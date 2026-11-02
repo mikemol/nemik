@@ -45,6 +45,7 @@ if TYPE_CHECKING:
 
 PRODID = "-//nemik//operator asks//EN"
 DEFAULT_OPT_IN = Path.home() / ".config" / "nemik" / "ics.toml"
+STAMP_DIGITS = 14
 
 
 class _Every(set[str]):
@@ -115,8 +116,12 @@ def _stamp(iso: str) -> str:
         The DATE-TIME text, YYYYMMDDTHHMMSSZ.
 
     """
-    digits = re.sub(r"[^0-9]", "", iso)[:14]
-    return f"{digits[:8]}T{digits[8:14]}Z" if len(digits) == 14 else "19700101T000000Z"
+    digits = re.sub(r"[^0-9]", "", iso)[:STAMP_DIGITS]
+    return (
+        f"{digits[:8]}T{digits[8:STAMP_DIGITS]}Z"
+        if len(digits) == STAMP_DIGITS
+        else "19700101T000000Z"
+    )
 
 
 def time_property(name: str, value: str) -> str:

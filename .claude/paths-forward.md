@@ -3,12 +3,12 @@
 
 state file: `.claude/paths-forward.json`
 
-counter 1463 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:7ee12d4f12ad05a4`
+counter 1465 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:1275ab08f3ddafc7`
 
 | # | symbol | status |
 |---|---|---|
-| 1 | W1462 | working |
-| 2 | W1463 | working |
+| 1 | W1464 | working |
+| 2 | W1465 | working |
 | 3 | W1075 | ready |
 | 4 | W1139 | ready |
 | 5 | W1279 | ready |
@@ -1442,19 +1442,19 @@ counter 1463 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:7ee
 | 1433 | W1459 | done |
 | 1434 | W1460 | done |
 | 1435 | W1461 | done |
+| 1436 | W1462 | done |
+| 1437 | W1463 | done |
 
 ## waypoints
 
-1. **W1462** (working) tests/test_build_scope.py, test_cachestore.py, test_check_realizability.py, test_flow_cache.py
-   and test_frontier_walker.py name the published floor, the stamp length, the exit code, the recompute count and the
-   goal floor they compare with, so ruff falls by five
-   - next: Edit the five files, run tests and guards, mikemol-pycheck --ratchet --write, write stack852.json, submit
-     behind 851.
-2. **W1463** (working) tests/test_flow_reference.py, test_guarantees.py, test_no_waivers.py, test_operator_rate.py and
-   test_overlap_claims.py name the front share, the unscored count, the source floor, the open asks and the held count
-   they compare with, so ruff falls by five
-   - next: Edit the five files, run tests and guards, mikemol-pycheck --ratchet --write, write stack853.json, submit
-     behind 852.
+1. **W1464** (working) tests/test_published_valid.py, test_pieces_corpus.py, test_rank_apply.py, test_static.py and
+   test_work.py name the checked floor, the case floor and the exit codes they compare with, so ruff falls by five
+   - next: Edit the five files, run tests and guards, mikemol-pycheck --ratchet --write, write stack854.json, submit
+     behind 853.
+2. **W1465** (working) src/nemik/health.py, overlaps.py, vtodo.py and critical.py name the red level, the sharing floor,
+   the stamp digits and the planned-list cap they compare with, so ruff falls by five
+   - next: Write w1465_src.py, run it, run the four hook commands and the guards, mikemol-pycheck --ratchet --write,
+     write stack855.json, submit behind 854.
 3. **W1075** (ready) Take an idle-host staging figure for one test target and split it by input (venv, Chromium, opa,
    Codon, corpus)
 4. **W1139** (ready) The pace carries cards and landing-rate rows beside the ratchets, each with its horizon in days at
@@ -4716,6 +4716,12 @@ counter 1463 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:7ee
 1435. **W1461** (done) tests/test_alarm_delivery.py, test_ask_priority.py, test_baseline.py, test_churn.py and
    test_floorasks.py name the undelivered count, the top priority, the planned count, the polls and the floor asks they
    compare with, so ruff falls by five
+1436. **W1462** (done) tests/test_build_scope.py, test_cachestore.py, test_check_realizability.py, test_flow_cache.py
+   and test_frontier_walker.py name the published floor, the stamp length, the exit code, the recompute count and the
+   goal floor they compare with, so ruff falls by five
+1437. **W1463** (done) tests/test_flow_reference.py, test_guarantees.py, test_no_waivers.py, test_operator_rate.py and
+   test_overlap_claims.py name the front share, the unscored count, the source floor, the open asks and the held count
+   they compare with, so ruff falls by five
 
 ## residue
 
@@ -6521,3 +6527,25 @@ counter 1463 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:7ee
   W1382, R112 on W1288, R114 on W1395, R116 on W1383, R119 and R135 on W1396, R134 on W1282, R138 on W1288 (the
   invariant held on all six), R142 on W1451 (landed in 843; Protocol loosening to do), R143 on W1246 (the load table,
   843's wall to complete); two UNCLAIMED mtools:W2099 letters; codon owed with no stack.; 1 finding(s)
+- **nemik:R144** (-) round 146: stacks 849 (W1459) 529b8fa4 = 10:41:39Z, 850 (W1460) aad08551 = 10:52:36Z and 851
+  (W1461) 3db03f81 = 11:04:25Z landed; stack 852 (W1462) inflight, key 1793617011877252343, began_ns
+  1793617469213007039; 853 (W1463, ruff 385 to 380) queued; PLR2004 down to 29 sites: root Verified from source (TZ=UTC
+  reflog): 529b8fa4 main@{05:41:39 -0500} = 10:41:39Z, aad08551 05:52:36 = 10:52:36Z, 3db03f81 06:04:25 = 11:04:25Z;
+  --in-gate lists W1462 inflight and W1463 queued; `mikemol-pycheck --ratchet` prints ruff 380/380 and mypy 1092/1092
+  (395 - 5 - 5 - 5 = 380 with 852 and 853 live in the tree); my own `python3 -m ruff ... --select PLR2004` prints 29
+  sites, matching the G1's 29 (test_layout 14, hook-imported src 8, singles). Gate walls from the landings: 849 to 850
+  10 min 57 s, 850 to 851 10 min 53 s, 851 to 852 about 11 min 49 s, and 0 s of empty gate at every landing (the
+  invariant has now held on twelve landings in a row). The G1 is straight about its lapses: the standing-11 three-stamp
+  table for 844 to 853 is NOT written (it says so and does not claim it), the four backfill ledger lines were written at
+  10:36Z (R145's first half met), the G0 stamps of W1461 to W1463 are minute-resolution again with no stampnote call,
+  and the Edit hook's two-part refusal (constant and its use) was met with a codemod after the ratchet read clean. No
+  new findings on the stacks themselves; the finding is forward-looking. I computed the ruff mass that is left at 380
+  (python3 -m ruff --statistics over src, tests, tools and checks): S603 53, PLC0415 50, S404 43, PT018 37, PLR2004 29,
+  SLF001 19, C901 17, S607 14, PLR0913 13, DOC501 10, PLR0912 10, and a tail; so the subprocess class (S603, S404, S607)
+  is 110 findings, 29 percent of what is left, and it is the next campaign-sized class after the 123 T201 prints the say
+  module absorbed. No fixpoint is declared. Carried open findings, status on 2026-11-02 11:15Z: R145 on W1458 (table of
+  the three stamps for 844 to 853 still owed; ledger backfill done), R95 second finding on W1349 (stamps), R95 third,
+  R97 first, R98, R111 first, R102, R127 and R128 on W1219, R94 on W1348, R93 on W1347, R92 on W1346, R91 on W1345, R72
+  on W846, R100 on W910, R101 and R105 on W1288, R85 on W613, R106 on W1376, R108 on W1382, R112 on W1288, R114 on
+  W1395, R116 on W1383, R119 and R135 on W1396, R134 on W1282, R138 on W1288 (twelve in a row), R142 on W1451, R143 on
+  W1246; two UNCLAIMED mtools:W2099 letters; codon owed with no stack.; 1 finding(s)

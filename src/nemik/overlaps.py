@@ -32,6 +32,7 @@ if TYPE_CHECKING:
 
 LIVE = {STATE["ready"], STATE["working"]}
 CLAIM = "claim:label:touch:"
+MIN_SHARING = 2
 DEFAULT_MEMBUDGET = (
     Path.home() / "github/mtools/bazel-bin/fence/.venv/bin/mikemol-membudget"
 )
@@ -57,7 +58,9 @@ def overlaps(g: Graph, *, cross: bool = False) -> dict[str, list[str]]:
             by_tag.setdefault(str(tag), set()).add(node)
     out: dict[str, list[str]] = {}
     for name, nodes in sorted(by_tag.items()):
-        if len(nodes) < 2 or (cross and len({_repo(n) for n in nodes}) < 2):
+        if len(nodes) < MIN_SHARING or (
+            cross and len({_repo(n) for n in nodes}) < MIN_SHARING
+        ):
             continue
         out[name] = sorted(ref(n) for n in nodes)
     return out

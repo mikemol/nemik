@@ -32,6 +32,7 @@ if TYPE_CHECKING:
 # nemik:W818: the algorithm is the shared core's, over plain data; this module adapts rdflib-built
 # Cards to it and back (the page runs the same core, compiled to wasm)
 CHAINS = longest_chains
+PLANNED_SHOWN = 8
 
 
 class Critical(NamedTuple):
@@ -402,8 +403,8 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         for f in found_fires:
             say(
                 f"  {f.cite}  delays the path {f.delay}, holds up {len(f.planned)} planned: "
-                + ", ".join(f.planned[:8])
-                + (" ..." if len(f.planned) > 8 else "")
+                + ", ".join(f.planned[:PLANNED_SHOWN])
+                + (" ..." if len(f.planned) > PLANNED_SHOWN else "")
             )
         return
     if args.assume_done:

@@ -25,6 +25,7 @@ if TYPE_CHECKING:
 
 STATUSES = ("green", "amber", "red")
 SIGNALS = ("blocked_share", "oldest_block_ticks", "asks_owed")
+RED_LEVEL = 2
 
 
 class Health(NamedTuple):
@@ -87,7 +88,7 @@ def health_cards(
         amber, red = limits.get(signal, (float("inf"), float("inf")))
         level = 2 if value >= red else 1 if value >= amber else 0
         if level:
-            floor = red if level == 2 else amber
+            floor = red if level == RED_LEVEL else amber
             reasons.append(f"{signal} {value:g} (>= {floor:g}: {STATUSES[level]})")
         worst = max(worst, level)
     return Health(STATUSES[worst], round(share, 3), ticks, owed, reasons)
