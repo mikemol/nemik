@@ -365,8 +365,8 @@ def dependency_cycles(g: Graph) -> list[tuple[Node, ...]]:
     return [tuple(URIRef(s) for s in ring) for ring in verdict.cycles]
 
 
-def annotate(g: Graph) -> None:
-    """Mark unclaimed blocks, operator blocks by category, and blocks that resolve to no party."""
+def _mark_unresolved(g: Graph) -> None:
+    """Mark each blocked waypoint whose blocked_on names no party nemik can resolve."""
     # A blocked waypoint whose blocked_on names nothing nemik can resolve (no workstream, waypoint
     # or operator) draws no edge at all; the operator ruled that a defect (2026-09-26).
     for node in g.subjects(OSLC_CM.state, NEMIK.Blocked):
@@ -395,6 +395,11 @@ def annotate(g: Graph) -> None:
                     or witnessed
                 ):
                     g.add((node, NEMIK.unresolvedBlocker, text))
+
+
+def annotate(g: Graph) -> None:
+    """Mark unclaimed blocks, operator blocks by category, and blocks that resolve to no party."""
+    _mark_unresolved(g)
 
     # nemik:W41, W144, W436: umbrella blocks and ready umbrellas are SPARQL constraints in
     # shapes.ttl (nemik:W529), UmbrellaBlockShape and ReadyUmbrellaShape.
