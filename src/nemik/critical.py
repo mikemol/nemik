@@ -166,18 +166,28 @@ def critical_cards(by_cite: dict[str, Card], scope: set[str] | None = None) -> C
     )
 
 
-def cycles(g: Graph) -> list[tuple[list[str], bool]]:
-    """nemik:W324: the dependency cycles among open cards, each with its operator-breakable flag.
-
-    Each is (its sorted cards, operator breakable): a strongly connected component of more than one
-    card, or a card that waits on itself. Every card in one waits on another, so it cannot clear by
-    itself. It IS breakable when a member is blocked on the operator (blocked_kind human): the
-    `same ask as` convention makes two repos' asks cite each other on purpose, and the operator's
-    answer ends it. Any other cycle is a true deadlock. Tarjan's algorithm; depth is bounded by a
-    simple path.
+def _pop_group(stack: list[Node], on_stack: set[Node], root: Node) -> list[Node]:
+    """Pop the cards of one strongly connected component off Tarjan's stack, down to its root.
 
     Returns:
-        Each cycle as (its sorted cards, operator breakable), sorted.
+        The component's cards, last pushed first.
+
+    """
+    group: list[Node] = []
+    while True:
+        w = stack.pop()
+        on_stack.discard(w)
+        group.append(w)
+        if w == root:
+            break
+    return group
+
+
+def _open_successors(g: Graph) -> dict[Node, list[Node]]:
+    """Map each open card to the open cards that wait on it or that it enables, sorted.
+
+    Returns:
+        {card: its open successors, sorted by name}, with the bare-repo-name waits added.
 
     """
     nodes = {
@@ -192,6 +202,24 @@ def cycles(g: Graph) -> list[tuple[list[str], bool]]:
     for claim, waiter in bare_wait_edges(g):
         if claim in nodes and waiter in nodes and waiter not in succ[claim]:
             succ[claim] = sorted([*succ[claim], waiter], key=str)
+    return succ
+
+
+def cycles(g: Graph) -> list[tuple[list[str], bool]]:
+    """nemik:W324: the dependency cycles among open cards, each with its operator-breakable flag.
+
+    Each is (its sorted cards, operator breakable): a strongly connected component of more than one
+    card, or a card that waits on itself. Every card in one waits on another, so it cannot clear by
+    itself. It IS breakable when a member is blocked on the operator (blocked_kind human): the
+    `same ask as` convention makes two repos' asks cite each other on purpose, and the operator's
+    answer ends it. Any other cycle is a true deadlock. Tarjan's algorithm; depth is bounded by a
+    simple path.
+
+    Returns:
+        Each cycle as (its sorted cards, operator breakable), sorted.
+
+    """
+    succ = _open_successors(g)
     index: dict[Node, int] = {}
     low: dict[Node, int] = {}
     on_stack: set[Node] = set()
@@ -209,20 +237,14 @@ def cycles(g: Graph) -> list[tuple[list[str], bool]]:
             elif w in on_stack:
                 low[v] = min(low[v], index[w])
         if low[v] == index[v]:
-            group = []
-            while True:
-                w = stack.pop()
-                on_stack.discard(w)
-                group.append(w)
-                if w == v:
-                    break
+            group = _pop_group(stack, on_stack, v)
             if len(group) > 1 or v in succ[v]:
                 human = any(
                     (n, NEMIK.blockedKind, Literal("human")) in g for n in group
                 )
                 found.append((sorted(ref(n) for n in group), human))
 
-    for n in sorted(nodes, key=str):
+    for n in sorted(succ, key=str):
         if n not in index:
             visit(n)
     return sorted(found)

@@ -4154,3 +4154,5 @@
 2026-11-02T20:27:56Z  interrupt W1508 minted    -         "adapter._queue_graph: split it into stages, so three findings clear (src/nemik/adapter.py)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1494
 2026-11-02T20:27:56Z  interrupt W1509 minted    -         "serve._to_json: split it into nodes, edges and documents, so four findings clear (src/nemik/serve.py)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1494
 2026-11-02T20:31:11Z  status W1495 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T20:59:32Z  status W1495 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T21:03:11Z  status W1496 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
