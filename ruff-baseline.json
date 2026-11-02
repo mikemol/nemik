@@ -272,7 +272,6 @@
   "PLR2004": 1
  },
  "tests/test_fruit.py": {
-  "PLR2004": 3,
   "PT018": 4
  },
  "tests/test_gate_weights.py": {
@@ -358,9 +357,6 @@
  },
  "tests/test_overlap_claims.py": {
   "PLR2004": 1
- },
- "tests/test_pacing.py": {
-  "PLR2004": 2
  },
  "tests/test_parse_cache.py": {
   "ARG001": 1,

@@ -7,6 +7,10 @@ from rdflib import Graph, Literal
 from nemik.adapter import NEMIK, OSLC_CM, waypoint_uri, workstream_uri
 from nemik.rank import fruit, load_weights, rank
 
+TWO_MEMBERS_WEIGHT = 2
+TAGGED_WEIGHT = 4
+PILE_WEIGHT = 9
+
 
 def test_members_are_leaves_moving_nothing_or_tagged() -> None:
     """Members are leaves moving nothing or tagged."""
@@ -17,7 +21,7 @@ def test_members_are_leaves_moving_nothing_or_tagged() -> None:
     ]
     f = fruit(Graph(), "a", rows)
     assert f is not None
-    assert f["members"] == ["W1", "W3"] and f["class_weight"] == 2
+    assert f["members"] == ["W1", "W3"] and f["class_weight"] == TWO_MEMBERS_WEIGHT
 
 
 def test_tagged_item_joins_with_its_downstream() -> None:
@@ -29,7 +33,7 @@ def test_tagged_item_joins_with_its_downstream() -> None:
     g.add((n, NEMIK.touches, Literal("fruit")))
     f = fruit(g, "a", [{"symbol": "W2", "downstream": 3}])
     assert f is not None
-    assert f["members"] == ["W2"] and f["class_weight"] == 4
+    assert f["members"] == ["W2"] and f["class_weight"] == TAGGED_WEIGHT
 
 
 def test_no_members_no_row() -> None:
@@ -80,7 +84,7 @@ def test_pile_outweighs_a_deep_item_and_leads() -> None:
         }
     )  # W1 moves one stalled peer (8); fruit W2-W10 weigh 9
     rows = rank(g, "a", load_weights())
-    assert rows[0]["symbol"] == "W2" and rows[0]["fruit"]["class_weight"] == 9
+    assert rows[0]["symbol"] == "W2" and rows[0]["fruit"]["class_weight"] == PILE_WEIGHT
 
 
 def test_deep_item_outweighing_the_pile_leads() -> None:

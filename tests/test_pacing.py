@@ -11,6 +11,8 @@ import pytest
 from nemik.pacing import bucket, limits
 
 START = datetime(2026, 10, 1, tzinfo=UTC)
+BURST = 10
+OVERDRAFT_FLOOR = 19
 
 
 def test_within_the_burst_the_bucket_never_goes_over() -> None:
@@ -20,7 +22,7 @@ def test_within_the_burst_the_bucket_never_goes_over() -> None:
         stamps, rate=5, burst=10, start=START, now=START + timedelta(hours=10)
     )
     assert overdraft == pytest.approx(0.0, rel=0, abs=0)
-    assert 0 < level <= 10
+    assert 0 < level <= BURST
 
 
 def test_a_flood_past_the_burst_is_an_overdraft_that_refills_at_the_rate() -> None:
@@ -31,7 +33,7 @@ def test_a_flood_past_the_burst_is_an_overdraft_that_refills_at_the_rate() -> No
     overdraft, _ = bucket(
         flood, rate=10, burst=10, start=START, now=START + timedelta(hours=1)
     )
-    assert overdraft > 19  # 30 taken from a bucket of 10, barely refilled
+    assert overdraft > OVERDRAFT_FLOOR  # 30 taken from a bucket of 10, barely refilled
     later = bucket(
         flood, rate=10, burst=10, start=START, now=START + timedelta(days=3)
     )[1]

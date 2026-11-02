@@ -4016,3 +4016,6 @@
 2026-11-02T09:47:17Z  status W1454 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-02T09:47:39Z  interrupt W1456 minted    -         "tests/test_letters.py names the addressed count, the fold and move counts and nemik-check's exit code for letters pending, so ruff falls by five"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1383
 2026-11-02T09:47:45Z  status W1456 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T09:58:41Z  status W1455 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T09:58:52Z  interrupt W1457 minted    -         "tests/test_fruit.py and tests/test_pacing.py name the class weights, the burst and the overdraft floor they compare with, so ruff falls by five"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1383
+2026-11-02T09:58:58Z  status W1457 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
