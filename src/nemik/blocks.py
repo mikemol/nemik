@@ -681,67 +681,92 @@ def operator_asks(g: Graph) -> list[AskRow]:
     return [row.copy() for row in ix.operator_asks]
 
 
-def _operator_asks(g: Graph) -> list[AskRow]:
+def _last_activity(g: Graph) -> dict[Node, str]:
+    """Return the latest activity stamp of each waypoint any recorded activity used.
 
+    Returns:
+        {waypoint: the latest startedAtTime of an activity that used it}.
+
+    """
     last: dict[Node, str] = {}
     for act in g.subjects(RDF.type, PROV.Activity):
         stamp = str(g.value(act, PROV.startedAtTime) or "")
         for wp in g.objects(act, PROV.used):
             last[wp] = max(last.get(wp, ""), stamp)
-    out: list[AskRow] = []
-    keys: dict[str, str] = {}
-    # On the operator: resolved to them, or declared blocked_kind human (e.g. "event: ...", "a
-    # GREEN tree - operator RULED ...", which name a condition but were filed against the human).
-    human = set(g.subjects(NEMIK.waitsFor, OPERATOR)) | {
-        n
-        for n in g.subjects(NEMIK.blockedKind, None)
-        if str(g.value(n, NEMIK.blockedKind)) == "human"
-        and (n, OSLC_CM.state, NEMIK.Blocked) in g
+    return last
+
+
+def _ask_text(g: Graph, node: Node) -> tuple[str, list[str]]:
+    """Return the ask as one string, and the blocked_on texts it was joined from.
+
+    Returns:
+        (the ask joined with " | ", the sorted blocked_on texts, or the title when they are bare).
+
+    """
+    texts = sorted(str(o) for o in g.objects(node, NEMIK.blockedOn))
+    title = str(g.value(node, DCTERMS.title) or "")
+    # A bare "operator" with the ask carried in a title that starts "OPERATOR: ..." (summit's
+    # convention) states the ask there; read it rather than calling the block unstated.
+    if all(BARE.match(t) for t in texts) and re.match(
+        r"^\s*operator\b[^:]{0,60}:", title, re.IGNORECASE
+    ):
+        texts = [title]
+    return " | ".join(texts), texts
+
+
+def _ask_category(texts: list[str], node: Node, errands: frozenset[str]) -> str:
+    """Return the category of an ask: the most actionable reading across its blocked_on texts.
+
+    Returns:
+        One of CATEGORIES; a no-command ask in an errand repo is an errand.
+
+    """
+    cats = [operator_category(t) for t in texts] or ["unstated"]
+    # the most actionable reading wins across several blocked_on values
+    cat: str = next(
+        c
+        for c in ("needs-you", "no-command", "unstated", "condition", "answered")
+        if c in cats
+    )
+    if cat == "no-command" and ref(node).partition(":")[0] in errands:
+        cat = "errand"
+    return cat
+
+
+def _ask_row(
+    g: Graph, node: Node, last: dict[Node, str], errands: frozenset[str]
+) -> tuple[AskRow, str]:
+    """Return one operator ask as a row, and the key that groups it with duplicates.
+
+    Returns:
+        (the row, its _ask_key when the ask needs the operator, else the empty string).
+
+    """
+    text, texts = _ask_text(g, node)
+    cat = _ask_category(texts, node, errands)
+    # nemik:W1264: the card says why the root apply loop could not carry it (nemik:W1263)
+    excused = (node, NEMIK.applyLoopCannot, None) in g
+    row: AskRow = {
+        "ref": ref(node),
+        "title": str(g.value(node, DCTERMS.title) or ""),
+        "ask": text,
+        "apply_loop_cannot": excused,
+        "sudo_shaped": sudo_shaped(text) and not excused,
+        "category": cat,
+        "ticks_blocked": int(str(g.value(node, NEMIK.ticksBlocked) or 0)),
+        "last_activity": last.get(node, ""),
+        "waiting": sorted(ref(w) for w in waiting_behind(g, node)),
+        "dtstart": str(g.value(node, NEMIK.dtstart) or ""),
+        "due": str(g.value(node, NEMIK.due) or ""),
+        "alarms": sorted(str(a) for a in g.objects(node, NEMIK.alarm)),
+        "rrule": str(g.value(node, NEMIK.rrule) or ""),
+        "exdates": sorted(str(x) for x in g.objects(node, NEMIK.exdate)),
     }
-    repos = {str(w).removeprefix(BASE) for w in g.subjects(RDF.type, NEMIK.Workstream)}
-    errands = errand_repos()
-    for node in human:
-        if (node, OSLC_CM.state, NEMIK.Done) in g:
-            continue
-        texts = sorted(str(o) for o in g.objects(node, NEMIK.blockedOn))
-        title = str(g.value(node, DCTERMS.title) or "")
-        # A bare "operator" with the ask carried in a title that starts "OPERATOR: ..." (summit's
-        # convention) states the ask there; read it rather than calling the block unstated.
-        if all(BARE.match(t) for t in texts) and re.match(
-            r"^\s*operator\b[^:]{0,60}:", title, re.IGNORECASE
-        ):
-            texts = [title]
-        text = " | ".join(texts)
-        cats = [operator_category(t) for t in texts] or ["unstated"]
-        # the most actionable reading wins across several blocked_on values
-        cat: str = next(
-            c
-            for c in ("needs-you", "no-command", "unstated", "condition", "answered")
-            if c in cats
-        )
-        if cat == "no-command" and ref(node).partition(":")[0] in errands:
-            cat = "errand"
-        # nemik:W1264: the card says why the root apply loop could not carry it (nemik:W1263)
-        excused = (node, NEMIK.applyLoopCannot, None) in g
-        keys[ref(node)] = _ask_key(text) if cat == "needs-you" else ""
-        out.append(
-            {
-                "ref": ref(node),
-                "title": str(g.value(node, DCTERMS.title) or ""),
-                "ask": text,
-                "apply_loop_cannot": excused,
-                "sudo_shaped": sudo_shaped(text) and not excused,
-                "category": cat,
-                "ticks_blocked": int(str(g.value(node, NEMIK.ticksBlocked) or 0)),
-                "last_activity": last.get(node, ""),
-                "waiting": sorted(ref(w) for w in waiting_behind(g, node)),
-                "dtstart": str(g.value(node, NEMIK.dtstart) or ""),
-                "due": str(g.value(node, NEMIK.due) or ""),
-                "alarms": sorted(str(a) for a in g.objects(node, NEMIK.alarm)),
-                "rrule": str(g.value(node, NEMIK.rrule) or ""),
-                "exdates": sorted(str(x) for x in g.objects(node, NEMIK.exdate)),
-            }
-        )
+    return row, _ask_key(text) if cat == "needs-you" else ""
+
+
+def _group_asks(out: list[AskRow], keys: dict[str, str], repos: set[str]) -> None:
+    """Set each row's same_ask: the other asks that are the same ask, closed over the group."""
     groups: dict[str, set[str]] = {}
     for a in out:
         if keys[a["ref"]]:
@@ -767,6 +792,29 @@ def _operator_asks(g: Graph) -> list[AskRow]:
         same_ask[a["ref"]] = sorted(members - {a["ref"]})
     for a in out:
         a["same_ask"] = same_ask[a["ref"]]
+
+
+def _operator_asks(g: Graph) -> list[AskRow]:
+    last = _last_activity(g)
+    out: list[AskRow] = []
+    keys: dict[str, str] = {}
+    # On the operator: resolved to them, or declared blocked_kind human (e.g. "event: ...", "a
+    # GREEN tree - operator RULED ...", which name a condition but were filed against the human).
+    human = set(g.subjects(NEMIK.waitsFor, OPERATOR)) | {
+        n
+        for n in g.subjects(NEMIK.blockedKind, None)
+        if str(g.value(n, NEMIK.blockedKind)) == "human"
+        and (n, OSLC_CM.state, NEMIK.Blocked) in g
+    }
+    repos = {str(w).removeprefix(BASE) for w in g.subjects(RDF.type, NEMIK.Workstream)}
+    errands = errand_repos()
+    for node in human:
+        if (node, OSLC_CM.state, NEMIK.Done) in g:
+            continue
+        row, key = _ask_row(g, node, last, errands)
+        keys[row["ref"]] = key
+        out.append(row)
+    _group_asks(out, keys, repos)
     order = {c: i for i, c in enumerate(CATEGORIES)}
 
     def by_wait(a: AskRow) -> tuple[int, int, str]:
