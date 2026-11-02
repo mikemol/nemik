@@ -19,6 +19,7 @@ from nemik.rank import _open, _repo, frontier, ref_of
 from nemik.serve import Model
 
 FLEET = Path(__file__).parent / "fixtures" / "fleet"
+MIN_GOALS = 10
 
 
 def _old_frontier(g: Graph, goal: Node) -> tuple[set[Node], set[str]]:
@@ -64,6 +65,6 @@ def test_the_walker_agrees_with_the_old_walk_on_every_open_card() -> None:
     goals = sorted(
         (n for n in set(g.subjects(OSLC_CM.state, None)) if _open(g, n)), key=str
     )
-    assert len(goals) > 10, "the fixture fleet is too small to say anything"
+    assert len(goals) > MIN_GOALS, "the fixture fleet is too small to say anything"
     differ = [ref_of(n) for n in goals if frontier(g, n) != _old_frontier(g, n)]
     assert differ == []

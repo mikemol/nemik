@@ -199,11 +199,9 @@
  },
  "tests/test_build_scope.py": {
   "PLC2701": 1,
-  "PLR2004": 1,
   "PT018": 1
  },
  "tests/test_cachestore.py": {
-  "PLR2004": 1,
   "PT018": 1,
   "SLF001": 3,
   "syntax": 1
@@ -223,7 +221,6 @@
   "S607": 1
  },
  "tests/test_check_realizability.py": {
-  "PLR2004": 1,
   "S404": 1,
   "S603": 2
  },
@@ -233,7 +230,6 @@
   "SLF001": 2
  },
  "tests/test_flow_cache.py": {
-  "PLR2004": 1,
   "SLF001": 1
  },
  "tests/test_flow_reference.py": {
@@ -245,8 +241,7 @@
   "PT018": 3
  },
  "tests/test_frontier_walker.py": {
-  "PLC2701": 2,
-  "PLR2004": 1
+  "PLC2701": 2
  },
  "tests/test_fruit.py": {
   "PT018": 4

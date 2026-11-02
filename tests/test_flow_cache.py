@@ -14,6 +14,8 @@ if TYPE_CHECKING:
 
     import pytest
 
+RECOMPUTES = 2
+
 
 def _counting(monkeypatch: pytest.MonkeyPatch) -> dict[str, int]:
     calls = {"n": 0}
@@ -58,5 +60,5 @@ def test_a_change_inside_a_cone_is_solved_again(
     demand = {"x": Fraction(1)}
     first = flow.solve(demand, {"x": ["a", "b"]}, {"a", "b"})
     second = flow.solve(demand, {"x": ["a", "b", "c"]}, {"a", "b", "c"})
-    assert calls["n"] == 2
+    assert calls["n"] == RECOMPUTES
     assert first.salience != second.salience

@@ -11,6 +11,7 @@ from nemik import cachestore, flow, shaclinc
 from nemik.serve import Model
 
 FLEET = Path(__file__).parent / "fixtures" / "fleet"
+STAMP_LENGTH = 64
 
 
 def _forget() -> None:
@@ -93,4 +94,4 @@ def test_a_missing_or_damaged_file_is_a_cold_start(tmp_path: Path) -> None:
 def test_the_stamp_follows_the_shapes() -> None:
     """The code stamp is stable for the same shapes."""
     assert cachestore.stamp() == cachestore.stamp()
-    assert len(cachestore.stamp()) == 64
+    assert len(cachestore.stamp()) == STAMP_LENGTH

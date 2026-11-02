@@ -21,6 +21,7 @@ from nemik.index import indexed
 from nemik.serve import _build_static, build_static
 
 FLEET = Path(__file__).parent / "fixtures" / "fleet"
+MIN_PUBLISHED = 20
 
 
 def _tree(root: Path) -> dict[str, bytes]:
@@ -42,7 +43,7 @@ def test_the_scoped_build_publishes_exactly_what_the_unscoped_one_does(
     assert a.keys() == b.keys()
     different = [name for name in a if a[name] != b[name] and name != "metrics"]
     assert different == [], f"differ: {different[:5]}"
-    assert len(a) > 20, "the fixture fleet published almost nothing"
+    assert len(a) > MIN_PUBLISHED, "the fixture fleet published almost nothing"
 
 
 def _graph(state: Node) -> Graph:

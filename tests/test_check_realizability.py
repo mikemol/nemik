@@ -13,6 +13,7 @@ import pytest
 from installed import script
 
 OPA = os.environ.get("NEMIK_OPA", "opa")
+EXIT_UNJUDGED = 2
 pytestmark = pytest.mark.skipif(shutil.which(OPA) is None, reason="opa not installed")
 
 
@@ -59,5 +60,5 @@ def test_each_live_waypoint_gets_a_coordinate_and_its_residue(tmp_path: Path) ->
 def test_an_absent_opa_is_not_judged_and_never_clean(tmp_path: Path) -> None:
     """An absent opa is not judged and never clean."""
     done = _run(_fleet(tmp_path), str(tmp_path / "no-such-opa"))
-    assert done.returncode == 2, done.stdout + done.stderr
+    assert done.returncode == EXIT_UNJUDGED, done.stdout + done.stderr
     assert "NOT JUDGED alpha" in done.stdout
