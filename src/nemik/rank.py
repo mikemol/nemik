@@ -20,7 +20,7 @@ from dataclasses import dataclass
 from fractions import Fraction
 from importlib.resources import files
 from pathlib import Path
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, TypedDict
 
 from mikemol.frontier.walk import frontier as walk
 from rdflib import Graph, Literal, URIRef
@@ -161,11 +161,50 @@ def _toml_table(value: object) -> dict[str, object]:
     return {str(k): v for k, v in value.items()} if isinstance(value, dict) else {}
 
 
-def _dominates(a: dict[str, float], b: dict[str, float], objs: tuple[str, ...]) -> bool:
-    return all(a[o] >= b[o] for o in objs) and any(a[o] > b[o] for o in objs)
+class RankRow(TypedDict, total=False):
+    """One ranked card: its identity, its objectives and where the order put it."""
+
+    symbol: str
+    title: str
+    state: str
+    manifest: list[str]
+    operator: int
+    tier: int
+    band: int
+    band_name: str
+    band_why: str
+    weight: int | Fraction
+    downstream: int
+    salience: float | None
+    key: tuple[object, ...]
+    fruit: dict[str, object]
+    repo: str
+    cite: str
 
 
-def compose(rows: list[dict], comp: Composition) -> list[dict]:
+def _objective(row: RankRow, name: str) -> int | Fraction:
+    """Read one objective of a row by its name.
+
+    Returns:
+        The objective's value.
+
+    """
+    if name == "operator":
+        return row["operator"]
+    if name == "tier":
+        return row["tier"]
+    if name == "band":
+        return row["band"]
+    return row["weight"]
+
+
+def _dominates(a: RankRow, b: RankRow, objs: tuple[str, ...]) -> bool:
+    return all(_objective(a, o) >= _objective(b, o) for o in objs) and any(
+        _objective(a, o) > _objective(b, o) for o in objs
+    )
+
+
+def compose(rows: list[RankRow], comp: Composition) -> list[RankRow]:
     """Order rows by the declared composition; each row gets `key` (equal keys are true ties).
 
     Across tiers: lexicographic. Within a tier: Pareto fronts (non-dominated sorting), then the
@@ -178,10 +217,10 @@ def compose(rows: list[dict], comp: Composition) -> list[dict]:
     """
 
     def go(
-        items: list[dict],
+        items: list[RankRow],
         tiers: tuple[tuple[str, ...], ...],
         prefix: tuple[object, ...],
-    ) -> list[dict]:
+    ) -> list[RankRow]:
         if not tiers:
             for r in items:
                 r["key"] = prefix
@@ -196,7 +235,10 @@ def compose(rows: list[dict], comp: Composition) -> list[dict]:
             ]
             remaining = [a for a in remaining if a not in front]
             scal = {
-                id(a): sum(Fraction(comp.scalarize.get(o, 1.0)) * a[o] for o in objs)
+                id(a): sum(
+                    Fraction(comp.scalarize.get(o, 1.0)) * _objective(a, o)
+                    for o in objs
+                )
                 for a in front
             }
             for v in sorted({scal[id(a)] for a in front}, reverse=True):
@@ -212,8 +254,12 @@ def compose(rows: list[dict], comp: Composition) -> list[dict]:
 
 
 def objectives(
-    g: Graph, n: Node, weights: Weights, bands: Bands, salience: dict | None = None
-) -> dict:
+    g: Graph,
+    n: Node,
+    weights: Weights,
+    bands: Bands,
+    salience: dict[str, Fraction] | None = None,
+) -> RankRow:
     """One ready card's objectives.
 
     `salience` (nemik.salience, the flow model) replaces the `weight` objective when given; the old
@@ -448,7 +494,7 @@ def _rows(
     comp: Composition | None = None,
     toward: str = "",
     with_working: bool = False,
-) -> list[dict]:
+) -> list[RankRow]:
     """`repo`'s ready leaves as objective rows, before any ordering (for `rank`, `rank_fleet`).
 
     `toward` (`repo:W<n>`, nemik:W316) ranks by the demand of that one milestone card alone.
@@ -492,7 +538,7 @@ def _rows(
         if flow
         else None
     )
-    rows = [
+    rows: list[RankRow] = [
         {
             "symbol": str(g.value(n, NEMIK.symbol)),
             "title": str(g.value(n, DCTERMS.title) or ""),
@@ -532,7 +578,25 @@ def _rows(
     return rows
 
 
-def _position(rows: list[dict], comp: Composition | None) -> list[dict]:
+def _printable(part: object) -> int | float:
+    """Turn one part of a row's key into a number a reader can print.
+
+    Returns:
+        The part as an int, or as a float when it is an exact fraction.
+
+    Raises:
+        TypeError: the part is neither an int nor a fraction (a defect).
+
+    """
+    if isinstance(part, int):
+        return part
+    if isinstance(part, Fraction):
+        return float(part)
+    msg = f"a rank key holds only ints and fractions, got {part!r}"
+    raise TypeError(msg)
+
+
+def _position(rows: list[RankRow], comp: Composition | None) -> list[RankRow]:
     """Order `rows` by the declared composition; write each row's `weight` and `key`.
 
     Returns:
@@ -543,11 +607,11 @@ def _position(rows: list[dict], comp: Composition | None) -> list[dict]:
     out = compose(rows, comp or load_composition())
     # mtools sorts a queue by stored `weight` (--weights-from), so `weight` carries the COMPOSED
     # order: highest first, distinct unless two rows truly tie. The raw sum stays in `downstream`.
-    keys = sorted({r["key"] for r in out}, reverse=True)
+    keys = sorted({tuple(r["key"]) for r in out}, reverse=True)
     for r in out:
-        r["weight"] = keys.index(r["key"]) + 1
+        r["weight"] = keys.index(tuple(r["key"])) + 1
         # The order was decided on exact values; the printed key is for reading (and JSON).
-        r["key"] = [x if isinstance(x, int) else float(x) for x in r["key"]]
+        r["key"] = tuple(_printable(x) for x in r["key"])
     return out
 
 
@@ -560,7 +624,7 @@ def rank(
     fruit_row: bool = True,
     toward: str = "",
     with_working: bool = False,
-) -> list[dict]:
+) -> list[RankRow]:
     """Every ready leaf in `repo`, in the declared composed order (nemik:W132; lower symbol first).
 
     Umbrellas are left out: their open children are what can be worked (nemik:W74). With `toward`
@@ -613,7 +677,7 @@ def _fleet_composition(comp: Composition | None) -> Composition:
 
 def rank_fleet(
     g: Graph, weights: Weights, comp: Composition | None = None
-) -> list[dict[str, object]]:
+) -> list[RankRow]:
     """Every workstream's ready leaves in ONE composed order (nemik:W202).
 
     `rank` positions are per repo, so its `weight` and `key` cannot be compared across repos. Here
@@ -626,7 +690,7 @@ def rank_fleet(
         Every repo's rows in one composed order, each with `repo` and `cite` added.
 
     """
-    rows = []
+    rows: list[RankRow] = []
     for repo in fleet_repos(g):
         for r in _rows(g, repo, weights, comp=comp):
             r["repo"], r["cite"] = repo, f"{repo}:{r['symbol']}"
@@ -638,7 +702,7 @@ FRUIT_TAG = "fruit"
 
 
 def fruit(
-    g: Graph, repo: str, rows: list[dict], weights: Weights | None = None
+    g: Graph, repo: str, rows: list[RankRow], weights: Weights | None = None
 ) -> dict | None:
     """nemik:W178: the low-hanging fruit of `repo` as ONE virtual row, weighed against the rest.
 
@@ -817,7 +881,7 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         # nemik:W1059: a round holds the work in progress, so a repo with only that has one
         busy = {_repo(n) for n in g.subjects(OSLC_CM.state, NEMIK.Working)}
         by_repo = {
-            repo: rank(g, repo, weights, with_working=True)
+            repo: [dict(r) for r in rank(g, repo, weights, with_working=True)]
             for repo in sorted({*fleet_repos(g), *busy})
         }
         write_round_file(by_repo, args.landings, args.round_file)  # W1025
@@ -974,7 +1038,7 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         return
     rows = rank(g, args.repo, weights, toward=args.toward, with_working=args.round)
     if args.round:
-        show_round(args.repo, rows, args.landings)
+        show_round(args.repo, [dict(r) for r in rows], args.landings)
         return
     if args.apply:
         _apply(args.apply, rows)
@@ -982,13 +1046,13 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     if args.json:
         say(json.dumps(rows, indent=2))
         return
-    for r in rows:
+    for listed in rows:
         say(
-            f"{r['symbol']:6} {r['band_name']:9} op={r['operator']} down={r['downstream']:<4} {r['title'][:70]}"
+            f"{listed['symbol']:6} {listed['band_name']:9} op={listed['operator']} down={listed['downstream']:<4} {listed['title'][:70]}"
         )
 
 
-def _apply(state: str, rows: list[dict]) -> None:
+def _apply(state: str, rows: list[RankRow]) -> None:
     """nemik:W427: hand the ranked rows to the queue's one writer, mikemol-paths-forward.
 
     It is the one installed beside this interpreter; nemik never writes a queue itself. Exits with
@@ -1013,7 +1077,7 @@ def _apply(state: str, rows: list[dict]) -> None:
         raise SystemExit(done.returncode)
 
 
-def _next(g: Graph, repo: str, rows: list[dict]) -> dict:
+def _next(g: Graph, repo: str, rows: list[RankRow]) -> RankRow:
     """Give the ready row mtools puts first: `nemik:queuePosition`, from `model.ordered`.
 
     Returns:
@@ -1031,8 +1095,8 @@ def _next(g: Graph, repo: str, rows: list[dict]) -> dict:
 
 
 def drift(
-    g: Graph, repo: str, weights: Weights, rows: list[dict] | None = None
-) -> tuple[dict, dict] | None:
+    g: Graph, repo: str, weights: Weights, rows: list[RankRow] | None = None
+) -> tuple[RankRow, RankRow] | None:
     """(next, heavier) when the ready item mtools puts first is outweighed by another ready item.
 
     ⚑ "Next" is mtools' own order (`nemik:queuePosition`, from `model.ordered`), not this
@@ -1054,8 +1118,8 @@ def drift(
 
 
 def inversion(
-    g: Graph, repo: str, rows: list[dict], bands: Bands, guar: Guarantees
-) -> tuple[dict, dict] | None:
+    g: Graph, repo: str, rows: list[RankRow], bands: Bands, guar: Guarantees
+) -> tuple[RankRow, RankRow] | None:
     """(next, urgent) when the next item sits below the declared floor band (nemik:W133).
 
     That holds while a ready item at the floor or above exists. `urgent` is the first such item in

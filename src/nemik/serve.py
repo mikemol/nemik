@@ -981,8 +981,8 @@ def _to_json(g: Graph, findings: dict, numbers: Graph | None = None) -> dict:
         for i, r in enumerate(rank(gn, repo, weights, comp)):
             if found := by_id.get(f"{BASE}{repo}/{r['symbol']}"):
                 found["rank_pos"], found["band"] = i, r["band_name"]
-                if r.get("salience") is not None:
-                    found["salience"] = round(r["salience"], 4)
+                if (sal := r.get("salience")) is not None:
+                    found["salience"] = round(sal, 4)
     # nemik:W322: slack (nemik.critical) per open card, and which cards lie on the longest chain, so
     # the page can mark the path that bounds the fleet. Computed over `gn` like every published
     # number.

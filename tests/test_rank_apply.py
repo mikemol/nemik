@@ -26,7 +26,7 @@ def test_apply_calls_the_queue_writer_with_the_rows(
         return subprocess.CompletedProcess(cmd, 0)
 
     monkeypatch.setattr(subprocess, "run", fake_run)
-    rows = [{"symbol": "W1", "weight": 3}]
+    rows: list[rank.RankRow] = [{"symbol": "W1", "weight": 3}]
     rank._apply("/q/paths-forward.json", rows)
     cmd = seen["cmd"]
     assert isinstance(cmd, list)

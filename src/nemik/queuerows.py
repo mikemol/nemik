@@ -64,7 +64,9 @@ def queue_rows(g: Graph, repo: str, now: datetime) -> list[QueueRow]:
         issue stamp, and `overtaken_by` counts the cards above it that were issued after it.
 
     """
-    order: list[dict[str, object]] = rank(g, repo, load_weights(), load_composition())
+    order: list[dict[str, object]] = [
+        dict(r) for r in rank(g, repo, load_weights(), load_composition())
+    ]
     symbols = [str(row["symbol"]) for row in order]
     born = _issued(g, repo, symbols)
     rows: list[QueueRow] = []

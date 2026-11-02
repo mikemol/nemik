@@ -10,6 +10,7 @@ from rdflib import Graph, Literal, URIRef
 from nemik.adapter import NEMIK, OSLC_CM, STATE, waypoint_uri, workstream_uri
 from nemik.rank import (
     Composition,
+    RankRow,
     Weights,
     children,
     compose,
@@ -181,9 +182,7 @@ def test_umbrella_children_are_direct_feeders_not_transitive_leaves() -> None:
     assert frontier(g, w59)[0] == {w132, w78}
 
 
-def _row(
-    sym: str, operator: int = 0, band: int = -3, weight: int = 0
-) -> dict[str, object]:
+def _row(sym: str, operator: int = 0, band: int = -3, weight: int = 0) -> RankRow:
     return {
         "symbol": sym,
         "operator": operator,

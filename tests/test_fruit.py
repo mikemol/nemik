@@ -5,7 +5,7 @@
 from rdflib import Graph, Literal
 
 from nemik.adapter import NEMIK, OSLC_CM, waypoint_uri, workstream_uri
-from nemik.rank import fruit, load_weights, rank
+from nemik.rank import RankRow, fruit, load_weights, rank
 
 TWO_MEMBERS_WEIGHT = 2
 TAGGED_WEIGHT = 4
@@ -14,7 +14,7 @@ PILE_WEIGHT = 9
 
 def test_members_are_leaves_moving_nothing_or_tagged() -> None:
     """Members are leaves moving nothing or tagged."""
-    rows = [
+    rows: list[RankRow] = [
         {"symbol": "W1", "downstream": 0},
         {"symbol": "W2", "downstream": 5},
         {"symbol": "W3", "downstream": 0},

@@ -697,7 +697,9 @@ def stackable_lines(root: Path, merged: Graph) -> list[str]:
     """
     out = ["# TYPE nemik_stackable gauge"]
     for repo, _ in workstream_files(root, QUEUE):
-        ranked: list[dict[str, object]] = rank(merged, repo, load_weights())
+        ranked: list[dict[str, object]] = [
+            dict(r) for r in rank(merged, repo, load_weights())
+        ]
         out.append(
             f"nemik_stackable{label(repo=repo)} {stackable_count(merged, repo, ranked, [])}"
         )

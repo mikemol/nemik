@@ -36,12 +36,12 @@
   "misc": 10
  },
  "src/nemik/rank.py": {
-  "misc": 232,
-  "type-arg": 17
+  "misc": 94,
+  "type-arg": 2
  },
  "src/nemik/serve.py": {
   "explicit-any": 5,
-  "misc": 259,
+  "misc": 248,
   "operator": 1,
   "type-arg": 8
  },
@@ -53,7 +53,7 @@
   "misc": 3
  },
  "src/nemik/starved.py": {
-  "misc": 5
+  "misc": 1
  },
  "src/nemik/vtodo.py": {
   "misc": 3
@@ -96,10 +96,10 @@
   "misc": 20
  },
  "tests/test_fruit.py": {
-  "misc": 25
+  "misc": 9
  },
  "tests/test_guarantees.py": {
-  "misc": 18
+  "misc": 3
  },
  "tests/test_history.py": {
   "misc": 2
@@ -123,7 +123,7 @@
   "misc": 8
  },
  "tests/test_rank_apply.py": {
-  "misc": 4
+  "misc": 3
  },
  "tests/test_rank_flow.py": {
   "misc": 6

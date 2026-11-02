@@ -197,7 +197,7 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     if drifting:
         print_drift(g, root / name)
         return
-    rows: list[dict[str, object]] = rank(g, name, load_weights())
+    rows: list[dict[str, object]] = [dict(r) for r in rank(g, name, load_weights())]
     if proposing:
         print_proposal(g, root / name, rows, as_json=as_json)
         return
