@@ -4082,3 +4082,6 @@
 2026-11-02T14:06:04Z  status W1472 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-02T14:06:14Z  interrupt W1474 minted    -         "src/nemik/rank.py and serve.py document the ValueError their loaders raise, so ruff falls by two"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1383
 2026-11-02T14:06:26Z  status W1474 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T14:31:44Z  status W1473 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T14:33:05Z  interrupt W1475 minted    -         "src/nemik/wake.py dumps its two JSON payloads through one typed helper, so mypy falls by two"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1282
+2026-11-02T14:33:14Z  status W1475 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

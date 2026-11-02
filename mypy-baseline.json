@@ -58,9 +58,6 @@
  "src/nemik/vtodo.py": {
   "misc": 3
  },
- "src/nemik/wake.py": {
-  "misc": 2
- },
  "src/nemik/withheld.py": {
   "explicit-any": 1
  },

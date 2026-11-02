@@ -396,6 +396,16 @@ def _read_seen(path: Path) -> dict[str, float]:
     return seen
 
 
+def _dump_doc(doc: dict[str, object]) -> str:
+    """Give a JSON document as indented text.
+
+    Returns:
+        The document, two-space indented.
+
+    """
+    return json.dumps(doc, indent=2)
+
+
 def _write_seen(path: Path, seen: dict[str, float]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(seen, sort_keys=True), encoding="utf-8")
@@ -646,14 +656,13 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
             _write_seen(args.nudges_state, seen)
         if args.json:
             say(
-                json.dumps(
+                _dump_doc(
                     {
                         "liveness": source,
                         "since": since.isoformat(),
                         "until": until.isoformat(),
                         "alarms": fired,
-                    },
-                    indent=2,
+                    }
                 )
             )
             return
@@ -684,10 +693,7 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         _write_seen(args.nudges_state, seen)
     if args.json:
         say(
-            json.dumps(
-                {"liveness": source, "roster": rows, "operator": operator_row(g)},
-                indent=2,
-            )
+            _dump_doc({"liveness": source, "roster": rows, "operator": operator_row(g)})
         )
         return
     say(f"liveness: {source}")
