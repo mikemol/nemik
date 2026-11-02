@@ -3950,3 +3950,9 @@
 2026-11-02T05:07:48Z  status W1436 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-02T05:09:02Z  interrupt W1437 minted    -         "critical.py, cards.py and witnesses.py move their function-local imports to module scope, so ruff falls by five"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1383
 2026-11-02T05:11:30Z  status W1437 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T05:14:06Z  tick  W1437 advanced  sweep     "stack 828 (W1437 cards.py hoist, ruff 475 to 474) gating after a 6 min 50 s empty gate; stack 827 landed 5f0e8c44 (mypy 1134 to 1111); ruff is behind again [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T05:30:47Z  status W1437 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T05:31:03Z  interrupt W1438 minted    -         "tests split their composite assertions into one assertion each (PT018), so ruff falls by about twenty-six"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1383
+2026-11-02T05:32:17Z  status W1438 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T05:33:09Z  interrupt W1439 minted    -         "tools/check_run_rows.py declares its parsed options and reads the schema and each row as object, so mypy falls by about eight"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1178
+2026-11-02T05:34:33Z  status W1439 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

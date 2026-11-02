@@ -16,8 +16,17 @@ from pathlib import Path
 
 import jsonschema
 
+from nemik.tomlview import table
+
 SCHEMA = Path(__file__).resolve().parents[1] / "src/nemik/data/run-row.schema.json"
 UNREADABLE = 2
+
+
+class Options(argparse.Namespace):
+    """The parsed command line, typed so reading it adds no Any."""
+
+    log: Path
+    last: int
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -35,7 +44,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "--last", type=int, default=0, help="check only the last N rows"
     )
-    args = parser.parse_args(argv)
+    args = parser.parse_args(argv, namespace=Options())
     try:
         lines = args.log.read_text(encoding="utf-8").splitlines()
     except OSError as err:
@@ -43,15 +52,17 @@ def main(argv: list[str] | None = None) -> int:
         return UNREADABLE
     if args.last:
         lines = lines[-args.last :]
+    parsed: object = json.loads(SCHEMA.read_text(encoding="utf-8"))
     validator = jsonschema.Draft202012Validator(
-        json.loads(SCHEMA.read_text(encoding="utf-8")),
+        table(parsed),
         format_checker=jsonschema.FormatChecker(),
     )
     passed = 0
     reasons: Counter[str] = Counter()
     for line in lines:
         try:
-            errors = list(validator.iter_errors(json.loads(line)))
+            row: object = json.loads(line)
+            errors = list(validator.iter_errors(row))
         except ValueError:
             reasons["not JSON"] += 1
             continue
