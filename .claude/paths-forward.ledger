@@ -3976,3 +3976,8 @@
 2026-11-02T07:00:56Z  interrupt W1445 minted    -         "tests/test_critical.py names the chain lengths and counts it compares with, so ruff falls by four"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1383
 2026-11-02T07:01:51Z  status W1445 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-02T07:04:06Z  tick  W1445 advanced  sweep     "stack 833 (W1443 test_witwait constants, ruff 463 to 458) gating, 834 (W1444 test_rank, 458 to 453) and 835 (W1445 test_critical, 453 to 449) queued behind it; stack 832 landed 2af84a90 (ruff 468 to 463); gate stayed full, three deep [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T07:07:15Z  status W1443 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T07:19:15Z  status W1444 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T07:19:25Z  status W1445 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T07:20:17Z  interrupt W1446 minted    -         "tests/test_vtodo.py names the fold limit, the ask count and the missing-helper exit code, so ruff falls by four"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1383
+2026-11-02T07:21:38Z  status W1446 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

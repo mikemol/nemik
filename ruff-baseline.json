@@ -458,9 +458,6 @@
   "S404": 1,
   "S603": 1
  },
- "tests/test_vtodo.py": {
-  "PLR2004": 4
- },
  "tests/test_wake_alarms.py": {
   "PT018": 4
  },

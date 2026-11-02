@@ -11,6 +11,10 @@ import installed
 from nemik.blocks import AskRow
 from nemik.vtodo import calendar, grouped, opted_in, stated_ask, time_property, vtodos
 
+FOLD_LIMIT = 75  # RFC 5545 3.1: a content line is at most 75 octets before folding
+NEEDS_YOU_ASKS = 2  # the two needs-you asks in ASKS
+EXIT_NO_HELPER = 2  # nemik-tasks when the helper binary is missing
+
 ASKS: list[AskRow] = [
     {
         "ref": "life:W21",
@@ -70,15 +74,15 @@ def test_calendar_is_crlf_folded_and_deterministic() -> None:
     assert text.startswith("BEGIN:VCALENDAR\r\nVERSION:2.0\r\n")
     assert text.endswith("END:VCALENDAR\r\n")
     for line in text.split("\r\n"):
-        assert len(line.encode()) <= 75
-    assert text.count("BEGIN:VTODO") == 2
+        assert len(line.encode()) <= FOLD_LIMIT
+    assert text.count("BEGIN:VTODO") == NEEDS_YOU_ASKS
 
 
 def test_star_opts_every_repo_in(tmp_path: Path) -> None:
     """Star opts every repo in."""
     f = tmp_path / "ics.toml"
     f.write_text('repos = ["*"]\n')
-    assert len(vtodos(ASKS, opted_in(f))) == 2  # both needs-you asks, any repo
+    assert len(vtodos(ASKS, opted_in(f))) == NEEDS_YOU_ASKS  # any repo
     assert opted_in(tmp_path / "missing.toml") == set()
 
 
@@ -120,7 +124,7 @@ def test_nemik_tasks_feeds_the_helper_and_returns_its_exit_code(tmp_path: Path) 
     r = installed.run("nemik-tasks", *base, "--helper", str(helper), "--apply")
     assert "TODOS 2" in r.stdout  # grouped by default: its repo's parent and the ask
     r = installed.run("nemik-tasks", *base, "--helper", str(tmp_path / "missing"))
-    assert r.returncode == 2
+    assert r.returncode == EXIT_NO_HELPER
     assert "setup.sh" in r.stdout
 
 
