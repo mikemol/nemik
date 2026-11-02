@@ -13,9 +13,7 @@
   "misc": 12
  },
  "src/nemik/check.py": {
-  "call-overload": 2,
-  "misc": 23,
-  "type-arg": 1
+  "misc": 2
  },
  "src/nemik/churn.py": {
   "misc": 10,

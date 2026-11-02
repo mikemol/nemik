@@ -63,6 +63,7 @@ from nemik.rank import successors
 from nemik.rolls import idle_run, stalled
 from nemik.say import say
 from nemik.shaclinc import findings as shacl_findings
+from nemik.tomlview import table
 from nemik.work import in_gate
 from nemik.workrows import NO_BOUND, ready_stamps, small_done_stamps, upper_quantile
 
@@ -768,9 +769,7 @@ def survey(
     # local.
 
     weights_toml = files("nemik.data").joinpath("rank-weights.toml").read_text()
-    cap = int(
-        tomllib.loads(weights_toml).get("saturation", {}).get("needs_you_per_repo", 10)
-    )
+    cap = _declared_int(weights_toml, "saturation", "needs_you_per_repo", 10)
     owed: dict[str, list[str]] = {}
     for ask in operator_asks(merged):
         if ask["category"] == "needs-you":
@@ -801,7 +800,7 @@ def survey(
     # nemik:W356: an inter-workstream SLA. A card blocked on another repo's open card for longer
     # than
     # the declared number of loop ticks is a Warning on the BLOCKER's card, since that repo can act.
-    sla = int(tomllib.loads(weights_toml).get("sla", {}).get("cross_repo_ticks", 48))
+    sla = _declared_int(weights_toml, "sla", "cross_repo_ticks", 48)
     for waiter, _, target in merged.triples((None, NEMIK.waitsFor, None)):
         wcite, tcite = ref(waiter), ref(target)
         wrepo, trepo = wcite.partition(":")[0], tcite.partition(":")[0]
@@ -854,7 +853,7 @@ def survey(
         for n in merged.subjects(OSLC_CM.state, None)
         if (n, OSLC_CM.state, NEMIK.Done) not in merged
     }
-    prereqs: dict = {}
+    prereqs: dict[Node, set[Node]] = {}
     for n in open_nodes:
         for s in successors(merged, n):
             if s in open_nodes and s != n:
@@ -921,6 +920,18 @@ def survey(
             yield repo, g, sorted(by_repo[repo])
 
 
+def _declared_int(text: str, section: str, key: str, default: int) -> int:
+    """Read one integer a TOML section declares.
+
+    Returns:
+        The declared integer, or `default` when the section or key is absent or not an integer.
+
+    """
+    parsed: object = tomllib.loads(text)
+    value = table(table(parsed).get(section)).get(key, default)
+    return value if isinstance(value, int) and not isinstance(value, bool) else default
+
+
 def _git(cwd: Path, *argv: str) -> str | None:
     try:
         out = subprocess.run(
@@ -945,7 +956,8 @@ def exported_commit(queue_dir: Path) -> tuple[str, str] | None:
 
     """
     try:
-        data = json.loads((queue_dir / "commit.json").read_text())
+        parsed: object = json.loads((queue_dir / "commit.json").read_text())
+        data = table(parsed)
         sha = str(data["sha"])
         return ("uncommitted" if data["dirty"] else "committed", sha)
     except (OSError, json.JSONDecodeError, KeyError, TypeError, ValueError):
