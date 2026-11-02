@@ -4075,3 +4075,6 @@
 2026-11-02T13:41:51Z  status W1470 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-02T13:42:23Z  interrupt W1472 minted    -         "tests/test_layout.py names the thirteen thresholds and counts it compares with, so ruff falls by thirteen"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1383
 2026-11-02T13:42:33Z  status W1472 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T13:52:44Z  status W1471 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T13:53:40Z  interrupt W1473 minted    -         "src/nemik/calendars.py and score.py document the exceptions their loaders raise, so ruff falls by four"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1383
+2026-11-02T13:53:50Z  status W1473 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

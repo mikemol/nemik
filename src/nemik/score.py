@@ -251,6 +251,9 @@ def load_guarantees(text: str | None = None, bands: Bands | None = None) -> Guar
     Returns:
         The floor band (or None) and one Policy per [[policy]] table.
 
+    Raises:
+        ValueError: guarantee.floor names a band that is not in the declared order.
+
     """
     if text is None:
         text = files("nemik.data").joinpath("bands.toml").read_text()

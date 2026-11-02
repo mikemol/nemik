@@ -28,7 +28,7 @@
  },
  "src/nemik/calendars.py": {
   "C901": 2,
-  "DOC501": 4,
+  "DOC501": 1,
   "PLR0913": 1,
   "PLW2901": 2,
   "S404": 1,
@@ -124,9 +124,6 @@
   "PLR0915": 1,
   "PLR0917": 3,
   "PLW0603": 1
- },
- "src/nemik/score.py": {
-  "DOC501": 1
  },
  "src/nemik/serve.py": {
   "C901": 3,

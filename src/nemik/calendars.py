@@ -78,6 +78,11 @@ def load_calendars(path: Path = DEFAULT_CONFIG) -> dict[str, Calendar]:
     Returns:
         The calendars by label, in sorted order.
 
+    Raises:
+        TypeError: [calendars] is not a table, or an entry's `write` is not true or false.
+        ValueError: an entry has a bad label, an unknown key, or a bad `name`, `include` or
+            `mirror`, or `write` and `mirror` do not come together.
+
     """
     if not path.exists():
         return {}
@@ -199,6 +204,9 @@ def occurrences(
 
     Returns:
         The occurrence rows for every collection, sorted by start.
+
+    Raises:
+        FileNotFoundError: the calendar reader is not installed.
 
     """
     ics = ics or _venv_ics()
