@@ -15,6 +15,8 @@ LIMITS = {
     "oldest_block_ticks": (16.0, 48.0),
     "asks_owed": (1.0, 5.0),
 }
+OLDEST_BLOCK_TICKS = 50
+TWO_REASONS = 2
 
 
 def _repo(states: list[str], ticks: int = 0) -> Graph:
@@ -55,8 +57,8 @@ def test_the_worst_signal_decides_and_each_crossing_is_named() -> None:
     found = health(_repo(["ready", "blocked", "blocked"], ticks=50), "a", LIMITS)
     assert found.status == "red"
     assert found.blocked_share == pytest.approx(0.667, rel=0, abs=0)
-    assert found.oldest_block_ticks == 50
-    assert len(found.reasons) == 2
+    assert found.oldest_block_ticks == OLDEST_BLOCK_TICKS
+    assert len(found.reasons) == TWO_REASONS
     assert any("oldest_block_ticks" in r and "red" in r for r in found.reasons)
     assert any("blocked_share" in r and "amber" in r for r in found.reasons)
 
