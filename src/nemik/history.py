@@ -25,6 +25,10 @@ from itertools import starmap
 from pathlib import Path
 from typing import TypedDict
 
+from rdflib import RDF
+from rdflib.namespace import PROV
+
+from nemik.adapter import NEMIK, ledger_graph
 from nemik.cachestore import user_dir
 from nemik.cardevents import Event, events_of
 from nemik.check import LEDGER, QUEUE, default_root, workstream_files
@@ -2521,11 +2525,6 @@ def toil(repo: str, ledger: Path) -> list[dict[str, object]]:
         One row per ISO week: the counts by effort class and `toil_share`.
 
     """
-    from rdflib import RDF
-    from rdflib.namespace import PROV
-
-    from nemik.adapter import NEMIK, ledger_graph
-
     g, _ = ledger_graph(repo, ledger)
     weeks: dict[str, dict[str, int]] = {}
     for act in g.subjects(RDF.type, PROV.Activity):

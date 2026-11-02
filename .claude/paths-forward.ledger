@@ -3960,3 +3960,6 @@
 2026-11-02T05:41:31Z  status W1439 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-02T06:01:03Z  interrupt W1440 minted    -         "salience.py imports Weights and load_weights from nemik.rank once at module scope, so ruff falls by three"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1383
 2026-11-02T06:03:46Z  status W1440 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T06:10:43Z  tick  W1440 advanced  sweep     "stack 830 (W1440 salience.py rank imports at module scope, ruff 474 to 471) gating after a 23 min empty gate; stack 829 landed ee49adb4 (mypy 1111 to 1103); adapter.py hoists excluded by the single-writer-boundary claim [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T06:15:44Z  interrupt W1441 minted    -         "history.toil imports rdflib and nemik.adapter at module scope, so ruff falls by three"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1383
+2026-11-02T06:17:04Z  status W1441 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

@@ -3,11 +3,11 @@
 
 state file: `.claude/paths-forward.json`
 
-counter 1439 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:10c43b35e95c7fcb`
+counter 1440 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:2800d88cec02aeb7`
 
 | # | symbol | status |
 |---|---|---|
-| 1 | W1439 | working |
+| 1 | W1440 | working |
 | 2 | W1075 | ready |
 | 3 | W1139 | ready |
 | 4 | W1279 | ready |
@@ -1418,11 +1418,12 @@ counter 1439 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:10c
 | 1409 | W1435 | done |
 | 1410 | W1436 | done |
 | 1411 | W1437 | done |
+| 1412 | W1439 | done |
 
 ## waypoints
 
-1. **W1439** (working) tools/check_run_rows.py declares its parsed options and reads the schema and each row as object,
-   so mypy falls by about eight
+1. **W1440** (working) salience.py imports Weights and load_weights from nemik.rank once at module scope, so ruff falls
+   by three
 2. **W1075** (ready) Take an idle-host staging figure for one test target and split it by input (venv, Chromium, opa,
    Codon, corpus)
 3. **W1139** (ready) The pace carries cards and landing-rate rows beside the ratchets, each with its horizon in days at
@@ -4642,6 +4643,8 @@ counter 1439 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:10c
    falls by about twenty-three
 1411. **W1437** (done) critical.py, cards.py and witnesses.py move their function-local imports to module scope, so ruff
    falls by five
+1412. **W1439** (done) tools/check_run_rows.py declares its parsed options and reads the schema and each row as object,
+   so mypy falls by about eight
 
 ## residue
 
@@ -6245,3 +6248,23 @@ counter 1439 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:10c
   W1288, R114 on W1395, R116 on W1383, R119 and R135 on W1396 (the repin entry still unbuilt), R134 on W1282 (serve and
   layout unprobed; the candidate pool is now exhausted, which makes it the next work), R130 on W1288 (a K=1 landing
   again); two UNCLAIMED mtools:W2099 letters; codon owed with no stack.; 1 finding(s)
+- **nemik:R135** (-) round 137: nemik-120, stack 828 (W1437) landed 57a84704 = 05:29:35Z; stack 829 (W1439
+  tools/check_run_rows.py, mypy 1111 to 1103) inflight since 05:34:36Z, key 1793597674865196831; W1438 (PT018) refused
+  by measurement and reverted: root Verified from source (TZ=UTC reflog): 5f0e8c44 05:04:47Z, 57a84704 05:29:35Z
+  (00:29:35 -0500); --in-gate lists W1439 inflight; `mikemol-pycheck --ratchet` prints ruff 474/474 and mypy 1103/1103;
+  nemik-stale, run by me against the two directories the hook uses, prints no STALE row. Intervals as Z pairs: 828 gated
+  05:11:38Z to 05:29:35Z (17 min 57 s wall); gate empty 05:29:35Z to the 829 submit at about 05:34:36Z (about 5 min),
+  the window going to the PT018 attempt and then to this stack. W1438's refusal by measurement is clean practice: the
+  diff of 26 fixes read in full, the unsafe fix named in its G0, applied to four files, ruff 474 to 451 but mypy +16
+  (test_frontier 20 to 21, test_fruit 25 to 33, test_layout 266 to 272, test_wake_alarms 4 to 5), the four files
+  reverted by git checkout with git status then showing only queue files, the baseline never written, the card blocked
+  on W1282 with the reason (the Any sources). The R136 exclusion table was recorded on W1383. For W1439 the differential
+  (HEAD file against the new one on a crafted log: passing, failing, non-JSON, non-object rows, for the whole log,
+  --last 3 and --last 1; the unreadable-log exit 2) and the named semantic difference (a schema file that is not an
+  object now reads as an empty schema) are the right proof for a tool no test drives. One finding on a slip the G1
+  states. No fixpoint is declared. Carried open findings, status on 2026-11-02 05:44Z: R95 second finding on W1349, R95
+  third, R97 first, R98, R111 first, R102, R127 and R128 on W1219, R94 on W1348, R93 on W1347, R92 on W1346, R91 on
+  W1345, R72 on W846, R100 on W910, R101 on W1288, R105 on W1288, R85 on W613, R106 on W1376, R108 on W1382, R112 on
+  W1288, R114 on W1395, R116 on W1383, R119 and R135 on W1396 (repin entry unbuilt), R134 on W1282 (serve and layout
+  unprobed; W1438 now waits on it), R136 on W1437 (the exclusion table: recorded on W1383, the tool reading it is the
+  witness); two UNCLAIMED mtools:W2099 letters; codon owed with no stack.; 1 finding(s)
