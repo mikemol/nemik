@@ -11,6 +11,9 @@ from rdflib import Graph
 from nemik.adapter import queue_graph
 from nemik.calwrite import event_times, events, feed, uid
 
+TWO_EVENTS = 2
+FOLD_LIMIT = 75
+
 
 def _queue(tmp_path: Path, repo: str, waypoints: list[dict[str, object]]) -> Graph:
     path = tmp_path / f"{repo}.json"
@@ -104,7 +107,7 @@ def test_a_calendar_touch_routes_a_waypoint_to_that_calendar_only(
     main = [e[1] for e in events(g, ["life"], "main")]
     assert household == [f"UID:{uid('life:W1')}"]
     assert main == [f"UID:{uid('life:W1')}", f"UID:{uid('life:W2')}"]
-    assert len(events(g, ["life"])) == 2
+    assert len(events(g, ["life"])) == TWO_EVENTS
 
 
 def test_a_due_only_waypoint_sits_at_its_deadline_with_an_end_for_its_alarm(
@@ -187,4 +190,4 @@ def test_the_feed_is_crlf_folded_deterministic_and_carries_only_what_was_asked(
         [{"symbol": "W7", "title": "x" * 200, "status": "ready", "due": "20261001"}],
     )
     wrapped = feed(long, ["life"])
-    assert all(len(line.encode()) <= 75 for line in wrapped.split("\r\n"))
+    assert all(len(line.encode()) <= FOLD_LIMIT for line in wrapped.split("\r\n"))

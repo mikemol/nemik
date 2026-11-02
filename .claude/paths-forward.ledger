@@ -4022,3 +4022,6 @@
 2026-11-02T10:09:33Z  status W1456 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-02T10:09:50Z  interrupt W1458 minted    -         "tests/test_ruler_table.py, test_shaclcache_threads.py and test_parse_cache.py name the table size, the row count and the parse counts they compare with, so ruff falls by seven"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1383
 2026-11-02T10:09:58Z  status W1458 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T10:20:30Z  status W1457 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T10:20:42Z  interrupt W1459 minted    -         "tests/test_calendars.py, test_calendar_write.py and test_calwrite.py name the event count, the exit code and the line limit they compare with, so ruff falls by six"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1383
+2026-11-02T10:20:49Z  status W1459 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

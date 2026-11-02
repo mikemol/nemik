@@ -24,6 +24,9 @@ from nemik.calendars import (
     occurrences,
 )
 
+TWO_EVENTS = 2
+EXIT_REFUSED = 2
+
 ICS = (
     "BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//t//EN\r\n"
     "BEGIN:VEVENT\r\nUID:a@t\r\nDTSTAMP:20261001T000000Z\r\n"
@@ -128,7 +131,7 @@ def test_events_become_nodes_and_cal_refs_wait_on_the_next_occurrence() -> None:
     q.add((w, OSLC_CM.state, STATE["blocked"]))
     q.add((w, NEMIK.blockedOn, Literal("cal:home/a@t")))
     g = event_graph(occs, q)
-    assert len(set(g.subjects(None, NEMIK.Event))) == 2
+    assert len(set(g.subjects(None, NEMIK.Event))) == TWO_EVENTS
     assert [str(t) for t in g.objects(w, NEMIK.waitsFor)] == [
         "urn:nemik:cal:home/a@t/2026-10-03T15:00:00+00:00"
     ]
@@ -203,7 +206,7 @@ def test_a_refusing_helper_is_reported_not_a_traceback(
             ["3", "--calendars", str(cfg), "--helper", str(h)],
             __import__("rdflib").Graph(),
         )
-    assert e.value.code == 2
+    assert e.value.code == EXIT_REFUSED
     out = capsys.readouterr().out
     assert "refusing to start it" in out
     assert "Traceback" not in out

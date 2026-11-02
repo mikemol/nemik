@@ -11,6 +11,9 @@ from rdflib import Graph
 from nemik.adapter import queue_graph
 from nemik.calwrite import main
 
+EXIT_REFUSED = 2
+TWO_GONE = 2
+
 
 def _fleet(tmp_path: Path) -> Graph:
     """Build life with two open dated waypoints, one done, one undated.
@@ -100,9 +103,9 @@ def test_a_refusal_from_the_helper_is_the_commands_exit_code(
     cfg = _config(tmp_path, SHARED)
     refusing = _stand_in(tmp_path, code=2)
     argv = ["--calendars", str(cfg), "--helper", str(refusing), "--apply"]
-    assert main(argv, _fleet(tmp_path)) == 2
+    assert main(argv, _fleet(tmp_path)) == EXIT_REFUSED
     gone = main(
         ["--calendars", str(cfg), "--helper", str(tmp_path / "gone")], _fleet(tmp_path)
     )
-    assert gone == 2
+    assert gone == TWO_GONE
     assert "is missing" in capsys.readouterr().out
