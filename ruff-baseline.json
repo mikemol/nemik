@@ -29,7 +29,6 @@
  "src/nemik/calendars.py": {
   "C901": 2,
   "PLR0913": 1,
-  "PLW2901": 2,
   "S404": 1,
   "S603": 2
  },
@@ -85,8 +84,7 @@
   "S603": 1
  },
  "src/nemik/metrics.py": {
-  "PLC0415": 4,
-  "PTH111": 1
+  "PLC0415": 4
  },
  "src/nemik/mspdi.py": {
   "S314": 1,
@@ -149,7 +147,6 @@
   "PLR0912": 1,
   "PLR0915": 1,
   "PLW0717": 1,
-  "PTH111": 1,
   "S404": 1,
   "S603": 1
  },
@@ -280,8 +277,7 @@
   "SLF001": 1
  },
  "tests/test_manifest.py": {
-  "ANN202": 1,
-  "S105": 1
+  "ANN202": 1
  },
  "tests/test_memo_audits.py": {
   "PLC2701": 1

@@ -271,7 +271,7 @@ def spool_path() -> Path:
         events.jsonl under $XDG_STATE_HOME (or ~/.local/state), in the nemik directory.
 
     """
-    state = os.environ.get("XDG_STATE_HOME") or os.path.expanduser("~/.local/state")
+    state = os.environ.get("XDG_STATE_HOME") or str(Path("~/.local/state").expanduser())
     return Path(state) / "nemik" / "events.jsonl"
 
 

@@ -40,8 +40,10 @@ def test_every_rendered_field_is_manifested() -> None:
 def test_a_new_field_is_flagged() -> None:
     """A new field is flagged."""
     docs = dict(_documents())
-    docs["graph.json"]["nodes"][0]["secret"] = "x"
-    assert unmanifested("graph.json", docs["graph.json"]) == ["graph.json nodes.secret"]
+    docs["graph.json"]["nodes"][0]["extra_field"] = "x"
+    assert unmanifested("graph.json", docs["graph.json"]) == [
+        "graph.json nodes.extra_field"
+    ]
     assert unmanifested("goals/x.json", [{"goal": "W1", "leak": 1}]) == [
         "goals/x.json goals.leak"
     ]

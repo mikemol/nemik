@@ -4114,3 +4114,12 @@
 2026-11-02T18:29:38Z  status W1482 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-02T18:32:19Z  interrupt W1483 minted    -         "tests (mpxj, rank_apply, parse_cache, witness_promql, witnesses, score) clear their unused arguments, absolute paths and uppercase parameter names, so ruff falls by about fifteen"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1383
 2026-11-02T18:32:35Z  status W1483 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T18:40:33Z  status W1483 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T18:45:07Z  redact W1175 redacted  --        "sha256:169cc2321779 n=2"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T18:47:02Z  redact W1325 redacted  --        "sha256:8d4eceff4b55 n=1"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T18:48:47Z  status W1282 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T18:48:48Z  tick  W1483 advanced  sweep     "stacks 869, 870 and 871 landed (mypy 1069 to 728, ruff 340 to 324); gate empty; warrant-debt Warnings on W1175 and W1325 cleared [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T18:53:33Z  interrupt W1484 minted    -         "nemik-rank prints sets in iteration order, so two unseeded runs differ; sort the sets where they are printed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1480
+2026-11-02T19:00:39Z  interrupt W1485 minted    -         "calendars.py, metrics.py, wake.py and test_manifest.py clear a loop-variable overwrite, two os.path.expanduser calls and a secret-named key, so ruff falls by five"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1383
+2026-11-02T19:00:50Z  status W1485 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-02T19:05:55Z  status W1282 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

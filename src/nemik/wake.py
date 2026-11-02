@@ -359,7 +359,7 @@ def nudges_path() -> Path:
         The path of nudges.json.
 
     """
-    state = os.environ.get("XDG_STATE_HOME") or os.path.expanduser("~/.local/state")
+    state = os.environ.get("XDG_STATE_HOME") or str(Path("~/.local/state").expanduser())
     return Path(state) / "nemik" / "nudges.json"
 
 

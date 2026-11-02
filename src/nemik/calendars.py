@@ -92,12 +92,11 @@ def load_calendars(path: Path = DEFAULT_CONFIG) -> dict[str, Calendar]:
         msg = f'{path}: [calendars] must be a table of label = "collection name"'
         raise TypeError(msg)
     out: dict[str, Calendar] = {}
-    for label, spec in table(cals).items():
+    for label, raw in table(cals).items():
         bad = f"{path}: bad entry {label!r}: "
         if not _LABEL.fullmatch(label):
             raise ValueError(bad + "labels are [a-z][a-z0-9-]*")
-        if isinstance(spec, str):
-            spec = {"name": spec}
+        spec = {"name": raw} if isinstance(raw, str) else raw
         allowed = {"name", "include", "write", "mirror"}
         if not isinstance(spec, dict) or set(table(spec)) - allowed:
             raise ValueError(
@@ -290,8 +289,9 @@ def dedupe(rows: list[Occurrence]) -> list[Occurrence]:
         k = (r["start"], r["summary"])
         p = first.get(k)
         if p is None:
-            first[k] = r = r.copy()
-            out.append(r)
+            fresh = r.copy()
+            first[k] = fresh
+            out.append(fresh)
         elif r["label"] != p["label"] and r["label"] not in p.get("also", []):
             p["also"] = [*p.get("also", []), r["label"]]
             p["waiting"] = sorted({*p.get("waiting", []), *r.get("waiting", [])})
