@@ -24,6 +24,7 @@ from rdflib import Graph
 from rdflib.namespace import SH
 from rdflib.term import Node, URIRef
 
+from nemik.shaclcache import cached_sparql_parse
 from nemik.shapedepth import UNBOUNDED, predicates, radius
 
 Result = tuple[str, str]  # (severity IRI, message)
@@ -53,7 +54,6 @@ def import_cache(held: Held) -> None:
 
 
 def _results(data: Graph, shapes: Graph) -> dict[Node, list[Result]]:
-    from nemik.shaclcache import cached_sparql_parse
 
     # nemik:W254: pyshacl hands rdflib the same constraint text for every focus node; parse it once.
     with cached_sparql_parse():

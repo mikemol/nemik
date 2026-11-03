@@ -6,7 +6,7 @@
   "RUF067": 2
  },
  "src/nemik/adapter.py": {
-  "PLC0415": 2,
+  "PLC0415": 1,
   "RUF001": 1
  },
  "src/nemik/alarm.py": {
@@ -75,9 +75,6 @@
   "C901": 2,
   "PLC0415": 26,
   "PLR0912": 1
- },
- "src/nemik/shaclinc.py": {
-  "PLC0415": 1
  },
  "src/nemik/staticserve.py": {
   "C901": 1,

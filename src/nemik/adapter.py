@@ -13,7 +13,7 @@ from datetime import datetime
 from typing import TYPE_CHECKING
 from urllib.parse import quote, unquote
 
-from mikemol.pathsforward import ledger, model, store
+from mikemol.pathsforward import attach, ledger, model, store
 from rdflib import RDF, Graph, Literal, Namespace, URIRef
 from rdflib.namespace import DCTERMS, PROV, RDFS, XSD
 
@@ -485,7 +485,6 @@ def _add_letters(g: Graph, node: URIRef, w: model.Json) -> None:
             g.add((node, NEMIK.letter, Literal(path)))
     # nemik:W276: mtools:W930/W931's `attachments` [{path, sha256}] are the stored form of the
     # same citation: a repo-relative file pinned by hash, read through mtools' own parser.
-    from mikemol.pathsforward import attach
 
     for attached, _digest in attach.entries(w):
         g.add((node, NEMIK.letter, Literal(attached)))
