@@ -76,9 +76,6 @@
   "PLC0415": 26,
   "PLR0912": 1
  },
- "src/nemik/shaclcache.py": {
-  "ANN401": 4
- },
  "src/nemik/shaclinc.py": {
   "PLC0415": 1
  },

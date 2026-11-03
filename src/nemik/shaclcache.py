@@ -26,14 +26,14 @@ from __future__ import annotations
 
 import threading
 from contextlib import contextmanager
-from typing import TYPE_CHECKING, Any, NamedTuple
+from typing import TYPE_CHECKING, NamedTuple, cast
 
 from rdflib.plugins.sparql import processor
 
 _LOCK = threading.RLock()
 
 if TYPE_CHECKING:
-    from collections.abc import Generator
+    from collections.abc import Callable, Generator
 
 
 class _Text(NamedTuple):
@@ -50,8 +50,8 @@ def cached_sparql_parse() -> Generator[None]:
         nothing; a query text parses and translates once per base and namespace set.
 
     """
-    module = vars(processor)
-    queries: dict[tuple[str, Any, str], Any] = {}
+    module = cast("dict[str, object]", vars(processor))
+    queries: dict[tuple[str, object, str], object] = {}
 
     def lazy(text: str) -> _Text:
         return _Text(text)
@@ -60,12 +60,16 @@ def cached_sparql_parse() -> Generator[None]:
     # thread's patch as the originals. A nested block in the same thread saves and restores the
     # outer patch, which still parses and translates correctly.
     with _LOCK:
-        parse, translate = module["parseQuery"], module["translateQuery"]
+        parse = cast("Callable[[str], object]", module["parseQuery"])
+        translate = cast(
+            "Callable[[object, object, object], object]", module["translateQuery"]
+        )
 
-        def cached(tree: Any, base: Any = None, init_ns: Any = None) -> Any:
+        def cached(tree: object, base: object = None, init_ns: object = None) -> object:
             if not isinstance(tree, _Text):
                 return translate(tree, base, init_ns)
-            key = (tree.text, base, repr(sorted((init_ns or {}).items(), key=str)))
+            namespaces = cast("dict[str, object]", init_ns or {})
+            key = (tree.text, base, repr(sorted(namespaces.items(), key=str)))
             if key not in queries:
                 queries[key] = translate(parse(tree.text), base, init_ns)
             return queries[key]

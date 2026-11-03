@@ -36417,18 +36417,17 @@
       "enables": [],
       "touches": [],
       "blocked_on": [
-        "mtools:W2249",
         "mtools:W2250",
         "mtools:W2251"
       ],
       "blocked_kind": "agent",
-      "next_bounded_step": "Detail: the tool kept procrun's g in the paths it wrote, left the old procrun wheel behind and refused at uv lock with a blank reason. When mtools:W2249 (print uv's stderr) and the g fix land, repin at mtools main with the newer tool and confirm --revendor --write completes with no hand correction; record the sha and the printed hashes.",
-      "evidence": "2026-11-03T02:39:53Z: 2026-11-03 mtools cards for what W1510 found: W2249 print uv's stderr (open), W2250 the g kept in the rewritten wheel path (+g45ffeb7 against +45ffeb7), W2251 the superseded procrun wheel left in vendor/wheels, W2252 the INSTALL note on running repin from mtools' own checkout. mtools will message when each lands.",
+      "next_bounded_step": "Wait for mtools' reply to the status ask. At 2026-11-04T12:00Z, if mtools:W2250 and W2251 are not landed, run the repin by the tool plus the hand fixes (plan on W1534).",
+      "evidence": "2026-11-03T02:39:53Z: 2026-11-03 mtools cards for what W1510 found: W2249 print uv's stderr (open), W2250 the g kept in the rewritten wheel path (+g45ffeb7 against +45ffeb7), W2251 the superseded procrun wheel left in vendor/wheels, W2252 the INSTALL note on running repin from mtools' own checkout. mtools will message when each lands. | 2026-11-03T15:10:18Z: R189 finding 2, dated decision. Read back from mtools' own queue on 2026-11-03T15:1xZ: mtools:W2249 ready (ranks below paydown, does not block nemik), mtools:W2250 and mtools:W2251 ready and never worked (last_worked null, no evidence, issued 2026-11-03T02:38Z). One status ask sent to mtools (question: will W2250 and W2251 land before 2026-11-04T12:00Z). DECISION: wait until 2026-11-04T12:00Z; if they have not landed by then, or mtools says they cannot, proceed on that date with the tool plus the recorded hand fixes (edit the written path, git rm the stale wheel, uv lock --offline, the six-step plan on W1534) and take mtools:W2258's 87220c86 in the same repin, so the false ATOMIZE print stops. Until then each tick-close's false ATOMIZE line is a known cost (nine so far), not a signal. | 2026-11-03T15:11:31Z: 2026-11-03 mtools replied to the status ask: cannot promise W2250 and W2251 before 2026-11-04T12:00Z, but takes them now as its next build (revendor_apply.py, hooks lane; a build of about 1 to 2 hours, then a gate of a few hours, the last ones 3 to 4 h), with W2249 in the same change. They will message by 2026-11-04T06:00Z saying whether the stack is in the gate; if not, nemik proceeds on the 12:00Z date with the tool plus the hand fixes; if it lands first the repin needs nothing by hand. Decision stands: wait for their 06:00Z message, then proceed at 12:00Z by the tool plus hand fixes unless landed.",
       "issued_at": "2026-11-03T02:39:17Z",
       "minted_during": "interrupt",
       "caused_by": "W1510",
-      "last_worked": "2026-11-03T02:39:53Z",
-      "ticks_blocked": 22,
+      "last_worked": "2026-11-03T15:11:31Z",
+      "ticks_blocked": 0,
       "completed": null
     },
     {
@@ -37199,17 +37198,17 @@
     {
       "symbol": "W1555",
       "title": "vtodo, calwrite and history run their subprocesses through procrun.capture_bytes so S404, S603 and S607 clear",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Codemod w1555_src.py: capture_bytes(cmd, input_bytes=text.encode()) in vtodo and calwrite, capture_bytes([git ...], input_bytes=stdin or None) in history._run keeping its OSError handler, the subprocess imports swapped. Run codon_first.py on all three modules (they are in the Codon census) and the tests of each directly. RUFF stack, shares nothing with stack 922 (mypy), queues now.",
-      "evidence": "2026-11-03T14:21:23Z: 2026-11-03T14:21:23Z (read by stampnote): G0 precommit, before the edit (card and manifest first). Pace read 2026-11-03T14:15:26Z, about 7 minutes old at this G0 (its newest-landing field read PENDING: 921 landed at 14:19:29Z, after the stamp): ruff 193 left owes 90 (49 landings to zero), mypy 431 left owes 190 (56 to zero), codon owes 2; both before 921's fall to 189 and 922's. N: three src modules hold subprocess S404 and S603: src/nemik/vtodo.py (line 446, input=text.encode(), output captured as bytes, check=False), src/nemik/calwrite.py (line 266, the same shape) and src/nemik/history.py (line 388, git with input=stdin or None, check=False, inside a try that catches OSError); history's call also carries S607 (a partial path, git). K = 3 call sites, 7 findings (S404 x3, S603 x3, S607 x1) read from the baseline rows and the code. procrun.capture_bytes takes input_bytes and returns bytes stdout, so no decode changes. All three modules are in the Codon census, so a K probe is owed: codon_first.py on vtodo, calwrite and history before the stack, expecting each first error unchanged. Actuator: codemod w1555_src.py. Sensor: mikemol-pycheck --ratchet, codon_first.py, and the tests of each module run directly (test_vtodo*, test_calwrite*, test_history* and the guards). Expected reading: ruff 189 (the tree after 921) falls by exactly 7 to 182, mypy flat at 401, codon first errors unchanged. RUFF stack, shares no file with stack 922 (mypy, inflight).",
+      "next_bounded_step": null,
+      "evidence": "2026-11-03T14:21:23Z: 2026-11-03T14:21:23Z (read by stampnote): G0 precommit, before the edit (card and manifest first). Pace read 2026-11-03T14:15:26Z, about 7 minutes old at this G0 (its newest-landing field read PENDING: 921 landed at 14:19:29Z, after the stamp): ruff 193 left owes 90 (49 landings to zero), mypy 431 left owes 190 (56 to zero), codon owes 2; both before 921's fall to 189 and 922's. N: three src modules hold subprocess S404 and S603: src/nemik/vtodo.py (line 446, input=text.encode(), output captured as bytes, check=False), src/nemik/calwrite.py (line 266, the same shape) and src/nemik/history.py (line 388, git with input=stdin or None, check=False, inside a try that catches OSError); history's call also carries S607 (a partial path, git). K = 3 call sites, 7 findings (S404 x3, S603 x3, S607 x1) read from the baseline rows and the code. procrun.capture_bytes takes input_bytes and returns bytes stdout, so no decode changes. All three modules are in the Codon census, so a K probe is owed: codon_first.py on vtodo, calwrite and history before the stack, expecting each first error unchanged. Actuator: codemod w1555_src.py. Sensor: mikemol-pycheck --ratchet, codon_first.py, and the tests of each module run directly (test_vtodo*, test_calwrite*, test_history* and the guards). Expected reading: ruff 189 (the tree after 921) falls by exactly 7 to 182, mypy flat at 401, codon first errors unchanged. RUFF stack, shares no file with stack 922 (mypy, inflight). | 2026-11-03T15:08:18Z: Landed aaf53cf8 at 15:07:31Z (reflog, UTC; gated from began_ns 14:45:03Z, 22 min 28 s): vtodo, calwrite and history through capture_bytes, ruff 189 to 182. tools/working_unnamed.py flagged W1555 at the landing; cleared.",
       "issued_at": "2026-11-03T14:20:54Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W1175",
-      "last_worked": "2026-11-03T14:23:55Z",
+      "last_worked": "2026-11-03T15:08:18Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/vtodo.py",
@@ -37218,7 +37217,7 @@
         "ruff-baseline.json"
       ],
       "size_class": "small",
-      "completed": null
+      "completed": "20261103T150818Z"
     },
     {
       "symbol": "W1556",
@@ -37245,23 +37244,24 @@
     {
       "symbol": "W1557",
       "title": "shaclcache types its SPARQL patch with object parameters and casts at the one boundary so its 25 Any reads clear",
-      "status": "ready",
+      "status": "working",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "One Write of the patch function: module typed dict[str, object], lazy/cached with object parameters, translate and parse cast to Callable, key tuple[str, object, str], queries dict of object. codon_first.py shaclcache (it has a codon-baseline row), run the shacl tests directly, measure house mypy (25 findings) and the ANN401 row in ruff (4). MYPY stack by baseline, shares nothing with stacks 923 or 924.",
-      "evidence": "2026-11-03T15:01:52Z: 2026-11-03T15:01:52Z (read by stampnote): G0 precommit, before the edit (card and manifest first). Pace read 2026-11-03T14:55:27Z, this tick's first command, about 3 minutes old: mypy 401 left owes 190 (39 landings to zero, 105 fall over the last 10), ruff 182 left owes 90 (56 to zero), codon owes 2; before 923's fall to 182 and 924's to 381. N: src/nemik/shaclcache.py holds 25 mypy findings (misc 23, explicit-any 2), read from house mypy on the file: every one sits in cached_sparql_parse, the monkeypatch that wraps rdflib's untyped parseQuery and translateQuery (vars(processor) is dict[str, Any], the wrapper's parameters are Any, the cache key and values carry Any); the file also holds 4 ruff ANN401 (the Any parameters), read from the baseline row. K = 25 for mypy (measured, the whole file), 4 for ruff. Actuator: one Write of the function: module typed dict[str, object], the two originals cast to Callable[..., object], lazy/cached with object parameters and an object result, the key tuple[str, object, str], queries dict[key, object]. The first Codon error of shaclcache is its import of contextlib/__future__ (codon-baseline row), masked, so the conversion cannot move it; I still run codon_first.py. Behaviour must not change: the cache key and the repr(sorted(items, key=str)) are kept character for character. Sensor: house mypy on the file, mikemol-pycheck --ratchet --write (mypy only in this stack, its ruff fall of up to 4 stays in the tree for the next ruff stack's write), the SHACL and survey tests run directly. Expected reading: mypy 381 (the tree after 924) falls by up to 25, to 356, and a residue is named if a use stays; ruff falls by up to 4 in the tree. MYPY stack, shares no file with stacks 923 (ruff) or 924 (mypy: test_layout.py and its baseline, but this stack writes the baseline from a tree where 924's value is the base, so it submits after 924 lands). | 2026-11-03T15:07:05Z: Staged, not submitted: stack925.json (shaclcache typed, ruff 182 to 178 exactly, mypy 381 to 357 of which 24 clear and 1 stays, left for the next mypy stack's baseline write; codon first error unchanged; 19 tests passed 201.31 s wall; hookcheck rc 0 x4). Submit after stack 923 lands (shared ruff-baseline.json); write the baseline with pycheck --ratchet --write then and RESTORE the mypy-baseline.json blob to the value of the stack ahead (924's 381) so only ruff moves.",
+      "evidence": "2026-11-03T15:01:52Z: 2026-11-03T15:01:52Z (read by stampnote): G0 precommit, before the edit (card and manifest first). Pace read 2026-11-03T14:55:27Z, this tick's first command, about 3 minutes old: mypy 401 left owes 190 (39 landings to zero, 105 fall over the last 10), ruff 182 left owes 90 (56 to zero), codon owes 2; before 923's fall to 182 and 924's to 381. N: src/nemik/shaclcache.py holds 25 mypy findings (misc 23, explicit-any 2), read from house mypy on the file: every one sits in cached_sparql_parse, the monkeypatch that wraps rdflib's untyped parseQuery and translateQuery (vars(processor) is dict[str, Any], the wrapper's parameters are Any, the cache key and values carry Any); the file also holds 4 ruff ANN401 (the Any parameters), read from the baseline row. K = 25 for mypy (measured, the whole file), 4 for ruff. Actuator: one Write of the function: module typed dict[str, object], the two originals cast to Callable[..., object], lazy/cached with object parameters and an object result, the key tuple[str, object, str], queries dict[key, object]. The first Codon error of shaclcache is its import of contextlib/__future__ (codon-baseline row), masked, so the conversion cannot move it; I still run codon_first.py. Behaviour must not change: the cache key and the repr(sorted(items, key=str)) are kept character for character. Sensor: house mypy on the file, mikemol-pycheck --ratchet --write (mypy only in this stack, its ruff fall of up to 4 stays in the tree for the next ruff stack's write), the SHACL and survey tests run directly. Expected reading: mypy 381 (the tree after 924) falls by up to 25, to 356, and a residue is named if a use stays; ruff falls by up to 4 in the tree. MYPY stack, shares no file with stacks 923 (ruff) or 924 (mypy: test_layout.py and its baseline, but this stack writes the baseline from a tree where 924's value is the base, so it submits after 924 lands). | 2026-11-03T15:07:05Z: Staged, not submitted: stack925.json (shaclcache typed, ruff 182 to 178 exactly, mypy 381 to 357 of which 24 clear and 1 stays, left for the next mypy stack's baseline write; codon first error unchanged; 19 tests passed 201.31 s wall; hookcheck rc 0 x4). Submit after stack 923 lands (shared ruff-baseline.json); write the baseline with pycheck --ratchet --write then and RESTORE the mypy-baseline.json blob to the value of the stack ahead (924's 381) so only ruff moves. | 2026-11-03T15:10:01Z: 2026-11-03T15:10:01Z (read by stampnote): G0 AMENDMENT (R189 finding 1), stamped after the edit and the plan change: the G0 above planned a mypy-only stack. It shipped as stack 925, a RUFF-only stack (ruff-baseline.json, 182 to 178, exactly the 4 ANN401), because at 923's landing a mypy successor would have shared mypy-baseline.json with stack 924. Owed mypy credit: shaclcache.py's code change clears 24 of its 25 mypy findings (381 to 357 in the tree, one stays) and lands with 925, but 925 does NOT write mypy-baseline.json; the next mypy stack after 924's landing must run pycheck --ratchet --write on a tree holding 925, take the 357 or lower as its baseline, and say in its body that 24 of its fall belong to W1557.",
       "issued_at": "2026-11-03T15:01:18Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W1490",
-      "last_worked": "2026-11-03T15:07:05Z",
+      "last_worked": "2026-11-03T15:10:01Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/shaclcache.py",
         "mypy-baseline.json"
       ],
-      "size_class": "small"
+      "size_class": "small",
+      "completed": null
     }
   ],
   "residue": [
@@ -37464,12 +37464,7 @@
   ],
   "job_id": "481476b5",
   "heartbeat": "2026-10-29T04:11:13Z",
-  "lock": {
-    "holder": "session-nemik",
-    "taken_at": "2026-11-03T15:07:10Z",
-    "pid": 337543,
-    "start": 21144718
-  },
+  "lock": null,
   "predecessor_job_id": "1d7fe6d0",
   "leases": [
     {
@@ -46106,7 +46101,29 @@
         }
       ],
       "id": "nemik:R186"
+    },
+    {
+      "card": "W1557",
+      "trigger": "round 189: stacks 922 (W1554 slice 5) 1c591f24 landed 14:44:58Z and 923 (W1555 vtodo, calwrite, history) aaf53cf8 landed 15:07:31Z; stack 924 (W1556 slice 6, mypy 401 to 381) inflight since 15:07:36Z; stack 925 (W1557 shaclcache, ruff 182 to 178, mypy-baseline unwritten) queued",
+      "root": "Verified from the reflog (unix stamps): 744e82a2 1793715569 = 14:19:29Z, 1c591f24 1793717098 = 14:44:58Z, aaf53cf8 1793718451 = 15:07:31Z. 922 gated 14:19:33Z to 14:44:58Z (25 min 25 s) and 923 14:45:03Z to 15:07:31Z (22 min 28 s), each begun within 5 s of the landing before it; 924 began 15:07:36Z (the G1's closing line about its expected landing is garbled by an interrupted correction and I take 924's begin from the reflog, 5 s after 923) with 925 queued, so the gate was not empty. R188 findings are carried as plans on W1535 and W1175 and the G1 says so; one working step was already taken (the 50 PLC0415 sites listed and the non-serve ones read: adapter's hashlib is a standing-4 Codon case, check's is a commented cycle), which is the probe R188 asked for and which led the session to a different supply (shaclcache), a sound change. I did not re-run any figure. Two findings. No fixpoint is declared. Carried open findings as in R188.",
+      "findings": [
+        {
+          "finding": "W1557's G0 planned a mypy-only stack ('mypy-baseline write, its ruff fall of up to 4 stays in the tree'), and the stack ended as the reverse (ruff-baseline.json only, mypy's 24 credited by the next mypy write) because a mypy successor would have shared a file with 924. The G1 records the change in prose, but the G0 on the card still says the opposite and the sensor line (mypy 381 falls by up to 25) is the one a reader will check. Amend it with a stampnote line stamped after the change ('plan changed at <Z>: ruff-baseline only; reason: shared file with 924; mypy 24 credited later'), so the card's last G0 line matches the stack. Also write on the card the one credit still owed (mypy 24 findings in shaclcache.py, baseline entry 25 to 1) so the next mypy stack's expected number counts them and a surprise delta is not misread, as with the calendars ruff drop in R178.",
+          "finding_card": "W1557",
+          "finding_owner": "nemik session",
+          "finding_witness": "A stamped amendment line on W1557 stating the changed plan and the owed mypy credit (24, shaclcache.py), and the next mypy stack's G0 counting it.",
+          "due": "2026-11-04"
+        },
+        {
+          "finding": "ATOMIZE W1556 is the ninth false positive of one cause (mtools:W2258's reader fix, awaiting our repin W1520, which waits on mtools:W2249 to W2251), and those three mtools cards have been unlanded since the plan was written on 2026-11-03 early morning, now over twelve hours. The decision made then (wait, rather than accept a hand edit) was given for a reason that may have changed; revisit it with facts, not by feel: read the three mtools cards back from their queue (status, last note, owner, whether claimed), send mtools one status ask naming the ninth print as the cost, and set a date after which the repin proceeds by the tool as it is plus the recorded hand fixes (the procrun +g path and the old wheel git rm that the last repin needed), with the six-step plan on W1534. Record the fetched status on W1534 and the decision with its date.",
+          "finding_card": "W1534",
+          "finding_owner": "nemik session",
+          "finding_witness": "A W1534 line with the fetched statuses of mtools:W2249, W2250, W2251 and W2258, the message sent to mtools, and a dated decision (wait until X or proceed by hand fix).",
+          "due": "2026-11-04"
+        }
+      ],
+      "id": "nemik:R187"
     }
   ],
-  "retro_counter": 186
+  "retro_counter": 187
 }
