@@ -64,7 +64,8 @@ def test_ready_item_with_open_feeder_is_an_umbrella() -> None:
     g = Graph()
     umbrella, leaf = _wp(g, "a", "W1"), _wp(g, "a", "W2")
     g.add((leaf, NEMIK.enables, umbrella))
-    assert is_umbrella(g, umbrella) and not is_umbrella(g, leaf)
+    assert is_umbrella(g, umbrella)
+    assert not is_umbrella(g, leaf)
     g.set((leaf, OSLC_CM.state, STATE["done"]))
     assert not is_umbrella(g, umbrella)
 
@@ -83,9 +84,8 @@ def test_goals_pick_terminal_items_with_on_deck_leaf_and_outside_waits() -> None
         g.add((n, NEMIK.symbol, Literal(s)))
     rows = {r["goal"]: r for r in goals(g, "a", load_weights())}
     assert set(rows) == {"W1", "W4"}
-    assert (
-        rows["W1"]["on_deck"] == "a:W2"
-        and rows["W1"]["outside"] == ["b:W9"]
-        and not rows["W1"]["clear"]
-    )
-    assert rows["W4"]["frontier"] == ["a:W4"] and rows["W4"]["clear"]
+    assert rows["W1"]["on_deck"] == "a:W2"
+    assert rows["W1"]["outside"] == ["b:W9"]
+    assert not rows["W1"]["clear"]
+    assert rows["W4"]["frontier"] == ["a:W4"]
+    assert rows["W4"]["clear"]

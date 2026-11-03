@@ -3,12 +3,12 @@
 
 state file: `.claude/paths-forward.json`
 
-counter 1537 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:f17d19ca6370a346`
+counter 1538 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:644d4f1aae20c35c`
 
 | # | symbol | status |
 |---|---|---|
 | 1 | W1535 | working |
-| 2 | W1536 | working |
+| 2 | W1537 | working |
 | 3 | W1007 | ready |
 | 4 | W1008 | ready |
 | 5 | W1075 | ready |
@@ -122,7 +122,7 @@ counter 1537 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:f17
 | 113 | W1522 | ready |
 | 114 | W1532 | ready |
 | 115 | W1534 | ready |
-| 116 | W1537 | ready |
+| 116 | W1538 | ready |
 | 117 | W986 | blocked |
 | 118 | W1010 | blocked |
 | 119 | W1136 | blocked |
@@ -1516,6 +1516,7 @@ counter 1537 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:f17
 | 1507 | W1530 | done |
 | 1508 | W1531 | done |
 | 1509 | W1533 | done |
+| 1510 | W1536 | done |
 
 ## waypoints
 
@@ -1526,11 +1527,10 @@ counter 1537 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:f17
      evaluate_strs, ...) taking the page and the JS and returning the narrowed type via an object-annotated result; step
      3: a codemod moves one kind per stack. Atomize by kind (one stack per helper) because the file is 1700 lines. Pairs
      with ruff-flat; MYPY stack, shares mypy-baseline.json.
-2. **W1536** (working) nemik-witnesses --apply fails to close a card whose file witness is under the home directory
-   - blocked on: luthen-observability
-   - next: Stack 905 carries it (queued behind 903). At 905's landing, in the same tick: read its sha from the reflog,
-     send it to luthen-observability, then fetch their throwaway home-path --apply result back and record it here before
-     closing the card.
+2. **W1537** (working) Split the compound asserts in eight test files so PT018 clears
+   - next: Apply ruff's PT018 fix (unsafe-fixes, preview with --diff first) to the eight files, restore the comment the
+     fix drops in test_wake_alarms (backoff applies as for blockers), pycheck --format, run the eight test files
+     directly, ratchet --write. RUFF stack, shares ruff-baseline.json with stack 905, so it submits after 905 lands.
 3. **W1007** (ready) The open-commitment count per repo, from mtools' commitment ledger, is a ratchet on the pace board
    and gauges
    - next: When mtools publishes its commitment ledger, count each repo's open commitments into a series, judge it like
@@ -2021,10 +2021,11 @@ counter 1537 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:f17
      exemption can live there; if it is mtools' code, send mtools a nudge citing nemik:W1534 with the three false
      positives (W1175 twice, W1526) and ask for an exemption for a card a live gating stack names, with a test. Do not
      suppress by marking or unmarking the card (R176 finding 2).
-116. **W1537** (ready) Split the compound asserts in eight test files so PT018 clears
-   - next: Apply ruff's PT018 fix (unsafe-fixes, preview with --diff first) to the eight files, restore the comment the
-     fix drops in test_wake_alarms (backoff applies as for blockers), pycheck --format, run the eight test files
-     directly, ratchet --write. RUFF stack, shares ruff-baseline.json with stack 905, so it submits after 905 lands.
+116. **W1538** (ready) Three test files run their probe command through procrun.capture so S404 and S603 clear
+   - next: Codemod w1538_tests.py: swap import subprocess for the procrun capture import (isort position: froms after
+     plain imports, sorted by module) and subprocess.run(cmd, capture_output=True, text=True, check=False) for
+     capture(cmd) in the three files; run them directly; ratchet. RUFF stack, shares ruff-baseline.json with stack 906,
+     so it submits after 906 lands.
 117. **W986** (blocked) A ratchet paydown rate requirement with teeth: a repo is behind when a ratchet's fall over a
    trailing window of landed commits is below a requirement that only rises
    - blocked on: W994, W1002
@@ -4956,6 +4957,7 @@ counter 1537 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:f17
 1507. **W1530** (done) Pin spool_lines skipping a JSON non-object line with a test
 1508. **W1531** (done) history.py reads queue JSON through a typed helper so five Any reads clear
 1509. **W1533** (done) history.py reads queue cards through one typed helper so three Any reads clear
+1510. **W1536** (done) nemik-witnesses --apply fails to close a card whose file witness is under the home directory
 
 ## residue
 
@@ -7343,3 +7345,16 @@ counter 1537 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:f17
   now run ahead of the landed ones by an unlanded edit, which only a written note guards. I did not re-run any figure.
   Two findings: the third late G0 in the series, and an external-reader step that is owed and dated by nobody. No
   fixpoint is declared. Carried open findings as in R178, minus R178's two (met).; 2 finding(s)
+- **nemik:R178** (-) round 180: stack 903 (W1528) af0e2c56 landed 09:17:52Z; stack 905 (W1536, calendars' ruff drop)
+  inflight since 09:17:56Z; stack 904 (W1535 slice 1, mypy 578 to 542) queued; stacks 906 (W1537, ruff 261 to 245) and
+  907 (W1535 slice 2, mypy 542 to 516) staged: root Verified from the reflog (unix stamp 1793697472 = 09:17:52Z, 1490 s
+  after d76e68b6 at 08:53:02Z): 903 gated 08:53:07Z to 09:17:52Z (24 min 45 s) and 905 began right after (began_ns
+  1793697476 = 09:17:56Z), so the gate was not empty. R179 is met on both findings in form: standing 11 amended with the
+  mid-stack-defect clause (W846, W1529, W1536 cited), and W1536's luthen step is dated (the sha sent at 905's landing,
+  the --apply result fetched back); W1537's and slice 2's G0 were stamped before the edit. The 903 commit subject says
+  'ruff falls 265 to 261' though 903 wrote mypy-baseline.json; the G1 names the mismatch on W1528 and the ruff fall
+  belongs to 905, and the subject is permanent in the history, so the card note is the only correction possible. I
+  accept it, and hand-raising test_wake_alarms back to 4 in mypy-baseline.json is correct because the file in 904 is the
+  landed one (it restores the landed state, not a waiver). I did not re-run any figure. One finding. No fixpoint is
+  declared. Carried open findings as in R179, minus R179's finding 1 (met); finding 2 (W1536 luthen step) still carried,
+  as it falls due at 905's landing.; 1 finding(s)

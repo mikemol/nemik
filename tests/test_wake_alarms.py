@@ -13,6 +13,18 @@ from nemik.adapter import NEMIK, queue_graph, waypoint_uri
 from nemik.wake import Liveness, due_nudges, fired_alarms, main, read_liveness, roster
 
 
+def _alarms(printed: str) -> list[str]:
+    """Read the `alarms` of nemik-wake's printed JSON.
+
+    Returns:
+        Each alarm as text; empty when the document has none.
+
+    """
+    parsed: object = json.loads(printed)
+    alarms = parsed.get("alarms") if isinstance(parsed, dict) else None
+    return [str(a) for a in alarms] if isinstance(alarms, list) else []
+
+
 def _graph(tmp_path: Path) -> Graph:
     q = tmp_path / "q.json"
     payload2: dict[str, object] = {
@@ -73,9 +85,8 @@ def test_a_bad_alarm_is_reported_not_fatal(tmp_path: Path) -> None:
     got = fired_alarms(
         g, datetime(2026, 10, 1, tzinfo=UTC), datetime(2026, 10, 2, tzinfo=UTC), {}
     )
-    assert any(a.get("error") for a in got) and any(
-        a["at"] == "2026-10-01T20:00:00Z" for a in got
-    )
+    assert any(a.get("error") for a in got)
+    assert any(a["at"] == "2026-10-01T20:00:00Z" for a in got)
 
 
 def test_alarms_nudge_delivers_each_firing_once(
@@ -99,10 +110,11 @@ def test_alarms_nudge_delivers_each_firing_once(
         str(tmp_path / "none"),
     ]
     main(argv, g)
-    first = json.loads(capsys.readouterr().out)["alarms"]
+    first = _alarms(capsys.readouterr().out)
     main(argv, g)
-    second = json.loads(capsys.readouterr().out)["alarms"]
-    assert first and second == []
+    second = _alarms(capsys.readouterr().out)
+    assert first
+    assert second == []
     assert json.loads(state.read_text())["life"] == pytest.approx(
         1.0, rel=0, abs=0
     )  # the repo nudge state survives
@@ -132,10 +144,10 @@ def test_a_sleeping_owner_of_a_fired_alarm_joins_the_wake_roster(
     asleep: Liveness = {"life": {"verdict": "dormant"}}
     rows = roster(g, asleep, alarms=fired_alarms(g, *window, asleep))
     (life,) = [r for r in rows if r["repo"] == "life"]
-    assert life["state"] == "asleep" and life["waiting"][0]["blocked"] == "life:W9"
-    assert (
-        due_nudges(rows, {}) and due_nudges(rows, {"life": 9e18}) == []
-    )  # backoff applies as for blockers
+    assert life["state"] == "asleep"
+    assert life["waiting"][0]["blocked"] == "life:W9"
+    assert due_nudges(rows, {})
+    assert due_nudges(rows, {"life": 9e18}) == []  # backoff applies as for blockers
     awake: Liveness = {"life": {"verdict": "ok"}}
     assert not [
         r

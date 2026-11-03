@@ -21,7 +21,8 @@ def test_members_are_leaves_moving_nothing_or_tagged() -> None:
     ]
     f = fruit(Graph(), "a", rows)
     assert f is not None
-    assert f["members"] == ["W1", "W3"] and f["class_weight"] == TWO_MEMBERS_WEIGHT
+    assert f["members"] == ["W1", "W3"]
+    assert f["class_weight"] == TWO_MEMBERS_WEIGHT
 
 
 def test_tagged_item_joins_with_its_downstream() -> None:
@@ -33,7 +34,8 @@ def test_tagged_item_joins_with_its_downstream() -> None:
     g.add((n, NEMIK.touches, Literal("fruit")))
     f = fruit(g, "a", [{"symbol": "W2", "downstream": 3}])
     assert f is not None
-    assert f["members"] == ["W2"] and f["class_weight"] == TAGGED_WEIGHT
+    assert f["members"] == ["W2"]
+    assert f["class_weight"] == TAGGED_WEIGHT
 
 
 def test_no_members_no_row() -> None:
@@ -84,7 +86,8 @@ def test_pile_outweighs_a_deep_item_and_leads() -> None:
         }
     )  # W1 moves one stalled peer (8); fruit W2-W10 weigh 9
     rows = rank(g, "a", load_weights())
-    assert rows[0]["symbol"] == "W2" and rows[0]["fruit"]["class_weight"] == PILE_WEIGHT
+    assert rows[0]["symbol"] == "W2"
+    assert rows[0]["fruit"]["class_weight"] == PILE_WEIGHT
 
 
 def test_deep_item_outweighing_the_pile_leads() -> None:
@@ -111,4 +114,5 @@ def test_a_working_fruit_member_holds_the_class_slot() -> None:
     )
     g.set((waypoint_uri("a", "W2"), OSLC_CM.state, NEMIK.Working))
     rows = rank(g, "a", load_weights())
-    assert rows[0]["symbol"] == "W1" and not any("fruit" in r for r in rows)
+    assert rows[0]["symbol"] == "W1"
+    assert not any("fruit" in r for r in rows)

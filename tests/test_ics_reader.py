@@ -41,4 +41,5 @@ def test_mikemol_ics_reads_an_exported_calendar(tmp_path: Path) -> None:
         env=installed._bin()[1],
         check=True,
     ).stdout
-    assert "dentist" in out and "a@test" in out, out[:400]
+    assert "dentist" in out, out[:400]
+    assert "a@test" in out, out[:400]

@@ -34,7 +34,8 @@ def test_a_saved_cache_is_restored_exactly(tmp_path: Path) -> None:
     """What is saved loads back unchanged."""
     _build()
     held, solves = shaclinc.export_cache(), flow.export_solves()
-    assert held and solves, "the build left nothing to keep"
+    assert held, "the build left nothing to keep"
+    assert solves, "the build left nothing to keep"
     assert cachestore.save(tmp_path) > 0
     _forget()
     assert cachestore.load(tmp_path) is True

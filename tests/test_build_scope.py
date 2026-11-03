@@ -57,9 +57,8 @@ def test_cards_are_read_once_per_graph_inside_a_scope_and_never_stale_outside() 
     g = _graph(NEMIK.Ready)
     with indexed():
         first, second = cards(g), cards(g)
-        assert first == second and first is not second, (
-            "a shared dict would let a caller edit it"
-        )
+        assert first == second, "a shared dict would let a caller edit it"
+        assert first is not second, "a shared dict would let a caller edit it"
         assert first["r:W1"].state == "ready"
     # outside any scope nothing is cached: a graph changed between asks is read afresh
     g.set((waypoint_uri("r", "W1"), OSLC_CM.state, NEMIK.Done))

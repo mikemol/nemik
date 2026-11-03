@@ -115,7 +115,6 @@
   "S603": 2
  },
  "tests/test_akonadi_guard.py": {
-  "PT018": 1,
   "S404": 1,
   "S603": 1
  },
@@ -124,11 +123,9 @@
   "S603": 1
  },
  "tests/test_build_scope.py": {
-  "PLC2701": 1,
-  "PT018": 1
+  "PLC2701": 1
  },
  "tests/test_cachestore.py": {
-  "PT018": 1,
   "SLF001": 3,
   "syntax": 1
  },
@@ -161,14 +158,8 @@
   "C901": 1,
   "S311": 1
  },
- "tests/test_frontier.py": {
-  "PT018": 3
- },
  "tests/test_frontier_walker.py": {
   "PLC2701": 2
- },
- "tests/test_fruit.py": {
-  "PT018": 4
  },
  "tests/test_gate_weights.py": {
   "S404": 1,
@@ -193,7 +184,6 @@
   "S603": 1
  },
  "tests/test_ics_reader.py": {
-  "PT018": 1,
   "S404": 1,
   "S603": 1,
   "SLF001": 1
@@ -204,9 +194,6 @@
  },
  "tests/test_inbound_orphans.py": {
   "PLC2701": 1
- },
- "tests/test_incremental_redraw.py": {
-  "PT018": 1
  },
  "tests/test_index.py": {
   "PLC2701": 2
@@ -287,9 +274,6 @@
  "tests/test_staticserve.py": {
   "S404": 1,
   "S603": 1
- },
- "tests/test_wake_alarms.py": {
-  "PT018": 4
  },
  "tests/test_witnesses.py": {
   "PT018": 2,

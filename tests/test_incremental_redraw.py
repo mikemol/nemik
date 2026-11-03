@@ -140,9 +140,8 @@ def test_a_poll_that_adds_and_removes_cards_leaves_the_rest_where_it_was(
     assert webpage.flag(gone, "removed")
     assert webpage.flag(gone, "kept")
     assert "2 cards" in gone.string(gone.root, "text")
-    assert webpage.flag(fresh, "rebuilt") and webpage.flag(fresh, "hidden"), (
-        "re-layout did not start afresh"
-    )
+    assert webpage.flag(fresh, "rebuilt"), "re-layout did not start afresh"
+    assert webpage.flag(fresh, "hidden"), "re-layout did not start afresh"
 
 
 def test_a_rebuilt_card_list_keeps_the_focus_a_reader_had_in_it(server: str) -> None:

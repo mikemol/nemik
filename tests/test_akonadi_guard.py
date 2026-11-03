@@ -34,4 +34,5 @@ def test_helper_refuses_without_a_session_bus() -> None:
         timeout=30,
         check=False,
     )
-    assert r.returncode == EXIT_REFUSED and b"refusing to start it" in r.stdout, r
+    assert r.returncode == EXIT_REFUSED, r
+    assert b"refusing to start it" in r.stdout, r
