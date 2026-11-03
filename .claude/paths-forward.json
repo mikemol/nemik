@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1533,
+  "counter": 1534,
   "waypoints": [
     {
       "symbol": "W1",
@@ -36635,45 +36635,45 @@
     {
       "symbol": "W1530",
       "title": "Pin spool_lines skipping a JSON non-object line with a test",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Write tests/test_metrics_spool.py: a spool with a valid event, bad JSON and a JSON list/string line; spool_lines skips the non-objects and counts the rest (fails on f36bdd1a's parent source, where it raised). The gate refuses a commit that lowers no ratchet while behind, so it rides as an entry of the next MYPY stack (history.py, 12 findings), not alone.",
-      "evidence": "2026-11-03T06:46:39Z: 2026-11-03T06:46:39Z (read by stampnote): G0 precommit, before the Write. N: no test pins metrics.spool_lines skipping a JSON non-object line (R173 finding 2). Actuator: new tests/test_metrics_spool.py, one test with a spool of a prompt, a Stop, bad JSON, a JSON list and a JSON string. Sensor: pytest on the new source (passes) and on the parent worktree source (must fail, the old code raised AttributeError on the list). Expected: ruff and mypy flat on the test file; the stack's mypy fall stays 587 to 582 from history.py. Rides stack with W1531 since the gate refuses a no-ratchet commit while behind. | 2026-11-03T07:09:41Z: R175 finding 1 applied: standing 17 amended with the testable clause (every working card is named by an entry of a live stack) citing the two refusals, stacks 890 and 900; the mechanical listing is carded as W1532. Count correction: the G1 said seven remaining history.py Any reads but listed six lines (146, 1306, 1406, 1514, 1564, 2593); the next probe prints the list with its count.",
+      "next_bounded_step": null,
+      "evidence": "2026-11-03T06:46:39Z: 2026-11-03T06:46:39Z (read by stampnote): G0 precommit, before the Write. N: no test pins metrics.spool_lines skipping a JSON non-object line (R173 finding 2). Actuator: new tests/test_metrics_spool.py, one test with a spool of a prompt, a Stop, bad JSON, a JSON list and a JSON string. Sensor: pytest on the new source (passes) and on the parent worktree source (must fail, the old code raised AttributeError on the list). Expected: ruff and mypy flat on the test file; the stack's mypy fall stays 587 to 582 from history.py. Rides stack with W1531 since the gate refuses a no-ratchet commit while behind. | 2026-11-03T07:09:41Z: R175 finding 1 applied: standing 17 amended with the testable clause (every working card is named by an entry of a live stack) citing the two refusals, stacks 890 and 900; the mechanical listing is carded as W1532. Count correction: the G1 said seven remaining history.py Any reads but listed six lines (146, 1306, 1406, 1514, 1564, 2593); the next probe prints the list with its count. | 2026-11-03T07:33:05Z: Landed 010c1ba0 at 07:32:17Z (reflog, UTC): tests/test_metrics_spool.py pins spool_lines skipping non-object lines.",
       "issued_at": "2026-11-03T06:43:00Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W1529",
-      "last_worked": "2026-11-03T07:09:41Z",
+      "last_worked": "2026-11-03T07:33:05Z",
       "ticks_blocked": 0,
       "manifest": [
         "tests/test_metrics_spool.py"
       ],
       "size_class": "small",
-      "completed": null
+      "completed": "20261103T073305Z"
     },
     {
       "symbol": "W1531",
       "title": "history.py reads queue JSON through a typed helper so five Any reads clear",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Run w1531_history.py (helper _queue_doc, three uses), measure mypy, run history tests, differential on queue_at/snapshots, codon_first history.",
-      "evidence": "2026-11-03T06:44:56Z: 2026-11-03T06:44:55Z (read by stampnote): G0 precommit, before the edit. N: history.py holds mypy misc findings at its json.loads reads (lines 265, 594, 796: five of its twelve). Actuator: codemod w1531_history.py adds helper _queue_doc (json.loads into an object, cast to QueueDoc) and three uses. K: codon_first.py history (cast and typing import are the risk). Sensor: mikemol-pycheck --ratchet, house mypy on history.py, history tests run directly, parent-source differential of queue_at. Expected reading: mypy 587 falls by 5, ruff flat at 268 (270 baseline until 897 lands). Pace read 2026-11-03T06:25:10Z (mypy 597 left then, owes 190). Stack is MYPY, behind 897 (ruff) with no shared file; it also carries W1530's pin test.",
+      "next_bounded_step": null,
+      "evidence": "2026-11-03T06:44:56Z: 2026-11-03T06:44:55Z (read by stampnote): G0 precommit, before the edit. N: history.py holds mypy misc findings at its json.loads reads (lines 265, 594, 796: five of its twelve). Actuator: codemod w1531_history.py adds helper _queue_doc (json.loads into an object, cast to QueueDoc) and three uses. K: codon_first.py history (cast and typing import are the risk). Sensor: mikemol-pycheck --ratchet, house mypy on history.py, history tests run directly, parent-source differential of queue_at. Expected reading: mypy 587 falls by 5, ruff flat at 268 (270 baseline until 897 lands). Pace read 2026-11-03T06:25:10Z (mypy 597 left then, owes 190). Stack is MYPY, behind 897 (ruff) with no shared file; it also carries W1530's pin test. | 2026-11-03T07:33:03Z: Landed f07dbd0f (first entry of stack 900), stack landed 07:32:17Z (reflog, UTC): history.py _queue_doc, mypy 587 to 582.",
       "issued_at": "2026-11-03T06:44:47Z",
       "minted_during": "interrupt",
       "caused_by": null,
-      "last_worked": "2026-11-03T06:48:01Z",
+      "last_worked": "2026-11-03T07:33:03Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/history.py",
         "mypy-baseline.json"
       ],
       "size_class": "small",
-      "completed": null
+      "completed": "20261103T073303Z"
     },
     {
       "symbol": "W1532",
@@ -36695,22 +36695,42 @@
     {
       "symbol": "W1533",
       "title": "history.py reads queue cards through one typed helper so three Any reads clear",
-      "status": "ready",
+      "status": "working",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "Run w1533_history.py: helper _cards_of, used by card_table and oldest_cards, and an object-annotated json.loads in oldest_rows; measure mypy; differential on card_table, oldest_cards and oldest_rows; codon_first history.",
-      "evidence": "2026-11-03T07:30:35Z: 2026-11-03T07:30:35Z (read by stampnote): G0 precommit, before the edit. N: history.py holds seven mypy misc findings (lines 146, 1317 twice, 1417, 1525, 1575, 2604); three are the same untyped-card pattern: card_table (1417), oldest_cards (1525), oldest_rows json.loads (1575). Actuator: codemod w1533_history.py adds helper _cards_of(doc: object) -> list[dict[str, object]] used by the two loops and annotates the json.loads result object. K: codon_first.py history. Sensor: mikemol-pycheck --ratchet and house mypy on history.py. Expected reading: history.py findings 7 to 4 (146, 1317 x2, 2604 remain), mypy 582 to 579, ruff flat. Pace read 2026-11-03T06:55:11Z (mypy 587 left then, 64 landings to zero). MYPY stack, shares mypy-baseline.json with stack 900 (gating), so it waits for 900's landing. | 2026-11-03T07:32:08Z: Staged, not submitted: stack902.json (history.py _cards_of, mypy 582 to 579, differential EQUAL on the frozen snapshot plus odd documents, 31 tests passed, codon first error unchanged). Submit after stack 900 lands (same file and mypy-baseline.json); write the baseline with pycheck --ratchet --write then. Remaining history.py: 146, 1317 x2, 2614.",
+      "evidence": "2026-11-03T07:30:35Z: 2026-11-03T07:30:35Z (read by stampnote): G0 precommit, before the edit. N: history.py holds seven mypy misc findings (lines 146, 1317 twice, 1417, 1525, 1575, 2604); three are the same untyped-card pattern: card_table (1417), oldest_cards (1525), oldest_rows json.loads (1575). Actuator: codemod w1533_history.py adds helper _cards_of(doc: object) -> list[dict[str, object]] used by the two loops and annotates the json.loads result object. K: codon_first.py history. Sensor: mikemol-pycheck --ratchet and house mypy on history.py. Expected reading: history.py findings 7 to 4 (146, 1317 x2, 2604 remain), mypy 582 to 579, ruff flat. Pace read 2026-11-03T06:55:11Z (mypy 587 left then, 64 landings to zero). MYPY stack, shares mypy-baseline.json with stack 900 (gating), so it waits for 900's landing. | 2026-11-03T07:32:08Z: Staged, not submitted: stack902.json (history.py _cards_of, mypy 582 to 579, differential EQUAL on the frozen snapshot plus odd documents, 31 tests passed, codon first error unchanged). Submit after stack 900 lands (same file and mypy-baseline.json); write the baseline with pycheck --ratchet --write then. Remaining history.py: 146, 1317 x2, 2614. | 2026-11-03T07:37:01Z: R176 finding 1: the 06:55:11Z pace read was 35 minutes old at this card's G0 and predates the 897 and 900 landings it reports on, a second miss of standing 15 after R170. From the next tick the fresh pace read (nemik-rank --pace) is the first command, before any G0, and the G0 cites that tick's own stamp. Finding 2 is carded as W1534 (ATOMIZE print on a card a live gating stack names).",
       "issued_at": "2026-11-03T07:30:27Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W1531",
-      "last_worked": "2026-11-03T07:32:08Z",
+      "last_worked": "2026-11-03T07:37:01Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/history.py",
         "mypy-baseline.json"
       ],
+      "size_class": "small",
+      "completed": null
+    },
+    {
+      "symbol": "W1534",
+      "title": "Tick-close ATOMIZE print skips a card a live gating stack names",
+      "status": "ready",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [
+        "mtools"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Find where --tick-close computes ATOMIZE (the writer, mtools' mikemol-pathsforward) and whether the in-gate exemption can live there; if it is mtools' code, send mtools a nudge citing nemik:W1534 with the three false positives (W1175 twice, W1526) and ask for an exemption for a card a live gating stack names, with a test. Do not suppress by marking or unmarking the card (R176 finding 2).",
+      "evidence": "2026-11-03T07:55:16Z: 2026-11-03 root cause read, not guessed: the exemption exists (pathsforward atomize.atomize skips a top card that inflight.read(root) names) but never fires. inflight.cards_of does counts.partition('TAB') and json-loads the part after the tab (its docstring: one line, '<n> TAB <json>'), while hooks commit_counts writes the file as bare json.dumps(entries) (lines 181 and 275), no count and no tab. So body is empty, json.loads fails, the set is empty and the card is never exempted. The live file has two entries, W1526 inflight and W1533 queued. The fix is in mtools' two dists (one side must change, plus a test that feeds the hooks writer's output to inflight.cards_of). Nudged mtools; not a nemik change.",
+      "issued_at": "2026-11-03T07:36:53Z",
+      "minted_during": "interrupt",
+      "caused_by": "nemik:W1526",
+      "last_worked": "2026-11-03T07:55:16Z",
+      "ticks_blocked": 0,
       "size_class": "small"
     }
   ],
@@ -36914,12 +36934,7 @@
   ],
   "job_id": "481476b5",
   "heartbeat": "2026-10-29T04:11:13Z",
-  "lock": {
-    "holder": "session-nemik",
-    "taken_at": "2026-11-03T07:32:13Z",
-    "pid": 337543,
-    "start": 21144718
-  },
+  "lock": null,
   "predecessor_job_id": "1d7fe6d0",
   "leases": [
     {
@@ -45313,7 +45328,29 @@
         }
       ],
       "id": "nemik:R173"
+    },
+    {
+      "card": "W1533",
+      "trigger": "round 176: stack 897 (W1527) 55d0da8e landed 07:08:29Z; stack 900 (W1531, W1530) 010c1ba0 landed 07:32:17Z; stack 899 (W1526 wake, ruff 270 to 268) inflight; stack 902 (W1533 history cards, mypy 582 to 579) queued; stack 901 (W1525) staged",
+      "root": "Verified from the reflog (unix stamps): 6ddaf75d 1793688216 = 06:43:36Z, 55d0da8e 1793689709 = 07:08:29Z, 010c1ba0 1793691137 = 07:32:17Z. 897 gated 06:43:41Z to 07:08:29Z (24 min 48 s) and 900 07:08:34Z to 07:32:17Z (23 min 43 s), each begun 5 s after the landing before it, so the gate was not empty; 899 queued behind 900 and 902 behind 899 is the alternation (ruff, mypy, ruff, mypy) holding. R175 is met: standing 17 now carries the clause with the 890 and 900 refusals, and W1532 is carded for the mechanical listing. My R175 count remark is answered: seven findings in history.py were 146, 1306/1317 twice, and four others; the G0 lists them and the differential shows seven to four. I did not re-run any figure. The W1533 work is again exemplary in form (G0 stamped before the edit, N and K, a frozen differential by hash on 11762 and 50 entries, a first-error probe). Two findings, both about practice the G1 itself leaves open. No fixpoint is declared. Carried open findings as in R175, minus R175's (met).",
+      "findings": [
+        {
+          "finding": "The pace in this G1 and in W1533's G0 is the 06:55:11Z read, 35 minutes old at the G0 (07:30:35Z) and read before both landings (897, 900) that moved the numbers it quotes ('mypy 587 left, 64 landings to zero' while 582 was true at 07:32:17Z and 587 at 06:55:11Z); standing 15 asks the pace read first in the tick, and this tick has none of its own. The pace unit runs every ten minutes, so a fresh stamp is one command away. Read it now, record the three numbers with its stamp on W1533, and put the read as the first command in the tick-open G0 template; a G1 quoting a pace stamp that precedes the landings it reports is quoting a different state. R170 asked the same and was met once; this is the second miss, so make the template carry it.",
+          "finding_card": "W1533",
+          "finding_owner": "nemik session",
+          "finding_witness": "A pace line with its own stamp after 07:32:17Z recorded on W1533, and the next tick whose first command is nemik-rank nemik --pace.",
+          "due": "2026-11-04"
+        },
+        {
+          "finding": "The ATOMIZE print came back for W1526, a card that is already an atomized child and whose stack is in the gate; the G1 observes that its landing will clear it. The print fired for W1175 in R172, R173 and now for W1526: three times for a card that a live stack names. A rank rule that warns about a card 'advanced 1 times without landing' while its stack gates is a false positive every tick, and teaches the session to ignore the print, which is the one that mattered for W1175. Card it: the ATOMIZE rule should skip a card named by an entry of a stack in --in-gate (the same exemption round_wire.in_gate applies), with a test, and until then record the instance. Do not suppress the print by marking or unmarking the card.",
+          "finding_card": "W1526",
+          "finding_owner": "nemik session",
+          "finding_witness": "A minted card for the ATOMIZE in-gate exemption with a test case (a card named by a gating stack does not print ATOMIZE), and nemik-rank output without ATOMIZE W1526 while 899 gates.",
+          "due": "2026-11-05"
+        }
+      ],
+      "id": "nemik:R174"
     }
   ],
-  "retro_counter": 173
+  "retro_counter": 174
 }

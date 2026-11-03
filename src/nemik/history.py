@@ -1404,6 +1404,19 @@ Hop = tuple[str, str]
 Cards = dict[str, tuple[str, list[str]]]
 
 
+def _cards_of(doc: object) -> list[dict[str, object]]:
+    """List the card dicts of one queue document; anything else in it is skipped.
+
+    Returns:
+        The queue's `waypoints` entries that are objects, keyed by text; empty when it has none.
+
+    """
+    cards = doc.get("waypoints") if isinstance(doc, dict) else None
+    if not isinstance(cards, list):
+        return []
+    return [{str(k): v for k, v in c.items()} for c in cards if isinstance(c, dict)]
+
+
 def card_table(docs: dict[str, object]) -> Cards:
     """Index every card of the queues by repo:W<n>, with its status and blockers.
 
@@ -1413,9 +1426,8 @@ def card_table(docs: dict[str, object]) -> Cards:
     """
     table: Cards = {}
     for repo, doc in docs.items():
-        cards = doc.get("waypoints") if isinstance(doc, dict) else None
-        for card in cards if isinstance(cards, list) else []:
-            if isinstance(card, dict) and card.get("symbol"):
+        for card in _cards_of(doc):
+            if card.get("symbol"):
                 waits = card.get("blocked_on")
                 table[f"{repo}:{card['symbol']}"] = (
                     str(card.get("status", "")),
@@ -1521,10 +1533,7 @@ def oldest_cards(
     order: list[tuple[datetime, str]] = []
     rows: dict[str, dict[str, str]] = {}
     for repo, doc in docs.items():
-        cards = doc.get("waypoints") if isinstance(doc, dict) else None
-        for card in cards if isinstance(cards, list) else []:
-            if not isinstance(card, dict):
-                continue
+        for card in _cards_of(doc):
             status, symbol = str(card.get("status", "")), str(card.get("symbol", ""))
             try:
                 born = datetime.fromisoformat(str(card.get("issued_at", "")))
@@ -1572,9 +1581,10 @@ def oldest_rows(
     docs: dict[str, object] = {}
     for name, path in files.items():
         try:
-            docs[name] = json.loads(path.read_text(encoding="utf-8"))
+            value: object = json.loads(path.read_text(encoding="utf-8"))
         except (OSError, ValueError):
             continue
+        docs[name] = value
     rows = oldest_cards(docs, datetime.now(UTC), limit, keep)
     return with_paths(rows, docs, live_repos(root))
 
