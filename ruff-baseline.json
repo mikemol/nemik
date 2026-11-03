@@ -105,7 +105,6 @@
   "SLF001": 1
  },
  "tests/test_flow_reference.py": {
-  "C901": 1,
   "S311": 1
  },
  "tests/test_frontier_walker.py": {

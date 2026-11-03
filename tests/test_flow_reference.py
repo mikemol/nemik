@@ -14,6 +14,47 @@ from nemik.flow import solve
 FRONT_SHARE = 0.3
 
 
+def _laplacian(
+    unknown: list[str], edges: list[tuple[str, str]], source: str
+) -> list[list[Fraction]]:
+    """Build the augmented grounded Laplacian: one row per unknown node, the source current last.
+
+    Returns:
+        The rows, each one wider than the number of unknown nodes.
+
+    """
+    idx = {n: i for i, n in enumerate(unknown)}
+    n = len(unknown)
+    rows = [[Fraction(0)] * (n + 1) for _ in range(n)]
+    for u, v in edges:
+        for a, b in ((u, v), (v, u)):
+            if a in idx:
+                rows[idx[a]][idx[a]] += 1
+                if b in idx:
+                    rows[idx[a]][idx[b]] -= 1
+    rows[idx[source]][n] = Fraction(1)
+    return rows
+
+
+def _reduce(rows: list[list[Fraction]]) -> list[list[Fraction]]:
+    """Gauss-Jordan reduce augmented rows to reduced echelon form, exactly over the rationals.
+
+    Returns:
+        The same rows, reduced; the last column holds the solution.
+
+    """
+    n = len(rows)
+    for c in range(n):
+        p = next(r for r in range(c, n) if rows[r][c] != 0)
+        rows[c], rows[p] = rows[p], rows[c]
+        rows[c] = [x / rows[c][c] for x in rows[c]]
+        for r in range(n):
+            if r != c and rows[r][c] != 0:
+                f = rows[r][c]
+                rows[r] = [a - f * b for a, b in zip(rows[r], rows[c], strict=True)]
+    return rows
+
+
 def _dense(
     cone: list[str], front: set[str], edges: list[tuple[str, str]], source: str
 ) -> dict[str, Fraction]:
@@ -25,24 +66,8 @@ def _dense(
     """
     unknown = [n for n in cone if n not in front]
     idx = {n: i for i, n in enumerate(unknown)}
-    n = len(unknown)
-    rows = [[Fraction(0)] * (n + 1) for _ in range(n)]
-    for u, v in edges:
-        for a, b in ((u, v), (v, u)):
-            if a in idx:
-                rows[idx[a]][idx[a]] += 1
-                if b in idx:
-                    rows[idx[a]][idx[b]] -= 1
-    rows[idx[source]][n] = Fraction(1)
-    for c in range(n):
-        p = next(r for r in range(c, n) if rows[r][c] != 0)
-        rows[c], rows[p] = rows[p], rows[c]
-        rows[c] = [x / rows[c][c] for x in rows[c]]
-        for r in range(n):
-            if r != c and rows[r][c] != 0:
-                f = rows[r][c]
-                rows[r] = [a - f * b for a, b in zip(rows[r], rows[c], strict=True)]
-    volt = {u: rows[i][n] for u, i in idx.items()}
+    rows = _reduce(_laplacian(unknown, edges, source))
+    volt = {u: rows[i][len(unknown)] for u, i in idx.items()}
     into: dict[str, Fraction] = {}
     for u, v in edges:
         for a, b in ((u, v), (v, u)):
