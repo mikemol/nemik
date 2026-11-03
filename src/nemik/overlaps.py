@@ -16,10 +16,10 @@ from __future__ import annotations
 
 import argparse
 import os
-import subprocess
 from pathlib import Path
 from typing import TYPE_CHECKING, NamedTuple
 
+from mikemol.procrun.proc import capture
 from rdflib import Graph
 
 from nemik.adapter import NEMIK, OSLC_CM, STATE
@@ -97,9 +97,7 @@ def read_claims(membudget: Path | None = None) -> dict[tuple[str, str], Holder] 
     """
     path = membudget or Path(os.environ.get("NEMIK_MEMBUDGET") or DEFAULT_MEMBUDGET)
     try:
-        run = subprocess.run(
-            [str(path), "claims"], capture_output=True, text=True, check=False
-        )
+        run = capture([str(path), "claims"])
     except OSError:
         return None
     return parse_claims(run.stdout) if run.returncode == 0 else None

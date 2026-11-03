@@ -70,10 +70,6 @@
   "S314": 1,
   "S405": 1
  },
- "src/nemik/overlaps.py": {
-  "S404": 1,
-  "S603": 1
- },
  "src/nemik/pins.py": {
   "S404": 1,
   "S603": 3,
