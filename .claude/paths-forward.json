@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1573,
+  "counter": 1574,
   "waypoints": [
     {
       "symbol": "W1",
@@ -37359,22 +37359,23 @@
     {
       "symbol": "W1562",
       "title": "PLC0415 import cycles: record the 11 cycle sites (check 831, critical 493, history 1296, rank 551/882/905/906/1149/1170, witnesses 608) as a residue ledger with the import each one needs and the module that closes the cycle, no waiver, they stay in the baseline",
-      "status": "ready",
+      "status": "working",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Write docs/plc0415-cycles.md from the probe table: per site the import, the module pair that closes the cycle (the ImportError line the probe printed) and the structural fix (a leaf module, a TYPE_CHECKING-only name, or none); the 11 stay in the baseline",
-      "evidence": "2026-11-03T18:05:44Z: Minted 2026-11-03 from R194 finding 2. Residue, not deletion: these 11 fail an import probe, so they are kept with their reasons. Sites: check 831 (LEDGER), critical 493 (cycles), history 1296 (QueueDoc), rank 551/882/905/906/1149/1170 (Weights), witnesses 608 (_get).",
+      "next_bounded_step": "Rides as the second entry of stack 948; after it lands the card closes with the document landed and the PERF401 decision dated",
+      "evidence": "2026-11-03T18:05:44Z: Minted 2026-11-03 from R194 finding 2. Residue, not deletion: these 11 fail an import probe, so they are kept with their reasons. Sites: check 831 (LEDGER), critical 493 (cycles), history 1296 (QueueDoc), rank 551/882/905/906/1149/1170 (Weights), witnesses 608 (_get). | 2026-11-03T22:44:10Z: R205 finding 2, 2026-11-03T22:4xZ: docs/plc0415-cycles.md is WRITTEN (not yet in a stack): the eleven src/nemik PLC0415 sites that stay local, one row each (module:line, the import, what closes the cycle, the structural fix), read from the live files and from the import statements that close each cycle (checked by grep: history.py imports LEDGER, QUEUE, default_root and workstream_files from check; churn.py imports QueueDoc from history; salience.py imports from rank and waitrows.py imports Weights from rank; check.py imports cycles from critical; witwait.py imports _get from witnesses; stalled.py imports history). Finding: two leaf modules would retire five sites (a Weights leaf: rank 551, 883, 907; a path-constants and default_root leaf: check 835, critical 491, rank 1151). It rides as the second entry of the next lowering stack, since a docs file lowers no ratchet. PERF401 leftover in rank.py (1300), DATED DECISION: try the for s in [shared(b)] if s idiom (no walrus, so no var-annotated finding) on a rank.py probe copy during the next gate; if the probe shows mypy flat it is a ruff stack entry; due 2026-11-04T12:00Z or the next rank.py stack, whichever comes first; if the probe still raises mypy, it stays a recorded residue with that reason.",
       "issued_at": "2026-11-03T18:05:28Z",
       "minted_during": "interrupt",
       "caused_by": "W1175",
-      "last_worked": "2026-11-03T18:05:44Z",
+      "last_worked": "2026-11-03T22:57:33Z",
       "ticks_blocked": 0,
       "manifest": [
         "docs/plc0415-cycles.md"
       ],
-      "size_class": "small"
+      "size_class": "small",
+      "completed": null
     },
     {
       "symbol": "W1563",
@@ -37592,19 +37593,19 @@
     {
       "symbol": "W1572",
       "title": "tests/test_lifecycle_scheme.py reads the scheme through typed rdflib calls (URIRef, Graph.subjects, a typed _first over Graph.objects): ten mypy findings clear (the successor table's next mypy row)",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Apply w1572.py, format, ratchet, run the test and the guards, queue behind 945 (mypy lane, no shared file)",
-      "evidence": "2026-11-03T22:31:35Z: 2026-11-03T22:31:35Z (read by stampnote): G0 precommit, before the first edit of tests/test_lifecycle_scheme.py (card and manifest minted first). Pace read 2026-11-03T22:25:42Z, seconds old: mypy 232 left (owes 190; 44 over the last 10 landings; 53 landings to zero), ruff 89 left (owes 89 now; 64 over the last 10; 14 landings to zero), codon owes 2. The successor table's next mypy row (W1568), a stack of the OTHER baseline than the one in the gate (stack 945 is ruff). N = 10 house-mypy findings in tests/test_lifecycle_scheme.py. K = 10 MEASURED ON A PROBE COPY before this G0 (tests/probe_lifecycle.py beside the test, codemod w1572.py applied to the copy only, mikemol-pycheck format already formatted, house mypy 10 to 0, house ruff clean apart from the tests-exempt S101; copy deleted by exact path). The cause: Graph.resource and Graph.value answer Any and Resource.subjects is untyped; the test now builds its URIs with URIRef, lists scheme members with Graph.subjects(SKOS.inScheme, scheme), and reads the first object of a pair through a typed _first over Graph.objects. Behaviour change named: Graph.value returned an arbitrary object of the pair, _first returns the first one Graph.objects yields; the graph is a parsed turtle with one prefLabel, definition and witnessedBy per concept, and closeMatch is read as a set, so the assertions hold the same; the test is run on the real file below and must pass. Ruff axis: UNMEASURED beyond the probe (standing 12), read after the edit. Expected: mypy 232 to 222 exactly, ruff flat 89 (a mypy stack does not write the ruff baseline while 945 carries it). MYPY stack, shares no file with stack 945 (salience, rank, serve, calwrite, test_guarantees, test_score, ruff-baseline.json). The gate holds 945 inflight since 22:14:54Z. | 2026-11-03T22:33:34Z: Stack 946: G0 2026-11-03T22:31:35Z (stamped while 945 still gated; it landed 22:31:33Z, 2 s before), probe K=10 (mypy 10 to 0), real tree mypy 232 to 222 exactly, ruff flat 89; tests and guards 6 passed (1.65 s wall); SUBMIT stamp 2026-11-03T22:33:21Z (key 1793745201 via date -u -d), began gating 22:33:22Z. G0 to submit 1 min 46 s wall. Gate empty interval 22:31:33Z (945 landed) to 22:33:21Z: 1 min 48 s wall, the shortest of the series.",
+      "next_bounded_step": null,
+      "evidence": "2026-11-03T22:31:35Z: 2026-11-03T22:31:35Z (read by stampnote): G0 precommit, before the first edit of tests/test_lifecycle_scheme.py (card and manifest minted first). Pace read 2026-11-03T22:25:42Z, seconds old: mypy 232 left (owes 190; 44 over the last 10 landings; 53 landings to zero), ruff 89 left (owes 89 now; 64 over the last 10; 14 landings to zero), codon owes 2. The successor table's next mypy row (W1568), a stack of the OTHER baseline than the one in the gate (stack 945 is ruff). N = 10 house-mypy findings in tests/test_lifecycle_scheme.py. K = 10 MEASURED ON A PROBE COPY before this G0 (tests/probe_lifecycle.py beside the test, codemod w1572.py applied to the copy only, mikemol-pycheck format already formatted, house mypy 10 to 0, house ruff clean apart from the tests-exempt S101; copy deleted by exact path). The cause: Graph.resource and Graph.value answer Any and Resource.subjects is untyped; the test now builds its URIs with URIRef, lists scheme members with Graph.subjects(SKOS.inScheme, scheme), and reads the first object of a pair through a typed _first over Graph.objects. Behaviour change named: Graph.value returned an arbitrary object of the pair, _first returns the first one Graph.objects yields; the graph is a parsed turtle with one prefLabel, definition and witnessedBy per concept, and closeMatch is read as a set, so the assertions hold the same; the test is run on the real file below and must pass. Ruff axis: UNMEASURED beyond the probe (standing 12), read after the edit. Expected: mypy 232 to 222 exactly, ruff flat 89 (a mypy stack does not write the ruff baseline while 945 carries it). MYPY stack, shares no file with stack 945 (salience, rank, serve, calwrite, test_guarantees, test_score, ruff-baseline.json). The gate holds 945 inflight since 22:14:54Z. | 2026-11-03T22:33:34Z: Stack 946: G0 2026-11-03T22:31:35Z (stamped while 945 still gated; it landed 22:31:33Z, 2 s before), probe K=10 (mypy 10 to 0), real tree mypy 232 to 222 exactly, ruff flat 89; tests and guards 6 passed (1.65 s wall); SUBMIT stamp 2026-11-03T22:33:21Z (key 1793745201 via date -u -d), began gating 22:33:22Z. G0 to submit 1 min 46 s wall. Gate empty interval 22:31:33Z (945 landed) to 22:33:21Z: 1 min 48 s wall, the shortest of the series. | 2026-11-03T22:44:08Z: Stack 946 landed as ae1f4542 at 2026-11-03T22:42:30Z (reflog 17:42:30 -0500), exit 0: mypy 232 to 222, ruff flat 89. Gated 9 min 8 s wall from the 22:33:22Z start (submit 22:33:21Z). Stack 947 (W1573) began gating 22:42:35Z, 5 s later: the gate was not empty.",
       "issued_at": "2026-11-03T22:31:10Z",
       "minted_during": "interrupt",
       "caused_by": "W1568",
-      "last_worked": "2026-11-03T22:33:34Z",
+      "last_worked": "2026-11-03T22:44:08Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261103T224408Z",
       "manifest": [
         "tests/test_lifecycle_scheme.py",
         "mypy-baseline.json"
@@ -37614,22 +37615,44 @@
     {
       "symbol": "W1573",
       "title": "tests/test_flow_reference._dense is split into a Laplacian builder and an eliminator: one C901 clears (the ruff lane's next row)",
+      "status": "done",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-11-03T22:38:26Z: 2026-11-03T22:38:25Z (read by stampnote): G0 precommit, before the first edit of tests/test_flow_reference.py (card and manifest minted first). Pace read 2026-11-03T22:35:42Z, seconds old: ruff 89 left (owes 89; 64 over the last 10 landings; 14 landings to zero), mypy 232 (owes 190; 44 over the last 10), codon owes 2. The ruff lane's next row from the successor table (W1568), a stack of the OTHER baseline than the one in the gate (stack 946 is mypy). N = 1 C901 in tests/test_flow_reference.py: _dense is one over the complexity limit (11 > 10). K = 1 MEASURED ON A PROBE COPY before this G0 (tests/probe_flowref.py beside the test, codemod w1573.py applied to the copy only, house ruff on the copy: C901 gone, one E501 on a new docstring line which I fixed in the codemod and re-measured, and only the file's own S311 left, mikemol-pycheck format already formatted; house mypy on the copy and the original clean; the refactored COPY run as a test: 12 passed, the independent dense solve still equals nemik.flow's sparse elimination on every case; copy deleted by exact path). The change: _dense's construction of the augmented grounded Laplacian becomes _laplacian and its Gauss-Jordan elimination becomes _reduce; _dense reads the solution off the reduced rows as before. Behaviour change named: none by intent, and the 12 tests are the proof of the reference. mypy axis: flat on the probe; ruff elsewhere UNMEASURED (standing 12), read after. Expected: ruff 89 to 88 exactly, mypy flat 222 (once 946 lands; 232 in HEAD). RUFF stack, shares no file with stack 946 (tests/test_lifecycle_scheme.py, mypy-baseline.json). The gate holds 946 inflight since 22:33:22Z. | 2026-11-03T22:39:50Z: Stack 947: G0 2026-11-03T22:38:25Z, probe K=1 (C901 gone on a copy, the refactored copy ran 12 passed), real tree ruff 89 to 88 exactly, mypy flat 222; tests and guards 15 passed (1.55 s wall); mypy-baseline.json NOT carried (946 ahead carries it); SUBMIT stamp 2026-11-03T22:39:28Z (key 1793745568 via date -u -d), QUEUED behind 946 (inflight since 22:33:22Z, 6 min 6 s at this stamp). G0 to submit 1 min 3 s wall. The gate was never empty for this stack. | 2026-11-03T22:55:04Z: Stack 947 landed as d3e5bdb7 at 2026-11-03T22:54:15Z (reflog 17:54:15 -0500), exit 0: ruff 89 to 88, mypy flat 222. Gated 11 min 40 s wall from its 22:42:35Z start (submit 22:39:28Z). Gate empty from 22:54:15Z.",
+      "issued_at": "2026-11-03T22:38:12Z",
+      "minted_during": "tick",
+      "caused_by": "W1568",
+      "last_worked": "2026-11-03T22:55:04Z",
+      "ticks_blocked": 0,
+      "completed": "20261103T225504Z",
+      "manifest": [
+        "tests/test_flow_reference.py",
+        "ruff-baseline.json"
+      ],
+      "size_class": "small"
+    },
+    {
+      "symbol": "W1574",
+      "title": "tests/test_shaclcache_threads.py reads the patched sparql processor names through one typed helper and types its excepthook: nine mypy findings clear (the successor table's next mypy row), with docs/plc0415-cycles.md as the second entry",
       "status": "working",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Apply w1573.py, format, ratchet, run test_flow_reference and the guards, queue behind 946 (ruff lane, no shared file)",
-      "evidence": "2026-11-03T22:38:26Z: 2026-11-03T22:38:25Z (read by stampnote): G0 precommit, before the first edit of tests/test_flow_reference.py (card and manifest minted first). Pace read 2026-11-03T22:35:42Z, seconds old: ruff 89 left (owes 89; 64 over the last 10 landings; 14 landings to zero), mypy 232 (owes 190; 44 over the last 10), codon owes 2. The ruff lane's next row from the successor table (W1568), a stack of the OTHER baseline than the one in the gate (stack 946 is mypy). N = 1 C901 in tests/test_flow_reference.py: _dense is one over the complexity limit (11 > 10). K = 1 MEASURED ON A PROBE COPY before this G0 (tests/probe_flowref.py beside the test, codemod w1573.py applied to the copy only, house ruff on the copy: C901 gone, one E501 on a new docstring line which I fixed in the codemod and re-measured, and only the file's own S311 left, mikemol-pycheck format already formatted; house mypy on the copy and the original clean; the refactored COPY run as a test: 12 passed, the independent dense solve still equals nemik.flow's sparse elimination on every case; copy deleted by exact path). The change: _dense's construction of the augmented grounded Laplacian becomes _laplacian and its Gauss-Jordan elimination becomes _reduce; _dense reads the solution off the reduced rows as before. Behaviour change named: none by intent, and the 12 tests are the proof of the reference. mypy axis: flat on the probe; ruff elsewhere UNMEASURED (standing 12), read after. Expected: ruff 89 to 88 exactly, mypy flat 222 (once 946 lands; 232 in HEAD). RUFF stack, shares no file with stack 946 (tests/test_lifecycle_scheme.py, mypy-baseline.json). The gate holds 946 inflight since 22:33:22Z. | 2026-11-03T22:39:50Z: Stack 947: G0 2026-11-03T22:38:25Z, probe K=1 (C901 gone on a copy, the refactored copy ran 12 passed), real tree ruff 89 to 88 exactly, mypy flat 222; tests and guards 15 passed (1.55 s wall); mypy-baseline.json NOT carried (946 ahead carries it); SUBMIT stamp 2026-11-03T22:39:28Z (key 1793745568 via date -u -d), QUEUED behind 946 (inflight since 22:33:22Z, 6 min 6 s at this stamp). G0 to submit 1 min 3 s wall. The gate was never empty for this stack.",
-      "issued_at": "2026-11-03T22:38:12Z",
-      "minted_during": "tick",
+      "next_bounded_step": "Apply w1574.py, format, ratchet, test_shaclcache_threads and the guards, stack [W1574, W1562 doc] (gate empty)",
+      "evidence": "2026-11-03T22:56:26Z: 2026-11-03T22:56:25Z (read by stampnote): G0 precommit, before the first edit of tests/test_shaclcache_threads.py (card and manifest minted first). Pace read 2026-11-03T22:45:42Z (newest-landing PENDING: d3e5bdb7 landed 9 minutes later), a few minutes old at this stamp: mypy 222 left (owes 190; 45 over the last 10 landings; 50 landings to zero), ruff 89 (88 after d3e5bdb7; owes 89), codon owes 2. R205 finding 1 asked for fall per landing: this row falls 9 (not the 13 or 18 of the best rows) and goes second behind the cheapest-first order the table uses; the big rows (serve.py 79 and rank.py 29) still have no scratch measure. N = 10 house-mypy findings in tests/test_shaclcache_threads.py. K = 9 MEASURED ON A PROBE COPY before this G0 (tests/probe_shaclthreads.py beside the test, codemod w1574.py applied to the copy, mikemol-pycheck format, house mypy 10 to 1: the one left is the Any read inside the new helper, house ruff clean apart from the tests-exempt S101; the refactored COPY run as a test: 2 passed, so the concurrency test still sees the patch and the restore; copy deleted by exact path). The cause: rdflib.plugins.sparql.processor imports parseQuery and translateQuery without exporting them, so six attribute reads cost findings; the test reads them through _current(name) over vars(processor) (one Any read, in the helper) and types its excepthook as a function over threading.ExceptHookArgs instead of a lambda. Behaviour change named: none (vars(module)[name] is the attribute cached_sparql_parse patches). Second entry of the stack: docs/plc0415-cycles.md for W1562 (R205 finding 2), which lowers nothing and rides behind this lowering entry. Ruff axis: UNMEASURED beyond the probe (standing 12), read after. Expected: mypy 222 to 213 exactly, ruff flat 88. MYPY stack. The gate is EMPTY since d3e5bdb7 landed at 2026-11-03T22:54:15Z; the interval ends at the submit, stamped from its queue key.",
+      "issued_at": "2026-11-03T22:56:08Z",
+      "minted_during": "interrupt",
       "caused_by": "W1568",
-      "last_worked": "2026-11-03T22:39:50Z",
+      "last_worked": "2026-11-03T22:56:26Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
-        "tests/test_flow_reference.py",
-        "ruff-baseline.json"
+        "tests/test_shaclcache_threads.py",
+        "mypy-baseline.json"
       ],
       "size_class": "small"
     }
