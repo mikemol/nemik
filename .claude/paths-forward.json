@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1542,
+  "counter": 1543,
   "waypoints": [
     {
       "symbol": "W1",
@@ -36896,20 +36896,42 @@
     {
       "symbol": "W1542",
       "title": "test_editable types its distribution stub and payloads so five Any reads clear",
+      "status": "done",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-11-03T10:54:20Z: 2026-11-03T10:54:19Z (read by stampnote): G0 precommit, before the edit (card and manifest first). Pace read: the tick's first command was 2026-11-03T10:25:18Z, 28 minutes old now; mypy 542 left then (owes 190, 99 landings to zero) and 516 now at HEAD after 907's landing at 10:52:59Z. N: tests/test_editable.py holds 5 mypy misc findings, read from house mypy: lines 26 and 27 (two each, a dict[Any, Any] literal for the empty dir_info in json.dumps, inside a tuple) and line 30 (the lambda _n, t=text: _Dist(t) is Callable[[Any, Any], _Dist]). K = 5, all verified by running house mypy on the file before this G0. Actuator: one Write of the file: a typed payload (dict[str, object]) built in a helper, and a _dist_of(text) factory that returns a typed callable, _Dist.read_text returning str | None to keep the None case. Sensor: house mypy on the file, then mikemol-pycheck --ratchet and the file run directly. Expected reading: mypy 516 falls by exactly 5 to 511, ruff flat at 224 in the tree. K: tests are outside the Codon census. MYPY stack, shares no file with stack 908 (ruff, inflight), so it queues now to keep the gate at two. | 2026-11-03T11:03:39Z: R183 finding 2 applied: standing 15 now has the 10-minute rule (a G0's pace quote is at most 10 minutes old at the G0's stamp; a card prepared during a gate re-reads the pace first and the G0 gives the stamp and its age). This G0 cited the 10:25:18Z read, 28 minutes old at 10:54:19Z; the tick's own first-command read was 10:55:19Z, after it. | 2026-11-03T11:16:33Z: Landed 2ab60925 at 11:15:40Z (reflog, UTC): test_editable typed distribution stub and payloads, mypy 516 to 511. working_unnamed.py at the landing flagged W1542; cleared.",
+      "issued_at": "2026-11-03T10:54:09Z",
+      "minted_during": "interrupt",
+      "caused_by": "nemik:W1490",
+      "last_worked": "2026-11-03T11:16:33Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "tests/test_editable.py",
+        "mypy-baseline.json"
+      ],
+      "size_class": "small",
+      "completed": "20261103T111633Z"
+    },
+    {
+      "symbol": "W1543",
+      "title": "test_churn types the empty residue of its queue fixture so two Any reads clear",
       "status": "working",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Rewrite test_editable.py in one Write: typed payload dicts, a _dist_of(text) factory instead of the lambda default, read_text returning str | None; measure house mypy on the file (5 findings), run it directly, ratchet --write. MYPY stack, shares nothing with stack 908 (ruff), so it queues now.",
-      "evidence": "2026-11-03T10:54:20Z: 2026-11-03T10:54:19Z (read by stampnote): G0 precommit, before the edit (card and manifest first). Pace read: the tick's first command was 2026-11-03T10:25:18Z, 28 minutes old now; mypy 542 left then (owes 190, 99 landings to zero) and 516 now at HEAD after 907's landing at 10:52:59Z. N: tests/test_editable.py holds 5 mypy misc findings, read from house mypy: lines 26 and 27 (two each, a dict[Any, Any] literal for the empty dir_info in json.dumps, inside a tuple) and line 30 (the lambda _n, t=text: _Dist(t) is Callable[[Any, Any], _Dist]). K = 5, all verified by running house mypy on the file before this G0. Actuator: one Write of the file: a typed payload (dict[str, object]) built in a helper, and a _dist_of(text) factory that returns a typed callable, _Dist.read_text returning str | None to keep the None case. Sensor: house mypy on the file, then mikemol-pycheck --ratchet and the file run directly. Expected reading: mypy 516 falls by exactly 5 to 511, ruff flat at 224 in the tree. K: tests are outside the Codon census. MYPY stack, shares no file with stack 908 (ruff, inflight), so it queues now to keep the gate at two. | 2026-11-03T11:03:39Z: R183 finding 2 applied: standing 15 now has the 10-minute rule (a G0's pace quote is at most 10 minutes old at the G0's stamp; a card prepared during a gate re-reads the pace first and the G0 gives the stamp and its age). This G0 cited the 10:25:18Z read, 28 minutes old at 10:54:19Z; the tick's own first-command read was 10:55:19Z, after it.",
-      "issued_at": "2026-11-03T10:54:09Z",
+      "next_bounded_step": "Bind the empty residue list to a typed name in _queue so the dict literal holds no list[Any]; measure house mypy on the file (2 findings), run test_churn directly, ratchet --write. MYPY stack, shares nothing with stack 909 (ruff), queues now.",
+      "evidence": "2026-11-03T11:17:00Z: 2026-11-03T11:16:59Z (read by stampnote): G0 precommit, before the edit (card and manifest first). Pace read: 2026-11-03T11:15:19Z, taken 1 minute before this G0 (standing 15's 10-minute rule): mypy 511 left owes 190 (72 landings to zero), ruff 239 left owes 90 (78 to zero), codon owes 2. N: tests/test_churn.py holds 2 mypy misc findings, both on line 32, both from the empty residue list literal in _queue's dict (a list[Any] and the tuple holding it); K = 2, read from house mypy on the file just now. Four tiny files were read (test_churn 2, test_history 2, test_mpxj 2, test_deploy_manifest 2); the other three read from re.Match and untyped-parser Anys that need a different fix, so this stack is test_churn alone, a small stack to keep the gate at two. Actuator: bind the residue to a typed name (a list of Waypoint) before the dict. Sensor: house mypy on the file, mikemol-pycheck --ratchet --write, test_churn directly. Expected reading: mypy 511 falls by exactly 2 to 509, ruff flat at 239 in the tree. K: tests are outside the Codon census. MYPY stack, shares no file with stack 909 (ruff).",
+      "issued_at": "2026-11-03T11:16:50Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W1490",
-      "last_worked": "2026-11-03T11:03:39Z",
+      "last_worked": "2026-11-03T11:18:20Z",
       "ticks_blocked": 0,
       "manifest": [
-        "tests/test_editable.py",
+        "tests/test_churn.py",
         "mypy-baseline.json"
       ],
       "size_class": "small",

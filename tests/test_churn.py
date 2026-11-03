@@ -27,10 +27,14 @@ def _card(
 
 
 def _queue(*cards: Waypoint, heartbeat: str = "a") -> QueueDoc:
-    return cast(
-        "QueueDoc",
-        {"waypoints": list(cards), "residue": [], "heartbeat": heartbeat},
-    )
+    waypoints: list[Waypoint] = list(cards)
+    residue: list[Waypoint] = []
+    body: dict[str, object] = {
+        "waypoints": waypoints,
+        "residue": residue,
+        "heartbeat": heartbeat,
+    }
+    return cast("QueueDoc", body)
 
 
 def test_each_kind_of_change_is_classified() -> None:
