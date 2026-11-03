@@ -4248,3 +4248,7 @@
 2026-11-03T05:37:06Z  interrupt W1526 minted    -         "W1175 child: wake.py _roster runs its subprocess through procrun.capture"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W1175
 2026-11-03T05:37:07Z  interrupt W1527 minted    -         "W1175 child: witnesses.py runs its two git calls through procrun.capture"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W1175
 2026-11-03T05:37:08Z  interrupt W1528 minted    -         "W1175 child: calendars.py runs its two subprocess calls through procrun.capture"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W1175
+2026-11-03T05:58:15Z  status W1523 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-03T06:05:13Z  interrupt W1529 minted    -         "metrics.spool_lines types its spool events so ten Any reads clear"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W1490
+2026-11-03T06:05:20Z  status W1529 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-03T06:10:02Z  tick  W1529 advanced  sweep     "stack 895 landed f36bdd1a (mypy 617 to 597); stack 898 submitted (metrics.spool_lines, mypy 597 to 587) beside 896 (letters, ruff); stack 897 (witnesses, ruff 274 to 270) staged for 896's landing; W1175 split into W1525 to W1528 [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

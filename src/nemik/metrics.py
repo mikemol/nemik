@@ -971,14 +971,18 @@ def spool_lines(spool: Path) -> list[str]:
     if spool.exists():
         for raw in spool.read_text(encoding="utf-8").splitlines():
             try:
-                e = json.loads(raw)
+                e: object = json.loads(raw)
             except json.JSONDecodeError:
                 continue
-            repo = e.get("repo") or "none"
-            if e.get("event") == "UserPromptSubmit":
-                src = e.get("source") or "unknown"
+            if not isinstance(e, dict):
+                continue
+            fields: dict[str, object] = dict(e.items())
+            repo = str(fields.get("repo") or "none")
+            event = fields.get("event")
+            if event == "UserPromptSubmit":
+                src = str(fields.get("source") or "unknown")
                 prompts[repo, src, CLASS.get(src, "unknown")] += 1
-            elif e.get("event") == "Stop":
+            elif event == "Stop":
                 turns[repo] += 1
     out = ["# TYPE nemik_prompts_total counter"]
     for (repo, src, cls), n in sorted(prompts.items()):
