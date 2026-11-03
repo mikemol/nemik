@@ -19,6 +19,17 @@ QUERY = "SELECT ?o WHERE { ?s <urn:p> ?o }"
 ROWS = 20
 
 
+def _current(name: str) -> object:
+    """Read a name from the sparql processor module's namespace as it is right now.
+
+    Returns:
+        The module-level object, which cached_sparql_parse patches and restores.
+
+    """
+    value: object = vars(processor)[name]
+    return value
+
+
 def _graph() -> Graph:
     g = Graph()
     for i in range(20):
@@ -30,13 +41,17 @@ def test_concurrent_blocks_answer_correctly_and_restore_the_originals(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     """Concurrent blocks answer correctly and restore the originals."""
-    parse, translate = processor.parseQuery, processor.translateQuery
+    parse, translate = _current("parseQuery"), _current("translateQuery")
     g = _graph()
     errors: list[object] = []
     counts: list[int] = []
     start = threading.Barrier(8)
+
     # a failing worker thread reports here, so the main thread can assert on it
-    monkeypatch.setattr(threading, "excepthook", lambda a: errors.append(a.exc_value))
+    def record(args: threading.ExceptHookArgs) -> None:
+        errors.append(args.exc_value)
+
+    monkeypatch.setattr(threading, "excepthook", record)
 
     def worker() -> None:
         start.wait(timeout=5)
@@ -51,16 +66,16 @@ def test_concurrent_blocks_answer_correctly_and_restore_the_originals(
         t.join(timeout=60)
     assert not errors, errors
     assert counts == [20] * 80
-    assert processor.parseQuery is parse
-    assert processor.translateQuery is translate
+    assert _current("parseQuery") is parse
+    assert _current("translateQuery") is translate
 
 
 def test_a_nested_block_still_answers_and_restores() -> None:
     """A nested block still answers and restores."""
-    parse = processor.parseQuery
+    parse = _current("parseQuery")
     g = _graph()
     with cached_sparql_parse():
         with cached_sparql_parse():
             assert len(list(g.query(QUERY))) == ROWS
         assert len(list(g.query(QUERY))) == ROWS
-    assert processor.parseQuery is parse
+    assert _current("parseQuery") is parse
