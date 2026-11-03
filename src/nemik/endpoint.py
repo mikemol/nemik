@@ -17,10 +17,11 @@ from __future__ import annotations
 import http.client
 import json
 import os
-import subprocess
 import sys
 import urllib.parse
 from typing import TYPE_CHECKING
+
+from mikemol.procrun.proc import Completed, TimeoutExpired, capture
 
 from nemik.check import default_root
 
@@ -40,9 +41,7 @@ PORT_NAMES = {
 }
 
 
-def _luthen(
-    checkout: Path, module_argv: list[str], timeout: int
-) -> subprocess.CompletedProcess[str]:
+def _luthen(checkout: Path, module_argv: list[str], timeout: int) -> Completed:
     """Run `python -m <module> ...` inside luthen's checkout, the one place this module spawns.
 
     Returns:
@@ -51,11 +50,8 @@ def _luthen(
     """
     environ = dict(os.environ)
     environ["PYTHONPATH"] = str(checkout)
-    return subprocess.run(
+    return capture(
         [sys.executable, "-m", *module_argv],
-        capture_output=True,
-        text=True,
-        check=False,
         cwd=checkout,
         env=environ,
         timeout=timeout,
@@ -79,7 +75,7 @@ def declared_base(name: str, root: Path) -> str | None:
             QUERY_TIMEOUT_SECONDS,
         )
         answer: object = json.loads(done.stdout)
-    except (OSError, ValueError, subprocess.TimeoutExpired):
+    except (OSError, ValueError, TimeoutExpired):
         return None
     if done.returncode != 0 or not isinstance(answer, dict):
         return None
@@ -116,7 +112,7 @@ def vlogs_lines(query: str, root: Path, limit: int = VLOGS_LIMIT) -> list[str]:
             ["checks.vlogs_query", "--limit", str(limit), query],
             VLOGS_TIMEOUT_SECONDS,
         )
-    except subprocess.TimeoutExpired as error:
+    except TimeoutExpired as error:
         message = f"vlogs_query outlasted {VLOGS_TIMEOUT_SECONDS} s"
         raise OSError(message) from error
     if done.returncode != 0:
