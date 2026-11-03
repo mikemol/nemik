@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1552,
+  "counter": 1554,
   "waypoints": [
     {
       "symbol": "W1",
@@ -37105,17 +37105,17 @@
     {
       "symbol": "W1551",
       "title": "Four more test files run their commands through procrun.capture so S404 and S603 clear (mpxj, akonadi guard, publish, deterministic)",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Codemod w1551_tests.py: capture with an asserted return code (checked calls) in test_mpxj, test_publish, and capture_bytes in test_akonadi_guard and test_deterministic; run the four directly (test_mpxj may skip without a JRE), ratchet. RUFF stack, shares nothing with stack 918 (mypy), queues now.",
-      "evidence": "2026-11-03T13:12:43Z: 2026-11-03T13:12:42Z (read by stampnote): G0 precommit, before the edit (card and manifest first). Pace read 2026-11-03T13:05:23Z, this stretch's newest, about 8 minutes old at this G0 (newest landing then not yet counted: 917 landed at 13:10:50Z): ruff 209 left owes 90 (59 landings to zero), mypy 503 left owes 190 (fell 13 over 10 landings), codon owes 2; both before 917's fall to 202 and 918's. N: four test files hold subprocess S404 and S603: test_mpxj.py (one checked call with timeout=600, text), test_akonadi_guard.py (one call with bytes input, bytes output, env, timeout, check=False), test_publish.py (two checked calls with env=) and test_deterministic.py (one checked call, bytes output). K = 5 call sites, 9 findings read: S404 x4, S603 x5 (test_mpxj S404 S603; test_akonadi_guard S404 S603; test_publish S404 and two S603; test_deterministic S404 S603), measured against the baseline file rows. Their SLF001 findings (test_publish 2, test_deterministic 2) are separate and stay. Actuator: codemod w1551_tests.py: capture for text children with asserted return codes (the checked calls), capture_bytes for the bytes children. Companion: none expected. Sensor: mikemol-pycheck --ratchet and the four files run directly. Expected reading: ruff 202 (the tree after 917) falls by exactly 9 to 193, mypy flat at 472 in the tree. K: tests outside the Codon census. RUFF stack, shares no file with stack 918 (mypy, inflight). | 2026-11-03T13:40:47Z: R187 applied before 919 lands: pytest -rs on the two host-skippable files: test_akonadi_guard PASSED (the host-built helper exists here, so its capture_bytes call with input_bytes was exercised), test_mpxj SKIPPED: 'the pinned JRE and MPXJ jars come from bazel (W445)' (tests/test_mpxj.py:45). For test_mpxj the converted call shape (procrun.capture with timeout=600, an assert on the return code, a read of stdout) was run once against stub java scripts (w1551_probe.py in the nemik scratch directory): a stub printing an MPXJ-style relation line gave rc 0 and the exact stdout, a stub exiting 3 gave rc 3 with its stderr, so the assert would fire. The real JRE run remains the gate's bazel run only, and I will record the gate's verdict on this card when 919 lands or is refused.",
+      "next_bounded_step": null,
+      "evidence": "2026-11-03T13:12:43Z: 2026-11-03T13:12:42Z (read by stampnote): G0 precommit, before the edit (card and manifest first). Pace read 2026-11-03T13:05:23Z, this stretch's newest, about 8 minutes old at this G0 (newest landing then not yet counted: 917 landed at 13:10:50Z): ruff 209 left owes 90 (59 landings to zero), mypy 503 left owes 190 (fell 13 over 10 landings), codon owes 2; both before 917's fall to 202 and 918's. N: four test files hold subprocess S404 and S603: test_mpxj.py (one checked call with timeout=600, text), test_akonadi_guard.py (one call with bytes input, bytes output, env, timeout, check=False), test_publish.py (two checked calls with env=) and test_deterministic.py (one checked call, bytes output). K = 5 call sites, 9 findings read: S404 x4, S603 x5 (test_mpxj S404 S603; test_akonadi_guard S404 S603; test_publish S404 and two S603; test_deterministic S404 S603), measured against the baseline file rows. Their SLF001 findings (test_publish 2, test_deterministic 2) are separate and stay. Actuator: codemod w1551_tests.py: capture for text children with asserted return codes (the checked calls), capture_bytes for the bytes children. Companion: none expected. Sensor: mikemol-pycheck --ratchet and the four files run directly. Expected reading: ruff 202 (the tree after 917) falls by exactly 9 to 193, mypy flat at 472 in the tree. K: tests outside the Codon census. RUFF stack, shares no file with stack 918 (mypy, inflight). | 2026-11-03T13:40:47Z: R187 applied before 919 lands: pytest -rs on the two host-skippable files: test_akonadi_guard PASSED (the host-built helper exists here, so its capture_bytes call with input_bytes was exercised), test_mpxj SKIPPED: 'the pinned JRE and MPXJ jars come from bazel (W445)' (tests/test_mpxj.py:45). For test_mpxj the converted call shape (procrun.capture with timeout=600, an assert on the return code, a read of stdout) was run once against stub java scripts (w1551_probe.py in the nemik scratch directory): a stub printing an MPXJ-style relation line gave rc 0 and the exact stdout, a stub exiting 3 gave rc 3 with its stderr, so the assert would fire. The real JRE run remains the gate's bazel run only, and I will record the gate's verdict on this card when 919 lands or is refused. | 2026-11-03T13:46:23Z: Landed 907358df at 13:45:32Z (reflog, UTC; gated from began_ns 13:34:19Z, 11 min 13 s). The gate's bazel run passed the stack including tests/test_mpxj.py with its real JRE, so the converted capture call there is exercised by the gate (the stub probe and the host-skip record above remain the pre-submit evidence). tools/working_unnamed.py flagged W1551 at the landing; cleared.",
       "issued_at": "2026-11-03T13:12:13Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W1175",
-      "last_worked": "2026-11-03T13:40:47Z",
+      "last_worked": "2026-11-03T13:46:23Z",
       "ticks_blocked": 0,
       "manifest": [
         "tests/test_mpxj.py",
@@ -37125,7 +37125,7 @@
         "ruff-baseline.json"
       ],
       "size_class": "small",
-      "completed": null
+      "completed": "20261103T134623Z"
     },
     {
       "symbol": "W1552",
@@ -37149,6 +37149,51 @@
       ],
       "size_class": "medium",
       "completed": null
+    },
+    {
+      "symbol": "W1553",
+      "title": "Two more test files run their commands through procrun.capture so S404 and S603 clear (hooks wired, static view)",
+      "status": "working",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Codemod w1553_tests.py: capture(installed.script(hook), env=env, timeout=90, input_text=payload) in test_hooks_wired, capture(build, env=...) plus an asserted return code in test_static_view, the subprocess imports swapped. installed.py and webpage.py stay: they Popen a child they stream from. RUFF stack, shares nothing with stack 920 (mypy), queues now.",
+      "evidence": "2026-11-03T13:46:53Z: 2026-11-03T13:46:53Z (read by stampnote): G0 precommit, before the edit (card and manifest first). Pace read 2026-11-03T13:45:24Z, taken as the read for this card, a few minutes old at this G0 (its newest-landing field read PENDING: 919 landed at 13:45:32Z, 8 seconds after the stamp): ruff 193 left owes 90 (49 landings to zero), mypy 472 left owes 190 (122 to zero), codon owes 2; both before 919's fall to 193 and 920's. N: two test files hold subprocess S404 and S603: test_hooks_wired.py (one call, text stdin via input=, env, timeout=90, check=False) and test_static_view.py (one checked call, env, output captured), K = 2 call sites, 4 findings (S404 x2, S603 x2) read from the baseline rows and the files; procrun.capture takes input_text, env and timeout. installed.py and webpage.py also hold S404/S603 but Popen a child whose stdout they stream, which capture cannot do, so they stay. Actuator: codemod w1553_tests.py. Sensor: mikemol-pycheck --ratchet and the two files run directly (test_static_view is a browser test and may skip). Expected reading: ruff 193 falls by exactly 4 to 189, mypy flat at 431 in the tree. K: tests outside the Codon census. RUFF stack, shares no file with stack 920 (mypy, inflight).",
+      "issued_at": "2026-11-03T13:46:38Z",
+      "minted_during": "interrupt",
+      "caused_by": "nemik:W1175",
+      "last_worked": "2026-11-03T13:48:21Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "tests/test_hooks_wired.py",
+        "tests/test_static_view.py",
+        "ruff-baseline.json"
+      ],
+      "size_class": "small",
+      "completed": null
+    },
+    {
+      "symbol": "W1554",
+      "title": "test_layout reads its tile, contrast, colour, roll-up and legend evaluates through typed readers so their 44 Any reads clear (slice 5)",
+      "status": "ready",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Codemod w1554_slice5.py: outside to evaluate_bool, rolled to a (label, count) converter, fit and zoomed to evaluate_dict with num and as_str reads, ratios to a float dict, measured to evaluate_dict with items, motifs/lengths/dashes/legend to as_strs and as_ints (two new readers in tests/webpage.py). Measure house mypy on both, run test_layout whole directly. MYPY stack, shares mypy-baseline.json with stack 920 (inflight), so it submits after 920 lands.",
+      "evidence": "2026-11-03T14:01:48Z: 2026-11-03T14:01:47Z (read by stampnote): G0 precommit, before the edit (card and manifest first). Pace read 2026-11-03T13:55:24Z, this tick's first command, about 8 minutes old at this G0: mypy 472 left owes 190 (122 landings to zero), ruff 193 left owes 90 (49 to zero), codon owes 2; both before 920's fall to 431 and 921's. N: ten evaluate sites in tests/test_layout.py with their findings MEASURED before this G0 by w1535_by_site.py (uses included): outside 7, rolled 7, zoomed 8, fit@tile 1, ratios 5, measured 7, legend 6, motifs 1, lengths 1, dashes 1; K = 44, the bound. Actuator: codemod w1554_slice5.py: outside becomes webpage.evaluate_bool; rolled a (label, count) converter; the two TILE_LABELS reads webpage.evaluate_dict with webpage.num for tiles, smallest and hidden and webpage.as_str for note; ratios a dict of floats from evaluate_dict through as_float; measured evaluate_dict with webpage.items(measured, 'cases'); motifs, dashes and legend webpage.as_strs and lengths webpage.as_ints over evaluate_value (two new readers in tests/webpage.py, a TypeError on a mismatch). Expected fall: 44, the bound; any use a reader does not reach stays and is named by mypy afterwards. Sensor: house mypy on both files, mikemol-pycheck --ratchet --write, then test_layout whole run directly (3 to 6 min), because the readers raise only at runtime. MYPY stack, shares mypy-baseline.json with stack 920 (inflight): it submits after 920 lands, its baseline written on a tree where 920's 431 is the base. | 2026-11-03T14:08:00Z: Staged, not submitted: stack922.json (slice 5, mypy 431 to 401, a fall of 30 against a bound of 44 because w1535_by_site.py lumps later uses under the nearest earlier site; test_layout whole 40 passed 2 skipped 217.25 s wall). Submit after stack 920 lands (shared files); write the baseline with pycheck --ratchet --write then. 101 findings remain in test_layout over about 30 sites.",
+      "issued_at": "2026-11-03T14:01:31Z",
+      "minted_during": "interrupt",
+      "caused_by": "nemik:W1535",
+      "last_worked": "2026-11-03T14:08:00Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "tests/webpage.py",
+        "tests/test_layout.py",
+        "mypy-baseline.json"
+      ],
+      "size_class": "medium"
     }
   ],
   "residue": [

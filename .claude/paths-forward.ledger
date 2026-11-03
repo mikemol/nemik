@@ -4345,3 +4345,7 @@
 2026-11-03T13:35:06Z  status W1550 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-03T13:38:45Z  status W1552 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-03T13:38:57Z  tick  W1552 advanced  sweep     "stack 917 landed 1cfee575 (ruff 209 to 202) and stack 918 landed 8a015c11 (test_layout metric dicts, mypy 503 to 472); stack 919 (four tests via procrun, ruff 202 to 193) inflight with 920 (test_layout row converters, mypy 472 to 431) queued; slice plan by measured fall written on W1535 [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-03T13:46:23Z  status W1551 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-03T13:46:38Z  interrupt W1553 minted    -         "Two more test files run their commands through procrun.capture so S404 and S603 clear (hooks wired, static view)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W1175
+2026-11-03T13:48:21Z  status W1553 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-03T14:01:31Z  interrupt W1554 minted    -         "test_layout reads its tile, contrast, colour, roll-up and legend evaluates through typed readers so their 44 Any reads clear (slice 5)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W1535

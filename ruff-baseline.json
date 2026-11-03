@@ -143,8 +143,6 @@
   "PLR0917": 1
  },
  "tests/test_hooks_wired.py": {
-  "S404": 1,
-  "S603": 1,
   "SLF001": 2
  },
  "tests/test_ics_reader.py": {
@@ -192,8 +190,6 @@
   "PLC2701": 1
  },
  "tests/test_static_view.py": {
-  "S404": 1,
-  "S603": 1,
   "SLF001": 1
  },
  "tests/test_witnesses.py": {

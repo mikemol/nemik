@@ -8,10 +8,10 @@ hooks README prescribes. Wiring is only as good as what it runs, so the test als
 """
 
 import json
-import subprocess
 from pathlib import Path
 
 import installed
+from mikemol.procrun.proc import capture
 
 ROOT = Path(__file__).parents[1]
 HOOKS = ["mikemol-hook-inbound-asks", "mikemol-hook-nemik-check"]
@@ -55,13 +55,5 @@ def test_a_hook_run_with_a_session_start_payload_exits_zero(tmp_path: Path) -> N
     }
     payload = json.dumps(payload2)
     for hook in HOOKS:
-        r = subprocess.run(
-            installed.script(hook),
-            input=payload,
-            capture_output=True,
-            text=True,
-            env=env,
-            timeout=90,
-            check=False,
-        )
+        r = capture(installed.script(hook), env=env, timeout=90, input_text=payload)
         assert r.returncode == 0, (hook, r.stderr[-300:])
