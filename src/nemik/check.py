@@ -17,7 +17,6 @@ import argparse
 import datetime as dt
 import json
 import os
-import subprocess
 import sys
 import time
 import tomllib
@@ -29,6 +28,7 @@ from typing import TYPE_CHECKING
 from mikemol.pathsforward.lock import stamp
 from mikemol.pathsforward.opa_eval import OpaUnavailableError
 from mikemol.pathsforward.store import UnreadableStateError
+from mikemol.procrun.proc import capture
 from rdflib import Graph, Literal, URIRef
 from rdflib.namespace import DCTERMS
 
@@ -935,12 +935,10 @@ def _declared_int(text: str, section: str, key: str, default: int) -> int:
 
 def _git(cwd: Path, *argv: str) -> str | None:
     try:
-        out = subprocess.run(
-            ["git", "-C", str(cwd), *argv], capture_output=True, text=True, check=True
-        )
-    except (OSError, subprocess.CalledProcessError):
+        out = capture(["git", "-C", str(cwd), *argv])
+    except OSError:
         return None
-    return out.stdout.strip()
+    return out.stdout.strip() if out.returncode == 0 else None
 
 
 def exported_commit(queue_dir: Path) -> tuple[str, str] | None:
