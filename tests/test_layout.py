@@ -1048,9 +1048,10 @@ def test_the_card_list_selects_and_expands_from_the_keyboard(server: str) -> Non
             page,
             "() => document.querySelectorAll('#cardlist button[data-card]').length",
         )
-        drawn = page.evaluate(
+        drawn = webpage.evaluate_int(
+            page,
             "() => cy.nodes('[symbol]')"
-            ".filter(n => n.visible() && n.data('state') !== 'unclaimed').length"
+            ".filter(n => n.visible() && n.data('state') !== 'unclaimed').length",
         )
         first = page.locator("#cardlist button[data-card]").nth(1)
         target = first.get_attribute("data-card")
@@ -1105,11 +1106,12 @@ def test_a_cite_link_in_the_panel_selects_its_card_and_announces_it(
             page,
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 1",
         )
-        target = page.evaluate(
+        target = webpage.evaluate_dict(
+            page,
             "() => { const n = cy.nodes('[symbol]').filter(n => n.visible()"
             " && n.data('cite')).last().data();"
             " document.getElementById('detail').innerHTML = citeLink(n.cite);"
-            " return { id: n.id, cite: n.cite }; }"
+            " return { id: n.id, cite: n.cite }; }",
         )
         page.click("#detail a[data-cite]")
         _settle(page)
@@ -1121,8 +1123,9 @@ def test_a_cite_link_in_the_panel_selects_its_card_and_announces_it(
         detail = page.inner_text("#detail")
         browser.close()
     assert selected == [target["id"]]
-    assert target["cite"] in said and live == "polite"
-    assert target["cite"].rsplit(":", 1)[-1] in detail
+    cite = webpage.as_str(target["cite"])
+    assert cite in said and live == "polite"
+    assert cite.rsplit(":", 1)[-1] in detail
 
 
 def test_the_view_chain_is_drawn_end_to_end_with_its_length(server: str) -> None:
