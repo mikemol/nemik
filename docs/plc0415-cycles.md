@@ -27,8 +27,13 @@ was checked the same way before stack 940 landed.
 | `witnesses.py:608` | `from nemik.witwait import poller, seconds, wait` | `nemik.witwait` imports `_get` from `nemik.witnesses` | make `_get` a public name in a leaf used by both |
 | `adapter.py:435` | `import hashlib` | not a cycle: standing rule 4, `hashlib` is outside Codon's supported modules | none until Codon supports it, or a Codon-friendly digest in a leaf |
 
-The `Weights` edge accounts for three of the eleven (`rank.py` 551, 883, 907) and `default_root` for
-two (`critical.py` 491, `rank.py` 1151), so two leaf modules retire five sites. A new `src/nemik`
+The `Weights` edge accounts for three of the eleven (`rank.py` 551, 883, 907), but the leaf has to
+carry seven names, not one: `salience.py` imports `Weights`, `_open`, `_repo`, `downstream_weight`,
+`load_weights`, `ref_of` and `successors` from `rank` at module level (nemik:W1577). The path
+constants leaf retires one (`check.py` 835, through `stalled` and `history`; nemik:W1578): the other
+two `default_root` sites (`critical.py` 491, `rank.py` 1151) import `survey` from `check` as well, and
+`survey` stays there, so they remain cycles until `survey` moves or their callers take it as an
+argument. Two new leaf modules therefore retire four sites, not five. A new `src/nemik`
 module has costs the stack must pay: `bazel build //:.venv` before any wiring (hooks import `check`
 and `rank`), `test_codon_census` compiled against the pinned Codon, and `checks/claims.py`'s declared
 dependency sets for the hubs; the memory notes `new-module-breaks-live-readers` and
