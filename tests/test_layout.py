@@ -410,6 +410,41 @@ def _label_counts(value: object) -> list[tuple[str, int]]:
     return rows
 
 
+def _chips(value: object) -> list[tuple[str, str]]:
+    """Read the (health, label text) rows of the repo chips the page reports.
+
+    Returns:
+        One row per chip.
+
+    """
+    rows: list[tuple[str, str]] = []
+    for row in webpage.as_list(value):
+        health, text = webpage.as_list(row)
+        rows.append((webpage.as_str(health), webpage.as_str(text)))
+    return rows
+
+
+def _repo_chips(value: object) -> list[tuple[str, str, str, str]]:
+    """Read the (repo, health, accessible name, hidden marks) rows of the repo chips.
+
+    Returns:
+        One row per chip.
+
+    """
+    rows: list[tuple[str, str, str, str]] = []
+    for row in webpage.as_list(value):
+        repo, health, name, hidden = webpage.as_list(row)
+        rows.append(
+            (
+                webpage.as_str(repo),
+                webpage.as_str(health),
+                webpage.as_str(name),
+                webpage.as_str(hidden),
+            )
+        )
+    return rows
+
+
 def _fans(value: object) -> list[list[tuple[str, int, str]]]:
     """Read the wait-line fans the page reports.
 
@@ -641,9 +676,12 @@ def test_the_default_view_is_legible(server: str, scheme: Scheme) -> None:
         )
         # nemik:W317: every repo chip carries its health, and a non-green one a glyph, not colour
         # alone
-        chips = page.evaluate(
-            "() => [...document.querySelectorAll('#repos button')]"
-            ".map(b => [b.dataset.health, b.textContent])"
+        chips = _chips(
+            webpage.evaluate_value(
+                page,
+                "() => [...document.querySelectorAll('#repos button')]"
+                ".map(b => [b.dataset.health, b.textContent])",
+            )
         )
         browser.close()
     assert chips and {h for h, _ in chips} <= {"green", "amber", "red"}
@@ -675,13 +713,16 @@ def test_every_label_glyph_exists_in_this_browsers_fonts(server: str) -> None:
         webpage.watch(page)
         page.goto(server)
         webpage.until(page, "() => typeof STATE_MARK === 'object'")
-        missing = page.evaluate(
-            "() => { const c = document.createElement('canvas').getContext('2d');"
-            " c.font = 'bold 10px sans-serif';"
-            " const box = c.measureText('\\u{10FFFD}').width;"
-            " const glyphs = [...Object.values(STATE_MARK), '\\u25b2', '\\u25a0']"
-            "   .map(s => s.trim()).filter(Boolean);"
-            " return glyphs.filter(g => Math.abs(c.measureText(g).width - box) < 0.01); }"
+        missing = webpage.as_strs(
+            webpage.evaluate_value(
+                page,
+                "() => { const c = document.createElement('canvas').getContext('2d');"
+                " c.font = 'bold 10px sans-serif';"
+                " const box = c.measureText('\\u{10FFFD}').width;"
+                " const glyphs = [...Object.values(STATE_MARK), '\\u25b2', '\\u25a0']"
+                "   .map(s => s.trim()).filter(Boolean);"
+                " return glyphs.filter(g => Math.abs(c.measureText(g).width - box) < 0.01); }",
+            )
         )
         browser.close()
     assert missing == [], f"not in this browser's fonts: {missing}"
@@ -880,7 +921,9 @@ def test_a_static_build_refetches_only_the_pieces_whose_hash_moved(
             page.goto(url)
             webpage.until(page, "() => typeof data !== 'undefined' && data")
             drawn = webpage.evaluate_int(page, "() => data.nodes.length")
-            first = page.evaluate("() => [...window.__pieceFetches]")
+            first = webpage.as_strs(
+                webpage.evaluate_value(page, "() => [...window.__pieceFetches]")
+            )
             one = fleet["repos"][0]
             hashes = json.loads((out / "hashes.json").read_text())
             hashes[f"graph/{one}.json"] = "moved"
@@ -889,7 +932,11 @@ def test_a_static_build_refetches_only_the_pieces_whose_hash_moved(
             time.sleep(1.1)
             (out / "hashes.json").write_text(json.dumps(hashes))
             page.evaluate("() => load()")
-            second = page.evaluate("n => window.__pieceFetches.slice(n)", len(first))
+            second = webpage.as_strs(
+                webpage.evaluate_value(
+                    page, "n => window.__pieceFetches.slice(n)", len(first)
+                )
+            )
             browser.close()
     finally:
         httpd.shutdown()
@@ -913,10 +960,13 @@ def test_every_repo_chip_names_its_health_in_words(server: str) -> None:
         webpage.watch(page)
         page.goto(server)
         webpage.until(page, REPO_CHIPS_DRAWN)
-        chips = page.evaluate(
-            "() => [...document.querySelectorAll('#repos button[data-repo]')].map(b => "
-            "[b.dataset.repo, b.dataset.health, b.getAttribute('aria-label'), "
-            "[...b.querySelectorAll('[aria-hidden=true]')].map(s => s.textContent).join('')])"
+        chips = _repo_chips(
+            webpage.evaluate_value(
+                page,
+                "() => [...document.querySelectorAll('#repos button[data-repo]')].map(b => "
+                "[b.dataset.repo, b.dataset.health, b.getAttribute('aria-label'), "
+                "[...b.querySelectorAll('[aria-hidden=true]')].map(s => s.textContent).join('')])",
+            )
         )
         browser.close()
     assert chips
@@ -971,8 +1021,10 @@ def test_the_card_list_selects_and_expands_from_the_keyboard(server: str) -> Non
         page.keyboard.press("Enter")
         _settle(page)
         after = webpage.evaluate_int(page, "() => cy.nodes('[symbol]').length")
-        expanded = page.evaluate(
-            "() => document.activeElement.getAttribute('aria-expanded')"
+        expanded = webpage.as_str(
+            webpage.evaluate_value(
+                page, "() => document.activeElement.getAttribute('aria-expanded')"
+            )
         )
         browser.close()
     assert target is not None
