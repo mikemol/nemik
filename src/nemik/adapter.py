@@ -350,6 +350,189 @@ def queue_graph(
     )[0]
 
 
+def _add_links(
+    g: Graph, repo: str, node: URIRef, w: model.Json, known: frozenset[str]
+) -> None:
+    """Add the card's enables edges, its blocked_on texts and what each waits for."""
+    # strlist reads a bare string as one element, which hid el-openglo's 45 comma-joined
+    # fields; record the raw shape so the shapes can see it.
+    for field in ("enables", "touches", "blocked_on"):
+        if isinstance(w.get(field), str):
+            g.add((node, NEMIK.stringNotList, Literal(field)))
+    for target in model.strlist(w, "enables"):
+        g.add((node, NEMIK.enables, reference_uri(repo, target)))
+    for who in model.strlist(w, "blocked_on"):
+        g.add((node, NEMIK.blockedOn, Literal(who)))
+        if waited := resolve_blocker(repo, who, known):
+            g.add((node, NEMIK.waitsFor, waited))
+    if kind := model.text(w, "blocked_kind"):
+        g.add((node, NEMIK.blockedKind, Literal(kind)))
+
+
+def _add_wants(g: Graph, repo: str, node: URIRef, w: model.Json) -> None:
+    """Add the card's acceptable suppliers and the asset it wants."""
+    # nemik:W343 (mtools:W1511): any of these may deliver what the card wants; a fallback that
+    # never changes the card's state or its blockers.
+    for supplier in model.strlist(w, "acceptable_suppliers"):
+        g.add((node, NEMIK.acceptableSupplier, reference_uri(repo, supplier)))
+    if want := model.text(w, "want").strip():
+        g.add((node, NEMIK.wantText, Literal(want)))
+
+
+def _add_warrants(g: Graph, node: URIRef, w: model.Json) -> None:
+    """Add the card's warrants, a ruling claim in prose, and its touches."""
+    # nemik:W598: the card's warrants (PROV-O JSON-LD, mtools:W1384) join the graph; one
+    # that does not parse is marked, not guessed at.
+    for bad in warrants.attach(g, w):
+        g.add((node, NEMIK.malformedWarrant, Literal(bad)))
+    if warrants.claims_ruling(w):  # nemik:W597: an operator ruling in prose, no warrant
+        g.add((node, NEMIK.claimsRuling, Literal("operator ruling in prose")))
+    for tag in model.strlist(w, "touches"):
+        g.add((node, NEMIK.touches, Literal(tag)))
+        g.add((node, DCTERMS.subject, Literal(tag)))
+
+
+def _add_plans(g: Graph, node: URIRef, w: model.Json) -> None:
+    """Add the files the next step names and edits, its manifest, size and flags."""
+    # nemik:W544 (mtools:W1276): the repo files the next step names, as written. Paths only; the
+    # EditDeclaredShape in shapes.ttl compares them with the file:<path>!w touches.
+    named = re.findall(
+        r"(?:[\w.-]+/)*[\w-]+\.(?:py|ttl|ya?ml|json|md|html|toml|js)\b",
+        model.text(w, "next_bounded_step"),
+    )
+    for path in sorted(set(named)):
+        g.add((node, NEMIK.namesFile, Literal(path)))
+    # nemik:W627: and the ones it says it CHANGES, which a drafted manifest may propose
+    for path in editverbs.edited_paths(model.text(w, "next_bounded_step")):
+        g.add((node, NEMIK.editsFile, Literal(path)))
+    # nemik:W488: whether the card still states a next step; an umbrella with none and every
+    # child done is realized by construction (UmbrellaCompleteShape).
+    if model.text(w, "next_bounded_step").strip():
+        g.add((node, NEMIK.hasNextStep, Literal("true", datatype=XSD.boolean)))
+    # nemik:W612 (mtools:W1426): the manifest of planned changes (exact repo-relative files)
+    # and a size class; ManifestShape and OversizeShape read them, and nemik.stackable too.
+    for planned in model.strlist(w, "manifest"):
+        g.add((node, NEMIK.plannedPath, Literal(planned)))
+    if size := model.text(w, "size_class").strip():
+        g.add((node, NEMIK.sizeClass, Literal(size)))
+    # nemik:W1011: the evidence holds an executed probe (retro gate G8)
+    if has_probe(model.text(w, "evidence")):
+        g.add((node, NEMIK.probeRecorded, Literal("true", datatype=XSD.boolean)))
+    # nemik:W1263: the evidence says why the root apply loop could not carry an operator act
+    if apply_loop_cannot(model.text(w, "evidence")):
+        g.add((node, NEMIK.applyLoopCannot, Literal("true", datatype=XSD.boolean)))
+
+
+def _add_signals(g: Graph, node: URIRef, w: model.Json) -> None:
+    """Add the card's stray words, weather, ticks, issue time and close time."""
+    # nemik:W553 (github-8f 2026-10-15): words that blur the change-lifecycle steps.
+    for word in stray_words(model.text(w, "next_bounded_step")):
+        g.add((node, NEMIK.strayWord, Literal(word)))
+    # nemik:W174: weather. Waypoints whose witnesses are the same query wait on the same outage,
+    # so they share one weather id: a hash of the query with its whitespace collapsed. The query
+    # text itself stays out of the graph (it may name hosts or endpoints).
+    if wq := " ".join(model.text(w, "witness").split()):
+        import hashlib
+
+        g.add(
+            (
+                node,
+                NEMIK.weather,
+                Literal("wx:" + hashlib.sha256(wq.encode()).hexdigest()[:10]),
+            )
+        )
+    if tb := model.ticks(w):
+        g.add((node, NEMIK.ticksBlocked, Literal(tb)))
+    if issued := model.text(w, "issued_at"):
+        g.add((node, DCTERMS.created, _instant(issued)))
+    # nemik:W530: the close time the writer stamps on a completed card, as oslc_cm:closeDate
+    # (OSLC CM 3.0: the date no further work is intended), typed as xsd:dateTime
+    if closed_at := _extended(model.text(w, "completed")):
+        g.add((node, OSLC_CM.closeDate, _instant(closed_at)))
+
+
+def _add_clocks(g: Graph, node: URIRef, w: model.Json) -> None:
+    """Add whether the card deploys, its landing and last-worked clocks and vector."""
+    # nemik:W841 (mtools:W1643): a card whose change is deployed says so (deploys), and the
+    # writer stamps the moment it entered landed once (landed_at, RFC 5545 UTC, like completed)
+    if model.text(w, "deploys").lower() == "true":
+        g.add((node, NEMIK.deploys, Literal("true", datatype=XSD.boolean)))
+    if landed_at := _extended(model.text(w, "landed_at")):
+        g.add((node, NEMIK.landedAt, _instant(landed_at)))
+    # nemik:W616: when the card was last worked, for the stalled and progress-invisible checks
+    if worked := model.text(w, "last_worked"):
+        g.add((node, NEMIK.lastWorked, _instant(worked)))
+    # mtools 2e21902: derived from the tick lock at mint time, never by the agent.
+    if during := model.text(w, "minted_during"):
+        g.add((node, NEMIK.mintedDuring, Literal(during)))
+    # mtools:W248: the WV:1 vector and who wrote it, carried as written; nemik.score reads it
+    # through mtools' own parser and owns the band (nemik:W131).
+    if vec := model.text(w, "vector"):
+        g.add((node, NEMIK.vector, Literal(vec)))
+    if src := model.text(w, "vector_source"):
+        g.add((node, NEMIK.vectorSource, Literal(src)))
+
+
+def _add_letters(g: Graph, node: URIRef, w: model.Json) -> None:
+    """Add the letters and attachments the card cites."""
+    # nemik:W275 (operator 2026-10-10: a letter is a waypoint's evidence in file form): the
+    # letter files a waypoint cites in its evidence or next step, as written. Paths only: the
+    # evidence text itself stays out of the graph.
+    for text in (model.text(w, "evidence"), model.text(w, "next_bounded_step")):
+        for path in re.findall(
+            r"(?:[\w.-]+/inbox/[\w./-]+\.md|\.claude/letters/[\w./-]+\.md)", text
+        ):
+            g.add((node, NEMIK.letter, Literal(path)))
+    # nemik:W276: mtools:W930/W931's `attachments` [{path, sha256}] are the stored form of the
+    # same citation: a repo-relative file pinned by hash, read through mtools' own parser.
+    from mikemol.pathsforward import attach
+
+    for attached, _digest in attach.entries(w):
+        g.add((node, NEMIK.letter, Literal(attached)))
+
+
+def _add_schedule(g: Graph, repo: str, node: URIRef, w: model.Json) -> None:
+    """Add the card's schedule, recurrence, alarms and cause."""
+    # mtools:W300: RFC 5545 DTSTART/DUE values, kept exactly as written (a DATE, a UTC
+    # DATE-TIME, or TZID=Zone:local); nemik.vtodo renders them as properties (nemik:W134).
+    # mtools:W1687 adds `location`, where it takes place, free text (nemik:W722).
+    for field, pred in (
+        ("dtstart", NEMIK.dtstart),
+        ("due", NEMIK.due),
+        ("location", NEMIK.location),
+    ):
+        if val := model.text(w, field):
+            g.add((node, pred, Literal(val)))
+    # mtools:W309: an RFC 5545 RRULE (verbatim) and its EXDATEs; vtodo passes them through, and
+    # expanding occurrences for nemik-wake is nemik:W145.
+    if rule := model.text(w, "rrule"):
+        g.add((node, NEMIK.rrule, Literal(rule)))
+    for ex in model.strlist(w, "exdates"):
+        g.add((node, NEMIK.exdate, Literal(ex)))
+    # mtools:W310: completed occurrences, {RECURRENCE-ID: COMPLETED}; the ids are what skip.
+    for rid in sorted(model.strmap(w, "occurrences")):
+        g.add((node, NEMIK.occurrenceDone, Literal(rid)))
+    # mtools:W279: VALARM triggers, verbatim; nemik.alarm resolves them, nemik-wake fires them.
+    for trig in model.strlist(w, "alarms"):
+        g.add((node, NEMIK.alarm, Literal(trig)))
+    if cause := model.text(w, "caused_by"):
+        cause_ref = (
+            reference_uri(repo, cause) if model.is_reference(cause) else Literal(cause)
+        )
+        g.add((node, PROV.wasInformedBy, cause_ref))
+
+
+def _drop_residue(g: Graph, repo: str, ws: URIRef, state: model.State) -> None:
+    """Add one dropped node for each residue entry."""
+    for r in state.residue:
+        symbol = model.text(r, "symbol")
+        node = waypoint_uri(repo, symbol)
+        g.add((node, RDF.type, NEMIK.Dropped))
+        g.add((node, NEMIK.workstream, ws))
+        g.add((node, NEMIK.symbol, Literal(symbol)))
+        g.add((node, DCTERMS.title, Literal(model.text(r, "title"))))
+
+
 def _queue_graph(repo: str, state_path: Path, known: frozenset[str]) -> Graph:
     state = store.load(state_path)
     g = bind(Graph())
@@ -374,155 +557,15 @@ def _queue_graph(repo: str, state_path: Path, known: frozenset[str]) -> Graph:
         g.add((node, DCTERMS.title, Literal(model.text(w, "title"))))
         g.add((node, OSLC_CM.state, STATE.get(status, Literal(status))))
         g.add((node, OSLC_CM.closed, Literal(status == "done", datatype=XSD.boolean)))
-        # strlist reads a bare string as one element, which hid el-openglo's 45 comma-joined
-        # fields; record the raw shape so the shapes can see it.
-        for field in ("enables", "touches", "blocked_on"):
-            if isinstance(w.get(field), str):
-                g.add((node, NEMIK.stringNotList, Literal(field)))
-        for target in model.strlist(w, "enables"):
-            g.add((node, NEMIK.enables, reference_uri(repo, target)))
-        for who in model.strlist(w, "blocked_on"):
-            g.add((node, NEMIK.blockedOn, Literal(who)))
-            if waited := resolve_blocker(repo, who, known):
-                g.add((node, NEMIK.waitsFor, waited))
-        if kind := model.text(w, "blocked_kind"):
-            g.add((node, NEMIK.blockedKind, Literal(kind)))
-        # nemik:W343 (mtools:W1511): any of these may deliver what the card wants; a fallback that
-        # never changes the card's state or its blockers.
-        for supplier in model.strlist(w, "acceptable_suppliers"):
-            g.add((node, NEMIK.acceptableSupplier, reference_uri(repo, supplier)))
-        if want := model.text(w, "want").strip():
-            g.add((node, NEMIK.wantText, Literal(want)))
-        # nemik:W598: the card's warrants (PROV-O JSON-LD, mtools:W1384) join the graph; one
-        # that does not parse is marked, not guessed at.
-        for bad in warrants.attach(g, w):
-            g.add((node, NEMIK.malformedWarrant, Literal(bad)))
-        if warrants.claims_ruling(
-            w
-        ):  # nemik:W597: an operator ruling in prose, no warrant
-            g.add((node, NEMIK.claimsRuling, Literal("operator ruling in prose")))
-        for tag in model.strlist(w, "touches"):
-            g.add((node, NEMIK.touches, Literal(tag)))
-            g.add((node, DCTERMS.subject, Literal(tag)))
-        # nemik:W544 (mtools:W1276): the repo files the next step names, as written. Paths only; the
-        # EditDeclaredShape in shapes.ttl compares them with the file:<path>!w touches.
-        named = re.findall(
-            r"(?:[\w.-]+/)*[\w-]+\.(?:py|ttl|ya?ml|json|md|html|toml|js)\b",
-            model.text(w, "next_bounded_step"),
-        )
-        for path in sorted(set(named)):
-            g.add((node, NEMIK.namesFile, Literal(path)))
-        # nemik:W627: and the ones it says it CHANGES, which a drafted manifest may propose
-        for path in editverbs.edited_paths(model.text(w, "next_bounded_step")):
-            g.add((node, NEMIK.editsFile, Literal(path)))
-        # nemik:W488: whether the card still states a next step; an umbrella with none and every
-        # child done is realized by construction (UmbrellaCompleteShape).
-        if model.text(w, "next_bounded_step").strip():
-            g.add((node, NEMIK.hasNextStep, Literal("true", datatype=XSD.boolean)))
-        # nemik:W612 (mtools:W1426): the manifest of planned changes (exact repo-relative files)
-        # and a size class; ManifestShape and OversizeShape read them, and nemik.stackable too.
-        for planned in model.strlist(w, "manifest"):
-            g.add((node, NEMIK.plannedPath, Literal(planned)))
-        if size := model.text(w, "size_class").strip():
-            g.add((node, NEMIK.sizeClass, Literal(size)))
-        # nemik:W1011: the evidence holds an executed probe (retro gate G8)
-        if has_probe(model.text(w, "evidence")):
-            g.add((node, NEMIK.probeRecorded, Literal("true", datatype=XSD.boolean)))
-        # nemik:W1263: the evidence says why the root apply loop could not carry an operator act
-        if apply_loop_cannot(model.text(w, "evidence")):
-            g.add((node, NEMIK.applyLoopCannot, Literal("true", datatype=XSD.boolean)))
-        # nemik:W553 (github-8f 2026-10-15): words that blur the change-lifecycle steps.
-        for word in stray_words(model.text(w, "next_bounded_step")):
-            g.add((node, NEMIK.strayWord, Literal(word)))
-        # nemik:W174: weather. Waypoints whose witnesses are the same query wait on the same outage,
-        # so they share one weather id: a hash of the query with its whitespace collapsed. The query
-        # text itself stays out of the graph (it may name hosts or endpoints).
-        if wq := " ".join(model.text(w, "witness").split()):
-            import hashlib
-
-            g.add(
-                (
-                    node,
-                    NEMIK.weather,
-                    Literal("wx:" + hashlib.sha256(wq.encode()).hexdigest()[:10]),
-                )
-            )
-        if tb := model.ticks(w):
-            g.add((node, NEMIK.ticksBlocked, Literal(tb)))
-        if issued := model.text(w, "issued_at"):
-            g.add((node, DCTERMS.created, _instant(issued)))
-        # nemik:W530: the close time the writer stamps on a completed card, as oslc_cm:closeDate
-        # (OSLC CM 3.0: the date no further work is intended), typed as xsd:dateTime
-        if closed_at := _extended(model.text(w, "completed")):
-            g.add((node, OSLC_CM.closeDate, _instant(closed_at)))
-        # nemik:W841 (mtools:W1643): a card whose change is deployed says so (deploys), and the
-        # writer stamps the moment it entered landed once (landed_at, RFC 5545 UTC, like completed)
-        if model.text(w, "deploys").lower() == "true":
-            g.add((node, NEMIK.deploys, Literal("true", datatype=XSD.boolean)))
-        if landed_at := _extended(model.text(w, "landed_at")):
-            g.add((node, NEMIK.landedAt, _instant(landed_at)))
-        # nemik:W616: when the card was last worked, for the stalled and progress-invisible checks
-        if worked := model.text(w, "last_worked"):
-            g.add((node, NEMIK.lastWorked, _instant(worked)))
-        # mtools 2e21902: derived from the tick lock at mint time, never by the agent.
-        if during := model.text(w, "minted_during"):
-            g.add((node, NEMIK.mintedDuring, Literal(during)))
-        # mtools:W248: the WV:1 vector and who wrote it, carried as written; nemik.score reads it
-        # through mtools' own parser and owns the band (nemik:W131).
-        if vec := model.text(w, "vector"):
-            g.add((node, NEMIK.vector, Literal(vec)))
-        if src := model.text(w, "vector_source"):
-            g.add((node, NEMIK.vectorSource, Literal(src)))
-        # nemik:W275 (operator 2026-10-10: a letter is a waypoint's evidence in file form): the
-        # letter files a waypoint cites in its evidence or next step, as written. Paths only: the
-        # evidence text itself stays out of the graph.
-        for text in (model.text(w, "evidence"), model.text(w, "next_bounded_step")):
-            for path in re.findall(
-                r"(?:[\w.-]+/inbox/[\w./-]+\.md|\.claude/letters/[\w./-]+\.md)", text
-            ):
-                g.add((node, NEMIK.letter, Literal(path)))
-        # nemik:W276: mtools:W930/W931's `attachments` [{path, sha256}] are the stored form of the
-        # same citation: a repo-relative file pinned by hash, read through mtools' own parser.
-        from mikemol.pathsforward import attach
-
-        for attached, _digest in attach.entries(w):
-            g.add((node, NEMIK.letter, Literal(attached)))
-        # mtools:W300: RFC 5545 DTSTART/DUE values, kept exactly as written (a DATE, a UTC
-        # DATE-TIME, or TZID=Zone:local); nemik.vtodo renders them as properties (nemik:W134).
-        # mtools:W1687 adds `location`, where it takes place, free text (nemik:W722).
-        for field, pred in (
-            ("dtstart", NEMIK.dtstart),
-            ("due", NEMIK.due),
-            ("location", NEMIK.location),
-        ):
-            if val := model.text(w, field):
-                g.add((node, pred, Literal(val)))
-        # mtools:W309: an RFC 5545 RRULE (verbatim) and its EXDATEs; vtodo passes them through, and
-        # expanding occurrences for nemik-wake is nemik:W145.
-        if rule := model.text(w, "rrule"):
-            g.add((node, NEMIK.rrule, Literal(rule)))
-        for ex in model.strlist(w, "exdates"):
-            g.add((node, NEMIK.exdate, Literal(ex)))
-        # mtools:W310: completed occurrences, {RECURRENCE-ID: COMPLETED}; the ids are what skip.
-        for rid in sorted(model.strmap(w, "occurrences")):
-            g.add((node, NEMIK.occurrenceDone, Literal(rid)))
-        # mtools:W279: VALARM triggers, verbatim; nemik.alarm resolves them, nemik-wake fires them.
-        for trig in model.strlist(w, "alarms"):
-            g.add((node, NEMIK.alarm, Literal(trig)))
-        if cause := model.text(w, "caused_by"):
-            cause_ref = (
-                reference_uri(repo, cause)
-                if model.is_reference(cause)
-                else Literal(cause)
-            )
-            g.add((node, PROV.wasInformedBy, cause_ref))
-    for r in state.residue:
-        symbol = model.text(r, "symbol")
-        node = waypoint_uri(repo, symbol)
-        g.add((node, RDF.type, NEMIK.Dropped))
-        g.add((node, NEMIK.workstream, ws))
-        g.add((node, NEMIK.symbol, Literal(symbol)))
-        g.add((node, DCTERMS.title, Literal(model.text(r, "title"))))
+        _add_links(g, repo, node, w, known)
+        _add_wants(g, repo, node, w)
+        _add_warrants(g, node, w)
+        _add_plans(g, node, w)
+        _add_signals(g, node, w)
+        _add_clocks(g, node, w)
+        _add_letters(g, node, w)
+        _add_schedule(g, repo, node, w)
+    _drop_residue(g, repo, ws, state)
     return g
 
 
