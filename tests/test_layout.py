@@ -661,9 +661,10 @@ def test_side_panel_sections_fold_and_the_choice_survives_a_reload(server: str) 
         webpage.watch(page)
         page.goto(server)
         webpage.until(page, SECTIONS_DRAWN)
-        first = page.evaluate(
+        first = webpage.evaluate_dict(
+            page,
             "() => Object.fromEntries([...document.querySelectorAll('details.sec')]"
-            ".map(d => [d.id, d.open]))"
+            ".map(d => [d.id, d.open]))",
         )
         page.click("#sec-goals > summary")
         webpage.until(
@@ -671,9 +672,12 @@ def test_side_panel_sections_fold_and_the_choice_survives_a_reload(server: str) 
             "() => !document.getElementById('goals').checkVisibility()"
             " && (localStorage.getItem('nemik.sections') || '').includes('\"sec-goals\":false')",
         )
-        hidden = page.evaluate(
-            "() => [document.getElementById('sec-goals').open,"
-            " document.getElementById('goals').checkVisibility()]"
+        hidden = webpage.as_list(
+            webpage.evaluate_value(
+                page,
+                "() => [document.getElementById('sec-goals').open,"
+                " document.getElementById('goals').checkVisibility()]",
+            )
         )
         page.reload()
         webpage.until(page, SECTIONS_DRAWN)
@@ -975,7 +979,7 @@ def test_a_static_build_refetches_only_the_pieces_whose_hash_moved(
             # read would answer 304 and look unchanged, so the rewrite waits out the second
             time.sleep(1.1)
             (out / "hashes.json").write_text(json.dumps(hashes))
-            page.evaluate("() => load()")
+            webpage.evaluate_value(page, "() => load()")
             second = webpage.as_strs(
                 webpage.evaluate_value(
                     page, "n => window.__pieceFetches.slice(n)", len(first)
