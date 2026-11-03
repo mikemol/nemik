@@ -387,6 +387,78 @@ def test_scope_rings_carry_distinct_ruler_motifs_pinned_to_paperkits(
     assert legend == dashes
 
 
+def _fans(value: object) -> list[list[tuple[str, int, str]]]:
+    """Read the wait-line fans the page reports.
+
+    Returns:
+        Each fan as (source, place in the fan, dash pattern) triples.
+
+    """
+    fans: list[list[tuple[str, int, str]]] = []
+    for fan in webpage.as_list(value):
+        triples: list[tuple[str, int, str]] = []
+        for row in webpage.as_list(fan):
+            src, place, pat = webpage.as_list(row)
+            triples.append(
+                (webpage.as_str(src), int(webpage.as_float(place)), str(pat))
+            )
+        fans.append(triples)
+    return fans
+
+
+def _contrast_pairs(value: object) -> list[tuple[str, float]]:
+    """Read the (state, contrast ratio) pairs the page reports.
+
+    Returns:
+        One pair per drawn state.
+
+    """
+    found: list[tuple[str, float]] = []
+    for row in webpage.as_list(value):
+        state, ratio = webpage.as_list(row)
+        found.append((webpage.as_str(state), webpage.as_float(ratio)))
+    return found
+
+
+def _ghost_rows(value: object) -> list[tuple[bool, str, float]]:
+    """Read the (is a context card, border style, opacity) rows the page reports.
+
+    Returns:
+        One row per drawn card.
+
+    """
+    rows: list[tuple[bool, str, float]] = []
+    for row in webpage.as_list(value):
+        ghost, style, opacity = webpage.as_list(row)
+        rows.append(
+            (
+                webpage.as_bool(ghost),
+                webpage.as_str(style),
+                webpage.as_float(opacity),
+            )
+        )
+    return rows
+
+
+def _prefixes(value: object) -> dict[str, list[str]]:
+    """Read the label prefixes the page reports for each card state.
+
+    Returns:
+        The distinct prefixes of each state.
+
+    Raises:
+        TypeError: When the answer is not an object.
+
+    """
+    if not isinstance(value, dict):
+        message = f"no object, only {value!r}"
+        raise TypeError(message)
+    return {
+        str(state): [webpage.as_str(p) for p in webpage.as_list(marks)]
+        for state, marks in value.items()
+    }
+
+
 FANS = """() => {
   const fans = {};
   cy.edges(".waits").forEach(e => {
@@ -417,7 +489,7 @@ def test_blocker_lines_into_one_card_carry_distinct_decodable_ruler_patterns(
             page,
             "() => typeof cy !== 'undefined' && cy && cy.edges('.waits').length > 0",
         )
-        fans = page.evaluate(FANS)
+        fans = _fans(webpage.evaluate_value(page, FANS))
         browser.close()
     assert fans, "the fixture fleet has no card with two or more wait lines"
     for fan in fans:
@@ -466,7 +538,7 @@ def test_every_card_label_meets_four_and_a_half_to_one(
         )
         page.check("#showDone")
         _settle(page)
-        pairs = page.evaluate(CONTRAST)
+        pairs = _contrast_pairs(webpage.evaluate_value(page, CONTRAST))
         browser.close()
     assert pairs
     assert {s for s, _ in pairs} >= {"ready", "blocked", "done"}
@@ -616,9 +688,12 @@ def test_context_cards_have_a_rendered_cue_of_their_own(
         )
         page.click("#repos button[data-repo='nemik']")
         _settle(page)
-        seen = page.evaluate(
-            "() => cy.nodes('[symbol]').map(n => [!!n.data('ghost'),"
-            " n.style('border-style'), +n.style('opacity')])"
+        seen = _ghost_rows(
+            webpage.evaluate_value(
+                page,
+                "() => cy.nodes('[symbol]').map(n => [!!n.data('ghost'),"
+                " n.style('border-style'), +n.style('opacity')])",
+            )
         )
         browser.close()
     ghosts = [s for s in seen if s[0]]
@@ -654,13 +729,17 @@ def test_each_card_state_differs_by_more_than_its_fill(
         )
         page.check("#showDone")
         _settle(page)
-        prefixes = page.evaluate(
-            # nemik:W477: a ready card behind an open enabler is drawn as a state of its own ("~ ")
-            "() => { const m = {}; cy.nodes('[symbol]').forEach(n => { const s = n.data('state')"
-            " === 'ready' && n.data('behind_open') ? 'ready-behind-open' : n.data('state');"
-            " if (s === 'unclaimed') return; const l = n.data('label'), sym = n.data('symbol');"
-            " (m[s] = m[s] || new Set()).add(l.slice(0, l.indexOf(sym))); });"
-            " return Object.fromEntries(Object.entries(m).map(([s, v]) => [s, [...v]])); }"
+        # nemik:W477: a ready card behind an open enabler is drawn as a state of its own ("~ ")
+        prefixes = _prefixes(
+            webpage.evaluate_value(
+                page,
+                "() => { const m = {}; cy.nodes('[symbol]').forEach(n => {"
+                " const s = n.data('state')"
+                " === 'ready' && n.data('behind_open') ? 'ready-behind-open' : n.data('state');"
+                " if (s === 'unclaimed') return; const l = n.data('label'), sym = n.data('symbol');"
+                " (m[s] = m[s] || new Set()).add(l.slice(0, l.indexOf(sym))); });"
+                " return Object.fromEntries(Object.entries(m).map(([s, v]) => [s, [...v]])); }",
+            )
         )
         browser.close()
     assert {"ready", "blocked", "done"} <= set(prefixes)

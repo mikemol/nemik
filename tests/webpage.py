@@ -40,6 +40,10 @@ __all__ = [
     "FLEET",
     "PageBrokenError",
     "Waitable",
+    "as_bool",
+    "as_float",
+    "as_list",
+    "as_str",
     "evaluate_bool",
     "evaluate_dict",
     "evaluate_int",
@@ -547,6 +551,71 @@ def items(row: dict[str, object], key: str) -> list[object]:
         raise TypeError(message)
     listed: list[object] = list(value)
     return listed
+
+
+def as_list(value: object) -> list[object]:
+    """Read a page answer that must be a list.
+
+    Returns:
+        The list's elements; anything but a list is a TypeError.
+
+    Raises:
+        TypeError: When the value is not a list.
+
+    """
+    if not isinstance(value, list):
+        message = f"no list, only {value!r}"
+        raise TypeError(message)
+    listed: list[object] = list(value)
+    return listed
+
+
+def as_str(value: object) -> str:
+    """Read a page answer that must be text.
+
+    Returns:
+        The text; anything else is a TypeError.
+
+    Raises:
+        TypeError: When the value is not text.
+
+    """
+    if not isinstance(value, str):
+        message = f"no text, only {value!r}"
+        raise TypeError(message)
+    return value
+
+
+def as_float(value: object) -> float:
+    """Read a page answer that must be a number.
+
+    Returns:
+        The number as a float; a boolean or anything else is a TypeError.
+
+    Raises:
+        TypeError: When the value is not a number.
+
+    """
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
+        message = f"no number, only {value!r}"
+        raise TypeError(message)
+    return float(value)
+
+
+def as_bool(value: object) -> bool:
+    """Read a page answer that must be a flag.
+
+    Returns:
+        The boolean; anything else is a TypeError.
+
+    Raises:
+        TypeError: When the value is not a boolean.
+
+    """
+    if not isinstance(value, bool):
+        message = f"no boolean, only {value!r}"
+        raise TypeError(message)
+    return value
 
 
 def evaluate_text(page: Evaluator, expression: str, arg: object = None) -> str:

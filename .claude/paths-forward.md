@@ -3,12 +3,12 @@
 
 state file: `.claude/paths-forward.json`
 
-counter 1550 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:e66f922dfc355d48`
+counter 1552 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:7f106b0dcd9c5d80`
 
 | # | symbol | status |
 |---|---|---|
-| 1 | W1548 | working |
-| 2 | W1550 | working |
+| 1 | W1551 | working |
+| 2 | W1552 | working |
 | 3 | W1007 | ready |
 | 4 | W1008 | ready |
 | 5 | W1075 | ready |
@@ -1529,20 +1529,23 @@ counter 1550 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:e66
 | 1520 | W1545 | done |
 | 1521 | W1546 | done |
 | 1522 | W1547 | done |
+| 1523 | W1548 | done |
+| 1524 | W1550 | done |
 
 ## waypoints
 
-1. **W1548** (working) Three more test files run their command through procrun.capture so S404 and S603 clear
-   (architecture, check and metrics realizability)
-   - next: Codemod w1548_tests.py: capture([...]) in test_architecture (output text), capture(...).returncode in the two
-     realizability fleets and capture(cmd, env=...) in test_check_realizability._run with the Completed alias; run the
-     three directly; ratchet. RUFF stack, shares ruff-baseline.json with stack 916, so it submits after 916 lands.
-2. **W1550** (working) test_layout reads its metric dicts (m = page.evaluate) through evaluate_dict and typed num and
-   items readers so their Any reads clear
-   - next: Codemod w1550_metrics.py: tests/webpage.py gains evaluate_dict, num and items readers, test_layout's 7 m =
-     page.evaluate sites call evaluate_dict and its m reads become num or items calls (items where compared with an
-     empty list). Then run mypy on both files and test_layout whole directly (about 5 min). MYPY stack, shares nothing
-     with stack 917 (ruff), queues now.
+1. **W1551** (working) Four more test files run their commands through procrun.capture so S404 and S603 clear (mpxj,
+   akonadi guard, publish, deterministic)
+   - next: Codemod w1551_tests.py: capture with an asserted return code (checked calls) in test_mpxj, test_publish, and
+     capture_bytes in test_akonadi_guard and test_deterministic; run the four directly (test_mpxj may skip without a
+     JRE), ratchet. RUFF stack, shares nothing with stack 918 (mypy), queues now.
+2. **W1552** (working) test_layout converts its fans, pairs, seen and prefixes row evaluates through typed converters so
+   their 41 Any reads clear
+   - next: Codemod w1552_rows.py: tests/webpage.py gains as_list, as_str, as_float and as_bool primitive readers (a
+     TypeError on a mismatch), and test_layout gets four private converters (_fans, _contrast_pairs, _ghost_rows,
+     _prefixes) wrapping the four evaluate_value calls so the uses are typed tuples and dicts. Measure house mypy on
+     both, run test_layout whole directly. MYPY stack, shares mypy-baseline.json with stack 918 (inflight), so it
+     submits after 918 lands.
 3. **W1007** (ready) The open-commitment count per repo, from mtools' commitment ledger, is a ratchet on the pace board
    and gauges
    - next: When mtools publishes its commitment ledger, count each repo's open commitments into a series, judge it like
@@ -2024,12 +2027,8 @@ counter 1550 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:e66
      then the G0 sensor lines name it. It replaces w1480_diff, w1496_diff, w1500_diff, w1508_diff, w1509_diff and
      w1521_diff in the scratch directory, which were each found after a failed first attempt.
 114. **W1535** (ready) tests/test_layout.py types its page.evaluate results so its Any reads clear
-   - next: tests/test_layout.py holds 262 of the repo's 578 mypy findings, nearly all Expression has type Any from
-     page.evaluate(...). Step 1: count the evaluate sites by result kind (int for .length, bool, list of str, dict) with
-     a read-only scratch probe; step 2: add typed helpers to tests/webpage.py (evaluate_int, evaluate_bool,
-     evaluate_strs, ...) taking the page and the JS and returning the narrowed type via an object-annotated result; step
-     3: a codemod moves one kind per stack. Atomize by kind (one stack per helper) because the file is 1700 lines. Pairs
-     with ruff-flat; MYPY stack, shares mypy-baseline.json.
+   - next: Slice 4: read the JS and the uses of fans, seen, pairs and prefixes, then add typed row readers (webpage.rows
+     or evaluate_tree readers) and rewrite those four sites; G0 states the fall measured on a scratch copy.
 115. **W1549** (ready) A guard test fails a tests/ module that imports a tools/ module with no BUILD.bazel data entry
    for it
    - next: Extend tests/test_test_inputs.py (or a sibling) with a check that reads every tests/test_*.py for imports of
@@ -4989,6 +4988,10 @@ counter 1550 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:e66
 1521. **W1546** (done) test_guarantees reads bands.toml through importlib.resources instead of a module global so its
    Any reads clear
 1522. **W1547** (done) Three more test files run their command through procrun.capture so S404 and S603 clear
+1523. **W1548** (done) Three more test files run their command through procrun.capture so S404 and S603 clear
+   (architecture, check and metrics realizability)
+1524. **W1550** (done) test_layout reads its metric dicts (m = page.evaluate) through evaluate_dict and typed num and
+   items readers so their Any reads clear
 
 ## residue
 
@@ -7454,3 +7457,15 @@ counter 1550 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:e66
   refusal stamp is not read, so I cannot show the gap between the refusal and 916's begin. I did not re-run any figure.
   One finding. No fixpoint is declared. Carried open findings as in R184, minus R184's two (finding 1 withdrawn, finding
   2 in progress).; 1 finding(s)
+- **nemik:R184** (-) round 186: stack 916 (W1547) afa8256f landed 12:39:27Z; stack 915 (W1546, W1532) 27d38883 landed
+  12:59:48Z; stack 917 (W1548, ruff 209 to 202) inflight since 12:59:54Z; stack 918 (W1550 test_layout metric dicts,
+  mypy 503 to 472) queued: root Verified from the reflog (unix stamps): 15a61ec2 1793708081 = 12:14:41Z, afa8256f
+  1793709567 = 12:39:27Z, 27d38883 1793710788 = 12:59:48Z. 916 gated 12:26:42Z to 12:39:27Z (12 min 45 s) and 915
+  12:39:32Z to 12:59:48Z (20 min 16 s), each begun within 5 s of the landing before it, so after the 915 refusal of R185
+  the gate has been full without a gap; 917 began 12:59:54Z (began_ns 1793710794). R185 is met: the guard is carded as
+  W1549, and 915's unread begin and refusal stamps are said not to have been captured, not claimed, which is the honest
+  handling; the refused-stack gap I could not show in R185 stays unproven and I do not raise it again. The G0 for W1550
+  faced the supply question squarely (mypy fell only 13 over 10 landings, 387 landings to zero at that rate; test_layout
+  alone holds 203 of the 503), which is the right reading of the pace. I did not re-run any figure. Two findings, both
+  about using that reading. No fixpoint is declared. Carried open findings as in R185, minus R185's (guard carded as
+  W1549, stamps admitted).; 2 finding(s)
