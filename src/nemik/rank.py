@@ -1287,7 +1287,7 @@ def policy_blocks(
     touches = {n: {str(t) for t in g.objects(n, NEMIK.touches)} for n in nodes}
     vector = {n: str(g.value(n, NEMIK.vector) or "") or None for n in nodes}
     sym = {n: str(g.value(n, NEMIK.symbol)) for n in nodes}
-    out = []
+    out: list[tuple[str, str, str, list[str]]] = []
     for p in guar.policies:
         members = {n for n in nodes if p.member(vector[n], touches[n])}
         for dep in nodes:
@@ -1297,9 +1297,12 @@ def policy_blocks(
                 or not p.blocks(touches[dep])
             ):
                 continue
-            for b in members:
-                if shared := sorted((touches[dep] & touches[b]) - {p.tag}):
-                    out.append((sym[dep], sym[b], p.name, shared))
+            out.extend(
+                (sym[dep], sym[b], p.name, shared)
+                for b in members
+                for shared in [sorted((touches[dep] & touches[b]) - {p.tag})]
+                if shared
+            )
     return sorted(
         out, key=lambda t: (int(t[0].lstrip("W")), int(t[1].lstrip("W")), t[2])
     )
