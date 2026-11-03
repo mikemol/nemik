@@ -40,6 +40,7 @@ __all__ = [
     "FLEET",
     "PageBrokenError",
     "Waitable",
+    "evaluate_int",
     "evaluate_value",
     "evaluated",
     "first_error",
@@ -436,6 +437,23 @@ def evaluate_value(page: Evaluator, expression: str, arg: object = None) -> obje
 
     """
     return page.evaluate(expression, arg)
+
+
+def evaluate_int(page: Evaluator, expression: str, arg: object = None) -> int:
+    """Run a JS expression that gives a count and return it as an int.
+
+    Returns:
+        The expression's value, which must be a whole number (a boolean is not one).
+
+    Raises:
+        TypeError: When the expression gave anything but a whole number.
+
+    """
+    value = evaluate_value(page, expression, arg)
+    if isinstance(value, bool) or not isinstance(value, int):
+        message = f"{expression[:60]!r} gave no whole number, only {value!r}"
+        raise TypeError(message)
+    return value
 
 
 def evaluate_text(page: Evaluator, expression: str, arg: object = None) -> str:

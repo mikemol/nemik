@@ -200,47 +200,52 @@ def test_repo_toggles_and_salience_order(server: str, tmp_path: Path) -> None:
             page,
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
         )
-        everything = page.evaluate("() => cy.nodes('[symbol]').length")
+        everything = webpage.evaluate_int(page, "() => cy.nodes('[symbol]').length")
         repos = page.evaluate(
             "() => [...document.querySelectorAll('#repos button')].map(b => b.dataset.repo)"
         )
         page.click(f"#repos button[data-repo='{repos[0]}']")
         _settle(page)
-        one = page.evaluate("() => cy.nodes('[symbol]').length")
+        one = webpage.evaluate_int(page, "() => cy.nodes('[symbol]').length")
         lit = page.evaluate(
             "() => [...document.querySelectorAll('#repos button')]"
             ".filter(b => b.getAttribute('aria-pressed') === 'true').length"
         )
         page.click(f"#repos button[data-repo='{repos[0]}']")  # unlit again: everything
         _settle(page)
-        again = page.evaluate("() => cy.nodes('[symbol]').length")
+        again = webpage.evaluate_int(page, "() => cy.nodes('[symbol]').length")
         page.check("#bySalience")
         _settle(page)
-        labelled = page.evaluate(
-            "() => cy.nodes('[symbol]').filter(n => n.data('label').includes(' · ')).length"
+        labelled = webpage.evaluate_int(
+            page,
+            "() => cy.nodes('[symbol]').filter(n => n.data('label').includes(' · ')).length",
         )
-        widened = page.evaluate("() => cy.edges('[current > 0]').length")
+        widened = webpage.evaluate_int(page, "() => cy.edges('[current > 0]').length")
         # nemik:W322: the cards on the longest open chain carry the halo class data
-        assert page.evaluate("() => cy.nodes('[?on_path]').length") > 0
+        assert webpage.evaluate_int(page, "() => cy.nodes('[?on_path]').length") > 0
         # nemik:W335: one ring per scope, a legend naming each, and a selected card's cone gets its
         # own ring
-        assert page.evaluate("() => cy.nodes('[nrings > 0]').length") > 0
+        assert webpage.evaluate_int(page, "() => cy.nodes('[nrings > 0]').length") > 0
         assert (
-            page.evaluate(
-                "() => cy.nodes().filter(n => (n.data('rings') || []).includes('view')).length"
+            webpage.evaluate_int(
+                page,
+                "() => cy.nodes().filter(n => (n.data('rings') || []).includes('view')).length",
             )
             > 0
         )
         assert (
-            page.evaluate("() => document.querySelectorAll('#pathkey span').length")
+            webpage.evaluate_int(
+                page, "() => document.querySelectorAll('#pathkey span').length"
+            )
             == PATHKEY_SPANS
         )
         ringed = page.evaluate("() => cy.nodes('[nrings > 0]')[0].id()")
         page.evaluate(f"() => cy.getElementById('{ringed}').emit('tap')")
         _settle(page)
         assert (
-            page.evaluate(
-                "() => cy.nodes().filter(n => (n.data('rings') || []).includes('sel')).length"
+            webpage.evaluate_int(
+                page,
+                "() => cy.nodes().filter(n => (n.data('rings') || []).includes('sel')).length",
             )
             > 0
         )
@@ -321,10 +326,10 @@ def test_rolling_up_umbrellas_hides_their_work_and_a_double_click_expands_one(
         )
         page.click("#repos button[data-repo='nemik']")
         _settle(page)
-        full = page.evaluate("() => cy.nodes('[symbol]').length")
+        full = webpage.evaluate_int(page, "() => cy.nodes('[symbol]').length")
         page.check("#rollup")
         _settle(page)
-        rolled = page.evaluate("() => cy.nodes('[symbol]').length")
+        rolled = webpage.evaluate_int(page, "() => cy.nodes('[symbol]').length")
         umbrella = page.evaluate(
             "() => { const u = cy.nodes('[rollup > 0]')[0];"
             " return u ? [u.id(), u.data('rollup')] : null; }"
@@ -332,7 +337,7 @@ def test_rolling_up_umbrellas_hides_their_work_and_a_double_click_expands_one(
         assert umbrella is not None
         page.evaluate(f"() => cy.getElementById('{umbrella[0]}').emit('dbltap')")
         _settle(page)
-        opened = page.evaluate("() => cy.nodes('[symbol]').length")
+        opened = webpage.evaluate_int(page, "() => cy.nodes('[symbol]').length")
         browser.close()
     assert rolled < full
     # the umbrella's own work is back (other umbrellas may stay rolled up)
@@ -532,8 +537,9 @@ def test_the_default_view_is_legible(server: str, scheme: Scheme) -> None:
         m = page.evaluate(LEGIBILITY)
         note = page.inner_text("#legnote")
         # nemik:W433: the live region holds text only; a control inside it is re-announced with it
-        controls_in_status = page.evaluate(
-            "() => document.querySelectorAll('#legnote button, #legnote a').length"
+        controls_in_status = webpage.evaluate_int(
+            page,
+            "() => document.querySelectorAll('#legnote button, #legnote a').length",
         )
         # nemik:W317: every repo chip carries its health, and a non-green one a glyph, not colour
         # alone
@@ -767,7 +773,7 @@ def test_a_static_build_refetches_only_the_pieces_whose_hash_moved(
             webpage.watch(page)
             page.goto(url)
             webpage.until(page, "() => typeof data !== 'undefined' && data")
-            drawn = page.evaluate("() => data.nodes.length")
+            drawn = webpage.evaluate_int(page, "() => data.nodes.length")
             first = page.evaluate("() => [...window.__pieceFetches]")
             one = fleet["repos"][0]
             hashes = json.loads((out / "hashes.json").read_text())
@@ -834,8 +840,9 @@ def test_the_card_list_selects_and_expands_from_the_keyboard(server: str) -> Non
         page.check("#rollup")
         _settle(page)
         page.evaluate("() => { document.getElementById('sec-cards').open = true; }")
-        listed = page.evaluate(
-            "() => document.querySelectorAll('#cardlist button[data-card]').length"
+        listed = webpage.evaluate_int(
+            page,
+            "() => document.querySelectorAll('#cardlist button[data-card]').length",
         )
         drawn = page.evaluate(
             "() => cy.nodes('[symbol]')"
@@ -851,11 +858,11 @@ def test_the_card_list_selects_and_expands_from_the_keyboard(server: str) -> Non
         focused = page.evaluate("() => document.activeElement.dataset.card")
         detail = page.inner_text("#detail")
         toggle = page.locator("#cardlist button[data-toggle]").first
-        before = page.evaluate("() => cy.nodes('[symbol]').length")
+        before = webpage.evaluate_int(page, "() => cy.nodes('[symbol]').length")
         toggle.focus()
         page.keyboard.press("Enter")
         _settle(page)
-        after = page.evaluate("() => cy.nodes('[symbol]').length")
+        after = webpage.evaluate_int(page, "() => cy.nodes('[symbol]').length")
         expanded = page.evaluate(
             "() => document.activeElement.getAttribute('aria-expanded')"
         )
@@ -969,7 +976,7 @@ def test_a_focused_list_row_rings_its_card_and_opens_the_popover(server: str) ->
         closed = page.evaluate("() => document.getElementById('pop').hidden")
         page.locator("#bySalience").focus()
         _settle(page)
-        cleared = page.evaluate("() => cy.nodes('.listfocus').length")
+        cleared = webpage.evaluate_int(page, "() => cy.nodes('.listfocus').length")
         browser.close()
     assert ringed == [card]
     assert shown and card.rsplit("/", 1)[-1] in text
@@ -1169,8 +1176,9 @@ def test_every_card_demand_crosses_carries_a_number(server: str) -> None:
             " && carries.has(n.id()) && !/ · /.test(n.data('label')))"
             ".map(n => n.data('label')); }"
         )
-        carried = page.evaluate(
-            "() => cy.nodes('[symbol]').filter(n => / · \\(/.test(n.data('label'))).length"
+        carried = webpage.evaluate_int(
+            page,
+            "() => cy.nodes('[symbol]').filter(n => / · \\(/.test(n.data('label'))).length",
         )
         browser.close()
     assert carried > 0, "the fixture fleet has no waiting card with demand to label"
@@ -1427,9 +1435,12 @@ def test_picked_repos_show_their_blockers_blockers_as_context(server: str) -> No
         for hops in ("1", "2", "3"):
             page.select_option("#depth", hops)
             _settle(page)
-            counts.append(page.evaluate("() => cy.nodes('[?ghost]').length"))
-        stray = page.evaluate(
-            "() => cy.nodes('[?ghost]').filter(n => n.data('repo') === 'nemik').length"
+            counts.append(
+                webpage.evaluate_int(page, "() => cy.nodes('[?ghost]').length")
+            )
+        stray = webpage.evaluate_int(
+            page,
+            "() => cy.nodes('[?ghost]').filter(n => n.data('repo') === 'nemik').length",
         )
         browser.close()
     assert counts[0] <= counts[1] <= counts[2], counts
@@ -1455,7 +1466,7 @@ def test_rank_forest_view(server: str, tmp_path: Path) -> None:
             page,
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
         )
-        ranked = page.evaluate("() => cy.nodes('[rank_pos]').length")
+        ranked = webpage.evaluate_int(page, "() => cy.nodes('[rank_pos]').length")
         _settle(page)
         m = page.evaluate(METRICS)
         overlaps = page.evaluate(NODE_OVERLAPS)
