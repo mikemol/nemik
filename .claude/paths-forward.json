@@ -36681,14 +36681,18 @@
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Run working_unnamed.py at every landing and before every submit; promote it to a writer or commit mode (a card for mtools) once it has run clean for a few ticks.",
-      "evidence": "2026-11-03T11:03:37Z: R183 finding 1 applied: the listing exists, in the nemik scratch directory as working_unnamed.py (reads the working cards through the writer's --working-stale 0 and the live stacks through mikemol-commit --in-gate --json; prints each working card no stack names; exit 1 when any). First run 2026-11-03: working W1538, W1542; named W1538, W1542; none unnamed. Standing 17 now says to run it at every landing and before every submit and put its output in the G1. It is a scratch script, not yet a writer mode; promoting it to a mode of the writer (mtools') remains the work this card keeps. | 2026-11-03T11:38:50Z: R184 finding 2: the probe is in the nemik scratch directory under the cache tree (not the reaped /var/tmp tree the finding names; /var/tmp is where this session's task output lives), but it is still outside the repo and standing 17 depends on it. Plan: commit it as tools/working_unnamed.py with a fixture test that feeds it a stub writer and a stub commit tool (a working card named, one unnamed, none), as an entry of the next ruff or mypy stack; name the repo path in standing 17 when it lands. Not done yet: I still need to write the file, its test and the standing edit, W1532.",
+      "next_bounded_step": "Write tools/working_unnamed.py (the scratch probe as pure functions plus main) and tests/test_working_unnamed.py (fixtures: one named, one unnamed, none); both mypy- and ruff-clean; ride as an entry of the next mypy stack after 914 lands, with a lowering sibling entry; then name the repo path in standing 17.",
+      "evidence": "2026-11-03T11:03:37Z: R183 finding 1 applied: the listing exists, in the nemik scratch directory as working_unnamed.py (reads the working cards through the writer's --working-stale 0 and the live stacks through mikemol-commit --in-gate --json; prints each working card no stack names; exit 1 when any). First run 2026-11-03: working W1538, W1542; named W1538, W1542; none unnamed. Standing 17 now says to run it at every landing and before every submit and put its output in the G1. It is a scratch script, not yet a writer mode; promoting it to a mode of the writer (mtools') remains the work this card keeps. | 2026-11-03T11:38:50Z: R184 finding 2: the probe is in the nemik scratch directory under the cache tree (not the reaped /var/tmp tree the finding names; /var/tmp is where this session's task output lives), but it is still outside the repo and standing 17 depends on it. Plan: commit it as tools/working_unnamed.py with a fixture test that feeds it a stub writer and a stub commit tool (a working card named, one unnamed, none), as an entry of the next ruff or mypy stack; name the repo path in standing 17 when it lands. Not done yet: I still need to write the file, its test and the standing edit, W1532. | 2026-11-03T12:01:01Z: 2026-11-03T12:01:00Z (read by stampnote): G0 precommit, before the edit (manifest first). Pace read 2026-11-03T11:55:21Z, a few minutes old at this G0 (producer every 10 minutes): ruff 224 left owes 90 (55 landings to zero), mypy 509 left owes 190 (73 to zero), codon owes 2. N: the probe that runs standing 17's clause lives outside the repo, in the nemik scratch directory under the cache tree; R184 finding 2 asks it be committed. Actuator: two new files, tools/working_unnamed.py (working_cards, named_cards, unnamed as pure functions over the two commands' text, and main running the writer's --working-stale 0 and mikemol-commit --in-gate --json through procrun.capture) and tests/test_working_unnamed.py (a card named, a card unnamed, none working, a torn stack JSON). K: no existing finding to clear; the files are written clean (house mypy and ruff run on both before the stack), so their expected fall is 0. The change lowers no ratchet itself, so it rides as an entry of the next mypy stack after 914 lands, with a lowering sibling named in that stack's body. Sensor: mikemol-pycheck --ratchet flat for these files, the new test passing, the tool run against the live queue printing what the scratch probe printed. K: tests/tools outside the Codon census.",
       "issued_at": "2026-11-03T07:09:35Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W1530",
-      "last_worked": "2026-11-03T11:38:50Z",
+      "last_worked": "2026-11-03T12:01:01Z",
       "ticks_blocked": 0,
-      "size_class": "small"
+      "size_class": "small",
+      "manifest": [
+        "tools/working_unnamed.py",
+        "tests/test_working_unnamed.py"
+      ]
     },
     {
       "symbol": "W1533",
@@ -36875,24 +36879,24 @@
     {
       "symbol": "W1541",
       "title": "test_history runs its git calls through one checked helper over procrun.capture so S404, S603 and S607 clear",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Codemod w1541_history.py: add _git(repo, *args, env=None) over capture that asserts returncode 0 (the four check=True calls must still fail loudly), and use it at the four sites; run test_history directly; ratchet. RUFF stack, shares ruff-baseline.json with stack 909, so it submits after 909 lands.",
-      "evidence": "2026-11-03T10:41:01Z: 2026-11-03T10:41:00Z (read by stampnote): G0 precommit, before the edit (card and manifest first). Pace read first this session tick: 2026-11-03T10:25:18Z (ruff 245 left owes 90, 85 landings to zero; mypy 542 left owes 190, 99 to zero); I did not re-read it since, and this card is prepared during the gate, so its stamp is 15 minutes old at the G0 (named, R176). N: tests/test_history.py holds subprocess S404 (import) plus four git calls with S603 and S607 each: lines 243 (check=True, env=), 244 (check=True, capture_output, text; rev-parse), 256 and 309 (git init, check=True). K = 4 sites, 9 findings (S404 x1, S603 x4, S607 x4). The calls use check=True, which capture does not (it never raises), so a checked helper _git(repo, *args, env=None) -> str wraps capture and asserts returncode == 0 with stderr as the message (a test must still fail loudly on a git failure). Actuator: codemod w1541_history.py. Companion findings: I001 for the import, F401 none (subprocess has no other use). Sensor: mikemol-pycheck --ratchet and test_history run directly. Expected reading: ruff 233 falls by exactly 9 to 224 in the tree, mypy flat at 516. K: tests are outside the Codon census. RUFF stack, waits for 909's landing (shared ruff-baseline.json). | 2026-11-03T10:42:19Z: Staged, not submitted: stack910.json (test_history via a checked _git helper over procrun.capture, ruff 233 to 224 exactly as expected, 19 tests passed 1.89 s wall). Submit after stack 909 lands (shared ruff-baseline.json); write the baseline with pycheck --ratchet --write then. R182 (0 findings) added to the queue. | 2026-11-03T11:06:24Z: Baseline trap, written before it bites (same as W1535's): stack 910 submits after 909 lands, and pycheck --write in a tree holding 910's edits reads 224; the gate measures 910's tip at 233 only if 910's edits are the stack's own. When 909 lands the tree baseline must read 233 until 910 is submitted: after --write, the tests/test_history.py entry is absent; 910's own write (224) is then correct at its submit. For 909, I added the test_history entry (S404 1, S603 4, S607 4) back so the file reads 233.",
+      "next_bounded_step": null,
+      "evidence": "2026-11-03T10:41:01Z: 2026-11-03T10:41:00Z (read by stampnote): G0 precommit, before the edit (card and manifest first). Pace read first this session tick: 2026-11-03T10:25:18Z (ruff 245 left owes 90, 85 landings to zero; mypy 542 left owes 190, 99 to zero); I did not re-read it since, and this card is prepared during the gate, so its stamp is 15 minutes old at the G0 (named, R176). N: tests/test_history.py holds subprocess S404 (import) plus four git calls with S603 and S607 each: lines 243 (check=True, env=), 244 (check=True, capture_output, text; rev-parse), 256 and 309 (git init, check=True). K = 4 sites, 9 findings (S404 x1, S603 x4, S607 x4). The calls use check=True, which capture does not (it never raises), so a checked helper _git(repo, *args, env=None) -> str wraps capture and asserts returncode == 0 with stderr as the message (a test must still fail loudly on a git failure). Actuator: codemod w1541_history.py. Companion findings: I001 for the import, F401 none (subprocess has no other use). Sensor: mikemol-pycheck --ratchet and test_history run directly. Expected reading: ruff 233 falls by exactly 9 to 224 in the tree, mypy flat at 516. K: tests are outside the Codon census. RUFF stack, waits for 909's landing (shared ruff-baseline.json). | 2026-11-03T10:42:19Z: Staged, not submitted: stack910.json (test_history via a checked _git helper over procrun.capture, ruff 233 to 224 exactly as expected, 19 tests passed 1.89 s wall). Submit after stack 909 lands (shared ruff-baseline.json); write the baseline with pycheck --ratchet --write then. R182 (0 findings) added to the queue. | 2026-11-03T11:06:24Z: Baseline trap, written before it bites (same as W1535's): stack 910 submits after 909 lands, and pycheck --write in a tree holding 910's edits reads 224; the gate measures 910's tip at 233 only if 910's edits are the stack's own. When 909 lands the tree baseline must read 233 until 910 is submitted: after --write, the tests/test_history.py entry is absent; 910's own write (224) is then correct at its submit. For 909, I added the test_history entry (S404 1, S603 4, S607 4) back so the file reads 233. | 2026-11-03T11:52:10Z: Landed 56cd99ba at 11:51:24Z (reflog, UTC): test_history through a checked _git helper over procrun.capture, ruff 233 to 224. working_unnamed.py flagged W1541 at the landing; cleared.",
       "issued_at": "2026-11-03T10:40:47Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W1175",
-      "last_worked": "2026-11-03T11:28:33Z",
+      "last_worked": "2026-11-03T11:52:10Z",
       "ticks_blocked": 0,
       "manifest": [
         "tests/test_history.py",
         "ruff-baseline.json"
       ],
       "size_class": "small",
-      "completed": null
+      "completed": "20261103T115210Z"
     },
     {
       "symbol": "W1542",
@@ -36941,7 +36945,7 @@
     {
       "symbol": "W1544",
       "title": "Three more test files run their checked git and writer calls through procrun.capture so S404, S603 and S607 clear",
-      "status": "ready",
+      "status": "working",
       "enables": [],
       "touches": [],
       "blocked_on": [],
@@ -36951,7 +36955,7 @@
       "issued_at": "2026-11-03T11:30:39Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W1175",
-      "last_worked": "2026-11-03T11:38:48Z",
+      "last_worked": "2026-11-03T11:52:12Z",
       "ticks_blocked": 0,
       "manifest": [
         "tests/test_check_committed.py",
@@ -36959,7 +36963,8 @@
         "tests/test_pins.py",
         "ruff-baseline.json"
       ],
-      "size_class": "small"
+      "size_class": "small",
+      "completed": null
     },
     {
       "symbol": "W1545",

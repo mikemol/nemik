@@ -5,10 +5,10 @@
 from __future__ import annotations
 
 import json
-import subprocess
 from typing import TYPE_CHECKING
 
 import pytest
+from mikemol.procrun.proc import capture
 
 from nemik.check import main
 
@@ -39,7 +39,8 @@ def _repo(root: Path, name: str, *, dirty: bool) -> None:
         "PATH": "/usr/bin:/bin",
     }
     for args in (["init", "-q"], ["add", "-A"], ["commit", "-q", "-m", "q"]):
-        subprocess.run(["git", "-C", str(repo), *args], check=True, env=env)
+        done = capture(["git", "-C", str(repo), *args], env=env)
+        assert done.returncode == 0, done.stderr
     if dirty:
         changed: dict[str, object] = {**QUEUE, "counter": 2}
         path.write_text(json.dumps(changed))

@@ -4,8 +4,9 @@
 
 from __future__ import annotations
 
-import subprocess
 from typing import TYPE_CHECKING
+
+from mikemol.procrun.proc import capture
 
 from nemik.pins import Pin, behind, main, pins
 
@@ -27,13 +28,8 @@ ENV = {
 
 
 def _git(repo: Path, *args: str) -> str:
-    run = subprocess.run(
-        ["git", "-C", str(repo), *args],
-        check=True,
-        capture_output=True,
-        text=True,
-        env=ENV,
-    )
+    run = capture(["git", "-C", str(repo), *args], env=ENV)
+    assert run.returncode == 0, run.stderr
     return run.stdout.strip()
 
 

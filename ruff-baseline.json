@@ -133,11 +133,6 @@
   "PLC2701": 1,
   "SLF001": 3
  },
- "tests/test_check_committed.py": {
-  "S404": 1,
-  "S603": 1,
-  "S607": 1
- },
  "tests/test_check_realizability.py": {
   "S404": 1,
   "S603": 2
@@ -175,10 +170,6 @@
   "S603": 1,
   "SLF001": 1
  },
- "tests/test_importer.py": {
-  "S404": 1,
-  "S603": 2
- },
  "tests/test_inbound_orphans.py": {
   "PLC2701": 1
  },
@@ -211,11 +202,6 @@
  "tests/test_mspdi.py": {
   "S314": 2,
   "S405": 1
- },
- "tests/test_pins.py": {
-  "S404": 1,
-  "S603": 1,
-  "S607": 1
  },
  "tests/test_precommit_gate.py": {
   "S404": 1,

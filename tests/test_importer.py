@@ -4,12 +4,12 @@
 
 import json
 import shlex
-import subprocess
 import sys
 from pathlib import Path
 from typing import TypedDict
 
 import pytest
+from mikemol.procrun.proc import capture
 
 from nemik.importer import commands
 from nemik.projection import Link, Task
@@ -55,14 +55,13 @@ def _tasks() -> list[Task]:
 
 def _run(cmds: list[list[str]]) -> None:
     for cmd in cmds:
-        subprocess.run(cmd, check=True, capture_output=True, text=True)
+        done = capture(cmd)
+        assert done.returncode == 0, done.stderr
 
 
 def _queue(tmp_path: Path) -> Path:
     state = tmp_path / "q.json"
-    subprocess.run(
-        [WRITER, "--state", str(state), "--init"], check=True, capture_output=True
-    )
+    _run([[WRITER, "--state", str(state), "--init"]])
     _run([[WRITER, "--state", str(state), "--add", "already here"]])  # counter is 1 now
     return state
 
