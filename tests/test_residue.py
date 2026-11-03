@@ -6,12 +6,12 @@ from __future__ import annotations
 
 import os
 import shutil
-import subprocess
 from pathlib import Path
 
 import pytest
 from installed import script
 from mikemol.pathsforward.opa_eval import OpaUnavailableError
+from mikemol.procrun.proc import capture
 
 from nemik.metrics import judged_cards
 from nemik.residue import by_card
@@ -30,9 +30,7 @@ def _fleet(tmp_path: Path) -> Path:
         ["--add", "Bare"],
     ):
         assert (
-            subprocess.run(
-                pf + args, capture_output=True, text=True, check=False
-            ).returncode
+            capture(pf + args).returncode
             == 0
         )
     return tmp_path

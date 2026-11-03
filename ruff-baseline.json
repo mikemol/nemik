@@ -133,10 +133,6 @@
   "PLC2701": 1,
   "SLF001": 3
  },
- "tests/test_certify.py": {
-  "S404": 1,
-  "S603": 1
- },
  "tests/test_check_committed.py": {
   "S404": 1,
   "S603": 1,
@@ -238,14 +234,6 @@
  "tests/test_rank_apply.py": {
   "S404": 1,
   "SLF001": 2
- },
- "tests/test_residue.py": {
-  "S404": 1,
-  "S603": 1
- },
- "tests/test_salience.py": {
-  "S404": 1,
-  "S603": 1
  },
  "tests/test_score.py": {
   "PLR0913": 1,

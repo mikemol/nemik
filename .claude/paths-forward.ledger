@@ -4307,3 +4307,5 @@
 2026-11-03T11:00:43Z  tick  W1542 advanced  sweep     "stack 907 landed 0c31084d (test_layout flags and id lists, mypy 542 to 516); stack 911 (test_editable, mypy 516 to 511) submitted behind 908 (three tests via procrun, ruff) after a refusal for W1535's stale working mark; stacks 909 and 910 (ruff, tests via procrun, 239 to 233 and 233 to 224) staged [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-03T11:00:43Z  prune W1534 edge-pruned writer    "mtools:W2258"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-03T11:01:33Z  status W1534 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-03T11:05:34Z  status W1538 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-03T11:05:35Z  status W1540 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

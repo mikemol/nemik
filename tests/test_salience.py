@@ -4,12 +4,12 @@
 
 from __future__ import annotations
 
-import subprocess
 from fractions import Fraction
 from typing import TYPE_CHECKING
 
 import installed
 import pytest
+from mikemol.procrun.proc import TimeoutExpired, capture
 from rdflib import Graph
 
 from nemik.check import survey
@@ -24,10 +24,8 @@ def _pf(state: Path, *args: str) -> None:
     cmd = [*installed.script("mikemol-paths-forward"), "--state", str(state), *args]
     # W1244: a gate run once stalled here for 300 s with no output; bound the call and name it
     try:
-        done = subprocess.run(
-            cmd, capture_output=True, text=True, check=False, timeout=120
-        )
-    except subprocess.TimeoutExpired as e:
+        done = capture(cmd, timeout=120)
+    except TimeoutExpired as e:
         stalled = f"the writer stalled 120 s on {args}: {e.stderr!r}"
         raise AssertionError(stalled) from e
     assert done.returncode == 0, done.stderr

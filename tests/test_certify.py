@@ -12,21 +12,21 @@ from __future__ import annotations
 import json
 import os
 import shutil
-import subprocess
 from pathlib import Path
 from typing import TypedDict
 
 import pytest
 from installed import script
+from mikemol.procrun.proc import Completed, capture
 
 OPA = os.environ.get("NEMIK_OPA", "opa")
 pytestmark = pytest.mark.skipif(shutil.which(OPA) is None, reason="opa not installed")
 
 
-def _pf(state: Path, *args: str) -> subprocess.CompletedProcess[str]:
+def _pf(state: Path, *args: str) -> Completed:
     env = {**os.environ, "OPA_BIN": str(Path(shutil.which(OPA) or OPA).resolve())}
     cmd = [*script("mikemol-paths-forward"), "--state", str(state), *args]
-    return subprocess.run(cmd, env=env, capture_output=True, text=True, check=False)
+    return capture(cmd, env=env)
 
 
 class Verdict(TypedDict):
@@ -38,7 +38,7 @@ class Verdict(TypedDict):
     residue: list[dict[str, str]]
 
 
-def _verdicts(done: subprocess.CompletedProcess[str]) -> list[Verdict]:
+def _verdicts(done: Completed) -> list[Verdict]:
     """Read the verdict lines of a `--certify` run, from stdout and stderr.
 
     Returns:

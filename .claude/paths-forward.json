@@ -36809,17 +36809,17 @@
     {
       "symbol": "W1538",
       "title": "Three test files run their probe command through procrun.capture so S404 and S603 clear",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Codemod w1538_tests.py: swap import subprocess for the procrun capture import (isort position: froms after plain imports, sorted by module) and subprocess.run(cmd, capture_output=True, text=True, check=False) for capture(cmd) in the three files; run them directly; ratchet. RUFF stack, shares ruff-baseline.json with stack 906, so it submits after 906 lands.",
-      "evidence": "2026-11-03T10:01:23Z: 2026-11-03T10:01:23Z (read by stampnote): G0 precommit, before the edit (card and manifest minted first, R179). Pace read first this tick: 2026-11-03T09:55:16Z (ruff 261 left owes 90, 174 landings to zero; mypy 578 left owes 190, 149 to zero; codon owes 2). N: three test files each hold one subprocess.run probe (S404 on the import, S603 on the call): test_rank_flow.py line 72, test_gate_weights.py line 25, test_realize.py line 29; all three are subprocess.run(cmd, capture_output=True, text=True, check=False).returncode == 0, K = 3 sites verified by reading them, 6 findings (S404 x3, S603 x3). Actuator: codemod w1538_tests.py swaps the import for the procrun capture import and each call for capture(cmd). Companion findings: I001 if the import lands in the wrong isort position, F401 if subprocess is used elsewhere in a file (grep showed one use each). Sensor: mikemol-pycheck --ratchet and the three files run directly. Expected reading: ruff 245 falls by exactly 6 to 239 in the tree (tight to K, R180), mypy flat at 516. K: tests are outside the Codon census. RUFF stack, waits for 906's landing (shared ruff-baseline.json). | 2026-11-03T10:04:52Z: Staged, not submitted: stack908.json (three test files via procrun.capture, ruff 245 to 239 exactly as expected, 19 tests passed 116.29 s wall). Submit after stack 906 lands (shared ruff-baseline.json); write the baseline with pycheck --ratchet --write then.",
+      "next_bounded_step": null,
+      "evidence": "2026-11-03T10:01:23Z: 2026-11-03T10:01:23Z (read by stampnote): G0 precommit, before the edit (card and manifest minted first, R179). Pace read first this tick: 2026-11-03T09:55:16Z (ruff 261 left owes 90, 174 landings to zero; mypy 578 left owes 190, 149 to zero; codon owes 2). N: three test files each hold one subprocess.run probe (S404 on the import, S603 on the call): test_rank_flow.py line 72, test_gate_weights.py line 25, test_realize.py line 29; all three are subprocess.run(cmd, capture_output=True, text=True, check=False).returncode == 0, K = 3 sites verified by reading them, 6 findings (S404 x3, S603 x3). Actuator: codemod w1538_tests.py swaps the import for the procrun capture import and each call for capture(cmd). Companion findings: I001 if the import lands in the wrong isort position, F401 if subprocess is used elsewhere in a file (grep showed one use each). Sensor: mikemol-pycheck --ratchet and the three files run directly. Expected reading: ruff 245 falls by exactly 6 to 239 in the tree (tight to K, R180), mypy flat at 516. K: tests are outside the Codon census. RUFF stack, waits for 906's landing (shared ruff-baseline.json). | 2026-11-03T10:04:52Z: Staged, not submitted: stack908.json (three test files via procrun.capture, ruff 245 to 239 exactly as expected, 19 tests passed 116.29 s wall). Submit after stack 906 lands (shared ruff-baseline.json); write the baseline with pycheck --ratchet --write then. | 2026-11-03T11:05:34Z: Landed 247cc635 at 11:04:41Z (reflog, UTC): test_rank_flow, test_gate_weights, test_realize through procrun.capture, ruff 245 to 239. working_unnamed.py at the landing flagged W1538 as the one working card no stack named; cleared here.",
       "issued_at": "2026-11-03T10:00:43Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W1175",
-      "last_worked": "2026-11-03T10:24:44Z",
+      "last_worked": "2026-11-03T11:05:34Z",
       "ticks_blocked": 0,
       "manifest": [
         "tests/test_rank_flow.py",
@@ -36828,7 +36828,7 @@
         "ruff-baseline.json"
       ],
       "size_class": "small",
-      "completed": null
+      "completed": "20261103T110534Z"
     },
     {
       "symbol": "W1539",
@@ -36851,7 +36851,7 @@
     {
       "symbol": "W1540",
       "title": "Three more test files run the writer through procrun.capture so S404 and S603 clear",
-      "status": "ready",
+      "status": "working",
       "enables": [],
       "touches": [],
       "blocked_on": [],
@@ -36861,7 +36861,7 @@
       "issued_at": "2026-11-03T10:31:16Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W1175",
-      "last_worked": "2026-11-03T10:33:26Z",
+      "last_worked": "2026-11-03T11:05:35Z",
       "ticks_blocked": 0,
       "manifest": [
         "tests/test_certify.py",
@@ -36869,7 +36869,8 @@
         "tests/test_salience.py",
         "ruff-baseline.json"
       ],
-      "size_class": "small"
+      "size_class": "small",
+      "completed": null
     },
     {
       "symbol": "W1541",
@@ -36880,11 +36881,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "Codemod w1541_history.py: add _git(repo, *args, env=None) over capture that asserts returncode 0 (the four check=True calls must still fail loudly), and use it at the four sites; run test_history directly; ratchet. RUFF stack, shares ruff-baseline.json with stack 909, so it submits after 909 lands.",
-      "evidence": "2026-11-03T10:41:01Z: 2026-11-03T10:41:00Z (read by stampnote): G0 precommit, before the edit (card and manifest first). Pace read first this session tick: 2026-11-03T10:25:18Z (ruff 245 left owes 90, 85 landings to zero; mypy 542 left owes 190, 99 to zero); I did not re-read it since, and this card is prepared during the gate, so its stamp is 15 minutes old at the G0 (named, R176). N: tests/test_history.py holds subprocess S404 (import) plus four git calls with S603 and S607 each: lines 243 (check=True, env=), 244 (check=True, capture_output, text; rev-parse), 256 and 309 (git init, check=True). K = 4 sites, 9 findings (S404 x1, S603 x4, S607 x4). The calls use check=True, which capture does not (it never raises), so a checked helper _git(repo, *args, env=None) -> str wraps capture and asserts returncode == 0 with stderr as the message (a test must still fail loudly on a git failure). Actuator: codemod w1541_history.py. Companion findings: I001 for the import, F401 none (subprocess has no other use). Sensor: mikemol-pycheck --ratchet and test_history run directly. Expected reading: ruff 233 falls by exactly 9 to 224 in the tree, mypy flat at 516. K: tests are outside the Codon census. RUFF stack, waits for 909's landing (shared ruff-baseline.json). | 2026-11-03T10:42:19Z: Staged, not submitted: stack910.json (test_history via a checked _git helper over procrun.capture, ruff 233 to 224 exactly as expected, 19 tests passed 1.89 s wall). Submit after stack 909 lands (shared ruff-baseline.json); write the baseline with pycheck --ratchet --write then. R182 (0 findings) added to the queue.",
+      "evidence": "2026-11-03T10:41:01Z: 2026-11-03T10:41:00Z (read by stampnote): G0 precommit, before the edit (card and manifest first). Pace read first this session tick: 2026-11-03T10:25:18Z (ruff 245 left owes 90, 85 landings to zero; mypy 542 left owes 190, 99 to zero); I did not re-read it since, and this card is prepared during the gate, so its stamp is 15 minutes old at the G0 (named, R176). N: tests/test_history.py holds subprocess S404 (import) plus four git calls with S603 and S607 each: lines 243 (check=True, env=), 244 (check=True, capture_output, text; rev-parse), 256 and 309 (git init, check=True). K = 4 sites, 9 findings (S404 x1, S603 x4, S607 x4). The calls use check=True, which capture does not (it never raises), so a checked helper _git(repo, *args, env=None) -> str wraps capture and asserts returncode == 0 with stderr as the message (a test must still fail loudly on a git failure). Actuator: codemod w1541_history.py. Companion findings: I001 for the import, F401 none (subprocess has no other use). Sensor: mikemol-pycheck --ratchet and test_history run directly. Expected reading: ruff 233 falls by exactly 9 to 224 in the tree, mypy flat at 516. K: tests are outside the Codon census. RUFF stack, waits for 909's landing (shared ruff-baseline.json). | 2026-11-03T10:42:19Z: Staged, not submitted: stack910.json (test_history via a checked _git helper over procrun.capture, ruff 233 to 224 exactly as expected, 19 tests passed 1.89 s wall). Submit after stack 909 lands (shared ruff-baseline.json); write the baseline with pycheck --ratchet --write then. R182 (0 findings) added to the queue. | 2026-11-03T11:06:24Z: Baseline trap, written before it bites (same as W1535's): stack 910 submits after 909 lands, and pycheck --write in a tree holding 910's edits reads 224; the gate measures 910's tip at 233 only if 910's edits are the stack's own. When 909 lands the tree baseline must read 233 until 910 is submitted: after --write, the tests/test_history.py entry is absent; 910's own write (224) is then correct at its submit. For 909, I added the test_history entry (S404 1, S603 4, S607 4) back so the file reads 233.",
       "issued_at": "2026-11-03T10:40:47Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W1175",
-      "last_worked": "2026-11-03T10:42:19Z",
+      "last_worked": "2026-11-03T11:06:24Z",
       "ticks_blocked": 0,
       "manifest": [
         "tests/test_history.py",
