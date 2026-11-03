@@ -55,9 +55,7 @@
   "PLW0603": 1
  },
  "src/nemik/letters.py": {
-  "PLR0913": 2,
-  "S404": 1,
-  "S603": 1
+  "PLR0913": 2
  },
  "src/nemik/metrics.py": {
   "PLC0415": 4

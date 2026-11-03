@@ -24,11 +24,12 @@ import json
 import re
 import shlex
 import shutil
-import subprocess
 import sys
 from datetime import UTC, date, datetime
 from pathlib import Path
 from typing import NamedTuple
+
+from mikemol.procrun.proc import capture
 
 from nemik.tomlview import table, tables
 
@@ -358,13 +359,7 @@ def apply_fold(
         )
         state = root / owner / ".claude" / "paths-forward.json"
         cmd = [writer, "--state", str(state), "--add", title[:140]]
-        run = subprocess.run(
-            [*cmd, "--caused-by", f"inbox/{path.name}"],
-            capture_output=True,
-            text=True,
-            check=False,
-            env=env,
-        )
+        run = capture([*cmd, "--caused-by", f"inbox/{path.name}"], env=env)
         done.append(f"{owner}: {(run.stdout or run.stderr).strip()}")
     for owner, path in stale:
         (path.parent / "archive").mkdir(exist_ok=True)
