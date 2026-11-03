@@ -34,6 +34,22 @@ def fires_at(trigger: str, dtstart: str = "", due: str = "") -> datetime | None:
     return _fires_at(trigger, dtstart, due, day_zone=host_zone)
 
 
+def _datetime(when: datetime | date) -> datetime:
+    """Return an occurrence as a datetime, the form a zoned or instant DTSTART needs.
+
+    Returns:
+        `when`, unchanged.
+
+    Raises:
+        TypeError: when `when` is a bare date.
+
+    """
+    if not isinstance(when, datetime):
+        msg = f"a zoned or instant DTSTART needs a datetime occurrence, not {when!r}"
+        raise TypeError(msg)
+    return when
+
+
 def recurrence_id(when: datetime | date, dtstart: str) -> str:
     """Give an occurrence's RECURRENCE-ID in DTSTART's own form, the key mtools:W310 uses.
 
@@ -44,12 +60,10 @@ def recurrence_id(when: datetime | date, dtstart: str) -> str:
     """
     if dtstart.startswith("TZID="):
         zone = dtstart.removeprefix("TZID=").partition(":")[0]
-        assert isinstance(when, datetime)
-        return f"TZID={zone}:{when.strftime('%Y%m%dT%H%M%S')}"
+        return f"TZID={zone}:{_datetime(when).strftime('%Y%m%dT%H%M%S')}"
     if re.fullmatch(r"\d{8}", dtstart):
         return when.strftime("%Y%m%d")
-    assert isinstance(when, datetime)
-    return when.astimezone(UTC).strftime("%Y%m%dT%H%M%SZ")
+    return _datetime(when).astimezone(UTC).strftime("%Y%m%dT%H%M%SZ")
 
 
 def fires_between(

@@ -10,8 +10,7 @@
   "RUF001": 1
  },
  "src/nemik/alarm.py": {
-  "PLR0913": 1,
-  "S101": 2
+  "PLR0913": 1
  },
  "src/nemik/cachestore.py": {
   "S301": 1,
