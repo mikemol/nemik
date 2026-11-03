@@ -903,7 +903,7 @@ def _activity(g: Graph) -> tuple[dict[str, Counter[str]], dict[str, str]]:
         ({card: Counter of effort class}, {card: latest startedAtTime}).
 
     """
-    effort: dict[str, Counter] = defaultdict(Counter)
+    effort: dict[str, Counter[str]] = defaultdict(Counter)
     last: dict[str, str] = {}
     for act in g.subjects(RDF.type, PROV.Activity):
         cls = str(g.value(act, NEMIK.effortClass))
@@ -1060,7 +1060,7 @@ def _satisfy(nodes: list[NodeRow], edges: list[EdgeRow]) -> None:
     # that end is the source; for `waits` it is the target. open_blockers counts what still does.
     done = {n["id"] for n in nodes if n["state"] == "done"}
     # Distinct upstream items, since W3 enables W1 and W1 waits on W3 name one blocker.
-    open_blockers: dict[str, set] = defaultdict(set)
+    open_blockers: dict[str, set[str]] = defaultdict(set)
     for e in edges:
         up, down = (
             (e["source"], e["target"])

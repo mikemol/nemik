@@ -3,11 +3,11 @@
 
 state file: `.claude/paths-forward.json`
 
-counter 1560 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:34fda91270092f40`
+counter 1562 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:1fd1ae50881253e7`
 
 | # | symbol | status |
 |---|---|---|
-| 1 | W1560 | working |
+| 1 | W1561 | working |
 | 2 | W1007 | ready |
 | 3 | W1008 | ready |
 | 4 | W1075 | ready |
@@ -120,8 +120,8 @@ counter 1560 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:34f
 | 111 | W1518 | ready |
 | 112 | W1520 | ready |
 | 113 | W1522 | ready |
-| 114 | W1535 | ready |
-| 115 | W1549 | ready |
+| 114 | W1549 | ready |
+| 115 | W1562 | ready |
 | 116 | W986 | blocked |
 | 117 | W1010 | blocked |
 | 118 | W1136 | blocked |
@@ -1516,36 +1516,39 @@ counter 1560 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:34f
 | 1507 | W1531 | done |
 | 1508 | W1532 | done |
 | 1509 | W1533 | done |
-| 1510 | W1536 | done |
-| 1511 | W1537 | done |
-| 1512 | W1538 | done |
-| 1513 | W1539 | done |
-| 1514 | W1540 | done |
-| 1515 | W1541 | done |
-| 1516 | W1542 | done |
-| 1517 | W1543 | done |
-| 1518 | W1544 | done |
-| 1519 | W1545 | done |
-| 1520 | W1546 | done |
-| 1521 | W1547 | done |
-| 1522 | W1548 | done |
-| 1523 | W1550 | done |
-| 1524 | W1551 | done |
-| 1525 | W1552 | done |
-| 1526 | W1553 | done |
-| 1527 | W1554 | done |
-| 1528 | W1555 | done |
-| 1529 | W1556 | done |
-| 1530 | W1557 | done |
-| 1531 | W1558 | done |
-| 1532 | W1559 | done |
+| 1510 | W1535 | done |
+| 1511 | W1536 | done |
+| 1512 | W1537 | done |
+| 1513 | W1538 | done |
+| 1514 | W1539 | done |
+| 1515 | W1540 | done |
+| 1516 | W1541 | done |
+| 1517 | W1542 | done |
+| 1518 | W1543 | done |
+| 1519 | W1544 | done |
+| 1520 | W1545 | done |
+| 1521 | W1546 | done |
+| 1522 | W1547 | done |
+| 1523 | W1548 | done |
+| 1524 | W1550 | done |
+| 1525 | W1551 | done |
+| 1526 | W1552 | done |
+| 1527 | W1553 | done |
+| 1528 | W1554 | done |
+| 1529 | W1555 | done |
+| 1530 | W1556 | done |
+| 1531 | W1557 | done |
+| 1532 | W1558 | done |
+| 1533 | W1559 | done |
+| 1534 | W1560 | done |
 
 ## waypoints
 
-1. **W1560** (working) test_layout slice 8a: lit-chip, ringed card and roll-up umbrella evaluates typed (8 of the 57 Any
-   reads); 49 remain
-   - next: After the PT018 stack lands: the 7 PT018 left (compound asserts with a comment or multi-line message, hand
-     splits) and the page.route lambda at test_layout 292 (2 mypy); then W1520 repin as the second entry
+1. **W1561** (working) PLC0415 name clashes: rename the local or import that a hoist would collide with (check.py rows
+   and provenance, critical.py cards, metrics.py ref, serve.py Counter and load) so the five hoists become SAFE
+   - next: After the stack lands: part b, metrics 755 ref and serve 1255 Counter and 1578 load (hub modules): rename on
+     a probe tree, run test_architecture and test_namespaces there first (standing 15), Codon first-error probe, then
+     one stack
 2. **W1007** (ready) The open-commitment count per repo, from mtools' commitment ledger, is a ratchet on the pace board
    and gauges
    - next: When mtools publishes its commitment ledger, count each repo's open commitments into a series, judge it like
@@ -2029,15 +2032,18 @@ counter 1560 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:34f
      and '`<n.n>` d'), runs old, new, old with PYTHONHASHSEED=0 and prints equal, drift or the first differing lines;
      then the G0 sensor lines name it. It replaces w1480_diff, w1496_diff, w1500_diff, w1508_diff, w1509_diff and
      w1521_diff in the scratch directory, which were each found after a failed first attempt.
-114. **W1535** (ready) tests/test_layout.py types its page.evaluate results so its Any reads clear
-   - next: Slice 8 of test_layout from the remaining 57 findings (by-site list), measured on a scratch copy before its
-     G0; then PT018 in test_layout once the Any values behind its asserts are typed.
-115. **W1549** (ready) A guard test fails a tests/ module that imports a tools/ module with no BUILD.bazel data entry
+114. **W1549** (ready) A guard test fails a tests/ module that imports a tools/ module with no BUILD.bazel data entry
    for it
    - next: Extend tests/test_test_inputs.py (or a sibling) with a check that reads every tests/test_*.py for imports of
      a tools/ module and fails when BUILD.bazel carries no data entry for that tools file under that test's name (the
      check_run_rows, namespaces, peerwindow, working_unnamed pattern); run it directly before each gate. It must fail on
      the pre-fix BUILD.bazel (stack 915's first submit). Rides a lowering stack as an entry.
+115. **W1562** (ready) PLC0415 import cycles: record the 11 cycle sites (check 831, critical 493, history 1296, rank
+   551/882/905/906/1149/1170, witnesses 608) as a residue ledger with the import each one needs and the module that
+   closes the cycle, no waiver, they stay in the baseline
+   - next: Write docs/plc0415-cycles.md from the probe table: per site the import, the module pair that closes the cycle
+     (the ImportError line the probe printed) and the structural fix (a leaf module, a TYPE_CHECKING-only name, or
+     none); the 11 stay in the baseline
 116. **W986** (blocked) A ratchet paydown rate requirement with teeth: a repo is behind when a ratchet's fall over a
    trailing window of landed commits is below a requirement that only rises
    - blocked on: W994, W1002
@@ -4970,44 +4976,47 @@ counter 1560 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:34f
 1507. **W1531** (done) history.py reads queue JSON through a typed helper so five Any reads clear
 1508. **W1532** (done) List working cards that no live stack names, before each submit
 1509. **W1533** (done) history.py reads queue cards through one typed helper so three Any reads clear
-1510. **W1536** (done) nemik-witnesses --apply fails to close a card whose file witness is under the home directory
-1511. **W1537** (done) Split the compound asserts in eight test files so PT018 clears
-1512. **W1538** (done) Three test files run their probe command through procrun.capture so S404 and S603 clear
-1513. **W1539** (done) Residue of W1536: the witnesses timer closing a card unaided, and a non-home witness path, both
+1510. **W1535** (done) tests/test_layout.py types its page.evaluate results so its Any reads clear
+1511. **W1536** (done) nemik-witnesses --apply fails to close a card whose file witness is under the home directory
+1512. **W1537** (done) Split the compound asserts in eight test files so PT018 clears
+1513. **W1538** (done) Three test files run their probe command through procrun.capture so S404 and S603 clear
+1514. **W1539** (done) Residue of W1536: the witnesses timer closing a card unaided, and a non-home witness path, both
    unobserved
-1514. **W1540** (done) Three more test files run the writer through procrun.capture so S404 and S603 clear
-1515. **W1541** (done) test_history runs its git calls through one checked helper over procrun.capture so S404, S603 and
+1515. **W1540** (done) Three more test files run the writer through procrun.capture so S404 and S603 clear
+1516. **W1541** (done) test_history runs its git calls through one checked helper over procrun.capture so S404, S603 and
    S607 clear
-1516. **W1542** (done) test_editable types its distribution stub and payloads so five Any reads clear
-1517. **W1543** (done) test_churn types the empty residue of its queue fixture so two Any reads clear
-1518. **W1544** (done) Three more test files run their checked git and writer calls through procrun.capture so S404,
+1517. **W1542** (done) test_editable types its distribution stub and payloads so five Any reads clear
+1518. **W1543** (done) test_churn types the empty residue of its queue fixture so two Any reads clear
+1519. **W1544** (done) Three more test files run their checked git and writer calls through procrun.capture so S404,
    S603 and S607 clear
-1519. **W1545** (done) test_rank_apply types its fake writer and the rows it reads so three Any reads clear
-1520. **W1546** (done) test_guarantees reads bands.toml through importlib.resources instead of a module global so its
+1520. **W1545** (done) test_rank_apply types its fake writer and the rows it reads so three Any reads clear
+1521. **W1546** (done) test_guarantees reads bands.toml through importlib.resources instead of a module global so its
    Any reads clear
-1521. **W1547** (done) Three more test files run their command through procrun.capture so S404 and S603 clear
-1522. **W1548** (done) Three more test files run their command through procrun.capture so S404 and S603 clear
+1522. **W1547** (done) Three more test files run their command through procrun.capture so S404 and S603 clear
+1523. **W1548** (done) Three more test files run their command through procrun.capture so S404 and S603 clear
    (architecture, check and metrics realizability)
-1523. **W1550** (done) test_layout reads its metric dicts (m = page.evaluate) through evaluate_dict and typed num and
+1524. **W1550** (done) test_layout reads its metric dicts (m = page.evaluate) through evaluate_dict and typed num and
    items readers so their Any reads clear
-1524. **W1551** (done) Four more test files run their commands through procrun.capture so S404 and S603 clear (mpxj,
+1525. **W1551** (done) Four more test files run their commands through procrun.capture so S404 and S603 clear (mpxj,
    akonadi guard, publish, deterministic)
-1525. **W1552** (done) test_layout converts its fans, pairs, seen and prefixes row evaluates through typed converters so
+1526. **W1552** (done) test_layout converts its fans, pairs, seen and prefixes row evaluates through typed converters so
    their 41 Any reads clear
-1526. **W1553** (done) Two more test files run their commands through procrun.capture so S404 and S603 clear (hooks
+1527. **W1553** (done) Two more test files run their commands through procrun.capture so S404 and S603 clear (hooks
    wired, static view)
-1527. **W1554** (done) test_layout reads its tile, contrast, colour, roll-up and legend evaluates through typed readers
+1528. **W1554** (done) test_layout reads its tile, contrast, colour, roll-up and legend evaluates through typed readers
    so their 44 Any reads clear (slice 5)
-1528. **W1555** (done) vtodo, calwrite and history run their subprocesses through procrun.capture_bytes so S404, S603
+1529. **W1555** (done) vtodo, calwrite and history run their subprocesses through procrun.capture_bytes so S404, S603
    and S607 clear
-1529. **W1556** (done) test_layout reads its repo chips, glyph, piece-fetch and aria-expanded evaluates through typed
+1530. **W1556** (done) test_layout reads its repo chips, glyph, piece-fetch and aria-expanded evaluates through typed
    readers (slice 6)
-1530. **W1557** (done) shaclcache types its SPARQL patch with object parameters and casts at the one boundary so its 25
+1531. **W1557** (done) shaclcache types its SPARQL patch with object parameters and casts at the one boundary so its 25
    Any reads clear
-1531. **W1558** (done) test_layout reads its focused-card, chain-summary, tile and glyph-role evaluates through typed
+1532. **W1558** (done) test_layout reads its focused-card, chain-summary, tile and glyph-role evaluates through typed
    readers (slice 7)
-1532. **W1559** (done) Two function-local imports (adapter attach, shaclinc cached_sparql_parse) move to module level so
+1533. **W1559** (done) Two function-local imports (adapter attach, shaclinc cached_sparql_parse) move to module level so
    PLC0415 clears
+1534. **W1560** (done) test_layout slice 8a: lit-chip, ringed card and roll-up umbrella evaluates typed (8 of the 57 Any
+   reads); 49 remain
 
 ## residue
 
@@ -7572,3 +7581,17 @@ counter 1560 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:34f
   a test_layout change, which is a tenth of the runs before. I did not re-run any figure. Three findings. No fixpoint is
   declared. Carried open findings as in R192, with R191 finding 2 (W1175 collision card, rebuilt PLC0415 probe) carried
   a third time and R192 finding 2 (W1520 sequence) answered by the G1's recorded plan but not started.; 3 finding(s)
+- **nemik:R192** (-) round 194: stacks 932 (W1560 slice 8e, mypy 301 to 278) 4f4753f3 landed 17:50:37Z and 933 (PT018 in
+  test_layout, ruff 175 to 164) ba25551d landed 18:02:27Z; the gate empty again since 18:02:27Z with nothing staged; the
+  PLC0415 probe returned 47 sites (SAFE 29, CLASH 5, CYCLE 11); W1520 repin still unstarted: root Verified from the
+  reflog (unix stamps): eed41c63 1793727370 = 17:36:10Z, 4f4753f3 1793728237 = 17:50:37Z, ba25551d 1793728947 =
+  18:02:27Z. The G1's empty-gate intervals check out (17:36:10Z to 17:48:40Z, 12 min 30 s; 17:50:37Z to 17:57:09Z, 6 min
+  32 s; 19 min 2 s of 26 min 17 s, 72 percent), with two Z stamps each, converted submit stamps and the cause stated,
+  and the idle share fell from 83 percent (R193) to 72 percent. R193 is met in part: 8e took 23 findings in one stack
+  (the sizing finding 1 asked for), the PLC0415 probe was rebuilt on the scratch-copy method (finding 3: 47 sites, 29
+  safe, 5 clash, 11 cycle), and the G1 states what it did not do (the W1520 venv window, the BES check of finding 2, the
+  CLASH rename card). Measured equals expected on both stacks (23 and 11 exactly); the unplanned ruff 176 to 175 came
+  with 8e and the G1 attributes it (PT018 19 to 18, a split assert now typed). The ATOMIZE false print at 18:02:13Z, 14
+  s before 933 landed, is the eleventh instance and its cure, W1520, is the unstarted item. I did not re-run any figure.
+  Two findings. No fixpoint is declared. Carried open findings as in R193 (finding 2, the BES check on 931, is still
+  open).; 2 finding(s)
