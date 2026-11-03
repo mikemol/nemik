@@ -2,7 +2,10 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W154: the field manifest covers every field the export renders and flags a new one."""
 
+import json
+from collections.abc import Iterator
 from pathlib import Path
+from typing import Protocol
 
 import pytest
 
@@ -14,11 +17,56 @@ from nemik.wake import operator_row, read_liveness, roster
 FLEET = Path(__file__).parent / "fixtures" / "fleet"
 
 
-def _documents():
+class _Decoder(Protocol):
+    def decode(self, s: str) -> object: ...
+
+
+def _obj(value: object) -> dict[str, object]:
+    """Read a JSON value that must be an object, keyed by text.
+
+    Returns:
+        The object's members.
+
+    Raises:
+        TypeError: When the value is not an object.
+
+    """
+    if not isinstance(value, dict):
+        message = f"no object, only {value!r}"
+        raise TypeError(message)
+    return {str(k): v for k, v in value.items()}
+
+
+def _list(value: object) -> list[object]:
+    """Read a JSON value that must be an array.
+
+    Returns:
+        The array's elements.
+
+    Raises:
+        TypeError: When the value is not an array.
+
+    """
+    if not isinstance(value, list):
+        message = f"no array, only {value!r}"
+        raise TypeError(message)
+    listed: list[object] = list(value)
+    return listed
+
+
+def _documents() -> Iterator[tuple[str, object]]:
+    """Yield each document the server publishes, as the JSON it sends.
+
+    Yields:
+        (file name, document) pairs: the graph, the wake board and one goals file per repo.
+
+    """
     m = Model(FLEET)
     m.refresh()
     live, source = read_liveness(FLEET, None)
-    yield "graph.json", m.doc
+    decoder: _Decoder = json.JSONDecoder()
+    graph = _obj(decoder.decode(m.payload.decode()))
+    yield "graph.json", graph
     yield (
         "wake.json",
         {
@@ -27,7 +75,7 @@ def _documents():
             "operator": operator_row(m.graph),
         },
     )
-    for repo in sorted({n["repo"] for n in m.doc["nodes"]}):
+    for repo in sorted({str(_obj(n)["repo"]) for n in _list(graph["nodes"])}):
         yield f"goals/{repo}.json", goals(m.graph, repo, load_weights())
 
 
@@ -40,10 +88,10 @@ def test_every_rendered_field_is_manifested() -> None:
 def test_a_new_field_is_flagged() -> None:
     """A new field is flagged."""
     docs = dict(_documents())
-    docs["graph.json"]["nodes"][0]["extra_field"] = "x"
-    assert unmanifested("graph.json", docs["graph.json"]) == [
-        "graph.json nodes.extra_field"
-    ]
+    graph = _obj(docs["graph.json"])
+    first = {**_obj(_list(graph["nodes"])[0]), "extra_field": "x"}
+    flagged = {**graph, "nodes": [first]}
+    assert unmanifested("graph.json", flagged) == ["graph.json nodes.extra_field"]
     assert unmanifested("goals/x.json", [{"goal": "W1", "leak": 1}]) == [
         "goals/x.json goals.leak"
     ]

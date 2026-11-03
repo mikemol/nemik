@@ -84,11 +84,6 @@
   "misc": 9,
   "no-untyped-call": 1
  },
- "tests/test_manifest.py": {
-  "misc": 15,
-  "no-untyped-call": 2,
-  "no-untyped-def": 1
- },
  "tests/test_mpxj.py": {
   "misc": 2
  },
