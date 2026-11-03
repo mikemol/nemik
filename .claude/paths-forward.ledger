@@ -4441,3 +4441,6 @@
 2026-11-03T22:09:13Z  status W1570 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-03T22:11:14Z  interrupt W1571 minted    -         "Five functions take their tail parameters keyword-only (salience_of, edge_currents, event_lines, test_guarantees._wp, test_score.vec): five PLR0917 clear, the ruff lane's first probed row"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1568
 2026-11-03T22:11:26Z  status W1571 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-03T22:31:10Z  interrupt W1572 minted    -         "tests/test_lifecycle_scheme.py reads the scheme through typed rdflib calls (URIRef, Graph.subjects, a typed _first over Graph.objects): ten mypy findings clear (the successor table's next mypy row)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1568
+2026-11-03T22:31:23Z  status W1572 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-03T22:32:56Z  status W1571 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

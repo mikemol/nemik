@@ -4,8 +4,9 @@
 
 from pathlib import Path
 
-from rdflib import Graph
+from rdflib import Graph, URIRef
 from rdflib.namespace import RDF, SKOS
+from rdflib.term import Node
 
 NEMIK = "https://github.com/mikemol/nemik/ns#"
 DATA = Path(__file__).resolve().parents[1] / "src" / "nemik" / "data" / "nemik.ttl"
@@ -18,13 +19,23 @@ def _graph() -> Graph:
     return graph
 
 
+def _first(graph: Graph, subject: Node, predicate: URIRef) -> Node | None:
+    """Read the first object of a (subject, predicate) pair.
+
+    Returns:
+        The object, or None when the graph has none.
+
+    """
+    return next(iter(graph.objects(subject, predicate)), None)
+
+
 def test_the_scheme_has_exactly_the_six_steps() -> None:
     """Six concepts in the scheme, labelled with the six words."""
     graph = _graph()
-    scheme = graph.resource(f"{NEMIK}ChangeLifecycle")
+    scheme = URIRef(f"{NEMIK}ChangeLifecycle")
     members = [
-        str(graph.value(concept.identifier, SKOS.prefLabel))
-        for concept in scheme.subjects(SKOS.inScheme)
+        str(_first(graph, concept, SKOS.prefLabel))
+        for concept in graph.subjects(SKOS.inScheme, scheme)
     ]
     assert sorted(members) == sorted(STEPS)
 
@@ -32,16 +43,16 @@ def test_the_scheme_has_exactly_the_six_steps() -> None:
 def test_every_step_is_mapped_to_oslc_cm_or_marked_an_extension() -> None:
     """nemik:W552: a step either closely matches an OSLC CM term or says it is a nemik extension."""
     graph = _graph()
-    extension = graph.resource(f"{NEMIK}extension").identifier
+    extension = URIRef(f"{NEMIK}extension")
     cm = "http://open-services.net/ns/cm#"
     expected = {
         "landed": cm + "Fixed",
         "applied": cm + "Verified",
     }
     for step in STEPS:
-        concept = graph.resource(f"{NEMIK}{step.capitalize()}").identifier
+        concept = URIRef(f"{NEMIK}{step.capitalize()}")
         matches = {str(m) for m in graph.objects(concept, SKOS.closeMatch)}
-        marked = graph.value(concept, extension) is not None
+        marked = _first(graph, concept, extension) is not None
         assert bool(matches) != marked, step  # exactly one of the two
         if step in expected:
             assert matches == {expected[step]}, step
@@ -50,12 +61,12 @@ def test_every_step_is_mapped_to_oslc_cm_or_marked_an_extension() -> None:
 def test_every_step_has_a_definition_and_a_witness() -> None:
     """A step without a definition or without the evidence that witnesses it is refused."""
     graph = _graph()
-    witnessed = graph.resource(f"{NEMIK}witnessedBy").identifier
+    witnessed = URIRef(f"{NEMIK}witnessedBy")
     for concept in graph.subjects(RDF.type, SKOS.Concept):
         if (concept, SKOS.inScheme, None) not in graph:
             continue
-        label = str(graph.value(concept, SKOS.prefLabel))
+        label = str(_first(graph, concept, SKOS.prefLabel))
         if label not in STEPS:
             continue
-        assert graph.value(concept, SKOS.definition), label
-        assert graph.value(concept, witnessed), label
+        assert _first(graph, concept, SKOS.definition), label
+        assert _first(graph, concept, witnessed), label
