@@ -4180,3 +4180,8 @@
 2026-11-02T23:47:50Z  status W1497 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-02T23:47:52Z  status W1500 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-02T23:52:48Z  interrupt W1514 minted    -         "Export nemik-wake's per-workstream verdict (wake required, 0 or 1, and the awake state) as a metric so luthen can page on wake-required AND stamp older than its window, not a flat 2 h"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=luthen-observability:W1928
+2026-11-02T23:54:36Z  status W1501 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-03T00:11:10Z  tick  W1515 minted    -         "Decide and, if adopted, build ready_wake as a nemik tool beside nemik-wake and nemik-inbound, and a flip-line mode of nemik-witnesses --apply, so one Monitor tails queue events and measurement events in one line format (luthen-observability W1931)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=luthen-observability:W1931
+2026-11-03T00:25:24Z  status W1497 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-03T00:25:26Z  status W1500 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-03T00:25:28Z  status W846 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

@@ -552,16 +552,11 @@ class Options(argparse.Namespace):
     series_max_age: int
 
 
-def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
-    """Run nemik-wake: print the roster of workstreams, or with --alarms the alarms that fired.
+def _parse(argv: list[str] | None) -> Options:
+    """Parse nemik-wake's command line.
 
-    The roster lists the workstreams that are not awake (all with --all) plus the operator row.
-    --nudge keeps only rows due a nudge, or only alarms not yet delivered, and records them in
-    the nudges state file. --json prints machine-readable output.
-
-    Args:
-        argv: the command line, or None for sys.argv.
-        g: a graph to read instead of surveying the root.
+    Returns:
+        The parsed options.
 
     """
     ap = argparse.ArgumentParser(
@@ -623,62 +618,49 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         action="append",
         help="a repo to report even if the series has none (repeat); it reads no sample",
     )
-    args = ap.parse_args(argv, namespace=Options())
-    if args.series_only:
-        series_report(
-            args.repo or [], series_path(args), args.series_max_age, only=args.only
-        )
-        return
-    if g is None:
-        g = Graph()
-        for _, qg, _ in survey(args.root):
-            if qg is not None:
-                g += qg
-    if args.series_lines:
-        series_report(
-            workstreams(g) + (args.repo or []), series_path(args), args.series_max_age
-        )
-        return
-    live, source = read_liveness(args.root, args.liveness)
-    if args.alarms:
-        until = datetime.fromisoformat(args.until) if args.until else datetime.now(UTC)
-        since = (
-            datetime.fromisoformat(args.since)
-            if args.since
-            else until - timedelta(minutes=15)
-        )
-        fired = fired_alarms(g, since.astimezone(UTC), until.astimezone(UTC), live)
-        if args.nudge:
-            # nemik:W167: alarms go out through the nudge path, so each firing is delivered once
-            # (W166's key) in the same state file the repo nudges use.
-            seen = _read_seen(args.nudges_state)
-            fired = undelivered(fired, seen)
-            _write_seen(args.nudges_state, seen)
-        if args.json:
-            say(
-                _dump_doc(
-                    {
-                        "liveness": source,
-                        "since": since.isoformat(),
-                        "until": until.isoformat(),
-                        "alarms": fired,
-                    }
-                )
-            )
-            return
-        say(
-            f"alarms fired {since.isoformat()} .. {until.isoformat()} (liveness: {source})"
-        )
-        for a in fired:
-            occ = f" [{a['recurrence_id']}]" if a["recurrence_id"] else ""
-            what = f"ERROR {a['error']}" if a.get("error") else a["title"][:60]
-            say(
-                f"  {a['at'] or '-':20} {a['state']:7} {a['ref']:28}{occ} {a['trigger']:22} {what}"
-            )
-            if a.get("message"):
-                say(f"      send: {a['message'].splitlines()[0]}")
-        return
+    return ap.parse_args(argv, namespace=Options())
 
+
+def _report_alarms(g: Graph, args: Options, live: Liveness, source: str) -> None:
+    """Print the alarms that fired in [--since, --until), as JSON or one line each."""
+    until = datetime.fromisoformat(args.until) if args.until else datetime.now(UTC)
+    since = (
+        datetime.fromisoformat(args.since)
+        if args.since
+        else until - timedelta(minutes=15)
+    )
+    fired = fired_alarms(g, since.astimezone(UTC), until.astimezone(UTC), live)
+    if args.nudge:
+        # nemik:W167: alarms go out through the nudge path, so each firing is delivered once
+        # (W166's key) in the same state file the repo nudges use.
+        seen = _read_seen(args.nudges_state)
+        fired = undelivered(fired, seen)
+        _write_seen(args.nudges_state, seen)
+    if args.json:
+        say(
+            _dump_doc(
+                {
+                    "liveness": source,
+                    "since": since.isoformat(),
+                    "until": until.isoformat(),
+                    "alarms": fired,
+                }
+            )
+        )
+        return
+    say(f"alarms fired {since.isoformat()} .. {until.isoformat()} (liveness: {source})")
+    for a in fired:
+        occ = f" [{a['recurrence_id']}]" if a["recurrence_id"] else ""
+        what = f"ERROR {a['error']}" if a.get("error") else a["title"][:60]
+        say(
+            f"  {a['at'] or '-':20} {a['state']:7} {a['ref']:28}{occ} {a['trigger']:22} {what}"
+        )
+        if a.get("message"):
+            say(f"      send: {a['message'].splitlines()[0]}")
+
+
+def _report_roster(g: Graph, args: Options, live: Liveness, source: str) -> None:
+    """Print the roster of workstreams that are not awake, then the operator row."""
     end = datetime.now(UTC)
     rows = [
         r
@@ -713,3 +695,38 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     # nemik:W298: the five heaviest, with the demand waiting behind each
     for w in op["waiting"][:5]:
         say(f"  {w['salience']:6.1f} {w['blocked']:28} {w['title'][:60]}")
+
+
+def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
+    """Run nemik-wake: print the roster of workstreams, or with --alarms the alarms that fired.
+
+    The roster lists the workstreams that are not awake (all with --all) plus the operator row.
+    --nudge keeps only rows due a nudge, or only alarms not yet delivered, and records them in
+    the nudges state file. --json prints machine-readable output.
+
+    Args:
+        argv: the command line, or None for sys.argv.
+        g: a graph to read instead of surveying the root.
+
+    """
+    args = _parse(argv)
+    if args.series_only:
+        series_report(
+            args.repo or [], series_path(args), args.series_max_age, only=args.only
+        )
+        return
+    if g is None:
+        g = Graph()
+        for _, qg, _ in survey(args.root):
+            if qg is not None:
+                g += qg
+    if args.series_lines:
+        series_report(
+            workstreams(g) + (args.repo or []), series_path(args), args.series_max_age
+        )
+        return
+    live, source = read_liveness(args.root, args.liveness)
+    if args.alarms:
+        _report_alarms(g, args, live, source)
+        return
+    _report_roster(g, args, live, source)
