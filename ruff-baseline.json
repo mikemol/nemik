@@ -101,9 +101,7 @@
   "S603": 1
  },
  "src/nemik/wake.py": {
-  "PLW0717": 1,
-  "S404": 1,
-  "S603": 1
+  "PLW0717": 1
  },
  "src/nemik/witnesses.py": {
   "PLC0415": 1,

@@ -23,13 +23,13 @@ import argparse
 import json
 import operator
 import os
-import subprocess
 import sys
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from typing import TYPE_CHECKING, TypedDict
 
 from mikemol.hooks import rewake
+from mikemol.procrun.proc import capture
 from rdflib import Graph
 from rdflib.namespace import DCTERMS
 
@@ -97,6 +97,23 @@ class WakeRow(TypedDict, total=False):
     waiting: list[Waiter]
 
 
+def _checker_output(py: Path, cwd: Path) -> str:
+    """Run luthen's checks.loop_liveness with its own python and return what it printed.
+
+    Returns:
+        The checker's standard output.
+
+    Raises:
+        ValueError: The checker exited nonzero; the message carries its exit status.
+
+    """
+    done = capture([str(py), "-m", "checks.loop_liveness"], cwd=cwd)
+    if done.returncode:
+        reason = f"checks.loop_liveness exited {done.returncode}"
+        raise ValueError(reason)
+    return done.stdout
+
+
 def read_liveness(root: Path, source: str | None) -> tuple[Liveness, str]:
     """Return ({repo: record}, where it came from); ({}, reason) when there is none.
 
@@ -120,16 +137,9 @@ def read_liveness(root: Path, source: str | None) -> tuple[Liveness, str]:
         luthen = root / "luthen-observability"
         py = luthen / ".venv" / "bin" / "python"
         if py.exists():
-            out = subprocess.run(
-                [str(py), "-m", "checks.loop_liveness"],
-                cwd=luthen,
-                capture_output=True,
-                text=True,
-                check=True,
-            ).stdout
-            document = json.loads(out)
+            document = json.loads(_checker_output(py, luthen))
             return document["repos"], "luthen-observability checks.loop_liveness"
-    except (OSError, ValueError, KeyError, subprocess.CalledProcessError) as exc:
+    except (OSError, ValueError, KeyError) as exc:
         return {}, f"unreadable: {exc}"
     return {}, "no liveness source"
 

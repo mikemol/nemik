@@ -10,7 +10,7 @@ import pytest
 from rdflib import Graph, Literal
 
 from nemik.adapter import NEMIK, queue_graph, waypoint_uri
-from nemik.wake import Liveness, due_nudges, fired_alarms, main, roster
+from nemik.wake import Liveness, due_nudges, fired_alarms, main, read_liveness, roster
 
 
 def _graph(tmp_path: Path) -> Graph:
@@ -142,3 +142,16 @@ def test_a_sleeping_owner_of_a_fired_alarm_joins_the_wake_roster(
         for r in roster(g, awake, alarms=fired_alarms(g, *window, awake))
         if r["repo"] == "life"
     ]
+
+
+def test_a_liveness_checker_that_exits_nonzero_gives_no_liveness_and_says_unreadable(
+    tmp_path: Path,
+) -> None:
+    """The checker run through luthen's venv; a nonzero exit is `{}` plus an unreadable source."""
+    python = tmp_path / "luthen-observability" / ".venv" / "bin" / "python"
+    python.parent.mkdir(parents=True)
+    python.write_text("#!/bin/sh\nexit 3\n", encoding="utf-8")
+    python.chmod(0o755)
+    live, source = read_liveness(tmp_path, None)
+    assert live == {}
+    assert source == "unreadable: checks.loop_liveness exited 3"
