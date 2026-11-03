@@ -34,8 +34,8 @@
  },
  "src/nemik/serve.py": {
   "explicit-any": 2,
-  "misc": 77,
-  "type-arg": 4
+  "misc": 74,
+  "type-arg": 3
  },
  "src/nemik/shaclcache.py": {
   "misc": 1

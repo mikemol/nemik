@@ -419,7 +419,7 @@ class Model:
         # the view publishes (salience, edge current, history counts), not only out of the node
         # list.
         self.withheld = withheld
-        self.key: tuple = ()
+        self.key: tuple[tuple[str, int], ...] = ()
         self.graph = bind(Graph())
         self.payload = b"{}"
         self.doc: dict = {
@@ -458,7 +458,9 @@ class Model:
         The rebuild runs under a lock, so concurrent requests do not each redo it, and it records
         the CPU seconds per phase. Nothing changes when the sources' mtimes match the last key.
         """
-        key = tuple((str(p), p.stat().st_mtime_ns) for p in self.sources())
+        key: tuple[tuple[str, int], ...] = tuple(
+            (str(p), p.stat().st_mtime_ns) for p in self.sources()
+        )
         if key == self.key:
             return
         with self._lock:
@@ -721,7 +723,9 @@ class Model:
         if self.rebuilds == 0:
             self.refresh()
             return
-        key = tuple((str(p), p.stat().st_mtime_ns) for p in self.sources())
+        key: tuple[tuple[str, int], ...] = tuple(
+            (str(p), p.stat().st_mtime_ns) for p in self.sources()
+        )
         if key != self.key and not self._lock.locked():
             threading.Thread(target=self.refresh, daemon=True).start()
 
