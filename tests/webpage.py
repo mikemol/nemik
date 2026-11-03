@@ -41,13 +41,16 @@ __all__ = [
     "PageBrokenError",
     "Waitable",
     "evaluate_bool",
+    "evaluate_dict",
     "evaluate_int",
     "evaluate_strs",
     "evaluate_value",
     "evaluated",
     "first_error",
+    "items",
     "launched_page",
     "load",
+    "num",
     "open_page",
     "opened_page",
     "served",
@@ -490,6 +493,60 @@ def evaluate_strs(page: Evaluator, expression: str, arg: object = None) -> list[
         message = f"{expression[:60]!r} gave no list of strings, only {value!r}"
         raise TypeError(message)
     return [str(v) for v in value]
+
+
+def evaluate_dict(
+    page: Evaluator, expression: str, arg: object = None
+) -> dict[str, object]:
+    """Run a JS expression that gives an object and return it with text keys.
+
+    Returns:
+        The expression's value, which must be an object, keyed by text.
+
+    Raises:
+        TypeError: When the expression gave anything but an object.
+
+    """
+    value = evaluate_value(page, expression, arg)
+    if not isinstance(value, dict):
+        message = f"{expression[:60]!r} gave no object, only {value!r}"
+        raise TypeError(message)
+    return {str(k): v for k, v in value.items()}
+
+
+def num(row: dict[str, object], key: str) -> float:
+    """Read one number out of an evaluated object.
+
+    Returns:
+        The member as a float; a boolean or a non-number is a TypeError.
+
+    Raises:
+        TypeError: When the member is not a number.
+
+    """
+    value = row.get(key)
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
+        message = f"{key!r} is no number, only {value!r}"
+        raise TypeError(message)
+    return float(value)
+
+
+def items(row: dict[str, object], key: str) -> list[object]:
+    """Read one list out of an evaluated object.
+
+    Returns:
+        The member's elements; anything but a list is a TypeError.
+
+    Raises:
+        TypeError: When the member is not a list.
+
+    """
+    value = row.get(key)
+    if not isinstance(value, list):
+        message = f"{key!r} is no list, only {value!r}"
+        raise TypeError(message)
+    listed: list[object] = list(value)
+    return listed
 
 
 def evaluate_text(page: Evaluator, expression: str, arg: object = None) -> str:

@@ -82,7 +82,7 @@
   "misc": 2
  },
  "tests/test_layout.py": {
-  "misc": 203
+  "misc": 172
  },
  "tests/test_lifecycle_scheme.py": {
   "misc": 9,

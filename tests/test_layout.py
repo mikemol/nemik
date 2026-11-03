@@ -537,7 +537,7 @@ def test_the_default_view_is_legible(server: str, scheme: Scheme) -> None:
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
         )
         _settle(page)
-        m = page.evaluate(LEGIBILITY)
+        m = webpage.evaluate_dict(page, LEGIBILITY)
         note = page.inner_text("#legnote")
         # nemik:W433: the live region holds text only; a control inside it is re-announced with it
         controls_in_status = webpage.evaluate_int(
@@ -556,9 +556,9 @@ def test_the_default_view_is_legible(server: str, scheme: Scheme) -> None:
         text.startswith({"amber": "▲", "red": "■"}.get(h, text[:1]))
         for h, text in chips
     )
-    assert m["in_view"] > 0
-    assert m["label_px"] >= MIN_LABEL_PX, m
-    assert m["min_target_px"] >= MIN_TARGET_PX, m
+    assert webpage.num(m, "in_view") > 0
+    assert webpage.num(m, "label_px") >= MIN_LABEL_PX, m
+    assert webpage.num(m, "min_target_px") >= MIN_TARGET_PX, m
     assert not note or "readable size" in note
     assert controls_in_status == 0
 
@@ -1422,9 +1422,9 @@ def test_one_picked_repo_restored_from_the_last_visit_is_legible_too(
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
         )
         _settle(page)
-        m = page.evaluate(LEGIBILITY)
+        m = webpage.evaluate_dict(page, LEGIBILITY)
         browser.close()
-    assert m["label_px"] >= MIN_LABEL_PX, m
+    assert webpage.num(m, "label_px") >= MIN_LABEL_PX, m
 
 
 def test_picked_repos_show_their_blockers_blockers_as_context(server: str) -> None:
@@ -1483,7 +1483,7 @@ def test_rank_forest_view(server: str, tmp_path: Path) -> None:
         )
         ranked = webpage.evaluate_int(page, "() => cy.nodes('[rank_pos]').length")
         _settle(page)
-        m = page.evaluate(METRICS)
+        m = webpage.evaluate_dict(page, METRICS)
         overlaps = page.evaluate(NODE_OVERLAPS)
         page.screenshot(path=str(out / "forest-dark.png"))
         page.evaluate("() => cy.fit(cy.getElementById('repo:life'), 20)")
@@ -1494,11 +1494,11 @@ def test_rank_forest_view(server: str, tmp_path: Path) -> None:
     assert errors == []
     assert ranked > 0  # the server ships nemik-rank's composed order
     assert overlaps == []
-    assert m["labels_outside"] == []
-    assert m["cross_p95"] <= FOREST_BUDGET["cross_p95"], m
-    assert m["fit_zoom"] >= FOREST_BUDGET["fit_zoom"], m
-    assert m["intra_crossings"] <= FOREST_BUDGET["intra_crossings"], m
-    assert m["cross_upward"] <= FOREST_BUDGET["cross_upward"], m
+    assert webpage.items(m, "labels_outside") == []
+    assert webpage.num(m, "cross_p95") <= FOREST_BUDGET["cross_p95"], m
+    assert webpage.num(m, "fit_zoom") >= FOREST_BUDGET["fit_zoom"], m
+    assert webpage.num(m, "intra_crossings") <= FOREST_BUDGET["intra_crossings"], m
+    assert webpage.num(m, "cross_upward") <= FOREST_BUDGET["cross_upward"], m
 
 
 TREEMAP_INVARIANTS = """async () => {
@@ -1535,13 +1535,15 @@ def test_treemap_model(server: str) -> None:
         webpage.watch(page)
         page.goto(server)
         webpage.until(page, "() => typeof treeOf === 'function' && !!coreWasm")
-        m = page.evaluate(TREEMAP_INVARIANTS)
+        m = webpage.evaluate_dict(page, TREEMAP_INVARIANTS)
         browser.close()
-    assert m["bad"] == [], m
-    assert m["n"] > 0 and m["total"] == m["n"], (
+    assert webpage.items(m, "bad") == [], m
+    assert webpage.num(m, "n") > 0 and webpage.num(m, "total") == webpage.num(m, "n"), (
         m
     )  # every open item is placed exactly once
-    assert m["repos_in_one_root"] > 1, m  # not grouped by repo: a tree spans repos
+    assert webpage.num(m, "repos_in_one_root") > 1, (
+        m
+    )  # not grouped by repo: a tree spans repos
 
 
 def test_treemap_view_draws(server: str, tmp_path: Path) -> None:
@@ -1568,7 +1570,9 @@ def test_treemap_view_draws(server: str, tmp_path: Path) -> None:
         fit = page.evaluate("""() => { const b = cy.elements(':visible').renderedBoundingBox();
           return b.x1 >= -1 && b.y1 >= -1 && b.x2 <= cy.width() + 1 && b.y2 <= cy.height() + 1;
             }""")
-        m = page.evaluate("""() => {
+        m = webpage.evaluate_dict(
+            page,
+            """() => {
           // Step 6: nested clusters. A child lies inside its parent's frame (below the header); two
           // tiles overlap only when one contains the other.
           const tiles = cy.nodes('.tile').filter(n => n.visible()), bad = [];
@@ -1607,22 +1611,27 @@ def test_treemap_view_draws(server: str, tmp_path: Path) -> None:
                    repo_boxes: cy.nodes('.repo').length, repos: repos.size,
                    fit_zoom: Math.round(1000 * Math.min(cy.width() / (bb.w + 40),
                      cy.height() / (bb.h + 40))) / 1000 };
-        }""")
+        }""",
+        )
         page.evaluate("() => cy.fit(undefined, 20)")
         page.screenshot(path=str(out / "treemap-dark.png"))
         browser.close()
     (out / "treemap-dark.json").write_text(json.dumps(m, indent=1))
     assert errors == []
     assert fit, "the treemap is not fitted to the pane after the toggle"
-    assert m["repo_boxes"] == 0 and m["repos"] > 1, m  # not grouped by repo
-    assert m["key_repos"] == m["repos"], m
-    assert m["groups"] > 0, m  # clusters are drawn as labelled frames
-    assert m["two_line"] > 0 and m["clipped"] == [], (
+    assert webpage.num(m, "repo_boxes") == 0 and webpage.num(m, "repos") > 1, (
+        m
+    )  # not grouped by repo
+    assert webpage.num(m, "key_repos") == webpage.num(m, "repos"), m
+    assert webpage.num(m, "groups") > 0, m  # clusters are drawn as labelled frames
+    assert webpage.num(m, "two_line") > 0 and webpage.items(m, "clipped") == [], (
         m
     )  # leaves name their repo, and every label fits  # every repo colour has a key entry
-    assert m["tiles"] > 0 and m["contained"] > 0 and m["outside"] == [], (
-        m
-    )  # "outside" = overlapping tiles
+    assert (
+        webpage.num(m, "tiles") > 0
+        and webpage.num(m, "contained") > 0
+        and webpage.items(m, "outside") == []
+    ), m  # "outside" = overlapping tiles
 
 
 @pytest.mark.parametrize("width", [380, 1400])
@@ -1652,14 +1661,20 @@ def test_side_panel_never_overflows_sideways(server: str, width: int) -> None:
             a.waiting = Array.from({length: 12}, (_, i) => 'luthen-observability:W1' + i); }
           lane('needs-you'); }""")
         _settle(page)
-        m = page.evaluate("""() => { const a = document.querySelector('aside');
+        m = webpage.evaluate_dict(
+            page,
+            """() => { const a = document.querySelector('aside');
           const r = a.getBoundingClientRect(), wide = [];
           a.querySelectorAll('*').forEach(e => { const b = e.getBoundingClientRect();
             if (b.width && b.right > r.right + 1) wide.push(e.tagName + ':' + (e.textContent
               || '').slice(0, 40)); });
-          return { scroll: a.scrollWidth, client: a.clientWidth, wide: wide.slice(0, 5) }; }""")
+          return { scroll: a.scrollWidth, client: a.clientWidth, wide: wide.slice(0, 5) }; }""",
+        )
         browser.close()
-    assert m["wide"] == [] and m["scroll"] <= m["client"] + 1, m
+    assert (
+        webpage.items(m, "wide") == []
+        and webpage.num(m, "scroll") <= webpage.num(m, "client") + 1
+    ), m
 
 
 def test_every_cite_in_the_panel_is_a_repo_colon_link(server: str) -> None:
@@ -1709,7 +1724,9 @@ def test_weather_panel_groups_one_outage(server: str) -> None:
             page,
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
         )
-        m = page.evaluate("""() => {
+        m = webpage.evaluate_dict(
+            page,
+            """() => {
           const open = data.nodes.filter(n => n.state === 'blocked' && n.cite).slice(0, 3);
           open.forEach(n => n.weather = 'wx:same');  // three repos' items wait on one outage
           weather();
@@ -1717,6 +1734,7 @@ def test_weather_panel_groups_one_outage(server: str) -> None:
           return { rows: document.querySelectorAll('#weather dt').length,
                    waiters: document.querySelectorAll('#weather dd > a[data-cite]').length,
                      once: once.length };
-        }""")
+        }""",
+        )
         browser.close()
     assert m == {"rows": 1, "waiters": 3, "once": 1}, m
