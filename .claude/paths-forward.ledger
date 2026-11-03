@@ -4349,3 +4349,5 @@
 2026-11-03T13:46:38Z  interrupt W1553 minted    -         "Two more test files run their commands through procrun.capture so S404 and S603 clear (hooks wired, static view)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W1175
 2026-11-03T13:48:21Z  status W1553 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-03T14:01:31Z  interrupt W1554 minted    -         "test_layout reads its tile, contrast, colour, roll-up and legend evaluates through typed readers so their 44 Any reads clear (slice 5)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W1535
+2026-11-03T14:09:13Z  status W1552 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-03T14:09:14Z  status W1554 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

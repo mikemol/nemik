@@ -42,8 +42,10 @@ __all__ = [
     "Waitable",
     "as_bool",
     "as_float",
+    "as_ints",
     "as_list",
     "as_str",
+    "as_strs",
     "evaluate_bool",
     "evaluate_dict",
     "evaluate_int",
@@ -616,6 +618,26 @@ def as_bool(value: object) -> bool:
         message = f"no boolean, only {value!r}"
         raise TypeError(message)
     return value
+
+
+def as_strs(value: object) -> list[str]:
+    """Read a page answer that must be a list of text.
+
+    Returns:
+        Each element as text; any element that is not text is a TypeError.
+
+    """
+    return [as_str(v) for v in as_list(value)]
+
+
+def as_ints(value: object) -> list[int]:
+    """Read a page answer that must be a list of whole numbers.
+
+    Returns:
+        Each element as an int; any element that is not a number is a TypeError.
+
+    """
+    return [int(as_float(v)) for v in as_list(value)]
 
 
 def evaluate_text(page: Evaluator, expression: str, arg: object = None) -> str:

@@ -37130,17 +37130,17 @@
     {
       "symbol": "W1552",
       "title": "test_layout converts its fans, pairs, seen and prefixes row evaluates through typed converters so their 41 Any reads clear",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Codemod w1552_rows.py: tests/webpage.py gains as_list, as_str, as_float and as_bool primitive readers (a TypeError on a mismatch), and test_layout gets four private converters (_fans, _contrast_pairs, _ghost_rows, _prefixes) wrapping the four evaluate_value calls so the uses are typed tuples and dicts. Measure house mypy on both, run test_layout whole directly. MYPY stack, shares mypy-baseline.json with stack 918 (inflight), so it submits after 918 lands.",
-      "evidence": "2026-11-03T13:31:07Z: R186 finding 2 slice 4: per-site findings measured by w1535_by_site.py before this card: fans 13, seen 10, pairs 9, prefixes 9, total 41. | 2026-11-03T13:31:09Z: 2026-11-03T13:31:08Z (read by stampnote): G0 precommit, before the edit (card and manifest first). Pace read 2026-11-03T13:25:24Z, this tick's first command, about 6 minutes old at this G0: mypy 472 left owes 190 (122 landings to zero; the rate recovered to 39 over 10 landings after the test_layout slices), ruff 202 left owes 90 (55 to zero), codon owes 2. N: four row-shaped evaluate results in tests/test_layout.py: fans (13 findings), seen (10), pairs (9), prefixes (9), K = 41 MEASURED by w1535_by_site.py (each finding attributed to the evaluate it follows, uses included) at the current tree before this G0. Actuator: codemod w1552_rows.py adds as_list, as_str, as_float, as_bool to tests/webpage.py and four private converters to test_layout that turn each evaluate_value result into list[list[tuple[str, int, str]]], list[tuple[str, float]], list[tuple[bool, str, float]] and dict[str, list[str]], raising TypeError on a shape mismatch, so each test fails loudly if the page's answer changes shape. Expected fall: 41 if every use is typed by its converter, less any use the converter does not reach; the measured per-site count is the bound, not a range. Sensor: house mypy on both files, mikemol-pycheck --ratchet --write, test_layout whole run directly (about 4 to 6 min), because shape mismatches raise only at runtime. MYPY stack, shares mypy-baseline.json with stack 918 (inflight): it submits after 918 lands and the baseline written then is measured on a tree that has 918's 472.",
+      "next_bounded_step": null,
+      "evidence": "2026-11-03T13:31:07Z: R186 finding 2 slice 4: per-site findings measured by w1535_by_site.py before this card: fans 13, seen 10, pairs 9, prefixes 9, total 41. | 2026-11-03T13:31:09Z: 2026-11-03T13:31:08Z (read by stampnote): G0 precommit, before the edit (card and manifest first). Pace read 2026-11-03T13:25:24Z, this tick's first command, about 6 minutes old at this G0: mypy 472 left owes 190 (122 landings to zero; the rate recovered to 39 over 10 landings after the test_layout slices), ruff 202 left owes 90 (55 to zero), codon owes 2. N: four row-shaped evaluate results in tests/test_layout.py: fans (13 findings), seen (10), pairs (9), prefixes (9), K = 41 MEASURED by w1535_by_site.py (each finding attributed to the evaluate it follows, uses included) at the current tree before this G0. Actuator: codemod w1552_rows.py adds as_list, as_str, as_float, as_bool to tests/webpage.py and four private converters to test_layout that turn each evaluate_value result into list[list[tuple[str, int, str]]], list[tuple[str, float]], list[tuple[bool, str, float]] and dict[str, list[str]], raising TypeError on a shape mismatch, so each test fails loudly if the page's answer changes shape. Expected fall: 41 if every use is typed by its converter, less any use the converter does not reach; the measured per-site count is the bound, not a range. Sensor: house mypy on both files, mikemol-pycheck --ratchet --write, test_layout whole run directly (about 4 to 6 min), because shape mismatches raise only at runtime. MYPY stack, shares mypy-baseline.json with stack 918 (inflight): it submits after 918 lands and the baseline written then is measured on a tree that has 918's 472. | 2026-11-03T14:09:13Z: Landed 6429a74a at 14:08:26Z (reflog, UTC; gated from began_ns 13:45:37Z, 22 min 49 s): test_layout row converters, mypy 472 to 431. tools/working_unnamed.py flagged W1552 at the landing; cleared.",
       "issued_at": "2026-11-03T13:30:54Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W1535",
-      "last_worked": "2026-11-03T13:38:45Z",
+      "last_worked": "2026-11-03T14:09:13Z",
       "ticks_blocked": 0,
       "manifest": [
         "tests/webpage.py",
@@ -37148,7 +37148,7 @@
         "mypy-baseline.json"
       ],
       "size_class": "medium",
-      "completed": null
+      "completed": "20261103T140913Z"
     },
     {
       "symbol": "W1553",
@@ -37176,7 +37176,7 @@
     {
       "symbol": "W1554",
       "title": "test_layout reads its tile, contrast, colour, roll-up and legend evaluates through typed readers so their 44 Any reads clear (slice 5)",
-      "status": "ready",
+      "status": "working",
       "enables": [],
       "touches": [],
       "blocked_on": [],
@@ -37186,14 +37186,15 @@
       "issued_at": "2026-11-03T14:01:31Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W1535",
-      "last_worked": "2026-11-03T14:08:00Z",
+      "last_worked": "2026-11-03T14:09:14Z",
       "ticks_blocked": 0,
       "manifest": [
         "tests/webpage.py",
         "tests/test_layout.py",
         "mypy-baseline.json"
       ],
-      "size_class": "medium"
+      "size_class": "medium",
+      "completed": null
     }
   ],
   "residue": [

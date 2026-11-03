@@ -365,13 +365,22 @@ def test_scope_rings_carry_distinct_ruler_motifs_pinned_to_paperkits(
         page.goto(server)
         # the legend is drawn once the first graph (and its patterns) has loaded
         webpage.until(page, PATHKEY_DRAWN)
-        motifs = page.evaluate("() => [0, 1, 2, 3].map(rulerMotif)")
-        lengths = page.evaluate("() => data.ruler.f.map(p => p.length)")
-        dashes = page.evaluate("() => SCOPES.map(scopeDash)")
+        motifs = webpage.as_strs(
+            webpage.evaluate_value(page, "() => [0, 1, 2, 3].map(rulerMotif)")
+        )
+        lengths = webpage.as_ints(
+            webpage.evaluate_value(page, "() => data.ruler.f.map(p => p.length)")
+        )
+        dashes = webpage.as_strs(
+            webpage.evaluate_value(page, "() => SCOPES.map(scopeDash)")
+        )
         generates = webpage.evaluate_bool(page, "() => typeof emitF !== 'undefined'")
-        legend = page.evaluate(
-            "() => [...document.querySelectorAll('#pathkey line')]"
-            ".map(l => l.getAttribute('stroke-dasharray'))"
+        legend = webpage.as_strs(
+            webpage.evaluate_value(
+                page,
+                "() => [...document.querySelectorAll('#pathkey line')]"
+                ".map(l => l.getAttribute('stroke-dasharray'))",
+            )
         )
         browser.close()
     assert motifs == [
@@ -385,6 +394,20 @@ def test_scope_rings_carry_distinct_ruler_motifs_pinned_to_paperkits(
     assert not generates  # the page renders the patterns; it no longer generates them
     assert len(set(dashes)) == PATH_DASH_PATTERNS and all(dashes)
     assert legend == dashes
+
+
+def _label_counts(value: object) -> list[tuple[str, int]]:
+    """Read the (label, roll-up count) rows the page reports.
+
+    Returns:
+        One row per rolled-up card.
+
+    """
+    rows: list[tuple[str, int]] = []
+    for row in webpage.as_list(value):
+        label, count = webpage.as_list(row)
+        rows.append((webpage.as_str(label), int(webpage.as_float(count))))
+    return rows
 
 
 def _fans(value: object) -> list[list[tuple[str, int, str]]]:
@@ -813,7 +836,7 @@ def test_every_meaning_the_view_colours_has_a_second_channel(
         webpage.watch(page)
         page.goto(server)
         webpage.until(page, PATHKEY_DRAWN)
-        measured = page.evaluate(USE_OF_COLOUR)
+        measured = webpage.evaluate_dict(page, USE_OF_COLOUR)
         browser.close()
     data = tmp_path / "input.json"
     data.write_text(json.dumps(measured))
@@ -822,7 +845,8 @@ def test_every_meaning_the_view_colours_has_a_second_channel(
     out = subprocess.run(cmd, capture_output=True, text=True, check=True)
     verdict = json.loads(out.stdout)["result"][0]["expressions"][0]["value"]
     assert verdict["deny"] == [], verdict["deny"]
-    assert len(verdict["admitted"]) == len(measured["cases"]) >= MIN_ADMITTED_CASES
+    cases = webpage.items(measured, "cases")
+    assert len(verdict["admitted"]) == len(cases) >= MIN_ADMITTED_CASES
 
 
 def test_a_static_build_refetches_only_the_pieces_whose_hash_moved(
@@ -1136,8 +1160,9 @@ def test_the_card_list_is_one_tab_stop_walked_by_arrows(server: str) -> None:
             page, "() => cy.nodes(':selected').map(n => n.id())"
         )
         page.keyboard.press("Tab")
-        outside = page.evaluate(
-            "() => !document.getElementById('cardlist').contains(document.activeElement)"
+        outside = webpage.evaluate_bool(
+            page,
+            "() => !document.getElementById('cardlist').contains(document.activeElement)",
         )
         browser.close()
     assert len(rows) > MIN_ROWS
@@ -1340,17 +1365,21 @@ def test_treemap_labels_meet_the_floor_or_are_hidden_and_counted(server: str) ->
         page.check("#treemap")
         webpage.until(page, "() => cy.nodes('.tile').length > 0")
         _settle(page)
-        fit = page.evaluate(TILE_LABELS)
+        fit = webpage.evaluate_dict(page, TILE_LABELS)
         page.evaluate(ZOOM_IN_4X)
         _settle(page)
-        zoomed = page.evaluate(TILE_LABELS)
+        zoomed = webpage.evaluate_dict(page, TILE_LABELS)
         browser.close()
-    assert fit["tiles"] > 0
-    assert fit["smallest"] >= MIN_LABEL_PX, fit
-    assert zoomed["smallest"] >= MIN_LABEL_PX, zoomed
-    if fit["hidden"]:
-        assert f"{fit['hidden']} tiles too small" in fit["note"], fit
-        assert zoomed["hidden"] < fit["hidden"], (fit, zoomed)
+    assert webpage.num(fit, "tiles") > 0
+    assert webpage.num(fit, "smallest") >= MIN_LABEL_PX, fit
+    assert webpage.num(zoomed, "smallest") >= MIN_LABEL_PX, zoomed
+    if webpage.num(fit, "hidden"):
+        note = webpage.as_str(fit["note"])
+        assert f"{fit['hidden']} tiles too small" in note, fit
+        assert webpage.num(zoomed, "hidden") < webpage.num(fit, "hidden"), (
+            fit,
+            zoomed,
+        )
 
 
 NON_TEXT_CONTRAST = """() => {
@@ -1387,7 +1416,10 @@ def test_meaningful_strokes_reach_three_to_one(server: str, scheme: Scheme) -> N
         webpage.watch(page)
         page.goto(server)
         webpage.until(page, PATHKEY_DRAWN)
-        ratios = page.evaluate(NON_TEXT_CONTRAST)
+        ratios = {
+            k: webpage.as_float(v)
+            for k, v in webpage.evaluate_dict(page, NON_TEXT_CONTRAST).items()
+        }
         browser.close()
     low = {k: round(v, 2) for k, v in ratios.items() if v < WCAG_NON_TEXT_CONTRAST}
     assert len(ratios) >= MIN_CONTRAST_ROLES
@@ -1427,8 +1459,11 @@ def test_no_label_glyph_plays_two_roles(server: str) -> None:
         page.click("#repos button[data-repo='nemik']")
         page.check("#rollup")
         _settle(page)
-        rolled = page.evaluate(
-            "() => cy.nodes('[rollup > 0]').map(n => [n.data('label'), n.data('rollup')])"
+        rolled = _label_counts(
+            webpage.evaluate_value(
+                page,
+                "() => cy.nodes('[rollup > 0]').map(n => [n.data('label'), n.data('rollup')])",
+            )
         )
         browser.close()
     seen: dict[str, str] = {}
