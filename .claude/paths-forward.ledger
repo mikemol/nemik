@@ -4405,3 +4405,8 @@
 2026-11-03T19:39:44Z  status W1563 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-03T19:41:19Z  interrupt W1564 minted    -         "Three tests run their child process through procrun.capture (test_ics_reader, test_witnesses git, test_layout opa): nine S404, S603 and S607 findings clear"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1175
 2026-11-03T19:41:26Z  status W1564 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-03T19:52:16Z  status W1564 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-03T19:57:15Z  tick  W1564 advanced  sweep     "937 landed 3580f94a 19:38:31Z (ruff 153 to 149), 938 landed 178e2766 19:51:26Z (ruff 149 to 140, procrun in three tests); standing 12 amended by R197 f1 (unmeasured axis, in-project probe copy); serve typed-row plan and TypedDict inventory on W1490; gate empty from 19:51:26Z [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-03T20:02:44Z  status W1520 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-03T20:04:36Z  interrupt W1565 minted    -         "adapter's possessive-apostrophe regex spells the typographic quote as an escape and installed.script raises instead of asserting: RUF001 and S101 clear, the lowering first entry of the repin stack"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1520
+2026-11-03T20:04:41Z  status W1565 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
