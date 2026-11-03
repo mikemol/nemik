@@ -12,10 +12,11 @@ from __future__ import annotations
 
 import argparse
 import re
-import subprocess
 import tomllib
 from pathlib import Path
 from typing import NamedTuple
+
+from mikemol.procrun.proc import TimeoutExpired, capture
 
 from nemik.check import default_root
 from nemik.say import say
@@ -71,12 +72,7 @@ def behind(root: Path, pin: Pin) -> int | None:
     clone = root / pin.peer
     if not (clone / ".git").exists():
         return None
-    run = subprocess.run(
-        ["git", "-C", str(clone), "rev-list", "--count", f"{pin.sha}..HEAD"],
-        capture_output=True,
-        text=True,
-        check=False,
-    )
+    run = capture(["git", "-C", str(clone), "rev-list", "--count", f"{pin.sha}..HEAD"])
     return int(run.stdout) if run.returncode == 0 and run.stdout.strip() else None
 
 
@@ -123,7 +119,7 @@ def deployed(namespace: str = "nemik") -> str | None:
 
     """
     try:
-        run = subprocess.run(
+        run = capture(
             [
                 "kubectl",
                 "-n",
@@ -133,12 +129,9 @@ def deployed(namespace: str = "nemik") -> str | None:
                 "-o",
                 "jsonpath={.items[0].spec.template.spec.containers[0].image}",
             ],
-            capture_output=True,
-            text=True,
-            check=False,
             timeout=60,
         )
-    except (OSError, subprocess.TimeoutExpired):
+    except (OSError, TimeoutExpired):
         return None
     m = _IMAGE_SHA.search(run.stdout.strip()) if run.returncode == 0 else None
     return m[1] if m else None
@@ -200,11 +193,8 @@ def main(argv: list[str] | None = None) -> int:
         sha = installed(args.receipt)
         if sha is not None:
             n = behind(args.root, Pin("host", "nemik", sha))
-            head = subprocess.run(
-                ["git", "-C", str(args.root / "nemik"), "rev-parse", "HEAD"],
-                capture_output=True,
-                text=True,
-                check=False,
+            head = capture(
+                ["git", "-C", str(args.root / "nemik"), "rev-parse", "HEAD"]
             ).stdout.strip()
             shown = "unknown" if n is None else n
             say(f"host installs nemik@{sha[:12]}: behind {shown}")
