@@ -18,29 +18,32 @@ def test_apply_calls_the_queue_writer_with_the_rows(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     """Apply calls the queue writer with the rows."""
-    seen: dict[str, object] = {}
+    cmds: list[list[str]] = []
+    read_rows: list[object] = []
 
     def fake_run(cmd: list[str], **_kwargs: object) -> subprocess.CompletedProcess[str]:
-        seen["cmd"] = cmd
-        seen["rows"] = json.loads(Path(cmd[-1]).read_text(encoding="utf-8"))
+        cmds.append(cmd)
+        rows_read: object = json.loads(Path(cmd[-1]).read_text(encoding="utf-8"))
+        read_rows.append(rows_read)
         return subprocess.CompletedProcess(cmd, 0)
 
     monkeypatch.setattr(subprocess, "run", fake_run)
     rows: list[rank.RankRow] = [{"symbol": "W1", "weight": 3}]
     rank._apply("/q/paths-forward.json", rows)
-    cmd = seen["cmd"]
-    assert isinstance(cmd, list)
+    (cmd,) = cmds
     assert cmd[0] == str(Path(sys.executable).parent / "mikemol-paths-forward")
     assert cmd[1:4] == ["--state", "/q/paths-forward.json", "--weights-from"]
-    assert seen["rows"] == rows
+    assert read_rows == [rows]
     assert not Path(cmd[-1]).exists(), "the temporary rows file is removed"
 
 
 def test_a_refusing_writer_fails_the_command(monkeypatch: pytest.MonkeyPatch) -> None:
     """A refusing writer fails the command."""
-    monkeypatch.setattr(
-        subprocess, "run", lambda cmd, **_kwargs: subprocess.CompletedProcess(cmd, 2)
-    )
+
+    def refuse(cmd: list[str], **_kwargs: object) -> subprocess.CompletedProcess[str]:
+        return subprocess.CompletedProcess(cmd, 2)
+
+    monkeypatch.setattr(subprocess, "run", refuse)
     with pytest.raises(SystemExit) as e:
         rank._apply("/q/paths-forward.json", [])
     assert e.value.code == EXIT_REFUSED

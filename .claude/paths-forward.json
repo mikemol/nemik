@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1544,
+  "counter": 1545,
   "waypoints": [
     {
       "symbol": "W1",
@@ -36919,24 +36919,24 @@
     {
       "symbol": "W1543",
       "title": "test_churn types the empty residue of its queue fixture so two Any reads clear",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Bind the empty residue list to a typed name in _queue so the dict literal holds no list[Any]; measure house mypy on the file (2 findings), run test_churn directly, ratchet --write. MYPY stack, shares nothing with stack 909 (ruff), queues now.",
-      "evidence": "2026-11-03T11:17:00Z: 2026-11-03T11:16:59Z (read by stampnote): G0 precommit, before the edit (card and manifest first). Pace read: 2026-11-03T11:15:19Z, taken 1 minute before this G0 (standing 15's 10-minute rule): mypy 511 left owes 190 (72 landings to zero), ruff 239 left owes 90 (78 to zero), codon owes 2. N: tests/test_churn.py holds 2 mypy misc findings, both on line 32, both from the empty residue list literal in _queue's dict (a list[Any] and the tuple holding it); K = 2, read from house mypy on the file just now. Four tiny files were read (test_churn 2, test_history 2, test_mpxj 2, test_deploy_manifest 2); the other three read from re.Match and untyped-parser Anys that need a different fix, so this stack is test_churn alone, a small stack to keep the gate at two. Actuator: bind the residue to a typed name (a list of Waypoint) before the dict. Sensor: house mypy on the file, mikemol-pycheck --ratchet --write, test_churn directly. Expected reading: mypy 511 falls by exactly 2 to 509, ruff flat at 239 in the tree. K: tests are outside the Codon census. MYPY stack, shares no file with stack 909 (ruff).",
+      "next_bounded_step": null,
+      "evidence": "2026-11-03T11:17:00Z: 2026-11-03T11:16:59Z (read by stampnote): G0 precommit, before the edit (card and manifest first). Pace read: 2026-11-03T11:15:19Z, taken 1 minute before this G0 (standing 15's 10-minute rule): mypy 511 left owes 190 (72 landings to zero), ruff 239 left owes 90 (78 to zero), codon owes 2. N: tests/test_churn.py holds 2 mypy misc findings, both on line 32, both from the empty residue list literal in _queue's dict (a list[Any] and the tuple holding it); K = 2, read from house mypy on the file just now. Four tiny files were read (test_churn 2, test_history 2, test_mpxj 2, test_deploy_manifest 2); the other three read from re.Match and untyped-parser Anys that need a different fix, so this stack is test_churn alone, a small stack to keep the gate at two. Actuator: bind the residue to a typed name (a list of Waypoint) before the dict. Sensor: house mypy on the file, mikemol-pycheck --ratchet --write, test_churn directly. Expected reading: mypy 511 falls by exactly 2 to 509, ruff flat at 239 in the tree. K: tests are outside the Codon census. MYPY stack, shares no file with stack 909 (ruff). | 2026-11-03T11:40:29Z: Landed abcc55e8 at 11:39:41Z (reflog, UTC): test_churn typed fixture lists, mypy 511 to 509. working_unnamed.py flagged W1543 at the landing; cleared.",
       "issued_at": "2026-11-03T11:16:50Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W1490",
-      "last_worked": "2026-11-03T11:18:20Z",
+      "last_worked": "2026-11-03T11:40:29Z",
       "ticks_blocked": 0,
       "manifest": [
         "tests/test_churn.py",
         "mypy-baseline.json"
       ],
       "size_class": "small",
-      "completed": null
+      "completed": "20261103T114029Z"
     },
     {
       "symbol": "W1544",
@@ -36960,6 +36960,28 @@
         "ruff-baseline.json"
       ],
       "size_class": "small"
+    },
+    {
+      "symbol": "W1545",
+      "title": "test_rank_apply types its fake writer and the rows it reads so three Any reads clear",
+      "status": "working",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Rewrite the fake writer in test_rank_apply.py with a typed json read (object-annotated), a typed fake_run for the second test instead of a lambda; measure house mypy on the file (3 findings), run it directly, ratchet --write. MYPY stack, shares nothing with stack 910 (ruff), queues now.",
+      "evidence": "2026-11-03T11:41:09Z: 2026-11-03T11:41:09Z (read by stampnote): G0 precommit, before the edit (card and manifest first). Pace read 2026-11-03T11:35:20Z, taken a few minutes before this G0 and the newest the producer has written (its timer runs every 10 minutes, R184): mypy 511 left owes 190 (72 landings to zero), ruff 233 left owes 90 (67 to zero), codon owes 2; both before 912's fall to 509. N: tests/test_rank_apply.py holds 3 mypy misc findings, read from house mypy on the file just now: line 25 (the json.loads of the rows file in fake_run, Any), line 33 (a read of seen[...] / cmd that carries Any) and line 42 (the lambda monkeypatched over subprocess.run, a Callable with Any parameters). K = 3, all verified by running house mypy before this G0. Actuator: one Write of the file: the json read annotated object, and a typed fake_refuse def in place of the lambda. Sensor: house mypy on the file, then mikemol-pycheck --ratchet --write and the file run directly. Expected reading: mypy 509 falls by exactly 3 to 506, ruff flat at 224 in the tree (the file keeps its subprocess monkeypatch; the S404 in it is a separate finding I leave). K: tests are outside the Codon census. MYPY stack, shares no file with stack 910 (ruff, inflight).",
+      "issued_at": "2026-11-03T11:40:56Z",
+      "minted_during": "interrupt",
+      "caused_by": "nemik:W1490",
+      "last_worked": "2026-11-03T11:42:06Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "tests/test_rank_apply.py",
+        "mypy-baseline.json"
+      ],
+      "size_class": "small",
+      "completed": null
     }
   ],
   "residue": [
