@@ -15,7 +15,6 @@ import argparse
 import json
 import re
 import shutil
-import subprocess
 import sys
 import tempfile
 import tomllib
@@ -23,6 +22,7 @@ from datetime import date, datetime
 from pathlib import Path
 from typing import NamedTuple, TypedDict
 
+from mikemol.procrun.proc import capture
 from rdflib import Graph, Literal, URIRef
 from rdflib.namespace import DCTERMS, RDF
 
@@ -199,6 +199,33 @@ def _venv_ics() -> str:
     return str(Path(sys.executable).parent / "mikemol-ics")
 
 
+class CalendarError(RuntimeError):
+    """A calendar helper or reader exited nonzero; carries what it printed."""
+
+    def __init__(self, returncode: int, stdout: str, stderr: str) -> None:
+        """Keep the exit status and both streams the command printed."""
+        super().__init__(f"exit {returncode}")
+        self.returncode = returncode
+        self.stdout = stdout
+        self.stderr = stderr
+
+
+def _run(argv: list[str]) -> str:
+    """Run one calendar command and return what it printed.
+
+    Returns:
+        The command's standard output.
+
+    Raises:
+        CalendarError: The command exited nonzero.
+
+    """
+    done = capture(argv)
+    if done.returncode:
+        raise CalendarError(done.returncode, done.stdout, done.stderr)
+    return done.stdout
+
+
 def occurrences(
     collections: dict[str, str],
     *,
@@ -233,17 +260,8 @@ def occurrences(
         out: list[Occurrence] = []
         for label, name in sorted(collections.items()):
             f = tmp / f"{label}.ics"
-            subprocess.run(
-                [str(helper), "--export-calendar", name, "--out", str(f)],
-                check=True,
-                capture_output=True,
-            )
-            text = subprocess.run(
-                [ics, "--from", start, "--window", window, "--json", str(f)],
-                check=True,
-                capture_output=True,
-                text=True,
-            ).stdout
+            _run([str(helper), "--export-calendar", name, "--out", str(f)])
+            text = _run([ics, "--from", start, "--window", window, "--json", str(f)])
             pats = (includes or {}).get(label, ())
             total = matched = 0
             for line in text.splitlines():
@@ -280,10 +298,6 @@ def occurrences(
 
 def _by_start(r: Occurrence) -> tuple[str, str, str]:
     return (r["start"] or "", r["label"], r["uid"] or "")
-
-
-def _said(raw: object) -> str:
-    return raw.decode(errors="replace").strip() if isinstance(raw, bytes) else ""
 
 
 def dedupe(rows: list[Occurrence]) -> list[Occurrence]:
@@ -381,10 +395,10 @@ def _export(
     except FileNotFoundError as e:
         say(f"ERROR: {e}")
         raise SystemExit(2) from e
-    except subprocess.CalledProcessError as e:
+    except CalendarError as e:
         # The helper refuses (nemik:W193) when Akonadi is not running; say what it said, not a
         # traceback.
-        why = _said(e.stdout) or _said(e.stderr) or f"exit {e.returncode}"
+        why = e.stdout.strip() or e.stderr.strip() or f"exit {e.returncode}"
         say(f"ERROR: the calendar export failed: {why.splitlines()[-1]}")
         raise SystemExit(2) from e
     return occs, stats

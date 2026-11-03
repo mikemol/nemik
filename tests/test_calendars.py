@@ -3,7 +3,6 @@
 """nemik:W157: calendars exported by the helper, read through mikemol-ics, temp files removed."""
 
 import stat
-import subprocess
 from datetime import date
 from pathlib import Path
 
@@ -14,6 +13,7 @@ from rdflib import Graph, Literal
 from nemik.adapter import NEMIK, OSLC_CM, STATE, waypoint_uri
 from nemik.calendars import (
     Calendar,
+    CalendarError,
     Occurrence,
     _venv_ics,
     days_main,
@@ -84,7 +84,7 @@ def test_a_failed_export_raises_rather_than_reading_as_a_free_day(
     tmp_path: Path, ics: str
 ) -> None:
     """A helper that fails raises, so a failed export never reads as a free day."""
-    with pytest.raises(subprocess.CalledProcessError):
+    with pytest.raises(CalendarError):
         occurrences(
             {"home": "Personal"},
             start="2026-10-01",

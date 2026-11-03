@@ -3,12 +3,12 @@
 
 state file: `.claude/paths-forward.json`
 
-counter 1534 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:d4f2d774ccab2277`
+counter 1535 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:65a04b3b60b37830`
 
 | # | symbol | status |
 |---|---|---|
 | 1 | W1525 | working |
-| 2 | W1533 | working |
+| 2 | W1528 | working |
 | 3 | W1075 | ready |
 | 4 | W1139 | ready |
 | 5 | W1279 | ready |
@@ -103,24 +103,24 @@ counter 1534 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:d4f
 | 94 | W1383 | ready |
 | 95 | W1384 | ready |
 | 96 | W1385 | ready |
-| 97 | W1528 | ready |
-| 98 | W1175 | ready |
-| 99 | W1229 | ready |
-| 100 | W1246 | ready |
-| 101 | W1288 | ready |
-| 102 | W1300 | ready |
-| 103 | W1345 | ready |
-| 104 | W1347 | ready |
-| 105 | W1390 | ready |
-| 106 | W1395 | ready |
-| 107 | W1399 | ready |
-| 108 | W1418 | ready |
-| 109 | W1514 | ready |
-| 110 | W1515 | ready |
-| 111 | W1518 | ready |
-| 112 | W1522 | ready |
-| 113 | W1532 | ready |
-| 114 | W1534 | ready |
+| 97 | W1175 | ready |
+| 98 | W1229 | ready |
+| 99 | W1246 | ready |
+| 100 | W1288 | ready |
+| 101 | W1300 | ready |
+| 102 | W1345 | ready |
+| 103 | W1347 | ready |
+| 104 | W1390 | ready |
+| 105 | W1395 | ready |
+| 106 | W1399 | ready |
+| 107 | W1418 | ready |
+| 108 | W1514 | ready |
+| 109 | W1515 | ready |
+| 110 | W1518 | ready |
+| 111 | W1522 | ready |
+| 112 | W1532 | ready |
+| 113 | W1534 | ready |
+| 114 | W1535 | ready |
 | 115 | W986 | blocked |
 | 116 | W1007 | blocked |
 | 117 | W1008 | blocked |
@@ -1513,6 +1513,7 @@ counter 1534 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:d4f
 | 1504 | W1529 | done |
 | 1505 | W1530 | done |
 | 1506 | W1531 | done |
+| 1507 | W1533 | done |
 
 ## waypoints
 
@@ -1520,10 +1521,9 @@ counter 1534 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:d4f
    handler at 941
    - next: check.py line 938 subprocess.run to capture; the CalledProcessError handler at 941 never fires with
      check=False, so test returncode; run codon_first.py check first
-2. **W1533** (working) history.py reads queue cards through one typed helper so three Any reads clear
-   - next: Run w1533_history.py: helper _cards_of, used by card_table and oldest_cards, and an object-annotated
-     json.loads in oldest_rows; measure mypy; differential on card_table, oldest_cards and oldest_rows; codon_first
-     history.
+2. **W1528** (working) W1175 child: calendars.py runs its two subprocess calls through procrun.capture
+   - next: calendars.py lines 236 and 241 subprocess.run to capture; the CalledProcessError handler at 384 becomes a
+     returncode test
 3. **W1075** (ready) Take an idle-host staging figure for one test target and split it by input (venv, Chromium, opa,
    Codon, corpus)
 4. **W1139** (ready) The pace carries cards and landing-rate rows beside the ratchets, each with its horizon in days at
@@ -1926,89 +1926,93 @@ counter 1534 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:d4f
    - next: Decide the convention on one file (a module constant named for what is counted, e.g. ASKS = 7, placed beside
      the fixture); read ten more sites before deciding, since the first ten were all assertion expectations; a
      per-file-ignores entry in ruff-house.toml is a waiver and is out
-97. **W1528** (ready) W1175 child: calendars.py runs its two subprocess calls through procrun.capture
-   - next: calendars.py lines 236 and 241 subprocess.run to capture; the CalledProcessError handler at 384 becomes a
-     returncode test
-98. **W1175** (ready) Ruff in larger steps, after the Any-boundary moves: D103 (423 in tests) and D205 (68) by
+97. **W1175** (ready) Ruff in larger steps, after the Any-boundary moves: D103 (423 in tests) and D205 (68) by
    mechanization, PLC0415 (271) as hoists with an importdag cycle refusal turned into atomize cards, T201 (124 in src)
    into one output module
    - next: When the repin W1396 lands mikemol.procrun in the venv: convert one covered caller (overlaps.py), run the
      codon census with the cached compiler and compare its entry before and after; then convert the other 12 covered
      calls.
-99. **W1229** (ready) A repair of a rejected file in a stacked round uses the predecessor stack's frozen files as its
+98. **W1229** (ready) A repair of a rejected file in a stacked round uses the predecessor stack's frozen files as its
    base, in a scratch worktree, not git's HEAD
    - next: mtools-ad: a mode that restores a file as of a queued stack's frozen files, in mikemol-scratch; nemik:W1229
      holds the case (test_calendars.py, stack622)
-100. **W1246** (ready) The queue mirror lists each retro as '0 finding(s)', so no finding or its witness can be audited
+99. **W1246** (ready) The queue mirror lists each retro as '0 finding(s)', so no finding or its witness can be audited
    from it
    - next: Watch the next three tick-open outputs for the gate line; then decide whether a second hook (a gap figure at
      tick-close) is wanted.
-101. **W1288** (ready) Tests without a docstring (D103, 398): one sentence per test function, taken from its name, a
+100. **W1288** (ready) Tests without a docstring (D103, 398): one sentence per test function, taken from its name, a
    file at a time
    - next: Next tick: quote the pace age and flag it only if over 30 min.
-102. **W1300** (ready) letters.py compiles under Codon: its NamedTuple rows become plain classes, shlex and UTC go, and
+101. **W1300** (ready) letters.py compiles under Codon: its NamedTuple rows become plain classes, shlex and UTC go, and
    its subprocess, shutil and sys.executable code moves to a module of its own, so codon falls 2
-103. **W1345** (ready) tests/corpus/pieces/fixture-fleet-3-repos.json is stale against the current check output:
+102. **W1345** (ready) tests/corpus/pieces/fixture-fleet-3-repos.json is stale against the current check output:
    regenerating it with tools/gen_pieces_corpus.py adds 2724 lines of findings rows, and the corpus is the Python half
    of the cross-language pieces conformance run (mtools:W1072)
    - next: Read what mtools:W1072's run does with this fixture and its last result; find the commit after which the
      check output on the fixture fleet changed (git log on the check rules and src/nemik/data/shapes.ttl against the
      fixture's last commit); then regenerate with tools/gen_pieces_corpus.py on its own stack with the new sha256
      recorded, or say why not
-104. **W1347** (ready) tests/test_layout.py splits its 14 autofixable composite assertions, so ruff PT018 falls by 14
+103. **W1347** (ready) tests/test_layout.py splits its 14 autofixable composite assertions, so ruff PT018 falls by 14
    - next: Type the Any values the composite asserts read (test_fruit.py, test_frontier.py, test_read_api.py,
      test_wake_alarms.py, test_witnesses.py, test_layout.py), then split the asserts, so PT018 falls with no mypy rise;
      or take hooks/record_event.py (25 ruff findings, 4 of them D103)
-105. **W1390** (ready) Hoist the function-local imports of calendars, witnesses, salience and the small src modules past
+104. **W1390** (ready) Hoist the function-local imports of calendars, witnesses, salience and the small src modules past
    the name clashes the probe refused
    - next: Remaining: calendars (11 sites, Graph bound under a module-level block), witnesses (9, urllib imported two
      ways: the codemod skip list only skips from-imports), salience (6, Weights bound under a module-level block); cards
      (mypy 0 to 2), shaclinc (a guard failed), history (reaches churn, F402), adapter (a guard failed), critical
      (reaches check, F402) were probed and left out. Extend hoist_imports.py to skip plain imports before the next
      probe.
-106. **W1395** (ready) Answer mtools:W2186 - baselinetop and ratchetseries open the ratchet baseline themselves, so they
+105. **W1395** (ready) Answer mtools:W2186 - baselinetop and ratchetseries open the ratchet baseline themselves, so they
    need the mypy-baseline.d directory read
    - next: Next tick: look for a reply in the inbox or the mtools card; close W1395 when the adopter card exists and
      mtools has the answer.
-107. **W1399** (ready) baselinetop and ratchetseries read a mypy-baseline.d directory through baselinedir.read when one
+106. **W1399** (ready) baselinetop and ratchetseries read a mypy-baseline.d directory through baselinedir.read when one
    exists, once mtools W2191 lands the per-module writer
    - next: After mtools:W2191 lands and the venv is rebuilt: make baselinetop.py and ratchetseries.py take the merged
      text from baselinedir.read(Path('mypy-baseline.d')) when that directory exists, with a test for each.
-108. **W1418** (ready) Answer the three mtools letters that say W2088 and W2099 are done: read W1246 and W1229, lift the
+107. **W1418** (ready) Answer the three mtools letters that say W2088 and W2099 are done: read W1246 and W1229, lift the
    waits they name or say why not
-109. **W1514** (ready) Export nemik-wake's per-workstream verdict (wake required, 0 or 1, and the awake state) as a
+108. **W1514** (ready) Export nemik-wake's per-workstream verdict (wake required, 0 or 1, and the awake state) as a
    metric so luthen can page on wake-required AND stamp older than its window, not a flat 2 h
    - next: Read src/nemik/waitemit.py to see what it already emits and whether a wake gauge belongs there; read roster()
      in wake.py for the verdict's fields; design the series name and labels; reply to luthen-observability with the
      metric name once it exists.
-110. **W1515** (ready) Decide and, if adopted, build ready_wake as a nemik tool beside nemik-wake and nemik-inbound, and
+109. **W1515** (ready) Decide and, if adopted, build ready_wake as a nemik tool beside nemik-wake and nemik-inbound, and
    a flip-line mode of nemik-witnesses --apply, so one Monitor tails queue events and measurement events in one line
    format (luthen-observability W1931)
    - next: Take luthen-observability's source and tests at the sha they name (checks/ready_wake.py, landed 54823aa8, 9
      tests) and read them; decide (1) adopt as a nemik command and (2) emit flip lines from nemik-witnesses --apply; a
      new command needs the five registries (pyproject, BUILD.bazel, SKILL.md, workflows.toml, codon-baseline) and a
      Codon-compilable module; related to W1513 and W1514.
-111. **W1518** (ready) nemik-witnesses' file observer reports mtime (epoch seconds) and size beside exists, so a witness
+110. **W1518** (ready) nemik-witnesses' file observer reports mtime (epoch seconds) and size beside exists, so a witness
    can say a stamp moved (luthen-observability W1927)
    - next: Extend _file in src/nemik/witnesses.py: {exists, mtime, size} for an existing path (stat, never read); keep
      exists-only for a missing one; a test in tests/ for the three shapes; document in the module docstring and in
      skills/nemik/SKILL.md; the mtime is a number so Rego compares it with time.parse_rfc3339_ns(input.now) / 1e9.
-112. **W1522** (ready) A checked-in differential harness: freeze the inputs, mask named clock fields, run old-new-old
+111. **W1522** (ready) A checked-in differential harness: freeze the inputs, mask named clock fields, run old-new-old
    - next: Write tools/diff_harness.py (and a test): it snapshots the 18 queue files to a scratch root, takes a list of
      argv modes and an old and a new source tree, masks regexes named on the command line (the proven ones: '`<n>` h'
      and '`<n.n>` d'), runs old, new, old with PYTHONHASHSEED=0 and prints equal, drift or the first differing lines;
      then the G0 sensor lines name it. It replaces w1480_diff, w1496_diff, w1500_diff, w1508_diff, w1509_diff and
      w1521_diff in the scratch directory, which were each found after a failed first attempt.
-113. **W1532** (ready) List working cards that no live stack names, before each submit
+112. **W1532** (ready) List working cards that no live stack names, before each submit
    - next: Write a read-only scratch probe (then a mode, if mtools' round_wire can host it) that diffs the writer's
      working cards against mikemol-commit --in-gate --json waypoints and prints the working cards no entry names; run it
      before each submit. Closes standing 17's testable clause mechanically (R175 finding 1).
-114. **W1534** (ready) Tick-close ATOMIZE print skips a card a live gating stack names
+113. **W1534** (ready) Tick-close ATOMIZE print skips a card a live gating stack names
    - blocked on: mtools:W2258
    - next: Find where --tick-close computes ATOMIZE (the writer, mtools' mikemol-pathsforward) and whether the in-gate
      exemption can live there; if it is mtools' code, send mtools a nudge citing nemik:W1534 with the three false
      positives (W1175 twice, W1526) and ask for an exemption for a card a live gating stack names, with a test. Do not
      suppress by marking or unmarking the card (R176 finding 2).
+114. **W1535** (ready) tests/test_layout.py types its page.evaluate results so its Any reads clear
+   - next: tests/test_layout.py holds 262 of the repo's 578 mypy findings, nearly all Expression has type Any from
+     page.evaluate(...). Step 1: count the evaluate sites by result kind (int for .length, bool, list of str, dict) with
+     a read-only scratch probe; step 2: add typed helpers to tests/webpage.py (evaluate_int, evaluate_bool,
+     evaluate_strs, ...) taking the page and the JS and returning the narrowed type via an object-annotated result; step
+     3: a codemod moves one kind per stack. Atomize by kind (one stack per helper) because the file is 1700 lines. Pairs
+     with ruff-flat; MYPY stack, shares mypy-baseline.json.
 115. **W986** (blocked) A ratchet paydown rate requirement with teeth: a repo is behind when a ratchet's fall over a
    trailing window of landed commits is below a requirement that only rises
    - blocked on: W994, W1002
@@ -4946,6 +4950,7 @@ counter 1534 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:d4f
 1504. **W1529** (done) metrics.spool_lines types its spool events so ten Any reads clear
 1505. **W1530** (done) Pin spool_lines skipping a JSON non-object line with a test
 1506. **W1531** (done) history.py reads queue JSON through a typed helper so five Any reads clear
+1507. **W1533** (done) history.py reads queue cards through one typed helper so three Any reads clear
 
 ## residue
 
@@ -7298,3 +7303,16 @@ counter 1534 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:d4f
   before the edit, N and K, a frozen differential by hash on 11762 and 50 entries, a first-error probe). Two findings,
   both about practice the G1 itself leaves open. No fixpoint is declared. Carried open findings as in R175, minus R175's
   (met).; 2 finding(s)
+- **nemik:R175** (-) round 177: stack 899 (W1526) 8cafe863 landed 07:57:36Z; stack 902 (W1533, mypy) inflight since
+  07:57:41Z; stack 901 (W1525 check._git, ruff 268 to 265) queued; stack 903 (W1528 calendars, lowers BOTH ruff 265 to
+  261 and mypy 579 to 578) staged, waits for both 901 and 902: root Verified from the reflog (unix stamp 1793692656 =
+  07:57:36Z, 1519 s after 010c1ba0 at 07:32:17Z): 899 gated 07:32:22Z to 07:57:36Z (25 min 14 s) and 902 began 07:57:41Z
+  (began_ns 1793692661), 5 s after, so the gate was not empty. R176 is met: the pace was the first command and carried
+  its own stamp (07:55:13Z, and the G1 states that it predates the landing by 2 min), and the ATOMIZE false positive was
+  run to cause by reading code, not guessed (atomize skips a card a live stack names, but inflight.cards_of splits on a
+  tab while the commit writer emits bare json.dumps, so the exemption never fires), sent to mtools with the lines,
+  confirmed and claimed as mtools:W2258; W1534 is blocked on it and the ATOMIZE W1525 print is the fourth instance of
+  the one cause. I accept all of that. The W1528 contract change is named in the stack body and pinned by a test, and I
+  grepped src and tests for CalledProcessError and CalendarError: the only files are calendars.py and test_calendars.py,
+  so no other caller sees the change. I did not re-run any figure. Two findings. No fixpoint is declared. Carried open
+  findings as in R176, minus R176's two (met).; 2 finding(s)

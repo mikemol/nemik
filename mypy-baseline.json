@@ -8,9 +8,6 @@
  "src/nemik/cachestore.py": {
   "misc": 4
  },
- "src/nemik/calendars.py": {
-  "misc": 1
- },
  "src/nemik/check.py": {
   "misc": 2
  },
