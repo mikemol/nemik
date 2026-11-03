@@ -36,7 +36,7 @@
   "misc": 10
  },
  "src/nemik/rank.py": {
-  "misc": 94,
+  "misc": 51,
   "type-arg": 2
  },
  "src/nemik/serve.py": {

@@ -742,15 +742,238 @@ def fruit(
     }
 
 
-def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
-    """nemik-rank REPO: REPO's ready waypoints ordered by cross-repo downstream weight.
+def _write_round(g: Graph, landings: Path, round_file: Path, weights: Weights) -> None:
+    """Write every repo's round to the round file, then stop (nemik:W1025)."""
+    # nemik:W1059: a round holds the work in progress, so a repo with only that has one
+    busy = {_repo(n) for n in g.subjects(OSLC_CM.state, NEMIK.Working)}
+    by_repo = {
+        repo: [dict(r) for r in rank(g, repo, weights, with_working=True)]
+        for repo in sorted({*fleet_repos(g), *busy})
+    }
+    write_round_file(by_repo, landings, round_file)  # W1025
+
+
+def _report_all(g: Graph, args: Options, weights: Weights) -> None:
+    """Print every workstream's ready items in one cross-repo order."""
+    fleet = rank_fleet(g, weights)
+    if args.json:
+        say(json.dumps(fleet, indent=2))
+        return
+    for entry in fleet:
+        head = f"{entry['weight']:4} {entry['cite']:32} {entry['band_name']:9}"
+        say(
+            f"{head} op={entry['operator']} down={entry['downstream']:<4} "
+            f"{str(entry['title'])[:60]}"
+        )
+
+
+def _report_item(g: Graph, args: Options) -> None:
+    """Print the band of one waypoint, whatever its status.
 
     Raises:
-        SystemExit: with the exit code of the mode it ran, for the modes that report a verdict.
+        SystemExit: with code 2, when the card is not a waypoint of any workstream.
 
     """
-    from nemik.check import default_root, survey
+    repo_, _, sym = args.item.partition(":")
+    n = URIRef(f"{BASE}{repo_}/{sym}")
+    if (n, NEMIK.symbol, None) not in g:
+        say(f"rank: {args.item} is not a waypoint in any workstream")
+        raise SystemExit(2)
+    vec = str(g.value(n, NEMIK.vector) or "") or None
+    b, why = band(vec, load_bands())
+    state = str(g.value(n, OSLC_CM.state) or "").rsplit("/", 1)[-1].rsplit("#", 1)[-1]
+    say(f"{args.item}  {state}  {b}  ({why})  {vec or 'no vector'}")
 
+
+def _report_check(g: Graph, args: Options, weights: Weights) -> None:
+    """Print the drift, inversion and policy findings, then exit 1 if there was any.
+
+    Raises:
+        SystemExit: with code 1 when any finding was printed, else 0.
+
+    """
+    failed = False
+    for u in umbrellas(g, args.repo):
+        # nemik:W112: DECOMPOSE puts the DIRECT open children in blocked_on; the frontier is the
+        # transitive leaves beneath them (paperkit read the leaves as children and found 2 of 5
+        # "wrong": W59 <- W60 <- W132, W78 listed W132, W78, not W60).
+        say(
+            f"rank: UMBRELLA {ref_of(u)} is ready with open work under it: "
+            f"children {', '.join(sorted(ref_of(x) for x in children(g, u)))}; "
+            f"leaves {', '.join(sorted(ref_of(x) for x in frontier(g, u)[0]))}"
+        )
+        failed = True
+    rows = rank(g, args.repo, weights)
+    if d := drift(g, args.repo, weights, rows):
+        nxt, top = d
+        say(
+            f"rank: DRIFT {args.repo}: next is {nxt['symbol']} ({nxt['weight']}) "
+            f"but {top['symbol']} carries {top['weight']}"
+        )
+        failed = True
+    # nemik:W133: the declared guarantees (bands.toml), each naming the rule and the pair.
+
+    bands = load_bands()
+    guar = load_guarantees(bands=bands)
+    if inv := inversion(g, args.repo, rows, bands, guar):
+        nxt, top = inv
+        say(
+            f"rank: INVERSION {args.repo}: next is {nxt['symbol']} ({nxt['band_name']}) "
+            f"while {top['symbol']} is ready at {top['band_name']} (floor {guar.floor})"
+        )
+        failed = True
+    for dep, blocker, cls, surfaces in policy_blocks(g, args.repo, guar):
+        say(
+            f"rank: POLICY {args.repo}: {dep} is ready while {cls} {blocker} is open "
+            f"on {', '.join(surfaces)}"
+        )
+        failed = True
+    # A census, not a verdict (the letter's "count the unscored ones"): exit is unchanged.
+    say(f"rank: UNSCORED {args.repo} {unscored(g, args.repo)}")
+    if not failed:
+        say(f"rank: OK {args.repo}: next ready item carries the top cross-repo weight")
+    raise SystemExit(1 if failed else 0)
+
+
+def _report_goals(g: Graph, args: Options, weights: Weights) -> None:
+    """Print each goal with its frontier, on-deck leaf and outside waits."""
+    gs = goals(g, args.repo, weights)
+    if args.json:
+        say(json.dumps(gs, indent=2))
+        return
+    for r in gs:
+        path = "clear" if r["clear"] else "waits on " + ", ".join(r["outside"])
+        say(
+            f"{r['goal']:6} {r['weight']:4}  on deck {r['on_deck'] or '-'}; path {path}  {r['title'][:60]}"
+        )
+
+
+def _report_ask(g: Graph, args: Options) -> None:
+    """Print what one operator ask needs and which ready cards it pushes down.
+
+    Raises:
+        SystemExit: with code 2, when the ask is not a card of the repo's graph.
+
+    """
+    # nemik:W244: an ask lives inside the model. Show where its demand lands (what it needs)
+    # and which of this repo's ready cards sit lower because of it (what it overrides), so the
+    # operator's reply can refactor the graph.
+    from nemik.salience import ask_effect, show
+
+    try:
+        effect = ask_effect(g, args.repo, args.ask)
+    except ValueError as err:
+        say(f"rank: {err}")
+        raise SystemExit(2) from err
+    say(f"ask {effect.ref} in {args.repo}'s ranking")
+    if effect.stranded:
+        say("  needs: nothing on the ready frontier (stranded demand)")
+    for card, current in effect.needs:
+        say(f"  needs {card:28} carries {show(current)}")
+    for card, without, with_ in effect.displaced:
+        say(f"  overrides {card}: position {without} without the ask, {with_} with it")
+    if not effect.displaced:
+        say("  overrides: no ready card of this repo sits lower because of it")
+
+
+def _report_flow(g: Graph, args: Options) -> None:
+    """Print the flow salience beside the old weight, and the pairs they order differently."""
+    # nemik:W240: the old downstream weight beside the flow model's salience (exact; shown
+    # rounded), and every pair the two order differently. The model replaces the old order
+    # only after this audit agrees (W241).
+    from nemik.metrics import residue_gaps
+    from nemik.salience import audit, load_gate_weights, load_wait_weight, show
+
+    # nemik:W251: --residue adds each recorded gap (the policy's residue) as demand at its card,
+    # weighted by gate from rank-weights.toml [residue] (W253); off by default.
+    gaps = residue_gaps(args.root) if args.residue else None
+    # nemik:W712: the time a blocked card has waited adds demand at what it waits on, at the
+    # per_tick measured in docs/wait-weight.md
+    result = audit(
+        g,
+        args.repo,
+        residue=gaps,
+        workable=args.workable,
+        gate_weights=load_gate_weights(),
+        wait_weight=load_wait_weight(),
+    )
+    old_pos = {c: i + 1 for i, c in enumerate(result.old_order())}
+    new_pos = {c: i + 1 for i, c in enumerate(result.new_order())}
+    say(
+        f"flow {args.repo}: {len(result.rows)} ready, {result.sources} sources, "
+        f"{len(result.flow.stranded)} stranded"
+    )
+    for row in sorted(result.rows, key=lambda r: new_pos[r.ref]):
+        say(
+            f"{row.ref:28} old={row.old:<5} flow={show(row.new):>10}  "
+            f"old#{old_pos[row.ref]:<4} flow#{new_pos[row.ref]}"
+        )
+    pairs = result.disagreements()
+    say(f"flow {args.repo}: {len(pairs)} pair(s) ordered differently")
+    for above, below in pairs:
+        say(f"  old puts {above} above {below}; flow puts {below} above {above}")
+    # Why: the old weight counts a shared source in full for each card; the flow splits it.
+    # Each card that the old arm put above another and the flow did not is explained by the
+    # sources it shares with other ready cards.
+    for card in sorted({above for above, _ in pairs}):
+        shared = result.contested(card)
+        say(f"  {card}: {len(shared)} contested source(s)")
+        for source, demand, part, others in shared[:8]:
+            say(
+                f"    {source}: demand {show(demand)}, {card} absorbs {show(part)}, "
+                f"shared with {', '.join(others[:4])}"
+            )
+
+
+def _report_rank(g: Graph, args: Options, weights: Weights) -> None:
+    """Print the repo's ranked ready items: the round, the writer's input, JSON or lines."""
+    rows = rank(g, args.repo, weights, toward=args.toward, with_working=args.round)
+    if args.round:
+        show_round(args.repo, [dict(r) for r in rows], args.landings)
+        return
+    if args.apply:
+        _apply(args.apply, rows)
+        return
+    if args.json:
+        say(json.dumps(rows, indent=2))
+        return
+    for listed in rows:
+        say(
+            f"{listed['symbol']:6} {listed['band_name']:9} op={listed['operator']} down={listed['downstream']:<4} {listed['title'][:70]}"
+        )
+
+
+class Options(argparse.Namespace):
+    """nemik-rank's parsed command line, typed so each option reads as its own type."""
+
+    repo: str
+    root: Path
+    goals: bool
+    json: bool
+    apply: str
+    check: bool
+    band: str
+    item: str
+    all: bool
+    flow: bool
+    workable: bool
+    residue: bool
+    ask: str
+    toward: str
+    round: bool
+    landings: Path
+    round_file: Path | None
+    assume_done: list[str]
+    pace: bool
+
+
+def _parse(argv: list[str] | None, root: Path) -> Options:
+    """Parse nemik-rank's command line, `root` being the default of --root.
+
+    Returns:
+        The parsed options.
+
+    """
     ap = argparse.ArgumentParser(
         prog="nemik-rank", description=(main.__doc__ or "").splitlines()[0]
     )
@@ -760,7 +983,7 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     ap.add_argument(
         "--root",
         type=Path,
-        default=default_root(),
+        default=root,
         help="~/github, or the export layout root",
     )
     ap.add_argument(
@@ -771,6 +994,7 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     ap.add_argument("--json", action="store_true", help="machine-readable output")
     ap.add_argument(
         "--apply",
+        default="",
         metavar="STATE",
         help="write the ranked weights into that queue through "
         "mikemol-paths-forward --weights-from "
@@ -783,11 +1007,13 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     )
     ap.add_argument(
         "--band",
+        default="",
         metavar="VECTOR",
         help="print the band a WV:1 vector falls in, and why",
     )
     ap.add_argument(
         "--item",
+        default="",
         metavar="REPO:W<n>",
         help="print the band of that waypoint, whatever its status",
     )
@@ -816,6 +1042,7 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     )
     ap.add_argument(
         "--ask",
+        default="",
         metavar="REPO:W<n>",
         help="what that waiting card (an operator ask) needs and which of REPO's ready "
         "cards it pushes down in the flow model (nemik:W244)",
@@ -861,11 +1088,50 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         help="print one line per behind or unknown ratchet from ratchet-pace.json in --root and "
         "exit 1 when any is, 0 when none, 2 when the file is unreadable (nemik:W1107)",
     )
+    return ap.parse_args(argv, namespace=Options())
+
+
+def _dispatch(g: Graph, args: Options, weights: Weights) -> bool:
+    """Run the one mode the options name, and say whether there was one.
+
+    Returns:
+        True when a mode ran, False when the options name none.
+
+    """
+    handled = True
+    if args.round_file is not None:
+        _write_round(g, args.landings, args.round_file, weights)
+    elif args.all:
+        _report_all(g, args, weights)
+    elif args.item:
+        _report_item(g, args)
+    elif args.check:
+        _report_check(g, args, weights)
+    elif args.goals:
+        _report_goals(g, args, weights)
+    elif args.ask:
+        _report_ask(g, args)
+    elif args.flow:
+        _report_flow(g, args)
+    else:
+        handled = False
+    return handled
+
+
+def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
+    """nemik-rank REPO: REPO's ready waypoints ordered by cross-repo downstream weight.
+
+    Raises:
+        SystemExit: with the exit code of the mode it ran, for the modes that report a verdict.
+
+    """
+    from nemik.check import default_root, survey
+
     # --pace is read-only and fast: no survey, only the pace file (nemik:W1107)
     answered = pace_process() if argv is None else pace_exit(argv)
     if answered >= 0:
         raise SystemExit(answered)
-    args = ap.parse_args(argv)
+    args = _parse(argv, default_root())
     if (
         args.band
     ):  # nemik:W152 (el-openglo:W176): check a vector's band before the item closes
@@ -883,179 +1149,9 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         from nemik.critical import assume_done
 
         g = assume_done(g, args.assume_done)
-    if args.round_file is not None:
-        # nemik:W1059: a round holds the work in progress, so a repo with only that has one
-        busy = {_repo(n) for n in g.subjects(OSLC_CM.state, NEMIK.Working)}
-        by_repo = {
-            repo: [dict(r) for r in rank(g, repo, weights, with_working=True)]
-            for repo in sorted({*fleet_repos(g), *busy})
-        }
-        write_round_file(by_repo, args.landings, args.round_file)  # W1025
+    if _dispatch(g, args, weights):
         return
-    if args.all:
-        fleet = rank_fleet(g, weights)
-        if args.json:
-            say(json.dumps(fleet, indent=2))
-            return
-        for entry in fleet:
-            head = f"{entry['weight']:4} {entry['cite']:32} {entry['band_name']:9}"
-            say(
-                f"{head} op={entry['operator']} down={entry['downstream']:<4} "
-                f"{str(entry['title'])[:60]}"
-            )
-        return
-    if args.item:
-        repo_, _, sym = args.item.partition(":")
-        n = URIRef(f"{BASE}{repo_}/{sym}")
-        if (n, NEMIK.symbol, None) not in g:
-            say(f"rank: {args.item} is not a waypoint in any workstream")
-            raise SystemExit(2)
-        vec = str(g.value(n, NEMIK.vector) or "") or None
-        b, why = band(vec, load_bands())
-        state = (
-            str(g.value(n, OSLC_CM.state) or "").rsplit("/", 1)[-1].rsplit("#", 1)[-1]
-        )
-        say(f"{args.item}  {state}  {b}  ({why})  {vec or 'no vector'}")
-        return
-    if args.check:
-        failed = False
-        for u in umbrellas(g, args.repo):
-            # nemik:W112: DECOMPOSE puts the DIRECT open children in blocked_on; the frontier is the
-            # transitive leaves beneath them (paperkit read the leaves as children and found 2 of 5
-            # "wrong": W59 <- W60 <- W132, W78 listed W132, W78, not W60).
-            say(
-                f"rank: UMBRELLA {ref_of(u)} is ready with open work under it: "
-                f"children {', '.join(sorted(ref_of(x) for x in children(g, u)))}; "
-                f"leaves {', '.join(sorted(ref_of(x) for x in frontier(g, u)[0]))}"
-            )
-            failed = True
-        rows = rank(g, args.repo, weights)
-        if d := drift(g, args.repo, weights, rows):
-            nxt, top = d
-            say(
-                f"rank: DRIFT {args.repo}: next is {nxt['symbol']} ({nxt['weight']}) "
-                f"but {top['symbol']} carries {top['weight']}"
-            )
-            failed = True
-        # nemik:W133: the declared guarantees (bands.toml), each naming the rule and the pair.
-
-        bands = load_bands()
-        guar = load_guarantees(bands=bands)
-        if inv := inversion(g, args.repo, rows, bands, guar):
-            nxt, top = inv
-            say(
-                f"rank: INVERSION {args.repo}: next is {nxt['symbol']} ({nxt['band_name']}) "
-                f"while {top['symbol']} is ready at {top['band_name']} (floor {guar.floor})"
-            )
-            failed = True
-        for dep, blocker, cls, surfaces in policy_blocks(g, args.repo, guar):
-            say(
-                f"rank: POLICY {args.repo}: {dep} is ready while {cls} {blocker} is open "
-                f"on {', '.join(surfaces)}"
-            )
-            failed = True
-        # A census, not a verdict (the letter's "count the unscored ones"): exit is unchanged.
-        say(f"rank: UNSCORED {args.repo} {unscored(g, args.repo)}")
-        if not failed:
-            say(
-                f"rank: OK {args.repo}: next ready item carries the top cross-repo weight"
-            )
-        raise SystemExit(1 if failed else 0)
-    if args.goals:
-        gs = goals(g, args.repo, weights)
-        if args.json:
-            say(json.dumps(gs, indent=2))
-            return
-        for r in gs:
-            path = "clear" if r["clear"] else "waits on " + ", ".join(r["outside"])
-            say(
-                f"{r['goal']:6} {r['weight']:4}  on deck {r['on_deck'] or '-'}; path {path}  {r['title'][:60]}"
-            )
-        return
-    if args.ask:
-        # nemik:W244: an ask lives inside the model. Show where its demand lands (what it needs)
-        # and which of this repo's ready cards sit lower because of it (what it overrides), so the
-        # operator's reply can refactor the graph.
-        from nemik.salience import ask_effect, show
-
-        try:
-            effect = ask_effect(g, args.repo, args.ask)
-        except ValueError as err:
-            say(f"rank: {err}")
-            raise SystemExit(2) from err
-        say(f"ask {effect.ref} in {args.repo}'s ranking")
-        if effect.stranded:
-            say("  needs: nothing on the ready frontier (stranded demand)")
-        for card, current in effect.needs:
-            say(f"  needs {card:28} carries {show(current)}")
-        for card, without, with_ in effect.displaced:
-            say(
-                f"  overrides {card}: position {without} without the ask, {with_} with it"
-            )
-        if not effect.displaced:
-            say("  overrides: no ready card of this repo sits lower because of it")
-        return
-    if args.flow:
-        # nemik:W240: the old downstream weight beside the flow model's salience (exact; shown
-        # rounded), and every pair the two order differently. The model replaces the old order
-        # only after this audit agrees (W241).
-        from nemik.metrics import residue_gaps
-        from nemik.salience import audit, load_gate_weights, load_wait_weight, show
-
-        # nemik:W251: --residue adds each recorded gap (the policy's residue) as demand at its card,
-        # weighted by gate from rank-weights.toml [residue] (W253); off by default.
-        gaps = residue_gaps(args.root) if args.residue else None
-        # nemik:W712: the time a blocked card has waited adds demand at what it waits on, at the
-        # per_tick measured in docs/wait-weight.md
-        result = audit(
-            g,
-            args.repo,
-            residue=gaps,
-            workable=args.workable,
-            gate_weights=load_gate_weights(),
-            wait_weight=load_wait_weight(),
-        )
-        old_pos = {c: i + 1 for i, c in enumerate(result.old_order())}
-        new_pos = {c: i + 1 for i, c in enumerate(result.new_order())}
-        say(
-            f"flow {args.repo}: {len(result.rows)} ready, {result.sources} sources, "
-            f"{len(result.flow.stranded)} stranded"
-        )
-        for row in sorted(result.rows, key=lambda r: new_pos[r.ref]):
-            say(
-                f"{row.ref:28} old={row.old:<5} flow={show(row.new):>10}  "
-                f"old#{old_pos[row.ref]:<4} flow#{new_pos[row.ref]}"
-            )
-        pairs = result.disagreements()
-        say(f"flow {args.repo}: {len(pairs)} pair(s) ordered differently")
-        for above, below in pairs:
-            say(f"  old puts {above} above {below}; flow puts {below} above {above}")
-        # Why: the old weight counts a shared source in full for each card; the flow splits it.
-        # Each card that the old arm put above another and the flow did not is explained by the
-        # sources it shares with other ready cards.
-        for card in sorted({above for above, _ in pairs}):
-            shared = result.contested(card)
-            say(f"  {card}: {len(shared)} contested source(s)")
-            for source, demand, part, others in shared[:8]:
-                say(
-                    f"    {source}: demand {show(demand)}, {card} absorbs {show(part)}, "
-                    f"shared with {', '.join(others[:4])}"
-                )
-        return
-    rows = rank(g, args.repo, weights, toward=args.toward, with_working=args.round)
-    if args.round:
-        show_round(args.repo, [dict(r) for r in rows], args.landings)
-        return
-    if args.apply:
-        _apply(args.apply, rows)
-        return
-    if args.json:
-        say(json.dumps(rows, indent=2))
-        return
-    for listed in rows:
-        say(
-            f"{listed['symbol']:6} {listed['band_name']:9} op={listed['operator']} down={listed['downstream']:<4} {listed['title'][:70]}"
-        )
+    _report_rank(g, args, weights)
 
 
 def _apply(state: str, rows: list[RankRow]) -> None:
