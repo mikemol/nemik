@@ -209,11 +209,11 @@ def solve(
     prerequisite)]` overrides the conductance `edge` of one dependency; both are declared data
     (rank-weights.toml), here parameters.
 
+    A source whose demand is not conserved is a defect, never an expected answer: the check that
+    finds it raises ValueError, from a callee rather than from here.
+
     Returns:
         the salience, its fibre per source, the stranded sources and the source potentials.
-
-    Raises:
-        ValueError: when a source's demand is not conserved (a defect, never an expected answer).
 
     """
     front = set(frontier)

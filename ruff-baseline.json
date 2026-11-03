@@ -48,9 +48,6 @@
   "S404": 1,
   "S603": 1
  },
- "src/nemik/flow.py": {
-  "DOC502": 1
- },
  "src/nemik/history.py": {
   "PLC0415": 1,
   "PLR0914": 1,
