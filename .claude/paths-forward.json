@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1575,
+  "counter": 1578,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 867
+      "ticks_blocked": 868
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-18T21:49:48Z",
-      "ticks_blocked": 687,
+      "ticks_blocked": 688,
       "weight": 1
     },
     {
@@ -3520,7 +3520,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:35:59Z",
-      "ticks_blocked": 543,
+      "ticks_blocked": 544,
       "weight": 2,
       "completed": null
     },
@@ -4278,7 +4278,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 716,
+      "ticks_blocked": 717,
       "weight": 2,
       "completed": null,
       "warrants": [
@@ -5405,7 +5405,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 693,
+      "ticks_blocked": 694,
       "completed": null
     },
     {
@@ -5426,7 +5426,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 708,
+      "ticks_blocked": 709,
       "completed": null
     },
     {
@@ -5485,7 +5485,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 708,
+      "ticks_blocked": 709,
       "completed": null
     },
     {
@@ -5506,7 +5506,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 708,
+      "ticks_blocked": 709,
       "completed": null
     },
     {
@@ -5546,7 +5546,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 708,
+      "ticks_blocked": 709,
       "completed": null
     },
     {
@@ -5605,7 +5605,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 708,
+      "ticks_blocked": 709,
       "completed": null
     },
     {
@@ -5645,7 +5645,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 708,
+      "ticks_blocked": 709,
       "completed": null
     },
     {
@@ -5666,7 +5666,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 708,
+      "ticks_blocked": 709,
       "completed": null
     },
     {
@@ -5706,7 +5706,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 708,
+      "ticks_blocked": 709,
       "completed": null
     },
     {
@@ -6650,7 +6650,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T04:17:48Z",
-      "ticks_blocked": 508,
+      "ticks_blocked": 509,
       "completed": null
     },
     {
@@ -6789,7 +6789,7 @@
       "minted_during": "interrupt",
       "caused_by": "W346",
       "last_worked": "2026-10-19T18:16:23Z",
-      "ticks_blocked": 401,
+      "ticks_blocked": 402,
       "weight": 9,
       "completed": null,
       "manifest": [
@@ -6818,7 +6818,7 @@
       "minted_during": "interrupt",
       "caused_by": "W346",
       "last_worked": "2026-10-19T18:16:25Z",
-      "ticks_blocked": 401,
+      "ticks_blocked": 402,
       "weight": 9,
       "completed": null,
       "manifest": [
@@ -7082,7 +7082,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:34:06Z",
-      "ticks_blocked": 621,
+      "ticks_blocked": 622,
       "completed": null
     },
     {
@@ -7195,7 +7195,7 @@
       "minted_during": "interrupt",
       "caused_by": "W364",
       "last_worked": "2026-10-24T12:37:36Z",
-      "ticks_blocked": 346,
+      "ticks_blocked": 347,
       "manifest": [
         "src/nemik/mirror.py",
         "tests/test_mirror.py"
@@ -7224,7 +7224,7 @@
       "minted_during": "interrupt",
       "caused_by": "W364",
       "last_worked": "2026-10-24T13:19:24Z",
-      "ticks_blocked": 344,
+      "ticks_blocked": 345,
       "manifest": [
         "src/nemik/pollevents.py",
         "tests/test_pollevents.py",
@@ -8340,7 +8340,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T01:19:18Z",
-      "ticks_blocked": 607,
+      "ticks_blocked": 608,
       "completed": null
     },
     {
@@ -8361,7 +8361,7 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": "2026-10-16T01:35:27Z",
-      "ticks_blocked": 571,
+      "ticks_blocked": 572,
       "completed": null
     },
     {
@@ -8382,7 +8382,7 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": "2026-10-13T01:25:21Z",
-      "ticks_blocked": 640,
+      "ticks_blocked": 641,
       "completed": null
     },
     {
@@ -9024,7 +9024,7 @@
       "minted_during": "tick",
       "caused_by": "W458",
       "last_worked": "2026-10-13T19:10:34Z",
-      "ticks_blocked": 605,
+      "ticks_blocked": 606,
       "completed": null
     },
     {
@@ -9062,7 +9062,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W943",
       "last_worked": "2026-10-20T18:05:40Z",
-      "ticks_blocked": 448,
+      "ticks_blocked": 449,
       "weight": 1,
       "manifest": [
         "src/nemik/adapter.py",
@@ -9602,7 +9602,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-19T10:16:00Z",
-      "ticks_blocked": 508,
+      "ticks_blocked": 509,
       "completed": null,
       "warrants": [
         {
@@ -9714,7 +9714,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-16T01:54:02Z",
-      "ticks_blocked": 572,
+      "ticks_blocked": 573,
       "weight": 1,
       "completed": null
     },
@@ -9734,7 +9734,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-16T01:54:03Z",
-      "ticks_blocked": 572,
+      "ticks_blocked": 573,
       "weight": 1,
       "completed": null
     },
@@ -9895,7 +9895,7 @@
       "minted_during": "interrupt",
       "caused_by": "luthen-observability:W1051",
       "last_worked": "2026-10-18T21:49:01Z",
-      "ticks_blocked": 508,
+      "ticks_blocked": 509,
       "completed": null,
       "weight": 6,
       "warrants": [
@@ -10072,7 +10072,7 @@
       "minted_during": "tick",
       "caused_by": "W500",
       "last_worked": "2026-10-15T11:53:53Z",
-      "ticks_blocked": 508,
+      "ticks_blocked": 509,
       "completed": null
     },
     {
@@ -10117,7 +10117,7 @@
       "minted_during": "tick",
       "caused_by": "W506",
       "last_worked": "2026-10-24T16:41:28Z",
-      "ticks_blocked": 336,
+      "ticks_blocked": 337,
       "weight": 11,
       "completed": null,
       "manifest": [
@@ -10189,7 +10189,7 @@
       "minted_during": "tick",
       "caused_by": "W506",
       "last_worked": "2026-10-18T03:08:04Z",
-      "ticks_blocked": 508,
+      "ticks_blocked": 509,
       "weight": 2,
       "completed": null
     },
@@ -10213,7 +10213,7 @@
       "minted_during": "tick",
       "caused_by": "github:W35",
       "last_worked": "2026-10-15T12:00:59Z",
-      "ticks_blocked": 601,
+      "ticks_blocked": 602,
       "completed": null
     },
     {
@@ -10298,7 +10298,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-23T12:40:08Z",
-      "ticks_blocked": 226,
+      "ticks_blocked": 227,
       "weight": 11,
       "manifest": [
         "src/nemik/withheld.py"
@@ -10326,7 +10326,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-18T19:15:01Z",
-      "ticks_blocked": 364,
+      "ticks_blocked": 365,
       "completed": null
     },
     {
@@ -10707,7 +10707,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-16T01:53:12Z",
-      "ticks_blocked": 572,
+      "ticks_blocked": 573,
       "weight": 13,
       "completed": null
     },
@@ -11330,7 +11330,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-17T10:50:53Z",
-      "ticks_blocked": 508,
+      "ticks_blocked": 509,
       "completed": null
     },
     {
@@ -11376,7 +11376,7 @@
       "minted_during": "tick",
       "caused_by": "github-8f",
       "last_worked": "2026-10-27T06:32:37Z",
-      "ticks_blocked": 225,
+      "ticks_blocked": 226,
       "completed": null,
       "warrants": [
         {
@@ -11428,7 +11428,7 @@
       "minted_during": "tick",
       "caused_by": "W560",
       "last_worked": "2026-10-16T02:51:43Z",
-      "ticks_blocked": 570,
+      "ticks_blocked": 571,
       "completed": null
     },
     {
@@ -11501,7 +11501,7 @@
       "minted_during": "tick",
       "caused_by": "W566",
       "last_worked": "2026-10-16T05:23:44Z",
-      "ticks_blocked": 565,
+      "ticks_blocked": 566,
       "completed": null
     },
     {
@@ -11526,7 +11526,7 @@
       "minted_during": "tick",
       "caused_by": "W566",
       "last_worked": "2026-10-23T19:25:35Z",
-      "ticks_blocked": 565,
+      "ticks_blocked": 566,
       "completed": null
     },
     {
@@ -11550,7 +11550,7 @@
       "minted_during": "tick",
       "caused_by": "W566",
       "last_worked": "2026-10-29T02:48:39Z",
-      "ticks_blocked": 566,
+      "ticks_blocked": 567,
       "completed": null
     },
     {
@@ -11572,7 +11572,7 @@
       "minted_during": "tick",
       "caused_by": "W541",
       "last_worked": "2026-10-23T17:58:15Z",
-      "ticks_blocked": 563,
+      "ticks_blocked": 564,
       "completed": null
     },
     {
@@ -11594,7 +11594,7 @@
       "minted_during": "tick",
       "caused_by": "github-8f",
       "last_worked": "2026-10-23T12:09:48Z",
-      "ticks_blocked": 395,
+      "ticks_blocked": 396,
       "completed": null,
       "manifest": [
         "Containerfile",
@@ -11692,7 +11692,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-17T08:09:46Z",
-      "ticks_blocked": 554,
+      "ticks_blocked": 555,
       "completed": null
     },
     {
@@ -11756,7 +11756,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-16T15:08:10Z",
-      "ticks_blocked": 493,
+      "ticks_blocked": 494,
       "completed": null
     },
     {
@@ -11781,7 +11781,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-22T07:10:08Z",
-      "ticks_blocked": 398,
+      "ticks_blocked": 399,
       "completed": null
     },
     {
@@ -11805,7 +11805,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-17T15:38:53Z",
-      "ticks_blocked": 508,
+      "ticks_blocked": 509,
       "completed": null
     },
     {
@@ -11829,7 +11829,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-19T02:01:21Z",
-      "ticks_blocked": 477,
+      "ticks_blocked": 478,
       "completed": null,
       "manifest": [
         "src/nemik/salience.py",
@@ -12551,7 +12551,7 @@
       "minted_during": "tick",
       "caused_by": "github-8f",
       "last_worked": "2026-11-01T03:11:01Z",
-      "ticks_blocked": 132,
+      "ticks_blocked": 133,
       "completed": null
     },
     {
@@ -13211,7 +13211,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-25T02:12:38Z",
-      "ticks_blocked": 317,
+      "ticks_blocked": 318,
       "manifest": [
         "src/nemik/stackable.py",
         "src/nemik/cones.py",
@@ -14013,7 +14013,7 @@
       "minted_during": "interrupt",
       "caused_by": "W510",
       "last_worked": "2026-10-18T16:06:47Z",
-      "ticks_blocked": 508,
+      "ticks_blocked": 509,
       "manifest": [
         "src/nemik/web/index.html",
         "tests/test_sources_trs.py"
@@ -14039,7 +14039,7 @@
       "minted_during": "interrupt",
       "caused_by": "W510",
       "last_worked": "2026-10-18T14:33:41Z",
-      "ticks_blocked": 508,
+      "ticks_blocked": 509,
       "completed": null,
       "manifest": [
         "src/nemik/web/index.html",
@@ -14117,7 +14117,7 @@
       "minted_during": "interrupt",
       "caused_by": "W674",
       "last_worked": "2026-10-18T16:13:01Z",
-      "ticks_blocked": 508,
+      "ticks_blocked": 509,
       "manifest": [
         "src/nemik/serve.py",
         "src/nemik/web/vendor/n3.min.js",
@@ -14433,7 +14433,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-18T19:40:28Z",
-      "ticks_blocked": 508,
+      "ticks_blocked": 509,
       "warrants": [
         {
           "@context": {
@@ -14620,7 +14620,7 @@
       "minted_during": "interrupt",
       "caused_by": "W691",
       "last_worked": "2026-10-19T01:14:55Z",
-      "ticks_blocked": 508,
+      "ticks_blocked": 509,
       "completed": null,
       "manifest": [
         "src/nemik/serve.py",
@@ -14692,7 +14692,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-11-02T04:40:12Z",
-      "ticks_blocked": 37,
+      "ticks_blocked": 38,
       "completed": null
     },
     {
@@ -14818,7 +14818,7 @@
       "minted_during": "interrupt",
       "caused_by": "W581",
       "last_worked": "2026-10-18T23:03:49Z",
-      "ticks_blocked": 508,
+      "ticks_blocked": 509,
       "completed": null
     },
     {
@@ -15033,7 +15033,7 @@
       "minted_during": "interrupt",
       "caused_by": "el-openglo:W702",
       "last_worked": "2026-10-19T00:15:45Z",
-      "ticks_blocked": 508,
+      "ticks_blocked": 509,
       "completed": null
     },
     {
@@ -15060,7 +15060,7 @@
       "minted_during": "interrupt",
       "caused_by": "W693",
       "last_worked": "2026-10-24T15:22:53Z",
-      "ticks_blocked": 340,
+      "ticks_blocked": 341,
       "manifest": [
         "src/nemik/blocks.py",
         "src/nemik/serve.py",
@@ -15749,7 +15749,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W728",
       "last_worked": "2026-10-19T15:12:10Z",
-      "ticks_blocked": 499,
+      "ticks_blocked": 500,
       "completed": null
     },
     {
@@ -15953,7 +15953,7 @@
       "minted_during": "tick",
       "caused_by": "github-8f",
       "last_worked": "2026-10-23T19:25:28Z",
-      "ticks_blocked": 455,
+      "ticks_blocked": 456,
       "warrants": [
         {
           "@context": {
@@ -16195,7 +16195,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W743",
       "last_worked": "2026-10-24T14:11:42Z",
-      "ticks_blocked": 342,
+      "ticks_blocked": 343,
       "completed": null,
       "manifest": [
         "docs/forecast-features.md"
@@ -16250,7 +16250,7 @@
       "minted_during": "tick",
       "caused_by": "mtools:W1731",
       "last_worked": "2026-10-24T18:42:00Z",
-      "ticks_blocked": 196,
+      "ticks_blocked": 197,
       "completed": null,
       "manifest": [
         "src/nemik/landings.py",
@@ -16610,7 +16610,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-25T02:38:48Z",
-      "ticks_blocked": 315,
+      "ticks_blocked": 316,
       "manifest": [
         "deploy/deployment.yaml",
         "tests/test_deploy_manifest.py"
@@ -16725,7 +16725,7 @@
       "minted_during": "tick",
       "caused_by": "W762",
       "last_worked": "2026-10-28T14:21:12Z",
-      "ticks_blocked": 196,
+      "ticks_blocked": 197,
       "manifest": [
         "tools/codon_census.py",
         "tests/test_codon_census.py",
@@ -17064,7 +17064,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-20T22:31:27Z",
-      "ticks_blocked": 401,
+      "ticks_blocked": 402,
       "warrants": [
         {
           "@context": {
@@ -17275,7 +17275,7 @@
       "minted_during": "tick",
       "caused_by": "W781",
       "last_worked": "2026-10-23T17:58:17Z",
-      "ticks_blocked": 447,
+      "ticks_blocked": 448,
       "completed": null
     },
     {
@@ -17301,7 +17301,7 @@
       "minted_during": "tick",
       "caused_by": "W461",
       "last_worked": "2026-10-25T02:38:49Z",
-      "ticks_blocked": 315,
+      "ticks_blocked": 316,
       "manifest": [
         "src/nemik/web/index.html",
         "src/nemik/serve.py",
@@ -17887,7 +17887,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-25T03:12:35Z",
-      "ticks_blocked": 314,
+      "ticks_blocked": 315,
       "completed": null
     },
     {
@@ -18502,7 +18502,7 @@
       "minted_during": "tick",
       "caused_by": "W579",
       "last_worked": "2026-10-23T19:25:16Z",
-      "ticks_blocked": 381,
+      "ticks_blocked": 382,
       "completed": null
     },
     {
@@ -18920,7 +18920,7 @@
       "minted_during": "interrupt",
       "caused_by": "nemik:W703",
       "last_worked": "2026-10-22T20:45:21Z",
-      "ticks_blocked": 401,
+      "ticks_blocked": 402,
       "completed": null
     },
     {
@@ -19631,7 +19631,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-10-23T07:32:14Z",
-      "ticks_blocked": 401,
+      "ticks_blocked": 402,
       "completed": null
     },
     {
@@ -19667,7 +19667,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-10-23T07:32:19Z",
-      "ticks_blocked": 401,
+      "ticks_blocked": 402,
       "completed": null
     },
     {
@@ -19703,7 +19703,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-10-23T07:32:23Z",
-      "ticks_blocked": 401,
+      "ticks_blocked": 402,
       "completed": null
     },
     {
@@ -20225,7 +20225,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-23T16:12:14Z",
-      "ticks_blocked": 385,
+      "ticks_blocked": 386,
       "completed": null
     },
     {
@@ -20401,7 +20401,7 @@
       "minted_during": "tick",
       "caused_by": "github-8f",
       "last_worked": "2026-10-24T17:33:15Z",
-      "ticks_blocked": 381,
+      "ticks_blocked": 382,
       "warrants": [
         {
           "@context": {
@@ -20553,7 +20553,7 @@
       "minted_during": "tick",
       "caused_by": "W905",
       "last_worked": "2026-10-23T18:12:28Z",
-      "ticks_blocked": 383,
+      "ticks_blocked": 384,
       "manifest": [
         "docs/evidence-standards.md"
       ],
@@ -20606,7 +20606,7 @@
       "minted_during": "tick",
       "caused_by": "W905",
       "last_worked": "2026-10-23T19:34:39Z",
-      "ticks_blocked": 381,
+      "ticks_blocked": 382,
       "completed": null,
       "manifest": [
         "docs/evidence-recommendations.md"
@@ -20778,7 +20778,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-27T02:41:06Z",
-      "ticks_blocked": 381,
+      "ticks_blocked": 382,
       "completed": null,
       "manifest": [
         "src/nemik/witnesses.py",
@@ -20969,7 +20969,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-23T20:45:05Z",
-      "ticks_blocked": 378,
+      "ticks_blocked": 379,
       "manifest": [
         "tests/test_modes.py",
         "tests/test_metrics_gating.py"
@@ -20995,7 +20995,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-23T20:57:46Z",
-      "ticks_blocked": 378,
+      "ticks_blocked": 379,
       "completed": null
     },
     {
@@ -21018,7 +21018,7 @@
       "minted_during": "tick",
       "caused_by": "W923",
       "last_worked": "2026-10-25T11:09:55Z",
-      "ticks_blocked": 297,
+      "ticks_blocked": 298,
       "completed": null,
       "manifest": [
         "tools/gen_test_targets.py",
@@ -21045,7 +21045,7 @@
       "minted_during": "tick",
       "caused_by": "W923",
       "last_worked": "2026-10-23T20:57:51Z",
-      "ticks_blocked": 378,
+      "ticks_blocked": 379,
       "completed": null
     },
     {
@@ -21066,7 +21066,7 @@
       "minted_during": "tick",
       "caused_by": "W923",
       "last_worked": "2026-10-23T20:57:53Z",
-      "ticks_blocked": 378,
+      "ticks_blocked": 379,
       "completed": null,
       "manifest": [
         "tests/test_shard_declared.py"
@@ -21252,7 +21252,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-23T21:21:43Z",
-      "ticks_blocked": 346,
+      "ticks_blocked": 347,
       "completed": null
     },
     {
@@ -21347,7 +21347,7 @@
       "minted_during": "tick",
       "caused_by": "W934",
       "last_worked": "2026-10-24T12:59:53Z",
-      "ticks_blocked": 345,
+      "ticks_blocked": 346,
       "completed": null,
       "manifest": [
         "src/nemik/web/views.js",
@@ -21416,7 +21416,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W918",
       "last_worked": "2026-10-24T12:59:54Z",
-      "ticks_blocked": 345,
+      "ticks_blocked": 346,
       "completed": null
     },
     {
@@ -21984,7 +21984,7 @@
       "minted_during": "interrupt",
       "caused_by": "nemik:W959",
       "last_worked": "2026-10-24T12:59:55Z",
-      "ticks_blocked": 345,
+      "ticks_blocked": 346,
       "completed": null,
       "manifest": [
         "src/nemik/mirrorsend.py",
@@ -22008,7 +22008,7 @@
       "minted_during": "interrupt",
       "caused_by": "nemik:W938",
       "last_worked": "2026-10-24T12:59:52Z",
-      "ticks_blocked": 345,
+      "ticks_blocked": 346,
       "completed": null,
       "size_class": "small"
     },
@@ -22088,7 +22088,7 @@
       "minted_during": "tick",
       "caused_by": "W749",
       "last_worked": "2026-10-24T14:12:01Z",
-      "ticks_blocked": 342,
+      "ticks_blocked": 343,
       "completed": null,
       "manifest": [
         "src/nemik/forecastshingle.py",
@@ -22167,7 +22167,7 @@
       "minted_during": "interrupt",
       "caused_by": "W709",
       "last_worked": "2026-10-24T15:23:12Z",
-      "ticks_blocked": 340,
+      "ticks_blocked": 341,
       "completed": null,
       "manifest": [
         "src/nemik/web/panels.js",
@@ -22391,7 +22391,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-24T16:47:53Z",
-      "ticks_blocked": 337,
+      "ticks_blocked": 338,
       "completed": null
     },
     {
@@ -22505,7 +22505,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-24T17:33:12Z",
-      "ticks_blocked": 336,
+      "ticks_blocked": 337,
       "completed": null,
       "manifest": [
         "src/nemik/retrostub.py",
@@ -22529,7 +22529,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-24T17:33:14Z",
-      "ticks_blocked": 336,
+      "ticks_blocked": 337,
       "completed": null,
       "manifest": [
         "src/nemik/retrolayers.py",
@@ -22556,7 +22556,7 @@
       "minted_during": "interrupt",
       "caused_by": "github:W42",
       "last_worked": "2026-10-24T23:08:23Z",
-      "ticks_blocked": 253,
+      "ticks_blocked": 254,
       "completed": null,
       "warrants": [
         {
@@ -23287,7 +23287,7 @@
       "minted_during": "interrupt",
       "caused_by": "github:W44",
       "last_worked": "2026-10-24T23:43:28Z",
-      "ticks_blocked": 323,
+      "ticks_blocked": 324,
       "warrants": [
         {
           "@context": {
@@ -23581,7 +23581,7 @@
       "minted_during": "tick",
       "caused_by": "W643",
       "last_worked": "2026-10-25T02:12:46Z",
-      "ticks_blocked": 317,
+      "ticks_blocked": 318,
       "completed": null,
       "manifest": [
         "src/nemik/stackable.py",
@@ -23607,7 +23607,7 @@
       "minted_during": "tick",
       "caused_by": "W643",
       "last_worked": "2026-10-25T02:12:47Z",
-      "ticks_blocked": 317,
+      "ticks_blocked": 318,
       "completed": null,
       "manifest": [
         "src/nemik/cones.py",
@@ -23674,7 +23674,7 @@
       "minted_during": "tick",
       "caused_by": "W764",
       "last_worked": "2026-10-25T02:39:00Z",
-      "ticks_blocked": 315,
+      "ticks_blocked": 316,
       "completed": null,
       "manifest": [
         "deploy/deployment.yaml",
@@ -23725,7 +23725,7 @@
       "minted_during": "tick",
       "caused_by": "W789",
       "last_worked": "2026-10-25T02:39:02Z",
-      "ticks_blocked": 315,
+      "ticks_blocked": 316,
       "completed": null,
       "manifest": [
         "src/nemik/web/index.html",
@@ -23983,7 +23983,7 @@
       "minted_during": "tick",
       "caused_by": "W997",
       "last_worked": "2026-10-25T07:39:20Z",
-      "ticks_blocked": 305,
+      "ticks_blocked": 306,
       "manifest": [
         "src/nemik/pacerun.py",
         "src/nemik/hostroot_cli.py",
@@ -24114,7 +24114,7 @@
       "minted_during": "tick",
       "caused_by": "W925",
       "last_worked": "2026-10-26T00:43:08Z",
-      "ticks_blocked": 273,
+      "ticks_blocked": 274,
       "manifest": [
         "docs/per-test-targets.md"
       ],
@@ -24139,7 +24139,7 @@
       "minted_during": "tick",
       "caused_by": "W925",
       "last_worked": "2026-10-25T18:42:04Z",
-      "ticks_blocked": 297,
+      "ticks_blocked": 298,
       "completed": null,
       "manifest": [
         "tools/gen_test_targets.py",
@@ -24165,7 +24165,7 @@
       "minted_during": "tick",
       "caused_by": "W925",
       "last_worked": "2026-10-25T11:10:13Z",
-      "ticks_blocked": 297,
+      "ticks_blocked": 298,
       "completed": null,
       "manifest": [
         "tests/venv_pytest.sh"
@@ -24314,7 +24314,7 @@
       "minted_during": "tick",
       "caused_by": "github:W48",
       "last_worked": "2026-10-29T08:59:07Z",
-      "ticks_blocked": 175,
+      "ticks_blocked": 176,
       "completed": null,
       "manifest": [
         "src/nemik/landings.py",
@@ -24463,7 +24463,7 @@
       "minted_during": "tick",
       "caused_by": "W728",
       "last_worked": "2026-10-25T14:28:23Z",
-      "ticks_blocked": 219,
+      "ticks_blocked": 220,
       "warrants": [
         {
           "@context": {
@@ -24563,7 +24563,7 @@
       "minted_during": "tick",
       "caused_by": "W1047",
       "last_worked": "2026-10-27T07:42:42Z",
-      "ticks_blocked": 219,
+      "ticks_blocked": 220,
       "completed": null
     },
     {
@@ -24705,7 +24705,7 @@
       "minted_during": "tick",
       "caused_by": "github:W50",
       "last_worked": "2026-10-26T23:05:10Z",
-      "ticks_blocked": 287,
+      "ticks_blocked": 288,
       "warrants": [
         {
           "@context": {
@@ -24783,7 +24783,7 @@
       "minted_during": "tick",
       "caused_by": "W1055",
       "last_worked": "2026-10-29T23:48:39Z",
-      "ticks_blocked": 158,
+      "ticks_blocked": 159,
       "manifest": [
         "src/nemik/landcost.py",
         "tests/test_landcost.py"
@@ -24812,7 +24812,7 @@
       "minted_during": "tick",
       "caused_by": "W1055",
       "last_worked": "2026-10-25T17:06:49Z",
-      "ticks_blocked": 287,
+      "ticks_blocked": 288,
       "completed": null,
       "manifest": [
         "src/nemik/rank.py",
@@ -24841,7 +24841,7 @@
       "minted_during": "tick",
       "caused_by": "W1055",
       "last_worked": "2026-10-25T17:11:59Z",
-      "ticks_blocked": 287,
+      "ticks_blocked": 288,
       "completed": null,
       "manifest": [
         "tests/test_orderrank.py"
@@ -25248,7 +25248,7 @@
       "minted_during": "tick",
       "caused_by": "W1071",
       "last_worked": "2026-10-25T23:18:55Z",
-      "ticks_blocked": 276,
+      "ticks_blocked": 277,
       "completed": null
     },
     {
@@ -25270,7 +25270,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W1644",
       "last_worked": "2026-10-26T11:56:26Z",
-      "ticks_blocked": 264,
+      "ticks_blocked": 265,
       "completed": null
     },
     {
@@ -25367,7 +25367,7 @@
       "minted_during": "tick",
       "caused_by": "github:W50",
       "last_worked": "2026-10-26T01:03:02Z",
-      "ticks_blocked": 271,
+      "ticks_blocked": 272,
       "warrants": [
         {
           "@context": {
@@ -25718,7 +25718,7 @@
       "minted_during": "tick",
       "caused_by": "W1082",
       "last_worked": "2026-10-26T22:09:25Z",
-      "ticks_blocked": 214,
+      "ticks_blocked": 215,
       "manifest": [
         "src/nemik/roundof.py",
         "src/nemik/roundgauges.py",
@@ -25806,7 +25806,7 @@
       "minted_during": "tick",
       "caused_by": "W1073",
       "last_worked": "2026-10-26T11:58:00Z",
-      "ticks_blocked": 262,
+      "ticks_blocked": 263,
       "manifest": [
         "src/nemik/adapter.py",
         "src/nemik/blocks.py",
@@ -26238,7 +26238,7 @@
       "minted_during": "tick",
       "caused_by": "inbox/2026-10-27-nemik-edge-github-W63-enables-W1113.md",
       "last_worked": "2026-10-27T00:42:25Z",
-      "ticks_blocked": 240,
+      "ticks_blocked": 241,
       "completed": null,
       "warrants": [
         {
@@ -26864,7 +26864,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1092",
       "last_worked": "2026-10-29T13:11:57Z",
-      "ticks_blocked": 168,
+      "ticks_blocked": 169,
       "manifest": [
         "src/nemik/roundof.py",
         "tests/test_roundof.py"
@@ -27888,7 +27888,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1047",
       "last_worked": "2026-10-27T13:02:58Z",
-      "ticks_blocked": 214,
+      "ticks_blocked": 215,
       "completed": null
     },
     {
@@ -28602,7 +28602,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1196",
       "last_worked": "2026-10-28T03:10:08Z",
-      "ticks_blocked": 197,
+      "ticks_blocked": 198,
       "completed": null
     },
     {
@@ -29145,7 +29145,7 @@
       "minted_during": "interrupt",
       "caused_by": "W733",
       "last_worked": "2026-11-02T00:42:25Z",
-      "ticks_blocked": 192,
+      "ticks_blocked": 193,
       "completed": null
     },
     {
@@ -29261,7 +29261,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1215",
       "last_worked": "2026-10-29T04:37:26Z",
-      "ticks_blocked": 192,
+      "ticks_blocked": 193,
       "completed": null
     },
     {
@@ -29284,7 +29284,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1196",
       "last_worked": "2026-10-29T00:01:22Z",
-      "ticks_blocked": 175,
+      "ticks_blocked": 176,
       "completed": null,
       "manifest": [
         "tools/liftdoc.py",
@@ -29921,7 +29921,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1244",
       "last_worked": "2026-10-29T09:19:21Z",
-      "ticks_blocked": 177,
+      "ticks_blocked": 178,
       "completed": null,
       "manifest": [
         "tests/test_page_queue.py",
@@ -30685,7 +30685,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-42",
       "last_worked": "2026-10-29T18:57:42Z",
-      "ticks_blocked": 162,
+      "ticks_blocked": 163,
       "completed": null,
       "manifest": [
         "docs/pace-producer.md"
@@ -30770,7 +30770,7 @@
       "minted_during": "tick",
       "caused_by": "github-42",
       "last_worked": "2026-10-30T01:47:29Z",
-      "ticks_blocked": 156,
+      "ticks_blocked": 157,
       "completed": null,
       "weight": 20,
       "manifest": [
@@ -30821,7 +30821,7 @@
       "minted_during": "tick",
       "caused_by": "W1187",
       "last_worked": "2026-11-02T20:27:11Z",
-      "ticks_blocked": 48,
+      "ticks_blocked": 49,
       "manifest": [
         "src/nemik/rank.py",
         "mypy-baseline.json"
@@ -33556,7 +33556,7 @@
       "minted_during": "interrupt",
       "caused_by": "W561",
       "last_worked": "2026-11-02T20:27:32Z",
-      "ticks_blocked": 48,
+      "ticks_blocked": 49,
       "completed": null
     },
     {
@@ -34432,7 +34432,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1383",
       "last_worked": "2026-11-02T05:32:17Z",
-      "ticks_blocked": 71,
+      "ticks_blocked": 72,
       "manifest": [
         "tests/test_frontier.py",
         "tests/test_fruit.py",
@@ -35668,11 +35668,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "Typed rows for the view document: define NodeRow and ViewDoc TypedDicts in serve.py beside the existing EdgeRow (line 861), type to_json/_to_json to answer ViewDoc and Model.doc to ViewDoc, then fix the readers (lines 478/479/503, 1216, 1236, 1377, 1486, 1770, 1777) against them; scratch-copy beside serve.py first and stage only if serve.py findings fall with no new mypy code",
-      "evidence": "2026-11-03T04:03:02Z: 2026-11-03T04:03:01Z (read by stampnote): G0 precommit: advances W1490, the inbound reader of serve._wait_edges (the first slice), as a MYPY stack 893 that waits for 891 to land (it shares mypy-baseline.json with 891, so the new commit tool would refuse it queued; standing 16), then queues behind 892 (ruff) once 891 is gone. Pace stamp 2026-11-03T03:45:03Z, mypy owes 190 at 679 (641 once 891 lands). N: serve.py lines 988 to 1025 carry about 30 of its 119 findings: by_blocked is dict[tuple[str, str], dict], fresh = dict(blk) loses InboundRow, and b[...] reads are Any. K is not probed by a mypy list; it is the ratchet total after the edit, and the edit is reverted by git checkout if mypy rises. Actuator: one Edit of those lines, by_blocked typed dict[tuple[str, str], InboundRow] and fresh = blk.copy() (the same shallow copy dict(blk) made). Sensor: ratchet mypy falls, ruff flat; serve.to_json byte-equal against a worktree of the parent commit on a frozen snapshot with hours and days masked (old-new-old, mask proved old-vs-old, as for part 2); the 43 serve tests and guards; hookcheck rc 0. Expected: mypy 641 to about 615, ruff flat, codon flat. | 2026-11-03T05:09:57Z: Landed 5768b76f: serve._wait_edges types inbound rows as InboundRow, mypy 641 to 617. Next slice: serve operator/findings/health readers. | 2026-11-03T18:39:41Z: 2026-11-03T18:39:39Z (read by stampnote): G0 precommit, W1490 slice b, before the first edit of src/nemik/serve.py. Pace read 2026-11-03T18:35:34Z, about 8 minutes old at this stamp (inside the limit): mypy 276 left (owes 190, 27 landings to zero, 105 over the last 10), ruff 153 (owes 90, 62 to zero), codon owes 2. N = 92 house-mypy findings in serve.py; this slice is the two bare generics: effort: dict[str, Counter] becomes Counter[str] and open_blockers: dict[str, set] becomes set[str]. K = 9 MEASURED ON A SCRATCH COPY before this G0 (src/nemik/probe_serve_b.py beside serve.py, codemod w1490b.py applied to the copy only, house mypy 92 to 83, copy deleted by exact path). A type annotation only, no runtime change. Before staging: hookcheck.py (serve.py is hook-imported, standing 6) and nemik-stale, test_architecture, test_namespaces and the serve tests directly, and checks/claims.py hub-modules-depend-on-everything-below (standing 14: serve.py is a hub), plus the Codon first-error probe. R195 finding 2: this is the mypy successor queued behind stack 935 (W1561 part a: check.py, critical.py, ruff-baseline.json), sharing no file with it. Expected: mypy 276 to 267 exactly, ruff flat 153. MYPY stack. | 2026-11-03T18:42:33Z: Slice b staged as stack 936: serve.py Counter[str] and set[str], mypy 276 to 267 measured (92 to 83 on the serve.py copy first), hookcheck rc 0 x4, claims.py hub-modules clean, codon first error unchanged. | 2026-11-03T18:43:44Z: Slice b stack 936: G0 2026-11-03T18:39:39Z, tests run directly 27 passed (71.14 s wall: architecture, namespaces, no_waivers and eight test_serve files), codon first error unchanged for serve, claims.py hub-modules clean, hookcheck rc 0 x4 at 18:40:34Z to 18:40:37Z, SUBMIT stamp 2026-11-03T18:43:29Z (key 1793731409 via date -u -d), QUEUED behind stack 935 (inflight since 18:23:14Z, 20 min 15 s at this stamp). G0 to submit 3 min 50 s wall. The gate was never empty for this stack: 935 inflight, 936 queued. | 2026-11-03T19:12:11Z: Slice b stack 936 landed as 53175423 at 2026-11-03T19:10:47Z (reflog 14:10:47 -0500), exit 0: mypy 276 to 267. Gated 24 min 40 s wall from its 18:46:07Z start (submit 18:43:29Z). 83 mypy findings remain in serve.py. Gate empty from 19:10:47Z. | 2026-11-03T19:31:01Z: Slice c probe 2026-11-03 (scratch copy, deleted): widening Model.key to tuple[object, ...], Model.doc to dict[str, object] and to_json/_to_json to dict[str, object] cut serve.py from 83 to 56 house-mypy findings but added NEW codes (arg-type 2, attr-defined 6 'object not iterable', assignment 1), which the per-file-per-code ratchet refuses ('arg-type 2 > baseline 0'). Not staged. The knock-ons are the readers of doc (lines 478/479/503, 1216, 1236, 1377, 1486, 1770, 1777): they need typed rows (InboundRow style) or a TypedDict before to_json can answer dict[str, object]. Next slice is a narrower one, or the typed-row work first. | 2026-11-03T19:38:50Z: R197 finding 2 (2026-11-03): TypedDicts in src/nemik, read by grep: issues._Row; calendars.Occurrence; witnesses.Alert, Sample, Data, Body, Expression, OpaResult, OpaAnswer, Card, Queue; rank.FruitRow, RankRow, GoalRow; pieces.GraphDoc; history.WeeklyRow, Variance, ShapeDrift; blocks.InboundRow, AskRow; wake.LivenessRecord, Alarm, Waiter, WakeRow; serve.EdgeRow. The row types already live in their producing modules and serve.py imports several. Proposal: NOT a new shared module (a new src/nemik module breaks live readers until bazel build //:.venv and trips test_codon_census, memory new-module-breaks-live-readers and new-module-must-compile-under-codon); add NodeRow and ViewDoc beside EdgeRow in serve.py, the module that builds the document. Slice c's rejection (new arg-type/attr-defined codes) is the evidence that the readers need these rows first. | 2026-11-03T21:01:21Z: 2026-11-03T21:01:21Z (read by stampnote): G0 precommit, W1490 slice c, before the first edit of src/nemik/serve.py. Pace read 2026-11-03T20:55:39Z, seconds old: mypy 267 left (owes 190, 59 landings to zero, only 46 over the last 10), ruff 108 (owes 90, 16 landings to zero, 68 over the last 10), codon owes 2. This is the narrow cut after slice c's wide cut was rejected (it added new mypy codes): only the Model cache key, typed tuple[tuple[str, int], ...] at its declaration and at the two places that build it from the sources' mtimes (refresh and the request-time staleness check). N = 83 house-mypy findings in serve.py. K = 4 MEASURED ON A SCRATCH COPY before this G0 (src/nemik/probe_serve_c2.py beside serve.py, codemod w1490c2.py applied to the copy only, house mypy 83 to 79, no new code, copy deleted by exact path): the tuple type-arg at the declaration and the three tuple[Any, ...] expressions. A type annotation only, no runtime change. The document readers (the doc dict and the Any reads of its nodes) are NOT in this slice: they need NodeRow and ViewDoc rows first. Before staging: hookcheck and nemik-stale (serve.py is hook-imported, standing 6), checks/claims.py hub-modules-depend-on-everything-below (no import changes, so the sets hold), test_architecture, test_namespaces, test_no_waivers and the serve tests directly (standing 14), the Codon first-error probe. Ruff axis: UNMEASURED (standing 12), read after the edit. Expected: mypy 267 to 263 exactly. MYPY stack, the gate is EMPTY since 2c87025d and 00ac55f8 landed at 2026-11-03T20:47:51Z; the interval ends at the submit, stamped from its queue key. | 2026-11-03T21:04:10Z: Slice c narrow cut, stack 941: G0 2026-11-03T21:01:21Z, K=4 on a probe copy (83 to 79, no new code), real tree mypy 267 to 263 exactly, ruff flat 108; hookcheck rc 0 x4 at 21:02:04Z to 21:02:07Z; hub claim clean; tests 56 passed (50.91 s wall); codon first error unchanged. SUBMIT stamp 2026-11-03T21:03:46Z (key 1793739826 via date -u -d), began gating 21:03:47Z. G0 to submit 2 min 25 s wall. Gate empty interval 20:47:51Z (940 landed) to 21:03:46Z: 15 min 55 s wall (the time went to the R200 measurements, the pace read and the probe). | 2026-11-03T21:19:53Z: Slice c narrow cut, stack 941, landed as bf72cb50 at 2026-11-03T21:18:50Z (reflog 16:18:50 -0500), exit 0: mypy 267 to 263. Gated 15 min 4 s wall from the 21:03:46Z submit. 79 mypy findings remain in serve.py (the document readers need NodeRow and ViewDoc rows). Gate empty from 21:18:50Z.",
+      "evidence": "2026-11-03T04:03:02Z: 2026-11-03T04:03:01Z (read by stampnote): G0 precommit: advances W1490, the inbound reader of serve._wait_edges (the first slice), as a MYPY stack 893 that waits for 891 to land (it shares mypy-baseline.json with 891, so the new commit tool would refuse it queued; standing 16), then queues behind 892 (ruff) once 891 is gone. Pace stamp 2026-11-03T03:45:03Z, mypy owes 190 at 679 (641 once 891 lands). N: serve.py lines 988 to 1025 carry about 30 of its 119 findings: by_blocked is dict[tuple[str, str], dict], fresh = dict(blk) loses InboundRow, and b[...] reads are Any. K is not probed by a mypy list; it is the ratchet total after the edit, and the edit is reverted by git checkout if mypy rises. Actuator: one Edit of those lines, by_blocked typed dict[tuple[str, str], InboundRow] and fresh = blk.copy() (the same shallow copy dict(blk) made). Sensor: ratchet mypy falls, ruff flat; serve.to_json byte-equal against a worktree of the parent commit on a frozen snapshot with hours and days masked (old-new-old, mask proved old-vs-old, as for part 2); the 43 serve tests and guards; hookcheck rc 0. Expected: mypy 641 to about 615, ruff flat, codon flat. | 2026-11-03T05:09:57Z: Landed 5768b76f: serve._wait_edges types inbound rows as InboundRow, mypy 641 to 617. Next slice: serve operator/findings/health readers. | 2026-11-03T18:39:41Z: 2026-11-03T18:39:39Z (read by stampnote): G0 precommit, W1490 slice b, before the first edit of src/nemik/serve.py. Pace read 2026-11-03T18:35:34Z, about 8 minutes old at this stamp (inside the limit): mypy 276 left (owes 190, 27 landings to zero, 105 over the last 10), ruff 153 (owes 90, 62 to zero), codon owes 2. N = 92 house-mypy findings in serve.py; this slice is the two bare generics: effort: dict[str, Counter] becomes Counter[str] and open_blockers: dict[str, set] becomes set[str]. K = 9 MEASURED ON A SCRATCH COPY before this G0 (src/nemik/probe_serve_b.py beside serve.py, codemod w1490b.py applied to the copy only, house mypy 92 to 83, copy deleted by exact path). A type annotation only, no runtime change. Before staging: hookcheck.py (serve.py is hook-imported, standing 6) and nemik-stale, test_architecture, test_namespaces and the serve tests directly, and checks/claims.py hub-modules-depend-on-everything-below (standing 14: serve.py is a hub), plus the Codon first-error probe. R195 finding 2: this is the mypy successor queued behind stack 935 (W1561 part a: check.py, critical.py, ruff-baseline.json), sharing no file with it. Expected: mypy 276 to 267 exactly, ruff flat 153. MYPY stack. | 2026-11-03T18:42:33Z: Slice b staged as stack 936: serve.py Counter[str] and set[str], mypy 276 to 267 measured (92 to 83 on the serve.py copy first), hookcheck rc 0 x4, claims.py hub-modules clean, codon first error unchanged. | 2026-11-03T18:43:44Z: Slice b stack 936: G0 2026-11-03T18:39:39Z, tests run directly 27 passed (71.14 s wall: architecture, namespaces, no_waivers and eight test_serve files), codon first error unchanged for serve, claims.py hub-modules clean, hookcheck rc 0 x4 at 18:40:34Z to 18:40:37Z, SUBMIT stamp 2026-11-03T18:43:29Z (key 1793731409 via date -u -d), QUEUED behind stack 935 (inflight since 18:23:14Z, 20 min 15 s at this stamp). G0 to submit 3 min 50 s wall. The gate was never empty for this stack: 935 inflight, 936 queued. | 2026-11-03T19:12:11Z: Slice b stack 936 landed as 53175423 at 2026-11-03T19:10:47Z (reflog 14:10:47 -0500), exit 0: mypy 276 to 267. Gated 24 min 40 s wall from its 18:46:07Z start (submit 18:43:29Z). 83 mypy findings remain in serve.py. Gate empty from 19:10:47Z. | 2026-11-03T19:31:01Z: Slice c probe 2026-11-03 (scratch copy, deleted): widening Model.key to tuple[object, ...], Model.doc to dict[str, object] and to_json/_to_json to dict[str, object] cut serve.py from 83 to 56 house-mypy findings but added NEW codes (arg-type 2, attr-defined 6 'object not iterable', assignment 1), which the per-file-per-code ratchet refuses ('arg-type 2 > baseline 0'). Not staged. The knock-ons are the readers of doc (lines 478/479/503, 1216, 1236, 1377, 1486, 1770, 1777): they need typed rows (InboundRow style) or a TypedDict before to_json can answer dict[str, object]. Next slice is a narrower one, or the typed-row work first. | 2026-11-03T19:38:50Z: R197 finding 2 (2026-11-03): TypedDicts in src/nemik, read by grep: issues._Row; calendars.Occurrence; witnesses.Alert, Sample, Data, Body, Expression, OpaResult, OpaAnswer, Card, Queue; rank.FruitRow, RankRow, GoalRow; pieces.GraphDoc; history.WeeklyRow, Variance, ShapeDrift; blocks.InboundRow, AskRow; wake.LivenessRecord, Alarm, Waiter, WakeRow; serve.EdgeRow. The row types already live in their producing modules and serve.py imports several. Proposal: NOT a new shared module (a new src/nemik module breaks live readers until bazel build //:.venv and trips test_codon_census, memory new-module-breaks-live-readers and new-module-must-compile-under-codon); add NodeRow and ViewDoc beside EdgeRow in serve.py, the module that builds the document. Slice c's rejection (new arg-type/attr-defined codes) is the evidence that the readers need these rows first. | 2026-11-03T21:01:21Z: 2026-11-03T21:01:21Z (read by stampnote): G0 precommit, W1490 slice c, before the first edit of src/nemik/serve.py. Pace read 2026-11-03T20:55:39Z, seconds old: mypy 267 left (owes 190, 59 landings to zero, only 46 over the last 10), ruff 108 (owes 90, 16 landings to zero, 68 over the last 10), codon owes 2. This is the narrow cut after slice c's wide cut was rejected (it added new mypy codes): only the Model cache key, typed tuple[tuple[str, int], ...] at its declaration and at the two places that build it from the sources' mtimes (refresh and the request-time staleness check). N = 83 house-mypy findings in serve.py. K = 4 MEASURED ON A SCRATCH COPY before this G0 (src/nemik/probe_serve_c2.py beside serve.py, codemod w1490c2.py applied to the copy only, house mypy 83 to 79, no new code, copy deleted by exact path): the tuple type-arg at the declaration and the three tuple[Any, ...] expressions. A type annotation only, no runtime change. The document readers (the doc dict and the Any reads of its nodes) are NOT in this slice: they need NodeRow and ViewDoc rows first. Before staging: hookcheck and nemik-stale (serve.py is hook-imported, standing 6), checks/claims.py hub-modules-depend-on-everything-below (no import changes, so the sets hold), test_architecture, test_namespaces, test_no_waivers and the serve tests directly (standing 14), the Codon first-error probe. Ruff axis: UNMEASURED (standing 12), read after the edit. Expected: mypy 267 to 263 exactly. MYPY stack, the gate is EMPTY since 2c87025d and 00ac55f8 landed at 2026-11-03T20:47:51Z; the interval ends at the submit, stamped from its queue key. | 2026-11-03T21:04:10Z: Slice c narrow cut, stack 941: G0 2026-11-03T21:01:21Z, K=4 on a probe copy (83 to 79, no new code), real tree mypy 267 to 263 exactly, ruff flat 108; hookcheck rc 0 x4 at 21:02:04Z to 21:02:07Z; hub claim clean; tests 56 passed (50.91 s wall); codon first error unchanged. SUBMIT stamp 2026-11-03T21:03:46Z (key 1793739826 via date -u -d), began gating 21:03:47Z. G0 to submit 2 min 25 s wall. Gate empty interval 20:47:51Z (940 landed) to 21:03:46Z: 15 min 55 s wall (the time went to the R200 measurements, the pace read and the probe). | 2026-11-03T21:19:53Z: Slice c narrow cut, stack 941, landed as bf72cb50 at 2026-11-03T21:18:50Z (reflog 16:18:50 -0500), exit 0: mypy 267 to 263. Gated 15 min 4 s wall from the 21:03:46Z submit. 79 mypy findings remain in serve.py (the document readers need NodeRow and ViewDoc rows). Gate empty from 21:18:50Z. | 2026-11-03T23:16:00Z: 2026-11-03T23:15Z: the NodeRow/ViewDoc measure carried since R197 is DONE as W1576 (stack 950 queued): ViewDoc over the existing NodeRow, EdgeRow, InboundRow and AskRow rows (no new module); probe 79 to 23 in serve.py with no new code, real tree mypy 213 to 149. Left in serve.py after it: 23 (existing misc and explicit-any in the history and JSON-reading code at lines about 1494 to 1606). Left in the mypy lane: rank.py 29, adapter.py 9, test_published_valid 8, test_static 7, test_calendars 6, test_rank_flow 6, test_run_row_schema 5.",
       "issued_at": "2026-11-02T20:27:11Z",
       "minted_during": "interrupt",
       "caused_by": "W1282",
-      "last_worked": "2026-11-03T21:19:53Z",
+      "last_worked": "2026-11-03T23:16:00Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/serve.py",
@@ -35769,7 +35769,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1383",
       "last_worked": "2026-11-02T20:27:56Z",
-      "ticks_blocked": 37,
+      "ticks_blocked": 38,
       "completed": null
     },
     {
@@ -36517,7 +36517,7 @@
       "minted_during": "interrupt",
       "caused_by": "nemik:R169",
       "last_worked": "2026-11-03T05:01:11Z",
-      "ticks_blocked": 34,
+      "ticks_blocked": 35,
       "completed": null
     },
     {
@@ -37359,23 +37359,23 @@
     {
       "symbol": "W1562",
       "title": "PLC0415 import cycles: record the 11 cycle sites (check 831, critical 493, history 1296, rank 551/882/905/906/1149/1170, witnesses 608) as a residue ledger with the import each one needs and the module that closes the cycle, no waiver, they stay in the baseline",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Rides as the second entry of stack 948; after it lands the card closes with the document landed and the PERF401 decision dated",
-      "evidence": "2026-11-03T18:05:44Z: Minted 2026-11-03 from R194 finding 2. Residue, not deletion: these 11 fail an import probe, so they are kept with their reasons. Sites: check 831 (LEDGER), critical 493 (cycles), history 1296 (QueueDoc), rank 551/882/905/906/1149/1170 (Weights), witnesses 608 (_get). | 2026-11-03T22:44:10Z: R205 finding 2, 2026-11-03T22:4xZ: docs/plc0415-cycles.md is WRITTEN (not yet in a stack): the eleven src/nemik PLC0415 sites that stay local, one row each (module:line, the import, what closes the cycle, the structural fix), read from the live files and from the import statements that close each cycle (checked by grep: history.py imports LEDGER, QUEUE, default_root and workstream_files from check; churn.py imports QueueDoc from history; salience.py imports from rank and waitrows.py imports Weights from rank; check.py imports cycles from critical; witwait.py imports _get from witnesses; stalled.py imports history). Finding: two leaf modules would retire five sites (a Weights leaf: rank 551, 883, 907; a path-constants and default_root leaf: check 835, critical 491, rank 1151). It rides as the second entry of the next lowering stack, since a docs file lowers no ratchet. PERF401 leftover in rank.py (1300), DATED DECISION: try the for s in [shared(b)] if s idiom (no walrus, so no var-annotated finding) on a rank.py probe copy during the next gate; if the probe shows mypy flat it is a ruff stack entry; due 2026-11-04T12:00Z or the next rank.py stack, whichever comes first; if the probe still raises mypy, it stays a recorded residue with that reason.",
+      "next_bounded_step": null,
+      "evidence": "2026-11-03T18:05:44Z: Minted 2026-11-03 from R194 finding 2. Residue, not deletion: these 11 fail an import probe, so they are kept with their reasons. Sites: check 831 (LEDGER), critical 493 (cycles), history 1296 (QueueDoc), rank 551/882/905/906/1149/1170 (Weights), witnesses 608 (_get). | 2026-11-03T22:44:10Z: R205 finding 2, 2026-11-03T22:4xZ: docs/plc0415-cycles.md is WRITTEN (not yet in a stack): the eleven src/nemik PLC0415 sites that stay local, one row each (module:line, the import, what closes the cycle, the structural fix), read from the live files and from the import statements that close each cycle (checked by grep: history.py imports LEDGER, QUEUE, default_root and workstream_files from check; churn.py imports QueueDoc from history; salience.py imports from rank and waitrows.py imports Weights from rank; check.py imports cycles from critical; witwait.py imports _get from witnesses; stalled.py imports history). Finding: two leaf modules would retire five sites (a Weights leaf: rank 551, 883, 907; a path-constants and default_root leaf: check 835, critical 491, rank 1151). It rides as the second entry of the next lowering stack, since a docs file lowers no ratchet. PERF401 leftover in rank.py (1300), DATED DECISION: try the for s in [shared(b)] if s idiom (no walrus, so no var-annotated finding) on a rank.py probe copy during the next gate; if the probe shows mypy flat it is a ruff stack entry; due 2026-11-04T12:00Z or the next rank.py stack, whichever comes first; if the probe still raises mypy, it stays a recorded residue with that reason. | 2026-11-03T23:08:23Z: docs/plc0415-cycles.md landed with stack 948 as e3aee4e3 at 2026-11-03T23:06:36Z. The PERF401 half was carried out as stack 949 (W1575). Residue: the eleven sites stay in the ruff baseline with their reasons in the document; the two leaf-module designs it names get their own cards.",
       "issued_at": "2026-11-03T18:05:28Z",
       "minted_during": "interrupt",
       "caused_by": "W1175",
-      "last_worked": "2026-11-03T22:57:33Z",
+      "last_worked": "2026-11-03T23:08:23Z",
       "ticks_blocked": 0,
       "manifest": [
         "docs/plc0415-cycles.md"
       ],
       "size_class": "small",
-      "completed": null
+      "completed": "20261103T230823Z"
     },
     {
       "symbol": "W1563",
@@ -37508,11 +37508,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "2026-11-03T21:38:51Z: SUCCESSOR TABLE v1, 2026-11-03T21:5xZ, from the baselines after stack 942 is in the gate (ruff 108 in HEAD, 95 once 942 lands; mypy 263). Rule: the successor is a stack of the OTHER baseline than the one in the gate (standing 13 as amended, standing 16). Columns: lane | row | findings | probed | measured K. MYPY lane (queue behind a ruff stack): serve.py document rows via NodeRow and ViewDoc beside EdgeRow | 79 | no (wide cut rejected 2026-11-03; needs rows first) | none; rank.py | 29 misc | no | none; tests/test_manifest.py | 18 (misc 15, no-untyped-call 2, no-untyped-def 1) | no (its ANN202 shares the cause: the _documents generator is untyped) | none; tests/test_witness_promql.py | 13 | no | none; tests/test_lifecycle_scheme.py | 10 | no | none; tests/test_shaclcache_threads.py | 10 (attr-defined 6) | no | none; adapter.py | 9 | no | none; tests/test_published_valid.py | 8 | no | none; tests/test_static.py | 7 | no | none. RUFF lane (queue behind a mypy stack): src/nemik/rank.py | 11 (PLC0415 6: Weights cycle sites; PLR0913 2; PERF401 1; S404 1) | PLC0415 6 are W1562 cycles, not stackable; PERF401 needs a typed generator; the rest blocked | none; src/nemik/salience.py | 11 (PLR0913 3, PLR0917 3, C901, PLR0912 and more) | no | none; src/nemik/check.py | 5 (PLC0415 1 is a cycle site, C901, PLR0912, PLR0914) | no | none; tests/test_cachestore.py | 4 (SLF001 3: _LAST, _SOLVES, _results) | no | none; checks/claims.py | 3 PLC0415 | no | none; tests/test_mspdi.py | 3 (S314 x2, S405) | no (xml parse of fixtures; defusedxml would be a new dependency) | none; tests/test_rank_apply.py | 3 (SLF001 x2, S404) | blocked: it monkeypatches subprocess.run | none; cachestore.py S301/S403 (pickle) | 2 | no | none. The first row of each lane to probe during the 942 gate is the mypy lane's tests/test_manifest.py (smallest-risk, tests only). | 2026-11-03T21:44:40Z: Table update 2026-11-03T21:44Z: mypy row tests/test_manifest.py PROBED and STAGED as stack 943 behind 942: K=18 measured on a probe copy, real tree 263 to 245; ruff side effect 1 (ANN202), credited to the next ruff stack. Next mypy rows to probe during the 942 and 943 gates: tests/test_witness_promql.py (13), tests/test_lifecycle_scheme.py (10), tests/test_shaclcache_threads.py (10), tests/test_published_valid.py (8), tests/test_static.py (7); all tests-only and the same Model.doc or json.loads Any cause is likely. Pace note: mypy fell 15 over 10 landings (176 landings to zero at that rate), ruff 80 (12 to zero), so the mypy lane needs rows of 10 or more; serve.py (79) and rank.py (29) are the only big ones. | 2026-11-03T21:48:50Z: OWED CREDITS 2026-11-03T21:5xZ (R203 finding 2): ruff 1 finding cleared by stack 943 (ANN202 on tests/test_manifest.py _documents) but not written to ruff-baseline.json because stack 942 ahead carried that file at 95; the tree reads ruff 94 against baseline 95. The next ruff stack's G0 counts it: its own K plus 1, and its --write takes the baseline to (95 minus its K minus 1). Earlier credits of the same kind: calendars (W1557) and shaclcache (W1558) mypy 24, landed 2026-11-03. | 2026-11-03T21:49:26Z: RUFF LANE PROBE 2026-11-03T22:0xZ (R203 finding 1), read by grep, no copy edited yet: the PLC2701 rows (9) and the SLF001 rows (6) are private names tests import: rank._open and rank._repo (frontier_walker 2, index 1), critical._open (index 1), letters._today, calendars._venv_ics, serve._build_static and serve._to_json, shaclinc._results (+ cachestore's _LAST/_SOLVES/_results). rank._open/_repo are also imported by salience.py and blocks._repo by overlaps.py and each has about 30 call sites across rank, critical, salience, blocks and tests, so a rename to a public name is a multi-module, hook-imported change (hookcheck, claims, Codon probes) for K of about 3 to 4 per name: NOT stackable cheaply, probed by reading, K not measured. CODON LANE: codon-baseline.json lists 138 modules with their first Codon error (e.g. 'syntax error, unexpected ,' for check, calendars, alarm: except-tuples; 'no module named __future__' for most); a module leaves the baseline only when it compiles whole, so the lane needs a module whose only error is a single construct; none probed. The ruff lane's honest supply is therefore the W1562 cycle sites and the PLR0913/PLR0917 argument-count rows (salience 6, calwrite 2), which are signature changes. Next probe candidate, smallest first: salience.py PLR0913/PLR0917 (6) by bundling arguments into a typed record. | 2026-11-03T21:57:26Z: Table update 2026-11-03T21:57Z: mypy row tests/test_manifest.py LANDED as 0d93e4f6 at 21:56:31Z (mypy 263 to 245, exactly K=18). Gate empty from 21:56:31Z with no successor staged: the ruff-lane rows are all unprobed or blocked, and the mypy rows left (test_witness_promql 13, test_lifecycle_scheme 10, test_shaclcache_threads 10, test_published_valid 8, test_static 7) are probe-ready. A mypy stack is the next one; a ruff stack cannot queue behind it, so the rule gives the next probe to the mypy row test_witness_promql.py. | 2026-11-03T22:09:14Z: STRIKE 2026-11-03T22:1xZ: the 'OWED CREDITS' line above (ruff 1 finding, tests/test_manifest.py ANN202) is SETTLED, not owed: it landed in stack 944 as 599ef45d at 22:07:29Z (ruff 95 to 94). Table: mypy row tests/test_witness_promql.py LANDED (232 left). Lane state now: ruff 94 is the binding constraint (80 fell over the last 10 landings, 12 to zero at that rate); mypy 232. | 2026-11-03T22:15:24Z: Table update 2026-11-03T22:15Z: RUFF lane row 'PLR0917 tail parameters keyword-only' PROBED on a scratch root (K=5 of 6 PLR0917 rows) and STAGED as stack 945 (salience_of, edge_currents, event_lines, test_guarantees._wp, test_score.vec). Left in the ruff lane: PLR0917 salience.audit (1; the same function carries PLR0913 10 args, C901, PLR0912, PLR0915, PLR0914: an argument-record refactor), PLR0913 (8 rows: all-arguments needs a record or fewer parameters, not a star), C901 rows (check.survey 49, serve.handler 19, serve.do_GET 16, staticserve.handler 16, salience.audit 25, tests/test_flow_reference._dense 11), PLR0914 (history 868 with 21 locals, check.survey), PLW0603 x2 (global statements in index.py and salience.py), PLC2701/SLF001 renames (K 3 to 4 per name, multi-module). Next ruff probe, smallest first: tests/test_flow_reference._dense C901 (11 vs 10), a one-over-the-limit row.",
+      "evidence": "2026-11-03T21:38:51Z: SUCCESSOR TABLE v1, 2026-11-03T21:5xZ, from the baselines after stack 942 is in the gate (ruff 108 in HEAD, 95 once 942 lands; mypy 263). Rule: the successor is a stack of the OTHER baseline than the one in the gate (standing 13 as amended, standing 16). Columns: lane | row | findings | probed | measured K. MYPY lane (queue behind a ruff stack): serve.py document rows via NodeRow and ViewDoc beside EdgeRow | 79 | no (wide cut rejected 2026-11-03; needs rows first) | none; rank.py | 29 misc | no | none; tests/test_manifest.py | 18 (misc 15, no-untyped-call 2, no-untyped-def 1) | no (its ANN202 shares the cause: the _documents generator is untyped) | none; tests/test_witness_promql.py | 13 | no | none; tests/test_lifecycle_scheme.py | 10 | no | none; tests/test_shaclcache_threads.py | 10 (attr-defined 6) | no | none; adapter.py | 9 | no | none; tests/test_published_valid.py | 8 | no | none; tests/test_static.py | 7 | no | none. RUFF lane (queue behind a mypy stack): src/nemik/rank.py | 11 (PLC0415 6: Weights cycle sites; PLR0913 2; PERF401 1; S404 1) | PLC0415 6 are W1562 cycles, not stackable; PERF401 needs a typed generator; the rest blocked | none; src/nemik/salience.py | 11 (PLR0913 3, PLR0917 3, C901, PLR0912 and more) | no | none; src/nemik/check.py | 5 (PLC0415 1 is a cycle site, C901, PLR0912, PLR0914) | no | none; tests/test_cachestore.py | 4 (SLF001 3: _LAST, _SOLVES, _results) | no | none; checks/claims.py | 3 PLC0415 | no | none; tests/test_mspdi.py | 3 (S314 x2, S405) | no (xml parse of fixtures; defusedxml would be a new dependency) | none; tests/test_rank_apply.py | 3 (SLF001 x2, S404) | blocked: it monkeypatches subprocess.run | none; cachestore.py S301/S403 (pickle) | 2 | no | none. The first row of each lane to probe during the 942 gate is the mypy lane's tests/test_manifest.py (smallest-risk, tests only). | 2026-11-03T21:44:40Z: Table update 2026-11-03T21:44Z: mypy row tests/test_manifest.py PROBED and STAGED as stack 943 behind 942: K=18 measured on a probe copy, real tree 263 to 245; ruff side effect 1 (ANN202), credited to the next ruff stack. Next mypy rows to probe during the 942 and 943 gates: tests/test_witness_promql.py (13), tests/test_lifecycle_scheme.py (10), tests/test_shaclcache_threads.py (10), tests/test_published_valid.py (8), tests/test_static.py (7); all tests-only and the same Model.doc or json.loads Any cause is likely. Pace note: mypy fell 15 over 10 landings (176 landings to zero at that rate), ruff 80 (12 to zero), so the mypy lane needs rows of 10 or more; serve.py (79) and rank.py (29) are the only big ones. | 2026-11-03T21:48:50Z: OWED CREDITS 2026-11-03T21:5xZ (R203 finding 2): ruff 1 finding cleared by stack 943 (ANN202 on tests/test_manifest.py _documents) but not written to ruff-baseline.json because stack 942 ahead carried that file at 95; the tree reads ruff 94 against baseline 95. The next ruff stack's G0 counts it: its own K plus 1, and its --write takes the baseline to (95 minus its K minus 1). Earlier credits of the same kind: calendars (W1557) and shaclcache (W1558) mypy 24, landed 2026-11-03. | 2026-11-03T21:49:26Z: RUFF LANE PROBE 2026-11-03T22:0xZ (R203 finding 1), read by grep, no copy edited yet: the PLC2701 rows (9) and the SLF001 rows (6) are private names tests import: rank._open and rank._repo (frontier_walker 2, index 1), critical._open (index 1), letters._today, calendars._venv_ics, serve._build_static and serve._to_json, shaclinc._results (+ cachestore's _LAST/_SOLVES/_results). rank._open/_repo are also imported by salience.py and blocks._repo by overlaps.py and each has about 30 call sites across rank, critical, salience, blocks and tests, so a rename to a public name is a multi-module, hook-imported change (hookcheck, claims, Codon probes) for K of about 3 to 4 per name: NOT stackable cheaply, probed by reading, K not measured. CODON LANE: codon-baseline.json lists 138 modules with their first Codon error (e.g. 'syntax error, unexpected ,' for check, calendars, alarm: except-tuples; 'no module named __future__' for most); a module leaves the baseline only when it compiles whole, so the lane needs a module whose only error is a single construct; none probed. The ruff lane's honest supply is therefore the W1562 cycle sites and the PLR0913/PLR0917 argument-count rows (salience 6, calwrite 2), which are signature changes. Next probe candidate, smallest first: salience.py PLR0913/PLR0917 (6) by bundling arguments into a typed record. | 2026-11-03T21:57:26Z: Table update 2026-11-03T21:57Z: mypy row tests/test_manifest.py LANDED as 0d93e4f6 at 21:56:31Z (mypy 263 to 245, exactly K=18). Gate empty from 21:56:31Z with no successor staged: the ruff-lane rows are all unprobed or blocked, and the mypy rows left (test_witness_promql 13, test_lifecycle_scheme 10, test_shaclcache_threads 10, test_published_valid 8, test_static 7) are probe-ready. A mypy stack is the next one; a ruff stack cannot queue behind it, so the rule gives the next probe to the mypy row test_witness_promql.py. | 2026-11-03T22:09:14Z: STRIKE 2026-11-03T22:1xZ: the 'OWED CREDITS' line above (ruff 1 finding, tests/test_manifest.py ANN202) is SETTLED, not owed: it landed in stack 944 as 599ef45d at 22:07:29Z (ruff 95 to 94). Table: mypy row tests/test_witness_promql.py LANDED (232 left). Lane state now: ruff 94 is the binding constraint (80 fell over the last 10 landings, 12 to zero at that rate); mypy 232. | 2026-11-03T22:15:24Z: Table update 2026-11-03T22:15Z: RUFF lane row 'PLR0917 tail parameters keyword-only' PROBED on a scratch root (K=5 of 6 PLR0917 rows) and STAGED as stack 945 (salience_of, edge_currents, event_lines, test_guarantees._wp, test_score.vec). Left in the ruff lane: PLR0917 salience.audit (1; the same function carries PLR0913 10 args, C901, PLR0912, PLR0915, PLR0914: an argument-record refactor), PLR0913 (8 rows: all-arguments needs a record or fewer parameters, not a star), C901 rows (check.survey 49, serve.handler 19, serve.do_GET 16, staticserve.handler 16, salience.audit 25, tests/test_flow_reference._dense 11), PLR0914 (history 868 with 21 locals, check.survey), PLW0603 x2 (global statements in index.py and salience.py), PLC2701/SLF001 renames (K 3 to 4 per name, multi-module). Next ruff probe, smallest first: tests/test_flow_reference._dense C901 (11 vs 10), a one-over-the-limit row. | 2026-11-03T23:30:55Z: Table update 2026-11-03T23:2xZ: stacks 948 (W1574 test_shaclcache_threads, mypy 222 to 213, plus docs/plc0415-cycles.md) landed e3aee4e3 at 23:06:36Z; 949 (W1575 rank PERF401, ruff 88 to 87) inflight since 23:06:42Z; 950 (W1576 serve ViewDoc, mypy 213 to 149 by measure) queued. NEW ROWS (R206 finding 2): W1577 rankcore leaf (K 3 PLC0415, large, LOW rank) and W1578 paths leaf (K 1, medium, LOW rank): both need a new src module, so each pays bazel build //:.venv before wiring, test_codon_census and claims.py; the honest count for the two is FOUR of eleven cycle sites, not five (the default_root sites in critical and rank also import survey, which stays in check). Ranking by fall per landing now: mypy lane: rank.py 29 (unprobed), adapter.py 9, test_published_valid 8, test_static 7, test_calendars 6, test_rank_flow 6; serve.py 23 left after 950; ruff lane: PLR0913 rows (8, each an argument record), C901 rows, PLR0914, PLW0603 x2, PLC2701/SLF001 renames, then W1577 and W1578.",
       "issued_at": "2026-11-03T21:38:03Z",
       "minted_during": "interrupt",
       "caused_by": "W1490",
-      "last_worked": "2026-11-03T22:15:24Z",
+      "last_worked": "2026-11-03T23:30:55Z",
       "ticks_blocked": 0,
       "manifest": [
         ".claude/paths-forward.json"
@@ -37637,19 +37637,19 @@
     {
       "symbol": "W1574",
       "title": "tests/test_shaclcache_threads.py reads the patched sparql processor names through one typed helper and types its excepthook: nine mypy findings clear (the successor table's next mypy row), with docs/plc0415-cycles.md as the second entry",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Apply w1574.py, format, ratchet, test_shaclcache_threads and the guards, stack [W1574, W1562 doc] (gate empty)",
-      "evidence": "2026-11-03T22:56:26Z: 2026-11-03T22:56:25Z (read by stampnote): G0 precommit, before the first edit of tests/test_shaclcache_threads.py (card and manifest minted first). Pace read 2026-11-03T22:45:42Z (newest-landing PENDING: d3e5bdb7 landed 9 minutes later), a few minutes old at this stamp: mypy 222 left (owes 190; 45 over the last 10 landings; 50 landings to zero), ruff 89 (88 after d3e5bdb7; owes 89), codon owes 2. R205 finding 1 asked for fall per landing: this row falls 9 (not the 13 or 18 of the best rows) and goes second behind the cheapest-first order the table uses; the big rows (serve.py 79 and rank.py 29) still have no scratch measure. N = 10 house-mypy findings in tests/test_shaclcache_threads.py. K = 9 MEASURED ON A PROBE COPY before this G0 (tests/probe_shaclthreads.py beside the test, codemod w1574.py applied to the copy, mikemol-pycheck format, house mypy 10 to 1: the one left is the Any read inside the new helper, house ruff clean apart from the tests-exempt S101; the refactored COPY run as a test: 2 passed, so the concurrency test still sees the patch and the restore; copy deleted by exact path). The cause: rdflib.plugins.sparql.processor imports parseQuery and translateQuery without exporting them, so six attribute reads cost findings; the test reads them through _current(name) over vars(processor) (one Any read, in the helper) and types its excepthook as a function over threading.ExceptHookArgs instead of a lambda. Behaviour change named: none (vars(module)[name] is the attribute cached_sparql_parse patches). Second entry of the stack: docs/plc0415-cycles.md for W1562 (R205 finding 2), which lowers nothing and rides behind this lowering entry. Ruff axis: UNMEASURED beyond the probe (standing 12), read after. Expected: mypy 222 to 213 exactly, ruff flat 88. MYPY stack. The gate is EMPTY since d3e5bdb7 landed at 2026-11-03T22:54:15Z; the interval ends at the submit, stamped from its queue key. | 2026-11-03T22:57:58Z: Stack 948 [W1574, W1562]: G0 2026-11-03T22:56:25Z, probe K=9 (mypy 10 to 1, the refactored copy ran 2 passed), real tree mypy 222 to 213 exactly, ruff flat 88; tests and guards 10 passed (3.22 s wall); SUBMIT stamp 2026-11-03T22:57:41Z (key 1793746661 via date -u -d), began gating 22:57:43Z. G0 to submit 1 min 16 s wall. Gate empty interval 22:54:15Z (947 landed) to 22:57:41Z: 3 min 26 s wall. 947 gated 11 min 40 s and 946 9 min 8 s before it.",
+      "next_bounded_step": null,
+      "evidence": "2026-11-03T22:56:26Z: 2026-11-03T22:56:25Z (read by stampnote): G0 precommit, before the first edit of tests/test_shaclcache_threads.py (card and manifest minted first). Pace read 2026-11-03T22:45:42Z (newest-landing PENDING: d3e5bdb7 landed 9 minutes later), a few minutes old at this stamp: mypy 222 left (owes 190; 45 over the last 10 landings; 50 landings to zero), ruff 89 (88 after d3e5bdb7; owes 89), codon owes 2. R205 finding 1 asked for fall per landing: this row falls 9 (not the 13 or 18 of the best rows) and goes second behind the cheapest-first order the table uses; the big rows (serve.py 79 and rank.py 29) still have no scratch measure. N = 10 house-mypy findings in tests/test_shaclcache_threads.py. K = 9 MEASURED ON A PROBE COPY before this G0 (tests/probe_shaclthreads.py beside the test, codemod w1574.py applied to the copy, mikemol-pycheck format, house mypy 10 to 1: the one left is the Any read inside the new helper, house ruff clean apart from the tests-exempt S101; the refactored COPY run as a test: 2 passed, so the concurrency test still sees the patch and the restore; copy deleted by exact path). The cause: rdflib.plugins.sparql.processor imports parseQuery and translateQuery without exporting them, so six attribute reads cost findings; the test reads them through _current(name) over vars(processor) (one Any read, in the helper) and types its excepthook as a function over threading.ExceptHookArgs instead of a lambda. Behaviour change named: none (vars(module)[name] is the attribute cached_sparql_parse patches). Second entry of the stack: docs/plc0415-cycles.md for W1562 (R205 finding 2), which lowers nothing and rides behind this lowering entry. Ruff axis: UNMEASURED beyond the probe (standing 12), read after. Expected: mypy 222 to 213 exactly, ruff flat 88. MYPY stack. The gate is EMPTY since d3e5bdb7 landed at 2026-11-03T22:54:15Z; the interval ends at the submit, stamped from its queue key. | 2026-11-03T22:57:58Z: Stack 948 [W1574, W1562]: G0 2026-11-03T22:56:25Z, probe K=9 (mypy 10 to 1, the refactored copy ran 2 passed), real tree mypy 222 to 213 exactly, ruff flat 88; tests and guards 10 passed (3.22 s wall); SUBMIT stamp 2026-11-03T22:57:41Z (key 1793746661 via date -u -d), began gating 22:57:43Z. G0 to submit 1 min 16 s wall. Gate empty interval 22:54:15Z (947 landed) to 22:57:41Z: 3 min 26 s wall. 947 gated 11 min 40 s and 946 9 min 8 s before it. | 2026-11-03T23:08:21Z: Stack 948 landed as e3aee4e3 at 2026-11-03T23:06:36Z (reflog 18:06:36 -0500), exit 0: mypy 222 to 213, ruff flat 88. Gated 8 min 53 s wall from the 22:57:43Z start (submit 22:57:41Z). Stack 949 (W1575) began gating next.",
       "issued_at": "2026-11-03T22:56:08Z",
       "minted_during": "interrupt",
       "caused_by": "W1568",
-      "last_worked": "2026-11-03T22:57:58Z",
+      "last_worked": "2026-11-03T23:08:21Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261103T230821Z",
       "manifest": [
         "tests/test_shaclcache_threads.py",
         "mypy-baseline.json"
@@ -37677,6 +37677,83 @@
         "ruff-baseline.json"
       ],
       "size_class": "small"
+    },
+    {
+      "symbol": "W1576",
+      "title": "serve.py types the published document as ViewDoc (NodeRow, EdgeRow, InboundRow, AskRow rows), so the document readers stop being Any: fifty-six mypy findings clear",
+      "status": "working",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Apply w1490d.py, format, ratchet (whole-repo mypy for the callers of to_json and Model.doc), hookcheck, hub claim, serve tests, codon probe, queue behind 949",
+      "evidence": "2026-11-03T23:10:53Z: 2026-11-03T23:10:52Z (read by stampnote): G0 precommit, W1490's NodeRow/ViewDoc measure carried since R197 and asked for again in R206 finding 1; before the first edit of src/nemik/serve.py (card and manifest minted first). Pace read 2026-11-03T23:05:43Z (newest-landing PENDING: e3aee4e3 landed 53 s later), seconds old at this stamp: mypy 213 left (owes 190; 54 over the last 10 landings; 40 landings to zero), ruff 88 (87 after stack 949), codon owes 2. Fall per landing is the lever (R205 finding 1): this is the first big row, N = 79 house-mypy findings in serve.py. NodeRow, EdgeRow, InboundRow and AskRow already exist in or are imported by serve.py; what was missing was the type of the document itself. The change: one new TypedDict ViewDoc (total=False) of the seven keys _to_json returns (nodes: list[NodeRow], edges: list[EdgeRow], inbound: list[InboundRow], operator: list[AskRow], findings, health, ruler), to_json and _to_json answer ViewDoc and take findings: dict[str, list[Finding]], Model.doc is a ViewDoc, and the one reader that handed model.doc[nodes] to functions expecting list[dict[str, object]] builds that list with dict(n) for each node (a shallow per-node copy, same keys and values). K = 56 MEASURED ON A PROBE COPY before this G0 (src/nemik/probe_serve_d.py beside serve.py, codemod w1490d.py applied to the copy only, formatted already, house mypy 79 to 23, NO new mypy code: the remaining 23 are the existing misc and explicit-any; two earlier versions of the codemod were measured and fixed first: the wide dict[str, object] cut (rejected, new codes) and a NodeRow-annotated local that raised three arg-type findings, replaced by the dict(n) copy; house ruff on the copy: only the 3 findings serve.py already has (C901 handler, C901 do_GET, PLR0912 do_GET); copy deleted by exact path). NOT measured here, stated as unmeasured (standing 12): mypy on the OTHER files that read to_json or Model.doc (tests and other src modules; a new finding there would show as above-baseline in the ratchet and I would revert or fix it before staging), the Codon first error, and the serve tests. Run before staging: hookcheck and nemik-stale (serve.py is hook-imported), checks/claims.py hub-modules-depend-on-everything-below (no import changed), codon_first.py for serve, test_architecture, test_namespaces, test_no_waivers and the serve and static view tests directly. Behaviour change named: none for the document; ViewDoc is an annotation, and the dict(n) copy replaces an alias that the callee only reads. Expected: mypy 213 to 157 if no other file moves (213 minus 56), ruff flat 87. MYPY stack. The gate holds 949 (ruff, rank.py, ruff-baseline.json) inflight since 23:06:37Z; this stack shares no file with it. | 2026-11-03T23:15:58Z: Stack 950: G0 2026-11-03T23:10:52Z, probe K=56 (serve.py 79 to 23, no new code), the real tree's first ratchet read refused (test_memo_audits and test_series_serve each +2 assignment) and both tests were fixed in the stack, then mypy 213 to 149 (a fall of 64), ruff flat 87; hookcheck rc 0 x4 at 23:12:49Z to 23:12:51Z; hub claim clean; codon first error unchanged; tests 41 passed (110.59 s wall); SUBMIT stamp 2026-11-03T23:15:31Z (key 1793747731 via date -u -d), QUEUED behind 949 (inflight since 23:06:42Z by its began_ns 1793747202, 8 min 49 s at this stamp). G0 to submit 4 min 39 s wall. The gate was never empty for this stack.",
+      "issued_at": "2026-11-03T23:10:35Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1490",
+      "last_worked": "2026-11-03T23:15:58Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "src/nemik/serve.py",
+        "mypy-baseline.json"
+      ],
+      "size_class": "medium"
+    },
+    {
+      "symbol": "W1577",
+      "title": "rankcore leaf: Weights, load_weights, _open, _repo, downstream_weight, ref_of and successors move from rank.py to a new leaf module that rank, salience and waitrows import, so rank.py can import salience at module level and three PLC0415 clear (rank 551, 883, 907)",
+      "status": "ready",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Probe on an in-project copy: create src/nemik/probe_rankcore.py with the seven names, repoint rank, salience and waitrows, hoist rank 551, 883, 907; then K by house ruff, the import test of the six entry modules, hookcheck, claims.py declared sets, test_codon_census (the new module must compile under the pinned Codon: probe-compile first with the bazel-cache codon), and bazel build //:.venv with the gate empty BEFORE wiring",
+      "evidence": "2026-11-03T23:30:45Z: Minted 2026-11-03 from R206 finding 2. K by reading, not measured: 3 PLC0415 (rank.py 551 salience_of, 883 ask_effect and show, 907 audit and the gate-weight readers). Why seven names, not one: salience.py imports Weights, _open, _repo, downstream_weight, load_weights, ref_of and successors from rank at module level, so moving only Weights would leave rank to salience to rank a cycle. waitrows.py and serve.py:161 import Weights from rank too and repoint to the leaf. Costs a new src/nemik module pays (memory: new-module-breaks-live-readers, new-module-must-compile-under-codon): bazel build //:.venv before any wiring, test_codon_census against the pinned Codon with a codon-baseline.json entry only if the module fails to compile whole, checks/claims.py declared dependency sets (rank and the hubs), hookcheck.py (rank is hook-imported), and the BUILD.bazel/pyproject registries a new module needs. Rank on the successor table: LOW (K 3 for a large cost); do it after the mypy rows.",
+      "issued_at": "2026-11-03T23:30:29Z",
+      "minted_during": "tick",
+      "caused_by": "W1562",
+      "last_worked": "2026-11-03T23:30:45Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "src/nemik/rankcore.py",
+        "src/nemik/rank.py",
+        "src/nemik/salience.py",
+        "src/nemik/waitrows.py",
+        "checks/claims.py",
+        "ruff-baseline.json",
+        "codon-baseline.json"
+      ],
+      "size_class": "large"
+    },
+    {
+      "symbol": "W1578",
+      "title": "paths leaf: QUEUE, LEDGER, default_root and workstream_files move from check.py to a new leaf module that check, history, vtodo and blocks_cli import, so check.py can import stalled at module level and one PLC0415 clears (check 835)",
+      "status": "ready",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Probe on an in-project copy: src/nemik/probe_rootpaths.py with QUEUE, LEDGER, default_root and workstream_files, repoint history, vtodo and blocks_cli (check re-exports for its other importers), hoist check 835; K by house ruff, import test of the six entry modules, hookcheck, claims.py, codon probe-compile, bazel build //:.venv before wiring",
+      "evidence": "2026-11-03T23:30:47Z: Minted 2026-11-03 from R206 finding 2. K by reading: 1 PLC0415 (check.py 835, from nemik import stalled: stalled imports history, history imports LEDGER, QUEUE, default_root and workstream_files from check). CORRECTION to docs/plc0415-cycles.md, which said two leaf modules would retire five sites: the paths leaf retires ONE (check 835). The other two default_root sites (critical.py 491 and rank.py 1151) import default_root AND survey from check, and survey is the 500-line fleet scan that has to stay in check, so those two stay cycles until survey itself moves or the callers take it as an argument. The rankcore leaf (W1577) retires three. So the honest count is four of eleven for two new modules, and the document row for the default_root leaf should say so (a one-line edit to the doc, carried in this card's stack). Rank on the successor table: LOW (K 1 for a medium cost). Same new-module checks as W1577: bazel build //:.venv before wiring, test_codon_census, claims.py declared sets (check is a hook-imported module), hookcheck.",
+      "issued_at": "2026-11-03T23:30:31Z",
+      "minted_during": "tick",
+      "caused_by": "W1562",
+      "last_worked": "2026-11-03T23:30:47Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "src/nemik/rootpaths.py",
+        "src/nemik/check.py",
+        "src/nemik/history.py",
+        "src/nemik/vtodo.py",
+        "src/nemik/blocks_cli.py",
+        "docs/plc0415-cycles.md",
+        "ruff-baseline.json",
+        "codon-baseline.json"
+      ],
+      "size_class": "medium"
     }
   ],
   "residue": [
@@ -46918,7 +46995,29 @@
         }
       ],
       "id": "nemik:R203"
+    },
+    {
+      "card": "W1574",
+      "trigger": "round 206: stacks 946 (W1572) ae1f4542 22:42:30Z and 947 (W1573) d3e5bdb7 22:54:15Z landed; stack 948 [W1574 mypy 222 to 213, W1562 docs/plc0415-cycles.md] inflight since 22:57:43Z; stack 949 (W1575 PERF401 leftover, ruff 88 to 87) queued; R205 finding 1 (serve typed rows first) not done",
+      "root": "Verified from the reflog (unix stamps): 665c8a67 1793745093 = 22:31:33Z, ae1f4542 1793745750 = 22:42:30Z, d3e5bdb7 1793746455 = 22:54:15Z, and the submit key 1793746661 = 22:57:41Z. 946 gated 22:33:22Z to 22:42:30Z (9 min 08 s), 947 22:42:35Z to 22:54:15Z (11 min 40 s), and the gate was empty 22:54:15Z to 22:57:41Z (3 min 26 s), as the G1 states; the gate has held 948 and 949, one per lane, since 23:04:40Z. R205 finding 2 is met, and the document is better than a first draft: eleven src sites, one row each, the first draft written from the probe's error lines and each cycle-closing import then checked by grep, which corrected two rows (check.py 835 goes through stalled to history; rank 906 is the metrics hub edge), plus the PERF401 leftover carried out within the hour of its dated decision with a typed form that keeps mypy flat. R205 finding 1 is NOT done and the G1 says so in two words ('I took the cheapest rows first again'): the serve.py and rank.py rows have been unmeasured since R197, six rounds, every landing since has taken 1 to 13 findings, and the filler rows left are 24 findings in three files. W1534 has six readings. I did not re-run any figure. Two findings. No fixpoint is declared. Carried open findings as in R205, with R205 finding 1 now carried a second time.",
+      "findings": [
+        {
+          "finding": "Both lanes are full right now (948 inflight, 949 queued), which makes this the exact window for the one measure that has been deferred for six rounds: the serve.py typed rows (NodeRow, ViewDoc beside EdgeRow) on an in-project copy, house mypy by code, no new code, K stated. The wide cut failed by adding codes (arg-type 2, attr-defined 6, assignment 1) and the narrow cut cleared 4; a middle cut that types the readers through the shared rows is what the measure should look for, and a failure (new codes) is a result worth recording by code. Do it before 948 lands (about 10 more minutes at the rate of the last mypy stacks), put the measured K and its codes on W1490, and make the serve slice the next mypy stack unless the measure shows a fall under the filler rows' 7 to 9. If the measure cannot be taken in this window, record why on W1490 and name the time it will be taken.",
+          "finding_card": "W1490",
+          "finding_owner": "nemik session",
+          "finding_witness": "A W1490 line with the NodeRow/ViewDoc probe-copy mypy result by code (K, new codes) stamped before 948 lands, and the next mypy stack's G0 built from it; or a dated reason.",
+          "due": "2026-11-03"
+        },
+        {
+          "finding": "The new document ends in a design with a number: two leaf modules (a Weights leaf for rank 551, 883, 907; a path-constants and default_root leaf for check 835, critical 491, rank 1151) 'would retire five' of the 11 CYCLE sites, i.e. five ruff findings, but it is written as a paragraph and not as work. Mint two cards (one per leaf module) with manifests, each with K (the sites it retires, from the document's rows) and the two checks the new-module memory notes require: a probe-compile of the new module under the pinned Codon with codon_first, and the bazel-built venv before wiring (a new src/nemik module imported by adapter or check breaks live readers until the venv is rebuilt). They are the ruff lane's largest candidates beyond the one-site rows and each is a K=2-3 stack, so rank them on the table with their expected fall.",
+          "finding_card": "W1562",
+          "finding_owner": "nemik session",
+          "finding_witness": "Two minted cards (Weights leaf, path-constants leaf) with manifests, K from the document's rows, and the codon probe-compile plan, linked from W1562 and ranked on the W1568 table.",
+          "due": "2026-11-04"
+        }
+      ],
+      "id": "nemik:R204"
     }
   ],
-  "retro_counter": 203
+  "retro_counter": 204
 }

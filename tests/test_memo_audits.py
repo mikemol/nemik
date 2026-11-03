@@ -54,10 +54,10 @@ def test_the_memo_changes_no_number_and_cuts_the_solves(
         return real(demand, needs, frontier, weights, edge)
 
     monkeypatch.setattr("nemik.salience.solve", counted)
-    plain: dict[str, object] = _to_json(g, findings)
+    plain = _to_json(g, findings)
     unmemoized = calls["n"]
     calls["n"] = 0
-    memoized: dict[str, object] = to_json(g, findings)
+    memoized = to_json(g, findings)
     assert json.dumps(memoized, sort_keys=True) == json.dumps(plain, sort_keys=True)
     assert unmemoized > 0
     assert calls["n"] < unmemoized, (calls["n"], unmemoized)

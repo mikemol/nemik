@@ -7,7 +7,7 @@ import time
 from pathlib import Path
 
 from nemik.apischema import unmanifested
-from nemik.serve import SERIES_FILE, Model, static_data
+from nemik.serve import SERIES_FILE, Model, NodeRow, ViewDoc, static_data
 
 FLEET = Path(__file__).parent / "fixtures" / "fleet"
 
@@ -28,11 +28,11 @@ def test_a_withheld_card_is_not_counted_as_work(tmp_path: Path) -> None:
     """The withheld list keeps a card out of every number the view publishes, the board's too."""
     model = _model(tmp_path, _snapshot(tmp_path / "s.json"))
     model.withheld = frozenset({"slow:W1"})
-    nodes: list[dict[str, str]] = [
+    nodes: list[NodeRow] = [
         {"repo": "slow", "symbol": "W1", "state": "ready"},
         {"repo": "up", "symbol": "W2", "state": "ready"},
     ]
-    doc: dict[str, object] = {"operator": [], "inbound": [], "nodes": nodes}
+    doc: ViewDoc = {"operator": [], "inbound": [], "nodes": nodes}
     model.doc = doc
     board = model.series_doc()
     assert board["stranded"] == []
@@ -82,19 +82,13 @@ def _model(tmp_path: Path, series: Path | None, max_age: int = 900) -> Model:
 
     """
     model = Model(tmp_path, series=series, series_max_age=max_age)
-    nodes = [
+    nodes: list[NodeRow] = [
         {"repo": "up", "state": "ready"},
         {"repo": "gone", "state": "working"},
         {"repo": "gone", "state": "done"},
         {"repo": "slow", "state": "ready"},
     ]
-    operator: list[object] = []
-    inbound: list[object] = []
-    doc: dict[str, object] = {
-        "operator": operator,
-        "inbound": inbound,
-        "nodes": nodes,
-    }
+    doc: ViewDoc = {"operator": [], "inbound": [], "nodes": nodes}
     model.doc = doc
     return model
 

@@ -422,7 +422,7 @@ class Model:
         self.key: tuple[tuple[str, int], ...] = ()
         self.graph = bind(Graph())
         self.payload = b"{}"
-        self.doc: dict = {
+        self.doc: ViewDoc = {
             "operator": [],
             "inbound": [],
         }  # parsed once per rebuild, shared by requests
@@ -883,7 +883,21 @@ class EdgeRow(TypedDict, total=False):
     current: float
 
 
-def to_json(g: Graph, findings: dict, numbers: Graph | None = None) -> dict:
+class ViewDoc(TypedDict, total=False):
+    """The document to_json builds and graph.json publishes (nemik:W1490)."""
+
+    nodes: list[NodeRow]
+    edges: list[EdgeRow]
+    inbound: list[InboundRow]
+    operator: list[AskRow]
+    findings: dict[str, list[list[str]]]
+    health: dict[str, dict[str, object]]
+    ruler: dict[str, list[str]]
+
+
+def to_json(
+    g: Graph, findings: dict[str, list[Finding]], numbers: Graph | None = None
+) -> ViewDoc:
     """Build the view's document.
 
     nemik:W403: built with identical flow solves answered once (the ranking, edge widths and
@@ -1199,7 +1213,9 @@ def _edge_widths(
             e["current"] = round(carried, 4)
 
 
-def _to_json(g: Graph, findings: dict, numbers: Graph | None = None) -> dict:
+def _to_json(
+    g: Graph, findings: dict[str, list[Finding]], numbers: Graph | None = None
+) -> ViewDoc:
     # nemik:W309: every published number (salience, edge current, ask weight) comes from `gn`, the
     # graph without the withheld waypoints, when there are any; structure still comes from `g`.
     gn = numbers if numbers is not None else g
@@ -1736,7 +1752,7 @@ def private_files(model: Model, out: Path) -> list[Path]:
         return json.dumps(doc, indent=1).encode()
 
     rows = model.doc["inbound"]
-    nodes: list[dict[str, object]] = model.doc["nodes"]
+    nodes: list[dict[str, object]] = [dict(n) for n in model.doc["nodes"]]
     put("operator.json", dump(model.doc["operator"]))
     # nemik:W978: the landings board, as /landings.json answers it live, from the file in the root
     now = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())

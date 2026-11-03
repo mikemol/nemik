@@ -34,8 +34,7 @@
  },
  "src/nemik/serve.py": {
   "explicit-any": 2,
-  "misc": 74,
-  "type-arg": 3
+  "misc": 21
  },
  "src/nemik/shaclcache.py": {
   "misc": 1
@@ -65,9 +64,6 @@
   "misc": 1,
   "type-arg": 1
  },
- "tests/test_calendar_boundary.py": {
-  "misc": 1
- },
  "tests/test_calendars.py": {
   "misc": 6
  },
@@ -85,9 +81,6 @@
  },
  "tests/test_published_valid.py": {
   "misc": 8
- },
- "tests/test_rank_flow.py": {
-  "misc": 6
  },
  "tests/test_run_row_schema.py": {
   "misc": 5
@@ -115,9 +108,6 @@
  },
  "tools/check_run_rows.py": {
   "misc": 4
- },
- "tools/gen_pieces_corpus.py": {
-  "misc": 1
  },
  "tools/nemik_client.py": {
   "misc": 2
