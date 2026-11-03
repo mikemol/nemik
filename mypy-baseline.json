@@ -36,8 +36,7 @@
   "misc": 10
  },
  "src/nemik/rank.py": {
-  "misc": 39,
-  "type-arg": 1
+  "misc": 29
  },
  "src/nemik/serve.py": {
   "explicit-any": 2,
@@ -90,9 +89,6 @@
  },
  "tests/test_flow_cache.py": {
   "attr-defined": 1
- },
- "tests/test_fruit.py": {
-  "misc": 9
  },
  "tests/test_guarantees.py": {
   "misc": 3

@@ -161,6 +161,15 @@ def _toml_table(value: object) -> dict[str, object]:
     return {str(k): v for k, v in value.items()} if isinstance(value, dict) else {}
 
 
+class FruitRow(TypedDict):
+    """The one virtual row `fruit` makes of a repo's low-hanging fruit."""
+
+    symbol: str
+    title: str
+    members: list[str]
+    class_weight: int
+
+
 class RankRow(TypedDict, total=False):
     """One ranked card: its identity, its objectives and where the order put it."""
 
@@ -177,7 +186,7 @@ class RankRow(TypedDict, total=False):
     downstream: int
     salience: float | None
     key: tuple[object, ...]
-    fruit: dict[str, object]
+    fruit: FruitRow
     repo: str
     cite: str
 
@@ -721,7 +730,7 @@ FRUIT_TAG = "fruit"
 
 def fruit(
     g: Graph, repo: str, rows: list[RankRow], weights: Weights | None = None
-) -> dict | None:
+) -> FruitRow | None:
     """nemik:W178: the low-hanging fruit of `repo` as ONE virtual row, weighed against the rest.
 
     Each member counts `local` (rank-weights.toml, the weight of one waypoint in this repo) for
