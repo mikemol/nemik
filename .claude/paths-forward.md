@@ -3,11 +3,11 @@
 
 state file: `.claude/paths-forward.json`
 
-counter 1529 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:f2fe7bb2f9b35043`
+counter 1529 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:bf3914b33c9ef63d`
 
 | # | symbol | status |
 |---|---|---|
-| 1 | W1175 | working |
+| 1 | W1527 | working |
 | 2 | W1529 | working |
 | 3 | W1075 | ready |
 | 4 | W1139 | ready |
@@ -105,8 +105,8 @@ counter 1529 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:f2f
 | 96 | W1385 | ready |
 | 97 | W1525 | ready |
 | 98 | W1526 | ready |
-| 99 | W1527 | ready |
-| 100 | W1528 | ready |
+| 99 | W1528 | ready |
+| 100 | W1175 | ready |
 | 101 | W1229 | ready |
 | 102 | W1246 | ready |
 | 103 | W1288 | ready |
@@ -1511,12 +1511,9 @@ counter 1529 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:f2f
 
 ## waypoints
 
-1. **W1175** (working) Ruff in larger steps, after the Any-boundary moves: D103 (423 in tests) and D205 (68) by
-   mechanization, PLC0415 (271) as hoists with an importdag cycle refusal turned into atomize cards, T201 (124 in src)
-   into one output module
-   - next: When the repin W1396 lands mikemol.procrun in the venv: convert one covered caller (overlaps.py), run the
-     codon census with the cached compiler and compare its entry before and after; then convert the other 12 covered
-     calls.
+1. **W1527** (working) W1175 child: witnesses.py runs its two git calls through procrun.capture
+   - next: witnesses.py lines 157 and 325 subprocess.run to capture; no handler to change; run codon_first.py witnesses
+     first
 2. **W1529** (working) metrics.spool_lines types its spool events so ten Any reads clear
 3. **W1075** (ready) Take an idle-host staging figure for one test target and split it by input (venv, Chromium, opa,
    Codon, corpus)
@@ -1927,12 +1924,15 @@ counter 1529 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:f2f
 98. **W1526** (ready) W1175 child: wake.py _roster runs its subprocess through procrun.capture
    - next: wake.py line 123 subprocess.run to capture; the CalledProcessError in the except at 132 never fires, so test
      returncode
-99. **W1527** (ready) W1175 child: witnesses.py runs its two git calls through procrun.capture
-   - next: witnesses.py lines 157 and 325 subprocess.run to capture; no handler to change; run codon_first.py witnesses
-     first
-100. **W1528** (ready) W1175 child: calendars.py runs its two subprocess calls through procrun.capture
+99. **W1528** (ready) W1175 child: calendars.py runs its two subprocess calls through procrun.capture
    - next: calendars.py lines 236 and 241 subprocess.run to capture; the CalledProcessError handler at 384 becomes a
      returncode test
+100. **W1175** (ready) Ruff in larger steps, after the Any-boundary moves: D103 (423 in tests) and D205 (68) by
+   mechanization, PLC0415 (271) as hoists with an importdag cycle refusal turned into atomize cards, T201 (124 in src)
+   into one output module
+   - next: When the repin W1396 lands mikemol.procrun in the venv: convert one covered caller (overlaps.py), run the
+     codon census with the cached compiler and compare its entry before and after; then convert the other 12 covered
+     calls.
 101. **W1229** (ready) A repair of a rejected file in a stacked round uses the predecessor stack's frozen files as its
    base, in a scratch worktree, not git's HEAD
    - next: mtools-ad: a mode that restores a file as of a queued stack's frozen files, in mikemol-scratch; nemik:W1229
@@ -7232,3 +7232,15 @@ counter 1529 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:f2f
   form). The alternation holds: 896 (ruff) behind 895 (mypy), no shared file. Three findings, one per standing rule that
   the G1 or G0 leaves unmet. I did not re-run any figure. No fixpoint is declared. Carried open findings as in R171,
   minus R171's three (met).; 3 finding(s)
+- **nemik:R171** (-) round 173: stack 895 (W1523) f36bdd1a landed 05:57:32Z; stack 896 (W1175 letters.apply_fold, ruff
+  276 to 274) inflight since 05:57:36Z; stack 898 (W1529 metrics.spool_lines, mypy 597 to 587) submitted after
+  06:05:18Z; stack 897 (W1527 witnesses.py, ruff 274 to 270) staged: root Verified from the reflog (unix stamp
+  1793685452 = 05:57:32Z, 1435 s after bce0cbb7 at 05:33:37Z): 895 gated 05:33:41Z to 05:57:32Z (23 min 51 s) and 896
+  began 05:57:36Z (began_ns 1793685456), 4 s later, so the gate was not empty. One misstatement in the G1: it says that
+  at the 05:55:08Z pace read 'only 896 inflight (began_ns 1793685456...)', but that began_ns is 05:57:36Z, after the
+  read; at 05:55:08Z the inflight stack was 895 and 896 was queued. The conclusion (gate not empty) stands and I make no
+  finding of it, but the began_ns and the read time cannot both be right. R172 corrections are met: stamps and the
+  letters G0 amendment recorded, W1175 children minted (W1525 to W1528 with manifests). The queue shape holds: 898
+  (mypy) shares no file with 896 (ruff), 897 (ruff) waits for 896 because both write ruff-baseline.json. I did not
+  re-run any figure. Three findings. No fixpoint is declared. Carried open findings as in R172, minus R172's three (met
+  in form).; 3 finding(s)

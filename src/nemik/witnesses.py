@@ -20,7 +20,6 @@ import argparse
 import json
 import os
 import re
-import subprocess
 import sys
 import urllib.parse
 import urllib.request
@@ -29,6 +28,7 @@ from pathlib import Path
 from typing import TYPE_CHECKING, TypedDict, cast
 
 from mikemol.pathsforward.opa_eval import OpaUnavailableError, resolve
+from mikemol.procrun.proc import capture
 
 from nemik import edgeletters
 from nemik.check import QUEUE, default_root, workstream_files
@@ -154,7 +154,7 @@ def _git_ref(key: str) -> Fact | None:
         or not (path / ".git").exists()
     ):
         return None
-    out = subprocess.run(
+    out = capture(
         [
             "git",
             "-C",
@@ -163,10 +163,7 @@ def _git_ref(key: str) -> Fact | None:
             "--verify",
             "--quiet",
             f"{rev}^{{commit}}",
-        ],
-        capture_output=True,
-        text=True,
-        check=False,
+        ]
     )
     return {"exists": out.returncode == 0, "sha": out.stdout.strip()}
 
@@ -322,13 +319,7 @@ def opa_json(query: str, doc: object, data: list[str]) -> object:
     argv = [opa, "eval", "--format", "json"]
     for path in data:
         argv += ["--data", path]
-    out = subprocess.run(
-        [*argv, "--stdin-input", query],
-        input=json.dumps(doc),
-        capture_output=True,
-        text=True,
-        check=False,
-    )
+    out = capture([*argv, "--stdin-input", query], input_text=json.dumps(doc))
     if out.returncode != 0:
         return None
     answer: object = json.loads(out.stdout)
