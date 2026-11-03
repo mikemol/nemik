@@ -9,12 +9,12 @@ from __future__ import annotations
 
 import os
 import shutil
-import subprocess
 from pathlib import Path
 
 import pytest
 from installed import script
 from mikemol.pathsforward.opa_eval import OpaUnavailableError
+from mikemol.procrun.proc import capture
 
 from nemik.realize import verdicts
 
@@ -26,7 +26,7 @@ NOW = "2026-10-08T12:00:00Z"
 def _pf(state: Path, *args: str) -> None:
     cmd = [*script("mikemol-paths-forward"), "--state", str(state), *args]
     assert (
-        subprocess.run(cmd, capture_output=True, text=True, check=False).returncode == 0
+        capture(cmd).returncode == 0
     )
 
 

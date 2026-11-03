@@ -3,12 +3,12 @@
 
 state file: `.claude/paths-forward.json`
 
-counter 1538 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:644d4f1aae20c35c`
+counter 1540 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:40c819b50452aa09`
 
 | # | symbol | status |
 |---|---|---|
 | 1 | W1535 | working |
-| 2 | W1537 | working |
+| 2 | W1538 | working |
 | 3 | W1007 | ready |
 | 4 | W1008 | ready |
 | 5 | W1075 | ready |
@@ -122,7 +122,7 @@ counter 1538 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:644
 | 113 | W1522 | ready |
 | 114 | W1532 | ready |
 | 115 | W1534 | ready |
-| 116 | W1538 | ready |
+| 116 | W1540 | ready |
 | 117 | W986 | blocked |
 | 118 | W1010 | blocked |
 | 119 | W1136 | blocked |
@@ -1517,6 +1517,8 @@ counter 1538 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:644
 | 1508 | W1531 | done |
 | 1509 | W1533 | done |
 | 1510 | W1536 | done |
+| 1511 | W1537 | done |
+| 1512 | W1539 | done |
 
 ## waypoints
 
@@ -1527,10 +1529,11 @@ counter 1538 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:644
      evaluate_strs, ...) taking the page and the JS and returning the narrowed type via an object-annotated result; step
      3: a codemod moves one kind per stack. Atomize by kind (one stack per helper) because the file is 1700 lines. Pairs
      with ruff-flat; MYPY stack, shares mypy-baseline.json.
-2. **W1537** (working) Split the compound asserts in eight test files so PT018 clears
-   - next: Apply ruff's PT018 fix (unsafe-fixes, preview with --diff first) to the eight files, restore the comment the
-     fix drops in test_wake_alarms (backoff applies as for blockers), pycheck --format, run the eight test files
-     directly, ratchet --write. RUFF stack, shares ruff-baseline.json with stack 905, so it submits after 905 lands.
+2. **W1538** (working) Three test files run their probe command through procrun.capture so S404 and S603 clear
+   - next: Codemod w1538_tests.py: swap import subprocess for the procrun capture import (isort position: froms after
+     plain imports, sorted by module) and subprocess.run(cmd, capture_output=True, text=True, check=False) for
+     capture(cmd) in the three files; run them directly; ratchet. RUFF stack, shares ruff-baseline.json with stack 906,
+     so it submits after 906 lands.
 3. **W1007** (ready) The open-commitment count per repo, from mtools' commitment ledger, is a ratchet on the pace board
    and gauges
    - next: When mtools publishes its commitment ledger, count each repo's open commitments into a series, judge it like
@@ -2021,11 +2024,10 @@ counter 1538 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:644
      exemption can live there; if it is mtools' code, send mtools a nudge citing nemik:W1534 with the three false
      positives (W1175 twice, W1526) and ask for an exemption for a card a live gating stack names, with a test. Do not
      suppress by marking or unmarking the card (R176 finding 2).
-116. **W1538** (ready) Three test files run their probe command through procrun.capture so S404 and S603 clear
-   - next: Codemod w1538_tests.py: swap import subprocess for the procrun capture import (isort position: froms after
-     plain imports, sorted by module) and subprocess.run(cmd, capture_output=True, text=True, check=False) for
-     capture(cmd) in the three files; run them directly; ratchet. RUFF stack, shares ruff-baseline.json with stack 906,
-     so it submits after 906 lands.
+116. **W1540** (ready) Three more test files run the writer through procrun.capture so S404 and S603 clear
+   - next: Codemod w1540_tests.py: test_residue (capture(pf + args)), test_certify (capture(cmd, env=env), Completed
+     annotations), test_salience (capture(cmd, timeout=120), except TimeoutExpired); run the three files directly;
+     ratchet. RUFF stack, shares ruff-baseline.json with stack 908, so it submits after 908 lands.
 117. **W986** (blocked) A ratchet paydown rate requirement with teeth: a repo is behind when a ratchet's fall over a
    trailing window of landed commits is below a requirement that only rises
    - blocked on: W994, W1002
@@ -4958,6 +4960,9 @@ counter 1538 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:644
 1508. **W1531** (done) history.py reads queue JSON through a typed helper so five Any reads clear
 1509. **W1533** (done) history.py reads queue cards through one typed helper so three Any reads clear
 1510. **W1536** (done) nemik-witnesses --apply fails to close a card whose file witness is under the home directory
+1511. **W1537** (done) Split the compound asserts in eight test files so PT018 clears
+1512. **W1539** (done) Residue of W1536: the witnesses timer closing a card unaided, and a non-home witness path, both
+   unobserved
 
 ## residue
 
@@ -7358,3 +7363,14 @@ counter 1538 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:644
   landed one (it restores the landed state, not a waiver). I did not re-run any figure. One finding. No fixpoint is
   declared. Carried open findings as in R179, minus R179's finding 1 (met); finding 2 (W1536 luthen step) still carried,
   as it falls due at 905's landing.; 1 finding(s)
+- **nemik:R179** (-) round 181: stack 905 (W1536) 9ef3d5fe landed 09:44:17Z; stack 904 (W1535 slice 1, mypy 578 to 542)
+  inflight since 09:44:22Z; stack 906 (W1537, ruff 261 to 245) queued; stacks 907 (W1535 slice 2) and 908 (W1538 three
+  test subprocess probes, ruff 245 to 239) staged: root Verified from the reflog (unix stamp 1793699057 = 09:44:17Z,
+  1585 s after af0e2c56 at 09:17:52Z): 905 gated 09:17:56Z to 09:44:17Z (26 min 21 s) and 904 began 09:44:22Z (began_ns
+  1793699062), 5 s after, so the gate was not empty and 906 is queued behind 904. R180 is met: the 26 split by file
+  (test_layout 23, test_wake_alarms 3, webpage 0) is on W1535 and in 907's body, and W1538's expected number was tight
+  to K (exactly 6) and matched. R179 finding 2 is met in the strong form: in the same tick as 905's landing the sha went
+  to luthen-observability, and W1536 closed on a read-back of luthen's card W1936 from their own queue (done, evidence
+  with the redacted home path), not on a send. The G1 names what the test did not cover: the 5-minute timer itself
+  closing a card, and a path outside the home directories. I did not re-run any figure. One finding, the residue of that
+  closure. No fixpoint is declared. Carried open findings as in R180, minus R180's and R179's (met).; 1 finding(s)

@@ -161,10 +161,6 @@
  "tests/test_frontier_walker.py": {
   "PLC2701": 2
  },
- "tests/test_gate_weights.py": {
-  "S404": 1,
-  "S603": 1
- },
  "tests/test_guarantees.py": {
   "PLR0913": 1,
   "PLR0917": 1
@@ -242,14 +238,6 @@
  "tests/test_rank_apply.py": {
   "S404": 1,
   "SLF001": 2
- },
- "tests/test_rank_flow.py": {
-  "S404": 1,
-  "S603": 1
- },
- "tests/test_realize.py": {
-  "S404": 1,
-  "S603": 1
  },
  "tests/test_residue.py": {
   "S404": 1,

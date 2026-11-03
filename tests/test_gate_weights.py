@@ -4,11 +4,11 @@
 
 from __future__ import annotations
 
-import subprocess
 from fractions import Fraction
 from typing import TYPE_CHECKING
 
 import installed
+from mikemol.procrun.proc import capture
 from rdflib import Graph
 
 from nemik.check import survey
@@ -22,7 +22,7 @@ if TYPE_CHECKING:
 def _pf(state: Path, *args: str) -> None:
     cmd = [*installed.script("mikemol-paths-forward"), "--state", str(state), *args]
     assert (
-        subprocess.run(cmd, capture_output=True, text=True, check=False).returncode == 0
+        capture(cmd).returncode == 0
     )
 
 
