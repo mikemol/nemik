@@ -6,12 +6,12 @@ from __future__ import annotations
 
 import json
 import os
-import subprocess
 import tempfile
 from datetime import UTC, datetime
 from typing import TYPE_CHECKING, cast
 
 import pytest
+from mikemol.procrun.proc import capture
 
 from nemik.apischema import unmanifested
 from nemik.history import (
@@ -226,6 +226,18 @@ def test_a_repo_with_no_queue_yet_reads_as_empty() -> None:
     assert d.closed == ["W1"]
 
 
+def _git(repo: Path, *args: str, env: dict[str, str] | None = None) -> str:
+    """Run git in `repo` and fail the test, with git's stderr, when it exits nonzero.
+
+    Returns:
+        Git's standard output.
+
+    """
+    done = capture(["git", "-C", str(repo), *args], env=env)
+    assert done.returncode == 0, done.stderr
+    return done.stdout
+
+
 def _commit(repo: Path, queue: dict[str, object], when: str) -> str:
     path = repo / ".claude" / "paths-forward.json"
     path.parent.mkdir(exist_ok=True)
@@ -240,20 +252,14 @@ def _commit(repo: Path, queue: dict[str, object], when: str) -> str:
         "PATH": "/usr/bin:/bin",
     }
     for args in (["add", "-A"], ["commit", "-q", "-m", "q"]):
-        subprocess.run(["git", "-C", str(repo), *args], check=True, env=env)
-    out = subprocess.run(
-        ["git", "-C", str(repo), "rev-parse", "HEAD"],
-        check=True,
-        capture_output=True,
-        text=True,
-    )
-    return out.stdout.strip()
+        _git(repo, *args, env=env)
+    return _git(repo, "rev-parse", "HEAD").strip()
 
 
 def _two_commits(tmp_path: Path) -> tuple[Path, str]:
     repo = tmp_path / "a"
     repo.mkdir()
-    subprocess.run(["git", "-C", str(repo), "init", "-q"], check=True)
+    _git(repo, "init", "-q")
     first = _commit(
         repo, {"waypoints": [_wp("W1")], "residue": []}, "2026-10-01T12:00:00Z"
     )
@@ -306,7 +312,7 @@ def test_time_in_state_and_the_weekly_roll_up_follow_the_commits(
     """Time in state and the weekly roll up follow the commits."""
     repo = tmp_path / "a"
     repo.mkdir()
-    subprocess.run(["git", "-C", str(repo), "init", "-q"], check=True)
+    _git(repo, "init", "-q")
     _commit(
         repo,
         {"waypoints": [_wp("W1", "blocked"), _wp("W2")], "residue": []},

@@ -161,11 +161,6 @@
   "PLR0913": 1,
   "PLR0917": 1
  },
- "tests/test_history.py": {
-  "S404": 1,
-  "S603": 4,
-  "S607": 4
- },
  "tests/test_hooks_wired.py": {
   "S404": 1,
   "S603": 1,
