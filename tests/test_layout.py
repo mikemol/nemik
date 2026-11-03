@@ -256,8 +256,11 @@ def test_repo_toggles_and_salience_order(server: str, tmp_path: Path) -> None:
         page.screenshot(path=str(out / "salience-order.png"))
         browser.close()
     assert errors == []
-    assert 0 < one < everything and lit == 1 and again == everything
-    assert labelled > 0 and widened > 0
+    assert 0 < one < everything
+    assert lit == 1
+    assert again == everything
+    assert labelled > 0
+    assert widened > 0
 
 
 def test_the_history_panel_shows_the_weekly_roll_up_when_there_is_one(
@@ -295,7 +298,9 @@ def test_the_history_panel_shows_the_weekly_roll_up_when_there_is_one(
         webpage.until(page, "() => !document.getElementById('historyBox').hidden")
         text = page.inner_text("#history")
         browser.close()
-    assert "W41" in text and "+5" in text and "50% blocked" in text
+    assert "W41" in text
+    assert "+5" in text
+    assert "50% blocked" in text
 
 
 LEGIBILITY = """() => {
@@ -399,7 +404,8 @@ def test_scope_rings_carry_distinct_ruler_motifs_pinned_to_paperkits(
     # len(F(n)) == n, so each shipped pattern decodes to its index
     assert lengths == list(range(len(lengths)))
     assert not generates  # the page renders the patterns; it no longer generates them
-    assert len(set(dashes)) == PATH_DASH_PATTERNS and all(dashes)
+    assert len(set(dashes)) == PATH_DASH_PATTERNS
+    assert all(dashes)
     assert legend == dashes
 
 
@@ -728,8 +734,10 @@ def test_side_panel_sections_fold_and_the_choice_survives_a_reload(server: str) 
             page, "() => document.getElementById('sec-goals').open"
         )
         browser.close()
-    assert first["sec-weather"] is False and first["sec-findings"] is False
-    assert first["sec-legend"] is True and first["sec-goals"] is True
+    assert first["sec-weather"] is False
+    assert first["sec-findings"] is False
+    assert first["sec-legend"] is True
+    assert first["sec-goals"] is True
     # closed, and its body is not rendered (Chrome hides it with content-visibility, so it keeps a
     # box)
     assert hidden == [False, False], hidden
@@ -775,7 +783,8 @@ def test_the_default_view_is_legible(server: str, scheme: Scheme) -> None:
             )
         )
         browser.close()
-    assert chips and {h for h, _ in chips} <= {"green", "amber", "red"}
+    assert chips
+    assert {h for h, _ in chips} <= {"green", "amber", "red"}
     assert all(
         text.startswith({"amber": "▲", "red": "■"}.get(h, text[:1]))
         for h, text in chips
@@ -1128,7 +1137,8 @@ def test_the_card_list_selects_and_expands_from_the_keyboard(server: str) -> Non
     assert target is not None
     assert listed == drawn > 1
     assert selected == [target]
-    assert current == "true" and focused == target
+    assert current == "true"
+    assert focused == target
     assert target.rsplit("/", 1)[-1] in detail
     assert after > before
     assert expanded == "true"
@@ -1171,7 +1181,8 @@ def test_a_cite_link_in_the_panel_selects_its_card_and_announces_it(
         browser.close()
     assert selected == [target["id"]]
     cite = webpage.as_str(target["cite"])
-    assert cite in said and live == "polite"
+    assert cite in said
+    assert live == "polite"
     assert cite.rsplit(":", 1)[-1] in detail
 
 
@@ -1250,7 +1261,8 @@ def test_a_focused_list_row_rings_its_card_and_opens_the_popover(server: str) ->
         cleared = webpage.evaluate_int(page, "() => cy.nodes('.listfocus').length")
         browser.close()
     assert ringed == [card]
-    assert shown and card.rsplit("/", 1)[-1] in text
+    assert shown
+    assert card.rsplit("/", 1)[-1] in text
     assert closed, "Esc did not close the popover"
     assert cleared == 0, "the ring stayed after focus left the list"
 
@@ -1328,7 +1340,8 @@ def test_the_card_list_is_one_tab_stop_walked_by_arrows(server: str) -> None:
         browser.close()
     assert len(rows) > MIN_ROWS
     assert stops == 1
-    assert second == rows[2] and last == rows[-1]
+    assert second == rows[2]
+    assert last == rows[-1]
     assert selected == [rows[1]]
     assert outside, "Tab stayed inside the list"
 
