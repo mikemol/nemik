@@ -21,7 +21,7 @@ import time
 import urllib.error
 import urllib.request
 from pathlib import Path
-from typing import TYPE_CHECKING, Literal
+from typing import TYPE_CHECKING, Literal, Protocol
 
 import pytest
 import webpage
@@ -489,6 +489,49 @@ def _roles(value: object) -> dict[str, list[str]]:
     return {str(role): webpage.as_strs(glyphs) for role, glyphs in value.items()}
 
 
+class _Decoder(Protocol):
+    def decode(self, s: str) -> object: ...
+
+
+def _obj(value: object) -> dict[str, object]:
+    """Read a JSON value that must be an object, keyed by text.
+
+    Returns:
+        The object's members.
+
+    Raises:
+        TypeError: When the value is not an object.
+
+    """
+    if not isinstance(value, dict):
+        message = f"no object, only {value!r}"
+        raise TypeError(message)
+    return {str(k): v for k, v in value.items()}
+
+
+def _json(text: str) -> dict[str, object]:
+    """Read a JSON document that must be an object.
+
+    Returns:
+        The document's members, never Any.
+
+    """
+    decoder: _Decoder = json.JSONDecoder()
+    return _obj(decoder.decode(text))
+
+
+def _verdict(text: str) -> dict[str, object]:
+    """Read the policy verdict out of opa's eval answer.
+
+    Returns:
+        The first expression's value.
+
+    """
+    result = webpage.as_list(_json(text)["result"])
+    expressions = webpage.as_list(_obj(result[0])["expressions"])
+    return _obj(_obj(expressions[0])["value"])
+
+
 def _fans(value: object) -> list[list[tuple[str, int, str]]]:
     """Read the wait-line fans the page reports.
 
@@ -932,10 +975,11 @@ def test_every_meaning_the_view_colours_has_a_second_channel(
     query = "data.el.use_of_colour"
     cmd = [opa, "eval", "-f", "json", "-d", rego, "-i", str(data), query]
     out = subprocess.run(cmd, capture_output=True, text=True, check=True)
-    verdict = json.loads(out.stdout)["result"][0]["expressions"][0]["value"]
+    verdict = _verdict(out.stdout)
     assert verdict["deny"] == [], verdict["deny"]
     cases = webpage.items(measured, "cases")
-    assert len(verdict["admitted"]) == len(cases) >= MIN_ADMITTED_CASES
+    admitted = len(webpage.as_list(verdict["admitted"]))
+    assert admitted == len(cases) >= MIN_ADMITTED_CASES
 
 
 def test_a_static_build_refetches_only_the_pieces_whose_hash_moved(
@@ -953,8 +997,8 @@ def test_a_static_build_refetches_only_the_pieces_whose_hash_moved(
     withheld.write_text(json.dumps(payload))
     out = tmp_path / "out"
     build_static(FLEET, out, withheld)
-    whole = json.loads((out / "graph.json").read_text())
-    fleet = json.loads((out / "graph" / "_fleet.json").read_text())
+    whole = _json((out / "graph.json").read_text())
+    fleet = _json((out / "graph" / "_fleet.json").read_text())
     handler = functools.partial(
         http.server.SimpleHTTPRequestHandler, directory=str(out)
     )
@@ -972,8 +1016,8 @@ def test_a_static_build_refetches_only_the_pieces_whose_hash_moved(
             first = webpage.as_strs(
                 webpage.evaluate_value(page, "() => [...window.__pieceFetches]")
             )
-            one = fleet["repos"][0]
-            hashes = json.loads((out / "hashes.json").read_text())
+            one = webpage.as_list(fleet["repos"])[0]
+            hashes = _json((out / "hashes.json").read_text())
             hashes[f"graph/{one}.json"] = "moved"
             # Last-Modified has one-second resolution: a rewrite within the second of the first
             # read would answer 304 and look unchanged, so the rewrite waits out the second
@@ -988,9 +1032,12 @@ def test_a_static_build_refetches_only_the_pieces_whose_hash_moved(
             browser.close()
     finally:
         httpd.shutdown()
-    assert drawn == len(whole["nodes"])
+    assert drawn == len(webpage.as_list(whole["nodes"]))
     assert sorted(first) == sorted(
-        ["graph/_fleet.json", *(f"graph/{r}.json" for r in fleet["repos"])]
+        [
+            "graph/_fleet.json",
+            *(f"graph/{r}.json" for r in webpage.as_list(fleet["repos"])),
+        ]
     )
     assert second == [f"graph/{one}.json"]
 

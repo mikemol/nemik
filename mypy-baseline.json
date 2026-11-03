@@ -81,7 +81,7 @@
   "misc": 2
  },
  "tests/test_layout.py": {
-  "misc": 37
+  "misc": 25
  },
  "tests/test_lifecycle_scheme.py": {
   "misc": 9,
