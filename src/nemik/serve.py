@@ -985,9 +985,9 @@ def _wait_edges(
     # One (blocked, blocker) pair can have several inbound rows (linux-sources:W40 waits on the
     # mtools session AND mtools:W24 AND mtools:W46). Keeping only the last row made which claims got
     # drawn depend on hash order (nemik:W119), so the claims are merged.
-    by_blocked: dict[tuple[str, str], dict] = {}
+    by_blocked: dict[tuple[str, str], InboundRow] = {}
     for blk in blocks:
-        fresh = dict(blk)
+        fresh = blk.copy()
         fresh["claimed_by"] = []
         m = by_blocked.setdefault((blk["blocked"], blk["blocker"]), fresh)
         m["claimed_by"] = sorted(set(m["claimed_by"]) | set(blk["claimed_by"]))
