@@ -13,8 +13,9 @@ commit that
 says why.
 """
 
-import subprocess
 from pathlib import Path
+
+from mikemol.procrun.proc import capture
 
 ROOT = Path(__file__).resolve().parents[1]
 HOOK = ROOT / ".githooks" / "pre-commit"
@@ -90,14 +91,7 @@ def test_the_hook_refuses_when_bazel_is_absent(tmp_path: Path) -> None:
     """The hook refuses when bazel is absent."""
     empty = tmp_path / "empty"
     empty.mkdir()
-    run = subprocess.run(
-        ["/bin/sh", str(HOOK)],
-        capture_output=True,
-        text=True,
-        check=False,
-        env={"PATH": str(empty)},
-        cwd=tmp_path,
-    )
+    run = capture(["/bin/sh", str(HOOK)], env={"PATH": str(empty)}, cwd=tmp_path)
     assert run.returncode == 1
     assert "bazel is not on PATH" in run.stderr
     assert "commit refused" in run.stderr

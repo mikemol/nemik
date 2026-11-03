@@ -5,7 +5,6 @@
 import hashlib
 import http.client
 import json
-import subprocess
 import sys
 import threading
 from collections.abc import Iterator
@@ -14,6 +13,7 @@ from http.server import ThreadingHTTPServer
 from pathlib import Path
 
 import pytest
+from mikemol.procrun.proc import capture
 
 from nemik.staticserve import handler, resolve, snapshot
 
@@ -156,5 +156,5 @@ def test_the_live_servers_extensionless_paths_still_answer(
 def test_the_server_never_imports_rdflib() -> None:
     """The server never imports rdflib."""
     probe = "import nemik.staticserve, sys; sys.exit('rdflib' in sys.modules)"
-    run = subprocess.run([sys.executable, "-I", "-c", probe], check=False)
+    run = capture([sys.executable, "-I", "-c", probe])
     assert run.returncode == 0, "nemik.staticserve pulled in rdflib"

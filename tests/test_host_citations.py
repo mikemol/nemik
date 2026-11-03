@@ -5,10 +5,10 @@
 from __future__ import annotations
 
 import json
-import subprocess
 from typing import TYPE_CHECKING
 
 import installed
+from mikemol.procrun.proc import capture
 
 from nemik.check import survey
 
@@ -42,7 +42,7 @@ def _fleet(tmp_path: Path, cited: str) -> Path:
         ],
     )
     for args in steps:
-        done = subprocess.run(pf + args, capture_output=True, text=True, check=False)
+        done = capture(pf + args)
         assert done.returncode == 0, done.stderr
     return tmp_path
 

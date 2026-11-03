@@ -161,10 +161,6 @@
   "S603": 1,
   "SLF001": 2
  },
- "tests/test_host_citations.py": {
-  "S404": 1,
-  "S603": 1
- },
  "tests/test_ics_reader.py": {
   "S404": 1,
   "S603": 1,
@@ -203,10 +199,6 @@
   "S314": 2,
   "S405": 1
  },
- "tests/test_precommit_gate.py": {
-  "S404": 1,
-  "S603": 1
- },
  "tests/test_publish.py": {
   "S404": 1,
   "S603": 2,
@@ -227,10 +219,6 @@
   "S404": 1,
   "S603": 1,
   "SLF001": 1
- },
- "tests/test_staticserve.py": {
-  "S404": 1,
-  "S603": 1
  },
  "tests/test_witnesses.py": {
   "PT018": 2,
