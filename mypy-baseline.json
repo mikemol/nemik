@@ -80,9 +80,6 @@
  "tests/test_history.py": {
   "misc": 2
  },
- "tests/test_layout.py": {
-  "misc": 2
- },
  "tests/test_lifecycle_scheme.py": {
   "misc": 9,
   "no-untyped-call": 1

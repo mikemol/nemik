@@ -33,7 +33,7 @@ from nemik.serve import build_static
 if TYPE_CHECKING:
     from collections.abc import Iterator
 
-    from playwright.sync_api import Browser, Page, Playwright
+    from playwright.sync_api import Browser, Page, Playwright, Route
 
 Scheme = Literal["light", "dark"]  # the colour schemes the parametrized tests take
 FLEET = Path(__file__).parent / "fixtures" / "fleet"
@@ -287,12 +287,12 @@ def test_the_history_panel_shows_the_weekly_roll_up_when_there_is_one(
     with sync_playwright() as p:
         browser = _launch(p)
         page = browser.new_page(viewport={"width": 1700, "height": 1250})
-        page.route(
-            "**/history.json",
-            lambda route: route.fulfill(
-                status=200, content_type="application/json", body=json.dumps(doc)
-            ),
-        )
+        history = json.dumps(doc)
+
+        def fulfil(route: "Route") -> None:
+            route.fulfill(status=200, content_type="application/json", body=history)
+
+        page.route("**/history.json", fulfil)
         webpage.watch(page)
         page.goto(server)
         webpage.until(page, "() => !document.getElementById('historyBox').hidden")
@@ -1076,7 +1076,8 @@ def test_every_repo_chip_names_its_health_in_words(server: str) -> None:
     assert chips
     for repo, status, name, hidden in chips:
         assert name.startswith(f"{repo}, health {status}"), name
-        assert "▲" not in name and "■" not in name, name
+        assert "▲" not in name, name
+        assert "■" not in name, name
         assert hidden == {"amber": "▲ ", "red": "■ "}.get(status, "")
 
 
@@ -1755,7 +1756,8 @@ def test_picked_repos_show_their_blockers_blockers_as_context(server: str) -> No
         )
         browser.close()
     assert counts[0] <= counts[1] <= counts[2], counts
-    assert counts[1] > 0 and stray == 0, (counts, stray)
+    assert counts[1] > 0, (counts, stray)
+    assert stray == 0, (counts, stray)
 
 
 def test_rank_forest_view(server: str, tmp_path: Path) -> None:
@@ -1834,9 +1836,8 @@ def test_treemap_model(server: str) -> None:
         m = webpage.evaluate_dict(page, TREEMAP_INVARIANTS)
         browser.close()
     assert webpage.items(m, "bad") == [], m
-    assert webpage.num(m, "n") > 0 and webpage.num(m, "total") == webpage.num(m, "n"), (
-        m
-    )  # every open item is placed exactly once
+    assert webpage.num(m, "n") > 0, m  # every open item is placed exactly once
+    assert webpage.num(m, "total") == webpage.num(m, "n"), m
     assert webpage.num(m, "repos_in_one_root") > 1, (
         m
     )  # not grouped by repo: a tree spans repos
@@ -1918,19 +1919,15 @@ def test_treemap_view_draws(server: str, tmp_path: Path) -> None:
     (out / "treemap-dark.json").write_text(json.dumps(m, indent=1))
     assert errors == []
     assert fit, "the treemap is not fitted to the pane after the toggle"
-    assert webpage.num(m, "repo_boxes") == 0 and webpage.num(m, "repos") > 1, (
-        m
-    )  # not grouped by repo
+    assert webpage.num(m, "repo_boxes") == 0, m  # not grouped by repo
+    assert webpage.num(m, "repos") > 1, m
     assert webpage.num(m, "key_repos") == webpage.num(m, "repos"), m
     assert webpage.num(m, "groups") > 0, m  # clusters are drawn as labelled frames
-    assert webpage.num(m, "two_line") > 0 and webpage.items(m, "clipped") == [], (
-        m
-    )  # leaves name their repo, and every label fits  # every repo colour has a key entry
-    assert (
-        webpage.num(m, "tiles") > 0
-        and webpage.num(m, "contained") > 0
-        and webpage.items(m, "outside") == []
-    ), m  # "outside" = overlapping tiles
+    assert webpage.num(m, "two_line") > 0, m  # leaves name their repo
+    assert webpage.items(m, "clipped") == [], m  # every label fits
+    assert webpage.num(m, "tiles") > 0, m
+    assert webpage.num(m, "contained") > 0, m
+    assert webpage.items(m, "outside") == [], m  # "outside" = overlapping tiles
 
 
 @pytest.mark.parametrize("width", [380, 1400])
@@ -1970,10 +1967,8 @@ def test_side_panel_never_overflows_sideways(server: str, width: int) -> None:
           return { scroll: a.scrollWidth, client: a.clientWidth, wide: wide.slice(0, 5) }; }""",
         )
         browser.close()
-    assert (
-        webpage.items(m, "wide") == []
-        and webpage.num(m, "scroll") <= webpage.num(m, "client") + 1
-    ), m
+    assert webpage.items(m, "wide") == [], m
+    assert webpage.num(m, "scroll") <= webpage.num(m, "client") + 1, m
 
 
 def test_every_cite_in_the_panel_is_a_repo_colon_link(server: str) -> None:
