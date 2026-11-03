@@ -17,9 +17,7 @@
   "S403": 1
  },
  "src/nemik/calendars.py": {
-  "PLR0913": 1,
-  "S404": 1,
-  "S603": 2
+  "PLR0913": 1
  },
  "src/nemik/calwrite.py": {
   "PLR0913": 1,
@@ -136,7 +134,6 @@
  },
  "tests/test_calendars.py": {
   "PLC2701": 1,
-  "S404": 1,
   "SLF001": 3
  },
  "tests/test_certify.py": {

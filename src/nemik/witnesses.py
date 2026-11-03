@@ -48,6 +48,17 @@ _REF = re.compile(r'input\.(\w+)\["((?:[^"\\]|\\.)*)"\]')
 Fact = dict[str, object]
 
 
+def redact_home(text: str) -> str:
+    """Hide the home directories' parent in `text`, as the writer's evidence check would refuse it.
+
+    Returns:
+        `text` with each `<home parent>/` written as `<home>/`; unchanged when the parent is empty.
+
+    """
+    parent = str(Path.home().parent).rstrip("/")
+    return text.replace(f"{parent}/", "<home>/") if parent else text
+
+
 class Alert(TypedDict):
     """One alert in vmalert's answer."""
 
@@ -631,7 +642,10 @@ def main(argv: list[str] | None = None) -> None:
                     "--status",
                     "done",
                     "--evidence-append",
-                    f"witness held at {doc['now']}: {json.dumps(observed, sort_keys=True)}",
+                    redact_home(
+                        f"witness held at {doc['now']}: "
+                        f"{json.dumps(observed, sort_keys=True)}"
+                    ),
                 ]
             )
             if code:
