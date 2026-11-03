@@ -407,7 +407,19 @@ def ref_of(node: Node) -> str:
     return f"{r}:{sym}"
 
 
-def goals(g: Graph, repo: str, weights: Weights) -> list[dict]:
+class GoalRow(TypedDict):
+    """One goal of a repo, as `goals` gives it."""
+
+    goal: str
+    title: str
+    weight: int
+    frontier: list[str]
+    on_deck: str | None
+    outside: list[str]
+    clear: bool
+
+
+def goals(g: Graph, repo: str, weights: Weights) -> list[GoalRow]:
     """nemik:W79 (first half of W71): `repo`'s goals, heaviest cross-repo weight first.
 
     A goal G is an open waypoint that nothing open in its own repo is waiting to follow: its
@@ -421,7 +433,7 @@ def goals(g: Graph, repo: str, weights: Weights) -> list[dict]:
 
     """
     ws = workstream_uri(repo)
-    out = []
+    out: list[GoalRow] = []
     for n in g.subjects(NEMIK.workstream, ws):
         if not _open(g, n):
             continue

@@ -36,12 +36,12 @@
   "misc": 10
  },
  "src/nemik/rank.py": {
-  "misc": 51,
-  "type-arg": 2
+  "misc": 39,
+  "type-arg": 1
  },
  "src/nemik/serve.py": {
   "explicit-any": 2,
-  "misc": 110,
+  "misc": 107,
   "type-arg": 7
  },
  "src/nemik/shaclcache.py": {
@@ -91,9 +91,6 @@
  "tests/test_flow_cache.py": {
   "attr-defined": 1
  },
- "tests/test_frontier.py": {
-  "misc": 20
- },
  "tests/test_fruit.py": {
   "misc": 9
  },
@@ -111,7 +108,7 @@
   "no-untyped-call": 1
  },
  "tests/test_manifest.py": {
-  "misc": 17,
+  "misc": 15,
   "no-untyped-call": 2,
   "no-untyped-def": 1
  },

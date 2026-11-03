@@ -4226,3 +4226,8 @@
 2026-11-03T03:01:50Z  status W1399 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-03T03:04:59Z  status W1175 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-03T03:23:47Z  status W1509 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-03T03:25:02Z  tick  W1521 minted    -         "rank.goals returns typed GoalRow rows, so its consumers' Any reads clear in rank.py and test_frontier.py"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1282
+2026-11-03T03:33:20Z  status W1521 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-03T03:33:49Z  tick  W1175 advanced  unblock   "W1396 closed (repin landed, venv rebuilt); stack 889 landed 03:22:17Z; stack 890 (W1175 first procrun caller, ruff) inflight from 03:23:50Z; stack 891 (W1521 GoalRow, mypy 679 to 641) queued behind it; the new commit tool refuses two ruff stacks queued together [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-03T03:33:49Z  prune W1175 edge-pruned writer    "nemik:W1396"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-03T03:36:46Z  interrupt W1522 minted    -         "A checked-in differential harness: freeze the inputs, mask named clock fields, run old-new-old"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:R166
