@@ -20,7 +20,9 @@ from rdflib import Graph, Literal
 
 from nemik.adapter import BASE, NEMIK, OSLC_CM
 from nemik.blocks import bare_wait_edges, ref
+from nemik.cards import cards
 from nemik.core.chains import longest_chains
+from nemik.index import index
 from nemik.rank import successors
 from nemik.say import say
 
@@ -52,8 +54,6 @@ class Critical(NamedTuple):
 
 
 def _open(g: Graph) -> set[Node]:
-    from nemik.index import index
-
     ix = index(g)
     if ix is not None:
         return {n for n in ix.state if ix.open(n)}
@@ -114,8 +114,6 @@ def critical(g: Graph, scope: set[str] | None = None) -> Critical:
         The critical path: its length, the zero-slack chain and each card's slack.
 
     """
-    from nemik.cards import cards
-
     return critical_cards(cards(g), scope)
 
 
@@ -459,11 +457,11 @@ def _report_cycles(loops: list[tuple[list[str], bool]]) -> None:
         f"dependency cycles: {len(loops)}, "
         f"{len(deadlocks)} true deadlocks, {len(loops) - len(deadlocks)} the operator can break"
     )
-    for cards, human in loops:
-        repos = {c.partition(":")[0] for c in cards}
+    for members, human in loops:
+        repos = {c.partition(":")[0] for c in members}
         mark = " [cross-repo]" if len(repos) > 1 else ""
         kind = "operator can break" if human else "DEADLOCK"
-        say(f"  {kind}: {', '.join(cards)}{mark}")
+        say(f"  {kind}: {', '.join(members)}{mark}")
 
 
 def _report_path(g: Graph, scope: set[str] | None) -> None:
@@ -479,8 +477,8 @@ def _report_path(g: Graph, scope: set[str] | None) -> None:
     say(
         "  "
         + " -> ".join(
-            "|".join(cards) + (f" (x{len(cards)} tied)" if len(cards) > 1 else "")
-            for _, cards in sorted(levels.items())
+            "|".join(tied) + (f" (x{len(tied)} tied)" if len(tied) > 1 else "")
+            for _, tied in sorted(levels.items())
         )
     )
     loose = sum(1 for s in found.slack.values() if s > 0)

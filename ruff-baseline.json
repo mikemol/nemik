@@ -25,13 +25,13 @@
  },
  "src/nemik/check.py": {
   "C901": 1,
-  "PLC0415": 3,
+  "PLC0415": 1,
   "PLR0912": 1,
   "PLR0914": 1,
   "PLR0915": 1
  },
  "src/nemik/critical.py": {
-  "PLC0415": 3
+  "PLC0415": 1
  },
  "src/nemik/history.py": {
   "PLC0415": 1,

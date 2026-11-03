@@ -59,7 +59,11 @@ from nemik.digest import collapse, delta
 from nemik.hostapply import HOST_REF, load
 from nemik.idle import findings as idle_findings
 from nemik.letters import report
+from nemik.marks import MARKS, policy_version, read
+from nemik.marks import provenance as mark_provenance
 from nemik.rank import successors
+from nemik.realize import rows as realize_rows
+from nemik.realize import runtime_valid, verdicts
 from nemik.rolls import idle_run, stalled
 from nemik.say import say
 from nemik.shaclinc import findings as shacl_findings
@@ -1008,9 +1012,6 @@ def _realizability(root: Path) -> int:
         queue could not be judged.
 
     """
-    from nemik.marks import MARKS, policy_version, provenance, read
-    from nemik.realize import rows, runtime_valid, verdicts
-
     now, residue, unjudged = stamp(datetime.now(UTC)), 0, 0
     version = policy_version()
     # nemik:W236: the clock is the policy's input, so the verdicts below are a function of it;
@@ -1029,8 +1030,8 @@ def _realizability(root: Path) -> int:
         for verdict in found:
             residue += not runtime_valid(verdict)
             symbol = str(verdict.get("ref")).rsplit(":", 1)[-1]
-            source = provenance(marks.get(symbol), now, version)
-            for line in rows(verdict, source):
+            source = mark_provenance(marks.get(symbol), now, version)
+            for line in realize_rows(verdict, source):
                 say(f"  {line}")
     return 2 if unjudged else int(residue > 0)
 

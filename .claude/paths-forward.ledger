@@ -4391,3 +4391,6 @@
 2026-11-03T18:05:26Z  interrupt W1561 minted    -         "PLC0415 name clashes: rename the local or import that a hoist would collide with (check.py rows and provenance, critical.py cards, metrics.py ref, serve.py Counter and load) so the five hoists become SAFE"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1175
 2026-11-03T18:05:28Z  interrupt W1562 minted    -         "PLC0415 import cycles: record the 11 cycle sites (check 831, critical 493, history 1296, rank 551/882/905/906/1149/1170, witnesses 608) as a residue ledger with the import each one needs and the module that closes the cycle, no waiver, they stay in the baseline"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1175
 2026-11-03T18:07:53Z  status W1560 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-03T18:17:23Z  status W1560 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-03T18:17:32Z  status W1535 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-03T18:20:50Z  status W1561 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
