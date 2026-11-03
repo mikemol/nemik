@@ -12,6 +12,7 @@ dependencies = [
     "mikemol-fence",  # nemik:W378: mikemol-membudget beside the interpreter, so mikemol-commit takes its commit lock
     "mikemol-ratchet",  # nemik:W1027: the ratchet census, so the gate can send nemik's ratchet values (mtools:W1909)
     "mikemol-atomicwrite",  # nemik:W1027: mikemol-ratchet's one dependency
+    "mikemol-procrun",  # nemik:W1511: the fleet's one subprocess wrapper (mtools:W2231), and mikemol-ratchet's second dependency from 11d5b4d (mtools:W2214)
     "mikemol-rulerseq",  # nemik:W417: the ruler-sequence generator (mtools:W1048), computed server-side by W418
     "mikemol-converge",  # nemik:W776/W652: the shared converge loop (mtools:W1522), stdlib only; nemik's own copy is gone (W777), tests/test_converge.py runs it
     "mikemol-frontier",  # nemik:W483: the fleet's shared frontier walker (mtools:W1127), rank.frontier reads through it
@@ -29,6 +30,7 @@ mikemol-fence = { path = "vendor/wheels/mikemol_fence-0.1.0+e6dc759-py3-none-any
 mikemol-rulerseq = { path = "vendor/wheels/mikemol_rulerseq-0.1.0+e6dc759-py3-none-any.whl" }
 mikemol-ratchet = { path = "vendor/wheels/mikemol_ratchet-0.1.0+e6dc759-py3-none-any.whl" }
 mikemol-atomicwrite = { path = "vendor/wheels/mikemol_atomicwrite-0.1.0+e6dc759-py3-none-any.whl" }
+mikemol-procrun = { path = "vendor/wheels/mikemol_procrun-0.1.0+g11d5b4d-py3-none-any.whl" }
 mikemol-frontier = { path = "vendor/wheels/mikemol_frontier-0.1.0+e6dc759-py3-none-any.whl" }
 mikemol-cvdcore = { path = "vendor/wheels/mikemol_cvdcore-0.1.0+e6dc759-py3-none-any.whl" }
 mikemol-transcriptstruct = { path = "vendor/wheels/mikemol_transcriptstruct-0.1.0+e6dc759-py3-none-any.whl" }

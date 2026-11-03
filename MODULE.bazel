@@ -75,6 +75,15 @@ vendored_wheel(
     wheel = "//:vendor/wheels/mikemol_atomicwrite-0.1.0+e6dc759-py3-none-any.whl",
 )
 
+# nemik:W1511: mtools' procrun (mikemol.procrun, mtools:W2231 and W2230), the fleet's one subprocess
+# wrapper: ratchet's second dependency from 11d5b4d (mtools:W2214), and what nemik's own subprocess
+# callers move to. Built by mikemol-wheel procrun --sha 11d5b4d (local version +g11d5b4d); the next
+# mikemol-repin --revendor moves it with the rest, procrun being on its list (mtools:W2230).
+vendored_wheel(
+    name = "procrun",
+    wheel = "//:vendor/wheels/mikemol_procrun-0.1.0+g11d5b4d-py3-none-any.whl",
+)
+
 # nemik:W1180: mtools' transcriptstruct (mikemol-transcriptstruct, the reader of the host transcripts
 # that warrants verify against), at the same sha, so the live tools carry it (github-8f 2026-10-27).
 vendored_wheel(

@@ -71,3 +71,9 @@ opentelemetry-proto and protobuf from PyPI with them.
 the hand-kept list here went stale with each bump); `sha256sum -c SHA256SUMS` in this directory
 verifies them, and uv.lock pins the same digests. mikemol_fence is mtools' fence (nemik:W378), for
 `mikemol-membudget`, the commit lock mikemol-commit takes.
+
+`mikemol_procrun-0.1.0+g11d5b4d-py3-none-any.whl` (nemik:W1511) is mtools' procrun at 11d5b4d: `mikemol.procrun`, the fleet's one
+subprocess wrapper (`capture`, `capture_bytes`; mtools:W2231). Built by `mikemol-wheel procrun --sha
+11d5b4d... --out DIR --mtools REPO`, so its local version is `+g11d5b4d`; it is vendored ahead of the
+ratchet bump because ratchet at 11d5b4d requires it (mtools:W2214), and `mikemol-repin --revendor`
+moves it with the others from then on (mtools:W2230).
