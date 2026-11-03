@@ -144,7 +144,7 @@ def check_report(name: str, graph: Graph, root: Path) -> str | None:
 if TYPE_CHECKING:
     from collections.abc import Callable
 
-    from nemik.blocks import AskRow
+    from nemik.blocks import AskRow, InboundRow
 
 VENDOR = {"cytoscape.min.js", "dagre.min.js", "cytoscape-dagre.js"}
 # nemik:W801: the page's own files beside index.html (nemik:W799 splits it by concern): the
@@ -895,10 +895,13 @@ def stage_of(g: Graph, n: URIRef) -> str:
     return "gating" if g.value(n, NEMIK.inGate) is not None else ""
 
 
-def _to_json(g: Graph, findings: dict, numbers: Graph | None = None) -> dict:
-    # nemik:W309: every published number (salience, edge current, ask weight) comes from `gn`, the
-    # graph without the withheld waypoints, when there are any; structure still comes from `g`.
-    gn = numbers if numbers is not None else g
+def _activity(g: Graph) -> tuple[dict[str, Counter[str]], dict[str, str]]:
+    """Count each card's recorded activities by effort class, and find its latest one.
+
+    Returns:
+        ({card: Counter of effort class}, {card: latest startedAtTime}).
+
+    """
     effort: dict[str, Counter] = defaultdict(Counter)
     last: dict[str, str] = {}
     for act in g.subjects(RDF.type, PROV.Activity):
@@ -907,8 +910,19 @@ def _to_json(g: Graph, findings: dict, numbers: Graph | None = None) -> dict:
         for wp in g.objects(act, PROV.used):
             effort[str(wp)][cls] += 1
             last[str(wp)] = max(last.get(str(wp), ""), stamp)
+    return effort, last
+
+
+def _waypoint_nodes(
+    g: Graph, effort: dict[str, Counter[str]], last: dict[str, str]
+) -> list[NodeRow]:
+    """Make one node per waypoint and per dropped card, with its effort and clocks.
+
+    Returns:
+        The nodes, waypoints first and dropped cards after, in graph order.
+
+    """
     nodes: list[NodeRow] = []
-    edges: list[EdgeRow] = []
     for kind, cls in (("waypoint", OSLC_CM.ChangeRequest), ("dropped", NEMIK.Dropped)):
         for n in g.subjects(RDF.type, cls):
             state = (
@@ -939,8 +953,31 @@ def _to_json(g: Graph, findings: dict, numbers: Graph | None = None) -> dict:
                     "weather": str(g.value(n, NEMIK.weather) or ""),
                 }
             )
+    return nodes
+
+
+def _enable_edges(g: Graph) -> list[EdgeRow]:
+    """Make one `enables` edge per enables triple.
+
+    Returns:
+        The edges, in graph order.
+
+    """
+    edges: list[EdgeRow] = []
     for s, _, o in g.triples((None, NEMIK.enables, None)):
         edges.append({"source": str(s), "target": str(o), "kind": "enables"})
+    return edges
+
+
+def _wait_edges(
+    g: Graph, nodes: list[NodeRow], edges: list[EdgeRow]
+) -> list[InboundRow]:
+    """Add the `waits` edges, and the placeholder nodes for blocks nothing claims yet.
+
+    Returns:
+        The inbound rows, which the document publishes as `inbound`.
+
+    """
     # A block on another workstream ends at the blocker's waypoint that claims it, or at an
     # "unclaimed" placeholder inside the blocker's box, never at a bare repo label.
     blocks = inbound(g)
@@ -988,6 +1025,16 @@ def _to_json(g: Graph, findings: dict, numbers: Graph | None = None) -> dict:
                 }
             )
             edges.append({"source": str(s), "target": ask, "kind": "waits"})
+    return blocks
+
+
+def _ask_lanes(g: Graph, gn: Graph, edges: list[EdgeRow]) -> list[AskRow]:
+    """Add one edge per operator ask into its category lane, weighted by the demand it holds.
+
+    Returns:
+        The asks, errands left out.
+
+    """
     from nemik.blocks import with_salience
 
     # nemik:W460: an errand is the operator's own business: nemik-operator lists it, the view does
@@ -1003,6 +1050,11 @@ def _to_json(g: Graph, findings: dict, numbers: Graph | None = None) -> dict:
         if a["salience"]:
             lane_edge["current"] = a["salience"]
         edges.append(lane_edge)
+    return asks
+
+
+def _satisfy(nodes: list[NodeRow], edges: list[EdgeRow]) -> None:
+    """Mark each edge satisfied when its upstream is done; count each node's open blockers."""
     # nemik:W56: an edge whose upstream end is done no longer holds anything back. For `enables`
     # that end is the source; for `waits` it is the target. open_blockers counts what still does.
     done = {n["id"] for n in nodes if n["state"] == "done"}
@@ -1021,6 +1073,18 @@ def _to_json(g: Graph, findings: dict, numbers: Graph | None = None) -> dict:
         item["open_blockers"] = len(open_blockers.get(item["id"], ()))
         if item["id"].startswith(BASE):
             item["cite"] = ref(URIRef(item["id"]))
+
+
+def _to_json(g: Graph, findings: dict, numbers: Graph | None = None) -> dict:
+    # nemik:W309: every published number (salience, edge current, ask weight) comes from `gn`, the
+    # graph without the withheld waypoints, when there are any; structure still comes from `g`.
+    gn = numbers if numbers is not None else g
+    effort, last = _activity(g)
+    nodes = _waypoint_nodes(g, effort, last)
+    edges = _enable_edges(g)
+    blocks = _wait_edges(g, nodes, edges)
+    asks = _ask_lanes(g, gn, edges)
+    _satisfy(nodes, edges)
     # nemik:W135: each ready waypoint's place in its repo's composed nemik-rank order (0 = work it
     # first), so the page can lay out a rank-ordered forest without re-deriving the ranking.
     from nemik.rank import load_composition, load_weights, rank

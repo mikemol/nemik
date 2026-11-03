@@ -105,8 +105,7 @@
   "C901": 3,
   "PLC0415": 26,
   "PLR0912": 2,
-  "PLR0914": 1,
-  "PLR0915": 1
+  "PLR0914": 1
  },
  "src/nemik/shaclcache.py": {
   "ANN401": 4
