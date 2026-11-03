@@ -15,7 +15,13 @@ import sys
 from pathlib import Path
 
 
-def _bin() -> tuple[Path, dict[str, str]]:
+def bin_env() -> tuple[Path, dict[str, str]]:
+    """Give the directory of the installed scripts and the environment that runs them.
+
+    Returns:
+        The bin directory (under Bazel, the venv's in the runfiles) and the child environment.
+
+    """
     runfiles = os.environ.get("RUNFILES_DIR") or os.environ.get("TEST_SRCDIR")
     if runfiles:
         venv = Path(runfiles) / "_main" / ".venv"
@@ -34,7 +40,7 @@ def script(name: str) -> list[str]:
         FileNotFoundError: When the script is not installed.
 
     """
-    path = _bin()[0] / name
+    path = bin_env()[0] / name
     if not path.exists():
         message = f"{name} is not installed in {path.parent}"
         raise FileNotFoundError(message)
@@ -52,7 +58,7 @@ def run(
     """
     return subprocess.run(
         [*script(name), *args],
-        env=_bin()[1],
+        env=bin_env()[1],
         capture_output=True,
         text=True,
         check=False,
@@ -70,7 +76,7 @@ def popen(
 
     """
     return subprocess.Popen(
-        [*script(name), *args], env=_bin()[1], stdout=stdout, stderr=stderr
+        [*script(name), *args], env=bin_env()[1], stdout=stdout, stderr=stderr
     )
 
 

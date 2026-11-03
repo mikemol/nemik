@@ -38,13 +38,13 @@ def test_settings_wire_both_hooks_on_both_events() -> None:
 def test_each_wired_hook_is_installed_in_the_built_venv() -> None:
     """Each wired hook is installed in the built venv."""
     for hook in HOOKS:
-        assert (installed._bin()[0] / hook).exists(), hook
+        assert (installed.bin_env()[0] / hook).exists(), hook
 
 
 def test_a_hook_run_with_a_session_start_payload_exits_zero(tmp_path: Path) -> None:
     """Both hooks never refuse: a SessionStart for a repo with no queue is silent, exit 0."""
     env = {
-        **installed._bin()[1],
+        **installed.bin_env()[1],
         "CLAUDE_PROJECT_DIR": str(tmp_path),
         "TMPDIR": str(tmp_path),
     }

@@ -36,7 +36,7 @@ def test_mikemol_ics_reads_an_exported_calendar(tmp_path: Path) -> None:
             "--json",
             str(src),
         ],
-        env=installed._bin()[1],
+        env=installed.bin_env()[1],
     )
     assert ran.returncode == 0, ran.stderr
     out = ran.stdout

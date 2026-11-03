@@ -84,10 +84,10 @@ def test_the_publish_command_runs_in_its_own_process(tmp_path: Path) -> None:
         "--publish",
         str(tmp_path / "p"),
     ]
-    run = capture(cmd, env=installed._bin()[1])
+    run = capture(cmd, env=installed.bin_env()[1])
     assert run.returncode == 0, run.stderr
     assert run.stdout.strip().startswith(str(tmp_path / "p" / "snap-"))
-    again = capture(cmd, env=installed._bin()[1])
+    again = capture(cmd, env=installed.bin_env()[1])
     assert again.returncode == 0, again.stderr
     assert again.stdout.strip() == "unchanged"
 

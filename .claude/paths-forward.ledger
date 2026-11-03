@@ -4425,3 +4425,7 @@
 2026-11-03T20:48:58Z  status W1561 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-03T20:49:00Z  status W1566 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-03T21:03:39Z  status W1490 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-03T21:09:10Z  tick  W1490 advanced  sweep     "stack 940 (W1561 part b + W1566) landed 20:47:51Z (ruff 138 to 108); W1534 closed on a close with no false ATOMIZE; R200 answered (static view tests 21 passed, import time inconclusive at ~90 ms host noise); stack 941 (W1490 slice c narrow cut, mypy 267 to 263) inflight since 21:03:47Z [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-03T21:19:53Z  status W1490 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-03T21:20:47Z  interrupt W1567 minted    -         "tests/installed.py names its private _bin as a public bin_env: thirteen SLF001 clear across eight test files"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1175
+2026-11-03T21:20:54Z  status W1567 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

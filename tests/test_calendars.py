@@ -60,7 +60,7 @@ def ics(monkeypatch: pytest.MonkeyPatch) -> str:
         The command that runs the venv's mikemol-ics.
 
     """
-    for k, v in installed._bin()[1].items():
+    for k, v in installed.bin_env()[1].items():
         monkeypatch.setenv(k, v)
     return installed.script("mikemol-ics")[0]
 
@@ -146,7 +146,7 @@ def test_operator_lists_the_next_days_with_waiters(
     """nemik:W160/W161: nemik-days N, from opted-in calendars only."""
     monkeypatch.setattr("nemik.calendars.today", lambda: date(2026, 10, 1))
     monkeypatch.setenv(
-        "PATH", str(installed._bin()[0]) + ":" + __import__("os").environ["PATH"]
+        "PATH", str(installed.bin_env()[0]) + ":" + __import__("os").environ["PATH"]
     )
     g = Graph()
     w = waypoint_uri("life", "W9")
@@ -170,7 +170,7 @@ def test_the_reader_is_found_in_nemiks_own_venv_not_on_path(
     It could not find mikemol-ics. The default is the venv's own copy; a missing reader is a stated
     refusal.
     """
-    for k, v in installed._bin()[1].items():
+    for k, v in installed.bin_env()[1].items():
         monkeypatch.setenv(k, v)
     monkeypatch.setenv("PATH", "/usr/bin:/bin")  # the venv is not on PATH
     got = occurrences(

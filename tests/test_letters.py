@@ -168,7 +168,7 @@ def test_apply_mints_the_cards_and_archives_the_stale(tmp_path: Path) -> None:
         14,
         today=date(2026, 10, 10),
         writer=installed.script("mikemol-paths-forward")[0],
-        env=installed._bin()[1],
+        env=installed.bin_env()[1],
     )
     assert any("W1" in line for line in done)
     assert (tmp_path / "a" / "inbox" / "archive" / "2026-01-01-old.md").exists()

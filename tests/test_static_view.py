@@ -45,7 +45,7 @@ def snapshot_url(tmp_path_factory: pytest.TempPathFactory) -> Iterator[str]:
         "--withheld",
         str(withheld),
     ]
-    built = capture(build, env=installed._bin()[1])
+    built = capture(build, env=installed.bin_env()[1])
     assert built.returncode == 0, built.stderr
     server = ThreadingHTTPServer(("127.0.0.1", 0), handler(root))
     threading.Thread(target=server.serve_forever, daemon=True).start()

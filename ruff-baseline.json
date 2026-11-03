@@ -100,11 +100,7 @@
   "syntax": 1
  },
  "tests/test_calendars.py": {
-  "PLC2701": 1,
-  "SLF001": 3
- },
- "tests/test_deterministic.py": {
-  "SLF001": 2
+  "PLC2701": 1
  },
  "tests/test_flow_cache.py": {
   "SLF001": 1
@@ -120,12 +116,6 @@
   "PLR0913": 1,
   "PLR0917": 1
  },
- "tests/test_hooks_wired.py": {
-  "SLF001": 2
- },
- "tests/test_ics_reader.py": {
-  "SLF001": 1
- },
  "tests/test_inbound_orphans.py": {
   "PLC2701": 1
  },
@@ -134,9 +124,6 @@
  },
  "tests/test_layout.py": {
   "S310": 1
- },
- "tests/test_letters.py": {
-  "SLF001": 1
  },
  "tests/test_manifest.py": {
   "ANN202": 1
@@ -147,9 +134,6 @@
  "tests/test_mspdi.py": {
   "S314": 2,
   "S405": 1
- },
- "tests/test_publish.py": {
-  "SLF001": 2
  },
  "tests/test_rank_apply.py": {
   "S404": 1,
@@ -162,16 +146,12 @@
  "tests/test_shaclinc.py": {
   "PLC2701": 1
  },
- "tests/test_static_view.py": {
-  "SLF001": 1
- },
  "tests/test_witwait.py": {
   "PLR6301": 1
  },
  "tests/webpage.py": {
   "S404": 1,
-  "S603": 1,
-  "SLF001": 1
+  "S603": 1
  },
  "tools/nemik_client.py": {
   "S310": 1

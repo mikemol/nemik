@@ -231,7 +231,7 @@ def served(series: Path | None = None, root: Path = FLEET) -> Generator[str]:
             ran and the tail of its stderr (W846).
 
     """
-    env = {**installed._bin()[1], "PYTHONHASHSEED": "0"}
+    env = {**installed.bin_env()[1], "PYTHONHASHSEED": "0"}
     extra = ["--series", str(series)] if series is not None else []
     command = [
         *installed.script("nemik-serve"),

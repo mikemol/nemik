@@ -19,6 +19,6 @@ def test_an_uninstalled_script_is_a_file_not_found(
     def empty_bin() -> tuple[Path, dict[str, str]]:
         return tmp_path, {}
 
-    monkeypatch.setattr(installed, "_bin", empty_bin)
+    monkeypatch.setattr(installed, "bin_env", empty_bin)
     with pytest.raises(FileNotFoundError, match="nemik-absent is not installed in"):
         installed.script("nemik-absent")

@@ -68,10 +68,10 @@ def test_graph_json_is_identical_across_hash_seeds(tmp_path: Path) -> None:
         "import sys; from pathlib import Path; from nemik.serve import Model; "
         "m = Model(Path(sys.argv[1])); m.refresh(); sys.stdout.buffer.write(m.payload)"
     )
-    py = installed._bin()[0] / "python3"
+    py = installed.bin_env()[0] / "python3"
     out = set()
     for seed in ("1", "2", "3", "4"):
-        env = {**installed._bin()[1], "PYTHONHASHSEED": seed}
+        env = {**installed.bin_env()[1], "PYTHONHASHSEED": seed}
         r = capture_bytes([str(py), "-c", code, str(tmp_path)], env=env)
         assert r.returncode == 0, r.stderr
         out.add(r.stdout)
