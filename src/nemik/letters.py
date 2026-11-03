@@ -329,6 +329,7 @@ def apply_fold(
     root: Path,
     repo: str | None = None,
     older_than: int | None = None,
+    *,
     today: date | None = None,
     writer: str | None = None,
     env: dict[str, str] | None = None,

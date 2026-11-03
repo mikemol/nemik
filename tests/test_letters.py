@@ -166,7 +166,7 @@ def test_apply_mints_the_cards_and_archives_the_stale(tmp_path: Path) -> None:
         tmp_path,
         "a",
         14,
-        date(2026, 10, 10),
+        today=date(2026, 10, 10),
         writer=installed.script("mikemol-paths-forward")[0],
         env=installed._bin()[1],
     )
