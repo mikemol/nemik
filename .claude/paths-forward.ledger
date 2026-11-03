@@ -4200,3 +4200,16 @@
 2026-11-03T01:44:14Z  interrupt W1517 minted    -         "letters.apply_fold takes today, writer and env as keyword-only, so PLR0917 clears"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1494
 2026-11-03T01:45:24Z  status W1517 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-03T02:06:11Z  status W1508 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-03T02:07:28Z  status W1511 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-03T02:07:29Z  status W1509 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-03T02:07:31Z  status W1510 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-03T02:07:37Z  tick  W1508 advanced  sweep     "stack 885 landed (W1509 part 1 and W1511 procrun vendored, 02:06:22Z); 886 inflight, W1508 queued as 887; W1510 released [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-03T02:27:32Z  interrupt W1518 minted    -         "nemik-witnesses' file observer reports mtime (epoch seconds) and size beside exists, so a witness can say a stamp moved (luthen-observability W1927)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=luthen-observability:W1927
+2026-11-03T02:27:49Z  status W1513 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-03T02:30:14Z  prune W1175 edge-pruned writer    "mtools:W2230"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-03T02:30:14Z  prune W1175 edge-pruned writer    "mtools:W2231"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-03T02:32:09Z  status W1517 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-03T02:32:10Z  status W1508 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-03T02:35:46Z  tick  W1519 minted    -         "alarm.recurrence_id narrows its occurrence with a helper that raises TypeError instead of two asserts, so S101 clears twice"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1494
+2026-11-03T02:36:45Z  status W1510 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-03T02:36:46Z  status W1519 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
