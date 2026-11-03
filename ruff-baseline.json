@@ -114,10 +114,6 @@
   "S404": 1,
   "S603": 2
  },
- "tests/test_akonadi_guard.py": {
-  "S404": 1,
-  "S603": 1
- },
  "tests/test_build_scope.py": {
   "PLC2701": 1
  },
@@ -130,8 +126,6 @@
   "SLF001": 3
  },
  "tests/test_deterministic.py": {
-  "S404": 1,
-  "S603": 1,
   "SLF001": 2
  },
  "tests/test_flow_cache.py": {
@@ -179,17 +173,11 @@
  "tests/test_memo_audits.py": {
   "PLC2701": 1
  },
- "tests/test_mpxj.py": {
-  "S404": 1,
-  "S603": 1
- },
  "tests/test_mspdi.py": {
   "S314": 2,
   "S405": 1
  },
  "tests/test_publish.py": {
-  "S404": 1,
-  "S603": 2,
   "SLF001": 2
  },
  "tests/test_rank_apply.py": {

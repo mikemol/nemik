@@ -8,9 +8,9 @@ moments this helper ran with no session bus. The helper now refuses first. It is
 """
 
 import os
-import subprocess
 
 import pytest
+from mikemol.procrun.proc import capture_bytes
 
 from nemik.vtodo import DEFAULT_HELPER
 
@@ -26,13 +26,8 @@ def test_helper_refuses_without_a_session_bus() -> None:
         "HOME": os.environ.get("HOME", "/"),
         "PATH": "/usr/bin:/bin",
     }  # no D-Bus session, no display
-    r = subprocess.run(
-        [str(DEFAULT_HELPER), "--list", "x"],
-        input=b"",
-        capture_output=True,
-        env=env,
-        timeout=30,
-        check=False,
+    r = capture_bytes(
+        [str(DEFAULT_HELPER), "--list", "x"], env=env, timeout=30, input_bytes=b""
     )
     assert r.returncode == EXIT_REFUSED, r
     assert b"refusing to start it" in r.stdout, r

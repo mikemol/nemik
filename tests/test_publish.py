@@ -4,11 +4,11 @@
 
 import os
 import shutil
-import subprocess
 import time
 from pathlib import Path
 
 import installed
+from mikemol.procrun.proc import capture
 
 from nemik.serve import fleet_key, publish
 from nemik.tracker import parse_tree
@@ -84,13 +84,11 @@ def test_the_publish_command_runs_in_its_own_process(tmp_path: Path) -> None:
         "--publish",
         str(tmp_path / "p"),
     ]
-    run = subprocess.run(
-        cmd, check=True, capture_output=True, text=True, env=installed._bin()[1]
-    )
+    run = capture(cmd, env=installed._bin()[1])
+    assert run.returncode == 0, run.stderr
     assert run.stdout.strip().startswith(str(tmp_path / "p" / "snap-"))
-    again = subprocess.run(
-        cmd, check=True, capture_output=True, text=True, env=installed._bin()[1]
-    )
+    again = capture(cmd, env=installed._bin()[1])
+    assert again.returncode == 0, again.stderr
     assert again.stdout.strip() == "unchanged"
 
 

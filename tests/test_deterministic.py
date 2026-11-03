@@ -9,10 +9,10 @@ one inbound row per (blocked, blocker) pair survived, chosen by that order.
 """
 
 import json
-import subprocess
 from pathlib import Path
 
 import installed
+from mikemol.procrun.proc import capture_bytes
 
 
 def _queue(root: Path, repo: str, wps: list[dict[str, object]]) -> None:
@@ -72,11 +72,7 @@ def test_graph_json_is_identical_across_hash_seeds(tmp_path: Path) -> None:
     out = set()
     for seed in ("1", "2", "3", "4"):
         env = {**installed._bin()[1], "PYTHONHASHSEED": seed}
-        r = subprocess.run(
-            [str(py), "-c", code, str(tmp_path)],
-            env=env,
-            capture_output=True,
-            check=True,
-        )
+        r = capture_bytes([str(py), "-c", code, str(tmp_path)], env=env)
+        assert r.returncode == 0, r.stderr
         out.add(r.stdout)
     assert len(out) == 1

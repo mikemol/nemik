@@ -11,10 +11,10 @@ predecessor column is read. nemik writes each task's ID as its UID, so IDs map b
 
 import os
 import re
-import subprocess
 from pathlib import Path
 
 import pytest
+from mikemol.procrun.proc import capture
 from rdflib import Graph
 
 from nemik.adapter import queue_graph
@@ -54,7 +54,7 @@ def test_mpxj_reads_every_in_file_link(tmp_path: Path) -> None:
     assert expected, "the fixture has in-file links, so the comparison is not vacuous"
     doc = tmp_path / "fleet.xml"
     doc.write_text(write(tasks))
-    out = subprocess.run(
+    done = capture(
         [
             str(Path(java).absolute()),
             "-cp",
@@ -62,11 +62,10 @@ def test_mpxj_reads_every_in_file_link(tmp_path: Path) -> None:
             "org.mpxj.sample.MpxjQuery",
             str(doc),
         ],
-        capture_output=True,
-        text=True,
-        check=True,
         timeout=600,
-    ).stdout
+    )
+    assert done.returncode == 0, done.stderr
+    out = done.stdout
     read: set[tuple[str, str]] = set()
     for line in out.splitlines():
         m = RELATION.match(line)
