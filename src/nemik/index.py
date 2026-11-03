@@ -73,18 +73,18 @@ class Index:
         return state in self.state.get(node, ())
 
 
-_SCOPE: dict[int, tuple[weakref.ref[Graph], int, Index]] | None = None
+_SCOPE: list[dict[int, tuple[weakref.ref[Graph], int, Index]] | None] = [None]
 
 
 @contextmanager
 def indexed() -> Generator[None]:
     """Keep each graph's index for the duration of the block (one build)."""
-    global _SCOPE
-    outer, _SCOPE = _SCOPE, {} if _SCOPE is None else _SCOPE
+    outer = _SCOPE[0]
+    _SCOPE[0] = {} if outer is None else outer
     try:
         yield
     finally:
-        _SCOPE = outer
+        _SCOPE[0] = outer
 
 
 def index(g: Graph) -> Index | None:
@@ -95,9 +95,10 @@ def index(g: Graph) -> Index | None:
         again when the graph's size changed; None outside a scope.
 
     """
-    if _SCOPE is None:
+    scope = _SCOPE[0]
+    if scope is None:
         return None
-    hit = _SCOPE.get(id(g))
+    hit = scope.get(id(g))
     if hit is not None and hit[0]() is g and hit[1] == len(g):
         return hit[2]
     ix = Index()
@@ -107,7 +108,7 @@ def index(g: Graph) -> Index | None:
         ix.enables.setdefault(s, set()).add(o)
     for s, o in g.subject_objects(NEMIK.waitsFor):
         ix.waited_by.setdefault(o, set()).add(s)
-    scope, key = _SCOPE, id(g)
+    key = id(g)
 
     def forget(dead: weakref.ref[Graph]) -> None:
         # nemik:W518: the entry goes with its graph. A strong reference kept every copy a build made

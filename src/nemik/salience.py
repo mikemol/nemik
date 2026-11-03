@@ -47,18 +47,18 @@ DECIMALS = 4
 # edge widths twice, the operator-ask weights), each a full flow solve over the same graph: 58
 # solves, 245 of 268 profiled seconds. Inside `memo_audits()` an identical audit is answered from
 # this table; outside it nothing is cached, so a CLI run computes exactly as before.
-_MEMO: dict[tuple[object, ...], Audit] | None = None
+_MEMO: list[dict[tuple[object, ...], Audit] | None] = [None]
 
 
 @contextmanager
 def memo_audits() -> Generator[None]:
     """Answer repeated identical audits from a table for the duration of the block (one build)."""
-    global _MEMO
-    outer, _MEMO = _MEMO, {} if _MEMO is None else _MEMO
+    outer = _MEMO[0]
+    _MEMO[0] = {} if outer is None else outer
     try:
         yield
     finally:
-        _MEMO = outer
+        _MEMO[0] = outer
 
 
 @dataclass(frozen=True)
@@ -203,7 +203,8 @@ def audit(
     # W403: residue and gate weights are per-call inputs, not part of the key, so those audits
     # bypass it.
     key: tuple[object, ...] | None = None
-    if _MEMO is not None and residue is None and gate_weights is None:
+    memo = _MEMO[0]
+    if memo is not None and residue is None and gate_weights is None:
         key = (
             id(g),
             len(g),
@@ -218,8 +219,8 @@ def audit(
             toward,
             wait_weight,
         )
-        if key in _MEMO:
-            return _MEMO[key]
+        if key in memo:
+            return memo[key]
     nodes = {n for n in g.subjects(OSLC_CM.state, None) if _open(g, n)}
     prereq: dict[Node, set[Node]] = {}
     for p in nodes:
@@ -314,8 +315,8 @@ def audit(
         for n in mine
     ]
     result = Audit(rows, flow, len(sources), demand, reach)
-    if key is not None and _MEMO is not None:
-        _MEMO[key] = result
+    if key is not None and memo is not None:
+        memo[key] = result
     return result
 
 

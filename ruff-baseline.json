@@ -39,9 +39,6 @@
   "S404": 1,
   "S603": 1
  },
- "src/nemik/index.py": {
-  "PLW0603": 1
- },
  "src/nemik/letters.py": {
   "PLR0913": 2
  },
@@ -61,8 +58,7 @@
   "PLR0913": 3,
   "PLR0914": 1,
   "PLR0915": 1,
-  "PLR0917": 1,
-  "PLW0603": 1
+  "PLR0917": 1
  },
  "src/nemik/serve.py": {
   "C901": 2,
