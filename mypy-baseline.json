@@ -78,9 +78,6 @@
  "tests/test_flow_cache.py": {
   "attr-defined": 1
  },
- "tests/test_guarantees.py": {
-  "misc": 3
- },
  "tests/test_history.py": {
   "misc": 2
  },

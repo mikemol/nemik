@@ -5,6 +5,8 @@
 Each guarantee is falsifiable: --check names the rule and the pair of items that broke it.
 """
 
+from importlib.resources import files
+
 import pytest
 from rdflib import Graph, Literal, URIRef
 
@@ -156,7 +158,7 @@ def test_check_ok_still_reports_the_unscored_census(
 def test_only_narrows_the_blocked_dependents_to_named_tags() -> None:
     """nemik:W138 (luthen §3): only tenant-facing rollouts wait on an open trust-boundary item."""
     text = (
-        load_guarantees.__globals__["files"]("nemik.data")
+        files("nemik.data")
         .joinpath("bands.toml")
         .read_text()
         .replace(
