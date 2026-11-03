@@ -1293,13 +1293,15 @@ def test_the_card_list_is_one_tab_stop_walked_by_arrows(server: str) -> None:
         )
         page.evaluate("() => { document.getElementById('sec-cards').open = true; }")
         _settle(page)
-        stops = page.evaluate(
+        stops = webpage.evaluate_int(
+            page,
             "() => [...document.querySelectorAll('#cardlist button')]"
-            ".filter(b => b.tabIndex === 0).length"
+            ".filter(b => b.tabIndex === 0).length",
         )
-        rows = page.evaluate(
+        rows = webpage.evaluate_strs(
+            page,
             "() => [...document.querySelectorAll('#cardlist button[data-card]')]"
-            ".map(b => b.dataset.card)"
+            ".map(b => b.dataset.card)",
         )
         page.locator("#cardlist button[tabindex='0']").focus()
         page.keyboard.press("ArrowDown")
@@ -1390,7 +1392,8 @@ def test_the_card_popover_follows_the_hovercard_rules(server: str) -> None:
         # runs past the window's bottom edge and the card nearest it sat 96 px inside it, so a
         # header that wraps one line more in the image build put it outside the window and the
         # popover never opened. Take the first card whose point is in the window and on the graph.
-        card = page.evaluate(
+        card = webpage.evaluate_dict(
+            page,
             "() => { const r = document.getElementById('cy').getBoundingClientRect();"
             " const reach = n => { const p = n.renderedPosition(),"
             " x = r.left + p.x, y = r.top + p.y, e = document.elementFromPoint(x, y);"
@@ -1399,10 +1402,10 @@ def test_the_card_popover_follows_the_hovercard_rules(server: str) -> None:
             " const n = cy.nodes('[symbol]').filter(n => n.visible()"
             " && n.data('state') !== 'unclaimed' && reach(n)).first(),"
             " p = n.renderedPosition();"
-            " return { x: r.left + p.x, y: r.top + p.y, cite: n.data('cite') }; }"
+            " return { x: r.left + p.x, y: r.top + p.y, cite: n.data('cite') }; }",
         )
         hidden = "() => document.getElementById('pop').hidden"
-        page.mouse.move(card["x"], card["y"])
+        page.mouse.move(webpage.num(card, "x"), webpage.num(card, "y"))
         page.clock.run_for(150)
         early = webpage.evaluate_bool(page, hidden)
         page.clock.run_for(600)
@@ -1415,14 +1418,15 @@ def test_the_card_popover_follows_the_hovercard_rules(server: str) -> None:
         kept = not webpage.evaluate_bool(page, hidden)
         page.keyboard.press("Escape")
         dismissed = webpage.evaluate_bool(page, hidden)
-        page.mouse.move(card["x"], card["y"])
+        page.mouse.move(webpage.num(card, "x"), webpage.num(card, "y"))
         page.clock.run_for(700)
         page.mouse.move(5, 5)
         page.clock.run_for(500)
         left = webpage.evaluate_bool(page, hidden)
         browser.close()
     assert early, "the popover opened before its delay"
-    assert shown and card["cite"] in text
+    assert shown
+    assert webpage.as_str(card["cite"]) in text
     assert kept, "the popover closed when the pointer moved onto it"
     assert dismissed, "Esc did not dismiss the popover"
     assert left, "the popover stayed after the pointer left"
@@ -1447,12 +1451,13 @@ def test_every_card_demand_crosses_carries_a_number(server: str) -> None:
         )
         page.check("#bySalience")
         _settle(page)
-        bare = page.evaluate(
+        bare = webpage.evaluate_value(
+            page,
             "() => { const carries = new Set(data.edges.filter(e => e.current)"
             ".map(e => e.kind === 'waits' ? e.source : e.target));"
             " return cy.nodes('[symbol]').filter(n => n.visible()"
             " && carries.has(n.id()) && !/ · /.test(n.data('label')))"
-            ".map(n => n.data('label')); }"
+            ".map(n => n.data('label')); }",
         )
         carried = webpage.evaluate_int(
             page,
@@ -1659,8 +1664,9 @@ def test_no_command_route_or_tools_panel_remains(server: str) -> None:
         webpage.watch(page)
         page.goto(server)
         webpage.until(page, SECTIONS_DRAWN)
-        tools = page.evaluate(
-            "() => [document.getElementById('tool'), document.getElementById('sec-tools')]"
+        tools = webpage.evaluate_value(
+            page,
+            "() => [document.getElementById('tool'), document.getElementById('sec-tools')]",
         )
         browser.close()
     assert tools == [None, None]
@@ -1685,9 +1691,10 @@ def test_one_picked_repo_restored_from_the_last_visit_is_legible_too(
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
         )
         # the repo with the most cards, so its fit is the one most likely to fall under the floor
-        big = page.evaluate(
+        big = webpage.evaluate_value(
+            page,
             "() => { const c = {}; data.nodes.forEach(n => c[n.repo] = (c[n.repo] || 0) + 1);"
-            " return Object.entries(c).sort((a, b) => b[1] - a[1])[0][0]; }"
+            " return Object.entries(c).sort((a, b) => b[1] - a[1])[0][0]; }",
         )
         page.evaluate(
             f"() => localStorage.setItem('nemik.repos', JSON.stringify(['{big}']))"
@@ -1760,7 +1767,7 @@ def test_rank_forest_view(server: str, tmp_path: Path) -> None:
         ranked = webpage.evaluate_int(page, "() => cy.nodes('[rank_pos]').length")
         _settle(page)
         m = webpage.evaluate_dict(page, METRICS)
-        overlaps = page.evaluate(NODE_OVERLAPS)
+        overlaps = webpage.evaluate_value(page, NODE_OVERLAPS)
         page.screenshot(path=str(out / "forest-dark.png"))
         page.evaluate("() => cy.fit(cy.getElementById('repo:life'), 20)")
         _settle(page)
@@ -1843,9 +1850,12 @@ def test_treemap_view_draws(server: str, tmp_path: Path) -> None:
         page.check("#treemap")
         webpage.until(page, "() => cy.nodes('.tile').length > 0")
         # W185: toggling the view refits; the old zoom/pan scaled one tile off the page.
-        fit = page.evaluate("""() => { const b = cy.elements(':visible').renderedBoundingBox();
+        fit = webpage.evaluate_bool(
+            page,
+            """() => { const b = cy.elements(':visible').renderedBoundingBox();
           return b.x1 >= -1 && b.y1 >= -1 && b.x2 <= cy.width() + 1 && b.y2 <= cy.height() + 1;
-            }""")
+            }""",
+        )
         m = webpage.evaluate_dict(
             page,
             """() => {
@@ -1968,7 +1978,9 @@ def test_every_cite_in_the_panel_is_a_repo_colon_link(server: str) -> None:
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
         )
         _settle(page)
-        bad = page.evaluate("""() => {
+        bad = webpage.evaluate_value(
+            page,
+            """() => {
           const out = [], pat = /\\b[a-z][a-z0-9-]*(?:[:\\/]| )W\\d+\\b/;
           const scan = where => {
             const walk = document.createTreeWalker(document.querySelector('aside'),
@@ -1984,7 +1996,8 @@ def test_every_cite_in_the_panel_is_a_repo_colon_link(server: str) -> None:
           if (ns.length) { detail(ns[0].data()); scan('detail'); }
           lane('needs-you'); scan('lane');
           return [...new Set(out)].slice(0, 8);
-        }""")
+        }""",
+        )
         browser.close()
     assert bad == []
 

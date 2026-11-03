@@ -4381,3 +4381,6 @@
 2026-11-03T17:01:36Z  status W1560 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-03T17:09:34Z  status W1560 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-03T17:29:33Z  status W1560 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-03T17:36:56Z  status W1560 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-03T17:41:00Z  tick  W1560 advanced  sweep     "test_layout slices 8a to 8d landed (19a90820 16:35:43Z, ccdcea2c 16:47:36Z, 6f5ed6b8 17:08:47Z, eed41c63 17:36:10Z): mypy 333 to 301; W1520 repin unblocked by mtools 7b5b16c6 (verified, dry run read), sequence written; gate empty from 17:36:10Z [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-03T17:45:13Z  status W1560 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
