@@ -17,12 +17,12 @@ from __future__ import annotations
 
 import argparse
 import re
-import subprocess
 from datetime import date, timedelta
 from pathlib import Path
 from typing import TYPE_CHECKING
 
 from mikemol.pathsforward.ics import escape, serialize
+from mikemol.procrun.proc import capture_bytes
 from rdflib import Graph
 from rdflib.namespace import DCTERMS, RDF
 
@@ -263,7 +263,7 @@ def _write(helper: Path, name: str, text: str, *, apply: bool) -> tuple[int, str
     cmd = [str(helper), "--write-calendar", name]
     if apply:
         cmd.append("--apply")
-    run = subprocess.run(cmd, input=text.encode(), capture_output=True, check=False)
+    run = capture_bytes(cmd, input_bytes=text.encode())
     return run.returncode, run.stdout.decode(errors="replace")
 
 

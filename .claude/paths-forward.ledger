@@ -4351,3 +4351,8 @@
 2026-11-03T14:01:31Z  interrupt W1554 minted    -         "test_layout reads its tile, contrast, colour, roll-up and legend evaluates through typed readers so their 44 Any reads clear (slice 5)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W1535
 2026-11-03T14:09:13Z  status W1552 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-03T14:09:14Z  status W1554 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-03T14:20:35Z  status W1553 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-03T14:20:54Z  interrupt W1555 minted    -         "vtodo, calwrite and history run their subprocesses through procrun.capture_bytes so S404, S603 and S607 clear"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W1175
+2026-11-03T14:23:55Z  status W1555 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-03T14:31:01Z  interrupt W1556 minted    -         "test_layout reads its repo chips, glyph, piece-fetch and aria-expanded evaluates through typed readers (slice 6)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W1535
+2026-11-03T14:40:19Z  tick  W1556 advanced  sweep     "stacks 920 (6429a74a, mypy 472 to 431) and 921 (744e82a2, ruff 193 to 189) landed; stack 922 (test_layout slice 5, mypy 431 to 401) inflight with 923 (vtodo, calwrite and history through capture_bytes, ruff 189 to 182) queued; slice 6 (mypy 401 to 381) staged as stack 924 [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

@@ -22,7 +22,6 @@ from __future__ import annotations
 import argparse
 import operator
 import re
-import subprocess
 import sys
 import time
 import tomllib
@@ -32,6 +31,7 @@ from typing import TYPE_CHECKING
 
 from mikemol.pathsforward.ics import escape, serialize
 from mikemol.pathsforward.vtimezone import vtimezone
+from mikemol.procrun.proc import capture_bytes
 from rdflib import Graph
 
 from nemik.adapter import ledger_graph
@@ -443,7 +443,7 @@ def tasks_main(argv: list[str] | None = None) -> None:
 
     tries = 1 + (3 if args.apply and not args.flat else 0)
     for attempt in range(tries):
-        run = subprocess.run(cmd, input=text.encode(), capture_output=True, check=False)
+        run = capture_bytes(cmd, input_bytes=text.encode())
         sys.stdout.write(run.stdout.decode(errors="replace"))
         sys.stderr.write(run.stderr.decode(errors="replace"))
         sys.stdout.flush()

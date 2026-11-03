@@ -16,7 +16,6 @@ import json
 import os
 import re
 import statistics
-import subprocess
 import sys
 import zlib
 from dataclasses import asdict, dataclass, field
@@ -25,6 +24,7 @@ from itertools import starmap
 from pathlib import Path
 from typing import TypedDict, cast
 
+from mikemol.procrun.proc import capture_bytes
 from rdflib import RDF
 from rdflib.namespace import PROV
 
@@ -385,12 +385,7 @@ def _run(repo: Path, args: tuple[str, ...], stdin: bytes = b"") -> bytes | None:
     # image's final stage carries no git (only its test stage does), and the snapshot builder of
     # the pod (nemik-serve --publish) reaches this, so a missing binary must not stop a publish.
     try:
-        run = subprocess.run(
-            ["git", "-C", str(repo), *args],
-            capture_output=True,
-            check=False,
-            input=stdin or None,
-        )
+        run = capture_bytes(["git", "-C", str(repo), *args], input_bytes=stdin or None)
     except OSError:
         return None
     return run.stdout if run.returncode == 0 else None

@@ -21,9 +21,7 @@
  },
  "src/nemik/calwrite.py": {
   "PLR0913": 1,
-  "PLR0917": 1,
-  "S404": 1,
-  "S603": 1
+  "PLR0917": 1
  },
  "src/nemik/check.py": {
   "C901": 1,
@@ -37,10 +35,7 @@
  },
  "src/nemik/history.py": {
   "PLC0415": 1,
-  "PLR0914": 1,
-  "S404": 1,
-  "S603": 1,
-  "S607": 1
+  "PLR0914": 1
  },
  "src/nemik/hostapply.py": {
   "S404": 1,
@@ -90,10 +85,6 @@
  "src/nemik/staticserve.py": {
   "C901": 1,
   "PLW0717": 1
- },
- "src/nemik/vtodo.py": {
-  "S404": 1,
-  "S603": 1
  },
  "src/nemik/wake.py": {
   "PLW0717": 1
