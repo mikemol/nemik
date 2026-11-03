@@ -46,9 +46,6 @@
  "src/nemik/letters.py": {
   "PLR0913": 2
  },
- "src/nemik/metrics.py": {
-  "PLC0415": 4
- },
  "src/nemik/mspdi.py": {
   "S314": 1,
   "S405": 1
@@ -71,7 +68,6 @@
  },
  "src/nemik/serve.py": {
   "C901": 2,
-  "PLC0415": 26,
   "PLR0912": 1
  },
  "src/nemik/staticserve.py": {

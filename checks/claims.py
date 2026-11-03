@@ -256,9 +256,21 @@ def hub_modules_depend_on_everything_below() -> None:
     # nemik:W1323: and counts each repo's stackable ready cards for the nemik_stackable gauge,
     # through stackable.stackable_count (the function nemik-stackable's report uses).
     # nemik:W1384: and both write their command output through say, a leaf that imports only sys.
+    # nemik:W1561: the function-local imports of both hubs moved to module level (PLC0415), so the
+    # set also names what they imported inside functions: health and stackable_cli for metrics.
     expected = {
         "metrics": lower
-        | {"realize", "residue", "runlogs", "workrows", "rank", "stackable", "say"},
+        | {
+            "realize",
+            "residue",
+            "runlogs",
+            "workrows",
+            "rank",
+            "stackable",
+            "say",
+            "health",
+            "stackable_cli",
+        },
         "serve": lower
         | {
             "outbox",
@@ -286,6 +298,15 @@ def hub_modules_depend_on_everything_below() -> None:
             "cardseries",
             "stackable",
             "say",
+            "apischema",
+            "catalog",
+            "health",
+            "index",
+            "pieces",
+            "rank",
+            "salience",
+            "trs",
+            "withheld",
         },
     }
     for hub, want in expected.items():

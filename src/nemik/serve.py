@@ -19,6 +19,7 @@ a stat walk, not a SHACL pass.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import operator
 import os
@@ -35,11 +36,14 @@ from importlib.resources import files
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, TypedDict
 
+from mikemol.rulerseq import emit_f, morse_motif
 from rdflib import RDF, Graph, URIRef
 from rdflib.namespace import DCTERMS, PROV
 
+from nemik import adapter, cachestore, lastgood
 from nemik.adapter import BASE, NEMIK, OPERATOR, OSLC_CM, bind, ledger_graph
-from nemik.blocks import inbound, operator_asks, ref
+from nemik.apischema import openapi, schema_path, schemas, unmanifested
+from nemik.blocks import inbound, node_flags, operator_asks, ref, with_salience
 from nemik.buildcost import (
     build_cost_lines,
     bytes_of,
@@ -48,6 +52,7 @@ from nemik.buildcost import (
     swap_kib_of,
 )
 from nemik.cardseries import card_lines
+from nemik.catalog import catalog
 from nemik.check import (
     LEDGER,
     QUEUE,
@@ -63,12 +68,14 @@ from nemik.check import (
 from nemik.check import survey as checked_survey
 from nemik.collapse import collapse, paths
 from nemik.collapse import lines as collapse_lines
-from nemik.critical import critical_doc
+from nemik.critical import critical, critical_doc, repo_scope
 from nemik.exportwire import exports_key, withheld_by_exports
 from nemik.floorasks import floor_asks, unresolved
+from nemik.health import health, thresholds
 from nemik.histdocs import STALE_HOURS, decode, file_name, wrap
-from nemik.history import oldest_rows
+from nemik.history import oldest_rows, snapshots, weekly
 from nemik.hostroot import HostRow, read_document, stale
+from nemik.index import indexed
 from nemik.landings import read_document as read_landings
 from nemik.landings import series as landing_series
 from nemik.letters import report as letters_report
@@ -77,15 +84,21 @@ from nemik.outbox import outbox
 from nemik.overlaps import overlaps
 from nemik.pacepublish import metric_lines, read_pace, readable_lines
 from nemik.pacing import limits, paces
+from nemik.pieces import split
 from nemik.queuerows import fleet_queues
+from nemik.rank import goals, load_composition, load_weights, rank
 from nemik.roundcli import bindings_of
 from nemik.roundfile import ROUND_FILE
 from nemik.roundgauges import round_board
 from nemik.runlogs import runs_graph
+from nemik.salience import edge_currents, memo_audits
 from nemik.say import say, warn
 from nemik.stackable import manifest
 from nemik.starved import days_limit, starved_fleet
+from nemik.trs import turtle
 from nemik.wake import operator_row, read_liveness, roster
+from nemik.withheld import _id, apply
+from nemik.withheld import load as load_withheld
 from nemik.withheldage import require_fresh
 
 # nemik:W783: the server never starts a process, so its survey skips the gate marks that ask
@@ -808,8 +821,6 @@ def without(g: Graph, refs: frozenset[str]) -> Graph:
         A new graph holding every triple that touches no withheld waypoint.
 
     """
-    from nemik.withheld import _id
-
     out = Graph()
     gone = {URIRef(_id(r)) for r in refs}
     for s, p, o in g:
@@ -879,9 +890,6 @@ def to_json(g: Graph, findings: dict, numbers: Graph | None = None) -> dict:
         The view's document, as _to_json builds it inside the memo and index scopes.
 
     """
-    from nemik.index import indexed
-    from nemik.salience import memo_audits
-
     with memo_audits(), indexed():
         return _to_json(g, findings, numbers)
 
@@ -1036,8 +1044,6 @@ def _ask_lanes(g: Graph, gn: Graph, edges: list[EdgeRow]) -> list[AskRow]:
         The asks, errands left out.
 
     """
-    from nemik.blocks import with_salience
-
     # nemik:W460: an errand is the operator's own business: nemik-operator lists it, the view does
     # not.
     asks = [a for a in with_salience(gn, operator_asks(g)) if a["category"] != "errand"]
@@ -1085,8 +1091,6 @@ def _rank_nodes(gn: Graph, nodes: list[NodeRow]) -> Weights:
     """
     # nemik:W135: each ready waypoint's place in its repo's composed nemik-rank order (0 = work it
     # first), so the page can lay out a rank-ordered forest without re-deriving the ranking.
-    from nemik.rank import load_composition, load_weights, rank
-
     weights, comp = load_weights(), load_composition()
     by_id = {n["id"]: n for n in nodes}
     for repo in sorted({n["repo"] for n in nodes if n["state"] == "ready"}):
@@ -1103,8 +1107,6 @@ def _path_marks(gn: Graph, nodes: list[NodeRow]) -> None:
     # nemik:W322: slack (nemik.critical) per open card, and which cards lie on the longest chain, so
     # the page can mark the path that bounds the fleet. Computed over `gn` like every published
     # number.
-    from nemik.critical import critical, repo_scope
-
     crit = critical(gn)
     on_path = set(crit.chain)
     # nemik:W334: each repo's own longest chain, beside the fleet's, for the page's per-repo halo.
@@ -1129,8 +1131,6 @@ def _flag_nodes(
     # as waiting: its fill says ready, but the flow model counts it as waiting and gives it no
     # salience. nemik:W684: a ready leaf with no manifest cannot be stacked, so it is drawn waiting
     # for one. nemik:W687: and a card that throws a Warning on the CLI carries it, for the badge.
-    from nemik.blocks import node_flags
-
     marks = node_flags(g, findings)
     for item in nodes:
         flags = marks.get(item["id"], {})
@@ -1158,8 +1158,6 @@ def _edge_widths(
     # nemik:W264: the demand that crossed each dependency, summed over the ready repos' solves, as
     # the width the page draws the edge with. A `waits` edge runs waiter -> blocker, an `enables`
     # edge prerequisite -> dependent; the flow names a dependency (needing card, prerequisite).
-    from nemik.salience import edge_currents
-
     crossed: dict[tuple[str, str], float] = defaultdict(float)
     for repo in sorted({n["repo"] for n in nodes if n["state"] == "ready"}):
         for pair, amount in edge_currents(
@@ -1221,8 +1219,6 @@ def _to_json(g: Graph, findings: dict, numbers: Graph | None = None) -> dict:
     edges.sort(key=operator.itemgetter("source", "target", "kind"))
     # nemik:W317: each repo's red/amber/green from the declared thresholds, over `gn` like every
     # number.
-    from nemik.health import health, thresholds
-
     limits = thresholds()
     return {
         "nodes": nodes,
@@ -1252,10 +1248,6 @@ def ruler_table(edges: list[EdgeRow], asks: list[AskRow]) -> dict[str, list[str]
         line count).
 
     """
-    from collections import Counter
-
-    from mikemol.rulerseq import emit_f, morse_motif
-
     into = Counter(e["target"] for e in edges if e["kind"] == "waits")
     chips = Counter((a["category"], str(a["ref"]).partition(":")[0]) for a in asks)
     top = max([*into.values(), *chips.values(), 0])
@@ -1376,8 +1368,6 @@ def handler(model: Model) -> type[BaseHTTPRequestHandler]:
                 self.send(200, "application/json", json.dumps(rows, indent=1).encode())
             elif self.path.startswith("/goals/"):
                 # nemik:W80: the W79 goal view, computed on the cached graph.
-                from nemik.rank import goals, load_weights
-
                 goals_repo = (
                     self.path.removeprefix("/goals/").strip("/").removesuffix(".json")
                 )
@@ -1462,8 +1452,6 @@ def static_data(model: Model) -> dict[str, object]:
         umbrellas.
 
     """
-    from nemik.rank import goals, load_weights
-
     model.refresh()
     g, live = model.graph, read_liveness(model.root, None)[0]
     docs: dict[str, object] = {
@@ -1502,8 +1490,6 @@ def history_doc(
         Per repo, the weekly roll-up rows without the `oldest_blocked` field.
 
     """
-    from nemik.history import snapshots, weekly
-
     out: dict[str, list[dict[str, Any]]] = {}
     for repo, path in workstream_files(root, QUEUE):
         hide = {r.partition(":")[2] for r in withheld if r.partition(":")[0] == repo}
@@ -1540,9 +1526,6 @@ def build_static(
         The files written, as _build_static returns them.
 
     """
-    from nemik.index import indexed
-    from nemik.salience import memo_audits
-
     with memo_audits(), indexed():
         return _build_static(root, out, withheld, private=private, exports=exports)
 
@@ -1574,11 +1557,8 @@ def _build_static(
         ValueError: a document holds fields no manifest declares, so nothing is published.
 
     """
-    from nemik.apischema import unmanifested
-    from nemik.withheld import apply, load
-
     refs = (
-        frozenset() if private and withheld is None else load(withheld)
+        frozenset() if private and withheld is None else load_withheld(withheld)
     )  # public fails closed
     if exports is not None:
         refs |= withheld_by_exports(workstream_files(root, QUEUE), exports)
@@ -1588,14 +1568,10 @@ def _build_static(
         raise ValueError("unmanifested fields, refusing to publish: " + ", ".join(bad))
     # nemik:W415: graph.json's pieces, cut after the checks above from the document they checked,
     # so they hold nothing graph.json may not; graph.json stays until the page reads pieces (W416).
-    from nemik.pieces import split
-
     for piece, cut in split(docs["graph.json"]).items():
         docs[f"graph/{piece}.json"] = cut
     # nemik:W440: the contract the published files keep, generated from the field manifest and
     # listed in hashes.json like the data, so a client sees when it changes
-    from nemik.apischema import openapi, schema_path, schemas
-
     for pattern, schema in schemas().items():
         docs[schema_path(pattern)] = schema
     # nemik:W442: the read API, generated from the same schemas
@@ -1603,13 +1579,8 @@ def _build_static(
     written = write_static(out)
     # nemik:W414: hashes.json maps each published data path to the sha256 of its bytes, so a page
     # (W416) can refetch only the pieces that changed. Paths and digests only: nothing withheld.
-    import hashlib
-
     # nemik:W449: each repo's Tracked Resource Set (W448) as Turtle, the form TRS readers consume; a
     # withheld card leaves both the base and the change log
-    from nemik.trs import turtle
-    from nemik.withheld import _id
-
     hidden = frozenset(_id(r) for r in refs)
     bodies = {name: json.dumps(doc, indent=1) for name, doc in docs.items()}
     repos = {str(n["repo"]) for n in docs["graph.json"]["nodes"] if n["repo"]}
@@ -1622,8 +1593,6 @@ def _build_static(
             repo, model.graph, hidden, root / LOG_FILE
         )
     # nemik:W451: the OSLC discovery root, pointing at each repo's tracked resource set above
-    from nemik.catalog import catalog
-
     bodies["catalog.ttl"] = catalog(sorted(repos)).serialize(format="turtle")
     hashes: dict[str, str] = {}
     for name, body in sorted(bodies.items()):
@@ -1818,8 +1787,6 @@ def fleet_key(root: Path) -> str:
         The sha256 hex digest.
 
     """
-    import hashlib
-
     digest = hashlib.sha256()
     for name in (QUEUE, LEDGER):
         for _, path in workstream_files(root, name):
@@ -1859,8 +1826,6 @@ def publish(
         current/ was built.
 
     """
-    from nemik import adapter, cachestore, lastgood
-
     # nemik:W1096: this process builds once and exits, so the parse cache only doubles the graphs
     adapter.forget_parsed()
     key = fleet_key(root)

@@ -67,7 +67,7 @@ from rdflib.namespace import DCTERMS, PROV
 
 from nemik import cachestore, forecast, history, tiers
 from nemik.adapter import BASE, NEMIK, OSLC_CM, ledger_graph
-from nemik.blocks import inbound, ref
+from nemik.blocks import inbound, operator_asks, ref, with_salience
 from nemik.check import (
     LEDGER,
     QUEUE,
@@ -77,12 +77,14 @@ from nemik.check import (
     survey,
     workstream_files,
 )
+from nemik.health import STATUSES, health, thresholds
 from nemik.rank import TIERS, load_weights, rank
 from nemik.realize import verdicts
 from nemik.residue import by_card
 from nemik.runlogs import unmigrated_at_source
 from nemik.say import say
 from nemik.stackable import stackable_count
+from nemik.stackable_cli import drifted, history_cited
 from nemik.wake import read_liveness, roster
 from nemik.workrows import open_leaf_stamps, tick_kinds, working_rows
 
@@ -320,8 +322,6 @@ def operator_lines(g: Graph) -> list[str]:
         asks and their count.
 
     """
-    from nemik.blocks import operator_asks, with_salience
-
     held: dict[str, float] = {}
     count: dict[str, int] = {}
     for ask in with_salience(g, operator_asks(g)):
@@ -670,8 +670,6 @@ def drift_lines(root: Path, merged: Graph) -> list[str]:
         The gauge's TYPE line and a sample for each repo with a git history.
 
     """
-    from nemik.stackable_cli import drifted, history_cited
-
     out = ["# TYPE nemik_manifest_drift gauge"]
     for repo, path in workstream_files(root, QUEUE):
         top = path.parents[1] if path.parent.name == ".claude" else path.parent
@@ -752,9 +750,6 @@ def health_lines(g: Graph) -> list[str]:
         The TYPE header, then one gauge per repo: 0 green, 1 amber, 2 red.
 
     """
-    from nemik.blocks import ref
-    from nemik.health import STATUSES, health, thresholds
-
     limits = thresholds()
     repos = sorted({ref(n).partition(":")[0] for n in g.subjects(OSLC_CM.state, None)})
     out = ["# TYPE nemik_repo_health gauge"]
