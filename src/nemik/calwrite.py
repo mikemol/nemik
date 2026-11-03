@@ -133,6 +133,7 @@ def event_lines(
     title: str,
     dtstart: str,
     due: str,
+    *,
     alarms: Iterable[str] = (),
     rrule: str = "",
     exdates: Iterable[str] = (),
@@ -230,10 +231,10 @@ def events(g: Graph, repos: Iterable[str], label: str | None = None) -> list[lis
             str(g.value(n, DCTERMS.title) or symbol),
             dtstart,
             due,
-            (str(a) for a in g.objects(n, NEMIK.alarm)),
-            rrule,
-            gone,
-            str(g.value(n, NEMIK.location) or ""),
+            alarms=(str(a) for a in g.objects(n, NEMIK.alarm)),
+            rrule=rrule,
+            exdates=gone,
+            location=str(g.value(n, NEMIK.location) or ""),
         )
         found.append((repo, int(symbol.lstrip("W") or 0), lines))
     return [lines for _, _, lines in sorted(found)]

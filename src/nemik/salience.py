@@ -448,6 +448,7 @@ def salience_of(
     local: int,
     peer: int,
     peer_blocked: int,
+    *,
     operator: int = 0,
     toward: str = "",
 ) -> dict[str, Fraction]:
@@ -481,8 +482,8 @@ def edge_currents(
     local: int,
     peer: int,
     peer_blocked: int,
-    operator: int = 0,
     *,
+    operator: int = 0,
     workable: bool = True,
 ) -> dict[tuple[str, str], float]:
     """Give the demand across each dependency in `repo`'s solve, by (needing card, prerequisite).

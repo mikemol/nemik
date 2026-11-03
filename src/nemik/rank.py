@@ -559,8 +559,8 @@ def _rows(
             weights.local,
             weights.peer,
             weights.peer_blocked,
-            weights.operator,
-            toward,
+            operator=weights.operator,
+            toward=toward,
         )
         if flow
         else None

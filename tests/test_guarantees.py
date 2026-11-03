@@ -26,6 +26,7 @@ def _wp(
     g: Graph,
     sym: str,
     status: str = "ready",
+    *,
     pos: int | None = None,
     vector: str | None = None,
     touches: tuple[str, ...] = (),

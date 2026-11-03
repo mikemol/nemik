@@ -1170,7 +1170,7 @@ def _edge_widths(
             weights.local,
             weights.peer,
             weights.peer_blocked,
-            weights.operator,
+            operator=weights.operator,
         ).items():
             crossed[pair] += amount
     # nemik:W298: an operator ask is not workable, so the solve above never ends a path at it; the
@@ -1183,7 +1183,7 @@ def _edge_widths(
             weights.local,
             weights.peer,
             weights.peer_blocked,
-            weights.operator,
+            operator=weights.operator,
             workable=False,
         ).items():
             if pair[1] in asked:
