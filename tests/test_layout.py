@@ -208,9 +208,10 @@ def test_repo_toggles_and_salience_order(server: str, tmp_path: Path) -> None:
         page.click(f"#repos button[data-repo='{repos[0]}']")
         _settle(page)
         one = webpage.evaluate_int(page, "() => cy.nodes('[symbol]').length")
-        lit = page.evaluate(
+        lit = webpage.evaluate_int(
+            page,
             "() => [...document.querySelectorAll('#repos button')]"
-            ".filter(b => b.getAttribute('aria-pressed') === 'true').length"
+            ".filter(b => b.getAttribute('aria-pressed') === 'true').length",
         )
         page.click(f"#repos button[data-repo='{repos[0]}']")  # unlit again: everything
         _settle(page)
@@ -240,8 +241,10 @@ def test_repo_toggles_and_salience_order(server: str, tmp_path: Path) -> None:
             )
             == PATHKEY_SPANS
         )
-        ringed = page.evaluate("() => cy.nodes('[nrings > 0]')[0].id()")
-        page.evaluate(f"() => cy.getElementById('{ringed}').emit('tap')")
+        ringed = webpage.as_str(
+            webpage.evaluate_value(page, "() => cy.nodes('[nrings > 0]')[0].id()")
+        )
+        webpage.evaluate_value(page, f"() => cy.getElementById('{ringed}').emit('tap')")
         _settle(page)
         assert (
             webpage.evaluate_int(
@@ -331,12 +334,16 @@ def test_rolling_up_umbrellas_hides_their_work_and_a_double_click_expands_one(
         page.check("#rollup")
         _settle(page)
         rolled = webpage.evaluate_int(page, "() => cy.nodes('[symbol]').length")
-        umbrella = page.evaluate(
+        umbrella = webpage.evaluate_value(
+            page,
             "() => { const u = cy.nodes('[rollup > 0]')[0];"
-            " return u ? [u.id(), u.data('rollup')] : null; }"
+            " return u ? [u.id(), u.data('rollup')] : null; }",
         )
         assert umbrella is not None
-        page.evaluate(f"() => cy.getElementById('{umbrella[0]}').emit('dbltap')")
+        umbrella_id = webpage.as_str(webpage.as_list(umbrella)[0])
+        webpage.evaluate_value(
+            page, f"() => cy.getElementById('{umbrella_id}').emit('dbltap')"
+        )
         _settle(page)
         opened = webpage.evaluate_int(page, "() => cy.nodes('[symbol]').length")
         browser.close()
