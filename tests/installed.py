@@ -30,9 +30,14 @@ def script(name: str) -> list[str]:
     Returns:
         The script's path, as a one-item argv list.
 
+    Raises:
+        FileNotFoundError: When the script is not installed.
+
     """
     path = _bin()[0] / name
-    assert path.exists(), f"{name} is not installed in {path.parent}"
+    if not path.exists():
+        message = f"{name} is not installed in {path.parent}"
+        raise FileNotFoundError(message)
     return [str(path)]
 
 

@@ -6,8 +6,7 @@
   "RUF067": 2
  },
  "src/nemik/adapter.py": {
-  "PLC0415": 1,
-  "RUF001": 1
+  "PLC0415": 1
  },
  "src/nemik/alarm.py": {
   "PLR0913": 1
@@ -94,7 +93,6 @@
   "S603": 1
  },
  "tests/installed.py": {
-  "S101": 1,
   "S404": 1,
   "S603": 2
  },
