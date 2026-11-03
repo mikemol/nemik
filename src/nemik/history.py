@@ -23,7 +23,7 @@ from dataclasses import asdict, dataclass, field
 from datetime import UTC, datetime
 from itertools import starmap
 from pathlib import Path
-from typing import TypedDict
+from typing import TypedDict, cast
 
 from rdflib import RDF
 from rdflib.namespace import PROV
@@ -253,6 +253,17 @@ QueueDoc = dict[str, list[Waypoint]]
 _SLIM: dict[str, QueueDoc] = {}
 
 
+def _queue_doc(raw: str | bytes) -> QueueDoc:
+    """Parse one committed queue's JSON as the QueueDoc its callers read it as.
+
+    Returns:
+        The parsed document; its shape is the writer's, checked by nobody here.
+
+    """
+    value: object = json.loads(raw)
+    return cast("QueueDoc", value)
+
+
 def _slim_path(oid: str) -> Path:
     # slim2: the slim queue grew fields (W752), so a file of the older shape must not be read
     return user_dir() / "slim2" / f"{oid}.z"
@@ -262,7 +273,7 @@ def _slim_known(oid: str) -> bool:
     if oid in _SLIM:
         return True
     try:
-        _SLIM[oid] = json.loads(zlib.decompress(_slim_path(oid).read_bytes()))
+        _SLIM[oid] = _queue_doc(zlib.decompress(_slim_path(oid).read_bytes()))
     except OSError:
         return False
     except zlib.error:
@@ -591,7 +602,7 @@ def queue_at(repo: Path, rev: str | None, known: str = "") -> QueueDoc:
     if rev is None:
         return {}
     text = known or _git(repo, "show", f"{rev}:{QUEUE_PATH}")
-    return json.loads(text) if text else {}
+    return _queue_doc(text) if text else {}
 
 
 def staged_paths(repo: Path) -> list[str]:
@@ -793,7 +804,7 @@ def commit_snapshots(
         oids = _blob_ids(repo, shas)
         need = sorted({oid for oid in oids if oid and not _slim_known(oid)})
         for oid, text in zip(need, _read_blobs(repo, need), strict=True):
-            _slim_keep(oid, slim(json.loads(text) if text else {}))
+            _slim_keep(oid, slim(_queue_doc(text) if text else {}))
         queues = [_SLIM.get(oid, {}) for oid in oids]
     return [
         (sha, datetime.fromisoformat(stamp), queue)
