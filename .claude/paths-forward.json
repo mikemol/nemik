@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1538,
+  "counter": 1539,
   "waypoints": [
     {
       "symbol": "W1",
@@ -36740,11 +36740,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "tests/test_layout.py holds 262 of the repo's 578 mypy findings, nearly all Expression has type Any from page.evaluate(...). Step 1: count the evaluate sites by result kind (int for .length, bool, list of str, dict) with a read-only scratch probe; step 2: add typed helpers to tests/webpage.py (evaluate_int, evaluate_bool, evaluate_strs, ...) taking the page and the JS and returning the narrowed type via an object-annotated result; step 3: a codemod moves one kind per stack. Atomize by kind (one stack per helper) because the file is 1700 lines. Pairs with ruff-flat; MYPY stack, shares mypy-baseline.json.",
-      "evidence": "2026-11-03T08:30:38Z: 2026-11-03T08:30:38Z (read by stampnote): G0 precommit, before the edit. Pace read first this tick: 2026-11-03T08:25:14Z (mypy 579 left owes 190, 94 landings to zero; ruff 268 left owes 90; codon owes 2). N: tests/test_layout.py holds 262 mypy findings, from 100 page.evaluate calls that answer Any; this slice is the count kind, the evaluate whose JS ends in .length. Actuator: codemod w1535_int.py adds webpage.evaluate_int (evaluate_value narrowed by isinstance int, TypeError otherwise) and rewrites the matching test_layout sites to webpage.evaluate_int(page, ...). K: none, tests are not in the Codon census. Sensor: mikemol-pycheck --ratchet, house mypy on test_layout.py, then test_layout run directly. Expected reading: mypy 578 falls by roughly 25 (a site per .length call and its uses), ruff flat. MYPY stack, shares mypy-baseline.json with stack 903 (queued), so it waits for 903's landing. | 2026-11-03T08:36:45Z: Slice 1 staged, not submitted: stack904.json (webpage.evaluate_int + 23 .length sites; mypy 578 to 542; test_layout 40 passed 2 skipped in 256.47 s wall). I still need to read test_layout's bazel timeout (it ran 256 s, the over-50-percent shard rule) and to compare the 2 skips with the parent tree. Submit after stack 903 lands; write the baseline then. | 2026-11-03T08:42:04Z: R178 finding 2 read: tests/test_layout.py is a bazel size=large target in 8 shards (BUILD.bazel lines 17 and 36); the card's own comments record about 124 s a shard and a 900 s timeout, and my 256.47 s was the whole file on the host in one process, so a shard sits well under half of 900 s. The 2 skips are the file's two conditional skips: chromium unavailable (line 70) and pinned rego or opa unavailable, run under bazel (line 725); I did not run the parent tree to compare their count, so which of the two skipped on this host is not read. | 2026-11-03T09:06:17Z: Submit-order trap, written before it bites: stack 906 (W1537) clears 3 mypy findings in tests/test_wake_alarms.py (tree 542 to 539) but writes ruff-baseline.json only, and it submits AFTER 904 (904 queues behind 905 at 903's landing, about 09:16Z; 906 waits for 905, about 09:41Z). The gate measures 904 on a tip without 906, i.e. 542, so 904's mypy-baseline.json must read 542, not the tree's 539: after pycheck --write, raise the tests/test_wake_alarms.py entry in mypy-baseline.json back by 3 (its pre-906 value) before submitting 904, and let 906's successor mypy stack lower it again. | 2026-11-03T09:30:41Z: 2026-11-03T09:30:40Z (read by stampnote): G0 precommit, slice 2, before the edit. Pace read first this tick: 2026-11-03T09:25:15Z (mypy 578 left owes 190, 149 landings to zero; ruff 265 left owes 90, 148 to zero; codon owes 2). N: after slice 1 (stack 904, queued) test_layout holds about 226 mypy findings; this slice is the bool kind (JS ending .hidden or .open, the typeof test, and the hidden constant: 9 sites) and the list-of-ids kind (.map(n => n.id()) and the repos button map: 5 sites). K: sites verified by reading the JS in the file, 14 of them; any that does not match the regex stays. Actuator: codemod w1535_kinds.py adds webpage.evaluate_bool and webpage.evaluate_strs (evaluate_value narrowed by isinstance) and rewrites those sites. Sensor: mikemol-pycheck --ratchet, house mypy on test_layout.py, test_layout run directly. Expected reading: mypy 542 falls by 14 to 40 (range, a site per call and the uses it types), ruff flat at 245 in the tree. MYPY stack, shares mypy-baseline.json with stack 904 (queued), so it waits for 904's landing. | 2026-11-03T09:39:02Z: Slice 2 staged, not submitted: stack907.json (evaluate_bool and evaluate_strs, 14 sites, mypy 542 to 516; test_layout 40 passed 2 skipped in 361.84 s wall with a gate running). Submit after stack 904 lands and after 906 is submitted; write the baseline with pycheck --ratchet --write then (the tree reads 516). | 2026-11-03T09:41:17Z: R180 applied: the 26-finding fall in the tree splits 23 in tests/test_layout.py (226 to 203; the 14 sites plus 9 consequential uses) and 3 in tests/test_wake_alarms.py (4 to 1, stack 906's, W1537); webpage.py stays 0. Slice 3's G0 will state its expected number as K, tight, not a range: K is the count of sites matched, and the consequential uses are named in the G0 once the sites are read. Stack 907's body now says its own fall is 23.",
+      "evidence": "2026-11-03T08:30:38Z: 2026-11-03T08:30:38Z (read by stampnote): G0 precommit, before the edit. Pace read first this tick: 2026-11-03T08:25:14Z (mypy 579 left owes 190, 94 landings to zero; ruff 268 left owes 90; codon owes 2). N: tests/test_layout.py holds 262 mypy findings, from 100 page.evaluate calls that answer Any; this slice is the count kind, the evaluate whose JS ends in .length. Actuator: codemod w1535_int.py adds webpage.evaluate_int (evaluate_value narrowed by isinstance int, TypeError otherwise) and rewrites the matching test_layout sites to webpage.evaluate_int(page, ...). K: none, tests are not in the Codon census. Sensor: mikemol-pycheck --ratchet, house mypy on test_layout.py, then test_layout run directly. Expected reading: mypy 578 falls by roughly 25 (a site per .length call and its uses), ruff flat. MYPY stack, shares mypy-baseline.json with stack 903 (queued), so it waits for 903's landing. | 2026-11-03T08:36:45Z: Slice 1 staged, not submitted: stack904.json (webpage.evaluate_int + 23 .length sites; mypy 578 to 542; test_layout 40 passed 2 skipped in 256.47 s wall). I still need to read test_layout's bazel timeout (it ran 256 s, the over-50-percent shard rule) and to compare the 2 skips with the parent tree. Submit after stack 903 lands; write the baseline then. | 2026-11-03T08:42:04Z: R178 finding 2 read: tests/test_layout.py is a bazel size=large target in 8 shards (BUILD.bazel lines 17 and 36); the card's own comments record about 124 s a shard and a 900 s timeout, and my 256.47 s was the whole file on the host in one process, so a shard sits well under half of 900 s. The 2 skips are the file's two conditional skips: chromium unavailable (line 70) and pinned rego or opa unavailable, run under bazel (line 725); I did not run the parent tree to compare their count, so which of the two skipped on this host is not read. | 2026-11-03T09:06:17Z: Submit-order trap, written before it bites: stack 906 (W1537) clears 3 mypy findings in tests/test_wake_alarms.py (tree 542 to 539) but writes ruff-baseline.json only, and it submits AFTER 904 (904 queues behind 905 at 903's landing, about 09:16Z; 906 waits for 905, about 09:41Z). The gate measures 904 on a tip without 906, i.e. 542, so 904's mypy-baseline.json must read 542, not the tree's 539: after pycheck --write, raise the tests/test_wake_alarms.py entry in mypy-baseline.json back by 3 (its pre-906 value) before submitting 904, and let 906's successor mypy stack lower it again. | 2026-11-03T09:30:41Z: 2026-11-03T09:30:40Z (read by stampnote): G0 precommit, slice 2, before the edit. Pace read first this tick: 2026-11-03T09:25:15Z (mypy 578 left owes 190, 149 landings to zero; ruff 265 left owes 90, 148 to zero; codon owes 2). N: after slice 1 (stack 904, queued) test_layout holds about 226 mypy findings; this slice is the bool kind (JS ending .hidden or .open, the typeof test, and the hidden constant: 9 sites) and the list-of-ids kind (.map(n => n.id()) and the repos button map: 5 sites). K: sites verified by reading the JS in the file, 14 of them; any that does not match the regex stays. Actuator: codemod w1535_kinds.py adds webpage.evaluate_bool and webpage.evaluate_strs (evaluate_value narrowed by isinstance) and rewrites those sites. Sensor: mikemol-pycheck --ratchet, house mypy on test_layout.py, test_layout run directly. Expected reading: mypy 542 falls by 14 to 40 (range, a site per call and the uses it types), ruff flat at 245 in the tree. MYPY stack, shares mypy-baseline.json with stack 904 (queued), so it waits for 904's landing. | 2026-11-03T09:39:02Z: Slice 2 staged, not submitted: stack907.json (evaluate_bool and evaluate_strs, 14 sites, mypy 542 to 516; test_layout 40 passed 2 skipped in 361.84 s wall with a gate running). Submit after stack 904 lands and after 906 is submitted; write the baseline with pycheck --ratchet --write then (the tree reads 516). | 2026-11-03T09:41:17Z: R180 applied: the 26-finding fall in the tree splits 23 in tests/test_layout.py (226 to 203; the 14 sites plus 9 consequential uses) and 3 in tests/test_wake_alarms.py (4 to 1, stack 906's, W1537); webpage.py stays 0. Slice 3's G0 will state its expected number as K, tight, not a range: K is the count of sites matched, and the consequential uses are named in the G0 once the sites are read. Stack 907's body now says its own fall is 23. | 2026-11-03T10:13:08Z: Slice 1 landed 241bdd47 at 10:11:09Z (reflog, UTC): webpage.evaluate_int and 23 .length sites, mypy 578 to 542. Slice 2 (stack 907) submitted next; W1535 stays working for it.",
       "issued_at": "2026-11-03T08:08:48Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W1490",
-      "last_worked": "2026-11-03T09:41:17Z",
+      "last_worked": "2026-11-03T10:13:08Z",
       "ticks_blocked": 0,
       "manifest": [
         "tests/test_layout.py",
@@ -36826,6 +36826,25 @@
         "tests/test_realize.py",
         "ruff-baseline.json"
       ],
+      "size_class": "small"
+    },
+    {
+      "symbol": "W1539",
+      "title": "Residue of W1536: the witnesses timer closing a card unaided, and a non-home witness path, both unobserved",
+      "status": "ready",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [
+        "luthen-observability"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Two observations owned here, due 2026-11-05: (1) a card closed by the 5-minute luthen-nemik-witnesses timer itself with a home-path witness (read its closing evidence line from luthen's own queue with --show; the timer ran at 9ef3d5fe from 09:44Z); (2) a witness on a path outside the home directories closing by --apply with its path unchanged in the evidence (luthen's textfile witness under /var/lib/luthen/textfile is the existing example). Record each reading here from the system of record, then close; if neither card appears by the due date, say so and re-date or drop with a reason.",
+      "evidence": "2026-11-03T10:12:41Z: R181 finding 1: W1536 was closed with two named untested cases; this card owns them, with the due date and the witness (the closing evidence line of a luthen card).",
+      "issued_at": "2026-11-03T10:11:49Z",
+      "minted_during": "interrupt",
+      "caused_by": "nemik:W1536",
+      "last_worked": "2026-11-03T10:12:41Z",
+      "ticks_blocked": 0,
       "size_class": "small"
     }
   ],
@@ -45526,7 +45545,22 @@
         }
       ],
       "id": "nemik:R178"
+    },
+    {
+      "card": "W1536",
+      "trigger": "round 181: stack 905 (W1536) 9ef3d5fe landed 09:44:17Z; stack 904 (W1535 slice 1, mypy 578 to 542) inflight since 09:44:22Z; stack 906 (W1537, ruff 261 to 245) queued; stacks 907 (W1535 slice 2) and 908 (W1538 three test subprocess probes, ruff 245 to 239) staged",
+      "root": "Verified from the reflog (unix stamp 1793699057 = 09:44:17Z, 1585 s after af0e2c56 at 09:17:52Z): 905 gated 09:17:56Z to 09:44:17Z (26 min 21 s) and 904 began 09:44:22Z (began_ns 1793699062), 5 s after, so the gate was not empty and 906 is queued behind 904. R180 is met: the 26 split by file (test_layout 23, test_wake_alarms 3, webpage 0) is on W1535 and in 907's body, and W1538's expected number was tight to K (exactly 6) and matched. R179 finding 2 is met in the strong form: in the same tick as 905's landing the sha went to luthen-observability, and W1536 closed on a read-back of luthen's card W1936 from their own queue (done, evidence with the redacted home path), not on a send. The G1 names what the test did not cover: the 5-minute timer itself closing a card, and a path outside the home directories. I did not re-run any figure. One finding, the residue of that closure. No fixpoint is declared. Carried open findings as in R180, minus R180's and R179's (met).",
+      "findings": [
+        {
+          "finding": "W1536 was closed with two named, untested cases: the luthen timer (every five minutes) closing a card on its own, and a file witness whose path is outside the home directories (the redact_home branch not taken). A residue named in a G1 and attached to nothing is lost at the next tick. Keep it as residue, not deletion: mint one small card, W1536's residue, that owns both cases with their witnesses (luthen's next timer run closes a real card with a home-path witness, read back from their queue after the run; a witness with a path under /var or /srv, run through redact_home and shown unchanged), and a due date. If luthen says the timer path is theirs to see, wait on a luthen card instead and cite it; do not leave the claim 'W1536 done' standing without the residue linked.",
+          "finding_card": "W1536",
+          "finding_owner": "nemik session",
+          "finding_witness": "A residue card (or luthen-observability card) citing W1536 with the two cases, the tests or the read-back for each, and a due date; and W1536's evidence line linking it.",
+          "due": "2026-11-05"
+        }
+      ],
+      "id": "nemik:R179"
     }
   ],
-  "retro_counter": 178
+  "retro_counter": 179
 }

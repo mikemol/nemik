@@ -201,8 +201,9 @@ def test_repo_toggles_and_salience_order(server: str, tmp_path: Path) -> None:
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
         )
         everything = webpage.evaluate_int(page, "() => cy.nodes('[symbol]').length")
-        repos = page.evaluate(
-            "() => [...document.querySelectorAll('#repos button')].map(b => b.dataset.repo)"
+        repos = webpage.evaluate_strs(
+            page,
+            "() => [...document.querySelectorAll('#repos button')].map(b => b.dataset.repo)",
         )
         page.click(f"#repos button[data-repo='{repos[0]}']")
         _settle(page)
@@ -367,7 +368,7 @@ def test_scope_rings_carry_distinct_ruler_motifs_pinned_to_paperkits(
         motifs = page.evaluate("() => [0, 1, 2, 3].map(rulerMotif)")
         lengths = page.evaluate("() => data.ruler.f.map(p => p.length)")
         dashes = page.evaluate("() => SCOPES.map(scopeDash)")
-        generates = page.evaluate("() => typeof emitF !== 'undefined'")
+        generates = webpage.evaluate_bool(page, "() => typeof emitF !== 'undefined'")
         legend = page.evaluate(
             "() => [...document.querySelectorAll('#pathkey line')]"
             ".map(l => l.getAttribute('stroke-dasharray'))"
@@ -502,7 +503,9 @@ def test_side_panel_sections_fold_and_the_choice_survives_a_reload(server: str) 
         )
         page.reload()
         webpage.until(page, SECTIONS_DRAWN)
-        kept = page.evaluate("() => document.getElementById('sec-goals').open")
+        kept = webpage.evaluate_bool(
+            page, "() => document.getElementById('sec-goals').open"
+        )
         browser.close()
     assert first["sec-weather"] is False and first["sec-findings"] is False
     assert first["sec-legend"] is True and first["sec-goals"] is True
@@ -853,7 +856,9 @@ def test_the_card_list_selects_and_expands_from_the_keyboard(server: str) -> Non
         first.focus()
         page.keyboard.press("Enter")
         _settle(page)
-        selected = page.evaluate("() => cy.nodes(':selected').map(n => n.id())")
+        selected = webpage.evaluate_strs(
+            page, "() => cy.nodes(':selected').map(n => n.id())"
+        )
         current = first.get_attribute("aria-current")
         focused = page.evaluate("() => document.activeElement.dataset.card")
         detail = page.inner_text("#detail")
@@ -903,7 +908,9 @@ def test_a_cite_link_in_the_panel_selects_its_card_and_announces_it(
         )
         page.click("#detail a[data-cite]")
         _settle(page)
-        selected = page.evaluate("() => cy.nodes(':selected').map(n => n.id())")
+        selected = webpage.evaluate_strs(
+            page, "() => cy.nodes(':selected').map(n => n.id())"
+        )
         said = page.inner_text("#announce")
         live = page.get_attribute("#announce", "aria-live")
         detail = page.inner_text("#detail")
@@ -969,11 +976,17 @@ def test_a_focused_list_row_rings_its_card_and_opens_the_popover(server: str) ->
         page.keyboard.press("ArrowDown")
         _settle(page)
         card = page.evaluate("() => document.activeElement.dataset.card")
-        ringed = page.evaluate("() => cy.nodes('.listfocus').map(n => n.id())")
-        shown = not page.evaluate("() => document.getElementById('pop').hidden")
+        ringed = webpage.evaluate_strs(
+            page, "() => cy.nodes('.listfocus').map(n => n.id())"
+        )
+        shown = not webpage.evaluate_bool(
+            page, "() => document.getElementById('pop').hidden"
+        )
         text = page.inner_text("#pop")
         page.keyboard.press("Escape")
-        closed = page.evaluate("() => document.getElementById('pop').hidden")
+        closed = webpage.evaluate_bool(
+            page, "() => document.getElementById('pop').hidden"
+        )
         page.locator("#bySalience").focus()
         _settle(page)
         cleared = webpage.evaluate_int(page, "() => cy.nodes('.listfocus').length")
@@ -1040,7 +1053,9 @@ def test_the_card_list_is_one_tab_stop_walked_by_arrows(server: str) -> None:
         page.keyboard.press("ArrowDown")
         page.keyboard.press("Enter")
         _settle(page)
-        selected = page.evaluate("() => cy.nodes(':selected').map(n => n.id())")
+        selected = webpage.evaluate_strs(
+            page, "() => cy.nodes(':selected').map(n => n.id())"
+        )
         page.keyboard.press("Tab")
         outside = page.evaluate(
             "() => !document.getElementById('cardlist').contains(document.activeElement)"
@@ -1126,22 +1141,22 @@ def test_the_card_popover_follows_the_hovercard_rules(server: str) -> None:
         hidden = "() => document.getElementById('pop').hidden"
         page.mouse.move(card["x"], card["y"])
         page.clock.run_for(150)
-        early = page.evaluate(hidden)
+        early = webpage.evaluate_bool(page, hidden)
         page.clock.run_for(600)
-        shown = not page.evaluate(hidden)
+        shown = not webpage.evaluate_bool(page, hidden)
         text = page.inner_text("#pop")
         box = page.locator("#pop").bounding_box()
         assert box is not None
         page.mouse.move(box["x"] + 10, box["y"] + 10)
         page.clock.run_for(500)
-        kept = not page.evaluate(hidden)
+        kept = not webpage.evaluate_bool(page, hidden)
         page.keyboard.press("Escape")
-        dismissed = page.evaluate(hidden)
+        dismissed = webpage.evaluate_bool(page, hidden)
         page.mouse.move(card["x"], card["y"])
         page.clock.run_for(700)
         page.mouse.move(5, 5)
         page.clock.run_for(500)
-        left = page.evaluate(hidden)
+        left = webpage.evaluate_bool(page, hidden)
         browser.close()
     assert early, "the popover opened before its delay"
     assert shown and card["cite"] in text

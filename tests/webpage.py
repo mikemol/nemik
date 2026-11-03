@@ -40,7 +40,9 @@ __all__ = [
     "FLEET",
     "PageBrokenError",
     "Waitable",
+    "evaluate_bool",
     "evaluate_int",
+    "evaluate_strs",
     "evaluate_value",
     "evaluated",
     "first_error",
@@ -454,6 +456,40 @@ def evaluate_int(page: Evaluator, expression: str, arg: object = None) -> int:
         message = f"{expression[:60]!r} gave no whole number, only {value!r}"
         raise TypeError(message)
     return value
+
+
+def evaluate_bool(page: Evaluator, expression: str, arg: object = None) -> bool:
+    """Run a JS expression that gives a flag and return it as a bool.
+
+    Returns:
+        The expression's value, which must be a boolean.
+
+    Raises:
+        TypeError: When the expression gave anything but a boolean.
+
+    """
+    value = evaluate_value(page, expression, arg)
+    if not isinstance(value, bool):
+        message = f"{expression[:60]!r} gave no boolean, only {value!r}"
+        raise TypeError(message)
+    return value
+
+
+def evaluate_strs(page: Evaluator, expression: str, arg: object = None) -> list[str]:
+    """Run a JS expression that gives a list of strings and return it.
+
+    Returns:
+        The expression's value, which must be a list holding only strings.
+
+    Raises:
+        TypeError: When the expression gave anything but a list of strings.
+
+    """
+    value = evaluate_value(page, expression, arg)
+    if not isinstance(value, list) or not all(isinstance(v, str) for v in value):
+        message = f"{expression[:60]!r} gave no list of strings, only {value!r}"
+        raise TypeError(message)
+    return [str(v) for v in value]
 
 
 def evaluate_text(page: Evaluator, expression: str, arg: object = None) -> str:
