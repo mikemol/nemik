@@ -3,6 +3,7 @@
 """nemik.editable_install tells an editable install from a package install."""
 
 import json
+from collections.abc import Callable
 
 import pytest
 
@@ -10,12 +11,33 @@ import nemik
 
 
 class _Dist:
-    def __init__(self, text: str) -> None:
+    def __init__(self, text: str | None) -> None:
         self.text = text
 
-    def read_text(self, name: str) -> str:
+    def read_text(self, name: str) -> str | None:
         assert name == "direct_url.json"
         return self.text
+
+
+def _dist_of(text: str | None) -> Callable[[str], _Dist]:
+    """Stand in for importlib.metadata.distribution.
+
+    Returns:
+        A function that gives, for any name, a dist holding `text`.
+
+    """
+    return lambda _name: _Dist(text)
+
+
+def _payload(dir_info: dict[str, object]) -> str:
+    """Write a direct_url.json for a file install.
+
+    Returns:
+        The JSON text, whose dir_info is `dir_info`.
+
+    """
+    body: dict[str, object] = {"url": "file:///x", "dir_info": dir_info}
+    return json.dumps(body)
 
 
 def test_editable_install_is_detected_and_a_package_install_is_not(
@@ -23,9 +45,9 @@ def test_editable_install_is_detected_and_a_package_install_is_not(
 ) -> None:
     """Editable install is detected and a package install is not."""
     for text, want in (
-        (json.dumps({"url": "file:///x", "dir_info": {"editable": True}}), True),
-        (json.dumps({"url": "file:///x", "dir_info": {}}), False),
+        (_payload({"editable": True}), True),
+        (_payload({}), False),
         (None, False),
     ):
-        monkeypatch.setattr(nemik, "distribution", lambda _n, t=text: _Dist(t))
+        monkeypatch.setattr(nemik, "distribution", _dist_of(text))
         assert nemik.editable_install() is want

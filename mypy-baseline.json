@@ -78,9 +78,6 @@
  "tests/test_deploy_manifest.py": {
   "misc": 2
  },
- "tests/test_editable.py": {
-  "misc": 5
- },
  "tests/test_flow_cache.py": {
   "attr-defined": 1
  },
