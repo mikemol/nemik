@@ -4433,3 +4433,7 @@
 2026-11-03T21:38:03Z  interrupt W1568 minted    -         "Successor table: the next stack rows per lane (ruff, mypy, codon), each probed or not with its measured K, kept on this card and updated at each landing"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1490
 2026-11-03T21:41:03Z  interrupt W1569 minted    -         "tests/test_manifest.py reads the served document as JSON objects through typed readers: eighteen mypy findings clear (the successor table's first mypy row)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1568
 2026-11-03T21:41:19Z  status W1569 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-03T21:46:18Z  status W1567 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-03T21:57:25Z  status W1569 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-03T22:01:00Z  interrupt W1570 minted    -         "tests/test_witness_promql.py types its fake probe with object, not Any: thirteen mypy findings clear (the successor table's next mypy row)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1568
+2026-11-03T22:01:10Z  status W1570 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

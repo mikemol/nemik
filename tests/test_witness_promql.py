@@ -13,7 +13,6 @@ undefined when the probe cannot answer: unknown is never false.
 
 import json
 from pathlib import Path
-from typing import Any
 
 import pytest
 
@@ -33,7 +32,7 @@ EXECUTOR_LOAD = (
 
 
 def _answer(
-    monkeypatch: pytest.MonkeyPatch, result: list[Any] | None
+    monkeypatch: pytest.MonkeyPatch, result: list[object] | None
 ) -> list[dict[str, str]]:
     """Make the VictoriaMetrics probe answer `result` (None: unreachable) and return the queries.
 
@@ -43,7 +42,7 @@ def _answer(
     """
     asked: list[dict[str, str]] = []
 
-    def get(_env: str, _path: str, params: dict[str, str]) -> dict[str, Any] | None:
+    def get(_env: str, _path: str, params: dict[str, str]) -> dict[str, object] | None:
         asked.append(params)
         if result is None:
             return None

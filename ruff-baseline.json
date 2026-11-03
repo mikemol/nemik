@@ -125,9 +125,6 @@
  "tests/test_layout.py": {
   "S310": 1
  },
- "tests/test_manifest.py": {
-  "ANN202": 1
- },
  "tests/test_memo_audits.py": {
   "PLC2701": 1
  },

@@ -118,10 +118,6 @@
  "tests/test_web_render.py": {
   "misc": 1
  },
- "tests/test_witness_promql.py": {
-  "explicit-any": 2,
-  "misc": 11
- },
  "tools/check_run_rows.py": {
   "misc": 4
  },
