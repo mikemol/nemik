@@ -6,11 +6,11 @@ from __future__ import annotations
 
 import os
 import shutil
-import subprocess
 from pathlib import Path
 
 import pytest
 from installed import script
+from mikemol.procrun.proc import capture
 
 from nemik.metrics import realizability_lines
 
@@ -24,12 +24,7 @@ def _fleet(tmp_path: Path) -> Path:
     state = repo / ".claude" / "paths-forward.json"
     pf = [*script("mikemol-paths-forward"), "--state", str(state)]
     for args in (["--init"], ["--add", "Write the thing", "--next", "write it"]):
-        assert (
-            subprocess.run(
-                [*pf, *args], capture_output=True, text=True, check=False
-            ).returncode
-            == 0
-        )
+        assert capture([*pf, *args]).returncode == 0
     return tmp_path
 
 

@@ -8,11 +8,11 @@ goes stale.
 
 from __future__ import annotations
 
-import subprocess
 import sys
 from pathlib import Path
 
 import pytest
+from mikemol.procrun.proc import capture
 
 pytest.importorskip("paperkit")
 
@@ -21,10 +21,5 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def test_architecture_projection_gates_clean() -> None:
     """Architecture projection gates clean."""
-    r = subprocess.run(
-        [sys.executable, "-m", "paperkit.gate", str(ROOT)],
-        capture_output=True,
-        text=True,
-        check=False,
-    )
+    r = capture([sys.executable, "-m", "paperkit.gate", str(ROOT)])
     assert r.returncode == 0, r.stdout + r.stderr

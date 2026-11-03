@@ -37014,17 +37014,17 @@
     {
       "symbol": "W1547",
       "title": "Three more test files run their command through procrun.capture so S404 and S603 clear",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Codemod w1547_tests.py: capture(pf + args) in test_host_citations, capture([...], env=..., cwd=tmp_path) in test_precommit_gate, capture([sys.executable, '-I', '-c', probe]) in test_staticserve, the subprocess imports swapped; run the three directly; ratchet. RUFF stack, shares nothing with stack 915 (mypy), queues now.",
-      "evidence": "2026-11-03T12:16:03Z: 2026-11-03T12:16:03Z (read by stampnote): G0 precommit, before the edit (card and manifest first). Pace read 2026-11-03T12:05:21Z, the newest the producer has written (12 minutes old at this G0 because its :15 run has not appeared; named under the 10-minute rule, there being no newer stamp to take): ruff 224 left owes 90 (55 landings to zero), mypy 506 left owes 190 (71 to zero), codon owes 2; the ruff count is before 913's fall to 215. N: three test files each hold one subprocess.run (S404 on the import, S603 on the call): test_host_citations.py line 45 (pf + args, capture_output, text, check=False), test_precommit_gate.py line 93 (the hook under /bin/sh with env= and cwd=, check=False) and test_staticserve.py line 159 (sys.executable -I -c probe, check=False, output not captured). K = 3 sites, 6 findings (S404 x3, S603 x3), all verified by reading the lines; none uses check=True, so no assert is added (each test already asserts returncode). Actuator: codemod w1547_tests.py. Companion: capture also captures the probe's output in test_staticserve (it did not before), which changes nothing the test reads. Sensor: mikemol-pycheck --ratchet and the three files run directly. Expected reading: ruff 215 falls by exactly 6 to 209, mypy flat at 503 in the tree. K: tests outside the Codon census. RUFF stack, shares no file with stack 915 (mypy, inflight).",
+      "next_bounded_step": null,
+      "evidence": "2026-11-03T12:16:03Z: 2026-11-03T12:16:03Z (read by stampnote): G0 precommit, before the edit (card and manifest first). Pace read 2026-11-03T12:05:21Z, the newest the producer has written (12 minutes old at this G0 because its :15 run has not appeared; named under the 10-minute rule, there being no newer stamp to take): ruff 224 left owes 90 (55 landings to zero), mypy 506 left owes 190 (71 to zero), codon owes 2; the ruff count is before 913's fall to 215. N: three test files each hold one subprocess.run (S404 on the import, S603 on the call): test_host_citations.py line 45 (pf + args, capture_output, text, check=False), test_precommit_gate.py line 93 (the hook under /bin/sh with env= and cwd=, check=False) and test_staticserve.py line 159 (sys.executable -I -c probe, check=False, output not captured). K = 3 sites, 6 findings (S404 x3, S603 x3), all verified by reading the lines; none uses check=True, so no assert is added (each test already asserts returncode). Actuator: codemod w1547_tests.py. Companion: capture also captures the probe's output in test_staticserve (it did not before), which changes nothing the test reads. Sensor: mikemol-pycheck --ratchet and the three files run directly. Expected reading: ruff 215 falls by exactly 6 to 209, mypy flat at 503 in the tree. K: tests outside the Codon census. RUFF stack, shares no file with stack 915 (mypy, inflight). | 2026-11-03T12:43:22Z: Landed afa8256f at 12:39:27Z (reflog, UTC; gated from began_ns 12:26:42Z, 12 min 45 s): test_host_citations, test_precommit_gate, test_staticserve through procrun.capture, ruff 215 to 209. tools/working_unnamed.py flagged W1547 at the landing; cleared.",
       "issued_at": "2026-11-03T12:15:44Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W1175",
-      "last_worked": "2026-11-03T12:17:40Z",
+      "last_worked": "2026-11-03T12:43:22Z",
       "ticks_blocked": 0,
       "manifest": [
         "tests/test_host_citations.py",
@@ -37033,12 +37033,12 @@
         "ruff-baseline.json"
       ],
       "size_class": "small",
-      "completed": null
+      "completed": "20261103T124322Z"
     },
     {
       "symbol": "W1548",
       "title": "Three more test files run their command through procrun.capture so S404 and S603 clear (architecture, check and metrics realizability)",
-      "status": "ready",
+      "status": "working",
       "enables": [],
       "touches": [],
       "blocked_on": [],
@@ -37048,7 +37048,7 @@
       "issued_at": "2026-11-03T12:30:41Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W1175",
-      "last_worked": "2026-11-03T12:31:51Z",
+      "last_worked": "2026-11-03T12:43:24Z",
       "ticks_blocked": 0,
       "manifest": [
         "tests/test_architecture.py",
@@ -37056,7 +37056,8 @@
         "tests/test_metrics_realizability.py",
         "ruff-baseline.json"
       ],
-      "size_class": "small"
+      "size_class": "small",
+      "completed": null
     },
     {
       "symbol": "W1549",

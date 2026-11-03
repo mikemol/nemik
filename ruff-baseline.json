@@ -118,10 +118,6 @@
   "S404": 1,
   "S603": 1
  },
- "tests/test_architecture.py": {
-  "S404": 1,
-  "S603": 1
- },
  "tests/test_build_scope.py": {
   "PLC2701": 1
  },
@@ -132,10 +128,6 @@
  "tests/test_calendars.py": {
   "PLC2701": 1,
   "SLF001": 3
- },
- "tests/test_check_realizability.py": {
-  "S404": 1,
-  "S603": 2
  },
  "tests/test_deterministic.py": {
   "S404": 1,
@@ -186,10 +178,6 @@
  },
  "tests/test_memo_audits.py": {
   "PLC2701": 1
- },
- "tests/test_metrics_realizability.py": {
-  "S404": 1,
-  "S603": 1
  },
  "tests/test_mpxj.py": {
   "S404": 1,

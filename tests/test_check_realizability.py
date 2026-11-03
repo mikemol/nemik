@@ -6,11 +6,11 @@ from __future__ import annotations
 
 import os
 import shutil
-import subprocess
 from pathlib import Path
 
 import pytest
 from installed import script
+from mikemol.procrun.proc import Completed, capture
 
 OPA = os.environ.get("NEMIK_OPA", "opa")
 EXIT_UNJUDGED = 2
@@ -31,20 +31,13 @@ def _fleet(tmp_path: Path) -> Path:
         ["--add", "Write the thing", "--next", "write it"],
         ["--add", "Bare card"],
     ):
-        assert (
-            subprocess.run(
-                [*pf, *args], capture_output=True, text=True, check=False
-            ).returncode
-            == 0
-        )
+        assert capture([*pf, *args]).returncode == 0
     return tmp_path
 
 
-def _run(root: Path, opa: str) -> subprocess.CompletedProcess[str]:
+def _run(root: Path, opa: str) -> Completed:
     cmd = [*script("nemik-check"), "--realizability", "--root", str(root)]
-    return subprocess.run(
-        cmd, env=_env(opa), capture_output=True, text=True, check=False
-    )
+    return capture(cmd, env=_env(opa))
 
 
 def test_each_live_waypoint_gets_a_coordinate_and_its_residue(tmp_path: Path) -> None:
