@@ -130,8 +130,6 @@
   "SLF001": 2
  },
  "tests/test_ics_reader.py": {
-  "S404": 1,
-  "S603": 1,
   "SLF001": 1
  },
  "tests/test_inbound_orphans.py": {
@@ -141,9 +139,7 @@
   "PLC2701": 2
  },
  "tests/test_layout.py": {
-  "S310": 1,
-  "S404": 1,
-  "S603": 1
+  "S310": 1
  },
  "tests/test_letters.py": {
   "SLF001": 1
@@ -174,11 +170,6 @@
  },
  "tests/test_static_view.py": {
   "SLF001": 1
- },
- "tests/test_witnesses.py": {
-  "S404": 1,
-  "S603": 2,
-  "S607": 2
  },
  "tests/test_witwait.py": {
   "PLR6301": 1

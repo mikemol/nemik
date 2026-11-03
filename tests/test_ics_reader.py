@@ -2,10 +2,10 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W157: mtools' mikemol-ics is installed in nemik's venv and reads an exported calendar."""
 
-import subprocess
 from pathlib import Path
 
 import installed
+from mikemol.procrun.proc import capture
 
 ICS = (
     "BEGIN:VCALENDAR\r\n"
@@ -26,7 +26,7 @@ def test_mikemol_ics_reads_an_exported_calendar(tmp_path: Path) -> None:
     """Mikemol ics reads an exported calendar."""
     src = tmp_path / "cal.ics"
     src.write_text(ICS, newline="")
-    out = subprocess.run(
+    ran = capture(
         [
             *installed.script("mikemol-ics"),
             "--from",
@@ -36,10 +36,9 @@ def test_mikemol_ics_reads_an_exported_calendar(tmp_path: Path) -> None:
             "--json",
             str(src),
         ],
-        capture_output=True,
-        text=True,
         env=installed._bin()[1],
-        check=True,
-    ).stdout
+    )
+    assert ran.returncode == 0, ran.stderr
+    out = ran.stdout
     assert "dentist" in out, out[:400]
     assert "a@test" in out, out[:400]

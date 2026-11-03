@@ -15,7 +15,6 @@ import http.server
 import json
 import os
 import shutil
-import subprocess
 import threading
 import time
 import urllib.error
@@ -25,6 +24,7 @@ from typing import TYPE_CHECKING, Literal, Protocol
 
 import pytest
 import webpage
+from mikemol.procrun.proc import capture
 from playwright.sync_api import Error as PlaywrightError
 from playwright.sync_api import sync_playwright
 
@@ -983,7 +983,8 @@ def test_every_meaning_the_view_colours_has_a_second_channel(
     data.write_text(json.dumps(measured))
     query = "data.el.use_of_colour"
     cmd = [opa, "eval", "-f", "json", "-d", rego, "-i", str(data), query]
-    out = subprocess.run(cmd, capture_output=True, text=True, check=True)
+    out = capture(cmd)
+    assert out.returncode == 0, out.stderr
     verdict = _verdict(out.stdout)
     assert verdict["deny"] == [], verdict["deny"]
     cases = webpage.items(measured, "cases")

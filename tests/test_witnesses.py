@@ -8,7 +8,6 @@ import json
 import os
 import re
 import shutil
-import subprocess
 import threading
 from datetime import UTC, datetime
 from http.server import BaseHTTPRequestHandler, HTTPServer
@@ -18,6 +17,7 @@ from urllib.parse import parse_qs, urlparse
 
 import installed
 import pytest
+from mikemol.procrun.proc import capture
 
 from nemik.witnesses import witness
 
@@ -80,26 +80,28 @@ def test_time_witness_uses_input_now() -> None:
     assert witness(q, now=datetime(2026, 10, 2, tzinfo=UTC))[0] == "true"
 
 
+def _git(*args: str) -> None:
+    """Run git with the given arguments and fail the test on a nonzero exit."""
+    ran = capture(["git", *args])
+    assert ran.returncode == 0, ran.stderr
+
+
 def test_git_ref_witness(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     """Git ref witness."""
     repo = tmp_path / "r"
-    subprocess.run(["git", "init", "-q", "-b", "main", str(repo)], check=True)
-    subprocess.run(
-        [
-            "git",
-            "-C",
-            str(repo),
-            "-c",
-            "user.name=t",
-            "-c",
-            "user.email=t@t",
-            "commit",
-            "-q",
-            "--allow-empty",
-            "-m",
-            "x",
-        ],
-        check=True,
+    _git("init", "-q", "-b", "main", str(repo))
+    _git(
+        "-C",
+        str(repo),
+        "-c",
+        "user.name=t",
+        "-c",
+        "user.email=t@t",
+        "commit",
+        "-q",
+        "--allow-empty",
+        "-m",
+        "x",
     )
     monkeypatch.setenv("NEMIK_ROOT", str(tmp_path))
     assert witness('input.git_ref["r@main"].exists')[0] == "true"
