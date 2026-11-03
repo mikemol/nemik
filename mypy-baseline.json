@@ -38,8 +38,7 @@
   "type-arg": 6
  },
  "src/nemik/shaclcache.py": {
-  "explicit-any": 2,
-  "misc": 23
+  "misc": 1
  },
  "src/nemik/shaclinc.py": {
   "misc": 3
@@ -82,7 +81,7 @@
   "misc": 2
  },
  "tests/test_layout.py": {
-  "misc": 81
+  "misc": 57
  },
  "tests/test_lifecycle_scheme.py": {
   "misc": 9,

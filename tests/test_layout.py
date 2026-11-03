@@ -445,6 +445,43 @@ def _repo_chips(value: object) -> list[tuple[str, str, str, str]]:
     return rows
 
 
+def _tiles(value: object) -> list[tuple[str, int]]:
+    """Read the (label, roll-up count) rows of the labelled rolled-up tiles.
+
+    Returns:
+        One row per tile.
+
+    Raises:
+        TypeError: When a tile is not an object.
+
+    """
+    rows: list[tuple[str, int]] = []
+    for row in webpage.as_list(value):
+        if not isinstance(row, dict):
+            message = f"no tile object, only {row!r}"
+            raise TypeError(message)
+        rows.append(
+            (webpage.as_str(row["label"]), int(webpage.as_float(row["rollup"])))
+        )
+    return rows
+
+
+def _roles(value: object) -> dict[str, list[str]]:
+    """Read the glyphs of each card-state role the page reports.
+
+    Returns:
+        The glyphs by role.
+
+    Raises:
+        TypeError: When the answer is not an object.
+
+    """
+    if not isinstance(value, dict):
+        message = f"no object, only {value!r}"
+        raise TypeError(message)
+    return {str(role): webpage.as_strs(glyphs) for role, glyphs in value.items()}
+
+
 def _fans(value: object) -> list[list[tuple[str, int, str]]]:
     """Read the wait-line fans the page reports.
 
@@ -1013,7 +1050,9 @@ def test_the_card_list_selects_and_expands_from_the_keyboard(server: str) -> Non
             page, "() => cy.nodes(':selected').map(n => n.id())"
         )
         current = first.get_attribute("aria-current")
-        focused = page.evaluate("() => document.activeElement.dataset.card")
+        focused = webpage.as_str(
+            webpage.evaluate_value(page, "() => document.activeElement.dataset.card")
+        )
         detail = page.inner_text("#detail")
         toggle = page.locator("#cardlist button[data-toggle]").first
         before = webpage.evaluate_int(page, "() => cy.nodes('[symbol]').length")
@@ -1091,21 +1130,22 @@ def test_the_view_chain_is_drawn_end_to_end_with_its_length(server: str) -> None
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
         )
         _settle(page)
-        got = page.evaluate(
+        got = webpage.evaluate_dict(
+            page,
             "() => { const on = new Set(viewChain);"
             " const ends = cy.edges('.onchain').map(e => [e.source().id(), e.target().id()]);"
             " const touched = new Set(ends.flat());"
             " return { longest: viewChain.longest, cards: on.size, edges: ends.length,"
             " stray: ends.filter(([a, b]) => !on.has(a) || !on.has(b)).length,"
             " untouched: [...on].filter(id => !touched.has(id)).length,"
-            " legend: document.getElementById('pathkey').innerText }; }"
+            " legend: document.getElementById('pathkey').innerText }; }",
         )
         browser.close()
-    assert got["longest"] > 1, "the fixture fleet has no chain to draw"
-    assert got["edges"] >= got["longest"] - 1
-    assert got["stray"] == 0, "a chain edge has an end off the chain"
-    assert got["untouched"] == 0, "a card on the chain has no chain edge"
-    assert f"({got['longest']} cards" in got["legend"]
+    assert webpage.num(got, "longest") > 1, "the fixture fleet has no chain to draw"
+    assert webpage.num(got, "edges") >= webpage.num(got, "longest") - 1
+    assert webpage.num(got, "stray") == 0, "a chain edge has an end off the chain"
+    assert webpage.num(got, "untouched") == 0, "a card on the chain has no chain edge"
+    assert f"({got['longest']} cards" in webpage.as_str(got["legend"])
 
 
 def test_a_focused_list_row_rings_its_card_and_opens_the_popover(server: str) -> None:
@@ -1130,7 +1170,9 @@ def test_a_focused_list_row_rings_its_card_and_opens_the_popover(server: str) ->
         page.locator("#cardlist button[tabindex='0']").focus()
         page.keyboard.press("ArrowDown")
         _settle(page)
-        card = page.evaluate("() => document.activeElement.dataset.card")
+        card = webpage.as_str(
+            webpage.evaluate_value(page, "() => document.activeElement.dataset.card")
+        )
         ringed = webpage.evaluate_strs(
             page, "() => cy.nodes('.listfocus').map(n => n.id())"
         )
@@ -1201,9 +1243,13 @@ def test_the_card_list_is_one_tab_stop_walked_by_arrows(server: str) -> None:
         page.locator("#cardlist button[tabindex='0']").focus()
         page.keyboard.press("ArrowDown")
         page.keyboard.press("ArrowDown")
-        second = page.evaluate("() => document.activeElement.dataset.card")
+        second = webpage.as_str(
+            webpage.evaluate_value(page, "() => document.activeElement.dataset.card")
+        )
         page.keyboard.press("End")
-        last = page.evaluate("() => document.activeElement.dataset.card")
+        last = webpage.as_str(
+            webpage.evaluate_value(page, "() => document.activeElement.dataset.card")
+        )
         page.keyboard.press("Home")
         page.keyboard.press("ArrowDown")
         page.keyboard.press("Enter")
@@ -1376,15 +1422,18 @@ def test_a_rolled_up_tile_says_what_it_hides(server: str) -> None:
         page.check("#rollup")
         page.check("#treemap")
         _settle(page)
-        tiles = page.evaluate(
-            "() => cy.nodes('.tile').filter(n => n.visible() && n.data('rollup')"
-            " && !n.hasClass('tinylabel') && n.data('label'))"
-            ".map(n => ({ label: n.data('label'), rollup: n.data('rollup') }))"
+        tiles = _tiles(
+            webpage.evaluate_value(
+                page,
+                "() => cy.nodes('.tile').filter(n => n.visible() && n.data('rollup')"
+                " && !n.hasClass('tinylabel') && n.data('label'))"
+                ".map(n => ({ label: n.data('label'), rollup: n.data('rollup') }))",
+            )
         )
         browser.close()
     assert tiles, "the fixture fleet has no labelled rolled-up tile to check"
-    for t in tiles:
-        assert f"+{t['rollup']}" in t["label"], t
+    for label, rollup in tiles:
+        assert f"+{rollup}" in label, (label, rollup)
 
 
 TILE_LABELS = """() => {
@@ -1507,7 +1556,7 @@ def test_no_label_glyph_plays_two_roles(server: str) -> None:
             page,
             "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0",
         )
-        roles = page.evaluate(GLYPH_ROLES)
+        roles = _roles(webpage.evaluate_value(page, GLYPH_ROLES))
         page.click("#repos button[data-repo='nemik']")
         page.check("#rollup")
         _settle(page)

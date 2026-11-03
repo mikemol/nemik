@@ -3,12 +3,12 @@
 
 state file: `.claude/paths-forward.json`
 
-counter 1557 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:306dff6cd1a2e299`
+counter 1558 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:15f95231f050c321`
 
 | # | symbol | status |
 |---|---|---|
-| 1 | W1556 | working |
-| 2 | W1557 | working |
+| 1 | W1557 | working |
+| 2 | W1558 | working |
 | 3 | W1007 | ready |
 | 4 | W1008 | ready |
 | 5 | W1075 | ready |
@@ -1536,21 +1536,21 @@ counter 1557 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:306
 | 1527 | W1553 | done |
 | 1528 | W1554 | done |
 | 1529 | W1555 | done |
+| 1530 | W1556 | done |
 
 ## waypoints
 
-1. **W1556** (working) test_layout reads its repo chips, glyph, piece-fetch and aria-expanded evaluates through typed
-   readers (slice 6)
-   - next: Codemod w1556_slice6.py: missing, first and second to as_strs, the two chips sites to private _chips and
-     _repo_chips converters, expanded to as_str, over evaluate_value. Measure house mypy (bound 35 = missing 7 + chips
-     12 + first 5 + second 6 + expanded 5, from w1535_by_site.py before the G0), run test_layout whole directly. MYPY
-     stack, shares mypy-baseline.json and test_layout.py with stack 922 (inflight), so it submits after 922 lands.
-2. **W1557** (working) shaclcache types its SPARQL patch with object parameters and casts at the one boundary so its 25
+1. **W1557** (working) shaclcache types its SPARQL patch with object parameters and casts at the one boundary so its 25
    Any reads clear
    - next: One Write of the patch function: module typed dict[str, object], lazy/cached with object parameters,
      translate and parse cast to Callable, key tuple[str, object, str], queries dict of object. codon_first.py
      shaclcache (it has a codon-baseline row), run the shacl tests directly, measure house mypy (25 findings) and the
      ANN401 row in ruff (4). MYPY stack by baseline, shares nothing with stacks 923 or 924.
+2. **W1558** (working) test_layout reads its focused-card, chain-summary, tile and glyph-role evaluates through typed
+   readers (slice 7)
+   - next: Run w1558_slice7.py on tests/test_layout.py, format, measure (expected 24), run test_layout whole directly.
+     MYPY stack, shares nothing with stack 925 (ruff, inflight): its baseline write takes shaclcache's 24 as well
+     (W1557's credit) and the body says so.
 3. **W1007** (ready) The open-commitment count per repo, from mtools' commitment ledger, is a ratchet on the pace board
    and gauges
    - next: When mtools publishes its commitment ledger, count each repo's open commitments into a series, judge it like
@@ -2030,8 +2030,8 @@ counter 1557 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:306
      then the G0 sensor lines name it. It replaces w1480_diff, w1496_diff, w1500_diff, w1508_diff, w1509_diff and
      w1521_diff in the scratch directory, which were each found after a failed first attempt.
 114. **W1535** (ready) tests/test_layout.py types its page.evaluate results so its Any reads clear
-   - next: Promote w1535_by_site.py to tools/ with range-based attribution, backtest on slices 5 (30) and 6 (20), record
-     the result here, then slice 7 with a G0 number from it.
+   - next: Slice 8 of test_layout from the remaining 57 findings (by-site list), measured on a scratch copy before its
+     G0; then PT018 in test_layout once the Any values behind its asserts are typed.
 115. **W1549** (ready) A guard test fails a tests/ module that imports a tools/ module with no BUILD.bazel data entry
    for it
    - next: Extend tests/test_test_inputs.py (or a sibling) with a check that reads every tests/test_*.py for imports of
@@ -2741,10 +2741,9 @@ counter 1557 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:306
    PLR0917), one function at a time
    - blocked on: W1502, W1503, W1504, W1505, W1507
 247. **W1520** (blocked) Repin with no hand edit once mtools fixes the repin tool's procrun path and refusal text
-   - blocked on: mtools:W2249, mtools:W2250, mtools:W2251
-   - next: Detail: the tool kept procrun's g in the paths it wrote, left the old procrun wheel behind and refused at uv
-     lock with a blank reason. When mtools:W2249 (print uv's stderr) and the g fix land, repin at mtools main with the
-     newer tool and confirm --revendor --write completes with no hand correction; record the sha and the printed hashes.
+   - blocked on: mtools:W2250, mtools:W2251
+   - next: Wait for mtools' sha message (stack-revendor-tags). On landing: repin all eleven wheels to that sha with the
+     tool, no hand edits, build the venv, then confirm the next tick-close prints no ATOMIZE for a card in the gate.
 248. **W1524** (blocked) Decide what the pace does with a declared exemption: nemik *.py owes 1 is the tests S101 relief
    in ruff-house.toml
    - blocked on: mtools:W2255
@@ -5005,6 +5004,8 @@ counter 1557 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:306
    so their 44 Any reads clear (slice 5)
 1529. **W1555** (done) vtodo, calwrite and history run their subprocesses through procrun.capture_bytes so S404, S603
    and S607 clear
+1530. **W1556** (done) test_layout reads its repo chips, glyph, piece-fetch and aria-expanded evaluates through typed
+   readers (slice 6)
 
 ## residue
 
@@ -7504,3 +7505,14 @@ counter 1557 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:306
   gave 20, and the G1 names the cause (nearest-earlier-site attribution) and the plan for slice 7. The bound is honest
   as an upper bound, and the G0 says so. I did not re-run any figure. Two findings. No fixpoint is declared. Carried
   open findings as in R187, minus R187's (met).; 2 finding(s)
+- **nemik:R187** (-) round 189: stacks 922 (W1554 slice 5) 1c591f24 landed 14:44:58Z and 923 (W1555 vtodo, calwrite,
+  history) aaf53cf8 landed 15:07:31Z; stack 924 (W1556 slice 6, mypy 401 to 381) inflight since 15:07:36Z; stack 925
+  (W1557 shaclcache, ruff 182 to 178, mypy-baseline unwritten) queued: root Verified from the reflog (unix stamps):
+  744e82a2 1793715569 = 14:19:29Z, 1c591f24 1793717098 = 14:44:58Z, aaf53cf8 1793718451 = 15:07:31Z. 922 gated 14:19:33Z
+  to 14:44:58Z (25 min 25 s) and 923 14:45:03Z to 15:07:31Z (22 min 28 s), each begun within 5 s of the landing before
+  it; 924 began 15:07:36Z (the G1's closing line about its expected landing is garbled by an interrupted correction and
+  I take 924's begin from the reflog, 5 s after 923) with 925 queued, so the gate was not empty. R188 findings are
+  carried as plans on W1535 and W1175 and the G1 says so; one working step was already taken (the 50 PLC0415 sites
+  listed and the non-serve ones read: adapter's hashlib is a standing-4 Codon case, check's is a commented cycle), which
+  is the probe R188 asked for and which led the session to a different supply (shaclcache), a sound change. I did not
+  re-run any figure. Two findings. No fixpoint is declared. Carried open findings as in R188.; 2 finding(s)
