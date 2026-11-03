@@ -145,6 +145,7 @@ if TYPE_CHECKING:
     from collections.abc import Callable
 
     from nemik.blocks import AskRow, InboundRow
+    from nemik.rank import Weights
 
 VENDOR = {"cytoscape.min.js", "dagre.min.js", "cytoscape-dagre.js"}
 # nemik:W801: the page's own files beside index.html (nemik:W799 splits it by concern): the
@@ -1075,16 +1076,13 @@ def _satisfy(nodes: list[NodeRow], edges: list[EdgeRow]) -> None:
             item["cite"] = ref(URIRef(item["id"]))
 
 
-def _to_json(g: Graph, findings: dict, numbers: Graph | None = None) -> dict:
-    # nemik:W309: every published number (salience, edge current, ask weight) comes from `gn`, the
-    # graph without the withheld waypoints, when there are any; structure still comes from `g`.
-    gn = numbers if numbers is not None else g
-    effort, last = _activity(g)
-    nodes = _waypoint_nodes(g, effort, last)
-    edges = _enable_edges(g)
-    blocks = _wait_edges(g, nodes, edges)
-    asks = _ask_lanes(g, gn, edges)
-    _satisfy(nodes, edges)
+def _rank_nodes(gn: Graph, nodes: list[NodeRow]) -> Weights:
+    """Give each ready node its place in its repo's composed rank, and its band and salience.
+
+    Returns:
+        The rank weights, which the edge widths need again.
+
+    """
     # nemik:W135: each ready waypoint's place in its repo's composed nemik-rank order (0 = work it
     # first), so the page can lay out a rank-ordered forest without re-deriving the ranking.
     from nemik.rank import load_composition, load_weights, rank
@@ -1097,6 +1095,11 @@ def _to_json(g: Graph, findings: dict, numbers: Graph | None = None) -> dict:
                 found["rank_pos"], found["band"] = i, r["band_name"]
                 if (sal := r.get("salience")) is not None:
                     found["salience"] = round(sal, 4)
+    return weights
+
+
+def _path_marks(gn: Graph, nodes: list[NodeRow]) -> None:
+    """Mark each node's slack, the fleet's and its own repo's longest chain, and its path count."""
     # nemik:W322: slack (nemik.critical) per open card, and which cards lie on the longest chain, so
     # the page can mark the path that bounds the fleet. Computed over `gn` like every published
     # number.
@@ -1116,6 +1119,12 @@ def _to_json(g: Graph, findings: dict, numbers: Graph | None = None) -> dict:
             # nemik:W344: the longest chains through this card (ways in x ways out); 1 = no ties
             item["path_count"] = crit.paths.get(item["cite"], 0)
             item["on_path_repo"] = item["cite"] in repo_chain[item["repo"]]
+
+
+def _flag_nodes(
+    g: Graph, findings: dict[str, list[tuple[str, str, str]]], nodes: list[NodeRow]
+) -> None:
+    """Mark each node that is behind an open card or needs a manifest, and attach its warnings."""
     # nemik:W477: a card stored ready while an open card enables it (nemik:W465's finding) is drawn
     # as waiting: its fill says ready, but the flow model counts it as waiting and gives it no
     # salience. nemik:W684: a ready leaf with no manifest cannot be stacked, so it is drawn waiting
@@ -1136,6 +1145,16 @@ def _to_json(g: Graph, findings: dict, numbers: Graph | None = None) -> dict:
                 for w in warned
                 if isinstance(w, dict)
             ]
+
+
+def _edge_widths(
+    gn: Graph,
+    nodes: list[NodeRow],
+    edges: list[EdgeRow],
+    asks: list[AskRow],
+    weights: Weights,
+) -> None:
+    """Set each edge's current: the demand that crossed it, over the ready repos and the asks."""
     # nemik:W264: the demand that crossed each dependency, summed over the ready repos' solves, as
     # the width the page draws the edge with. A `waits` edge runs waiter -> blocker, an `enables`
     # edge prerequisite -> dependent; the flow names a dependency (needing card, prerequisite).
@@ -1176,6 +1195,22 @@ def _to_json(g: Graph, findings: dict, numbers: Graph | None = None) -> dict:
         carried = crossed.get((ref(URIRef(need)), ref(URIRef(pre))), 0.0)
         if carried:
             e["current"] = round(carried, 4)
+
+
+def _to_json(g: Graph, findings: dict, numbers: Graph | None = None) -> dict:
+    # nemik:W309: every published number (salience, edge current, ask weight) comes from `gn`, the
+    # graph without the withheld waypoints, when there are any; structure still comes from `g`.
+    gn = numbers if numbers is not None else g
+    effort, last = _activity(g)
+    nodes = _waypoint_nodes(g, effort, last)
+    edges = _enable_edges(g)
+    blocks = _wait_edges(g, nodes, edges)
+    asks = _ask_lanes(g, gn, edges)
+    _satisfy(nodes, edges)
+    weights = _rank_nodes(gn, nodes)
+    _path_marks(gn, nodes)
+    _flag_nodes(g, findings, nodes)
+    _edge_widths(gn, nodes, edges, asks, weights)
     # nemik:W119: a total order on everything drawn. rdflib iterates in hash order, and Python salts
     # str hashes per process, so without this every server start (and every rebuild after an
     # insertion) handed the layout the same graph in a different order, and dagre/cytoscape laid it

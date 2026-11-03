@@ -97,10 +97,9 @@
   "PLW0603": 1
  },
  "src/nemik/serve.py": {
-  "C901": 3,
+  "C901": 2,
   "PLC0415": 26,
-  "PLR0912": 2,
-  "PLR0914": 1
+  "PLR0912": 1
  },
  "src/nemik/shaclcache.py": {
   "ANN401": 4
