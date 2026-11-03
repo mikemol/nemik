@@ -144,7 +144,8 @@ def test_runner_applies_only_holding_witnesses(tmp_path: Path) -> None:
     state.write_text(json.dumps(payload2))
 
     r = installed.run("nemik-witnesses", "--root", str(tmp_path), "--apply")
-    assert r.returncode == 0 and "APPLY FAILED" not in r.stderr, r.stderr
+    assert r.returncode == 0, r.stderr
+    assert "APPLY FAILED" not in r.stderr, r.stderr
     out = r.stdout
     assert "WITNESS r:W1 true" in out
     assert "WITNESS r:W2 false" in out
@@ -274,7 +275,8 @@ def test_apply_writes_letters_to_waiting_repos(tmp_path: Path) -> None:
     queue("c", [{"symbol": "W7", "title": "unrelated", "status": "ready"}])
 
     r = installed.run("nemik-witnesses", "--root", str(tmp_path), "--apply")
-    assert r.returncode == 0 and "APPLY FAILED" not in r.stderr, r.stderr
+    assert r.returncode == 0, r.stderr
+    assert "APPLY FAILED" not in r.stderr, r.stderr
     out = r.stdout
     # mtools:W1215: the writer prunes a done card from its local dependents at once, so W2 is
     # already free and only the foreign waiter needs a letter.

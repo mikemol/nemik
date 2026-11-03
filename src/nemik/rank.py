@@ -865,7 +865,8 @@ def _report_goals(g: Graph, args: Options, weights: Weights) -> None:
     for r in gs:
         path = "clear" if r["clear"] else "waits on " + ", ".join(r["outside"])
         say(
-            f"{r['goal']:6} {r['weight']:4}  on deck {r['on_deck'] or '-'}; path {path}  {r['title'][:60]}"
+            f"{r['goal']:6} {r['weight']:4}  on deck {r['on_deck'] or '-'}; "
+            f"path {path}  {r['title'][:60]}"
         )
 
 
@@ -960,7 +961,8 @@ def _report_rank(g: Graph, args: Options, weights: Weights) -> None:
         return
     for listed in rows:
         say(
-            f"{listed['symbol']:6} {listed['band_name']:9} op={listed['operator']} down={listed['downstream']:<4} {listed['title'][:70]}"
+            f"{listed['symbol']:6} {listed['band_name']:9} op={listed['operator']} "
+            f"down={listed['downstream']:<4} {listed['title'][:70]}"
         )
 
 
