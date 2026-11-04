@@ -147,7 +147,8 @@ def _victoria(series: list[list[str]]) -> Generator[str]:
             self.end_headers()
             self.wfile.write(payload)
 
-        def log_message(self, *_: object) -> None:
+        @staticmethod
+        def log_message(*_: object) -> None:
             return
 
     server = HTTPServer(("127.0.0.1", 0), Handler)

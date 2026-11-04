@@ -14,22 +14,17 @@ B = load_bands()
 V = "WV:1/R:{R}/E:{E}/C:{C}/I:{I}/A:{A}/X:N/S:{S}/F:K/W:N"
 
 
-def vec(
-    *,
-    r: str = "L",
-    e: str = "N",
-    c: str = "N",
-    i: str = "N",
-    a: str = "N",
-    s: str = "U",
-) -> str:
-    """Build a WV:1 vector string from the given metric values.
+METRICS = {"R": "L", "E": "N", "C": "N", "I": "N", "A": "N", "S": "U"}
+
+
+def vec(**given: str) -> str:
+    """Build a WV:1 vector string from the given metric values, by lower-case letter.
 
     Returns:
-        The vector.
+        The vector, each metric not given at its default.
 
     """
-    return V.format(R=r, E=e, C=c, I=i, A=a, S=s)
+    return V.format(**{**METRICS, **{k.upper(): v for k, v in given.items()}})
 
 
 def test_a_card_tagged_velocity_is_in_the_band_above_critical() -> None:
