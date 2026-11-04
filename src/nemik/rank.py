@@ -971,7 +971,8 @@ def _report_flow(g: Graph, args: Options) -> None:
         f"flow {args.repo}: {len(result.rows)} ready, {result.sources} sources, "
         f"{len(result.flow.stranded)} stranded"
     )
-    for row in sorted(result.rows, key=lambda r: new_pos[r.ref]):
+    by_pos = {new_pos[r.ref]: r for r in result.rows}
+    for row in (by_pos[p] for p in sorted(by_pos)):
         say(
             f"{row.ref:28} old={row.old:<5} flow={show(row.new):>10}  "
             f"old#{old_pos[row.ref]:<4} flow#{new_pos[row.ref]}"
@@ -1148,7 +1149,7 @@ def _parse(argv: list[str] | None, root: Path) -> Options:
         "--assume-done",
         nargs="+",
         metavar="REPO:W<n>",
-        default=[],
+        default=list[str](),
         help="what-if: rank as if these cards were closed (nemik:W351)",
     )
     ap.add_argument(

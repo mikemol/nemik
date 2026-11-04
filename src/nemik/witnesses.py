@@ -25,7 +25,7 @@ import urllib.parse
 import urllib.request
 from datetime import UTC, datetime
 from pathlib import Path
-from typing import TYPE_CHECKING, TypedDict, cast
+from typing import IO, TYPE_CHECKING, TypedDict, cast
 
 from mikemol.pathsforward.opa_eval import OpaUnavailableError, resolve
 from mikemol.procrun.proc import capture
@@ -194,8 +194,9 @@ def _get(env: str, path: str, params: dict[str, str]) -> Body | None:
         return None
     url = f"{base.rstrip('/')}{path}?{urllib.parse.urlencode(params)}"
     try:
-        with urllib.request.urlopen(url, timeout=5) as r:
-            body: Body = json.load(r)
+        opened = cast("IO[bytes]", urllib.request.urlopen(url, timeout=5))
+        with opened as r:
+            body: Body = cast("Body", json.load(r))
     except (OSError, ValueError):
         return None
     return body if body.get("status") == "success" else None
@@ -589,7 +590,7 @@ def main(argv: list[str] | None = None) -> None:
     )
     ap.add_argument(
         "--lang",
-        choices=["rego", "promql"],
+        choices=list[str](["rego", "promql"]),
         default="",
         help="with --wait: the query's language, instead of guessing it from its text (nemik:W539)",
     )

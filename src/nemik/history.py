@@ -143,7 +143,9 @@ def is_series(args: argparse.Namespace, *, extra: tuple[str, ...] = ()) -> bool:
         True when any of SERIES_MODES, or of `extra`, is set.
 
     """
-    return any(getattr(args, mode) for mode in SERIES_MODES + extra)
+    return any(
+        bool(cast("object", getattr(args, mode))) for mode in SERIES_MODES + extra
+    )
 
 
 def _oldest_first(card: tuple[str, float]) -> float:
@@ -2606,7 +2608,7 @@ def _series(args: Opts, names: list[str], dirs: dict[str, Path]) -> int:
         ("score", _score),
         ("oldest", _oldest),
     ):
-        if getattr(args, mode):
+        if cast("object", getattr(args, mode)):
             return run(args, names, dirs)
     now = datetime.now(UTC)
     rolled: dict[str, list[WeeklyRow]] = {}

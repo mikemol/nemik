@@ -1342,12 +1342,14 @@ def cached_survey(root: Path, *, digest: bool) -> tuple[list[str], int]:
         held: object = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, ValueError):
         held = None
-    if isinstance(held, dict) and held.get("key") == key:
-        said, bad = held.get("lines"), held.get("failed")
+    doc = table(held)
+    if doc.get("key") == key:
+        said, bad = doc.get("lines"), doc.get("failed")
         if isinstance(said, list) and isinstance(bad, int):
             return [str(line) for line in said], bad
     lines, failed, _ = survey_lines(root, digest=digest)
-    body = json.dumps({"key": key, "lines": lines, "failed": failed})
+    payload: dict[str, object] = {"key": key, "lines": lines, "failed": failed}
+    body = json.dumps(payload)
     try:
         path.parent.mkdir(parents=True, exist_ok=True)
         tmp = path.with_name(f".{DIGEST_FILE}.{os.getpid()}")
