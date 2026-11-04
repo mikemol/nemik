@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1584,
+  "counter": 1585,
   "waypoints": [
     {
       "symbol": "W1",
@@ -37871,7 +37871,7 @@
     {
       "symbol": "W1584",
       "title": "check.survey split: cut survey into three helpers under the ruff thresholds, so four ruff findings clear",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [
         "ruff",
@@ -37879,19 +37879,58 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Probe on a copy src/nemik/probe_check.py: survey is 137 statements, complexity 49, 51 locals; split into three helpers by phase and measure house ruff. Unmeasured: the real fall. Lower rank than the audit split (4 against 6).",
-      "evidence": "2026-11-04T02:30:08Z: G0 2026-11-04T02:30:30Z: gate empty since the 954 landing at 02:04:15Z (26 min 15 s at this stamp). Correction to W1583: its time-box was met only from the G0 stamp, the idle interval before it was 34 min 36 s. Actuator: probe the survey split on src/nemik/probe_check.py, hard stop 03:00:30Z; if K is not measured by then, submit the smallest already-probed filler. Sensor: house ruff on the copy against check.py (5 findings: 4 on survey, 1 PLC0415). Expected: unmeasured; no range claimed. Copy deleted by exact path.",
+      "next_bounded_step": null,
+      "evidence": "2026-11-04T02:30:08Z: G0 2026-11-04T02:30:30Z: gate empty since the 954 landing at 02:04:15Z (26 min 15 s at this stamp). Correction to W1583: its time-box was met only from the G0 stamp, the idle interval before it was 34 min 36 s. Actuator: probe the survey split on src/nemik/probe_check.py, hard stop 03:00:30Z; if K is not measured by then, submit the smallest already-probed filler. Sensor: house ruff on the copy against check.py (5 findings: 4 on survey, 1 PLC0415). Expected: unmeasured; no range claimed. Copy deleted by exact path. | 2026-11-04T02:51:38Z: Landed 530c0e66 at 2026-11-04T02:50:54Z (reflog); 462 of 465 targets fresh, green; ruff 81 to 77 (K=4 as probed). Sensor quoted before the close: 'unnamed: W1584' (landed stack, card still working). Gate empty 02:04:15Z to the 955 submit, then gated to 02:50:54Z. Codon first reading was the gate (green). Correction to W1583: its 30-minute time-box ran from the G0 stamp (01:47:00Z), the idle interval before that stamp was 34 min 36 s.",
       "issued_at": "2026-11-04T01:39:44Z",
       "minted_during": "interrupt",
       "caused_by": "W1568",
-      "last_worked": "2026-11-04T02:30:08Z",
+      "last_worked": "2026-11-04T02:51:38Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/check.py",
         "ruff-baseline.json"
       ],
       "size_class": "large",
-      "completed": null
+      "completed": "20261104T025138Z"
+    },
+    {
+      "symbol": "W1585",
+      "title": "Public names for five privately imported helpers: letters._today, calendars._venv_ics, shaclinc._results, serve._build_static and serve._to_json, so six ruff findings (five PLC2701, one SLF001) clear",
+      "status": "working",
+      "enables": [],
+      "touches": [
+        "ruff",
+        "letters",
+        "calendars",
+        "shaclinc",
+        "serve"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Rename each to a public name in its module and its users (codemod w1585.py), measure on the real tree: expected ruff 77 to 71, unmeasured until run.",
+      "evidence": "2026-11-04T03:00:41Z: G0 2026-11-04T03:01:00Z: gate empty since the 955 landing at 02:50:54Z (10 min 6 s at this stamp). Pace read 2026-11-04T01:25:47Z (ruff then 85, now 77 after 954 and 955; mypy 116; codon owes 2). Actuator: codemod w1585.py renames letters._today to current_day, calendars._venv_ics to venv_ics, shaclinc._results to shacl_results, serve._build_static to build_static_unscoped, serve._to_json to to_json_unscoped, across src and the tests that import them. Sensor: mikemol-pycheck --ratchet on the real tree, house ruff on the touched files. Expected ruff 77 to 71 (five PLC2701 and the SLF001 on shaclinc._results in test_cachestore), mypy flat 116; unmeasured until run, no probe copy because a rename has no partial form. Time-box: submit by 03:31:00Z.",
+      "issued_at": "2026-11-04T03:00:34Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1568",
+      "last_worked": "2026-11-04T03:00:41Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "src/nemik/letters.py",
+        "src/nemik/blocks_cli.py",
+        "src/nemik/calendars.py",
+        "src/nemik/shaclinc.py",
+        "src/nemik/serve.py",
+        "tests/test_inbound_orphans.py",
+        "tests/test_calendars.py",
+        "tests/test_shaclinc.py",
+        "tests/test_cachestore.py",
+        "tests/test_shaclinc_unwatched.py",
+        "tests/test_memo_audits.py",
+        "tests/test_build_scope.py",
+        "ruff-baseline.json"
+      ],
+      "size_class": "medium"
     }
   ],
   "residue": [

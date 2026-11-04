@@ -49,7 +49,13 @@ class Letter(NamedTuple):
     recipient: str
 
 
-def _today() -> date:
+def current_day() -> date:
+    """Give today's date in UTC.
+
+    Returns:
+        The current UTC date.
+
+    """
     return datetime.now(UTC).date()
 
 
@@ -292,7 +298,7 @@ def fold_commands(
 
     """
     out: list[str] = []
-    for owner, path in _split(root, repo, older_than, today or _today())[0]:
+    for owner, path in _split(root, repo, older_than, today or current_day())[0]:
         line = _first_line(path)
         head = _HEADER.match(line)
         title = (
@@ -322,7 +328,7 @@ def archive_commands(
     """
     return [
         f"mv {shlex.quote(str(path))} {shlex.quote(str(path.parent / 'archive'))}/"
-        for _, path in _split(root, repo, older_than, today or _today())[1]
+        for _, path in _split(root, repo, older_than, today or current_day())[1]
     ]
 
 
@@ -347,7 +353,7 @@ def apply_fold(
 
     """
     writer = writer or str(Path(sys.executable).parent / "mikemol-paths-forward")
-    live, stale = _split(root, repo, older_than, today or _today())
+    live, stale = _split(root, repo, older_than, today or current_day())
     done: list[str] = []
     for owner, path in live:
         line = _first_line(path)

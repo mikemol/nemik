@@ -78,15 +78,9 @@
   "S404": 1,
   "S603": 2
  },
- "tests/test_build_scope.py": {
-  "PLC2701": 1
- },
  "tests/test_cachestore.py": {
-  "SLF001": 3,
+  "SLF001": 2,
   "syntax": 1
- },
- "tests/test_calendars.py": {
-  "PLC2701": 1
  },
  "tests/test_flow_cache.py": {
   "SLF001": 1
@@ -100,17 +94,11 @@
  "tests/test_guarantees.py": {
   "PLR0913": 1
  },
- "tests/test_inbound_orphans.py": {
-  "PLC2701": 1
- },
  "tests/test_index.py": {
   "PLC2701": 2
  },
  "tests/test_layout.py": {
   "S310": 1
- },
- "tests/test_memo_audits.py": {
-  "PLC2701": 1
  },
  "tests/test_mspdi.py": {
   "S314": 2,
@@ -122,9 +110,6 @@
  },
  "tests/test_score.py": {
   "PLR0913": 1
- },
- "tests/test_shaclinc.py": {
-  "PLC2701": 1
  },
  "tests/test_witwait.py": {
   "PLR6301": 1

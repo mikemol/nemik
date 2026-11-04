@@ -27,7 +27,7 @@ from nemik.blocks import (
 )
 from nemik.check import LEDGER, default_root, survey, workstream_files
 from nemik.inbound_issues import by_peer, census, letters_of, unclaimed
-from nemik.letters import _split, _today, fold_commands
+from nemik.letters import _split, current_day, fold_commands
 from nemik.rank import TIERS
 from nemik.say import say
 
@@ -150,7 +150,7 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     # two days unseen, luthen-observability:W722). The same UNCLAIMED token, with the --add that
     # claims it; the fold's 14-day cutoff leaves old ones to `nemik-check --letters --fold`.
     if args.repo:
-        live = _split(Path(args.root), args.repo, 14, _today())[0]
+        live = _split(Path(args.root), args.repo, 14, current_day())[0]
         claims = fold_commands(Path(args.root), repo=args.repo, older_than=14)
         for (_, path), cmd in zip(live, claims, strict=True):
             say(

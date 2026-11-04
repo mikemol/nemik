@@ -15,13 +15,13 @@ from nemik.calendars import (
     Calendar,
     CalendarError,
     Occurrence,
-    _venv_ics,
     days_main,
     dedupe,
     event_graph,
     load_calendars,
     load_collections,
     occurrences,
+    venv_ics,
 )
 
 TWO_EVENTS = 2
@@ -177,7 +177,7 @@ def test_the_reader_is_found_in_nemiks_own_venv_not_on_path(
         {"home": "Personal"}, start="2026-10-01", helper=_helper(tmp_path)
     )
     assert [r["uid"] for r in got] == ["a@t"]
-    assert _venv_ics().endswith("/mikemol-ics")
+    assert venv_ics().endswith("/mikemol-ics")
     with pytest.raises(FileNotFoundError, match="calendar reader"):
         occurrences(
             {"home": "Personal"},

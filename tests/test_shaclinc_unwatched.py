@@ -34,7 +34,7 @@ def test_changing_an_unwatched_predicate_runs_no_validation(
         calls.append(len(data) + len(shapes_graph))
         return {}
 
-    monkeypatch.setattr("nemik.shaclinc._results", counted)
+    monkeypatch.setattr("nemik.shaclinc.shacl_results", counted)
     card = URIRef(f"{BASE}unwatched-test/W1")
     first = Graph()
     first.add((card, NEMIK.queuePosition, Literal(1)))

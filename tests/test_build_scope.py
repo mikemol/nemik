@@ -18,7 +18,7 @@ from rdflib.term import Node
 from nemik.adapter import NEMIK, OSLC_CM, waypoint_uri
 from nemik.cards import cards
 from nemik.index import indexed
-from nemik.serve import _build_static, build_static
+from nemik.serve import build_static, build_static_unscoped
 
 FLEET = Path(__file__).parent / "fixtures" / "fleet"
 MIN_PUBLISHED = 20
@@ -37,7 +37,7 @@ def test_the_scoped_build_publishes_exactly_what_the_unscoped_one_does(
 ) -> None:
     """The scoped build publishes exactly what the unscoped one does."""
     unscoped, scoped = tmp_path / "unscoped", tmp_path / "scoped"
-    _build_static(FLEET, unscoped, None, private=True)
+    build_static_unscoped(FLEET, unscoped, None, private=True)
     build_static(FLEET, scoped, None, private=True)
     a, b = _tree(unscoped), _tree(scoped)
     assert a.keys() == b.keys()

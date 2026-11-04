@@ -187,7 +187,7 @@ def _flag(value: object) -> bool | None:
     return value if isinstance(value, bool) else None
 
 
-def _venv_ics() -> str:
+def venv_ics() -> str:
     """Locate mikemol-ics in nemik's own venv (it is vendored there, nemik:W157), not on PATH.
 
     A host caller runs .venv/bin/nemik-days without activating the venv (life-82, 2026-10-02).
@@ -251,7 +251,7 @@ def occurrences(
         FileNotFoundError: the calendar reader is not installed.
 
     """
-    ics = ics or _venv_ics()
+    ics = ics or venv_ics()
     if not Path(ics).exists() and not shutil.which(ics):
         msg = f"the calendar reader {ics} is missing: rebuild nemik's venv (bazel build //:.venv)"
         raise FileNotFoundError(msg)

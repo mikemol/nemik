@@ -12,7 +12,7 @@ from rdflib import Graph
 
 from nemik import flow
 from nemik.check import survey
-from nemik.serve import _to_json, to_json
+from nemik.serve import to_json, to_json_unscoped
 
 if TYPE_CHECKING:
     from collections.abc import Collection, Mapping
@@ -54,7 +54,7 @@ def test_the_memo_changes_no_number_and_cuts_the_solves(
         return real(demand, needs, frontier, weights, edge)
 
     monkeypatch.setattr("nemik.salience.solve", counted)
-    plain = _to_json(g, findings)
+    plain = to_json_unscoped(g, findings)
     unmemoized = calls["n"]
     calls["n"] = 0
     memoized = to_json(g, findings)

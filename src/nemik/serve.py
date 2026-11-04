@@ -834,7 +834,7 @@ def without(g: Graph, refs: frozenset[str]) -> Graph:
 
 
 # nemik:W1282: one card of graph.json, and one edge. `for` is a keyword, so the node row is the
-# functional form; _to_json adds keys in place after the literal, hence total=False.
+# functional form; to_json_unscoped adds keys in place after the literal, hence total=False.
 NodeRow = TypedDict(
     "NodeRow",
     {
@@ -905,11 +905,11 @@ def to_json(
     per-card facts indexed once.
 
     Returns:
-        The view's document, as _to_json builds it inside the memo and index scopes.
+        The view's document, as to_json_unscoped builds it inside the memo and index scopes.
 
     """
     with memo_audits(), indexed():
-        return _to_json(g, findings, numbers)
+        return to_json_unscoped(g, findings, numbers)
 
 
 def stage_of(g: Graph, n: URIRef) -> str:
@@ -1213,9 +1213,15 @@ def _edge_widths(
             e["current"] = round(carried, 4)
 
 
-def _to_json(
+def to_json_unscoped(
     g: Graph, findings: dict[str, list[Finding]], numbers: Graph | None = None
 ) -> ViewDoc:
+    """Build the view's document outside the memo and index scopes.
+
+    Returns:
+        The document, as `to_json` builds it inside those scopes.
+
+    """
     # nemik:W309: every published number (salience, edge current, ask weight) comes from `gn`, the
     # graph without the withheld waypoints, when there are any; structure still comes from `g`.
     gn = numbers if numbers is not None else g
@@ -1535,7 +1541,9 @@ def build_static(
     private: bool = False,
     exports: Path | None = None,
 ) -> list[Path]:
-    """nemik:W153 (see _build_static), inside the live server's per-build scope (nemik:W412, W403).
+    """nemik:W153 (see build_static_unscoped), inside the live server's per-build scope.
+
+    The scope is nemik:W412 and W403.
 
     The scope is the one the live server's document is built in: each graph indexed once and each
     flow solve answered once. The build ran outside it, so the goals, the pieces and the TRS feeds
@@ -1543,14 +1551,16 @@ def build_static(
     of it in rank.goals).
 
     Returns:
-        The files written, as _build_static returns them.
+        The files written, as build_static_unscoped returns them.
 
     """
     with memo_audits(), indexed():
-        return _build_static(root, out, withheld, private=private, exports=exports)
+        return build_static_unscoped(
+            root, out, withheld, private=private, exports=exports
+        )
 
 
-def _build_static(
+def build_static_unscoped(
     root: Path,
     out: Path,
     withheld: Path | None,

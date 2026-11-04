@@ -49,13 +49,13 @@ def test_a_restored_cache_makes_an_unchanged_rebuild_validate_nothing(
     """A rebuild after a restored cache validates nothing that is unchanged."""
     # the reason this exists: a fresh process rebuilding cold validates the whole fleet
     runs: list[int] = []
-    real = shaclinc._results
+    real = shaclinc.shacl_results
 
     def counting(data: Graph, shapes: Graph) -> dict:
         runs.append(len(data))
         return real(data, shapes)
 
-    monkeypatch.setattr(shaclinc, "_results", counting)
+    monkeypatch.setattr(shaclinc, "shacl_results", counting)
     _build()
     cold = len(runs)
     assert cold >= 1

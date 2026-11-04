@@ -8,7 +8,7 @@ import json
 from typing import TYPE_CHECKING
 
 from nemik.blocks_cli import main
-from nemik.letters import _today
+from nemik.letters import current_day
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -36,7 +36,7 @@ def _repo(root: Path, cites: str = "") -> None:
     queue.write_text(json.dumps(body))
     inbox = root / "a" / "inbox"
     inbox.mkdir()
-    name = f"{_today().isoformat()}-b-please-do-x.md"
+    name = f"{current_day().isoformat()}-b-please-do-x.md"
     (inbox / name).write_text("From: b (W9)\nTo: a\n\nplease do x\n")
 
 
@@ -57,7 +57,7 @@ def test_a_cited_letter_is_not_listed(
     tmp_path: Path, capsys: pytest.CaptureFixture[str]
 ) -> None:
     """A cited letter is not listed."""
-    name = f"{_today().isoformat()}-b-please-do-x.md"
+    name = f"{current_day().isoformat()}-b-please-do-x.md"
     _repo(tmp_path, cites=f"a/inbox/{name}")
     main(["a", "--root", str(tmp_path)])
     assert "<- letter" not in capsys.readouterr().out

@@ -53,8 +53,13 @@ def import_cache(held: Held) -> None:
     _LAST.update(held)
 
 
-def _results(data: Graph, shapes: Graph) -> dict[Node, list[Result]]:
+def shacl_results(data: Graph, shapes: Graph) -> dict[Node, list[Result]]:
+    """Validate `data` against `shapes` in full.
 
+    Returns:
+        The results by focus node.
+
+    """
     # nemik:W254: pyshacl hands rdflib the same constraint text for every focus node; parse it once.
     with cached_sparql_parse():
         _, report, _ = validate(data, shacl_graph=shapes)
@@ -177,7 +182,7 @@ def findings(key: str, data: Graph, shapes: Graph) -> list[tuple[Node, str, str]
     texts = sorted(str(t) for t in shapes.objects(None, SH.select))
     hops = radius(texts)  # nemik:W626: derived from the shapes
     if last is None or hops == UNBOUNDED:
-        by_focus = _results(data, shapes)
+        by_focus = shacl_results(data, shapes)
     else:
         before, by_focus = last[0], dict(last[1])
         watched = watched_predicates(shapes, texts)
@@ -210,7 +215,7 @@ def findings(key: str, data: Graph, shapes: Graph) -> list[tuple[Node, str, str]
             for t in now:
                 if t[0] in near:
                     sub.add(t)
-            for f, rows in _results(sub, shapes).items():
+            for f, rows in shacl_results(sub, shapes).items():
                 if f in live:
                     by_focus[f] = rows
     _LAST[key] = (now, by_focus)

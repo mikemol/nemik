@@ -12,7 +12,7 @@ from rdflib.term import Node
 from nemik.adapter import NEMIK, OSLC_CM, queue_graph
 from nemik.blocks import annotate
 from nemik.check import QUEUE, shapes, workstream_files
-from nemik.shaclinc import _results, findings
+from nemik.shaclinc import findings, shacl_results
 
 FLEET = Path(__file__).parent / "fixtures" / "fleet"
 
@@ -62,7 +62,9 @@ def test_incremental_equals_full_after_an_edit(edit: Callable[[Graph], None]) ->
     findings(key, g, sh)
     edit(g)
     inc = sorted(findings(key, g, sh))
-    full = sorted((f, s, m) for f, rows in _results(g, sh).items() for s, m in rows)
+    full = sorted(
+        (f, s, m) for f, rows in shacl_results(g, sh).items() for s, m in rows
+    )
     assert inc == full
 
 
@@ -73,5 +75,7 @@ def test_edits_in_sequence_stay_equal() -> None:
     for edit in EDITS:
         edit(g)
         inc = sorted(findings("test-sequence", g, sh))
-        full = sorted((f, s, m) for f, rows in _results(g, sh).items() for s, m in rows)
+        full = sorted(
+            (f, s, m) for f, rows in shacl_results(g, sh).items() for s, m in rows
+        )
         assert inc == full, edit.__name__
