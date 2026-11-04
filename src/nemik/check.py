@@ -648,6 +648,343 @@ def _gate_mark(graph: Graph, repo: str, repo_dir: Path, gate: str) -> None:
         mark_gating(graph, repo, repo_dir)
 
 
+def _read_queues(
+    root: Path, gate: str
+) -> tuple[dict[str, Graph | None], dict[str, str], Graph]:
+    """Parse every queue under `root` into one merged graph.
+
+    Returns:
+        each repo's graph (None when mtools refuses the file), the refusals by repo and the merge.
+
+    """
+    queues = workstream_files(root, QUEUE)
+    known = frozenset(repo for repo, _ in queues)
+    graphs: dict[str, Graph | None] = {}
+    refused: dict[str, str] = {}
+    merged = Graph()
+    for repo, state_path in queues:
+        try:
+            qg = queue_graph(repo, state_path, known)
+            qg.add(
+                (
+                    workstream_uri(repo),
+                    NEMIK.pathsforwardAdoption,
+                    Literal(adoption_state(state_path)),
+                )
+            )
+            _gate_mark(qg, repo, state_path.parent.parent, gate)
+            graphs[repo] = qg
+            merged += qg
+        except UnreadableStateError as exc:
+            graphs[repo], refused[repo] = None, str(exc)
+    return graphs, refused, merged
+
+
+def _mark_unresolved(root: Path, merged: Graph) -> None:
+    """Mark a cited host-apply row the export does not hold (nemik:W256).
+
+    Only the file is read (no exporter subprocess), and no export at all leaves the citation as
+    it was.
+    """
+    try:
+        export = load(root, run_exporter=False)
+    except ValueError:
+        return
+    if export is None:
+        return
+    for node, cited in list(merged.subject_objects(NEMIK.blockedOn)):
+        m = HOST_REF.fullmatch(str(cited).strip())
+        if m and m[1] not in export.rows:
+            merged.add((node, NEMIK.unresolvedBlocker, cited))
+
+
+def _shacl_by_repo(
+    root: Path, merged: Graph, graphs: dict[str, Graph | None]
+) -> dict[str, list[Finding]]:
+    """Validate the merged graph once and file each finding under its focus node's repo.
+
+    nemik:W400: a rebuild in the same process re-validates only the nodes its change touches.
+    nemik:W625: and a fresh process starts from the last reader's caches (142 s CPU cold, 11 s
+    warm), kept in the user's cache directory; only the real fleet root is kept, so a test's
+    temporary root does not grow it.
+
+    Returns:
+        the findings by repo, an empty list for each repo in `graphs`.
+
+    """
+    kept = root.resolve() == default_root().resolve()
+    if kept:
+        cachestore.restore_user()
+    results = shacl_findings(str(root.resolve()), merged, shapes())
+    if kept:
+        cachestore.persist_user()
+    by_repo: dict[str, list[Finding]] = {repo: [] for repo in graphs}
+    for focus, sev, msg in sorted(results):
+        repo, _, sym = str(focus).removeprefix(BASE).partition("/")
+        by_repo.setdefault(repo, []).append(
+            (str(sev).rsplit("#", 1)[-1], sym or "--", str(msg))
+        )
+    return by_repo
+
+
+def _cycle_findings(merged: Graph, by_repo: dict[str, list[Finding]]) -> None:
+    """Warn on every card of a dependency cycle the operator cannot break (nemik:W331).
+
+    The cause is fixed where it is written (usually an umbrella that lists its children under
+    `enables` and is blocked_on them). nemik.critical classifies the cycles. nemik:W484
+    (mtools:W1134's ring of three): name the ring in order, "a:W1 -> a:W2 -> a:W1", as the
+    fleet's shared walker finds it, rather than as an unordered set of members.
+    """
+    cause = (
+        "none of them can become ready (an umbrella listing its children under "
+        "enables while blocked_on them is the usual cause)"
+    )
+    rings = [[ref(n) for n in ring] for ring in dependency_cycles(merged)]
+    for members, operator_can_break in cycles(merged):
+        if operator_can_break:
+            continue
+        for member in members:
+            mrepo, _, msym = member.partition(":")
+            ring = next(
+                (r for r in rings if member in r and set(r) <= set(members)), None
+            )
+            if ring:
+                at = ring.index(member)
+                turn = [*ring[at:], *ring[:at], member]
+                found = f"on a dependency cycle {' -> '.join(turn)}: {cause}"
+            else:
+                others = ", ".join(m for m in members if m != member) or "itself"
+                found = f"on a dependency cycle with {others}: {cause}"
+            by_repo.setdefault(mrepo, []).append(("Warning", msym, found))
+
+
+def _owed_asks(merged: Graph) -> dict[str, list[str]]:
+    """Group the open needs-you operator asks by the repo that holds them.
+
+    Returns:
+        the asks' refs by repo.
+
+    """
+    owed: dict[str, list[str]] = {}
+    for ask in operator_asks(merged):
+        if ask["category"] == "needs-you":
+            owed.setdefault(str(ask["ref"]).partition(":")[0], []).append(
+                str(ask["ref"])
+            )
+    return owed
+
+
+def _saturation_findings(
+    merged: Graph, by_repo: dict[str, list[Finding]], cap: int
+) -> None:
+    """Warn on a repo holding more needs-you asks than the declared cap (nemik:W348).
+
+    It has made the operator its bottleneck (the doc's "paralyzed waiting on too many parallel
+    operator answers"). One Warning on the repo, with the count and the oldest ask, so the remedy
+    (batch, withdraw, share) is local.
+    """
+    remedy = (
+        "the operator is this repo's bottleneck; batch them into one ask, withdraw those another "
+        "path answers, or cite a shared ask (same ask as <repo>:W<n>)"
+    )
+    for orepo, refs in sorted(_owed_asks(merged).items()):
+        if len(refs) <= cap:
+            continue
+        stamps = sorted(
+            str(merged.value(URIRef(BASE + r.replace(":", "/")), DCTERMS.created) or "")
+            for r in refs
+        )
+        oldest = next((s[:10] for s in stamps if s), "unknown")
+        found = (
+            f"{len(refs)} needs-you operator asks are open "
+            f"(cap {cap}, oldest issued {oldest}): {remedy}"
+        )
+        by_repo.setdefault(orepo, []).append(("Warning", "--", found))
+
+
+def _sla_findings(merged: Graph, by_repo: dict[str, list[Finding]], sla: int) -> None:
+    """Warn the blocker's repo when a card has waited on it longer than `sla` ticks (nemik:W356).
+
+    An inter-workstream SLA: a card blocked on another repo's open card for longer than the
+    declared number of loop ticks is a Warning on the BLOCKER's card, since that repo can act.
+    """
+    for waiter, _, target in merged.triples((None, NEMIK.waitsFor, None)):
+        wcite, tcite = ref(waiter), ref(target)
+        wrepo, trepo = wcite.partition(":")[0], tcite.partition(":")[0]
+        if wrepo == trepo or (target, OSLC_CM.state, None) not in merged:
+            continue
+        if (target, OSLC_CM.state, NEMIK.Done) in merged:
+            continue
+        if (waiter, OSLC_CM.state, NEMIK.Blocked) not in merged:
+            continue
+        # a blocker that itself waits on the operator cannot act; W348 counts that load instead
+        if str(merged.value(target, NEMIK.blockedKind) or "") == "human":
+            continue
+        ticks = int(str(merged.value(waiter, NEMIK.ticksBlocked) or 0))
+        if ticks <= sla:
+            continue
+        late = (
+            f"has kept {wcite} waiting {ticks} loop ticks (SLA {sla}): answer it, re-scope "
+            f"it, or tell {wrepo} why it waits"
+        )
+        by_repo.setdefault(trepo, []).append(("Warning", tcite.partition(":")[2], late))
+
+
+def _add_notes(by_repo: dict[str, list[Finding]], notes: dict[str, str]) -> None:
+    """File one repo-level Warning per repo whose note is given."""
+    for repo, text in notes.items():
+        by_repo.setdefault(repo, []).append(("Warning", "--", text))
+
+
+def _add_rows(
+    by_repo: dict[str, list[Finding]],
+    severity: str,
+    rows_by_repo: dict[str, list[tuple[str, str]]],
+) -> None:
+    """File each (card, text) row of a repo under `severity`."""
+    for repo, rows in rows_by_repo.items():
+        by_repo.setdefault(repo, []).extend((severity, sym, said) for sym, said in rows)
+
+
+def _is_umbrella(prereqs: dict[Node, set[Node]], n: Node) -> bool:
+    return len(prereqs.get(n, ())) >= UMBRELLA_PREREQS
+
+
+def _open_leaves(prereqs: dict[Node, set[Node]], target: Node) -> set[str]:
+    """Descend an umbrella to the open steps that are not themselves umbrellas.
+
+    Only umbrellas are descended (their work IS their children); a single step that waits on
+    something is still the step you wait for, so the descent stops at the first non-umbrella.
+
+    Returns:
+        the refs of the open leaf steps under `target`.
+
+    """
+    seen, todo, leaves = {target}, [target], set()
+    while todo:
+        for p in prereqs.get(todo.pop(), ()):
+            if p in seen:
+                continue
+            seen.add(p)
+            if _is_umbrella(prereqs, p):
+                todo.append(p)
+            else:
+                leaves.add(ref(p))
+    return leaves
+
+
+def _leaf_hint(waiter: Node, target: Node, leaves: set[str]) -> str:
+    """Say which open step a waiter should cite instead, with the exact re-point command.
+
+    Returns:
+        the hint text.
+
+    """
+    wrepo, wsym = ref(waiter).partition(":")[0], ref(waiter).partition(":")[2]
+    pf = f"mikemol-paths-forward --state {wrepo}/.claude/paths-forward.json"
+    if len(leaves) == 1:
+        (leaf,) = leaves
+        # `--update=W<n>`: the same argument to argparse, and never read as a "repo W<n>" cite
+        return (
+            f"waits on {ref(target)}, whose open step is {leaf}: "
+            f"{pf} --update={wsym} --blocked-on {leaf}"
+        )
+    return (
+        f"waits on {ref(target)}, whose open steps are {', '.join(sorted(leaves))}: "
+        f"cite the one that unblocks you ({pf} --update={wsym} --blocked-on <one of them>)"
+    )
+
+
+def _umbrella_hints(merged: Graph, by_repo: dict[str, list[Finding]]) -> None:
+    """Hand a card waiting on another repo's umbrella the leaves to cite (nemik:W405).
+
+    A card waiting on another repo's card that has open prerequisites of its own (an umbrella,
+    or a card a peer has since atomized) gets the leaves to cite instead, with the exact re-point
+    command, so the fix is one command rather than a hand search (three hand re-points of
+    nemik:W392 in one day, W870 -> W872 -> W878). Info only: it never changes the verdict.
+    """
+    open_nodes = {
+        n
+        for n in merged.subjects(OSLC_CM.state, None)
+        if (n, OSLC_CM.state, NEMIK.Done) not in merged
+    }
+    prereqs: dict[Node, set[Node]] = {}
+    for n in open_nodes:
+        for s in successors(merged, n):
+            if s in open_nodes and s != n:
+                prereqs.setdefault(s, set()).add(n)
+    for waiter, _, target in merged.triples((None, NEMIK.waitsFor, None)):
+        if not _is_umbrella(prereqs, target) or waiter not in open_nodes:
+            continue
+        wrepo, trepo = ref(waiter).partition(":")[0], ref(target).partition(":")[0]
+        if wrepo == trepo:
+            continue
+        leaves = _open_leaves(prereqs, target)
+        if leaves:
+            hint = _leaf_hint(waiter, target, leaves)
+            by_repo.setdefault(wrepo, []).append(
+                ("Info", ref(waiter).partition(":")[2], hint)
+            )
+
+
+def _letter_findings(
+    root: Path, merged: Graph, by_repo: dict[str, list[Finding]]
+) -> None:
+    """Warn on a cited letter that does not exist (nemik:W279).
+
+    A letter a waypoint cites as evidence must exist (moved to inbox/archive counts). The export
+    layout carries no inbox, so a root without any inbox directory is not asked.
+    """
+    if not any(root.glob("*/inbox")):
+        return
+    for node, _, cited in merged.triples((None, NEMIK.letter, None)):
+        repo, _, sym = str(node).removeprefix(BASE).partition("/")
+        rel = str(cited)
+        path = root / (rel if "/inbox/" in rel else f"{repo}/{rel}")
+        archived = path.parent / "archive" / path.name
+        if not (path.exists() or archived.exists()):
+            missing = (
+                f"cites the letter {rel}, which is not under the root: fix the path"
+            )
+            by_repo.setdefault(repo, []).append(("Warning", sym, missing))
+
+
+def _fleet_checks(
+    root: Path, merged: Graph, by_repo: dict[str, list[Finding]], repos: list[str]
+) -> None:
+    """Run the fleet checks that read the merged graph and add their findings to `by_repo`."""
+    _cycle_findings(merged, by_repo)
+    weights_toml = files("nemik.data").joinpath("rank-weights.toml").read_text()
+    _saturation_findings(
+        merged,
+        by_repo,
+        _declared_int(weights_toml, "saturation", "needs_you_per_repo", 10),
+    )
+    # nemik:W685: a repo whose ready cards without a manifest passed the declared ratchet.
+    add_manifest_warnings(merged, by_repo)
+    add_roll_warnings(root, merged, by_repo)
+    add_ready_neither_infos(root, by_repo)
+    _sla_findings(
+        merged, by_repo, _declared_int(weights_toml, "sla", "cross_repo_ticks", 48)
+    )
+    # nemik:W577: a loop that ticks idle with nothing workable is told to disarm or name its wait.
+    _add_notes(by_repo, idle_findings(root, merged, repos))
+    # nemik:W616, W617: a working card that looks stalled, or whose progress is invisible. Imported
+    # here because stalled reads history and history reads check: a module-level import is a cycle.
+    from nemik import stalled
+
+    _add_rows(by_repo, "Warning", stalled.findings(root, merged, int(time.time())))
+    # nemik:W608: the warrant debt may only fall: a repo above its ceiling is told to warrant.
+    _add_notes(by_repo, warrantdebt.findings(merged, warrantdebt.baseline()))
+    # nemik:W693: an enables edge whose target does not wait on its source (the operator's
+    # data-integrity rule, 695f3e0a line 80516): the enables and blocked_on edges disagree.
+    # Staged at Info, as ManifestShape was: the first run found 274 across the fleet, and a
+    # Warning is not cosmetic, so it rises on a declared ratchet from that count, not before.
+    _add_rows(by_repo, "Info", integrity_findings(merged))
+    _umbrella_hints(merged, by_repo)
+    _letter_findings(root, merged, by_repo)
+
+
 def survey(
     root: Path,
     phases: dict[str, float] | None = None,
@@ -683,240 +1020,17 @@ def survey(
             phases[name] = phases.get(name, 0.0) + now - mark[0]
         mark[0] = now
 
-    queues = workstream_files(root, QUEUE)
-    known = frozenset(repo for repo, _ in queues)
-    graphs: dict[str, Graph | None] = {}
-    refused: dict[str, str] = {}
-    merged = Graph()
-    for repo, state_path in queues:
-        try:
-            qg = queue_graph(repo, state_path, known)
-            qg.add(
-                (
-                    workstream_uri(repo),
-                    NEMIK.pathsforwardAdoption,
-                    Literal(adoption_state(state_path)),
-                )
-            )
-            _gate_mark(qg, repo, state_path.parent.parent, gate)
-            graphs[repo] = qg
-            merged += qg
-        except UnreadableStateError as exc:
-            graphs[repo], refused[repo] = None, str(exc)
+    graphs, refused, merged = _read_queues(root, gate)
     lap("parse")
     annotate(merged)
     lap("annotate")
-
-    # nemik:W256: a cited host-apply row the export does not hold is an unresolved citation.
-    # Only the
-    # file is read (no exporter subprocess), and no export at all leaves the citation as it was.
-    try:
-        export = load(root, run_exporter=False)
-    except ValueError:
-        export = None
-    if export is not None:
-        for node, cited in list(merged.subject_objects(NEMIK.blockedOn)):
-            m = HOST_REF.fullmatch(str(cited).strip())
-            if m and m[1] not in export.rows:
-                merged.add((node, NEMIK.unresolvedBlocker, cited))
+    _mark_unresolved(root, merged)
     if not check:
         yield from unchecked(graphs, refused)
         return
-
-    # nemik:W400: a rebuild in the same process re-validates only the nodes its change touches.
-    # nemik:W625: and a fresh process starts from the last reader's caches (142 s CPU cold, 11 s
-    # warm), kept in the user's cache directory; only the real fleet root is kept, so a test's
-    # temporary root does not grow it.
-    kept = root.resolve() == default_root().resolve()
-    if kept:
-        cachestore.restore_user()
-    results = shacl_findings(str(root.resolve()), merged, shapes())
-    if kept:
-        cachestore.persist_user()
+    by_repo = _shacl_by_repo(root, merged, graphs)
     lap("shacl")
-    by_repo: dict[str, list[Finding]] = {repo: [] for repo in graphs}
-    for focus, sev, msg in sorted(results):
-        repo, _, sym = str(focus).removeprefix(BASE).partition("/")
-        by_repo.setdefault(repo, []).append(
-            (str(sev).rsplit("#", 1)[-1], sym or "--", str(msg))
-        )
-    # nemik:W331: every card on a dependency cycle that the operator cannot break is a Warning, so
-    # the cause is fixed where it is written (usually an umbrella that lists its children under
-    # `enables` and is blocked_on them). nemik.critical classifies the cycles.
-
-    cause = (
-        "none of them can become ready (an umbrella listing its children under "
-        "enables while blocked_on them is the usual cause)"
-    )
-    # nemik:W484 (mtools:W1134's ring of three): name the ring in order, "a:W1 -> a:W2 -> a:W1",
-    # as the fleet's shared walker finds it, rather than as an unordered set of members.
-
-    rings = [[ref(n) for n in ring] for ring in dependency_cycles(merged)]
-    for members, operator_can_break in cycles(merged):
-        if operator_can_break:
-            continue
-        for member in members:
-            mrepo, _, msym = member.partition(":")
-            ring = next(
-                (r for r in rings if member in r and set(r) <= set(members)), None
-            )
-            if ring:
-                at = ring.index(member)
-                turn = [*ring[at:], *ring[:at], member]
-                found = f"on a dependency cycle {' -> '.join(turn)}: {cause}"
-            else:
-                others = ", ".join(m for m in members if m != member) or "itself"
-                found = f"on a dependency cycle with {others}: {cause}"
-            by_repo.setdefault(mrepo, []).append(("Warning", msym, found))
-    # nemik:W348: a repo holding more needs-you asks than the declared cap has made the operator its
-    # bottleneck (the doc's "paralyzed waiting on too many parallel operator answers"). One Warning
-    # on the repo, with the count and the oldest ask, so the remedy (batch, withdraw, share) is
-    # local.
-
-    weights_toml = files("nemik.data").joinpath("rank-weights.toml").read_text()
-    cap = _declared_int(weights_toml, "saturation", "needs_you_per_repo", 10)
-    owed: dict[str, list[str]] = {}
-    for ask in operator_asks(merged):
-        if ask["category"] == "needs-you":
-            owed.setdefault(str(ask["ref"]).partition(":")[0], []).append(
-                str(ask["ref"])
-            )
-    remedy = (
-        "the operator is this repo's bottleneck; batch them into one ask, withdraw those another "
-        "path answers, or cite a shared ask (same ask as <repo>:W<n>)"
-    )
-    for orepo, refs in sorted(owed.items()):
-        if len(refs) <= cap:
-            continue
-        stamps = sorted(
-            str(merged.value(URIRef(BASE + r.replace(":", "/")), DCTERMS.created) or "")
-            for r in refs
-        )
-        oldest = next((s[:10] for s in stamps if s), "unknown")
-        found = (
-            f"{len(refs)} needs-you operator asks are open "
-            f"(cap {cap}, oldest issued {oldest}): {remedy}"
-        )
-        by_repo.setdefault(orepo, []).append(("Warning", "--", found))
-    # nemik:W685: a repo whose ready cards without a manifest passed the declared ratchet.
-    add_manifest_warnings(merged, by_repo)
-    add_roll_warnings(root, merged, by_repo)
-    add_ready_neither_infos(root, by_repo)
-    # nemik:W356: an inter-workstream SLA. A card blocked on another repo's open card for longer
-    # than
-    # the declared number of loop ticks is a Warning on the BLOCKER's card, since that repo can act.
-    sla = _declared_int(weights_toml, "sla", "cross_repo_ticks", 48)
-    for waiter, _, target in merged.triples((None, NEMIK.waitsFor, None)):
-        wcite, tcite = ref(waiter), ref(target)
-        wrepo, trepo = wcite.partition(":")[0], tcite.partition(":")[0]
-        if wrepo == trepo or (target, OSLC_CM.state, None) not in merged:
-            continue
-        if (target, OSLC_CM.state, NEMIK.Done) in merged:
-            continue
-        if (waiter, OSLC_CM.state, NEMIK.Blocked) not in merged:
-            continue
-        # a blocker that itself waits on the operator cannot act; W348 counts that load instead
-        if str(merged.value(target, NEMIK.blockedKind) or "") == "human":
-            continue
-        ticks = int(str(merged.value(waiter, NEMIK.ticksBlocked) or 0))
-        if ticks <= sla:
-            continue
-        late = (
-            f"has kept {wcite} waiting {ticks} loop ticks (SLA {sla}): answer it, re-scope "
-            f"it, or tell {wrepo} why it waits"
-        )
-        by_repo.setdefault(trepo, []).append(("Warning", tcite.partition(":")[2], late))
-    # nemik:W577: a loop that ticks idle with nothing workable is told to disarm or name its wait.
-    idle_said = idle_findings(root, merged, [repo for repo, _ in queues])
-    for irepo, said in idle_said.items():
-        by_repo.setdefault(irepo, []).append(("Warning", "--", said))
-    # nemik:W616, W617: a working card that looks stalled, or whose progress is invisible. Imported
-    # here because stalled reads history and history reads check: a module-level import is a cycle.
-    from nemik import stalled
-
-    for srepo, rows in stalled.findings(root, merged, int(time.time())).items():
-        by_repo.setdefault(srepo, []).extend(
-            ("Warning", sym, said) for sym, said in rows
-        )
-    # nemik:W608: the warrant debt may only fall: a repo above its ceiling is told to warrant.
-    debts = warrantdebt.findings(merged, warrantdebt.baseline())
-    for drepo, dtext in debts.items():
-        by_repo.setdefault(drepo, []).append(("Warning", "--", dtext))
-    # nemik:W693: an enables edge whose target does not wait on its source (the operator's
-    # data-integrity rule, 695f3e0a line 80516): the enables and blocked_on edges disagree.
-    # Staged at Info, as ManifestShape was: the first run found 274 across the fleet, and a
-    # Warning is not cosmetic, so it rises on a declared ratchet from that count, not before.
-    for irepo, rows in integrity_findings(merged).items():
-        by_repo.setdefault(irepo, []).extend(("Info", sym, said) for sym, said in rows)
-    # nemik:W405: a card waiting on another repo's card that has open prerequisites of its own (an
-    # umbrella, or a card a peer has since atomized) gets the leaves to cite instead, with the exact
-    # re-point command, so the fix is one command rather than a hand search (three hand re-points of
-    # nemik:W392 in one day, W870 -> W872 -> W878). Info only: it never changes the verdict.
-
-    open_nodes = {
-        n
-        for n in merged.subjects(OSLC_CM.state, None)
-        if (n, OSLC_CM.state, NEMIK.Done) not in merged
-    }
-    prereqs: dict[Node, set[Node]] = {}
-    for n in open_nodes:
-        for s in successors(merged, n):
-            if s in open_nodes and s != n:
-                prereqs.setdefault(s, set()).add(n)
-
-    # An umbrella is what the shape calls one: two or more open children enable it. Only
-    # umbrellas are
-    # descended (their work IS their children); a single step that waits on something is still the
-    # step you wait for, so the descent stops at the first non-umbrella.
-    def umbrella(n: Node) -> bool:
-        return len(prereqs.get(n, ())) >= UMBRELLA_PREREQS
-
-    for waiter, _, target in merged.triples((None, NEMIK.waitsFor, None)):
-        if not umbrella(target) or waiter not in open_nodes:
-            continue
-        wrepo, trepo = ref(waiter).partition(":")[0], ref(target).partition(":")[0]
-        if wrepo == trepo:
-            continue
-        seen, todo, leaves = {target}, [target], set()
-        while todo:
-            for p in prereqs.get(todo.pop(), ()):
-                if p in seen:
-                    continue
-                seen.add(p)
-                if umbrella(p):
-                    todo.append(p)
-                else:
-                    leaves.add(ref(p))
-        if not leaves:
-            continue
-        wsym = ref(waiter).partition(":")[2]
-        pf = f"mikemol-paths-forward --state {wrepo}/.claude/paths-forward.json"
-        if len(leaves) == 1:
-            (leaf,) = leaves
-            # `--update=W<n>`: the same argument to argparse, and never read as a "repo W<n>" cite
-            hint = (
-                f"waits on {ref(target)}, whose open step is {leaf}: "
-                f"{pf} --update={wsym} --blocked-on {leaf}"
-            )
-        else:
-            hint = (
-                f"waits on {ref(target)}, whose open steps are {', '.join(sorted(leaves))}: "
-                f"cite the one that unblocks you ({pf} --update={wsym} --blocked-on <one of them>)"
-            )
-        by_repo.setdefault(wrepo, []).append(("Info", wsym, hint))
-    # nemik:W279: a letter a waypoint cites as evidence must exist (moved to inbox/archive counts).
-    # The export layout carries no inbox, so a root without any inbox directory is not asked.
-    if any(root.glob("*/inbox")):
-        for node, _, cited in merged.triples((None, NEMIK.letter, None)):
-            repo, _, sym = str(node).removeprefix(BASE).partition("/")
-            rel = str(cited)
-            path = root / (rel if "/inbox/" in rel else f"{repo}/{rel}")
-            archived = path.parent / "archive" / path.name
-            if not (path.exists() or archived.exists()):
-                missing = (
-                    f"cites the letter {rel}, which is not under the root: fix the path"
-                )
-                by_repo.setdefault(repo, []).append(("Warning", sym, missing))
+    _fleet_checks(root, merged, by_repo, list(graphs))
     lap("fleet_checks")
     for repo, g in graphs.items():
         if g is None:
