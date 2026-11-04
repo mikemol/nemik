@@ -29,7 +29,6 @@ def _wp(
     *,
     pos: int | None = None,
     vector: str | None = None,
-    touches: tuple[str, ...] = (),
 ) -> URIRef:
     n = waypoint_uri("a", sym)
     g.add((n, OSLC_CM.state, STATE[status]))
@@ -39,6 +38,10 @@ def _wp(
         g.add((n, NEMIK.queuePosition, Literal(pos)))
     if vector:
         g.add((n, NEMIK.vector, Literal(vector)))
+    return n
+
+
+def _tag(g: Graph, n: URIRef, touches: tuple[str, ...]) -> URIRef:
     for t in touches:
         g.add((n, NEMIK.touches, Literal(t)))
     return n
@@ -86,13 +89,15 @@ def test_no_inversion_when_the_next_item_is_at_the_floor_or_nothing_reaches_it()
 def test_policy_blocks_a_ready_item_sharing_a_surface_with_an_open_member() -> None:
     """Policy blocks a ready item sharing a surface with an open member."""
     g = Graph()
-    _wp(g, "W1", "blocked", touches=("trust-boundary", "opa"))  # a member by tag, open
-    _wp(g, "W2", touches=("opa", "dashboard"))  # shares the opa surface
-    _wp(g, "W3", touches=("dashboard",))  # shares nothing with a member
-    _wp(g, "W4", vector=V.format(R="L", S="C"), touches=("rbac",))  # a member by vector
-    _wp(g, "W5", touches=("rbac",))
-    _wp(
-        g, "W6", touches=("opa", "trust-boundary")
+    _tag(g, _wp(g, "W1", "blocked"), ("trust-boundary", "opa"))  # a member by tag, open
+    _tag(g, _wp(g, "W2"), ("opa", "dashboard"))  # shares the opa surface
+    _tag(g, _wp(g, "W3"), ("dashboard",))  # shares nothing with a member
+    _tag(
+        g, _wp(g, "W4", vector=V.format(R="L", S="C")), ("rbac",)
+    )  # a member by vector
+    _tag(g, _wp(g, "W5"), ("rbac",))
+    _tag(
+        g, _wp(g, "W6"), ("opa", "trust-boundary")
     )  # a member itself: never blocked by W1
     assert policy_blocks(g, "a", load_guarantees()) == [
         ("W2", "W1", "trust-boundary", ["opa"]),
@@ -104,9 +109,9 @@ def test_policy_blocks_a_ready_item_sharing_a_surface_with_an_open_member() -> N
 def test_a_done_member_blocks_nothing_and_the_class_tag_alone_is_no_surface() -> None:
     """A done member blocks nothing and the class tag alone is no surface."""
     g = Graph()
-    _wp(g, "W1", "done", touches=("trust-boundary", "opa"))
-    _wp(g, "W2", touches=("opa",))
-    _wp(g, "W3", "blocked", touches=("trust-boundary",))
+    _tag(g, _wp(g, "W1", "done"), ("trust-boundary", "opa"))
+    _tag(g, _wp(g, "W2"), ("opa",))
+    _tag(g, _wp(g, "W3", "blocked"), ("trust-boundary",))
     assert policy_blocks(g, "a", load_guarantees()) == []
 
 
@@ -125,8 +130,8 @@ def test_check_names_rule_and_pair_and_exits_one(
 ) -> None:
     """Check names rule and pair and exits one."""
     g = Graph()
-    _wp(g, "W1", pos=0, touches=("opa",))
-    _wp(g, "W2", pos=1, vector=V.format(R="H", S="C"), touches=("opa",))
+    _tag(g, _wp(g, "W1", pos=0), ("opa",))
+    _tag(g, _wp(g, "W2", pos=1, vector=V.format(R="H", S="C")), ("opa",))
     with pytest.raises(SystemExit) as e:
         main(["a", "--check"], g=g)
     out = capsys.readouterr().out.splitlines()
@@ -169,10 +174,10 @@ def test_only_narrows_the_blocked_dependents_to_named_tags() -> None:
         )
     )
     g = Graph()
-    _wp(g, "W1", "blocked", touches=("trust-boundary", "opa"))
-    _wp(g, "W2", touches=("opa", "tenant-rollout"))  # in scope: blocked
-    _wp(
-        g, "W3", touches=("opa", "dashboard")
+    _tag(g, _wp(g, "W1", "blocked"), ("trust-boundary", "opa"))
+    _tag(g, _wp(g, "W2"), ("opa", "tenant-rollout"))  # in scope: blocked
+    _tag(
+        g, _wp(g, "W3"), ("opa", "dashboard")
     )  # same surface, not a rollout: not blocked
     assert policy_blocks(g, "a", load_guarantees(text)) == [
         ("W2", "W1", "trust-boundary", ["opa"])
