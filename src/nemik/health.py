@@ -13,8 +13,9 @@ from __future__ import annotations
 
 import tomllib
 from importlib.resources import files
-from typing import TYPE_CHECKING, NamedTuple
+from typing import TYPE_CHECKING, NamedTuple, cast
 
+from nemik import tomlview
 from nemik.blocks import operator_asks
 from nemik.cards import Card, cards
 
@@ -38,6 +39,17 @@ class Health(NamedTuple):
     reasons: list[str]
 
 
+def _floors(value: object) -> tuple[float, float]:
+    """Read one declared (amber, red) pair.
+
+    Returns:
+        The two floors as floats.
+
+    """
+    pair = cast("list[float]", value)
+    return float(pair[0]), float(pair[1])
+
+
 def thresholds(text: str | None = None) -> dict[str, tuple[float, float]]:
     """Read the declared `[health]` table: for each signal, its (amber, red) floor.
 
@@ -47,8 +59,9 @@ def thresholds(text: str | None = None) -> dict[str, tuple[float, float]]:
     """
     if text is None:
         text = files("nemik.data").joinpath("rank-weights.toml").read_text()
-    table: dict[str, list[float]] = tomllib.loads(text).get("health", {})
-    return {s: (float(table[s][0]), float(table[s][1])) for s in SIGNALS if s in table}
+    parsed: object = tomllib.loads(text)
+    table = tomlview.table(tomlview.table(parsed).get("health"))
+    return {s: _floors(table[s]) for s in SIGNALS if s in table}
 
 
 def health(g: Graph, repo: str, limits: dict[str, tuple[float, float]]) -> Health:

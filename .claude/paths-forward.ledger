@@ -4638,3 +4638,8 @@
 2026-11-04T19:22:29Z  status W1630 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-04T19:23:30Z  interrupt W1631 minted    -         "staticserve.handler's response writers move to a module-level _Writer base class, so its C901 clears and ruff falls 30 to 29"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1568
 2026-11-04T19:23:37Z  status W1631 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T19:25:38Z  tick  W1631 advanced  sweep     "stacks 991 (W1629 test_flow_reference S311, tests-only 6 fresh, landed 18:52:12Z), 992 (W1630 serve.do_GET split, ruff 33 to 30, landed 19:21:40Z) and 993 (W1631 staticserve _Writer, ruff 30 to 29, inflight): the structural rows done by probing on a copy first; nested methods count toward their enclosing function [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T19:27:36Z  interrupt W1632 minted    -         "health.thresholds and importer.main read through typed values, so two mypy Any reads clear"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1568
+2026-11-04T19:27:44Z  status W1632 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T19:29:21Z  interrupt W1633 minted    -         "Decide whether nemik adds defusedxml for mspdi's XML parse, clearing five ruff S314/S405 findings"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1568
+2026-11-04T19:29:33Z  status W1633 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

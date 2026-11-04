@@ -109,6 +109,14 @@ def commands(
     return adds + updates
 
 
+class Options(argparse.Namespace):
+    """The parsed command line: the format, the exported file and the receiving queue."""
+
+    fmt: str
+    file: Path
+    state: Path
+
+
 def main(argv: list[str] | None = None) -> int:
     """nemik-import: print the commands that bring another tool's tasks into a queue.
 
@@ -127,7 +135,7 @@ def main(argv: list[str] | None = None) -> int:
         default=Path(".claude/paths-forward.json"),
         help="the receiving queue (read for its counter and existing source ids; never written)",
     )
-    args = ap.parse_args(argv)
+    args = ap.parse_args(argv, namespace=Options())
     writer = str(Path(sys.executable).parent / "mikemol-paths-forward")
     for cmd in commands(
         _read(args.fmt, args.file), args.fmt, args.file.name, args.state, writer
