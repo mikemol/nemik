@@ -22,7 +22,7 @@ from dataclasses import asdict, dataclass, field
 from datetime import UTC, datetime
 from itertools import starmap
 from pathlib import Path
-from typing import TypedDict, cast
+from typing import NamedTuple, TypedDict, cast
 
 from mikemol.procrun.proc import capture_bytes
 from rdflib import RDF
@@ -867,6 +867,78 @@ class WeeklyRow(TypedDict):
     oldest_blocked_days: float | None
 
 
+class _Track(NamedTuple):
+    """What weekly carries from one week to the next: births, closes, blocks and operator asks."""
+
+    born: dict[str, datetime]
+    done_at: dict[str, datetime]
+    blocked_since: dict[str, datetime]
+    on_operator: set[str]
+
+
+def _scan(
+    inside: list[Snapshot], track: _Track
+) -> tuple[list[float], list[str], int, int]:
+    """Walk one week's commits, updating `track`, and count what closed and what was asked.
+
+    Returns:
+        The days each card closed this week took from its first commit, the cards that closed,
+        and how many operator asks were opened and answered.
+
+    """
+    finished: list[float] = []
+    closed_now: list[str] = []
+    # nemik:W357: operator asks, a card entering or leaving blocked_kind human, counted per
+    # week.
+    asked, answered = 0, 0
+    for at, queue in inside:
+        now_on = {
+            str(w["symbol"])
+            for w in queue.get("waypoints", [])
+            if w.get("status") == "blocked" and w.get("blocked_kind") == "human"
+        }
+        asked += len(now_on - track.on_operator)
+        answered += len(track.on_operator - now_on)
+        track.on_operator.clear()
+        track.on_operator.update(now_on)
+        for symbol, status in _status(queue).items():
+            track.born.setdefault(symbol, at)
+            if status == "done" and symbol not in track.done_at:
+                track.done_at[symbol] = at
+                finished.append((at - track.born[symbol]).total_seconds() / 86400)
+                closed_now.append(symbol)
+            if status == "blocked":
+                track.blocked_since.setdefault(symbol, at)
+            else:
+                track.blocked_since.pop(symbol, None)
+    return finished, closed_now, asked, answered
+
+
+def _by_week(snaps: list[Snapshot]) -> list[tuple[tuple[int, int], list[Snapshot]]]:
+    """Group the snapshots by ISO (year, week).
+
+    Returns:
+        Each (year, week) with its snapshots, oldest week first.
+
+    """
+    weeks: dict[tuple[int, int], list[Snapshot]] = {}
+    for at, queue in snaps:
+        iso = at.isocalendar()
+        weeks.setdefault((iso.year, iso.week), []).append((at, queue))
+    return sorted(weeks.items())
+
+
+def _open_and_blocked(at_end: dict[str, str]) -> tuple[list[str], list[str]]:
+    """Split a week's closing statuses into the open cards and, of those, the blocked ones.
+
+    Returns:
+        The cards neither done nor dropped, and the ones among them that are blocked.
+
+    """
+    open_cards = [s for s, st in at_end.items() if st not in {"done", "dropped"}]
+    return open_cards, [s for s in open_cards if at_end[s] == "blocked"]
+
+
 def weekly(snaps: list[Snapshot]) -> list[WeeklyRow]:
     """One row per ISO week that saw a commit.
 
@@ -880,52 +952,20 @@ def weekly(snaps: list[Snapshot]) -> list[WeeklyRow]:
         the ratios and the oldest block.
 
     """
-    weeks: dict[tuple[int, int], list[Snapshot]] = {}
-    for at, queue in snaps:
-        iso = at.isocalendar()
-        weeks.setdefault((iso.year, iso.week), []).append((at, queue))
     rows: list[WeeklyRow] = []
     before: QueueDoc = {}
-    blocked_since: dict[str, datetime] = {}
-    born: dict[str, datetime] = {}
-    done_at: dict[str, datetime] = {}
     # nemik:W328: time each card spent in each status over the whole history, for flow efficiency.
     spent = time_in_state(snaps, snaps[-1][0] if snaps else datetime.now(UTC))
-    on_operator: set[str] = set()
-    for (year, week), inside in sorted(weeks.items()):
-        finished: list[float] = []
-        closed_now: list[str] = []
-        # nemik:W357: operator asks, a card entering or leaving blocked_kind human, counted per
-        # week.
-        asked, answered = 0, 0
-        for at, queue in inside:
-            now_on = {
-                str(w["symbol"])
-                for w in queue.get("waypoints", [])
-                if w.get("status") == "blocked" and w.get("blocked_kind") == "human"
-            }
-            asked += len(now_on - on_operator)
-            answered += len(on_operator - now_on)
-            on_operator = now_on
-            for symbol, status in _status(queue).items():
-                born.setdefault(symbol, at)
-                if status == "done" and symbol not in done_at:
-                    done_at[symbol] = at
-                    finished.append((at - born[symbol]).total_seconds() / 86400)
-                    closed_now.append(symbol)
-                if status == "blocked":
-                    blocked_since.setdefault(symbol, at)
-                else:
-                    blocked_since.pop(symbol, None)
+    track = _Track({}, {}, {}, set())
+    for key, inside in _by_week(snaps):
+        finished, closed_now, asked, answered = _scan(inside, track)
         end_at, end = inside[-1]
         change = diff(before, end)
-        at_end = _status(end)
-        open_cards = [s for s, st in at_end.items() if st not in {"done", "dropped"}]
-        blocked = [s for s in open_cards if at_end[s] == "blocked"]
-        oldest = min(blocked, key=blocked_since.__getitem__, default=None)
+        open_cards, blocked = _open_and_blocked(_status(end))
+        oldest = min(blocked, key=track.blocked_since.__getitem__, default=None)
         rows.append(
             {
-                "week": f"{year}-W{week:02d}",
+                "week": f"{key[0]}-W{key[1]:02d}",
                 "opened": len(change.minted),
                 "closed": len(change.closed),
                 # nemik:W315: median days from a card's first commit to the commit that closed it,
@@ -951,14 +991,14 @@ def weekly(snaps: list[Snapshot]) -> list[WeeklyRow]:
                 else 0.0,
                 "operator_asked": asked,
                 "operator_answered": answered,
-                "operator_open": len(on_operator),
+                "operator_open": len(track.on_operator),
                 # Little's law on the operator alone: open asks over the weekly answer rate.
-                "operator_wait_days": round(len(on_operator) / answered * 7, 1)
+                "operator_wait_days": round(len(track.on_operator) / answered * 7, 1)
                 if answered
                 else None,
                 "oldest_blocked": oldest,
                 "oldest_blocked_days": round(
-                    (end_at - blocked_since[oldest]).total_seconds() / 86400, 1
+                    (end_at - track.blocked_since[oldest]).total_seconds() / 86400, 1
                 )
                 if oldest
                 else None,

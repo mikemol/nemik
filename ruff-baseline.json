@@ -19,8 +19,7 @@
   "PLC0415": 1
  },
  "src/nemik/history.py": {
-  "PLC0415": 1,
-  "PLR0914": 1
+  "PLC0415": 1
  },
  "src/nemik/mspdi.py": {
   "S314": 1,
