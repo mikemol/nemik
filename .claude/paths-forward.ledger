@@ -4489,3 +4489,7 @@
 2026-11-04T02:51:38Z  status W1584 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-04T03:00:34Z  interrupt W1585 minted    -         "Public names for five privately imported helpers: letters._today, calendars._venv_ics, shaclinc._results, serve._build_static and serve._to_json, so six ruff findings (five PLC2701, one SLF001) clear"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1568
 2026-11-04T03:00:41Z  status W1585 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T03:25:23Z  status W1585 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T03:30:06Z  tick  W1585 advanced  sweep     "ruff lane: stacks 954 (salience.audit), 955 (check.survey), 956 (five public names) landed, ruff 85 to 71, mypy flat 116; standing 13 long-lane-first line written [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T03:32:47Z  interrupt W1586 minted    -         "Subprocess calls in rank, hostapply and work go through procrun capture, so six S404/S603 clear in src and test_rank_apply patches nemik.rank.capture, a seventh"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1568
+2026-11-04T03:32:57Z  status W1586 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

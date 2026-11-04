@@ -3,11 +3,11 @@
 """nemik:W427: nemik-rank --apply hands its rows to the writer's --weights-from, never the file."""
 
 import json
-import subprocess
 import sys
 from pathlib import Path
 
 import pytest
+from mikemol.procrun.proc import Completed
 
 from nemik import rank
 
@@ -21,13 +21,13 @@ def test_apply_calls_the_queue_writer_with_the_rows(
     cmds: list[list[str]] = []
     read_rows: list[object] = []
 
-    def fake_run(cmd: list[str], **_kwargs: object) -> subprocess.CompletedProcess[str]:
+    def fake_run(cmd: list[str], **_kwargs: object) -> Completed:
         cmds.append(cmd)
         rows_read: object = json.loads(Path(cmd[-1]).read_text(encoding="utf-8"))
         read_rows.append(rows_read)
-        return subprocess.CompletedProcess(cmd, 0)
+        return Completed(cmd, 0, "", "")
 
-    monkeypatch.setattr(subprocess, "run", fake_run)
+    monkeypatch.setattr(rank, "capture", fake_run)
     rows: list[rank.RankRow] = [{"symbol": "W1", "weight": 3}]
     rank._apply("/q/paths-forward.json", rows)
     (cmd,) = cmds
@@ -40,10 +40,10 @@ def test_apply_calls_the_queue_writer_with_the_rows(
 def test_a_refusing_writer_fails_the_command(monkeypatch: pytest.MonkeyPatch) -> None:
     """A refusing writer fails the command."""
 
-    def refuse(cmd: list[str], **_kwargs: object) -> subprocess.CompletedProcess[str]:
-        return subprocess.CompletedProcess(cmd, 2)
+    def refuse(cmd: list[str], **_kwargs: object) -> Completed:
+        return Completed(cmd, 2, "", "")
 
-    monkeypatch.setattr(subprocess, "run", refuse)
+    monkeypatch.setattr(rank, "capture", refuse)
     with pytest.raises(SystemExit) as e:
         rank._apply("/q/paths-forward.json", [])
     assert e.value.code == EXIT_REFUSED

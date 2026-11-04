@@ -31,10 +31,6 @@
   "PLC0415": 1,
   "PLR0914": 1
  },
- "src/nemik/hostapply.py": {
-  "S404": 1,
-  "S603": 1
- },
  "src/nemik/letters.py": {
   "PLR0913": 2
  },
@@ -44,9 +40,7 @@
  },
  "src/nemik/rank.py": {
   "PLC0415": 6,
-  "PLR0913": 2,
-  "S404": 1,
-  "S603": 1
+  "PLR0913": 2
  },
  "src/nemik/salience.py": {
   "PLR0913": 3,
@@ -69,10 +63,6 @@
  },
  "src/nemik/witwait.py": {
   "PLR0913": 1
- },
- "src/nemik/work.py": {
-  "S404": 1,
-  "S603": 1
  },
  "tests/installed.py": {
   "S404": 1,
@@ -105,7 +95,6 @@
   "S405": 1
  },
  "tests/test_rank_apply.py": {
-  "S404": 1,
   "SLF001": 2
  },
  "tests/test_score.py": {

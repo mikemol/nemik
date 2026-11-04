@@ -12,7 +12,6 @@ from __future__ import annotations
 import argparse
 import json
 import re
-import subprocess
 import sys
 import tempfile
 import tomllib
@@ -23,6 +22,7 @@ from pathlib import Path
 from typing import TYPE_CHECKING, TypedDict
 
 from mikemol.frontier.walk import frontier as walk
+from mikemol.procrun.proc import capture
 from rdflib import Graph, Literal, URIRef
 from rdflib.namespace import DCTERMS, PROV
 
@@ -1234,11 +1234,11 @@ def _apply(state: str, rows: list[RankRow]) -> None:
     ) as f:
         json.dump(rows, f)
     try:
-        done = subprocess.run(
-            [str(pf), "--state", str(state), "--weights-from", f.name], check=False
-        )
+        done = capture([str(pf), "--state", str(state), "--weights-from", f.name])
     finally:
         Path(f.name).unlink()
+    sys.stdout.write(done.stdout or "")
+    sys.stderr.write(done.stderr or "")
     if done.returncode:
         raise SystemExit(done.returncode)
 

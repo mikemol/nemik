@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1585,
+  "counter": 1586,
   "waypoints": [
     {
       "symbol": "W1",
@@ -37896,7 +37896,7 @@
     {
       "symbol": "W1585",
       "title": "Public names for five privately imported helpers: letters._today, calendars._venv_ics, shaclinc._results, serve._build_static and serve._to_json, so six ruff findings (five PLC2701, one SLF001) clear",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [
         "ruff",
@@ -37907,14 +37907,14 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Rename each to a public name in its module and its users (codemod w1585.py), measure on the real tree: expected ruff 77 to 71, unmeasured until run.",
-      "evidence": "2026-11-04T03:00:41Z: G0 2026-11-04T03:01:00Z: gate empty since the 955 landing at 02:50:54Z (10 min 6 s at this stamp). Pace read 2026-11-04T01:25:47Z (ruff then 85, now 77 after 954 and 955; mypy 116; codon owes 2). Actuator: codemod w1585.py renames letters._today to current_day, calendars._venv_ics to venv_ics, shaclinc._results to shacl_results, serve._build_static to build_static_unscoped, serve._to_json to to_json_unscoped, across src and the tests that import them. Sensor: mikemol-pycheck --ratchet on the real tree, house ruff on the touched files. Expected ruff 77 to 71 (five PLC2701 and the SLF001 on shaclinc._results in test_cachestore), mypy flat 116; unmeasured until run, no probe copy because a rename has no partial form. Time-box: submit by 03:31:00Z.",
+      "next_bounded_step": null,
+      "evidence": "2026-11-04T03:00:41Z: G0 2026-11-04T03:01:00Z: gate empty since the 955 landing at 02:50:54Z (10 min 6 s at this stamp). Pace read 2026-11-04T01:25:47Z (ruff then 85, now 77 after 954 and 955; mypy 116; codon owes 2). Actuator: codemod w1585.py renames letters._today to current_day, calendars._venv_ics to venv_ics, shaclinc._results to shacl_results, serve._build_static to build_static_unscoped, serve._to_json to to_json_unscoped, across src and the tests that import them. Sensor: mikemol-pycheck --ratchet on the real tree, house ruff on the touched files. Expected ruff 77 to 71 (five PLC2701 and the SLF001 on shaclinc._results in test_cachestore), mypy flat 116; unmeasured until run, no probe copy because a rename has no partial form. Time-box: submit by 03:31:00Z. | 2026-11-04T03:25:23Z: Landed a5d963f7 at 2026-11-04T03:24:37Z (reflog); 462 of 465 targets fresh, green; ruff 77 to 71 (as measured on the real tree; the first ratchet write was refused for 8 findings above baseline, fixed in-stack). Sensor quoted before the close: 'unnamed: W1585' (landed stack, card still working). Gate empty 02:50:54Z to the 956 submit, then gated to 03:24:37Z. Codon first reading was the gate (green). The 50 touched-file tests ran before the docstring and import-order fixes; the gate covered the final tree.",
       "issued_at": "2026-11-04T03:00:34Z",
       "minted_during": "interrupt",
       "caused_by": "W1568",
-      "last_worked": "2026-11-04T03:00:41Z",
+      "last_worked": "2026-11-04T03:25:23Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261104T032523Z",
       "manifest": [
         "src/nemik/letters.py",
         "src/nemik/blocks_cli.py",
@@ -37928,6 +37928,36 @@
         "tests/test_shaclinc_unwatched.py",
         "tests/test_memo_audits.py",
         "tests/test_build_scope.py",
+        "ruff-baseline.json"
+      ],
+      "size_class": "medium"
+    },
+    {
+      "symbol": "W1586",
+      "title": "Subprocess calls in rank, hostapply and work go through procrun capture, so six S404/S603 clear in src and test_rank_apply patches nemik.rank.capture, a seventh",
+      "status": "working",
+      "enables": [],
+      "touches": [
+        "ruff",
+        "rank",
+        "hostapply",
+        "work"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Codemod w1586.py: capture() replaces subprocess.run at the three sites; Completed and TimeoutExpired come from mikemol.procrun.proc; rank echoes the writer's stdout and stderr; hostapply raises ValueError on a non-zero exit. Measure on the real tree: expected ruff 71 to 64.",
+      "evidence": "2026-11-04T03:32:57Z: G0 2026-11-04T03:33:10Z (R211 f2): gate empty since the 956 landing at 03:24:37Z (8 min 33 s at this stamp). Pace read 2026-11-04T01:25:47Z, ruff then 85, now 71 after 954 to 956; mypy 116; codon owes 2. Table of next ruff rows by fall per landing (R211 f2), from the baseline file: subprocess S404/S603 in rank, hostapply, work (6, this card) plus test_rank_apply S404 (1); tests/installed.py and tests/webpage.py S404/S603 (5, need a Popen seam, unprobed); xml S314/S405 in mspdi and test_mspdi (6, defusedxml dependency, unprobed); PLC0415 sites (14, cycle-bound, W1577/W1578); PLR0913 records (10, Codon census risk, unprobed); C901 handlers in serve and staticserve (3, unprobed). Actuator: codemod w1586.py applied to the real files. Sensor: mikemol-pycheck --ratchet on the real tree. Expected ruff 71 to 64 (seven findings), mypy flat 116; unmeasured until run, no probe copy because the change at each site is whole. Behaviour changes to name: rank echoes the writer's output after it exits instead of streaming it; hostapply raises ValueError for a non-zero exit with a new message. Time-box: submit by 04:03:00Z.",
+      "issued_at": "2026-11-04T03:32:47Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1568",
+      "last_worked": "2026-11-04T03:32:57Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "src/nemik/rank.py",
+        "src/nemik/hostapply.py",
+        "src/nemik/work.py",
+        "tests/test_rank_apply.py",
         "ruff-baseline.json"
       ],
       "size_class": "medium"
@@ -47303,7 +47333,36 @@
         }
       ],
       "id": "nemik:R208"
+    },
+    {
+      "card": "W1585",
+      "trigger": "round 211: stacks 954 (W1583 salience.audit split, ruff 85 to 81) 12889a52 landed 02:04:15Z, 955 (W1584 check.survey split, ruff 81 to 77) 530c0e66 landed 02:50:54Z and 956 (W1585 five public names, ruff 77 to 71) a5d963f7 landed 03:24:37Z; the gate empty at each of the three landings for about 38, 28 and 13 minutes",
+      "root": "Verified from the reflog (unix stamps): 5e2b04b3 1793754744 = 01:12:24Z, 12889a52 1793757855 = 02:04:15Z, 530c0e66 1793760654 = 02:50:54Z, a5d963f7 1793762677 = 03:24:37Z. The three stacks landed 85 to 71 on the ruff lane in 132 minutes (4, 4 and 6 findings, each K probed and then measured the same, which is the large-function method of earlier campaigns used on the two functions R208 named, and a first probe's new union-attr mypy finding caught and guarded by the codemod), the best ruff fall in the series. The G1's empty intervals are written as 'about' (38, 28, 13 minutes, about 79 of 132 minutes, 60 percent), and I cannot give them exact because the G1 gives no submit keys; they can be converted from the queue keys as in earlier rounds. The G1 also says candidly that its time-box claim on W1583 was met only from the G0 stamp (34 min 36 s into the gap), a weaker claim than the box asked for. R210 is met on findings 1 and 2 (the sensor was run under .venv/bin/python3 at each of the three landings and its output line quoted on each card; the empty gate was ended by stacks with measured K; standing 13 amended with the long-lane-first rule, the 30-minute time-box and the sensor-quote rule) and not on finding 3 (stampnote.py into tools/ with a test). I did not re-run any figure. Three findings. No fixpoint is declared. Carried open findings as in R210, minus R210's findings 1 and 2.",
+      "findings": [
+        {
+          "finding": "The long-lane-first rule, as written and applied, makes the gate serial: ruff stacks cannot queue behind a ruff stack (shared ruff-baseline.json), so the next ruff stack is built after each landing and the gate idles through the build (38, 28 and 13 minutes here, 60 percent of the span). The whole point of the two lanes is that the other lane fills the gate. Add the missing half to the rule: while the ruff stack gates, a MYPY filler is built from the already-probed mypy rows (test_published_valid 8, test_static 7, test_calendars 6, test_rank_flow 6, serve.py 23, rank.py 29) and queued behind it, so that the gate holds two stacks and the ruff successor's build time is covered by the filler's gate time. Do it at the next ruff stack: probe one mypy row during its build, submit both. Also, to keep the numbers exact, give each empty interval from the queue key (date -u -d) and not as 'about'.",
+          "finding_card": "W1568",
+          "finding_owner": "nemik session",
+          "finding_witness": "A ruff stack with a mypy filler queued behind it (both submit stamps from keys) and no empty interval at that landing, and standing 13 carrying the filler sentence.",
+          "due": "2026-11-05"
+        },
+        {
+          "finding": "The next ruff rows are not probed or staged, the G1 says, and the mypy lane has 116 left untouched; the ruff pace (71 left) now argues for the rows of the same shape as the last three, so name them with their findings from the whole-tree census: the C901 handler rows in serve and staticserve, history PLR0914, the PLR0913 argument records in other modules, the remaining PLC2701 and SLF001 renames. Probe the biggest two on copies during this next tick's first 20 minutes (as the 954 and 955 probes worked) and write K on the W1568 table, ordered by fall per landing. A row that measures at 1 or 2 findings goes to the filler pile with the mypy rows.",
+          "finding_card": "W1568",
+          "finding_owner": "nemik session",
+          "finding_witness": "W1568 table rows for the next two ruff splits with copy-measured K by code, written before the next ruff G0.",
+          "due": "2026-11-05"
+        },
+        {
+          "finding": "R210 finding 3 (stampnote.py into tools/ with a test and named in standing 11) is not done, and the stamps in this span were made with --update --evidence-append by hand. Do it as the second entry of the next stack, since a tool move has no ratchet axis; the stamp format the writer accepts (Z time, card, text, no home path) is the test.",
+          "finding_card": "W1568",
+          "finding_owner": "nemik session",
+          "finding_witness": "tools/stampnote.py in a landed stack with a test, named in standing 11.",
+          "due": "2026-11-05"
+        }
+      ],
+      "id": "nemik:R209"
     }
   ],
-  "retro_counter": 208
+  "retro_counter": 209
 }

@@ -24,10 +24,11 @@ from __future__ import annotations
 
 import json
 import re
-import subprocess
 from dataclasses import dataclass, field
 from datetime import datetime
 from typing import TYPE_CHECKING
+
+from mikemol.procrun.proc import Completed, TimeoutExpired, capture
 
 from nemik.marks import MAX_AGE_SECONDS
 
@@ -190,25 +191,36 @@ def load(root: Path, *, run_exporter: bool = True) -> HostApply | None:
 
     """
     path = root / EXPORT
+    done: Completed | None = None
     try:
         if path.exists():
             return parse(_loads(path.read_text(encoding="utf-8")))
-        luthen = root / LUTHEN
-        python = luthen / ".venv" / "bin" / "python"
-        if run_exporter and python.exists():
-            done = subprocess.run(
-                [str(python), "-m", EXPORTER],
-                cwd=luthen,
-                capture_output=True,
-                text=True,
-                check=True,
-                timeout=EXPORTER_TIMEOUT_S,
-            )
+        done = _run_exporter(root, run_exporter=run_exporter)
+        if done is not None and done.returncode == 0:
             return parse(_loads(done.stdout))
-    except (OSError, json.JSONDecodeError, subprocess.SubprocessError) as exc:
+    except (OSError, json.JSONDecodeError, TimeoutExpired) as exc:
         msg = f"host-apply export unreadable: {exc}"
         raise ValueError(msg) from exc
+    if done is not None:
+        msg = f"host-apply export unreadable: exporter exited {done.returncode}"
+        raise ValueError(msg)
     return None
+
+
+def _run_exporter(root: Path, *, run_exporter: bool) -> Completed | None:
+    """Run luthen's exporter from its venv, when it is asked for and installed.
+
+    Returns:
+        The finished process, or None when the exporter is not asked for or has no venv.
+
+    """
+    luthen = root / LUTHEN
+    python = luthen / ".venv" / "bin" / "python"
+    if not (run_exporter and python.exists()):
+        return None
+    return capture(
+        [str(python), "-m", EXPORTER], cwd=luthen, timeout=EXPORTER_TIMEOUT_S
+    )
 
 
 def restarts_of(export: HostApply, row_id: str) -> list[tuple[str, str]]:

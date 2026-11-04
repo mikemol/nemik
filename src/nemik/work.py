@@ -13,9 +13,10 @@ from __future__ import annotations
 
 import argparse
 import json
-import subprocess
 import sys
 from pathlib import Path
+
+from mikemol.procrun.proc import Completed, TimeoutExpired, capture
 
 from nemik.say import say, warn
 from nemik.tomlview import strings, table, tables
@@ -83,9 +84,7 @@ COMMITTER_TIMEOUT = 20  # seconds the commit tool may take to answer a read-only
 NOT_INSTALLED, TIMED_OUT = 127, 124
 
 
-def _spawn(
-    tool: str, argv: list[str], timeout: int | None
-) -> subprocess.CompletedProcess[str]:
+def _spawn(tool: str, argv: list[str], timeout: int | None) -> Completed:
     """Run one of the tools installed beside this interpreter, the only place nemik-work starts one.
 
     A tool that is not installed, or that outlasts `timeout`, is a completed process with status
@@ -97,17 +96,11 @@ def _spawn(
     """
     path = Path(sys.executable).parent / tool
     if not path.is_file():
-        return subprocess.CompletedProcess([tool], NOT_INSTALLED, "", "")
+        return Completed([tool], NOT_INSTALLED, "", "")
     try:
-        return subprocess.run(
-            [str(path), *argv],
-            capture_output=True,
-            text=True,
-            check=False,
-            timeout=timeout,
-        )
-    except (OSError, subprocess.TimeoutExpired):
-        return subprocess.CompletedProcess([tool], TIMED_OUT, "", "")
+        return capture([str(path), *argv], timeout=timeout)
+    except (OSError, TimeoutExpired):
+        return Completed([tool], TIMED_OUT, "", "")
 
 
 def run_committer(argv: list[str]) -> tuple[int, str]:
