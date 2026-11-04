@@ -29,7 +29,8 @@ if TYPE_CHECKING:
     from pathlib import Path
 
 # Ordered mildest first: an interval is as bad as the worst repo in it.
-CLASSES = ("identical", "attribute", "state", "structural")
+CHANGED = ("attribute", "state", "structural")
+CLASSES = ("identical", *CHANGED)
 STEPS = (60, 300, 3600)  # seconds: the poll, five of them, an hour
 
 
@@ -185,7 +186,7 @@ def render(
     total = sum(commits.values())
     head = f"queue churn {start:%Y-%m-%d %H:%M} .. {end:%Y-%m-%d %H:%M}, {repos} repos"
     floor = "a floor: history is commit-granular, the live view also sees uncommitted writes"
-    by_class = ", ".join(f"{c} {commits.get(c, 0) / total:.0%}" for c in CLASSES[1:])
+    by_class = ", ".join(f"{c} {commits.get(c, 0) / total:.0%}" for c in CHANGED)
     lines = [
         f"{head}; {floor}",
         f"{total} commits: {by_class}" if total else "no commits in the span",
