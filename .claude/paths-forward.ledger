@@ -4627,3 +4627,8 @@
 2026-11-04T18:01:12Z  status W1627 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-04T18:02:59Z  status W1628 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-04T18:18:01Z  status W1626 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T18:18:29Z  tick  W1627 advanced  sweep     "stack 989 (W1626 salience.audit AuditOptions, ruff 36 to 35; landed 18:17:15Z) and stack 990 (W1627 test_layout S310, W1628 three mypy reads; inflight): the ruff first entry plus the mypy bundle shape built during 989's gate and submitted at its landing; PLR0914 counts a rebound parameter as a local [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T18:30:27Z  tick  W1629 minted    -         "tests/test_flow_reference draws its random graphs from a seeded subclass of random.Random, so its S311 clears and ruff falls 34 to 33"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1568
+2026-11-04T18:30:35Z  status W1629 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T18:41:08Z  status W1627 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T18:41:09Z  status W1628 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

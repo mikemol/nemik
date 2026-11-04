@@ -43,9 +43,6 @@
   "S404": 1,
   "S603": 1
  },
- "tests/test_flow_reference.py": {
-  "S311": 1
- },
  "tests/test_guarantees.py": {
   "PLR0913": 1
  },

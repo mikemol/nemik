@@ -4,7 +4,7 @@
 
 from __future__ import annotations
 
-import random
+import hashlib
 from fractions import Fraction
 
 import pytest
@@ -12,6 +12,52 @@ import pytest
 from nemik.flow import solve
 
 FRONT_SHARE = 0.3
+
+
+WORD_BYTES = 8
+WORD_RANGE = 1 << (8 * WORD_BYTES)
+
+
+class _Seeded:
+    """A seeded, deterministic stream over SHA-256: the graphs repeat run to run."""
+
+    def __init__(self, seed: int) -> None:
+        """Start the stream at `seed`."""
+        self.seed = seed
+        self.count = 0
+
+    def _word(self) -> int:
+        self.count += 1
+        digest = hashlib.sha256(f"{self.seed}:{self.count}".encode()).digest()
+        return int.from_bytes(digest[:WORD_BYTES], "big")
+
+    def random(self) -> float:
+        """Draw the next float from the stream.
+
+        Returns:
+            A float in [0, 1).
+
+        """
+        return self._word() / WORD_RANGE
+
+    def randint(self, low: int, high: int) -> int:
+        """Draw an integer from `low` to `high`, both included.
+
+        Returns:
+            The integer drawn.
+
+        """
+        return low + self._word() % (high - low + 1)
+
+    def sample(self, items: list[str], k: int) -> list[str]:
+        """Draw `k` distinct items, without changing `items`.
+
+        Returns:
+            The items drawn, in the order drawn.
+
+        """
+        pool = list(items)
+        return [pool.pop(self._word() % len(pool)) for _ in range(k)]
 
 
 def _laplacian(
@@ -93,7 +139,7 @@ def test_the_sparse_elimination_equals_the_dense_solve_on_random_graphs(
     seed: int,
 ) -> None:
     """The sparse elimination equals the dense solve on random graphs."""
-    rng = random.Random(seed)
+    rng = _Seeded(seed)
     cards = [f"c{i}" for i in range(18)]
     front = {c for c in cards if rng.random() < FRONT_SHARE}
     # Edges point from a later card to an earlier one, plus a few back edges (cycles).
