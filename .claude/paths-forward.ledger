@@ -4545,3 +4545,10 @@
 2026-11-04T08:21:56Z  status W1601 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-04T08:30:41Z  interrupt W1602 minted    -         "wake.read_liveness reads its source text in a helper, so its eleven-statement try clause is cut and PLW0717 clears, ruff falls 46 to 45"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1568
 2026-11-04T08:30:45Z  status W1602 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T08:52:27Z  interrupt W1603 minted    -         "Design the wake verdict gauge: read waitemit.py and wake.roster(), choose the series name and labels (wake required 0 or 1, the awake state), write the design on the card"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1514
+2026-11-04T08:52:27Z  interrupt W1604 minted    -         "Emit the wake verdict gauge from nemik-metrics (src/nemik/metrics.py or waitemit.py) with a test and a metric_families entry request to luthen-observability"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1514
+2026-11-04T08:52:27Z  interrupt W1605 minted    -         "Reply to luthen-observability:W1928 with the metric name once it exists"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1514
+2026-11-04T08:53:19Z  status W1602 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T09:00:57Z  interrupt W1606 minted    -         "salience.audit takes everything after weights by keyword, so PLR0917 clears and ruff falls 45 to 44"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1568
+2026-11-04T09:01:00Z  status W1606 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T09:21:49Z  status W846 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
