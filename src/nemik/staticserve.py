@@ -166,18 +166,20 @@ def handler(root: Path) -> type[BaseHTTPRequestHandler]:
             if self.command != "HEAD":
                 self.wfile.write(body)
 
+        def head_of(self, size: int, ctype: str, tag: str) -> None:
+            """Send a 200 for a file of `size` bytes: its type, no caching and its ETag."""
+            self.send_response(200)
+            self.send_header("Content-Type", ctype)
+            self.send_header("Content-Length", str(size))
+            self.send_header("Cache-Control", "no-cache")
+            self.send_header("ETag", tag)
+            self.end_headers()
+
         def stream(self, real: Path, ctype: str, tag: str) -> None:
             """Stream a file in 64 KiB chunks: memory does not grow with its size or other reads."""
             try:
                 with real.open("rb") as f:
-                    self.send_response(200)
-                    self.send_header("Content-Type", ctype)
-                    self.send_header(
-                        "Content-Length", str(os.fstat(f.fileno()).st_size)
-                    )
-                    self.send_header("Cache-Control", "no-cache")
-                    self.send_header("ETag", tag)
-                    self.end_headers()
+                    self.head_of(os.fstat(f.fileno()).st_size, ctype, tag)
                     if self.command != "HEAD":
                         shutil.copyfileobj(f, self.wfile, 64 * 1024)
             except (BrokenPipeError, ConnectionResetError):

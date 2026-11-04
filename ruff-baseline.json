@@ -47,8 +47,7 @@
   "PLR0912": 1
  },
  "src/nemik/staticserve.py": {
-  "C901": 1,
-  "PLW0717": 1
+  "C901": 1
  },
  "src/nemik/witnesses.py": {
   "PLC0415": 1,
