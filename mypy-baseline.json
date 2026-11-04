@@ -39,18 +39,12 @@
   "misc": 1
  },
  "tests/fixtures/make_fleet.py": {
-  "misc": 2
+  "misc": 1
  },
  "tests/test_deploy_manifest.py": {
   "misc": 2
  },
- "tests/test_flow_cache.py": {
-  "attr-defined": 1
- },
  "tests/test_history.py": {
-  "misc": 2
- },
- "tests/test_mpxj.py": {
   "misc": 2
  },
  "tests/test_shaclcache_threads.py": {
@@ -60,9 +54,6 @@
   "misc": 2
  },
  "tests/test_static_view.py": {
-  "misc": 1
- },
- "tests/test_wake_alarms.py": {
   "misc": 1
  },
  "tests/test_web_render.py": {

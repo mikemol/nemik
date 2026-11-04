@@ -5,6 +5,7 @@
 import json
 from datetime import UTC, datetime
 from pathlib import Path
+from typing import cast
 
 import pytest
 from rdflib import Graph, Literal
@@ -115,9 +116,9 @@ def test_alarms_nudge_delivers_each_firing_once(
     second = _alarms(capsys.readouterr().out)
     assert first
     assert second == []
-    assert json.loads(state.read_text())["life"] == pytest.approx(
-        1.0, rel=0, abs=0
-    )  # the repo nudge state survives
+    assert cast("dict[str, object]", json.loads(state.read_text()))[
+        "life"
+    ] == pytest.approx(1.0, rel=0, abs=0)  # the repo nudge state survives
 
 
 def test_live_owner_gets_a_send_ready_line_and_a_sleeper_does_not(

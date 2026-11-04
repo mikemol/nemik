@@ -4,6 +4,7 @@
 
 from __future__ import annotations
 
+from collections import OrderedDict
 from fractions import Fraction
 from typing import TYPE_CHECKING
 
@@ -32,7 +33,7 @@ def _counting(monkeypatch: pytest.MonkeyPatch) -> dict[str, int]:
         return real(demand, front, prereq, weights, edge)
 
     monkeypatch.setattr(flow, "solve_uncached", counted)
-    monkeypatch.setattr(flow, "_SOLVES", flow.OrderedDict())
+    monkeypatch.setattr(flow, "_SOLVES", OrderedDict())
     return calls
 
 
