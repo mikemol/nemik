@@ -14,11 +14,14 @@ The contract is openapi.json and schema/*.schema.json, published beside the data
 from __future__ import annotations
 
 import argparse
+import http.client
 import json
 import sys
 import time
-import urllib.request
-from typing import IO, cast
+import urllib.parse
+from typing import cast
+
+HTTP_ERROR = 400
 
 
 class Client:
@@ -32,11 +35,25 @@ class Client:
 
     def _get(self, path: str) -> object:
         # JSON documents decode; anything else (the TRS feeds are Turtle, W449) is kept as text
-        opened = cast("IO[bytes]", urllib.request.urlopen(self.base + path, timeout=30))
-        with opened as r:
-            if path.endswith(".json"):
-                return cast("object", json.load(r))
-            return r.read().decode()
+        parts = urllib.parse.urlsplit(self.base + path)
+        connect = (
+            http.client.HTTPSConnection
+            if parts.scheme == "https"
+            else http.client.HTTPConnection
+        )
+        conn = connect(parts.netloc, timeout=30)
+        try:
+            conn.request("GET", parts.path or "/")
+            reply = conn.getresponse()
+            status, body = reply.status, reply.read()
+        finally:
+            conn.close()
+        if status >= HTTP_ERROR:
+            msg = f"{self.base}{path}: HTTP {status}"
+            raise RuntimeError(msg)
+        if path.endswith(".json"):
+            return cast("object", json.loads(body))
+        return body.decode()
 
     def refresh(self, prefix: str = "") -> list[str]:
         """Fetch every path under `prefix` whose hash moved; return the paths fetched.

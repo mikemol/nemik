@@ -63,8 +63,5 @@
  "tests/webpage.py": {
   "S404": 1,
   "S603": 1
- },
- "tools/nemik_client.py": {
-  "S310": 1
  }
 }
