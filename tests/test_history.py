@@ -82,7 +82,7 @@ def test_a_null_or_empty_field_in_a_committed_queue_reads_as_empty(
     }
     _commit(repo, {"waypoints": [card], "residue": []}, "2026-10-06T12:00:00Z")
     third = [event for event in backfill("a", repo) if event[0] == "a:W3"]
-    assert [event[2:5] for event in third] == [
+    assert [(e[2], e[3], e[4]) for e in third] == [
         ("card", "", "minted"),
         ("status", "", "ready"),
     ]

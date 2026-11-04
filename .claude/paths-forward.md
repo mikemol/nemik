@@ -3,11 +3,11 @@
 
 state file: `.claude/paths-forward.json`
 
-counter 1633 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:6ef231f0d3dac9ff`
+counter 1635 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:052e7afed7ee7b32`
 
 | # | symbol | status |
 |---|---|---|
-| 1 | W1632 | working |
+| 1 | W1635 | working |
 | 2 | W1007 | ready |
 | 3 | W1008 | ready |
 | 4 | W1075 | ready |
@@ -1611,11 +1611,15 @@ counter 1633 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:6ef
 | 1602 | W1629 | done |
 | 1603 | W1630 | done |
 | 1604 | W1631 | done |
+| 1605 | W1632 | done |
+| 1606 | W1634 | done |
 
 ## waypoints
 
-1. **W1632** (working) health.thresholds and importer.main read through typed values, so two mypy Any reads clear
-   - next: Write w1632.py; probe on copies of health.py and importer.py; apply; ratchet; tests
+1. **W1635** (working) history.weekly hands its per-week scan to _scan over a _Track record, so its 21-local PLR0914
+   clears and ruff falls 28 to 27
+   - next: Write w1635.py; probe on src/nemik/probe_history.py; apply; hookcheck (history is hook-reached); ratchet;
+     history tests
 2. **W1007** (ready) The open-commitment count per repo, from mtools' commitment ledger, is a ratchet on the pace board
    and gauges
    - next: When mtools publishes its commitment ledger, count each repo's open commitments into a series, judge it like
@@ -5229,6 +5233,9 @@ counter 1633 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:6ef
    clear and ruff falls 33 to 30
 1604. **W1631** (done) staticserve.handler's response writers move to a module-level _Writer base class, so its C901
    clears and ruff falls 30 to 29
+1605. **W1632** (done) health.thresholds and importer.main read through typed values, so two mypy Any reads clear
+1606. **W1634** (done) tests/test_guarantees._wp sheds touches to a second helper _tag, so its six-argument PLR0913
+   clears and ruff falls 29 to 28
 
 ## residue
 
@@ -8337,3 +8344,16 @@ counter 1633 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:6ef
   before the submit (19:16:31Z: ruff owes 30, mypy NOW behind owes 11, codon behind) is the habit working. I did not
   re-run any figure. SHIP-SEEN for 984 to 992 is unread. Two findings. No fixpoint is declared. Carried open findings as
   in R225, minus R225's two (applied).; 2 finding(s)
+- **nemik:R225** (-) round 227: stack 993 (W1631 staticserve.handler, ruff 30 to 29) 4169be0c landed 19:46:50Z; stack
+  994 (W1632 health and importer, mypy 11 to 9) queued behind it at 19:29:09Z and began 19:46:54Z, the gate never empty;
+  no stack staged behind 994: root Verified from the reflog (unix stamp 1793821610 = 19:46:50Z, 1510 s after 54c63abd at
+  19:21:40Z) and the 994 key (1793820549 = 19:29:09Z) and began_ns (1793821614 = 19:46:54Z): 993 gated 19:25:24Z to
+  19:46:50Z (21 min 26 s), 994 was queued 17 min 41 s before the landing and began 4 s after it, so the gate was never
+  empty. R226 is applied in full and in the order I asked: the mypy successor was built, probed on copies (house mypy
+  clean, ruff and format clean, the copies deleted by exact path) and queued BEFORE 993 landed, with nine other sites
+  named as not taken. The XML decision is narrowed by a measurement (the stdlib route cleared zero: S405 on the import
+  and S314 on ET.XMLParser itself, so the operator ask is for defusedxml only), the pickle decision and the RUF067 probe
+  are dated 2026-11-06 with the owner (the session), and the rows left are written. The G1's honest note on its own
+  LANDED stamp (written before running date and then verified correct) is the kind of disclosure I want. I did not
+  re-run any figure. SHIP-SEEN for 984 to 993 is unread. Two findings, both about what the ruff lane's end looks like.
+  No fixpoint is declared. Carried open findings as in R226, minus R226's two (applied).; 2 finding(s)
