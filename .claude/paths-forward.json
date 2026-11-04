@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1630,
+  "counter": 1631,
   "waypoints": [
     {
       "symbol": "W1",
@@ -39030,6 +39030,30 @@
     {
       "symbol": "W1630",
       "title": "serve.handler's do_GET splits into page, live and stored replies, so its C901 x2 and PLR0912 clear and ruff falls 33 to 30",
+      "status": "done",
+      "enables": [],
+      "touches": [
+        "file:ruff-baseline.json"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-11-04T19:00:37Z: BUILD 2026-11-04T19:00:36Z: pace read stamp 2026-11-04T18:56:30Z: behind nemik *.py: fell 0 over 10 landings, owes 1; 1 left, no fall to reach zero; behind nemik codon-baseline.json: fell 0 over 10 landings, owes 2; 138 left, no fall to reach zero; behind nemik ruff-baseline.json: fell 9 over 10 landings, owes 33; 33 left, 37 landings to zero; ok nemik mypy-baseline.json; 11 left, 9 landings to zero BUILD START, ruff first entry (gate empty since 18:52:12Z). Measured by house ruff on the real files BEFORE this stamp: serve.py handler C901 19, do_GET C901 16 and PLR0912 17 branches (three findings; staticserve.handler C901 17 and history.weekly PLR0914 21 are separate rows, not in this entry). Actuator: codemod w1630.py: do_GET of serve.handler is split into page_reply (the page, its own files and vendor: no poke), live_reply (wake, operator, inbound, goals, metrics) and stored_reply (check, DOC_ROUTES, history, graph.json, graph.ttl, 404), each returning (code, ctype, body), and do_GET keeps the poke rule (everything but /metrics and the page files pokes the model before the live and stored replies); the branch ORDER of the original chain is kept (page, vendor first with no poke; then wake, operator, inbound, goals, metrics; then check, DOC_ROUTES, history, graph.json, graph.ttl, 404). serve.py is hook-reached (standing 6): hookcheck four codes to be written; a stack touching serve.py also runs checks/claims.py hub-modules-depend-on-everything-below (standing 14) and test_architecture. Sensor: mikemol-pycheck --ratchet --write; the serve tests directly. Expected ruff 33 to 30 (three findings), mypy flat 11; first-write risks named: mypy Any on json.dumps literals (assign typed locals), D102 on public methods (nested class methods have no docstrings today), DOC201. Gate cost: full 465 re-run (src). Not probed on a copy: this is the first measure after the edit. | 2026-11-04T19:22:27Z: LANDED 2026-11-04T19:22:26Z: stack 992 landed as 54c63ab at 2026-11-04T19:21:40Z (reflog 14:21:40 -0500 plus 5 h), [PUSHED]; git status -sb read back: main...origin/main, level and clean. Gate output: 465 fresh of 468, 468 pass, bazel elapsed 926.9 s. Ruff 33 to 30 and mypy flat 11 as measured by the ratchet write before submit and re-measured on the tree at 19:0xZ (30 and 11); not re-read after the landing. Submit 19:04:52Z (key 1793819092) to landing 19:21:40Z = 16 min 48 s wall gated. Sensor line before the close: working: W1630, unnamed: W1630, staged successor: none. Gate empty from 19:21:40Z.",
+      "issued_at": "2026-11-04T19:00:25Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1568",
+      "last_worked": "2026-11-04T19:22:29Z",
+      "ticks_blocked": 0,
+      "completed": "20261104T192229Z",
+      "manifest": [
+        "src/nemik/serve.py",
+        "ruff-baseline.json"
+      ],
+      "size_class": "small"
+    },
+    {
+      "symbol": "W1631",
+      "title": "staticserve.handler's response writers move to a module-level _Writer base class, so its C901 clears and ruff falls 30 to 29",
       "status": "working",
       "enables": [],
       "touches": [
@@ -39037,16 +39061,16 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Write w1630.py; apply; hookcheck (serve is hook-reached); ratchet write; run serve tests and guards, hub-modules claim",
-      "evidence": "2026-11-04T19:00:37Z: BUILD 2026-11-04T19:00:36Z: pace read stamp 2026-11-04T18:56:30Z: behind nemik *.py: fell 0 over 10 landings, owes 1; 1 left, no fall to reach zero; behind nemik codon-baseline.json: fell 0 over 10 landings, owes 2; 138 left, no fall to reach zero; behind nemik ruff-baseline.json: fell 9 over 10 landings, owes 33; 33 left, 37 landings to zero; ok nemik mypy-baseline.json; 11 left, 9 landings to zero BUILD START, ruff first entry (gate empty since 18:52:12Z). Measured by house ruff on the real files BEFORE this stamp: serve.py handler C901 19, do_GET C901 16 and PLR0912 17 branches (three findings; staticserve.handler C901 17 and history.weekly PLR0914 21 are separate rows, not in this entry). Actuator: codemod w1630.py: do_GET of serve.handler is split into page_reply (the page, its own files and vendor: no poke), live_reply (wake, operator, inbound, goals, metrics) and stored_reply (check, DOC_ROUTES, history, graph.json, graph.ttl, 404), each returning (code, ctype, body), and do_GET keeps the poke rule (everything but /metrics and the page files pokes the model before the live and stored replies); the branch ORDER of the original chain is kept (page, vendor first with no poke; then wake, operator, inbound, goals, metrics; then check, DOC_ROUTES, history, graph.json, graph.ttl, 404). serve.py is hook-reached (standing 6): hookcheck four codes to be written; a stack touching serve.py also runs checks/claims.py hub-modules-depend-on-everything-below (standing 14) and test_architecture. Sensor: mikemol-pycheck --ratchet --write; the serve tests directly. Expected ruff 33 to 30 (three findings), mypy flat 11; first-write risks named: mypy Any on json.dumps literals (assign typed locals), D102 on public methods (nested class methods have no docstrings today), DOC201. Gate cost: full 465 re-run (src). Not probed on a copy: this is the first measure after the edit.",
-      "issued_at": "2026-11-04T19:00:25Z",
+      "next_bounded_step": "Probe on src/nemik/probe_staticserve.py; apply w1631.py to the real file; ratchet; static tests",
+      "evidence": "2026-11-04T19:23:40Z: BUILD 2026-11-04T19:23:39Z: pace read stamp 2026-11-04T19:16:31Z: PENDING behind nemik *.py: fell 0 over 10 landings, owes 1; 1 left, no fall to reach zero; PENDING behind nemik codon-baseline.json: fell 0 over 10 landings, owes 2; 138 left, no fall to reach zero; PENDING behind nemik mypy-baseline.json: fell 3 over 10 landings, owes 11; 11 left, 37 landings to zero; PENDING behind nemik ruff-baseline.json: fell 11 over 10 landings, owes 30; 30 left, 28 landings to zero BUILD START, ruff first entry (gate empty since 19:21:40Z). Measured BEFORE this stamp by house ruff on the real file: staticserve.handler C901 17 (one finding; nested methods count toward the enclosing function, learned on W1630). Actuator: codemod w1631.py: reply, head_of and stream (the three response writers, about 9 of the 17) move VERBATIM to a module-level class _Writer(BaseHTTPRequestHandler) and H(_Writer) keeps serve, do_GET, do_HEAD and log_message; probe first on a copy src/nemik/probe_staticserve.py (deleted by exact path) for ruff, mypy and format. Expected ruff 30 to 29 (the C901), mypy flat 11. staticserve is not on standing 6's hook-reached list. Tests: tests/test_staticserve.py, test_deploy_manifest, test_static_exports and the guards. Gate cost: a src module imported by few modules, so the re-run may be small (test_deploy_manifest imports it): unmeasured. Not probed yet: this stamp precedes the probe.",
+      "issued_at": "2026-11-04T19:23:30Z",
       "minted_during": "interrupt",
       "caused_by": "W1568",
-      "last_worked": "2026-11-04T19:00:37Z",
+      "last_worked": "2026-11-04T19:23:40Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
-        "src/nemik/serve.py",
+        "src/nemik/staticserve.py",
         "ruff-baseline.json"
       ],
       "size_class": "small"

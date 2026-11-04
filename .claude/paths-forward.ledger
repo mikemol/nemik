@@ -4635,3 +4635,6 @@
 2026-11-04T18:53:00Z  status W1629 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-04T19:00:25Z  interrupt W1630 minted    -         "serve.handler's do_GET splits into page, live and stored replies, so its C901 x2 and PLR0912 clear and ruff falls 33 to 30"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1568
 2026-11-04T19:00:33Z  status W1630 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T19:22:29Z  status W1630 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T19:23:30Z  interrupt W1631 minted    -         "staticserve.handler's response writers move to a module-level _Writer base class, so its C901 clears and ruff falls 30 to 29"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1568
+2026-11-04T19:23:37Z  status W1631 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
