@@ -79,12 +79,6 @@
  "tests/test_mpxj.py": {
   "misc": 2
  },
- "tests/test_published_valid.py": {
-  "misc": 8
- },
- "tests/test_run_row_schema.py": {
-  "misc": 5
- },
  "tests/test_serve_model.py": {
   "misc": 4
  },
@@ -105,9 +99,6 @@
  },
  "tests/test_web_render.py": {
   "misc": 1
- },
- "tools/check_run_rows.py": {
-  "misc": 4
  },
  "tools/nemik_client.py": {
   "misc": 2

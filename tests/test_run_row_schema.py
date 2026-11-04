@@ -4,6 +4,7 @@
 
 import json
 from pathlib import Path
+from typing import cast
 
 import jsonschema
 
@@ -26,7 +27,7 @@ CLEAN = {
 
 
 def _errors(row: dict[str, object]) -> list[str]:
-    schema = json.loads(SCHEMA.read_text())
+    schema = cast("dict[str, object]", json.loads(SCHEMA.read_text()))
     validator = jsonschema.Draft202012Validator(
         schema, format_checker=jsonschema.FormatChecker()
     )
@@ -35,7 +36,9 @@ def _errors(row: dict[str, object]) -> list[str]:
 
 def test_the_schema_is_itself_valid() -> None:
     """The file is a valid draft 2020-12 schema."""
-    jsonschema.Draft202012Validator.check_schema(json.loads(SCHEMA.read_text()))
+    jsonschema.Draft202012Validator.check_schema(
+        cast("dict[str, object]", json.loads(SCHEMA.read_text()))
+    )
 
 
 def test_a_clean_row_passes() -> None:

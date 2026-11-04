@@ -4,9 +4,10 @@
 
 import json
 from pathlib import Path
+from typing import cast
 
+import jsonschema
 import pytest
-from jsonschema import Draft202012Validator
 
 from nemik.serve import build_static
 
@@ -31,6 +32,16 @@ def built(tmp_path_factory: pytest.TempPathFactory) -> Path:
     return out
 
 
+def _read(path: Path) -> dict[str, object]:
+    """Read a JSON document.
+
+    Returns:
+        The document as an object map.
+
+    """
+    return cast("dict[str, object]", json.loads(path.read_text(encoding="utf-8")))
+
+
 def _schema_for(name: str) -> str:
     """Give the published schema path for a data path (goals/<repo>.json share one).
 
@@ -48,7 +59,7 @@ def test_every_schema_is_a_valid_2020_12_schema(built: Path) -> None:
     schemas = list((built / "schema").rglob("*.schema.json"))
     assert schemas
     for p in schemas:
-        Draft202012Validator.check_schema(json.loads(p.read_text()))
+        jsonschema.Draft202012Validator.check_schema(_read(p))
 
 
 def test_every_contracted_document_validates(built: Path) -> None:
@@ -64,8 +75,8 @@ def test_every_contracted_document_validates(built: Path) -> None:
             # the contract itself (schemas, openapi), pieces cut from graph.json (W415), the index
             continue
         assert schema.exists(), f"{name} is published with no schema"
-        validator = Draft202012Validator(json.loads(schema.read_text()))
-        errors = sorted(validator.iter_errors(json.loads(doc.read_text())), key=str)
+        validator = jsonschema.Draft202012Validator(_read(schema))
+        errors = sorted(validator.iter_errors(_read(doc)), key=str)
         assert not errors, f"{name}: " + "; ".join(
             f"{'/'.join(map(str, e.absolute_path))}: {e.message}" for e in errors[:5]
         )

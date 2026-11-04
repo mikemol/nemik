@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1586,
+  "counter": 1587,
   "waypoints": [
     {
       "symbol": "W1",
@@ -37961,6 +37961,33 @@
         "ruff-baseline.json"
       ],
       "size_class": "medium"
+    },
+    {
+      "symbol": "W1587",
+      "title": "A typed jsonschema stub and typed JSON reads in two tests, so seventeen mypy findings clear and mypy falls 116 to 99",
+      "status": "working",
+      "enables": [],
+      "touches": [
+        "mypy",
+        "jsonschema"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Stack 958: stubs/jsonschema/__init__.pyi, tests/test_published_valid.py, tests/test_run_row_schema.py and mypy-baseline.json, behind stack 957.",
+      "evidence": "2026-11-04T03:50:08Z: G0 2026-11-04T03:50:07Z: LATE: stamped AFTER the edit, a standing-11 lapse (fifth: W846, W1529, W1536, W1580, W1587): the edit was made as a mypy filler for R211 finding 1 while stack 957 gates, and the card was minted afterwards. Pace read 2026-11-04T01:25:47Z, mypy then 116 left. Actuator: stubs/jsonschema/__init__.pyi typing the part of jsonschema the tests and tools use, plus typed JSON reads in test_published_valid and test_run_row_schema (codemod w1587.py). Measured on the real tree before this stamp: mypy 116 to 99 (17, more than the 13 measured on the six jsonschema users, so the stub cleared findings elsewhere), ruff flat 64 after a first run refused for one PLW1514 (a read_text without encoding) fixed in place; house mypy on the six users 13 to 0.",
+      "issued_at": "2026-11-04T03:49:29Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1568",
+      "last_worked": "2026-11-04T03:50:11Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "stubs/jsonschema/__init__.pyi",
+        "tests/test_published_valid.py",
+        "tests/test_run_row_schema.py",
+        "mypy-baseline.json"
+      ],
+      "size_class": "small"
     }
   ],
   "residue": [
