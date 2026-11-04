@@ -16,7 +16,7 @@ content, not losing the dependency). An edge between two withheld items is dropp
 from __future__ import annotations
 
 import json
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING
 
 from nemik.adapter import BASE
 
@@ -168,7 +168,7 @@ def _node_id(node: dict[str, object]) -> str:
     return _s(node["id"])
 
 
-def apply(docs: dict[str, object], refs: frozenset[str]) -> dict[str, Any]:
+def apply(docs: dict[str, object], refs: frozenset[str]) -> dict[str, object]:
     """Drop every withheld item whole from the documents (stubs where a published item points).
 
     Returns:

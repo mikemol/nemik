@@ -4530,3 +4530,8 @@
 2026-11-04T06:21:44Z  status W1596 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-04T06:30:46Z  interrupt W1598 minted    -         "rank._apply becomes the public apply_weights, so two SLF001 in test_rank_apply clear and ruff falls 50 to 48"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1568
 2026-11-04T06:30:49Z  status W1598 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T06:48:13Z  status W1597 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T07:09:50Z  tick  W1598 advanced  sweep     "stacks 963 (W1595 mypy 86 to 80), 964 (W1596 ruff 52 to 50), 965 (W1597 mypy 80 to 73, pyshacl stub) landed; 966 (W1598 ruff 50 to 48) gating alone, no mypy successor staged (reason and check on W1568); W1592 closed on the peer's confirmation [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T07:12:34Z  interrupt W1599 minted    -         "serve.py's static build and history_doc type their documents as objects, and withheld.apply answers dict[str, object], so twenty-three mypy findings clear and mypy falls 73 to 50"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1568
+2026-11-04T07:12:47Z  status W1599 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T07:15:15Z  status W1598 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

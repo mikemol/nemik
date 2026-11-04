@@ -112,9 +112,8 @@ def test_unknown_version_fails(tmp_path: Path) -> None:
 
 def test_empty_list_withholds_nothing(tmp_path: Path, docs: dict[str, object]) -> None:
     """Empty list withholds nothing."""
-    kept = cast(
-        "dict[str, object]",
-        apply(docs, load(_write(tmp_path, {"version": 1, "as_of": "x", "items": []}))),
+    kept = apply(
+        docs, load(_write(tmp_path, {"version": 1, "as_of": "x", "items": []}))
     )
     assert kept == docs
 
@@ -136,19 +135,16 @@ def test_withheld_item_is_dropped_whole_and_pointers_become_stubs(
     node["title"] = (
         "SENTINEL-withheld-text"  # fixture titles are "repo W<n>", substrings of each other
     )
-    out = cast(
-        "dict[str, object]",
-        apply(
-            docs,
-            load(
-                _write(
-                    tmp_path,
-                    {
-                        "version": 1,
-                        "items": [{"ref": ref, "field": "title", "rule": "key-shaped"}],
-                    },
-                )
-            ),
+    out = apply(
+        docs,
+        load(
+            _write(
+                tmp_path,
+                {
+                    "version": 1,
+                    "items": [{"ref": ref, "field": "title", "rule": "key-shaped"}],
+                },
+            )
         ),
     )
     og = cast("_Graph", out["graph.json"])
@@ -180,25 +176,22 @@ def test_goals_entry_is_dropped_when_a_frontier_leaf_is_withheld(
         if e["frontier"] and e["frontier"][0] != f"{n[6:-5]}:{e['goal']}"
     )
     leaf = entry["frontier"][0]
-    out = cast(
-        "dict[str, object]",
-        apply(
-            docs,
-            load(
-                _write(
-                    tmp_path,
-                    {
-                        "version": 1,
-                        "items": [
-                            {
-                                "ref": leaf,
-                                "field": "blocked_on",
-                                "rule": "address-literal",
-                            }
-                        ],
-                    },
-                )
-            ),
+    out = apply(
+        docs,
+        load(
+            _write(
+                tmp_path,
+                {
+                    "version": 1,
+                    "items": [
+                        {
+                            "ref": leaf,
+                            "field": "blocked_on",
+                            "rule": "address-literal",
+                        }
+                    ],
+                },
+            )
         ),
     )
     assert all(leaf not in e["frontier"] for e in cast("list[_Goal]", out[name]))

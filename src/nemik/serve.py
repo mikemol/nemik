@@ -34,7 +34,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from importlib.metadata import PackageNotFoundError, version
 from importlib.resources import files
 from pathlib import Path
-from typing import TYPE_CHECKING, Any, TypedDict
+from typing import TYPE_CHECKING, TypedDict, cast
 
 from mikemol.rulerseq import emit_f, morse_motif
 from rdflib import RDF, Graph, URIRef
@@ -84,7 +84,7 @@ from nemik.outbox import outbox
 from nemik.overlaps import overlaps
 from nemik.pacepublish import metric_lines, read_pace, readable_lines
 from nemik.pacing import limits, paces
-from nemik.pieces import split
+from nemik.pieces import GraphDoc, split
 from nemik.queuerows import fleet_queues
 from nemik.rank import goals, load_composition, load_weights, rank
 from nemik.roundcli import bindings_of
@@ -1499,7 +1499,7 @@ def static_data(model: Model) -> dict[str, object]:
 
 def history_doc(
     root: Path, withheld: frozenset[str] = frozenset()
-) -> dict[str, list[dict[str, Any]]]:
+) -> dict[str, list[dict[str, object]]]:
     """nemik:W308: the project-manager's weekly roll-up per repo, from each repo's committed queue.
 
     Counts and days only: the roll-up row's `oldest_blocked` symbol is dropped, so nothing here
@@ -1510,7 +1510,7 @@ def history_doc(
         Per repo, the weekly roll-up rows without the `oldest_blocked` field.
 
     """
-    out: dict[str, list[dict[str, Any]]] = {}
+    out: dict[str, list[dict[str, object]]] = {}
     for repo, path in workstream_files(root, QUEUE):
         hide = {r.partition(":")[2] for r in withheld if r.partition(":")[0] == repo}
         snaps = []
@@ -1592,7 +1592,8 @@ def build_static_unscoped(
         raise ValueError("unmanifested fields, refusing to publish: " + ", ".join(bad))
     # nemik:W415: graph.json's pieces, cut after the checks above from the document they checked,
     # so they hold nothing graph.json may not; graph.json stays until the page reads pieces (W416).
-    for piece, cut in split(docs["graph.json"]).items():
+    graph = cast("GraphDoc", docs["graph.json"])
+    for piece, cut in split(graph).items():
         docs[f"graph/{piece}.json"] = cut
     # nemik:W440: the contract the published files keep, generated from the field manifest and
     # listed in hashes.json like the data, so a client sees when it changes
@@ -1607,7 +1608,7 @@ def build_static_unscoped(
     # withheld card leaves both the base and the change log
     hidden = frozenset(_id(r) for r in refs)
     bodies = {name: json.dumps(doc, indent=1) for name, doc in docs.items()}
-    repos = {str(n["repo"]) for n in docs["graph.json"]["nodes"] if n["repo"]}
+    repos = {str(n["repo"]) for n in graph["nodes"] if n["repo"]}
     for repo in sorted(repos):
         feed = turtle(repo, model.graph, model.graph, hidden)
         for part in ("base", "changelog"):

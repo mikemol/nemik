@@ -29,10 +29,6 @@
  "src/nemik/rank.py": {
   "misc": 4
  },
- "src/nemik/serve.py": {
-  "explicit-any": 2,
-  "misc": 21
- },
  "src/nemik/shaclcache.py": {
   "misc": 1
  },
@@ -41,9 +37,6 @@
  },
  "src/nemik/vtodo.py": {
   "misc": 3
- },
- "src/nemik/withheld.py": {
-  "explicit-any": 1
  },
  "src/nemik/witnesses.py": {
   "misc": 3
