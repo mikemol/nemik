@@ -67,11 +67,16 @@ __all__ = [
 
 FLEET = Path(__file__).parent / "fixtures" / "fleet"
 HTTP_ERROR = 400
+LISTEN_ROWS = 2  # the TcpExt header row and its value row
 # nemik:W846: Chromium aborts every request in flight when the host's network configuration
 # changes (an interface or address event on a busy host), whatever the server did; the page then
 # fails to load through no fault of the code under test, so a load that lost only to that is tried
 # again on a fresh page.
 NETWORK_CHANGED = "net::ERR_NETWORK_CHANGED"
+# nemik:W846: the requests the latest page load saw fail or answer an error status, kept for
+# served() to name when a page error surfaces after the load returned
+NOTED_REFUSED: list[str] = []
+NETSTAT = Path("/proc/net/netstat")
 LOAD_TRIES = 3
 LISTENING_WORDS = 2  # the server's line is "listening" and a port
 CY_READY = "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 1"
@@ -211,6 +216,35 @@ class Playwright(Protocol):
     chromium: Chromium
 
 
+def listen_overflows(netstat: str) -> int:
+    """Read the kernel's TcpExt ListenOverflows count out of /proc/net/netstat text.
+
+    The accept queue of a listening socket overflowing is the leading reading of the popLater
+    flake's failed requests (nemik:W846); the count is host-wide and cumulative since boot.
+
+    Returns:
+        The count, or -1 when the text has no TcpExt rows or no such column.
+
+    """
+    rows = [line.split() for line in netstat.splitlines() if line.startswith("TcpExt:")]
+    if len(rows) < LISTEN_ROWS or "ListenOverflows" not in rows[0]:
+        return -1
+    return int(rows[1][rows[0].index("ListenOverflows")])
+
+
+def overflows_now() -> int:
+    """Read ListenOverflows from this host now.
+
+    Returns:
+        The count, or -1 when /proc/net/netstat cannot be read.
+
+    """
+    try:
+        return listen_overflows(NETSTAT.read_text(encoding="utf-8"))
+    except OSError:
+        return -1
+
+
 @contextmanager
 def served(series: Path | None = None, root: Path = FLEET) -> Generator[str]:
     """nemik-serve over `root` (the fixture fleet), on a port it binds itself; yields its URL.
@@ -241,6 +275,7 @@ def served(series: Path | None = None, root: Path = FLEET) -> Generator[str]:
         "0",
         *extra,
     ]
+    overflows_before = overflows_now()
     with tempfile.TemporaryFile() as log:
         proc = subprocess.Popen(command, env=env, stdout=subprocess.PIPE, stderr=log)
         try:
@@ -259,6 +294,8 @@ def served(series: Path | None = None, root: Path = FLEET) -> Generator[str]:
                 log.seek(0)
                 message = (
                     f"{e}; nemik-serve alive: {proc.poll() is None}; "
+                    f"requests refused or failed: {NOTED_REFUSED}; "
+                    f"ListenOverflows {overflows_before} -> {overflows_now()}; "
                     f"its stderr: {log.read().decode()[-2000:]}"
                 )
                 raise PageBrokenError(message) from e
@@ -290,7 +327,8 @@ def opened_page(
     except PlaywrightError as e:
         pytest.skip(f"chromium unavailable: {e}")
     page = browser.new_page(viewport={"width": 1700, "height": 1250})
-    refused: list[str] = []
+    refused = NOTED_REFUSED
+    refused.clear()
 
     def note_failed(request: Seen) -> None:
         refused.append(f"failed {request.url}")
@@ -355,7 +393,8 @@ def first_load(
 
     """
     page = browser.new_page(viewport={"width": viewport[0], "height": viewport[1]})
-    refused: list[str] = []
+    refused = NOTED_REFUSED
+    refused.clear()
 
     def note_failed(request: LaunchedRequest) -> None:
         # nemik:W846: the error text says why (net::ERR_CONNECTION_RESET, ...), not only which URL
