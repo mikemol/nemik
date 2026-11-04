@@ -159,6 +159,165 @@ def show(value: Fraction, places: int = DECIMALS) -> str:
     return f"{float(value):.{places}f}"
 
 
+def _node_number(n: Node) -> int:
+    return _number(ref_of(n))
+
+
+def _memo_key(
+    g: Graph, repo: str, weights: Weights, extra: tuple[object, ...]
+) -> tuple[object, ...]:
+    """Give the memo key of one audit call (nemik:W403).
+
+    Returns:
+        the graph identity and size, the repo, the four class weights and the per-call inputs.
+
+    """
+    return (
+        id(g),
+        len(g),
+        repo,
+        weights.local,
+        weights.peer,
+        weights.peer_blocked,
+        weights.operator,
+        *extra,
+    )
+
+
+def _open_graph(
+    g: Graph, *, workable: bool
+) -> tuple[set[Node], dict[Node, set[Node]], set[Node]]:
+    """Read the open cards, what each waits for and which have nothing to wait for.
+
+    Returns:
+        the open cards, their open prerequisites and the ready ground (narrowed to ready or
+        working cards when `workable`).
+
+    """
+    nodes = {n for n in g.subjects(OSLC_CM.state, None) if _open(g, n)}
+    prereq: dict[Node, set[Node]] = {}
+    for p in nodes:
+        for s in successors(g, p):
+            if s in nodes and s != p:
+                prereq.setdefault(s, set()).add(p)
+    ready = {n for n in nodes if n not in prereq}
+    if workable:
+        ready = {
+            n
+            for n in ready
+            if (n, OSLC_CM.state, NEMIK.Ready) in g
+            or (n, OSLC_CM.state, NEMIK.Working) in g
+        }
+    return nodes, prereq, ready
+
+
+def _cone(g: Graph, n: Node, nodes: set[Node]) -> set[Node]:
+    """Walk the open successors of `n`.
+
+    Returns:
+        every open card downstream of `n`, not `n` itself.
+
+    """
+    seen, stack = {n}, [n]
+    while stack:
+        for nxt in successors(g, stack.pop()):
+            if nxt not in seen and nxt in nodes:
+                seen.add(nxt)
+                stack.append(nxt)
+    return seen - {n}
+
+
+def _reach(
+    g: Graph, mine: list[Node], nodes: set[Node]
+) -> tuple[set[Node], dict[str, frozenset[str]]]:
+    """Take the cone of each ranked card.
+
+    Returns:
+        the union of the cones and each card's own cone by ref.
+
+    """
+    population: set[Node] = set()
+    reach: dict[str, frozenset[str]] = {}
+    for n in mine:
+        cone = _cone(g, n, nodes)
+        population |= cone
+        reach[ref_of(n)] = frozenset(ref_of(x) for x in cone)
+    return population, reach
+
+
+def _class_demand(
+    g: Graph, sources: list[Node], weights: Weights, repo: str, without: str
+) -> dict[str, Fraction]:
+    """Give each source the class weight of its repo and state.
+
+    Returns:
+        the demand by ref, leaving out the source `without` names.
+
+    """
+
+    def klass(x: Node) -> int:
+        if _repo(x) == repo:
+            return weights.local
+        return (
+            weights.peer_blocked
+            if (x, OSLC_CM.state, NEMIK.Blocked) in g
+            else weights.peer
+        )
+
+    return {ref_of(x): Fraction(klass(x)) for x in sources if ref_of(x) != without}
+
+
+def _add_operator_demand(
+    g: Graph,
+    demand: dict[str, Fraction],
+    nodes: set[Node],
+    scope: tuple[set[str], str],
+    amount: int,
+) -> None:
+    """Add the operator class weight to each card an operator asked for (nemik:W249).
+
+    An operator ask is a demand source with a declared class weight, not a strict tier above the
+    order. A ready ask absorbs its own demand; a waiting one sends it through its cone. Additive
+    to the class weight the card already carries.
+    """
+    relevant, without = scope
+    for n in sorted(nodes, key=str):
+        cause = str(g.value(n, PROV.wasInformedBy) or "").strip().lower()
+        asked = cause == "operator" or cause.startswith("operator:")
+        if asked and ref_of(n) in relevant and ref_of(n) != without:
+            demand[ref_of(n)] = demand.get(ref_of(n), Fraction(0)) + amount
+
+
+def _apply_residue(
+    demand: dict[str, Fraction],
+    needs: dict[str, list[str]],
+    residue: dict[str, list[dict[str, object]]],
+    scope: tuple[set[str], set[str], set[str], str],
+    gates: tuple[dict[str, Fraction] | None, Fraction],
+) -> None:
+    """Inject each recorded gap's demand at its card (nemik:W251).
+
+    An entry that names an open `closes_ref` adds that card to the prerequisites, so the card that
+    closes the gap is pulled up.
+    """
+    open_refs, relevant, front, without = scope
+    gate_weights, gate_weight = gates
+    for card, entries in residue.items():
+        if card not in open_refs or card not in relevant or card == without:
+            continue
+        for entry in entries:
+            weight = (gate_weights or {}).get(str(entry.get("gate")), gate_weight)
+            demand[card] = demand.get(card, Fraction(0)) + weight
+            target = entry.get("closes_ref")
+            if (
+                isinstance(target, str)
+                and target in open_refs
+                and target != card
+                and card not in front
+            ):
+                needs[card] = sorted({*needs.get(card, []), target})
+
+
 def audit(
     g: Graph,
     repo: str,
@@ -203,68 +362,15 @@ def audit(
     # W403: residue and gate weights are per-call inputs, not part of the key, so those audits
     # bypass it.
     key: tuple[object, ...] | None = None
-    memo = _MEMO[0]
-    if memo is not None and residue is None and gate_weights is None:
-        key = (
-            id(g),
-            len(g),
-            repo,
-            weights.local,
-            weights.peer,
-            weights.peer_blocked,
-            weights.operator,
-            without,
-            gate_weight,
-            workable,
-            toward,
-            wait_weight,
+    if _MEMO[0] is not None and residue is None and gate_weights is None:
+        key = _memo_key(
+            g, repo, weights, (without, gate_weight, workable, toward, wait_weight)
         )
-        if key in memo:
-            return memo[key]
-    nodes = {n for n in g.subjects(OSLC_CM.state, None) if _open(g, n)}
-    prereq: dict[Node, set[Node]] = {}
-    for p in nodes:
-        for s in successors(g, p):
-            if s in nodes and s != p:
-                prereq.setdefault(s, set()).add(p)
-    ready = {n for n in nodes if n not in prereq}
-    if workable:
-        ready = {
-            n
-            for n in ready
-            if (n, OSLC_CM.state, NEMIK.Ready) in g
-            or (n, OSLC_CM.state, NEMIK.Working) in g
-        }
-
-    def node_number(n: Node) -> int:
-        return _number(ref_of(n))
-
-    mine = sorted((n for n in ready if _repo(n) == repo), key=node_number)
-
-    def klass(x: Node) -> int:
-        if _repo(x) == repo:
-            return weights.local
-        return (
-            weights.peer_blocked
-            if (x, OSLC_CM.state, NEMIK.Blocked) in g
-            else weights.peer
-        )
-
-    def closure(n: Node) -> set[Node]:
-        seen, stack = {n}, [n]
-        while stack:
-            for nxt in successors(g, stack.pop()):
-                if nxt not in seen and nxt in nodes:
-                    seen.add(nxt)
-                    stack.append(nxt)
-        return seen - {n}
-
-    population: set[Node] = set()
-    reach: dict[str, frozenset[str]] = {}
-    for n in mine:
-        cone = closure(n)
-        population |= cone
-        reach[ref_of(n)] = frozenset(ref_of(x) for x in cone)
+        if key in _MEMO[0]:
+            return _MEMO[0][key]
+    nodes, prereq, ready = _open_graph(g, workable=workable)
+    mine = sorted((n for n in ready if _repo(n) == repo), key=_node_number)
+    population, reach = _reach(g, mine, nodes)
     sources = sorted((x for x in population if x in prereq), key=str)
     if toward:
         # nemik:W316: a milestone ranks by ITS demand alone: the one source is the target card.
@@ -273,50 +379,38 @@ def audit(
         ref_of(x): sorted(ref_of(p) for p in ps if p in nodes)
         for x, ps in prereq.items()
     }
-    demand = {ref_of(x): Fraction(klass(x)) for x in sources if ref_of(x) != without}
+    demand = _class_demand(g, sources, weights, repo, without)
     front = {ref_of(n) for n in ready}
     relevant = {ref_of(x) for x in population} | {ref_of(n) for n in mine}
-    open_refs = {ref_of(n) for n in nodes}
     if weights.operator and not toward:
-        # nemik:W249: an operator ask is a demand source with a declared class weight, not a strict
-        # tier above the order. A ready ask absorbs its own demand; a waiting one sends it through
-        # its cone. Additive to the class weight the card already carries.
-
-        for n in sorted(nodes, key=str):
-            cause = str(g.value(n, PROV.wasInformedBy) or "").strip().lower()
-            asked = cause == "operator" or cause.startswith("operator:")
-            if asked and ref_of(n) in relevant and ref_of(n) != without:
-                demand[ref_of(n)] = (
-                    demand.get(ref_of(n), Fraction(0)) + weights.operator
-                )
+        _add_operator_demand(g, demand, nodes, (relevant, without), weights.operator)
     for card, added in wait_demand(g, sources, wait_weight, without).items():
         demand[card] = demand.get(card, Fraction(0)) + added
-    for card, entries in ({} if toward else (residue or {})).items():
-        if card not in open_refs or card not in relevant or card == without:
-            continue
-        for entry in entries:
-            weight = (gate_weights or {}).get(str(entry.get("gate")), gate_weight)
-            demand[card] = demand.get(card, Fraction(0)) + weight
-            target = entry.get("closes_ref")
-            if (
-                isinstance(target, str)
-                and target in open_refs
-                and target != card
-                and card not in front
-            ):
-                needs[card] = sorted({*needs.get(card, []), target})
-    flow = solve(demand, needs, front)
-    rows = [
-        Row(
-            ref_of(n),
-            downstream_weight(g, n, weights),
-            flow.salience.get(ref_of(n), Fraction(0)),
+    if not toward:
+        _apply_residue(
+            demand,
+            needs,
+            residue or {},
+            ({ref_of(n) for n in nodes}, relevant, front, without),
+            (gate_weights, gate_weight),
         )
-        for n in mine
-    ]
-    result = Audit(rows, flow, len(sources), demand, reach)
-    if key is not None and memo is not None:
-        memo[key] = result
+    flow = solve(demand, needs, front)
+    result = Audit(
+        [
+            Row(
+                ref_of(n),
+                downstream_weight(g, n, weights),
+                flow.salience.get(ref_of(n), Fraction(0)),
+            )
+            for n in mine
+        ],
+        flow,
+        len(sources),
+        demand,
+        reach,
+    )
+    if key is not None and _MEMO[0] is not None:
+        _MEMO[0][key] = result
     return result
 
 

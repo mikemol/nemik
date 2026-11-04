@@ -53,11 +53,7 @@
   "S603": 1
  },
  "src/nemik/salience.py": {
-  "C901": 1,
-  "PLR0912": 1,
   "PLR0913": 3,
-  "PLR0914": 1,
-  "PLR0915": 1,
   "PLR0917": 1
  },
  "src/nemik/serve.py": {
