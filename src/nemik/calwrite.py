@@ -27,6 +27,7 @@ from rdflib import Graph
 from rdflib.namespace import DCTERMS, RDF
 
 from nemik.adapter import BASE, NEMIK, OSLC_CM
+from nemik.alarm import Schedule
 from nemik.calendars import DEFAULT_CONFIG, load_calendars
 from nemik.check import default_root, survey
 from nemik.say import say, say_raw
@@ -131,12 +132,9 @@ def _alarm_lines(trigger: str, summary: str) -> list[str]:
 def event_lines(
     ref: str,
     title: str,
-    dtstart: str,
-    due: str,
+    schedule: Schedule,
     *,
     alarms: Iterable[str] = (),
-    rrule: str = "",
-    exdates: Iterable[str] = (),
     location: str = "",
 ) -> list[str]:
     """One VEVENT as property lines. DTSTAMP is fixed so the feed depends only on the queues.
@@ -148,6 +146,7 @@ def event_lines(
         The VEVENT's property lines, BEGIN:VEVENT through END:VEVENT.
 
     """
+    dtstart, due, rrule, exdates = schedule
     triggers = sorted(alarms)
     start, end = event_times(
         dtstart,
@@ -229,11 +228,8 @@ def events(g: Graph, repos: Iterable[str], label: str | None = None) -> list[lis
         lines = event_lines(
             f"{repo}:{symbol}",
             str(g.value(n, DCTERMS.title) or symbol),
-            dtstart,
-            due,
+            Schedule(dtstart, due, rrule, tuple(gone)),
             alarms=(str(a) for a in g.objects(n, NEMIK.alarm)),
-            rrule=rrule,
-            exdates=gone,
             location=str(g.value(n, NEMIK.location) or ""),
         )
         found.append((repo, int(symbol.lstrip("W") or 0), lines))

@@ -4592,3 +4592,12 @@
 2026-11-04T14:26:51Z  status W1617 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-04T14:32:37Z  interrupt W1618 minted    -         "alarm.fires_between takes its schedule fields as one Schedule tuple, so an eight-argument PLR0913 clears and ruff falls 42 to 41"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1568
 2026-11-04T14:32:41Z  status W1618 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T14:41:59Z  tick  W1618 advanced  sweep     "stack 980 (W1616 bundle, mypy 32 to 24) landed pushed; 981 [W1617 alone] REFUSED by the pace guard (the bundle turned the mypy lane to ok), rebuilt as 982 [W1618 alarm schedule tuple ruff 42 to 41, W1617 mypy 24 to 14] gating; R221 applied (W846 verdict, luthen rollout numbers and correction adopted: SHIP-SEEN is the image_spec sha against the pushed sha, stuck rule 15 minutes) [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T14:50:43Z  status W1618 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T14:50:45Z  status W1617 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T15:00:25Z  interrupt W1619 minted    -         "calwrite.event_lines takes dtstart, due, rrule and exdates as alarm.Schedule, so its eight-argument PLR0913 clears and ruff falls 41 to 40"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1568
+2026-11-04T15:00:30Z  status W1619 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T15:17:44Z  status W1619 working>blocked writer    "working -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T15:30:20Z  interrupt W1620 minted    -         "test_cardtree opens its page through webpage.launched_page, so its load records failed requests and retries a network change (the W846 recurrence at stack 983 came from a page the harness never watched)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W846
+2026-11-04T15:30:26Z  status W1620 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T15:32:45Z  status W1619 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
