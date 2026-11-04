@@ -14,6 +14,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+from mikemol.procrun.proc import Completed, capture
+
 
 def bin_env() -> tuple[Path, dict[str, str]]:
     """Give the directory of the installed scripts and the environment that runs them.
@@ -47,23 +49,14 @@ def script(name: str) -> list[str]:
     return [str(path)]
 
 
-def run(
-    name: str, *args: str, cwd: Path | None = None
-) -> subprocess.CompletedProcess[str]:
+def run(name: str, *args: str, cwd: Path | None = None) -> Completed:
     """Run an installed script to completion, capturing its output as text.
 
     Returns:
         The finished process; a nonzero exit is left to the caller.
 
     """
-    return subprocess.run(
-        [*script(name), *args],
-        env=bin_env()[1],
-        capture_output=True,
-        text=True,
-        check=False,
-        cwd=cwd,
-    )
+    return capture([*script(name), *args], cwd=cwd, env=bin_env()[1])
 
 
 def popen(

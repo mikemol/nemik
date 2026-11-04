@@ -4537,3 +4537,7 @@
 2026-11-04T07:15:15Z  status W1598 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-04T07:30:43Z  interrupt W1600 minted    -         "test_cachestore marks its cache-clearing fixture by usefixtures instead of autouse, so one ruff finding clears and ruff falls 48 to 47"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1568
 2026-11-04T07:31:06Z  status W1600 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T07:40:47Z  status W1599 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T07:53:35Z  status W1600 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T07:53:48Z  interrupt W1601 minted    -         "tests/installed.run starts its child through procrun capture, so one S603 clears and ruff falls 47 to 46"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1568
+2026-11-04T07:53:51Z  status W1601 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

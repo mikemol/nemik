@@ -58,6 +58,7 @@ def test_the_pace_age_is_whole_minutes_from_the_quoted_stamp() -> None:
     assert pace_age_minutes(WHEN, fresh) == FRESH_AGE
     assert pace_age_minutes(WHEN, stale) == STALE_AGE
     assert pace_age_minutes(WHEN, "no read quoted") is None
+    assert pace_age_minutes(WHEN, "Pace read stamp 2026-11-04T03:00:10Z") == STALE_AGE
 
 
 def test_manifest_paths_already_in_the_status_are_late() -> None:

@@ -27,7 +27,7 @@ from mikemol.procrun.proc import capture
 MIN_ARGS = 3
 STAMP_FORMAT = "%Y-%m-%dT%H:%M:%SZ"
 PACE_STAMP = re.compile(
-    r"pace read(?: of)? (?:stamp )?(\d{4}-\d\d-\d\dT\d\d:\d\d:\d\dZ)"
+    r"pace read(?: of)? (?:stamp )?(\d{4}-\d\d-\d\dT\d\d:\d\d:\d\dZ)", re.IGNORECASE
 )
 STALE_MINUTES = 10
 SECONDS_PER_MINUTE = 60
