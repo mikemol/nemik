@@ -392,11 +392,21 @@ def _add_warrants(g: Graph, node: URIRef, w: model.Json) -> None:
         g.add((node, DCTERMS.subject, Literal(tag)))
 
 
+def _findall(pattern: str, text: str) -> list[str]:
+    """Give every whole match of `pattern` in `text`, as text.
+
+    Returns:
+        The matches in order (the patterns here have no groups).
+
+    """
+    return [str(m[0]) for m in re.finditer(pattern, text)]
+
+
 def _add_plans(g: Graph, node: URIRef, w: model.Json) -> None:
     """Add the files the next step names and edits, its manifest, size and flags."""
     # nemik:W544 (mtools:W1276): the repo files the next step names, as written. Paths only; the
     # EditDeclaredShape in shapes.ttl compares them with the file:<path>!w touches.
-    named = re.findall(
+    named = _findall(
         r"(?:[\w.-]+/)*[\w-]+\.(?:py|ttl|ya?ml|json|md|html|toml|js)\b",
         model.text(w, "next_bounded_step"),
     )
@@ -479,7 +489,7 @@ def _add_letters(g: Graph, node: URIRef, w: model.Json) -> None:
     # letter files a waypoint cites in its evidence or next step, as written. Paths only: the
     # evidence text itself stays out of the graph.
     for text in (model.text(w, "evidence"), model.text(w, "next_bounded_step")):
-        for path in re.findall(
+        for path in _findall(
             r"(?:[\w.-]+/inbox/[\w./-]+\.md|\.claude/letters/[\w./-]+\.md)", text
         ):
             g.add((node, NEMIK.letter, Literal(path)))

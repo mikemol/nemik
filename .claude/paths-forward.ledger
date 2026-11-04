@@ -4469,3 +4469,7 @@
 2026-11-03T23:39:13Z  status W1579 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-03T23:40:58Z  interrupt W1580 minted    -         "docs/plc0415-cycles.md counts four retired cycle sites for the two leaf modules, not five"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1578
 2026-11-03T23:41:12Z  status W1580 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-03T23:59:56Z  status W1576 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T00:01:34Z  tick  W1581 minted    -         "adapter.py reads its two regex path lists through one typed _findall: eight mypy findings clear (the mypy successor behind stack 951)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1568
+2026-11-04T00:01:49Z  status W1581 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T00:05:00Z  tick  W1581 advanced  sweep     "950 (W1576 serve ViewDoc, e0bcdc5b 23:59:08Z, mypy 213 to 149) and 949 (4a2f1c9a 23:34:34Z, ruff 88 to 87) landed; 951 [W1579 PLW0603 x2 ruff 87 to 85, W1580 doc correction] inflight since 23:59:13Z with 952 (W1581 adapter _findall, mypy 149 to 141) queued; R206 and R207 applied (ViewDoc, leaf-module cards, four-not-five correction) [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
