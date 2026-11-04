@@ -11,14 +11,14 @@ a harness.
 """
 
 import functools
+import http.client
 import http.server
 import json
 import os
 import shutil
 import threading
 import time
-import urllib.error
-import urllib.request
+import urllib.parse
 from pathlib import Path
 from typing import TYPE_CHECKING, Literal, Protocol
 
@@ -1667,11 +1667,12 @@ def test_no_command_route_or_tools_panel_remains(server: str) -> None:
     # offered is either native to the view or CLI-only. Neither the route nor the panel may come
     # back.
 
+    conn = http.client.HTTPConnection(urllib.parse.urlsplit(server).netloc, timeout=30)
     try:
-        urllib.request.urlopen(server + "cmd/rank?repo=a", timeout=30)
-        status = 200
-    except urllib.error.HTTPError as e:
-        status = e.code
+        conn.request("GET", "/cmd/rank?repo=a")
+        status = conn.getresponse().status
+    finally:
+        conn.close()
     assert status == HTTP_NOT_FOUND
     with sync_playwright() as p:
         browser = _launch(p)

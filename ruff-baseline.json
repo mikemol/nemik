@@ -49,9 +49,6 @@
  "tests/test_guarantees.py": {
   "PLR0913": 1
  },
- "tests/test_layout.py": {
-  "S310": 1
- },
  "tests/test_mspdi.py": {
   "S314": 2,
   "S405": 1

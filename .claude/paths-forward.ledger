@@ -4622,3 +4622,8 @@
 2026-11-04T17:49:02Z  status W1625 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-04T17:50:29Z  interrupt W1626 minted    -         "salience.audit takes its eight keyword options as one AuditOptions tuple, so its eleven-argument PLR0913 clears and ruff falls 36 to 35"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1568
 2026-11-04T17:50:36Z  status W1626 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T18:01:00Z  tick  W1627 minted    -         "tests/test_layout reads its /cmd status through http.client, so its S310 urlopen clears and ruff falls 35 to 34"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1568
+2026-11-04T18:01:09Z  tick  W1628 minted    -         "Five untyped Any reads typed in make_fleet, shaclcache, adapter, health and importer, so mypy falls"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1568
+2026-11-04T18:01:12Z  status W1627 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T18:02:59Z  status W1628 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T18:18:01Z  status W1626 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
