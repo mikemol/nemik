@@ -566,10 +566,8 @@ def _rows(
     repo: str,
     weights: Weights,
     *,
-    fruit_row: bool = True,
     comp: Composition | None = None,
-    toward: str = "",
-    with_working: bool = False,
+    options: tuple[bool, str, bool] = (True, "", False),
 ) -> list[RankRow]:
     """`repo`'s ready leaves as objective rows, before any ordering (for `rank`, `rank_fleet`).
 
@@ -587,6 +585,7 @@ def _rows(
         class set when it applies.
 
     """
+    fruit_row, toward, with_working = options
     ws = workstream_uri(repo)
     ready = sorted(
         (
@@ -717,10 +716,8 @@ def rank(
             g,
             repo,
             weights,
-            fruit_row=fruit_row,
             comp=comp,
-            toward=toward,
-            with_working=with_working,
+            options=(fruit_row, toward, with_working),
         ),
         comp,
     )

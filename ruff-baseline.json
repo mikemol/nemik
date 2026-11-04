@@ -37,7 +37,7 @@
  },
  "src/nemik/rank.py": {
   "PLC0415": 6,
-  "PLR0913": 2
+  "PLR0913": 1
  },
  "src/nemik/salience.py": {
   "PLR0913": 1
