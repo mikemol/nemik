@@ -127,6 +127,15 @@ def matches(header: str | None, tag: str) -> bool:
     return "*" in wanted or tag in wanted or tag.removeprefix("W/") in wanted
 
 
+BACKLOG = 128  # above a browser's six parallel connects; socketserver's default is 5 (nemik:W846)
+
+
+class PageServer(ThreadingHTTPServer):
+    """A ThreadingHTTPServer whose listen backlog outlasts a browser's parallel connects."""
+
+    request_queue_size = BACKLOG
+
+
 def handler(root: Path) -> type[BaseHTTPRequestHandler]:
     """Build the static server's request handler class over one publish root.
 
@@ -252,7 +261,7 @@ def main(argv: list[str] | None = None) -> None:
 
     """
     args = parser().parse_args(argv, namespace=Options())
-    ThreadingHTTPServer((args.bind, args.port), handler(args.root)).serve_forever()
+    PageServer((args.bind, args.port), handler(args.root)).serve_forever()
 
 
 if __name__ == "__main__":

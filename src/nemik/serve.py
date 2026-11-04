@@ -1323,6 +1323,15 @@ def history_response(
     return 200, "application/json", wrapped.encode("utf-8")
 
 
+BACKLOG = 128  # above a browser's six parallel connects; socketserver's default is 5 (nemik:W846)
+
+
+class PageServer(ThreadingHTTPServer):
+    """A ThreadingHTTPServer whose listen backlog outlasts a browser's parallel connects."""
+
+    request_queue_size = BACKLOG
+
+
 def handler(model: Model) -> type[BaseHTTPRequestHandler]:
     """Build the live server's request handler class over one model.
 
@@ -2054,7 +2063,7 @@ def main(argv: list[str] | None = None) -> None:
     model.hostroot = args.hostroot
     model.landings = args.landings
     model.history_dir = args.history_dir
-    server = ThreadingHTTPServer((args.bind, args.port), handler(model))
+    server = PageServer((args.bind, args.port), handler(model))
     # nemik:W1060: the bound port is told once the socket listens, so a caller that passed --port 0
     # learns it from this process and never from a number it picked, closed and hoped to keep.
     sys.stdout.write(f"listening {server.server_address[1]}\n")
