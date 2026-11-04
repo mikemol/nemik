@@ -20,12 +20,13 @@ def _forget() -> None:
     flow.reset_solves()
 
 
-@pytest.fixture(autouse=True)
-def _clean_caches() -> None:
-    _forget()
-
-
 def _build() -> Model:
+    """Build the fleet's model from whatever the caches hold.
+
+    Returns:
+        The refreshed model.
+
+    """
     model = Model(FLEET, frozenset())
     model.refresh()
     return model
@@ -33,6 +34,7 @@ def _build() -> Model:
 
 def test_a_saved_cache_is_restored_exactly(tmp_path: Path) -> None:
     """What is saved loads back unchanged."""
+    _forget()
     _build()
     held, solves = shaclinc.export_cache(), flow.export_solves()
     assert held, "the build left nothing to keep"
@@ -48,6 +50,7 @@ def test_a_restored_cache_makes_an_unchanged_rebuild_validate_nothing(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     """A rebuild after a restored cache validates nothing that is unchanged."""
+    _forget()
     # the reason this exists: a fresh process rebuilding cold validates the whole fleet
     runs: list[int] = []
     real = shaclinc.shacl_results
@@ -73,6 +76,7 @@ def test_a_cache_computed_by_other_code_is_not_trusted(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     """A cache saved under a different code stamp is refused."""
+    _forget()
     _build()
     cachestore.save(tmp_path)
     _forget()
@@ -84,6 +88,7 @@ def test_a_cache_computed_by_other_code_is_not_trusted(
 
 def test_a_missing_or_damaged_file_is_a_cold_start(tmp_path: Path) -> None:
     """A missing or damaged cache file loads as nothing, not as an error."""
+    _forget()
     assert cachestore.load(tmp_path) is False
     (tmp_path / cachestore.NAME).write_bytes(b"not a pickle")
     assert cachestore.load(tmp_path) is False

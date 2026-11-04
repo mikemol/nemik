@@ -62,9 +62,6 @@
   "S404": 1,
   "S603": 2
  },
- "tests/test_cachestore.py": {
-  "syntax": 1
- },
  "tests/test_flow_reference.py": {
   "S311": 1
  },
