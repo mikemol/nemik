@@ -26,11 +26,11 @@ from nemik.adapter import NEMIK, OSLC_CM
 from nemik.flow import Flow, solve
 from nemik.rank import (
     Weights,
-    _open,
-    _repo,
     downstream_weight,
     load_weights,
+    open_card,
     ref_of,
+    repo_of,
     successors,
 )
 from nemik.tomlview import table
@@ -194,7 +194,7 @@ def _open_graph(
         working cards when `workable`).
 
     """
-    nodes = {n for n in g.subjects(OSLC_CM.state, None) if _open(g, n)}
+    nodes = {n for n in g.subjects(OSLC_CM.state, None) if open_card(g, n)}
     prereq: dict[Node, set[Node]] = {}
     for p in nodes:
         for s in successors(g, p):
@@ -256,7 +256,7 @@ def _class_demand(
     """
 
     def klass(x: Node) -> int:
-        if _repo(x) == repo:
+        if repo_of(x) == repo:
             return weights.local
         return (
             weights.peer_blocked
@@ -369,7 +369,7 @@ def audit(
         if key in _MEMO[0]:
             return _MEMO[0][key]
     nodes, prereq, ready = _open_graph(g, workable=workable)
-    mine = sorted((n for n in ready if _repo(n) == repo), key=_node_number)
+    mine = sorted((n for n in ready if repo_of(n) == repo), key=_node_number)
     population, reach = _reach(g, mine, nodes)
     sources = sorted((x for x in population if x in prereq), key=str)
     if toward:

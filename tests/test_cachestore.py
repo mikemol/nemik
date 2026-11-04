@@ -15,8 +15,8 @@ STAMP_LENGTH = 64
 
 
 def _forget() -> None:
-    shaclinc._LAST.clear()
-    flow._SOLVES.clear()
+    shaclinc.reset_cache()
+    flow.reset_solves()
 
 
 @pytest.fixture(autouse=True)

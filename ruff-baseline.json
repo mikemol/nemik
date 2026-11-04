@@ -69,23 +69,13 @@
   "S603": 2
  },
  "tests/test_cachestore.py": {
-  "SLF001": 2,
   "syntax": 1
- },
- "tests/test_flow_cache.py": {
-  "SLF001": 1
  },
  "tests/test_flow_reference.py": {
   "S311": 1
  },
- "tests/test_frontier_walker.py": {
-  "PLC2701": 2
- },
  "tests/test_guarantees.py": {
   "PLR0913": 1
- },
- "tests/test_index.py": {
-  "PLC2701": 2
  },
  "tests/test_layout.py": {
   "S310": 1

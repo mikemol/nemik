@@ -237,7 +237,7 @@ def solve(
     if cached is not None:
         _SOLVES.move_to_end(key)
         return cached
-    result = _solve(demand, front, prereq, weights, edge)
+    result = solve_uncached(demand, front, prereq, weights, edge)
     _SOLVES[key] = result
     if len(_SOLVES) > _SOLVES_MAX:
         _SOLVES.popitem(last=False)
@@ -275,13 +275,27 @@ def import_solves(held: dict[SolveKey, Flow]) -> None:
         _SOLVES.popitem(last=False)
 
 
-def _solve(
+def reset_solves() -> None:
+    """Forget the cached solves, so the next solve runs."""
+    _SOLVES.clear()
+
+
+def solve_uncached(
     demand: Mapping[str, Fraction],
     front: set[str],
     prereq: dict[str, list[str]],
     weights: Mapping[tuple[str, str], Fraction] | None,
     edge: Fraction,
 ) -> Flow:
+    """Solve the flow from the demand to the front, without the cache.
+
+    Returns:
+        The solved flow.
+
+    Raises:
+        ValueError: when the demand at a source is not conserved.
+
+    """
     fibre: dict[str, dict[str, Fraction]] = {}
     stranded: dict[str, Fraction] = {}
     potential: dict[str, Fraction] = {}

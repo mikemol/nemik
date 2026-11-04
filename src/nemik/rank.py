@@ -289,7 +289,7 @@ def objectives(
     down = downstream_weight(g, n, weights)
     return {
         "operator": int(cause == "operator" or cause.startswith("operator:")),
-        "tier": -tiers.rank(TIERS.get(_repo(n), tiers.UNLISTED)),
+        "tier": -tiers.rank(TIERS.get(repo_of(n), tiers.UNLISTED)),
         "band": -bands.rank(b),
         "band_name": b,
         "band_why": why,
@@ -339,7 +339,13 @@ def _pair_order(pair: tuple[str, str, str, list[str]]) -> tuple[int, int, str]:
     return (int(pair[0].lstrip("W")), int(pair[1].lstrip("W")), pair[2])
 
 
-def _repo(node: Node) -> str:
+def repo_of(node: Node) -> str:
+    """Name the workstream a waypoint belongs to.
+
+    Returns:
+        The repo segment of the node's IRI.
+
+    """
     return str(node).removeprefix(BASE).partition("/")[0]
 
 
@@ -367,7 +373,7 @@ def downstream_weight(g: Graph, node: Node, weights: Weights) -> int:
         `peer_blocked` for a blocked one elsewhere, else `peer`.
 
     """
-    origin = _repo(node)
+    origin = repo_of(node)
     seen: set[Node] = {node}
     stack = [node]
     total = 0
@@ -377,7 +383,7 @@ def downstream_weight(g: Graph, node: Node, weights: Weights) -> int:
                 continue
             seen.add(nxt)
             stack.append(nxt)
-            if _repo(nxt) == origin:
+            if repo_of(nxt) == origin:
                 total += weights.local
             elif (nxt, OSLC_CM.state, NEMIK.Blocked) in g:
                 total += weights.peer_blocked
@@ -386,8 +392,13 @@ def downstream_weight(g: Graph, node: Node, weights: Weights) -> int:
     return total
 
 
-def _open(g: Graph, n: Node) -> bool:
+def open_card(g: Graph, n: Node) -> bool:
+    """Say whether a card is not done.
 
+    Returns:
+        True when the card has a state and it is not Done.
+
+    """
     ix = index(g)
     if ix is not None:
         return ix.open(n)
@@ -412,7 +423,7 @@ def frontier(g: Graph, goal: Node) -> tuple[set[Node], set[str]]:
         The leaves dG, and ddG: what they wait on from outside the repo.
 
     """
-    repo = _repo(goal)
+    repo = repo_of(goal)
     seen, stack, outside = {goal}, [goal], set()
     nodes, edges = {goal}, set()
     while stack:
@@ -423,14 +434,14 @@ def frontier(g: Graph, goal: Node) -> tuple[set[Node], set[str]]:
             if str(t).startswith(BASE) and "/" in str(t)[len(BASE) :]
         }
         for f in feeders:
-            if _repo(f) != repo:
-                if _open(g, f):
+            if repo_of(f) != repo:
+                if open_card(g, f):
                     outside.add(ref_of(f))
                 continue
             if (f, OSLC_CM.state, None) in g:  # a card, open or done
                 nodes.add(f)
                 edges.add((str(f), str(n)))
-            if _open(g, f) and f not in seen:
+            if open_card(g, f) and f not in seen:
                 seen.add(f)
                 stack.append(f)
     verdict = walk(
@@ -485,9 +496,9 @@ def goals(g: Graph, repo: str, weights: Weights) -> list[GoalRow]:
     ws = workstream_uri(repo)
     out: list[GoalRow] = []
     for n in g.subjects(NEMIK.workstream, ws):
-        if not _open(g, n):
+        if not open_card(g, n):
             continue
-        if any(_repo(s) == repo and _open(g, s) for s in successors(g, n)):
+        if any(repo_of(s) == repo and open_card(g, s) for s in successors(g, n)):
             continue
         leaves, outside = frontier(g, n)
 
@@ -519,7 +530,7 @@ def children(g: Graph, n: Node) -> set[Node]:
 
     """
     feeders = set(g.subjects(NEMIK.enables, n)) | set(g.objects(n, NEMIK.waitsFor))
-    return {f for f in feeders if _repo(f) == _repo(n) and _open(g, f)}
+    return {f for f in feeders if repo_of(f) == repo_of(n) and open_card(g, f)}
 
 
 def is_umbrella(g: Graph, n: Node) -> bool:
@@ -725,7 +736,7 @@ def fleet_repos(g: Graph) -> list[str]:
         The repo names, sorted.
 
     """
-    return sorted({_repo(n) for n in g.subjects(OSLC_CM.state, NEMIK.Ready)})
+    return sorted({repo_of(n) for n in g.subjects(OSLC_CM.state, NEMIK.Ready)})
 
 
 def _fleet_composition(comp: Composition | None) -> Composition:
@@ -807,7 +818,7 @@ def fruit(
 def _write_round(g: Graph, landings: Path, round_file: Path, weights: Weights) -> None:
     """Write every repo's round to the round file, then stop (nemik:W1025)."""
     # nemik:W1059: a round holds the work in progress, so a repo with only that has one
-    busy = {_repo(n) for n in g.subjects(OSLC_CM.state, NEMIK.Working)}
+    busy = {repo_of(n) for n in g.subjects(OSLC_CM.state, NEMIK.Working)}
     by_repo = {
         repo: [dict(r) for r in rank(g, repo, weights, with_working=True)]
         for repo in sorted({*fleet_repos(g), *busy})
@@ -1328,7 +1339,7 @@ def policy_blocks(
 
     """
     ws = workstream_uri(repo)
-    nodes = [n for n in g.subjects(NEMIK.workstream, ws) if _open(g, n)]
+    nodes = [n for n in g.subjects(NEMIK.workstream, ws) if open_card(g, n)]
     touches = {n: {str(t) for t in g.objects(n, NEMIK.touches)} for n in nodes}
     vector = {n: str(g.value(n, NEMIK.vector) or "") or None for n in nodes}
     sym = {n: str(g.value(n, NEMIK.symbol)) for n in nodes}
@@ -1362,5 +1373,5 @@ def unscored(g: Graph, repo: str) -> int:
     return sum(
         1
         for n in g.subjects(NEMIK.workstream, ws)
-        if _open(g, n) and g.value(n, NEMIK.vector) is None
+        if open_card(g, n) and g.value(n, NEMIK.vector) is None
     )

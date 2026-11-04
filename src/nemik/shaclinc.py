@@ -53,6 +53,11 @@ def import_cache(held: Held) -> None:
     _LAST.update(held)
 
 
+def reset_cache() -> None:
+    """Forget the held runs, so the next findings() validates in full."""
+    _LAST.clear()
+
+
 def shacl_results(data: Graph, shapes: Graph) -> dict[Node, list[Result]]:
     """Validate `data` against `shapes` in full.
 

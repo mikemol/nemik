@@ -19,7 +19,7 @@ RECOMPUTES = 2
 
 def _counting(monkeypatch: pytest.MonkeyPatch) -> dict[str, int]:
     calls = {"n": 0}
-    real = flow._solve
+    real = flow.solve_uncached
 
     def counted(
         demand: Mapping[str, Fraction],
@@ -31,7 +31,7 @@ def _counting(monkeypatch: pytest.MonkeyPatch) -> dict[str, int]:
         calls["n"] += 1
         return real(demand, front, prereq, weights, edge)
 
-    monkeypatch.setattr(flow, "_solve", counted)
+    monkeypatch.setattr(flow, "solve_uncached", counted)
     monkeypatch.setattr(flow, "_SOLVES", flow.OrderedDict())
     return calls
 

@@ -7,9 +7,9 @@ from __future__ import annotations
 from rdflib import Graph
 
 from nemik.adapter import NEMIK, OSLC_CM, waypoint_uri
-from nemik.critical import _open as open_set
+from nemik.critical import open_nodes as open_set
 from nemik.index import index, indexed
-from nemik.rank import _open, successors
+from nemik.rank import open_card, successors
 
 
 def _graph() -> Graph:
@@ -29,13 +29,13 @@ def test_indexed_answers_equal_the_graphs() -> None:
     nodes = sorted(set(g.subjects()), key=str)
     plain = (
         [successors(g, n) for n in nodes],
-        [_open(g, n) for n in nodes],
+        [open_card(g, n) for n in nodes],
         open_set(g),
     )
     with indexed():
         fast = (
             [successors(g, n) for n in nodes],
-            [_open(g, n) for n in nodes],
+            [open_card(g, n) for n in nodes],
             open_set(g),
         )
     assert fast == plain

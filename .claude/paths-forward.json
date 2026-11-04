@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1587,
+  "counter": 1588,
   "waypoints": [
     {
       "symbol": "W1",
@@ -37935,7 +37935,7 @@
     {
       "symbol": "W1586",
       "title": "Subprocess calls in rank, hostapply and work go through procrun capture, so six S404/S603 clear in src and test_rank_apply patches nemik.rank.capture, a seventh",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [
         "ruff",
@@ -37945,14 +37945,14 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Codemod w1586.py: capture() replaces subprocess.run at the three sites; Completed and TimeoutExpired come from mikemol.procrun.proc; rank echoes the writer's stdout and stderr; hostapply raises ValueError on a non-zero exit. Measure on the real tree: expected ruff 71 to 64.",
-      "evidence": "2026-11-04T03:32:57Z: G0 2026-11-04T03:33:10Z (R211 f2): gate empty since the 956 landing at 03:24:37Z (8 min 33 s at this stamp). Pace read 2026-11-04T01:25:47Z, ruff then 85, now 71 after 954 to 956; mypy 116; codon owes 2. Table of next ruff rows by fall per landing (R211 f2), from the baseline file: subprocess S404/S603 in rank, hostapply, work (6, this card) plus test_rank_apply S404 (1); tests/installed.py and tests/webpage.py S404/S603 (5, need a Popen seam, unprobed); xml S314/S405 in mspdi and test_mspdi (6, defusedxml dependency, unprobed); PLC0415 sites (14, cycle-bound, W1577/W1578); PLR0913 records (10, Codon census risk, unprobed); C901 handlers in serve and staticserve (3, unprobed). Actuator: codemod w1586.py applied to the real files. Sensor: mikemol-pycheck --ratchet on the real tree. Expected ruff 71 to 64 (seven findings), mypy flat 116; unmeasured until run, no probe copy because the change at each site is whole. Behaviour changes to name: rank echoes the writer's output after it exits instead of streaming it; hostapply raises ValueError for a non-zero exit with a new message. Time-box: submit by 04:03:00Z.",
+      "next_bounded_step": null,
+      "evidence": "2026-11-04T03:32:57Z: G0 2026-11-04T03:33:10Z (R211 f2): gate empty since the 956 landing at 03:24:37Z (8 min 33 s at this stamp). Pace read 2026-11-04T01:25:47Z, ruff then 85, now 71 after 954 to 956; mypy 116; codon owes 2. Table of next ruff rows by fall per landing (R211 f2), from the baseline file: subprocess S404/S603 in rank, hostapply, work (6, this card) plus test_rank_apply S404 (1); tests/installed.py and tests/webpage.py S404/S603 (5, need a Popen seam, unprobed); xml S314/S405 in mspdi and test_mspdi (6, defusedxml dependency, unprobed); PLC0415 sites (14, cycle-bound, W1577/W1578); PLR0913 records (10, Codon census risk, unprobed); C901 handlers in serve and staticserve (3, unprobed). Actuator: codemod w1586.py applied to the real files. Sensor: mikemol-pycheck --ratchet on the real tree. Expected ruff 71 to 64 (seven findings), mypy flat 116; unmeasured until run, no probe copy because the change at each site is whole. Behaviour changes to name: rank echoes the writer's output after it exits instead of streaming it; hostapply raises ValueError for a non-zero exit with a new message. Time-box: submit by 04:03:00Z. | 2026-11-04T03:59:05Z: LANDED 2026-11-04T03:59:04Z: stack 957 landed 5b23be6 (W1586) and feb6d0b (W1568) at 2026-11-04T03:58:16Z (reflog, last commit); ruff 71 to 64 as measured; sensor quoted before the close: 'unnamed: W1586' with W1587 named by the live stack 958 (landed card still working). Codon first reading was the gate (green). Gate empty 03:24:37Z to the 957 submit (key 1793763697, about 03:41Z), then 957 gated to 03:58:16Z. The stamp tool of the second entry was used from the working tree for W1587's G0.",
       "issued_at": "2026-11-04T03:32:47Z",
       "minted_during": "interrupt",
       "caused_by": "W1568",
-      "last_worked": "2026-11-04T03:32:57Z",
+      "last_worked": "2026-11-04T03:59:08Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261104T035908Z",
       "manifest": [
         "src/nemik/rank.py",
         "src/nemik/hostapply.py",
@@ -37988,6 +37988,42 @@
         "mypy-baseline.json"
       ],
       "size_class": "small"
+    },
+    {
+      "symbol": "W1588",
+      "title": "Public names for the flow and shaclinc cache resets and for rank and critical's open-card helpers, so seven ruff findings (SLF001 and PLC2701) clear",
+      "status": "working",
+      "enables": [],
+      "touches": [
+        "ruff",
+        "rank",
+        "flow",
+        "shaclinc",
+        "critical"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Codemod w1588.py: shaclinc.reset and flow.reset_solves replace the private clears, flow._solve becomes solve_uncached, rank._open and _repo become open_card and repo_of (rank, salience, test_frontier_walker, test_index), critical._open becomes open_nodes. Measure on the real tree: expected ruff 64 to 57.",
+      "evidence": "2026-11-04T04:00:47Z: G0 2026-11-04T04:00:46Z: stack 957 landed at 03:58:16Z and stack 958 (W1587, mypy filler) is in the gate; this is the ruff stack built while it gates (R211 f1). Pace read 2026-11-04T01:25:47Z (ruff then 85, now 64 after 957; mypy 116, 99 once 958 lands; codon owes 2). Actuator: codemod w1588.py: shaclinc.reset and flow.reset_solves replace the private clears in test_cachestore, flow._solve becomes solve_uncached (flow, test_flow_cache), rank._open and rank._repo become open_card and repo_of (rank, salience, test_frontier_walker, test_index), critical._open becomes open_nodes (critical, test_index). Sensor: mikemol-pycheck --ratchet on the real tree. Expected ruff 64 to 57 (SLF001 x3, PLC2701 x4), mypy flat; unmeasured until run, no probe copy because a rename has no partial form. Behaviour change: none. Submit after stack 958 lands, since both carry queue files and 958 carries mypy-baseline.json.",
+      "issued_at": "2026-11-04T04:00:38Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1568",
+      "last_worked": "2026-11-04T04:00:49Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "src/nemik/rank.py",
+        "src/nemik/salience.py",
+        "src/nemik/critical.py",
+        "src/nemik/flow.py",
+        "src/nemik/shaclinc.py",
+        "tests/test_cachestore.py",
+        "tests/test_flow_cache.py",
+        "tests/test_frontier_walker.py",
+        "tests/test_index.py",
+        "ruff-baseline.json"
+      ],
+      "size_class": "medium"
     }
   ],
   "residue": [

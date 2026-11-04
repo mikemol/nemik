@@ -2,7 +2,7 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W483: rank.frontier through mtools' shared walker agrees with the old stored-state walk.
 
-The old walk decided a card was open from its stored state (rank._open) and called a card a leaf
+The old walk decided a card was open from its stored state (rank.open_card) and called a card a leaf
 when nothing open in its repo fed it. The walker takes the same cone as plain nodes and edges with
 realized = the stored state is done. For every open card of the fixture fleet taken as a goal, the
 leaves (dG) and what they wait on outside (ddG) must be the same set, card for card.
@@ -15,7 +15,7 @@ from rdflib import Graph
 from rdflib.term import Node
 
 from nemik.adapter import BASE, NEMIK, OSLC_CM
-from nemik.rank import _open, _repo, frontier, ref_of
+from nemik.rank import frontier, open_card, ref_of, repo_of
 from nemik.serve import Model
 
 FLEET = Path(__file__).parent / "fixtures" / "fleet"
@@ -29,7 +29,7 @@ def _old_frontier(g: Graph, goal: Node) -> tuple[set[Node], set[str]]:
         The leaves, and what they wait on from outside the repo.
 
     """
-    repo = _repo(goal)
+    repo = repo_of(goal)
     seen, stack, leaves, outside = {goal}, [goal], set(), set()
     while stack:
         n = stack.pop()
@@ -40,9 +40,9 @@ def _old_frontier(g: Graph, goal: Node) -> tuple[set[Node], set[str]]:
         }
         local_open = set()
         for f in feeders:
-            if not _open(g, f):
+            if not open_card(g, f):
                 continue
-            if _repo(f) == repo:
+            if repo_of(f) == repo:
                 local_open.add(f)
             else:
                 outside.add(ref_of(f))
@@ -63,7 +63,7 @@ def test_the_walker_agrees_with_the_old_walk_on_every_open_card() -> None:
     model.refresh()
     g = model.graph
     goals = sorted(
-        (n for n in set(g.subjects(OSLC_CM.state, None)) if _open(g, n)), key=str
+        (n for n in set(g.subjects(OSLC_CM.state, None)) if open_card(g, n)), key=str
     )
     assert len(goals) > MIN_GOALS, "the fixture fleet is too small to say anything"
     differ = [ref_of(n) for n in goals if frontier(g, n) != _old_frontier(g, n)]

@@ -53,7 +53,13 @@ class Critical(NamedTuple):
     ]  # longest chains through each critical card (ways in x ways out)
 
 
-def _open(g: Graph) -> set[Node]:
+def open_nodes(g: Graph) -> set[Node]:
+    """Give the cards that are not done.
+
+    Returns:
+        Every waypoint node with a state other than Done.
+
+    """
     ix = index(g)
     if ix is not None:
         return {n for n in ix.state if ix.open(n)}
@@ -71,7 +77,7 @@ def repo_scope(g: Graph, repo: str) -> set[str]:
         The cites of the repo's open cards.
 
     """
-    return {c for c in (ref(n) for n in _open(g)) if c.partition(":")[0] == repo}
+    return {c for c in (ref(n) for n in open_nodes(g)) if c.partition(":")[0] == repo}
 
 
 def cone(g: Graph, card: str) -> set[str]:
@@ -83,7 +89,7 @@ def cone(g: Graph, card: str) -> set[str]:
         The cites in the cone, empty when the card is not open.
 
     """
-    nodes = _open(g)
+    nodes = open_nodes(g)
     start = next((n for n in nodes if ref(n) == card), None)
     if start is None:
         return set()
@@ -284,7 +290,7 @@ def fires(g: Graph, scope: set[str] | None = None) -> list[Fire]:
         The fires that hold up planned work, heaviest delay first.
 
     """
-    nodes = _open(g)
+    nodes = open_nodes(g)
     if scope is not None:
         nodes = {n for n in nodes if ref(n) in scope}
     succ = {n: {s for s in successors(g, n) if s in nodes} for n in nodes}
