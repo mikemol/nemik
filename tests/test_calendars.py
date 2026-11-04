@@ -2,6 +2,7 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W157: calendars exported by the helper, read through mikemol-ics, temp files removed."""
 
+import os
 import stat
 from datetime import date
 from pathlib import Path
@@ -145,9 +146,7 @@ def test_operator_lists_the_next_days_with_waiters(
 ) -> None:
     """nemik:W160/W161: nemik-days N, from opted-in calendars only."""
     monkeypatch.setattr("nemik.calendars.today", lambda: date(2026, 10, 1))
-    monkeypatch.setenv(
-        "PATH", str(installed.bin_env()[0]) + ":" + __import__("os").environ["PATH"]
-    )
+    monkeypatch.setenv("PATH", str(installed.bin_env()[0]) + ":" + os.environ["PATH"])
     g = Graph()
     w = waypoint_uri("life", "W9")
     g.add((w, OSLC_CM.state, STATE["blocked"]))
@@ -204,7 +203,7 @@ def test_a_refusing_helper_is_reported_not_a_traceback(
     with pytest.raises(SystemExit) as e:
         days_main(
             ["3", "--calendars", str(cfg), "--helper", str(h)],
-            __import__("rdflib").Graph(),
+            Graph(),
         )
     assert e.value.code == EXIT_REFUSED
     out = capsys.readouterr().out
@@ -320,7 +319,7 @@ def test_a_filter_that_matches_nothing_is_reported_not_read_as_a_free_day(
             "--helper",
             str(_helper(tmp_path, text=CHORES)),
         ],
-        __import__("rdflib").Graph(),
+        Graph(),
     )
     out = capsys.readouterr().out
     assert "next 14 days (0)" in out
@@ -390,7 +389,7 @@ def test_days_dedupes_across_calendars_and_no_dedupe_shows_all(
         "--helper",
         str(_helper(tmp_path, text=CHORES)),
     ]
-    g = __import__("rdflib").Graph()
+    g = Graph()
     days_main(base, g)
     out = capsys.readouterr().out
     assert "next 14 days (4)" in out

@@ -18,8 +18,19 @@ from nemik.serve import (
     static_data,
     write_static,
 )
+from nemik.tomlview import table
 
 EXIT_REFUSED = 2
+
+
+def _all(pattern: str, text: str) -> list[str]:
+    """Give the first group of every match of `pattern` in `text`.
+
+    Returns:
+        The group texts, in order.
+
+    """
+    return [str(m[1]) for m in re.finditer(pattern, text)]
 
 
 def test_page_and_vendor_written_with_relative_links(tmp_path: Path) -> None:
@@ -31,11 +42,9 @@ def test_page_and_vendor_written_with_relative_links(tmp_path: Path) -> None:
         f"vendor/{v}" for v in VENDOR
     } | own
     html = (tmp_path / "index.html").read_text()
-    for url in re.findall(r'(?:src|href)="([^"$]+)"', html) + re.findall(
-        r'fetch\("([^"]+)"', html
-    ):
+    for url in _all(r'(?:src|href)="([^"$]+)"', html) + _all(r'fetch\("([^"]+)"', html):
         assert not url.startswith(("/", "http:", "https:")), url
-    for f in re.findall(r'fetch\("([^"]+)"', html):
+    for f in _all(r'fetch\("([^"]+)"', html):
         # a file name a bucket can serve: a document, or one of the page's own files (nemik:W822)
         assert f.endswith((".json", "/", *PAGE_FILES)), f
 
@@ -46,8 +55,7 @@ def test_data_files_cover_what_the_page_fetches_and_are_manifested() -> None:
     assert {"graph.json", "wake.json"} <= set(docs)
     assert any(k.startswith("goals/") for k in docs)
     assert not any(k.startswith("inbound/") for k in docs)  # the page never reads it
-    wake = docs["wake.json"]
-    assert isinstance(wake, dict)
+    wake = table(docs["wake.json"])
     assert wake["liveness"] == "snapshot"  # no host path published
     for name, doc in docs.items():
         assert unmanifested(name, doc) == [], name

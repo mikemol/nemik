@@ -64,9 +64,6 @@
   "misc": 1,
   "type-arg": 1
  },
- "tests/test_calendars.py": {
-  "misc": 6
- },
  "tests/test_deploy_manifest.py": {
   "misc": 2
  },
@@ -87,9 +84,6 @@
  },
  "tests/test_shaclinc.py": {
   "misc": 2
- },
- "tests/test_static.py": {
-  "misc": 7
  },
  "tests/test_static_view.py": {
   "misc": 1
