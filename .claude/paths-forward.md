@@ -3,11 +3,11 @@
 
 state file: `.claude/paths-forward.json`
 
-counter 1598 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:9bbb09df85976b2f`
+counter 1601 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:227dcae9cb43c3a6`
 
 | # | symbol | status |
 |---|---|---|
-| 1 | W1598 | working |
+| 1 | W1601 | working |
 | 2 | W1007 | ready |
 | 3 | W1008 | ready |
 | 4 | W1075 | ready |
@@ -1576,13 +1576,17 @@ counter 1598 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:9bb
 | 1567 | W1595 | done |
 | 1568 | W1596 | done |
 | 1569 | W1597 | done |
+| 1570 | W1598 | done |
+| 1571 | W1599 | done |
+| 1572 | W1600 | done |
 
 ## waypoints
 
-1. **W1598** (working) rank._apply becomes the public apply_weights, so two SLF001 in test_rank_apply clear and ruff
-   falls 50 to 48
-   - next: Codemod w1598.py: rank.py (two sites) and tests/test_rank_apply.py (two); the def already has a full
-     docstring. Measure the real tree, expected ruff 50 to 48.
+1. **W1601** (working) tests/installed.run starts its child through procrun capture, so one S603 clears and ruff falls
+   47 to 46
+   - next: Edit tests/installed.py run(): capture([*script(name), *args], cwd=cwd, env=bin_env()[1]) returning
+     Completed; popen and announced keep subprocess (a Popen with a pipe has no seam). Measure the real tree, expected
+     ruff 47 to 46.
 2. **W1007** (ready) The open-commitment count per repo, from mtools' commitment ledger, is a ratchet on the pace board
    and gauges
    - next: When mtools publishes its commitment ledger, count each repo's open commitments into a series, judge it like
@@ -5123,6 +5127,12 @@ counter 1598 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:9bb
    clear and ruff falls 52 to 50
 1569. **W1597** (done) shaclinc and cachestore read their untyped library results through typed casts, so seven mypy
    findings clear and mypy falls 80 to 73
+1570. **W1598** (done) rank._apply becomes the public apply_weights, so two SLF001 in test_rank_apply clear and ruff
+   falls 50 to 48
+1571. **W1599** (done) serve.py's static build and history_doc type their documents as objects, and withheld.apply
+   answers dict[str, object], so twenty-three mypy findings clear and mypy falls 73 to 50
+1572. **W1600** (done) test_cachestore marks its cache-clearing fixture by usefixtures instead of autouse, so one ruff
+   finding clears and ruff falls 48 to 47
 
 ## residue
 
@@ -7984,3 +7994,20 @@ counter 1598 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:9bb
   inbound ask marked working with a guessed manifest and then reverted before any submit, and W1589 dropped unedited
   with its reason (E402 and rdflib). I did not re-run any figure. Three findings. No fixpoint is declared. Carried open
   findings as in R212, with R212 finding 1 carried a second time.; 3 finding(s)
+- **nemik:R212** (-) round 214: stacks 963 (W1595 mypy 86 to 80) f995eddd landed 05:57:06Z, 964 (W1596 ruff 52 to 50)
+  2b265910 landed 06:20:54Z and 965 (W1597 mypy 80 to 73) 93a4c01b landed 06:47:23Z; stack 966 (W1598, ruff 50 to 48)
+  gating alone with no staged successor; W1592 closed: root Verified from the reflog (unix stamps): 526b05d8 1793771095
+  = 05:44:55Z, f995eddd 1793771826 = 05:57:06Z, 2b265910 1793773254 = 06:20:54Z, 93a4c01b 1793774843 = 06:47:23Z. The
+  three landings were exactly as expected on both lanes (mypy 86 to 80, ruff 52 to 50, mypy 80 to 73), the gate held a
+  stack at each landing from 05:44:55Z to 06:47:23Z, and the lane-check step from R213 finding 1 was followed for W1597
+  and for 963, with the pace stamp and the status of all three lanes quoted in the G0. R213 finding 3 is done in the
+  form I asked: the inbound ask luthen-observability:W1965 was read from their registry, answered, and CLOSED on their
+  confirmation, with their freshness baseline now empty. The probe work on W1597 is the best of the span: K measured on
+  two in-project copies, which also showed that a bare cast cannot clear shaclinc (the untyped pyshacl.validate call is
+  the finding) and led to a stub (stubs/pyshacl/__init__.pyi), plus TC003 x2 and an E501 found by the probe and fixed by
+  the codemod before the real tree. The G1 names its misses: the W1598 G0 quoted a pace read about 30 minutes old and
+  did not re-run it, after the standing-12 sentence written in answer to R213 finding 2, and the stampnote LATE check
+  (R212 finding 1) is still not built. It also ends the turn with one stack in the gate and no staged successor, after
+  reading six modules for a mypy row and finding none probed to K. I did not re-run any figure. Two findings. No
+  fixpoint is declared. Carried open findings as in R213, minus R213's three (met or applied) and R212 finding 1 carried
+  a third time.; 2 finding(s)

@@ -51,9 +51,6 @@
   "C901": 1,
   "PLW0717": 1
  },
- "src/nemik/wake.py": {
-  "PLW0717": 1
- },
  "src/nemik/witnesses.py": {
   "PLC0415": 1,
   "S310": 1

@@ -114,6 +114,31 @@ def _checker_output(py: Path, cwd: Path) -> str:
     return done.stdout
 
 
+NO_SOURCE = "no liveness source"
+
+
+def _liveness_text(root: Path, source: str | None) -> tuple[str, str]:
+    """Read the liveness JSON text from the first source there is.
+
+    Returns:
+        The text and where it came from (stdin, the file named, root/liveness.json, or luthen's
+        checker); an empty text and NO_SOURCE when there is none.
+
+    """
+    if source == "-":
+        return Path("/dev/stdin").read_text(encoding="utf-8"), "stdin"
+    if source:
+        return Path(source).read_text(encoding="utf-8"), source
+    export = root / "liveness.json"
+    if export.exists():
+        return export.read_text(), str(export)
+    luthen = root / "luthen-observability"
+    py = luthen / ".venv" / "bin" / "python"
+    if py.exists():
+        return _checker_output(py, luthen), "luthen-observability checks.loop_liveness"
+    return "", NO_SOURCE
+
+
 def read_liveness(root: Path, source: str | None) -> tuple[Liveness, str]:
     """Return ({repo: record}, where it came from); ({}, reason) when there is none.
 
@@ -124,24 +149,13 @@ def read_liveness(root: Path, source: str | None) -> tuple[Liveness, str]:
     """
     document: dict[str, Liveness]
     try:
-        if source == "-":
-            document = json.load(sys.stdin)
-            return document["repos"], "stdin"
-        if source:
-            document = json.loads(Path(source).read_text(encoding="utf-8"))
-            return document["repos"], source
-        export = root / "liveness.json"
-        if export.exists():
-            document = json.loads(export.read_text())
-            return document["repos"], str(export)
-        luthen = root / "luthen-observability"
-        py = luthen / ".venv" / "bin" / "python"
-        if py.exists():
-            document = json.loads(_checker_output(py, luthen))
-            return document["repos"], "luthen-observability checks.loop_liveness"
+        body, origin = _liveness_text(root, source)
+        if origin == NO_SOURCE:
+            return {}, NO_SOURCE
+        document = json.loads(body)
+        return document["repos"], origin
     except (OSError, ValueError, KeyError) as exc:
         return {}, f"unreadable: {exc}"
-    return {}, "no liveness source"
 
 
 def age_seconds(last_tick: str | None, now: datetime | None = None) -> float | None:

@@ -4541,3 +4541,7 @@
 2026-11-04T07:53:35Z  status W1600 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-04T07:53:48Z  interrupt W1601 minted    -         "tests/installed.run starts its child through procrun capture, so one S603 clears and ruff falls 47 to 46"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1568
 2026-11-04T07:53:51Z  status W1601 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T08:05:01Z  tick  W1601 advanced  sweep     "stacks 967 (W1599 mypy 73 to 49), 968 (W1600 ruff 48 to 47 with the stampnote LATE and PACE-STALE checks, R214 f1) landed; 969 (W1601 installed.run via capture, ruff 47 to 46, stampnote case fix) gating alone [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T08:21:56Z  status W1601 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T08:30:41Z  interrupt W1602 minted    -         "wake.read_liveness reads its source text in a helper, so its eleven-statement try clause is cut and PLW0717 clears, ruff falls 46 to 45"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1568
+2026-11-04T08:30:45Z  status W1602 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
