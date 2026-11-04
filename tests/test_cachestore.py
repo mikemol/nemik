@@ -6,6 +6,7 @@ from pathlib import Path
 
 import pytest
 from rdflib import Graph
+from rdflib.term import Node
 
 from nemik import cachestore, flow, shaclinc
 from nemik.serve import Model
@@ -51,7 +52,7 @@ def test_a_restored_cache_makes_an_unchanged_rebuild_validate_nothing(
     runs: list[int] = []
     real = shaclinc.shacl_results
 
-    def counting(data: Graph, shapes: Graph) -> dict:
+    def counting(data: Graph, shapes: Graph) -> dict[Node, list[shaclinc.Result]]:
         runs.append(len(data))
         return real(data, shapes)
 

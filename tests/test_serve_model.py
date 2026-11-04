@@ -16,6 +16,7 @@ import time
 from typing import TYPE_CHECKING
 from unittest import mock
 
+from nemik.check import survey as check_survey
 from nemik.serve import Model
 
 if TYPE_CHECKING:
@@ -43,13 +44,12 @@ def test_concurrent_refresh_rebuilds_once(tmp_path: Path) -> None:
     """Concurrent refresh rebuilds once."""
     write_queue(tmp_path, "alpha")
     model = Model(tmp_path)
-    real_survey = __import__("nemik.serve", fromlist=["survey"]).survey
 
     def slow_survey(
         root: Path, phases: dict[str, float] | None = None
     ) -> Iterator[tuple[str, Graph | None, list[Finding]]]:
         time.sleep(0.05)  # widen the race window so concurrent callers actually overlap
-        yield from real_survey(root, phases)
+        yield from check_survey(root, phases)
 
     barrier = threading.Barrier(5)
 
@@ -86,14 +86,13 @@ def test_poke_serves_stale_while_rebuilding(tmp_path: Path) -> None:
     model = Model(tmp_path)
     model.poke()
     assert model.rebuilds == 1
-    real_survey = __import__("nemik.serve", fromlist=["survey"]).survey
     released = threading.Event()
 
     def gated_survey(
         root: Path, phases: dict[str, float] | None = None
     ) -> Iterator[tuple[str, Graph | None, list[Finding]]]:
         released.wait(timeout=2)
-        yield from real_survey(root, phases)
+        yield from check_survey(root, phases)
 
     q = tmp_path / "alpha" / ".claude" / "paths-forward.json"
     os.utime(q, ns=(q.stat().st_atime_ns, q.stat().st_mtime_ns + 10**9))

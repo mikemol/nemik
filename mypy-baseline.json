@@ -60,10 +60,6 @@
  "tests/fixtures/make_fleet.py": {
   "misc": 2
  },
- "tests/test_cachestore.py": {
-  "misc": 1,
-  "type-arg": 1
- },
  "tests/test_deploy_manifest.py": {
   "misc": 2
  },
@@ -75,9 +71,6 @@
  },
  "tests/test_mpxj.py": {
   "misc": 2
- },
- "tests/test_serve_model.py": {
-  "misc": 4
  },
  "tests/test_shaclcache_threads.py": {
   "misc": 1
