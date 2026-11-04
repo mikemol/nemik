@@ -526,7 +526,7 @@ def operator_category(text: str) -> str:
     """
     if m := EXPLICIT.match(text):
         if (
-            m[1].lower() == "act"
+            str(m[1]).lower() == "act"
             and MACHINE_ACT.search(text)
             and not COMMAND.search(text)
         ):

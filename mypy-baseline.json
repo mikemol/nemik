@@ -2,9 +2,6 @@
  "src/nemik/adapter.py": {
   "misc": 1
  },
- "src/nemik/blocks.py": {
-  "misc": 3
- },
  "src/nemik/check.py": {
   "misc": 2
  },
