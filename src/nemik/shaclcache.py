@@ -68,7 +68,9 @@ def cached_sparql_parse() -> Generator[None]:
         def cached(tree: object, base: object = None, init_ns: object = None) -> object:
             if not isinstance(tree, _Text):
                 return translate(tree, base, init_ns)
-            namespaces = cast("dict[str, object]", init_ns or {})
+            namespaces: dict[str, object] = (
+                cast("dict[str, object]", init_ns) if init_ns else {}
+            )
             key = (tree.text, base, repr(sorted(namespaces.items(), key=str)))
             if key not in queries:
                 queries[key] = translate(parse(tree.text), base, init_ns)

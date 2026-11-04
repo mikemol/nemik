@@ -34,7 +34,7 @@ class _Terms(Namespace):
 
     def __getattr__(self, name: str) -> URIRef:
         term = super().__getattr__(name)
-        self.__dict__[name] = term
+        setattr(self, name, term)
         return term
 
 

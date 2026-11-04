@@ -1,7 +1,4 @@
 {
- "src/nemik/adapter.py": {
-  "misc": 1
- },
  "src/nemik/churn.py": {
   "misc": 3
  },
@@ -17,13 +14,7 @@
  "src/nemik/rank.py": {
   "misc": 1
  },
- "src/nemik/shaclcache.py": {
-  "misc": 1
- },
  "src/nemik/witwait.py": {
-  "misc": 1
- },
- "tests/fixtures/make_fleet.py": {
   "misc": 1
  },
  "tests/test_history.py": {

@@ -69,19 +69,15 @@ def main(root: Path, out: Path) -> None:
             for r in tables(d.get("residue"))
         ]
         (out / repo).mkdir(parents=True)
+        fixture: dict[str, object] = {
+            "version": 1,
+            "project_root": f"/fixture/{repo}",
+            "counter": d.get("counter", 0),
+            "waypoints": wps,
+            "residue": res,
+        }
         (out / repo / "paths-forward.json").write_text(
-            json.dumps(
-                {
-                    "version": 1,
-                    "project_root": f"/fixture/{repo}",
-                    "counter": d.get("counter", 0),
-                    "waypoints": wps,
-                    "residue": res,
-                },
-                indent=1,
-                sort_keys=True,
-            )
-            + "\n"
+            json.dumps(fixture, indent=1, sort_keys=True) + "\n"
         )
 
 
