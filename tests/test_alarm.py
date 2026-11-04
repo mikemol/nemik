@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import TYPE_CHECKING
 
 from nemik.adapter import NEMIK, queue_graph, waypoint_uri
-from nemik.alarm import duration, fires_at, fires_between
+from nemik.alarm import Schedule, duration, fires_at, fires_between
 from nemik.vtodo import vtodos
 
 if TYPE_CHECKING:
@@ -91,9 +91,11 @@ def test_recurring_alarms_fire_per_occurrence_skipping_exdates_and_completed() -
         "-PT15M",
         datetime(2026, 10, 1, tzinfo=UTC),
         datetime(2026, 11, 10, tzinfo=UTC),
-        dtstart="TZID=America/Detroit:20261005T180000",
-        rrule="FREQ=WEEKLY;BYDAY=MO",
-        exdates=("TZID=America/Detroit:20261012T180000",),
+        schedule=Schedule(
+            dtstart="TZID=America/Detroit:20261005T180000",
+            rrule="FREQ=WEEKLY;BYDAY=MO",
+            exdates=("TZID=America/Detroit:20261012T180000",),
+        ),
         done={"TZID=America/Detroit:20261019T180000": "20261019T230000Z"},
     )
     assert [(at.strftime("%m-%d %H:%M"), rid[-15:]) for at, rid in got] == [
@@ -110,11 +112,13 @@ def test_recurring_alarms_fire_per_occurrence_skipping_exdates_and_completed() -
 def test_one_shot_and_absolute_alarms_fire_once_inside_the_window() -> None:
     """One shot and absolute alarms fire once inside the window."""
     w = (datetime(2026, 10, 1, tzinfo=UTC), datetime(2026, 10, 2, tzinfo=UTC))
-    assert fires_between("RELATED=END:-PT2H", *w, due="20261001T220000Z") == [
-        (datetime(2026, 10, 1, 20, 0, tzinfo=UTC), "")
-    ]
     assert fires_between(
-        "VALUE=DATE-TIME:20261001T190000Z", *w, dtstart="20261001", rrule="FREQ=DAILY"
+        "RELATED=END:-PT2H", *w, schedule=Schedule(due="20261001T220000Z")
+    ) == [(datetime(2026, 10, 1, 20, 0, tzinfo=UTC), "")]
+    assert fires_between(
+        "VALUE=DATE-TIME:20261001T190000Z",
+        *w,
+        schedule=Schedule(dtstart="20261001", rrule="FREQ=DAILY"),
     ) == [(datetime(2026, 10, 1, 19, 0, tzinfo=UTC), "")]
     # fires 10-01 21:45Z, outside a 10-03 window
     assert (
@@ -122,13 +126,13 @@ def test_one_shot_and_absolute_alarms_fire_once_inside_the_window() -> None:
             "-PT15M",
             datetime(2026, 10, 3, tzinfo=UTC),
             datetime(2026, 10, 4, tzinfo=UTC),
-            dtstart="20261001T220000Z",
+            schedule=Schedule(dtstart="20261001T220000Z"),
         )
         == []
     )
-    assert fires_between("-PT15M", *w, dtstart="20261001T220000Z") == [
-        (datetime(2026, 10, 1, 21, 45, tzinfo=UTC), "")
-    ]
+    assert fires_between(
+        "-PT15M", *w, schedule=Schedule(dtstart="20261001T220000Z")
+    ) == [(datetime(2026, 10, 1, 21, 45, tzinfo=UTC), "")]
 
 
 def test_adapter_carries_recurrence_and_completed_occurrences(tmp_path: Path) -> None:

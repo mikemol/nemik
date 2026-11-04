@@ -34,7 +34,7 @@ from rdflib import Graph
 from rdflib.namespace import DCTERMS
 
 from nemik.adapter import BASE, NEMIK, OSLC_CM
-from nemik.alarm import fires_between
+from nemik.alarm import Schedule, fires_between
 from nemik.blocks import inbound, operator_asks, with_salience
 from nemik.check import default_root, survey
 from nemik.luthenseries import load
@@ -297,10 +297,14 @@ def fired_alarms(
                     trig,
                     start,
                     end,
-                    dtstart=val(n, NEMIK.dtstart),
-                    due=val(n, NEMIK.due),
-                    rrule=val(n, NEMIK.rrule),
-                    exdates=tuple(sorted(str(x) for x in g.objects(n, NEMIK.exdate))),
+                    schedule=Schedule(
+                        dtstart=val(n, NEMIK.dtstart),
+                        due=val(n, NEMIK.due),
+                        rrule=val(n, NEMIK.rrule),
+                        exdates=tuple(
+                            sorted(str(x) for x in g.objects(n, NEMIK.exdate))
+                        ),
+                    ),
                     done={str(r): "" for r in g.objects(n, NEMIK.occurrenceDone)},
                 )
             # One bad alarm (a hand-edited queue) must not hide the rest. What a bad one raises: the

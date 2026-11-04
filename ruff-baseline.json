@@ -8,9 +8,6 @@
  "src/nemik/adapter.py": {
   "PLC0415": 1
  },
- "src/nemik/alarm.py": {
-  "PLR0913": 1
- },
  "src/nemik/cachestore.py": {
   "S301": 1,
   "S403": 1

@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import re
 from datetime import UTC, date, datetime, time, timedelta
+from typing import NamedTuple
 
 from dateutil.rrule import rrulestr
 from mikemol.pathsforward.timevalue import duration, parse
@@ -66,15 +67,21 @@ def recurrence_id(when: datetime | date, dtstart: str) -> str:
     return _datetime(when).astimezone(UTC).strftime("%Y%m%dT%H%M%SZ")
 
 
+class Schedule(NamedTuple):
+    """The fields that place an alarm's card in time: when it starts, is due and repeats."""
+
+    dtstart: str = ""
+    due: str = ""
+    rrule: str = ""
+    exdates: tuple[str, ...] = ()
+
+
 def fires_between(
     trigger: str,
     start: datetime,
     end: datetime,
     *,
-    dtstart: str = "",
-    due: str = "",
-    rrule: str = "",
-    exdates: tuple[str, ...] = (),
+    schedule: Schedule | None = None,
     done: dict[str, str] | None = None,
 ) -> list[tuple[datetime, str]]:
     """Every (UTC instant, RECURRENCE-ID) in [start, end) at which `trigger` fires (nemik:W145).
@@ -89,6 +96,7 @@ def fires_between(
         anchor to count from.
 
     """
+    dtstart, due, rrule, exdates = schedule or Schedule()
     base = fires_at(trigger, dtstart, due)
     if base is None:
         return []
