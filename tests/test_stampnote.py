@@ -11,6 +11,7 @@ from stampnote import (
     main,
     manifest_of,
     pace_age_minutes,
+    pace_lanes,
     stamp_text,
 )
 
@@ -84,6 +85,24 @@ def test_the_flags_name_a_stale_read_and_the_late_paths() -> None:
         "[PACE-STALE 33 min] [LATE: 1 manifest path(s) already modified: a.py]"
     )
     assert not flags(WHEN, "pace read stamp 2026-11-04T03:30:10Z", [])
+
+
+PACE = """\
+nemik: WARNING running from an editable install
+pace of 2026-11-04T11:56:14Z; newest landing of nemik 2026-11-04T11:09:46Z: current
+behind mtools hooks/pyproject.toml: fell 7 (pace of 2026-11-04T11:56:14Z)
+behind nemik mypy-baseline.json: fell 35, owes 38 (pace of 2026-11-04T11:56:14Z)
+ok nemik ruff-baseline.json; 5 left, 3 landings to zero (pace of 2026-11-04T11:56:14Z)
+"""
+
+
+def test_the_pace_lanes_are_the_stamp_and_only_nemiks_ratchet_lines() -> None:
+    """A BUILD START stamp embeds the lane statuses, not another repo's lines."""
+    lanes = pace_lanes(PACE)
+    assert lanes.startswith("pace read stamp 2026-11-04T11:56:14Z: behind nemik mypy")
+    assert "ok nemik ruff-baseline.json; 5 left, 3 landings to zero" in lanes
+    assert "mtools" not in lanes
+    assert not pace_lanes("no pace here")
 
 
 def test_a_g0_without_a_quoted_pace_stamp_is_marked_and_other_labels_are_not() -> None:

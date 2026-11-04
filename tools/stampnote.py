@@ -49,6 +49,27 @@ def pace_age_minutes(now: datetime, text: str) -> int | None:
     return int((now - at).total_seconds() // SECONDS_PER_MINUTE)
 
 
+def pace_lanes(output: str) -> str:
+    """Pick the pace stamp and nemik's ratchet lines out of the pace tool's output.
+
+    Returns:
+        `pace read stamp <time>: <lane>; <lane>...`, or an empty string when the output has no
+        `pace of <time>` line.
+
+    """
+    stamp = re.search(
+        r"^pace of (\d{4}-\d\d-\d\dT\d\d:\d\d:\d\dZ)", output, re.MULTILINE
+    )
+    if stamp is None:
+        return ""
+    lanes = [
+        line.split(" (pace of")[0]
+        for line in output.splitlines()
+        if re.match(r"(PENDING )?(behind|ok) nemik ", line)
+    ]
+    return f"pace read stamp {stamp[1]}: " + "; ".join(lanes)
+
+
 def late_paths(manifest: list[str], porcelain: str) -> list[str]:
     """Pick the manifest paths that `git status --porcelain` already lists as changed.
 
@@ -132,6 +153,11 @@ def main(argv: list[str]) -> int:
     root = Path(__file__).resolve().parents[1]
     writer = str(bin_dir / "mikemol-paths-forward")
     state = str(root / ".claude" / "paths-forward.json")
+    if label.startswith("BUILD"):
+        pace = capture(
+            [str(bin_dir / "nemik-rank"), "nemik", "--pace", "--repo", "nemik"]
+        )
+        text = f"{pace_lanes(pace.stdout + pace.stderr)} {text}"
     now = datetime.now(UTC)
     shown = capture([writer, "--state", state, "--show", symbol]).stdout
     porcelain = capture(["git", "-C", str(root), "status", "--porcelain"]).stdout
