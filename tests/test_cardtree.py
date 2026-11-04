@@ -2,14 +2,10 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W725: the card list is a tree: a card sits under the heaviest card it enables."""
 
-import os
 from collections.abc import Generator
 from contextlib import contextmanager
-from pathlib import Path
 
-import pytest
 import webpage
-from playwright.sync_api import Error as PlaywrightError
 from playwright.sync_api import Page, sync_playwright
 
 ITEMS = "[...document.querySelectorAll('#cardlist button[data-card]')]"
@@ -42,17 +38,9 @@ def _viewer() -> Generator[Page]:
         The page, ready.
 
     """
-    exe = os.environ.get("NEMIK_CHROMIUM")
     with webpage.served() as url, sync_playwright() as p:
+        browser, page = webpage.launched_page(p, url)
         try:
-            browser = p.chromium.launch(
-                executable_path=str(Path(exe).absolute()) if exe else None
-            )
-        except PlaywrightError as e:
-            pytest.skip(f"chromium unavailable: {e}")
-        try:
-            page = browser.new_page(viewport={"width": 1700, "height": 1250})
-            webpage.load(page, url, webpage.CY_READY)
             yield page
         finally:
             browser.close()
