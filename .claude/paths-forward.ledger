@@ -4518,3 +4518,8 @@
 2026-11-04T05:21:02Z  status W1594 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-04T05:30:27Z  interrupt W1595 minted    -         "test_serve_model and test_cachestore name their imports and types instead of __import__ and a bare dict, so six mypy findings clear and mypy falls 86 to 80"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1568
 2026-11-04T05:30:37Z  status W1595 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T05:45:44Z  status W1594 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T05:49:40Z  tick  W1596 minted    -         "salience_of and edge_currents take the Weights object instead of its four fields, so two PLR0913 clear and ruff falls 52 to 50"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1568
+2026-11-04T05:49:49Z  status W1596 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T05:53:56Z  tick  W1596 advanced  sweep     "stacks 960 (W1591, W1590), 961 (W1593), 962 (W1594) landed, ruff 57 to 52 and mypy 99 to 86; 963 (W1595 mypy filler) gating and 964 (W1596 ruff, ruff 52 to 50) queued behind it; W1592 claimed for the luthen-observability:W1965 ask [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T05:56:46Z  status W1592 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

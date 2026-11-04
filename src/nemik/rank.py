@@ -608,10 +608,7 @@ def _rows(
         salience_of(
             g,
             repo,
-            weights.local,
-            weights.peer,
-            weights.peer_blocked,
-            operator=weights.operator,
+            weights,
             toward=toward,
         )
         if flow

@@ -540,18 +540,14 @@ def wait_demand(
 def salience_of(
     g: Graph,
     repo: str,
-    local: int,
-    peer: int,
-    peer_blocked: int,
+    weights: Weights,
     *,
-    operator: int = 0,
     toward: str = "",
 ) -> dict[str, Fraction]:
     """Solve `repo`'s ready cards and return each card's exact flow salience, by `repo:W<n>`.
 
-    The class weights come in as plain numbers (those of `rank-weights.toml`, `operator` being
-    what an operator ask injects, W249), so a caller needs no shared type with this module;
-    nemik.rank uses this for its `weight` objective (W241).
+    The class weights are those of `rank-weights.toml` (`operator` being what an operator ask
+    injects, W249); nemik.rank uses this for its `weight` objective (W241).
 
     The ground is the WORKABLE cards (state ready or working), what a worker can pick up now: a card
     blocked on something outside the graph is a dead end and absorbs nothing (nemik:W252; measured
@@ -565,7 +561,7 @@ def salience_of(
     return audit(
         g,
         repo,
-        Weights(local, peer, peer_blocked, operator),
+        weights,
         workable=True,
         toward=toward,
     ).flow.salience
@@ -574,11 +570,8 @@ def salience_of(
 def edge_currents(
     g: Graph,
     repo: str,
-    local: int,
-    peer: int,
-    peer_blocked: int,
+    weights: Weights,
     *,
-    operator: int = 0,
     workable: bool = True,
 ) -> dict[tuple[str, str], float]:
     """Give the demand across each dependency in `repo`'s solve, by (needing card, prerequisite).
@@ -593,7 +586,5 @@ def edge_currents(
         prerequisite).
 
     """
-    flow = audit(
-        g, repo, Weights(local, peer, peer_blocked, operator), workable=workable
-    ).flow
+    flow = audit(g, repo, weights, workable=workable).flow
     return {edge: float(amount) for edge, amount in flow.current.items()}

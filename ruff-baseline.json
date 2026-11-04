@@ -40,7 +40,7 @@
   "PLR0913": 2
  },
  "src/nemik/salience.py": {
-  "PLR0913": 3,
+  "PLR0913": 1,
   "PLR0917": 1
  },
  "src/nemik/serve.py": {
