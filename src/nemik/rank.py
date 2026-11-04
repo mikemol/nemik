@@ -19,7 +19,7 @@ from dataclasses import dataclass
 from fractions import Fraction
 from importlib.resources import files
 from pathlib import Path
-from typing import TYPE_CHECKING, TypedDict
+from typing import TYPE_CHECKING, NamedTuple, TypedDict
 
 from mikemol.frontier.walk import frontier as walk
 from mikemol.procrun.proc import capture
@@ -690,15 +690,21 @@ def _position(rows: list[RankRow], comp: Composition | None) -> list[RankRow]:
     return out
 
 
+class RankOptions(NamedTuple):
+    """What rank may be asked besides the graph: the fruit row, a milestone, the cards at work."""
+
+    fruit_row: bool = True
+    toward: str = ""
+    with_working: bool = False
+
+
 def rank(
     g: Graph,
     repo: str,
     weights: Weights,
     comp: Composition | None = None,
     *,
-    fruit_row: bool = True,
-    toward: str = "",
-    with_working: bool = False,
+    options: RankOptions | None = None,
 ) -> list[RankRow]:
     """Every ready leaf in `repo`, in the declared composed order (nemik:W132; lower symbol first).
 
@@ -717,7 +723,7 @@ def rank(
             repo,
             weights,
             comp=comp,
-            options=(fruit_row, toward, with_working),
+            options=options or RankOptions(),
         ),
         comp,
     )
@@ -814,7 +820,10 @@ def _write_round(g: Graph, landings: Path, round_file: Path, weights: Weights) -
     # nemik:W1059: a round holds the work in progress, so a repo with only that has one
     busy = {repo_of(n) for n in g.subjects(OSLC_CM.state, NEMIK.Working)}
     by_repo = {
-        repo: [dict(r) for r in rank(g, repo, weights, with_working=True)]
+        repo: [
+            dict(r)
+            for r in rank(g, repo, weights, options=RankOptions(with_working=True))
+        ]
         for repo in sorted({*fleet_repos(g), *busy})
     }
     write_round_file(by_repo, landings, round_file)  # W1025
@@ -996,7 +1005,8 @@ def _report_flow(g: Graph, args: Options) -> None:
 
 def _report_rank(g: Graph, args: Options, weights: Weights) -> None:
     """Print the repo's ranked ready items: the round, the writer's input, JSON or lines."""
-    rows = rank(g, args.repo, weights, toward=args.toward, with_working=args.round)
+    options = RankOptions(toward=args.toward, with_working=args.round)
+    rows = rank(g, args.repo, weights, options=options)
     if args.round:
         show_round(args.repo, [dict(r) for r in rows], args.landings)
         return

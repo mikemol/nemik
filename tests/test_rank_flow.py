@@ -12,7 +12,7 @@ from mikemol.procrun.proc import capture
 from rdflib import Graph
 
 from nemik.check import survey
-from nemik.rank import load_composition, load_weights, rank
+from nemik.rank import RankOptions, load_composition, load_weights, rank
 from nemik.serve import to_json, without
 
 if TYPE_CHECKING:
@@ -68,9 +68,7 @@ class _Doc(TypedDict, total=False):
 
 def _pf(state: Path, *args: str) -> None:
     cmd = [*installed.script("mikemol-paths-forward"), "--state", str(state), *args]
-    assert (
-        capture(cmd).returncode == 0
-    )
+    assert capture(cmd).returncode == 0
 
 
 def _fleet(tmp_path: Path) -> Graph:
@@ -109,7 +107,10 @@ def _fleet(tmp_path: Path) -> Graph:
 
 def _order(g: Graph, model: str) -> list[str]:
     comp = load_composition(f'{TIERS}weight = "{model}"\n')
-    rows = cast("list[_Row]", rank(g, "a", load_weights(), comp, fruit_row=False))
+    rows = cast(
+        "list[_Row]",
+        rank(g, "a", load_weights(), comp, options=RankOptions(fruit_row=False)),
+    )
     return [r["symbol"] for r in rows]
 
 
@@ -135,7 +136,13 @@ def test_ranking_toward_a_milestone_counts_only_that_cards_demand(
     comp = load_composition(f'{TIERS}weight = "flow"\n')
     toward = cast(
         "list[_Row]",
-        rank(g, "a", load_weights(), comp, fruit_row=False, toward="a:W4"),
+        rank(
+            g,
+            "a",
+            load_weights(),
+            comp,
+            options=RankOptions(fruit_row=False, toward="a:W4"),
+        ),
     )
     assert [r["symbol"] for r in toward] == ["W1", "W2", "W3"]
     assert (
@@ -227,7 +234,9 @@ def _ranked(g: Graph, operator: int) -> list[str]:
         f"local = 1\npeer = 2\npeer_blocked = 8\noperator = {operator}\n"
     )
     comp = load_composition(f'{TIERS}weight = "flow"\n')
-    rows = cast("list[_Row]", rank(g, "a", weights, comp, fruit_row=False))
+    rows = cast(
+        "list[_Row]", rank(g, "a", weights, comp, options=RankOptions(fruit_row=False))
+    )
     return [r["symbol"] for r in rows]
 
 

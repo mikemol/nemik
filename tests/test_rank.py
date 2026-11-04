@@ -10,6 +10,7 @@ from rdflib import Graph, Literal, URIRef
 from nemik.adapter import NEMIK, OSLC_CM, STATE, waypoint_uri, workstream_uri
 from nemik.rank import (
     Composition,
+    RankOptions,
     RankRow,
     Weights,
     children,
@@ -120,7 +121,9 @@ def test_a_round_ranks_the_work_in_progress_among_the_ready_cards() -> None:
     g.add((_wp(g, "b", "W1", "blocked"), NEMIK.waitsFor, busy))
     ranked = cast("list[_Row]", rank(g, "a", W))
     assert [r["symbol"] for r in ranked] == ["W2"]
-    working = cast("list[_Row]", rank(g, "a", W, with_working=True))
+    working = cast(
+        "list[_Row]", rank(g, "a", W, options=RankOptions(with_working=True))
+    )
     assert [r["symbol"] for r in working] == ["W5", "W2"]
 
 
