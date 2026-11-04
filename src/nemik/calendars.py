@@ -226,15 +226,21 @@ def _run(argv: list[str]) -> str:
     return done.stdout
 
 
+class Reading(NamedTuple):
+    """How the collections are read: the export helper, the ics reader, the filters, the counts."""
+
+    helper: Path = DEFAULT_HELPER
+    ics: str | None = None
+    includes: dict[str, tuple[str, ...]] | None = None
+    stats: dict[str, tuple[int, int]] | None = None
+
+
 def occurrences(
     collections: dict[str, str],
     *,
     start: str,
     window: str = "14d",
-    helper: Path = DEFAULT_HELPER,
-    ics: str | None = None,
-    includes: dict[str, tuple[str, ...]] | None = None,
-    stats: dict[str, tuple[int, int]] | None = None,
+    reading: Reading | None = None,
 ) -> list[Occurrence]:
     """[{label, uid, start, end, all_day, summary, recurrence_id}] for every collection, by start.
 
@@ -251,6 +257,7 @@ def occurrences(
         FileNotFoundError: the calendar reader is not installed.
 
     """
+    helper, ics, includes, stats = reading or Reading()
     ics = ics or venv_ics()
     if not Path(ics).exists() and not shutil.which(ics):
         msg = f"the calendar reader {ics} is missing: rebuild nemik's venv (bazel build //:.venv)"
@@ -388,9 +395,11 @@ def _export(
             cols,
             start=today().isoformat(),
             window=f"{days}d",
-            helper=helper,
-            includes={label: c.include for label, c in cals.items() if c.include},
-            stats=stats,
+            reading=Reading(
+                helper=helper,
+                includes={label: c.include for label, c in cals.items() if c.include},
+                stats=stats,
+            ),
         )
     except FileNotFoundError as e:
         say(f"ERROR: {e}")

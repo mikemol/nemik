@@ -4601,3 +4601,7 @@
 2026-11-04T15:30:20Z  interrupt W1620 minted    -         "test_cardtree opens its page through webpage.launched_page, so its load records failed requests and retries a network change (the W846 recurrence at stack 983 came from a page the harness never watched)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W846
 2026-11-04T15:30:26Z  status W1620 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-04T15:32:45Z  status W1619 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T15:36:09Z  status W1619 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T15:36:11Z  status W1620 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T16:00:35Z  interrupt W1621 minted    -         "calendars.occurrences takes helper, ics, includes and stats as one Reading tuple, so its seven-argument PLR0913 clears and ruff falls 40 to 39"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1568
+2026-11-04T16:00:41Z  status W1621 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

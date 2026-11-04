@@ -16,6 +16,7 @@ from nemik.calendars import (
     Calendar,
     CalendarError,
     Occurrence,
+    Reading,
     days_main,
     dedupe,
     event_graph,
@@ -71,7 +72,12 @@ def test_occurrences_are_read_and_the_export_is_deleted(
 ) -> None:
     """The helper's export is read into occurrences, and no copy of the calendar is left."""
     got = occurrences(
-        {"home": "Personal"}, start="2026-10-01", helper=_helper(tmp_path), ics=ics
+        {"home": "Personal"},
+        start="2026-10-01",
+        reading=Reading(
+            helper=_helper(tmp_path),
+            ics=ics,
+        ),
     )
     assert [(r["label"], r["uid"], r["summary"]) for r in got] == [
         ("home", "a@t", "dentist")
@@ -89,8 +95,10 @@ def test_a_failed_export_raises_rather_than_reading_as_a_free_day(
         occurrences(
             {"home": "Personal"},
             start="2026-10-01",
-            helper=_helper(tmp_path, fail=True),
-            ics=ics,
+            reading=Reading(
+                helper=_helper(tmp_path, fail=True),
+                ics=ics,
+            ),
         )
 
 
@@ -173,7 +181,11 @@ def test_the_reader_is_found_in_nemiks_own_venv_not_on_path(
         monkeypatch.setenv(k, v)
     monkeypatch.setenv("PATH", "/usr/bin:/bin")  # the venv is not on PATH
     got = occurrences(
-        {"home": "Personal"}, start="2026-10-01", helper=_helper(tmp_path)
+        {"home": "Personal"},
+        start="2026-10-01",
+        reading=Reading(
+            helper=_helper(tmp_path),
+        ),
     )
     assert [r["uid"] for r in got] == ["a@t"]
     assert venv_ics().endswith("/mikemol-ics")
@@ -181,8 +193,10 @@ def test_the_reader_is_found_in_nemiks_own_venv_not_on_path(
         occurrences(
             {"home": "Personal"},
             start="2026-10-01",
-            helper=_helper(tmp_path),
-            ics=str(tmp_path / "nope"),
+            reading=Reading(
+                helper=_helper(tmp_path),
+                ics=str(tmp_path / "nope"),
+            ),
         )
 
 
@@ -268,19 +282,23 @@ def test_include_keeps_case_sensitive_substring_matches_and_counts_both_ways(
     occurrences(
         {"chores": "Chores"},
         start="2026-10-01",
-        helper=_helper(tmp_path, text=CHORES),
-        ics=ics,
-        stats=got_all,
+        reading=Reading(
+            helper=_helper(tmp_path, text=CHORES),
+            ics=ics,
+            stats=got_all,
+        ),
     )
     assert got_all == {"chores": (4, 4)}  # no include: everything
     stats: dict[str, tuple[int, int]] = {}
     got = occurrences(
         {"chores": "Chores"},
         start="2026-10-01",
-        helper=_helper(tmp_path, text=CHORES),
-        ics=ics,
-        includes={"chores": ("Mike", "Supper: Pascal")},
-        stats=stats,
+        reading=Reading(
+            helper=_helper(tmp_path, text=CHORES),
+            ics=ics,
+            includes={"chores": ("Mike", "Supper: Pascal")},
+            stats=stats,
+        ),
     )
     assert [r["summary"] for r in got] == [
         "Trash: Mike",
@@ -291,10 +309,12 @@ def test_include_keeps_case_sensitive_substring_matches_and_counts_both_ways(
     assert not occurrences(
         {"chores": "Chores"},
         start="2026-10-01",
-        helper=_helper(tmp_path, text=CHORES),
-        ics=ics,
-        includes={"chores": ("mike",)},
-        stats=none,
+        reading=Reading(
+            helper=_helper(tmp_path, text=CHORES),
+            ics=ics,
+            includes={"chores": ("mike",)},
+            stats=none,
+        ),
     )  # case-sensitive: "mike" is not "Mike"
     assert none == {"chores": (0, 4)}
 
@@ -446,9 +466,11 @@ def test_events_nemik_mirrored_are_not_read_back_as_the_operators_own(
     got = occurrences(
         {"home": "Personal"},
         start="2026-10-01",
-        helper=_helper(tmp_path, text=mixed),
-        ics=ics,
-        stats=stats,
+        reading=Reading(
+            helper=_helper(tmp_path, text=mixed),
+            ics=ics,
+            stats=stats,
+        ),
     )
     assert [r["uid"] for r in got] == ["a@t"]
     assert stats == {"home": (1, 1)}

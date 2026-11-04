@@ -12,9 +12,6 @@
   "S301": 1,
   "S403": 1
  },
- "src/nemik/calendars.py": {
-  "PLR0913": 1
- },
  "src/nemik/check.py": {
   "PLC0415": 1
  },
