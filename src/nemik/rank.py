@@ -1003,7 +1003,7 @@ def _report_rank(g: Graph, args: Options, weights: Weights) -> None:
         show_round(args.repo, [dict(r) for r in rows], args.landings)
         return
     if args.apply:
-        _apply(args.apply, rows)
+        apply_weights(args.apply, rows)
         return
     if args.json:
         say(json.dumps(rows, indent=2))
@@ -1226,7 +1226,7 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     _report_rank(g, args, weights)
 
 
-def _apply(state: str, rows: list[RankRow]) -> None:
+def apply_weights(state: str, rows: list[RankRow]) -> None:
     """nemik:W427: hand the ranked rows to the queue's one writer, mikemol-paths-forward.
 
     It is the one installed beside this interpreter; nemik never writes a queue itself. Exits with

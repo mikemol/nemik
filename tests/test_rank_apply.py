@@ -29,7 +29,7 @@ def test_apply_calls_the_queue_writer_with_the_rows(
 
     monkeypatch.setattr(rank, "capture", fake_run)
     rows: list[rank.RankRow] = [{"symbol": "W1", "weight": 3}]
-    rank._apply("/q/paths-forward.json", rows)
+    rank.apply_weights("/q/paths-forward.json", rows)
     (cmd,) = cmds
     assert cmd[0] == str(Path(sys.executable).parent / "mikemol-paths-forward")
     assert cmd[1:4] == ["--state", "/q/paths-forward.json", "--weights-from"]
@@ -45,5 +45,5 @@ def test_a_refusing_writer_fails_the_command(monkeypatch: pytest.MonkeyPatch) ->
 
     monkeypatch.setattr(rank, "capture", refuse)
     with pytest.raises(SystemExit) as e:
-        rank._apply("/q/paths-forward.json", [])
+        rank.apply_weights("/q/paths-forward.json", [])
     assert e.value.code == EXIT_REFUSED

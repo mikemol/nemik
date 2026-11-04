@@ -4527,3 +4527,6 @@
 2026-11-04T06:01:04Z  status W1592 blocked>done writer    "blocked -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-04T06:01:20Z  interrupt W1597 minted    -         "shaclinc and cachestore read their untyped library results through typed casts, so seven mypy findings clear and mypy falls 80 to 73"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1568
 2026-11-04T06:01:30Z  status W1597 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T06:21:44Z  status W1596 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T06:30:46Z  interrupt W1598 minted    -         "rank._apply becomes the public apply_weights, so two SLF001 in test_rank_apply clear and ruff falls 50 to 48"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1568
+2026-11-04T06:30:49Z  status W1598 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
