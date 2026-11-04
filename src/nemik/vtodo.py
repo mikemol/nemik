@@ -165,7 +165,7 @@ def stated_ask(ask: str) -> tuple[str, str]:
     """
     for part in ask.split(" | "):
         if m := EXPLICIT.match(part):
-            return m[1].lower(), part[m.end() :].strip(" :—-")
+            return str(m[1]).lower(), part[m.end() :].strip(" :—-")
     return "decide", ask
 
 
@@ -404,7 +404,7 @@ def tasks_main(argv: list[str] | None = None) -> None:
     ap.add_argument(
         "--only",
         action="append",
-        default=[],
+        default=list[str](),
         metavar="REF",
         help="sync only this repo:W<n> (repeatable); other tasks are left untouched (nemik:W162)",
     )

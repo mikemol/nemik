@@ -11,9 +11,6 @@
  "src/nemik/churn.py": {
   "misc": 3
  },
- "src/nemik/critical.py": {
-  "misc": 3
- },
  "src/nemik/health.py": {
   "misc": 1
  },
@@ -34,9 +31,6 @@
  },
  "src/nemik/starved.py": {
   "misc": 1
- },
- "src/nemik/vtodo.py": {
-  "misc": 3
  },
  "src/nemik/witnesses.py": {
   "misc": 3

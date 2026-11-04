@@ -402,7 +402,7 @@ def _parse(argv: list[str] | None, root: Path) -> Options:
         "--assume-done",
         nargs="+",
         metavar="REPO:W<n>",
-        default=[],
+        default=list[str](),
         help="what-if: the path and slack as if these cards were closed, against today's (W351)",
     )
     ap.add_argument(
@@ -430,10 +430,21 @@ def _scope(g: Graph, args: Options) -> set[str] | None:
     return scope
 
 
+def _plain(row: tuple[object, ...], fields: tuple[str, ...]) -> dict[str, object]:
+    """Name a NamedTuple row's fields, as a dict for JSON.
+
+    Returns:
+        The row's values keyed by its field names.
+
+    """
+    return dict(zip(fields, row, strict=True))
+
+
 def _report_fires(found_fires: list[Fire], args: Options) -> None:
     """Print the interrupt cards that hold up planned work, as JSON or one line each."""
     if args.json:
-        say(json.dumps([f._asdict() for f in found_fires], indent=1))
+        fires: list[dict[str, object]] = [_plain(f, f._fields) for f in found_fires]
+        say(json.dumps(fires, indent=1))
         return
     say(f"fires holding up planned work: {len(found_fires)}")
     for f in found_fires:
@@ -450,7 +461,11 @@ def _report_what_if(g: Graph, scope: set[str] | None, args: Options) -> None:
     before = critical(g, scope)
     after = critical(assume_done(g, args.assume_done), scope)
     if args.json:
-        say(json.dumps({"before": before._asdict(), "after": after._asdict()}))
+        both: dict[str, dict[str, object]] = {
+            "before": _plain(before, before._fields),
+            "after": _plain(after, after._fields),
+        }
+        say(json.dumps(both))
         return
     say(what_if(before, after, args.assume_done))
 

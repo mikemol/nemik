@@ -4557,3 +4557,6 @@
 2026-11-04T09:46:21Z  status W846 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-04T10:00:54Z  interrupt W1607 minted    -         "rank._rows takes its fruit_row, toward and with_working options as one tuple, so a seven-argument PLR0913 clears and ruff falls 44 to 43"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1568
 2026-11-04T10:01:18Z  status W1607 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T10:20:00Z  status W1607 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T10:30:45Z  interrupt W1608 minted    -         "critical and vtodo give argparse typed list defaults and cast their tuple dicts, so five mypy findings clear and mypy falls 49 to 44"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1568
+2026-11-04T10:30:57Z  status W1608 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
