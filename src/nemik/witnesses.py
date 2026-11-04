@@ -17,15 +17,15 @@ key they could not resolve.
 from __future__ import annotations
 
 import argparse
+import http.client
 import json
 import os
 import re
 import sys
 import urllib.parse
-import urllib.request
 from datetime import UTC, datetime
 from pathlib import Path
-from typing import IO, TYPE_CHECKING, TypedDict, cast
+from typing import TYPE_CHECKING, TypedDict, cast
 
 from mikemol.pathsforward.opa_eval import OpaUnavailableError, resolve
 from mikemol.procrun.proc import capture
@@ -179,6 +179,30 @@ def _git_ref(key: str) -> Fact | None:
     return {"exists": out.returncode == 0, "sha": out.stdout.strip()}
 
 
+HTTP_ERROR = 400
+
+
+def _read(parts: urllib.parse.SplitResult) -> tuple[int, bytes]:
+    """Fetch the URL's path and query over http.client and close the connection.
+
+    Returns:
+        The response status and its whole body.
+
+    """
+    connect = (
+        http.client.HTTPSConnection
+        if parts.scheme == "https"
+        else http.client.HTTPConnection
+    )
+    conn = connect(parts.netloc, timeout=5)
+    try:
+        conn.request("GET", f"{parts.path}?{parts.query}")
+        reply = conn.getresponse()
+        return reply.status, reply.read()
+    finally:
+        conn.close()
+
+
 def _get(env: str, path: str, params: dict[str, str]) -> Body | None:
     """GET <$env><path> as JSON; None when the endpoint is unset or unreachable (cannot observe).
 
@@ -192,12 +216,15 @@ def _get(env: str, path: str, params: dict[str, str]) -> Body | None:
     base = os.environ.get(env)
     if not base:
         return None
-    url = f"{base.rstrip('/')}{path}?{urllib.parse.urlencode(params)}"
+    parts = urllib.parse.urlsplit(
+        f"{base.rstrip('/')}{path}?{urllib.parse.urlencode(params)}"
+    )
     try:
-        opened = cast("IO[bytes]", urllib.request.urlopen(url, timeout=5))
-        with opened as r:
-            body: Body = cast("Body", json.load(r))
-    except (OSError, ValueError):
+        status, raw = _read(parts)
+        body: Body = cast("Body", json.loads(raw))
+    except (OSError, ValueError, http.client.HTTPException):
+        return None
+    if status >= HTTP_ERROR:
         return None
     return body if body.get("status") == "success" else None
 

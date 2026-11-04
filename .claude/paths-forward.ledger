@@ -4614,3 +4614,7 @@
 2026-11-04T17:03:47Z  status W1623 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-04T17:04:32Z  tick  W1624 minted    -         "test_modes opens its page through webpage.launched_page, as test_cardtree now does (W846: the second file that called the library load on a page the harness never watched)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W846
 2026-11-04T17:04:36Z  status W1624 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T17:25:01Z  status W1623 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T17:25:03Z  status W1624 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T17:26:04Z  tick  W1625 minted    -         "witnesses._get reads through http.client, so its S310 urlopen of a variable URL clears and ruff falls 37 to 36"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1568
+2026-11-04T17:26:17Z  status W1625 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
