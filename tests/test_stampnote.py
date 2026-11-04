@@ -4,10 +4,20 @@
 
 from datetime import UTC, datetime, timedelta, timezone
 
-from stampnote import command, main, stamp_text
+from stampnote import (
+    command,
+    flags,
+    late_paths,
+    main,
+    manifest_of,
+    pace_age_minutes,
+    stamp_text,
+)
 
 WHEN = datetime(2026, 11, 4, 3, 33, 10, tzinfo=UTC)
 USAGE = 2
+FRESH_AGE = 5
+STALE_AGE = 33
 
 
 def test_the_stamp_is_the_utc_clock_reading_between_the_label_and_the_text() -> None:
@@ -15,6 +25,12 @@ def test_the_stamp_is_the_utc_clock_reading_between_the_label_and_the_text() -> 
     assert stamp_text(WHEN, "G0", "gate empty") == "G0 2026-11-04T03:33:10Z: gate empty"
     local = WHEN.astimezone(timezone(timedelta(hours=-5)))
     assert stamp_text(local, "G0", "x") == "G0 2026-11-04T03:33:10Z: x"
+
+
+def test_the_marks_come_before_the_text_and_only_when_there_are_any() -> None:
+    """A fired check is visible at the head of the note."""
+    assert stamp_text(WHEN, "G0", "x", "[LATE]") == "G0 2026-11-04T03:33:10Z: [LATE] x"
+    assert stamp_text(WHEN, "G0", "x", "") == "G0 2026-11-04T03:33:10Z: x"
 
 
 def test_the_command_goes_through_the_writers_update_and_append() -> None:
@@ -33,3 +49,37 @@ def test_the_command_goes_through_the_writers_update_and_append() -> None:
 def test_a_wrong_number_of_arguments_is_refused_before_anything_runs() -> None:
     """Two arguments are a usage error with status 2."""
     assert main(["W9", "G0"]) == USAGE
+
+
+def test_the_pace_age_is_whole_minutes_from_the_quoted_stamp() -> None:
+    """A note quoting `pace read stamp <time>` is aged at the stamp; one without is not."""
+    fresh = "pace read stamp 2026-11-04T03:28:10Z: ruff 48"
+    stale = "pace read of 2026-11-04T03:00:10Z, ruff 48"
+    assert pace_age_minutes(WHEN, fresh) == FRESH_AGE
+    assert pace_age_minutes(WHEN, stale) == STALE_AGE
+    assert pace_age_minutes(WHEN, "no read quoted") is None
+
+
+def test_manifest_paths_already_in_the_status_are_late() -> None:
+    """A path git lists as changed (modified, added or untracked) marks the stamp late."""
+    porcelain = " M src/nemik/a.py\n?? tools/new.py\nA  b.md\n"
+    manifest = ["src/nemik/a.py", "tools/new.py", "c.py"]
+    assert late_paths(manifest, porcelain) == ["src/nemik/a.py", "tools/new.py"]
+    assert late_paths(manifest, "") == []
+
+
+def test_the_manifest_is_read_from_the_writers_json() -> None:
+    """Torn text and a card without a manifest give no paths."""
+    assert manifest_of('{"manifest": ["a.py", "b.py"]}') == ["a.py", "b.py"]
+    assert manifest_of('{"symbol": "W1"}') == []
+    assert manifest_of("not json") == []
+
+
+def test_the_flags_name_a_stale_read_and_the_late_paths() -> None:
+    """Both labels are bracketed and joined; a fresh read on an unedited card adds none."""
+    stale = "pace read stamp 2026-11-04T03:00:10Z"
+    both = flags(WHEN, stale, ["a.py"])
+    assert both == (
+        "[PACE-STALE 33 min] [LATE: 1 manifest path(s) already modified: a.py]"
+    )
+    assert not flags(WHEN, "pace read stamp 2026-11-04T03:30:10Z", [])

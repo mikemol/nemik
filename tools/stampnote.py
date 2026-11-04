@@ -7,26 +7,101 @@ the time it was written, never one typed by hand. This replaces a scratch script
 (nemik:R210 finding 3): the tool lives in tools/ with a test. It writes only through
 `mikemol-paths-forward --update SYMBOL --evidence-append`.
 
+Two checks label the stamp itself (nemik:R214 finding 1, file retro-r214.json): `[LATE ...]` when
+a path in the card's manifest is already modified in the working tree, so the stamp is written
+after the edit and says so; `[PACE-STALE n min]` when the note quotes a `pace read stamp <time>`
+more than ten minutes before the stamp.
+
     .venv/bin/python3 tools/stampnote.py W1586 G0 "gate empty since ..."
 """
 
+import json
+import re
 import sys
 from datetime import UTC, datetime
 from pathlib import Path
+from typing import cast
 
 from mikemol.procrun.proc import capture
 
 MIN_ARGS = 3
+STAMP_FORMAT = "%Y-%m-%dT%H:%M:%SZ"
+PACE_STAMP = re.compile(
+    r"pace read(?: of)? (?:stamp )?(\d{4}-\d\d-\d\dT\d\d:\d\d:\d\dZ)"
+)
+STALE_MINUTES = 10
+SECONDS_PER_MINUTE = 60
+STATUS_PATH_AT = 3
 
 
-def stamp_text(now: datetime, label: str, text: str) -> str:
+def pace_age_minutes(now: datetime, text: str) -> int | None:
+    """Say how old the pace read a note quotes is at the stamp.
+
+    Returns:
+        Whole minutes between the quoted `pace read stamp <time>` and `now`, or None when the
+        note quotes none.
+
+    """
+    found = PACE_STAMP.search(text)
+    if found is None:
+        return None
+    at = datetime.strptime(found[1], STAMP_FORMAT).replace(tzinfo=UTC)
+    return int((now - at).total_seconds() // SECONDS_PER_MINUTE)
+
+
+def late_paths(manifest: list[str], porcelain: str) -> list[str]:
+    """Pick the manifest paths that `git status --porcelain` already lists as changed.
+
+    Returns:
+        The manifest paths present in the status, in manifest order.
+
+    """
+    changed = {line[STATUS_PATH_AT:].strip() for line in porcelain.splitlines()}
+    return [path for path in manifest if path in changed]
+
+
+def manifest_of(shown: str) -> list[str]:
+    """Read a card's manifest from the writer's `--show SYMBOL` JSON.
+
+    Returns:
+        The manifest paths; empty for text that is not that shape or a card without one.
+
+    """
+    try:
+        card = cast("dict[str, object]", json.loads(shown))
+    except ValueError:
+        return []
+    manifest = card.get("manifest")
+    return [str(p) for p in manifest] if isinstance(manifest, list) else []
+
+
+def flags(now: datetime, text: str, late: list[str]) -> str:
+    """Build the bracketed labels a stamp carries when a check fires.
+
+    Returns:
+        `[PACE-STALE n min]` and `[LATE: ...]` joined by a space, or an empty string.
+
+    """
+    labels: list[str] = []
+    age = pace_age_minutes(now, text)
+    if age is not None and age > STALE_MINUTES:
+        labels.append(f"[PACE-STALE {age} min]")
+    if late:
+        labels.append(
+            f"[LATE: {len(late)} manifest path(s) already modified: {', '.join(late)}]"
+        )
+    return " ".join(labels)
+
+
+def stamp_text(now: datetime, label: str, text: str, marks: str = "") -> str:
     """Put the UTC clock reading of `now` between the label and the text.
 
     Returns:
-        `<label> <YYYY-MM-DDTHH:MM:SSZ>: <text>`.
+        `<label> <YYYY-MM-DDTHH:MM:SSZ>: <marks> <text>`, the marks only when there are any.
 
     """
-    return f"{label} {now.astimezone(UTC).strftime('%Y-%m-%dT%H:%M:%SZ')}: {text}"
+    body = f"{marks} {text}" if marks else text
+    return f"{label} {now.astimezone(UTC).strftime(STAMP_FORMAT)}: {body}"
 
 
 def command(writer: str, state: str, symbol: str, note: str) -> list[str]:
@@ -52,14 +127,13 @@ def main(argv: list[str]) -> int:
     symbol, label, text = argv
     bin_dir = Path(sys.executable).parent
     root = Path(__file__).resolve().parents[1]
-    done = capture(
-        command(
-            str(bin_dir / "mikemol-paths-forward"),
-            str(root / ".claude" / "paths-forward.json"),
-            symbol,
-            stamp_text(datetime.now(UTC), label, text),
-        )
-    )
+    writer = str(bin_dir / "mikemol-paths-forward")
+    state = str(root / ".claude" / "paths-forward.json")
+    now = datetime.now(UTC)
+    shown = capture([writer, "--state", state, "--show", symbol]).stdout
+    porcelain = capture(["git", "-C", str(root), "status", "--porcelain"]).stdout
+    marks = flags(now, text, late_paths(manifest_of(shown), porcelain))
+    done = capture(command(writer, state, symbol, stamp_text(now, label, text, marks)))
     sys.stdout.write(done.stdout)
     sys.stderr.write(done.stderr)
     return done.returncode
