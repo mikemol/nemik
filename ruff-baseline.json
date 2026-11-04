@@ -61,9 +61,6 @@
   "PLC0415": 1,
   "S310": 1
  },
- "src/nemik/witwait.py": {
-  "PLR0913": 1
- },
  "tests/installed.py": {
   "S404": 1,
   "S603": 2

@@ -58,8 +58,7 @@ def _wait(
     t = _Clock()
     code, line = wait(
         poll,
-        timeout,
-        every,
+        (timeout, every),
         sleep=t.sleep,
         clock=t.clock,
         stamp=lambda: "2026-10-09T07:00:00Z",
@@ -170,8 +169,7 @@ def test_a_series_crossing_the_threshold_between_polls_returns_zero(
         monkeypatch.setenv("NEMIK_VM_URL", url)
         code, line = wait(
             promql_poll("synced / total > 0.99"),
-            5,
-            0.01,
+            (5, 0.01),
             stamp=lambda: "T",
         )
     assert (code, line) == (0, "HELD at T: 0.995")
@@ -183,14 +181,14 @@ def test_many_matching_series_print_a_readable_value(
     """Many matching series print a readable value."""
     with _victoria([[str(i) for i in range(8)]]) as url:
         monkeypatch.setenv("NEMIK_VM_URL", url)
-        code, line = wait(promql_poll("up == 1"), 5, 0.01, stamp=lambda: "T")
+        code, line = wait(promql_poll("up == 1"), (5, 0.01), stamp=lambda: "T")
     assert (code, line) == (0, "HELD at T: 0, 1, 2, 3, 4 (+3 more series)")
 
 
 def test_a_probe_that_is_down_is_exit_two(monkeypatch: pytest.MonkeyPatch) -> None:
     """A probe that is down is exit two."""
     monkeypatch.setenv("NEMIK_VM_URL", "http://127.0.0.1:9")
-    code, line = wait(promql_poll("up"), 5, 0.01)
+    code, line = wait(promql_poll("up"), (5, 0.01))
     assert code == EXIT_UNKNOWN
     assert "unreachable" in line
 

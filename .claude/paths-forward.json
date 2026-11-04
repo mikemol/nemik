@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1591,
+  "counter": 1593,
   "waypoints": [
     {
       "symbol": "W1",
@@ -38028,7 +38028,7 @@
     {
       "symbol": "W1590",
       "title": "test_calendars and test_static read their imports and regex matches in typed form, so thirteen mypy findings clear and mypy falls 99 to 86",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [
         "mypy",
@@ -38036,14 +38036,14 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Codemod w1590.py: import os and Graph replace the six __import__ calls in test_calendars; test_static takes a typed _all over re.finditer and table() for the wake document. Measure the real tree; expected mypy 99 to 86.",
-      "evidence": "2026-11-04T04:38:04Z: G0 2026-11-04T04:38:03Z: gate empty since the 959 landing at 04:35:54Z. Pace read 2026-11-04T04:25:55Z: mypy 99 left (9 landings to zero), ruff 57 (19 landings); codon owes 2. The W1589 hoist of checks/claims.py was dropped (not hoistable: E402 and rdflib), nothing edited. Actuator: codemod w1590.py: tests/test_calendars.py imports os and uses Graph (already imported) in place of six __import__ calls; tests/test_static.py reads its regex matches through a typed _all over re.finditer and its wake document through nemik.tomlview.table. Measured BEFORE this stamp by house mypy on the two files, no edit made: 13 findings (test_calendars 6, test_static 7). Expected mypy 99 to 86 (13); unmeasured after the change, no probe copy because both are test files. Predictable codes cleared in the codemod per standing 12: I001 (ruff --select I --fix), F401, PLC0415 none, a new helper gets a docstring with Returns (D103, DOC201). Time-box: submit by 05:10:00Z.",
+      "next_bounded_step": null,
+      "evidence": "2026-11-04T04:38:04Z: G0 2026-11-04T04:38:03Z: gate empty since the 959 landing at 04:35:54Z. Pace read 2026-11-04T04:25:55Z: mypy 99 left (9 landings to zero), ruff 57 (19 landings); codon owes 2. The W1589 hoist of checks/claims.py was dropped (not hoistable: E402 and rdflib), nothing edited. Actuator: codemod w1590.py: tests/test_calendars.py imports os and uses Graph (already imported) in place of six __import__ calls; tests/test_static.py reads its regex matches through a typed _all over re.finditer and its wake document through nemik.tomlview.table. Measured BEFORE this stamp by house mypy on the two files, no edit made: 13 findings (test_calendars 6, test_static 7). Expected mypy 99 to 86 (13); unmeasured after the change, no probe copy because both are test files. Predictable codes cleared in the codemod per standing 12: I001 (ruff --select I --fix), F401, PLC0415 none, a new helper gets a docstring with Returns (D103, DOC201). Time-box: submit by 05:10:00Z. | 2026-11-04T04:48:32Z: Landed b9ad7bb at 2026-11-04T04:47:34Z (reflog) in stack 960 behind W1591; 9 fresh of 466 targets (test-only stack), green; mypy 99 to 86 as measured. Sensor line quoted on W1591.",
       "issued_at": "2026-11-04T04:37:53Z",
       "minted_during": "interrupt",
       "caused_by": "W1568",
-      "last_worked": "2026-11-04T04:38:05Z",
+      "last_worked": "2026-11-04T04:48:32Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261104T044832Z",
       "manifest": [
         "tests/test_calendars.py",
         "tests/test_static.py",
@@ -38054,7 +38054,7 @@
     {
       "symbol": "W1591",
       "title": "test_score.vec takes its metrics as keywords and test_witwait's log_message is a static method, so PLR0913 and PLR6301 clear and ruff falls 57 to 55",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [
         "ruff",
@@ -38062,16 +38062,64 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Codemod w1591.py; measure the real tree; the stack is [W1591, W1590] because the pace guard refuses a mypy-only stack (codon and ruff are the owed ratchets).",
-      "evidence": "2026-11-04T04:41:23Z: G0 2026-11-04T04:41:23Z: stack 960 (W1590, mypy-only) was REFUSED at submit by the pace guard: nemik owes codon (required fall 2, observed 0) and ruff (required fall 57, observed 30), mypy is ok, so a mypy-only stack lowers none it owes; the earlier mypy fillers (958) were accepted only because a ruff stack was ahead in the gate. So the next stack is [W1591 ruff, W1590 mypy]. Gate empty since the 959 landing at 04:35:54Z. Pace read 2026-11-04T04:25:55Z (ruff 57, 19 landings; mypy 99; codon owes 2). Actuator: codemod w1591.py: tests/test_score.py vec(**metrics: str) over a defaults map in place of six keyword parameters (PLR0913), tests/test_witwait.py log_message as a staticmethod (PLR6301). Sensor: mikemol-pycheck --ratchet on the real tree. Expected ruff 57 to 55, mypy 86 to 86 with the W1590 edits already in the tree (unmeasured for log_message: a staticmethod override may raise a mypy override finding, then it is reverted). Predictable codes per standing 12: D103/DOC201 on a changed helper keep its docstring Returns; I001 none; no new constants. Time-box: submit by 05:20:00Z.",
+      "next_bounded_step": null,
+      "evidence": "2026-11-04T04:41:23Z: G0 2026-11-04T04:41:23Z: stack 960 (W1590, mypy-only) was REFUSED at submit by the pace guard: nemik owes codon (required fall 2, observed 0) and ruff (required fall 57, observed 30), mypy is ok, so a mypy-only stack lowers none it owes; the earlier mypy fillers (958) were accepted only because a ruff stack was ahead in the gate. So the next stack is [W1591 ruff, W1590 mypy]. Gate empty since the 959 landing at 04:35:54Z. Pace read 2026-11-04T04:25:55Z (ruff 57, 19 landings; mypy 99; codon owes 2). Actuator: codemod w1591.py: tests/test_score.py vec(**metrics: str) over a defaults map in place of six keyword parameters (PLR0913), tests/test_witwait.py log_message as a staticmethod (PLR6301). Sensor: mikemol-pycheck --ratchet on the real tree. Expected ruff 57 to 55, mypy 86 to 86 with the W1590 edits already in the tree (unmeasured for log_message: a staticmethod override may raise a mypy override finding, then it is reverted). Predictable codes per standing 12: D103/DOC201 on a changed helper keep its docstring Returns; I001 none; no new constants. Time-box: submit by 05:20:00Z. | 2026-11-04T04:48:24Z: LANDED 2026-11-04T04:48:23Z: stack 960 landed 1c936de (W1591) and b9ad7bb (W1590) at 2026-11-04T04:47:34Z (reflog, last commit); ruff 57 to 55 and mypy 99 to 86 as measured; sensor quoted before the close: 'unnamed: W1590, W1591' (landed stack, cards still working). Gate empty 04:35:54Z to the first submit's refusal, then to the accepted submit; the first submit (W1590 alone) was refused by the pace guard at about 04:44Z.",
       "issued_at": "2026-11-04T04:41:16Z",
       "minted_during": "interrupt",
       "caused_by": "W1568",
-      "last_worked": "2026-11-04T04:41:25Z",
+      "last_worked": "2026-11-04T04:48:30Z",
+      "ticks_blocked": 0,
+      "completed": "20261104T044830Z",
+      "manifest": [
+        "tests/test_score.py",
+        "tests/test_witwait.py",
+        "ruff-baseline.json"
+      ],
+      "size_class": "small"
+    },
+    {
+      "symbol": "W1592",
+      "title": "Answer luthen-observability:W1965: its metric registry row nemik_findings_ has no freshness declaration",
+      "status": "ready",
+      "enables": [
+        "luthen-observability:W1965"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Read the peer's full ask (nemik-inbound prints it truncated), find which nemik metric family nemik_findings_ names and what freshness declaration the registry wants (a max age and the stamp it is read from), then declare it or tell the peer why not.",
+      "evidence": "",
+      "issued_at": "2026-11-04T05:02:02Z",
+      "minted_during": "interrupt",
+      "caused_by": "luthen-observability:W1965",
+      "last_worked": "2026-11-04T05:05:20Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": null,
+      "size_class": "small"
+    },
+    {
+      "symbol": "W1593",
+      "title": "witwait.wait takes its timeout and interval as one window pair, so PLR0913 clears and ruff falls 55 to 54",
+      "status": "working",
+      "enables": [],
+      "touches": [
+        "ruff",
+        "witwait"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Codemod w1593.py: wait(poll, window, *, sleep, clock, stamp); witnesses.py and four test calls pass a (timeout, interval) pair.",
+      "evidence": "2026-11-04T05:03:27Z: G0 2026-11-04T05:03:26Z: gate empty since the 960 landing at 04:47:34Z. Pace read 2026-11-04T04:25:55Z (ruff 55 after 960, 19 landings at the read; mypy 86; codon owes 2) is older than 10 min at this stamp: re-read before submit. Tick prompt also brought the inbound ask luthen-observability:W1965, claimed as W1592. Actuator: codemod w1593.py: src/nemik/witwait.py wait(poll, window, *, sleep, clock, stamp) with window the (timeout_s, every_s) pair, src/nemik/witnesses.py passing (limit, step), tests/test_witwait.py four calls. Sensor: mikemol-pycheck --ratchet on the real tree. Expected ruff 55 to 54 (PLR0913), mypy flat 86; unmeasured until run. witwait is imported function-locally by witnesses.py (a hook-adjacent module): hookcheck.py after the edit. Predictable codes per standing 12: no rename, no new constant, a changed signature keeps its docstring (D417 no). Time-box: submit by 05:30:00Z.",
+      "issued_at": "2026-11-04T05:03:20Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1568",
+      "last_worked": "2026-11-04T05:03:28Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
-        "tests/test_score.py",
+        "src/nemik/witwait.py",
+        "src/nemik/witnesses.py",
         "tests/test_witwait.py",
         "ruff-baseline.json"
       ],

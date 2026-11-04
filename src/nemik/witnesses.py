@@ -612,7 +612,7 @@ def main(argv: list[str] | None = None) -> None:
         except ValueError as err:
             warn(f"nemik-witnesses: {err}")
             raise SystemExit(2) from err
-        code, line = wait(poller(args.wait, args.lang), limit, step)
+        code, line = wait(poller(args.wait, args.lang), (limit, step))
         say(line)
         raise SystemExit(code)
     # nemik:W97: the queue's one writer is the installed mikemol-paths-forward, beside this

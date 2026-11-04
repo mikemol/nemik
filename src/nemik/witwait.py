@@ -114,8 +114,7 @@ def poller(query: str, lang: str = "") -> Callable[[], tuple[str, str]]:
 
 def wait(
     poll: Callable[[], tuple[str, str]],
-    timeout_s: float,
-    every_s: float,
+    window: tuple[float, float],
     *,
     sleep: Callable[[float], None] = time.sleep,
     clock: Callable[[], float] = time.monotonic,
@@ -123,10 +122,13 @@ def wait(
 ) -> tuple[int, str]:
     """Poll until the witness holds, the timeout passes, or it cannot be evaluated.
 
+    `window` is (timeout_s, every_s): how long to wait, and how long between polls.
+
     Returns:
         (exit code, the one line to print).
 
     """
+    timeout_s, every_s = window
     deadline = clock() + timeout_s
     last, unknowns = "never observed", 0
     while True:
