@@ -1332,6 +1332,83 @@ class PageServer(ThreadingHTTPServer):
     request_queue_size = BACKLOG
 
 
+def _page_reply(
+    path: str, page: bytes, vendor_file: Callable[[str], bytes]
+) -> tuple[int, str, bytes] | None:
+    """Answer the page, its own files and the vendor scripts, or None for neither.
+
+    Returns:
+        The reply (code, content type, body), or None when the path is none of those.
+
+    """
+    if path in {"/", "/index.html"}:
+        return 200, "text/html; charset=utf-8", page
+    if (own := page_file(path.lstrip("/"))) is not None:
+        return 200, PAGE_FILES[path.lstrip("/")], own
+    if path.startswith("/vendor/"):
+        name = path.removeprefix("/vendor/")
+        if name in VENDOR:
+            return 200, "text/javascript", vendor_file(name)
+        return 404, "text/plain", b"not found"
+    return None
+
+
+def _live_reply(model: Model, path: str) -> tuple[int, str, bytes] | None:
+    """Answer the routes read from the model's live state, or None for another route.
+
+    Returns:
+        The reply (code, content type, body), or None when the path is not one of these.
+
+    """
+    if path in {"/wake", "/wake.json"}:
+        g = model.graph
+        live, source = read_liveness(model.root, None)
+        wake_body = {
+            "liveness": source,
+            "roster": roster(g, live),
+            "operator": operator_row(g),
+            "series": model.series_doc(),
+        }
+        return 200, "application/json", json.dumps(wake_body, indent=1).encode()
+    if path in {"/operator", "/operator.json"}:
+        operator_body = json.dumps(model.doc["operator"], indent=1).encode()
+        return 200, "application/json", operator_body
+    if path.startswith("/inbound"):
+        inbound_repo = path.removeprefix("/inbound").strip("/").removesuffix(".json")
+        doc = model.doc["inbound"]
+        rows = [b for b in doc if not inbound_repo or b["blocker"] == inbound_repo]
+        return 200, "application/json", json.dumps(rows, indent=1).encode()
+    if path.startswith("/goals/"):
+        # nemik:W80: the W79 goal view, computed on the cached graph.
+        goals_repo = path.removeprefix("/goals/").strip("/").removesuffix(".json")
+        goals_body = goals(model.graph, goals_repo, load_weights())
+        return 200, "application/json", json.dumps(goals_body, indent=1).encode()
+    if path == "/metrics":
+        return 200, "text/plain; version=0.0.4", model.metrics()
+    return None
+
+
+def _stored_reply(model: Model, path: str) -> tuple[int, str, bytes]:
+    """Answer the routes read from the cached documents and the history, or the 404.
+
+    Returns:
+        The reply (code, content type, body); a 404 for a path no route names.
+
+    """
+    if path.startswith("/check/"):
+        return model.check_reply(path)
+    if path in DOC_ROUTES:
+        host_body = json.dumps(model.doc_for(path), indent=1).encode()
+        return 200, "application/json", host_body
+    if path.startswith(HISTORY_PREFIX):
+        return history_response(model.history_dir, path, datetime.now(UTC))
+    if path == "/graph.json":
+        return 200, "application/json", model.payload
+    if path == "/graph.ttl":
+        return 200, "text/turtle", model.graph.serialize(format="turtle").encode()
+    return 404, "text/plain", b"not found"
+
+
 def handler(model: Model) -> type[BaseHTTPRequestHandler]:
     """Build the live server's request handler class over one model.
 
@@ -1348,84 +1425,19 @@ def handler(model: Model) -> type[BaseHTTPRequestHandler]:
     page = files("nemik.web").joinpath("index.html").read_bytes()
     vendor = files("nemik.web").joinpath("vendor")
 
+    def vendor_file(name: str) -> bytes:
+        return vendor.joinpath(name).read_bytes()
+
     class H(BaseHTTPRequestHandler):
         def do_GET(self) -> None:
-            if self.path in {"/", "/index.html"}:
-                self.send(200, "text/html; charset=utf-8", page)
-                return
-            if (own := page_file(self.path.lstrip("/"))) is not None:
-                self.send(200, PAGE_FILES[self.path.lstrip("/")], own)
-                return
-            if self.path.startswith("/vendor/"):
-                name = self.path.removeprefix("/vendor/")
-                if name in VENDOR:
-                    self.send(
-                        200, "text/javascript", vendor.joinpath(name).read_bytes()
-                    )
-                else:
-                    self.send(404, "text/plain", b"not found")
-                return
-            if (
-                self.path != "/metrics"
-            ):  # a scrape reports the model; it never drives a rebuild
-                model.poke()
-            if self.path in {"/wake", "/wake.json"}:
-                g = model.graph
-                live, source = read_liveness(model.root, None)
-                wake_body = {
-                    "liveness": source,
-                    "roster": roster(g, live),
-                    "operator": operator_row(g),
-                    "series": model.series_doc(),
-                }
-                self.send(
-                    200,
-                    "application/json",
-                    json.dumps(wake_body, indent=1).encode(),
-                )
-            elif self.path in {"/operator", "/operator.json"}:
-                operator_body = json.dumps(model.doc["operator"], indent=1).encode()
-                self.send(200, "application/json", operator_body)
-            elif self.path.startswith("/inbound"):
-                inbound_repo = (
-                    self.path.removeprefix("/inbound").strip("/").removesuffix(".json")
-                )
-                doc = model.doc["inbound"]
-                rows = [
-                    b for b in doc if not inbound_repo or b["blocker"] == inbound_repo
-                ]
-                self.send(200, "application/json", json.dumps(rows, indent=1).encode())
-            elif self.path.startswith("/goals/"):
-                # nemik:W80: the W79 goal view, computed on the cached graph.
-                goals_repo = (
-                    self.path.removeprefix("/goals/").strip("/").removesuffix(".json")
-                )
-                goals_body = goals(model.graph, goals_repo, load_weights())
-                self.send(
-                    200,
-                    "application/json",
-                    json.dumps(goals_body, indent=1).encode(),
-                )
-            elif self.path == "/metrics":
-                self.send(200, "text/plain; version=0.0.4", model.metrics())
-            elif self.path.startswith("/check/"):
-                answer = model.check_reply(self.path)
-                self.send(answer[0], answer[1], answer[2])
-            elif self.path in DOC_ROUTES:
-                host_body = json.dumps(model.doc_for(self.path), indent=1).encode()
-                self.send(200, "application/json", host_body)
-            elif self.path.startswith(HISTORY_PREFIX):
-                self.send(
-                    *history_response(model.history_dir, self.path, datetime.now(UTC))
-                )
-            elif self.path == "/graph.json":
-                self.send(200, "application/json", model.payload)
-            elif self.path == "/graph.ttl":
-                self.send(
-                    200, "text/turtle", model.graph.serialize(format="turtle").encode()
-                )
-            else:
-                self.send(404, "text/plain", b"not found")
+            reply = _page_reply(self.path, page, vendor_file)
+            if reply is None:
+                if (
+                    self.path != "/metrics"
+                ):  # a scrape reports the model; it never drives a rebuild
+                    model.poke()
+                reply = _live_reply(model, self.path) or _stored_reply(model, self.path)
+            self.send(*reply)
 
         def send(self, code: int, ctype: str, body: bytes) -> None:
             self.send_response(code)

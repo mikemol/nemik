@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1629,
+  "counter": 1630,
   "waypoints": [
     {
       "symbol": "W1",
@@ -39006,6 +39006,30 @@
     {
       "symbol": "W1629",
       "title": "tests/test_flow_reference draws its random graphs from a seeded subclass of random.Random, so its S311 clears and ruff falls 34 to 33",
+      "status": "done",
+      "enables": [],
+      "touches": [
+        "file:ruff-baseline.json"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-11-04T18:30:43Z: BUILD 2026-11-04T18:30:41Z: [LATE: 1 manifest path(s) already modified: ruff-baseline.json] pace read stamp 2026-11-04T18:26:29Z: behind nemik *.py: fell 0 over 10 landings, owes 1; 1 left, no fall to reach zero; behind nemik codon-baseline.json: fell 0 over 10 landings, owes 2; 138 left, no fall to reach zero; behind nemik ruff-baseline.json: fell 7 over 10 landings, owes 35; 35 left, 50 landings to zero; ok nemik mypy-baseline.json; 14 left, 8 landings to zero BUILD START, ruff first entry of the next stack (990 in the gate, inflight since 18:18:21Z; this stack is a ruff successor and is submitted the minute 990 lands, standing 16). Actuator: tests/test_flow_reference.py: a class _Seeded(random.Random) with only a docstring, and the one rng line uses _Seeded(seed); ruff S311 flags a CALL of random.Random (bandit B311), not a base class, so the 12 random-graph tests keep their generator and their sequences. Premise read, not measured: which of lines 96 and 98 carries the S311 (the baseline says 1). Sensor: mikemol-pycheck --ratchet --write and the 12 tests directly. Expected ruff 34 to 33 (the S311 entry for test_flow_reference.py out); mypy flat 11. Tests-only, so the gate re-runs the meta targets plus this one. Not probed on a copy: a one-line subclass. | 2026-11-04T18:52:58Z: LANDED 2026-11-04T18:52:57Z: stack 991 landed as 55c6fa6 at 2026-11-04T18:52:12Z (reflog 13:52:12 -0500 plus 5 h), [PUSHED]; git status -sb read back: main...origin/main, level and clean (no modified tracked file). Gate output: 6 fresh of 468, 468 pass, bazel elapsed 43.65 s (a tests-only stack, as predicted). Ruff 34 to 33 and mypy flat 11 as measured by the ratchet write before submit and re-measured on the tree at 18:4xZ (33 and 11). Submit 18:41:27Z (key 1793817687) to landing 18:52:12Z = 10 min 45 s wall gated. Sensor line before the close: working: W1629, unnamed: W1629, staged successor: none. Gate empty from 18:52:12Z.",
+      "issued_at": "2026-11-04T18:30:27Z",
+      "minted_during": "tick",
+      "caused_by": "W1568",
+      "last_worked": "2026-11-04T18:53:00Z",
+      "ticks_blocked": 0,
+      "completed": "20261104T185300Z",
+      "manifest": [
+        "tests/test_flow_reference.py",
+        "ruff-baseline.json"
+      ],
+      "size_class": "small"
+    },
+    {
+      "symbol": "W1630",
+      "title": "serve.handler's do_GET splits into page, live and stored replies, so its C901 x2 and PLR0912 clear and ruff falls 33 to 30",
       "status": "working",
       "enables": [],
       "touches": [
@@ -39013,16 +39037,16 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Add class _Seeded(random.Random); use it at the rng line; ratchet write; run the 12 tests",
-      "evidence": "2026-11-04T18:30:43Z: BUILD 2026-11-04T18:30:41Z: [LATE: 1 manifest path(s) already modified: ruff-baseline.json] pace read stamp 2026-11-04T18:26:29Z: behind nemik *.py: fell 0 over 10 landings, owes 1; 1 left, no fall to reach zero; behind nemik codon-baseline.json: fell 0 over 10 landings, owes 2; 138 left, no fall to reach zero; behind nemik ruff-baseline.json: fell 7 over 10 landings, owes 35; 35 left, 50 landings to zero; ok nemik mypy-baseline.json; 14 left, 8 landings to zero BUILD START, ruff first entry of the next stack (990 in the gate, inflight since 18:18:21Z; this stack is a ruff successor and is submitted the minute 990 lands, standing 16). Actuator: tests/test_flow_reference.py: a class _Seeded(random.Random) with only a docstring, and the one rng line uses _Seeded(seed); ruff S311 flags a CALL of random.Random (bandit B311), not a base class, so the 12 random-graph tests keep their generator and their sequences. Premise read, not measured: which of lines 96 and 98 carries the S311 (the baseline says 1). Sensor: mikemol-pycheck --ratchet --write and the 12 tests directly. Expected ruff 34 to 33 (the S311 entry for test_flow_reference.py out); mypy flat 11. Tests-only, so the gate re-runs the meta targets plus this one. Not probed on a copy: a one-line subclass.",
-      "issued_at": "2026-11-04T18:30:27Z",
-      "minted_during": "tick",
+      "next_bounded_step": "Write w1630.py; apply; hookcheck (serve is hook-reached); ratchet write; run serve tests and guards, hub-modules claim",
+      "evidence": "2026-11-04T19:00:37Z: BUILD 2026-11-04T19:00:36Z: pace read stamp 2026-11-04T18:56:30Z: behind nemik *.py: fell 0 over 10 landings, owes 1; 1 left, no fall to reach zero; behind nemik codon-baseline.json: fell 0 over 10 landings, owes 2; 138 left, no fall to reach zero; behind nemik ruff-baseline.json: fell 9 over 10 landings, owes 33; 33 left, 37 landings to zero; ok nemik mypy-baseline.json; 11 left, 9 landings to zero BUILD START, ruff first entry (gate empty since 18:52:12Z). Measured by house ruff on the real files BEFORE this stamp: serve.py handler C901 19, do_GET C901 16 and PLR0912 17 branches (three findings; staticserve.handler C901 17 and history.weekly PLR0914 21 are separate rows, not in this entry). Actuator: codemod w1630.py: do_GET of serve.handler is split into page_reply (the page, its own files and vendor: no poke), live_reply (wake, operator, inbound, goals, metrics) and stored_reply (check, DOC_ROUTES, history, graph.json, graph.ttl, 404), each returning (code, ctype, body), and do_GET keeps the poke rule (everything but /metrics and the page files pokes the model before the live and stored replies); the branch ORDER of the original chain is kept (page, vendor first with no poke; then wake, operator, inbound, goals, metrics; then check, DOC_ROUTES, history, graph.json, graph.ttl, 404). serve.py is hook-reached (standing 6): hookcheck four codes to be written; a stack touching serve.py also runs checks/claims.py hub-modules-depend-on-everything-below (standing 14) and test_architecture. Sensor: mikemol-pycheck --ratchet --write; the serve tests directly. Expected ruff 33 to 30 (three findings), mypy flat 11; first-write risks named: mypy Any on json.dumps literals (assign typed locals), D102 on public methods (nested class methods have no docstrings today), DOC201. Gate cost: full 465 re-run (src). Not probed on a copy: this is the first measure after the edit.",
+      "issued_at": "2026-11-04T19:00:25Z",
+      "minted_during": "interrupt",
       "caused_by": "W1568",
-      "last_worked": "2026-11-04T18:30:43Z",
+      "last_worked": "2026-11-04T19:00:37Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
-        "tests/test_flow_reference.py",
+        "src/nemik/serve.py",
         "ruff-baseline.json"
       ],
       "size_class": "small"
