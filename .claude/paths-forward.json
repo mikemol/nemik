@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1593,
+  "counter": 1594,
   "waypoints": [
     {
       "symbol": "W1",
@@ -38101,7 +38101,7 @@
     {
       "symbol": "W1593",
       "title": "witwait.wait takes its timeout and interval as one window pair, so PLR0913 clears and ruff falls 55 to 54",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [
         "ruff",
@@ -38109,18 +38109,45 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Codemod w1593.py: wait(poll, window, *, sleep, clock, stamp); witnesses.py and four test calls pass a (timeout, interval) pair.",
-      "evidence": "2026-11-04T05:03:27Z: G0 2026-11-04T05:03:26Z: gate empty since the 960 landing at 04:47:34Z. Pace read 2026-11-04T04:25:55Z (ruff 55 after 960, 19 landings at the read; mypy 86; codon owes 2) is older than 10 min at this stamp: re-read before submit. Tick prompt also brought the inbound ask luthen-observability:W1965, claimed as W1592. Actuator: codemod w1593.py: src/nemik/witwait.py wait(poll, window, *, sleep, clock, stamp) with window the (timeout_s, every_s) pair, src/nemik/witnesses.py passing (limit, step), tests/test_witwait.py four calls. Sensor: mikemol-pycheck --ratchet on the real tree. Expected ruff 55 to 54 (PLR0913), mypy flat 86; unmeasured until run. witwait is imported function-locally by witnesses.py (a hook-adjacent module): hookcheck.py after the edit. Predictable codes per standing 12: no rename, no new constant, a changed signature keeps its docstring (D417 no). Time-box: submit by 05:30:00Z.",
+      "next_bounded_step": null,
+      "evidence": "2026-11-04T05:03:27Z: G0 2026-11-04T05:03:26Z: gate empty since the 960 landing at 04:47:34Z. Pace read 2026-11-04T04:25:55Z (ruff 55 after 960, 19 landings at the read; mypy 86; codon owes 2) is older than 10 min at this stamp: re-read before submit. Tick prompt also brought the inbound ask luthen-observability:W1965, claimed as W1592. Actuator: codemod w1593.py: src/nemik/witwait.py wait(poll, window, *, sleep, clock, stamp) with window the (timeout_s, every_s) pair, src/nemik/witnesses.py passing (limit, step), tests/test_witwait.py four calls. Sensor: mikemol-pycheck --ratchet on the real tree. Expected ruff 55 to 54 (PLR0913), mypy flat 86; unmeasured until run. witwait is imported function-locally by witnesses.py (a hook-adjacent module): hookcheck.py after the edit. Predictable codes per standing 12: no rename, no new constant, a changed signature keeps its docstring (D417 no). Time-box: submit by 05:30:00Z. | 2026-11-04T05:20:21Z: LANDED 2026-11-04T05:20:21Z: stack 961 landed addc2498 at 2026-11-04T05:19:34Z (reflog); 463 of 466 targets fresh, green; ruff 55 to 54 as measured; sensor quoted before the close: 'unnamed: W1593' (landed stack, card still working). Gate empty 04:47:34Z to the submit at about 05:05Z, then gated to 05:19:34Z. Codon first reading was the gate (green).",
       "issued_at": "2026-11-04T05:03:20Z",
       "minted_during": "interrupt",
       "caused_by": "W1568",
-      "last_worked": "2026-11-04T05:03:28Z",
+      "last_worked": "2026-11-04T05:20:22Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261104T052022Z",
       "manifest": [
         "src/nemik/witwait.py",
         "src/nemik/witnesses.py",
         "tests/test_witwait.py",
+        "ruff-baseline.json"
+      ],
+      "size_class": "small"
+    },
+    {
+      "symbol": "W1594",
+      "title": "letters.report and letters.apply_fold take their repo and age cutoff as one scope pair, so two PLR0913 clear and ruff falls 54 to 52",
+      "status": "working",
+      "enables": [],
+      "touches": [
+        "ruff",
+        "letters"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Codemod w1594.py: report(root, workstreams, *, fold, scope, apply) and apply_fold(root, scope, *, today, writer, env), scope = (repo, older_than); callers in check.py, letters.py and test_letters.py.",
+      "evidence": "2026-11-04T05:21:01Z: G0 2026-11-04T05:21:01Z: gate empty since the 961 landing at 05:19:34Z. Pace read stamp 2026-11-04T05:15:57Z (read this minute; the writer's own landing stamp 05:19:34Z is later than the pace stamp, the pace tool prints PENDING for the landing it has not folded in): ruff 54 left (18 landings to zero, fell 31 over 10), mypy 86 left (14 landings, fell 63 over 10), codon owes 2; mypy now lists as owed. Actuator: codemod w1594.py: src/nemik/letters.py report(root, workstreams, *, fold, scope, apply) and apply_fold(root, scope, *, today, writer, env), scope = the (repo, older_than) pair; callers in src/nemik/check.py (one) and tests/test_letters.py (five). Sensor: mikemol-pycheck --ratchet on the real tree. Expected ruff 54 to 52 (two PLR0913), mypy flat 86; unmeasured until run. letters is hook-adjacent through check: hookcheck.py after the edit. Predictable codes per standing 12: no rename; a changed signature keeps its docstring. Time-box: submit by 05:50:00Z.",
+      "issued_at": "2026-11-04T05:20:43Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1568",
+      "last_worked": "2026-11-04T05:21:02Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "src/nemik/letters.py",
+        "src/nemik/check.py",
+        "tests/test_letters.py",
         "ruff-baseline.json"
       ],
       "size_class": "small"

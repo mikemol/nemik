@@ -334,8 +334,7 @@ def archive_commands(
 
 def apply_fold(
     root: Path,
-    repo: str | None = None,
-    older_than: int | None = None,
+    scope: tuple[str | None, int | None] = (None, None),
     *,
     today: date | None = None,
     writer: str | None = None,
@@ -352,6 +351,7 @@ def apply_fold(
         one line per letter: the symbol minted, mtools' refusal, or the archive move.
 
     """
+    repo, older_than = scope
     writer = writer or str(Path(sys.executable).parent / "mikemol-paths-forward")
     live, stale = _split(root, repo, older_than, today or current_day())
     done: list[str] = []
@@ -419,8 +419,7 @@ def report(
     workstreams: set[str],
     *,
     fold: bool = False,
-    repo: str | None = None,
-    older_than: int | None = None,
+    scope: tuple[str | None, int | None] = (None, None),
     apply: bool = False,
 ) -> tuple[list[str], int]:
     """Printable lines and the exit code: 0 clean, 5 when a letter is misdelivered.
@@ -434,6 +433,7 @@ def report(
         The lines to print and the exit code.
 
     """
+    repo, older_than = scope
     addressed, unaddressed = headers(root)
     if repo:
         addressed = [x for x in addressed if repo in {x.inbox, x.recipient}]
@@ -457,7 +457,7 @@ def report(
     lines += [f"MISDELIVERED {row}" for row in bad]
     lines += delivery
     if fold and apply:
-        lines += apply_fold(root, repo, older_than)
+        lines += apply_fold(root, scope)
     elif fold:
         add = fold_commands(root, repo=repo, older_than=older_than)
         move = archive_commands(root, repo=repo, older_than=older_than)

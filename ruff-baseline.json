@@ -31,9 +31,6 @@
   "PLC0415": 1,
   "PLR0914": 1
  },
- "src/nemik/letters.py": {
-  "PLR0913": 2
- },
  "src/nemik/mspdi.py": {
   "S314": 1,
   "S405": 1

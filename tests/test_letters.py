@@ -164,8 +164,7 @@ def test_apply_mints_the_cards_and_archives_the_stale(tmp_path: Path) -> None:
     _letter(tmp_path, "a", "2026-01-01-old.md", "life → a: long ago")
     done = apply_fold(
         tmp_path,
-        "a",
-        14,
+        ("a", 14),
         today=date(2026, 10, 10),
         writer=installed.script("mikemol-paths-forward")[0],
         env=installed.bin_env()[1],
@@ -193,11 +192,11 @@ def test_a_misdelivered_letter_is_copied_to_its_recipient_and_then_counts_as_del
     )
 
     spaces = {"gcalculus", "linux-sources"}
-    said, code = report(tmp_path, spaces, fold=True, repo="linux-sources")
+    said, code = report(tmp_path, spaces, fold=True, scope=("linux-sources", None))
     assert code == EXIT_LETTERS_PENDING
     assert any(line.startswith("cp ") for line in said)
     said, code = report(
-        tmp_path, spaces, fold=True, repo="linux-sources", older_than=None, apply=True
+        tmp_path, spaces, fold=True, scope=("linux-sources", None), apply=True
     )
     assert any(line.startswith("delivered ") for line in said)
     assert code == 0  # the apply run's own verdict is the after state
@@ -206,7 +205,7 @@ def test_a_misdelivered_letter_is_copied_to_its_recipient_and_then_counts_as_del
     # the recipient reads it and files it under archive/: still delivered, not misdelivered again
     (copy.parent / "archive").mkdir()
     copy.rename(copy.parent / "archive" / copy.name)
-    assert report(tmp_path, spaces, fold=True, repo="linux-sources")[1] == 0
+    assert report(tmp_path, spaces, fold=True, scope=("linux-sources", None))[1] == 0
 
 
 def test_a_peer_waypoint_citing_the_letter_path_owns_it(tmp_path: Path) -> None:

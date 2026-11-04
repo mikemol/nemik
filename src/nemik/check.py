@@ -1546,8 +1546,7 @@ def main(argv: list[str] | None = None) -> None:
             args.root,
             {repo for repo, _ in workstream_files(args.root, QUEUE)},
             fold=args.fold,
-            repo=args.repo,
-            older_than=args.older_than,
+            scope=(args.repo, args.older_than),
             apply=args.apply,
         )
         say("\n".join(said))
