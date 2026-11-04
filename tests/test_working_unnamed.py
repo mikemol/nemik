@@ -2,7 +2,7 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W1532: tools/working_unnamed.py lists the working cards no live stack names."""
 
-from working_unnamed import named_cards, unnamed, working_cards
+from working_unnamed import named_cards, successor_line, unnamed, working_cards
 
 LISTING = """\
 W1545 0.0d Rewrite the fake writer in test_rank_apply.py.
@@ -13,6 +13,12 @@ STACKS = (
     '[{"key": "1", "state": "inflight", "waypoints": ["W1545"], "began_ns": 1},'
     ' {"key": "2", "state": "queued", "waypoints": ["W1546", "W1547"], "began_ns": null}]'
 )
+
+
+def test_the_successor_line_names_the_staged_cards_or_none() -> None:
+    """The landing sensor says what is staged behind the stack that landed, or that nothing is."""
+    assert successor_line(["W1", "W2"]) == "staged successor: W1, W2"
+    assert successor_line([]) == "staged successor: none"
 
 
 def test_the_working_cards_are_the_listings_symbols_without_its_summary_line() -> None:

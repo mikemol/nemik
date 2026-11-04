@@ -56,6 +56,16 @@ def named_cards(stacks_json: str) -> set[str]:
     return named
 
 
+def successor_line(named: list[str]) -> str:
+    """Say which cards a live stack names, as the successor the gate holds.
+
+    Returns:
+        `staged successor: <cards>` or `staged successor: none` (nemik:R216 finding 2).
+
+    """
+    return f"staged successor: {', '.join(named) or 'none'}"
+
+
 def unnamed(listing: str, stacks_json: str) -> list[str]:
     """List the working cards that no live stack names.
 
@@ -91,6 +101,7 @@ def main() -> int:
     missing = unnamed(listing.stdout, stacks.stdout)
     sys.stdout.write(f"working: {', '.join(working) or 'none'}\n")
     sys.stdout.write(f"named by a live stack: {', '.join(named) or 'none'}\n")
+    sys.stdout.write(f"{successor_line(named)}\n")
     sys.stdout.write(f"unnamed: {', '.join(missing) if missing else 'none unnamed'}\n")
     return 1 if missing else 0
 
