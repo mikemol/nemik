@@ -84,3 +84,10 @@ def test_the_flags_name_a_stale_read_and_the_late_paths() -> None:
         "[PACE-STALE 33 min] [LATE: 1 manifest path(s) already modified: a.py]"
     )
     assert not flags(WHEN, "pace read stamp 2026-11-04T03:30:10Z", [])
+
+
+def test_a_g0_without_a_quoted_pace_stamp_is_marked_and_other_labels_are_not() -> None:
+    """The absence of a pace read in a G0 is as visible as a stale one."""
+    assert flags(WHEN, "no read quoted", [], "G0") == "[NO-PACE-STAMP]"
+    assert not flags(WHEN, "pace read stamp 2026-11-04T03:30:10Z", [], "G0")
+    assert not flags(WHEN, "no read quoted", [], "LANDED")

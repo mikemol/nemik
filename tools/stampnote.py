@@ -75,15 +75,18 @@ def manifest_of(shown: str) -> list[str]:
     return [str(p) for p in manifest] if isinstance(manifest, list) else []
 
 
-def flags(now: datetime, text: str, late: list[str]) -> str:
+def flags(now: datetime, text: str, late: list[str], label: str = "") -> str:
     """Build the bracketed labels a stamp carries when a check fires.
 
     Returns:
-        `[PACE-STALE n min]` and `[LATE: ...]` joined by a space, or an empty string.
+        `[NO-PACE-STAMP]` (a G0 that quotes no pace read stamp), `[PACE-STALE n min]` and
+        `[LATE: ...]` joined by a space, or an empty string.
 
     """
     labels: list[str] = []
     age = pace_age_minutes(now, text)
+    if age is None and label.startswith("G0"):
+        labels.append("[NO-PACE-STAMP]")
     if age is not None and age > STALE_MINUTES:
         labels.append(f"[PACE-STALE {age} min]")
     if late:
@@ -132,7 +135,7 @@ def main(argv: list[str]) -> int:
     now = datetime.now(UTC)
     shown = capture([writer, "--state", state, "--show", symbol]).stdout
     porcelain = capture(["git", "-C", str(root), "status", "--porcelain"]).stdout
-    marks = flags(now, text, late_paths(manifest_of(shown), porcelain))
+    marks = flags(now, text, late_paths(manifest_of(shown), porcelain), label)
     done = capture(command(writer, state, symbol, stamp_text(now, label, text, marks)))
     sys.stdout.write(done.stdout)
     sys.stderr.write(done.stderr)
