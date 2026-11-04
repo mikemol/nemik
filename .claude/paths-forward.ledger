@@ -4523,3 +4523,7 @@
 2026-11-04T05:49:49Z  status W1596 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-04T05:53:56Z  tick  W1596 advanced  sweep     "stacks 960 (W1591, W1590), 961 (W1593), 962 (W1594) landed, ruff 57 to 52 and mypy 99 to 86; 963 (W1595 mypy filler) gating and 964 (W1596 ruff, ruff 52 to 50) queued behind it; W1592 claimed for the luthen-observability:W1965 ask [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-04T05:56:46Z  status W1592 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T05:58:01Z  status W1595 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T06:01:04Z  status W1592 blocked>done writer    "blocked -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T06:01:20Z  interrupt W1597 minted    -         "shaclinc and cachestore read their untyped library results through typed casts, so seven mypy findings clear and mypy falls 80 to 73"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1568
+2026-11-04T06:01:30Z  status W1597 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

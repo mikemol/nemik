@@ -5,9 +5,6 @@
  "src/nemik/blocks.py": {
   "misc": 3
  },
- "src/nemik/cachestore.py": {
-  "misc": 4
- },
  "src/nemik/check.py": {
   "misc": 2
  },
@@ -38,9 +35,6 @@
  },
  "src/nemik/shaclcache.py": {
   "misc": 1
- },
- "src/nemik/shaclinc.py": {
-  "misc": 3
  },
  "src/nemik/starved.py": {
   "misc": 1

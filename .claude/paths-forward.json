@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1596,
+  "counter": 1597,
   "waypoints": [
     {
       "symbol": "W1",
@@ -38080,23 +38080,21 @@
     {
       "symbol": "W1592",
       "title": "Answer luthen-observability:W1965: its metric registry row nemik_findings_ has no freshness declaration",
-      "status": "blocked",
+      "status": "done",
       "enables": [
         "luthen-observability:W1965"
       ],
       "touches": [],
-      "blocked_on": [
-        "luthen-observability:W1965"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "Wait for the peer's reply on the cut title; if they confirm freshness only, mark done with their confirmation as evidence.",
-      "evidence": "2026-11-04T05:56:46Z: 2026-11-04 (R213 f3): read the peer's card by --show on its state: title cut at 100 chars, evidence empty. Read the registry instead: policy/metric_families/data.json row nemik_findings_ has owner and purpose and no freshness; metric_freshness_baseline.json lists it in admitted_without. The family is nemik_findings{repo,severity}, printed by nemik-metrics (src/nemik/metrics.py line 858) on every relay run like nemik_graph_ and nemik_ledger_, which the registry marks freshness generated. Answer sent to luthen-observability by SendMessage: declare freshness generated; the edit is theirs; asked them to resend the cut remainder of the title. Waiting on that reply for the rest of the ask.",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-11-04T05:56:46Z: 2026-11-04 (R213 f3): read the peer's card by --show on its state: title cut at 100 chars, evidence empty. Read the registry instead: policy/metric_families/data.json row nemik_findings_ has owner and purpose and no freshness; metric_freshness_baseline.json lists it in admitted_without. The family is nemik_findings{repo,severity}, printed by nemik-metrics (src/nemik/metrics.py line 858) on every relay run like nemik_graph_ and nemik_ledger_, which the registry marks freshness generated. Answer sent to luthen-observability by SendMessage: declare freshness generated; the edit is theirs; asked them to resend the cut remainder of the title. Waiting on that reply for the rest of the ask. | 2026-11-04T06:01:04Z: 2026-11-04: luthen-observability confirmed by SendMessage that the reading was right and nothing further is needed from nemik: nemik_findings_ now declares freshness generated and leaves metric_freshness_baseline.json (luthen-observability:W1701, built and gating); nemik_findings has 34 series over the last 3 hours. The cut-off was their card title only. No nemik file was changed for this ask.",
       "issued_at": "2026-11-04T05:02:02Z",
       "minted_during": "interrupt",
       "caused_by": "luthen-observability:W1965",
-      "last_worked": "2026-11-04T05:56:46Z",
+      "last_worked": "2026-11-04T06:01:04Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261104T060104Z",
       "manifest": null,
       "size_class": "small"
     },
@@ -38157,7 +38155,7 @@
     {
       "symbol": "W1595",
       "title": "test_serve_model and test_cachestore name their imports and types instead of __import__ and a bare dict, so six mypy findings clear and mypy falls 86 to 80",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [
         "mypy",
@@ -38165,14 +38163,14 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Codemod w1595.py; measure the real tree, expected mypy 86 to 80; queue behind stack 962 as the mypy filler.",
-      "evidence": "2026-11-04T05:30:36Z: G0 2026-11-04T05:30:35Z: stack 962 (W1594, ruff) is inflight; this is the mypy filler behind it (R211 f1). Pace read stamp 2026-11-04T05:15:57Z (about 12 min old: re-read before submit): mypy 86 left, 14 landings; ruff 52 after 962; codon owes 2. Measured BEFORE this stamp by house mypy on candidate test files, no edit made: test_serve_model 4 (lines 46, 52, 89, 96, two __import__ expressions), test_cachestore 2 (line 54 bare dict, line 58 its Callable). Actuator: codemod w1595.py: test_serve_model takes nemik.check.survey as check_survey instead of __import__('nemik.serve').survey; test_cachestore types counting as dict[Node, list[shaclinc.Result]]. Sensor: mikemol-pycheck --ratchet on the real tree. Expected mypy 86 to 80 (6), ruff flat 52; unmeasured after the change. Predictable codes per standing 12: I001 (ruff --select I --fix), F401 for the removed local assignments. Time-box: submit by 06:00:00Z.",
+      "next_bounded_step": null,
+      "evidence": "2026-11-04T05:30:36Z: G0 2026-11-04T05:30:35Z: stack 962 (W1594, ruff) is inflight; this is the mypy filler behind it (R211 f1). Pace read stamp 2026-11-04T05:15:57Z (about 12 min old: re-read before submit): mypy 86 left, 14 landings; ruff 52 after 962; codon owes 2. Measured BEFORE this stamp by house mypy on candidate test files, no edit made: test_serve_model 4 (lines 46, 52, 89, 96, two __import__ expressions), test_cachestore 2 (line 54 bare dict, line 58 its Callable). Actuator: codemod w1595.py: test_serve_model takes nemik.check.survey as check_survey instead of __import__('nemik.serve').survey; test_cachestore types counting as dict[Node, list[shaclinc.Result]]. Sensor: mikemol-pycheck --ratchet on the real tree. Expected mypy 86 to 80 (6), ruff flat 52; unmeasured after the change. Predictable codes per standing 12: I001 (ruff --select I --fix), F401 for the removed local assignments. Time-box: submit by 06:00:00Z. | 2026-11-04T05:58:00Z: LANDED 2026-11-04T05:57:59Z: stack 963 landed f995eddd at 2026-11-04T05:57:06Z (reflog); 7 fresh of 466 targets (test-only), green; mypy 86 to 80 as measured; sensor quoted before the close: 'unnamed: W1595' with W1596 named by the live stack 964 (landed card still working). 963 queued behind 962 and gated 05:44:55Z to 05:57:06Z (12 min 11 s wall); 964 is now gating, so the gate was not empty at this landing.",
       "issued_at": "2026-11-04T05:30:27Z",
       "minted_during": "interrupt",
       "caused_by": "W1568",
-      "last_worked": "2026-11-04T05:30:37Z",
+      "last_worked": "2026-11-04T05:58:01Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261104T055801Z",
       "manifest": [
         "tests/test_serve_model.py",
         "tests/test_cachestore.py",
@@ -38206,6 +38204,33 @@
         "src/nemik/rank.py",
         "src/nemik/serve.py",
         "ruff-baseline.json"
+      ],
+      "size_class": "small"
+    },
+    {
+      "symbol": "W1597",
+      "title": "shaclinc and cachestore read their untyped library results through typed casts, so seven mypy findings clear and mypy falls 80 to 73",
+      "status": "working",
+      "enables": [],
+      "touches": [
+        "mypy",
+        "shaclinc",
+        "cachestore"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Probe on src/nemik/probe_shaclinc.py and probe_cachestore.py copies with codemod w1597.py, then the real files; expected mypy 80 to 73, unmeasured until run.",
+      "evidence": "2026-11-04T06:01:29Z: G0 2026-11-04T06:01:28Z: stack 963 landed at 05:57:06Z; stack 964 (W1596, ruff) is gating alone, so this is the successor of the OTHER baseline (mypy), built during the gate. LANE CHECK from the pace read of stamp 2026-11-04T05:55:59Z (age under 10 min at this stamp): mypy 80 left, 23 landings to zero (fell 36 over 10); ruff 52, 16 landings (fell 33 over 10); codon owes 2; all three list as behind, so a mypy stack is accepted, and mypy is now the longer lane. Measured BEFORE this stamp by house mypy on eight src candidates, no edit made: shaclinc 3, cachestore 4 (the others: blocks 1 line, critical 3, history 3, churn 3, witnesses 3, vtodo 3 not taken). Actuator: codemod w1597.py: shaclinc.shacl_results casts pyshacl's untyped report to Graph; cachestore.load casts the unpickled blob to a dict of objects and each part to its held type. Sensor: house mypy on in-project probe copies (src/nemik/probe_shaclinc.py, probe_cachestore.py) first, then mikemol-pycheck --ratchet on the real tree. Expected mypy 80 to 73 (7); unmeasured after the change. Codon: both modules import rdflib or pickle and are likely in codon-baseline.json already; typing.cast is the new construct: run codon_first.py. Predictable codes per standing 12: F401 and I001 for the cast import, D-codes none (no new function). Time-box: submit by 06:45:00Z.",
+      "issued_at": "2026-11-04T06:01:20Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1568",
+      "last_worked": "2026-11-04T06:01:30Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "src/nemik/shaclinc.py",
+        "src/nemik/cachestore.py",
+        "mypy-baseline.json"
       ],
       "size_class": "small"
     }

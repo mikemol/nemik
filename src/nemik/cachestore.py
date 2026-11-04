@@ -23,6 +23,7 @@ import time
 from importlib.metadata import PackageNotFoundError, version
 from importlib.resources import files
 from pathlib import Path
+from typing import cast
 
 from nemik import flow, shaclinc
 
@@ -101,11 +102,11 @@ def load(directory: Path, name: str = NAME) -> bool:
 
     """
     try:
-        blob = pickle.loads((directory / name).read_bytes())
+        blob = cast("dict[str, object]", pickle.loads((directory / name).read_bytes()))
         if blob["stamp"] != stamp():
             return False
-        shaclinc.import_cache(blob["shaclinc"])
-        flow.import_solves(blob["flow"])
+        shaclinc.import_cache(cast("shaclinc.Held", blob["shaclinc"]))
+        flow.import_solves(cast("dict[flow.SolveKey, flow.Flow]", blob["flow"]))
     except (
         OSError,
         EOFError,

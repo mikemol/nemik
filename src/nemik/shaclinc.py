@@ -18,6 +18,7 @@ that breaks the claim fails there instead of going stale silently.
 from __future__ import annotations
 
 import re
+from typing import TYPE_CHECKING, cast
 
 from pyshacl import validate
 from rdflib import Graph
@@ -27,10 +28,14 @@ from rdflib.term import Node, URIRef
 from nemik.shaclcache import cached_sparql_parse
 from nemik.shapedepth import UNBOUNDED, predicates, radius
 
+if TYPE_CHECKING:
+    from collections.abc import Iterable, Mapping
+
 Result = tuple[str, str]  # (severity IRI, message)
 
 Held = dict[str, tuple[frozenset[tuple[Node, Node, Node]], dict[Node, list[Result]]]]
 _LAST: Held = {}
+_NS: Mapping[str, object] = {"sh": SH}
 HUB = 40  # a node with more neighbours than this (a workstream) is judged, not walked through
 
 
@@ -69,10 +74,15 @@ def shacl_results(data: Graph, shapes: Graph) -> dict[Node, list[Result]]:
     with cached_sparql_parse():
         _, report, _ = validate(data, shacl_graph=shapes)
     out: dict[Node, list[Result]] = {}
-    for f, sev, msg in report.query(
-        "SELECT ?f ?s ?m WHERE { ?r sh:focusNode ?f ; sh:resultSeverity ?s ; sh:resultMessage ?m }",
-        initNs={"sh": SH},
-    ):
+    rows = cast(
+        "Iterable[tuple[Node, Node, Node]]",
+        report.query(
+            "SELECT ?f ?s ?m WHERE { ?r sh:focusNode ?f ; "
+            "sh:resultSeverity ?s ; sh:resultMessage ?m }",
+            initNs=_NS,
+        ),
+    )
+    for f, sev, msg in rows:
         out.setdefault(f, []).append((str(sev), str(msg)))
     return out
 
