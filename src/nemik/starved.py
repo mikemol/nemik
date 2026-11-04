@@ -142,7 +142,10 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     now = datetime.now(UTC)
     found = starved_fleet(g, args.repos, now, days)
     if args.json:
-        say(json.dumps([s._asdict() for s in found], indent=1))
+        rows: list[dict[str, object]] = [
+            dict(zip(s._fields, s, strict=True)) for s in found
+        ]
+        say(json.dumps(rows, indent=1))
         return
     say(
         f"starved ready cards (waited over {days} days, overtaken by newer ones): {len(found)}"

@@ -169,7 +169,7 @@ def answered(repo: str, path: Path, queue: dict[str, object]) -> bool:
     own = {
         f"W{m[2]}"
         for m in _REF.finditer(path.read_text(encoding="utf-8", errors="replace"))
-        if m[1] == repo
+        if str(m[1]) == repo
     }
     return bool(own) and own <= _closed(queue)
 

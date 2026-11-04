@@ -8,6 +8,7 @@ the block at once, one saving the other's patch as "the originals", and pyparsin
 """
 
 import threading
+from typing import cast
 
 import pytest
 from rdflib import Graph, Literal, URIRef
@@ -26,8 +27,8 @@ def _current(name: str) -> object:
         The module-level object, which cached_sparql_parse patches and restores.
 
     """
-    value: object = vars(processor)[name]
-    return value
+    namespace = cast("dict[str, object]", vars(processor))
+    return namespace[name]
 
 
 def _graph() -> Graph:

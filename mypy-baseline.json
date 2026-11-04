@@ -20,16 +20,10 @@
  "src/nemik/importer.py": {
   "misc": 1
  },
- "src/nemik/letters.py": {
-  "misc": 1
- },
  "src/nemik/rank.py": {
   "misc": 4
  },
  "src/nemik/shaclcache.py": {
-  "misc": 1
- },
- "src/nemik/starved.py": {
   "misc": 1
  },
  "src/nemik/witnesses.py": {
@@ -46,9 +40,6 @@
  },
  "tests/test_history.py": {
   "misc": 2
- },
- "tests/test_shaclcache_threads.py": {
-  "misc": 1
  },
  "tests/test_shaclinc.py": {
   "misc": 2
