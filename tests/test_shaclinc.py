@@ -54,7 +54,9 @@ def _untitled(g: Graph) -> None:
 EDITS: list[Callable[[Graph], None]] = [_done, _blocked, _bad_blocker, _untitled]
 
 
-@pytest.mark.parametrize("edit", EDITS, ids=lambda e: e.__name__)
+@pytest.mark.parametrize(
+    "edit", EDITS, ids=["_done", "_blocked", "_bad_blocker", "_untitled"]
+)
 def test_incremental_equals_full_after_an_edit(edit: Callable[[Graph], None]) -> None:
     """Incremental equals full after an edit."""
     g, sh = _fleet(), shapes()

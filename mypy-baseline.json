@@ -32,22 +32,7 @@
  "tests/fixtures/make_fleet.py": {
   "misc": 1
  },
- "tests/test_deploy_manifest.py": {
-  "misc": 2
- },
  "tests/test_history.py": {
-  "misc": 2
- },
- "tests/test_shaclinc.py": {
-  "misc": 2
- },
- "tests/test_static_view.py": {
-  "misc": 1
- },
- "tests/test_web_render.py": {
-  "misc": 1
- },
- "tools/nemik_client.py": {
   "misc": 2
  }
 }

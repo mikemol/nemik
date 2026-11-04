@@ -58,7 +58,11 @@ def test_the_view_draws_from_the_snapshot_files_alone(snapshot_url: str) -> None
     with sync_playwright() as p:
         browser, page = webpage.launched_page(p, snapshot_url)
         errors: list[str] = []
-        page.on("pageerror", lambda err: errors.append(str(err)))
+
+        def note(err: object) -> None:
+            errors.append(str(err))
+
+        page.on("pageerror", note)
         webpage.until(
             page,
             "() => document.getElementById('stat').innerText.includes('waypoints')",

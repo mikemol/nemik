@@ -201,7 +201,9 @@ def test_the_servers_command_line_is_one_the_tool_accepts() -> None:
     """The server's argv parses under nemik-static's own parser."""
     server = _containers()["server"]
     assert server["command"] == ["/app/.venv/bin/nemik-static"]
-    args = staticserve.parser().parse_args(server["args"])
+    args = staticserve.parser().parse_args(
+        server["args"], namespace=staticserve.Options()
+    )
     assert str(args.root) == "/srv"
     assert args.port == server["ports"][0]["containerPort"]
 

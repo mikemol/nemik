@@ -18,6 +18,7 @@ import json
 import sys
 import time
 import urllib.request
+from typing import IO, cast
 
 
 class Client:
@@ -31,8 +32,11 @@ class Client:
 
     def _get(self, path: str) -> object:
         # JSON documents decode; anything else (the TRS feeds are Turtle, W449) is kept as text
-        with urllib.request.urlopen(self.base + path, timeout=30) as r:
-            return json.load(r) if path.endswith(".json") else r.read().decode()
+        opened = cast("IO[bytes]", urllib.request.urlopen(self.base + path, timeout=30))
+        with opened as r:
+            if path.endswith(".json"):
+                return cast("object", json.load(r))
+            return r.read().decode()
 
     def refresh(self, prefix: str = "") -> list[str]:
         """Fetch every path under `prefix` whose hash moved; return the paths fetched.

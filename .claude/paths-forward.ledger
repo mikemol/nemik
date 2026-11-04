@@ -4581,3 +4581,8 @@
 2026-11-04T12:33:19Z  status W1615 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-04T12:42:38Z  tick  W1615 advanced  sweep     "stack 976 (W1613 three mypy rows, mypy 38 to 35) landed pushed; 977 (W1614 alone) REFUSED by the pace guard (mypy not owed), rebuilt as 978 [W1615 staticserve ruff 43 to 42, W1614 blocks mypy 35 to 32] gating; ship reader found (luthen-observability:W1973, image vs image_spec); R219 applied [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-04T13:00:23Z  status W846 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T13:19:23Z  status W1615 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T13:19:24Z  status W1614 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T13:19:26Z  status W846 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T13:30:05Z  interrupt W1616 minted    -         "A bundle of small test and tool mypy rows with no shared file, so about a dozen findings clear in one stack"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1568
+2026-11-04T13:37:47Z  status W1616 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

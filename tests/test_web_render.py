@@ -93,7 +93,11 @@ def test_labels_are_not_covered_by_other_nodes(server: str) -> None:
         # nemik:W1177: the wait is webpage.load's, bounded and watching the page, not timeout=0.
         browser, page = webpage.launched_page(p, server, LOADED, VIEWPORT)
         errors: list[str] = []
-        page.on("pageerror", lambda e: errors.append(str(e)))
+
+        def note(e: object) -> None:
+            errors.append(str(e))
+
+        page.on("pageerror", note)
         overlaps = webpage.evaluate_value(page, OVERLAPS)
         boxes = webpage.evaluate_value(page, BOXES)
         browser.close()
