@@ -959,7 +959,13 @@ def _report_flow(g: Graph, args: Options) -> None:
     # rounded), and every pair the two order differently. The model replaces the old order
     # only after this audit agrees (W241).
     from nemik.metrics import residue_gaps
-    from nemik.salience import audit, load_gate_weights, load_wait_weight, show
+    from nemik.salience import (
+        AuditOptions,
+        audit,
+        load_gate_weights,
+        load_wait_weight,
+        show,
+    )
 
     # nemik:W251: --residue adds each recorded gap (the policy's residue) as demand at its card,
     # weighted by gate from rank-weights.toml [residue] (W253); off by default.
@@ -969,10 +975,12 @@ def _report_flow(g: Graph, args: Options) -> None:
     result = audit(
         g,
         args.repo,
-        residue=gaps,
-        workable=args.workable,
-        gate_weights=load_gate_weights(),
-        wait_weight=load_wait_weight(),
+        options=AuditOptions(
+            residue=gaps,
+            workable=args.workable,
+            gate_weights=load_gate_weights(),
+            wait_weight=load_wait_weight(),
+        ),
     )
     old_pos = {c: i + 1 for i, c in enumerate(result.old_order())}
     new_pos = {c: i + 1 for i, c in enumerate(result.new_order())}

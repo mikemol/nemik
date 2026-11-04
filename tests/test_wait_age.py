@@ -9,7 +9,7 @@ from pathlib import Path
 from rdflib import Graph
 
 from nemik.adapter import queue_graph
-from nemik.salience import audit, load_wait_weight
+from nemik.salience import AuditOptions, audit, load_wait_weight
 
 WEIGHT = Fraction(1)
 OLD_WAIT = 10
@@ -80,7 +80,7 @@ def _salience(tmp_path: Path, weight: Fraction) -> dict[str, Fraction]:
         ref -> salience.
 
     """
-    result = audit(_graph(tmp_path), "alpha", wait_weight=weight)
+    result = audit(_graph(tmp_path), "alpha", options=AuditOptions(wait_weight=weight))
     return {row.ref: row.new for row in result.rows}
 
 

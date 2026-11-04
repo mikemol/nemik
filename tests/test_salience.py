@@ -14,7 +14,7 @@ from rdflib import Graph
 
 from nemik.check import survey
 from nemik.rank import load_weights
-from nemik.salience import ask_effect, audit, show
+from nemik.salience import AuditOptions, ask_effect, audit, show
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -119,7 +119,9 @@ def test_a_recorded_gap_on_a_waiting_card_adds_demand_that_flows_to_its_cone(
 ) -> None:
     """W3 needs W1 and W2; one gap on W3 adds 1 of demand, split between them."""
     gap: dict[str, object] = {"gate": "constructible"}
-    result = audit(_graph(_fleet(tmp_path)), "a", residue={"a:W3": [gap]})
+    result = audit(
+        _graph(_fleet(tmp_path)), "a", options=AuditOptions(residue={"a:W3": [gap]})
+    )
     local = Fraction(load_weights().local)
     assert result.rows[0].new == local * Fraction(3, 2) + Fraction(1, 2)
     assert result.rows[1].new == local / 2 + Fraction(1, 2)
@@ -134,8 +136,12 @@ def test_a_gap_that_names_the_card_that_closes_it_pulls_that_card_up(
     nothing is stranded.
     """
     graph = _graph(_fleet(tmp_path))
-    plain = audit(graph, "a", residue={"a:W4": [{"gate": "g"}]})
-    closer = audit(graph, "a", residue={"a:W4": [{"gate": "g", "closes_ref": "a:W2"}]})
+    plain = audit(graph, "a", options=AuditOptions(residue={"a:W4": [{"gate": "g"}]}))
+    closer = audit(
+        graph,
+        "a",
+        options=AuditOptions(residue={"a:W4": [{"gate": "g", "closes_ref": "a:W2"}]}),
+    )
     plain_w2, closer_w2 = plain.rows[1].new, closer.rows[1].new
     assert closer_w2 > plain_w2
     assert closer.flow.stranded == {}
@@ -145,7 +151,10 @@ def test_a_gap_on_a_card_that_is_not_open_is_ignored(tmp_path: Path) -> None:
     """A gap on a card that is not open is ignored."""
     graph = _graph(_fleet(tmp_path))
     gaps: dict[str, list[dict[str, object]]] = {"a:W99": [{"gate": "g"}]}
-    assert audit(graph, "a", residue=gaps).rows == audit(graph, "a").rows
+    assert (
+        audit(graph, "a", options=AuditOptions(residue=gaps)).rows
+        == audit(graph, "a").rows
+    )
 
 
 def test_display_rounds_but_the_value_stays_exact() -> None:

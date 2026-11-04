@@ -13,7 +13,7 @@ from rdflib import Graph
 
 from nemik.check import survey
 from nemik.rank import load_weights
-from nemik.salience import audit, load_gate_weights
+from nemik.salience import AuditOptions, audit, load_gate_weights
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -21,9 +21,7 @@ if TYPE_CHECKING:
 
 def _pf(state: Path, *args: str) -> None:
     cmd = [*installed.script("mikemol-paths-forward"), "--state", str(state), *args]
-    assert (
-        capture(cmd).returncode == 0
-    )
+    assert capture(cmd).returncode == 0
 
 
 def _graph(tmp_path: Path) -> Graph:
@@ -74,7 +72,7 @@ def test_an_unnamed_gate_weighs_one_and_a_zero_gate_adds_nothing(
         ]
     }
     weights = {"constructible": Fraction(2), "observable": Fraction(0)}
-    result = audit(g, "a", residue=gaps, gate_weights=weights)
+    result = audit(g, "a", options=AuditOptions(residue=gaps, gate_weights=weights))
     # W2's class demand plus constructible (2), observable (0), an unnamed gate (the default, 1).
     assert result.rows[0].new == local + 2 + 0 + 1
 

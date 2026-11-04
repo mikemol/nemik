@@ -3,11 +3,11 @@
 
 state file: `.claude/paths-forward.json`
 
-counter 1622 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:94c16c0f91f8aaea`
+counter 1625 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:98b42b66aca8a77c`
 
 | # | symbol | status |
 |---|---|---|
-| 1 | W1622 | working |
+| 1 | W1625 | working |
 | 2 | W1007 | ready |
 | 3 | W1008 | ready |
 | 4 | W1075 | ready |
@@ -1600,12 +1600,16 @@ counter 1622 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:94c
 | 1591 | W1619 | done |
 | 1592 | W1620 | done |
 | 1593 | W1621 | done |
+| 1594 | W1622 | done |
+| 1595 | W1623 | done |
+| 1596 | W1624 | done |
 
 ## waypoints
 
-1. **W1622** (working) rank.rank takes fruit_row, toward and with_working as one RankOptions tuple, so its
-   seven-argument PLR0913 clears and ruff falls 39 to 38
-   - next: Run w1622.py codemod; hookcheck (rank is hook-reached); ratchet write; tests and guards
+1. **W1625** (working) witnesses._get reads through http.client, so its S310 urlopen of a variable URL clears and ruff
+   falls 37 to 36
+   - next: Run w1625.py; probe: house ruff and mypy on the ratchet write; tests/test_witnesses.py,
+     test_witness_promql.py, test_witwait.py; hookcheck not needed (witnesses is not on the standing 6 list)
 2. **W1007** (ready) The open-commitment count per repo, from mtools' commitment ledger, is a ratchet on the pace board
    and gauges
    - next: When mtools publishes its commitment ledger, count each repo's open commitments into a series, judge it like
@@ -5194,6 +5198,12 @@ counter 1622 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:94c
    and retries a network change (the W846 recurrence at stack 983 came from a page the harness never watched)
 1593. **W1621** (done) calendars.occurrences takes helper, ics, includes and stats as one Reading tuple, so its
    seven-argument PLR0913 clears and ruff falls 40 to 39
+1594. **W1622** (done) rank.rank takes fruit_row, toward and with_working as one RankOptions tuple, so its
+   seven-argument PLR0913 clears and ruff falls 39 to 38
+1595. **W1623** (done) tools/nemik_client reads through http.client, so its S310 urlopen of a variable URL clears and
+   ruff falls 38 to 37
+1596. **W1624** (done) test_modes opens its page through webpage.launched_page, as test_cardtree now does (W846: the
+   second file that called the library load on a page the harness never watched)
 
 ## residue
 
@@ -8228,3 +8238,23 @@ counter 1622 · heartbeat 2026-10-29T04:11:13Z · job `481476b5` · hash `v2:94c
   itself took the working-tree mypy lane from behind to ok after the BUILD stamp had read it behind. I did not re-run
   any figure. Two findings. No fixpoint is declared. Carried open findings as in R221, minus R221's (applied).; 2
   finding(s)
+- **nemik:R221** (-) round 223: stack 982 [W1618, W1617] 10ae4e22 landed 14:49:48Z; 983 refused at the gate by the
+  popLater flake in test_cardtree (the fifth occurrence); 984 [W1619, W1620] 0acd1b6b landed 15:34:42Z; 985 (W1621)
+  c7e5a5ce landed 16:17:05Z; 986 (W1622, ruff 39 to 38) inflight since submit key 1793809988: root Verified from the
+  reflog (unix stamps): 78edeb0e 1793800279 = 13:51:19Z, 10ae4e22 1793803788 = 14:49:48Z, 0acd1b6b 1793806482 =
+  15:34:42Z, c7e5a5ce 1793809025 = 16:17:05Z, all matching the G1's landing stamps. The G1 left the four submit keys
+  unconverted and says so; I converted them by hand from the reflog stamps (the hook refused a shell loop): 983 key
+  1793804478 = 15:01:18Z (not 'about 14:55Z', and not the 14:41:18Z the G1 guessed), 984 key 1793806380 = 15:32:00Z (not
+  15:13Z, 19 minutes off), 985 key 1793808106 = 16:01:46Z, 986 key 1793809988 = 16:33:08Z. From those the gate intervals
+  are: empty 14:49:48Z to 15:01:18Z (11 min 30 s); 983 gated about 14 min 44 s (the bazel elapsed 884.477 s) and was
+  refused at about 15:16Z; empty about 15:16Z to 15:32:00Z (about 16 min); 984 gated 15:32:00Z to 15:34:42Z (2 min 42 s,
+  6 targets fresh of 468); empty 15:34:42Z to 16:01:46Z (27 min 04 s); 985 gated 16:01:46Z to 16:17:05Z (15 min 19 s,
+  the bazel elapsed 872.311 s agrees); empty 16:17:05Z to 16:33:08Z (16 min 03 s). Together about 70 minutes of the 103
+  from 14:49:48Z to 16:33:08Z, 68 percent, and the span landed ruff 41 to 39 (a third stack, 986, inflight for 38) with
+  mypy flat at 14. The G1 is honest on what it did not read (three conversions, SHIP-SEEN for 984 and 985, the
+  reviewer-round stamp) and on a slip (W1619 blocked on W846 with a block on its own card, lifted at the submit). The
+  test_cardtree finding is a good piece of reading with no edit: the empty request record was an absent listener,
+  because the test built its own page and so webpage.py's requestfailed and response recording never ran; W1620 moved it
+  onto webpage.launched_page. That is the fifth occurrence of the W846 class and the G1 says it is not proof of the root
+  cause and that fourteen other test files call new_page directly. I did not re-run any figure. Two findings. No
+  fixpoint is declared. Carried open findings as in R222.; 2 finding(s)

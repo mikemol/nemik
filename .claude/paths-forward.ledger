@@ -4618,3 +4618,7 @@
 2026-11-04T17:25:03Z  status W1624 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-04T17:26:04Z  tick  W1625 minted    -         "witnesses._get reads through http.client, so its S310 urlopen of a variable URL clears and ruff falls 37 to 36"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1568
 2026-11-04T17:26:17Z  status W1625 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T17:30:08Z  tick  W1625 advanced  sweep     "stacks 987 (W1623 ruff 38 to 37, W1624 test_modes; landed 17:24:08Z) and 988 (W1625 witnesses S310, ruff 37 to 36, inflight): http.client replaces urlopen at two S310 sites; W846 class remainder corrected from fourteen files to one; luthen's 18 landing-anchored times adopted as a 40 minute stuck bound (W1612) [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T17:49:02Z  status W1625 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-04T17:50:29Z  interrupt W1626 minted    -         "salience.audit takes its eight keyword options as one AuditOptions tuple, so its eleven-argument PLR0913 clears and ruff falls 36 to 35"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1568
+2026-11-04T17:50:36Z  status W1626 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

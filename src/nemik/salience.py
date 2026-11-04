@@ -18,7 +18,7 @@ from contextlib import contextmanager
 from dataclasses import dataclass
 from fractions import Fraction
 from importlib.resources import files
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, NamedTuple
 
 from rdflib.namespace import PROV
 
@@ -318,18 +318,27 @@ def _apply_residue(
                 needs[card] = sorted({*needs.get(card, []), target})
 
 
+class AuditOptions(NamedTuple):
+    """What audit may be asked besides the graph: what to leave out, the gaps, the weights."""
+
+    without: str = ""
+    residue: dict[str, list[dict[str, object]]] | None = None
+    gate_weight: Fraction = Fraction(1)
+    workable: bool = False
+    gate_weights: dict[str, Fraction] | None = None
+    toward: str = ""
+    wait_weight: Fraction = Fraction(0)
+
+
+NO_OPTIONS = AuditOptions()
+
+
 def audit(
     g: Graph,
     repo: str,
     weights: Weights | None = None,
     *,
-    without: str = "",
-    residue: dict[str, list[dict[str, object]]] | None = None,
-    gate_weight: Fraction = Fraction(1),
-    workable: bool = False,
-    gate_weights: dict[str, Fraction] | None = None,
-    toward: str = "",
-    wait_weight: Fraction = Fraction(0),
+    options: AuditOptions = NO_OPTIONS,
 ) -> Audit:
     """Run both arms over the ready cards of `repo`.
 
@@ -362,37 +371,54 @@ def audit(
     # W403: residue and gate weights are per-call inputs, not part of the key, so those audits
     # bypass it.
     key: tuple[object, ...] | None = None
-    if _MEMO[0] is not None and residue is None and gate_weights is None:
+    if (
+        _MEMO[0] is not None
+        and options.residue is None
+        and options.gate_weights is None
+    ):
         key = _memo_key(
-            g, repo, weights, (without, gate_weight, workable, toward, wait_weight)
+            g,
+            repo,
+            weights,
+            (
+                options.without,
+                options.gate_weight,
+                options.workable,
+                options.toward,
+                options.wait_weight,
+            ),
         )
         if key in _MEMO[0]:
             return _MEMO[0][key]
-    nodes, prereq, ready = _open_graph(g, workable=workable)
+    nodes, prereq, ready = _open_graph(g, workable=options.workable)
     mine = sorted((n for n in ready if repo_of(n) == repo), key=_node_number)
     population, reach = _reach(g, mine, nodes)
     sources = sorted((x for x in population if x in prereq), key=str)
-    if toward:
+    if options.toward:
         # nemik:W316: a milestone ranks by ITS demand alone: the one source is the target card.
-        sources = [x for x in sources if ref_of(x) == toward]
+        sources = [x for x in sources if ref_of(x) == options.toward]
     needs = {
         ref_of(x): sorted(ref_of(p) for p in ps if p in nodes)
         for x, ps in prereq.items()
     }
-    demand = _class_demand(g, sources, weights, repo, without)
+    demand = _class_demand(g, sources, weights, repo, options.without)
     front = {ref_of(n) for n in ready}
     relevant = {ref_of(x) for x in population} | {ref_of(n) for n in mine}
-    if weights.operator and not toward:
-        _add_operator_demand(g, demand, nodes, (relevant, without), weights.operator)
-    for card, added in wait_demand(g, sources, wait_weight, without).items():
+    if weights.operator and not options.toward:
+        _add_operator_demand(
+            g, demand, nodes, (relevant, options.without), weights.operator
+        )
+    for card, added in wait_demand(
+        g, sources, options.wait_weight, options.without
+    ).items():
         demand[card] = demand.get(card, Fraction(0)) + added
-    if not toward:
+    if not options.toward:
         _apply_residue(
             demand,
             needs,
-            residue or {},
-            ({ref_of(n) for n in nodes}, relevant, front, without),
-            (gate_weights, gate_weight),
+            options.residue or {},
+            ({ref_of(n) for n in nodes}, relevant, front, options.without),
+            (options.gate_weights, options.gate_weight),
         )
     flow = solve(demand, needs, front)
     result = Audit(
@@ -453,7 +479,7 @@ def ask_effect(
     if not absorbed and not stranded:
         msg = f"{ref} injects no demand into {repo}'s ranking"
         raise ValueError(msg)
-    bare = audit(g, repo, weights, without=ref)
+    bare = audit(g, repo, weights, options=AuditOptions(without=ref))
     before = {c: i for i, c in enumerate(bare.new_order())}
     after = {c: i for i, c in enumerate(full.new_order())}
     displaced = [
@@ -562,8 +588,7 @@ def salience_of(
         g,
         repo,
         weights,
-        workable=True,
-        toward=toward,
+        options=AuditOptions(workable=True, toward=toward),
     ).flow.salience
 
 
@@ -586,5 +611,5 @@ def edge_currents(
         prerequisite).
 
     """
-    flow = audit(g, repo, weights, workable=workable).flow
+    flow = audit(g, repo, weights, options=AuditOptions(workable=workable)).flow
     return {edge: float(amount) for edge, amount in flow.current.items()}
