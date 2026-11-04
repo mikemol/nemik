@@ -64,12 +64,12 @@ def load_weights(text: str | None = None) -> Weights:
     """
     if text is None:
         text = files("nemik.data").joinpath("rank-weights.toml").read_text()
-    data = tomllib.loads(text)
+    data: dict[str, object] = tomllib.loads(text)
     return Weights(
-        local=int(data["local"]),
-        peer=int(data["peer"]),
-        peer_blocked=int(data["peer_blocked"]),
-        operator=int(data.get("operator", 0)),
+        local=int(str(data["local"])),
+        peer=int(str(data["peer"])),
+        peer_blocked=int(str(data["peer_blocked"])),
+        operator=int(str(data.get("operator", 0))),
     )
 
 
@@ -132,7 +132,8 @@ def load_composition(text: str | None = None) -> Composition:
     """
     if text is None:
         text = files("nemik.data").joinpath("rank-weights.toml").read_text()
-    o = _toml_table(tomllib.loads(text).get("order"))
+    document: dict[str, object] = tomllib.loads(text)
+    o = _toml_table(document.get("order"))
     raw_tiers = o.get("tiers", [["weight"]])
     tiers = (
         tuple(tuple(str(x) for x in t) for t in raw_tiers)
@@ -233,7 +234,7 @@ def compose(rows: list[RankRow], comp: Composition) -> list[RankRow]:
         if not tiers:
             for r in items:
                 r["key"] = prefix
-            return sorted(items, key=lambda r: int(r["symbol"].lstrip("W")))
+            return sorted(items, key=_symbol_number)
         objs, rest, out = tiers[0], tiers[1:], []
         remaining, front_no = list(items), 0
         while remaining:
@@ -296,6 +297,46 @@ def objectives(
         "downstream": down,
         "salience": None if salience is None else float(salience.get(ref_of(n), 0)),
     }
+
+
+def _symbol_number(row: RankRow) -> int:
+    """Give a ranked row's card number, for ordering rows by card.
+
+    Returns:
+        The integer after the W of the row's symbol.
+
+    """
+    return int(row["symbol"].lstrip("W"))
+
+
+def _goal_order(row: GoalRow) -> tuple[int, int]:
+    """Order goal rows by weight, heaviest first, then by card number.
+
+    Returns:
+        The sort key.
+
+    """
+    return (-row["weight"], int(row["goal"].lstrip("W")))
+
+
+def _downstream_order(row: RankRow) -> tuple[int, int]:
+    """Order ranked rows by downstream weight, heaviest first, then by card number.
+
+    Returns:
+        The sort key.
+
+    """
+    return (-row["downstream"], int(row["symbol"].lstrip("W")))
+
+
+def _pair_order(pair: tuple[str, str, str, list[str]]) -> tuple[int, int, str]:
+    """Order policy pairs by the two card numbers, then the class.
+
+    Returns:
+        The sort key.
+
+    """
+    return (int(pair[0].lstrip("W")), int(pair[1].lstrip("W")), pair[2])
 
 
 def _repo(node: Node) -> str:
@@ -449,12 +490,12 @@ def goals(g: Graph, repo: str, weights: Weights) -> list[GoalRow]:
         if any(_repo(s) == repo and _open(g, s) for s in successors(g, n)):
             continue
         leaves, outside = frontier(g, n)
+
+        def ready_key(x: Node) -> tuple[int, str]:
+            return (-downstream_weight(g, x, weights), str(g.value(x, NEMIK.symbol)))
+
         ready = sorted(
-            (x for x in leaves if (x, OSLC_CM.state, NEMIK.Ready) in g),
-            key=lambda x: (
-                -downstream_weight(g, x, weights),
-                str(g.value(x, NEMIK.symbol)),
-            ),
+            (x for x in leaves if (x, OSLC_CM.state, NEMIK.Ready) in g), key=ready_key
         )
         out.append(
             {
@@ -467,7 +508,7 @@ def goals(g: Graph, repo: str, weights: Weights) -> list[GoalRow]:
                 "clear": not outside,
             }
         )
-    return sorted(out, key=lambda r: (-r["weight"], int(r["goal"].lstrip("W"))))
+    return sorted(out, key=_goal_order)
 
 
 def children(g: Graph, n: Node) -> set[Node]:
@@ -599,7 +640,7 @@ def _rows(
     ):
         rep = min(
             (r for r in rows if r["symbol"] in f["members"]),
-            key=lambda r: (-r["downstream"], int(r["symbol"].lstrip("W"))),
+            key=_downstream_order,
         )
         rep["weight"], rep["fruit"] = f["class_weight"], f
     return rows
@@ -1216,7 +1257,11 @@ def _next(g: Graph, repo: str, rows: list[RankRow]) -> RankRow:
         for n in g.subjects(NEMIK.workstream, ws)
         if g.value(n, NEMIK.queuePosition) is not None
     }
-    return min(rows, key=lambda r: pos.get(r["symbol"], 1 << 30))
+
+    def queue_pos(r: RankRow) -> int:
+        return pos.get(r["symbol"], 1 << 30)
+
+    return min(rows, key=queue_pos)
 
 
 def drift(
@@ -1303,9 +1348,7 @@ def policy_blocks(
                 for shared in [sorted((touches[dep] & touches[b]) - {p.tag})]
                 if shared
             )
-    return sorted(
-        out, key=lambda t: (int(t[0].lstrip("W")), int(t[1].lstrip("W")), t[2])
-    )
+    return sorted(out, key=_pair_order)
 
 
 def unscored(g: Graph, repo: str) -> int:

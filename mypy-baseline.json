@@ -30,7 +30,7 @@
   "misc": 1
  },
  "src/nemik/rank.py": {
-  "misc": 29
+  "misc": 4
  },
  "src/nemik/serve.py": {
   "explicit-any": 2,
