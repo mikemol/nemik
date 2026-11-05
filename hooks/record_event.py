@@ -8,13 +8,15 @@ mtools, so the hook never needs to understand a ledger schema. Prompt text is ne
 Spool: $XDG_STATE_HOME/nemik/events.jsonl (default ~/.local/state/...), append-only JSONL.
 Always exits 0 and prints nothing: this hook has no deny path and adds no context.
 """
+
 import json
 import os
 import sys
 import time
 
+# "[paths-forward tick]" is mtools payload.py's scheduled (forecast) tick prompt
 SOURCES = (
-    ("[paths-forward tick]", "tick"),  # mtools payload.py: the scheduled (forecast) tick prompt
+    ("[paths-forward tick]", "tick"),
     ("<cross-session-message", "peer"),
     ("<agent-message", "subagent"),
     ("<task-notification", "background"),
@@ -81,6 +83,7 @@ def main() -> None:
 if __name__ == "__main__":
     try:
         main()
-    except Exception as exc:  # noqa: BLE001 - a global hook must never break a session
+    except (OSError, ValueError, TypeError, AttributeError, KeyError) as exc:
+        # a global hook must never break a session: each failure the spool write can meet
         print(f"nemik hook: {exc}", file=sys.stderr)
     sys.exit(0)
