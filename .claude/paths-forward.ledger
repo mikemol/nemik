@@ -4995,3 +4995,9 @@
 2026-11-05T20:42:51Z  status W1757 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-05T20:42:51Z  interrupt W1758 minted    -         "Codon row work: nemik.work compiles under the pinned Codon in both modes"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-05T20:42:52Z  status W1758 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T21:05:09Z  status W1678 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T21:05:17Z  tick  W1678 advanced  collapse  "W1678 landed b44699e: the Codon walls are atomized as 19 wall cards and 65 row cards by an idempotent committed tool, so the graph ranks the levers; bc089dc corrected docs/codon-walls.md; ratchets ruff 0, mypy 0, codon 130; gate empty, next is one stack for the combined walls (collections.abc, hashlib, importlib, weakref) [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T21:08:19Z  tick  W1759 minted    -         "atomize_walls orders the walls greedily by rows brought close to free per module changed and writes each wall's wave into its card"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T21:08:28Z  status W1759 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T21:09:50Z  status W1685 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T21:13:00Z  tick  W1760 minted    -         "nemik-rank weighs a card's size in its order, so a cheap wall under many rows outranks an expensive one under slightly more"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
