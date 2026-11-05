@@ -760,6 +760,57 @@ def commits_since(repo: Path, since: str) -> int | None:
 
 Snapshot = tuple[datetime, QueueDoc]
 
+# the writer's `completed` stamp, e.g. 20261103T230823Z
+COMPLETED_FORM = "%Y%m%dT%H%M%SZ"
+
+
+def _when(stamp: object) -> datetime | None:
+    """Read a card's time stamp: `issued_at` is ISO with a Z, `completed` is the compact form.
+
+    Returns:
+        The time in UTC, or None when the stamp is missing or in neither form.
+
+    """
+    raw = str(stamp or "")
+    try:
+        if "-" in raw:
+            return datetime.fromisoformat(raw)
+        return datetime.strptime(raw, COMPLETED_FORM).replace(tzinfo=UTC)
+    except ValueError:
+        return None
+
+
+def stamp_snapshots(queue: QueueDoc) -> list[Snapshot]:
+    """nemik:W1139: snapshots of a queue that has no git history, built from its own stamps.
+
+    Each card's `issued_at` is when it was added and its `completed` is when it closed, so the
+    queue as it stood at each such moment is the cards issued by then, those that had closed marked
+    done and the rest as they are now (their earlier states are not recorded, so no card is blocked
+    in the past and the blocked share reads zero). A card without an `issued_at` is left out.
+
+    Returns:
+        (moment, queue) for each distinct stamp, oldest first, in the shape `weekly` reads.
+
+    """
+    born: list[tuple[Waypoint, datetime, datetime | None]] = []
+    for card in queue.get("waypoints", []):
+        issued = _when(card.get("issued_at"))
+        if issued is not None:
+            born.append((card, issued, _when(card.get("completed"))))
+    moments = sorted({t for _, a, b in born for t in (a, b) if t is not None})
+    out: list[Snapshot] = []
+    for at in moments:
+        cards: list[Waypoint] = []
+        for card, issued, completed in born:
+            if issued > at:
+                continue
+            closed = completed is not None and completed <= at
+            now = str(card.get("status", ""))
+            status = "done" if closed else ("ready" if now == "done" else now)
+            cards.append(card | {"status": status})
+        out.append((at, {"waypoints": cards}))
+    return out
+
 
 def snapshots(
     repo: Path, since: str | None = None, *, full: bool = False
@@ -770,7 +821,13 @@ def snapshots(
         (commit time, queue) per commit that touched the queue file; see `commit_snapshots`.
 
     """
-    return [(at, queue) for _, at, queue in commit_snapshots(repo, since, full=full)]
+    got = [(at, queue) for _, at, queue in commit_snapshots(repo, since, full=full)]
+    path = repo / QUEUE_PATH
+    # nemik:W1139: a queue with no git history at all (not a repository, or never committed) is
+    # read from its own stamps; `since` asks about commits, so it never falls back.
+    if got or since is not None or not path.is_file():
+        return got
+    return stamp_snapshots(_queue_doc(path.read_text(encoding="utf-8")))
 
 
 def commit_snapshots(

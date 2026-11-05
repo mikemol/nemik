@@ -4754,3 +4754,8 @@
 2026-11-05T11:49:14Z  status W1300 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-05T11:49:15Z  status W1656 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-05T11:49:17Z  status W1655 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T12:17:56Z  status W1300 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T12:17:57Z  status W1656 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T12:17:59Z  status W1655 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T12:41:16Z  tick  W1300 advanced  sweep     "stack 1006 landed 12:16:54Z (168c5de W1300 codon 138 to 137, 18f8f21 W1656 ruff 14 to 9, 57c3fe8 W1655 post-commit emit); first run refused on test_rank_survey (my miss), fixed; ruff 9 all PLC0415 cycles, codon owes 2 behind; gate empty [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T13:08:50Z  status W1139 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
