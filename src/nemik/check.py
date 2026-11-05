@@ -60,6 +60,7 @@ from nemik.critical import cycles
 from nemik.critical import parse_args as critical_args
 from nemik.critical import report as critical_report
 from nemik.digest import collapse, delta
+from nemik.floorasks import floor_asks, unresolved
 from nemik.hostapply import HOST_REF, load
 from nemik.idle import findings as idle_findings
 from nemik.index import successors
@@ -1482,6 +1483,35 @@ def wake_main(argv: list[str] | None = None, g: Graph | None = None) -> None:
                 if qg is not None:
                     g += qg
     wake_report(args, g)
+
+
+def floorasks_main(argv: list[str] | None = None) -> None:
+    """Report the floor asks that point at nothing.
+
+    Raises:
+        SystemExit: always; 1 when an ask does not resolve, else 0.
+
+    """
+    ap = argparse.ArgumentParser(
+        description="Witness that summit floor asks point at live waypoints (nemik:W42)."
+    )
+    ap.add_argument(
+        "--root",
+        type=Path,
+        default=default_root(),
+        help="~/github, or the export layout root",
+    )
+    ap.add_argument("--floor", type=Path, help="default: <root>/summit/floor")
+    args = ap.parse_args(argv)
+    root: Path = args.root
+    given: Path | None = args.floor
+    floor = given or root / "summit" / "floor"
+    n = len(floor_asks(floor))
+    bad = unresolved(root, floor)
+    for key, ptr, why in bad:
+        say(f"floor-asks: {key}: {ptr}: {why}")
+    say(f"floor-asks: {n - len(bad)} of {n} waypoint pointers resolve")
+    raise SystemExit(1 if bad else 0)
 
 
 def critical_main(argv: list[str] | None = None, g: Graph | None = None) -> None:

@@ -6,13 +6,11 @@ Each `summit/floor/*.bib` entry may carry `waypoint = {<repo>:W<n>}`. The pointe
 a waypoint in that repo's queue that is not dropped; otherwise the ask cites nothing an agent owns.
 """
 
-import argparse
 import json
 import re
 from pathlib import Path
 
-from nemik.queuefiles import QUEUE, default_root, workstream_files
-from nemik.say import say
+from nemik.queuefiles import QUEUE, workstream_files
 from nemik.tomlview import table, tables
 
 # Same field regex as summit's scripts/place_intake.py (`waypoint` is a real top-level field).
@@ -78,35 +76,3 @@ def unresolved(root: Path, floor: Path) -> list[tuple[str, str, str]]:
         elif st == "dropped":
             bad.append((key, ptr, "dropped"))
     return bad
-
-
-class Options(argparse.Namespace):
-    """The parsed command line of nemik-floor-asks (nemik:W1187)."""
-
-    root: Path
-    floor: Path | None
-
-
-def main(argv: list[str] | None = None) -> None:
-    """Report the floor asks that point at nothing.
-
-    Raises:
-        SystemExit: always; 1 when an ask does not resolve, else 0.
-
-    """
-    ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    ap.add_argument(
-        "--root",
-        type=Path,
-        default=default_root(),
-        help="~/github, or the export layout root",
-    )
-    ap.add_argument("--floor", type=Path, help="default: <root>/summit/floor")
-    args = ap.parse_args(argv, namespace=Options())
-    floor = args.floor or args.root / "summit" / "floor"
-    n = len(floor_asks(floor))
-    bad = unresolved(args.root, floor)
-    for key, ptr, why in bad:
-        say(f"floor-asks: {key}: {ptr}: {why}")
-    say(f"floor-asks: {n - len(bad)} of {n} waypoint pointers resolve")
-    raise SystemExit(1 if bad else 0)

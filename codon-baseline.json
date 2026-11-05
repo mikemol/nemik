@@ -59,10 +59,6 @@
   "as_written": "no module named 'argparse'",
   "stripped": "no module named 'argparse'"
  },
- "floorasks": {
-  "as_written": "no module named 'argparse'",
-  "stripped": "no module named 'argparse'"
- },
  "flow": {
   "as_written": "class decorator got unexpected argument",
   "stripped": "class decorator got unexpected argument"
