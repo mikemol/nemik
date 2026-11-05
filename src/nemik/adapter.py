@@ -8,9 +8,12 @@ reader, so schema drift across repos is mtools' problem to absorb, not a second 
 
 from __future__ import annotations
 
+import json
 import re
+import sys
 from datetime import datetime
-from typing import TYPE_CHECKING
+from importlib.metadata import PackageNotFoundError, distribution
+from typing import TYPE_CHECKING, cast
 from urllib.parse import quote, unquote
 
 from mikemol.pathsforward import attach, ledger, model, store
@@ -22,6 +25,42 @@ from nemik import editverbs, warrants
 if TYPE_CHECKING:
     from collections.abc import Callable
     from pathlib import Path
+
+
+def editable_install() -> bool:
+    """Say whether the installed `nemik` distribution records itself as editable.
+
+    An editable install runs the working tree, not what was installed: a CLI then behaves as
+    whatever is checked out at the moment, and Bazel's sandbox cannot see it (nemik:W94, operator
+    ruling nemik:W93).
+
+    Returns:
+        True when PEP 610's direct_url.json marks the install editable, else False (including
+        when the distribution is not installed).
+
+    """
+    try:
+        text = distribution("nemik").read_text("direct_url.json")
+    except PackageNotFoundError:
+        return False
+    if not text:
+        return False
+    # PEP 610: a JSON object whose `dir_info` object carries the `editable` flag; anything else is
+    # not an editable install, and each step is narrowed from what the next one reads.
+    loaded = cast("object", json.loads(text))
+    if not isinstance(loaded, dict):
+        return False
+    info = cast("dict[str, object]", loaded).get("dir_info")
+    if not isinstance(info, dict):
+        return False
+    return bool(cast("dict[str, object]", info).get("editable"))
+
+
+if editable_install():
+    sys.stderr.write(
+        "nemik: WARNING running from an editable install; "
+        "use the built venv: ./setup.sh (bazel build //:.venv)\n"
+    )
 
 
 class _Terms(Namespace):

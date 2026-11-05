@@ -4676,3 +4676,15 @@
 2026-11-05T01:42:34Z  status W1642 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-05T01:57:49Z  interrupt W1643 minted    -         "nemik-tasks prints the per-field diff for each task it plans to update, so the life parent's repeated UPDATE names the field that differs"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1641
 2026-11-05T02:04:32Z  status W1638 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T02:25:21Z  status W1643 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T02:35:40Z  status W1642 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T02:35:44Z  status W1638 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T02:35:47Z  status W1643 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T02:36:39Z  tick  W1642 advanced  sweep     "stack 999 (W1642 cachestore JSON, ruff 27 to 25; W1638 asdict rider, mypy 6 to 2; landed 02:34:29Z after 29 min 16 s): pickle taken as the first entry on measurement; W1643 explain mode built and tested for luthen's W1992, waiting for a ratchet-lowering first entry; the suspension withdrawn at the operator's question [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T02:42:31Z  interrupt W1644 minted    -         "vtodo.grouped emits a repo parent's DUE as a date, so Google's all-day normalization of the parent stops differing from the feed on every read"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1641
+2026-11-05T02:42:47Z  status W1644 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T02:44:30Z  status W1644 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T02:45:20Z  interrupt W1645 minted    -         "The editable-install check moves from nemik/__init__ into nemik.adapter, so RUF067 clears (ruff 25 to 23) and the package init compiles"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1568
+2026-11-05T02:45:32Z  status W1645 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T02:49:27Z  status W1643 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T02:49:29Z  status W1644 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

@@ -1,13 +1,13 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Mike Mol
-"""nemik.editable_install tells an editable install from a package install."""
+"""nemik.adapter.editable_install tells an editable install from a package install."""
 
 import json
 from collections.abc import Callable
 
 import pytest
 
-import nemik
+from nemik import adapter
 
 
 class _Dist:
@@ -49,5 +49,5 @@ def test_editable_install_is_detected_and_a_package_install_is_not(
         (_payload({}), False),
         (None, False),
     ):
-        monkeypatch.setattr(nemik, "distribution", _dist_of(text))
-        assert nemik.editable_install() is want
+        monkeypatch.setattr(adapter, "distribution", _dist_of(text))
+        assert adapter.editable_install() is want
