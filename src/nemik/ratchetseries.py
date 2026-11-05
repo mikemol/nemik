@@ -16,6 +16,8 @@ from nemik.tracker import DICT, INT, LIST, REAL, STR, Tree, parse_tree
 PHANTOM = "tree"
 PAIR = 2  # a sample is [unix seconds, "value"]
 END_SLACK_MS = 60_000  # a repo's series from one gate run end within this of each other
+LANDED = "landed"  # the `stage` label of a sample sent after its commit landed (mtools:W2171)
+NO_END = -1  # a series with no gate-time sample has no end and is never judged ended
 
 
 def series_of(answer: str) -> list[tuple[str, str, list[int]]]:
@@ -96,7 +98,7 @@ def ended_series(text: str) -> list[tuple[str, str]]:
     return sorted(
         (repo, ratchet)
         for repo, ratchet, _, end in rows
-        if end < newest[repo] - END_SLACK_MS
+        if end != NO_END and end < newest[repo] - END_SLACK_MS
     )
 
 
@@ -161,6 +163,7 @@ def _export_rows(
     # declared (guessed=false) sample winning where both stamped the same instant. Kept apart they
     # read as a series that ended, and every row went unknown.
     merged: dict[tuple[str, str], dict[int, tuple[int, int]]] = {}
+    gate_end: dict[tuple[str, str], int] = {}
     for line in text.splitlines():
         if not line.strip():
             continue
@@ -184,13 +187,49 @@ def _export_rows(
             declared = 0 if tree.string(metric, "guessed") == "false" else 1
             held = merged.setdefault((repo, ratchet), {})
             _hold(held, tree, stamps, values, declared)
+            # nemik:W1654: only a gate-time (unlabelled) sample says when a series ENDED
+            if tree.string(metric, "stage") != LANDED:
+                last = gate_end.get((repo, ratchet), NO_END)
+                gate_end[repo, ratchet] = max(last, _last_stamp(tree, stamps))
+    return _rows_of(merged, gate_end)
+
+
+def _last_stamp(tree: Tree, stamps: int) -> int:
+    """Find the newest sample time of one series.
+
+    Returns:
+        The largest time in milliseconds, or NO_END when the series holds none.
+
+    """
+    found = [_whole(tree, at) for at in tree.kids[stamps] if _number(tree, at)]
+    return max(found, default=NO_END)
+
+
+def _rows_of(
+    merged: dict[tuple[str, str], dict[int, tuple[int, int]]],
+    gate_end: dict[tuple[str, str], int],
+) -> tuple[list[tuple[str, str, list[int], int]], dict[str, int]]:
+    """Turn the merged samples into one row per ratchet, each with its gate-time end.
+
+    A series is judged ended against the repo's newest GATE-TIME sample only (nemik:W1654): the
+    gate's own emit sends every series together, which is what the END_SLACK_MS rule assumes, while
+    a stage=landed emit sends the ratchets of one landing, so a lone landed sample must neither be
+    the repo's newest nor make the others read as ended. A series with no gate-time sample has no
+    end (NO_END) and is never judged.
+
+    Returns:
+        (repo, ratchet, values oldest first, gate-time end or NO_END) per series, and each
+        repo's newest gate-time sample time.
+
+    """
     out: list[tuple[str, str, list[int], int]] = []
     newest: dict[str, int] = {}
     for (repo, ratchet), held in merged.items():
         ordered = sorted(held.items())
-        end = ordered[-1][0] if ordered else 0
+        end = gate_end.get((repo, ratchet), NO_END)
         out.append((repo, ratchet, [count for _, (_, count) in ordered], end))
-        newest[repo] = max(newest.get(repo, 0), end)
+        if end != NO_END:
+            newest[repo] = max(newest.get(repo, NO_END), end)
     return out, newest
 
 
