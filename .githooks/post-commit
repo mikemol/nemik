@@ -21,6 +21,20 @@ fi
 branch=$(git symbolic-ref --quiet --short HEAD) || exit 0
 git rev-parse --abbrev-ref --symbolic-full-name '@{upstream}' >/dev/null 2>&1 || exit 0
 git push --quiet || echo "post-commit: push of $branch failed; the commit stays local" >&2
+# nemik:W1655 (mtools:W2171, W1920): the LANDED sample of the ratchet series is sent here, after the
+# commit exists and the gate verified it. The gate's own emit sends the staged tree's values BEFORE its
+# verdict and carries no stage, so a gate the host cancelled (kine-latency, nemik stack 1003) left its
+# values in the series and the pace read a fall that never landed. This sample carries stage=landed.
+# The reader's path is this repository's to name (RATCHET_BIN). Detached and queued behind an earlier
+# one by a blocking flock, so git never waits on a census; an absent tool is a silent skip.
+real_root="${MIKEMOL_REAL_ROOT:-$(git rev-parse --show-toplevel)}"
+emit="$real_root/.venv/bin/mikemol-ratchet-emit"
+if [ -x "$emit" ]; then
+	mkdir -p "$git_dir/mtools"
+	RATCHET_BIN="$real_root/.venv/bin/mikemol-ratchet" setsid flock "$git_dir/mtools/ratchet-emit.lock" \
+		"$emit" "$(basename "$real_root")" "$(git rev-parse --show-toplevel)" landed \
+		</dev/null >"$git_dir/mtools/ratchet-emit.log" 2>&1 &
+fi
 # nemik:W591: replay the image's test stage on what was pushed (about 16 minutes, nemik:W588), detached
 # and single-flight (the runner takes a lock), so the commit returns at once and a burst of commits is
 # replayed as the newest. The result lands in .git/image-replica.last for the tick to read (W592).
