@@ -4739,3 +4739,18 @@
 2026-11-05T08:44:24Z  status W1652 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-05T08:48:43Z  status W1652 working>blocked writer    "working -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-05T08:48:48Z  status W1633 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T08:49:06Z  interrupt W1654 minted    -         "The pace reads only ratchet samples labelled stage landed once mtools emits them after the landing, so a cancelled gate cannot move the verdict"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1652
+2026-11-05T08:49:17Z  status W1654 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T09:07:58Z  status W1633 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T09:37:04Z  tick  W1633 advanced  sweep     "stack 1003 landed ec87ad4 09:07:12Z (ruff 19 to 14, expat mspdi); stack 1004 queue-only reset after a kine-latency cancel; ruff 14 left all PLC0415, codon owes 2; gate empty [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T09:59:46Z  interrupt W1655 minted    -         "nemik's post-commit hook sends the landed ratchet sample after each push, so the pace can ignore a gate that did not land"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1652
+2026-11-05T10:02:53Z  status W1654 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T10:26:55Z  tick  W1654 advanced  sweep     "quiet-ish tick: nemik post-commit emits stage=landed (W1655, live), ratchetseries counts only landed samples once they exist (W1654, live, 5 tests); both unlanded, no ratchet lowering reachable (ruff 14 all PLC0415, codon owes 2); gate empty [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T11:09:32Z  interrupt W1656 minted    -         "The graph helpers and rank weights move out of rank into index and score, so rank hoists its salience, check and critical imports and up to five PLC0415 findings clear"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1562
+2026-11-05T11:20:38Z  status W1656 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T11:20:40Z  status W1655 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T11:21:42Z  status W1656 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T11:21:43Z  status W1655 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T11:49:14Z  status W1300 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T11:49:15Z  status W1656 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T11:49:17Z  status W1655 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

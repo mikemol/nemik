@@ -17,6 +17,7 @@ import argparse
 import datetime as dt
 import json
 import os
+import shutil
 import sys
 import time
 import tomllib
@@ -58,10 +59,20 @@ from nemik.critical import cycles
 from nemik.digest import collapse, delta
 from nemik.hostapply import HOST_REF, load
 from nemik.idle import findings as idle_findings
-from nemik.letters import report
+from nemik.index import successors
+from nemik.letters import (
+    APPLY,
+    FOLD,
+    NO_CUTOFF,
+    PLAIN,
+    current_day,
+    fold_title,
+    redeliveries,
+    report,
+    split_orphans,
+)
 from nemik.marks import MARKS, policy_version, read
 from nemik.marks import provenance as mark_provenance
-from nemik.rank import successors
 from nemik.realize import rows as realize_rows
 from nemik.realize import runtime_valid, verdicts
 from nemik.rolls import idle_run, stalled
@@ -73,6 +84,7 @@ from nemik.workrows import NO_BOUND, ready_stamps, small_done_stamps, upper_quan
 
 if TYPE_CHECKING:
     from collections.abc import Iterator
+    from datetime import date
 
     from rdflib.term import Node
 
@@ -1150,6 +1162,73 @@ def _realizability(root: Path) -> int:
     return 2 if unjudged else int(residue > 0)
 
 
+def apply_fold(
+    root: Path,
+    scope: tuple[str | None, int | None] = (None, None),
+    *,
+    today: date | None = None,
+    writer: str | None = None,
+    env: dict[str, str] | None = None,
+) -> list[str]:
+    """nemik:W301 (substrate): run what `--fold` prints, so the act does not stall at the plan.
+
+    Each live orphan gets its `--add` through this venv's mikemol-paths-forward (the one writer of a
+    queue; `writer` and `env` override it, for a sandbox), and each stale one is moved into its
+    inbox's `archive/`. Idempotent: a letter a waypoint now cites is no longer an orphan, so a
+    second run finds nothing. It lives here and not in nemik.letters (nemik:W1300) because it
+    spawns the writer and moves files, which the pure side must not.
+
+    Returns:
+        one line per letter: the symbol minted, mtools' refusal, or the archive move.
+
+    """
+    repo, older_than = scope
+    writer = writer or str(Path(sys.executable).parent / "mikemol-paths-forward")
+    cutoff = NO_CUTOFF if older_than is None else older_than
+    live, stale = split_orphans(root, repo or "", cutoff, today or current_day())
+    done: list[str] = []
+    for owner, path in live:
+        state = root / owner / ".claude" / "paths-forward.json"
+        cmd = [writer, "--state", str(state), "--add", fold_title(path)[:140]]
+        run = capture([*cmd, "--caused-by", f"inbox/{path.name}"], env=env)
+        done.append(f"{owner}: {(run.stdout or run.stderr).strip()}")
+    for owner, path in stale:
+        (path.parent / "archive").mkdir(exist_ok=True)
+        path.rename(path.parent / "archive" / path.name)
+        done.append(f"{owner}: archived {path.name}")
+    return done
+
+
+def letters_report(
+    root: Path,
+    workstreams: set[str],
+    *,
+    fold: bool = False,
+    scope: tuple[str | None, int | None] = (None, None),
+    apply: bool = False,
+) -> tuple[list[str], int]:
+    """Printable lines and the exit code of `nemik-check --letters`: 0 clean, 5 when misdelivered.
+
+    The reading is nemik.letters.report; with `fold` and `apply` the copies of misdelivered
+    letters are made FIRST (nemik:W310), so the verdict and the exit code are the after state, and
+    the fold is carried out (apply_fold) instead of listed.
+
+    Returns:
+        The lines to print and the exit code.
+
+    """
+    repo, older_than = scope
+    cutoff = NO_CUTOFF if older_than is None else older_than
+    if not (fold and apply):
+        return report(root, workstreams, FOLD if fold else PLAIN, repo or "", cutoff)
+    delivery: list[str] = []
+    for src, dst in redeliveries(root, workstreams, repo or ""):
+        shutil.copy2(src, dst)
+        delivery.append(f"delivered {dst}")
+    lines, code = report(root, workstreams, APPLY, repo or "", cutoff)
+    return lines + delivery + apply_fold(root, scope), code
+
+
 def committed_verdict(root: Path, named: set[str]) -> int:
     """Print the queue provenance lines and say whether a named repo's queue is not committed.
 
@@ -1544,7 +1623,7 @@ def main(argv: list[str] | None = None) -> None:
     if args.realizability:
         sys.exit(_realizability(args.root))
     if args.letters:
-        said, code = report(
+        said, code = letters_report(
             args.root,
             {repo for repo, _ in workstream_files(args.root, QUEUE)},
             fold=args.fold,

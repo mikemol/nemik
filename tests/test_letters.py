@@ -11,15 +11,14 @@ from typing import TYPE_CHECKING
 import installed
 import pytest
 
-from nemik.check import main
+from nemik.check import apply_fold, main
+from nemik.check import letters_report as report
 from nemik.letters import (
-    apply_fold,
     archive_commands,
     fold_commands,
     headers,
     misdelivered,
     orphans,
-    report,
 )
 
 if TYPE_CHECKING:

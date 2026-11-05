@@ -78,6 +78,7 @@ from nemik.hostroot import HostRow, read_document, stale
 from nemik.index import indexed
 from nemik.landings import read_document as read_landings
 from nemik.landings import series as landing_series
+from nemik.letters import FOLD, PLAIN
 from nemik.letters import report as letters_report
 from nemik.luthenseries import board, load
 from nemik.outbox import outbox
@@ -86,13 +87,14 @@ from nemik.pacepublish import metric_lines, read_pace, readable_lines
 from nemik.pacing import limits, paces
 from nemik.pieces import GraphDoc, split
 from nemik.queuerows import fleet_queues
-from nemik.rank import goals, load_composition, load_weights, rank
+from nemik.rank import goals, load_composition, rank
 from nemik.roundcli import bindings_of
 from nemik.roundfile import ROUND_FILE
 from nemik.roundgauges import round_board
 from nemik.runlogs import runs_graph
 from nemik.salience import edge_currents, memo_audits
 from nemik.say import say, warn
+from nemik.score import load_weights
 from nemik.stackable import manifest
 from nemik.starved import days_limit, starved_fleet
 from nemik.trs import turtle
@@ -150,7 +152,7 @@ def check_report(name: str, graph: Graph, root: Path) -> str | None:
         # nemik:W862, W863: the inbox report as --letters and --fold print it; the writing mode
         # (--apply) is not served, only the plan it would carry out.
         known = {repo for repo, _ in workstream_files(root, QUEUE)}
-        return "\n".join(letters_report(root, known, fold=name == "fold")[0])
+        return "\n".join(letters_report(root, known, FOLD if name == "fold" else PLAIN)[0])
     return None
 
 
@@ -158,7 +160,7 @@ if TYPE_CHECKING:
     from collections.abc import Callable
 
     from nemik.blocks import AskRow, InboundRow
-    from nemik.rank import Weights
+    from nemik.score import Weights
 
 VENDOR = {"cytoscape.min.js", "dagre.min.js", "cytoscape-dagre.js"}
 # nemik:W801: the page's own files beside index.html (nemik:W799 splits it by concern): the
