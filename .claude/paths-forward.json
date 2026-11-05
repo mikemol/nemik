@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1659,
+  "counter": 1662,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 900
+      "ticks_blocked": 901
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-18T21:49:48Z",
-      "ticks_blocked": 720,
+      "ticks_blocked": 721,
       "weight": 1
     },
     {
@@ -3520,7 +3520,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:35:59Z",
-      "ticks_blocked": 576,
+      "ticks_blocked": 577,
       "weight": 2,
       "completed": null
     },
@@ -4278,7 +4278,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 749,
+      "ticks_blocked": 750,
       "weight": 2,
       "completed": null,
       "warrants": [
@@ -5405,7 +5405,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 726,
+      "ticks_blocked": 727,
       "completed": null
     },
     {
@@ -5426,7 +5426,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 741,
+      "ticks_blocked": 742,
       "completed": null
     },
     {
@@ -5485,7 +5485,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 741,
+      "ticks_blocked": 742,
       "completed": null
     },
     {
@@ -5506,7 +5506,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 741,
+      "ticks_blocked": 742,
       "completed": null
     },
     {
@@ -5546,7 +5546,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 741,
+      "ticks_blocked": 742,
       "completed": null
     },
     {
@@ -5605,7 +5605,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 741,
+      "ticks_blocked": 742,
       "completed": null
     },
     {
@@ -5645,7 +5645,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 741,
+      "ticks_blocked": 742,
       "completed": null
     },
     {
@@ -5666,7 +5666,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 741,
+      "ticks_blocked": 742,
       "completed": null
     },
     {
@@ -5706,7 +5706,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 741,
+      "ticks_blocked": 742,
       "completed": null
     },
     {
@@ -6650,7 +6650,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T04:17:48Z",
-      "ticks_blocked": 541,
+      "ticks_blocked": 542,
       "completed": null
     },
     {
@@ -6789,7 +6789,7 @@
       "minted_during": "interrupt",
       "caused_by": "W346",
       "last_worked": "2026-10-19T18:16:23Z",
-      "ticks_blocked": 434,
+      "ticks_blocked": 435,
       "weight": 9,
       "completed": null,
       "manifest": [
@@ -6818,7 +6818,7 @@
       "minted_during": "interrupt",
       "caused_by": "W346",
       "last_worked": "2026-10-19T18:16:25Z",
-      "ticks_blocked": 434,
+      "ticks_blocked": 435,
       "weight": 9,
       "completed": null,
       "manifest": [
@@ -7082,7 +7082,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:34:06Z",
-      "ticks_blocked": 654,
+      "ticks_blocked": 655,
       "completed": null
     },
     {
@@ -7195,7 +7195,7 @@
       "minted_during": "interrupt",
       "caused_by": "W364",
       "last_worked": "2026-10-24T12:37:36Z",
-      "ticks_blocked": 379,
+      "ticks_blocked": 380,
       "manifest": [
         "src/nemik/mirror.py",
         "tests/test_mirror.py"
@@ -7224,7 +7224,7 @@
       "minted_during": "interrupt",
       "caused_by": "W364",
       "last_worked": "2026-10-24T13:19:24Z",
-      "ticks_blocked": 377,
+      "ticks_blocked": 378,
       "manifest": [
         "src/nemik/pollevents.py",
         "tests/test_pollevents.py",
@@ -8340,7 +8340,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T01:19:18Z",
-      "ticks_blocked": 640,
+      "ticks_blocked": 641,
       "completed": null
     },
     {
@@ -8361,7 +8361,7 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": "2026-10-16T01:35:27Z",
-      "ticks_blocked": 604,
+      "ticks_blocked": 605,
       "completed": null
     },
     {
@@ -8382,7 +8382,7 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": "2026-10-13T01:25:21Z",
-      "ticks_blocked": 673,
+      "ticks_blocked": 674,
       "completed": null
     },
     {
@@ -9024,7 +9024,7 @@
       "minted_during": "tick",
       "caused_by": "W458",
       "last_worked": "2026-10-13T19:10:34Z",
-      "ticks_blocked": 638,
+      "ticks_blocked": 639,
       "completed": null
     },
     {
@@ -9062,7 +9062,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W943",
       "last_worked": "2026-10-20T18:05:40Z",
-      "ticks_blocked": 481,
+      "ticks_blocked": 482,
       "weight": 1,
       "manifest": [
         "src/nemik/adapter.py",
@@ -9602,7 +9602,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-19T10:16:00Z",
-      "ticks_blocked": 541,
+      "ticks_blocked": 542,
       "completed": null,
       "warrants": [
         {
@@ -9714,7 +9714,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-16T01:54:02Z",
-      "ticks_blocked": 605,
+      "ticks_blocked": 606,
       "weight": 1,
       "completed": null
     },
@@ -9734,7 +9734,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-16T01:54:03Z",
-      "ticks_blocked": 605,
+      "ticks_blocked": 606,
       "weight": 1,
       "completed": null
     },
@@ -9895,7 +9895,7 @@
       "minted_during": "interrupt",
       "caused_by": "luthen-observability:W1051",
       "last_worked": "2026-10-18T21:49:01Z",
-      "ticks_blocked": 541,
+      "ticks_blocked": 542,
       "completed": null,
       "weight": 6,
       "warrants": [
@@ -10072,7 +10072,7 @@
       "minted_during": "tick",
       "caused_by": "W500",
       "last_worked": "2026-10-15T11:53:53Z",
-      "ticks_blocked": 541,
+      "ticks_blocked": 542,
       "completed": null
     },
     {
@@ -10117,7 +10117,7 @@
       "minted_during": "tick",
       "caused_by": "W506",
       "last_worked": "2026-10-24T16:41:28Z",
-      "ticks_blocked": 369,
+      "ticks_blocked": 370,
       "weight": 11,
       "completed": null,
       "manifest": [
@@ -10189,7 +10189,7 @@
       "minted_during": "tick",
       "caused_by": "W506",
       "last_worked": "2026-10-18T03:08:04Z",
-      "ticks_blocked": 541,
+      "ticks_blocked": 542,
       "weight": 2,
       "completed": null
     },
@@ -10213,7 +10213,7 @@
       "minted_during": "tick",
       "caused_by": "github:W35",
       "last_worked": "2026-10-15T12:00:59Z",
-      "ticks_blocked": 634,
+      "ticks_blocked": 635,
       "completed": null
     },
     {
@@ -10298,7 +10298,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-23T12:40:08Z",
-      "ticks_blocked": 259,
+      "ticks_blocked": 260,
       "weight": 11,
       "manifest": [
         "src/nemik/withheld.py"
@@ -10326,7 +10326,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-18T19:15:01Z",
-      "ticks_blocked": 397,
+      "ticks_blocked": 398,
       "completed": null
     },
     {
@@ -10707,7 +10707,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-16T01:53:12Z",
-      "ticks_blocked": 605,
+      "ticks_blocked": 606,
       "weight": 13,
       "completed": null
     },
@@ -11330,7 +11330,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-17T10:50:53Z",
-      "ticks_blocked": 541,
+      "ticks_blocked": 542,
       "completed": null
     },
     {
@@ -11376,7 +11376,7 @@
       "minted_during": "tick",
       "caused_by": "github-8f",
       "last_worked": "2026-10-27T06:32:37Z",
-      "ticks_blocked": 258,
+      "ticks_blocked": 259,
       "completed": null,
       "warrants": [
         {
@@ -11428,7 +11428,7 @@
       "minted_during": "tick",
       "caused_by": "W560",
       "last_worked": "2026-10-16T02:51:43Z",
-      "ticks_blocked": 603,
+      "ticks_blocked": 604,
       "completed": null
     },
     {
@@ -11501,7 +11501,7 @@
       "minted_during": "tick",
       "caused_by": "W566",
       "last_worked": "2026-10-16T05:23:44Z",
-      "ticks_blocked": 598,
+      "ticks_blocked": 599,
       "completed": null
     },
     {
@@ -11526,7 +11526,7 @@
       "minted_during": "tick",
       "caused_by": "W566",
       "last_worked": "2026-10-23T19:25:35Z",
-      "ticks_blocked": 598,
+      "ticks_blocked": 599,
       "completed": null
     },
     {
@@ -11550,7 +11550,7 @@
       "minted_during": "tick",
       "caused_by": "W566",
       "last_worked": "2026-10-29T02:48:39Z",
-      "ticks_blocked": 599,
+      "ticks_blocked": 600,
       "completed": null
     },
     {
@@ -11572,7 +11572,7 @@
       "minted_during": "tick",
       "caused_by": "W541",
       "last_worked": "2026-10-23T17:58:15Z",
-      "ticks_blocked": 596,
+      "ticks_blocked": 597,
       "completed": null
     },
     {
@@ -11594,7 +11594,7 @@
       "minted_during": "tick",
       "caused_by": "github-8f",
       "last_worked": "2026-10-23T12:09:48Z",
-      "ticks_blocked": 428,
+      "ticks_blocked": 429,
       "completed": null,
       "manifest": [
         "Containerfile",
@@ -11692,7 +11692,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-17T08:09:46Z",
-      "ticks_blocked": 587,
+      "ticks_blocked": 588,
       "completed": null
     },
     {
@@ -11756,7 +11756,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-16T15:08:10Z",
-      "ticks_blocked": 526,
+      "ticks_blocked": 527,
       "completed": null
     },
     {
@@ -11781,7 +11781,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-22T07:10:08Z",
-      "ticks_blocked": 431,
+      "ticks_blocked": 432,
       "completed": null
     },
     {
@@ -11805,7 +11805,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-17T15:38:53Z",
-      "ticks_blocked": 541,
+      "ticks_blocked": 542,
       "completed": null
     },
     {
@@ -11829,7 +11829,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-19T02:01:21Z",
-      "ticks_blocked": 510,
+      "ticks_blocked": 511,
       "completed": null,
       "manifest": [
         "src/nemik/salience.py",
@@ -12551,7 +12551,7 @@
       "minted_during": "tick",
       "caused_by": "github-8f",
       "last_worked": "2026-11-01T03:11:01Z",
-      "ticks_blocked": 165,
+      "ticks_blocked": 166,
       "completed": null
     },
     {
@@ -13211,7 +13211,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-25T02:12:38Z",
-      "ticks_blocked": 350,
+      "ticks_blocked": 351,
       "manifest": [
         "src/nemik/stackable.py",
         "src/nemik/cones.py",
@@ -14013,7 +14013,7 @@
       "minted_during": "interrupt",
       "caused_by": "W510",
       "last_worked": "2026-10-18T16:06:47Z",
-      "ticks_blocked": 541,
+      "ticks_blocked": 542,
       "manifest": [
         "src/nemik/web/index.html",
         "tests/test_sources_trs.py"
@@ -14039,7 +14039,7 @@
       "minted_during": "interrupt",
       "caused_by": "W510",
       "last_worked": "2026-10-18T14:33:41Z",
-      "ticks_blocked": 541,
+      "ticks_blocked": 542,
       "completed": null,
       "manifest": [
         "src/nemik/web/index.html",
@@ -14117,7 +14117,7 @@
       "minted_during": "interrupt",
       "caused_by": "W674",
       "last_worked": "2026-10-18T16:13:01Z",
-      "ticks_blocked": 541,
+      "ticks_blocked": 542,
       "manifest": [
         "src/nemik/serve.py",
         "src/nemik/web/vendor/n3.min.js",
@@ -14433,7 +14433,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-18T19:40:28Z",
-      "ticks_blocked": 541,
+      "ticks_blocked": 542,
       "warrants": [
         {
           "@context": {
@@ -14620,7 +14620,7 @@
       "minted_during": "interrupt",
       "caused_by": "W691",
       "last_worked": "2026-10-19T01:14:55Z",
-      "ticks_blocked": 541,
+      "ticks_blocked": 542,
       "completed": null,
       "manifest": [
         "src/nemik/serve.py",
@@ -14692,7 +14692,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-11-02T04:40:12Z",
-      "ticks_blocked": 70,
+      "ticks_blocked": 71,
       "completed": null
     },
     {
@@ -14818,7 +14818,7 @@
       "minted_during": "interrupt",
       "caused_by": "W581",
       "last_worked": "2026-10-18T23:03:49Z",
-      "ticks_blocked": 541,
+      "ticks_blocked": 542,
       "completed": null
     },
     {
@@ -15033,7 +15033,7 @@
       "minted_during": "interrupt",
       "caused_by": "el-openglo:W702",
       "last_worked": "2026-10-19T00:15:45Z",
-      "ticks_blocked": 541,
+      "ticks_blocked": 542,
       "completed": null
     },
     {
@@ -15060,7 +15060,7 @@
       "minted_during": "interrupt",
       "caused_by": "W693",
       "last_worked": "2026-10-24T15:22:53Z",
-      "ticks_blocked": 373,
+      "ticks_blocked": 374,
       "manifest": [
         "src/nemik/blocks.py",
         "src/nemik/serve.py",
@@ -15749,7 +15749,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W728",
       "last_worked": "2026-10-19T15:12:10Z",
-      "ticks_blocked": 532,
+      "ticks_blocked": 533,
       "completed": null
     },
     {
@@ -15953,7 +15953,7 @@
       "minted_during": "tick",
       "caused_by": "github-8f",
       "last_worked": "2026-10-23T19:25:28Z",
-      "ticks_blocked": 488,
+      "ticks_blocked": 489,
       "warrants": [
         {
           "@context": {
@@ -16195,7 +16195,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W743",
       "last_worked": "2026-10-24T14:11:42Z",
-      "ticks_blocked": 375,
+      "ticks_blocked": 376,
       "completed": null,
       "manifest": [
         "docs/forecast-features.md"
@@ -16250,7 +16250,7 @@
       "minted_during": "tick",
       "caused_by": "mtools:W1731",
       "last_worked": "2026-10-24T18:42:00Z",
-      "ticks_blocked": 229,
+      "ticks_blocked": 230,
       "completed": null,
       "manifest": [
         "src/nemik/landings.py",
@@ -16610,7 +16610,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-25T02:38:48Z",
-      "ticks_blocked": 348,
+      "ticks_blocked": 349,
       "manifest": [
         "deploy/deployment.yaml",
         "tests/test_deploy_manifest.py"
@@ -16725,7 +16725,7 @@
       "minted_during": "tick",
       "caused_by": "W762",
       "last_worked": "2026-10-28T14:21:12Z",
-      "ticks_blocked": 229,
+      "ticks_blocked": 230,
       "manifest": [
         "tools/codon_census.py",
         "tests/test_codon_census.py",
@@ -17064,7 +17064,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-20T22:31:27Z",
-      "ticks_blocked": 434,
+      "ticks_blocked": 435,
       "warrants": [
         {
           "@context": {
@@ -17275,7 +17275,7 @@
       "minted_during": "tick",
       "caused_by": "W781",
       "last_worked": "2026-10-23T17:58:17Z",
-      "ticks_blocked": 480,
+      "ticks_blocked": 481,
       "completed": null
     },
     {
@@ -17301,7 +17301,7 @@
       "minted_during": "tick",
       "caused_by": "W461",
       "last_worked": "2026-10-25T02:38:49Z",
-      "ticks_blocked": 348,
+      "ticks_blocked": 349,
       "manifest": [
         "src/nemik/web/index.html",
         "src/nemik/serve.py",
@@ -17887,7 +17887,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-25T03:12:35Z",
-      "ticks_blocked": 347,
+      "ticks_blocked": 348,
       "completed": null
     },
     {
@@ -18502,7 +18502,7 @@
       "minted_during": "tick",
       "caused_by": "W579",
       "last_worked": "2026-10-23T19:25:16Z",
-      "ticks_blocked": 414,
+      "ticks_blocked": 415,
       "completed": null
     },
     {
@@ -18918,7 +18918,7 @@
       "minted_during": "interrupt",
       "caused_by": "nemik:W703",
       "last_worked": "2026-10-22T20:45:21Z",
-      "ticks_blocked": 434,
+      "ticks_blocked": 435,
       "completed": null
     },
     {
@@ -19629,7 +19629,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-10-23T07:32:14Z",
-      "ticks_blocked": 434,
+      "ticks_blocked": 435,
       "completed": null
     },
     {
@@ -19665,7 +19665,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-10-23T07:32:19Z",
-      "ticks_blocked": 434,
+      "ticks_blocked": 435,
       "completed": null
     },
     {
@@ -19701,7 +19701,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-10-23T07:32:23Z",
-      "ticks_blocked": 434,
+      "ticks_blocked": 435,
       "completed": null
     },
     {
@@ -20223,7 +20223,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-23T16:12:14Z",
-      "ticks_blocked": 418,
+      "ticks_blocked": 419,
       "completed": null
     },
     {
@@ -20399,7 +20399,7 @@
       "minted_during": "tick",
       "caused_by": "github-8f",
       "last_worked": "2026-10-24T17:33:15Z",
-      "ticks_blocked": 414,
+      "ticks_blocked": 415,
       "warrants": [
         {
           "@context": {
@@ -20551,7 +20551,7 @@
       "minted_during": "tick",
       "caused_by": "W905",
       "last_worked": "2026-10-23T18:12:28Z",
-      "ticks_blocked": 416,
+      "ticks_blocked": 417,
       "manifest": [
         "docs/evidence-standards.md"
       ],
@@ -20604,7 +20604,7 @@
       "minted_during": "tick",
       "caused_by": "W905",
       "last_worked": "2026-10-23T19:34:39Z",
-      "ticks_blocked": 414,
+      "ticks_blocked": 415,
       "completed": null,
       "manifest": [
         "docs/evidence-recommendations.md"
@@ -20776,7 +20776,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-27T02:41:06Z",
-      "ticks_blocked": 414,
+      "ticks_blocked": 415,
       "completed": null,
       "manifest": [
         "src/nemik/witnesses.py",
@@ -20967,7 +20967,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-23T20:45:05Z",
-      "ticks_blocked": 411,
+      "ticks_blocked": 412,
       "manifest": [
         "tests/test_modes.py",
         "tests/test_metrics_gating.py"
@@ -20993,7 +20993,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-23T20:57:46Z",
-      "ticks_blocked": 411,
+      "ticks_blocked": 412,
       "completed": null
     },
     {
@@ -21016,7 +21016,7 @@
       "minted_during": "tick",
       "caused_by": "W923",
       "last_worked": "2026-10-25T11:09:55Z",
-      "ticks_blocked": 330,
+      "ticks_blocked": 331,
       "completed": null,
       "manifest": [
         "tools/gen_test_targets.py",
@@ -21043,7 +21043,7 @@
       "minted_during": "tick",
       "caused_by": "W923",
       "last_worked": "2026-10-23T20:57:51Z",
-      "ticks_blocked": 411,
+      "ticks_blocked": 412,
       "completed": null
     },
     {
@@ -21064,7 +21064,7 @@
       "minted_during": "tick",
       "caused_by": "W923",
       "last_worked": "2026-10-23T20:57:53Z",
-      "ticks_blocked": 411,
+      "ticks_blocked": 412,
       "completed": null,
       "manifest": [
         "tests/test_shard_declared.py"
@@ -21250,7 +21250,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-23T21:21:43Z",
-      "ticks_blocked": 379,
+      "ticks_blocked": 380,
       "completed": null
     },
     {
@@ -21345,7 +21345,7 @@
       "minted_during": "tick",
       "caused_by": "W934",
       "last_worked": "2026-10-24T12:59:53Z",
-      "ticks_blocked": 378,
+      "ticks_blocked": 379,
       "completed": null,
       "manifest": [
         "src/nemik/web/views.js",
@@ -21414,7 +21414,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W918",
       "last_worked": "2026-10-24T12:59:54Z",
-      "ticks_blocked": 378,
+      "ticks_blocked": 379,
       "completed": null
     },
     {
@@ -21982,7 +21982,7 @@
       "minted_during": "interrupt",
       "caused_by": "nemik:W959",
       "last_worked": "2026-10-24T12:59:55Z",
-      "ticks_blocked": 378,
+      "ticks_blocked": 379,
       "completed": null,
       "manifest": [
         "src/nemik/mirrorsend.py",
@@ -22006,7 +22006,7 @@
       "minted_during": "interrupt",
       "caused_by": "nemik:W938",
       "last_worked": "2026-10-24T12:59:52Z",
-      "ticks_blocked": 378,
+      "ticks_blocked": 379,
       "completed": null,
       "size_class": "small"
     },
@@ -22086,7 +22086,7 @@
       "minted_during": "tick",
       "caused_by": "W749",
       "last_worked": "2026-10-24T14:12:01Z",
-      "ticks_blocked": 375,
+      "ticks_blocked": 376,
       "completed": null,
       "manifest": [
         "src/nemik/forecastshingle.py",
@@ -22165,7 +22165,7 @@
       "minted_during": "interrupt",
       "caused_by": "W709",
       "last_worked": "2026-10-24T15:23:12Z",
-      "ticks_blocked": 373,
+      "ticks_blocked": 374,
       "completed": null,
       "manifest": [
         "src/nemik/web/panels.js",
@@ -22389,7 +22389,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-24T16:47:53Z",
-      "ticks_blocked": 370,
+      "ticks_blocked": 371,
       "completed": null
     },
     {
@@ -22503,7 +22503,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-24T17:33:12Z",
-      "ticks_blocked": 369,
+      "ticks_blocked": 370,
       "completed": null,
       "manifest": [
         "src/nemik/retrostub.py",
@@ -22527,7 +22527,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-24T17:33:14Z",
-      "ticks_blocked": 369,
+      "ticks_blocked": 370,
       "completed": null,
       "manifest": [
         "src/nemik/retrolayers.py",
@@ -22554,7 +22554,7 @@
       "minted_during": "interrupt",
       "caused_by": "github:W42",
       "last_worked": "2026-10-24T23:08:23Z",
-      "ticks_blocked": 286,
+      "ticks_blocked": 287,
       "completed": null,
       "warrants": [
         {
@@ -23285,7 +23285,7 @@
       "minted_during": "interrupt",
       "caused_by": "github:W44",
       "last_worked": "2026-10-24T23:43:28Z",
-      "ticks_blocked": 356,
+      "ticks_blocked": 357,
       "warrants": [
         {
           "@context": {
@@ -23579,7 +23579,7 @@
       "minted_during": "tick",
       "caused_by": "W643",
       "last_worked": "2026-10-25T02:12:46Z",
-      "ticks_blocked": 350,
+      "ticks_blocked": 351,
       "completed": null,
       "manifest": [
         "src/nemik/stackable.py",
@@ -23605,7 +23605,7 @@
       "minted_during": "tick",
       "caused_by": "W643",
       "last_worked": "2026-10-25T02:12:47Z",
-      "ticks_blocked": 350,
+      "ticks_blocked": 351,
       "completed": null,
       "manifest": [
         "src/nemik/cones.py",
@@ -23672,7 +23672,7 @@
       "minted_during": "tick",
       "caused_by": "W764",
       "last_worked": "2026-10-25T02:39:00Z",
-      "ticks_blocked": 348,
+      "ticks_blocked": 349,
       "completed": null,
       "manifest": [
         "deploy/deployment.yaml",
@@ -23723,7 +23723,7 @@
       "minted_during": "tick",
       "caused_by": "W789",
       "last_worked": "2026-10-25T02:39:02Z",
-      "ticks_blocked": 348,
+      "ticks_blocked": 349,
       "completed": null,
       "manifest": [
         "src/nemik/web/index.html",
@@ -23981,7 +23981,7 @@
       "minted_during": "tick",
       "caused_by": "W997",
       "last_worked": "2026-10-25T07:39:20Z",
-      "ticks_blocked": 338,
+      "ticks_blocked": 339,
       "manifest": [
         "src/nemik/pacerun.py",
         "src/nemik/hostroot_cli.py",
@@ -24112,7 +24112,7 @@
       "minted_during": "tick",
       "caused_by": "W925",
       "last_worked": "2026-10-26T00:43:08Z",
-      "ticks_blocked": 306,
+      "ticks_blocked": 307,
       "manifest": [
         "docs/per-test-targets.md"
       ],
@@ -24137,7 +24137,7 @@
       "minted_during": "tick",
       "caused_by": "W925",
       "last_worked": "2026-10-25T18:42:04Z",
-      "ticks_blocked": 330,
+      "ticks_blocked": 331,
       "completed": null,
       "manifest": [
         "tools/gen_test_targets.py",
@@ -24163,7 +24163,7 @@
       "minted_during": "tick",
       "caused_by": "W925",
       "last_worked": "2026-10-25T11:10:13Z",
-      "ticks_blocked": 330,
+      "ticks_blocked": 331,
       "completed": null,
       "manifest": [
         "tests/venv_pytest.sh"
@@ -24459,7 +24459,7 @@
       "minted_during": "tick",
       "caused_by": "W728",
       "last_worked": "2026-10-25T14:28:23Z",
-      "ticks_blocked": 252,
+      "ticks_blocked": 253,
       "warrants": [
         {
           "@context": {
@@ -24559,7 +24559,7 @@
       "minted_during": "tick",
       "caused_by": "W1047",
       "last_worked": "2026-10-27T07:42:42Z",
-      "ticks_blocked": 252,
+      "ticks_blocked": 253,
       "completed": null
     },
     {
@@ -24701,7 +24701,7 @@
       "minted_during": "tick",
       "caused_by": "github:W50",
       "last_worked": "2026-10-26T23:05:10Z",
-      "ticks_blocked": 320,
+      "ticks_blocked": 321,
       "warrants": [
         {
           "@context": {
@@ -24779,7 +24779,7 @@
       "minted_during": "tick",
       "caused_by": "W1055",
       "last_worked": "2026-11-04T10:22:37Z",
-      "ticks_blocked": 191,
+      "ticks_blocked": 192,
       "manifest": [
         "src/nemik/landcost.py",
         "tests/test_landcost.py"
@@ -24808,7 +24808,7 @@
       "minted_during": "tick",
       "caused_by": "W1055",
       "last_worked": "2026-10-25T17:06:49Z",
-      "ticks_blocked": 320,
+      "ticks_blocked": 321,
       "completed": null,
       "manifest": [
         "src/nemik/rank.py",
@@ -24837,7 +24837,7 @@
       "minted_during": "tick",
       "caused_by": "W1055",
       "last_worked": "2026-10-25T17:11:59Z",
-      "ticks_blocked": 320,
+      "ticks_blocked": 321,
       "completed": null,
       "manifest": [
         "tests/test_orderrank.py"
@@ -25244,7 +25244,7 @@
       "minted_during": "tick",
       "caused_by": "W1071",
       "last_worked": "2026-10-25T23:18:55Z",
-      "ticks_blocked": 309,
+      "ticks_blocked": 310,
       "completed": null
     },
     {
@@ -25266,7 +25266,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W1644",
       "last_worked": "2026-10-26T11:56:26Z",
-      "ticks_blocked": 297,
+      "ticks_blocked": 298,
       "completed": null
     },
     {
@@ -25363,7 +25363,7 @@
       "minted_during": "tick",
       "caused_by": "github:W50",
       "last_worked": "2026-10-26T01:03:02Z",
-      "ticks_blocked": 304,
+      "ticks_blocked": 305,
       "warrants": [
         {
           "@context": {
@@ -25714,7 +25714,7 @@
       "minted_during": "tick",
       "caused_by": "W1082",
       "last_worked": "2026-10-26T22:09:25Z",
-      "ticks_blocked": 247,
+      "ticks_blocked": 248,
       "manifest": [
         "src/nemik/roundof.py",
         "src/nemik/roundgauges.py",
@@ -25802,7 +25802,7 @@
       "minted_during": "tick",
       "caused_by": "W1073",
       "last_worked": "2026-10-26T11:58:00Z",
-      "ticks_blocked": 295,
+      "ticks_blocked": 296,
       "manifest": [
         "src/nemik/adapter.py",
         "src/nemik/blocks.py",
@@ -26234,7 +26234,7 @@
       "minted_during": "tick",
       "caused_by": "inbox/2026-10-27-nemik-edge-github-W63-enables-W1113.md",
       "last_worked": "2026-10-27T00:42:25Z",
-      "ticks_blocked": 273,
+      "ticks_blocked": 274,
       "completed": null,
       "warrants": [
         {
@@ -26860,7 +26860,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1092",
       "last_worked": "2026-10-29T13:11:57Z",
-      "ticks_blocked": 201,
+      "ticks_blocked": 202,
       "manifest": [
         "src/nemik/roundof.py",
         "tests/test_roundof.py"
@@ -27884,7 +27884,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1047",
       "last_worked": "2026-10-27T13:02:58Z",
-      "ticks_blocked": 247,
+      "ticks_blocked": 248,
       "completed": null
     },
     {
@@ -28598,7 +28598,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1196",
       "last_worked": "2026-10-28T03:10:08Z",
-      "ticks_blocked": 230,
+      "ticks_blocked": 231,
       "completed": null
     },
     {
@@ -29141,7 +29141,7 @@
       "minted_during": "interrupt",
       "caused_by": "W733",
       "last_worked": "2026-11-02T00:42:25Z",
-      "ticks_blocked": 225,
+      "ticks_blocked": 226,
       "completed": null
     },
     {
@@ -29257,7 +29257,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1215",
       "last_worked": "2026-10-29T04:37:26Z",
-      "ticks_blocked": 225,
+      "ticks_blocked": 226,
       "completed": null
     },
     {
@@ -29280,7 +29280,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1196",
       "last_worked": "2026-10-29T00:01:22Z",
-      "ticks_blocked": 208,
+      "ticks_blocked": 209,
       "completed": null,
       "manifest": [
         "tools/liftdoc.py",
@@ -30678,7 +30678,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-42",
       "last_worked": "2026-10-29T18:57:42Z",
-      "ticks_blocked": 195,
+      "ticks_blocked": 196,
       "completed": null,
       "manifest": [
         "docs/pace-producer.md"
@@ -30763,7 +30763,7 @@
       "minted_during": "tick",
       "caused_by": "github-42",
       "last_worked": "2026-11-05T13:43:09Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 2,
       "completed": null,
       "weight": 20,
       "manifest": [
@@ -30814,7 +30814,7 @@
       "minted_during": "tick",
       "caused_by": "W1187",
       "last_worked": "2026-11-02T20:27:11Z",
-      "ticks_blocked": 81,
+      "ticks_blocked": 82,
       "manifest": [
         "src/nemik/rank.py",
         "mypy-baseline.json"
@@ -33558,7 +33558,7 @@
       "minted_during": "interrupt",
       "caused_by": "W561",
       "last_worked": "2026-11-02T20:27:32Z",
-      "ticks_blocked": 10,
+      "ticks_blocked": 11,
       "completed": null
     },
     {
@@ -34434,7 +34434,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1383",
       "last_worked": "2026-11-02T05:32:17Z",
-      "ticks_blocked": 104,
+      "ticks_blocked": 105,
       "manifest": [
         "tests/test_frontier.py",
         "tests/test_fruit.py",
@@ -36527,7 +36527,7 @@
       "minted_during": "interrupt",
       "caused_by": "nemik:R169",
       "last_worked": "2026-11-03T05:01:11Z",
-      "ticks_blocked": 67,
+      "ticks_blocked": 68,
       "completed": null
     },
     {
@@ -39540,15 +39540,15 @@
         "file:ruff-baseline.json"
       ],
       "blocked_on": [
-        "W1654"
+        "W1660"
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "mtools decides: emit the ratchet gauges after the commit lands, or have the guard compare a stack's baseline files with HEAD instead of the store's latest value; nemik resubmits stack 1003 when it can pass",
-      "evidence": "2026-11-05T08:35:50Z: 2026-11-05 INSTANCE: stack 1003 (W1633, ruff 19 to 14). Gate cancelled by kine-latency about 08:32Z after printing 'ratchet emit: 7 ratchet(s), sent=7'; the pace of 08:26:49Z then read 'ok nemik ruff-baseline.json; 14 left' (before: owes 19, fell 15, behind at 08:16:48Z) and the resubmit was refused: 'lowers none of the ratchets it owes (codon-baseline.json: required fall 2, observed 0)'. HEAD is still c3b0041, so the store holds a value the repo does not. | 2026-11-05T08:38:45Z: 2026-11-05 resubmit of stack 1003 again refused at submit with only codon owed (codon required 2, observed 0); the store's ruff sample of 14 persists across a pace refresh. No reply from mtools yet. | 2026-11-05T08:48:43Z: 2026-11-05 MEASURED (mtools' inference, untested until now): the queue-only stack 1004 was admitted at submit and its gate (started 08:44:33Z, cancelled by kine-latency after 36 s, no failing test) still printed 'ratchet emit: sent=7' from a tree with ruff 19; the pace of 08:46:49Z then read 'behind nemik ruff-baseline.json; owes 19, fell 11, 19 left' again, where 08:26:49Z had read ok with 14 left. So a gate run that does not land overwrites the store's latest sample, in either direction, and a queue-only stack is a working reset. Real fix is mtools:W2171 (emit after the landing) plus the pace selecting stage=landed (nemik side, unbuilt). | 2026-11-05T13:43:10Z: 2026-11-05 RE-FILED: the defect this card records (a gate that does not land leaves its ratchet values in the store, so the guard refused the stack that carried the fall) is half fixed: mtools:W2171 landed the post-commit emit labelled stage=landed (f93a8dda) and nemik:W1655 landed nemik's own (57c3fe8). What remains is the READING side, nemik:W1654 (the pace selecting landed samples per repo, tested against ended_series first); until it lands a cancelled gate still moves the pace. So this card waits on W1654, my own, not on mtools:W1920: the guard-rule question is mtools' and no longer blocks nemik, which owes nothing.",
+      "evidence": "2026-11-05T08:35:50Z: 2026-11-05 INSTANCE: stack 1003 (W1633, ruff 19 to 14). Gate cancelled by kine-latency about 08:32Z after printing 'ratchet emit: 7 ratchet(s), sent=7'; the pace of 08:26:49Z then read 'ok nemik ruff-baseline.json; 14 left' (before: owes 19, fell 15, behind at 08:16:48Z) and the resubmit was refused: 'lowers none of the ratchets it owes (codon-baseline.json: required fall 2, observed 0)'. HEAD is still c3b0041, so the store holds a value the repo does not. | 2026-11-05T08:38:45Z: 2026-11-05 resubmit of stack 1003 again refused at submit with only codon owed (codon required 2, observed 0); the store's ruff sample of 14 persists across a pace refresh. No reply from mtools yet. | 2026-11-05T08:48:43Z: 2026-11-05 MEASURED (mtools' inference, untested until now): the queue-only stack 1004 was admitted at submit and its gate (started 08:44:33Z, cancelled by kine-latency after 36 s, no failing test) still printed 'ratchet emit: sent=7' from a tree with ruff 19; the pace of 08:46:49Z then read 'behind nemik ruff-baseline.json; owes 19, fell 11, 19 left' again, where 08:26:49Z had read ok with 14 left. So a gate run that does not land overwrites the store's latest sample, in either direction, and a queue-only stack is a working reset. Real fix is mtools:W2171 (emit after the landing) plus the pace selecting stage=landed (nemik side, unbuilt). | 2026-11-05T13:43:10Z: 2026-11-05 RE-FILED: the defect this card records (a gate that does not land leaves its ratchet values in the store, so the guard refused the stack that carried the fall) is half fixed: mtools:W2171 landed the post-commit emit labelled stage=landed (f93a8dda) and nemik:W1655 landed nemik's own (57c3fe8). What remains is the READING side, nemik:W1654 (the pace selecting landed samples per repo, tested against ended_series first); until it lands a cancelled gate still moves the pace. So this card waits on W1654, my own, not on mtools:W1920: the guard-rule question is mtools' and no longer blocks nemik, which owes nothing. | 2026-11-05T15:34:42Z: 2026-11-05 W1654 landed (4d084f7) but fixed only the ended_series half; the value half (a cancelled gate's sample still counts as a landing, and each landing counts twice) is the new card W1660, so this card waits on it, not on W1654.",
       "issued_at": "2026-11-05T08:35:41Z",
       "minted_during": "interrupt",
       "caused_by": "W1633",
-      "last_worked": "2026-11-05T13:43:10Z",
+      "last_worked": "2026-11-05T15:34:42Z",
       "ticks_blocked": 1,
       "completed": null
     },
@@ -39570,13 +39570,13 @@
       "minted_during": "interrupt",
       "caused_by": "W1633",
       "last_worked": "2026-11-05T08:59:33Z",
-      "ticks_blocked": 5,
+      "ticks_blocked": 6,
       "completed": null
     },
     {
       "symbol": "W1654",
       "title": "The pace reads only ratchet samples labelled stage landed once mtools emits them after the landing, so a cancelled gate cannot move the verdict",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [
         "file:src/nemik/pacerun.py",
@@ -39584,14 +39584,14 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Install the scratch-tested ratchetseries (gate-time-only end judgement) and tests/test_ratchet_ended.py; stack it behind stack 1010; confirm after landing that the pace stays ok through the next gate in flight",
-      "evidence": "2026-11-05T08:49:17Z: 2026-11-05 minted from nemik:W1652 (mtools: 'your pace has to select stage=landed once rows carry it'). Blocked on mtools:W2171's second half, which they started 2026-11-05 (commit_kata passes landed after each push). | 2026-11-05T10:02:53Z: 2026-11-05 UNBLOCKED: mtools' post-commit emit landed (f93a8dda) and nemik's own is built and live (W1655); luthen read the store back (W2029): stage=landed exists on 5 nemik series, the unlabelled gate-time series carry the same 5 values. HAZARD FOUND IN THE CODE: ratchetseries._export_rows merges every series with the same (repo, ratchet) by sample time (it was written for the guessed=true and guessed=false pair, W1038), so landed and gate-time samples merge into ONE series and every future landing counts as two samples, halving the pace's 10-landing window, while a cancelled gate still adds its sample. DESIGN: hold the two kinds apart; before a ratchet's first landed sample use the gate-time samples (the history that exists), from the first landed sample on use only landed samples; no landed series means no change. Not 'landed only' outright: a landed-only series has one sample today, which would read as no fall and put every ratchet behind. | 2026-11-05T10:03:09Z: G0 2026-11-05T10:03:09Z: [NO-PACE-STAMP] Not a paydown: lowers no ratchet, so it cannot land alone (the guard needs a first entry that lowers an owed one, and ruff 14 and codon 2 have no reachable row); it is prepared now because the hazard is live: nemik's own post-commit (W1655) and mtools' send stage=landed samples after each landing, and src/nemik/ratchetseries._export_rows merges them with the gate-time samples of the same repo and ratchet by time, so each future landing counts two samples. Actuator: Edit src/nemik/ratchetseries.py (constants LANDED and NO_CUTOFF, _export_rows keeps the two kinds apart, new helpers _counted and _rows_of to stay under PLR0914) and tests/test_ratchetseries.py (a two-series fixture). Sensor: the edit gate per file, mikemol-pycheck --ratchet (ruff 14 and mypy 2 flat expected, no new code: PLR0914 and D/DOC on helpers cleared by splitting and docstrings with Returns), tests/test_ratchetseries.py, test_guessed_series.py, test_pace*.py run directly. Expected: with no landed series the output is identical to today (a test pins that on the existing nemik_export fixture); with a landed series, samples before its first sample come from the gate-time series and later ones only from the landed series. UNMEASURED: pace of the live store after the change; codon census for ratchetseries (a src module, compiled when its importers are; the census is the gate's). | 2026-11-05T10:05:22Z: 2026-11-05 BUILT, live in the tree, UNLANDED (it lowers no ratchet): src/nemik/ratchetseries.py now holds gate-time (no stage label) and stage=landed samples apart (_export_rows), chooses in _counted (a ratchet with no landed sample keeps every gate sample; with one, gate samples older than the first landed sample count and from there only landed ones do) and builds rows in _rows_of (split out to stay under PLR0914). New tests/test_landed_series.py, 5 tests: no landed sample keeps every gate sample; a cancelled gate after the first landed sample is dropped; line order is irrelevant; another ratchet with no landed series is untouched; a gate sample at the first landed instant is dropped. Run directly: 29 passed (the new, test_ratchetseries, test_guessed_series, the five guards) and 76 passed on all existing pace and series tests, so a store with no landed samples reads exactly as before. mikemol-pycheck --ratchet: ruff 14, mypy 2, both flat (an E501 on two docstring lines in the new test was caught by the ratchet write and fixed). Known wart, by design: the gate sample of the FIRST landing precedes the first landed sample, so that one landing counts twice. UNMEASURED: the live store (cluster-internal) and the codon census for ratchetseries. Needs a ride behind a stack that lowers an owed ratchet, with W1655. | 2026-11-05T10:29:21Z: 2026-11-05 R237 f2 DONE: codon_first on HEAD ec87ad4's src against the live tree for ratchetseries: 'compiles' old and new, as written and stripped, both 'same' (no regression). Two boundary tests added to tests/test_landed_series.py (a landed sample earlier than later gate samples cuts them off; a ratchet with only landed samples reads them all): 16 passed with test_ratchetseries and test_guessed_series; ruff 14, mypy 2 flat. R237 f1 (dependency): luthen-observability's pace unit and the repo's own post-commit hook READ THIS TREE LIVE while the change is unlanded; a reset or checkout of these files would silently put the pace back to counting each landing twice. HOLD RULE: do not reset, stash or checkout .githooks/post-commit, src/nemik/ratchetseries.py or tests/test_landed_series.py until the stack that carries them has landed. INSURANCE: a patch of the two tracked diffs and a copy of the untracked test sit in the scratch cache directory (unlanded-2026-11-05.patch, test_landed_series.py.keep); the scratch is not durable (luthen reaps /var/tmp, this is the home cache), so landing is the real cure. | 2026-11-05T11:10:17Z: 2026-11-05 REVERTED (my regression): the pace of 11:06:54Z read 'unknown ... no verdict' for essentially every mtools row (it read behind or ok before), while the live tree held my ratchetseries change that luthen's pace unit reads. CAUSE (read, not yet reproduced against the store): after the change a ratchet with landed samples ends at its last LANDED sample while other ratchets of the same repo, with only gate-time samples, keep ending later, so ended_series (a series that ended while its repo went on reads unknown, W1039) marks them unknown. I restored src/nemik/ratchetseries.py to HEAD with git checkout and moved tests/test_landed_series.py out of the tree; the patch and the test copy are in the scratch cache (unlanded-2026-11-05.patch, test_landed_series.py.keep). The hold rule above is withdrawn for ratchetseries. LESSON for the redo: the selection must also keep every ratchet's end time comparable (decide per REPO whether landed samples exist, not per ratchet; or compute newest[repo] and end from the same sample set), and it must be tested against ended_series on a two-ratchet fixture where only one ratchet has landed samples. The post-commit hook (W1655) stays, it only sends samples. Not measured: that the pace returns to behind/ok rows after the revert (the next unit run, about 20 minutes). | 2026-11-05T11:34:28Z: 2026-11-05 CONFIRMED by luthen-observability (W2030): pace as of 11:26:55Z, read 11:33Z, after the 11:15Z revert: mtools unknown 2 (was 88 of 89 at 11:06:54Z and 11:16:55Z), nemik 0; nemik rows ruff ok, mypy ok, pyproject.toml ok, *.py ok, codon behind. So the cause was my unlanded ratchetseries edit; the 11:16:55Z run was too close to the revert to show it. Two mtools rows still read unknown, cause unidentified (a separate one or the same). The redo is per repo and tested against ended_series first; it is not live. | 2026-11-05T11:37:10Z: 2026-11-05 the 2 mtools rows still unknown at 11:35Z (luthen-observability): .claude/debtplan.json and rebaselines.json, no mikemol.ratchet.value sample for repo mtools in 7 days (positive control pyproject.toml returns series). They are NOT from my change: both rows read 'unknown ... no verdict' in my own pace reads at 04:36:44Z and 08:46:49Z, hours before the edit. mtools' emit never sends a value for them; no nemik action. | 2026-11-05T12:45:11Z: 2026-11-05 R238 f1 READ-BACK, pace of 12:36:57Z (20 min after the 12:16:54Z landing, in the live store): nemik codon-baseline.json ok (136 left, 680 landings to zero), ruff-baseline.json ok (9 left, 5 to zero), mypy-baseline.json ok (2 left), mtools *.py ok; the mtools unknown rows are the same two as before (debtplan.json, rebaselines.json, no samples). NEMIK OWES NOTHING NOW: codon is no longer behind, so the guard's 'behind its rate' condition does not hold and the lock is gone, with no rule (c) needed. The double-count defect that W1654 addresses is still real (each landing now sends a gate sample AND, since W1655, a landed sample, merged by time in ratchetseries). REDO PLAN, test first: (1) a fixture with THREE repos in one export: R1 every ratchet has landed samples, R2 none has, R3 only some do; (2) tests over export_series AND ended_series on it; the failing case that bit me is R3 (end times of landed ratchets differ from the others', so ended_series reads them unknown); (3) the rule must decide PER REPO, not per ratchet: a repo's samples are landed-only from the first landed sample of ANY of its ratchets on; (4) run it against a copy of the store's export on a scratch tree and compare the pace text before and after for every repo; (5) only then put it in the tree, with luthen told first. Not started. | 2026-11-05T14:50:37Z: 2026-11-05 mtools' hypothesis for the 14:37:01Z all-unknown mtools rows (their message, not a verified cause): no mtools commit has landed since about 10:42Z (HEAD 0b88c776), so the post-commit landed emit last fired then; since 13:52Z one stack (W2219) has been inflight, and the gate's own pre-commit emit (unlabeled, from the staged tree) fires once at gate start, so mtools' newest sample is probably about 13:52Z; any series that emit skipped would have ended at 10:42Z, more than 60 s before the repo's newest sample, which is exactly ended_series' rule (END_SLACK_MS). They will read the gate's 'ratchet emit: N ratchet(s), sent=M' line for that run and compare M with the 87 the landed emit sent; if M is small the staged emit under-sends. IMPLICATION FOR THE W1654 REDO: a gate-time sample should not be allowed to define a repo's 'newest' time for the ended_series check, only samples that count as landings should, otherwise any long gate in a repo makes the repo's other series read unknown; test it with the fixture where one ratchet has a newer unlabeled sample than the rest. The mtools:W2295 card (empty {} reads zero, not UNREAD) is theirs. | 2026-11-05T14:59:11Z: 2026-11-05 ROOT CAUSE ESTABLISHED (luthen-observability's store read at 14:50:20Z, W2037, plus mtools' log reading): of mtools' 173 value series, 86 are UNLABELLED (gate-time) and arrive as ONE batch (all 86 within 0.4 s, at about 14:50:10Z; cadence irregular, pyproject.toml has 14 unlabelled samples in 24 h) and 87 are stage=landed, of which only ONE had a sample in the last 2 h (.claude/debt-ledger.json at about 13:55Z); mtools' post-commit landed emit sends individual ratchets, not all 87 each time (the 14:51Z one sent 87). At my 14:37:01Z pace run the repo's newest sample was therefore a lone landed sample while every other series last sampled at 11:2xZ or earlier, so ended_series (a series that ended more than END_SLACK_MS = 60 s before its repo's newest sample reads unknown) marked all of them unknown; the pace of 14:57:02Z, after the 14:50:10Z batch and the 14:51Z landed emit, reads mtools behind/ok again (only the two never-sampled rows stay unknown). This also explains 11:06:54Z (a whole-repo batch had just been emitted at 11:24Z, so the 11:26:55Z recovery) WITHOUT my ratchetseries edit, which is not in the tree now. MY EARLIER ATTRIBUTION OF THE 11:06Z EPISODE TO THAT EDIT IS NOT PROVEN and is withdrawn. THE FIX (nemik's, not built live): ended_series must judge a series as ended against the repo's newest GATE-TIME (unlabelled) sample time, because only a gate batch sends every series together; a stage=landed sample must neither define 'newest' nor be judged ended; a series with no unlabelled samples is never judged ended. Values still merge both stages (the double count of a landing stays a separate problem). Tests first, on a scratch copy: (1) the failing case, one repo whose unlabelled batch is at t1 for A and B and a lone landed sample for A at a much later t2 (old rule: B unknown; new rule: none); (2) a real ending, an unlabelled batch at t1 for A and B and a later unlabelled batch for A only (B still unknown); (3) a repo with only landed series (nothing judged); (4) the guessed true and false pair still one series. Then land it through a stack. | 2026-11-05T15:00:49Z: G0 2026-11-05T15:00:47Z: [NO-PACE-STAMP] Pace of 2026-11-05T14:57:02Z (age under 10 min): mtools back to behind/ok (two never-sampled rows unknown), nemik codon ok, ruff ok (8, the gate-start sample of stack 1010 is in the store), mypy unknown (empty-baseline bug, mtools:W2295). Premise MEASURED before this stamp, on a scratch copy of src (rs_src) with the pinned venv: the five fixtures in test_ended_gate.py run against the CURRENT code fail exactly the two that describe the 14:37Z case (B read ended after a lone landed sample; a landed-only repo judged) and pass 3, and against the fix pass all 5; the 76 pace and series tests (test_pace_*, test_pacepublish, test_pacerun, test_pacewrite, test_ratchetpace, test_ratchetseries, test_guessed_series) pass against the fix. Root cause from luthen's store read (W2037) and mtools' log reading: gate-time samples arrive as ONE batch of all series, stage=landed samples are sparse per ratchet, so a lone landed sample as the repo's newest makes every other series read ended (END_SLACK_MS 60 s). Actuator: install src/nemik/ratchetseries.py from the scratch file with mikemol-pycheck --install (gate-time-only ends: LANDED and NO_END constants, _last_stamp, _rows_of; ended_series skips NO_END) and a new tests/test_ratchet_ended.py (the five fixtures typed and documented). The file is read LIVE by luthen's pace unit from the moment it is installed (the lesson of 11:06Z), so it goes in only after the scratch tests; the change can only REMOVE unknown verdicts (a series is judged ended in fewer cases), never add one. Codes a ratchet write may raise: D103 and DOC201 on the new functions (Returns written), PLR0914 in _export_rows (split into _rows_of for that), PLR2004 and PLW1514 in the test (named constants, no file reads), E501 over 100 columns (checked with the house ruff before the write). Expected: ruff 8 (after stack 1010) flat or 9 if it has not landed yet, mypy 0 flat, codon flat (ratchetseries compiles under Codon today: the census must still pass; codon_first old vs new will be run before the submit). UNMEASURED: the live pace after landing, and the codon census with this module (probe first). Revert: git checkout src/nemik/ratchetseries.py and rm tests/test_ratchet_ended.py. | 2026-11-05T15:04:07Z: 2026-11-05 BUILT ON A SCRATCH COPY FIRST, THEN INSTALLED (live in the tree, unlanded, waiting for stack 1010 to land because the queue files differ in bytes and a queued stack cannot share them): src/nemik/ratchetseries.py judges a series ended against the repo's newest GATE-TIME (unlabelled) sample only (constants LANDED and NO_END, _last_stamp, _rows_of; ended_series skips NO_END), and tests/test_ratchet_ended.py holds the five fixtures. Measured: against the CURRENT code the fixtures fail exactly the two that describe 14:37Z (B read ended after a lone landed sample; a landed-only repo judged) and pass the other three; against the fix all 5 pass; 76 pace and series tests passed on the scratch copy, then 96 in the real tree with the new file and the five guards; codon_first old vs new for ratchetseries: compiles in both modes both times; ruff 8 and mypy 0 flat. EXPOSURE: luthen's pace unit reads this tree live, so the installed file is already what it reads; the change can only remove unknown verdicts. Not measured: the live pace after a gate-in-flight window with a lone landed sample (the next mtools gate). | 2026-11-05T15:08:19Z: 2026-11-05 luthen-observability's store read at about 15:27Z with the fix installed (not yet landed): nemik_ratchet_unknown by repo is mtools 2 (the two never-sampled rows, debtplan.json and rebaselines.json), nemik 1 (mypy-baseline.json, the empty-baseline bug mtools:W2295), estate 0, linux-sources 0, summit 0: NO new unknown since the install, and mtools went from 88 unknown at the 14:37Z run to 2. They read nemik_ratchet_unknown, not the pace text itself.",
+      "next_bounded_step": null,
+      "evidence": "2026-11-05T08:49:17Z: 2026-11-05 minted from nemik:W1652 (mtools: 'your pace has to select stage=landed once rows carry it'). Blocked on mtools:W2171's second half, which they started 2026-11-05 (commit_kata passes landed after each push). | 2026-11-05T10:02:53Z: 2026-11-05 UNBLOCKED: mtools' post-commit emit landed (f93a8dda) and nemik's own is built and live (W1655); luthen read the store back (W2029): stage=landed exists on 5 nemik series, the unlabelled gate-time series carry the same 5 values. HAZARD FOUND IN THE CODE: ratchetseries._export_rows merges every series with the same (repo, ratchet) by sample time (it was written for the guessed=true and guessed=false pair, W1038), so landed and gate-time samples merge into ONE series and every future landing counts as two samples, halving the pace's 10-landing window, while a cancelled gate still adds its sample. DESIGN: hold the two kinds apart; before a ratchet's first landed sample use the gate-time samples (the history that exists), from the first landed sample on use only landed samples; no landed series means no change. Not 'landed only' outright: a landed-only series has one sample today, which would read as no fall and put every ratchet behind. | 2026-11-05T10:03:09Z: G0 2026-11-05T10:03:09Z: [NO-PACE-STAMP] Not a paydown: lowers no ratchet, so it cannot land alone (the guard needs a first entry that lowers an owed one, and ruff 14 and codon 2 have no reachable row); it is prepared now because the hazard is live: nemik's own post-commit (W1655) and mtools' send stage=landed samples after each landing, and src/nemik/ratchetseries._export_rows merges them with the gate-time samples of the same repo and ratchet by time, so each future landing counts two samples. Actuator: Edit src/nemik/ratchetseries.py (constants LANDED and NO_CUTOFF, _export_rows keeps the two kinds apart, new helpers _counted and _rows_of to stay under PLR0914) and tests/test_ratchetseries.py (a two-series fixture). Sensor: the edit gate per file, mikemol-pycheck --ratchet (ruff 14 and mypy 2 flat expected, no new code: PLR0914 and D/DOC on helpers cleared by splitting and docstrings with Returns), tests/test_ratchetseries.py, test_guessed_series.py, test_pace*.py run directly. Expected: with no landed series the output is identical to today (a test pins that on the existing nemik_export fixture); with a landed series, samples before its first sample come from the gate-time series and later ones only from the landed series. UNMEASURED: pace of the live store after the change; codon census for ratchetseries (a src module, compiled when its importers are; the census is the gate's). | 2026-11-05T10:05:22Z: 2026-11-05 BUILT, live in the tree, UNLANDED (it lowers no ratchet): src/nemik/ratchetseries.py now holds gate-time (no stage label) and stage=landed samples apart (_export_rows), chooses in _counted (a ratchet with no landed sample keeps every gate sample; with one, gate samples older than the first landed sample count and from there only landed ones do) and builds rows in _rows_of (split out to stay under PLR0914). New tests/test_landed_series.py, 5 tests: no landed sample keeps every gate sample; a cancelled gate after the first landed sample is dropped; line order is irrelevant; another ratchet with no landed series is untouched; a gate sample at the first landed instant is dropped. Run directly: 29 passed (the new, test_ratchetseries, test_guessed_series, the five guards) and 76 passed on all existing pace and series tests, so a store with no landed samples reads exactly as before. mikemol-pycheck --ratchet: ruff 14, mypy 2, both flat (an E501 on two docstring lines in the new test was caught by the ratchet write and fixed). Known wart, by design: the gate sample of the FIRST landing precedes the first landed sample, so that one landing counts twice. UNMEASURED: the live store (cluster-internal) and the codon census for ratchetseries. Needs a ride behind a stack that lowers an owed ratchet, with W1655. | 2026-11-05T10:29:21Z: 2026-11-05 R237 f2 DONE: codon_first on HEAD ec87ad4's src against the live tree for ratchetseries: 'compiles' old and new, as written and stripped, both 'same' (no regression). Two boundary tests added to tests/test_landed_series.py (a landed sample earlier than later gate samples cuts them off; a ratchet with only landed samples reads them all): 16 passed with test_ratchetseries and test_guessed_series; ruff 14, mypy 2 flat. R237 f1 (dependency): luthen-observability's pace unit and the repo's own post-commit hook READ THIS TREE LIVE while the change is unlanded; a reset or checkout of these files would silently put the pace back to counting each landing twice. HOLD RULE: do not reset, stash or checkout .githooks/post-commit, src/nemik/ratchetseries.py or tests/test_landed_series.py until the stack that carries them has landed. INSURANCE: a patch of the two tracked diffs and a copy of the untracked test sit in the scratch cache directory (unlanded-2026-11-05.patch, test_landed_series.py.keep); the scratch is not durable (luthen reaps /var/tmp, this is the home cache), so landing is the real cure. | 2026-11-05T11:10:17Z: 2026-11-05 REVERTED (my regression): the pace of 11:06:54Z read 'unknown ... no verdict' for essentially every mtools row (it read behind or ok before), while the live tree held my ratchetseries change that luthen's pace unit reads. CAUSE (read, not yet reproduced against the store): after the change a ratchet with landed samples ends at its last LANDED sample while other ratchets of the same repo, with only gate-time samples, keep ending later, so ended_series (a series that ended while its repo went on reads unknown, W1039) marks them unknown. I restored src/nemik/ratchetseries.py to HEAD with git checkout and moved tests/test_landed_series.py out of the tree; the patch and the test copy are in the scratch cache (unlanded-2026-11-05.patch, test_landed_series.py.keep). The hold rule above is withdrawn for ratchetseries. LESSON for the redo: the selection must also keep every ratchet's end time comparable (decide per REPO whether landed samples exist, not per ratchet; or compute newest[repo] and end from the same sample set), and it must be tested against ended_series on a two-ratchet fixture where only one ratchet has landed samples. The post-commit hook (W1655) stays, it only sends samples. Not measured: that the pace returns to behind/ok rows after the revert (the next unit run, about 20 minutes). | 2026-11-05T11:34:28Z: 2026-11-05 CONFIRMED by luthen-observability (W2030): pace as of 11:26:55Z, read 11:33Z, after the 11:15Z revert: mtools unknown 2 (was 88 of 89 at 11:06:54Z and 11:16:55Z), nemik 0; nemik rows ruff ok, mypy ok, pyproject.toml ok, *.py ok, codon behind. So the cause was my unlanded ratchetseries edit; the 11:16:55Z run was too close to the revert to show it. Two mtools rows still read unknown, cause unidentified (a separate one or the same). The redo is per repo and tested against ended_series first; it is not live. | 2026-11-05T11:37:10Z: 2026-11-05 the 2 mtools rows still unknown at 11:35Z (luthen-observability): .claude/debtplan.json and rebaselines.json, no mikemol.ratchet.value sample for repo mtools in 7 days (positive control pyproject.toml returns series). They are NOT from my change: both rows read 'unknown ... no verdict' in my own pace reads at 04:36:44Z and 08:46:49Z, hours before the edit. mtools' emit never sends a value for them; no nemik action. | 2026-11-05T12:45:11Z: 2026-11-05 R238 f1 READ-BACK, pace of 12:36:57Z (20 min after the 12:16:54Z landing, in the live store): nemik codon-baseline.json ok (136 left, 680 landings to zero), ruff-baseline.json ok (9 left, 5 to zero), mypy-baseline.json ok (2 left), mtools *.py ok; the mtools unknown rows are the same two as before (debtplan.json, rebaselines.json, no samples). NEMIK OWES NOTHING NOW: codon is no longer behind, so the guard's 'behind its rate' condition does not hold and the lock is gone, with no rule (c) needed. The double-count defect that W1654 addresses is still real (each landing now sends a gate sample AND, since W1655, a landed sample, merged by time in ratchetseries). REDO PLAN, test first: (1) a fixture with THREE repos in one export: R1 every ratchet has landed samples, R2 none has, R3 only some do; (2) tests over export_series AND ended_series on it; the failing case that bit me is R3 (end times of landed ratchets differ from the others', so ended_series reads them unknown); (3) the rule must decide PER REPO, not per ratchet: a repo's samples are landed-only from the first landed sample of ANY of its ratchets on; (4) run it against a copy of the store's export on a scratch tree and compare the pace text before and after for every repo; (5) only then put it in the tree, with luthen told first. Not started. | 2026-11-05T14:50:37Z: 2026-11-05 mtools' hypothesis for the 14:37:01Z all-unknown mtools rows (their message, not a verified cause): no mtools commit has landed since about 10:42Z (HEAD 0b88c776), so the post-commit landed emit last fired then; since 13:52Z one stack (W2219) has been inflight, and the gate's own pre-commit emit (unlabeled, from the staged tree) fires once at gate start, so mtools' newest sample is probably about 13:52Z; any series that emit skipped would have ended at 10:42Z, more than 60 s before the repo's newest sample, which is exactly ended_series' rule (END_SLACK_MS). They will read the gate's 'ratchet emit: N ratchet(s), sent=M' line for that run and compare M with the 87 the landed emit sent; if M is small the staged emit under-sends. IMPLICATION FOR THE W1654 REDO: a gate-time sample should not be allowed to define a repo's 'newest' time for the ended_series check, only samples that count as landings should, otherwise any long gate in a repo makes the repo's other series read unknown; test it with the fixture where one ratchet has a newer unlabeled sample than the rest. The mtools:W2295 card (empty {} reads zero, not UNREAD) is theirs. | 2026-11-05T14:59:11Z: 2026-11-05 ROOT CAUSE ESTABLISHED (luthen-observability's store read at 14:50:20Z, W2037, plus mtools' log reading): of mtools' 173 value series, 86 are UNLABELLED (gate-time) and arrive as ONE batch (all 86 within 0.4 s, at about 14:50:10Z; cadence irregular, pyproject.toml has 14 unlabelled samples in 24 h) and 87 are stage=landed, of which only ONE had a sample in the last 2 h (.claude/debt-ledger.json at about 13:55Z); mtools' post-commit landed emit sends individual ratchets, not all 87 each time (the 14:51Z one sent 87). At my 14:37:01Z pace run the repo's newest sample was therefore a lone landed sample while every other series last sampled at 11:2xZ or earlier, so ended_series (a series that ended more than END_SLACK_MS = 60 s before its repo's newest sample reads unknown) marked all of them unknown; the pace of 14:57:02Z, after the 14:50:10Z batch and the 14:51Z landed emit, reads mtools behind/ok again (only the two never-sampled rows stay unknown). This also explains 11:06:54Z (a whole-repo batch had just been emitted at 11:24Z, so the 11:26:55Z recovery) WITHOUT my ratchetseries edit, which is not in the tree now. MY EARLIER ATTRIBUTION OF THE 11:06Z EPISODE TO THAT EDIT IS NOT PROVEN and is withdrawn. THE FIX (nemik's, not built live): ended_series must judge a series as ended against the repo's newest GATE-TIME (unlabelled) sample time, because only a gate batch sends every series together; a stage=landed sample must neither define 'newest' nor be judged ended; a series with no unlabelled samples is never judged ended. Values still merge both stages (the double count of a landing stays a separate problem). Tests first, on a scratch copy: (1) the failing case, one repo whose unlabelled batch is at t1 for A and B and a lone landed sample for A at a much later t2 (old rule: B unknown; new rule: none); (2) a real ending, an unlabelled batch at t1 for A and B and a later unlabelled batch for A only (B still unknown); (3) a repo with only landed series (nothing judged); (4) the guessed true and false pair still one series. Then land it through a stack. | 2026-11-05T15:00:49Z: G0 2026-11-05T15:00:47Z: [NO-PACE-STAMP] Pace of 2026-11-05T14:57:02Z (age under 10 min): mtools back to behind/ok (two never-sampled rows unknown), nemik codon ok, ruff ok (8, the gate-start sample of stack 1010 is in the store), mypy unknown (empty-baseline bug, mtools:W2295). Premise MEASURED before this stamp, on a scratch copy of src (rs_src) with the pinned venv: the five fixtures in test_ended_gate.py run against the CURRENT code fail exactly the two that describe the 14:37Z case (B read ended after a lone landed sample; a landed-only repo judged) and pass 3, and against the fix pass all 5; the 76 pace and series tests (test_pace_*, test_pacepublish, test_pacerun, test_pacewrite, test_ratchetpace, test_ratchetseries, test_guessed_series) pass against the fix. Root cause from luthen's store read (W2037) and mtools' log reading: gate-time samples arrive as ONE batch of all series, stage=landed samples are sparse per ratchet, so a lone landed sample as the repo's newest makes every other series read ended (END_SLACK_MS 60 s). Actuator: install src/nemik/ratchetseries.py from the scratch file with mikemol-pycheck --install (gate-time-only ends: LANDED and NO_END constants, _last_stamp, _rows_of; ended_series skips NO_END) and a new tests/test_ratchet_ended.py (the five fixtures typed and documented). The file is read LIVE by luthen's pace unit from the moment it is installed (the lesson of 11:06Z), so it goes in only after the scratch tests; the change can only REMOVE unknown verdicts (a series is judged ended in fewer cases), never add one. Codes a ratchet write may raise: D103 and DOC201 on the new functions (Returns written), PLR0914 in _export_rows (split into _rows_of for that), PLR2004 and PLW1514 in the test (named constants, no file reads), E501 over 100 columns (checked with the house ruff before the write). Expected: ruff 8 (after stack 1010) flat or 9 if it has not landed yet, mypy 0 flat, codon flat (ratchetseries compiles under Codon today: the census must still pass; codon_first old vs new will be run before the submit). UNMEASURED: the live pace after landing, and the codon census with this module (probe first). Revert: git checkout src/nemik/ratchetseries.py and rm tests/test_ratchet_ended.py. | 2026-11-05T15:04:07Z: 2026-11-05 BUILT ON A SCRATCH COPY FIRST, THEN INSTALLED (live in the tree, unlanded, waiting for stack 1010 to land because the queue files differ in bytes and a queued stack cannot share them): src/nemik/ratchetseries.py judges a series ended against the repo's newest GATE-TIME (unlabelled) sample only (constants LANDED and NO_END, _last_stamp, _rows_of; ended_series skips NO_END), and tests/test_ratchet_ended.py holds the five fixtures. Measured: against the CURRENT code the fixtures fail exactly the two that describe 14:37Z (B read ended after a lone landed sample; a landed-only repo judged) and pass the other three; against the fix all 5 pass; 76 pace and series tests passed on the scratch copy, then 96 in the real tree with the new file and the five guards; codon_first old vs new for ratchetseries: compiles in both modes both times; ruff 8 and mypy 0 flat. EXPOSURE: luthen's pace unit reads this tree live, so the installed file is already what it reads; the change can only remove unknown verdicts. Not measured: the live pace after a gate-in-flight window with a lone landed sample (the next mtools gate). | 2026-11-05T15:08:19Z: 2026-11-05 luthen-observability's store read at about 15:27Z with the fix installed (not yet landed): nemik_ratchet_unknown by repo is mtools 2 (the two never-sampled rows, debtplan.json and rebaselines.json), nemik 1 (mypy-baseline.json, the empty-baseline bug mtools:W2295), estate 0, linux-sources 0, summit 0: NO new unknown since the install, and mtools went from 88 unknown at the 14:37Z run to 2. They read nemik_ratchet_unknown, not the pace text itself. | 2026-11-05T15:34:19Z: 2026-11-05T15:33:24Z (reflog UTC): LANDED 4d084f7, stack 1012 entry two, 470 pass. ended_series now judges a series against the repo's newest gate-time sample only (a lone landed sample no longer makes the others read unknown); tests/test_ratchet_ended.py (5 fixtures). NOT DONE and carried by no card yet: the double count of a landing (each landing sends a gate sample AND, since W1655, a landed sample, both merged by time into one value series, so the pace's 10-landing window counts about twice what it should); that is the value-merge question, separate from ended_series, and needs its own scratch-first design (compare the pace's reported falls with the baselines' actual falls to find the inflation factor, R239 f2).",
       "issued_at": "2026-11-05T08:49:06Z",
       "minted_during": "interrupt",
       "caused_by": "W1652",
-      "last_worked": "2026-11-05T15:08:19Z",
+      "last_worked": "2026-11-05T15:34:19Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261105T153419Z",
       "manifest": [
         "src/nemik/ratchetseries.py",
         "tests/test_ratchet_ended.py"
@@ -39725,19 +39725,19 @@
     {
       "symbol": "W1659",
       "title": "residue_gaps moves below rank and metrics (judging in realize), so rank hoists its metrics import and ruff falls 8 to 7",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [
         "file:ruff-baseline.json"
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Codemod w1659.py: realize gains judged(files, root) and residue_gaps(files, root); metrics.judged_cards(root) calls judged and its residue_gaps goes; rank imports residue_gaps from realize and the queue list from check at module level; claims pin for metrics loses residue; then the ratchet write, hook commands, every test that mentions rank, metrics or realize",
-      "evidence": "2026-11-05T15:10:22Z: G0 2026-11-05T15:10:21Z: [NO-PACE-STAMP] Pace as the submit of stack 1011 read it, about 15:30Z (the guard's own text): ruff-baseline.json BEHIND, required fall 8, observed 6 (paydown cards W1175, W1178, W1187, W1225, W1279, W1438, W1640, W1652); codon ok, mypy unknown (empty-baseline bug mtools:W2295). So the next stack's first entry must lower ruff (standing 13 lane check), and W1654's feature stack was refused for lowering none of the ratchets owed. N = 1 site: rank.py line 877, 'from nemik.metrics import residue_gaps' inside _report_flow (metrics imports rank at module level, a real cycle). K = 1, derivable before the edit: residue_gaps(root) is only by_card(judged_cards(root)) in metrics.py lines 93 to 124; rank.py is its only user (git grep: metrics.py, rank.py); tests/test_residue.py uses metrics.judged_cards(root) so that name and signature stay; realize.py imports only nemik.adapter (lines 13 to 20), so judging can live there if the queue-file list is PASSED IN (realize cannot import check, which imports realize); residue.py compiles under Codon today (checks/claims.py line 255), so it must NOT gain imports (that would raise the codon baseline), which is why the host is realize (already in codon-baseline.json, first error TYPE_CHECKING). Actuator: codemod w1659.py (exact replacements, each asserted once): realize.py gets imports (datetime, pathsforward.lock.stamp, nemik.residue.by_card) and judged(files, root) and residue_gaps(files, root); metrics.judged_cards(root) becomes a one-line call of judged with workstream_files(root, QUEUE), its residue_gaps and the by_card import go; rank.py hoists the realize import and takes QUEUE and workstream_files from check (it already imports default_root, survey from there) and calls residue_gaps(workstream_files(args.root, QUEUE), args.root); checks/claims.py drops 'residue' from metrics' pinned dependency set (metrics no longer imports it). Companion codes: F401 in metrics.py for imports now unused (verdicts, stamp, by_card; UTC and datetime stay, used at line 143), I001, D103 and DOC201 on the two new public functions (docstrings with Returns written), E501. docs/plc0415-cycles.md is already stale from W1656 and is NOT touched here (W1639). Expected: ruff 8 to 7 (range 6 to 8: F401s are cleared before the write), mypy flat 0, codon flat (realize already fails; metrics and rank unchanged in kind). rank, metrics and realize are hook-reached (standing 6): after the codemod run nemik-rank --help, nemik-check --help, nemik-inbound --help and nemik-stale. Tests: EVERY test file that mentions rank, metrics or realize, plus a grep of tests for setattr of nemik.metrics attributes (standing 14, the hoist rule), plus checks/claims.py hub-modules-depend-on-everything-below and import-graph-is-acyclic, plus an import probe of rank, metrics, realize, check and serve each alone in a fresh interpreter. Revert: git checkout the four files. UNMEASURED: the full gate.",
+      "next_bounded_step": null,
+      "evidence": "2026-11-05T15:10:22Z: G0 2026-11-05T15:10:21Z: [NO-PACE-STAMP] Pace as the submit of stack 1011 read it, about 15:30Z (the guard's own text): ruff-baseline.json BEHIND, required fall 8, observed 6 (paydown cards W1175, W1178, W1187, W1225, W1279, W1438, W1640, W1652); codon ok, mypy unknown (empty-baseline bug mtools:W2295). So the next stack's first entry must lower ruff (standing 13 lane check), and W1654's feature stack was refused for lowering none of the ratchets owed. N = 1 site: rank.py line 877, 'from nemik.metrics import residue_gaps' inside _report_flow (metrics imports rank at module level, a real cycle). K = 1, derivable before the edit: residue_gaps(root) is only by_card(judged_cards(root)) in metrics.py lines 93 to 124; rank.py is its only user (git grep: metrics.py, rank.py); tests/test_residue.py uses metrics.judged_cards(root) so that name and signature stay; realize.py imports only nemik.adapter (lines 13 to 20), so judging can live there if the queue-file list is PASSED IN (realize cannot import check, which imports realize); residue.py compiles under Codon today (checks/claims.py line 255), so it must NOT gain imports (that would raise the codon baseline), which is why the host is realize (already in codon-baseline.json, first error TYPE_CHECKING). Actuator: codemod w1659.py (exact replacements, each asserted once): realize.py gets imports (datetime, pathsforward.lock.stamp, nemik.residue.by_card) and judged(files, root) and residue_gaps(files, root); metrics.judged_cards(root) becomes a one-line call of judged with workstream_files(root, QUEUE), its residue_gaps and the by_card import go; rank.py hoists the realize import and takes QUEUE and workstream_files from check (it already imports default_root, survey from there) and calls residue_gaps(workstream_files(args.root, QUEUE), args.root); checks/claims.py drops 'residue' from metrics' pinned dependency set (metrics no longer imports it). Companion codes: F401 in metrics.py for imports now unused (verdicts, stamp, by_card; UTC and datetime stay, used at line 143), I001, D103 and DOC201 on the two new public functions (docstrings with Returns written), E501. docs/plc0415-cycles.md is already stale from W1656 and is NOT touched here (W1639). Expected: ruff 8 to 7 (range 6 to 8: F401s are cleared before the write), mypy flat 0, codon flat (realize already fails; metrics and rank unchanged in kind). rank, metrics and realize are hook-reached (standing 6): after the codemod run nemik-rank --help, nemik-check --help, nemik-inbound --help and nemik-stale. Tests: EVERY test file that mentions rank, metrics or realize, plus a grep of tests for setattr of nemik.metrics attributes (standing 14, the hoist rule), plus checks/claims.py hub-modules-depend-on-everything-below and import-graph-is-acyclic, plus an import probe of rank, metrics, realize, check and serve each alone in a fresh interpreter. Revert: git checkout the four files. UNMEASURED: the full gate. | 2026-11-05T15:34:17Z: 2026-11-05T15:33:24Z (reflog UTC): LANDED 85b4dbb, stack 1012 entry one, gated 15 min 54 s wall from 15:17:30Z, 467 fresh of 470, 470 pass; ruff 8 to 7 (rank's metrics import hoisted after residue_gaps and the judging moved into realize), mypy 0, codon unchanged. 7 ruff findings remain: 3 in checks/claims.py (inadmissible, W1562) and 4 import cycles (check, critical, history, witnesses).",
       "issued_at": "2026-11-05T15:10:08Z",
       "minted_during": "interrupt",
       "caused_by": "W1562",
-      "last_worked": "2026-11-05T15:17:19Z",
+      "last_worked": "2026-11-05T15:34:17Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/realize.py",
@@ -39745,6 +39745,81 @@
         "src/nemik/rank.py",
         "checks/claims.py",
         "ruff-baseline.json"
+      ],
+      "size_class": "small",
+      "completed": "20261105T153417Z"
+    },
+    {
+      "symbol": "W1660",
+      "title": "The pace's value series counts a landing once: gate-time and landed samples of one landing stop being two samples, and a cancelled gate's sample is no landing",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "file:src/nemik/ratchetseries.py"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Scratch-first, measured: (1) compare the pace's reported falls with the baselines' actual falls over the last 10 landings of nemik to find the inflation factor (each landing sends a gate sample and a landed sample, merged by time into one series); (2) design the value rule per repo: from the first landed sample of the repo on, count landed samples only (a cancelled gate's sample is then no landing), before it keep the gate samples, one sample per landing; fixtures for a cancelled gate, a refused stack, one landing with both samples, a repo with no landed samples, the guessed pair; run on a scratch copy and the pace text before and after; then land through a stack, never live first",
+      "evidence": "2026-11-05T15:34:36Z: 2026-11-05 minted at W1654's landing: W1654 fixed the ENDED half only (4d084f7). The value half is open: ratchetseries merges every series with the same (repo, ratchet) by sample time, so since W1655 and mtools' post-commit emit each landing contributes a gate-time sample AND a landed sample (two points in the 10-landing window, halving it), and a gate that did not land (cancelled by kine-latency, refused) still leaves its sample (nemik:W1652's defect). My first attempt (keep landed-only from the first landed sample) was reverted because it made the mtools rows unknown through the ENDED rule, which W1654 has now fixed, so the value rule can be redone on top of it; it must still be built on a scratch copy with the pace text compared before and after.",
+      "issued_at": "2026-11-05T15:34:28Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1654",
+      "last_worked": "2026-11-05T15:34:36Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "src/nemik/ratchetseries.py",
+        "tests/test_ratchet_values.py"
+      ],
+      "size_class": "medium"
+    },
+    {
+      "symbol": "W1661",
+      "title": "mtools rows read unknown at 15:37:04Z with the ended_series fix live, so its cause is not proven",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "file:src/nemik/ratchetseries.py"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Read luthen-observability's store data for mtools at about 15:37Z (per unlabelled series the last sample time, how many unlabelled series sampled in the last 90 min, whether a mtools gate started between 15:20Z and 15:37Z); decide whether the newest gate-time batch is sparse (then the 'a gate batch sends every series' premise is wrong and the rule needs a per-series cadence instead) or whether the cause is elsewhere (the export or the previous pace file carrying rows); redo on a scratch copy with a fixture of the observed shape",
+      "evidence": "2026-11-05T15:48:14Z: 2026-11-05 RECURRENCE: nemik's own pace read at 15:37:04Z (newest landing 15:33:24Z) shows EVERY mtools row unknown again, including mtools *.py which read ok at 14:57Z; nemik's rows are fine. The ended_series fix (judge ended against the repo's newest GATE-TIME sample only) was installed in the tree at about 15:00Z and landed as 4d084f7 at 15:33:24Z; luthen's 15:27Z read saw no new unknown. So that fix did not prevent this episode and W1654's claimed root cause (a sparse LANDED sample as 'newest') is at best part of the story: the third all-mtools-unknown episode (11:06Z, 14:37Z, 15:37Z) has now happened with and without my edit. Hypotheses, none proven: (a) mtools' newest gate-time batch is itself sparse (a gate start that sent only a few series), which would make the others ended even under the new rule; (b) the pace run's export or the previous pace file differs (rows carried from the previous file when a series is absent read unknown). Asked luthen-observability for the per-series last-sample times; I will not name a cause until I see them. W1654's closing evidence is therefore corrected here: it landed what it says, and its premise is not confirmed. | 2026-11-05T15:53:30Z: 2026-11-05 DECISIVE FINDING (measured, read-only): the live pace is NOT produced by nemik's working tree. I reproduced the unit's run myself with the tree's code (nemik-hostroot --pace --root <fleet root> --out <a scratch file>) at 15:51:28Z, from the same store: 3 unknown rows (the two never-sampled mtools rows and nemik mypy-baseline.json), mtools rows behind or ok, although the newest unlabelled batch was 62 min old. The PUBLISHED pace files at that time (luthen's nemik-export, its last-good copy, and nemik's ratchet-priors copy, all as_of 15:47:05Z) have 89 unknown rows, and their first line is {as_of, window} with NO 'build' key, while the file my tree writes carries a 'build' key (W1197). So the unit runs an OLDER INSTALLED nemik, not the tree: my ratchetseries edits (installed in the tree at about 15:00Z, landed 4d084f7 at 15:33:24Z) cannot have reached it, which means (1) the 11:06Z attribution to my unlanded edit was wrong for a SECOND reason (the unit never read it), (2) the ended_series fix has had no effect on the live pace and its 'no new unknown' evidence at 15:27Z was not evidence about it, and (3) the live unknowns are the OLD ended_series rule against sparse landed samples, the behaviour the fix removes, which will only show once the host installs a nemik that contains 4d084f7. luthen-observability's age-bound inference fits the old rule plus the cadence of mtools' landed emits, not a freshness bound in the code (none exists in pacerun or pacewrite). NEXT: ask luthen how the host's nemik is installed and updated and request an install of a build at or after 4d084f7; verify by the 'build' key appearing in the published pace's first line and the mtools rows leaving unknown. | 2026-11-05T15:56:13Z: 2026-11-05 luthen-observability (W2044) confirmed the mechanism: the host pace unit runs a PINNED nemik build, user/tools.json row nemik-pace at sha ec56d66bc436 (installed 2026-10-27 23:48, by-sha directory, link live/nemik-pace), which moves ONLY by editing that sha through the gated user apply, on purpose: the pace feeds mtools' submit gate and its verdict flapped 109, 2, 38, 109 across installs of the followed nemik (github:W70, W1710). The FOLLOWED install (live/nemik, tracking main, used by hooks and by-hand runs) already points at 4d084f7a78014033b2418b7a49d9740bc029d289, installed 2026-11-05 10:40 EST, which is why my by-hand run carried the ended_series fix and the unit did not. luthen is editing the nemik-pace sha to 4d084f7a78014033b2418b7a49d9740bc029d289 through the gate now (a later sha only on request, 40 characters). Relayed to mtools: their rows will leave unknown for real behind/ok verdicts, which can change what their commit guard refuses. VERIFICATION owed: the published pace's first line gains a 'build' key and the mtools rows leave unknown at the unit's next run after the apply. NOTE for every earlier statement: nemik's own tree edits NEVER reach the pace unit; only a pin change does.",
+      "issued_at": "2026-11-05T15:48:05Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1654",
+      "last_worked": "2026-11-05T15:56:13Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "src/nemik/ratchetseries.py",
+        "tests/test_ratchet_ended.py"
+      ],
+      "size_class": "small"
+    },
+    {
+      "symbol": "W1662",
+      "title": "witwait folds into witnesses, so the witnesses cycle (PLC0415) clears and witwait leaves the codon baseline",
+      "status": "working",
+      "enables": [],
+      "touches": [
+        "file:ruff-baseline.json",
+        "file:codon-baseline.json"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Codemod w1662.py: witwait's body moves into witnesses.py before class Options (with import time), main calls seconds, poller and wait directly, src/nemik/witwait.py is deleted, the two tests import from nemik.witnesses, codon-baseline.json loses its witwait entry; then ratchet write, hook commands, every test that mentions witnesses or witwait",
+      "evidence": "2026-11-05T15:48:44Z: G0 2026-11-05T15:48:43Z: [PACE-STALE 11 min] Pace read 2026-11-05T15:37:04Z (age under 10 min): ruff BEHIND (owes 7, fell 2 over 10 landings, 7 left), codon BEHIND (owes 2, fell 0, 136 left), mypy unknown (empty-baseline bug), mtools rows all unknown again (W1661, not mine to claim a cause). So the next stack's first entry must lower ruff or codon; this one lowers BOTH. N = 1 ruff site: witnesses.py line 636, a function-local 'from nemik.witwait import poller, seconds, wait' in main's --wait branch (witwait imports _get, is_rego, witness from witnesses: a real cycle). Premise read: witwait.py in full (147 lines: constants HELD, NOT_YET, UNKNOWN, EXIT_*, TOLERATE, _SECONDS, _DURATION and seconds, rego_poll, promql_poll, poller, wait; imports json, re, time, datetime UTC, TYPE_CHECKING Callable); witnesses.py top-level names and imports (lines 17 to 45, definitions listed by grep: no name clash, it has Sample and Card TypedDicts and wake, waiters but none of witwait's names; it already imports json, re, datetime UTC, Callable under TYPE_CHECKING, and lacks only 'import time'); git grep witwait: only witnesses.py:636 and two tests (tests/test_witwait.py line 16, tests/test_witness_promql.py line 21), nothing in pyproject, BUILD, skills or checks. K = 1 ruff finding by the same method as W1659 (move what the cycle needs into the module that already owns its inputs; witwait only needs three witnesses names). CODON: witwait is in codon-baseline.json (as_written and stripped both 'syntax error, unexpected ,' from its bare star-comma marker), so deleting the module removes 2 baseline entries (136 to 134); witnesses stays failing (already in the baseline), so no module is added. Behaviour detail to verify: tests/test_witness_promql.py patches witnesses._get while witwait.promql_poll held its OWN imported copy of _get; after the merge promql_poll sees the patch directly, so that test's meaning changes (it should still pass; run it). Actuator: codemod w1662.py (exact replacements asserted once). Companion codes: I001 on the new 'import time', D-rules none (docstrings come along), PLR0913 on wait (it has 5 parameters including keyword-only ones, same as before), F401 none; E501 within 100 columns (checked with the house ruff before the write). Expected: ruff 7 to 6 (range 6 to 7), mypy flat 0, codon 136 to 134 (range 134 to 136). witnesses.py is NOT hook-imported (not in standing 6's list) but check.py imports it? I will run the four hook commands anyway. Tests: EVERY test file that mentions witnesses or witwait, plus a grep for setattr of witnesses and witwait attributes (standing 14), the five guards, an import probe of witnesses, check and serve. Revert: git checkout the changed files and restore src/nemik/witwait.py. UNMEASURED: the full gate and the codon census with the entry removed (run the census test with NEMIK_CODON before the submit).",
+      "issued_at": "2026-11-05T15:48:28Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1562",
+      "last_worked": "2026-11-05T15:54:06Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "src/nemik/witnesses.py",
+        "src/nemik/witwait.py",
+        "tests/test_witwait.py",
+        "tests/test_witness_promql.py",
+        "ruff-baseline.json",
+        "codon-baseline.json"
       ],
       "size_class": "small",
       "completed": null
@@ -49864,7 +49939,29 @@
         }
       ],
       "id": "nemik:R238"
+    },
+    {
+      "card": "W1659",
+      "trigger": "round 241: stack 1010 (W1658 adapter hashlib, ruff 9 to 8) 8ab6d558 landed 15:06:43Z and stack 1012 [W1659 realize host, ruff 8 to 7; W1654 pace redo] 4d084f7a landed 15:33:24Z; stack 1011 refused at submit (ruff behind again); ruff 7 left (3 inadmissible in claims.py, 4 import cycles); mypy 0; the pace's rate-based 'behind' can reappear on any lane",
+      "root": "Verified from the reflog (unix stamps): 79bff716 1793888984 = 14:29:44Z, 8ab6d558 1793891203 = 15:06:43Z, 4d084f7a 1793892804 = 15:33:24Z. 1010 gated 14:49:16Z to 15:06:43Z (17 min 27 s) and 1012 15:17:30Z to 15:33:24Z (15 min 54 s); the gate was empty 19 min 32 s and 10 min 47 s, 30 min 19 s of the 63 min 40 s (47 percent). R240 is applied with a correction of the G1's own claims: the wake-gauge read-back was taken (luthen's store at 14:51Z: 14 repos at 1, 3 at 0, 214 waiters, against nemik-wake --all at 14:55Z: identical sets, one card of difference, so luthen will not page on it), W1568 was NOT closed as ended and carries the true state, and the G1 retracted its claim that a ratchet at 0 keeps emitting 0 (an empty {} baseline reads UNREAD in mtools' census, kinds._counts returns None for an empty object, carded by mtools as W2295). Two reversals of 'residue' by measurement came in this span: the adapter's function-local import hashlib (W1658, line 484) and rank.py 877 (W1659, realize as the host because residue compiles under Codon today), so ruff went 9 to 7 on rows I had classed as cycles. The W1654 redo landed, and its story is worth keeping: the 14:37Z all-mtools-unknown was first attributed to the session's own earlier ratchetseries edit, the attribution retracted as unproven when the symptom returned with the edit out of the tree (it cost an hour), and the cause was found from luthen's store and mtools' log: a lone sparse landed sample as a repo's newest against END_SLACK_MS 60 s. The fixtures failed exactly where predicted on the old code, and after the live install luthen read no new unknown (mtools 88 to 2). I did not re-run any figure. SHIP-SEEN for 984 to 1012 is unread. Two findings. No fixpoint is declared. Carried open findings as in R240, minus R240's finding 1 (taken), with W1660 (the value half) open and the ready-card triage still not started.",
+      "findings": [
+        {
+          "finding": "The refusal of 1011 (a feature stack refused because ruff read behind again) is the same lock for the third time (977, 981, 1008 and now 1011): the pace's 'behind' is a rate over the last landings, so any run of landings without a ruff fall turns the lane back to behind, and at the floor there is no row to lower. The operator's ruling on W1633 settled the XML rows and left the floor-valve idea unanswered, and the mechanism may already exist: mtools' declaration reader has a retired key (the W1108 tombstone work) and 'not owed' rows (*.py, mtools:W2244). Ask mtools whether a ratchet row in ratchets.json can declare a floor (a count that stays, with the reason and the ledger path) and be read as not owed beyond it, or can be given one cheaply; if yes, declare ruff at its residue floor (the 3 claims.py E402 rows and the import cycles that stay, from the W1562 ledger) and codon at its 68 modules, so that a feature stack needs no ruff first entry. Record the answer on W1633 or W1568; if the reader cannot, that is the case for the guard change and the operator's answer to it.",
+          "finding_card": "W1568",
+          "finding_owner": "nemik session",
+          "finding_witness": "A W1568 line with mtools' answer on a declared floor and, if available, the floor declared in ratchets.json and one feature stack admitted with ruff behind and no ruff entry.",
+          "due": "2026-11-08"
+        },
+        {
+          "finding": "Four rows remain classed as import cycles and the last two reversals came from re-probing a row with a different host: adapter's hashlib (a Codon-failing module's local import) and rank's realize (a host that compiles under Codon today). The four left are the ones nobody has probed one by one since the designs failed as a group. Re-probe each separately with the realize method: for each site, name the cycle edge, choose a host module for the moved function that the importer can import without the cycle and that does not move the codon ratchet (an existing failing module, or a compiling one that stays compiling), and probe it on a copy with codon_first in both modes, the import probe of the affected modules and the test files that mention the names (standing 14, with the patch-target grep). Record each site's result on the W1562 ledger (reachable with a host and K, or the specific reason it is not), so the residue of seven is a list of reasons per site and not the group verdict.",
+          "finding_card": "W1562",
+          "finding_owner": "nemik session",
+          "finding_witness": "A W1562 table of the remaining four cycle sites and the three claims.py rows, each with a probed result (host, codon_first, tests) or its reason, and any reachable site taken as a stack.",
+          "due": "2026-11-08"
+        }
+      ],
+      "id": "nemik:R239"
     }
   ],
-  "retro_counter": 238
+  "retro_counter": 239
 }

@@ -4780,3 +4780,12 @@
 2026-11-05T15:07:37Z  status W1654 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-05T15:10:08Z  interrupt W1659 minted    -         "residue_gaps moves below rank and metrics (judging in realize), so rank hoists its metrics import and ruff falls 8 to 7"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1562
 2026-11-05T15:17:19Z  status W1659 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T15:34:17Z  status W1659 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T15:34:19Z  status W1652 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T15:34:19Z  status W1654 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T15:34:28Z  interrupt W1660 minted    -         "The pace's value series counts a landing once: gate-time and landed samples of one landing stop being two samples, and a cancelled gate's sample is no landing"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1654
+2026-11-05T15:34:42Z  status W1652 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T15:44:14Z  tick  W1654 advanced  sweep     "stacks 1010 to 1012 landed (8ab6d55 adapter hashlib ruff 9 to 8; 85b4dbb residue_gaps ruff 8 to 7; 4d084f7 ended_series gate-time end); root cause of the unknown mtools rows found with luthen and mtools (sparse landed samples vs the 60 s rule); empty-baseline bug reported (mtools:W2295); W1514 live read-back clean; value-series half carded as W1660; ruff 7 left, mypy 0, codon ok; gate empty [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T15:48:05Z  interrupt W1661 minted    -         "mtools rows read unknown at 15:37:04Z with the ended_series fix live, so its cause is not proven"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1654
+2026-11-05T15:48:28Z  interrupt W1662 minted    -         "witwait folds into witnesses, so the witnesses cycle (PLC0415) clears and witwait leaves the codon baseline"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1562
+2026-11-05T15:54:06Z  status W1662 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

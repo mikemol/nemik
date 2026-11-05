@@ -263,10 +263,6 @@
   "as_written": "no module named '__future__'",
   "stripped": "no module named 'importlib.metadata'"
  },
- "witwait": {
-  "as_written": "syntax error, unexpected ','",
-  "stripped": "syntax error, unexpected ','"
- },
  "work": {
   "as_written": "no module named '__future__'",
   "stripped": "no module named 'argparse'"

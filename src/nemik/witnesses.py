@@ -22,6 +22,7 @@ import json
 import os
 import re
 import sys
+import time
 import urllib.parse
 from datetime import UTC, datetime
 from pathlib import Path
@@ -571,6 +572,131 @@ def deliver(
     return written
 
 
+# nemik:W258, W1662: `nemik-witnesses --wait` waits on a witness, so a session can background it
+# and get one notification. This was nemik.witwait until it moved here: it needs _get, is_rego
+# and witness from this module, and this module's main called it, a cycle.
+#
+# Three outcomes, and unknown is not false: exit 0 it holds (prints the observed value and when it
+# first held); exit 1 the timeout passed and the last poll said not yet (prints that last value,
+# never an empty line); exit 2 it cannot be evaluated (the probe is unreachable, the endpoint is
+# unset or the query is bad; a few consecutive unknown polls are tolerated, more than TOLERATE, or
+# an unknown last poll at the timeout, is exit 2). A bare PromQL expression holds when its
+# instant-query result is non-empty; a query that names input.<observer> is Rego, decided by opa.
+HELD, NOT_YET, UNKNOWN = "held", "not-yet", "unknown"
+EXIT_HELD, EXIT_TIMEOUT, EXIT_UNKNOWN = 0, 1, 2
+TOLERATE = 3
+_SECONDS = {"s": 1, "m": 60, "h": 3600, "d": 86400}
+_DURATION = re.compile(r"(\d+)([smhd])")
+
+
+def seconds(text: str) -> float:
+    """Read a duration such as `90s`, `30m`, `12h` or `1d`.
+
+    Returns:
+        the number of seconds.
+
+    Raises:
+        ValueError: when the text is not a whole number and one of s, m, h, d.
+
+    """
+    m = _DURATION.fullmatch(text.strip())
+    if m is None:
+        msg = f"not a duration (use 90s, 30m, 12h or 1d): {text!r}"
+        raise ValueError(msg)
+    return float(int(m[1]) * _SECONDS[m[2]])
+
+
+def rego_poll(query: str, lang: str = "") -> Callable[[], tuple[str, str]]:
+    """Poll a Rego witness over the observers.
+
+    Returns:
+        a function giving (state, what was seen).
+
+    """
+
+    def poll() -> tuple[str, str]:
+        verdict, doc, missing = witness(query, lang=lang)
+        facts: dict[str, object] = {k: v for k, v in doc.items() if k != "now"}
+        seen = json.dumps(facts, sort_keys=True)
+        if verdict == "true":
+            return HELD, seen
+        if verdict == "false":
+            return NOT_YET, seen
+        return UNKNOWN, f"cannot observe {', '.join(missing) or 'the query'}"
+
+    return poll
+
+
+def promql_poll(expr: str) -> Callable[[], tuple[str, str]]:
+    """Poll a PromQL instant query; it holds while the result is non-empty.
+
+    Returns:
+        a function giving (state, what was seen).
+
+    """
+
+    def poll() -> tuple[str, str]:
+        body = _get("NEMIK_VM_URL", "/api/v1/query", {"query": expr})
+        if body is None:
+            return UNKNOWN, "probe unreachable, or NEMIK_VM_URL is unset"
+        try:
+            values = [float(r["value"][1]) for r in body["data"]["result"]]
+        except (KeyError, IndexError, TypeError, ValueError):
+            return UNKNOWN, "the probe returned a result nemik cannot read"
+        if values:
+            keep = 5  # a wait prints a readable value, not forty-nine series
+            shown = ", ".join(f"{v:g}" for v in values[:keep])
+            more = f" (+{len(values) - keep} more series)" if len(values) > keep else ""
+            return HELD, shown + more
+        return NOT_YET, "empty result (the expression is false, or no series)"
+
+    return poll
+
+
+def poller(query: str, lang: str = "") -> Callable[[], tuple[str, str]]:
+    """Choose the evaluator for a query: its declared language, else Rego when it reads `input`.
+
+    Returns:
+        the poll function.
+
+    """
+    return rego_poll(query, lang) if is_rego(query, lang) else promql_poll(query)
+
+
+def wait(
+    poll: Callable[[], tuple[str, str]],
+    window: tuple[float, float],
+    *,
+    sleep: Callable[[float], None] = time.sleep,
+    clock: Callable[[], float] = time.monotonic,
+    stamp: Callable[[], str] = lambda: datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ"),
+) -> tuple[int, str]:
+    """Poll until the witness holds, the timeout passes, or it cannot be evaluated.
+
+    `window` is (timeout_s, every_s): how long to wait, and how long between polls.
+
+    Returns:
+        (exit code, the one line to print).
+
+    """
+    timeout_s, every_s = window
+    deadline = clock() + timeout_s
+    last, unknowns = "never observed", 0
+    while True:
+        state, seen = poll()
+        if state == HELD:
+            return EXIT_HELD, f"HELD at {stamp()}: {seen}"
+        unknowns = unknowns + 1 if state == UNKNOWN else 0
+        last = seen
+        if unknowns > TOLERATE:
+            return EXIT_UNKNOWN, f"UNKNOWN after {unknowns} polls: {seen}"
+        if clock() + every_s > deadline:
+            if unknowns:
+                return EXIT_UNKNOWN, f"UNKNOWN at the timeout: {last}"
+            return EXIT_TIMEOUT, f"TIMEOUT, last value: {last}"
+        sleep(every_s)
+
+
 class Options(argparse.Namespace):
     """nemik-witnesses's parsed command line, typed so each option reads as its own type."""
 
@@ -633,8 +759,6 @@ def main(argv: list[str] | None = None) -> None:
     )
     args = ap.parse_args(argv, namespace=Options())
     if args.wait:
-        from nemik.witwait import poller, seconds, wait
-
         try:
             limit, step = seconds(args.timeout), seconds(args.every)
         except ValueError as err:

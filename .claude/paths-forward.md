@@ -3,7 +3,7 @@
 
 state file: `.claude/paths-forward.json`
 
-counter 1657 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:e1204280b431474a`
+counter 1660 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:69056d3230fb81f3`
 
 | # | symbol | status |
 |---|---|---|
@@ -97,7 +97,7 @@ counter 1657 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:e12
 | 88 | W1383 | ready |
 | 89 | W1384 | ready |
 | 90 | W1385 | ready |
-| 91 | W1654 | ready |
+| 91 | W1660 | ready |
 | 92 | W1042 | ready |
 | 93 | W1175 | ready |
 | 94 | W1220 | ready |
@@ -1631,9 +1631,12 @@ counter 1657 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:e12
 | 1622 | W1649 | done |
 | 1623 | W1650 | done |
 | 1624 | W1651 | done |
-| 1625 | W1655 | done |
-| 1626 | W1656 | done |
-| 1627 | W1657 | done |
+| 1625 | W1654 | done |
+| 1626 | W1655 | done |
+| 1627 | W1656 | done |
+| 1628 | W1657 | done |
+| 1629 | W1658 | done |
+| 1630 | W1659 | done |
 
 ## waypoints
 
@@ -2038,11 +2041,15 @@ counter 1657 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:e12
    - next: Decide the convention on one file (a module constant named for what is counted, e.g. ASKS = 7, placed beside
      the fixture); read ten more sites before deciding, since the first ten were all assertion expectations; a
      per-file-ignores entry in ruff-house.toml is a waiver and is out
-91. **W1654** (ready) The pace reads only ratchet samples labelled stage landed once mtools emits them after the
-   landing, so a cancelled gate cannot move the verdict
-   - next: ratchetseries._export_rows: hold gate-time (no stage label) and stage=landed samples apart per repo and
-     ratchet; once a ratchet has a landed sample, count only landed samples from the earliest one on and keep older
-     gate-time samples; add a test on a two-series fixture; run tests/test_ratchetseries.py and test_guessed_series.py
+91. **W1660** (ready) The pace's value series counts a landing once: gate-time and landed samples of one landing stop
+   being two samples, and a cancelled gate's sample is no landing
+   - next: Scratch-first, measured: (1) compare the pace's reported falls with the baselines' actual falls over the last
+     10 landings of nemik to find the inflation factor (each landing sends a gate sample and a landed sample, merged by
+     time into one series); (2) design the value rule per repo: from the first landed sample of the repo on, count
+     landed samples only (a cancelled gate's sample is then no landing), before it keep the gate samples, one sample per
+     landing; fixtures for a cancelled gate, a refused stack, one landing with both samples, a repo with no landed
+     samples, the guessed pair; run on a scratch copy and the pace text before and after; then land through a stack,
+     never live first
 92. **W1042** (ready) Size a round by a repo's landings from any commit path, not by multi-entry stacks
    - next: When github:W48 says which record the converged commit path writes, size a round by landings per gate time
      from it, and replace roundof.FLOOR with host admission
@@ -2096,10 +2103,13 @@ counter 1657 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:e12
    waits they name or say why not
 104. **W1514** (ready) Export nemik-wake's per-workstream verdict (wake required, 0 or 1, and the awake state) as a
    metric so luthen can page on wake-required AND stamp older than its window, not a flat 2 h
-   - next: Confirm the series exists: after the host's next waitemit run with the new code, ask luthen-observability (or
-     read the store through luthen's endpoints_query) for nemik_wake_required and nemik_wake_waiters, check one waiting
-     workstream reads 1 and a quiet one 0, then close; if the series is absent, find out whether liveness was unreadable
-     on the host (the job then sends no wake gauges by design)
+   - next: Confirm the series exists AND is right: after the host's next waitemit run with the new code, read
+     nemik_wake_required and nemik_wake_waiters from the store (luthen's endpoints_query or a request to
+     luthen-observability), compare each workstream with nemik-wake's roster and nemik-inbound at that minute, and look
+     for FALSE wake-required readings (a workstream that reads 1 with no card actually waiting, or whose session was
+     awake); tell luthen-observability to hold any page or wake on the gauge until that comparison is recorded here;
+     then close. If the series is absent, find out whether liveness was unreadable on the host (the job then sends no
+     wake gauges by design)
 105. **W1515** (ready) nemik-witnesses --apply prints one flip line when a witnessed card closes, in ready_wake's
    one-line format, for the one Monitor
    - next: Read the apply path in src/nemik/witnesses.py (where a witnessed card is marked done) and match ready_wake's
@@ -2840,7 +2850,7 @@ counter 1657 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:e12
      mtools (the pace is their ratchet census) with this entry as witness.
 243. **W1652** (blocked) A gate run sends its ratchet values to the store before it lands, so a cancelled run makes the
    guard refuse the stack that carries the fall
-   - blocked on: W1654
+   - blocked on: W1660
    - next: mtools decides: emit the ratchet gauges after the commit lands, or have the guard compare a stack's baseline
      files with HEAD instead of the store's latest value; nemik resubmits stack 1003 when it can pass
 244. **W1653** (blocked) A nemik gate run was cancelled by the host guard kine-latency mid-build with no failing test
@@ -5285,12 +5295,18 @@ counter 1657 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:e12
    rows
 1624. **W1651** (done) installed.announced and webpage.served start nemik-serve through procrun.spawn_piped, so the four
    Popen ruff rows (S404, S603 in tests/installed.py and tests/webpage.py) clear
-1625. **W1655** (done) nemik's post-commit hook sends the landed ratchet sample after each push, so the pace can ignore
+1625. **W1654** (done) The pace reads only ratchet samples labelled stage landed once mtools emits them after the
+   landing, so a cancelled gate cannot move the verdict
+1626. **W1655** (done) nemik's post-commit hook sends the landed ratchet sample after each push, so the pace can ignore
    a gate that did not land
-1626. **W1656** (done) The graph helpers and rank weights move out of rank into index and score, so rank hoists its
+1627. **W1656** (done) The graph helpers and rank weights move out of rank into index and score, so rank hoists its
    salience, check and critical imports and up to five PLC0415 findings clear
-1627. **W1657** (done) The last two mypy findings (rank.py load_composition tiers, witwait.py rego_poll seen) clear so
+1628. **W1657** (done) The last two mypy findings (rank.py load_composition tiers, witwait.py rego_poll seen) clear so
    mypy reaches zero
+1629. **W1658** (done) adapter.py imports hashlib at module level, so its function-local import (PLC0415) clears and
+   ruff falls 9 to 8
+1630. **W1659** (done) residue_gaps moves below rank and metrics (judging in realize), so rank hoists its metrics import
+   and ruff falls 8 to 7
 
 ## residue
 
@@ -8658,3 +8674,21 @@ counter 1657 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:e12
   is unread. Two findings. No fixpoint is declared: open findings are carried with owners and due dates. Carried open
   findings as in R238, minus R238's finding 3 (the codon scan, overtaken by the pace reading ok), with R238 finding 1
   (W1654) still open.; 2 finding(s)
+- **nemik:R238** (-) round 240: stack 1009 [W1657 mypy 2 to 0, W1604 wake gauge] 79bff716 landed 14:29:44Z after 1008
+  was refused at submit; mypy at zero findings, ruff 9 (all PLC0415 cycles), codon 68 modules; the triage and the W1654
+  redo not started for a second round: root Verified from the reflog (unix stamp 1793888984 = 14:29:44Z, 4026 s after
+  f74763a2 at 13:22:38Z): 1009 gated 14:14:12Z to 14:29:44Z (15 min 32 s) and the gate was empty 13:22:38Z to 14:14:12Z,
+  51 min 34 s, which includes the refused 1008 (W1604 alone, 'mypy-baseline.json: required fall 2, observed 0' because
+  the rate-based pace had slid mypy from ok at 12:36 to behind). The G1 owns that slide plainly (mypy was let slide
+  behind without watching the 10-landing window, and the pace was not re-read after 12:36:57Z until the submit said so,
+  so the G0's 'nemik owes NOTHING' was a stale statement by the time of the stack). The repair was the right one and a
+  milestone: W1657 cleared the last two mypy findings (witwait.py:69, a dict inferred in json.dumps's Any context, and
+  rank.py:125, a list[Any] iteration through a typed _names), the ratchet write printed 'mypy: 0 findings, baseline 2',
+  and 143 tests on every test file that mentions rank or witwait ran before the submit, which is standing 14 after the
+  1006 refusal applied exactly. Mypy is now at zero. The W1604 gauge was built with a defensive premise I like (with no
+  liveness, roster() reads every blocker state as 'unknown', which would make every waiting workstream wake-required, so
+  no wake gauge is sent unless liveness was read), six tests, a public wake_readings, and it landed in the same stack.
+  What the G1 leaves open is the live reading: the live host run and luthen's registry rows are UNMEASURED and W1514 is
+  left open for the live series. I did not re-run any figure. SHIP-SEEN for 984 to 1009 is unread. Two findings. No
+  fixpoint is declared: open findings are carried with owners and due dates. Carried open findings as in R239 (the
+  manifest and stale-card triage and the W1654 redo, each due 2026-11-07 and 2026-11-08, not started).; 2 finding(s)

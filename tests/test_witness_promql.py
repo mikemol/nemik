@@ -17,8 +17,14 @@ from pathlib import Path
 import pytest
 
 from nemik import witnesses
-from nemik.witnesses import is_rego, open_witnesses, witness
-from nemik.witwait import poller, promql_poll, rego_poll
+from nemik.witnesses import (
+    is_rego,
+    open_witnesses,
+    poller,
+    promql_poll,
+    rego_poll,
+    witness,
+)
 
 # luthen-observability:W1054's witness, verbatim
 EXECUTOR_LOAD = (

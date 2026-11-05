@@ -12,8 +12,7 @@ from typing import TYPE_CHECKING
 
 import pytest
 
-from nemik.witnesses import main
-from nemik.witwait import HELD, NOT_YET, UNKNOWN, promql_poll, seconds, wait
+from nemik.witnesses import HELD, NOT_YET, UNKNOWN, main, promql_poll, seconds, wait
 
 EXIT_UNKNOWN = 2  # the exit code of an unknown answer (and of a bad duration)
 SLEEPS_BEFORE_HELD = 2  # two not-yet polls, then the held one
