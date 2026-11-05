@@ -121,11 +121,8 @@ def load_composition(text: str | None = None) -> Composition:
     document: dict[str, object] = tomllib.loads(text)
     o = _toml_table(document.get("order"))
     raw_tiers = o.get("tiers", [["weight"]])
-    tiers = (
-        tuple(tuple(str(x) for x in t) for t in raw_tiers)
-        if isinstance(raw_tiers, list)
-        else ()
-    )
+    rows: list[object] = raw_tiers if isinstance(raw_tiers, list) else []
+    tiers = tuple(_names(t) for t in rows)
     unknown = {x for t in tiers for x in t} - set(OBJECTIVES)
     if unknown:
         msg = f"rank-weights.toml [order]: unknown objectives {sorted(unknown)}"
@@ -136,6 +133,20 @@ def load_composition(text: str | None = None) -> Composition:
         raise ValueError(msg)
     scalarize = _toml_table(o.get("scalarize"))
     return Composition(tiers, {k: float(str(v)) for k, v in scalarize.items()}, model)
+
+
+def _names(value: object) -> tuple[str, ...]:
+    """Read one tier of objectives as the names it holds (nemik:W1657).
+
+    Returns:
+        The elements of a list as text, the characters of a string (so a tier written as a bare
+        string fails the unknown-objective check as before), and nothing for any other value.
+
+    """
+    if isinstance(value, list):
+        items: list[object] = value
+        return tuple(str(x) for x in items)
+    return tuple(value) if isinstance(value, str) else ()
 
 
 def _toml_table(value: object) -> dict[str, object]:

@@ -3,7 +3,7 @@
 
 state file: `.claude/paths-forward.json`
 
-counter 1656 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:30e2decc63976564`
+counter 1656 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:17379a30bebb8692`
 
 | # | symbol | status |
 |---|---|---|
@@ -103,28 +103,28 @@ counter 1656 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:30e
 | 94 | W1383 | ready |
 | 95 | W1384 | ready |
 | 96 | W1385 | ready |
-| 97 | W1042 | ready |
-| 98 | W1175 | ready |
-| 99 | W1220 | ready |
-| 100 | W1229 | ready |
-| 101 | W1246 | ready |
-| 102 | W1288 | ready |
-| 103 | W1345 | ready |
-| 104 | W1347 | ready |
-| 105 | W1390 | ready |
-| 106 | W1395 | ready |
-| 107 | W1399 | ready |
-| 108 | W1418 | ready |
-| 109 | W1518 | ready |
-| 110 | W1522 | ready |
-| 111 | W1549 | ready |
-| 112 | W1568 | ready |
-| 113 | W1577 | ready |
-| 114 | W1578 | ready |
-| 115 | W1639 | ready |
-| 116 | W1640 | ready |
-| 117 | W1648 | ready |
-| 118 | W1654 | ready |
+| 97 | W1654 | ready |
+| 98 | W1042 | ready |
+| 99 | W1175 | ready |
+| 100 | W1220 | ready |
+| 101 | W1229 | ready |
+| 102 | W1246 | ready |
+| 103 | W1288 | ready |
+| 104 | W1345 | ready |
+| 105 | W1347 | ready |
+| 106 | W1390 | ready |
+| 107 | W1395 | ready |
+| 108 | W1399 | ready |
+| 109 | W1418 | ready |
+| 110 | W1518 | ready |
+| 111 | W1522 | ready |
+| 112 | W1549 | ready |
+| 113 | W1568 | ready |
+| 114 | W1577 | ready |
+| 115 | W1578 | ready |
+| 116 | W1639 | ready |
+| 117 | W1640 | ready |
+| 118 | W1648 | ready |
 | 119 | W986 | blocked |
 | 120 | W1010 | blocked |
 | 121 | W1136 | blocked |
@@ -1649,10 +1649,9 @@ counter 1656 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:30e
    Codon, corpus)
 4. **W1139** (ready) The pace carries cards and landing-rate rows beside the ratchets, each with its horizon in days at
    the landing rate
-   - next: Read how history.queue_at and baseline_spec get a repo's queue and why a non-git queue yields an empty plan;
-     then count adds and closes for a queue with no git history from its issued_at and completed stamps (the per-card
-     series W1138 reads the same fields); test it on a queue file outside a repository; then the cards and landing-rate
-     rows
+   - next: The cards and landing-rate rows: read how the per-card series (W1138) and the pace rows consume weekly(),
+     then add the cards-opened/closed and landing-rate columns for a queue with no git history, reading the stamps-only
+     snapshots; test on the same queue outside a repository
 5. **W1279** (ready) Pay down DOC201 in src: a Returns section written from each function body, in slices of about 12
    sites on files no neighbour slice shares
    - next: Slice 2 (during stack 679's gate): the next files alphabetically, adapter.py (6 sites), apischema.py (5),
@@ -1711,9 +1710,12 @@ counter 1656 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:30e
      nemik-hostroot --landings
 20. **W1108** (ready) The pace file carries each ratchet's last paydown time and its tagged paydown card, and nemik-rank
    --pace prints them
-   - next: The value is done (W1114, W1115). Remaining: last paydown time from the series (the last sample where the
-     value fell) in pacewrite, the card from the open card tagged file:`<ratchet>`, both as new row keys, which luthen's
-     egress gate must admit first (tell luthen-observability, extend the W1120 fixture)
+   - next: The value is done (W1114, W1115). Remaining, in this order: (1) last paydown time from the series (the last
+     sample where the value fell) in pacewrite and the card from the open card tagged file:`<ratchet>`, both as new row
+     keys; (2) TOMBSTONE rows (github-14's extension, 2026-11-05): for each ratchet that reached 0 or was retired, a row
+     with the date, the landing sha and whether it reached 0 or was retired; see the evidence for what the series
+     supplies and what it does not; new row keys need luthen's egress gate to admit them first (tell
+     luthen-observability, extend the W1120 fixture)
 21. **W1128** (ready) nemik-history takes one --where predicate language (status, age, flag, repo, blocked_on, title;
    and, or, not) in every mode
    - next: Wire --where into --events and the other history modes (they read events, so they need their own field set:
@@ -2047,102 +2049,102 @@ counter 1656 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:30e
    - next: Decide the convention on one file (a module constant named for what is counted, e.g. ASKS = 7, placed beside
      the fixture); read ten more sites before deciding, since the first ten were all assertion expectations; a
      per-file-ignores entry in ruff-house.toml is a waiver and is out
-97. **W1042** (ready) Size a round by a repo's landings from any commit path, not by multi-entry stacks
+97. **W1654** (ready) The pace reads only ratchet samples labelled stage landed once mtools emits them after the
+   landing, so a cancelled gate cannot move the verdict
+   - next: ratchetseries._export_rows: hold gate-time (no stage label) and stage=landed samples apart per repo and
+     ratchet; once a ratchet has a landed sample, count only landed samples from the earliest one on and keep older
+     gate-time samples; add a test on a two-series fixture; run tests/test_ratchetseries.py and test_guessed_series.py
+98. **W1042** (ready) Size a round by a repo's landings from any commit path, not by multi-entry stacks
    - next: When github:W48 says which record the converged commit path writes, size a round by landings per gate time
      from it, and replace roundof.FLOOR with host admission
-98. **W1175** (ready) Ruff in larger steps, after the Any-boundary moves: D103 (423 in tests) and D205 (68) by
+99. **W1175** (ready) Ruff in larger steps, after the Any-boundary moves: D103 (423 in tests) and D205 (68) by
    mechanization, PLC0415 (271) as hoists with an importdag cycle refusal turned into atomize cards, T201 (124 in src)
    into one output module
    - next: W1559: hoist those 6 sites (outside the hubs), run test_architecture, test_namespaces, codon_first on the
      four modules and hookcheck, then the stack.
-99. **W1220** (ready) Stack construction checks a ratchet baseline against the tree it will be gated on (and against
+100. **W1220** (ready) Stack construction checks a ratchet baseline against the tree it will be gated on (and against
    stacks queued ahead), so a stack built on an unlanded baseline is refused at build, not after a gate
    - next: mtools-ad: mikemol-commit --stack compares a ratchet baseline with the tree it will be gated on, taking the
      queued predecessor's tip as the base for a stack built on it; nemik:W1220 holds the evidence
-100. **W1229** (ready) A repair of a rejected file in a stacked round uses the predecessor stack's frozen files as its
+101. **W1229** (ready) A repair of a rejected file in a stacked round uses the predecessor stack's frozen files as its
    base, in a scratch worktree, not git's HEAD
    - next: mtools-ad: a mode that restores a file as of a queued stack's frozen files, in mikemol-scratch; nemik:W1229
      holds the case (test_calendars.py, stack622)
-101. **W1246** (ready) The queue mirror lists each retro as '0 finding(s)', so no finding or its witness can be audited
+102. **W1246** (ready) The queue mirror lists each retro as '0 finding(s)', so no finding or its witness can be audited
    from it
    - next: Watch the next three tick-open outputs for the gate line; then decide whether a second hook (a gap figure at
      tick-close) is wanted.
-102. **W1288** (ready) Tests without a docstring (D103, 398): one sentence per test function, taken from its name, a
+103. **W1288** (ready) Tests without a docstring (D103, 398): one sentence per test function, taken from its name, a
    file at a time
    - next: Next tick: quote the pace age and flag it only if over 30 min.
-103. **W1345** (ready) tests/corpus/pieces/fixture-fleet-3-repos.json is stale against the current check output:
+104. **W1345** (ready) tests/corpus/pieces/fixture-fleet-3-repos.json is stale against the current check output:
    regenerating it with tools/gen_pieces_corpus.py adds 2724 lines of findings rows, and the corpus is the Python half
    of the cross-language pieces conformance run (mtools:W1072)
    - next: Read what mtools:W1072's run does with this fixture and its last result; find the commit after which the
      check output on the fixture fleet changed (git log on the check rules and src/nemik/data/shapes.ttl against the
      fixture's last commit); then regenerate with tools/gen_pieces_corpus.py on its own stack with the new sha256
      recorded, or say why not
-104. **W1347** (ready) tests/test_layout.py splits its 14 autofixable composite assertions, so ruff PT018 falls by 14
+105. **W1347** (ready) tests/test_layout.py splits its 14 autofixable composite assertions, so ruff PT018 falls by 14
    - next: Type the Any values the composite asserts read (test_fruit.py, test_frontier.py, test_read_api.py,
      test_wake_alarms.py, test_witnesses.py, test_layout.py), then split the asserts, so PT018 falls with no mypy rise;
      or take hooks/record_event.py (25 ruff findings, 4 of them D103)
-105. **W1390** (ready) Hoist the function-local imports of calendars, witnesses, salience and the small src modules past
+106. **W1390** (ready) Hoist the function-local imports of calendars, witnesses, salience and the small src modules past
    the name clashes the probe refused
    - next: Remaining: calendars (11 sites, Graph bound under a module-level block), witnesses (9, urllib imported two
      ways: the codemod skip list only skips from-imports), salience (6, Weights bound under a module-level block); cards
      (mypy 0 to 2), shaclinc (a guard failed), history (reaches churn, F402), adapter (a guard failed), critical
      (reaches check, F402) were probed and left out. Extend hoist_imports.py to skip plain imports before the next
      probe.
-106. **W1395** (ready) Answer mtools:W2186 - baselinetop and ratchetseries open the ratchet baseline themselves, so they
+107. **W1395** (ready) Answer mtools:W2186 - baselinetop and ratchetseries open the ratchet baseline themselves, so they
    need the mypy-baseline.d directory read
    - next: Next tick: look for a reply in the inbox or the mtools card; close W1395 when the adopter card exists and
      mtools has the answer.
-107. **W1399** (ready) baselinetop and ratchetseries read a mypy-baseline.d directory through baselinedir.read when one
+108. **W1399** (ready) baselinetop and ratchetseries read a mypy-baseline.d directory through baselinedir.read when one
    exists, once mtools W2191 lands the per-module writer
    - next: After mtools:W2191 lands and the venv is rebuilt: make baselinetop.py and ratchetseries.py take the merged
      text from baselinedir.read(Path('mypy-baseline.d')) when that directory exists, with a test for each.
-108. **W1418** (ready) Answer the three mtools letters that say W2088 and W2099 are done: read W1246 and W1229, lift the
+109. **W1418** (ready) Answer the three mtools letters that say W2088 and W2099 are done: read W1246 and W1229, lift the
    waits they name or say why not
-109. **W1518** (ready) nemik-witnesses' file observer reports mtime (epoch seconds) and size beside exists, so a witness
+110. **W1518** (ready) nemik-witnesses' file observer reports mtime (epoch seconds) and size beside exists, so a witness
    can say a stamp moved (luthen-observability W1927)
    - next: Extend _file in src/nemik/witnesses.py: {exists, mtime, size} for an existing path (stat, never read); keep
      exists-only for a missing one; a test in tests/ for the three shapes; document in the module docstring and in
      skills/nemik/SKILL.md; the mtime is a number so Rego compares it with time.parse_rfc3339_ns(input.now) / 1e9.
-110. **W1522** (ready) A checked-in differential harness: freeze the inputs, mask named clock fields, run old-new-old
+111. **W1522** (ready) A checked-in differential harness: freeze the inputs, mask named clock fields, run old-new-old
    - next: Write tools/diff_harness.py (and a test): it snapshots the 18 queue files to a scratch root, takes a list of
      argv modes and an old and a new source tree, masks regexes named on the command line (the proven ones: '`<n>` h'
      and '`<n.n>` d'), runs old, new, old with PYTHONHASHSEED=0 and prints equal, drift or the first differing lines;
      then the G0 sensor lines name it. It replaces w1480_diff, w1496_diff, w1500_diff, w1508_diff, w1509_diff and
      w1521_diff in the scratch directory, which were each found after a failed first attempt.
-111. **W1549** (ready) A guard test fails a tests/ module that imports a tools/ module with no BUILD.bazel data entry
+112. **W1549** (ready) A guard test fails a tests/ module that imports a tools/ module with no BUILD.bazel data entry
    for it
    - next: Extend tests/test_test_inputs.py (or a sibling) with a check that reads every tests/test_*.py for imports of
      a tools/ module and fails when BUILD.bazel carries no data entry for that tools file under that test's name (the
      check_run_rows, namespaces, peerwindow, working_unnamed pattern); run it directly before each gate. It must fail on
      the pre-fix BUILD.bazel (stack 915's first submit). Rides a lowering stack as an entry.
-112. **W1568** (ready) Successor table: the next stack rows per lane (ruff, mypy, codon), each probed or not with its
+113. **W1568** (ready) Successor table: the next stack rows per lane (ruff, mypy, codon), each probed or not with its
    measured K, kept on this card and updated at each landing
-113. **W1577** (ready) rankcore leaf: Weights, load_weights, _open, _repo, downstream_weight, ref_of and successors move
+114. **W1577** (ready) rankcore leaf: Weights, load_weights, _open, _repo, downstream_weight, ref_of and successors move
    from rank.py to a new leaf module that rank, salience and waitrows import, so rank.py can import salience at module
    level and three PLC0415 clear (rank 551, 883, 907)
    - next: Probe on an in-project copy: create src/nemik/probe_rankcore.py with the seven names, repoint rank, salience
      and waitrows, hoist rank 551, 883, 907; then K by house ruff, the import test of the six entry modules, hookcheck,
      claims.py declared sets, test_codon_census (the new module must compile under the pinned Codon: probe-compile first
      with the bazel-cache codon), and bazel build //:.venv with the gate empty BEFORE wiring
-114. **W1578** (ready) paths leaf: QUEUE, LEDGER, default_root and workstream_files move from check.py to a new leaf
+115. **W1578** (ready) paths leaf: QUEUE, LEDGER, default_root and workstream_files move from check.py to a new leaf
    module that check, history, vtodo and blocks_cli import, so check.py can import stalled at module level and one
    PLC0415 clears (check 835)
    - next: Create rootpaths.py inert; bazel build //:.venv; then codemod check and history; hookcheck; ratchet; tests
-115. **W1639** (ready) docs/plc0415-cycles.md lists all 14 cycle rows, the cycle graph as found, both failed leaf
+116. **W1639** (ready) docs/plc0415-cycles.md lists all 14 cycle rows, the cycle graph as found, both failed leaf
    attempts and the retirement condition
    - next: Write the document rows from the 14 baseline sites (read each site's cycle with the import graph) and ride as
      a docs-only entry
-116. **W1640** (ready) checks/claims imports nemik.adapter once at module level, so two of its three PLC0415 become one
+117. **W1640** (ready) checks/claims imports nemik.adapter once at module level, so two of its three PLC0415 become one
    E402 and ruff falls 27 to 26
    - next: Run w1640.py; measure ratchet; run claims and the claim tests; stack behind W1638 as the second entry
-117. **W1648** (ready) Parsed queue and ledger graphs are kept on disk between processes keyed by file stamp, so a fresh
+118. **W1648** (ready) Parsed queue and ledger graphs are kept on disk between processes keyed by file stamp, so a fresh
    nemik command does not reparse every repo
    - next: Reopen only on a measured need
-118. **W1654** (ready) The pace reads only ratchet samples labelled stage landed once mtools emits them after the
-   landing, so a cancelled gate cannot move the verdict
-   - next: ratchetseries._export_rows: hold gate-time (no stage label) and stage=landed samples apart per repo and
-     ratchet; once a ratchet has a landed sample, count only landed samples from the earliest one on and keep older
-     gate-time samples; add a test on a two-series fixture; run tests/test_ratchetseries.py and test_guessed_series.py
 119. **W986** (blocked) A ratchet paydown rate requirement with teeth: a repo is behind when a ratchet's fall over a
    trailing window of landed commits is below a requirement that only rises
    - blocked on: W994, W1002
@@ -2173,7 +2175,7 @@ counter 1656 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:30e
      (an age gauge for the pace file and a failed-unit signal).
 124. **W1280** (blocked) Ask whether the gate can compute the lowered ratchet baseline at land time, or keep baselines
    per file, so paydown stacks stop serializing on one baseline file
-   - blocked on: mtools:W1920, mtools:W2167
+   - blocked on: mtools:W2286, mtools:W2167
    - next: Wait on mtools:W1920 (the paydown check). When its rule (c) lands, read how it counts a lowering (the staged
      blob's entry count below HEAD's by the census's own rule), repin past it, and reread the refusal on a stack that
      names a baseline without lowering it. For the one-stack-in-flight serialization, mtools leans to accepting an owed
@@ -2857,7 +2859,7 @@ counter 1656 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:30e
      mtools (the pace is their ratchet census) with this entry as witness.
 250. **W1652** (blocked) A gate run sends its ratchet values to the store before it lands, so a cancelled run makes the
    guard refuse the stack that carries the fall
-   - blocked on: mtools:W1920
+   - blocked on: W1654
    - next: mtools decides: emit the ratchet gauges after the commit lands, or have the guard compare a stack's baseline
      files with HEAD instead of the store's latest value; nemik resubmits stack 1003 when it can pass
 251. **W1653** (blocked) A nemik gate run was cancelled by the host guard kine-latency mid-build with no failing test
@@ -8617,3 +8619,22 @@ counter 1656 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:30e
   read by a fleet unit on a timer. That is the dirty-tree exposure R230 finding 1 named, now with a dependency outside
   the session. I did not re-run any figure. SHIP-SEEN for 984 to 1003 is unread. Three findings. No fixpoint is
   declared. Carried open findings as in R236.; 2 finding(s)
+- **nemik:R236** (-) round 238: stack 1006 [W1300 letters.py compiles under Codon (138 to 137), W1656 five PLC0415
+  hoists (ruff 14 to 9), W1655 post-commit] 57c3fe8d landed 12:16:54Z after a 2 h 44 min 24 s empty gate and one
+  refusal; the W1654 landed-series redo withdrawn after it broke luthen's pace read; ruff 9 = PLC0415 cycles; codon 137
+  still owes 2: root Verified from the reflog (unix stamp 1793881014 = 12:16:54Z, 11382 s after ec87ad4e at 09:07:12Z):
+  1006 landed as three commits (the last 57c3fe8d), gated from 11:51:36Z (811 s of bazel, refused on
+  //:test_rank_survey) and resubmitted at 12:07:39Z (6 fresh of 468, 9 min 15 s). The gate was empty 09:07:12Z to
+  11:51:36Z, 2 h 44 min 24 s, which the G1 does not state as an interval; the first-entry lock that I called out in R235
+  to R237 was broken the way R233 hoped, by a measured codon fall: letters.py is a pure rewrite that compiles in both
+  census modes (tomlview compiles, dataclasses are absent in the pinned Codon, date.fromordinal works), codon 138 to
+  137, and it carries W1656 (rank's five hoists) and the post-commit hook behind it. The G1 also reports the best piece
+  of judgement of the span: mtools offered an operator_held release and the session did not use it, because there was no
+  real operator decision and five ready codon cards existed. The W1654 redo is the other thing to read: my R237 finding
+  1 said luthen's unit was reading an unlanded edit and that the dependency was unheld; the G1 reports that the edit
+  (keep only stage=landed once a ratchet has them) made the pace read 'unknown' for 88 of 89 mtools rows, luthen
+  confirmed mtools returned after the session's git checkout of the file at about 11:15Z, and the redo is withdrawn.
+  That is the hazard realised and caught by luthen, not by the session's own checks, and the double-count defect it was
+  meant to fix is still open. I did not re-run any figure. SHIP-SEEN for 984 to 1006 is unread. Three findings. No
+  fixpoint is declared. Carried open findings as in R237, with R237 finding 2 (the codon census for ratchetseries) moot
+  with the redo withdrawn and finding 1 realised.; 3 finding(s)

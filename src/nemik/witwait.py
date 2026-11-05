@@ -66,7 +66,8 @@ def rego_poll(query: str, lang: str = "") -> Callable[[], tuple[str, str]]:
 
     def poll() -> tuple[str, str]:
         verdict, doc, missing = witness(query, lang=lang)
-        seen = json.dumps({k: v for k, v in doc.items() if k != "now"}, sort_keys=True)
+        facts: dict[str, object] = {k: v for k, v in doc.items() if k != "now"}
+        seen = json.dumps(facts, sort_keys=True)
         if verdict == "true":
             return HELD, seen
         if verdict == "false":
