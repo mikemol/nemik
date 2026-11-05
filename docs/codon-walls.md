@@ -32,8 +32,8 @@ walls below.
 
 | wall | what it blocks | what would retire it |
 |---|---|---|
-| `rdflib` (adapter and everything importing it) | about 58 rows | an rdflib-free core of adapter: the graph builder is the foundation of every reader, so this is a split of adapter into a pure row model and an rdflib view, then each reader moving to the row model |
-| the `mikemol.*` libraries (`procrun`, `pathsforward`, `endpoints`, `otlp`) | `work`, `ask_cli`, `alarm`, `endpoint`, `marks`, `pins` and their dependents | those libraries compiling under the pinned Codon (an mtools question), or nemik's own thin stand-ins for the three or four calls it makes |
+| `rdflib` (adapter and everything importing it) | about 58 rows | an rdflib-free core of adapter (a pure row model beside an rdflib view) AND each of the nine modules that import rdflib directly moving to it; measured below: removing this wall alone frees no row |
+| the `mikemol.*` libraries (`procrun`, `pathsforward`, `endpoints`, `otlp`) | `work`, `ask_cli`, `alarm`, `endpoint`, `marks`, `pins` and their dependents | measured 2026-11-05: the census does not stage the libs, and the venv's `mikemol` has no top-level `__init__.py`; with both added, `mikemol.procrun` compiles but `mikemol.procrun.proc` stops at `no module named select` (it also imports `subprocess`) and `mikemol.pathsforward.lock` at a dataclass decorator. So the libraries themselves do not compile: an mtools question, or nemik's own thin stand-ins for the few calls it makes |
 | `argparse`, `tomllib`, `shutil`, `subprocess`, `shlex` | the CLI modules, config readers | the CLI shells moved into a module already in the baseline (what W1668, W1669 and W1672 did for `critical`, `wake` and `floorasks`), and a Codon-compatible TOML reader |
 | `dataclasses` decorator arguments, `fractions`, `weakref`, `contextlib`, `collections.abc`, `hashlib`, `importlib.*` | `cards`, `flow`, `issues`, `projection`, `salience`, `score`, `index`, `shaclcache`, `cachestore`, `marks` | per module: plain classes for `@dataclass(frozen=True)` (the pinned Codon accepts plain classes), a `typing` or builtin spelling for the others |
 | strict typing | `apischema`: its `SCALAR` table mixes string and list values and Codon types the dict strictly | a typed row class in place of the mixed dict |
@@ -52,6 +52,28 @@ frees three or more rows.
    `mikemol` libraries except `apischema` (a typed row class) and the dataclass rows `score`,
    `cards`, `flow`, `issues`, `projection`, `salience` (each also reaches `adapter`, so freeing one
    of them alone does not make it compile).
-2. The structural move: split `adapter` into a pure row model and an rdflib view. It is the only
-   change that moves most of the list, it touches nearly every module, and it belongs to its own
-   card with its own measurement.
+2. There is no single structural move. The first version of this page named the `adapter` split as
+   the one lever; the static measurement below shows it frees no row on its own.
+
+## How many walls fall before a row frees
+
+`tools/codon_closure.py`'s functions, applied greedily (2026-11-05, 65 baseline rows): treat one
+blocker kind at a time as fixed, most common first, and count the rows whose whole closure is then
+empty. Fixing `adapter`'s own blockers alone frees 0 rows, and so does each of the first three kinds.
+
+| fixed so far (cumulative) | rows free |
+|---|---|
+| `mikemol`, `TYPE_CHECKING`, `collections.abc` | 0 |
+| plus `hashlib` | 1 |
+| plus `importlib`, `rdflib` | 2 |
+| plus `tomllib` | 14 |
+| plus `dataclasses` (decorator and import), `argparse` | 20 |
+| plus `contextlib`, `fractions`, `weakref` | 31 |
+| plus `datetime.UTC`, `pyshacl`, `shutil` | 53 |
+| plus `http`, `xml`, `google`, `shlex` | 65 |
+
+So the work is a campaign over about seven kinds before the first fourteen rows free, not a lever.
+`tomllib` is the biggest single step (2 to 14 rows) once the kinds before it are fixed. The order
+above is by how many closures a kind sits in; a cheaper order may exist and is a question for a
+measurement, not a conclusion. This is a static bound from imports, so it overstates what compiles:
+a freed row can still fail on a type error, as `apischema` does.

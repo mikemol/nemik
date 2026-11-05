@@ -4839,3 +4839,7 @@
 2026-11-05T19:51:03Z  status W1411 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-05T20:01:14Z  status W1411 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-05T20:05:39Z  status W1411 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T20:26:48Z  status W1411 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T20:26:55Z  tick  W1411 advanced  sweep     "W1411 landed 0e546c8 (tools/codon_closure.py); fe3406c (docs/codon-walls.md, 15 overtaken cards closed) and ffea930 (venv guard test) landed earlier in the span; ratchets ruff 0, mypy 0, codon 130; gate empty, no cheap codon row remains, next is the adapter split card [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T20:30:10Z  interrupt W1673 minted    -         "Measure the adapter wall: compile the baseline rows against a stub adapter without rdflib in a scratch copy of the tree, in both modes, and mint the split card with the measured count of rows that compile"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T20:31:11Z  status W1673 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
