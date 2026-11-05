@@ -1,8 +1,5 @@
 {
  "src/nemik/check.py": {
   "PLC0415": 1
- },
- "src/nemik/critical.py": {
-  "PLC0415": 1
  }
 }

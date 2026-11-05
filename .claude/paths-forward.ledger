@@ -4804,3 +4804,6 @@
 2026-11-05T17:34:28Z  status W1666 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-05T17:35:08Z  interrupt W1667 minted    -         "tools/landing_report.py prints the landing stamps in UTC with gaps, the gate's stacks with begin stamps, the working_unnamed lines and the dirty count, so a G1 carries numbers"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-05T17:41:09Z  status W1667 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T17:42:54Z  tick  W1668 minted    -         "nemik-critical's entry moves to check, so critical's function-local import of check (PLC0415) clears and ruff falls 2 to 1"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T18:01:57Z  status W1667 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T18:02:08Z  status W1668 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

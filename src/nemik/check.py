@@ -56,6 +56,8 @@ from nemik.blocks import (
 from nemik.collapse import disagreements
 from nemik.collapse import lines as collapse_lines
 from nemik.critical import cycles
+from nemik.critical import parse_args as critical_args
+from nemik.critical import report as critical_report
 from nemik.digest import collapse, delta
 from nemik.hostapply import HOST_REF, load
 from nemik.idle import findings as idle_findings
@@ -1502,6 +1504,17 @@ class Options(argparse.Namespace):
     report: str | None
     digest: bool
     since: str | None
+
+
+def critical_main(argv: list[str] | None = None, g: Graph | None = None) -> None:
+    """nemik-critical: the longest chain of open work across the fleet, and what has slack."""
+    args = critical_args(argv, default_root())
+    if g is None:
+        g = Graph()
+        for _, qg, _ in survey(args.root):
+            if qg is not None:
+                g += qg
+    critical_report(g, args)
 
 
 def main(argv: list[str] | None = None) -> None:

@@ -381,7 +381,7 @@ class Options(argparse.Namespace):
     fires: bool
 
 
-def _parse(argv: list[str] | None, root: Path) -> Options:
+def parse_args(argv: list[str] | None, root: Path) -> Options:
     """Parse nemik-critical's command line, `root` being the default of --root.
 
     Returns:
@@ -389,7 +389,8 @@ def _parse(argv: list[str] | None, root: Path) -> Options:
 
     """
     ap = argparse.ArgumentParser(
-        prog="nemik-critical", description=(main.__doc__ or "").splitlines()[0]
+        prog="nemik-critical",
+        description="nemik-critical: the longest chain of open work, and what has slack.",
     )
     ap.add_argument("--root", type=Path, default=root, help="~/github")
     ap.add_argument("--json", action="store_true")
@@ -506,16 +507,8 @@ def _report_path(g: Graph, scope: set[str] | None) -> None:
     _report_cycles(loops)
 
 
-def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
-    """nemik-critical: the longest chain of open work across the fleet, and what has slack."""
-    from nemik.check import default_root, survey
-
-    args = _parse(argv, default_root())
-    if g is None:
-        g = Graph()
-        for _, qg, _ in survey(args.root):
-            if qg is not None:
-                g += qg
+def report(g: Graph, args: Options) -> None:
+    """Print what nemik-critical was asked for over `g`: the longest chain and what has slack."""
     scope = _scope(g, args)
     if args.fires:
         _report_fires(fires(g, scope), args)
