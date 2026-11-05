@@ -48,6 +48,8 @@ exports_files(["pyproject.toml"])
             + (["tools/check_run_rows.py"] if src == "tests/test_check_run_rows.py" else [])
             # nemik:W1532: the standing-17 probe is imported by name from tools/
             + (["tools/working_unnamed.py"] if src == "tests/test_working_unnamed.py" else [])
+            # nemik:W1678: the wall atomizer is imported by name from tools/ with the closure map it reads
+            + (["tools/atomize_walls.py", "tools/codon_closure.py"] if src == "tests/test_atomize_walls.py" else [])
             # nemik:W1411: the codon closure map is imported by name from tools/
             + (["tools/codon_closure.py"] if src == "tests/test_codon_closure.py" else [])
             # nemik:W1667: the landing report is imported by name from tools/ with the probe it reuses
