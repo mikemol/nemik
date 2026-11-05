@@ -202,6 +202,20 @@ def render(
     return "\n".join(lines)
 
 
+def _polls(rows: list[Churn]) -> list[object]:
+    """Turn each poll row into its field dict, for JSON.
+
+    Returns:
+        One plain dict per row.
+
+    """
+    polls: list[object] = []
+    for row in rows:
+        poll: object = asdict(row)
+        polls.append(poll)
+    return polls
+
+
 def run(
     dirs: dict[str, Path], names: list[str], since: str | None, *, as_json: bool
 ) -> int:
@@ -219,7 +233,7 @@ def run(
     rows = [churn(fleet, start, end, step) for step in STEPS]
     commits = commit_classes(fleet, start, end)
     if as_json:
-        out = {"commits": commits, "polls": [asdict(r) for r in rows]}
+        out = {"commits": commits, "polls": _polls(rows)}
         say(json.dumps(out, indent=1))
     else:
         say(render((start, end), len(names), commits, rows))

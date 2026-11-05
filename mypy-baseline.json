@@ -1,10 +1,4 @@
 {
- "src/nemik/churn.py": {
-  "misc": 2
- },
- "src/nemik/history.py": {
-  "misc": 2
- },
  "src/nemik/rank.py": {
   "misc": 1
  },

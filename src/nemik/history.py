@@ -1011,6 +1011,20 @@ def weekly(snaps: list[Snapshot]) -> list[WeeklyRow]:
 BASELINE_PATH = ".claude/baseline"
 
 
+def _asdicts(items: dict[str, Diff]) -> dict[str, object]:
+    """Turn each repo's Diff into its field dict, for JSON.
+
+    Returns:
+        The same keys, each with its Diff as a plain dict.
+
+    """
+    rows: dict[str, object] = {}
+    for repo, change in items.items():
+        row: object = asdict(change)
+        rows[repo] = row
+    return rows
+
+
 def baseline_spec(repo: Path, spec: str | None) -> str | None:
     """nemik:W318: the baseline to measure from.
 
@@ -1351,7 +1365,7 @@ def main(argv: list[str] | None = None) -> int:
         new = queue_at(repo, resolve(repo, args.to))
         out[name] = diff(old, new)
     if args.json:
-        say(json.dumps({r: asdict(d) for r, d in out.items()}, indent=1))
+        say(json.dumps(_asdicts(out), indent=1))
     else:
         say("\n".join(starmap(render, out.items())))
     return 0
