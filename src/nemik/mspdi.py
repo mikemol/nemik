@@ -30,8 +30,8 @@ from rdflib import Graph
 from nemik import issues
 from nemik.adapter import queue_graph
 from nemik.blocks import annotate
-from nemik.check import QUEUE, default_root, workstream_files
 from nemik.projection import Link, Task, project
+from nemik.queuefiles import QUEUE, default_root, workstream_files
 
 NS = "http://schemas.microsoft.com/project"
 FS = "1"  # PredecessorLink Type: finish-to-start

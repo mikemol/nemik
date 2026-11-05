@@ -4807,3 +4807,6 @@
 2026-11-05T17:42:54Z  tick  W1668 minted    -         "nemik-critical's entry moves to check, so critical's function-local import of check (PLC0415) clears and ruff falls 2 to 1"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-05T18:01:57Z  status W1667 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-05T18:02:08Z  status W1668 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T18:07:04Z  tick  W1669 minted    -         "queue-file helpers move to a leaf queuefiles module, so check hoists its stalled import (PLC0415) and ruff falls 1 to 0"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T18:28:25Z  status W1668 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T18:42:05Z  status W1669 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

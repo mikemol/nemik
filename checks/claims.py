@@ -255,6 +255,8 @@ def hub_modules_depend_on_everything_below() -> None:
     # nemik:W1384: and both write their command output through say, a leaf that imports only sys.
     # nemik:W1561: the function-local imports of both hubs moved to module level (PLC0415), so the
     # set also names what they imported inside functions: health and stackable_cli for metrics.
+    # nemik:W1669: both read the queue file names, the default root and the workstream list from
+    # queuefiles, a leaf of standard library only, where check used to define them.
     expected = {
         "metrics": lower
         | {
@@ -267,6 +269,7 @@ def hub_modules_depend_on_everything_below() -> None:
             "health",
             "stackable_cli",
             "score",
+            "queuefiles",
         },
         "serve": lower
         | {
@@ -305,6 +308,7 @@ def hub_modules_depend_on_everything_below() -> None:
             "score",
             "trs",
             "withheld",
+            "queuefiles",
         },
     }
     for hub, want in expected.items():

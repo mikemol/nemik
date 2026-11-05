@@ -37,7 +37,8 @@ from rdflib import Graph
 from nemik import cachestore
 from nemik.adapter import ledger_graph
 from nemik.blocks import EXPLICIT, operator_asks, with_salience
-from nemik.check import LEDGER, default_root, survey, workstream_files
+from nemik.check import survey
+from nemik.queuefiles import LEDGER, default_root, workstream_files
 from nemik.say import say, say_raw
 from nemik.tomlview import strings, table
 

@@ -19,7 +19,7 @@ list in is read as declaring nothing, which the count says.
 import sys
 from pathlib import Path
 
-from nemik.check import default_root
+from nemik.queuefiles import default_root
 
 SECTION = "tool.setuptools"
 

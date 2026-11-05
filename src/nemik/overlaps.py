@@ -24,7 +24,8 @@ from rdflib import Graph
 
 from nemik.adapter import NEMIK, OSLC_CM, STATE
 from nemik.blocks import _repo, ref
-from nemik.check import default_root, survey
+from nemik.check import survey
+from nemik.queuefiles import default_root
 from nemik.say import say
 
 if TYPE_CHECKING:

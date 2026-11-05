@@ -18,7 +18,7 @@ from typing import NamedTuple
 
 from mikemol.procrun.proc import TimeoutExpired, capture
 
-from nemik.check import default_root
+from nemik.queuefiles import default_root
 from nemik.say import say
 from nemik.tomlview import table, tables
 

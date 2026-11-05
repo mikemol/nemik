@@ -17,7 +17,7 @@ from rdflib.term import Node
 from nemik import history
 from nemik.adapter import NEMIK, OSLC_CM
 from nemik.blocks import ref
-from nemik.check import QUEUE, workstream_files
+from nemik.queuefiles import QUEUE, workstream_files
 
 WINDOW_DAYS = 14  # the close rate is read over this many days
 UMBRELLA = 2  # open children that make a card an umbrella

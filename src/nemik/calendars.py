@@ -28,7 +28,8 @@ from rdflib.namespace import DCTERMS, RDF
 
 from nemik.adapter import NEMIK, OSLC_CM
 from nemik.blocks import ref
-from nemik.check import default_root, survey
+from nemik.check import survey
+from nemik.queuefiles import default_root
 from nemik.say import say, warn
 from nemik.tomlview import table
 from nemik.vtodo import DEFAULT_HELPER

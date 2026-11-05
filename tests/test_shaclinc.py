@@ -11,7 +11,8 @@ from rdflib.term import Node
 
 from nemik.adapter import NEMIK, OSLC_CM, queue_graph
 from nemik.blocks import annotate
-from nemik.check import QUEUE, shapes, workstream_files
+from nemik.check import shapes
+from nemik.queuefiles import QUEUE, workstream_files
 from nemik.shaclinc import findings, shacl_results
 
 FLEET = Path(__file__).parent / "fixtures" / "fleet"

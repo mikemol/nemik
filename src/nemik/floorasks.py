@@ -11,7 +11,7 @@ import json
 import re
 from pathlib import Path
 
-from nemik.check import QUEUE, default_root, workstream_files
+from nemik.queuefiles import QUEUE, default_root, workstream_files
 from nemik.say import say
 from nemik.tomlview import table, tables
 

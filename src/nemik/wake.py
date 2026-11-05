@@ -30,18 +30,18 @@ from typing import TYPE_CHECKING, TypedDict
 
 from mikemol.hooks import rewake
 from mikemol.procrun.proc import capture
-from rdflib import Graph
 from rdflib.namespace import DCTERMS
 
 from nemik.adapter import BASE, NEMIK, OSLC_CM
 from nemik.alarm import Schedule, fires_between
 from nemik.blocks import inbound, operator_asks, with_salience
-from nemik.check import default_root, survey
 from nemik.luthenseries import load
 from nemik.pacecli import EXPORT_TREE
+from nemik.queuefiles import default_root
 from nemik.say import say
 
 if TYPE_CHECKING:
+    from rdflib import Graph
     from rdflib.term import Node
 
     from nemik.luthenseries import Series
@@ -580,7 +580,7 @@ class Options(argparse.Namespace):
     series_max_age: int
 
 
-def _parse(argv: list[str] | None) -> Options:
+def parse_args(argv: list[str] | None) -> Options:
     """Parse nemik-wake's command line.
 
     Returns:
@@ -725,29 +725,23 @@ def _report_roster(g: Graph, args: Options, live: Liveness, source: str) -> None
         say(f"  {w['salience']:6.1f} {w['blocked']:28} {w['title'][:60]}")
 
 
-def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
-    """Run nemik-wake: print the roster of workstreams, or with --alarms the alarms that fired.
+def report(args: Options, g: Graph) -> None:
+    """Print the roster of workstreams, or with --alarms the alarms that fired.
 
     The roster lists the workstreams that are not awake (all with --all) plus the operator row.
     --nudge keeps only rows due a nudge, or only alarms not yet delivered, and records them in
     the nudges state file. --json prints machine-readable output.
 
     Args:
-        argv: the command line, or None for sys.argv.
-        g: a graph to read instead of surveying the root.
+        args: the parsed command line.
+        g: the fleet's merged graph.
 
     """
-    args = _parse(argv)
     if args.series_only:
         series_report(
             args.repo or [], series_path(args), args.series_max_age, only=args.only
         )
         return
-    if g is None:
-        g = Graph()
-        for _, qg, _ in survey(args.root):
-            if qg is not None:
-                g += qg
     if args.series_lines:
         series_report(
             workstreams(g) + (args.repo or []), series_path(args), args.series_max_age

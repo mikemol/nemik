@@ -28,10 +28,11 @@ from rdflib.namespace import DCTERMS, PROV
 
 from nemik import tiers
 from nemik.adapter import BASE, NEMIK, OSLC_CM, workstream_uri
-from nemik.check import QUEUE, default_root, survey, workstream_files
+from nemik.check import survey
 from nemik.critical import assume_done
 from nemik.index import downstream_weight, open_card, ref_of, repo_of, successors
 from nemik.pacecli import behind_files, pace_exit, pace_process
+from nemik.queuefiles import QUEUE, default_root, workstream_files
 from nemik.realize import residue_gaps
 from nemik.roundcli import NO_LANDINGS, show_round, write_round_file
 from nemik.salience import (

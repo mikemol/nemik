@@ -23,7 +23,8 @@ from rdflib import Graph
 from rdflib.namespace import DCTERMS
 
 from nemik.blocks import ref
-from nemik.check import default_root, survey
+from nemik.check import survey
+from nemik.queuefiles import default_root
 from nemik.say import say
 from nemik.tomlview import table
 

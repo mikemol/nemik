@@ -20,8 +20,8 @@ tree names it there.
 import sys
 from pathlib import Path
 
-from nemik.check import default_root
 from nemik.history import git_lines
+from nemik.queuefiles import default_root
 from nemik.tracker import parse_tree
 
 WATCH = Path(__file__).with_name("peer-watch.json")

@@ -7,7 +7,7 @@ from pathlib import Path
 import pytest
 from rdflib import Graph
 
-from nemik import cachestore, check
+from nemik import cachestore, check, queuefiles
 
 QUEUE = '{"waypoints": [], "residue": []}'
 
@@ -21,8 +21,8 @@ def _root(tmp_path: Path) -> Path:
     """
     claude = tmp_path / "root" / "a" / ".claude"
     claude.mkdir(parents=True)
-    (claude / check.QUEUE).write_text(QUEUE, encoding="utf-8")
-    (claude / check.LEDGER).write_text("", encoding="utf-8")
+    (claude / queuefiles.QUEUE).write_text(QUEUE, encoding="utf-8")
+    (claude / queuefiles.LEDGER).write_text("", encoding="utf-8")
     return tmp_path / "root"
 
 
@@ -42,7 +42,7 @@ def test_the_key_follows_the_content_of_the_queue_and_the_mode(tmp_path: Path) -
     first = _key(root)
     assert first == _key(root)
     assert first != _key(root, digest=False)
-    queue = root / "a" / ".claude" / check.QUEUE
+    queue = root / "a" / ".claude" / queuefiles.QUEUE
     queue.write_text(QUEUE.replace("[]", "[ ]", 1), encoding="utf-8")
     assert first != _key(root)
 
@@ -83,7 +83,7 @@ def test_an_unchanged_fleet_is_surveyed_once(
     assert check.cached_survey(root, digest=True) == (["OK        a"], 0)
     assert check.cached_survey(root, digest=True) == (["OK        a"], 0)
     assert len(calls) == 1
-    queue = root / "a" / ".claude" / check.QUEUE
+    queue = root / "a" / ".claude" / queuefiles.QUEUE
     queue.write_text(QUEUE.replace("[]", "[ ]", 1), encoding="utf-8")
     check.cached_survey(root, digest=True)
     assert len(calls) == len(("first", "after the change"))

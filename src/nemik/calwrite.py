@@ -29,7 +29,8 @@ from rdflib.namespace import DCTERMS, RDF
 from nemik.adapter import BASE, NEMIK, OSLC_CM
 from nemik.alarm import Schedule
 from nemik.calendars import DEFAULT_CONFIG, load_calendars
-from nemik.check import default_root, survey
+from nemik.check import survey
+from nemik.queuefiles import default_root
 from nemik.say import say, say_raw
 from nemik.vtodo import DEFAULT_HELPER, time_property, timezones
 

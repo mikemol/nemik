@@ -11,7 +11,8 @@ import pytest
 from rdflib import Graph, Literal
 
 from nemik.adapter import NEMIK, queue_graph, waypoint_uri
-from nemik.wake import Liveness, due_nudges, fired_alarms, main, read_liveness, roster
+from nemik.check import wake_main as main
+from nemik.wake import Liveness, due_nudges, fired_alarms, read_liveness, roster
 
 
 def _alarms(printed: str) -> list[str]:

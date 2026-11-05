@@ -19,9 +19,9 @@ from rdflib import Graph
 
 from nemik.adapter import queue_graph
 from nemik.blocks import annotate
-from nemik.check import QUEUE, workstream_files
 from nemik.mspdi import write
 from nemik.projection import project
+from nemik.queuefiles import QUEUE, workstream_files
 
 FLEET = Path(__file__).parent / "fixtures" / "fleet"
 RELATION = re.compile(r"^(\d+)\t[^\t]*\t\"?([\d,]*)\"?\t")

@@ -8,8 +8,8 @@ from rdflib import Graph
 
 from nemik.adapter import NEMIK, OSLC_CM, queue_graph
 from nemik.blocks import annotate, ref
-from nemik.check import QUEUE, workstream_files
 from nemik.projection import decode, project
+from nemik.queuefiles import QUEUE, workstream_files
 
 FLEET = Path(__file__).parent / "fixtures" / "fleet"
 

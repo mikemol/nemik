@@ -6,7 +6,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from nemik.check import QUEUE, workstream_files
+from nemik.queuefiles import QUEUE, workstream_files
 
 if TYPE_CHECKING:
     from pathlib import Path

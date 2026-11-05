@@ -8,9 +8,9 @@ from rdflib import Graph
 
 from nemik.adapter import queue_graph
 from nemik.blocks import annotate
-from nemik.check import QUEUE, workstream_files
 from nemik.issues import read, to_issues, write
 from nemik.projection import decode, project
+from nemik.queuefiles import QUEUE, workstream_files
 
 FLEET = Path(__file__).parent / "fixtures" / "fleet"
 

@@ -34,6 +34,7 @@ from rdflib import Graph, Literal, URIRef
 from rdflib.namespace import DCTERMS
 
 from nemik import adoption, cachestore, warrantdebt
+from nemik import stalled as stalled_rows
 from nemik.adapter import (
     BASE,
     NEMIK,
@@ -75,12 +76,15 @@ from nemik.letters import (
 )
 from nemik.marks import MARKS, policy_version, read
 from nemik.marks import provenance as mark_provenance
+from nemik.queuefiles import LEDGER, QUEUE, default_root, workstream_files
 from nemik.realize import rows as realize_rows
 from nemik.realize import runtime_valid, verdicts
 from nemik.rolls import idle_run, stalled
 from nemik.say import say
 from nemik.shaclinc import findings as shacl_findings
 from nemik.tomlview import table
+from nemik.wake import parse_args as wake_args
+from nemik.wake import report as wake_report
 from nemik.work import in_gate
 from nemik.workrows import NO_BOUND, ready_stamps, small_done_stamps, upper_quantile
 
@@ -90,7 +94,6 @@ if TYPE_CHECKING:
 
     from rdflib.term import Node
 
-QUEUE, LEDGER = "paths-forward.json", "paths-forward.ledger"
 WRITER = "mikemol-paths-forward --state"
 STALL_RUN = 2
 NEITHER_QUANTILE = 0.9  # the share of small cards that finished within the bound
@@ -552,46 +555,6 @@ def integrity_findings(merged: Graph) -> dict[str, list[tuple[str, str]]]:
     return found
 
 
-def default_root() -> Path:
-    """$NEMIK_ROOT, else ~/github.
-
-    Returns:
-        The directory named by $NEMIK_ROOT, else ~/github.
-
-    """
-    return Path(os.environ.get("NEMIK_ROOT") or Path.home() / "github")
-
-
-def workstream_files(root: Path, name: str) -> list[tuple[str, Path]]:
-    """(repo, path) for `name` under either layout, keyed by repo.
-
-    ~/github layout: <root>/<repo>/.claude/<name>. Export layout (luthen's host-side copy, which
-    carries only these two files per repo): <root>/<repo>/<name>.
-
-    Returns:
-        The (repo, path) pairs sorted by repo, leaving out dot-named directories.
-
-    """
-    found = {p.parents[1].name: p for p in root.glob(f"*/.claude/{name}")}
-    found |= {
-        p.parent.name: p for p in root.glob(f"*/{name}") if p.parent.name != ".claude"
-    }
-    own = root / ".claude" / name
-    if own.exists():
-        # nemik:W224: a root with a queue of its own is a workstream too, named by its directory,
-        # beside the workstreams it contains (the host queue at ~/github/.claude over every repo,
-        # cited `github:W<n>`); a root that holds no repos (--root pointed at one repo) is the
-        # same rule with nothing beneath it. A child of the same name wins. Resolved: `--root .`
-        # has the name '' (nemik:W142), which left the workstream unnamed and its own
-        # <repo>:W<n> references unresolvable.
-        found.setdefault(root.resolve().name, own)
-    # A dot-named directory (e.g. .linux-sources-gate-wt, a git worktree of linux-sources) carries
-    # another workstream's queue at another commit, not a workstream of its own; it cannot be
-    # cited either, since mtools' <repo>:W<n> requires the repo to start alphanumeric. Counting it
-    # doubled every block it holds and left the copies unclaimable.
-    return sorted((repo, p) for repo, p in found.items() if not repo.startswith("."))
-
-
 def shapes() -> Graph:
     """Read the SHACL shapes shipped with nemik (data/shapes.ttl) into a graph.
 
@@ -983,11 +946,8 @@ def _fleet_checks(
     )
     # nemik:W577: a loop that ticks idle with nothing workable is told to disarm or name its wait.
     _add_notes(by_repo, idle_findings(root, merged, repos))
-    # nemik:W616, W617: a working card that looks stalled, or whose progress is invisible. Imported
-    # here because stalled reads history and history reads check: a module-level import is a cycle.
-    from nemik import stalled
-
-    _add_rows(by_repo, "Warning", stalled.findings(root, merged, int(time.time())))
+    # nemik:W616, W617: a working card that looks stalled, or whose progress is invisible.
+    _add_rows(by_repo, "Warning", stalled_rows.findings(root, merged, int(time.time())))
     # nemik:W608: the warrant debt may only fall: a repo above its ceiling is told to warrant.
     _add_notes(by_repo, warrantdebt.findings(merged, warrantdebt.baseline()))
     # nemik:W693: an enables edge whose target does not wait on its source (the operator's
@@ -1504,6 +1464,24 @@ class Options(argparse.Namespace):
     report: str | None
     digest: bool
     since: str | None
+
+
+def wake_main(argv: list[str] | None = None, g: Graph | None = None) -> None:
+    """Run nemik-wake: print the roster of workstreams, or with --alarms the alarms that fired.
+
+    Args:
+        argv: the command line, or None for sys.argv.
+        g: a graph to read instead of surveying the root.
+
+    """
+    args = wake_args(argv)
+    if g is None:
+        g = Graph()
+        if not args.series_only:
+            for _, qg, _ in survey(args.root):
+                if qg is not None:
+                    g += qg
+    wake_report(args, g)
 
 
 def critical_main(argv: list[str] | None = None, g: Graph | None = None) -> None:

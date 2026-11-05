@@ -10,8 +10,9 @@ import pytest
 from rdflib import Graph
 
 from nemik.adapter import queue_graph
+from nemik.check import wake_main as main
 from nemik.luthenseries import parse
-from nemik.wake import main, series_lines
+from nemik.wake import series_lines
 
 AS_OF = 1_793_000_000
 STAMP = "2026-10-26T07:33:20Z"

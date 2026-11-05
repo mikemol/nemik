@@ -24,7 +24,8 @@ from rdflib import Graph
 from rdflib.namespace import DCTERMS
 
 from nemik.adapter import waypoint_uri
-from nemik.check import default_root, survey
+from nemik.check import survey
+from nemik.queuefiles import default_root
 from nemik.rank import fleet_repos, load_composition, rank
 from nemik.say import say
 from nemik.score import load_weights

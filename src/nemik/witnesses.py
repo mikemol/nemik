@@ -32,9 +32,9 @@ from mikemol.pathsforward.opa_eval import OpaUnavailableError, resolve
 from mikemol.procrun.proc import capture
 
 from nemik import edgeletters
-from nemik.check import QUEUE, default_root, workstream_files
 from nemik.delivery import owed, stamp
 from nemik.hostapply import fact, load
+from nemik.queuefiles import QUEUE, default_root, workstream_files
 from nemik.say import say, warn
 from nemik.work import run_writer
 from nemik.workrows import edges_of
