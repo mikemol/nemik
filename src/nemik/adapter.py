@@ -8,6 +8,7 @@ reader, so schema drift across repos is mtools' problem to absorb, not a second 
 
 from __future__ import annotations
 
+import hashlib
 import json
 import re
 import sys
@@ -481,8 +482,6 @@ def _add_signals(g: Graph, node: URIRef, w: model.Json) -> None:
     # so they share one weather id: a hash of the query with its whitespace collapsed. The query
     # text itself stays out of the graph (it may name hosts or endpoints).
     if wq := " ".join(model.text(w, "witness").split()):
-        import hashlib
-
         g.add(
             (
                 node,
