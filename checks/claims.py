@@ -18,12 +18,14 @@ import re
 import sys
 from pathlib import Path
 
+from nemik.adapter import NEMIK, OSLC_CM, STATE, reference_uri
+from nemik.metrics import label
+
 ROOT = Path(__file__).resolve().parents[1]
 MIN_DIRECT_RDFLIB_IMPORTERS = (
     2  # the claim is a gap: rdflib is not behind adapter alone
 )
 SRC = ROOT / "src" / "nemik"
-sys.path.insert(0, str(ROOT / "src"))
 
 
 def _src(name: str) -> str:
@@ -123,8 +125,6 @@ def hermetic_vendoring() -> None:
 
 def cross_repo_citation_form() -> None:
     """Citations resolve to urn:nemik:<repo>/W<n>, foreign ones to their own repo."""
-    from nemik.adapter import reference_uri
-
     got = str(reference_uri("alpha", "beta:W3"))
     _require(
         got == "urn:nemik:beta/W3", f"foreign-symbol resolution changed shape: {got}"
@@ -142,7 +142,6 @@ def oslc_cm_state_vocabulary() -> None:
     """oslc_cm:state holds nemik's five-value vocabulary, set by queue_graph()."""
     # oslc_cm:state is the OSLC CM property; its five values are nemik's own vocabulary (mtools'
     # status strings have no OSLC CM state URIs of their own to map onto).
-    from nemik.adapter import NEMIK, OSLC_CM, STATE
 
     _require(
         set(STATE) == {"ready", "working", "blocked", "landed", "done"},
@@ -172,8 +171,6 @@ def prov_activity_shape() -> None:
 
 def prometheus_label_format() -> None:
     """metrics.label renders labels as {repo="alpha",state="ready"}."""
-    from nemik.metrics import label
-
     got = label(repo="alpha", state="ready")
     _require(
         got == '{repo="alpha",state="ready"}', f"Prometheus label format changed: {got}"
