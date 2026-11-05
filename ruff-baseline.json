@@ -11,9 +11,6 @@
  "src/nemik/history.py": {
   "PLC0415": 1
  },
- "src/nemik/rank.py": {
-  "PLC0415": 1
- },
  "src/nemik/witnesses.py": {
   "PLC0415": 1
  }

@@ -79,8 +79,7 @@ from nemik.check import (
 )
 from nemik.health import STATUSES, health, thresholds
 from nemik.rank import TIERS, rank
-from nemik.realize import verdicts
-from nemik.residue import by_card
+from nemik.realize import judged, verdicts
 from nemik.runlogs import unmigrated_at_source
 from nemik.say import say
 from nemik.score import load_weights
@@ -102,26 +101,7 @@ def judged_cards(root: Path) -> list[dict[str, object]]:
         one with no gaps.
 
     """
-    now = stamp(datetime.now(UTC))
-    return [
-        dict(verdict)
-        for repo, path in workstream_files(root, QUEUE)
-        for verdict in verdicts(repo, path, root, now)
-    ]
-
-
-def residue_gaps(root: Path) -> dict[str, list[dict[str, object]]]:
-    """Collect every recorded gap in the fleet, by card (nemik:W251).
-
-    Args:
-        root: The fleet root.
-
-    Returns:
-        `repo:W<n>` to its residue entries, for every judged card that has any; an opa that is
-        absent raises.
-
-    """
-    return by_card(judged_cards(root))
+    return judged(workstream_files(root, QUEUE), root)
 
 
 def ready_stale_lines(root: Path, now: datetime) -> list[str]:

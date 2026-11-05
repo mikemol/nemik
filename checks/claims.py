@@ -262,7 +262,6 @@ def hub_modules_depend_on_everything_below() -> None:
         "metrics": lower
         | {
             "realize",
-            "residue",
             "runlogs",
             "workrows",
             "rank",

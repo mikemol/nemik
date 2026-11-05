@@ -4776,3 +4776,7 @@
 2026-11-05T14:43:56Z  tick  W1604 advanced  sweep     "stack 1009 landed 14:29:44Z (c5bf318 W1657 mypy 2 to 0, 79bff71 W1604 wake gauges); stack 1008 refused first because mypy slid behind; reader warnings fixed (W1280, W1652, W1245 closed, SLA nudges); W1603 to W1605 done, W1514 open for the live series; nemik owes nothing, gate empty [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-05T14:47:44Z  interrupt W1658 minted    -         "adapter.py imports hashlib at module level, so its function-local import (PLC0415) clears and ruff falls 9 to 8"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1562
 2026-11-05T14:47:55Z  status W1658 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T15:07:35Z  status W1658 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T15:07:37Z  status W1654 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T15:10:08Z  interrupt W1659 minted    -         "residue_gaps moves below rank and metrics (judging in realize), so rank hoists its metrics import and ruff falls 8 to 7"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1562
+2026-11-05T15:17:19Z  status W1659 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

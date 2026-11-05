@@ -28,10 +28,11 @@ from rdflib.namespace import DCTERMS, PROV
 
 from nemik import tiers
 from nemik.adapter import BASE, NEMIK, OSLC_CM, workstream_uri
-from nemik.check import default_root, survey
+from nemik.check import QUEUE, default_root, survey, workstream_files
 from nemik.critical import assume_done
 from nemik.index import downstream_weight, open_card, ref_of, repo_of, successors
 from nemik.pacecli import behind_files, pace_exit, pace_process
+from nemik.realize import residue_gaps
 from nemik.roundcli import NO_LANDINGS, show_round, write_round_file
 from nemik.salience import (
     AuditOptions,
@@ -874,11 +875,13 @@ def _report_flow(g: Graph, args: Options) -> None:
     # nemik:W240: the old downstream weight beside the flow model's salience (exact; shown
     # rounded), and every pair the two order differently. The model replaces the old order
     # only after this audit agrees (W241).
-    from nemik.metrics import residue_gaps
-
     # nemik:W251: --residue adds each recorded gap (the policy's residue) as demand at its card,
     # weighted by gate from rank-weights.toml [residue] (W253); off by default.
-    gaps = residue_gaps(args.root) if args.residue else None
+    gaps = (
+        residue_gaps(workstream_files(args.root, QUEUE), args.root)
+        if args.residue
+        else None
+    )
     # nemik:W712: the time a blocked card has waited adds demand at what it waits on, at the
     # per_tick measured in docs/wait-weight.md
     result = audit(

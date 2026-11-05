@@ -12,12 +12,15 @@ measured nothing, so it never reads as clean.
 
 from __future__ import annotations
 
+from datetime import UTC, datetime
 from typing import TYPE_CHECKING
 
 from mikemol.pathsforward import certify, opa_eval
+from mikemol.pathsforward.lock import stamp
 from mikemol.pathsforward.model import text
 
 from nemik.adapter import load_state
+from nemik.residue import by_card
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -44,6 +47,38 @@ def verdicts(repo: str, state_path: Path, root: Path, now: str) -> list[Json]:
     symbols = [text(w, "symbol") for w in state.waypoints if text(w, "status") != _DONE]
     built = certify.items(state, symbols, certify.Where(repo, root), now)
     return opa_eval.verdicts(built, opa_eval.resolve())
+
+
+def judged(files: list[tuple[str, Path]], root: Path) -> list[dict[str, object]]:
+    """Judge every queue a caller names, each verdict as a plain dict (nemik:W1659).
+
+    The list of queue files is passed in because this module cannot import nemik.check (which
+    imports it): metrics and rank each name the fleet's queues themselves.
+
+    Returns:
+        One verdict per judged card, each {ref, level, reference_arm, residue}. An opa that is
+        absent raises (`verdicts`), so a card that was not judged never reads as one with no gaps.
+
+    """
+    now = stamp(datetime.now(UTC))
+    return [
+        dict(verdict)
+        for repo, path in files
+        for verdict in verdicts(repo, path, root, now)
+    ]
+
+
+def residue_gaps(
+    files: list[tuple[str, Path]], root: Path
+) -> dict[str, list[dict[str, object]]]:
+    """Collect every recorded gap in the named queues, by card (nemik:W251, W1659).
+
+    Returns:
+        `repo:W<n>` to its residue entries, for every judged card that has any; an opa that is
+        absent raises.
+
+    """
+    return by_card(judged(files, root))
 
 
 def rows(verdict: Json, source: str = "") -> list[str]:
