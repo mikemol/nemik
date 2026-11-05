@@ -9,7 +9,7 @@ from typing import TYPE_CHECKING, cast
 
 import pytest
 
-from nemik.churn import churn, classify, commit_classes
+from nemik.history import churn, classify, commit_classes
 
 if TYPE_CHECKING:
     from nemik.history import QueueDoc, Waypoint

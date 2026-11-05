@@ -3,7 +3,7 @@
 
 state file: `.claude/paths-forward.json`
 
-counter 1662 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:80cc8ca4cb142e78`
+counter 1663 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:3228a84ea50b65e9`
 
 | # | symbol | status |
 |---|---|---|
@@ -1639,6 +1639,7 @@ counter 1662 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:80c
 | 1630 | W1658 | done |
 | 1631 | W1659 | done |
 | 1632 | W1662 | done |
+| 1633 | W1663 | done |
 
 ## waypoints
 
@@ -2158,11 +2159,12 @@ counter 1662 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:80c
    nemik command does not reparse every repo
    - next: Reopen only on a measured need
 115. **W1661** (ready) mtools rows read unknown at 15:37:04Z with the ended_series fix live, so its cause is not proven
-   - next: Read luthen-observability's store data for mtools at about 15:37Z (per unlabelled series the last sample
-     time, how many unlabelled series sampled in the last 90 min, whether a mtools gate started between 15:20Z and
-     15:37Z); decide whether the newest gate-time batch is sparse (then the 'a gate batch sends every series' premise is
-     wrong and the rule needs a per-series cadence instead) or whether the cause is elsewhere (the export or the
-     previous pace file carrying rows); redo on a scratch copy with a fixture of the observed shape
+   - next: Verify the pin move: when luthen reports the nemik-pace sha edit applied, read the published pace's first
+     line for the build key (it must be 4d084f7 or a later build) and compare every row with a read-only run of the
+     tree's code at the same minute (nemik-hostroot --pace --out a scratch file): the mtools rows must leave unknown;
+     then read it again a day later, because 4d084f7's code has never run in the unit; then build the nemik-rank --pace
+     warning (R242 f1): print a warning line when the published pace has no build key or a build that is not an ancestor
+     of main
 116. **W986** (blocked) A ratchet paydown rate requirement with teeth: a repo is behind when a ratchet's fall over a
    trailing window of landed commits is below a requirement that only rises
    - blocked on: W994, W1002
@@ -5317,6 +5319,8 @@ counter 1662 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:80c
    and ruff falls 8 to 7
 1632. **W1662** (done) witwait folds into witnesses, so the witnesses cycle (PLC0415) clears and witwait leaves the
    codon baseline
+1633. **W1663** (done) checks/claims.py hoists its three local nemik imports and drops sys.path.insert, clearing three
+   PLC0415 rows (ruff 6 to 3)
 
 ## residue
 
@@ -8722,3 +8726,28 @@ counter 1662 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:80c
   live install luthen read no new unknown (mtools 88 to 2). I did not re-run any figure. SHIP-SEEN for 984 to 1012 is
   unread. Two findings. No fixpoint is declared. Carried open findings as in R240, minus R240's finding 1 (taken), with
   W1660 (the value half) open and the ready-card triage still not started.; 2 finding(s)
+- **nemik:R240** (-) round 242: stack 1013 (W1662 witwait merged into witnesses, ruff 7 to 6, codon 136 to 134) 4198a596
+  landed 16:20:42Z; the all-mtools-unknown pace traced to luthen's PINNED pace build (sha ec56d66, installed
+  2026-10-27), not to the session's edits; ruff 6 = 3 inadmissible in claims.py + 3 CLI-dispatch moves; no floor can be
+  declared: root Verified from the reflog (unix stamp 1793895642 = 16:20:42Z, 2838 s after 4d084f7a at 15:33:24Z): 1013
+  gated 16:02:18Z to 16:20:42Z (18 min 24 s) and the gate was empty 15:33:24Z to 16:02:18Z, 28 min 54 s, as the G1
+  states, spent on the pace investigation and W1662. R241 is applied: the four cycle rows were probed one at a time and
+  two had already fallen by the host method (rank's metrics import in W1659, witnesses' witwait import in W1662), the
+  other three are on W1562 with the exact reason each (check:986 needs both history's path edge and wake's survey edge
+  out of check; critical:511 and history:1409 each need a CLI dispatch move), and mtools' answer on a declarable floor
+  was read from source (no floor field, a row is dropped by the guard only for a glob-keyed name, a required fall above
+  the entries held, or operator_held) and recorded as the operator's or github-8f's policy call. W1662 deleted a module
+  whose two codon entries leave the baseline together (136 to 134) and moved its behaviour detail with it (the test that
+  patches witnesses._get now reaches promql_poll directly), 7 passed on the codon census with the baseline lowered. The
+  larger event is the diagnosis, and it is a correction of two earlier rounds: the session had told luthen and mtools
+  several times that the pace unit read its tree, and it never did. The evidence in order: luthen's store showed all 86
+  unlabelled series in one batch with a 0.4 s spread, mtools showed the gate sends its 86 once and late, a read-only
+  reproduction of the pace with the tree's code gave 3 unknown while the published pace had 89 and a first line with no
+  build key against the reproduction's, and luthen then confirmed the pace unit runs a pinned build (user/tools.json row
+  nemik-pace at sha ec56d66bc436, installed 2026-10-27) that moves only by editing the sha through the gated user apply,
+  which is in flight to 4d084f7. So my ratchetseries edits never reached the unit, the 11:06Z attribution was wrong
+  twice, the 15:27Z 'no new unknown' was no evidence about the fix, and the live unknowns were the old rule. I share the
+  first mistake: R237 finding 1 and R238 finding 1 warned about a unit reading an unlanded edit on the same unexamined
+  premise. The G1 owns it (a one-line header comparison would have shown it hours earlier). I did not re-run any figure.
+  SHIP-SEEN for 984 to 1013 is unread. Three findings. No fixpoint is declared: open findings are carried with owners
+  and due dates. Carried open findings as in R241, minus R241's two (applied).; 3 finding(s)

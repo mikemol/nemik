@@ -47,10 +47,6 @@
   "as_written": "syntax error, unexpected ','",
   "stripped": "syntax error, unexpected ','"
  },
- "churn": {
-  "as_written": "class decorator got unexpected argument",
-  "stripped": "class decorator got unexpected argument"
- },
  "critical": {
   "as_written": "no module named '__future__'",
   "stripped": "no module named 'argparse'"
