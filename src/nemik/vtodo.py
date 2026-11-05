@@ -34,6 +34,7 @@ from mikemol.pathsforward.vtimezone import vtimezone
 from mikemol.procrun.proc import capture_bytes
 from rdflib import Graph
 
+from nemik import cachestore
 from nemik.adapter import ledger_graph
 from nemik.blocks import EXPLICIT, operator_asks, with_salience
 from nemik.check import LEDGER, default_root, survey, workstream_files
@@ -326,13 +327,23 @@ def feed(root: Path, opt_in: Path, link: str = "", *, group: bool = False) -> st
         The iCalendar text.
 
     """
+    # nemik:W1647: the feed keeps only the graphs, so it asks survey for no SHACL run, no fleet
+    # checks and no in-gate calls; survey restores the caches only inside its SHACL step, so the
+    # feed restores them itself (the flow solves below are what it saves from them).
+    kept = root.resolve() == default_root().resolve()
+    if kept:
+        cachestore.restore_user()
     g = Graph()
-    for _, qg, _ in survey(root):
+    for _, qg, _ in survey(root, check=False, gate=""):
         if qg is not None:
             g += qg
     for repo, path in workstream_files(root, LEDGER):
         g += ledger_graph(repo, path)[0]
-    todos = vtodos(with_salience(g, operator_asks(g)), opted_in(opt_in), link)
+    asks = with_salience(g, operator_asks(g))
+    if kept:
+        # nemik:W1646: survey persisted the caches before the flow solves existed
+        cachestore.persist_user()
+    todos = vtodos(asks, opted_in(opt_in), link)
     return calendar(grouped(todos) if group else todos)
 
 
