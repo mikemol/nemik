@@ -3,7 +3,7 @@
 
 state file: `.claude/paths-forward.json`
 
-counter 1663 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:3228a84ea50b65e9`
+counter 1664 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:235df0cc8b8025ff`
 
 | # | symbol | status |
 |---|---|---|
@@ -1640,6 +1640,7 @@ counter 1663 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:322
 | 1631 | W1659 | done |
 | 1632 | W1662 | done |
 | 1633 | W1663 | done |
+| 1634 | W1664 | done |
 
 ## waypoints
 
@@ -5321,6 +5322,8 @@ counter 1663 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:322
    codon baseline
 1633. **W1663** (done) checks/claims.py hoists its three local nemik imports and drops sys.path.insert, clearing three
    PLC0415 rows (ruff 6 to 3)
+1634. **W1664** (done) churn folds into history, so history's function-local churn import (PLC0415) clears and churn
+   leaves the codon baseline
 
 ## residue
 
@@ -8751,3 +8754,22 @@ counter 1663 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:322
   premise. The G1 owns it (a one-line header comparison would have shown it hours earlier). I did not re-run any figure.
   SHIP-SEEN for 984 to 1013 is unread. Three findings. No fixpoint is declared: open findings are carried with owners
   and due dates. Carried open findings as in R241, minus R241's two (applied).; 3 finding(s)
+- **nemik:R241** (-) round 243: stack 1014 (W1663 claims.py hoists, ruff 6 to 3) d3b6d3e8 landed 16:39:19Z; the three
+  claims.py rows I called inadmissible in R230 to R242 fell by dropping sys.path.insert; ruff 3 = three module moves;
+  the floor-policy ask not sent and no longer needed: root Verified from the reflog (unix stamp 1793896759 = 16:39:19Z,
+  1117 s after 4198a596 at 16:20:42Z): 1014 landed, [PUSHED], with the gate's own figure '3 fresh of 470' and the
+  ratchet reading 'ruff: 3 findings, baseline 6; mypy: 0 findings, baseline 0' (the baseline write following the
+  landing). The G1 gives neither the submit stamp nor the landing stamp nor the empty interval from 16:20:42Z, which I
+  derive (landing 16:39:19Z; the gate was empty from 16:20:42Z to the submit, which I cannot read from this G1). The
+  result is a third reversal of a dismissal, and this time the dismissal was partly mine: the three claims.py rows were
+  carried as 'inadmissible, E402 trade' since R230, and I repeated it in R241 and R242. The E402 was caused by the
+  sys.path.insert in the same file, so dropping the insert and hoisting the three nemik imports removes both, in one
+  small codemod (D202 x2 and EXE001 repaired by ruff --fix and chmod +x after the install had dropped the exec bit;
+  three claims exit 0, 47 tests on every file mentioning claims, test_architecture). The consequence: ruff has three
+  rows left, all reachable by module moves (check.py stalled, critical.py survey, history.py churn), none of them a
+  permanent residue, so ruff can reach zero, and at zero the guard has nothing to owe (mypy at zero already reads
+  unknown and does not block: 1013 and 1014 were admitted with mypy unknown). That dissolves R242 finding 3's premise (a
+  permanent floor needing a policy call), and I withdraw it. The G1 names what it did not do (the floor-policy question
+  was not sent, working_unnamed.py was not run at the landing, no tick landing stamps given). I did not re-run any
+  figure. SHIP-SEEN for 984 to 1014 is unread. Two findings. No fixpoint is declared: open findings are carried with
+  owners and due dates. Carried open findings as in R242, minus R242 finding 3 (withdrawn).; 2 finding(s)

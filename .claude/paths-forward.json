@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 1664,
+  "counter": 1667,
   "waypoints": [
     {
       "symbol": "W1",
@@ -26109,19 +26109,22 @@
     {
       "symbol": "W1108",
       "title": "The pace file carries each ratchet's last paydown time and its tagged paydown card, and nemik-rank --pace prints them",
-      "status": "ready",
+      "status": "blocked",
       "enables": [],
       "touches": [
         "velocity"
       ],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W1665",
+        "W1666"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "The value is done (W1114, W1115). Remaining, in this order: (1) last paydown time from the series (the last sample where the value fell) in pacewrite and the card from the open card tagged file:<ratchet>, both as new row keys; (2) TOMBSTONE rows (github-14's extension, 2026-11-05): for each ratchet that reached 0 or was retired, a row with the date, the landing sha and whether it reached 0 or was retired; see the evidence for what the series supplies and what it does not; new row keys need luthen's egress gate to admit them first (tell luthen-observability, extend the W1120 fixture)",
-      "evidence": "2026-10-26: 2026-10-26: value delivered by W1114/W1115; this card narrowed to the last paydown time and the paydown card | 2026-11-05T13:34:06Z: 2026-11-05 EXTENDED at github-14's request (relaying the operator, 2026-11-05: 'one thing you likely can't see is when/where a ratchet reached 0 or was retired'; I have not verified the quote): the pace should show when and where each ratchet reached 0 or was retired, so finished debt does not read as no history and a vanished row does not read unknown; each such row gets a tombstone with the date, the landing sha and reached-0 versus retired. WHAT THE STORE SUPPLIES (read from pacerun.py and ratchetseries.py, not yet built): DATE: the raw export holds one timestamp per sample (export_series drops them today, it keeps only the values), so the time of the first sample at value 0 is there, and for a retirement the first sample of mikemol.ratchet.retired{repo, ratchet, reason} at 1 or more. KIND: a value series that ends at 0 reached 0 (it keeps emitting 0 while the file exists); a retired tombstone is mtools' written retirement (retired_of already reads it) and carries a REASON label. WHERE: the repo and the ratchet's file name, which are the labels. WHAT IT DOES NOT SUPPLY: the landing SHA, since mikemol.ratchet.value and .retired carry no sha label. It can only be joined by time: a stage=landed sample (W1655 and mtools' post-commit emit, from 2026-11-05 on) is sent within seconds of its commit, so it matches that commit's time exactly enough; a gate-time sample (before) precedes the landing by up to a gate's duration, and anything before today has only gate-time samples, so older tombstones get a nearest-landing-after join, marked approximate. The commit list per repo comes from nemik-hostroot --landings or git log of that repo; whether nemik may read a sibling's git log under the no-sibling-paths ruling is a question for the operator, so the sha for a peer's ratchet may have to come from the landings file alone. Below the paydown work: this card ranks as it did. | 2026-11-05T13:35:22Z: 2026-11-05 SETTLED by github-14 (a peer relay, recorded as their ruling, not the operator's): build date, kind and where from the series; the sha joined from the LANDINGS FILE ONLY (nemik-hostroot --landings), never a peer's git log (the no-sibling-paths ruling already covers it, so it is not an operator question); rows older than the first stage=landed sample are marked approximate; exact sha for new rows comes from stage=landed anyway; no sha label asked of the emitter for now. The luthen egress row (new pace row keys) is parked as a deferred ask on github:W90 and waits. Paydown work stays first in the rank. So the build is: (1) pacewrite last-paydown time and the tagged card, (2) tombstone rows: date, kind (reached 0 or retired, with mtools' reason), where (repo, ratchet), sha from the landings file with an approximate flag, with the egress admission still to come, which means the rows can be written to the pace file's nemik-side form and tested but not yet published to luthen. | 2026-11-05T13:43:12Z: 2026-11-05 github-14's correction answered (read-only): mikemol.ratchet.retired is absent from the store because NOTHING HAS DECLARED A TOMBSTONE, not because an emit fails to arrive. The emitter exists (mtools hooks ratchet_emit.py, retired_rows): it sends one row, value 1, labelled repo, ratchet and reason, for each entry in a repo's ratchet declaration 'retired' list (ratchets.json, read by ratchet.declaration.read_retired), on every run while the declaration lists it, and nothing otherwise ('retired is written, never inferred from silence', operator host line 96701). I checked the declarations I could read: nemik, estate, summit and linux-sources have a ratchets.json with no 'retired' key; mtools and luthen-observability have no ratchets.json at the repo root at all (whether they declare another way I did not find). So the 'retired' half of the tombstone rows has no data until some repo retires a ratchet by writing it into its declaration; the 'reached 0' half comes from the value series (a ratchet at 0 keeps emitting 0 while its file exists). Separate finding for mtools: mikemol-ratchet census over the fleet root CRASHES with FileNotFoundError on a dangling path under el-openglo (.tree-writes/el-mkpux6p7/tree/scripts/gate_ledger.py), in fleetcensus.suppression_rows reading a file that does not exist, so a fleet-wide census cannot run today; the per-repo census the gate uses is not affected. Below paydown, as asked. | 2026-11-05T13:50:22Z: 2026-11-05 mtools carded the census crash as mtools:W2290 (skip a listed-but-gone source in fleetcensus.suppression_rows, with a dangling-path test), queued behind their paydown stacks.",
+      "evidence": "2026-10-26: 2026-10-26: value delivered by W1114/W1115; this card narrowed to the last paydown time and the paydown card | 2026-11-05T13:34:06Z: 2026-11-05 EXTENDED at github-14's request (relaying the operator, 2026-11-05: 'one thing you likely can't see is when/where a ratchet reached 0 or was retired'; I have not verified the quote): the pace should show when and where each ratchet reached 0 or was retired, so finished debt does not read as no history and a vanished row does not read unknown; each such row gets a tombstone with the date, the landing sha and reached-0 versus retired. WHAT THE STORE SUPPLIES (read from pacerun.py and ratchetseries.py, not yet built): DATE: the raw export holds one timestamp per sample (export_series drops them today, it keeps only the values), so the time of the first sample at value 0 is there, and for a retirement the first sample of mikemol.ratchet.retired{repo, ratchet, reason} at 1 or more. KIND: a value series that ends at 0 reached 0 (it keeps emitting 0 while the file exists); a retired tombstone is mtools' written retirement (retired_of already reads it) and carries a REASON label. WHERE: the repo and the ratchet's file name, which are the labels. WHAT IT DOES NOT SUPPLY: the landing SHA, since mikemol.ratchet.value and .retired carry no sha label. It can only be joined by time: a stage=landed sample (W1655 and mtools' post-commit emit, from 2026-11-05 on) is sent within seconds of its commit, so it matches that commit's time exactly enough; a gate-time sample (before) precedes the landing by up to a gate's duration, and anything before today has only gate-time samples, so older tombstones get a nearest-landing-after join, marked approximate. The commit list per repo comes from nemik-hostroot --landings or git log of that repo; whether nemik may read a sibling's git log under the no-sibling-paths ruling is a question for the operator, so the sha for a peer's ratchet may have to come from the landings file alone. Below the paydown work: this card ranks as it did. | 2026-11-05T13:35:22Z: 2026-11-05 SETTLED by github-14 (a peer relay, recorded as their ruling, not the operator's): build date, kind and where from the series; the sha joined from the LANDINGS FILE ONLY (nemik-hostroot --landings), never a peer's git log (the no-sibling-paths ruling already covers it, so it is not an operator question); rows older than the first stage=landed sample are marked approximate; exact sha for new rows comes from stage=landed anyway; no sha label asked of the emitter for now. The luthen egress row (new pace row keys) is parked as a deferred ask on github:W90 and waits. Paydown work stays first in the rank. So the build is: (1) pacewrite last-paydown time and the tagged card, (2) tombstone rows: date, kind (reached 0 or retired, with mtools' reason), where (repo, ratchet), sha from the landings file with an approximate flag, with the egress admission still to come, which means the rows can be written to the pace file's nemik-side form and tested but not yet published to luthen. | 2026-11-05T13:43:12Z: 2026-11-05 github-14's correction answered (read-only): mikemol.ratchet.retired is absent from the store because NOTHING HAS DECLARED A TOMBSTONE, not because an emit fails to arrive. The emitter exists (mtools hooks ratchet_emit.py, retired_rows): it sends one row, value 1, labelled repo, ratchet and reason, for each entry in a repo's ratchet declaration 'retired' list (ratchets.json, read by ratchet.declaration.read_retired), on every run while the declaration lists it, and nothing otherwise ('retired is written, never inferred from silence', operator host line 96701). I checked the declarations I could read: nemik, estate, summit and linux-sources have a ratchets.json with no 'retired' key; mtools and luthen-observability have no ratchets.json at the repo root at all (whether they declare another way I did not find). So the 'retired' half of the tombstone rows has no data until some repo retires a ratchet by writing it into its declaration; the 'reached 0' half comes from the value series (a ratchet at 0 keeps emitting 0 while its file exists). Separate finding for mtools: mikemol-ratchet census over the fleet root CRASHES with FileNotFoundError on a dangling path under el-openglo (.tree-writes/el-mkpux6p7/tree/scripts/gate_ledger.py), in fleetcensus.suppression_rows reading a file that does not exist, so a fleet-wide census cannot run today; the per-repo census the gate uses is not affected. Below paydown, as asked. | 2026-11-05T13:50:22Z: 2026-11-05 mtools carded the census crash as mtools:W2290 (skip a listed-but-gone source in fleetcensus.suppression_rows, with a dangling-path test), queued behind their paydown stacks. | 2026-11-05T17:14:24Z: 2026-11-05T17:2xZ: EXTENDED by github-14 (relayed, request not an operator ruling): publish a ratchet forecast per repo and ratchet, shaped like luthen's NOAA series, below ruff and codon paydown in rank; no new card. Wanted: predicted days to zero from the measured fall per day; an issue timestamp; an explicit impasse state when no fall is forecastable (never blank); forecast error scored later against what happened. Starting point: the pace file already carries per-row horizon (landings to zero, -1 when none) and observed fall; days = horizon over the landing rate; pattern to reuse is nemik_umbrella_forecast_days, not yet read. PROPOSED admission list for luthen (egress waits on github:W90): nemik_ratchet_forecast_days{repo,ratchet} (value or an impasse label, never absent), nemik_ratchet_forecast_issued_seconds{repo,ratchet}, nemik_ratchet_forecast_state{repo,ratchet,state=on_track|impasse|zero} and nemik_ratchet_forecast_error_days{repo,ratchet} scored when the ratchet reaches zero or a horizon passes. Zero target stands for every ratchet (operator ruling, host line 141395). | 2026-11-05T17:16:53Z: 2026-11-05T17:3xZ: SHAPE refined by github-14 (relayed from the operator, no transcript line cited yet; request, not a ruling): the forecast must OVERLAY on actuals like luthen's NWS panels. A days-to-zero number alone is not enough. At each issue publish the predicted ratchet VALUE at future times, kept per issue and lead, so a panel draws the actual line against what each earlier forecast said for that moment; error then falls out per lead. COPY luthen.noaa.forecast.* labels for issue time and lead (not yet read: reading it is the first step, my draft names of 17:2xZ are superseded by what it carries). Still below ruff and codon paydown. Existing nemik analogue to read first: forecastshingle.py and history's shingle rows (HORIZONS, shingle_rows, score_shingle in verify.py), which already issue and score forecasts per horizon.",
       "issued_at": "2026-10-26T13:36:07Z",
       "minted_during": "tick",
       "caused_by": "W1107",
-      "last_worked": "2026-11-05T13:50:22Z",
+      "last_worked": "2026-11-05T17:34:16Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/pacewrite.py",
@@ -26129,7 +26132,8 @@
         "tests/test_pace_rows.py"
       ],
       "size_class": "medium",
-      "weight": 25
+      "weight": 25,
+      "completed": null
     },
     {
       "symbol": "W1109",
@@ -37528,7 +37532,35 @@
         "tools/working_unnamed.py",
         "tests/test_working_unnamed.py"
       ],
-      "size_class": "small"
+      "size_class": "small",
+      "warrants": [
+        {
+          "@context": {
+            "prov": "http://www.w3.org/ns/prov#",
+            "xsd": "http://www.w3.org/2001/XMLSchema#",
+            "mtools": "urn:mtools:warrant#"
+          },
+          "@id": "urn:nemik:nemik/W1568",
+          "prov:wasDerivedFrom": {
+            "@id": "urn:claude:transcript:-home-mikemol-github/695f3e0a-d36f-4080-9c67-7548978cd99e#4a634218-fd42-4fd9-ad27-1fc9c7edd38f",
+            "@type": "prov:Entity",
+            "prov:generatedAtTime": {
+              "@value": "2026-11-05T16:47:48.996Z",
+              "@type": "xsd:dateTime"
+            },
+            "prov:wasAttributedTo": {
+              "@id": "urn:nemik:operator",
+              "@type": "prov:Agent"
+            },
+            "prov:wasGeneratedBy": {
+              "@id": "urn:nemik:utterance/4a634218-fd42-4fd9-ad27-1fc9c7edd38f",
+              "@type": "prov:Activity"
+            },
+            "mtools:line": 141395,
+            "mtools:reader": "mikemol-transcriptstruct claude:transcript:-home-mikemol-github/695f3e0a-d36f-4080-9c67-7548978cd99e --verify 4a634218-fd42-4fd9-ad27-1fc9c7edd38f --claim No declared floors on any ratchet; a declared floor is a temptation to declare a problem too hard to solve"
+          }
+        }
+      ]
     },
     {
       "symbol": "W1569",
@@ -39783,11 +39815,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "Verify the pin move: when luthen reports the nemik-pace sha edit applied, read the published pace's first line for the build key (it must be 4d084f7 or a later build) and compare every row with a read-only run of the tree's code at the same minute (nemik-hostroot --pace --out a scratch file): the mtools rows must leave unknown; then read it again a day later, because 4d084f7's code has never run in the unit; then build the nemik-rank --pace warning (R242 f1): print a warning line when the published pace has no build key or a build that is not an ancestor of main",
-      "evidence": "2026-11-05T15:48:14Z: 2026-11-05 RECURRENCE: nemik's own pace read at 15:37:04Z (newest landing 15:33:24Z) shows EVERY mtools row unknown again, including mtools *.py which read ok at 14:57Z; nemik's rows are fine. The ended_series fix (judge ended against the repo's newest GATE-TIME sample only) was installed in the tree at about 15:00Z and landed as 4d084f7 at 15:33:24Z; luthen's 15:27Z read saw no new unknown. So that fix did not prevent this episode and W1654's claimed root cause (a sparse LANDED sample as 'newest') is at best part of the story: the third all-mtools-unknown episode (11:06Z, 14:37Z, 15:37Z) has now happened with and without my edit. Hypotheses, none proven: (a) mtools' newest gate-time batch is itself sparse (a gate start that sent only a few series), which would make the others ended even under the new rule; (b) the pace run's export or the previous pace file differs (rows carried from the previous file when a series is absent read unknown). Asked luthen-observability for the per-series last-sample times; I will not name a cause until I see them. W1654's closing evidence is therefore corrected here: it landed what it says, and its premise is not confirmed. | 2026-11-05T15:53:30Z: 2026-11-05 DECISIVE FINDING (measured, read-only): the live pace is NOT produced by nemik's working tree. I reproduced the unit's run myself with the tree's code (nemik-hostroot --pace --root <fleet root> --out <a scratch file>) at 15:51:28Z, from the same store: 3 unknown rows (the two never-sampled mtools rows and nemik mypy-baseline.json), mtools rows behind or ok, although the newest unlabelled batch was 62 min old. The PUBLISHED pace files at that time (luthen's nemik-export, its last-good copy, and nemik's ratchet-priors copy, all as_of 15:47:05Z) have 89 unknown rows, and their first line is {as_of, window} with NO 'build' key, while the file my tree writes carries a 'build' key (W1197). So the unit runs an OLDER INSTALLED nemik, not the tree: my ratchetseries edits (installed in the tree at about 15:00Z, landed 4d084f7 at 15:33:24Z) cannot have reached it, which means (1) the 11:06Z attribution to my unlanded edit was wrong for a SECOND reason (the unit never read it), (2) the ended_series fix has had no effect on the live pace and its 'no new unknown' evidence at 15:27Z was not evidence about it, and (3) the live unknowns are the OLD ended_series rule against sparse landed samples, the behaviour the fix removes, which will only show once the host installs a nemik that contains 4d084f7. luthen-observability's age-bound inference fits the old rule plus the cadence of mtools' landed emits, not a freshness bound in the code (none exists in pacerun or pacewrite). NEXT: ask luthen how the host's nemik is installed and updated and request an install of a build at or after 4d084f7; verify by the 'build' key appearing in the published pace's first line and the mtools rows leaving unknown. | 2026-11-05T15:56:13Z: 2026-11-05 luthen-observability (W2044) confirmed the mechanism: the host pace unit runs a PINNED nemik build, user/tools.json row nemik-pace at sha ec56d66bc436 (installed 2026-10-27 23:48, by-sha directory, link live/nemik-pace), which moves ONLY by editing that sha through the gated user apply, on purpose: the pace feeds mtools' submit gate and its verdict flapped 109, 2, 38, 109 across installs of the followed nemik (github:W70, W1710). The FOLLOWED install (live/nemik, tracking main, used by hooks and by-hand runs) already points at 4d084f7a78014033b2418b7a49d9740bc029d289, installed 2026-11-05 10:40 EST, which is why my by-hand run carried the ended_series fix and the unit did not. luthen is editing the nemik-pace sha to 4d084f7a78014033b2418b7a49d9740bc029d289 through the gate now (a later sha only on request, 40 characters). Relayed to mtools: their rows will leave unknown for real behind/ok verdicts, which can change what their commit guard refuses. VERIFICATION owed: the published pace's first line gains a 'build' key and the mtools rows leave unknown at the unit's next run after the apply. NOTE for every earlier statement: nemik's own tree edits NEVER reach the pace unit; only a pin change does. | 2026-11-05T16:33:06Z: 2026-11-05 R242 f1 and f2 applied here: (f1) a standing rule 18, provenance before attribution, is in the standing set (script standing1122.py, 18 rules read back); the second half, a warning from nemik-rank --pace when the published pace has no build key or a mismatched one, is the next step below and is not built; (f2) the pin to 4d084f7 is in flight at luthen; 4d084f7's code has never run in the unit, so the check after the apply is the comparison with a read-only run of the tree, then again a day later.",
+      "evidence": "2026-11-05T15:48:14Z: 2026-11-05 RECURRENCE: nemik's own pace read at 15:37:04Z (newest landing 15:33:24Z) shows EVERY mtools row unknown again, including mtools *.py which read ok at 14:57Z; nemik's rows are fine. The ended_series fix (judge ended against the repo's newest GATE-TIME sample only) was installed in the tree at about 15:00Z and landed as 4d084f7 at 15:33:24Z; luthen's 15:27Z read saw no new unknown. So that fix did not prevent this episode and W1654's claimed root cause (a sparse LANDED sample as 'newest') is at best part of the story: the third all-mtools-unknown episode (11:06Z, 14:37Z, 15:37Z) has now happened with and without my edit. Hypotheses, none proven: (a) mtools' newest gate-time batch is itself sparse (a gate start that sent only a few series), which would make the others ended even under the new rule; (b) the pace run's export or the previous pace file differs (rows carried from the previous file when a series is absent read unknown). Asked luthen-observability for the per-series last-sample times; I will not name a cause until I see them. W1654's closing evidence is therefore corrected here: it landed what it says, and its premise is not confirmed. | 2026-11-05T15:53:30Z: 2026-11-05 DECISIVE FINDING (measured, read-only): the live pace is NOT produced by nemik's working tree. I reproduced the unit's run myself with the tree's code (nemik-hostroot --pace --root <fleet root> --out <a scratch file>) at 15:51:28Z, from the same store: 3 unknown rows (the two never-sampled mtools rows and nemik mypy-baseline.json), mtools rows behind or ok, although the newest unlabelled batch was 62 min old. The PUBLISHED pace files at that time (luthen's nemik-export, its last-good copy, and nemik's ratchet-priors copy, all as_of 15:47:05Z) have 89 unknown rows, and their first line is {as_of, window} with NO 'build' key, while the file my tree writes carries a 'build' key (W1197). So the unit runs an OLDER INSTALLED nemik, not the tree: my ratchetseries edits (installed in the tree at about 15:00Z, landed 4d084f7 at 15:33:24Z) cannot have reached it, which means (1) the 11:06Z attribution to my unlanded edit was wrong for a SECOND reason (the unit never read it), (2) the ended_series fix has had no effect on the live pace and its 'no new unknown' evidence at 15:27Z was not evidence about it, and (3) the live unknowns are the OLD ended_series rule against sparse landed samples, the behaviour the fix removes, which will only show once the host installs a nemik that contains 4d084f7. luthen-observability's age-bound inference fits the old rule plus the cadence of mtools' landed emits, not a freshness bound in the code (none exists in pacerun or pacewrite). NEXT: ask luthen how the host's nemik is installed and updated and request an install of a build at or after 4d084f7; verify by the 'build' key appearing in the published pace's first line and the mtools rows leaving unknown. | 2026-11-05T15:56:13Z: 2026-11-05 luthen-observability (W2044) confirmed the mechanism: the host pace unit runs a PINNED nemik build, user/tools.json row nemik-pace at sha ec56d66bc436 (installed 2026-10-27 23:48, by-sha directory, link live/nemik-pace), which moves ONLY by editing that sha through the gated user apply, on purpose: the pace feeds mtools' submit gate and its verdict flapped 109, 2, 38, 109 across installs of the followed nemik (github:W70, W1710). The FOLLOWED install (live/nemik, tracking main, used by hooks and by-hand runs) already points at 4d084f7a78014033b2418b7a49d9740bc029d289, installed 2026-11-05 10:40 EST, which is why my by-hand run carried the ended_series fix and the unit did not. luthen is editing the nemik-pace sha to 4d084f7a78014033b2418b7a49d9740bc029d289 through the gate now (a later sha only on request, 40 characters). Relayed to mtools: their rows will leave unknown for real behind/ok verdicts, which can change what their commit guard refuses. VERIFICATION owed: the published pace's first line gains a 'build' key and the mtools rows leave unknown at the unit's next run after the apply. NOTE for every earlier statement: nemik's own tree edits NEVER reach the pace unit; only a pin change does. | 2026-11-05T16:33:06Z: 2026-11-05 R242 f1 and f2 applied here: (f1) a standing rule 18, provenance before attribution, is in the standing set (script standing1122.py, 18 rules read back); the second half, a warning from nemik-rank --pace when the published pace has no build key or a mismatched one, is the next step below and is not built; (f2) the pin to 4d084f7 is in flight at luthen; 4d084f7's code has never run in the unit, so the check after the apply is the comparison with a read-only run of the tree, then again a day later. | 2026-11-05T17:12:59Z: 2026-11-05T17:1xZ: luthen W2044 reports the pin applied (13c53f8a, nemik-pace sha 4d084f7). READ BACK from the published file: first line {as_of 2026-11-05T17:07:07Z, window 10, build 4d084f7a78014033b2418b7a49d9740bc029d289}, so the build key is present and matches the pin. Row comparison with read-only nemik-hostroot --pace --root the fleet root (scratch file) at about 17:15Z: all five nemik rows carry the same states (*.py ok, codon ok, mypy unknown value 2 required 190 from the empty-baseline bug mtools:W2295, pyproject ok, ruff ok); the reproduction's values are newer (codon 132, ruff 2, from stack 1015's gate-time emit) than the published 17:07:07Z sample (codon 134, ruff 3), a timing difference, not a build one. nemik reading behind 0 is consistent: ruff reads ok (fell 3 over 10 landings against owes 6 at 16:37Z, ok after d3b6d3e). Still to do: read the published pace again a day later (2026-11-06) and build the nemik-rank --pace warning for a missing or mismatched build key.",
       "issued_at": "2026-11-05T15:48:05Z",
       "minted_during": "interrupt",
       "caused_by": "W1654",
-      "last_worked": "2026-11-05T16:33:06Z",
+      "last_worked": "2026-11-05T17:12:59Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/ratchetseries.py",
@@ -39849,17 +39881,17 @@
     {
       "symbol": "W1664",
       "title": "churn folds into history, so history's function-local churn import (PLC0415) clears and churn leaves the codon baseline",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "2026-11-05T16:56:42Z: G0 2026-11-05T16:56:41Z: [NO-PACE-STAMP] Pace 2026-11-05T16:37:06Z (PENDING, predates d3b6d3e): ruff behind owes 6 fell 3, codon ok 134, mypy unknown. Actuator: fold churn.py into history.py (render to render_churn, run to run_churn), delete churn.py, test_churn imports from nemik.history, codon baseline drops churn. Sensor: pycheck --ratchet, importprobe, every test mentioning history or churn, five guards, codon census. Expected: ruff 3 to 2, mypy 0, codon 134 to 132.",
+      "next_bounded_step": null,
+      "evidence": "2026-11-05T16:56:42Z: G0 2026-11-05T16:56:41Z: [NO-PACE-STAMP] Pace 2026-11-05T16:37:06Z (PENDING, predates d3b6d3e): ruff behind owes 6 fell 3, codon ok 134, mypy unknown. Actuator: fold churn.py into history.py (render to render_churn, run to run_churn), delete churn.py, test_churn imports from nemik.history, codon baseline drops churn. Sensor: pycheck --ratchet, importprobe, every test mentioning history or churn, five guards, codon census. Expected: ruff 3 to 2, mypy 0, codon 134 to 132. | 2026-11-05T17:32:08Z: Landed 6bc4cf3 (stack 1015, pushed). ruff 3 to 2, mypy 0, codon 134 to 132; census 7 passed; 141 history/churn tests and guards green; gate 467 fresh of 470.",
       "issued_at": "2026-11-05T16:56:30Z",
       "minted_during": "interrupt",
       "caused_by": null,
-      "last_worked": "2026-11-05T17:06:30Z",
+      "last_worked": "2026-11-05T17:32:08Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/history.py",
@@ -39869,6 +39901,98 @@
         "codon-baseline.json"
       ],
       "size_class": "medium",
+      "completed": "20261105T173208Z"
+    },
+    {
+      "symbol": "W1665",
+      "title": "Ratchet forecast series: predicted days to zero per repo and ratchet with issue stamp and explicit impasse state",
+      "status": "blocked",
+      "enables": [
+        "W1108"
+      ],
+      "touches": [],
+      "blocked_on": [
+        "github:W90"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-11-05T17:34:16Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1108",
+      "last_worked": "2026-11-05T17:34:26Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W1666",
+      "title": "Ratchet forecast overlay: predicted ratchet value per issue and lead, labels copied from luthen.noaa.forecast, error scored per lead",
+      "status": "blocked",
+      "enables": [
+        "W1108"
+      ],
+      "touches": [],
+      "blocked_on": [
+        "github:W90"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "",
+      "evidence": "2026-11-05T17:37:41Z: 2026-11-05T17:5xZ: WARRANT BASIS verified with mikemol-transcriptstruct --human: host transcript 695f3e0a line 141588, uuid 89c9bd0f-c008-4939-b483-6cee8c676d4e, 2026-11-05T17:15:44.125Z, human origin: 'One of the things we have are various nws forecasts and station readings, and we overlay the station readings with the forecasts for that moment which had been previously retrieved.' SCOPE: the operator described how the NWS panels overlay; they did not order a ratchet overlay in those words. Applying it to ratchets is the host's reading (relayed by github-14), recorded as that reading with this line as its basis.",
+      "issued_at": "2026-11-05T17:34:16Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1108",
+      "last_worked": "2026-11-05T17:37:41Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "warrants": [
+        {
+          "@context": {
+            "prov": "http://www.w3.org/ns/prov#",
+            "xsd": "http://www.w3.org/2001/XMLSchema#",
+            "mtools": "urn:mtools:warrant#"
+          },
+          "@id": "urn:nemik:nemik/W1666",
+          "prov:wasDerivedFrom": {
+            "@id": "urn:claude:transcript:-home-mikemol-github/695f3e0a-d36f-4080-9c67-7548978cd99e#89c9bd0f-c008-4939-b483-6cee8c676d4e",
+            "@type": "prov:Entity",
+            "prov:generatedAtTime": {
+              "@value": "2026-11-05T17:15:44.125Z",
+              "@type": "xsd:dateTime"
+            },
+            "prov:wasAttributedTo": {
+              "@id": "urn:nemik:operator",
+              "@type": "prov:Agent"
+            },
+            "prov:wasGeneratedBy": {
+              "@id": "urn:nemik:utterance/89c9bd0f-c008-4939-b483-6cee8c676d4e",
+              "@type": "prov:Activity"
+            },
+            "mtools:line": 141588,
+            "mtools:reader": "mikemol-transcriptstruct claude:transcript:-home-mikemol-github/695f3e0a-d36f-4080-9c67-7548978cd99e --verify 89c9bd0f-c008-4939-b483-6cee8c676d4e --claim The operator described the NWS overlay of station readings with previously retrieved forecasts for that moment; applying it to ratchets is the host's reading, not the operator's order"
+          }
+        }
+      ]
+    },
+    {
+      "symbol": "W1667",
+      "title": "tools/landing_report.py prints the landing stamps in UTC with gaps, the gate's stacks with begin stamps, the working_unnamed lines and the dirty count, so a G1 carries numbers",
+      "status": "working",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "2026-11-05T17:35:21Z: G0 2026-11-05T17:35:20Z: [NO-PACE-STAMP] Pace 2026-11-05T17:27:08Z (read at about 17:40Z, PENDING, predates 6bc4cf3): nemik ruff ok 2 left, codon ok 132, mypy unknown; nothing owed, so a tool-and-test stack lowers no ratchet and the guard has nothing to refuse. Actuator: new tools/landing_report.py and tests/test_landing_report.py. Sensor: pycheck --ratchet unchanged (ruff 2, mypy 0), the new test, the five guards, one by-hand run printing UTC stamps. Expected: the report prints six landings with gaps, the gate, the working lines and the dirty count.",
+      "issued_at": "2026-11-05T17:35:08Z",
+      "minted_during": "interrupt",
+      "caused_by": null,
+      "last_worked": "2026-11-05T17:41:09Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "tools/landing_report.py",
+        "tests/test_landing_report.py"
+      ],
+      "size_class": "small",
       "completed": null
     }
   ],
@@ -40086,12 +40210,7 @@
   ],
   "job_id": "74d4f68e",
   "heartbeat": "2026-11-05T01:13:32Z",
-  "lock": {
-    "holder": "session-nemik",
-    "taken_at": "2026-11-05T17:05:30Z",
-    "pid": 1411894,
-    "start": 59456217
-  },
+  "lock": null,
   "predecessor_job_id": "481476b5",
   "leases": [
     {
@@ -40830,7 +40949,7 @@
       "action": "update W1240",
       "first_run": "2026-10-29T00:06:58Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -40848,7 +40967,7 @@
       "action": "update W1242",
       "first_run": "2026-10-29T00:06:58Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -40857,7 +40976,7 @@
       "action": "update W1243",
       "first_run": "2026-10-29T00:06:58Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -40866,7 +40985,7 @@
       "action": "update W1246",
       "first_run": "2026-10-29T00:06:58Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -40884,7 +41003,7 @@
       "action": "update W1250",
       "first_run": "2026-10-29T00:06:58Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -40893,7 +41012,7 @@
       "action": "update W17",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -40902,7 +41021,7 @@
       "action": "update W47",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -40911,7 +41030,7 @@
       "action": "update W188",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -40920,7 +41039,7 @@
       "action": "update W224",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -40929,7 +41048,7 @@
       "action": "update W282",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -40938,7 +41057,7 @@
       "action": "update W283",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -40947,7 +41066,7 @@
       "action": "update W286",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -40956,7 +41075,7 @@
       "action": "update W287",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -40965,7 +41084,7 @@
       "action": "update W289",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -40974,7 +41093,7 @@
       "action": "update W292",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -40983,7 +41102,7 @@
       "action": "update W294",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -40992,7 +41111,7 @@
       "action": "update W295",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41001,7 +41120,7 @@
       "action": "update W297",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41010,7 +41129,7 @@
       "action": "update W346",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41019,7 +41138,7 @@
       "action": "update W352",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41028,7 +41147,7 @@
       "action": "update W353",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41037,7 +41156,7 @@
       "action": "update W364",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41046,7 +41165,7 @@
       "action": "update W369",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41055,7 +41174,7 @@
       "action": "update W370",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41064,7 +41183,7 @@
       "action": "update W422",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41073,7 +41192,7 @@
       "action": "update W423",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41082,7 +41201,7 @@
       "action": "update W424",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41091,7 +41210,7 @@
       "action": "update W459",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41100,7 +41219,7 @@
       "action": "update W461",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41109,7 +41228,7 @@
       "action": "update W486",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41118,7 +41237,7 @@
       "action": "update W490",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41127,7 +41246,7 @@
       "action": "update W491",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41136,7 +41255,7 @@
       "action": "update W500",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41145,7 +41264,7 @@
       "action": "update W506",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41154,7 +41273,7 @@
       "action": "update W511",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41163,7 +41282,7 @@
       "action": "update W512",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41172,7 +41291,7 @@
       "action": "update W516",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41181,7 +41300,7 @@
       "action": "update W517",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41190,7 +41309,7 @@
       "action": "update W534",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41199,7 +41318,7 @@
       "action": "update W561",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41208,7 +41327,7 @@
       "action": "update W563",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41217,7 +41336,7 @@
       "action": "update W564",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41226,7 +41345,7 @@
       "action": "update W567",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41235,7 +41354,7 @@
       "action": "update W568",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41244,7 +41363,7 @@
       "action": "update W569",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41253,7 +41372,7 @@
       "action": "update W570",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41262,7 +41381,7 @@
       "action": "update W571",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41271,7 +41390,7 @@
       "action": "update W575",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41280,7 +41399,7 @@
       "action": "update W578",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41289,7 +41408,7 @@
       "action": "update W579",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41298,7 +41417,7 @@
       "action": "update W580",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41307,7 +41426,7 @@
       "action": "update W581",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41316,7 +41435,7 @@
       "action": "update W613",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41325,7 +41444,7 @@
       "action": "update W643",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41334,7 +41453,7 @@
       "action": "update W674",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41343,7 +41462,7 @@
       "action": "update W675",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41352,7 +41471,7 @@
       "action": "update W680",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41361,7 +41480,7 @@
       "action": "update W691",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41370,7 +41489,7 @@
       "action": "update W693",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41379,7 +41498,7 @@
       "action": "update W695",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41388,7 +41507,7 @@
       "action": "update W708",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41397,7 +41516,7 @@
       "action": "update W709",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41406,7 +41525,7 @@
       "action": "update W735",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41415,7 +41534,7 @@
       "action": "update W743",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41424,7 +41543,7 @@
       "action": "update W749",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41433,7 +41552,7 @@
       "action": "update W750",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41442,7 +41561,7 @@
       "action": "update W751",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41451,7 +41570,7 @@
       "action": "update W764",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41460,7 +41579,7 @@
       "action": "update W768",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41469,7 +41588,7 @@
       "action": "update W781",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41478,7 +41597,7 @@
       "action": "update W788",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41487,7 +41606,7 @@
       "action": "update W789",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41496,7 +41615,7 @@
       "action": "update W812",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41505,7 +41624,7 @@
       "action": "update W837",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41514,7 +41633,7 @@
       "action": "update W846",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41523,7 +41642,7 @@
       "action": "update W852",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41532,7 +41651,7 @@
       "action": "update W877",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41541,7 +41660,7 @@
       "action": "update W879",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41550,7 +41669,7 @@
       "action": "update W881",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41559,7 +41678,7 @@
       "action": "update W899",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41568,7 +41687,7 @@
       "action": "update W902",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41577,7 +41696,7 @@
       "action": "update W905",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41586,7 +41705,7 @@
       "action": "update W908",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41595,7 +41714,7 @@
       "action": "update W909",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41604,7 +41723,7 @@
       "action": "update W910",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41613,7 +41732,7 @@
       "action": "update W911",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41622,7 +41741,7 @@
       "action": "update W913",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41631,7 +41750,7 @@
       "action": "update W914",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41640,7 +41759,7 @@
       "action": "update W922",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41649,7 +41768,7 @@
       "action": "update W923",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41658,7 +41777,7 @@
       "action": "update W925",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41667,7 +41786,7 @@
       "action": "update W926",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41676,7 +41795,7 @@
       "action": "update W927",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41685,7 +41804,7 @@
       "action": "update W934",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41694,7 +41813,7 @@
       "action": "update W938",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41703,7 +41822,7 @@
       "action": "update W941",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41712,7 +41831,7 @@
       "action": "update W963",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41721,7 +41840,7 @@
       "action": "update W964",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41730,7 +41849,7 @@
       "action": "update W966",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41739,7 +41858,7 @@
       "action": "update W967",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41748,7 +41867,7 @@
       "action": "update W969",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41757,7 +41876,7 @@
       "action": "update W970",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41766,7 +41885,7 @@
       "action": "update W976",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41775,7 +41894,7 @@
       "action": "update W979",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41784,7 +41903,7 @@
       "action": "update W980",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41793,7 +41912,7 @@
       "action": "update W981",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41802,7 +41921,7 @@
       "action": "update W982",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41811,7 +41930,7 @@
       "action": "update W984",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41820,7 +41939,7 @@
       "action": "update W985",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41829,7 +41948,7 @@
       "action": "update W986",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41838,7 +41957,7 @@
       "action": "update W994",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41847,7 +41966,7 @@
       "action": "update W1002",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41856,7 +41975,7 @@
       "action": "update W1007",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41865,7 +41984,7 @@
       "action": "update W1008",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41874,7 +41993,7 @@
       "action": "update W1009",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41883,7 +42002,7 @@
       "action": "update W1010",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41892,7 +42011,7 @@
       "action": "update W1016",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41901,7 +42020,7 @@
       "action": "update W1017",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41910,7 +42029,7 @@
       "action": "update W1018",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41919,7 +42038,7 @@
       "action": "update W1020",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41928,7 +42047,7 @@
       "action": "update W1021",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41937,7 +42056,7 @@
       "action": "update W1022",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41946,7 +42065,7 @@
       "action": "update W1023",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41955,7 +42074,7 @@
       "action": "update W1026",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41964,7 +42083,7 @@
       "action": "update W1028",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41973,7 +42092,7 @@
       "action": "update W1030",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41982,7 +42101,7 @@
       "action": "update W1032",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -41991,7 +42110,7 @@
       "action": "update W1035",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42000,7 +42119,7 @@
       "action": "update W1036",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42009,7 +42128,7 @@
       "action": "update W1037",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42018,7 +42137,7 @@
       "action": "update W1038",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42027,7 +42146,7 @@
       "action": "update W1041",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42036,7 +42155,7 @@
       "action": "update W1042",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42045,7 +42164,7 @@
       "action": "update W1047",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42054,7 +42173,7 @@
       "action": "update W1052",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42063,7 +42182,7 @@
       "action": "update W1055",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42072,7 +42191,7 @@
       "action": "update W1056",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42081,7 +42200,7 @@
       "action": "update W1057",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42090,7 +42209,7 @@
       "action": "update W1058",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42099,7 +42218,7 @@
       "action": "update W1063",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42108,7 +42227,7 @@
       "action": "update W1072",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42117,7 +42236,7 @@
       "action": "update W1073",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42126,7 +42245,7 @@
       "action": "update W1075",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42135,7 +42254,7 @@
       "action": "update W1076",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42144,7 +42263,7 @@
       "action": "update W1077",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42153,7 +42272,7 @@
       "action": "update W1079",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42162,7 +42281,7 @@
       "action": "update W1083",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42171,7 +42290,7 @@
       "action": "update W1092",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42180,7 +42299,7 @@
       "action": "update W1093",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42189,7 +42308,7 @@
       "action": "update W1094",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42198,7 +42317,7 @@
       "action": "update W1095",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42207,7 +42326,7 @@
       "action": "update W1096",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42216,7 +42335,7 @@
       "action": "update W1098",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42225,7 +42344,7 @@
       "action": "update W1099",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42234,7 +42353,7 @@
       "action": "update W1100",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42243,7 +42362,7 @@
       "action": "update W1101",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42252,7 +42371,7 @@
       "action": "update W1102",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42261,7 +42380,7 @@
       "action": "update W1103",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42270,7 +42389,7 @@
       "action": "update W1106",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42279,7 +42398,7 @@
       "action": "update W1113",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42288,7 +42407,7 @@
       "action": "update W1128",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42297,7 +42416,7 @@
       "action": "update W1136",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42306,7 +42425,7 @@
       "action": "update W1139",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42315,7 +42434,7 @@
       "action": "update W1140",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42324,7 +42443,7 @@
       "action": "update W1141",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42333,7 +42452,7 @@
       "action": "update W1163",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42342,7 +42461,7 @@
       "action": "update W1169",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42351,7 +42470,7 @@
       "action": "update W1173",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42360,7 +42479,7 @@
       "action": "update W1175",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42369,7 +42488,7 @@
       "action": "update W1178",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42378,7 +42497,7 @@
       "action": "update W1179",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42387,7 +42506,7 @@
       "action": "update W1184",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42396,7 +42515,7 @@
       "action": "update W1186",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42405,7 +42524,7 @@
       "action": "update W1187",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42414,7 +42533,7 @@
       "action": "update W1197",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42423,7 +42542,7 @@
       "action": "update W1198",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42432,7 +42551,7 @@
       "action": "update W1215",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42441,7 +42560,7 @@
       "action": "update W1216",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42450,7 +42569,7 @@
       "action": "update W1217",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42459,7 +42578,7 @@
       "action": "update W1218",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42468,7 +42587,7 @@
       "action": "update W1219",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42477,7 +42596,7 @@
       "action": "update W1220",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42486,7 +42605,7 @@
       "action": "update W1222",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42495,7 +42614,7 @@
       "action": "update W1224",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42504,7 +42623,7 @@
       "action": "update W1225",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42513,7 +42632,7 @@
       "action": "update W1226",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42522,7 +42641,7 @@
       "action": "update W1229",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42531,7 +42650,7 @@
       "action": "update W1231",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42540,7 +42659,7 @@
       "action": "update W1232",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42549,7 +42668,7 @@
       "action": "update W1244",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42558,7 +42677,7 @@
       "action": "update W1245",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42567,7 +42686,7 @@
       "action": "update W1249",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42576,7 +42695,7 @@
       "action": "update W1257",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42585,7 +42704,7 @@
       "action": "update W1258",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42594,7 +42713,7 @@
       "action": "update W1261",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42603,7 +42722,7 @@
       "action": "update W1270",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42612,7 +42731,7 @@
       "action": "update W1271",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42621,7 +42740,7 @@
       "action": "update W1272",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42630,7 +42749,7 @@
       "action": "update W1275",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42639,7 +42758,7 @@
       "action": "update W1276",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42648,7 +42767,7 @@
       "action": "update W1277",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42657,7 +42776,7 @@
       "action": "update W1279",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
-      "status": "open"
+      "status": "applied"
     },
     {
       "tool": "update-many",
@@ -42666,6 +42785,24 @@
       "action": "update W1280",
       "first_run": "2026-10-29T23:53:37Z",
       "last_run": "2026-10-29T23:53:37Z",
+      "status": "applied"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1665",
+      "action": "update W1665",
+      "first_run": "2026-11-05T17:34:21Z",
+      "last_run": "2026-11-05T17:34:21Z",
+      "status": "open"
+    },
+    {
+      "tool": "update-many",
+      "rule": "update-many",
+      "subject": "W1666",
+      "action": "update W1666",
+      "first_run": "2026-11-05T17:34:21Z",
+      "last_run": "2026-11-05T17:34:21Z",
       "status": "open"
     }
   ],
@@ -50065,7 +50202,29 @@
         }
       ],
       "id": "nemik:R241"
+    },
+    {
+      "card": "W1664",
+      "trigger": "round 244: stack 1015 (W1664 churn.py folded into history.py, ruff 3 to 2, codon 134 to 132) 6bc4cf34 landed 17:31:25Z; ruff 2 left (check.py:986, critical.py:511); the landing report tool, a submit stamp and the importprobe not done; github-14 asked twice to extend W1108",
+      "root": "Verified from the reflog (unix stamp 1793899885 = 17:31:25Z, 3126 s after d3b6d3e8 at 16:39:19Z): 1015 landed, [PUSHED], '467 fresh of 470', the ratchet write reading 'ruff: 2 findings, baseline 3; mypy: 0 findings, baseline 0', 80 and 61 tests on every file mentioning history or churn plus the five guards, and the codon census test 'seven passed in 433.58 s' run before the submit, which is the right use of seven minutes (a gate refusal would cost a full gate). I grepped pyproject.toml and BUILD.bazel for churn and found no command or target left pointing at the deleted module, so the importprobe the G0 named and the session did not run was not needed this time; the miss is a miss of procedure and not of result. The ruling I asked to see quoted in R236 finding 1 is now on record: github-14 verified the floor ruling (host line 141395, uuid 4a634218) and it is recorded on W1568, and the pin of luthen's pace unit was read back from the published file (build key 4d084f7) with a read-only hostroot comparison recorded on W1661, which is the provenance check R242 asked for. The span is otherwise one stack: after it ruff stands at two (check.py:986 and critical.py:511), codon at 132 modules' worth of entries, mypy zero. The G1 names what it did not do: no submit stamp recorded (so the 16:39:19Z to submit gap is 'about 47 minutes' by the G1's own estimate, which breaks standing 13), no landing-report tool (R243 finding 2), the two remaining ruff rows, the W1108 read. I did not re-run any figure. SHIP-SEEN for 984 to 1015 is unread. Two findings. No fixpoint is declared: open findings are carried with owners and due dates. Carried open findings as in R243, with R243 finding 1 now at two rows and finding 2 (the landing report) not built.",
+      "findings": [
+        {
+          "finding": "The stamps and the landing sensors have gone unrecorded in each of the last two G1s, and the gap here is a quantity that matters (the G1 estimates about 47 minutes empty before the submit and cannot say). The landing report (R243 finding 2) is small and its absence is the cause: build it now, before the last two ruff rows, so the interval is a number from then on. It prints, from the queue key and the reflog, the submit, begin and landing stamps (date -u), the empty interval since the previous landing, the working_unnamed line and the staged-successor line, and git status against origin/main, and a test pins the arithmetic on a fixture. Land it as the second entry of the check.py or critical.py stack so it needs no first entry of its own.",
+          "finding_card": "W1664",
+          "finding_owner": "nemik session",
+          "finding_witness": "tools/landing_report in a landed stack with a test, and the next G1 quoting its five lines.",
+          "due": "2026-11-09"
+        },
+        {
+          "finding": "github-14 has now asked twice to extend W1108 (a ratchet forecast, then an overlay of predicted values per issue and lead), recorded as requests with no operator line cited, and the card's own deliverable (the tombstone rows) has not landed. An umbrella that absorbs each request will not land its own scope. Split now: keep W1108's deliverable as written, give the forecast and the overlay their own children with a manifest and size each, blocked on the operator warrant or the owner's decision (cite the host line when it exists), and tell github-14 which card each request lives on and what it waits for. The tombstone rows are then a stack with a bounded scope and a landing, and the later requests are queue items rather than growth.",
+          "finding_card": "W1108",
+          "finding_owner": "nemik session",
+          "finding_witness": "Two child cards (forecast, overlay) with manifests and blocked_on, W1108's scope text unchanged, and github-14 told which card carries each request.",
+          "due": "2026-11-09"
+        }
+      ],
+      "id": "nemik:R242"
     }
   ],
-  "retro_counter": 241
+  "retro_counter": 242
 }
