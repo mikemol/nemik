@@ -14,18 +14,10 @@
  "src/nemik/history.py": {
   "PLC0415": 1
  },
- "src/nemik/mspdi.py": {
-  "S314": 1,
-  "S405": 1
- },
  "src/nemik/rank.py": {
   "PLC0415": 6
  },
  "src/nemik/witnesses.py": {
   "PLC0415": 1
- },
- "tests/test_mspdi.py": {
-  "S314": 2,
-  "S405": 1
  }
 }

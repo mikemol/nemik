@@ -4716,3 +4716,26 @@
 2026-11-05T06:53:17Z  status W1649 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-05T06:53:18Z  status W1646 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-05T06:53:19Z  status W1647 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T07:07:52Z  status W1651 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T07:07:54Z  status W1650 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T07:07:55Z  status W1649 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T07:07:57Z  status W1646 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T07:07:58Z  status W1647 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T07:29:19Z  tick  W1651 advanced  sweep     "stack 1002 landed 07:06:39Z (cde95c6 repin, ea4fbdf Popen rows, 250e440 noqa, 3f25272, c3b0041 feed): ruff 23 to 19, mypy 2, codon 138; gate empty after; W1633 awaits operator [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T07:52:39Z  status W1502 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T07:52:44Z  status W1503 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T07:52:50Z  status W1504 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T07:52:53Z  status W1505 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T07:52:55Z  status W1494 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T07:52:55Z  status W1507 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T07:53:10Z  status W1494 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T08:17:46Z  status W1633 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T08:22:59Z  status W1633 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T08:35:39Z  status W1633 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T08:35:41Z  interrupt W1652 minted    -         "A gate run sends its ratchet values to the store before it lands, so a cancelled run makes the guard refuse the stack that carries the fall"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1633
+2026-11-05T08:35:42Z  interrupt W1653 minted    -         "A nemik gate run was cancelled by the host guard kine-latency mid-build with no failing test"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1633
+2026-11-05T08:35:50Z  status W1652 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T08:35:57Z  status W1653 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T08:44:24Z  status W1652 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T08:48:43Z  status W1652 working>blocked writer    "working -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T08:48:48Z  status W1633 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

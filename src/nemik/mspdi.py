@@ -11,14 +11,19 @@ what was written.
 
 nemik has no durations or dates, so none are invented: a task carries only its UID, ID, name, the
 cite (as a text field), and PercentComplete 100 when the card is done.
+
+nemik:W1633: the XML is read with `xml.parsers.expat` and written as text, through a small tree of
+its own (`Node`), not ElementTree: the standard wrappers are the parsers ruff's S rules name as
+unsafe on untrusted input. A document with a DOCTYPE is refused outright, so no entity can be
+declared and none can expand, whatever expat the interpreter links.
 """
 
 from __future__ import annotations
 
 import argparse
 import sys
-import xml.etree.ElementTree as ET
 from pathlib import Path
+from xml.parsers import expat
 
 from rdflib import Graph
 
@@ -33,12 +38,117 @@ FS = "1"  # PredecessorLink Type: finish-to-start
 # Text1, the task field the cite rides in: "the FieldID 188743731 matches the pjCustomTaskText1
 # value" (Microsoft Learn, FieldID Element, fetched 2026-10-12).
 CITE_FIELD = "188743731"
+DECLARATION = "<?xml version='1.0' encoding='utf-8'?>"
+INDENT = "  "
+WHOLE_DOCUMENT = True  # expat's isfinal: the text given is all there is
 
 
-def _sub(parent: ET.Element, tag: str, text: str) -> ET.Element:
-    el = ET.SubElement(parent, f"{{{NS}}}{tag}")
-    el.text = text
-    return el
+class Node:
+    """One element of an MSPDI document: its local tag, its text and its child elements."""
+
+    def __init__(self, tag: str, text: str = "") -> None:
+        """Make an element with no children."""
+        self.tag = tag
+        self.text = text
+        self.kids: list[Node] = []
+
+    def add(self, tag: str, text: str = "") -> Node:
+        """Append a child element.
+
+        Returns:
+            The new child.
+
+        """
+        kid = Node(tag, text)
+        self.kids.append(kid)
+        return kid
+
+    def under(self, path: str) -> list[Node]:
+        """Find the elements a slash-separated path of local tags reaches from here.
+
+        Returns:
+            Every element at the end of the path, in document order; none when it breaks off.
+
+        """
+        found = [self]
+        for tag in path.split("/"):
+            found = [kid for node in found for kid in node.kids if kid.tag == tag]
+        return found
+
+    def text_at(self, path: str, default: str = "") -> str:
+        """Give the text of the first element a path reaches.
+
+        Returns:
+            Its text, or `default` when the path reaches nothing.
+
+        """
+        found = self.under(path)
+        return found[0].text if found else default
+
+    def descendants(self, tag: str) -> list[Node]:
+        """Find every element below this one, at any depth, with a local tag.
+
+        Returns:
+            The matches in document order.
+
+        """
+        return [
+            match
+            for kid in self.kids
+            for match in ([kid] if kid.tag == tag else []) + kid.descendants(tag)
+        ]
+
+
+def _no_doctype(*_declaration: object) -> None:
+    # a DOCTYPE is where an entity is declared; refusing it leaves nothing to expand
+    message = "an MSPDI document with a DOCTYPE is refused"
+    raise ValueError(message)
+
+
+def parse(text: str) -> Node:
+    """Read an XML document into a tree of `Node`, namespaces dropped to their local names.
+
+    A malformed document raises expat's own error, and one with a DOCTYPE raises ValueError.
+
+    Returns:
+        The document's root element.
+
+    """
+    stack = [Node("")]
+
+    def start(name: str, _attrs: dict[str, str]) -> None:
+        stack.append(stack[-1].add(name.rpartition("}")[2]))
+
+    def characters(data: str) -> None:
+        stack[-1].text += data
+
+    def end(_name: str) -> None:
+        stack.pop()
+
+    parser = expat.ParserCreate(namespace_separator="}")
+    parser.StartDoctypeDeclHandler = _no_doctype
+    parser.StartElementHandler = start
+    parser.CharacterDataHandler = characters
+    parser.EndElementHandler = end
+    parser.Parse(text, WHOLE_DOCUMENT)
+    return stack[0].kids[0]
+
+
+def _escape(text: str) -> str:
+    return text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+
+
+def _render(node: Node, depth: int, attributes: str = "") -> list[str]:
+    pad = INDENT * depth
+    head = f"{node.tag}{attributes}"
+    if node.kids:
+        lines = [f"{pad}<{head}>"]
+        for kid in node.kids:
+            lines += _render(kid, depth + 1)
+        return [*lines, f"{pad}</{node.tag}>"]
+    if node.text:
+        return [f"{pad}<{head}>{_escape(node.text)}</{node.tag}>"]
+    return [f"{pad}<{head} />"]
 
 
 def write(tasks: list[Task], name: str = "nemik") -> str:
@@ -49,39 +159,34 @@ def write(tasks: list[Task], name: str = "nemik") -> str:
         in an extended attribute.
 
     """
-    ET.register_namespace("", NS)
-    project = ET.Element(f"{{{NS}}}Project")
-    _sub(project, "Name", name)
-    attrs = ET.SubElement(project, f"{{{NS}}}ExtendedAttributes")
-    attr = ET.SubElement(attrs, f"{{{NS}}}ExtendedAttribute")
-    _sub(attr, "FieldID", CITE_FIELD)
-    _sub(attr, "FieldName", "Text1")
-    _sub(attr, "Alias", "nemik cite")
+    root = Node("Project")
+    root.add("Name", name)
+    attr = root.add("ExtendedAttributes").add("ExtendedAttribute")
+    attr.add("FieldID", CITE_FIELD)
+    attr.add("FieldName", "Text1")
+    attr.add("Alias", "nemik cite")
     uid = {t.cite: t.uid for t in tasks}
-    root = ET.SubElement(project, f"{{{NS}}}Tasks")
+    rows = root.add("Tasks")
     for t in tasks:
-        task = ET.SubElement(root, f"{{{NS}}}Task")
-        _sub(task, "UID", str(t.uid))
-        _sub(task, "ID", str(t.uid))
-        _sub(task, "Name", t.name)
-        _sub(task, "PercentComplete", "100" if t.done else "0")
+        task = rows.add("Task")
+        task.add("UID", str(t.uid))
+        task.add("ID", str(t.uid))
+        task.add("Name", t.name)
+        task.add("PercentComplete", "100" if t.done else "0")
         for link in t.preds:
-            pl = ET.SubElement(task, f"{{{NS}}}PredecessorLink")
+            pl = task.add("PredecessorLink")
             if link.cite in uid:
-                _sub(pl, "PredecessorUID", str(uid[link.cite]))
+                pl.add("PredecessorUID", str(uid[link.cite]))
             else:
-                _sub(pl, "CrossProject", "1")
-                _sub(
-                    pl,
-                    "CrossProjectName",
-                    f"{link.cite.partition(':')[0]}\\{link.cite}",
+                pl.add("CrossProject", "1")
+                pl.add(
+                    "CrossProjectName", f"{link.cite.partition(':')[0]}\\{link.cite}"
                 )
-            _sub(pl, "Type", FS)
-        ext = ET.SubElement(task, f"{{{NS}}}ExtendedAttribute")
-        _sub(ext, "FieldID", CITE_FIELD)
-        _sub(ext, "Value", t.cite)
-    ET.indent(project)
-    return ET.tostring(project, encoding="unicode", xml_declaration=True)
+            pl.add("Type", FS)
+        ext = task.add("ExtendedAttribute")
+        ext.add("FieldID", CITE_FIELD)
+        ext.add("Value", t.cite)
+    return DECLARATION + "\n" + "\n".join(_render(root, 0, f' xmlns="{NS}"'))
 
 
 def main(argv: list[str] | None = None) -> None:
@@ -142,32 +247,27 @@ def read(text: str) -> list[Task]:
         predecessor links, cross-project ones marked as such.
 
     """
-    q = {"p": NS}
-    project = ET.fromstring(text)
-    rows = project.findall("p:Tasks/p:Task", q)
-    cite_of = {
-        r.findtext("p:UID", "", q): r.findtext("p:ExtendedAttribute/p:Value", "", q)
-        for r in rows
-    }
+    rows = parse(text).under("Tasks/Task")
+    cite_of = {r.text_at("UID"): r.text_at("ExtendedAttribute/Value") for r in rows}
     tasks = []
     for r in rows:
-        cite = r.findtext("p:ExtendedAttribute/p:Value", "", q)
+        cite = r.text_at("ExtendedAttribute/Value")
         links = []
-        for pl in r.findall("p:PredecessorLink", q):
-            if pl.findtext("p:CrossProject", "0", q) == "1":
-                other = pl.findtext("p:CrossProjectName", "", q).partition("\\")[2]
+        for pl in r.under("PredecessorLink"):
+            if pl.text_at("CrossProject", "0") == "1":
+                other = pl.text_at("CrossProjectName").partition("\\")[2]
                 links.append(Link(other, cross_repo=True))
             else:
-                other = cite_of[pl.findtext("p:PredecessorUID", "", q)]
+                other = cite_of[pl.text_at("PredecessorUID")]
                 links.append(
                     Link(other, other.partition(":")[0] != cite.partition(":")[0])
                 )
         tasks.append(
             Task(
-                uid=int(r.findtext("p:UID", "0", q)),
+                uid=int(r.text_at("UID", "0")),
                 cite=cite,
-                name=r.findtext("p:Name", "", q),
-                done=r.findtext("p:PercentComplete", "0", q) == "100",
+                name=r.text_at("Name"),
+                done=r.text_at("PercentComplete", "0") == "100",
                 preds=tuple(links),
             )
         )
