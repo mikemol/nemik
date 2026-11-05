@@ -135,6 +135,6 @@ def test_a_publish_keeps_the_build_caches_beside_the_snapshots(tmp_path: Path) -
     """A publish keeps the build caches beside the snapshots."""
     # W518: the next fresh process starts warm from these
     assert publish(FLEET, tmp_path / "pub", None) is not None
-    cache = tmp_path / "pub" / ".cache" / "build-caches.pickle"
+    cache = tmp_path / "pub" / ".cache" / "build-caches.json"
     assert cache.is_file()
     assert cache.stat().st_size > 0
