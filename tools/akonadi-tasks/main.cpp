@@ -68,6 +68,10 @@ int main(int argc, char **argv) {
         }
     }
     const bool apply = args.contains(QStringLiteral("--apply"));
+    // nemik:W1643 (luthen-observability:W1992): --explain adds DUPLICATE and DIFF lines to a plan so
+    // a task that is planned for UPDATE on every run names the field that differs. It changes no
+    // write line and no decision.
+    const bool explain = args.contains(QStringLiteral("--explain"));
     // --only REF (repeatable): sync just these refs and leave every other task as it is (no COMPLETE
     // for refs outside the set), so a new mapping can be tried on one task (nemik:W162).
     QSet<QString> only;
@@ -298,14 +302,21 @@ int main(int argc, char **argv) {
     ij->fetchScope().fetchFullPayload();
     if (!ij->exec()) { out(QStringLiteral("ERROR: items: ") + ij->errorString()); return 2; }
     QHash<QString, Akonadi::Item> mine;
+    QHash<QString, int> held;  // items per ref: a second item with the same ref silently replaces the first
     for (const Akonadi::Item &it : ij->items()) {
         if (!it.hasPayload<Todo::Ptr>()) continue;
         const QString ref = refOf(it.payload<Todo::Ptr>());
-        if (!ref.isEmpty()) mine.insert(ref, it);
+        if (!ref.isEmpty()) { mine.insert(ref, it); ++held[ref]; }
         // nemik:W162: with --only, report what the list holds for those refs, parent included, so a
         // mapping can be read back after the resource syncs.
         if (only.contains(ref))
             out(QStringLiteral("HAVE %1 remote=%2 parent=%3").arg(ref, it.remoteId(), it.payload<Todo::Ptr>()->relatedTo(KCalendarCore::Incidence::RelTypeParent)));
+    }
+    if (explain) {
+        QStringList dup = held.keys();
+        dup.sort();
+        for (const QString &ref : dup)
+            if (held.value(ref) > 1) out(QStringLiteral("DUPLICATE %1 x%2").arg(ref).arg(held.value(ref)));
     }
 
     // nemik:W162: Google's resource passes relatedTo(RelTypeParent) straight to TaskMoveJob as the
@@ -344,6 +355,18 @@ int main(int argc, char **argv) {
             && have->dtStart() == want->dtStart() && have->dtDue() == want->dtDue()
             && have->relatedTo(KCalendarCore::Incidence::RelTypeParent) == want->relatedTo(KCalendarCore::Incidence::RelTypeParent))
             continue;
+        if (explain) {  // nemik:W1643: say which compared field differs, with both values
+            auto diff = [&](const char *field, const QString &w, const QString &h) {
+                if (w != h) out(QStringLiteral("DIFF %1 %2 want=[%3] have=[%4]").arg(f.key(), QString::fromLatin1(field), w, h));
+            };
+            diff("summary", want->summary(), have->summary());
+            diff("description", want->description(), have->description());
+            auto at = [](const QDateTime &d) { return d.toString(Qt::ISODate) + QStringLiteral(" zone=") + QString::fromLatin1(d.timeZone().id()); };
+            diff("dtStart", at(want->dtStart()), at(have->dtStart()));
+            diff("dtDue", at(want->dtDue()), at(have->dtDue()));
+            diff("allDay", QString::number(want->allDay()), QString::number(have->allDay()));
+            diff("parent", want->relatedTo(KCalendarCore::Incidence::RelTypeParent), have->relatedTo(KCalendarCore::Incidence::RelTypeParent));
+        }
         // nemik:W148/W162: the parent (RELATED-TO;RELTYPE=PARENT) moves too, re-parenting in place.
         have->setRelatedTo(want->relatedTo(KCalendarCore::Incidence::RelTypeParent), KCalendarCore::Incidence::RelTypeParent);
         have->setSummary(want->summary());

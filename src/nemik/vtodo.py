@@ -284,8 +284,11 @@ def grouped(todos: list[list[str]]) -> list[list[str]]:
             "STATUS:NEEDS-ACTION",
             f"CATEGORIES:nemik,{escape(repo)}",
         ]
-        if dues:  # earliest by the date-time digits, whatever the value form
-            parent.append(min(dues, key=_due_digits))
+        # nemik:W1644: the earliest child due as a DATE, because Google keeps a parent's due all-day
+        if dues:
+            parent.append(
+                f"DUE;VALUE=DATE:{_due_digits(min(dues, key=_due_digits))[:8]}"
+            )
         out.append([*parent, "END:VTODO"])
         out += [
             [*k[:-1], f"RELATED-TO;RELTYPE=PARENT:nemik:repo:{repo}", k[-1]]
@@ -364,6 +367,7 @@ def tasks_main(argv: list[str] | None = None) -> None:
         apply: bool
         only: list[str]
         flat: bool
+        explain: bool
         retry_wait: int
 
     ap = argparse.ArgumentParser(
@@ -415,6 +419,11 @@ def tasks_main(argv: list[str] | None = None) -> None:
         "(default: a parent task per repo, nemik:W148/W163)",
     )
     ap.add_argument(
+        "--explain",
+        action="store_true",
+        help="add DUPLICATE and per-field DIFF lines to the plan (nemik:W1643)",
+    )
+    ap.add_argument(
         "--retry-wait",
         type=int,
         default=25,
@@ -433,6 +442,7 @@ def tasks_main(argv: list[str] | None = None) -> None:
         raise SystemExit(2) from e
     cmd = [str(args.helper), "--list", args.tasks_list]
     cmd += ["--create-list"] * args.create_list + ["--apply"] * args.apply
+    cmd += ["--explain"] * args.explain
     for r in args.only:
         cmd += ["--only", r]
     sys.stdout.flush()

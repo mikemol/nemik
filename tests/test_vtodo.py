@@ -123,6 +123,9 @@ def test_nemik_tasks_feeds_the_helper_and_returns_its_exit_code(tmp_path: Path) 
     assert "ARGS --list nemik --apply TODOS 1" in r.stdout  # --flat: the ask alone
     r = installed.run("nemik-tasks", *base, "--helper", str(helper), "--apply")
     assert "TODOS 2" in r.stdout  # grouped by default: its repo's parent and the ask
+    r = installed.run("nemik-tasks", *base, "--helper", str(helper), "--explain")
+    # nemik:W1643: the flag is passed to the helper, which then prints DUPLICATE and DIFF lines
+    assert "ARGS --list nemik --explain" in r.stdout
     r = installed.run("nemik-tasks", *base, "--helper", str(tmp_path / "missing"))
     assert r.returncode == EXIT_NO_HELPER
     assert "setup.sh" in r.stdout
@@ -156,7 +159,9 @@ def test_grouped_adds_a_parent_per_repo_and_keeps_children_as_they_are() -> None
     assert [
         next(line for line in p if line.startswith("SUMMARY")) for p in parents
     ] == ["SUMMARY:aeternum (3)", "SUMMARY:life (1)"]
-    assert "DUE:20261003T120000Z" in parents[0]  # the earliest child due
+    # nemik:W1644: the earliest child due, as the DATE Google keeps for a parent (a timed parent due
+    # read back as an all-day midnight and was planned for update on every run)
+    assert "DUE;VALUE=DATE:20261003" in parents[0]
     kids = [t for t in g if t not in parents]
     assert all(
         t[-2].startswith("RELATED-TO;RELTYPE=PARENT:nemik:repo:")
