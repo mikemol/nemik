@@ -12,7 +12,9 @@ typed, so it adds no untyped expression to the baselines.
 from rdflib import Graph
 
 from nemik.adapter import NEMIK, OSLC_CM
-from nemik.rank import Weights, rank_fleet, ref_of
+from nemik.index import ref_of
+from nemik.rank import rank_fleet
+from nemik.score import Weights
 from nemik.waitseries import Row
 
 # (waiting repo, blocking repo, ticks blocked, the blocker's rank position; 0 when it is not ranked)

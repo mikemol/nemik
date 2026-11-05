@@ -25,8 +25,9 @@ from rdflib.namespace import DCTERMS
 
 from nemik.adapter import waypoint_uri
 from nemik.check import default_root, survey
-from nemik.rank import fleet_repos, load_composition, load_weights, rank
+from nemik.rank import fleet_repos, load_composition, rank
 from nemik.say import say
+from nemik.score import load_weights
 from nemik.tomlview import table
 
 DEFAULT_DAYS = 14

@@ -10,7 +10,7 @@ from rdflib.namespace import PROV
 
 from nemik.adapter import BASE, NEMIK, OSLC_CM
 from nemik.cardflags import inbound_rows, unclaimed_blocks
-from nemik.rank import ref_of
+from nemik.index import ref_of
 
 Plain = dict[str, list[str]]
 EXPECTED = [

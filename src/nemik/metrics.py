@@ -78,11 +78,12 @@ from nemik.check import (
     workstream_files,
 )
 from nemik.health import STATUSES, health, thresholds
-from nemik.rank import TIERS, load_weights, rank
+from nemik.rank import TIERS, rank
 from nemik.realize import verdicts
 from nemik.residue import by_card
 from nemik.runlogs import unmigrated_at_source
 from nemik.say import say
+from nemik.score import load_weights
 from nemik.stackable import stackable_count
 from nemik.stackable_cli import drifted, history_cited
 from nemik.wake import read_liveness, roster

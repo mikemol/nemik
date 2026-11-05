@@ -270,6 +270,7 @@ def hub_modules_depend_on_everything_below() -> None:
             "say",
             "health",
             "stackable_cli",
+            "score",
         },
         "serve": lower
         | {
@@ -305,6 +306,7 @@ def hub_modules_depend_on_everything_below() -> None:
             "pieces",
             "rank",
             "salience",
+            "score",
             "trs",
             "withheld",
         },

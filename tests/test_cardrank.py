@@ -20,8 +20,9 @@ from nemik.cardrank import (
     unknowns,
 )
 from nemik.flow import solve
-from nemik.rank import Weights, load_weights, ref_of, successors
-from nemik.rank import downstream_weight as graph_weight
+from nemik.index import downstream_weight as graph_weight
+from nemik.index import ref_of, successors
+from nemik.score import Weights, load_weights
 
 LOCAL, PEER, PEER_BLOCKED = 5, 3, 2
 CYCLE_LEN = 2

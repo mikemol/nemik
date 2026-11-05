@@ -13,8 +13,8 @@ from mikemol.procrun.proc import TimeoutExpired, capture
 from rdflib import Graph
 
 from nemik.check import survey
-from nemik.rank import load_weights
 from nemik.salience import AuditOptions, ask_effect, audit, show
+from nemik.score import load_weights
 
 if TYPE_CHECKING:
     from pathlib import Path

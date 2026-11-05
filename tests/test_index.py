@@ -8,8 +8,7 @@ from rdflib import Graph
 
 from nemik.adapter import NEMIK, OSLC_CM, waypoint_uri
 from nemik.critical import open_nodes as open_set
-from nemik.index import index, indexed
-from nemik.rank import open_card, successors
+from nemik.index import index, indexed, open_card, successors
 
 
 def _graph() -> Graph:

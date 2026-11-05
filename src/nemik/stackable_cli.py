@@ -21,7 +21,8 @@ from nemik import history
 from nemik.adapter import OSLC_CM, STATE
 from nemik.check import default_root, survey
 from nemik.drift import drift, ride_along
-from nemik.rank import load_weights, rank
+from nemik.rank import rank
+from nemik.score import load_weights
 from nemik.stackable import generated_files, manifest, proposal_rows, propose, report
 
 RIDE_ALONG_BAR = 2

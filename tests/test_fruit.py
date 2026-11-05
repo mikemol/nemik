@@ -5,7 +5,8 @@
 from rdflib import Graph, Literal
 
 from nemik.adapter import NEMIK, OSLC_CM, waypoint_uri, workstream_uri
-from nemik.rank import RankRow, fruit, load_weights, rank
+from nemik.rank import RankRow, fruit, rank
+from nemik.score import load_weights
 
 TWO_MEMBERS_WEIGHT = 2
 TAGGED_WEIGHT = 4

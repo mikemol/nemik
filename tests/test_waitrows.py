@@ -8,7 +8,7 @@ from pathlib import Path
 from rdflib import Graph
 
 from nemik.adapter import queue_graph
-from nemik.rank import Weights
+from nemik.score import Weights
 from nemik.waitrows import UNRANKED, blocker_positions, wait_edges, wait_rows
 from nemik.waitseries import samples
 

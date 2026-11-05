@@ -8,22 +8,21 @@ import pytest
 from rdflib import Graph, Literal, URIRef
 
 from nemik.adapter import NEMIK, OSLC_CM, STATE, waypoint_uri, workstream_uri
+from nemik.index import downstream_weight
 from nemik.rank import (
     Composition,
     RankOptions,
     RankRow,
-    Weights,
     children,
     compose,
-    downstream_weight,
     drift,
     frontier,
     load_composition,
-    load_weights,
     main,
     rank,
     rank_fleet,
 )
+from nemik.score import Weights, load_weights
 
 W = Weights(local=1, peer=2, peer_blocked=8)
 LONG_CHAIN_WEIGHT = 5  # W79's local chain

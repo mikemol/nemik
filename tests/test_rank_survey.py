@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from nemik import check, rank
+from nemik import rank
 
 
 def test_the_ranking_asks_the_survey_for_graphs_only(
@@ -29,6 +29,7 @@ def test_the_ranking_asks_the_survey_for_graphs_only(
         asked.append(check)
         return iter([])
 
-    monkeypatch.setattr(check, "survey", survey)
+    # nemik:W1656: rank imports survey at module level, so it is rank's own name that is patched
+    monkeypatch.setattr(rank, "survey", survey)
     rank.main(["nemik", "--root", str(tmp_path)])
     assert asked == [False]

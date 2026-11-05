@@ -26,7 +26,7 @@ from rdflib import Graph
 
 from nemik import waitlog
 from nemik.check import survey
-from nemik.rank import load_weights
+from nemik.score import load_weights
 from nemik.waitrows import UNRANKED, Edge, oldest_waits, wait_edges
 from nemik.waitseries import samples
 

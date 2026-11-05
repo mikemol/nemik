@@ -28,49 +28,35 @@ from rdflib.namespace import DCTERMS, PROV
 
 from nemik import tiers
 from nemik.adapter import BASE, NEMIK, OSLC_CM, workstream_uri
-from nemik.index import index
+from nemik.check import default_root, survey
+from nemik.critical import assume_done
+from nemik.index import downstream_weight, open_card, ref_of, repo_of, successors
 from nemik.pacecli import behind_files, pace_exit, pace_process
 from nemik.roundcli import NO_LANDINGS, show_round, write_round_file
+from nemik.salience import (
+    AuditOptions,
+    ask_effect,
+    audit,
+    load_gate_weights,
+    load_wait_weight,
+    salience_of,
+    show,
+)
 from nemik.say import say
-from nemik.score import band, load_bands, load_guarantees, tagged_band
+from nemik.score import (
+    Weights,
+    band,
+    load_bands,
+    load_guarantees,
+    load_weights,
+    tagged_band,
+)
 from nemik.stackable import manifest
 
 if TYPE_CHECKING:
     from rdflib.term import Node
 
     from nemik.score import Bands, Guarantees
-
-
-@dataclass(frozen=True)
-class Weights:
-    """The edge weights of rank-weights.toml: one per class of downstream card."""
-
-    local: int
-    peer: int
-    peer_blocked: int
-    operator: int = 0
-
-
-def load_weights(text: str | None = None) -> Weights:
-    """Read the edge weights; `text` overrides the packaged file (for tests).
-
-    `operator` (nemik:W249) is the demand an operator ask injects as a source in the flow model; a
-    text that does not name it weighs an ask nothing beyond its class.
-
-    Returns:
-        The local, peer, peer_blocked and operator weights; operator is 0 when the
-        text omits it.
-
-    """
-    if text is None:
-        text = files("nemik.data").joinpath("rank-weights.toml").read_text()
-    data: dict[str, object] = tomllib.loads(text)
-    return Weights(
-        local=int(str(data["local"])),
-        peer=int(str(data["peer"])),
-        peer_blocked=int(str(data["peer_blocked"])),
-        operator=int(str(data.get("operator", 0))),
-    )
 
 
 # nemik:W600: `tier` is the repo's burn-down tier (rank-weights.toml [tiers]), higher for a more
@@ -339,72 +325,6 @@ def _pair_order(pair: tuple[str, str, str, list[str]]) -> tuple[int, int, str]:
     return (int(pair[0].lstrip("W")), int(pair[1].lstrip("W")), pair[2])
 
 
-def repo_of(node: Node) -> str:
-    """Name the workstream a waypoint belongs to.
-
-    Returns:
-        The repo segment of the node's IRI.
-
-    """
-    return str(node).removeprefix(BASE).partition("/")[0]
-
-
-def successors(g: Graph, node: Node) -> set[Node]:
-    """Give what this waypoint moves: what it `enables`, and every waypoint that `waitsFor` it.
-
-    Returns:
-        The waypoints it enables and those that wait for it.
-
-    """
-    ix = index(g)
-    if ix is not None:
-        return ix.successors(node)
-    return set(g.objects(node, NEMIK.enables)) | set(g.subjects(NEMIK.waitsFor, node))
-
-
-def downstream_weight(g: Graph, node: Node, weights: Weights) -> int:
-    """Sum of weights over the transitive downstream closure of `node`, each waypoint counted once.
-
-    ⚑ A `done` waypoint contributes nothing and is not traversed through: finished work is not
-    waiting on anything. A cycle terminates on the visited set; `node` itself never counts.
-
-    Returns:
-        The total weight: `local` for each successor in the node's repo,
-        `peer_blocked` for a blocked one elsewhere, else `peer`.
-
-    """
-    origin = repo_of(node)
-    seen: set[Node] = {node}
-    stack = [node]
-    total = 0
-    while stack:
-        for nxt in successors(g, stack.pop()):
-            if nxt in seen or (nxt, OSLC_CM.state, NEMIK.Done) in g:
-                continue
-            seen.add(nxt)
-            stack.append(nxt)
-            if repo_of(nxt) == origin:
-                total += weights.local
-            elif (nxt, OSLC_CM.state, NEMIK.Blocked) in g:
-                total += weights.peer_blocked
-            else:
-                total += weights.peer
-    return total
-
-
-def open_card(g: Graph, n: Node) -> bool:
-    """Say whether a card is not done.
-
-    Returns:
-        True when the card has a state and it is not Done.
-
-    """
-    ix = index(g)
-    if ix is not None:
-        return ix.open(n)
-    return (n, OSLC_CM.state, NEMIK.Done) not in g and (n, OSLC_CM.state, None) in g
-
-
 def frontier(g: Graph, goal: Node) -> tuple[set[Node], set[str]]:
     """(dG, ddG) for a goal (nemik:W71, W73).
 
@@ -455,17 +375,6 @@ def frontier(g: Graph, goal: Node) -> tuple[set[Node], set[str]]:
             if not re.fullmatch(r"W\d+", str(lit).strip()):
                 outside.add(str(lit))
     return leaves, outside
-
-
-def ref_of(node: Node) -> str:
-    """Name a card node by its citation.
-
-    Returns:
-        The card as `<repo>:W<n>`.
-
-    """
-    r, _, sym = str(node).removeprefix(BASE).partition("/")
-    return f"{r}:{sym}"
 
 
 class GoalRow(TypedDict):
@@ -599,8 +508,6 @@ def _rows(
         ),
         key=str,
     )
-    from nemik.salience import salience_of
-
     bands = load_bands().watching(frozenset(behind_files(repo)))
     flow = (comp or load_composition()).weight_model == "flow"
     salience = (
@@ -935,8 +842,6 @@ def _report_ask(g: Graph, args: Options) -> None:
     # nemik:W244: an ask lives inside the model. Show where its demand lands (what it needs)
     # and which of this repo's ready cards sit lower because of it (what it overrides), so the
     # operator's reply can refactor the graph.
-    from nemik.salience import ask_effect, show
-
     try:
         effect = ask_effect(g, args.repo, args.ask)
     except ValueError as err:
@@ -959,13 +864,6 @@ def _report_flow(g: Graph, args: Options) -> None:
     # rounded), and every pair the two order differently. The model replaces the old order
     # only after this audit agrees (W241).
     from nemik.metrics import residue_gaps
-    from nemik.salience import (
-        AuditOptions,
-        audit,
-        load_gate_weights,
-        load_wait_weight,
-        show,
-    )
 
     # nemik:W251: --residue adds each recorded gap (the policy's residue) as demand at its card,
     # weighted by gate from rank-weights.toml [residue] (W253); off by default.
@@ -1213,8 +1111,6 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         SystemExit: with the exit code of the mode it ran, for the modes that report a verdict.
 
     """
-    from nemik.check import default_root, survey
-
     # --pace is read-only and fast: no survey, only the pace file (nemik:W1107)
     answered = pace_process() if argv is None else pace_exit(argv)
     if answered >= 0:
@@ -1234,8 +1130,6 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
                 g += qg
     weights = load_weights()
     if args.assume_done:
-        from nemik.critical import assume_done
-
         g = assume_done(g, args.assume_done)
     if _dispatch(g, args, weights):
         return

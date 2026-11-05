@@ -22,8 +22,7 @@ from nemik.adapter import BASE, NEMIK, OSLC_CM
 from nemik.blocks import bare_wait_edges, ref
 from nemik.cards import cards
 from nemik.core.chains import longest_chains
-from nemik.index import index
-from nemik.rank import successors
+from nemik.index import index, successors
 from nemik.say import say
 
 if TYPE_CHECKING:

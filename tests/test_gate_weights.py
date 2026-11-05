@@ -12,8 +12,8 @@ from mikemol.procrun.proc import capture
 from rdflib import Graph
 
 from nemik.check import survey
-from nemik.rank import load_weights
 from nemik.salience import AuditOptions, audit, load_gate_weights
+from nemik.score import load_weights
 
 if TYPE_CHECKING:
     from pathlib import Path

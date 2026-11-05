@@ -24,15 +24,8 @@ from rdflib.namespace import PROV
 
 from nemik.adapter import NEMIK, OSLC_CM
 from nemik.flow import Flow, solve
-from nemik.rank import (
-    Weights,
-    downstream_weight,
-    load_weights,
-    open_card,
-    ref_of,
-    repo_of,
-    successors,
-)
+from nemik.index import downstream_weight, open_card, ref_of, repo_of, successors
+from nemik.score import Weights, load_weights
 from nemik.tomlview import table
 
 if TYPE_CHECKING:

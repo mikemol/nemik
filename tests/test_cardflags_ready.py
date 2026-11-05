@@ -10,7 +10,7 @@ from rdflib import Graph
 from nemik.adapter import NEMIK, OSLC_CM, queue_graph
 from nemik.blocks import ready_behind_open as graph_flag
 from nemik.cardflags import ready_behind_open
-from nemik.rank import ref_of
+from nemik.index import ref_of
 
 
 def _card(symbol: str, status: str, enables: list[str]) -> dict[str, object]:

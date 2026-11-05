@@ -274,3 +274,35 @@ def load_guarantees(text: str | None = None, bands: Bands | None = None) -> Guar
         for p in _tables(d.get("policy"))
     )
     return Guarantees(floor, policies)
+
+
+@dataclass(frozen=True)
+class Weights:
+    """The edge weights of rank-weights.toml: one per class of downstream card."""
+
+    local: int
+    peer: int
+    peer_blocked: int
+    operator: int = 0
+
+
+def load_weights(text: str | None = None) -> Weights:
+    """Read the edge weights; `text` overrides the packaged file (for tests).
+
+    `operator` (nemik:W249) is the demand an operator ask injects as a source in the flow model; a
+    text that does not name it weighs an ask nothing beyond its class.
+
+    Returns:
+        The local, peer, peer_blocked and operator weights; operator is 0 when the
+        text omits it.
+
+    """
+    if text is None:
+        text = files("nemik.data").joinpath("rank-weights.toml").read_text()
+    data: dict[str, object] = tomllib.loads(text)
+    return Weights(
+        local=int(str(data["local"])),
+        peer=int(str(data["peer"])),
+        peer_blocked=int(str(data["peer_blocked"])),
+        operator=int(str(data.get("operator", 0))),
+    )

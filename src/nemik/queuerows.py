@@ -18,7 +18,8 @@ from rdflib import Graph
 from rdflib.namespace import DCTERMS
 
 from nemik.adapter import waypoint_uri
-from nemik.rank import fleet_repos, load_composition, load_weights, rank
+from nemik.rank import fleet_repos, load_composition, rank
+from nemik.score import load_weights
 
 SECONDS_A_DAY = 86400
 UNKNOWN = -1.0

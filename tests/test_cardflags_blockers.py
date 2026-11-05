@@ -10,7 +10,7 @@ from rdflib import Graph
 from nemik.adapter import NEMIK, OSLC_CM, queue_graph
 from nemik.blocks import annotate
 from nemik.cardflags import unresolved_blockers
-from nemik.rank import ref_of
+from nemik.index import ref_of
 
 
 def _card(

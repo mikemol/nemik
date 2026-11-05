@@ -12,7 +12,8 @@ from mikemol.procrun.proc import capture
 from rdflib import Graph
 
 from nemik.check import survey
-from nemik.rank import RankOptions, load_composition, load_weights, rank
+from nemik.rank import RankOptions, load_composition, rank
+from nemik.score import load_weights
 from nemik.serve import to_json, without
 
 if TYPE_CHECKING:

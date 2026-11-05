@@ -15,7 +15,8 @@ from rdflib import Graph
 from rdflib.term import Node
 
 from nemik.adapter import BASE, NEMIK, OSLC_CM
-from nemik.rank import frontier, open_card, ref_of, repo_of
+from nemik.index import open_card, ref_of, repo_of
+from nemik.rank import frontier
 from nemik.serve import Model
 
 FLEET = Path(__file__).parent / "fixtures" / "fleet"

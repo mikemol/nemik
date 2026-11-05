@@ -11,8 +11,8 @@ import pytest
 from rdflib import Graph, Literal, URIRef
 
 from nemik.adapter import NEMIK, OSLC_CM, STATE, waypoint_uri, workstream_uri
-from nemik.rank import Weights, inversion, main, policy_blocks, rank, unscored
-from nemik.score import load_bands, load_guarantees
+from nemik.rank import inversion, main, policy_blocks, rank, unscored
+from nemik.score import Weights, load_bands, load_guarantees
 
 W = Weights(local=1, peer=2, peer_blocked=8)
 UNSCORED = 2

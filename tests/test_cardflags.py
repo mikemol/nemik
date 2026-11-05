@@ -10,7 +10,7 @@ from rdflib import RDF, Graph
 from nemik.adapter import NEMIK, OSLC_CM, queue_graph
 from nemik.blocks import annotate
 from nemik.cardflags import all_blockers_landed
-from nemik.rank import ref_of
+from nemik.index import ref_of
 
 
 def _card(symbol: str, status: str, waits: list[str]) -> dict[str, object]:

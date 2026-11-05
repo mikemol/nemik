@@ -10,7 +10,8 @@ from typing import Protocol
 import pytest
 
 from nemik.apischema import load, unmanifested
-from nemik.rank import goals, load_weights
+from nemik.rank import goals
+from nemik.score import load_weights
 from nemik.serve import Model
 from nemik.wake import operator_row, read_liveness, roster
 

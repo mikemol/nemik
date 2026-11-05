@@ -18,7 +18,7 @@ from contextlib import contextmanager
 from dataclasses import dataclass, field
 from typing import TYPE_CHECKING
 
-from nemik.adapter import NEMIK, OSLC_CM
+from nemik.adapter import BASE, NEMIK, OSLC_CM
 
 if TYPE_CHECKING:
     from collections.abc import Generator
@@ -28,6 +28,7 @@ if TYPE_CHECKING:
 
     from nemik.blocks import AskRow
     from nemik.cards import Card
+    from nemik.score import Weights
 
 
 @dataclass
@@ -118,3 +119,80 @@ def index(g: Graph) -> Index | None:
 
     scope[key] = (weakref.ref(g, forget), len(g), ix)
     return ix
+
+
+def repo_of(node: Node) -> str:
+    """Name the workstream a waypoint belongs to.
+
+    Returns:
+        The repo segment of the node's IRI.
+
+    """
+    return str(node).removeprefix(BASE).partition("/")[0]
+
+
+def successors(g: Graph, node: Node) -> set[Node]:
+    """Give what this waypoint moves: what it `enables`, and every waypoint that `waitsFor` it.
+
+    Returns:
+        The waypoints it enables and those that wait for it.
+
+    """
+    ix = index(g)
+    if ix is not None:
+        return ix.successors(node)
+    return set(g.objects(node, NEMIK.enables)) | set(g.subjects(NEMIK.waitsFor, node))
+
+
+def downstream_weight(g: Graph, node: Node, weights: Weights) -> int:
+    """Sum of weights over the transitive downstream closure of `node`, each waypoint counted once.
+
+    ⚑ A `done` waypoint contributes nothing and is not traversed through: finished work is not
+    waiting on anything. A cycle terminates on the visited set; `node` itself never counts.
+
+    Returns:
+        The total weight: `local` for each successor in the node's repo,
+        `peer_blocked` for a blocked one elsewhere, else `peer`.
+
+    """
+    origin = repo_of(node)
+    seen: set[Node] = {node}
+    stack = [node]
+    total = 0
+    while stack:
+        for nxt in successors(g, stack.pop()):
+            if nxt in seen or (nxt, OSLC_CM.state, NEMIK.Done) in g:
+                continue
+            seen.add(nxt)
+            stack.append(nxt)
+            if repo_of(nxt) == origin:
+                total += weights.local
+            elif (nxt, OSLC_CM.state, NEMIK.Blocked) in g:
+                total += weights.peer_blocked
+            else:
+                total += weights.peer
+    return total
+
+
+def open_card(g: Graph, n: Node) -> bool:
+    """Say whether a card is not done.
+
+    Returns:
+        True when the card has a state and it is not Done.
+
+    """
+    ix = index(g)
+    if ix is not None:
+        return ix.open(n)
+    return (n, OSLC_CM.state, NEMIK.Done) not in g and (n, OSLC_CM.state, None) in g
+
+
+def ref_of(node: Node) -> str:
+    """Name a card node by its citation.
+
+    Returns:
+        The card as `<repo>:W<n>`.
+
+    """
+    r, _, sym = str(node).removeprefix(BASE).partition("/")
+    return f"{r}:{sym}"

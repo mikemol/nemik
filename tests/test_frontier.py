@@ -5,7 +5,8 @@
 from rdflib import Graph, Literal, URIRef
 
 from nemik.adapter import NEMIK, OSLC_CM, STATE, waypoint_uri, workstream_uri
-from nemik.rank import frontier, goals, is_umbrella, load_weights
+from nemik.rank import frontier, goals, is_umbrella
+from nemik.score import load_weights
 
 
 def _wp(
