@@ -10,11 +10,12 @@ stdlib lives with PYTHONHOME (mtools venv.bzl, pythonhome.runfiles).
 from __future__ import annotations
 
 import os
-import subprocess
 import sys
 from pathlib import Path
 
-from mikemol.procrun.proc import Completed, capture
+from mikemol.procrun.proc import Completed, capture, spawn_piped
+
+ANNOUNCE_IDLE = 60.0  # seconds a server may stay silent before its announcement
 
 
 def bin_env() -> tuple[Path, dict[str, str]]:
@@ -59,20 +60,6 @@ def run(name: str, *args: str, cwd: Path | None = None) -> Completed:
     return capture([*script(name), *args], cwd=cwd, env=bin_env()[1])
 
 
-def popen(
-    name: str, *args: str, stdout: int | None = None, stderr: int | None = None
-) -> subprocess.Popen[bytes]:
-    """Start an installed script without waiting for it.
-
-    Returns:
-        The running process.
-
-    """
-    return subprocess.Popen(
-        [*script(name), *args], env=bin_env()[1], stdout=stdout, stderr=stderr
-    )
-
-
 def announced(name: str, *args: str) -> list[str]:
     """nemik:W1060: run a script, read the first line it writes to stdout, stop it.
 
@@ -80,10 +67,7 @@ def announced(name: str, *args: str) -> list[str]:
         The line's words; an empty list when it wrote none (it exited first).
 
     """
-    proc: subprocess.Popen[bytes] = popen(
-        name, *args, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL
-    )
-    told = proc.stdout.readline().decode().split() if proc.stdout else []
-    proc.terminate()
-    proc.wait()
-    return told
+    with spawn_piped(
+        [*script(name), *args], env=bin_env()[1], stderr="discard"
+    ) as child:
+        return child.first_line(ANNOUNCE_IDLE).split()

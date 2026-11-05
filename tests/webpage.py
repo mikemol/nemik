@@ -8,7 +8,6 @@ are mtools' mikemol.webpage (nemik:W717, W848), re-exported here so the tests ke
 """
 
 import os
-import subprocess
 import tempfile
 from collections.abc import Callable, Generator
 from contextlib import contextmanager
@@ -17,6 +16,7 @@ from typing import Protocol, cast
 
 import installed
 import pytest
+from mikemol.procrun.proc import spawn_piped
 from mikemol.webpage.page import (
     PageBrokenError,
     Waitable,
@@ -79,6 +79,7 @@ NOTED_REFUSED: list[str] = []
 NETSTAT = Path("/proc/net/netstat")
 LOAD_TRIES = 3
 LISTENING_WORDS = 2  # the server's line is "listening" and a port
+SERVE_IDLE = 60.0  # seconds nemik-serve may stay silent before it says it listens
 CY_READY = "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 1"
 # nemik:W846: records, inside the page, each resource (a script tag, a stylesheet) whose load
 # failed. An error event on such an element does not bubble, so the listener is a capture listener
@@ -276,32 +277,30 @@ def served(series: Path | None = None, root: Path = FLEET) -> Generator[str]:
         *extra,
     ]
     overflows_before = overflows_now()
-    with tempfile.TemporaryFile() as log:
-        proc = subprocess.Popen(command, env=env, stdout=subprocess.PIPE, stderr=log)
+    with (
+        tempfile.TemporaryFile() as log,
+        spawn_piped(command, env=env, stderr=log) as proc,
+    ):
+        told = proc.first_line(SERVE_IDLE).split()
+        if len(told) != LISTENING_WORDS or told[0] != "listening":
+            log.seek(0)
+            message = (
+                f"nemik-serve did not say it listens: {told}: {log.read().decode()}"
+            )
+            raise RuntimeError(message)
         try:
-            told = proc.stdout.readline().decode().split() if proc.stdout else []
-            if len(told) != LISTENING_WORDS or told[0] != "listening":
-                log.seek(0)
-                message = (
-                    f"nemik-serve did not say it listens: {told}: {log.read().decode()}"
-                )
-                raise RuntimeError(message)
-            try:
-                yield f"http://127.0.0.1:{told[1]}/"
-            except PageBrokenError as e:
-                # nemik:W846: five scripts failed at once under the gate, which points at the
-                # server, so a broken page says whether nemik-serve still ran and what it wrote.
-                log.seek(0)
-                message = (
-                    f"{e}; nemik-serve alive: {proc.poll() is None}; "
-                    f"requests refused or failed: {NOTED_REFUSED}; "
-                    f"ListenOverflows {overflows_before} -> {overflows_now()}; "
-                    f"its stderr: {log.read().decode()[-2000:]}"
-                )
-                raise PageBrokenError(message) from e
-        finally:
-            proc.terminate()
-            proc.wait()
+            yield f"http://127.0.0.1:{told[1]}/"
+        except PageBrokenError as e:
+            # nemik:W846: five scripts failed at once under the gate, which points at the
+            # server, so a broken page says whether nemik-serve still ran and what it wrote.
+            log.seek(0)
+            message = (
+                f"{e}; nemik-serve alive: {proc.poll() is None}; "
+                f"requests refused or failed: {NOTED_REFUSED}; "
+                f"ListenOverflows {overflows_before} -> {overflows_now()}; "
+                f"its stderr: {log.read().decode()[-2000:]}"
+            )
+            raise PageBrokenError(message) from e
 
 
 def opened_page(
