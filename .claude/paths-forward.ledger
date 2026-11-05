@@ -4688,3 +4688,31 @@
 2026-11-05T02:45:32Z  status W1645 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-05T02:49:27Z  status W1643 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-05T02:49:29Z  status W1644 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T03:16:53Z  status W1645 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T03:16:56Z  status W1643 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T03:16:59Z  status W1644 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T03:24:59Z  status W1641 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T03:35:39Z  tick  W1646 minted    -         "nemik-tasks persists the flow solves its feed computed, so the next run restores them instead of solving 16 graphs again"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1641
+2026-11-05T03:35:54Z  status W1646 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T03:42:28Z  status W1646 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T03:42:41Z  tick  W1647 minted    -         "The feed build skips the per-repo mikemol-commit in-gate calls it does not use, saving about 14 s of wall per nemik-tasks run"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1646
+2026-11-05T03:42:44Z  tick  W1648 minted    -         "Parsed queue and ledger graphs are kept on disk between processes keyed by file stamp, so a fresh nemik command does not reparse every repo"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1646
+2026-11-05T03:43:07Z  tick  W1646 advanced  sweep     "stack 1000 (W1645 editable check into the adapter, ruff 25 to 23; W1643 explain; W1644 parent due as a date) landed 03:15:45Z and luthen verified W1992 from the journal; W1646 (persist the flow solves in the feed) measured 108.1 to 45.7 s CPU, live in the tree, not landed; the codon chain measured; ruff floor 23 [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T03:47:03Z  status W1647 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T03:51:31Z  status W1647 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T04:31:48Z  tick  W1647 advanced  sweep     "feed cuts W1646 and W1647 measured and confirmed in luthen's journal (warm no-op feed 108.1 to 38.7 s CPU, 126.0 to 40.6 s wall, live in the tree, not landed); W1648 parsed-graph cache deferred on a measured floor; survey-cluster extraction recorded as a negative result; W1633 re-asked with the evidence; the codon and ruff lanes unchanged (ruff 23, mypy 2, codon 138) [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T04:43:34Z  tick  W1411 advanced  sweep     "quiet tick: pace read 04:36Z (ruff 23, codon 138, *.py 1 owed; mypy ok), no ratchet-lowering row buildable, W1633 still awaits operator, apischema chain recorded on W1411 [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T05:44:09Z  interrupt W1649 minted    -         "Clear the last noqa in hooks/record_event.py so the suppression ratchet reads 0"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=mtools:W2283
+2026-11-05T05:45:55Z  status W1649 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T05:45:57Z  status W1646 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T05:45:58Z  status W1647 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T05:47:04Z  status W1646 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T05:47:06Z  status W1647 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T05:47:12Z  status W1649 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T06:44:40Z  interrupt W1650 minted    -         "Repin the vendored mtools wheels to 636e39b so procrun.spawn_piped exists for the four Popen ruff rows"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=mtools:W2277
+2026-11-05T06:47:09Z  interrupt W1651 minted    -         "installed.announced and webpage.served start nemik-serve through procrun.spawn_piped, so the four Popen ruff rows (S404, S603 in tests/installed.py and tests/webpage.py) clear"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=mtools:W2277
+2026-11-05T06:53:15Z  status W1650 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T06:53:16Z  status W1651 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T06:53:17Z  status W1649 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T06:53:18Z  status W1646 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-05T06:53:19Z  status W1647 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
