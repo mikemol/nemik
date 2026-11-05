@@ -29,6 +29,7 @@ from nemik.check import survey
 from nemik.score import load_weights
 from nemik.waitrows import UNRANKED, Edge, oldest_waits, wait_edges
 from nemik.waitseries import samples
+from nemik.wake import WakeRow, read_liveness, roster, workstreams
 
 if TYPE_CHECKING:
     from google.protobuf.message import Message
@@ -39,6 +40,8 @@ NAMESPACE = "nemik"
 OLDEST = "nemik_wait_oldest_ticks"
 COUNT = "nemik_wait_cards"
 POSITION = "nemik_wait_blocker_position"
+WAKE_REQUIRED = "nemik_wake_required"
+WAKE_WAITERS = "nemik_wake_waiters"
 
 
 class _Options(argparse.Namespace):
@@ -90,6 +93,50 @@ def gauge_samples(edges: list[Edge], time_ns: int) -> list[Sample]:
     return out
 
 
+def wake_samples(rows: list[WakeRow], repos: list[str], time_ns: int) -> list[Sample]:
+    """Turn the wake roster into two gauges per workstream (nemik:W1604, luthen's W1928).
+
+    `nemik_wake_required` is 1 when something waits on the workstream and its session is not awake,
+    0 otherwise; `nemik_wake_waiters` is how many cards wait on it. Every workstream in `repos`
+    reads a value, so a 0 is a reading and a missing series means nemik could not tell. The roster
+    is built without alarms, so the owner of a fired alarm is not counted here.
+
+    Returns:
+        Two samples per workstream, labelled by repo alone, in repo order.
+
+    """
+    waiting = {row["repo"]: len(row.get("waiting", [])) for row in rows}
+    asleep = {row["repo"] for row in rows if row.get("state") != "awake"}
+    out: list[Sample] = []
+    for repo in sorted({*repos, *waiting}):
+        waiters = waiting.get(repo, 0)
+        required = 1 if waiters and repo in asleep else 0
+        labels = {"repo": repo}
+        out.extend(
+            [
+                Sample(WAKE_REQUIRED, required, time_ns, labels),
+                Sample(WAKE_WAITERS, waiters, time_ns, labels, "{card}"),
+            ]
+        )
+    return out
+
+
+def wake_readings(g: Graph, root: Path, time_ns: int) -> tuple[Sample, ...]:
+    """Read the wake gauges, or none when luthen's liveness could not be read.
+
+    Without liveness every blocker reads `unknown`, which would make each waiting workstream
+    wake-required, so nothing is sent: a missing series is "could not tell", never "nothing waits".
+
+    Returns:
+        The samples; empty when there is no liveness.
+
+    """
+    live, _ = read_liveness(root, None)
+    if not live:
+        return ()
+    return tuple(wake_samples(roster(g, live), workstreams(g), time_ns))
+
+
 def payload(resource: Resource, readings: list[Sample]) -> bytes:
     """Serialise the readings as one OTLP metrics request.
 
@@ -102,7 +149,11 @@ def payload(resource: Resource, readings: list[Sample]) -> bytes:
 
 
 def emit(
-    edges: list[Edge], time_ns: int, environ: dict[str, str], poster: Post = post
+    edges: list[Edge],
+    time_ns: int,
+    environ: dict[str, str],
+    poster: Post = post,
+    more: tuple[Sample, ...] = (),
 ) -> int:
     """Send the wait series to the metrics store.
 
@@ -111,13 +162,14 @@ def emit(
         time_ns: When the readings were true, in Unix nanoseconds.
         environ: The environment the endpoint name resolves through.
         poster: The HTTP seam, replaced in tests.
+        more: Further readings sent in the same request (the wake gauges, nemik:W1604).
 
     Returns:
         The number of samples sent; 0 when there is nothing to send, -1 when the endpoint is
         unnamed or the send failed.
 
     """
-    readings = gauge_samples(edges, time_ns)
+    readings = [*gauge_samples(edges, time_ns), *more]
     if not readings:
         return 0
     base = base_url(ENDPOINT, environ)
@@ -150,7 +202,13 @@ def main(argv: list[str] | None = None) -> int:
             g += queue_graph
     now = time.time_ns()
     environ = dict(os.environ)
-    sent = emit(wait_edges(g, load_weights()), now, environ)
+    sent = emit(
+        wait_edges(g, load_weights()),
+        now,
+        environ,
+        post,
+        wake_readings(g, options.root, now),
+    )
     logged = waitlog.emit(oldest_waits(g), now, environ)
     if sent < 0 or logged < 0:
         return 1

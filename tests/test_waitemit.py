@@ -1,13 +1,26 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Mike Mol
-"""Tests for waitemit: the wait series as gauges (nemik:W885)."""
+"""Tests for waitemit: the wait series as gauges (nemik:W885) and the wake gauges (nemik:W1604)."""
 
 from pathlib import Path
 
 from mikemol.otlp.sender import Post, SendError
+from rdflib import Graph
 
-from nemik.waitemit import COUNT, ENDPOINT, OLDEST, POSITION, emit, gauge_samples
+from nemik.waitemit import (
+    COUNT,
+    ENDPOINT,
+    OLDEST,
+    POSITION,
+    WAKE_REQUIRED,
+    WAKE_WAITERS,
+    emit,
+    gauge_samples,
+    wake_readings,
+    wake_samples,
+)
 from nemik.waitrows import UNRANKED, Edge
+from nemik.wake import Waiter, WakeRow
 
 NOW = 1_700_000_000_000_000_000
 OK = 200
@@ -22,6 +35,15 @@ SAMPLES_SENT = 6
 BEST_PLACE = 1
 OLDEST_ALPHA = 7
 CARDS_ALPHA = 3
+WAITER: Waiter = {"blocked": "x:W1", "claimed_by": [], "title": "a card"}
+ROSTER: list[WakeRow] = [
+    {"repo": "alpha", "state": "asleep", "waiting": [WAITER, WAITER]},
+    {"repo": "beta", "state": "awake", "waiting": [WAITER]},
+    {"repo": "delta", "state": "idle", "waiting": [WAITER]},
+    {"repo": "echo", "state": "unknown", "waiting": [WAITER]},
+]
+KNOWN = ["alpha", "beta", "delta", "echo", "gamma"]
+TWO_WAITERS = 2
 
 
 def _endpoints(tmp_path: Path, url: str) -> dict[str, str]:
@@ -98,3 +120,53 @@ def test_unreachable_send_is_a_failure(tmp_path: Path) -> None:
 
     environ = _endpoints(tmp_path, "http://host:8428")
     assert emit(EDGES, NOW, environ, poster) == -1
+
+
+def test_wake_is_required_only_where_a_sleeper_has_waiters() -> None:
+    """Asleep, idle and unknown with a waiter read 1; awake, and a workstream no one waits on, 0."""
+    made = {
+        (s.name, (s.labels or {})["repo"]): s.value
+        for s in wake_samples(ROSTER, KNOWN, NOW)
+    }
+    assert [made[WAKE_REQUIRED, repo] for repo in KNOWN] == [1, 0, 1, 1, 0]
+
+
+def test_the_waiters_are_counted_per_workstream() -> None:
+    """The count is the roster row's waiting length, and 0 for a workstream not on the roster."""
+    made = {
+        (s.name, (s.labels or {})["repo"]): s.value
+        for s in wake_samples(ROSTER, KNOWN, NOW)
+    }
+    assert made[WAKE_WAITERS, "alpha"] == TWO_WAITERS
+    assert made[WAKE_WAITERS, "gamma"] == 0
+
+
+def test_the_wake_gauges_carry_the_repo_label_only() -> None:
+    """Two samples per known workstream, labelled by repo alone, stamped with the reading time."""
+    made = wake_samples(ROSTER, KNOWN, NOW)
+    assert len(made) == TWO_WAITERS * len(KNOWN)
+    for sample in made:
+        assert set(sample.labels or {}) == {"repo"}
+        assert sample.time_ns == NOW
+
+
+def test_no_liveness_sends_no_wake_gauges(tmp_path: Path) -> None:
+    """Without luthen's liveness every blocker reads unknown, so nothing is sent at all."""
+    assert wake_readings(Graph(), tmp_path, NOW) == ()
+
+
+def test_the_wake_gauges_ride_the_same_request(tmp_path: Path) -> None:
+    """One request carries the wait gauges and the wake gauges, and the count includes both."""
+    seen: list[bytes] = []
+
+    def poster(url: str, body: bytes) -> int:
+        del url
+        seen.append(body)
+        return OK
+
+    more = tuple(wake_samples(ROSTER, KNOWN, NOW))
+    environ = _endpoints(tmp_path, "http://host:8428/")
+    assert emit(EDGES, NOW, environ, poster, more) == SAMPLES_SENT + len(more)
+    assert len(seen) == 1
+    for name in (WAKE_REQUIRED, WAKE_WAITERS):
+        assert name.encode() in seen[0]
