@@ -3,7 +3,7 @@
 
 state file: `.claude/paths-forward.json`
 
-counter 1988 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:a170f6d5df588882`
+counter 1988 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:652c471daada1fa9`
 
 | # | symbol | status |
 |---|---|---|
@@ -9736,3 +9736,29 @@ counter 1988 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:a17
   not re-run any figure. SHIP-SEEN for 984 to 1029 is unread. Three findings. No fixpoint is declared: open findings are
   carried with owners and due dates. Carried open findings as in R249, with R249 finding 1 answered by the store read
   and R249 finding 2 realised (the held code is in the tree and in .claude copies).; 3 finding(s)
+- **nemik:R249** (-) round 251: a queue-and-design stretch; queue-only 832a7736 landed 23:09:48Z; design v3 of W1978
+  sent after a not-cleared cold review; the operator answered E1 'Sure, I guess.'; the learned-pace replay carded (W1984
+  to W1988); the held code (series repair stack 1028, the wave and hierarchy tools, the walls-doc correction) still
+  waiting on mtools:W2301: root Verified from the reflog: 832a7736 is HEAD (1793920188 = 23:09:48Z, 2205 s after
+  7be15c47 at 22:33:03Z), a queue-only commit, which fits the G1's 'about 23:08Z'. The stretch had no code on the gate,
+  and the G1 says so (no G0 stamped for queue-only work, a miss named). R250 is handled with reasons: the
+  operator-release suggestion was declined because the host's standing rule forbids proposing an exemption path and the
+  sanctioned route is the replay admission on mtools:W2301, which I accept and withdraw my finding on; the explicit
+  question on waves 1 to 10 went to the host's cold review; the cost of the 299 new cards was measured where a
+  before-reading existed (the queue file 4,574,400 to 4,738,434 bytes, +3.6 percent) and the G1 claimed no delta for the
+  132 s fleet digest because it had no earlier reading, which is the honest way to say it. The cold review of design v2
+  came back not cleared with four blocks and eleven fixes, and the session checked each against source (44 modules carry
+  the future import, not the 33 whose first error it is; MODULE.bazel:25 pins python 3.13; relative imports in
+  hostroot.py and landings.py that own_row ignores; a bare star-comma in at least nine modules), and sent v3 with
+  several withdrawals (that mtools reads only the census row, observed as {kind: 1} with a sidecar witness, a prior
+  table, credit on own-pair shrink and closure-set non-rise, rises in an append-only list, a tombstone for the old row);
+  the host then corrected the v3 prior from 1 to at least two pairs per ten-landing window with the unit stated, and the
+  session corrected it. Stack 1028's named fields were supplied (build sha 4d084f7a, a 30-day query range, the read-only
+  reproduction against the published pace: 106 rows, 102 identical, four differ, namely nemik codon behind to ok, mtools
+  hooks behind with observed 24 to 44, nemik mypy and ruff unknown unchanged). The learned-pace replay was carded as an
+  umbrella with four children, and the host's fifth question was answered from source (rank-weights.toml line 65, weight
+  = flow). The G1 owns its slips (no G0 on the queue-only work, an evidence call refused by the no-chaining hook, a
+  dry-run script with a noqa caught and removed, the earlier over-reach on line 142122). I did not re-run any figure.
+  SHIP-SEEN for 984 to 1029 is unread. Two findings. No fixpoint is declared: open findings are carried with owners and
+  due dates. Carried open findings as in R250, minus R250's finding 1 (declined with a valid reason, withdrawn).; 2
+  finding(s)
