@@ -3,7 +3,7 @@
 
 state file: `.claude/paths-forward.json`
 
-counter 1988 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:652c471daada1fa9`
+counter 1988 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:766daff38ff1a644`
 
 | # | symbol | status |
 |---|---|---|
@@ -9762,3 +9762,27 @@ counter 1988 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:652
   SHIP-SEEN for 984 to 1029 is unread. Two findings. No fixpoint is declared: open findings are carried with owners and
   due dates. Carried open findings as in R250, minus R250's finding 1 (declined with a valid reason, withdrawn).; 2
   finding(s)
+- **nemik:R250** (-) round 252: queue-only c9edd345 landed 23:36:15Z; the first clean tick-close since W1980, whose
+  caused_by W2008 (a symbol the guard's refusal text suggested) did not resolve in this queue and made every close
+  refuse; design v4 of the codon edge ratchet in docs/codon-edge-ratchet.md, uncommitted; the held code still waiting:
+  root Verified from the reflog and git status: c9edd345 is HEAD (1793921775 = 23:36:15Z, 1587 s after 832a7736 at
+  23:09:48Z), another queue-only commit, and the working tree holds the doc work (M docs/codon-walls.md, ??
+  docs/codon-edge-ratchet.md, ?? docs/shared-file-versions.md). I take the G1's correction of my R251 finding 2 with
+  thanks: the exit 4s on the close were not the ATOMIZE nudge but the writer's own check refusing W1980's caused_by
+  W2008, a symbol that does not exist in this queue, which the guard's refusal text had told the session to use;
+  corrected to W1759, the check printed 'check: OK, 1988 of 1988 symbols resolve', and the close exited 0. I
+  misattributed that cause, as I did the W1654 unit in R242, from the visible nudge rather than the refusing check; the
+  G1 read the check. R251 finding 1 is applied in full: W1978 carries the E1 question verbatim (line 142360, uuid
+  07e94fd0, 22:37:35Z), the answer verbatim (line 142382, uuid 4ac691d3, 'Sure, I guess.') and a scope that lists what
+  the warrant covers (the pair ratchet's birth as a rise from zero, pacing on it, the row ratchet no longer paced, rows
+  kept as the end test, the required pace not dropping) and what it does not (any build, the birth admission class, a
+  floor, the overdue hypothesis); and the question asked for the operator's words as the warrant for a rise from zero,
+  which settles what line 142122 did not. The cold review of v3 came back not cleared with four design blocks, the
+  session checked its numbers against source (147 of 215 pairs have a direct dependency already carrying the kind,
+  exact; 153 stay in the closure after removal against the review's 154; 46 modules mention __future__ and 44 import it;
+  src/nemik/core has four modules and own_row stops at core), and wrote v4 in the doc: credit needs a strict-subset pair
+  set, no per-pair reference rise, C a subset of the committed C compared as sets, no import edge gained into a carrier
+  of the removed kind, every row's first_error mapped to an open pair, and the clause 'a row leaving is a fall' deleted
+  because the review rightly rejected it (no pair shrink, the pace cannot see it). I did not re-run any figure; I have
+  not read v4. SHIP-SEEN for 984 to 1029 is unread. Two findings. No fixpoint is declared: open findings are carried
+  with owners and due dates. Carried open findings as in R251, minus R251's two (applied, and corrected).; 2 finding(s)
