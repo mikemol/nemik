@@ -36,8 +36,8 @@ walls below.
 | the `mikemol.*` libraries (`procrun`, `pathsforward`, `endpoints`, `otlp`) | `work`, `ask_cli`, `alarm`, `endpoint`, `marks`, `pins` and their dependents | measured 2026-11-05: the census does not stage the libs, and the venv's `mikemol` has no top-level `__init__.py`; with both added, `mikemol.procrun` compiles but `mikemol.procrun.proc` stops at `no module named select` (it also imports `subprocess`) and `mikemol.pathsforward.lock` at a dataclass decorator. So the libraries themselves do not compile: an mtools question, or nemik's own thin stand-ins for the few calls it makes |
 | `argparse`, `tomllib`, `shutil`, `subprocess`, `shlex` | the CLI modules, config readers | the CLI shells moved into a module already in the baseline (what W1668, W1669 and W1672 did for `critical`, `wake` and `floorasks`), and a Codon-compatible TOML reader |
 | `dataclasses` decorator arguments, `fractions`, `weakref`, `contextlib`, `collections.abc`, `hashlib`, `importlib.*` | `cards`, `flow`, `issues`, `projection`, `salience`, `score`, `index`, `shaclcache`, `cachestore`, `marks` | per module: plain classes for `@dataclass(frozen=True)` (the pinned Codon accepts plain classes), a `typing` or builtin spelling for the others |
-| strict typing | `apischema`: its `SCALAR` table mixes string and list values and Codon types the dict strictly | a typed row class in place of the mixed dict |
-| `from __future__`, `TYPE_CHECKING`, keyword-only `*,` markers, tuple `except` | the stripped-mode errors of `alarm`, `calendars`, `check`, `history`, `hostapply`, `rank`, `stackable_cli`, `wake` | per module, mechanical, but each module sits behind another wall as well |
+| strict typing | `apischema` (import row FREED by nemik:W2043): its `SCALAR` table mixed string and list values and Codon types the dict strictly | the import row is done: the schemas are built on an arena of typed nodes (`jsonarena`, `jsonparse`, `schemagen`) and returned as JSON text; the dict makers are `serve.py` and the tests. Not done: `apischema.load` and `unmanifested` still read JSON as an untyped object and do not compile when called (nemik:W2049). The import-and-call census (`tools/codon_call.py`) found that `import` alone can pass where a call fails |
+| `from __future__`, `TYPE_CHECKING`, keyword-only `*,` markers | the stripped-mode errors of `alarm`, `calendars`, `check`, `history`, `hostapply`, `rank`, `stackable_cli`, `wake` (the bare star-comma, a syntax error) | per module, mechanical, but each module sits behind another wall as well. Tuple `except` is NOT a blocker: `roundcli` and `pacecli` use it and are not in the baseline (corrected 2026-11-05 after the cold review) |
 
 ## What the pattern buys
 
@@ -49,7 +49,7 @@ frees three or more rows.
 ## Rows that remain, by cost
 
 1. Single-wall rows with a mechanical fix: none are left that sit outside `adapter` and the
-   `mikemol` libraries except `apischema` (a typed row class) and the dataclass rows `score`,
+   `mikemol` libraries (`apischema`'s import row was the last, freed by nemik:W2043; its calls remain nemik:W2049) except the dataclass rows `score`,
    `cards`, `flow`, `issues`, `projection`, `salience` (each also reaches `adapter`, so freeing one
    of them alone does not make it compile).
 2. There is no single structural move. The first version of this page named the `adapter` split as
@@ -76,4 +76,4 @@ So the work is a campaign over about seven kinds before the first fourteen rows 
 `tomllib` is the biggest single step (2 to 14 rows) once the kinds before it are fixed. The order
 above is by how many closures a kind sits in; a cheaper order may exist and is a question for a
 measurement, not a conclusion. This is a static bound from imports, so it overstates what compiles:
-a freed row can still fail on a type error, as `apischema` does.
+a freed row can still fail on a type error, as `apischema.load` still does (nemik:W2049).

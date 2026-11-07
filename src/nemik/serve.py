@@ -42,7 +42,7 @@ from rdflib.namespace import DCTERMS, PROV
 
 from nemik import adapter, cachestore, lastgood
 from nemik.adapter import BASE, NEMIK, OPERATOR, OSLC_CM, bind, ledger_graph
-from nemik.apischema import openapi, schema_path, schemas, unmanifested
+from nemik.apischema import openapi_text, schema_path, schemas_text, unmanifested
 from nemik.blocks import inbound, node_flags, operator_asks, ref, with_salience
 from nemik.buildcost import (
     build_cost_lines,
@@ -149,7 +149,9 @@ def check_report(name: str, graph: Graph, root: Path) -> str | None:
         # nemik:W862, W863: the inbox report as --letters and --fold print it; the writing mode
         # (--apply) is not served, only the plan it would carry out.
         known = {repo for repo, _ in workstream_files(root, QUEUE)}
-        return "\n".join(letters_report(root, known, FOLD if name == "fold" else PLAIN)[0])
+        return "\n".join(
+            letters_report(root, known, FOLD if name == "fold" else PLAIN)[0]
+        )
     return None
 
 
@@ -1617,10 +1619,13 @@ def build_static_unscoped(
         docs[f"graph/{piece}.json"] = cut
     # nemik:W440: the contract the published files keep, generated from the field manifest and
     # listed in hashes.json like the data, so a client sees when it changes
-    for pattern, schema in schemas().items():
+    # nemik:W2043: apischema returns compact JSON text, so the dicts are made here, in the caller
+    for pattern, text in schemas_text().items():
+        schema: object = json.loads(text)
         docs[schema_path(pattern)] = schema
     # nemik:W442: the read API, generated from the same schemas
-    docs["openapi.json"] = openapi()
+    api: object = json.loads(openapi_text())
+    docs["openapi.json"] = api
     written = write_static(out)
     # nemik:W414: hashes.json maps each published data path to the sha256 of its bytes, so a page
     # (W416) can refetch only the pieces that changed. Paths and digests only: nothing withheld.

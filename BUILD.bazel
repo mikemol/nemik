@@ -14,7 +14,7 @@ exports_files(["pyproject.toml"])
         # load ~100 it crossed medium's 300 s (284 s alone, then a timeout in the gate). The rest stay medium.
         # nemik:W625: the SHACL cache tests are full surveys (a cold one is tens of seconds); the warm-equals-cold
         # property runs five of them beside five twins.
-        size = "large" if src in ("tests/test_layout.py", "tests/test_codon_census.py", "tests/test_warm_equals_cold.py", "tests/test_shaclinc.py", "tests/test_cache_user.py") else "medium",
+        size = "large" if src in ("tests/test_layout.py", "tests/test_codon_census.py", "tests/test_codon_calls.py", "tests/test_warm_equals_cold.py", "tests/test_shaclinc.py", "tests/test_cache_user.py") else "medium",
         # nemik:W1044: six browser PDF prints; run alone it passed, in the full gate it timed out at 300 s
         # nemik:W1061: test_modes alone takes 190 s of its 300 s timeout, and test_layout 296 s of 900 s
         # but timed out at 900 s in a loaded gate, so both run in three as well
@@ -97,6 +97,13 @@ exports_files(["pyproject.toml"])
             + (["//tests/fixtures:pace"] if src in ("tests/test_pace_floors.py", "tests/test_required_value.py") else [])
             # nemik:W1033: the round file contract test reads the recorded round file
             + (["//tests/fixtures:round"] if src in ("tests/test_round_contract.py", "tests/test_roundgauges.py") else [])
+            # nemik:W2043: the apischema goldens, and the call census's registry, tool and codon
+            + (["//tests/fixtures/apischema:apischema-golden.json", "//tests/fixtures/apischema:apischema-manifest.json", "//tests/fixtures/apischema:apischema-cases.json"] if src == "tests/test_schemagen.py" else [])
+            + (["//tests/fixtures/apischema:apischema-errors.json", "//tests/fixtures/apischema:apischema-manifest.json"] if src == "tests/test_schemagen_errors.py" else [])
+            + (["//tests/fixtures/apischema:codon-calls.txt"] if src == "tests/test_codon_calls.py" else [])
+            + (["tools/codon_call.py", "tools/codon_census.py"] if src in ("tests/test_codon_call.py", "tests/test_codon_calls.py") else [])
+            + (["tools/hookcheck.py"] if src == "tests/test_hookcheck.py" else [])
+            + (["@codon//:files", "@codon//:bin/codon"] if src == "tests/test_codon_calls.py" else [])
             # nemik:W623: the pre-commit hook is copied and run by its test
             + ([".githooks/pre-commit"] if src == "tests/test_githooks_snapshot.py" else [])
             + (["tools/image_replica.sh", ".githooks/post-commit"] if src == "tests/test_image_replica.py" else [])
@@ -117,7 +124,7 @@ exports_files(["pyproject.toml"])
             "NEMIK_MPXJ_CLASSPATH": "$(rootpaths :mpxj_classpath)",
         } if src == "tests/test_mpxj.py" else {}) | ({
             "NEMIK_CODON": "$(rootpath @codon//:bin/codon)",
-        } if src in ("tests/test_codon_pin.py", "tests/test_codon_census.py") else {}),
+        } if src in ("tests/test_codon_pin.py", "tests/test_codon_census.py", "tests/test_codon_calls.py") else {}),
     )
     for src in glob(["tests/test_*.py"])
 ]

@@ -1,0 +1,7 @@
+# module|call|expected: the import-and-call census registry (nemik:W2043, tools/codon_call.py).
+# Each line is a call that must print the same text under CPython and under the pinned Codon in both census modes.
+# `-` expects no particular text, `DIFF` marks a negative control that must differ, anything else is the exact text.
+jsonarena|escape("a\"b" + chr(233) + chr(128512))|-
+jsonparse|parse("[1,{\"a\":null}]")|[1,{"a":null}]
+jsonparse|parse("[1,")|error
+manifest|no_such_call()|DIFF

@@ -1,0 +1,13 @@
+# nemik:W2043: the golden schemas, manifests, error cases and call registry the apischema rewrite is
+# judged by. Each test names the files it reads (BUILD.bazel's data), so an unrelated edit here
+# reruns nothing else.
+exports_files(
+    [
+        "apischema-cases.json",
+        "apischema-errors.json",
+        "apischema-golden.json",
+        "apischema-manifest.json",
+        "codon-calls.txt",
+    ],
+    visibility = ["//visibility:public"],
+)

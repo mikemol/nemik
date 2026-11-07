@@ -100,7 +100,7 @@ def _declared() -> tuple[set[str], list[str]]:
     ]
     prefixes = [item.split("*")[0] for item in patterns if item.endswith("**")]
     files |= {item for item in patterns if not item.endswith("**")}
-    pkgs: list[tuple[str, str]] = re.findall(r'"//([\w/]+):(\w+)"', data)
+    pkgs: list[tuple[str, str]] = re.findall(r'"//([\w/]+):([\w.-]+)"', data)
     prefixes += [f"{pkg}/{name}/" for pkg, name in pkgs]
     return files, prefixes
 

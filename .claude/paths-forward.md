@@ -3,7 +3,7 @@
 
 state file: `.claude/paths-forward.json`
 
-counter 1989 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:7340712a4d9f6fd8`
+counter 2052 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:ef90c6d5e47c5e71`
 
 | # | symbol | status |
 |---|---|---|
@@ -15,1962 +15,2027 @@ counter 1989 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:734
 | 6 | W1100 | ready |
 | 7 | W1101 | ready |
 | 8 | W1102 | ready |
-| 9 | W1325 | ready |
-| 10 | W1063 | ready |
-| 11 | W1083 | ready |
-| 12 | W1093 | ready |
-| 13 | W1094 | ready |
-| 14 | W1106 | ready |
-| 15 | W1128 | ready |
-| 16 | W1140 | ready |
-| 17 | W1141 | ready |
-| 18 | W1179 | ready |
-| 19 | W969 | ready |
-| 20 | W902 | ready |
-| 21 | W1028 | ready |
-| 22 | W1257 | ready |
-| 23 | W913 | ready |
-| 24 | W1215 | ready |
-| 25 | W1761 | ready |
-| 26 | W1258 | ready |
-| 27 | W1271 | ready |
-| 28 | W1272 | ready |
-| 29 | W976 | ready |
-| 30 | W1169 | ready |
-| 31 | W1016 | ready |
-| 32 | W1022 | ready |
-| 33 | W1515 | ready |
-| 34 | W982 | ready |
-| 35 | W1216 | ready |
-| 36 | W1042 | ready |
-| 37 | W1026 | ready |
-| 38 | W1020 | ready |
-| 39 | W966 | ready |
-| 40 | W910 | ready |
-| 41 | W911 | ready |
-| 42 | W1007 | ready |
-| 43 | W1008 | ready |
-| 44 | W1009 | ready |
-| 45 | W1764 | ready |
-| 46 | W1969 | ready |
-| 47 | W1847 | ready |
-| 48 | W1923 | ready |
-| 49 | W1002 | ready |
-| 50 | W1858 | ready |
-| 51 | W846 | ready |
-| 52 | W1763 | ready |
-| 53 | W1840 | ready |
-| 54 | W1765 | ready |
-| 55 | W1766 | ready |
-| 56 | W1768 | ready |
-| 57 | W1767 | ready |
-| 58 | W1032 | ready |
-| 59 | W1977 | ready |
-| 60 | W1976 | ready |
-| 61 | W1812 | ready |
-| 62 | W1877 | ready |
-| 63 | W1952 | ready |
-| 64 | W1487 | ready |
-| 65 | W1488 | ready |
-| 66 | W1489 | ready |
-| 67 | W1490 | ready |
-| 68 | W1879 | ready |
-| 69 | W1878 | ready |
-| 70 | W1848 | ready |
-| 71 | W1926 | ready |
-| 72 | W1769 | ready |
-| 73 | W994 | ready |
-| 74 | W1770 | ready |
-| 75 | W1815 | ready |
-| 76 | W1919 | ready |
-| 77 | W1773 | ready |
-| 78 | W1893 | ready |
-| 79 | W1843 | ready |
-| 80 | W1897 | ready |
-| 81 | W1799 | ready |
-| 82 | W1948 | ready |
-| 83 | W1813 | ready |
-| 84 | W1814 | ready |
-| 85 | W1968 | ready |
-| 86 | W1937 | ready |
-| 87 | W1904 | ready |
-| 88 | W1859 | ready |
-| 89 | W1771 | ready |
-| 90 | W1894 | ready |
-| 91 | W1973 | ready |
-| 92 | W1818 | ready |
-| 93 | W1964 | ready |
-| 94 | W1967 | ready |
-| 95 | W1772 | ready |
-| 96 | W1940 | ready |
-| 97 | W1907 | ready |
-| 98 | W1895 | ready |
-| 99 | W1939 | ready |
-| 100 | W1871 | ready |
-| 101 | W1938 | ready |
-| 102 | W1965 | ready |
-| 103 | W1905 | ready |
-| 104 | W1783 | ready |
-| 105 | W1906 | ready |
-| 106 | W1966 | ready |
-| 107 | W1849 | ready |
-| 108 | W1850 | ready |
-| 109 | W1774 | ready |
-| 110 | W1899 | ready |
-| 111 | W1830 | ready |
-| 112 | W1817 | ready |
-| 113 | W1782 | ready |
-| 114 | W750 | ready |
-| 115 | W1816 | ready |
-| 116 | W1890 | ready |
-| 117 | W1873 | ready |
-| 118 | W1831 | ready |
-| 119 | W1832 | ready |
-| 120 | W1876 | ready |
-| 121 | W1796 | ready |
-| 122 | W1844 | ready |
-| 123 | W1898 | ready |
-| 124 | W1891 | ready |
-| 125 | W1838 | ready |
-| 126 | W1819 | ready |
-| 127 | W1971 | ready |
-| 128 | W1972 | ready |
-| 129 | W1892 | ready |
-| 130 | W1963 | ready |
-| 131 | W1872 | ready |
-| 132 | W1918 | ready |
-| 133 | W1826 | ready |
-| 134 | W1930 | ready |
-| 135 | W1884 | ready |
-| 136 | W1870 | ready |
-| 137 | W1875 | ready |
-| 138 | W1836 | ready |
-| 139 | W1869 | ready |
-| 140 | W1874 | ready |
-| 141 | W1936 | ready |
-| 142 | W1961 | ready |
-| 143 | W1842 | ready |
-| 144 | W1896 | ready |
-| 145 | W1806 | ready |
-| 146 | W1957 | ready |
-| 147 | W1778 | ready |
-| 148 | W1902 | ready |
-| 149 | W1922 | ready |
-| 150 | W1974 | ready |
-| 151 | W1970 | ready |
-| 152 | W1827 | ready |
-| 153 | W1975 | ready |
-| 154 | W1837 | ready |
-| 155 | W1834 | ready |
-| 156 | W1809 | ready |
-| 157 | W1921 | ready |
-| 158 | W1820 | ready |
-| 159 | W1962 | ready |
-| 160 | W1811 | ready |
-| 161 | W1775 | ready |
-| 162 | W1900 | ready |
-| 163 | W1411 | ready |
-| 164 | W1491 | ready |
-| 165 | W1492 | ready |
-| 166 | W1789 | ready |
-| 167 | W1920 | ready |
-| 168 | W1953 | ready |
-| 169 | W1810 | ready |
-| 170 | W1776 | ready |
-| 171 | W1955 | ready |
-| 172 | W1954 | ready |
-| 173 | W1784 | ready |
-| 174 | W1835 | ready |
-| 175 | W1958 | ready |
-| 176 | W1779 | ready |
-| 177 | W1798 | ready |
-| 178 | W1846 | ready |
-| 179 | W1903 | ready |
-| 180 | W1956 | ready |
-| 181 | W1960 | ready |
-| 182 | W1925 | ready |
-| 183 | W1828 | ready |
-| 184 | W1777 | ready |
-| 185 | W1797 | ready |
-| 186 | W1845 | ready |
-| 187 | W1901 | ready |
-| 188 | W1825 | ready |
-| 189 | W1959 | ready |
-| 190 | W1833 | ready |
-| 191 | W1924 | ready |
-| 192 | W1880 | ready |
-| 193 | W1829 | ready |
-| 194 | W1823 | ready |
-| 195 | W1785 | ready |
-| 196 | W1911 | ready |
-| 197 | W1912 | ready |
-| 198 | W1883 | ready |
-| 199 | W1821 | ready |
-| 200 | W1856 | ready |
-| 201 | W1857 | ready |
-| 202 | W1824 | ready |
-| 203 | W1881 | ready |
-| 204 | W1888 | ready |
-| 205 | W1822 | ready |
-| 206 | W1839 | ready |
-| 207 | W1916 | ready |
-| 208 | W1841 | ready |
-| 209 | W1801 | ready |
-| 210 | W1802 | ready |
-| 211 | W1865 | ready |
-| 212 | W1807 | ready |
-| 213 | W1885 | ready |
-| 214 | W1868 | ready |
-| 215 | W1780 | ready |
-| 216 | W1886 | ready |
-| 217 | W1928 | ready |
-| 218 | W1882 | ready |
-| 219 | W1803 | ready |
-| 220 | W1889 | ready |
-| 221 | W1866 | ready |
-| 222 | W1781 | ready |
-| 223 | W1945 | ready |
-| 224 | W1790 | ready |
-| 225 | W1887 | ready |
-| 226 | W1932 | ready |
-| 227 | W1804 | ready |
-| 228 | W1861 | ready |
-| 229 | W1800 | ready |
-| 230 | W1860 | ready |
-| 231 | W1935 | ready |
-| 232 | W1808 | ready |
-| 233 | W1863 | ready |
-| 234 | W1864 | ready |
-| 235 | W1942 | ready |
-| 236 | W1792 | ready |
-| 237 | W1805 | ready |
-| 238 | W1862 | ready |
-| 239 | W1867 | ready |
-| 240 | W1933 | ready |
-| 241 | W1927 | ready |
-| 242 | W1943 | ready |
-| 243 | W1787 | ready |
-| 244 | W1941 | ready |
-| 245 | W1786 | ready |
-| 246 | W1946 | ready |
-| 247 | W1187 | ready |
-| 248 | W1929 | ready |
-| 249 | W1931 | ready |
-| 250 | W1944 | ready |
-| 251 | W1788 | ready |
-| 252 | W1949 | ready |
-| 253 | W1934 | ready |
-| 254 | W1793 | ready |
-| 255 | W1947 | ready |
-| 256 | W1791 | ready |
-| 257 | W1951 | ready |
-| 258 | W1795 | ready |
-| 259 | W1852 | ready |
-| 260 | W1853 | ready |
-| 261 | W1950 | ready |
-| 262 | W1794 | ready |
-| 263 | W1909 | ready |
-| 264 | W1910 | ready |
-| 265 | W1854 | ready |
-| 266 | W1851 | ready |
-| 267 | W1913 | ready |
-| 268 | W1855 | ready |
-| 269 | W1914 | ready |
-| 270 | W1908 | ready |
-| 271 | W1917 | ready |
-| 272 | W1915 | ready |
-| 273 | W1052 | ready |
-| 274 | W1079 | ready |
-| 275 | W1244 | ready |
-| 276 | W1249 | ready |
-| 277 | W1250 | ready |
-| 278 | W1038 | ready |
-| 279 | W1070 | ready |
-| 280 | W1163 | ready |
-| 281 | W1175 | ready |
-| 282 | W1178 | ready |
-| 283 | W1184 | ready |
-| 284 | W1197 | ready |
-| 285 | W1220 | ready |
-| 286 | W1222 | ready |
-| 287 | W1225 | ready |
-| 288 | W1226 | ready |
-| 289 | W1229 | ready |
-| 290 | W1231 | ready |
-| 291 | W1232 | ready |
-| 292 | W1246 | ready |
-| 293 | W1261 | ready |
-| 294 | W1270 | ready |
-| 295 | W1275 | ready |
-| 296 | W1276 | ready |
-| 297 | W1345 | ready |
-| 298 | W1347 | ready |
-| 299 | W1395 | ready |
-| 300 | W1399 | ready |
-| 301 | W1418 | ready |
-| 302 | W1514 | ready |
-| 303 | W1518 | ready |
-| 304 | W1522 | ready |
-| 305 | W1549 | ready |
-| 306 | W1568 | ready |
-| 307 | W1648 | ready |
-| 308 | W1661 | ready |
-| 309 | W1759 | ready |
-| 310 | W1760 | ready |
-| 311 | W1978 | ready |
-| 312 | W1217 | ready |
-| 313 | W1076 | ready |
-| 314 | W1103 | ready |
-| 315 | W1218 | ready |
-| 316 | W1981 | ready |
-| 317 | W1982 | ready |
-| 318 | W1983 | ready |
-| 319 | W1985 | ready |
-| 320 | W1986 | ready |
-| 321 | W1987 | ready |
-| 322 | W1988 | ready |
+| 9 | W1063 | ready |
+| 10 | W1083 | ready |
+| 11 | W1093 | ready |
+| 12 | W1094 | ready |
+| 13 | W1106 | ready |
+| 14 | W1128 | ready |
+| 15 | W1140 | ready |
+| 16 | W1141 | ready |
+| 17 | W1179 | ready |
+| 18 | W969 | ready |
+| 19 | W902 | ready |
+| 20 | W1028 | ready |
+| 21 | W1257 | ready |
+| 22 | W1215 | ready |
+| 23 | W1258 | ready |
+| 24 | W1272 | ready |
+| 25 | W976 | ready |
+| 26 | W1169 | ready |
+| 27 | W1016 | ready |
+| 28 | W1022 | ready |
+| 29 | W982 | ready |
+| 30 | W1216 | ready |
+| 31 | W1042 | ready |
+| 32 | W1026 | ready |
+| 33 | W1020 | ready |
+| 34 | W966 | ready |
+| 35 | W910 | ready |
+| 36 | W911 | ready |
+| 37 | W1007 | ready |
+| 38 | W1008 | ready |
+| 39 | W1009 | ready |
+| 40 | W1764 | ready |
+| 41 | W1969 | ready |
+| 42 | W1847 | ready |
+| 43 | W1923 | ready |
+| 44 | W1002 | ready |
+| 45 | W1858 | ready |
+| 46 | W846 | ready |
+| 47 | W1763 | ready |
+| 48 | W1840 | ready |
+| 49 | W1765 | ready |
+| 50 | W1766 | ready |
+| 51 | W1768 | ready |
+| 52 | W1767 | ready |
+| 53 | W1032 | ready |
+| 54 | W1977 | ready |
+| 55 | W1976 | ready |
+| 56 | W1812 | ready |
+| 57 | W1877 | ready |
+| 58 | W1952 | ready |
+| 59 | W1487 | ready |
+| 60 | W1488 | ready |
+| 61 | W1489 | ready |
+| 62 | W1490 | ready |
+| 63 | W1879 | ready |
+| 64 | W1878 | ready |
+| 65 | W1848 | ready |
+| 66 | W1926 | ready |
+| 67 | W1769 | ready |
+| 68 | W994 | ready |
+| 69 | W1770 | ready |
+| 70 | W1815 | ready |
+| 71 | W1919 | ready |
+| 72 | W1773 | ready |
+| 73 | W1893 | ready |
+| 74 | W1843 | ready |
+| 75 | W1897 | ready |
+| 76 | W1799 | ready |
+| 77 | W1948 | ready |
+| 78 | W1813 | ready |
+| 79 | W1814 | ready |
+| 80 | W1968 | ready |
+| 81 | W1937 | ready |
+| 82 | W1904 | ready |
+| 83 | W1859 | ready |
+| 84 | W1771 | ready |
+| 85 | W1894 | ready |
+| 86 | W1973 | ready |
+| 87 | W1818 | ready |
+| 88 | W1964 | ready |
+| 89 | W1967 | ready |
+| 90 | W1772 | ready |
+| 91 | W1940 | ready |
+| 92 | W1907 | ready |
+| 93 | W1895 | ready |
+| 94 | W1939 | ready |
+| 95 | W1871 | ready |
+| 96 | W1938 | ready |
+| 97 | W1965 | ready |
+| 98 | W1905 | ready |
+| 99 | W1783 | ready |
+| 100 | W1906 | ready |
+| 101 | W1966 | ready |
+| 102 | W1849 | ready |
+| 103 | W1850 | ready |
+| 104 | W1774 | ready |
+| 105 | W1899 | ready |
+| 106 | W1830 | ready |
+| 107 | W1817 | ready |
+| 108 | W1782 | ready |
+| 109 | W750 | ready |
+| 110 | W1816 | ready |
+| 111 | W1890 | ready |
+| 112 | W1873 | ready |
+| 113 | W1831 | ready |
+| 114 | W1832 | ready |
+| 115 | W1876 | ready |
+| 116 | W1796 | ready |
+| 117 | W1844 | ready |
+| 118 | W1898 | ready |
+| 119 | W1891 | ready |
+| 120 | W1838 | ready |
+| 121 | W1819 | ready |
+| 122 | W1971 | ready |
+| 123 | W1972 | ready |
+| 124 | W1892 | ready |
+| 125 | W1963 | ready |
+| 126 | W1872 | ready |
+| 127 | W1918 | ready |
+| 128 | W1826 | ready |
+| 129 | W1930 | ready |
+| 130 | W1884 | ready |
+| 131 | W1870 | ready |
+| 132 | W1875 | ready |
+| 133 | W1836 | ready |
+| 134 | W1869 | ready |
+| 135 | W1874 | ready |
+| 136 | W1936 | ready |
+| 137 | W1961 | ready |
+| 138 | W1842 | ready |
+| 139 | W1896 | ready |
+| 140 | W1806 | ready |
+| 141 | W1957 | ready |
+| 142 | W1778 | ready |
+| 143 | W1902 | ready |
+| 144 | W1922 | ready |
+| 145 | W1974 | ready |
+| 146 | W1970 | ready |
+| 147 | W1827 | ready |
+| 148 | W1975 | ready |
+| 149 | W1837 | ready |
+| 150 | W1834 | ready |
+| 151 | W1809 | ready |
+| 152 | W1921 | ready |
+| 153 | W1820 | ready |
+| 154 | W1962 | ready |
+| 155 | W1811 | ready |
+| 156 | W1775 | ready |
+| 157 | W1900 | ready |
+| 158 | W1411 | ready |
+| 159 | W1491 | ready |
+| 160 | W1492 | ready |
+| 161 | W1789 | ready |
+| 162 | W1920 | ready |
+| 163 | W1953 | ready |
+| 164 | W1810 | ready |
+| 165 | W1776 | ready |
+| 166 | W1955 | ready |
+| 167 | W1954 | ready |
+| 168 | W1784 | ready |
+| 169 | W1835 | ready |
+| 170 | W1958 | ready |
+| 171 | W1779 | ready |
+| 172 | W1798 | ready |
+| 173 | W1846 | ready |
+| 174 | W1903 | ready |
+| 175 | W1956 | ready |
+| 176 | W1960 | ready |
+| 177 | W1925 | ready |
+| 178 | W1828 | ready |
+| 179 | W1777 | ready |
+| 180 | W1797 | ready |
+| 181 | W1845 | ready |
+| 182 | W1901 | ready |
+| 183 | W1825 | ready |
+| 184 | W1959 | ready |
+| 185 | W1833 | ready |
+| 186 | W1924 | ready |
+| 187 | W1880 | ready |
+| 188 | W1829 | ready |
+| 189 | W1823 | ready |
+| 190 | W1785 | ready |
+| 191 | W1911 | ready |
+| 192 | W1912 | ready |
+| 193 | W1883 | ready |
+| 194 | W1821 | ready |
+| 195 | W1856 | ready |
+| 196 | W1857 | ready |
+| 197 | W1824 | ready |
+| 198 | W1881 | ready |
+| 199 | W1888 | ready |
+| 200 | W1822 | ready |
+| 201 | W1839 | ready |
+| 202 | W1916 | ready |
+| 203 | W1841 | ready |
+| 204 | W1801 | ready |
+| 205 | W1802 | ready |
+| 206 | W1865 | ready |
+| 207 | W1807 | ready |
+| 208 | W1885 | ready |
+| 209 | W1868 | ready |
+| 210 | W1780 | ready |
+| 211 | W1886 | ready |
+| 212 | W1928 | ready |
+| 213 | W1882 | ready |
+| 214 | W1803 | ready |
+| 215 | W1889 | ready |
+| 216 | W1866 | ready |
+| 217 | W1781 | ready |
+| 218 | W1945 | ready |
+| 219 | W1790 | ready |
+| 220 | W1887 | ready |
+| 221 | W1932 | ready |
+| 222 | W1804 | ready |
+| 223 | W1861 | ready |
+| 224 | W1800 | ready |
+| 225 | W1860 | ready |
+| 226 | W1935 | ready |
+| 227 | W1808 | ready |
+| 228 | W1863 | ready |
+| 229 | W1864 | ready |
+| 230 | W1942 | ready |
+| 231 | W1792 | ready |
+| 232 | W1805 | ready |
+| 233 | W1862 | ready |
+| 234 | W1867 | ready |
+| 235 | W1933 | ready |
+| 236 | W1927 | ready |
+| 237 | W1943 | ready |
+| 238 | W1787 | ready |
+| 239 | W1941 | ready |
+| 240 | W1786 | ready |
+| 241 | W1946 | ready |
+| 242 | W1187 | ready |
+| 243 | W1929 | ready |
+| 244 | W1931 | ready |
+| 245 | W1944 | ready |
+| 246 | W1788 | ready |
+| 247 | W1949 | ready |
+| 248 | W1934 | ready |
+| 249 | W1793 | ready |
+| 250 | W1947 | ready |
+| 251 | W1791 | ready |
+| 252 | W1951 | ready |
+| 253 | W1795 | ready |
+| 254 | W1852 | ready |
+| 255 | W1853 | ready |
+| 256 | W1950 | ready |
+| 257 | W1794 | ready |
+| 258 | W1909 | ready |
+| 259 | W1910 | ready |
+| 260 | W1854 | ready |
+| 261 | W1851 | ready |
+| 262 | W1913 | ready |
+| 263 | W1855 | ready |
+| 264 | W1914 | ready |
+| 265 | W1908 | ready |
+| 266 | W1917 | ready |
+| 267 | W1915 | ready |
+| 268 | W1052 | ready |
+| 269 | W1244 | ready |
+| 270 | W1978 | ready |
+| 271 | W1038 | ready |
+| 272 | W1070 | ready |
+| 273 | W1163 | ready |
+| 274 | W1175 | ready |
+| 275 | W1178 | ready |
+| 276 | W1184 | ready |
+| 277 | W1197 | ready |
+| 278 | W1220 | ready |
+| 279 | W1225 | ready |
+| 280 | W1226 | ready |
+| 281 | W1231 | ready |
+| 282 | W1232 | ready |
+| 283 | W1261 | ready |
+| 284 | W1276 | ready |
+| 285 | W1345 | ready |
+| 286 | W1347 | ready |
+| 287 | W1399 | ready |
+| 288 | W1514 | ready |
+| 289 | W1518 | ready |
+| 290 | W1522 | ready |
+| 291 | W1549 | ready |
+| 292 | W1568 | ready |
+| 293 | W1648 | ready |
+| 294 | W1661 | ready |
+| 295 | W1759 | ready |
+| 296 | W1760 | ready |
+| 297 | W569 | ready |
+| 298 | W700 | ready |
+| 299 | W564 | ready |
+| 300 | W1981 | ready |
+| 301 | W1982 | ready |
+| 302 | W1983 | ready |
+| 303 | W1985 | ready |
+| 304 | W1986 | ready |
+| 305 | W1987 | ready |
+| 306 | W1988 | ready |
+| 307 | W1994 | ready |
+| 308 | W1995 | ready |
+| 309 | W1996 | ready |
+| 310 | W1997 | ready |
+| 311 | W2000 | ready |
+| 312 | W2012 | ready |
+| 313 | W2013 | ready |
+| 314 | W2018 | ready |
+| 315 | W2034 | ready |
+| 316 | W2035 | ready |
+| 317 | W708 | ready |
+| 318 | W879 | ready |
+| 319 | W2042 | ready |
+| 320 | W2052 | ready |
+| 321 | W459 | ready |
+| 322 | W979 | ready |
 | 323 | W1762 | ready |
 | 324 | W1989 | ready |
-| 325 | W1139 | blocked |
-| 326 | W986 | blocked |
-| 327 | W1010 | blocked |
-| 328 | W1136 | blocked |
-| 329 | W1056 | blocked |
-| 330 | W1108 | blocked |
-| 331 | W1277 | blocked |
-| 332 | W1280 | blocked |
-| 333 | W534 | blocked |
-| 334 | W508 | blocked |
-| 335 | W516 | blocked |
-| 336 | W352 | blocked |
-| 337 | W353 | blocked |
-| 338 | W500 | blocked |
-| 339 | W511 | blocked |
-| 340 | W188 | blocked |
-| 341 | W224 | blocked |
-| 342 | W47 | blocked |
-| 343 | W461 | blocked |
-| 344 | W490 | blocked |
-| 345 | W491 | blocked |
-| 346 | W1694 | blocked |
-| 347 | W1698 | blocked |
-| 348 | W1705 | blocked |
-| 349 | W1736 | blocked |
-| 350 | W1731 | blocked |
-| 351 | W1700 | blocked |
-| 352 | W1712 | blocked |
-| 353 | W1717 | blocked |
-| 354 | W1750 | blocked |
-| 355 | W581 | blocked |
-| 356 | W925 | blocked |
-| 357 | W1740 | blocked |
-| 358 | W1758 | blocked |
-| 359 | W1979 | blocked |
-| 360 | W423 | blocked |
-| 361 | W567 | blocked |
-| 362 | W569 | blocked |
-| 363 | W700 | blocked |
-| 364 | W908 | blocked |
-| 365 | W1017 | blocked |
-| 366 | W1035 | blocked |
-| 367 | W1036 | blocked |
-| 368 | W1057 | blocked |
-| 369 | W1703 | blocked |
-| 370 | W1706 | blocked |
-| 371 | W1729 | blocked |
-| 372 | W1732 | blocked |
-| 373 | W1754 | blocked |
-| 374 | W1756 | blocked |
-| 375 | W283 | blocked |
-| 376 | W286 | blocked |
-| 377 | W287 | blocked |
-| 378 | W289 | blocked |
-| 379 | W292 | blocked |
-| 380 | W294 | blocked |
-| 381 | W295 | blocked |
-| 382 | W297 | blocked |
-| 383 | W369 | blocked |
-| 384 | W370 | blocked |
-| 385 | W424 | blocked |
-| 386 | W564 | blocked |
-| 387 | W568 | blocked |
-| 388 | W575 | blocked |
-| 389 | W578 | blocked |
-| 390 | W579 | blocked |
-| 391 | W580 | blocked |
-| 392 | W643 | blocked |
-| 393 | W693 | blocked |
-| 394 | W709 | blocked |
-| 395 | W788 | blocked |
-| 396 | W789 | blocked |
-| 397 | W837 | blocked |
-| 398 | W909 | blocked |
-| 399 | W926 | blocked |
-| 400 | W927 | blocked |
-| 401 | W938 | blocked |
-| 402 | W967 | blocked |
-| 403 | W970 | blocked |
-| 404 | W1018 | blocked |
-| 405 | W1021 | blocked |
-| 406 | W1023 | blocked |
-| 407 | W1037 | blocked |
-| 408 | W1050 | blocked |
-| 409 | W1058 | blocked |
-| 410 | W1095 | blocked |
-| 411 | W1282 | blocked |
-| 412 | W1665 | blocked |
-| 413 | W1666 | blocked |
-| 414 | W1695 | blocked |
-| 415 | W1707 | blocked |
-| 416 | W1709 | blocked |
-| 417 | W1711 | blocked |
-| 418 | W1713 | blocked |
-| 419 | W1718 | blocked |
-| 420 | W1719 | blocked |
-| 421 | W1733 | blocked |
-| 422 | W1735 | blocked |
-| 423 | W1739 | blocked |
-| 424 | W1745 | blocked |
-| 425 | W1746 | blocked |
-| 426 | W1749 | blocked |
-| 427 | W506 | blocked |
-| 428 | W563 | blocked |
-| 429 | W674 | blocked |
-| 430 | W675 | blocked |
-| 431 | W680 | blocked |
-| 432 | W708 | blocked |
-| 433 | W749 | blocked |
-| 434 | W751 | blocked |
-| 435 | W852 | blocked |
-| 436 | W877 | blocked |
-| 437 | W879 | blocked |
-| 438 | W881 | blocked |
-| 439 | W963 | blocked |
-| 440 | W1030 | blocked |
-| 441 | W1047 | blocked |
-| 442 | W1055 | blocked |
-| 443 | W1173 | blocked |
-| 444 | W1660 | blocked |
-| 445 | W1696 | blocked |
-| 446 | W1701 | blocked |
-| 447 | W1704 | blocked |
-| 448 | W1710 | blocked |
-| 449 | W1715 | blocked |
-| 450 | W1721 | blocked |
-| 451 | W1722 | blocked |
-| 452 | W1723 | blocked |
-| 453 | W1724 | blocked |
-| 454 | W1727 | blocked |
-| 455 | W1730 | blocked |
-| 456 | W1734 | blocked |
-| 457 | W1738 | blocked |
-| 458 | W1741 | blocked |
-| 459 | W1742 | blocked |
-| 460 | W1743 | blocked |
-| 461 | W1748 | blocked |
-| 462 | W1751 | blocked |
-| 463 | W1752 | blocked |
-| 464 | W1755 | blocked |
-| 465 | W17 | blocked |
-| 466 | W282 | blocked |
-| 467 | W346 | blocked |
-| 468 | W364 | blocked |
-| 469 | W422 | blocked |
-| 470 | W459 | blocked |
-| 471 | W486 | blocked |
-| 472 | W512 | blocked |
-| 473 | W517 | blocked |
-| 474 | W561 | blocked |
-| 475 | W570 | blocked |
-| 476 | W571 | blocked |
-| 477 | W613 | blocked |
-| 478 | W691 | blocked |
-| 479 | W695 | blocked |
-| 480 | W735 | blocked |
-| 481 | W743 | blocked |
-| 482 | W764 | blocked |
-| 483 | W768 | blocked |
-| 484 | W781 | blocked |
-| 485 | W812 | blocked |
-| 486 | W899 | blocked |
-| 487 | W905 | blocked |
-| 488 | W914 | blocked |
-| 489 | W922 | blocked |
-| 490 | W923 | blocked |
-| 491 | W934 | blocked |
-| 492 | W941 | blocked |
-| 493 | W964 | blocked |
-| 494 | W979 | blocked |
-| 495 | W984 | blocked |
-| 496 | W985 | blocked |
-| 497 | W1072 | blocked |
-| 498 | W1073 | blocked |
-| 499 | W1077 | blocked |
-| 500 | W1092 | blocked |
-| 501 | W1113 | blocked |
-| 502 | W1198 | blocked |
-| 503 | W1219 | blocked |
-| 504 | W1224 | blocked |
-| 505 | W1400 | blocked |
-| 506 | W1438 | blocked |
-| 507 | W1524 | blocked |
-| 508 | W1652 | blocked |
-| 509 | W1653 | blocked |
-| 510 | W1674 | blocked |
-| 511 | W1675 | blocked |
-| 512 | W1676 | blocked |
-| 513 | W1677 | blocked |
-| 514 | W1679 | blocked |
-| 515 | W1680 | blocked |
-| 516 | W1681 | blocked |
-| 517 | W1682 | blocked |
-| 518 | W1683 | blocked |
-| 519 | W1684 | blocked |
-| 520 | W1685 | blocked |
-| 521 | W1686 | blocked |
-| 522 | W1687 | blocked |
-| 523 | W1688 | blocked |
-| 524 | W1689 | blocked |
-| 525 | W1690 | blocked |
-| 526 | W1691 | blocked |
-| 527 | W1692 | blocked |
-| 528 | W1693 | blocked |
-| 529 | W1697 | blocked |
-| 530 | W1699 | blocked |
-| 531 | W1702 | blocked |
-| 532 | W1708 | blocked |
-| 533 | W1714 | blocked |
-| 534 | W1716 | blocked |
-| 535 | W1720 | blocked |
-| 536 | W1725 | blocked |
-| 537 | W1726 | blocked |
-| 538 | W1728 | blocked |
-| 539 | W1737 | blocked |
-| 540 | W1744 | blocked |
-| 541 | W1747 | blocked |
-| 542 | W1753 | blocked |
-| 543 | W1757 | blocked |
-| 544 | W1984 | blocked |
-| 545 | W987 | done |
-| 546 | W988 | done |
-| 547 | W989 | done |
-| 548 | W990 | done |
-| 549 | W991 | done |
-| 550 | W993 | done |
-| 551 | W995 | done |
-| 552 | W996 | done |
-| 553 | W997 | done |
-| 554 | W1003 | done |
-| 555 | W1006 | done |
-| 556 | W1011 | done |
-| 557 | W1012 | done |
-| 558 | W1015 | done |
-| 559 | W1024 | done |
-| 560 | W1025 | done |
-| 561 | W1027 | done |
-| 562 | W999 | done |
-| 563 | W1004 | done |
-| 564 | W105 | done |
-| 565 | W1014 | done |
-| 566 | W1176 | done |
-| 567 | W1279 | done |
-| 568 | W1278 | done |
-| 569 | W1269 | done |
-| 570 | W128 | done |
-| 571 | W371 | done |
-| 572 | W533 | done |
-| 573 | W501 | done |
-| 574 | W535 | done |
-| 575 | W130 | done |
-| 576 | W343 | done |
-| 577 | W466 | done |
-| 578 | W529 | done |
-| 579 | W530 | done |
-| 580 | W531 | done |
-| 581 | W540 | done |
-| 582 | W131 | done |
-| 583 | W505 | done |
-| 584 | W507 | done |
-| 585 | W514 | done |
-| 586 | W525 | done |
-| 587 | W526 | done |
-| 588 | W527 | done |
-| 589 | W515 | done |
-| 590 | W372 | done |
-| 591 | W354 | done |
-| 592 | W355 | done |
-| 593 | W528 | done |
-| 594 | W413 | done |
-| 595 | W373 | done |
-| 596 | W107 | done |
-| 597 | W536 | done |
-| 598 | W170 | done |
-| 599 | W171 | done |
-| 600 | W469 | done |
-| 601 | W470 | done |
-| 602 | W471 | done |
-| 603 | W472 | done |
-| 604 | W521 | done |
-| 605 | W522 | done |
-| 606 | W524 | done |
-| 607 | W177 | done |
-| 608 | W178 | done |
-| 609 | W180 | done |
-| 610 | W154 | done |
-| 611 | W166 | done |
-| 612 | W167 | done |
-| 613 | W169 | done |
-| 614 | W396 | done |
-| 615 | W397 | done |
-| 616 | W481 | done |
-| 617 | W981 | done |
-| 618 | W1253 | done |
-| 619 | W1255 | done |
-| 620 | W157 | done |
-| 621 | W158 | done |
-| 622 | W159 | done |
-| 623 | W162 | done |
-| 624 | W163 | done |
-| 625 | W164 | done |
-| 626 | W172 | done |
-| 627 | W327 | done |
-| 628 | W336 | done |
-| 629 | W338 | done |
-| 630 | W365 | done |
-| 631 | W366 | done |
-| 632 | W388 | done |
-| 633 | W408 | done |
-| 634 | W504 | done |
-| 635 | W118 | done |
-| 636 | W127 | done |
-| 637 | W133 | done |
-| 638 | W147 | done |
-| 639 | W149 | done |
-| 640 | W150 | done |
-| 641 | W151 | done |
-| 642 | W161 | done |
-| 643 | W168 | done |
-| 644 | W183 | done |
-| 645 | W318 | done |
-| 646 | W390 | done |
-| 647 | W400 | done |
-| 648 | W425 | done |
-| 649 | W454 | done |
-| 650 | W143 | done |
-| 651 | W262 | done |
-| 652 | W344 | done |
-| 653 | W455 | done |
-| 654 | W456 | done |
-| 655 | W462 | done |
-| 656 | W464 | done |
-| 657 | W485 | done |
-| 658 | W64 | done |
-| 659 | W65 | done |
-| 660 | W113 | done |
-| 661 | W121 | done |
-| 662 | W129 | done |
-| 663 | W148 | done |
-| 664 | W160 | done |
-| 665 | W341 | done |
-| 666 | W363 | done |
-| 667 | W367 | done |
-| 668 | W368 | done |
-| 669 | W393 | done |
-| 670 | W402 | done |
-| 671 | W417 | done |
-| 672 | W427 | done |
-| 673 | W442 | done |
-| 674 | W453 | done |
-| 675 | W1267 | done |
-| 676 | W1268 | done |
-| 677 | W138 | done |
-| 678 | W277 | done |
-| 679 | W342 | done |
-| 680 | W463 | done |
-| 681 | W465 | done |
-| 682 | W537 | done |
-| 683 | W60 | done |
-| 684 | W74 | done |
-| 685 | W99 | done |
-| 686 | W100 | done |
-| 687 | W123 | done |
-| 688 | W124 | done |
-| 689 | W173 | done |
-| 690 | W174 | done |
-| 691 | W175 | done |
-| 692 | W192 | done |
-| 693 | W235 | done |
-| 694 | W279 | done |
-| 695 | W280 | done |
-| 696 | W316 | done |
-| 697 | W317 | done |
-| 698 | W335 | done |
-| 699 | W339 | done |
-| 700 | W347 | done |
-| 701 | W348 | done |
-| 702 | W349 | done |
-| 703 | W350 | done |
-| 704 | W351 | done |
-| 705 | W356 | done |
-| 706 | W357 | done |
-| 707 | W362 | done |
-| 708 | W386 | done |
-| 709 | W409 | done |
-| 710 | W410 | done |
-| 711 | W418 | done |
-| 712 | W439 | done |
-| 713 | W468 | done |
-| 714 | W509 | done |
-| 715 | W510 | done |
-| 716 | W1240 | done |
-| 717 | W1241 | done |
-| 718 | W1242 | done |
-| 719 | W1243 | done |
-| 720 | W275 | done |
-| 721 | W45 | done |
-| 722 | W46 | done |
-| 723 | W53 | done |
-| 724 | W57 | done |
-| 725 | W61 | done |
-| 726 | W62 | done |
-| 727 | W66 | done |
-| 728 | W79 | done |
-| 729 | W80 | done |
-| 730 | W81 | done |
-| 731 | W82 | done |
-| 732 | W83 | done |
-| 733 | W84 | done |
-| 734 | W88 | done |
-| 735 | W90 | done |
-| 736 | W91 | done |
-| 737 | W92 | done |
-| 738 | W94 | done |
-| 739 | W97 | done |
-| 740 | W102 | done |
-| 741 | W103 | done |
-| 742 | W104 | done |
-| 743 | W165 | done |
-| 744 | W190 | done |
-| 745 | W191 | done |
-| 746 | W273 | done |
-| 747 | W313 | done |
-| 748 | W314 | done |
-| 749 | W340 | done |
-| 750 | W359 | done |
-| 751 | W360 | done |
-| 752 | W361 | done |
-| 753 | W381 | done |
-| 754 | W382 | done |
-| 755 | W383 | done |
-| 756 | W385 | done |
-| 757 | W406 | done |
-| 758 | W407 | done |
-| 759 | W519 | done |
-| 760 | W75 | done |
-| 761 | W108 | done |
-| 762 | W109 | done |
-| 763 | W116 | done |
-| 764 | W141 | done |
-| 765 | W248 | done |
-| 766 | W250 | done |
-| 767 | W254 | done |
-| 768 | W257 | done |
-| 769 | W260 | done |
-| 770 | W261 | done |
-| 771 | W276 | done |
-| 772 | W281 | done |
-| 773 | W345 | done |
-| 774 | W376 | done |
-| 775 | W398 | done |
-| 776 | W405 | done |
-| 777 | W420 | done |
-| 778 | W421 | done |
-| 779 | W443 | done |
-| 780 | W444 | done |
-| 781 | W447 | done |
-| 782 | W457 | done |
-| 783 | W460 | done |
-| 784 | W475 | done |
-| 785 | W487 | done |
-| 786 | W488 | done |
-| 787 | W492 | done |
-| 788 | W493 | done |
-| 789 | W513 | done |
-| 790 | W538 | done |
-| 791 | W1041 | done |
-| 792 | W1186 | done |
-| 793 | W1980 | done |
-| 794 | W207 | done |
-| 795 | W859 | done |
-| 796 | W860 | done |
-| 797 | W560 | done |
-| 798 | W584 | done |
-| 799 | W616 | done |
-| 800 | W748 | done |
-| 801 | W59 | done |
-| 802 | W134 | done |
-| 803 | W203 | done |
-| 804 | W229 | done |
-| 805 | W230 | done |
-| 806 | W231 | done |
-| 807 | W237 | done |
-| 808 | W239 | done |
-| 809 | W240 | done |
-| 810 | W551 | done |
-| 811 | W552 | done |
-| 812 | W593 | done |
-| 813 | W599 | done |
-| 814 | W612 | done |
-| 815 | W648 | done |
-| 816 | W649 | done |
-| 817 | W650 | done |
-| 818 | W654 | done |
-| 819 | W655 | done |
-| 820 | W656 | done |
-| 821 | W658 | done |
-| 822 | W662 | done |
-| 823 | W670 | done |
-| 824 | W696 | done |
-| 825 | W744 | done |
-| 826 | W745 | done |
-| 827 | W746 | done |
-| 828 | W747 | done |
-| 829 | W849 | done |
-| 830 | W850 | done |
-| 831 | W4 | done |
-| 832 | W15 | done |
-| 833 | W34 | done |
-| 834 | W35 | done |
-| 835 | W36 | done |
-| 836 | W37 | done |
-| 837 | W38 | done |
-| 838 | W39 | done |
-| 839 | W41 | done |
-| 840 | W43 | done |
-| 841 | W52 | done |
-| 842 | W56 | done |
-| 843 | W63 | done |
-| 844 | W68 | done |
-| 845 | W73 | done |
-| 846 | W76 | done |
-| 847 | W95 | done |
-| 848 | W96 | done |
-| 849 | W98 | done |
-| 850 | W106 | done |
-| 851 | W122 | done |
-| 852 | W132 | done |
-| 853 | W136 | done |
-| 854 | W145 | done |
-| 855 | W153 | done |
-| 856 | W179 | done |
-| 857 | W193 | done |
-| 858 | W204 | done |
-| 859 | W205 | done |
-| 860 | W206 | done |
-| 861 | W208 | done |
-| 862 | W209 | done |
-| 863 | W210 | done |
-| 864 | W211 | done |
-| 865 | W212 | done |
-| 866 | W213 | done |
-| 867 | W215 | done |
-| 868 | W216 | done |
-| 869 | W217 | done |
-| 870 | W218 | done |
-| 871 | W219 | done |
-| 872 | W220 | done |
-| 873 | W221 | done |
-| 874 | W223 | done |
-| 875 | W226 | done |
-| 876 | W232 | done |
-| 877 | W233 | done |
-| 878 | W234 | done |
-| 879 | W236 | done |
-| 880 | W238 | done |
-| 881 | W241 | done |
-| 882 | W243 | done |
-| 883 | W244 | done |
-| 884 | W245 | done |
-| 885 | W246 | done |
-| 886 | W247 | done |
-| 887 | W249 | done |
-| 888 | W251 | done |
-| 889 | W253 | done |
-| 890 | W256 | done |
-| 891 | W263 | done |
-| 892 | W267 | done |
-| 893 | W268 | done |
-| 894 | W269 | done |
-| 895 | W270 | done |
-| 896 | W271 | done |
-| 897 | W272 | done |
-| 898 | W278 | done |
-| 899 | W284 | done |
-| 900 | W285 | done |
-| 901 | W288 | done |
-| 902 | W290 | done |
-| 903 | W291 | done |
-| 904 | W293 | done |
-| 905 | W296 | done |
-| 906 | W301 | done |
-| 907 | W305 | done |
-| 908 | W308 | done |
-| 909 | W315 | done |
-| 910 | W322 | done |
-| 911 | W324 | done |
-| 912 | W325 | done |
-| 913 | W326 | done |
-| 914 | W328 | done |
-| 915 | W333 | done |
-| 916 | W334 | done |
-| 917 | W374 | done |
-| 918 | W375 | done |
-| 919 | W380 | done |
-| 920 | W384 | done |
-| 921 | W392 | done |
-| 922 | W394 | done |
-| 923 | W395 | done |
-| 924 | W399 | done |
-| 925 | W401 | done |
-| 926 | W403 | done |
-| 927 | W411 | done |
-| 928 | W412 | done |
-| 929 | W414 | done |
-| 930 | W415 | done |
-| 931 | W416 | done |
-| 932 | W419 | done |
-| 933 | W429 | done |
-| 934 | W430 | done |
-| 935 | W431 | done |
-| 936 | W432 | done |
-| 937 | W433 | done |
-| 938 | W434 | done |
-| 939 | W435 | done |
-| 940 | W437 | done |
-| 941 | W438 | done |
-| 942 | W440 | done |
-| 943 | W441 | done |
-| 944 | W445 | done |
-| 945 | W446 | done |
-| 946 | W448 | done |
-| 947 | W449 | done |
-| 948 | W451 | done |
-| 949 | W473 | done |
-| 950 | W478 | done |
-| 951 | W479 | done |
-| 952 | W480 | done |
-| 953 | W483 | done |
-| 954 | W495 | done |
-| 955 | W496 | done |
-| 956 | W497 | done |
-| 957 | W498 | done |
-| 958 | W502 | done |
-| 959 | W503 | done |
-| 960 | W518 | done |
-| 961 | W523 | done |
-| 962 | W532 | done |
-| 963 | W542 | done |
-| 964 | W543 | done |
-| 965 | W547 | done |
-| 966 | W549 | done |
-| 967 | W553 | done |
-| 968 | W554 | done |
-| 969 | W555 | done |
-| 970 | W556 | done |
-| 971 | W557 | done |
-| 972 | W558 | done |
-| 973 | W559 | done |
-| 974 | W562 | done |
-| 975 | W565 | done |
-| 976 | W566 | done |
-| 977 | W582 | done |
-| 978 | W583 | done |
-| 979 | W585 | done |
-| 980 | W586 | done |
-| 981 | W587 | done |
-| 982 | W588 | done |
-| 983 | W589 | done |
-| 984 | W590 | done |
-| 985 | W591 | done |
-| 986 | W592 | done |
-| 987 | W594 | done |
-| 988 | W595 | done |
-| 989 | W596 | done |
-| 990 | W598 | done |
-| 991 | W605 | done |
-| 992 | W608 | done |
-| 993 | W609 | done |
-| 994 | W615 | done |
-| 995 | W621 | done |
-| 996 | W622 | done |
-| 997 | W623 | done |
-| 998 | W624 | done |
-| 999 | W634 | done |
-| 1000 | W635 | done |
-| 1001 | W636 | done |
-| 1002 | W645 | done |
-| 1003 | W646 | done |
-| 1004 | W651 | done |
-| 1005 | W652 | done |
-| 1006 | W657 | done |
-| 1007 | W659 | done |
-| 1008 | W660 | done |
-| 1009 | W661 | done |
-| 1010 | W663 | done |
-| 1011 | W664 | done |
-| 1012 | W665 | done |
-| 1013 | W666 | done |
-| 1014 | W667 | done |
-| 1015 | W669 | done |
-| 1016 | W671 | done |
-| 1017 | W673 | done |
-| 1018 | W681 | done |
-| 1019 | W684 | done |
-| 1020 | W687 | done |
-| 1021 | W688 | done |
-| 1022 | W690 | done |
-| 1023 | W692 | done |
-| 1024 | W694 | done |
-| 1025 | W698 | done |
-| 1026 | W699 | done |
-| 1027 | W701 | done |
-| 1028 | W703 | done |
-| 1029 | W704 | done |
-| 1030 | W706 | done |
-| 1031 | W707 | done |
-| 1032 | W710 | done |
-| 1033 | W711 | done |
-| 1034 | W712 | done |
-| 1035 | W713 | done |
-| 1036 | W714 | done |
-| 1037 | W715 | done |
-| 1038 | W719 | done |
-| 1039 | W721 | done |
-| 1040 | W722 | done |
-| 1041 | W723 | done |
-| 1042 | W727 | done |
-| 1043 | W728 | done |
-| 1044 | W731 | done |
-| 1045 | W732 | done |
-| 1046 | W734 | done |
-| 1047 | W736 | done |
-| 1048 | W738 | done |
-| 1049 | W739 | done |
-| 1050 | W752 | done |
-| 1051 | W753 | done |
-| 1052 | W754 | done |
-| 1053 | W755 | done |
-| 1054 | W756 | done |
-| 1055 | W759 | done |
-| 1056 | W760 | done |
-| 1057 | W761 | done |
-| 1058 | W767 | done |
-| 1059 | W771 | done |
-| 1060 | W773 | done |
-| 1061 | W774 | done |
-| 1062 | W775 | done |
-| 1063 | W776 | done |
-| 1064 | W777 | done |
-| 1065 | W779 | done |
-| 1066 | W780 | done |
-| 1067 | W782 | done |
-| 1068 | W783 | done |
-| 1069 | W784 | done |
-| 1070 | W785 | done |
-| 1071 | W786 | done |
-| 1072 | W787 | done |
-| 1073 | W790 | done |
-| 1074 | W791 | done |
-| 1075 | W792 | done |
-| 1076 | W793 | done |
-| 1077 | W795 | done |
-| 1078 | W796 | done |
-| 1079 | W797 | done |
-| 1080 | W800 | done |
-| 1081 | W801 | done |
-| 1082 | W802 | done |
-| 1083 | W803 | done |
-| 1084 | W804 | done |
-| 1085 | W805 | done |
-| 1086 | W806 | done |
-| 1087 | W807 | done |
-| 1088 | W808 | done |
-| 1089 | W809 | done |
-| 1090 | W810 | done |
-| 1091 | W811 | done |
-| 1092 | W813 | done |
-| 1093 | W814 | done |
-| 1094 | W815 | done |
-| 1095 | W816 | done |
-| 1096 | W817 | done |
-| 1097 | W818 | done |
-| 1098 | W820 | done |
-| 1099 | W821 | done |
-| 1100 | W822 | done |
-| 1101 | W823 | done |
-| 1102 | W824 | done |
-| 1103 | W826 | done |
-| 1104 | W827 | done |
-| 1105 | W828 | done |
-| 1106 | W831 | done |
-| 1107 | W832 | done |
-| 1108 | W833 | done |
-| 1109 | W834 | done |
-| 1110 | W836 | done |
-| 1111 | W838 | done |
-| 1112 | W839 | done |
-| 1113 | W840 | done |
-| 1114 | W841 | done |
-| 1115 | W842 | done |
-| 1116 | W847 | done |
-| 1117 | W848 | done |
-| 1118 | W851 | done |
-| 1119 | W853 | done |
-| 1120 | W854 | done |
-| 1121 | W855 | done |
-| 1122 | W856 | done |
-| 1123 | W857 | done |
-| 1124 | W858 | done |
-| 1125 | W861 | done |
-| 1126 | W862 | done |
-| 1127 | W863 | done |
-| 1128 | W864 | done |
-| 1129 | W865 | done |
-| 1130 | W868 | done |
-| 1131 | W869 | done |
-| 1132 | W870 | done |
-| 1133 | W871 | done |
-| 1134 | W872 | done |
-| 1135 | W875 | done |
-| 1136 | W876 | done |
-| 1137 | W883 | done |
-| 1138 | W884 | done |
-| 1139 | W885 | done |
-| 1140 | W886 | done |
-| 1141 | W887 | done |
-| 1142 | W888 | done |
-| 1143 | W889 | done |
-| 1144 | W891 | done |
-| 1145 | W892 | done |
-| 1146 | W893 | done |
-| 1147 | W894 | done |
-| 1148 | W895 | done |
-| 1149 | W900 | done |
-| 1150 | W901 | done |
-| 1151 | W906 | done |
-| 1152 | W907 | done |
-| 1153 | W912 | done |
-| 1154 | W916 | done |
-| 1155 | W917 | done |
-| 1156 | W918 | done |
-| 1157 | W919 | done |
-| 1158 | W921 | done |
-| 1159 | W930 | done |
-| 1160 | W931 | done |
-| 1161 | W932 | done |
-| 1162 | W933 | done |
-| 1163 | W935 | done |
-| 1164 | W936 | done |
-| 1165 | W937 | done |
-| 1166 | W946 | done |
-| 1167 | W947 | done |
-| 1168 | W948 | done |
-| 1169 | W949 | done |
-| 1170 | W952 | done |
-| 1171 | W953 | done |
-| 1172 | W954 | done |
-| 1173 | W955 | done |
-| 1174 | W956 | done |
-| 1175 | W957 | done |
-| 1176 | W958 | done |
-| 1177 | W959 | done |
-| 1178 | W965 | done |
-| 1179 | W968 | done |
-| 1180 | W971 | done |
-| 1181 | W972 | done |
-| 1182 | W973 | done |
-| 1183 | W974 | done |
-| 1184 | W975 | done |
-| 1185 | W977 | done |
-| 1186 | W978 | done |
-| 1187 | W980 | done |
-| 1188 | W998 | done |
-| 1189 | W1049 | done |
-| 1190 | W1053 | done |
-| 1191 | W1059 | done |
-| 1192 | W1067 | done |
-| 1193 | W1078 | done |
-| 1194 | W1086 | done |
-| 1195 | W1088 | done |
-| 1196 | W1097 | done |
-| 1197 | W1114 | done |
-| 1198 | W1115 | done |
-| 1199 | W1117 | done |
-| 1200 | W1118 | done |
-| 1201 | W1121 | done |
-| 1202 | W1122 | done |
-| 1203 | W1123 | done |
-| 1204 | W1124 | done |
-| 1205 | W1130 | done |
-| 1206 | W1135 | done |
-| 1207 | W1144 | done |
-| 1208 | W1145 | done |
-| 1209 | W1146 | done |
-| 1210 | W1147 | done |
-| 1211 | W1149 | done |
-| 1212 | W1150 | done |
-| 1213 | W1152 | done |
-| 1214 | W1167 | done |
-| 1215 | W1189 | done |
-| 1216 | W1193 | done |
-| 1217 | W1238 | done |
-| 1218 | W1239 | done |
-| 1219 | W1247 | done |
-| 1220 | W1251 | done |
-| 1221 | W1254 | done |
-| 1222 | W1263 | done |
-| 1223 | W1264 | done |
-| 1224 | W1265 | done |
-| 1225 | W1266 | done |
-| 1226 | W1273 | done |
-| 1227 | W1274 | done |
-| 1228 | W1293 | done |
-| 1229 | W1323 | done |
-| 1230 | W1382 | done |
-| 1231 | W1383 | done |
-| 1232 | W1384 | done |
-| 1233 | W1385 | done |
-| 1234 | W1396 | done |
-| 1235 | W1410 | done |
-| 1236 | W1412 | done |
-| 1237 | W1414 | done |
-| 1238 | W1493 | done |
-| 1239 | W1495 | done |
-| 1240 | W1496 | done |
-| 1241 | W1497 | done |
-| 1242 | W1498 | done |
-| 1243 | W1499 | done |
-| 1244 | W1500 | done |
-| 1245 | W1501 | done |
-| 1246 | W1502 | done |
-| 1247 | W1503 | done |
-| 1248 | W1504 | done |
-| 1249 | W1505 | done |
-| 1250 | W1506 | done |
-| 1251 | W1507 | done |
-| 1252 | W1508 | done |
-| 1253 | W1509 | done |
-| 1254 | W1510 | done |
-| 1255 | W1511 | done |
-| 1256 | W1525 | done |
-| 1257 | W1526 | done |
-| 1258 | W1527 | done |
-| 1259 | W1528 | done |
-| 1260 | W1592 | done |
-| 1261 | W1603 | done |
-| 1262 | W1604 | done |
-| 1263 | W1605 | done |
-| 1264 | W1609 | done |
-| 1265 | W1611 | done |
-| 1266 | W1641 | done |
-| 1267 | W1 | done |
-| 1268 | W2 | done |
-| 1269 | W3 | done |
-| 1270 | W5 | done |
-| 1271 | W6 | done |
-| 1272 | W7 | done |
-| 1273 | W8 | done |
-| 1274 | W9 | done |
-| 1275 | W10 | done |
-| 1276 | W12 | done |
-| 1277 | W13 | done |
-| 1278 | W14 | done |
-| 1279 | W16 | done |
-| 1280 | W18 | done |
-| 1281 | W19 | done |
-| 1282 | W20 | done |
-| 1283 | W22 | done |
-| 1284 | W23 | done |
-| 1285 | W24 | done |
-| 1286 | W25 | done |
-| 1287 | W26 | done |
-| 1288 | W27 | done |
-| 1289 | W28 | done |
-| 1290 | W29 | done |
-| 1291 | W30 | done |
-| 1292 | W31 | done |
-| 1293 | W32 | done |
-| 1294 | W33 | done |
-| 1295 | W40 | done |
-| 1296 | W42 | done |
-| 1297 | W44 | done |
-| 1298 | W48 | done |
-| 1299 | W49 | done |
-| 1300 | W50 | done |
-| 1301 | W51 | done |
-| 1302 | W54 | done |
-| 1303 | W55 | done |
-| 1304 | W58 | done |
-| 1305 | W67 | done |
-| 1306 | W69 | done |
-| 1307 | W70 | done |
-| 1308 | W71 | done |
-| 1309 | W72 | done |
-| 1310 | W77 | done |
-| 1311 | W78 | done |
-| 1312 | W85 | done |
-| 1313 | W86 | done |
-| 1314 | W87 | done |
-| 1315 | W93 | done |
-| 1316 | W101 | done |
-| 1317 | W110 | done |
-| 1318 | W111 | done |
-| 1319 | W112 | done |
-| 1320 | W114 | done |
-| 1321 | W115 | done |
-| 1322 | W117 | done |
-| 1323 | W119 | done |
-| 1324 | W120 | done |
-| 1325 | W125 | done |
-| 1326 | W126 | done |
-| 1327 | W135 | done |
-| 1328 | W137 | done |
-| 1329 | W139 | done |
-| 1330 | W140 | done |
-| 1331 | W142 | done |
-| 1332 | W144 | done |
-| 1333 | W146 | done |
-| 1334 | W152 | done |
-| 1335 | W181 | done |
-| 1336 | W182 | done |
-| 1337 | W184 | done |
-| 1338 | W185 | done |
-| 1339 | W186 | done |
-| 1340 | W187 | done |
-| 1341 | W189 | done |
-| 1342 | W194 | done |
-| 1343 | W195 | done |
-| 1344 | W196 | done |
-| 1345 | W197 | done |
-| 1346 | W198 | done |
-| 1347 | W199 | done |
-| 1348 | W200 | done |
-| 1349 | W201 | done |
-| 1350 | W202 | done |
-| 1351 | W214 | done |
-| 1352 | W222 | done |
-| 1353 | W225 | done |
-| 1354 | W227 | done |
-| 1355 | W228 | done |
-| 1356 | W252 | done |
-| 1357 | W255 | done |
-| 1358 | W258 | done |
-| 1359 | W259 | done |
-| 1360 | W264 | done |
-| 1361 | W265 | done |
-| 1362 | W266 | done |
-| 1363 | W298 | done |
-| 1364 | W299 | done |
-| 1365 | W300 | done |
-| 1366 | W302 | done |
-| 1367 | W303 | done |
-| 1368 | W304 | done |
-| 1369 | W306 | done |
-| 1370 | W307 | done |
-| 1371 | W309 | done |
-| 1372 | W310 | done |
-| 1373 | W311 | done |
-| 1374 | W312 | done |
-| 1375 | W319 | done |
-| 1376 | W320 | done |
-| 1377 | W321 | done |
-| 1378 | W323 | done |
-| 1379 | W329 | done |
-| 1380 | W330 | done |
-| 1381 | W331 | done |
-| 1382 | W332 | done |
-| 1383 | W337 | done |
-| 1384 | W358 | done |
-| 1385 | W377 | done |
-| 1386 | W378 | done |
-| 1387 | W379 | done |
-| 1388 | W387 | done |
-| 1389 | W389 | done |
-| 1390 | W391 | done |
-| 1391 | W426 | done |
-| 1392 | W428 | done |
-| 1393 | W436 | done |
-| 1394 | W450 | done |
-| 1395 | W458 | done |
-| 1396 | W467 | done |
-| 1397 | W474 | done |
-| 1398 | W476 | done |
-| 1399 | W477 | done |
-| 1400 | W482 | done |
-| 1401 | W484 | done |
-| 1402 | W489 | done |
-| 1403 | W494 | done |
-| 1404 | W520 | done |
-| 1405 | W539 | done |
-| 1406 | W541 | done |
-| 1407 | W544 | done |
-| 1408 | W545 | done |
-| 1409 | W546 | done |
-| 1410 | W550 | done |
-| 1411 | W572 | done |
-| 1412 | W573 | done |
-| 1413 | W574 | done |
-| 1414 | W576 | done |
-| 1415 | W577 | done |
-| 1416 | W597 | done |
-| 1417 | W600 | done |
-| 1418 | W601 | done |
-| 1419 | W602 | done |
-| 1420 | W603 | done |
-| 1421 | W604 | done |
-| 1422 | W606 | done |
-| 1423 | W607 | done |
-| 1424 | W610 | done |
-| 1425 | W611 | done |
-| 1426 | W614 | done |
-| 1427 | W617 | done |
-| 1428 | W618 | done |
-| 1429 | W619 | done |
-| 1430 | W620 | done |
-| 1431 | W625 | done |
-| 1432 | W626 | done |
-| 1433 | W627 | done |
-| 1434 | W628 | done |
-| 1435 | W629 | done |
-| 1436 | W630 | done |
-| 1437 | W631 | done |
-| 1438 | W632 | done |
-| 1439 | W633 | done |
-| 1440 | W637 | done |
-| 1441 | W638 | done |
-| 1442 | W639 | done |
-| 1443 | W640 | done |
-| 1444 | W641 | done |
-| 1445 | W644 | done |
-| 1446 | W647 | done |
-| 1447 | W653 | done |
-| 1448 | W668 | done |
-| 1449 | W672 | done |
-| 1450 | W676 | done |
-| 1451 | W677 | done |
-| 1452 | W682 | done |
-| 1453 | W683 | done |
-| 1454 | W685 | done |
-| 1455 | W686 | done |
-| 1456 | W689 | done |
-| 1457 | W697 | done |
-| 1458 | W702 | done |
-| 1459 | W705 | done |
-| 1460 | W716 | done |
-| 1461 | W717 | done |
-| 1462 | W718 | done |
-| 1463 | W720 | done |
-| 1464 | W724 | done |
-| 1465 | W725 | done |
-| 1466 | W729 | done |
-| 1467 | W730 | done |
-| 1468 | W733 | done |
-| 1469 | W737 | done |
-| 1470 | W740 | done |
-| 1471 | W741 | done |
-| 1472 | W742 | done |
-| 1473 | W757 | done |
-| 1474 | W758 | done |
-| 1475 | W762 | done |
-| 1476 | W763 | done |
-| 1477 | W765 | done |
-| 1478 | W766 | done |
-| 1479 | W769 | done |
-| 1480 | W770 | done |
-| 1481 | W772 | done |
-| 1482 | W778 | done |
-| 1483 | W794 | done |
-| 1484 | W798 | done |
-| 1485 | W799 | done |
-| 1486 | W819 | done |
-| 1487 | W825 | done |
-| 1488 | W830 | done |
-| 1489 | W835 | done |
-| 1490 | W843 | done |
-| 1491 | W844 | done |
-| 1492 | W845 | done |
-| 1493 | W866 | done |
-| 1494 | W867 | done |
-| 1495 | W873 | done |
-| 1496 | W874 | done |
-| 1497 | W878 | done |
-| 1498 | W880 | done |
-| 1499 | W882 | done |
-| 1500 | W890 | done |
-| 1501 | W896 | done |
-| 1502 | W897 | done |
-| 1503 | W898 | done |
-| 1504 | W903 | done |
-| 1505 | W904 | done |
-| 1506 | W915 | done |
-| 1507 | W920 | done |
-| 1508 | W928 | done |
-| 1509 | W929 | done |
-| 1510 | W939 | done |
-| 1511 | W940 | done |
-| 1512 | W942 | done |
-| 1513 | W943 | done |
-| 1514 | W944 | done |
-| 1515 | W945 | done |
-| 1516 | W950 | done |
-| 1517 | W951 | done |
-| 1518 | W960 | done |
-| 1519 | W961 | done |
-| 1520 | W962 | done |
-| 1521 | W983 | done |
-| 1522 | W1013 | done |
-| 1523 | W1019 | done |
-| 1524 | W1029 | done |
-| 1525 | W1031 | done |
-| 1526 | W1033 | done |
-| 1527 | W1034 | done |
-| 1528 | W1039 | done |
-| 1529 | W1040 | done |
-| 1530 | W1043 | done |
-| 1531 | W1044 | done |
-| 1532 | W1045 | done |
-| 1533 | W1046 | done |
-| 1534 | W1051 | done |
-| 1535 | W1054 | done |
-| 1536 | W1060 | done |
-| 1537 | W1061 | done |
-| 1538 | W1062 | done |
-| 1539 | W1064 | done |
-| 1540 | W1065 | done |
-| 1541 | W1066 | done |
-| 1542 | W1068 | done |
-| 1543 | W1069 | done |
-| 1544 | W1071 | done |
-| 1545 | W1074 | done |
-| 1546 | W1082 | done |
-| 1547 | W1084 | done |
-| 1548 | W1085 | done |
-| 1549 | W1087 | done |
-| 1550 | W1089 | done |
-| 1551 | W1090 | done |
-| 1552 | W1091 | done |
-| 1553 | W1105 | done |
-| 1554 | W1107 | done |
-| 1555 | W1109 | done |
-| 1556 | W1110 | done |
-| 1557 | W1111 | done |
-| 1558 | W1112 | done |
-| 1559 | W1116 | done |
-| 1560 | W1119 | done |
-| 1561 | W1120 | done |
-| 1562 | W1125 | done |
-| 1563 | W1126 | done |
-| 1564 | W1127 | done |
-| 1565 | W1129 | done |
-| 1566 | W1131 | done |
-| 1567 | W1132 | done |
-| 1568 | W1133 | done |
-| 1569 | W1134 | done |
-| 1570 | W1137 | done |
-| 1571 | W1138 | done |
-| 1572 | W1142 | done |
-| 1573 | W1143 | done |
-| 1574 | W1148 | done |
-| 1575 | W1151 | done |
-| 1576 | W1153 | done |
-| 1577 | W1154 | done |
-| 1578 | W1155 | done |
-| 1579 | W1156 | done |
-| 1580 | W1157 | done |
-| 1581 | W1158 | done |
-| 1582 | W1159 | done |
-| 1583 | W1160 | done |
-| 1584 | W1161 | done |
-| 1585 | W1162 | done |
-| 1586 | W1164 | done |
-| 1587 | W1165 | done |
-| 1588 | W1166 | done |
-| 1589 | W1168 | done |
-| 1590 | W1170 | done |
-| 1591 | W1171 | done |
-| 1592 | W1172 | done |
-| 1593 | W1174 | done |
-| 1594 | W1177 | done |
-| 1595 | W1180 | done |
-| 1596 | W1181 | done |
-| 1597 | W1182 | done |
-| 1598 | W1183 | done |
-| 1599 | W1185 | done |
-| 1600 | W1188 | done |
-| 1601 | W1190 | done |
-| 1602 | W1191 | done |
-| 1603 | W1194 | done |
-| 1604 | W1195 | done |
-| 1605 | W1196 | done |
-| 1606 | W1199 | done |
-| 1607 | W1200 | done |
-| 1608 | W1201 | done |
-| 1609 | W1202 | done |
-| 1610 | W1203 | done |
-| 1611 | W1204 | done |
-| 1612 | W1205 | done |
-| 1613 | W1206 | done |
-| 1614 | W1207 | done |
-| 1615 | W1208 | done |
-| 1616 | W1209 | done |
-| 1617 | W1210 | done |
-| 1618 | W1211 | done |
-| 1619 | W1212 | done |
-| 1620 | W1213 | done |
-| 1621 | W1221 | done |
-| 1622 | W1223 | done |
-| 1623 | W1227 | done |
-| 1624 | W1228 | done |
-| 1625 | W1230 | done |
-| 1626 | W1233 | done |
-| 1627 | W1234 | done |
-| 1628 | W1235 | done |
-| 1629 | W1236 | done |
-| 1630 | W1237 | done |
-| 1631 | W1245 | done |
-| 1632 | W1252 | done |
-| 1633 | W1256 | done |
-| 1634 | W1259 | done |
-| 1635 | W1260 | done |
-| 1636 | W1262 | done |
-| 1637 | W1281 | done |
-| 1638 | W1283 | done |
-| 1639 | W1284 | done |
-| 1640 | W1285 | done |
-| 1641 | W1286 | done |
-| 1642 | W1287 | done |
-| 1643 | W1288 | done |
-| 1644 | W1289 | done |
-| 1645 | W1290 | done |
-| 1646 | W1291 | done |
-| 1647 | W1292 | done |
-| 1648 | W1294 | done |
-| 1649 | W1295 | done |
-| 1650 | W1296 | done |
-| 1651 | W1297 | done |
-| 1652 | W1298 | done |
-| 1653 | W1299 | done |
-| 1654 | W1300 | done |
-| 1655 | W1301 | done |
-| 1656 | W1302 | done |
-| 1657 | W1303 | done |
-| 1658 | W1304 | done |
-| 1659 | W1305 | done |
-| 1660 | W1306 | done |
-| 1661 | W1307 | done |
-| 1662 | W1308 | done |
-| 1663 | W1309 | done |
-| 1664 | W1310 | done |
-| 1665 | W1311 | done |
-| 1666 | W1312 | done |
-| 1667 | W1313 | done |
-| 1668 | W1314 | done |
-| 1669 | W1315 | done |
-| 1670 | W1316 | done |
-| 1671 | W1317 | done |
-| 1672 | W1318 | done |
-| 1673 | W1319 | done |
-| 1674 | W1320 | done |
-| 1675 | W1321 | done |
-| 1676 | W1322 | done |
-| 1677 | W1324 | done |
-| 1678 | W1326 | done |
-| 1679 | W1327 | done |
-| 1680 | W1328 | done |
-| 1681 | W1329 | done |
-| 1682 | W1330 | done |
-| 1683 | W1331 | done |
-| 1684 | W1332 | done |
-| 1685 | W1333 | done |
-| 1686 | W1334 | done |
-| 1687 | W1335 | done |
-| 1688 | W1336 | done |
-| 1689 | W1337 | done |
-| 1690 | W1338 | done |
-| 1691 | W1339 | done |
-| 1692 | W1340 | done |
-| 1693 | W1341 | done |
-| 1694 | W1342 | done |
-| 1695 | W1343 | done |
-| 1696 | W1344 | done |
-| 1697 | W1346 | done |
-| 1698 | W1348 | done |
-| 1699 | W1349 | done |
-| 1700 | W1350 | done |
-| 1701 | W1351 | done |
-| 1702 | W1352 | done |
-| 1703 | W1353 | done |
-| 1704 | W1354 | done |
-| 1705 | W1355 | done |
-| 1706 | W1356 | done |
-| 1707 | W1357 | done |
-| 1708 | W1358 | done |
-| 1709 | W1359 | done |
-| 1710 | W1360 | done |
-| 1711 | W1361 | done |
-| 1712 | W1362 | done |
-| 1713 | W1363 | done |
-| 1714 | W1364 | done |
-| 1715 | W1365 | done |
-| 1716 | W1366 | done |
-| 1717 | W1367 | done |
-| 1718 | W1368 | done |
-| 1719 | W1369 | done |
-| 1720 | W1370 | done |
-| 1721 | W1371 | done |
-| 1722 | W1372 | done |
-| 1723 | W1373 | done |
-| 1724 | W1374 | done |
-| 1725 | W1375 | done |
-| 1726 | W1376 | done |
-| 1727 | W1377 | done |
-| 1728 | W1378 | done |
-| 1729 | W1379 | done |
-| 1730 | W1380 | done |
-| 1731 | W1381 | done |
-| 1732 | W1386 | done |
-| 1733 | W1387 | done |
-| 1734 | W1388 | done |
-| 1735 | W1389 | done |
-| 1736 | W1390 | done |
-| 1737 | W1391 | done |
-| 1738 | W1392 | done |
-| 1739 | W1393 | done |
-| 1740 | W1394 | done |
-| 1741 | W1397 | done |
-| 1742 | W1398 | done |
-| 1743 | W1401 | done |
-| 1744 | W1402 | done |
-| 1745 | W1403 | done |
-| 1746 | W1404 | done |
-| 1747 | W1405 | done |
-| 1748 | W1406 | done |
-| 1749 | W1407 | done |
-| 1750 | W1408 | done |
-| 1751 | W1409 | done |
-| 1752 | W1413 | done |
-| 1753 | W1415 | done |
-| 1754 | W1416 | done |
-| 1755 | W1417 | done |
-| 1756 | W1419 | done |
-| 1757 | W1420 | done |
-| 1758 | W1421 | done |
-| 1759 | W1422 | done |
-| 1760 | W1423 | done |
-| 1761 | W1424 | done |
-| 1762 | W1425 | done |
-| 1763 | W1426 | done |
-| 1764 | W1427 | done |
-| 1765 | W1428 | done |
-| 1766 | W1429 | done |
-| 1767 | W1430 | done |
-| 1768 | W1431 | done |
-| 1769 | W1432 | done |
-| 1770 | W1433 | done |
-| 1771 | W1434 | done |
-| 1772 | W1435 | done |
-| 1773 | W1436 | done |
-| 1774 | W1437 | done |
-| 1775 | W1439 | done |
-| 1776 | W1440 | done |
-| 1777 | W1441 | done |
-| 1778 | W1442 | done |
-| 1779 | W1443 | done |
-| 1780 | W1444 | done |
-| 1781 | W1445 | done |
-| 1782 | W1446 | done |
-| 1783 | W1447 | done |
-| 1784 | W1448 | done |
-| 1785 | W1449 | done |
-| 1786 | W1450 | done |
-| 1787 | W1451 | done |
-| 1788 | W1452 | done |
-| 1789 | W1453 | done |
-| 1790 | W1454 | done |
-| 1791 | W1455 | done |
-| 1792 | W1456 | done |
-| 1793 | W1457 | done |
-| 1794 | W1458 | done |
-| 1795 | W1459 | done |
-| 1796 | W1460 | done |
-| 1797 | W1461 | done |
-| 1798 | W1462 | done |
-| 1799 | W1463 | done |
-| 1800 | W1464 | done |
-| 1801 | W1465 | done |
-| 1802 | W1466 | done |
-| 1803 | W1467 | done |
-| 1804 | W1468 | done |
-| 1805 | W1469 | done |
-| 1806 | W1470 | done |
-| 1807 | W1471 | done |
-| 1808 | W1472 | done |
-| 1809 | W1473 | done |
-| 1810 | W1474 | done |
-| 1811 | W1475 | done |
-| 1812 | W1476 | done |
-| 1813 | W1477 | done |
-| 1814 | W1478 | done |
-| 1815 | W1479 | done |
-| 1816 | W1480 | done |
-| 1817 | W1481 | done |
-| 1818 | W1482 | done |
-| 1819 | W1483 | done |
-| 1820 | W1484 | done |
-| 1821 | W1485 | done |
-| 1822 | W1486 | done |
-| 1823 | W1494 | done |
-| 1824 | W1512 | done |
-| 1825 | W1513 | done |
-| 1826 | W1516 | done |
-| 1827 | W1517 | done |
-| 1828 | W1519 | done |
-| 1829 | W1520 | done |
-| 1830 | W1521 | done |
-| 1831 | W1523 | done |
-| 1832 | W1529 | done |
-| 1833 | W1530 | done |
-| 1834 | W1531 | done |
-| 1835 | W1532 | done |
-| 1836 | W1533 | done |
-| 1837 | W1534 | done |
-| 1838 | W1535 | done |
-| 1839 | W1536 | done |
-| 1840 | W1537 | done |
-| 1841 | W1538 | done |
-| 1842 | W1539 | done |
-| 1843 | W1540 | done |
-| 1844 | W1541 | done |
-| 1845 | W1542 | done |
-| 1846 | W1543 | done |
-| 1847 | W1544 | done |
-| 1848 | W1545 | done |
-| 1849 | W1546 | done |
-| 1850 | W1547 | done |
-| 1851 | W1548 | done |
-| 1852 | W1550 | done |
-| 1853 | W1551 | done |
-| 1854 | W1552 | done |
-| 1855 | W1553 | done |
-| 1856 | W1554 | done |
-| 1857 | W1555 | done |
-| 1858 | W1556 | done |
-| 1859 | W1557 | done |
-| 1860 | W1558 | done |
-| 1861 | W1559 | done |
-| 1862 | W1560 | done |
-| 1863 | W1561 | done |
-| 1864 | W1562 | done |
-| 1865 | W1563 | done |
-| 1866 | W1564 | done |
-| 1867 | W1565 | done |
-| 1868 | W1566 | done |
-| 1869 | W1567 | done |
-| 1870 | W1569 | done |
-| 1871 | W1570 | done |
-| 1872 | W1571 | done |
-| 1873 | W1572 | done |
-| 1874 | W1573 | done |
-| 1875 | W1574 | done |
-| 1876 | W1575 | done |
-| 1877 | W1576 | done |
-| 1878 | W1577 | done |
-| 1879 | W1578 | done |
-| 1880 | W1579 | done |
-| 1881 | W1580 | done |
-| 1882 | W1581 | done |
-| 1883 | W1582 | done |
-| 1884 | W1583 | done |
-| 1885 | W1584 | done |
-| 1886 | W1585 | done |
-| 1887 | W1586 | done |
-| 1888 | W1587 | done |
-| 1889 | W1588 | done |
-| 1890 | W1590 | done |
-| 1891 | W1591 | done |
-| 1892 | W1593 | done |
-| 1893 | W1594 | done |
-| 1894 | W1595 | done |
-| 1895 | W1596 | done |
-| 1896 | W1597 | done |
-| 1897 | W1598 | done |
-| 1898 | W1599 | done |
-| 1899 | W1600 | done |
-| 1900 | W1601 | done |
-| 1901 | W1602 | done |
-| 1902 | W1606 | done |
-| 1903 | W1607 | done |
-| 1904 | W1608 | done |
-| 1905 | W1612 | done |
-| 1906 | W1613 | done |
-| 1907 | W1614 | done |
-| 1908 | W1615 | done |
-| 1909 | W1616 | done |
-| 1910 | W1617 | done |
-| 1911 | W1618 | done |
-| 1912 | W1619 | done |
-| 1913 | W1620 | done |
-| 1914 | W1621 | done |
-| 1915 | W1622 | done |
-| 1916 | W1623 | done |
-| 1917 | W1624 | done |
-| 1918 | W1625 | done |
-| 1919 | W1626 | done |
-| 1920 | W1627 | done |
-| 1921 | W1628 | done |
-| 1922 | W1629 | done |
-| 1923 | W1630 | done |
-| 1924 | W1631 | done |
-| 1925 | W1632 | done |
-| 1926 | W1633 | done |
-| 1927 | W1634 | done |
-| 1928 | W1635 | done |
-| 1929 | W1636 | done |
-| 1930 | W1637 | done |
-| 1931 | W1638 | done |
-| 1932 | W1639 | done |
-| 1933 | W1640 | done |
-| 1934 | W1642 | done |
-| 1935 | W1643 | done |
-| 1936 | W1644 | done |
-| 1937 | W1645 | done |
-| 1938 | W1646 | done |
-| 1939 | W1647 | done |
-| 1940 | W1649 | done |
-| 1941 | W1650 | done |
-| 1942 | W1651 | done |
-| 1943 | W1654 | done |
-| 1944 | W1655 | done |
-| 1945 | W1656 | done |
-| 1946 | W1657 | done |
-| 1947 | W1658 | done |
-| 1948 | W1659 | done |
-| 1949 | W1662 | done |
-| 1950 | W1663 | done |
-| 1951 | W1664 | done |
-| 1952 | W1667 | done |
-| 1953 | W1668 | done |
-| 1954 | W1669 | done |
-| 1955 | W1670 | done |
-| 1956 | W1671 | done |
-| 1957 | W1672 | done |
-| 1958 | W1673 | done |
-| 1959 | W1678 | done |
+| 325 | W2001 | ready |
+| 326 | W2014 | ready |
+| 327 | W2015 | ready |
+| 328 | W2019 | ready |
+| 329 | W2021 | ready |
+| 330 | W2022 | ready |
+| 331 | W2023 | ready |
+| 332 | W2024 | ready |
+| 333 | W2026 | ready |
+| 334 | W2027 | ready |
+| 335 | W2028 | ready |
+| 336 | W2029 | ready |
+| 337 | W2030 | ready |
+| 338 | W2031 | ready |
+| 339 | W2032 | ready |
+| 340 | W2033 | ready |
+| 341 | W2036 | ready |
+| 342 | W2037 | ready |
+| 343 | W2038 | ready |
+| 344 | W2039 | ready |
+| 345 | W2040 | ready |
+| 346 | W2041 | ready |
+| 347 | W2043 | ready |
+| 348 | W2044 | ready |
+| 349 | W2045 | ready |
+| 350 | W2046 | ready |
+| 351 | W2047 | ready |
+| 352 | W2049 | ready |
+| 353 | W2050 | ready |
+| 354 | W2051 | ready |
+| 355 | W1139 | blocked |
+| 356 | W1325 | blocked |
+| 357 | W913 | blocked |
+| 358 | W1515 | blocked |
+| 359 | W986 | blocked |
+| 360 | W1010 | blocked |
+| 361 | W1136 | blocked |
+| 362 | W1056 | blocked |
+| 363 | W1108 | blocked |
+| 364 | W1277 | blocked |
+| 365 | W1280 | blocked |
+| 366 | W534 | blocked |
+| 367 | W508 | blocked |
+| 368 | W516 | blocked |
+| 369 | W352 | blocked |
+| 370 | W353 | blocked |
+| 371 | W500 | blocked |
+| 372 | W511 | blocked |
+| 373 | W188 | blocked |
+| 374 | W224 | blocked |
+| 375 | W47 | blocked |
+| 376 | W1079 | blocked |
+| 377 | W461 | blocked |
+| 378 | W1249 | blocked |
+| 379 | W490 | blocked |
+| 380 | W491 | blocked |
+| 381 | W1694 | blocked |
+| 382 | W1698 | blocked |
+| 383 | W1705 | blocked |
+| 384 | W1736 | blocked |
+| 385 | W1731 | blocked |
+| 386 | W1660 | blocked |
+| 387 | W1700 | blocked |
+| 388 | W1712 | blocked |
+| 389 | W1717 | blocked |
+| 390 | W1750 | blocked |
+| 391 | W581 | blocked |
+| 392 | W925 | blocked |
+| 393 | W1740 | blocked |
+| 394 | W1758 | blocked |
+| 395 | W1979 | blocked |
+| 396 | W423 | blocked |
+| 397 | W908 | blocked |
+| 398 | W1017 | blocked |
+| 399 | W1035 | blocked |
+| 400 | W1036 | blocked |
+| 401 | W1057 | blocked |
+| 402 | W1217 | blocked |
+| 403 | W1703 | blocked |
+| 404 | W1706 | blocked |
+| 405 | W1729 | blocked |
+| 406 | W1732 | blocked |
+| 407 | W1754 | blocked |
+| 408 | W1756 | blocked |
+| 409 | W283 | blocked |
+| 410 | W286 | blocked |
+| 411 | W287 | blocked |
+| 412 | W289 | blocked |
+| 413 | W292 | blocked |
+| 414 | W294 | blocked |
+| 415 | W295 | blocked |
+| 416 | W297 | blocked |
+| 417 | W369 | blocked |
+| 418 | W370 | blocked |
+| 419 | W424 | blocked |
+| 420 | W568 | blocked |
+| 421 | W575 | blocked |
+| 422 | W578 | blocked |
+| 423 | W579 | blocked |
+| 424 | W580 | blocked |
+| 425 | W643 | blocked |
+| 426 | W693 | blocked |
+| 427 | W709 | blocked |
+| 428 | W788 | blocked |
+| 429 | W789 | blocked |
+| 430 | W837 | blocked |
+| 431 | W909 | blocked |
+| 432 | W926 | blocked |
+| 433 | W927 | blocked |
+| 434 | W938 | blocked |
+| 435 | W967 | blocked |
+| 436 | W970 | blocked |
+| 437 | W1018 | blocked |
+| 438 | W1021 | blocked |
+| 439 | W1023 | blocked |
+| 440 | W1037 | blocked |
+| 441 | W1050 | blocked |
+| 442 | W1058 | blocked |
+| 443 | W1076 | blocked |
+| 444 | W1095 | blocked |
+| 445 | W1103 | blocked |
+| 446 | W1218 | blocked |
+| 447 | W1282 | blocked |
+| 448 | W1665 | blocked |
+| 449 | W1666 | blocked |
+| 450 | W1695 | blocked |
+| 451 | W1707 | blocked |
+| 452 | W1709 | blocked |
+| 453 | W1711 | blocked |
+| 454 | W1713 | blocked |
+| 455 | W1718 | blocked |
+| 456 | W1719 | blocked |
+| 457 | W1733 | blocked |
+| 458 | W1735 | blocked |
+| 459 | W1739 | blocked |
+| 460 | W1745 | blocked |
+| 461 | W1746 | blocked |
+| 462 | W1749 | blocked |
+| 463 | W506 | blocked |
+| 464 | W563 | blocked |
+| 465 | W674 | blocked |
+| 466 | W675 | blocked |
+| 467 | W680 | blocked |
+| 468 | W749 | blocked |
+| 469 | W751 | blocked |
+| 470 | W852 | blocked |
+| 471 | W877 | blocked |
+| 472 | W881 | blocked |
+| 473 | W963 | blocked |
+| 474 | W1030 | blocked |
+| 475 | W1047 | blocked |
+| 476 | W1055 | blocked |
+| 477 | W1173 | blocked |
+| 478 | W1696 | blocked |
+| 479 | W1701 | blocked |
+| 480 | W1704 | blocked |
+| 481 | W1710 | blocked |
+| 482 | W1715 | blocked |
+| 483 | W1721 | blocked |
+| 484 | W1722 | blocked |
+| 485 | W1723 | blocked |
+| 486 | W1724 | blocked |
+| 487 | W1727 | blocked |
+| 488 | W1730 | blocked |
+| 489 | W1734 | blocked |
+| 490 | W1738 | blocked |
+| 491 | W1741 | blocked |
+| 492 | W1742 | blocked |
+| 493 | W1743 | blocked |
+| 494 | W1748 | blocked |
+| 495 | W1751 | blocked |
+| 496 | W1752 | blocked |
+| 497 | W1755 | blocked |
+| 498 | W1990 | blocked |
+| 499 | W1991 | blocked |
+| 500 | W17 | blocked |
+| 501 | W282 | blocked |
+| 502 | W346 | blocked |
+| 503 | W364 | blocked |
+| 504 | W422 | blocked |
+| 505 | W486 | blocked |
+| 506 | W512 | blocked |
+| 507 | W517 | blocked |
+| 508 | W561 | blocked |
+| 509 | W570 | blocked |
+| 510 | W571 | blocked |
+| 511 | W613 | blocked |
+| 512 | W691 | blocked |
+| 513 | W695 | blocked |
+| 514 | W735 | blocked |
+| 515 | W743 | blocked |
+| 516 | W764 | blocked |
+| 517 | W768 | blocked |
+| 518 | W781 | blocked |
+| 519 | W812 | blocked |
+| 520 | W899 | blocked |
+| 521 | W905 | blocked |
+| 522 | W914 | blocked |
+| 523 | W922 | blocked |
+| 524 | W923 | blocked |
+| 525 | W934 | blocked |
+| 526 | W941 | blocked |
+| 527 | W964 | blocked |
+| 528 | W984 | blocked |
+| 529 | W985 | blocked |
+| 530 | W1072 | blocked |
+| 531 | W1073 | blocked |
+| 532 | W1077 | blocked |
+| 533 | W1092 | blocked |
+| 534 | W1113 | blocked |
+| 535 | W1198 | blocked |
+| 536 | W1219 | blocked |
+| 537 | W1224 | blocked |
+| 538 | W1400 | blocked |
+| 539 | W1438 | blocked |
+| 540 | W1524 | blocked |
+| 541 | W1652 | blocked |
+| 542 | W1653 | blocked |
+| 543 | W1674 | blocked |
+| 544 | W1675 | blocked |
+| 545 | W1676 | blocked |
+| 546 | W1677 | blocked |
+| 547 | W1679 | blocked |
+| 548 | W1680 | blocked |
+| 549 | W1681 | blocked |
+| 550 | W1682 | blocked |
+| 551 | W1683 | blocked |
+| 552 | W1684 | blocked |
+| 553 | W1685 | blocked |
+| 554 | W1686 | blocked |
+| 555 | W1687 | blocked |
+| 556 | W1688 | blocked |
+| 557 | W1689 | blocked |
+| 558 | W1690 | blocked |
+| 559 | W1691 | blocked |
+| 560 | W1692 | blocked |
+| 561 | W1693 | blocked |
+| 562 | W1697 | blocked |
+| 563 | W1699 | blocked |
+| 564 | W1702 | blocked |
+| 565 | W1708 | blocked |
+| 566 | W1714 | blocked |
+| 567 | W1716 | blocked |
+| 568 | W1720 | blocked |
+| 569 | W1725 | blocked |
+| 570 | W1726 | blocked |
+| 571 | W1728 | blocked |
+| 572 | W1737 | blocked |
+| 573 | W1744 | blocked |
+| 574 | W1747 | blocked |
+| 575 | W1753 | blocked |
+| 576 | W1757 | blocked |
+| 577 | W1984 | blocked |
+| 578 | W1992 | blocked |
+| 579 | W1993 | blocked |
+| 580 | W1998 | blocked |
+| 581 | W2009 | blocked |
+| 582 | W2010 | blocked |
+| 583 | W2025 | blocked |
+| 584 | W1761 | done |
+| 585 | W1271 | done |
+| 586 | W987 | done |
+| 587 | W988 | done |
+| 588 | W989 | done |
+| 589 | W990 | done |
+| 590 | W991 | done |
+| 591 | W993 | done |
+| 592 | W995 | done |
+| 593 | W996 | done |
+| 594 | W997 | done |
+| 595 | W1003 | done |
+| 596 | W1006 | done |
+| 597 | W1011 | done |
+| 598 | W1012 | done |
+| 599 | W1015 | done |
+| 600 | W1024 | done |
+| 601 | W1025 | done |
+| 602 | W1027 | done |
+| 603 | W999 | done |
+| 604 | W1004 | done |
+| 605 | W105 | done |
+| 606 | W1014 | done |
+| 607 | W1176 | done |
+| 608 | W1279 | done |
+| 609 | W1278 | done |
+| 610 | W1269 | done |
+| 611 | W128 | done |
+| 612 | W371 | done |
+| 613 | W533 | done |
+| 614 | W501 | done |
+| 615 | W535 | done |
+| 616 | W130 | done |
+| 617 | W343 | done |
+| 618 | W466 | done |
+| 619 | W529 | done |
+| 620 | W530 | done |
+| 621 | W531 | done |
+| 622 | W540 | done |
+| 623 | W131 | done |
+| 624 | W505 | done |
+| 625 | W507 | done |
+| 626 | W514 | done |
+| 627 | W525 | done |
+| 628 | W526 | done |
+| 629 | W527 | done |
+| 630 | W515 | done |
+| 631 | W372 | done |
+| 632 | W354 | done |
+| 633 | W355 | done |
+| 634 | W528 | done |
+| 635 | W413 | done |
+| 636 | W373 | done |
+| 637 | W107 | done |
+| 638 | W536 | done |
+| 639 | W170 | done |
+| 640 | W171 | done |
+| 641 | W469 | done |
+| 642 | W470 | done |
+| 643 | W471 | done |
+| 644 | W472 | done |
+| 645 | W521 | done |
+| 646 | W522 | done |
+| 647 | W524 | done |
+| 648 | W177 | done |
+| 649 | W178 | done |
+| 650 | W180 | done |
+| 651 | W154 | done |
+| 652 | W166 | done |
+| 653 | W167 | done |
+| 654 | W169 | done |
+| 655 | W396 | done |
+| 656 | W397 | done |
+| 657 | W481 | done |
+| 658 | W981 | done |
+| 659 | W1253 | done |
+| 660 | W1255 | done |
+| 661 | W157 | done |
+| 662 | W158 | done |
+| 663 | W159 | done |
+| 664 | W162 | done |
+| 665 | W163 | done |
+| 666 | W164 | done |
+| 667 | W172 | done |
+| 668 | W327 | done |
+| 669 | W336 | done |
+| 670 | W338 | done |
+| 671 | W365 | done |
+| 672 | W366 | done |
+| 673 | W388 | done |
+| 674 | W408 | done |
+| 675 | W504 | done |
+| 676 | W118 | done |
+| 677 | W127 | done |
+| 678 | W133 | done |
+| 679 | W147 | done |
+| 680 | W149 | done |
+| 681 | W150 | done |
+| 682 | W151 | done |
+| 683 | W161 | done |
+| 684 | W168 | done |
+| 685 | W183 | done |
+| 686 | W318 | done |
+| 687 | W390 | done |
+| 688 | W400 | done |
+| 689 | W425 | done |
+| 690 | W454 | done |
+| 691 | W143 | done |
+| 692 | W262 | done |
+| 693 | W344 | done |
+| 694 | W455 | done |
+| 695 | W456 | done |
+| 696 | W462 | done |
+| 697 | W464 | done |
+| 698 | W485 | done |
+| 699 | W64 | done |
+| 700 | W65 | done |
+| 701 | W113 | done |
+| 702 | W121 | done |
+| 703 | W129 | done |
+| 704 | W148 | done |
+| 705 | W160 | done |
+| 706 | W341 | done |
+| 707 | W363 | done |
+| 708 | W367 | done |
+| 709 | W368 | done |
+| 710 | W393 | done |
+| 711 | W402 | done |
+| 712 | W417 | done |
+| 713 | W427 | done |
+| 714 | W442 | done |
+| 715 | W453 | done |
+| 716 | W1267 | done |
+| 717 | W1268 | done |
+| 718 | W138 | done |
+| 719 | W277 | done |
+| 720 | W342 | done |
+| 721 | W463 | done |
+| 722 | W465 | done |
+| 723 | W537 | done |
+| 724 | W60 | done |
+| 725 | W74 | done |
+| 726 | W99 | done |
+| 727 | W100 | done |
+| 728 | W123 | done |
+| 729 | W124 | done |
+| 730 | W173 | done |
+| 731 | W174 | done |
+| 732 | W175 | done |
+| 733 | W192 | done |
+| 734 | W235 | done |
+| 735 | W279 | done |
+| 736 | W280 | done |
+| 737 | W316 | done |
+| 738 | W317 | done |
+| 739 | W335 | done |
+| 740 | W339 | done |
+| 741 | W347 | done |
+| 742 | W348 | done |
+| 743 | W349 | done |
+| 744 | W350 | done |
+| 745 | W351 | done |
+| 746 | W356 | done |
+| 747 | W357 | done |
+| 748 | W362 | done |
+| 749 | W386 | done |
+| 750 | W409 | done |
+| 751 | W410 | done |
+| 752 | W418 | done |
+| 753 | W439 | done |
+| 754 | W468 | done |
+| 755 | W509 | done |
+| 756 | W510 | done |
+| 757 | W1240 | done |
+| 758 | W1241 | done |
+| 759 | W1242 | done |
+| 760 | W1243 | done |
+| 761 | W275 | done |
+| 762 | W45 | done |
+| 763 | W46 | done |
+| 764 | W53 | done |
+| 765 | W57 | done |
+| 766 | W61 | done |
+| 767 | W62 | done |
+| 768 | W66 | done |
+| 769 | W79 | done |
+| 770 | W80 | done |
+| 771 | W81 | done |
+| 772 | W82 | done |
+| 773 | W83 | done |
+| 774 | W84 | done |
+| 775 | W88 | done |
+| 776 | W90 | done |
+| 777 | W91 | done |
+| 778 | W92 | done |
+| 779 | W94 | done |
+| 780 | W97 | done |
+| 781 | W102 | done |
+| 782 | W103 | done |
+| 783 | W104 | done |
+| 784 | W165 | done |
+| 785 | W190 | done |
+| 786 | W191 | done |
+| 787 | W273 | done |
+| 788 | W313 | done |
+| 789 | W314 | done |
+| 790 | W340 | done |
+| 791 | W359 | done |
+| 792 | W360 | done |
+| 793 | W361 | done |
+| 794 | W381 | done |
+| 795 | W382 | done |
+| 796 | W383 | done |
+| 797 | W385 | done |
+| 798 | W406 | done |
+| 799 | W407 | done |
+| 800 | W519 | done |
+| 801 | W1250 | done |
+| 802 | W75 | done |
+| 803 | W108 | done |
+| 804 | W109 | done |
+| 805 | W116 | done |
+| 806 | W141 | done |
+| 807 | W248 | done |
+| 808 | W250 | done |
+| 809 | W254 | done |
+| 810 | W257 | done |
+| 811 | W260 | done |
+| 812 | W261 | done |
+| 813 | W276 | done |
+| 814 | W281 | done |
+| 815 | W345 | done |
+| 816 | W376 | done |
+| 817 | W398 | done |
+| 818 | W405 | done |
+| 819 | W420 | done |
+| 820 | W421 | done |
+| 821 | W443 | done |
+| 822 | W444 | done |
+| 823 | W447 | done |
+| 824 | W457 | done |
+| 825 | W460 | done |
+| 826 | W475 | done |
+| 827 | W487 | done |
+| 828 | W488 | done |
+| 829 | W492 | done |
+| 830 | W493 | done |
+| 831 | W513 | done |
+| 832 | W538 | done |
+| 833 | W1041 | done |
+| 834 | W1186 | done |
+| 835 | W1222 | done |
+| 836 | W1229 | done |
+| 837 | W1246 | done |
+| 838 | W1270 | done |
+| 839 | W1275 | done |
+| 840 | W1395 | done |
+| 841 | W1418 | done |
+| 842 | W1980 | done |
+| 843 | W207 | done |
+| 844 | W859 | done |
+| 845 | W860 | done |
+| 846 | W560 | done |
+| 847 | W584 | done |
+| 848 | W616 | done |
+| 849 | W748 | done |
+| 850 | W59 | done |
+| 851 | W134 | done |
+| 852 | W203 | done |
+| 853 | W229 | done |
+| 854 | W230 | done |
+| 855 | W231 | done |
+| 856 | W237 | done |
+| 857 | W239 | done |
+| 858 | W240 | done |
+| 859 | W551 | done |
+| 860 | W552 | done |
+| 861 | W593 | done |
+| 862 | W599 | done |
+| 863 | W612 | done |
+| 864 | W648 | done |
+| 865 | W649 | done |
+| 866 | W650 | done |
+| 867 | W654 | done |
+| 868 | W655 | done |
+| 869 | W656 | done |
+| 870 | W658 | done |
+| 871 | W662 | done |
+| 872 | W670 | done |
+| 873 | W696 | done |
+| 874 | W744 | done |
+| 875 | W745 | done |
+| 876 | W746 | done |
+| 877 | W747 | done |
+| 878 | W849 | done |
+| 879 | W850 | done |
+| 880 | W4 | done |
+| 881 | W15 | done |
+| 882 | W34 | done |
+| 883 | W35 | done |
+| 884 | W36 | done |
+| 885 | W37 | done |
+| 886 | W38 | done |
+| 887 | W39 | done |
+| 888 | W41 | done |
+| 889 | W43 | done |
+| 890 | W52 | done |
+| 891 | W56 | done |
+| 892 | W63 | done |
+| 893 | W68 | done |
+| 894 | W73 | done |
+| 895 | W76 | done |
+| 896 | W95 | done |
+| 897 | W96 | done |
+| 898 | W98 | done |
+| 899 | W106 | done |
+| 900 | W122 | done |
+| 901 | W132 | done |
+| 902 | W136 | done |
+| 903 | W145 | done |
+| 904 | W153 | done |
+| 905 | W179 | done |
+| 906 | W193 | done |
+| 907 | W204 | done |
+| 908 | W205 | done |
+| 909 | W206 | done |
+| 910 | W208 | done |
+| 911 | W209 | done |
+| 912 | W210 | done |
+| 913 | W211 | done |
+| 914 | W212 | done |
+| 915 | W213 | done |
+| 916 | W215 | done |
+| 917 | W216 | done |
+| 918 | W217 | done |
+| 919 | W218 | done |
+| 920 | W219 | done |
+| 921 | W220 | done |
+| 922 | W221 | done |
+| 923 | W223 | done |
+| 924 | W226 | done |
+| 925 | W232 | done |
+| 926 | W233 | done |
+| 927 | W234 | done |
+| 928 | W236 | done |
+| 929 | W238 | done |
+| 930 | W241 | done |
+| 931 | W243 | done |
+| 932 | W244 | done |
+| 933 | W245 | done |
+| 934 | W246 | done |
+| 935 | W247 | done |
+| 936 | W249 | done |
+| 937 | W251 | done |
+| 938 | W253 | done |
+| 939 | W256 | done |
+| 940 | W263 | done |
+| 941 | W267 | done |
+| 942 | W268 | done |
+| 943 | W269 | done |
+| 944 | W270 | done |
+| 945 | W271 | done |
+| 946 | W272 | done |
+| 947 | W278 | done |
+| 948 | W284 | done |
+| 949 | W285 | done |
+| 950 | W288 | done |
+| 951 | W290 | done |
+| 952 | W291 | done |
+| 953 | W293 | done |
+| 954 | W296 | done |
+| 955 | W301 | done |
+| 956 | W305 | done |
+| 957 | W308 | done |
+| 958 | W315 | done |
+| 959 | W322 | done |
+| 960 | W324 | done |
+| 961 | W325 | done |
+| 962 | W326 | done |
+| 963 | W328 | done |
+| 964 | W333 | done |
+| 965 | W334 | done |
+| 966 | W374 | done |
+| 967 | W375 | done |
+| 968 | W380 | done |
+| 969 | W384 | done |
+| 970 | W392 | done |
+| 971 | W394 | done |
+| 972 | W395 | done |
+| 973 | W399 | done |
+| 974 | W401 | done |
+| 975 | W403 | done |
+| 976 | W411 | done |
+| 977 | W412 | done |
+| 978 | W414 | done |
+| 979 | W415 | done |
+| 980 | W416 | done |
+| 981 | W419 | done |
+| 982 | W429 | done |
+| 983 | W430 | done |
+| 984 | W431 | done |
+| 985 | W432 | done |
+| 986 | W433 | done |
+| 987 | W434 | done |
+| 988 | W435 | done |
+| 989 | W437 | done |
+| 990 | W438 | done |
+| 991 | W440 | done |
+| 992 | W441 | done |
+| 993 | W445 | done |
+| 994 | W446 | done |
+| 995 | W448 | done |
+| 996 | W449 | done |
+| 997 | W451 | done |
+| 998 | W473 | done |
+| 999 | W478 | done |
+| 1000 | W479 | done |
+| 1001 | W480 | done |
+| 1002 | W483 | done |
+| 1003 | W495 | done |
+| 1004 | W496 | done |
+| 1005 | W497 | done |
+| 1006 | W498 | done |
+| 1007 | W502 | done |
+| 1008 | W503 | done |
+| 1009 | W518 | done |
+| 1010 | W523 | done |
+| 1011 | W532 | done |
+| 1012 | W542 | done |
+| 1013 | W543 | done |
+| 1014 | W547 | done |
+| 1015 | W549 | done |
+| 1016 | W553 | done |
+| 1017 | W554 | done |
+| 1018 | W555 | done |
+| 1019 | W556 | done |
+| 1020 | W557 | done |
+| 1021 | W558 | done |
+| 1022 | W559 | done |
+| 1023 | W562 | done |
+| 1024 | W565 | done |
+| 1025 | W566 | done |
+| 1026 | W567 | done |
+| 1027 | W582 | done |
+| 1028 | W583 | done |
+| 1029 | W585 | done |
+| 1030 | W586 | done |
+| 1031 | W587 | done |
+| 1032 | W588 | done |
+| 1033 | W589 | done |
+| 1034 | W590 | done |
+| 1035 | W591 | done |
+| 1036 | W592 | done |
+| 1037 | W594 | done |
+| 1038 | W595 | done |
+| 1039 | W596 | done |
+| 1040 | W598 | done |
+| 1041 | W605 | done |
+| 1042 | W608 | done |
+| 1043 | W609 | done |
+| 1044 | W615 | done |
+| 1045 | W621 | done |
+| 1046 | W622 | done |
+| 1047 | W623 | done |
+| 1048 | W624 | done |
+| 1049 | W634 | done |
+| 1050 | W635 | done |
+| 1051 | W636 | done |
+| 1052 | W645 | done |
+| 1053 | W646 | done |
+| 1054 | W651 | done |
+| 1055 | W652 | done |
+| 1056 | W657 | done |
+| 1057 | W659 | done |
+| 1058 | W660 | done |
+| 1059 | W661 | done |
+| 1060 | W663 | done |
+| 1061 | W664 | done |
+| 1062 | W665 | done |
+| 1063 | W666 | done |
+| 1064 | W667 | done |
+| 1065 | W669 | done |
+| 1066 | W671 | done |
+| 1067 | W673 | done |
+| 1068 | W681 | done |
+| 1069 | W684 | done |
+| 1070 | W687 | done |
+| 1071 | W688 | done |
+| 1072 | W690 | done |
+| 1073 | W692 | done |
+| 1074 | W694 | done |
+| 1075 | W698 | done |
+| 1076 | W699 | done |
+| 1077 | W701 | done |
+| 1078 | W703 | done |
+| 1079 | W704 | done |
+| 1080 | W706 | done |
+| 1081 | W707 | done |
+| 1082 | W710 | done |
+| 1083 | W711 | done |
+| 1084 | W712 | done |
+| 1085 | W713 | done |
+| 1086 | W714 | done |
+| 1087 | W715 | done |
+| 1088 | W719 | done |
+| 1089 | W721 | done |
+| 1090 | W722 | done |
+| 1091 | W723 | done |
+| 1092 | W727 | done |
+| 1093 | W728 | done |
+| 1094 | W731 | done |
+| 1095 | W732 | done |
+| 1096 | W734 | done |
+| 1097 | W736 | done |
+| 1098 | W738 | done |
+| 1099 | W739 | done |
+| 1100 | W752 | done |
+| 1101 | W753 | done |
+| 1102 | W754 | done |
+| 1103 | W755 | done |
+| 1104 | W756 | done |
+| 1105 | W759 | done |
+| 1106 | W760 | done |
+| 1107 | W761 | done |
+| 1108 | W767 | done |
+| 1109 | W771 | done |
+| 1110 | W773 | done |
+| 1111 | W774 | done |
+| 1112 | W775 | done |
+| 1113 | W776 | done |
+| 1114 | W777 | done |
+| 1115 | W779 | done |
+| 1116 | W780 | done |
+| 1117 | W782 | done |
+| 1118 | W783 | done |
+| 1119 | W784 | done |
+| 1120 | W785 | done |
+| 1121 | W786 | done |
+| 1122 | W787 | done |
+| 1123 | W790 | done |
+| 1124 | W791 | done |
+| 1125 | W792 | done |
+| 1126 | W793 | done |
+| 1127 | W795 | done |
+| 1128 | W796 | done |
+| 1129 | W797 | done |
+| 1130 | W800 | done |
+| 1131 | W801 | done |
+| 1132 | W802 | done |
+| 1133 | W803 | done |
+| 1134 | W804 | done |
+| 1135 | W805 | done |
+| 1136 | W806 | done |
+| 1137 | W807 | done |
+| 1138 | W808 | done |
+| 1139 | W809 | done |
+| 1140 | W810 | done |
+| 1141 | W811 | done |
+| 1142 | W813 | done |
+| 1143 | W814 | done |
+| 1144 | W815 | done |
+| 1145 | W816 | done |
+| 1146 | W817 | done |
+| 1147 | W818 | done |
+| 1148 | W820 | done |
+| 1149 | W821 | done |
+| 1150 | W822 | done |
+| 1151 | W823 | done |
+| 1152 | W824 | done |
+| 1153 | W826 | done |
+| 1154 | W827 | done |
+| 1155 | W828 | done |
+| 1156 | W831 | done |
+| 1157 | W832 | done |
+| 1158 | W833 | done |
+| 1159 | W834 | done |
+| 1160 | W836 | done |
+| 1161 | W838 | done |
+| 1162 | W839 | done |
+| 1163 | W840 | done |
+| 1164 | W841 | done |
+| 1165 | W842 | done |
+| 1166 | W847 | done |
+| 1167 | W848 | done |
+| 1168 | W851 | done |
+| 1169 | W853 | done |
+| 1170 | W854 | done |
+| 1171 | W855 | done |
+| 1172 | W856 | done |
+| 1173 | W857 | done |
+| 1174 | W858 | done |
+| 1175 | W861 | done |
+| 1176 | W862 | done |
+| 1177 | W863 | done |
+| 1178 | W864 | done |
+| 1179 | W865 | done |
+| 1180 | W868 | done |
+| 1181 | W869 | done |
+| 1182 | W870 | done |
+| 1183 | W871 | done |
+| 1184 | W872 | done |
+| 1185 | W875 | done |
+| 1186 | W876 | done |
+| 1187 | W883 | done |
+| 1188 | W884 | done |
+| 1189 | W885 | done |
+| 1190 | W886 | done |
+| 1191 | W887 | done |
+| 1192 | W888 | done |
+| 1193 | W889 | done |
+| 1194 | W891 | done |
+| 1195 | W892 | done |
+| 1196 | W893 | done |
+| 1197 | W894 | done |
+| 1198 | W895 | done |
+| 1199 | W900 | done |
+| 1200 | W901 | done |
+| 1201 | W906 | done |
+| 1202 | W907 | done |
+| 1203 | W912 | done |
+| 1204 | W916 | done |
+| 1205 | W917 | done |
+| 1206 | W918 | done |
+| 1207 | W919 | done |
+| 1208 | W921 | done |
+| 1209 | W930 | done |
+| 1210 | W931 | done |
+| 1211 | W932 | done |
+| 1212 | W933 | done |
+| 1213 | W935 | done |
+| 1214 | W936 | done |
+| 1215 | W937 | done |
+| 1216 | W946 | done |
+| 1217 | W947 | done |
+| 1218 | W948 | done |
+| 1219 | W949 | done |
+| 1220 | W952 | done |
+| 1221 | W953 | done |
+| 1222 | W954 | done |
+| 1223 | W955 | done |
+| 1224 | W956 | done |
+| 1225 | W957 | done |
+| 1226 | W958 | done |
+| 1227 | W959 | done |
+| 1228 | W965 | done |
+| 1229 | W968 | done |
+| 1230 | W971 | done |
+| 1231 | W972 | done |
+| 1232 | W973 | done |
+| 1233 | W974 | done |
+| 1234 | W975 | done |
+| 1235 | W977 | done |
+| 1236 | W978 | done |
+| 1237 | W980 | done |
+| 1238 | W998 | done |
+| 1239 | W1049 | done |
+| 1240 | W1053 | done |
+| 1241 | W1059 | done |
+| 1242 | W1067 | done |
+| 1243 | W1078 | done |
+| 1244 | W1086 | done |
+| 1245 | W1088 | done |
+| 1246 | W1097 | done |
+| 1247 | W1114 | done |
+| 1248 | W1115 | done |
+| 1249 | W1117 | done |
+| 1250 | W1118 | done |
+| 1251 | W1121 | done |
+| 1252 | W1122 | done |
+| 1253 | W1123 | done |
+| 1254 | W1124 | done |
+| 1255 | W1130 | done |
+| 1256 | W1135 | done |
+| 1257 | W1144 | done |
+| 1258 | W1145 | done |
+| 1259 | W1146 | done |
+| 1260 | W1147 | done |
+| 1261 | W1149 | done |
+| 1262 | W1150 | done |
+| 1263 | W1152 | done |
+| 1264 | W1167 | done |
+| 1265 | W1189 | done |
+| 1266 | W1193 | done |
+| 1267 | W1238 | done |
+| 1268 | W1239 | done |
+| 1269 | W1247 | done |
+| 1270 | W1251 | done |
+| 1271 | W1254 | done |
+| 1272 | W1263 | done |
+| 1273 | W1264 | done |
+| 1274 | W1265 | done |
+| 1275 | W1266 | done |
+| 1276 | W1273 | done |
+| 1277 | W1274 | done |
+| 1278 | W1293 | done |
+| 1279 | W1323 | done |
+| 1280 | W1382 | done |
+| 1281 | W1383 | done |
+| 1282 | W1384 | done |
+| 1283 | W1385 | done |
+| 1284 | W1396 | done |
+| 1285 | W1410 | done |
+| 1286 | W1412 | done |
+| 1287 | W1414 | done |
+| 1288 | W1493 | done |
+| 1289 | W1495 | done |
+| 1290 | W1496 | done |
+| 1291 | W1497 | done |
+| 1292 | W1498 | done |
+| 1293 | W1499 | done |
+| 1294 | W1500 | done |
+| 1295 | W1501 | done |
+| 1296 | W1502 | done |
+| 1297 | W1503 | done |
+| 1298 | W1504 | done |
+| 1299 | W1505 | done |
+| 1300 | W1506 | done |
+| 1301 | W1507 | done |
+| 1302 | W1508 | done |
+| 1303 | W1509 | done |
+| 1304 | W1510 | done |
+| 1305 | W1511 | done |
+| 1306 | W1525 | done |
+| 1307 | W1526 | done |
+| 1308 | W1527 | done |
+| 1309 | W1528 | done |
+| 1310 | W1592 | done |
+| 1311 | W1603 | done |
+| 1312 | W1604 | done |
+| 1313 | W1605 | done |
+| 1314 | W1609 | done |
+| 1315 | W1611 | done |
+| 1316 | W1641 | done |
+| 1317 | W1999 | done |
+| 1318 | W2011 | done |
+| 1319 | W2017 | done |
+| 1320 | W1 | done |
+| 1321 | W2 | done |
+| 1322 | W3 | done |
+| 1323 | W5 | done |
+| 1324 | W6 | done |
+| 1325 | W7 | done |
+| 1326 | W8 | done |
+| 1327 | W9 | done |
+| 1328 | W10 | done |
+| 1329 | W12 | done |
+| 1330 | W13 | done |
+| 1331 | W14 | done |
+| 1332 | W16 | done |
+| 1333 | W18 | done |
+| 1334 | W19 | done |
+| 1335 | W20 | done |
+| 1336 | W22 | done |
+| 1337 | W23 | done |
+| 1338 | W24 | done |
+| 1339 | W25 | done |
+| 1340 | W26 | done |
+| 1341 | W27 | done |
+| 1342 | W28 | done |
+| 1343 | W29 | done |
+| 1344 | W30 | done |
+| 1345 | W31 | done |
+| 1346 | W32 | done |
+| 1347 | W33 | done |
+| 1348 | W40 | done |
+| 1349 | W42 | done |
+| 1350 | W44 | done |
+| 1351 | W48 | done |
+| 1352 | W49 | done |
+| 1353 | W50 | done |
+| 1354 | W51 | done |
+| 1355 | W54 | done |
+| 1356 | W55 | done |
+| 1357 | W58 | done |
+| 1358 | W67 | done |
+| 1359 | W69 | done |
+| 1360 | W70 | done |
+| 1361 | W71 | done |
+| 1362 | W72 | done |
+| 1363 | W77 | done |
+| 1364 | W78 | done |
+| 1365 | W85 | done |
+| 1366 | W86 | done |
+| 1367 | W87 | done |
+| 1368 | W93 | done |
+| 1369 | W101 | done |
+| 1370 | W110 | done |
+| 1371 | W111 | done |
+| 1372 | W112 | done |
+| 1373 | W114 | done |
+| 1374 | W115 | done |
+| 1375 | W117 | done |
+| 1376 | W119 | done |
+| 1377 | W120 | done |
+| 1378 | W125 | done |
+| 1379 | W126 | done |
+| 1380 | W135 | done |
+| 1381 | W137 | done |
+| 1382 | W139 | done |
+| 1383 | W140 | done |
+| 1384 | W142 | done |
+| 1385 | W144 | done |
+| 1386 | W146 | done |
+| 1387 | W152 | done |
+| 1388 | W181 | done |
+| 1389 | W182 | done |
+| 1390 | W184 | done |
+| 1391 | W185 | done |
+| 1392 | W186 | done |
+| 1393 | W187 | done |
+| 1394 | W189 | done |
+| 1395 | W194 | done |
+| 1396 | W195 | done |
+| 1397 | W196 | done |
+| 1398 | W197 | done |
+| 1399 | W198 | done |
+| 1400 | W199 | done |
+| 1401 | W200 | done |
+| 1402 | W201 | done |
+| 1403 | W202 | done |
+| 1404 | W214 | done |
+| 1405 | W222 | done |
+| 1406 | W225 | done |
+| 1407 | W227 | done |
+| 1408 | W228 | done |
+| 1409 | W252 | done |
+| 1410 | W255 | done |
+| 1411 | W258 | done |
+| 1412 | W259 | done |
+| 1413 | W264 | done |
+| 1414 | W265 | done |
+| 1415 | W266 | done |
+| 1416 | W298 | done |
+| 1417 | W299 | done |
+| 1418 | W300 | done |
+| 1419 | W302 | done |
+| 1420 | W303 | done |
+| 1421 | W304 | done |
+| 1422 | W306 | done |
+| 1423 | W307 | done |
+| 1424 | W309 | done |
+| 1425 | W310 | done |
+| 1426 | W311 | done |
+| 1427 | W312 | done |
+| 1428 | W319 | done |
+| 1429 | W320 | done |
+| 1430 | W321 | done |
+| 1431 | W323 | done |
+| 1432 | W329 | done |
+| 1433 | W330 | done |
+| 1434 | W331 | done |
+| 1435 | W332 | done |
+| 1436 | W337 | done |
+| 1437 | W358 | done |
+| 1438 | W377 | done |
+| 1439 | W378 | done |
+| 1440 | W379 | done |
+| 1441 | W387 | done |
+| 1442 | W389 | done |
+| 1443 | W391 | done |
+| 1444 | W426 | done |
+| 1445 | W428 | done |
+| 1446 | W436 | done |
+| 1447 | W450 | done |
+| 1448 | W458 | done |
+| 1449 | W467 | done |
+| 1450 | W474 | done |
+| 1451 | W476 | done |
+| 1452 | W477 | done |
+| 1453 | W482 | done |
+| 1454 | W484 | done |
+| 1455 | W489 | done |
+| 1456 | W494 | done |
+| 1457 | W520 | done |
+| 1458 | W539 | done |
+| 1459 | W541 | done |
+| 1460 | W544 | done |
+| 1461 | W545 | done |
+| 1462 | W546 | done |
+| 1463 | W550 | done |
+| 1464 | W572 | done |
+| 1465 | W573 | done |
+| 1466 | W574 | done |
+| 1467 | W576 | done |
+| 1468 | W577 | done |
+| 1469 | W597 | done |
+| 1470 | W600 | done |
+| 1471 | W601 | done |
+| 1472 | W602 | done |
+| 1473 | W603 | done |
+| 1474 | W604 | done |
+| 1475 | W606 | done |
+| 1476 | W607 | done |
+| 1477 | W610 | done |
+| 1478 | W611 | done |
+| 1479 | W614 | done |
+| 1480 | W617 | done |
+| 1481 | W618 | done |
+| 1482 | W619 | done |
+| 1483 | W620 | done |
+| 1484 | W625 | done |
+| 1485 | W626 | done |
+| 1486 | W627 | done |
+| 1487 | W628 | done |
+| 1488 | W629 | done |
+| 1489 | W630 | done |
+| 1490 | W631 | done |
+| 1491 | W632 | done |
+| 1492 | W633 | done |
+| 1493 | W637 | done |
+| 1494 | W638 | done |
+| 1495 | W639 | done |
+| 1496 | W640 | done |
+| 1497 | W641 | done |
+| 1498 | W644 | done |
+| 1499 | W647 | done |
+| 1500 | W653 | done |
+| 1501 | W668 | done |
+| 1502 | W672 | done |
+| 1503 | W676 | done |
+| 1504 | W677 | done |
+| 1505 | W682 | done |
+| 1506 | W683 | done |
+| 1507 | W685 | done |
+| 1508 | W686 | done |
+| 1509 | W689 | done |
+| 1510 | W697 | done |
+| 1511 | W702 | done |
+| 1512 | W705 | done |
+| 1513 | W716 | done |
+| 1514 | W717 | done |
+| 1515 | W718 | done |
+| 1516 | W720 | done |
+| 1517 | W724 | done |
+| 1518 | W725 | done |
+| 1519 | W729 | done |
+| 1520 | W730 | done |
+| 1521 | W733 | done |
+| 1522 | W737 | done |
+| 1523 | W740 | done |
+| 1524 | W741 | done |
+| 1525 | W742 | done |
+| 1526 | W757 | done |
+| 1527 | W758 | done |
+| 1528 | W762 | done |
+| 1529 | W763 | done |
+| 1530 | W765 | done |
+| 1531 | W766 | done |
+| 1532 | W769 | done |
+| 1533 | W770 | done |
+| 1534 | W772 | done |
+| 1535 | W778 | done |
+| 1536 | W794 | done |
+| 1537 | W798 | done |
+| 1538 | W799 | done |
+| 1539 | W819 | done |
+| 1540 | W825 | done |
+| 1541 | W830 | done |
+| 1542 | W835 | done |
+| 1543 | W843 | done |
+| 1544 | W844 | done |
+| 1545 | W845 | done |
+| 1546 | W866 | done |
+| 1547 | W867 | done |
+| 1548 | W873 | done |
+| 1549 | W874 | done |
+| 1550 | W878 | done |
+| 1551 | W880 | done |
+| 1552 | W882 | done |
+| 1553 | W890 | done |
+| 1554 | W896 | done |
+| 1555 | W897 | done |
+| 1556 | W898 | done |
+| 1557 | W903 | done |
+| 1558 | W904 | done |
+| 1559 | W915 | done |
+| 1560 | W920 | done |
+| 1561 | W928 | done |
+| 1562 | W929 | done |
+| 1563 | W939 | done |
+| 1564 | W940 | done |
+| 1565 | W942 | done |
+| 1566 | W943 | done |
+| 1567 | W944 | done |
+| 1568 | W945 | done |
+| 1569 | W950 | done |
+| 1570 | W951 | done |
+| 1571 | W960 | done |
+| 1572 | W961 | done |
+| 1573 | W962 | done |
+| 1574 | W983 | done |
+| 1575 | W1013 | done |
+| 1576 | W1019 | done |
+| 1577 | W1029 | done |
+| 1578 | W1031 | done |
+| 1579 | W1033 | done |
+| 1580 | W1034 | done |
+| 1581 | W1039 | done |
+| 1582 | W1040 | done |
+| 1583 | W1043 | done |
+| 1584 | W1044 | done |
+| 1585 | W1045 | done |
+| 1586 | W1046 | done |
+| 1587 | W1051 | done |
+| 1588 | W1054 | done |
+| 1589 | W1060 | done |
+| 1590 | W1061 | done |
+| 1591 | W1062 | done |
+| 1592 | W1064 | done |
+| 1593 | W1065 | done |
+| 1594 | W1066 | done |
+| 1595 | W1068 | done |
+| 1596 | W1069 | done |
+| 1597 | W1071 | done |
+| 1598 | W1074 | done |
+| 1599 | W1082 | done |
+| 1600 | W1084 | done |
+| 1601 | W1085 | done |
+| 1602 | W1087 | done |
+| 1603 | W1089 | done |
+| 1604 | W1090 | done |
+| 1605 | W1091 | done |
+| 1606 | W1105 | done |
+| 1607 | W1107 | done |
+| 1608 | W1109 | done |
+| 1609 | W1110 | done |
+| 1610 | W1111 | done |
+| 1611 | W1112 | done |
+| 1612 | W1116 | done |
+| 1613 | W1119 | done |
+| 1614 | W1120 | done |
+| 1615 | W1125 | done |
+| 1616 | W1126 | done |
+| 1617 | W1127 | done |
+| 1618 | W1129 | done |
+| 1619 | W1131 | done |
+| 1620 | W1132 | done |
+| 1621 | W1133 | done |
+| 1622 | W1134 | done |
+| 1623 | W1137 | done |
+| 1624 | W1138 | done |
+| 1625 | W1142 | done |
+| 1626 | W1143 | done |
+| 1627 | W1148 | done |
+| 1628 | W1151 | done |
+| 1629 | W1153 | done |
+| 1630 | W1154 | done |
+| 1631 | W1155 | done |
+| 1632 | W1156 | done |
+| 1633 | W1157 | done |
+| 1634 | W1158 | done |
+| 1635 | W1159 | done |
+| 1636 | W1160 | done |
+| 1637 | W1161 | done |
+| 1638 | W1162 | done |
+| 1639 | W1164 | done |
+| 1640 | W1165 | done |
+| 1641 | W1166 | done |
+| 1642 | W1168 | done |
+| 1643 | W1170 | done |
+| 1644 | W1171 | done |
+| 1645 | W1172 | done |
+| 1646 | W1174 | done |
+| 1647 | W1177 | done |
+| 1648 | W1180 | done |
+| 1649 | W1181 | done |
+| 1650 | W1182 | done |
+| 1651 | W1183 | done |
+| 1652 | W1185 | done |
+| 1653 | W1188 | done |
+| 1654 | W1190 | done |
+| 1655 | W1191 | done |
+| 1656 | W1194 | done |
+| 1657 | W1195 | done |
+| 1658 | W1196 | done |
+| 1659 | W1199 | done |
+| 1660 | W1200 | done |
+| 1661 | W1201 | done |
+| 1662 | W1202 | done |
+| 1663 | W1203 | done |
+| 1664 | W1204 | done |
+| 1665 | W1205 | done |
+| 1666 | W1206 | done |
+| 1667 | W1207 | done |
+| 1668 | W1208 | done |
+| 1669 | W1209 | done |
+| 1670 | W1210 | done |
+| 1671 | W1211 | done |
+| 1672 | W1212 | done |
+| 1673 | W1213 | done |
+| 1674 | W1221 | done |
+| 1675 | W1223 | done |
+| 1676 | W1227 | done |
+| 1677 | W1228 | done |
+| 1678 | W1230 | done |
+| 1679 | W1233 | done |
+| 1680 | W1234 | done |
+| 1681 | W1235 | done |
+| 1682 | W1236 | done |
+| 1683 | W1237 | done |
+| 1684 | W1245 | done |
+| 1685 | W1252 | done |
+| 1686 | W1256 | done |
+| 1687 | W1259 | done |
+| 1688 | W1260 | done |
+| 1689 | W1262 | done |
+| 1690 | W1281 | done |
+| 1691 | W1283 | done |
+| 1692 | W1284 | done |
+| 1693 | W1285 | done |
+| 1694 | W1286 | done |
+| 1695 | W1287 | done |
+| 1696 | W1288 | done |
+| 1697 | W1289 | done |
+| 1698 | W1290 | done |
+| 1699 | W1291 | done |
+| 1700 | W1292 | done |
+| 1701 | W1294 | done |
+| 1702 | W1295 | done |
+| 1703 | W1296 | done |
+| 1704 | W1297 | done |
+| 1705 | W1298 | done |
+| 1706 | W1299 | done |
+| 1707 | W1300 | done |
+| 1708 | W1301 | done |
+| 1709 | W1302 | done |
+| 1710 | W1303 | done |
+| 1711 | W1304 | done |
+| 1712 | W1305 | done |
+| 1713 | W1306 | done |
+| 1714 | W1307 | done |
+| 1715 | W1308 | done |
+| 1716 | W1309 | done |
+| 1717 | W1310 | done |
+| 1718 | W1311 | done |
+| 1719 | W1312 | done |
+| 1720 | W1313 | done |
+| 1721 | W1314 | done |
+| 1722 | W1315 | done |
+| 1723 | W1316 | done |
+| 1724 | W1317 | done |
+| 1725 | W1318 | done |
+| 1726 | W1319 | done |
+| 1727 | W1320 | done |
+| 1728 | W1321 | done |
+| 1729 | W1322 | done |
+| 1730 | W1324 | done |
+| 1731 | W1326 | done |
+| 1732 | W1327 | done |
+| 1733 | W1328 | done |
+| 1734 | W1329 | done |
+| 1735 | W1330 | done |
+| 1736 | W1331 | done |
+| 1737 | W1332 | done |
+| 1738 | W1333 | done |
+| 1739 | W1334 | done |
+| 1740 | W1335 | done |
+| 1741 | W1336 | done |
+| 1742 | W1337 | done |
+| 1743 | W1338 | done |
+| 1744 | W1339 | done |
+| 1745 | W1340 | done |
+| 1746 | W1341 | done |
+| 1747 | W1342 | done |
+| 1748 | W1343 | done |
+| 1749 | W1344 | done |
+| 1750 | W1346 | done |
+| 1751 | W1348 | done |
+| 1752 | W1349 | done |
+| 1753 | W1350 | done |
+| 1754 | W1351 | done |
+| 1755 | W1352 | done |
+| 1756 | W1353 | done |
+| 1757 | W1354 | done |
+| 1758 | W1355 | done |
+| 1759 | W1356 | done |
+| 1760 | W1357 | done |
+| 1761 | W1358 | done |
+| 1762 | W1359 | done |
+| 1763 | W1360 | done |
+| 1764 | W1361 | done |
+| 1765 | W1362 | done |
+| 1766 | W1363 | done |
+| 1767 | W1364 | done |
+| 1768 | W1365 | done |
+| 1769 | W1366 | done |
+| 1770 | W1367 | done |
+| 1771 | W1368 | done |
+| 1772 | W1369 | done |
+| 1773 | W1370 | done |
+| 1774 | W1371 | done |
+| 1775 | W1372 | done |
+| 1776 | W1373 | done |
+| 1777 | W1374 | done |
+| 1778 | W1375 | done |
+| 1779 | W1376 | done |
+| 1780 | W1377 | done |
+| 1781 | W1378 | done |
+| 1782 | W1379 | done |
+| 1783 | W1380 | done |
+| 1784 | W1381 | done |
+| 1785 | W1386 | done |
+| 1786 | W1387 | done |
+| 1787 | W1388 | done |
+| 1788 | W1389 | done |
+| 1789 | W1390 | done |
+| 1790 | W1391 | done |
+| 1791 | W1392 | done |
+| 1792 | W1393 | done |
+| 1793 | W1394 | done |
+| 1794 | W1397 | done |
+| 1795 | W1398 | done |
+| 1796 | W1401 | done |
+| 1797 | W1402 | done |
+| 1798 | W1403 | done |
+| 1799 | W1404 | done |
+| 1800 | W1405 | done |
+| 1801 | W1406 | done |
+| 1802 | W1407 | done |
+| 1803 | W1408 | done |
+| 1804 | W1409 | done |
+| 1805 | W1413 | done |
+| 1806 | W1415 | done |
+| 1807 | W1416 | done |
+| 1808 | W1417 | done |
+| 1809 | W1419 | done |
+| 1810 | W1420 | done |
+| 1811 | W1421 | done |
+| 1812 | W1422 | done |
+| 1813 | W1423 | done |
+| 1814 | W1424 | done |
+| 1815 | W1425 | done |
+| 1816 | W1426 | done |
+| 1817 | W1427 | done |
+| 1818 | W1428 | done |
+| 1819 | W1429 | done |
+| 1820 | W1430 | done |
+| 1821 | W1431 | done |
+| 1822 | W1432 | done |
+| 1823 | W1433 | done |
+| 1824 | W1434 | done |
+| 1825 | W1435 | done |
+| 1826 | W1436 | done |
+| 1827 | W1437 | done |
+| 1828 | W1439 | done |
+| 1829 | W1440 | done |
+| 1830 | W1441 | done |
+| 1831 | W1442 | done |
+| 1832 | W1443 | done |
+| 1833 | W1444 | done |
+| 1834 | W1445 | done |
+| 1835 | W1446 | done |
+| 1836 | W1447 | done |
+| 1837 | W1448 | done |
+| 1838 | W1449 | done |
+| 1839 | W1450 | done |
+| 1840 | W1451 | done |
+| 1841 | W1452 | done |
+| 1842 | W1453 | done |
+| 1843 | W1454 | done |
+| 1844 | W1455 | done |
+| 1845 | W1456 | done |
+| 1846 | W1457 | done |
+| 1847 | W1458 | done |
+| 1848 | W1459 | done |
+| 1849 | W1460 | done |
+| 1850 | W1461 | done |
+| 1851 | W1462 | done |
+| 1852 | W1463 | done |
+| 1853 | W1464 | done |
+| 1854 | W1465 | done |
+| 1855 | W1466 | done |
+| 1856 | W1467 | done |
+| 1857 | W1468 | done |
+| 1858 | W1469 | done |
+| 1859 | W1470 | done |
+| 1860 | W1471 | done |
+| 1861 | W1472 | done |
+| 1862 | W1473 | done |
+| 1863 | W1474 | done |
+| 1864 | W1475 | done |
+| 1865 | W1476 | done |
+| 1866 | W1477 | done |
+| 1867 | W1478 | done |
+| 1868 | W1479 | done |
+| 1869 | W1480 | done |
+| 1870 | W1481 | done |
+| 1871 | W1482 | done |
+| 1872 | W1483 | done |
+| 1873 | W1484 | done |
+| 1874 | W1485 | done |
+| 1875 | W1486 | done |
+| 1876 | W1494 | done |
+| 1877 | W1512 | done |
+| 1878 | W1513 | done |
+| 1879 | W1516 | done |
+| 1880 | W1517 | done |
+| 1881 | W1519 | done |
+| 1882 | W1520 | done |
+| 1883 | W1521 | done |
+| 1884 | W1523 | done |
+| 1885 | W1529 | done |
+| 1886 | W1530 | done |
+| 1887 | W1531 | done |
+| 1888 | W1532 | done |
+| 1889 | W1533 | done |
+| 1890 | W1534 | done |
+| 1891 | W1535 | done |
+| 1892 | W1536 | done |
+| 1893 | W1537 | done |
+| 1894 | W1538 | done |
+| 1895 | W1539 | done |
+| 1896 | W1540 | done |
+| 1897 | W1541 | done |
+| 1898 | W1542 | done |
+| 1899 | W1543 | done |
+| 1900 | W1544 | done |
+| 1901 | W1545 | done |
+| 1902 | W1546 | done |
+| 1903 | W1547 | done |
+| 1904 | W1548 | done |
+| 1905 | W1550 | done |
+| 1906 | W1551 | done |
+| 1907 | W1552 | done |
+| 1908 | W1553 | done |
+| 1909 | W1554 | done |
+| 1910 | W1555 | done |
+| 1911 | W1556 | done |
+| 1912 | W1557 | done |
+| 1913 | W1558 | done |
+| 1914 | W1559 | done |
+| 1915 | W1560 | done |
+| 1916 | W1561 | done |
+| 1917 | W1562 | done |
+| 1918 | W1563 | done |
+| 1919 | W1564 | done |
+| 1920 | W1565 | done |
+| 1921 | W1566 | done |
+| 1922 | W1567 | done |
+| 1923 | W1569 | done |
+| 1924 | W1570 | done |
+| 1925 | W1571 | done |
+| 1926 | W1572 | done |
+| 1927 | W1573 | done |
+| 1928 | W1574 | done |
+| 1929 | W1575 | done |
+| 1930 | W1576 | done |
+| 1931 | W1577 | done |
+| 1932 | W1578 | done |
+| 1933 | W1579 | done |
+| 1934 | W1580 | done |
+| 1935 | W1581 | done |
+| 1936 | W1582 | done |
+| 1937 | W1583 | done |
+| 1938 | W1584 | done |
+| 1939 | W1585 | done |
+| 1940 | W1586 | done |
+| 1941 | W1587 | done |
+| 1942 | W1588 | done |
+| 1943 | W1590 | done |
+| 1944 | W1591 | done |
+| 1945 | W1593 | done |
+| 1946 | W1594 | done |
+| 1947 | W1595 | done |
+| 1948 | W1596 | done |
+| 1949 | W1597 | done |
+| 1950 | W1598 | done |
+| 1951 | W1599 | done |
+| 1952 | W1600 | done |
+| 1953 | W1601 | done |
+| 1954 | W1602 | done |
+| 1955 | W1606 | done |
+| 1956 | W1607 | done |
+| 1957 | W1608 | done |
+| 1958 | W1612 | done |
+| 1959 | W1613 | done |
+| 1960 | W1614 | done |
+| 1961 | W1615 | done |
+| 1962 | W1616 | done |
+| 1963 | W1617 | done |
+| 1964 | W1618 | done |
+| 1965 | W1619 | done |
+| 1966 | W1620 | done |
+| 1967 | W1621 | done |
+| 1968 | W1622 | done |
+| 1969 | W1623 | done |
+| 1970 | W1624 | done |
+| 1971 | W1625 | done |
+| 1972 | W1626 | done |
+| 1973 | W1627 | done |
+| 1974 | W1628 | done |
+| 1975 | W1629 | done |
+| 1976 | W1630 | done |
+| 1977 | W1631 | done |
+| 1978 | W1632 | done |
+| 1979 | W1633 | done |
+| 1980 | W1634 | done |
+| 1981 | W1635 | done |
+| 1982 | W1636 | done |
+| 1983 | W1637 | done |
+| 1984 | W1638 | done |
+| 1985 | W1639 | done |
+| 1986 | W1640 | done |
+| 1987 | W1642 | done |
+| 1988 | W1643 | done |
+| 1989 | W1644 | done |
+| 1990 | W1645 | done |
+| 1991 | W1646 | done |
+| 1992 | W1647 | done |
+| 1993 | W1649 | done |
+| 1994 | W1650 | done |
+| 1995 | W1651 | done |
+| 1996 | W1654 | done |
+| 1997 | W1655 | done |
+| 1998 | W1656 | done |
+| 1999 | W1657 | done |
+| 2000 | W1658 | done |
+| 2001 | W1659 | done |
+| 2002 | W1662 | done |
+| 2003 | W1663 | done |
+| 2004 | W1664 | done |
+| 2005 | W1667 | done |
+| 2006 | W1668 | done |
+| 2007 | W1669 | done |
+| 2008 | W1670 | done |
+| 2009 | W1671 | done |
+| 2010 | W1672 | done |
+| 2011 | W1673 | done |
+| 2012 | W1678 | done |
+| 2013 | W2002 | done |
+| 2014 | W2003 | done |
+| 2015 | W2004 | done |
+| 2016 | W2005 | done |
+| 2017 | W2006 | done |
+| 2018 | W2007 | done |
+| 2019 | W2008 | done |
+| 2020 | W2016 | done |
+| 2021 | W2048 | done |
 
 ## waypoints
 
 1. **W1075** (ready) Take an idle-host staging figure for one test target and split it by input (venv, Chromium, opa,
    Codon, corpus)
+   - next: 2026-11-06: when the host is idle (load below 4), run bazel test //:test_score --nocache_test_results and
+     record elapsed and critical path; then list which of venv, Chromium, opa, Codon, corpus the target stages and write
+     the split in docs/per-test-targets.md
 2. **W1096** (ready) Trace the 370 MiB the Model rebuild holds outside the graph: findings, annotation indices, SHACL
    caches, parsed JSON, the document
    - next: After stack521 lands and ships: read the pod's nemik_build_peak_rss_bytes and cgroup peaks for the new image;
@@ -1982,54 +2047,61 @@ counter 1989 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:734
      test with a recorded gh api fixture, then ask for an explicit go before the first real send
 4. **W1098** (ready) Move serve._to_json's effort and last-activity onto the ledger summary, published documents
    byte-identical
+   - next: 2026-11-07: move serve._to_json's effort and last-activity onto the ledger summary and prove the published
+     documents byte-identical with tests/test_ledger_effort.py; src edit, rides the next src stack
 5. **W1099** (ready) Move blocks.annotate's last-activity read onto the ledger summary, output unchanged
+   - next: 2026-11-07: move blocks.annotate's last-activity read onto the ledger summary and prove output unchanged with
+     tests/test_blocks_activity.py; src edit, rides the next src stack
 6. **W1100** (ready) Move metrics' last-activity and effort-class reads onto the ledger summary, output unchanged
+   - next: 2026-11-07: move metrics' last-activity and effort-class reads onto the ledger summary and prove output
+     unchanged with tests/test_metrics_activity.py; src edit, rides the next src stack
 7. **W1101** (ready) Move history's weekly roll-up onto the ledger summary, output unchanged
+   - next: 2026-11-07: move history's weekly roll-up onto the ledger summary and prove output unchanged with
+     tests/test_history_activity.py; src edit, rides the next src stack
 8. **W1102** (ready) Move idle and trs off the Activity triples onto the ledger summary, output unchanged
-9. **W1325** (ready) Configuration-mechanism census, fleet half: align each repo's per-surface rows (declaration site,
-   change path, load path, review path) side by side and show where the mechanisms differ
-   - next: When mtools:W2201 lands, read its per-repo output schema (four columns per surface), then add a nemik
-     side-by-side mode that runs or collects each repo's output and aligns rows by surface
-10. **W1063** (ready) Shard every browser test finer until each shard sits under half its timeout under load, and gate
-   on it
+   - next: 2026-11-07: read how idle.py and trs.py read Activity triples, switch them to the ledger summary, and prove
+     output unchanged with tests/test_idle_summary.py against the parent commit; src edit, so it rides a ruff-first
+     stack
+9. **W1063** (ready) Shard every browser test finer until each shard sits under half its timeout under load, and gate on
+   it
    - next: Measure per-shard times under load for test_layout, test_modes and test_pdf from the gate's per-target
      series, add shards until each is under 50% of its size's timeout, and check whether nemik's gate runs mtools'
      preflight that refuses an over-50% grid (mtools W1572-W1574)
-11. **W1083** (ready) Flag working-mark dishonesty: ready cards that are being worked, and working cards that are idle
+10. **W1083** (ready) Flag working-mark dishonesty: ready cards that are being worked, and working cards that are idle
    - next: Case (3) is built on mtools:W2033's candidate list: read it, show each candidate beside the commit subjects
      and the card's done-when, and count the candidates apart from green, never as landed. Cases (1) and (2) are nemik's
      own
-12. **W1093** (ready) Warn on a card blocked on a card that is done in another repo
+11. **W1093** (ready) Warn on a card blocked on a card that is done in another repo
    - next: A nemik-check shape: a blocked card whose blocked_on names `<repo>`:W`<n>` that is done in that repo's queue
      is a Warning ('blocked on a done card: lift the block'); the writer's --bump-blocked prunes it only when it runs.
      Evidence: the host's W54 and W56 sat blocked on luthen:W1653 for 8 hours after it closed
-13. **W1094** (ready) Warn on a queue whose ledger has no tick line for longer than its loop cadence plus slack
+12. **W1094** (ready) Warn on a queue whose ledger has no tick line for longer than its loop cadence plus slack
    - next: A nemik-check shape: a queue whose newest ledger tick line is older than its loop cadence plus slack is a
      Warning ('no tick line since T'); the cadence is the watchdog window (15 to 20 min) and the loop's 30 min re-arm;
      the host's ledger had none from 2026-10-25T18:44Z because its ticks touched only the liveness stamp
-14. **W1106** (ready) Warn on a now-tier repo with ready cards and no landing past a learned bound, since sessionless
+13. **W1106** (ready) Warn on a now-tier repo with ready cards and no landing past a learned bound, since sessionless
    repos are invisible to the idle check
    - next: A learned bound (the repo's own median days between landings, never a typed threshold) and a shape: a
      now-tier repo with ready cards and no landing past it is a Warning, and a gauge nemik_repo_dark{repo}; el-openglo
      has 68 ready and no commit since 10-19, gcalculus 3 and none since 10-16; the landing dates come from
      nemik-hostroot --landings
-15. **W1128** (ready) nemik-history takes one --where predicate language (status, age, flag, repo, blocked_on, title;
+14. **W1128** (ready) nemik-history takes one --where predicate language (status, age, flag, repo, blocked_on, title;
    and, or, not) in every mode
    - next: Wire --where into --events and the other history modes (they read events, so they need their own field set:
      station, field, from, to, repo); a witness for it is the test in tests/test_history_oldest_where.py
-16. **W1140** (ready) Browser tests fail in the image replay on varying tests while the gate passes them: a flake
+15. **W1140** (ready) Browser tests fail in the image replay on varying tests while the gate passes them: a flake
    population, worked by proof
    - next: Read the alone run of //:test_layout; then prove the interleaving from panels.js sourceGraph and the page's
      poll (a load stalled 60 s, a second round fetching pieces the first had not) and fix the test or the page by an
      explicit order, with a test that forces it; until then block feature cards on W1140 per the rule
-17. **W1141** (ready) Per-module Bazel libraries from mtools' importdag graph, so a src change reruns only the tests
+16. **W1141** (ready) Per-module Bazel libraries from mtools' importdag graph, so a src change reruns only the tests
    that import it and not test_layout
    - next: Read mtools' importdag (graph.py, how hooks/BUILD.bazel instantiates it), generate nemik's graph.json and a
      dag.bzl, give each src/nemik module its own py_library from the graph and each test only the libraries it imports
      plus its data, keep a graph_fresh test equal to the sources; atomize into: the generated graph, the per-module
      libraries, the tests moved one family at a time (test_layout last), measuring which tests rerun after a one-module
      change
-18. **W1179** (ready) Codon in larger steps: thin entry points, one dispatcher and one I/O adapter
+17. **W1179** (ready) Codon in larger steps: thin entry points, one dispatcher and one I/O adapter
    - next: CORRECTION 2026-10-27 to the previous note on datetime.UTC (tested, not inferred): the pinned Codon's
      datetime module has NEITHER UTC NOR timezone ('cannot import name UTC from datetime'; 'cannot import name timezone
      from datetime', probed with codon run on two three-line files). So there is no ruff-versus-Codon choice to make:
@@ -2041,23 +2113,23 @@ counter 1989 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:734
      W1190 (frozenset default became a list constant; Codon cannot read tuple[str, ...]); the tally by first error (18
      argparse, 10 ',', 9 rdflib, 8 tomllib, 7 class decorator, 4 importlib.resources, 4 collections.abc, singletons) and
      calendars and rank aborting the compiler (rc -6) unexplained
-19. **W969** (ready) The graph payload carries a collapse umbrella node over the blocked cards it rolls up, with its
+18. **W969** (ready) The graph payload carries a collapse umbrella node over the blocked cards it rolls up, with its
    n-path address, in the field manifest and the API schema
    - next: Build the separate list: the umbrellas from collapse.collapse over the blocked rows go into the payload as
      their own top-level list, carried through the piece split and assemble, the page's combine step, the field manifest
      and the API schema, with the withheld filter dropping any umbrella that has a withheld member; the payload test
      pins the payload, the pieces round trip and the manifest check; the page reads the list in W970. First read the
      pieces module and the page's combine step to size the carry
-20. **W902** (ready) Decide whether the web view itself should draw vector: measure an SVG renderer against the canvas
+19. **W902** (ready) Decide whether the web view itself should draw vector: measure an SVG renderer against the canvas
    at the fleet's size
    - next: Measure an SVG drawing of the web view against the canvas at the fleet's size (graphSvg of the fleet is 2.4
      MB, 5300 paths, 1800 texts): load, pan and zoom cost in Chromium and Firefox; write docs/vector-web-view.md with
      the numbers and a recommendation
-21. **W1028** (ready) Port the page's combine step to the core once the documents' schema is fixed: take the next pure
+20. **W1028** (ready) Port the page's combine step to the core once the documents' schema is fixed: take the next pure
    function from W815's inventory and call it through core.wasm
    - next: Read the documents' schema the combine step takes, write it as plain-data functions under src/nemik/core that
      compile under the pinned Codon, and have the page call them through core.wasm
-22. **W1257** (ready) Class: keyword-only call enforcement that Codon parses, a typed parameter object in place of '*,'
+21. **W1257** (ready) Class: keyword-only call enforcement that Codon parses, a typed parameter object in place of '*,'
    across the ten modules
    - next: Probe, with the bazel-cache codon (NEMIK_CODON), whether a plain class with a typed __init__ taking named
      fields compiles, and whether @dataclass without arguments does (frozen=True and slots=True fail with 'class
@@ -2065,21 +2137,14 @@ counter 1989 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:734
      mikemol.pathsforward or nemik.witnesses/check, so its chain is the imports, not the marker) and write the first
      leaf card for it. Do not drop either ruling: Codon-compatible Python (memory) and the typed-boundary keyword-only
      enforcement W569 wants.
-23. **W913** (ready) A nemik witness that is already true when its card is minted is refused, and a witness may carry a
-   freshness bound
-   - next: Design first: at --add a witness is evaluated once and a true verdict is a defect (a check in nemik-check for
-     a ready or blocked witnessed card whose witness holds on today's facts); then an optional fresh_since bound. Read
-     witnesses.open_witnesses and the W59 check before editing
-24. **W1215** (ready) Adopt the reviewed-loop in nemik: one persistent warm reviewer subagent over this session's
+22. **W1215** (ready) Adopt the reviewed-loop in nemik: one persistent warm reviewer subagent over this session's
    control law, G0 before each tick-open, G0 and G1 sent after each tick-close, retro JSON added with --add-retro, a
    cold reviewer at each fixpoint
    - next: Run the one fresh cold reviewer when the warm reviewer declares a fixpoint (a pass that returns nothing new),
      with the brief it asked for (rules 11, 12 and 13 first, and the instruments it named from memory: file mtime and
      git log %cI), then send the result to the warm reviewer. Switch the close to --tick-close --reviewing AGENT-ID when
      the pinned writer carries mtools:W2038
-25. **W1761** (ready) Answer luthen-observability:W2049: Ask nemik: nemik_wake_required is pushed about every 16 minutes
-   and luthen-obser
-26. **W1258** (ready) Report a past structured due on any open card (not only operator asks) beside the ready-overdue
+23. **W1258** (ready) Report a past structured due on any open card (not only operator asks) beside the ready-overdue
    count, without ranking
    - next: Read first: where NEMIK.due is read today (adapter.py:442 stores it, blocks.py:596 carries it on operator-ask
      rows, wake.py:190 on wake rows, calwrite.py:192 and vtodo.py:157 project it to the calendar; nemik-ics exports only
@@ -2087,377 +2152,374 @@ counter 1989 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:734
      a non-ask card is a REPORT (a count and the oldest, on the pace board beside the age-based ready-overdue cleanup
      count), never a ranking input (operator host 695f3e0a line 94798, W1005 dropped); the report would answer the
      operator's 2026-10-16 ask for monitoring of past-SLA waits (line 70556).
-27. **W1271** (ready) Decide the round ceiling's headroom as a windowed median of cores-minus-busy readings, not one
-   reading, and write the choice with its reason on W1136
-28. **W1272** (ready) Wire roundof.ceiling_of into width() with a per-entry cost from the gate_cost series, and test
+24. **W1272** (ready) Wire roundof.ceiling_of into width() with a per-entry cost from the gate_cost series, and test
    that the declared CEILING holds while either input is unmeasured
-29. **W976** (ready) Port nemik.critical (slack and the longest chain) to plain Card edges, held to the rdflib version
+   - next: 2026-11-08: wire roundof.ceiling_of into width() in src/nemik/roundof.py with a per-entry cost from the
+     gate_cost series (luthen-series.json carries nemik's median_s 5653.4 divided by its target count is NOT a per-entry
+     cost: decide the per-entry cost from the cards' influence cones first), and test that the declared CEILING holds
+     while either input is unmeasured; src edit, held behind github:W98 and mtools:W2301
+25. **W976** (ready) Port nemik.critical (slack and the longest chain) to plain Card edges, held to the rdflib version
    in a test
    - next: Port the slack and longest-chain computation of nemik.critical to plain card edges in a module with no
      import, held to the rdflib version on a fixture; critical_cards already takes plain Cards, so start by listing what
      it still reads from rdflib
-30. **W1169** (ready) nemik-inbound reads a repo's letters from its issues through the gh subprocess (route A of
+26. **W1169** (ready) nemik-inbound reads a repo's letters from its issues through the gh subprocess (route A of
    docs/courier-read-path.md), off by default, with a recorded gh api JSON as the fixture and a sent-census mode
    linux-sources can compare by value
    - next: Built: the pure reader, nemik-inbound --issues/--census (stack568), --by-peer. Remaining: the gh subprocess
      transport (off by default). The sent-census comparison waits on W1048 sends
-31. **W1016** (ready) A nemik tool traces one test run with the footprint audit and writes the declared reads for
+27. **W1016** (ready) A nemik tool traces one test run with the footprint audit and writes the declared reads for
    nemik's modules
    - next: Write readstrace: trace one test, drop .venv, __pycache__ and directories, map opens to repo-relative .py and
      data files, and list them per test as the candidate reads; run it over one test target first, then a sample
-32. **W1022** (ready) The page fetches the host-root board and maps its rows to nodes of a read-only host lane (state,
+28. **W1022** (ready) The page fetches the host-root board and maps its rows to nodes of a read-only host lane (state,
    waitsFor, id)
    - next: Fetch the host-root board in the served page only, and draw each row as a node of a read-only host lane using
      adapter.resource_uri for its id, with state mapped to the node states and waitsFor to edges and no rank weight
-33. **W1515** (ready) nemik-witnesses --apply prints one flip line when a witnessed card closes, in ready_wake's
-   one-line format, for the one Monitor
-   - next: Read the apply path in src/nemik/witnesses.py (where a witnessed card is marked done) and match ready_wake's
-     line format ('`<repo>`:W`<n>` `<old` status> -> `<new` status>'); add the flip line on apply with a test; no new
-     command, so none of the five registries; the queue-event source itself is mtools:W2247 (luthen-observability W1931)
-34. **W982** (ready) Retro records enter the graph from a durable file, so the nine retro shapes judge real retros and
+29. **W982** (ready) Retro records enter the graph from a durable file, so the nine retro shapes judge real retros and
    not only fixtures
    - next: Decide the form of a durable retro record (a separate list, not a card kind) with mtools, since the queue
      schema is theirs; then read it into the graph and judge a fixture retro file with the nine shapes
-35. **W1216** (ready) Commit the src/nemik import graph as data (module to the modules it imports), regenerated and
+30. **W1216** (ready) Commit the src/nemik import graph as data (module to the modules it imports), regenerated and
    checked by a test, so a census target can name its import closure
    - next: Write tools/import_graph.py that reads each src/nemik module's imports of other nemik modules with the ast
      module and writes src/nemik/data/import-graph.json; tests/test_import_graph.py fails when the committed file
      differs from a fresh read
-36. **W1042** (ready) Size a round by a repo's landings from any commit path, not by multi-entry stacks
+31. **W1042** (ready) Size a round by a repo's landings from any commit path, not by multi-entry stacks
    - next: When github:W48 says which record the converged commit path writes, size a round by landings per gate time
      from it, and replace roundof.FLOOR with host admission
-37. **W1026** (ready) The pace board publishes nemik_ready_overdue{repo}: the repo's ready cards past the learned age
+32. **W1026** (ready) The pace board publishes nemik_ready_overdue{repo}: the repo's ready cards past the learned age
    bound, a cleanup count beside the round gauges
    - next: Count each repo's ready cards past the learned age bound with the same arithmetic nemik-check --ready-neither
      uses, publish it as the gauge nemik_ready_overdue labelled by repo beside the round gauges, and treat it as a
      cleanup count, not demand
-38. **W1020** (ready) The builder container skips the rebuild when the inputs' hash is unchanged, with a before and
+33. **W1020** (ready) The builder container skips the rebuild when the inputs' hash is unchanged, with a before and
    after CPU reading
    - next: Make the builder container's loop skip nemik-serve --publish when the content hash of the export tree is
      unchanged since the last build, then take a CPU reading over a measured interval against the 0.862 core baseline on
      W764
-39. **W966** (ready) Forecast trial 3: only cards that can start take a place in the line, and a blocked card is capped
+34. **W966** (ready) Forecast trial 3: only cards that can start take a place in the line, and a blocked card is capped
    by how blocked stints end, scored on discrimination
-   - next: After W968: copy the rows stamped 2026-10-24T15:12 to a scratch file (grep '^2026-10-24T15:12'), score them
-     alone with nemik-history --all --score, and compare discrimination and its standard error with the 2026-10-23
-     issue's 0.66 and 0.09; record both in docs/forecast-features.md; keep the feature only if discrimination rises
-     beyond noise
-40. **W910** (ready) Survey PROV-O, PROV-DM, AIF, SEPIO, ECO, nanopublications, Carneades and ClaimReview with sources,
+   - next: 2026-11-07: W968 is done, so the wait is over. Copy the rows stamped 2026-10-24T15:12 to a scratch file,
+     score them alone with nemik-history --all --score, compare discrimination and its standard error with the
+     2026-10-23 issue's 0.66 and 0.09, record both in docs/forecast-features.md, and keep the feature only if
+     discrimination rises beyond noise
+35. **W910** (ready) Survey PROV-O, PROV-DM, AIF, SEPIO, ECO, nanopublications, Carneades and ClaimReview with sources,
    naming for each gap what we could adopt
    - next: Read each standard's primary source and cite it; one paragraph each; for every gap name the tool or
      vocabulary we could adopt (a pinned library, an ontology to import, a SHACL shape set). Needs WebFetch
-41. **W911** (ready) Survey SRE, agile and observability practice for claims and evidence (OTel semantic conventions,
+36. **W911** (ready) Survey SRE, agile and observability practice for claims and evidence (OTel semantic conventions,
    OpenSLO, Sloth, postmortem templates, definition of done) with sources and what we could adopt
    - next: The operator said (line 91591) not to forget our grounding in SRE, agile and observability. github-8f's
      reading, derived: SLOs as claims, SLIs as grounds, error budgets as qualifiers, postmortems and PRR checklists as
      backing; definition of done as the done-claim's warrant; OTel semconv and exemplars as the grounds channel. Survey
      OTel semconv, OpenSLO, Sloth and postmortem templates with sources and fold the matches into W910's gap table.
      Needs WebFetch
-42. **W1007** (ready) The open-commitment count per repo, from mtools' commitment ledger, is a ratchet on the pace board
+37. **W1007** (ready) The open-commitment count per repo, from mtools' commitment ledger, is a ratchet on the pace board
    and gauges
-   - next: When mtools publishes its commitment ledger, count each repo's open commitments into a series, judge it like
-     a file ratchet, and publish it on the pace board and gauges; the gate refusal reads it
-43. **W1008** (ready) A shape warns on an open commitment that names a card of this repo whose evidence is no newer than
+   - next: 2026-11-07: the letters inbox/2026-10-26-nemik-edge-mtools-W1933-enables-W1007.md and
+     ...-W2048-enables-W1007.md say mtools:W1933 and W2048 are done; check whether mtools publishes the commitment
+     ledger (nemik-inbound or the pace board), and if so count open commitments per repo into a series; if not, re-block
+     on the mtools card by symbol
+38. **W1008** (ready) A shape warns on an open commitment that names a card of this repo whose evidence is no newer than
    the statement
-   - next: When mtools publishes its commitment ledger, read each open commitment that names a card of this repo into
-     the graph, and warn when the card's evidence is no newer than the statement
-44. **W1009** (ready) A shape warns on a G0 intent older than the learned bound that no landing has delta-checked
+   - next: 2026-11-07: the letters inbox/2026-10-26-nemik-edge-mtools-W1933-enables-W1008.md and
+     ...-W2048-enables-W1008.md say mtools:W1933 and W2048 are done; check whether mtools publishes the commitment
+     ledger, and if so read each open commitment naming a nemik card into the graph; if not, re-block on the mtools card
+     by symbol
+39. **W1009** (ready) A shape warns on a G0 intent older than the learned bound that no landing has delta-checked
    - next: When mtools emits each turn's G0 intents with their later delta, warn on an intent older than the learned
      bound that has no landing delta
-45. **W1764** (ready) Codon instance adapter: nemik.adapter stops using hashlib
-46. **W1969** (ready) Codon instance withheld: nemik.withheld stops using TYPE_CHECKING blocks
-47. **W1847** (ready) Codon instance index: nemik.index stops using weakref
-48. **W1923** (ready) Codon instance shaclinc: nemik.shaclinc stops using pyshacl
-49. **W1002** (ready) The count of ready cards past the learned age bound is a ratchet on the pace board, so a repo
+40. **W1764** (ready) Codon instance adapter: nemik.adapter stops using hashlib
+41. **W1969** (ready) Codon instance withheld: nemik.withheld stops using TYPE_CHECKING blocks
+42. **W1847** (ready) Codon instance index: nemik.index stops using weakref
+43. **W1923** (ready) Codon instance shaclinc: nemik.shaclinc stops using pyshacl
+44. **W1002** (ready) The count of ready cards past the learned age bound is a ratchet on the pace board, so a repo
    whose stale-ready count is not falling lands only commits that close, block, drop or advance stale cards
    - next: Count each repo's ready cards past the learned age bound and give the count to the pace judgement as a
      ratchet series named by the stale-ready measure, published on the pace board and gauges beside the file ratchets;
      the gate refusal reads it like any other
-50. **W1858** (ready) Codon instance mspdi: nemik.mspdi stops using xml.etree
-51. **W846** (ready) test_modes failed once with 'Uncaught ReferenceError: popLater is not defined' at page load, then
+45. **W1858** (ready) Codon instance mspdi: nemik.mspdi stops using xml.etree
+46. **W846** (ready) test_modes failed once with 'Uncaught ReferenceError: popLater is not defined' at page load, then
    passed on rerun of the same tree: find why a head script's definition can be missing when index.html's wiring runs
    - next: Prove the interleaving from index.html script order and the harness wait; the diagnostic shows no failed
      request, no overflow, server alive
-52. **W1763** (ready) Codon instance adapter: nemik.adapter stops using collections.abc imports
-53. **W1840** (ready) Codon instance importer: nemik.importer stops using shlex
-54. **W1765** (ready) Codon instance adapter: nemik.adapter stops using importlib.resources and importlib.metadata
-55. **W1766** (ready) Codon instance adapter: nemik.adapter stops using the mikemol libraries
-56. **W1768** (ready) Codon instance adapter: nemik.adapter stops using TYPE_CHECKING blocks
-57. **W1767** (ready) Codon instance adapter: nemik.adapter stops using rdflib
-58. **W1032** (ready) The host job fetches the mikemol.ratchet.value range answer from the metric store into a file and
+47. **W1763** (ready) Codon instance adapter: nemik.adapter stops using collections.abc imports
+48. **W1840** (ready) Codon instance importer: nemik.importer stops using shlex
+49. **W1765** (ready) Codon instance adapter: nemik.adapter stops using importlib.resources and importlib.metadata
+50. **W1766** (ready) Codon instance adapter: nemik.adapter stops using the mikemol libraries
+51. **W1768** (ready) Codon instance adapter: nemik.adapter stops using TYPE_CHECKING blocks
+52. **W1767** (ready) Codon instance adapter: nemik.adapter stops using rdflib
+53. **W1032** (ready) The host job fetches the mikemol.ratchet.value range answer from the metric store into a file and
    runs nemik-hostroot --answer on a timer
    - next: Read the store address with luthen's endpoints_query, fetch the 30-day range answer for mikemol.ratchet.value
      into the cache directory, then run nemik-hostroot --answer on it; a timer unit on the host runs both
-59. **W1977** (ready) Codon instance work: nemik.work stops using the mikemol libraries
-60. **W1976** (ready) Codon instance work: nemik.work stops using argparse
-61. **W1812** (ready) Codon instance endpoint: nemik.endpoint stops using http.client
-62. **W1877** (ready) Codon instance projection: nemik.projection stops using the dataclass decorator and import
-63. **W1952** (ready) Codon instance waitlog: nemik.waitlog stops using the protobuf message import
-64. **W1487** (ready) serve.py: type Model.doc and the two remaining explicit-any readers as a GraphDoc, so mypy falls
+54. **W1977** (ready) Codon instance work: nemik.work stops using the mikemol libraries
+55. **W1976** (ready) Codon instance work: nemik.work stops using argparse
+56. **W1812** (ready) Codon instance endpoint: nemik.endpoint stops using http.client
+57. **W1877** (ready) Codon instance projection: nemik.projection stops using the dataclass decorator and import
+58. **W1952** (ready) Codon instance waitlog: nemik.waitlog stops using the protobuf message import
+59. **W1487** (ready) serve.py: type Model.doc and the two remaining explicit-any readers as a GraphDoc, so mypy falls
    in serve.py
    - next: Type Model.doc and the explicit-any readers as a GraphDoc; K probe with mypy-house.ini on a scratch copy
      first; byte differential of the static view against the parent commit.
-65. **W1488** (ready) tests/test_layout.py: convert the first group of browser tests to the typed webpage.opened_page
+60. **W1488** (ready) tests/test_layout.py: convert the first group of browser tests to the typed webpage.opened_page
    path
    - next: Convert the first group of browser tests to webpage.opened_page; K probe first; the gate runs the browser
      shards.
-66. **W1489** (ready) rank.py: type the remaining Any roots (goals rows, fruit row, the dict-typed helpers) as typed
+61. **W1489** (ready) rank.py: type the remaining Any roots (goals rows, fruit row, the dict-typed helpers) as typed
    rows
    - next: Type goals rows, the fruit row and the dict helpers; K probe first; nemik-rank differential.
-67. **W1490** (ready) serve.py: type the remaining _to_json readers (inbound, operator, findings, health) as typed rows
+62. **W1490** (ready) serve.py: type the remaining _to_json readers (inbound, operator, findings, health) as typed rows
    - next: Typed rows for the view document: define NodeRow and ViewDoc TypedDicts in serve.py beside the existing
      EdgeRow (line 861), type to_json/_to_json to answer ViewDoc and Model.doc to ViewDoc, then fix the readers (lines
      478/479/503, 1216, 1236, 1377, 1486, 1770, 1777) against them; scratch-copy beside serve.py first and stage only if
      serve.py findings fall with no new mypy code
-68. **W1879** (ready) Codon instance projection: nemik.projection stops using TYPE_CHECKING blocks
-69. **W1878** (ready) Codon instance projection: nemik.projection stops using rdflib
-70. **W1848** (ready) Codon instance marks: nemik.marks stops using hashlib
-71. **W1926** (ready) Codon instance stackable: nemik.stackable stops using rdflib
-72. **W1769** (ready) Codon instance alarm: nemik.alarm stops using datetime.UTC
-73. **W994** (ready) The adapter reads the pace file into the graph as behindOn facts on each workstream, so the paydown
+63. **W1879** (ready) Codon instance projection: nemik.projection stops using TYPE_CHECKING blocks
+64. **W1878** (ready) Codon instance projection: nemik.projection stops using rdflib
+65. **W1848** (ready) Codon instance marks: nemik.marks stops using hashlib
+66. **W1926** (ready) Codon instance stackable: nemik.stackable stops using rdflib
+67. **W1769** (ready) Codon instance alarm: nemik.alarm stops using datetime.UTC
+68. **W994** (ready) The adapter reads the pace file into the graph as behindOn facts on each workstream, so the paydown
    shape judges real repos
-   - next: Once W991 fixes where the pace file lives, read it and set behindOn for each repo's behind ratchets while the
-     graph is built
-74. **W1770** (ready) Codon instance alarm: nemik.alarm stops using the mikemol libraries
-75. **W1815** (ready) Codon instance exportcli: nemik.exportcli stops using argparse
-76. **W1919** (ready) Codon instance shaclcache: nemik.shaclcache stops using contextlib
-77. **W1773** (ready) Codon instance ask_cli: nemik.ask_cli stops using argparse
-78. **W1893** (ready) Codon instance runlogs: nemik.runlogs stops using rdflib
-79. **W1843** (ready) Codon instance index: nemik.index stops using contextlib
-80. **W1897** (ready) Codon instance salience: nemik.salience stops using contextlib
-81. **W1799** (ready) Codon instance catalog: nemik.catalog stops using rdflib
-82. **W1948** (ready) Codon instance waitemit: nemik.waitemit stops using the protobuf message import
-83. **W1813** (ready) Codon instance endpoint: nemik.endpoint stops using the mikemol libraries
-84. **W1814** (ready) Codon instance endpoint: nemik.endpoint stops using TYPE_CHECKING blocks
-85. **W1968** (ready) Codon instance wcagjudge: nemik.wcagjudge stops using importlib.resources and importlib.metadata
-86. **W1937** (ready) Codon instance staticserve: nemik.staticserve stops using http.client
-87. **W1904** (ready) Codon instance score: nemik.score stops using the dataclass decorator and import
-88. **W1859** (ready) Codon instance outbox: nemik.outbox stops using rdflib
-89. **W1771** (ready) Codon instance apischema: nemik.apischema stops using importlib.resources and importlib.metadata
-90. **W1894** (ready) Codon instance runrows: nemik.runrows stops using importlib.resources and importlib.metadata
-91. **W1973** (ready) Codon instance witnesses: nemik.witnesses stops using http.client
-92. **W1818** (ready) Codon instance flow: nemik.flow stops using fractions
-93. **W1964** (ready) Codon instance warrants: nemik.warrants stops using collections.abc imports
-94. **W1967** (ready) Codon instance warrants: nemik.warrants stops using tomllib
-95. **W1772** (ready) Codon instance apischema: nemik.apischema stops using TYPE_CHECKING blocks
-96. **W1940** (ready) Codon instance trs: nemik.trs stops using TYPE_CHECKING blocks
-97. **W1907** (ready) Codon instance score: nemik.score stops using tomllib
-98. **W1895** (ready) Codon instance runrows: nemik.runrows stops using rdflib
-99. **W1939** (ready) Codon instance trs: nemik.trs stops using rdflib
-100. **W1871** (ready) Codon instance pdf: nemik.pdf stops using shutil
-101. **W1938** (ready) Codon instance staticserve: nemik.staticserve stops using shutil
-102. **W1965** (ready) Codon instance warrants: nemik.warrants stops using importlib.resources and importlib.metadata
-103. **W1905** (ready) Codon instance score: nemik.score stops using importlib.resources and importlib.metadata
-104. **W1783** (ready) Codon instance cachestore: nemik.cachestore stops using hashlib
-105. **W1906** (ready) Codon instance score: nemik.score stops using the mikemol libraries
-106. **W1966** (ready) Codon instance warrants: nemik.warrants stops using rdflib
-107. **W1849** (ready) Codon instance marks: nemik.marks stops using the mikemol libraries
-108. **W1850** (ready) Codon instance marks: nemik.marks stops using TYPE_CHECKING blocks
-109. **W1774** (ready) Codon instance blocks: nemik.blocks stops using fractions
-110. **W1899** (ready) Codon instance salience: nemik.salience stops using fractions
-111. **W1830** (ready) Codon instance hostapply: nemik.hostapply stops using the dataclass decorator and import
-112. **W1817** (ready) Codon instance flow: nemik.flow stops using the dataclass decorator and import
-113. **W1782** (ready) Codon instance cachestore: nemik.cachestore stops using fractions
-114. **W750** (ready) Improve the climate: date each practice change as an intervention and measure the shift in a
+   - next: 2026-11-07: W991 is done, so the wait is over. Read the pace file where W991 put it and set behindOn for each
+     repo's behind ratchets while the graph is built
+69. **W1770** (ready) Codon instance alarm: nemik.alarm stops using the mikemol libraries
+70. **W1815** (ready) Codon instance exportcli: nemik.exportcli stops using argparse
+71. **W1919** (ready) Codon instance shaclcache: nemik.shaclcache stops using contextlib
+72. **W1773** (ready) Codon instance ask_cli: nemik.ask_cli stops using argparse
+73. **W1893** (ready) Codon instance runlogs: nemik.runlogs stops using rdflib
+74. **W1843** (ready) Codon instance index: nemik.index stops using contextlib
+75. **W1897** (ready) Codon instance salience: nemik.salience stops using contextlib
+76. **W1799** (ready) Codon instance catalog: nemik.catalog stops using rdflib
+77. **W1948** (ready) Codon instance waitemit: nemik.waitemit stops using the protobuf message import
+78. **W1813** (ready) Codon instance endpoint: nemik.endpoint stops using the mikemol libraries
+79. **W1814** (ready) Codon instance endpoint: nemik.endpoint stops using TYPE_CHECKING blocks
+80. **W1968** (ready) Codon instance wcagjudge: nemik.wcagjudge stops using importlib.resources and importlib.metadata
+81. **W1937** (ready) Codon instance staticserve: nemik.staticserve stops using http.client
+82. **W1904** (ready) Codon instance score: nemik.score stops using the dataclass decorator and import
+83. **W1859** (ready) Codon instance outbox: nemik.outbox stops using rdflib
+84. **W1771** (ready) Codon instance apischema: nemik.apischema stops using importlib.resources and importlib.metadata
+85. **W1894** (ready) Codon instance runrows: nemik.runrows stops using importlib.resources and importlib.metadata
+86. **W1973** (ready) Codon instance witnesses: nemik.witnesses stops using http.client
+87. **W1818** (ready) Codon instance flow: nemik.flow stops using fractions
+88. **W1964** (ready) Codon instance warrants: nemik.warrants stops using collections.abc imports
+89. **W1967** (ready) Codon instance warrants: nemik.warrants stops using tomllib
+90. **W1772** (ready) Codon instance apischema: nemik.apischema stops using TYPE_CHECKING blocks
+91. **W1940** (ready) Codon instance trs: nemik.trs stops using TYPE_CHECKING blocks
+92. **W1907** (ready) Codon instance score: nemik.score stops using tomllib
+93. **W1895** (ready) Codon instance runrows: nemik.runrows stops using rdflib
+94. **W1939** (ready) Codon instance trs: nemik.trs stops using rdflib
+95. **W1871** (ready) Codon instance pdf: nemik.pdf stops using shutil
+96. **W1938** (ready) Codon instance staticserve: nemik.staticserve stops using shutil
+97. **W1965** (ready) Codon instance warrants: nemik.warrants stops using importlib.resources and importlib.metadata
+98. **W1905** (ready) Codon instance score: nemik.score stops using importlib.resources and importlib.metadata
+99. **W1783** (ready) Codon instance cachestore: nemik.cachestore stops using hashlib
+100. **W1906** (ready) Codon instance score: nemik.score stops using the mikemol libraries
+101. **W1966** (ready) Codon instance warrants: nemik.warrants stops using rdflib
+102. **W1849** (ready) Codon instance marks: nemik.marks stops using the mikemol libraries
+103. **W1850** (ready) Codon instance marks: nemik.marks stops using TYPE_CHECKING blocks
+104. **W1774** (ready) Codon instance blocks: nemik.blocks stops using fractions
+105. **W1899** (ready) Codon instance salience: nemik.salience stops using fractions
+106. **W1830** (ready) Codon instance hostapply: nemik.hostapply stops using the dataclass decorator and import
+107. **W1817** (ready) Codon instance flow: nemik.flow stops using the dataclass decorator and import
+108. **W1782** (ready) Codon instance cachestore: nemik.cachestore stops using fractions
+109. **W750** (ready) Improve the climate: date each practice change as an intervention and measure the shift in a
    before and after window
    - next: From now send one intervention per practice change (atomize, stack, shard, repin) when it happens, and write
      the before and after windows in docs/climate-interventions.md as each matures, starting with the
      2026-10-21T02:14:31Z repin as the first window. The metric side (mikemol.waypoint.event) is not yet read back
-115. **W1816** (ready) Codon instance flow: nemik.flow stops using collections.abc imports
-116. **W1890** (ready) Codon instance realize: nemik.realize stops using datetime.UTC
-117. **W1873** (ready) Codon instance pendingdeliver: nemik.pendingdeliver stops using datetime.UTC
-118. **W1831** (ready) Codon instance hostapply: nemik.hostapply stops using the mikemol libraries
-119. **W1832** (ready) Codon instance hostapply: nemik.hostapply stops using TYPE_CHECKING blocks
-120. **W1876** (ready) Codon instance pins: nemik.pins stops using tomllib
-121. **W1796** (ready) Codon instance cards: nemik.cards stops using the dataclass decorator and import
-122. **W1844** (ready) Codon instance index: nemik.index stops using the dataclass decorator and import
-123. **W1898** (ready) Codon instance salience: nemik.salience stops using the dataclass decorator and import
-124. **W1891** (ready) Codon instance realize: nemik.realize stops using the mikemol libraries
-125. **W1838** (ready) Codon instance idle: nemik.idle stops using tomllib
-126. **W1819** (ready) Codon instance flow: nemik.flow stops using TYPE_CHECKING blocks
-127. **W1971** (ready) Codon instance witnesses: nemik.witnesses stops using collections.abc imports
-128. **W1972** (ready) Codon instance witnesses: nemik.witnesses stops using datetime.UTC
-129. **W1892** (ready) Codon instance realize: nemik.realize stops using TYPE_CHECKING blocks
-130. **W1963** (ready) Codon instance warrantdebt: nemik.warrantdebt stops using tomllib
-131. **W1872** (ready) Codon instance pendingdeliver: nemik.pendingdeliver stops using argparse
-132. **W1918** (ready) Codon instance shaclcache: nemik.shaclcache stops using collections.abc imports
-133. **W1826** (ready) Codon instance history: nemik.history stops using the dataclass decorator and import
-134. **W1930** (ready) Codon instance stalled: nemik.stalled stops using rdflib
-135. **W1884** (ready) Codon instance rank: nemik.rank stops using fractions
-136. **W1870** (ready) Codon instance pdf: nemik.pdf stops using the mikemol libraries
-137. **W1875** (ready) Codon instance pins: nemik.pins stops using the mikemol libraries
-138. **W1836** (ready) Codon instance idle: nemik.idle stops using importlib.resources and importlib.metadata
-139. **W1869** (ready) Codon instance pdf: nemik.pdf stops using argparse
-140. **W1874** (ready) Codon instance pins: nemik.pins stops using argparse
-141. **W1936** (ready) Codon instance staticserve: nemik.staticserve stops using argparse
-142. **W1961** (ready) Codon instance warrantdebt: nemik.warrantdebt stops using importlib.resources and
+110. **W1816** (ready) Codon instance flow: nemik.flow stops using collections.abc imports
+111. **W1890** (ready) Codon instance realize: nemik.realize stops using datetime.UTC
+112. **W1873** (ready) Codon instance pendingdeliver: nemik.pendingdeliver stops using datetime.UTC
+113. **W1831** (ready) Codon instance hostapply: nemik.hostapply stops using the mikemol libraries
+114. **W1832** (ready) Codon instance hostapply: nemik.hostapply stops using TYPE_CHECKING blocks
+115. **W1876** (ready) Codon instance pins: nemik.pins stops using tomllib
+116. **W1796** (ready) Codon instance cards: nemik.cards stops using the dataclass decorator and import
+117. **W1844** (ready) Codon instance index: nemik.index stops using the dataclass decorator and import
+118. **W1898** (ready) Codon instance salience: nemik.salience stops using the dataclass decorator and import
+119. **W1891** (ready) Codon instance realize: nemik.realize stops using the mikemol libraries
+120. **W1838** (ready) Codon instance idle: nemik.idle stops using tomllib
+121. **W1819** (ready) Codon instance flow: nemik.flow stops using TYPE_CHECKING blocks
+122. **W1971** (ready) Codon instance witnesses: nemik.witnesses stops using collections.abc imports
+123. **W1972** (ready) Codon instance witnesses: nemik.witnesses stops using datetime.UTC
+124. **W1892** (ready) Codon instance realize: nemik.realize stops using TYPE_CHECKING blocks
+125. **W1963** (ready) Codon instance warrantdebt: nemik.warrantdebt stops using tomllib
+126. **W1872** (ready) Codon instance pendingdeliver: nemik.pendingdeliver stops using argparse
+127. **W1918** (ready) Codon instance shaclcache: nemik.shaclcache stops using collections.abc imports
+128. **W1826** (ready) Codon instance history: nemik.history stops using the dataclass decorator and import
+129. **W1930** (ready) Codon instance stalled: nemik.stalled stops using rdflib
+130. **W1884** (ready) Codon instance rank: nemik.rank stops using fractions
+131. **W1870** (ready) Codon instance pdf: nemik.pdf stops using the mikemol libraries
+132. **W1875** (ready) Codon instance pins: nemik.pins stops using the mikemol libraries
+133. **W1836** (ready) Codon instance idle: nemik.idle stops using importlib.resources and importlib.metadata
+134. **W1869** (ready) Codon instance pdf: nemik.pdf stops using argparse
+135. **W1874** (ready) Codon instance pins: nemik.pins stops using argparse
+136. **W1936** (ready) Codon instance staticserve: nemik.staticserve stops using argparse
+137. **W1961** (ready) Codon instance warrantdebt: nemik.warrantdebt stops using importlib.resources and
    importlib.metadata
-143. **W1842** (ready) Codon instance index: nemik.index stops using collections.abc imports
-144. **W1896** (ready) Codon instance salience: nemik.salience stops using collections.abc imports
-145. **W1806** (ready) Codon instance check: nemik.check stops using shutil
-146. **W1957** (ready) Codon instance wake: nemik.wake stops using datetime.UTC
-147. **W1778** (ready) Codon instance blocks: nemik.blocks stops using tomllib
-148. **W1902** (ready) Codon instance salience: nemik.salience stops using tomllib
-149. **W1922** (ready) Codon instance shaclinc: nemik.shaclinc stops using collections.abc imports
-150. **W1974** (ready) Codon instance witnesses: nemik.witnesses stops using the mikemol libraries
-151. **W1970** (ready) Codon instance witnesses: nemik.witnesses stops using argparse
-152. **W1827** (ready) Codon instance history: nemik.history stops using datetime.UTC
-153. **W1975** (ready) Codon instance witnesses: nemik.witnesses stops using TYPE_CHECKING blocks
-154. **W1837** (ready) Codon instance idle: nemik.idle stops using rdflib
-155. **W1834** (ready) Codon instance hostroot_cli: nemik.hostroot_cli stops using datetime.UTC
-156. **W1809** (ready) Codon instance critical: nemik.critical stops using argparse
-157. **W1921** (ready) Codon instance shaclcache: nemik.shaclcache stops using TYPE_CHECKING blocks
-158. **W1820** (ready) Codon instance forecast: nemik.forecast stops using rdflib
-159. **W1962** (ready) Codon instance warrantdebt: nemik.warrantdebt stops using rdflib
-160. **W1811** (ready) Codon instance critical: nemik.critical stops using TYPE_CHECKING blocks
-161. **W1775** (ready) Codon instance blocks: nemik.blocks stops using importlib.resources and importlib.metadata
-162. **W1900** (ready) Codon instance salience: nemik.salience stops using importlib.resources and importlib.metadata
-163. **W1411** (ready) Find the dataclass decorator argument Codon rejects in flow, cards and churn, and whether a form
+138. **W1842** (ready) Codon instance index: nemik.index stops using collections.abc imports
+139. **W1896** (ready) Codon instance salience: nemik.salience stops using collections.abc imports
+140. **W1806** (ready) Codon instance check: nemik.check stops using shutil
+141. **W1957** (ready) Codon instance wake: nemik.wake stops using datetime.UTC
+142. **W1778** (ready) Codon instance blocks: nemik.blocks stops using tomllib
+143. **W1902** (ready) Codon instance salience: nemik.salience stops using tomllib
+144. **W1922** (ready) Codon instance shaclinc: nemik.shaclinc stops using collections.abc imports
+145. **W1974** (ready) Codon instance witnesses: nemik.witnesses stops using the mikemol libraries
+146. **W1970** (ready) Codon instance witnesses: nemik.witnesses stops using argparse
+147. **W1827** (ready) Codon instance history: nemik.history stops using datetime.UTC
+148. **W1975** (ready) Codon instance witnesses: nemik.witnesses stops using TYPE_CHECKING blocks
+149. **W1837** (ready) Codon instance idle: nemik.idle stops using rdflib
+150. **W1834** (ready) Codon instance hostroot_cli: nemik.hostroot_cli stops using datetime.UTC
+151. **W1809** (ready) Codon instance critical: nemik.critical stops using argparse
+152. **W1921** (ready) Codon instance shaclcache: nemik.shaclcache stops using TYPE_CHECKING blocks
+153. **W1820** (ready) Codon instance forecast: nemik.forecast stops using rdflib
+154. **W1962** (ready) Codon instance warrantdebt: nemik.warrantdebt stops using rdflib
+155. **W1811** (ready) Codon instance critical: nemik.critical stops using TYPE_CHECKING blocks
+156. **W1775** (ready) Codon instance blocks: nemik.blocks stops using importlib.resources and importlib.metadata
+157. **W1900** (ready) Codon instance salience: nemik.salience stops using importlib.resources and importlib.metadata
+158. **W1411** (ready) Find the dataclass decorator argument Codon rejects in flow, cards and churn, and whether a form
    it accepts keeps the tests green
    - next: Decide where the editable-install warning lives so nemik/__init__.py can compile (candidates: nemik.say,
      which every command imports; a console_scripts shim); probe apischema after that
-164. **W1491** (ready) Codon: read the census of nemik.core (the shared core the page runs as wasm) and list which of
+159. **W1491** (ready) Codon: read the census of nemik.core (the shared core the page runs as wasm) and list which of
    its modules fail and on what
    - next: Read the codon census of nemik.core and list which of its modules fail and on what; read only.
-165. **W1492** (ready) Codon: remove the bare star-comma from alarm.py's signature and measure what its first error
+160. **W1492** (ready) Codon: remove the bare star-comma from alarm.py's signature and measure what its first error
    becomes
    - next: Remove the bare star-comma at line 59 and run the cached compiler on a scratch copy; record the new first
      error.
-166. **W1789** (ready) Codon instance calendars: nemik.calendars stops using shutil
-167. **W1920** (ready) Codon instance shaclcache: nemik.shaclcache stops using rdflib
-168. **W1953** (ready) Codon instance waitlog: nemik.waitlog stops using the mikemol libraries
-169. **W1810** (ready) Codon instance critical: nemik.critical stops using rdflib
-170. **W1776** (ready) Codon instance blocks: nemik.blocks stops using the mikemol libraries
-171. **W1955** (ready) Codon instance waitrows: nemik.waitrows stops using rdflib
-172. **W1954** (ready) Codon instance waitlog: nemik.waitlog stops using TYPE_CHECKING blocks
-173. **W1784** (ready) Codon instance cachestore: nemik.cachestore stops using importlib.resources and
+161. **W1789** (ready) Codon instance calendars: nemik.calendars stops using shutil
+162. **W1920** (ready) Codon instance shaclcache: nemik.shaclcache stops using rdflib
+163. **W1953** (ready) Codon instance waitlog: nemik.waitlog stops using the mikemol libraries
+164. **W1810** (ready) Codon instance critical: nemik.critical stops using rdflib
+165. **W1776** (ready) Codon instance blocks: nemik.blocks stops using the mikemol libraries
+166. **W1955** (ready) Codon instance waitrows: nemik.waitrows stops using rdflib
+167. **W1954** (ready) Codon instance waitlog: nemik.waitlog stops using TYPE_CHECKING blocks
+168. **W1784** (ready) Codon instance cachestore: nemik.cachestore stops using importlib.resources and
    importlib.metadata
-174. **W1835** (ready) Codon instance hostroot_cli: nemik.hostroot_cli stops using importlib.resources and
+169. **W1835** (ready) Codon instance hostroot_cli: nemik.hostroot_cli stops using importlib.resources and
    importlib.metadata
-175. **W1958** (ready) Codon instance wake: nemik.wake stops using the mikemol libraries
-176. **W1779** (ready) Codon instance blocks: nemik.blocks stops using TYPE_CHECKING blocks
-177. **W1798** (ready) Codon instance cards: nemik.cards stops using TYPE_CHECKING blocks
-178. **W1846** (ready) Codon instance index: nemik.index stops using TYPE_CHECKING blocks
-179. **W1903** (ready) Codon instance salience: nemik.salience stops using TYPE_CHECKING blocks
-180. **W1956** (ready) Codon instance wake: nemik.wake stops using argparse
-181. **W1960** (ready) Codon instance wake: nemik.wake stops using TYPE_CHECKING blocks
-182. **W1925** (ready) Codon instance shaclinc: nemik.shaclinc stops using TYPE_CHECKING blocks
-183. **W1828** (ready) Codon instance history: nemik.history stops using the mikemol libraries
-184. **W1777** (ready) Codon instance blocks: nemik.blocks stops using rdflib
-185. **W1797** (ready) Codon instance cards: nemik.cards stops using rdflib
-186. **W1845** (ready) Codon instance index: nemik.index stops using rdflib
-187. **W1901** (ready) Codon instance salience: nemik.salience stops using rdflib
-188. **W1825** (ready) Codon instance history: nemik.history stops using argparse
-189. **W1959** (ready) Codon instance wake: nemik.wake stops using rdflib
-190. **W1833** (ready) Codon instance hostroot_cli: nemik.hostroot_cli stops using argparse
-191. **W1924** (ready) Codon instance shaclinc: nemik.shaclinc stops using rdflib
-192. **W1880** (ready) Codon instance queuerows: nemik.queuerows stops using datetime.UTC
-193. **W1829** (ready) Codon instance history: nemik.history stops using rdflib
-194. **W1823** (ready) Codon instance health: nemik.health stops using tomllib
-195. **W1785** (ready) Codon instance cachestore: nemik.cachestore stops using rdflib
-196. **W1911** (ready) Codon instance serve: nemik.serve stops using hashlib
-197. **W1912** (ready) Codon instance serve: nemik.serve stops using http.client
-198. **W1883** (ready) Codon instance rank: nemik.rank stops using the dataclass decorator and import
-199. **W1821** (ready) Codon instance health: nemik.health stops using importlib.resources and importlib.metadata
-200. **W1856** (ready) Codon instance mspdi: nemik.mspdi stops using argparse
-201. **W1857** (ready) Codon instance mspdi: nemik.mspdi stops using rdflib
-202. **W1824** (ready) Codon instance health: nemik.health stops using TYPE_CHECKING blocks
-203. **W1881** (ready) Codon instance queuerows: nemik.queuerows stops using rdflib
-204. **W1888** (ready) Codon instance rank: nemik.rank stops using tomllib
-205. **W1822** (ready) Codon instance health: nemik.health stops using rdflib
-206. **W1839** (ready) Codon instance importer: nemik.importer stops using argparse
-207. **W1916** (ready) Codon instance serve: nemik.serve stops using shutil
-208. **W1841** (ready) Codon instance importer: nemik.importer stops using TYPE_CHECKING blocks
-209. **W1801** (ready) Codon instance check: nemik.check stops using collections.abc imports
-210. **W1802** (ready) Codon instance check: nemik.check stops using datetime.UTC
-211. **W1865** (ready) Codon instance pacing: nemik.pacing stops using datetime.UTC
-212. **W1807** (ready) Codon instance check: nemik.check stops using tomllib
-213. **W1885** (ready) Codon instance rank: nemik.rank stops using importlib.resources and importlib.metadata
-214. **W1868** (ready) Codon instance pacing: nemik.pacing stops using tomllib
-215. **W1780** (ready) Codon instance blocks_cli: nemik.blocks_cli stops using argparse
-216. **W1886** (ready) Codon instance rank: nemik.rank stops using the mikemol libraries
-217. **W1928** (ready) Codon instance stackable_cli: nemik.stackable_cli stops using collections.abc imports
-218. **W1882** (ready) Codon instance rank: nemik.rank stops using argparse
-219. **W1803** (ready) Codon instance check: nemik.check stops using importlib.resources and importlib.metadata
-220. **W1889** (ready) Codon instance rank: nemik.rank stops using TYPE_CHECKING blocks
-221. **W1866** (ready) Codon instance pacing: nemik.pacing stops using importlib.resources and importlib.metadata
-222. **W1781** (ready) Codon instance blocks_cli: nemik.blocks_cli stops using rdflib
-223. **W1945** (ready) Codon instance vtodo: nemik.vtodo stops using tomllib
-224. **W1790** (ready) Codon instance calendars: nemik.calendars stops using tomllib
-225. **W1887** (ready) Codon instance rank: nemik.rank stops using rdflib
-226. **W1932** (ready) Codon instance starved: nemik.starved stops using datetime.UTC
-227. **W1804** (ready) Codon instance check: nemik.check stops using the mikemol libraries
-228. **W1861** (ready) Codon instance overlaps: nemik.overlaps stops using the mikemol libraries
-229. **W1800** (ready) Codon instance check: nemik.check stops using argparse
-230. **W1860** (ready) Codon instance overlaps: nemik.overlaps stops using argparse
-231. **W1935** (ready) Codon instance starved: nemik.starved stops using tomllib
-232. **W1808** (ready) Codon instance check: nemik.check stops using TYPE_CHECKING blocks
-233. **W1863** (ready) Codon instance overlaps: nemik.overlaps stops using TYPE_CHECKING blocks
-234. **W1864** (ready) Codon instance pacing: nemik.pacing stops using argparse
-235. **W1942** (ready) Codon instance vtodo: nemik.vtodo stops using importlib.resources and importlib.metadata
-236. **W1792** (ready) Codon instance calwrite: nemik.calwrite stops using collections.abc imports
-237. **W1805** (ready) Codon instance check: nemik.check stops using rdflib
-238. **W1862** (ready) Codon instance overlaps: nemik.overlaps stops using rdflib
-239. **W1867** (ready) Codon instance pacing: nemik.pacing stops using rdflib
-240. **W1933** (ready) Codon instance starved: nemik.starved stops using importlib.resources and importlib.metadata
-241. **W1927** (ready) Codon instance stackable_cli: nemik.stackable_cli stops using argparse
-242. **W1943** (ready) Codon instance vtodo: nemik.vtodo stops using the mikemol libraries
-243. **W1787** (ready) Codon instance calendars: nemik.calendars stops using the mikemol libraries
-244. **W1941** (ready) Codon instance vtodo: nemik.vtodo stops using argparse
-245. **W1786** (ready) Codon instance calendars: nemik.calendars stops using argparse
-246. **W1946** (ready) Codon instance vtodo: nemik.vtodo stops using TYPE_CHECKING blocks
-247. **W1187** (ready) Annotate the untyped test helpers that fan Any out to their callers, ranked by call count
+170. **W1958** (ready) Codon instance wake: nemik.wake stops using the mikemol libraries
+171. **W1779** (ready) Codon instance blocks: nemik.blocks stops using TYPE_CHECKING blocks
+172. **W1798** (ready) Codon instance cards: nemik.cards stops using TYPE_CHECKING blocks
+173. **W1846** (ready) Codon instance index: nemik.index stops using TYPE_CHECKING blocks
+174. **W1903** (ready) Codon instance salience: nemik.salience stops using TYPE_CHECKING blocks
+175. **W1956** (ready) Codon instance wake: nemik.wake stops using argparse
+176. **W1960** (ready) Codon instance wake: nemik.wake stops using TYPE_CHECKING blocks
+177. **W1925** (ready) Codon instance shaclinc: nemik.shaclinc stops using TYPE_CHECKING blocks
+178. **W1828** (ready) Codon instance history: nemik.history stops using the mikemol libraries
+179. **W1777** (ready) Codon instance blocks: nemik.blocks stops using rdflib
+180. **W1797** (ready) Codon instance cards: nemik.cards stops using rdflib
+181. **W1845** (ready) Codon instance index: nemik.index stops using rdflib
+182. **W1901** (ready) Codon instance salience: nemik.salience stops using rdflib
+183. **W1825** (ready) Codon instance history: nemik.history stops using argparse
+184. **W1959** (ready) Codon instance wake: nemik.wake stops using rdflib
+185. **W1833** (ready) Codon instance hostroot_cli: nemik.hostroot_cli stops using argparse
+186. **W1924** (ready) Codon instance shaclinc: nemik.shaclinc stops using rdflib
+187. **W1880** (ready) Codon instance queuerows: nemik.queuerows stops using datetime.UTC
+188. **W1829** (ready) Codon instance history: nemik.history stops using rdflib
+189. **W1823** (ready) Codon instance health: nemik.health stops using tomllib
+190. **W1785** (ready) Codon instance cachestore: nemik.cachestore stops using rdflib
+191. **W1911** (ready) Codon instance serve: nemik.serve stops using hashlib
+192. **W1912** (ready) Codon instance serve: nemik.serve stops using http.client
+193. **W1883** (ready) Codon instance rank: nemik.rank stops using the dataclass decorator and import
+194. **W1821** (ready) Codon instance health: nemik.health stops using importlib.resources and importlib.metadata
+195. **W1856** (ready) Codon instance mspdi: nemik.mspdi stops using argparse
+196. **W1857** (ready) Codon instance mspdi: nemik.mspdi stops using rdflib
+197. **W1824** (ready) Codon instance health: nemik.health stops using TYPE_CHECKING blocks
+198. **W1881** (ready) Codon instance queuerows: nemik.queuerows stops using rdflib
+199. **W1888** (ready) Codon instance rank: nemik.rank stops using tomllib
+200. **W1822** (ready) Codon instance health: nemik.health stops using rdflib
+201. **W1839** (ready) Codon instance importer: nemik.importer stops using argparse
+202. **W1916** (ready) Codon instance serve: nemik.serve stops using shutil
+203. **W1841** (ready) Codon instance importer: nemik.importer stops using TYPE_CHECKING blocks
+204. **W1801** (ready) Codon instance check: nemik.check stops using collections.abc imports
+205. **W1802** (ready) Codon instance check: nemik.check stops using datetime.UTC
+206. **W1865** (ready) Codon instance pacing: nemik.pacing stops using datetime.UTC
+207. **W1807** (ready) Codon instance check: nemik.check stops using tomllib
+208. **W1885** (ready) Codon instance rank: nemik.rank stops using importlib.resources and importlib.metadata
+209. **W1868** (ready) Codon instance pacing: nemik.pacing stops using tomllib
+210. **W1780** (ready) Codon instance blocks_cli: nemik.blocks_cli stops using argparse
+211. **W1886** (ready) Codon instance rank: nemik.rank stops using the mikemol libraries
+212. **W1928** (ready) Codon instance stackable_cli: nemik.stackable_cli stops using collections.abc imports
+213. **W1882** (ready) Codon instance rank: nemik.rank stops using argparse
+214. **W1803** (ready) Codon instance check: nemik.check stops using importlib.resources and importlib.metadata
+215. **W1889** (ready) Codon instance rank: nemik.rank stops using TYPE_CHECKING blocks
+216. **W1866** (ready) Codon instance pacing: nemik.pacing stops using importlib.resources and importlib.metadata
+217. **W1781** (ready) Codon instance blocks_cli: nemik.blocks_cli stops using rdflib
+218. **W1945** (ready) Codon instance vtodo: nemik.vtodo stops using tomllib
+219. **W1790** (ready) Codon instance calendars: nemik.calendars stops using tomllib
+220. **W1887** (ready) Codon instance rank: nemik.rank stops using rdflib
+221. **W1932** (ready) Codon instance starved: nemik.starved stops using datetime.UTC
+222. **W1804** (ready) Codon instance check: nemik.check stops using the mikemol libraries
+223. **W1861** (ready) Codon instance overlaps: nemik.overlaps stops using the mikemol libraries
+224. **W1800** (ready) Codon instance check: nemik.check stops using argparse
+225. **W1860** (ready) Codon instance overlaps: nemik.overlaps stops using argparse
+226. **W1935** (ready) Codon instance starved: nemik.starved stops using tomllib
+227. **W1808** (ready) Codon instance check: nemik.check stops using TYPE_CHECKING blocks
+228. **W1863** (ready) Codon instance overlaps: nemik.overlaps stops using TYPE_CHECKING blocks
+229. **W1864** (ready) Codon instance pacing: nemik.pacing stops using argparse
+230. **W1942** (ready) Codon instance vtodo: nemik.vtodo stops using importlib.resources and importlib.metadata
+231. **W1792** (ready) Codon instance calwrite: nemik.calwrite stops using collections.abc imports
+232. **W1805** (ready) Codon instance check: nemik.check stops using rdflib
+233. **W1862** (ready) Codon instance overlaps: nemik.overlaps stops using rdflib
+234. **W1867** (ready) Codon instance pacing: nemik.pacing stops using rdflib
+235. **W1933** (ready) Codon instance starved: nemik.starved stops using importlib.resources and importlib.metadata
+236. **W1927** (ready) Codon instance stackable_cli: nemik.stackable_cli stops using argparse
+237. **W1943** (ready) Codon instance vtodo: nemik.vtodo stops using the mikemol libraries
+238. **W1787** (ready) Codon instance calendars: nemik.calendars stops using the mikemol libraries
+239. **W1941** (ready) Codon instance vtodo: nemik.vtodo stops using argparse
+240. **W1786** (ready) Codon instance calendars: nemik.calendars stops using argparse
+241. **W1946** (ready) Codon instance vtodo: nemik.vtodo stops using TYPE_CHECKING blocks
+242. **W1187** (ready) Annotate the untyped test helpers that fan Any out to their callers, ranked by call count
    - next: Done in the tree: eight helpers annotated (_wp in umbrella_block, guarantees and frontier; _card and _ask;
      vec; _a), mypy 5248 to 4928 and ruff 2595 to 2569, because one untyped helper turned every caller's result into
      Any. The census of the rest (session scratchpad script) lists test_deterministic._wp and _queue,
      test_calendars._row, test_wake_alarms._graph, test_withheld._write, test_witnesses.queue and _serve,
      test_fruit._graph, test_weather._q, test_witwait._wait and _script, test_rank._ready; annotate them next, ranked by
      call count
-248. **W1929** (ready) Codon instance stackable_cli: nemik.stackable_cli stops using rdflib
-249. **W1931** (ready) Codon instance starved: nemik.starved stops using argparse
-250. **W1944** (ready) Codon instance vtodo: nemik.vtodo stops using rdflib
-251. **W1788** (ready) Codon instance calendars: nemik.calendars stops using rdflib
-252. **W1949** (ready) Codon instance waitemit: nemik.waitemit stops using the mikemol libraries
-253. **W1934** (ready) Codon instance starved: nemik.starved stops using rdflib
-254. **W1793** (ready) Codon instance calwrite: nemik.calwrite stops using the mikemol libraries
-255. **W1947** (ready) Codon instance waitemit: nemik.waitemit stops using argparse
-256. **W1791** (ready) Codon instance calwrite: nemik.calwrite stops using argparse
-257. **W1951** (ready) Codon instance waitemit: nemik.waitemit stops using TYPE_CHECKING blocks
-258. **W1795** (ready) Codon instance calwrite: nemik.calwrite stops using TYPE_CHECKING blocks
-259. **W1852** (ready) Codon instance metrics: nemik.metrics stops using collections.abc imports
-260. **W1853** (ready) Codon instance metrics: nemik.metrics stops using datetime.UTC
-261. **W1950** (ready) Codon instance waitemit: nemik.waitemit stops using rdflib
-262. **W1794** (ready) Codon instance calwrite: nemik.calwrite stops using rdflib
-263. **W1909** (ready) Codon instance serve: nemik.serve stops using collections.abc imports
-264. **W1910** (ready) Codon instance serve: nemik.serve stops using datetime.UTC
-265. **W1854** (ready) Codon instance metrics: nemik.metrics stops using the mikemol libraries
-266. **W1851** (ready) Codon instance metrics: nemik.metrics stops using argparse
-267. **W1913** (ready) Codon instance serve: nemik.serve stops using importlib.resources and importlib.metadata
-268. **W1855** (ready) Codon instance metrics: nemik.metrics stops using rdflib
-269. **W1914** (ready) Codon instance serve: nemik.serve stops using the mikemol libraries
-270. **W1908** (ready) Codon instance serve: nemik.serve stops using argparse
-271. **W1917** (ready) Codon instance serve: nemik.serve stops using TYPE_CHECKING blocks
-272. **W1915** (ready) Codon instance serve: nemik.serve stops using rdflib
-273. **W1052** (ready) A shared file's writer never emits a form its deployed readers refuse
+243. **W1929** (ready) Codon instance stackable_cli: nemik.stackable_cli stops using rdflib
+244. **W1931** (ready) Codon instance starved: nemik.starved stops using argparse
+245. **W1944** (ready) Codon instance vtodo: nemik.vtodo stops using rdflib
+246. **W1788** (ready) Codon instance calendars: nemik.calendars stops using rdflib
+247. **W1949** (ready) Codon instance waitemit: nemik.waitemit stops using the mikemol libraries
+248. **W1934** (ready) Codon instance starved: nemik.starved stops using rdflib
+249. **W1793** (ready) Codon instance calwrite: nemik.calwrite stops using the mikemol libraries
+250. **W1947** (ready) Codon instance waitemit: nemik.waitemit stops using argparse
+251. **W1791** (ready) Codon instance calwrite: nemik.calwrite stops using argparse
+252. **W1951** (ready) Codon instance waitemit: nemik.waitemit stops using TYPE_CHECKING blocks
+253. **W1795** (ready) Codon instance calwrite: nemik.calwrite stops using TYPE_CHECKING blocks
+254. **W1852** (ready) Codon instance metrics: nemik.metrics stops using collections.abc imports
+255. **W1853** (ready) Codon instance metrics: nemik.metrics stops using datetime.UTC
+256. **W1950** (ready) Codon instance waitemit: nemik.waitemit stops using rdflib
+257. **W1794** (ready) Codon instance calwrite: nemik.calwrite stops using rdflib
+258. **W1909** (ready) Codon instance serve: nemik.serve stops using collections.abc imports
+259. **W1910** (ready) Codon instance serve: nemik.serve stops using datetime.UTC
+260. **W1854** (ready) Codon instance metrics: nemik.metrics stops using the mikemol libraries
+261. **W1851** (ready) Codon instance metrics: nemik.metrics stops using argparse
+262. **W1913** (ready) Codon instance serve: nemik.serve stops using importlib.resources and importlib.metadata
+263. **W1855** (ready) Codon instance metrics: nemik.metrics stops using rdflib
+264. **W1914** (ready) Codon instance serve: nemik.serve stops using the mikemol libraries
+265. **W1908** (ready) Codon instance serve: nemik.serve stops using argparse
+266. **W1917** (ready) Codon instance serve: nemik.serve stops using TYPE_CHECKING blocks
+267. **W1915** (ready) Codon instance serve: nemik.serve stops using rdflib
+268. **W1052** (ready) A shared file's writer never emits a form its deployed readers refuse
    - next: List every file nemik writes for another party and who reads it, record each file's current form and each
      reader's accepted forms in docs/shared-file-versions.md, then decide where the version lives (a key in the head
      line, which luthen's gates rule on, or beside the file)
-274. **W1079** (ready) Warn on a repo with zero velocity-tagged open cards while its landing rate is below its trend
-   - blocked on: mtools:W2029
-275. **W1244** (ready) Find why //:test_salience timed out at 300 s in the stack 631 gate and passes in 33 s alone
+269. **W1244** (ready) Find why //:test_salience timed out at 300 s in the stack 631 gate and passes in 33 s alone
    - next: Per R18-F35: get test_salience's PASSED times from the last three green gates (their bazel test.xml or BEP;
      the submit outputs print only failures), the stamps of heavy local commands in 21:24:52Z-21:51:45Z, then cut the
      writer spawns in tests/test_salience.py (in-process fixtures) after stack 633 lands; close on that, not on a green
      gate. Add a standing rule: a gate timeout with no failing assertion compares gate time with alone time.
-276. **W1249** (ready) Remove the 120 s wall bound from tests/test_salience.py once the stall is named
-   - next: After the stall in W1244 is named or 634 lands green and a repeat shows nothing: remove the timeout=120 wall
-     bound from _pf (a wall bound is the failure W1085 recorded).
-277. **W1250** (ready) Follow the drum admission question github-8f routed to mtools
-278. **W1038** (ready) Carry mtools' guessed flag through the pace: treat every row as advisory until the label is live,
+270. **W1978** (ready) Design for cold review: a codon fall is a strict shrink of the open edge cards, derived from
+   source, with discovery recorded and the rows as the end test
+271. **W1038** (ready) Carry mtools' guessed flag through the pace: treat every row as advisory until the label is live,
    then read it from the export
    - next: Confirm the next host pace run reads verdicts; then carry guessed to the pace row as advisory versus binding,
      only after luthen-observability agrees and the W1120 fixture lists the key
-279. **W1070** (ready) Answer luthen-observability:W1668: pin the Containerfile BASE by digest, say whether the image
+272. **W1070** (ready) Answer luthen-observability:W1668: pin the Containerfile BASE by digest, say whether the image
    tag epoch can come from SOURCE_DATE_EPOCH or the commit time, and declare a registry retention rule keyed to the
    deployed pin
    - next: Resolve the BASE tag's manifest digest read-only (no tool on this host does it: add the mode, a small
@@ -2465,20 +2527,20 @@ counter 1989 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:734
      (digest pin, whether the tag epoch can come from SOURCE_DATE_EPOCH or the commit time, a retention rule keyed to
      the pin now applied), then pin BASE@sha256 in Containerfile with a test_containerfile case that BASE carries a
      digest
-280. **W1163** (ready) Answer nemik: estate:W39 is done (letter 2026-10-27-nemik-edge-estate-W39-enables-W914)
+273. **W1163** (ready) Answer nemik: estate:W39 is done (letter 2026-10-27-nemik-edge-estate-W39-enables-W914)
    - next: Write the answer to estate (nemik:W914 is enabled by estate:W39, done) as a note in docs/estate-w39-answer.md
      citing the letter inbox/2026-10-27-nemik-edge-estate-W39-enables-W914.md; the delivery to estate's inbox waits on
      the courier (W1048), so no sibling write
-281. **W1175** (ready) Ruff in larger steps, after the Any-boundary moves: D103 (423 in tests) and D205 (68) by
+274. **W1175** (ready) Ruff in larger steps, after the Any-boundary moves: D103 (423 in tests) and D205 (68) by
    mechanization, PLC0415 (271) as hoists with an importdag cycle refusal turned into atomize cards, T201 (124 in src)
    into one output module
    - next: W1559: hoist those 6 sites (outside the hubs), run test_architecture, test_namespaces, codon_first on the
      four modules and hookcheck, then the stack.
-282. **W1178** (ready) Fixture annotation by pycodemod annotate over the test fixtures
+275. **W1178** (ready) Fixture annotation by pycodemod annotate over the test fixtures
    - next: est ~350 mypy plus 94 ANN001; the test_calendars pilot cut ruff by 36 and mypy by 115. Run pycodemod annotate
      over the fixtures. The fixture-name to type map is a planner gap that github-8f is asking mtools for: until it
      lands, annotate by hand the most common fixtures (tmp_path, capsys, monkeypatch) the way W1166 and W1171 did
-283. **W1184** (ready) test_layout takes the typed page route (350 mypy, the one browser test left in the baseline)
+276. **W1184** (ready) test_layout takes the typed page route (350 mypy, the one browser test left in the baseline)
    - next: Probe 2026-10-27 (codemod page.evaluate to evaluate_value over the whole file, then mypy): the 350 findings
      are the evaluate answers used as numbers, indexables, iterables, sets and dicts across ~45 tests, so no blanket
      rewrite is clean; each site needs its narrowing. Design: webpage.py gains as_int(x), as_list(x) -> list[object],
@@ -2488,62 +2550,43 @@ counter 1989 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:734
      test_weather_panel...), run //:test_layout shards after each tranche, and keep the file's scheme-parametrized tests
      together. Splitting the file is fine once mtools:W2045 matches moved findings by identity (rule, message, source
      line); until then a split needs zero findings in the new file
-284. **W1197** (ready) The pace file header names the build that computed it: nemik-hostroot --pace writes {as_of,
+277. **W1197** (ready) The pace file header names the build that computed it: nemik-hostroot --pace writes {as_of,
    window, build}, build the installed nemik's commit sha, so a verdict is self-describing
    - next: Read the first ratchet-pace.json whose first line carries build (after the host install of 7dfc155 or later
      and the next hourly run): that the build equals the installed commit and that luthen's gate kept the file; then
      close
-285. **W1220** (ready) Stack construction checks a ratchet baseline against the tree it will be gated on (and against
+278. **W1220** (ready) Stack construction checks a ratchet baseline against the tree it will be gated on (and against
    stacks queued ahead), so a stack built on an unlanded baseline is refused at build, not after a gate
    - next: mtools-ad: mikemol-commit --stack compares a ratchet baseline with the tree it will be gated on, taking the
      queued predecessor's tip as the base for a stack built on it; nemik:W1220 holds the evidence
-286. **W1222** (ready) nemik-inbound takes 47 s (34 s CPU) of the 141 s a tick-open takes, so a foreground tick-open
-   overruns the 120 s limit: key its fleet graph on the queue files' hashes so an unchanged fleet is not re-read
-   - next: Profile nemik-inbound (cProfile, one run) to find where its 34 CPU seconds go, then cache the fleet graph
-     keyed on the queue files' hashes; a test that an unchanged fleet is read once
-287. **W1225** (ready) Mechanize the docstring paydown: a codemod writes the predictable parts (a Returns or Raises
+279. **W1225** (ready) Mechanize the docstring paydown: a codemod writes the predictable parts (a Returns or Raises
    section, an imperative first line) for the D103, D102, DOC201 and DOC501 findings, passes the gate, and lowers ruff
    by more than a hand batch
    - next: Write the comment-lift as a tool mode with a trial: for an undocumented public function whose body opens with
      a prose comment, make the first sentence the docstring summary (it must end in a period and fit one line, about 37
      of the 96), the rest of the comment a paragraph after a blank line, delete the comment, then run ruff D and mypy on
      the result; a human reads a sample of ten before the run is stacked
-288. **W1226** (ready) Every due NUDGE line that tick-open prints gets a recorded disposition at the close, sent or
+280. **W1226** (ready) Every due NUDGE line that tick-open prints gets a recorded disposition at the close, sent or
    backed off
    - next: Add a tick hook that prints each NUDGE line the tick-open produced next to its disposition (sent, or backed
      off with the reason) so the close cannot pass one unread; a test on a sample tick-open output
-289. **W1229** (ready) A repair of a rejected file in a stacked round uses the predecessor stack's frozen files as its
-   base, in a scratch worktree, not git's HEAD
-   - next: mtools-ad: a mode that restores a file as of a queued stack's frozen files, in mikemol-scratch; nemik:W1229
-     holds the case (test_calendars.py, stack622)
-290. **W1231** (ready) Bring the open operator asks to the cap of 10: merge, retire or answer from evidence each of the
+281. **W1231** (ready) Bring the open operator asks to the cap of 10: merge, retire or answer from evidence each of the
    11
    - next: The consolidated note goes to the operator in a visible message (10 asks, each answerable in a line,
      recommendations as stated); apply each answer with --update --blocked-on or close the card; the count only falls
      when the operator answers.
-291. **W1232** (ready) Find why one-module edits make 446 of 449 gate targets fresh, and atomize the targets that cause
+282. **W1232** (ready) Find why one-module edits make 446 of 449 gate targets fresh, and atomize the targets that cause
    it
    - next: Measure the fresh count of a TEST-ONLY gate (stack623's gate lines were in its leader's output, not in the
      joiner's) against a src-touching one, then decide: keep the single .venv (the venv-is-build-input rule) and
      sequence test-only paydowns separately, or give each test target a per-module closure (W1216 to W1218's import
      graph) so a src edit reruns only its importers
-292. **W1246** (ready) The queue mirror lists each retro as '0 finding(s)', so no finding or its witness can be audited
-   from it
-   - next: Watch the next three tick-open outputs for the gate line; then decide whether a second hook (a gap figure at
-     tick-close) is wanted.
-293. **W1261** (ready) Move test_viewstate and test_cardtree onto webpage.until: their raw waits take forms the adopt
+283. **W1261** (ready) Move test_viewstate and test_cardtree onto webpage.until: their raw waits take forms the adopt
    codemod skips
    - next: Read mikemol.webpage.until (does it accept the arg= form?); if yes convert the seven waits and add
      webpage.watch before each goto; if no, leave them at Playwright's 30 s default and close this card as not-needed
      with that reason (never unbound a wait that has a bound).
-294. **W1270** (ready) Answer nemik: mtools:W1905 is done
-   - next: Read inbox/2026-10-29-nemik-edge-mtools-W1905-enables-W979.md, find which nemik card it names as enabled
-     (W979 per the file name), confirm mtools:W1905 is done in mtools' queue (it is), lift that card's block if W1905
-     was its blocker, and close W1270. First step 2026-10-30.
-295. **W1275** (ready) Answer nemik: el-openglo:W754 is done
-   - next: Read inbox/2026-10-29-nemik-edge-el-openglo-W754-enables-W879.md, check el-openglo:W754 is done in its queue
-     (read only), lift the block on nemik W879 if W754 was its blocker, and close W1275. First step 2026-10-30.
-296. **W1276** (ready) A class emitter for the host tick: one line per repo and per behind ratchet with its class, as a
+284. **W1276** (ready) A class emitter for the host tick: one line per repo and per behind ratchet with its class, as a
    nemik-rank mode such as --classes
    - next: Design first, then build: read the host fields github-42 named (--in-gate depth, landings in the last 45 min,
      nemik-check --ready-neither, pace rows and their as-of, direct_url.json reader commit, tick_health liveness) and
@@ -2551,28 +2594,22 @@ counter 1989 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:734
      RATCHET, OVER PACE, PENDING with both stamps, series break, behind: no horizon) with one witness each and one line
      per repo and per behind ratchet. Ask mtools whether it owns the emitter instead, since its W2163 refuses a
      tick-close on an undisposed class line. Atomize into children before building (size medium). First step 2026-10-31.
-297. **W1345** (ready) tests/corpus/pieces/fixture-fleet-3-repos.json is stale against the current check output:
+285. **W1345** (ready) tests/corpus/pieces/fixture-fleet-3-repos.json is stale against the current check output:
    regenerating it with tools/gen_pieces_corpus.py adds 2724 lines of findings rows, and the corpus is the Python half
    of the cross-language pieces conformance run (mtools:W1072)
    - next: Read what mtools:W1072's run does with this fixture and its last result; find the commit after which the
      check output on the fixture fleet changed (git log on the check rules and src/nemik/data/shapes.ttl against the
      fixture's last commit); then regenerate with tools/gen_pieces_corpus.py on its own stack with the new sha256
      recorded, or say why not
-298. **W1347** (ready) tests/test_layout.py splits its 14 autofixable composite assertions, so ruff PT018 falls by 14
+286. **W1347** (ready) tests/test_layout.py splits its 14 autofixable composite assertions, so ruff PT018 falls by 14
    - next: Type the Any values the composite asserts read (test_fruit.py, test_frontier.py, test_read_api.py,
      test_wake_alarms.py, test_witnesses.py, test_layout.py), then split the asserts, so PT018 falls with no mypy rise;
      or take hooks/record_event.py (25 ruff findings, 4 of them D103)
-299. **W1395** (ready) Answer mtools:W2186 - baselinetop and ratchetseries open the ratchet baseline themselves, so they
-   need the mypy-baseline.d directory read
-   - next: Next tick: look for a reply in the inbox or the mtools card; close W1395 when the adopter card exists and
-     mtools has the answer.
-300. **W1399** (ready) baselinetop and ratchetseries read a mypy-baseline.d directory through baselinedir.read when one
+287. **W1399** (ready) baselinetop and ratchetseries read a mypy-baseline.d directory through baselinedir.read when one
    exists, once mtools W2191 lands the per-module writer
    - next: After mtools:W2191 lands and the venv is rebuilt: make baselinetop.py and ratchetseries.py take the merged
      text from baselinedir.read(Path('mypy-baseline.d')) when that directory exists, with a test for each.
-301. **W1418** (ready) Answer the three mtools letters that say W2088 and W2099 are done: read W1246 and W1229, lift the
-   waits they name or say why not
-302. **W1514** (ready) Export nemik-wake's per-workstream verdict (wake required, 0 or 1, and the awake state) as a
+288. **W1514** (ready) Export nemik-wake's per-workstream verdict (wake required, 0 or 1, and the awake state) as a
    metric so luthen can page on wake-required AND stamp older than its window, not a flat 2 h
    - next: Confirm the series exists AND is right: after the host's next waitemit run with the new code, read
      nemik_wake_required and nemik_wake_waiters from the store (luthen's endpoints_query or a request to
@@ -2581,80 +2618,85 @@ counter 1989 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:734
      awake); tell luthen-observability to hold any page or wake on the gauge until that comparison is recorded here;
      then close. If the series is absent, find out whether liveness was unreadable on the host (the job then sends no
      wake gauges by design)
-303. **W1518** (ready) nemik-witnesses' file observer reports mtime (epoch seconds) and size beside exists, so a witness
+289. **W1518** (ready) nemik-witnesses' file observer reports mtime (epoch seconds) and size beside exists, so a witness
    can say a stamp moved (luthen-observability W1927)
    - next: Extend _file in src/nemik/witnesses.py: {exists, mtime, size} for an existing path (stat, never read); keep
      exists-only for a missing one; a test in tests/ for the three shapes; document in the module docstring and in
      skills/nemik/SKILL.md; the mtime is a number so Rego compares it with time.parse_rfc3339_ns(input.now) / 1e9.
-304. **W1522** (ready) A checked-in differential harness: freeze the inputs, mask named clock fields, run old-new-old
+290. **W1522** (ready) A checked-in differential harness: freeze the inputs, mask named clock fields, run old-new-old
    - next: Write tools/diff_harness.py (and a test): it snapshots the 18 queue files to a scratch root, takes a list of
      argv modes and an old and a new source tree, masks regexes named on the command line (the proven ones: '`<n>` h'
      and '`<n.n>` d'), runs old, new, old with PYTHONHASHSEED=0 and prints equal, drift or the first differing lines;
      then the G0 sensor lines name it. It replaces w1480_diff, w1496_diff, w1500_diff, w1508_diff, w1509_diff and
      w1521_diff in the scratch directory, which were each found after a failed first attempt.
-305. **W1549** (ready) A guard test fails a tests/ module that imports a tools/ module with no BUILD.bazel data entry
+291. **W1549** (ready) A guard test fails a tests/ module that imports a tools/ module with no BUILD.bazel data entry
    for it
    - next: Extend tests/test_test_inputs.py (or a sibling) with a check that reads every tests/test_*.py for imports of
      a tools/ module and fails when BUILD.bazel carries no data entry for that tools file under that test's name (the
      check_run_rows, namespaces, peerwindow, working_unnamed pattern); run it directly before each gate. It must fail on
      the pre-fix BUILD.bazel (stack 915's first submit). Rides a lowering stack as an entry.
-306. **W1568** (ready) Successor table: the next stack rows per lane (ruff, mypy, codon), each probed or not with its
+292. **W1568** (ready) Successor table: the next stack rows per lane (ruff, mypy, codon), each probed or not with its
    measured K, kept on this card and updated at each landing
-307. **W1648** (ready) Parsed queue and ledger graphs are kept on disk between processes keyed by file stamp, so a fresh
+293. **W1648** (ready) Parsed queue and ledger graphs are kept on disk between processes keyed by file stamp, so a fresh
    nemik command does not reparse every repo
    - next: Reopen only on a measured need
-308. **W1661** (ready) mtools rows read unknown at 15:37:04Z with the ended_series fix live, so its cause is not proven
+294. **W1661** (ready) mtools rows read unknown at 15:37:04Z with the ended_series fix live, so its cause is not proven
    - next: Verify the pin move: when luthen reports the nemik-pace sha edit applied, read the published pace's first
      line for the build key (it must be 4d084f7 or a later build) and compare every row with a read-only run of the
      tree's code at the same minute (nemik-hostroot --pace --out a scratch file): the mtools rows must leave unknown;
      then read it again a day later, because 4d084f7's code has never run in the unit; then build the nemik-rank --pace
      warning (R242 f1): print a warning line when the published pace has no build key or a build that is not an ancestor
      of main
-309. **W1759** (ready) atomize_walls orders the walls greedily by rows brought close to free per module changed and
+295. **W1759** (ready) atomize_walls orders the walls greedily by rows brought close to free per module changed and
    writes each wall's wave into its card
-310. **W1760** (ready) nemik-rank weighs a card's size in its order, so a cheap wall under many rows outranks an
+296. **W1760** (ready) nemik-rank weighs a card's size in its order, so a cheap wall under many rows outranks an
    expensive one under slightly more
-311. **W1978** (ready) Design for cold review: a codon fall is a strict shrink of the open edge cards, derived from
-   source, with discovery recorded and the rows as the end test
-312. **W1217** (ready) Generate one Bazel codon-census target per src/nemik module whose inputs are that module's import
-   closure and the pinned compiler, so the cache re-runs only the modules a change touches
-   - blocked on: W1216
-   - next: After W1216: generate one bazel census target per module from import-graph.json, data = the module and its
-     closure; a test that every module has one
-313. **W1076** (ready) Decide from the split whether W1036 starts with per-test data narrowing and write the decision
-   into docs/per-test-targets.md
-   - blocked on: W1075
-314. **W1103** (ready) Stop adding the Activity triples to the merged graph once all six consumers read the summary, and
-   measure the build's peak
-   - blocked on: W1098, W1099, W1100, W1101, W1102
-315. **W1218** (ready) Retire the whole-glob codon census test once the per-module targets cover every module, with a
-   test that the set of targets equals the set of modules
-   - blocked on: W1217
-   - next: After W1217: drop the whole-glob census target and add a test that the per-module targets equal the set of
-     src/nemik modules
-316. **W1981** (ready) Landing-rate rows: the pace carries each repo's landings per day, read from landings.json through
+297. **W569** (ready) Codon paydown 3: keyword-only marker '*,' in alarm calendars hostapply rank wake witwait conflicts
+   with ruff's FBT001
+   - next: Decided in the audit: turn the 5 boolean keyword-only parameters (hostapply 2, rank 2, calendars 1) into
+     two-member enums, then remove the 7 bare '*,' markers (alarm, calendars, rank, wake, witwait, hostapply); where
+     more than one keyword-only argument remains use the W1257 typed parameter object. Do it as a codemod in a
+     mikemol-scratch worktree, run the tests of each module, lower codon-baseline.json. Held behind mtools:W2301 like
+     the other code. Owner nemik session, due 2026-11-13, witness: the marker count in the six modules falls from 7 to 0
+     and the module tests pass
+298. **W700** (ready) W581 part 2: the SLA breach priority band is derived from the wait SLO and its error budget, not a
+   tick count
+   - next: Derive the cross-repo wait SLO from the ledger, not from a typed number: take the answered cross-repo waits'
+     ages from every repo's ledger, state the target fraction and age (as W489 learns 9 in 10 for small cards), the
+     error budget is the remainder; then band = burn rate of that budget over the current wait ages, added to salience
+     as a band above ordinary work. Write the derivation first in docs/wait-slo.md with the numbers it read, and a test
+     over a fixture ledger. Owner nemik session, due 2026-11-12, witness: the test computes the SLO and a breach band
+     from a fixture
+299. **W564** (ready) Codon to wasm32: a sound target triple and a runtime that links, or another way to carry the typed
+   core into the browser
+   - next: Take option (3): run the typed core natively and let the browser read its JSON (measured on 2026-10-16: a
+     386,000-byte binary reading and writing the same JSON). Write docs/codon-to-browser.md with the three options in
+     plain words, the measurement, and the revisit trigger (a wasm32 triple from Codon upstream, or a wasi sysroot and
+     wasm32 compiler-rt on the host). Then unblock W423 with the native path. Owner nemik session, due 2026-11-12,
+     witness: the doc exists and W423 names the native path
+300. **W1981** (ready) Landing-rate rows: the pace carries each repo's landings per day, read from landings.json through
    landings.series, with a test
    - next: Read landings.series and how pacewrite assembles rows; add a per-repo landings-per-day row (rows in the last
      N days over N, a stack being the rows sharing one gate_s); test on the landings document fixture. Manifest is a
      first guess: confirm pacewrite is where rows are written.
-317. **W1982** (ready) Cards rows: the pace carries each repo's cards opened and closed per week from history.weekly,
+301. **W1982** (ready) Cards rows: the pace carries each repo's cards opened and closed per week from history.weekly,
    stamps-only for a queue with no git history, with a test
    - next: Read history.weekly and the stamps-only snapshots (f74763a); add per-repo cards-opened and cards-closed per
      week to the pace rows for a queue with and without git history; test outside a repository. Manifest is a first
      guess: confirm pacewrite is where rows are written.
-318. **W1983** (ready) Horizon in days: each pace row carries its horizon at the landing rate, the value over the fall
+302. **W1983** (ready) Horizon in days: each pace row carries its horizon at the landing rate, the value over the fall
    per day, with a test
    - next: After W1981: horizon in days per pace row = value over the fall per day at the landing rate (the pace already
      carries horizon in landings); add the days column and test it on a fixture; a row with no fall reads the impasse,
      never blank.
-319. **W1985** (ready) Replay data reach: per repo, how far back the queue's git history, the landings file and the
+303. **W1985** (ready) Replay data reach: per repo, how far back the queue's git history, the landings file and the
    Victoria ratchet series go, stated as dates and counts
    - next: For each repo under the fleet root: the date of the oldest commit that carries its .claude/paths-forward.json
      (git log --diff-filter=A on the file), the number of queue commits, the oldest and newest row of its landings
      document, and the oldest and newest sample of its mikemol.ratchet.value series from the store
      (nemik.endpoint.vm_export, read-only, since 90d and longer). Write the table into docs/learned-pace-replay.md and
      onto this card. No gate time.
-320. **W1986** (ready) Replay engine: a read-only script replays the candidate rank (umbrella as ratchet, learned pace
+304. **W1986** (ready) Replay engine: a read-only script replays the candidate rank (umbrella as ratchet, learned pace
    per class of work, salience times 1 over pace when at least half the children have a pace, else atomize first) over
    the queue history
    - next: After W1985 names the reach: write tools/pace_replay.py as pure functions over a queue's commit history (the
@@ -2663,50 +2705,367 @@ counter 1989 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:734
      shape, the candidate order (salience times 1 over pace when at least half the children have a pace, else atomize
      first), and a report that prints the candidate order beside the live one at chosen past dates. It writes nothing to
      any queue and runs no gate.
-321. **W1987** (ready) Replay questions 1 and 2: would the candidate rank have picked mtools' stacked paydown of last
+305. **W1987** (ready) Replay questions 1 and 2: would the candidate rank have picked mtools' stacked paydown of last
    week, and surfaced mtools:W2300 unprompted
    - next: After W1986: run the replay at the dates of mtools' stacked paydown of last week and answer from its report
      whether the candidate order would have ranked those stacks first, and whether the card for mtools:W2300 (the guard
      question, 2026-11-05) would have surfaced unprompted. Write both answers with the dates and the ranks on this card
      and in docs/learned-pace-replay.md.
-322. **W1988** (ready) Replay questions 3 and 4: would atomize-first have fired on codon before today, and how soon does
+306. **W1988** (ready) Replay questions 3 and 4: would atomize-first have fired on codon before today, and how soon does
    a learned pace appear for a new class of work
    - next: After W1986: from the replay, the first date at which the codon umbrella (W1400, the guard's cited paydown
      card) would have had fewer than half its children with a learned pace, so atomize-first fires, and for each class
      of work the number of closes the learned pace needs before it appears (the median needs how many closes). Write
      both with dates and counts on this card and in docs/learned-pace-replay.md.
+307. **W1994** (ready) Ratchet atomizer plan: tools/atomize_walls.py generalizes from Codon to any declared ratchet,
+   reading the census rows (file and rule) and printing a dry-run plan of leaf cards under one umbrella per ratchet,
+   idempotent by title
+   - next: Design first: write docs/ratchet-atomizer.md from the evidence on W1993 (input rows with file and rule, one
+     umbrella per ratchet row, leaf per entry, title stable across runs, dry run by default, applied by each repo to its
+     own queue). Then generalize atomize_walls.plan to take rows as data, not the Codon closure, with a test on fixture
+     rows. Ask mtools for a census mode that lists each row's file and rule. No stack until the guard admits one.
+308. **W1995** (ready) Ratchet atomizer close rule: a leaf closes when its row leaves the census, derived from the
+   ratchet and never by hand, with a check that refuses a hand close
+   - next: After W1994: a leaf closes only when its row has left the census (derive the open set from the ratchet file,
+     close the cards of rows that are gone, through the writer), and a nemik-check shape that warns on a leaf closed by
+     hand while its row is still in the census. Test on a fixture ratchet that loses one row.
+309. **W1996** (ready) Ratchet atomizer grouping: group leaf cards by the import graph where one exists, so the flow
+   salience finds the levers
+   - next: After W1994: for a ratchet whose rows are Python modules, group leaves by the import graph
+     (tools/codon_closure.py own_row deps: the leaves of a module wait on the leaves of the modules it imports), as the
+     hierarchy mode already does for Codon; a ratchet without a graph gets leaves under its umbrella only. Test the
+     grouping on a fixture graph.
+310. **W1997** (ready) Rolling-blocker check: nemik-check warns on a card blocked on a card with open work that keeps
+   landing, from the landings rows, with a learned bound
+   - next: Read landings.read_document and landings.series, then add the nemik-check shape: for each blocked_on edge to
+     an open card, count the landings citing the blocker since the block was set, compare to a bound learned from the
+     fleet's landings per card before close (a quantile, not a typed number), and warn 'rolling blocker, split it'
+     naming the blocker and the count. Test with a fixture landings document. Evidence: mtools:W2219 (about 45
+     hooks/pyproject.toml entries) held mtools:W2287 for days.
+311. **W2000** (ready) Add the flip line on apply with a test in tests/test_witnesses.py
+   - next: 2026-11-07 after W1999: edit src/nemik/witnesses.py to print the flip line on apply and add the case to
+     tests/test_witnesses.py; src edit, rides the next src stack
+312. **W2012** (ready) Make open_witnesses carry issued_at so the apply loop can compare it
+   - next: 2026-11-07 after W2011 shows the problem is real: extend open_witnesses in src/nemik/witnesses.py to return
+     issued_at beside the other fields and update its callers and tests/test_witnesses.py; src edit, rides the next src
+     stack
+313. **W2013** (ready) Refuse to close a witness that held at mint in nemik-witnesses --apply and print VACUOUS, with a
+   test
+   - next: 2026-11-08 after W2012: in the apply loop of src/nemik/witnesses.py refuse to close a card whose witness
+     holds within one apply interval of issued_at, print VACUOUS repo:Wn, and test it with a card minted and applied in
+     one interval; src edit, rides the next src stack
+314. **W2018** (ready) Add the nemik side-by-side mode that aligns each repo's rows by surface
+   - next: 2026-11-09: DESIGN FIRST: how does a side-by-side collect each repo's mikemol-surfaces output without nemik
+     reading a sibling checkout? (each repo publishes its own JSON, or a peer sends it, or mtools aggregates); write the
+     choice on this card, then build tools/side_by_side.py over a list of already-collected JSON files and test it on
+     two fixture rows in tests/test_side_by_side.py
+315. **W2034** (ready) tomlread v2: a Val tree reader with an Exception subclass, accessors, and an import-and-call
+   probe in the staged tree
+   - next: Rewrite tomlread in the scratch worktree for Codon: a TOMLDecodeError that derives from Exception with an
+     explicit __init__(self, msg: str), and a tagged Val class (kind, text, num, flt, flag, items: list[Val], table:
+     dict[str, Val]) in place of object, with accessors (get, as_str, as_int, as_list, keys). The differential test
+     converts a Val tree to a dict and compares with tomllib on the 7 repo files and 74 fleet files. Probe by import and
+     call in the staged tree (tools/codon_census.stage plus probe), in both modes, with the bazel-cache codon; the file
+     alone is too weak a sensor. Owner nemik session, due 2026-11-12, witness: loads('a = 1') compiles and runs in the
+     staged tree and the differential test passes
+316. **W2035** (ready) Migrate the 14 tomllib callers to the tomlread accessors in the dotted import form, with the
+   census as the sensor
+   - next: After W2034: move each of the 14 callers (22 tomllib.loads calls, each typed object or dict[str, object] on
+     its line) to the tomlread accessors in the dotted import form (from nemik.tomlread import ...; the bare from nemik
+     import is rejected by Codon), by module group, each group built in a mikemol-scratch worktree with the module tests
+     and the codon census as the sensors, and check.py's two except clauses naming TOMLDecodeError. Compare the cost
+     with the other waves before building more than the first group. Held behind mtools admitting a nemik row. Owner
+     nemik session, due 2026-11-14, witness: the census passes and the tomllib kind leaves the closure of the moved
+     modules
+317. **W708** (ready) The no-witness Warning fires on cards whose step is a behaviour (a command refuses without a flag)
+   that no observer can see: name the honest witness, a test result for a tree sha, or stop warning where none exists
+   - next: Narrow the no-witness Warning in shapes.ttl for cards whose step is a behaviour and that name no observable
+     (the default decided in the audit; the input.test observer is carded only if a test-result witness proves wanted).
+     First case: el-openglo:W702. A test over a fixture behaviour card expects no Warning, and one over an observable
+     card still expects it. A cold review before it ships. Owner nemik session, due 2026-11-13, witness: both fixtures
+318. **W879** (ready) Ask el-openglo: nemik:W516 (withholding at the source): please repin your mikemol-paths-forward to
+   mtools 5ba261f or
+   - next: 2026-11-07: read the ask on this card (repin to mtools 5ba261f for nemik:W516) against the el-openglo reply,
+     and close it if el-openglo:W754 delivered the repin, per the 2026-10-29 letter
+319. **W2042** (ready) Pace fetch: adaptive export range (ask 3d, widen to 30d only for ratchets with too few landings)
+   so the pace unit fits its 120 s CPU and 640 MiB bounds
+320. **W2052** (ready) Tests that resolve their own path can read undeclared data under bazel
+   - next: Confirm on test_schemagen_errors (runfiles-relative path, label dropped fails, restored passes), then run
+     each of the up to 40 resolve users with its data labels removed and count the escapers
+321. **W459** (ready) OperatorActShape escalates Warning to Violation after N ticks, N learned from ledger history
+   - next: Read ticks_blocked of the no-command asks over the ledger history, learn N (no typed number), add a second
+     sh:property at sh:Violation gated on ticksBlocked >= N in shapes.ttl, with a test over a fixture; a cold review
+     decides whether the escalation ships. Owner nemik session, due 2026-11-13, witness: a fixture ask past N yields a
+     Violation and one under N a Warning
+322. **W979** (ready) A nonzero ratchet is a priority marker: every repo with one needs an open pay-down card (a shape
+   warns when missing), those cards rank in a high band above feature work, and a ratchet that has not fallen over a
+   learned window raises an alert
+   - next: 2026-11-07: read whether mtools now publishes ratchet_value{repo, ratchet} from its census (mtools:W1905 is
+     done per the 2026-10-29 letter); if so add the missing-pay-down shape in src/nemik/data/shapes.ttl, else re-block
+     on the census card by symbol
 323. **W1762** (ready) atomize_walls emits the hierarchy: instance cards per module and blocker kind, module-to-module
    import edges, kind umbrellas, with a dry run
 324. **W1989** (ready) Edge-ratchet replay: re-derive the table's class for each of the last commits touching src in
    this repo, and compare to the reviewer's readings
-325. **W1139** (blocked) The pace carries cards and landing-rate rows beside the ratchets, each with its horizon in days
+325. **W2001** (ready) Split landing_report's dirty-paths count into live-risk, held and other classes
+   - next: 2026-11-07: in tools/landing_report.py classify git status paths into live-risk (src/, tests/, tools/,
+     checks/, .githooks/), held by design (docs/, .claude/held-*) and other, print one line per class, and test it in
+     tests/test_landing_report.py; tools edit, rides the next stack. Owner nemik session, due 2026-11-07, witness: the
+     test
+326. **W2014** (ready) A one-call mint wrapper that refuses a card with no manifest or size
+   - next: 2026-11-08: write tools/mint.py that takes a title, a dated next step, manifest paths and a size, and calls
+     the writer's --add and then --update with --manifest and --size in one go, refusing when no manifest is given; test
+     it on a fixture queue in tests/test_mint.py; then name it in standing 11 via the warm reviewer's G7. Owner nemik
+     session, due 2026-11-08, witness: nemik-check's unmanifested count stays at its declared bound after a mint. Held
+     behind github:W98 and mtools:W2301
+327. **W2015** (ready) Publish a push-time gauge from waitemit, nemik_wake_pushed_timestamp_seconds per repo, on every
+   push
+   - next: 2026-11-08: in src/nemik/waitemit.py add one gauge per repo carrying the time of the push in seconds, sent
+     with the other wake gauges in the same post; test in tests/test_waitemit.py that every push carries it; document
+     the cadence statement in the module docstring (the job's period is the host's, read from its unit). Answers
+     luthen-observability:W2049 part 2. Owner nemik session, due 2026-11-08, witness: the test and the series in the
+     store. Held behind mtools:W2301
+328. **W2019** (ready) The no-warrant warning matches the phrase 'operator ruling' even when a card says 'not an
+   operator ruling'
+   - next: 2026-11-09: write tests/test_warrant_shape.py with the texts of the five false matches as cases that must NOT
+     warn (W1276, W1277, W1280, W47, W2019) and the eight true claims as cases that must (W1660, W979, W1993, W846,
+     W1108, W1411, W1984, W1400, before their warrants); then fix the matcher behind the W597 shape so a negated mention
+     does not count
+329. **W2021** (ready) Keep tools/pace_replay.py as the instrument any window proposal must beat
+   - next: 2026-11-10: the held tools/pace_replay.py and tests/test_pace_replay.py are the instrument: a later pace
+     window proposal must show fewer than 66 false oks on it (the current rule's count over 1972 scored landings of main
+     for codon) before it reaches the host; add the per-time table so a rule can be set against published readings; ride
+     the S3 tools stack. Owner nemik session, due 2026-11-10, witness: the instrument landed and its numbers recorded on
+     W2020's residue entry
+330. **W2022** (ready) nemik-inbound asks survey for the graphs only, so it never runs the SHACL pass
+   - next: 2026-11-07: in src/nemik/blocks_cli.py pass check=False to both survey calls (lines 125 and 202, which use
+     only the graph); prove the --json output is byte-equal to the current one on the live queues; add a test in
+     tests/test_inbound_nocheck.py that a survey call from nemik-inbound computes no findings; time before and after.
+     Held behind mtools:W2301. Owner nemik session, due 2026-11-08, witness: equal output and the time
+331. **W2023** (ready) Every other survey caller that discards the findings passes check=False (R280 finding 2)
+   - next: Pass check=False at stackable_cli:196, starved:140, calwrite:321, calendars:491, pacing:128, check.py:1482
+     and 1522, overlaps:156, waitemit:200, each reading only the graph (third tuple item is _). Compare each command's
+     output byte for byte before and after, run tests that patch survey, add a test per module group. Held behind
+     mtools:W2301. Owner nemik session, due 2026-11-09
+332. **W2024** (ready) Codon instance waves built in an isolated worktree and kept as held patches (R287)
+   - next: Wave 1 is W1847 (nemik.index stops using weakref, src/nemik/index.py), chosen for no change of output; its
+     risk is memory lifetime. Step 1, read only: read index.py lines 70 to 125 (the scope table, the forget callback)
+     and name every place a graph is released (nemik-serve builds and drops many graphs); if no clean release point
+     exists, record that and take the next wave. Step 2: in a mikemol-scratch worktree outside the repo tree, write the
+     retention tests FIRST, one for a single graph (the index is gone when the graph is released) and one over a loop of
+     a few hundred graphs (the table does not grow), and run them against the CURRENT weakref code to show they pass
+     there. Step 3: replace weakref with explicit eviction at the release points and run the tests again, plus
+     tests/test_architecture.py and the tests that mention index. Step 4: save .claude/held-codon-wave-1.patch and
+     record the effect in docs/codon-walls.md. Held behind mtools:W2301. Owner nemik session, due 2026-11-09, witness:
+     the retention tests pass on both versions and the patch applies to HEAD
+333. **W2026** (ready) checks/claims.py sees the no-dot nemik import form, and the two claims it then fails are
+   corrected (R292)
+   - next: Apply .claude/held-claims-finder.patch (the widened _imports_nemik) in a scratch worktree, add
+     tests/test_claims_imports.py over the four forms (from nemik.x import y, from nemik import a, from nemik import a,
+     b, the parenthesised list, and an as alias), then decide each failing claim from the code, not by editing the set
+     to pass: (1) adapter-is-the-foundation-layer fails because adapter.py imports editverbs and warrants with from
+     nemik import; (2) hub-modules-depend-on-everything-below fails because metrics.py's set now includes cachestore,
+     forecast, history and tiers. Fix by updating ARCHITECTURE.md and the claim sets only after reading each edge. Owner
+     nemik session, due 2026-11-10, witness: test_architecture passes with the wider finder and the new test bites on a
+     revert
+334. **W2027** (ready) ActiveCardShape: confirm it still fires for a repo with ready cards, recent ledger ticks and zero
+   working, and that it reaches the operator's view (github-14 relay, cites nemik:W540)
+   - next: Read-only first: run nemik-check --warnings --repo luthen-observability and read whether an ActiveCardShape
+     row names zero working with ready cards; read the shape in src/nemik/data/shapes.ttl and the rule W540 landed; then
+     check where the warning is shown (nemik-check, the web view, the tick-open hook). If it does not fire for the shape
+     the peer describes (ready to done with no working step, many ready, ledger ticks recent), write the failing case as
+     a test first, then fix. Owner nemik session, due 2026-11-10, witness: a test over a queue with 300 ready, 0 working
+     and a ledger tick in the last hour that expects the warning
+335. **W2028** (ready) Mark on the graph a card whose state changed within a recent window, from the ledger, including
+   one that skipped working (github-14 relay)
+   - next: Design first, on the card: the ledger holds every transition; define a transition record (card, from, to, at)
+     read from the ledger, a window (default 24 hours, declared in rank-weights.toml), and three marks on a card: moved
+     (any change in the window), passed through working, skipped working (ready to done with no working line). Decide
+     where it renders (the web view halo or chip, nemik-check, the metrics gauges) and read src/nemik/web/index.html and
+     the a11y rules before touching it (the a11y-adversary agent reviews colour and chip changes). Then a test over a
+     ledger fixture. Owner nemik session, due 2026-11-12, witness: a fixture with one card ready to done and one ready
+     to working to done, each marked as designed
+336. **W2029** (ready) Decide the page structure in docs/page-structure-map.md (Orders as its own view or a section of
+   Health, pane or drawer, Wake split), then unblock W938
+   - next: Read docs/page-structure-map.md and src/nemik/web/index.html, decide the three questions with the
+     a11y-adversary review of any colour or chip change, write the decision in the doc, then unblock nemik:W938 with it.
+     Owner nemik session, due 2026-11-13, witness: the doc states the three decisions and W938 is unblocked
+337. **W2030** (ready) Find nemik's public base URL from the deployment manifest, or record none yet, then unblock or
+   drop W941
+   - next: Read deploy/deployment.yaml and the Flux ship's ingress or service name for the namespace nemik; if a public
+     URL is derivable, record it in docs and unblock nemik:W941 with it; if not, record none yet and drop W941 with that
+     reason. Owner nemik session, due 2026-11-13, witness: the URL or the none-yet statement is on W941
+338. **W2031** (ready) Tracker tokens for nemik:W963: check that no existing data serves, and only then ask the operator
+   for the two token files
+   - next: Read what W963 needs (issues read and write on one GitHub repo, the issue scope on one Forgejo repo) and
+     whether the queue export, the fleet's existing gh or Forgejo access, or a prior grant already serves; if nothing
+     does, block this card on 'operator: act provide a fine-grained GitHub token limited to issues read and write on one
+     repo you name, and a Forgejo token with the issue scope on one repo, each as a file path outside the repo
+     (nemik:W963 sends nothing before then)'. Owner nemik session, due 2026-11-13, witness: the card's evidence names
+     what was checked
+339. **W2032** (ready) Learned required fall for the ratchet pace: nemik's half is the weight of a fall, the fit and the
+   replay (mtools:W2200)
+   - next: Ask mtools for the full list of github-14's six changes to draft 1
+     (.claude/design/W2200-learned-required-fall.md in mtools), then answer the three questions from the code: (1) is a
+     fall's weight available per removed entry or only per card (read the baseline shapes: ruff per file and code, mypy
+     per file, codon per module and kind pair), (2) can nemik publish credit per row from ratchetseries or must mtools
+     derive it from the window's landings, (3) does the fit run per ratchet kind or per ratchet. The judge is
+     tools/pace_replay.py with credit in place of the per-stack rule. Bar (github-14, relayed, no transcript line): beat
+     both W2020's 155 false oks and today's 66, and report false behinds beside them. Estimator: a stall must not lower
+     the rate, a burst of cheap falls must not set it. Weight must come from the debt itself, not from nemik-rank's
+     position (it renumbers on status change). Operator ruling behind it: host line 145045, uuid
+     a4c93cee-e11e-40ab-9a25-146d932c07f1, human, 20:14:48Z, verified: not his to set, nonzero, learned, relative,
+     emergent. Owner nemik session, due 2026-11-12, witness: pace_replay reports false oks and false behinds for the
+     credit rule against 155 and 66
+340. **W2033** (ready) The codon edge detector: own kinds and import edges per module from the syntax tree, checked
+   against the baseline's first compile errors (W1978 design v8)
+   - next: Build tools/codon_edges.py: kinds_of(text) reads one module's own kinds (every import's module name with
+     importlib.metadata and importlib.resources as two kinds, the __future__ import, typing.TYPE_CHECKING, @dataclass,
+     datetime.UTC, and kwonly for a bare star-comma), edges(root) reads the nemik import edges (dotted, plain,
+     nemik.core.X mapped to a node, relative), closure(...) unions kinds over the edges, and check_oracle(baseline)
+     lists every row of codon-baseline.json whose first compile error names a kind that is NOT in that module's closure.
+     The oracle is the baseline file's own first errors (65 rows, two modes each). Test in tests/test_codon_edges.py
+     with small source fixtures and the oracle over the live tree. No src module: tools only, so no live reader breaks.
+     Owner nemik session, due 2026-11-09, witness: check_oracle prints no row, or names each row it cannot explain
+341. **W2036** (ready) Push the three codon rows nearest to compiling to a full compile on a copy, one error at a time,
+   and re-rank the waves from the chains (R303)
+   - next: The wall table was built from each row's FIRST compile error, so what stands behind it is unmeasured, and the
+     typed-rows campaign put object containers into most modules, which Codon rejects. Take the three baseline rows
+     nearest to compiling (fewest kinds in docs/codon-walls.md's closure), copy them into a scratch worktree, fix the
+     first error, recompile, and repeat until each compiles whole or the chain is longer than ten errors; record each
+     chain in docs/codon-walls.md with the error text and the construct, then re-rank the waves (W2024) by chain length,
+     not by first error. Owner nemik session, due 2026-11-13, witness: three chains in the doc and W2024's wave order
+     restated from them
+342. **W2037** (ready) The nemik builder container is OOMKilled about hourly at its 1536Mi limit
+   (luthen-observability:W2210): measure its real peak and fix or size it
+   - next: Measure the peak resident memory of one cold and one warm nemik-serve --publish over the real fleet root with
+     /usr/bin/time (max RSS), a private NEMIK_CACHE_DIR and a scratch publish directory, so the censored series is
+     replaced by a number; then answer luthen: the expected peak, whether it is a leak (each loop iteration is a fresh
+     process, so it is a per-build peak, not a leak across iterations) and the cause of its growth (fleet size since the
+     2026-10-26 sizing, the SHACL re-validation I found in W2016, two builders on one cache volume). Candidate fixes in
+     nemik's half: publish with check false where findings are not shown, bound the SHACL pass, serialize the cache
+     writer. Owner nemik session, due 2026-11-08, witness: a max-RSS number for cold and warm and the answer sent to
+     luthen-observability
+343. **W2038** (ready) Publish each document family on its own from only the inputs it needs, and let the client pull
+   the findings and other shapes on demand (the user, 2026-11-07)
+   - next: Inventory every file build_static_unscoped writes (graph.json and its pieces, the data documents,
+     hashes.json, each repo's TRS feed and outbox, catalog, schemas, the check and letters documents) and for each one
+     name its inputs: queues only, queues plus ledgers, plus the SHACL findings, plus series or history. Measure the
+     memory and CPU of each family built alone (the scratch scripts rss_publish.py and rss_static.py are the method).
+     Then split the publish into independent builders per input set, each writing its documents into the snapshot (or
+     its own sibling directory) on its own cadence, with the findings family as its own artefact the page fetches when
+     it needs it. Keep the 2026-10-15 ruling (W500, W504): the pod does no graph work at request time and none in a
+     long-lived process, so the 'pull' is a pull of a separately built static document, not a request-time computation.
+     The user's words, quoted from this session: 'all of these should be async pulls from the client. No reason to have
+     all of these different data shapes be calculated in one API call to the server.' If the user means request-time
+     computation, that reverses the 2026-10-15 ruling and must be asked. Owner nemik session, due 2026-11-14, witness:
+     the inventory table with inputs and measured peaks, and one family built alone with its peak
+344. **W2039** (ready) A declared gate-repair band above velocity, set by the card's vector or tag, auditable in the
+   ledger (github-14 for mtools:W2322)
+   - next: Wait for mtools to say the W2328 row has landed (W2330 and its review first), then submit the W2039 stack
+     from the main repository with mikemol-commit --stack (files frozen from scratch/W2039 with --freeze-from), queue
+     files inside. Never edit the seven blobs. Hold: no submit before then.
+345. **W2040** (ready) Demand from a held or blocked card flows to its in-graph blockers, tested by replay before and
+   after on today's graph (github-14, demand is salience)
+   - next: Read src/nemik/flow.py and the --workable rule (nemik:W252): today only ready or working cards ground demand,
+     so nemik's held stack pulls nothing on mtools:W2301's rows. Change: a card blocked on another card INSIDE the graph
+     is waiting and its demand flows to that blocker (only a block the graph cannot reach absorbs nothing). First write
+     tools/flow_replay.py: compute nemik-rank --flow and each repo's round for today's graph under both rules and print
+     before and after (the rounds of all 17 repos, the cards that move, the largest rank changes) so the fleet is not
+     reordered badly before any rule changes. Then the change behind a test. The operator ruling cited by github-14 is
+     verified: host line 94798, uuid a9a6013d, human, 2026-10-24T23:58:02Z (memory note feedback-demand-is-salience),
+     'that's precisely what salience supposed to communicate'. Ranks with W2039, behind W2301's rows. Owner nemik
+     session, due 2026-11-12, witness: the before and after tables and a test that a held card's demand reaches its
+     in-graph blocker
+346. **W2041** (ready) Trace why mtools:W1259 (salience 0) ranks 5th in mtools' round ahead of weighted cards
+   (github-14)
+   - next: Decided with github-14 (relayed, no transcript line): (a) print the class weight and member count on the
+     round line now, no ranking change, and (c) count only manifested members as the decision, both queued behind
+     W2301's rows. Build (a) in a scratch worktree (src/nemik/roundcli.py round_lines and its test, held patch
+     .claude/held-W2041-round-line.patch). For (c) show what changes in W2040's replay: add the manifested-members-only
+     fruit rule as a third column in tools/flow_replay.py (old rule, W2040's rule, and with (c)) and print the rounds
+     before and after. Owner nemik session, due 2026-11-10, witness: the round line shows class weight and members, and
+     the replay shows (c)'s effect on the rounds
+347. **W2043** (ready) Codon needs a tagged JSON value type in place of dict[str, object], so apischema and the schema
+   builders compile
+   - next: Read W2034 (tomlread v2: a tagged Val class) and decide one tagged value type for both. Probe in scratch with
+     the bazel-cache codon a small Val class (str, int, float, bool, None, list, dict variants) building one apischema
+     record, both modes. Then port apischema.py (held patch .claude/held-W2024-apischema-no-importlib.patch is the
+     import half). Witness: probe_modules apischema compiles in both modes and codon-baseline loses 2 entries. Held
+     behind the pace guard until W2039 is admitted.
+348. **W2044** (ready) Codon needs an argparse replacement for the CLI modules (ask_cli, work and the other *_cli entry
+   points)
+   - next: Probe with the bazel-cache codon which parts of a CLI Codon accepts (sys.argv, a hand-written flag reader
+     returning a typed struct), design one small typed flag parser, then port ask_cli.py and work.py (the two size-2
+     argparse rows of tools/codon_closure.py). Witness: probe_modules ask_cli and work compile in both modes and
+     codon-baseline loses their 4 entries. Decide whether the parser lives in mtools or nemik and ask mtools first if it
+     is shared.
+349. **W2045** (ready) nemik-rank --item ignores tagged_band and a bands.toml [tag] table without velocity disables
+   velocity (the two known residues of W2039)
+   - next: After W2039 lands: (1) rank.py --item (around line 779) calls tagged_band with the card's touches and
+     bands.tags, test that --item names the gate-repair band. (2) load_bands refuses or adds a [tag] table that omits
+     velocity, a test each way. (3) N3: a weightless gate card that is the fruit stand-in keeps its first place, test
+     through rank() with the fruit row on. (4) N5: decide whether an umbrella's children inherit the tag and test the
+     decision. Witness: each test fails on the W2039 v4 blobs and passes after.
+350. **W2046** (ready) Mechanical rule separating spawn-based tests (answers 28 vs 39) and a check that fails when a
+   test spawns the package without a declared dependency
+351. **W2047** (ready) Compare W1141's cone findings with mtools W2317 (mutants surviving their import cone) when its
+   results arrive
+352. **W2049** (ready) apischema.load and unmanifested still do not compile when called under the pinned Codon
+   - next: Give load and unmanifested a typed manifest reader on the arena tree (jsonparse), then register both calls in
+     the call census registry
+353. **W2050** (ready) Shard test_codon_census: 462 s of its 900 s large timeout is over half
+   - next: Split the census by module range into targets that each stay under 450 s, then run each alone; the loop
+     prompt's 50 percent rule says before the next run
+354. **W2051** (ready) schemagen.render refuses duplicate keys in the manifest as json.loads would not
+   - next: Decide first-wins versus last-wins against json.loads, then make the parser or render refuse a repeated key
+     and add a case to the error tests
+355. **W1139** (blocked) The pace carries cards and landing-rate rows beside the ratchets, each with its horizon in days
    at the landing rate
    - blocked on: W1981, W1982, W1983
    - next: The cards and landing-rate rows: read how the per-card series (W1138) and the pace rows consume weekly(),
      then add the cards-opened/closed and landing-rate columns for a queue with no git history, reading the stamps-only
      snapshots; test on the same queue outside a repository
-326. **W986** (blocked) A ratchet paydown rate requirement with teeth: a repo is behind when a ratchet's fall over a
+356. **W1325** (blocked) Configuration-mechanism census, fleet half: align each repo's per-surface rows (declaration
+   site, change path, load path, review path) side by side and show where the mechanisms differ
+   - blocked on: W2018
+   - next: 2026-11-07: mtools:W2201 is done (the writer refused my block on it: 'W2201 has landed'). Read its per-repo
+     output schema (four columns per surface) from its documented command in this venv, then decide the nemik
+     side-by-side mode and its files (manifest to follow); read only, no sibling file
+357. **W913** (blocked) A nemik witness that is already true when its card is minted is refused, and a witness may carry
+   a freshness bound
+   - blocked on: W2012, W2013
+   - next: Design first: at --add a witness is evaluated once and a true verdict is a defect (a check in nemik-check for
+     a ready or blocked witnessed card whose witness holds on today's facts); then an optional fresh_since bound. Read
+     witnesses.open_witnesses and the W59 check before editing
+358. **W1515** (blocked) nemik-witnesses --apply prints one flip line when a witnessed card closes, in ready_wake's
+   one-line format, for the one Monitor
+   - blocked on: W2000
+   - next: Read the apply path in src/nemik/witnesses.py (where a witnessed card is marked done) and match ready_wake's
+     line format ('`<repo>`:W`<n>` `<old` status> -> `<new` status>'); add the flip line on apply with a test; no new
+     command, so none of the five registries; the queue-event source itself is mtools:W2247 (luthen-observability W1931)
+359. **W986** (blocked) A ratchet paydown rate requirement with teeth: a repo is behind when a ratchet's fall over a
    trailing window of landed commits is below a requirement that only rises
    - blocked on: W994, W1002
-327. **W1010** (blocked) A shape warns on a retro record with zero sustain rows
+360. **W1010** (blocked) A shape warns on a retro record with zero sustain rows
    - blocked on: W982
    - next: Raise the sustain finding from Info to a Warning for a retro with zero sustain rows, once retro records are
      read into the graph (W982)
-328. **W1136** (blocked) Derive the round ceiling from luthen's W1645 series and drum's admission, with no typed
+361. **W1136** (blocked) Derive the round ceiling from luthen's W1645 series and drum's admission, with no typed
    threshold
-   - blocked on: W1271, W1272
+   - blocked on: W1272
    - next: Remaining: (2) decide what 'headroom' is (mikemol-gate-jobs --explain prints an instantaneous
      cores-minus-busy figure; a ceiling from one reading would flap); then wire roundof.ceiling_of into width() with
      cost per entry = ? (the sum is per gate, not per entry: decide the per-entry cost, e.g. the sum over the cards'
      influence cones, W1056/mtools landing-cost) and a term that says measured and bound; until then nemik keeps the
      declared CEILING
-329. **W1056** (blocked) A cost field per card, fed from mtools' landing-cost projection
+362. **W1056** (blocked) A cost field per card, fed from mtools' landing-cost projection
    - blocked on: mtools:W2060
    - next: When mtools:W2060 lands (revendor.EXTRA gains importdag, debtplan, buildtel, plus a first-vendor mode for a
      dist a repo does not name), repin past it, run mikemol-repin --revendor with the first-vendor form for importdag,
      then landcost.py runs mikemol-landing-cost over a card's manifest and parses median/p90 and the unmeasured list;
      unknown cost stays unknown, never zero.
-330. **W1108** (blocked) The pace file carries each ratchet's last paydown time and its tagged paydown card, and
+363. **W1108** (blocked) The pace file carries each ratchet's last paydown time and its tagged paydown card, and
    nemik-rank --pace prints them
    - blocked on: W1665, W1666
    - next: The value is done (W1114, W1115). Remaining, in this order: (1) last paydown time from the series (the last
@@ -2715,14 +3074,14 @@ counter 1989 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:734
      with the date, the landing sha and whether it reached 0 or was retired; see the evidence for what the series
      supplies and what it does not; new row keys need luthen's egress gate to admit them first (tell
      luthen-observability, extend the W1120 fixture)
-331. **W1277** (blocked) Find why the pace file is stale: nemik-rank --pace reads as-of 2026-10-29T04:25:05Z, about 13.5
+364. **W1277** (blocked) Find why the pace file is stale: nemik-rank --pace reads as-of 2026-10-29T04:25:05Z, about 13.5
    h old, so the producer stopped or its egress did
    - blocked on: luthen-observability:W1769
    - next: Wait for the recovery: luthen-observability:W1769 (disk chain) clears DiskPressure, the nemik service
      answers, and the next hourly luthen-nemik-pace.service run writes ratchet-pace.json. Read-back: nemik-rank nemik
      --pace prints a pace of a stamp newer than 2026-10-29T04:25:05Z. The gap in detection is luthen-observability:W1794
      (an age gauge for the pace file and a failed-unit signal).
-332. **W1280** (blocked) Ask whether the gate can compute the lowered ratchet baseline at land time, or keep baselines
+365. **W1280** (blocked) Ask whether the gate can compute the lowered ratchet baseline at land time, or keep baselines
    per file, so paydown stacks stop serializing on one baseline file
    - blocked on: mtools:W2286, mtools:W2167
    - next: Wait on mtools:W1920 (the paydown check). When its rule (c) lands, read how it counts a lowering (the staged
@@ -2731,495 +3090,87 @@ counter 1989 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:734
      ratchet as paid by a measured fall in the staged tree (their option c); option (a), the gate writing the baseline,
      touches the no-expansion rule and needs the operator; option (b), per-file baselines, is a layout change in every
      repo. First step on nemik's side: none until a decision.
-333. **W534** (blocked) One run-row schema for apply, reaper and nudge ledgers: ts, run id, trigger, verdict, detail,
+366. **W534** (blocked) One run-row schema for apply, reaper and nudge ledgers: ts, run id, trigger, verdict, detail,
    inputs digest
    - blocked on: luthen-observability:W1089
    - next: Publish the run-row shape for the five run logs only (W556), then migrate apply-set-runs first (W557)
-334. **W508** (blocked) Every computation the view needs runs over plain Card data, so it can run in the browser
+367. **W508** (blocked) Every computation the view needs runs over plain Card data, so it can run in the browser
    - blocked on: W976
    - next: Umbrella: inventory done (c97c9ba and this commit); W713 (rank port) and W714 (blocks flags port) remain;
      salience, critical and health follow after them
-335. **W516** (blocked) Withholding semantics live in the owning repos: each repo exports only publishable data and the
+368. **W516** (blocked) Withholding semantics live in the owning repos: each repo exports only publishable data and the
    nemik pod mounts only that export
    - blocked on: W877, W879, W881
    - next: Each repo repins, flags its listed cards, runs --export once and tells nemik (W877 gabion, W878 estate, W879
      el-openglo, W880 linux-sources, W881 substrate; mtools-ad for mtools); when all have an equal withheld set, tell
      luthen-observability, which retires its v1 list on that word, keeping the pod fail-closed
-336. **W352** (blocked) Liveness board: which repos had workable cards while asleep
+369. **W352** (blocked) Liveness board: which repos had workable cards while asleep
    - blocked on: luthen-observability:W1295
    - next: After the ship (W636): read the pod's wake.json back for series.board true with luthen's repos; then close
-337. **W353** (blocked) Token cost per card: tokens attributed through the ledger lines that used the card
+370. **W353** (blocked) Token cost per card: tokens attributed through the ledger lines that used the card
    - blocked on: luthen-observability:W1295
    - next: Per-card: mtools:W1546 adds session=`<uuid>` to the ledger line (mtools-ad asked whether session.own() is the
      transcript UUID; I think the lock holder is a name, told them); then join it to luthen's session label. Pod
      readback of series tokens after the ship (W636)
-338. **W500** (blocked) nemik process grows from 312 MiB to the 768Mi container limit within an hour of each start and
+371. **W500** (blocked) nemik process grows from 312 MiB to the 768Mi container limit within an hour of each start and
    is OOMKilled: find what grows and bound it
    - blocked on: W575
    - next: W502 first: nemik-serve --serve DIR as a file server with no model and no rdflib import
-339. **W511** (blocked) Each repo publishes its own piece, and what it withholds is its own choice at the source
+372. **W511** (blocked) Each repo publishes its own piece, and what it withholds is its own choice at the source
    - blocked on: W516
    - next: After W516's writer-side emission exists: each repo's export is its Source (docs/federation.md); decide with
      mtools and luthen who serves it
-340. **W188** (blocked) Tasks read-back from Google itself (KGAPI fetch with the resource's account), so a write is
+373. **W188** (blocked) Tasks read-back from Google itself (KGAPI fetch with the resource's account), so a write is
    confirmed by a fetch, not the helper's exit or Akonadi's cache
    - blocked on: operator: act provide a read-only Google Tasks API token for the read-back helper (operator ruling
      2026-10-09: they will supply their own); no credential is used before it is given
-341. **W224** (blocked) Nested workstreams: nemik resolves, cites and ranks a workstream that contains others, such as
+374. **W224** (blocked) Nested workstreams: nemik resolves, cites and ranks a workstream that contains others, such as
    the host queue above every repo
    - blocked on: mtools
    - next: Once mtools' citation grammar accepts `<parent>`/`<child>`:W`<n>`: discover queues at depth in
      check.workstream_files, name each by its relative path, and add a nested fixture test. No parent weight aggregation
      (operator ruling 2026-10-09).
-342. **W47** (blocked) Dormant watch: when aeternum (W26), gabion (W11, W14), sre-troubleshooting (W3) or amr-skills
+375. **W47** (blocked) Dormant watch: when aeternum (W26), gabion (W11, W14), sre-troubleshooting (W3) or amr-skills
    (W76, letter in inbox) wakes, nudge or verify its unstated operator blocks
    - blocked on: gabion:W11, gabion:W14, sre-troubleshooting
    - next: Each tick: nemik-wake --json; on a wake event for one of the three, message it citing its `<repo>`:W`<n>`
-343. **W461** (blocked) Apply resources as nemik nodes: read luthen's host root published as a queue-shaped document,
+376. **W1079** (blocked) Warn on a repo with zero velocity-tagged open cards while its landing rate is below its trend
+   - blocked on: mtools:W2029
+377. **W461** (blocked) Apply resources as nemik nodes: read luthen's host root published as a queue-shaped document,
    read-only, in nemik-serve
    - blocked on: , W789
    - next: When the stream has lines: read it through the endpoint name (nemik.endpoint), map each id through
      adapter.resource_uri, ingest as a read-only workstream in the view and shapes only, no rank weights
-344. **W490** (blocked) Advice as graph nodes: each deterministic advisory gets a node with its resolution derived from
+378. **W1249** (blocked) Remove the 120 s wall bound from tests/test_salience.py once the stall is named
+   - blocked on: W1244
+   - next: After the stall in W1244 is named or 634 lands green and a repeat shows nothing: remove the timeout=120 wall
+     bound from _pf (a wall bound is the failure W1085 recorded).
+379. **W490** (blocked) Advice as graph nodes: each deterministic advisory gets a node with its resolution derived from
    the world (acted, rejected with reason, ignored)
    - blocked on: W500
    - next: after W500: read each queue's advice list (nemik.cards-style reader) into advice nodes with (tool, rule,
      repo, subject); resolution open/rejected/applied comes from the row's status, not inferred; then the nemik-check
      rows as a second source
-345. **W491** (blocked) Goals as a node type: declared, not inferred from 'nothing open follows it', realized when all
+380. **W491** (blocked) Goals as a node type: declared, not inferred from 'nothing open follows it', realized when all
    its children are, weighted by graph salience
    - blocked on: W461
    - next: today rank.goals infers a goal (an open card nothing open in its repo follows) and sorts by cross-repo
      weight, so an operator goal nobody else waits on (mtools:W1143) sorts last at 0; a goal type published by its owner
      (W461's federation), realized = all children realized (W488's derivation), its weight from W486's graph salience;
      --goals shows its open count, workable frontier and critical path (as computed for W1143 by hand today)
-346. **W1694** (blocked) Codon row adapter: nemik.adapter compiles under the pinned Codon in both modes
+381. **W1694** (blocked) Codon row adapter: nemik.adapter compiles under the pinned Codon in both modes
    - blocked on: W1763, W1764, W1765, W1766, W1767, W1768, W1752
-347. **W1698** (blocked) Codon row blocks: nemik.blocks compiles under the pinned Codon in both modes
+382. **W1698** (blocked) Codon row blocks: nemik.blocks compiles under the pinned Codon in both modes
    - blocked on: W1979
-348. **W1705** (blocked) Codon row check: nemik.check compiles under the pinned Codon in both modes
+383. **W1705** (blocked) Codon row check: nemik.check compiles under the pinned Codon in both modes
    - blocked on: W1800, W1801, W1802, W1803, W1804, W1805, W1806, W1807, W1808, W1694, W1698, W1700, W1706, W1713,
      W1715, W1717, W1719, W1732, W1739, W1742, W1750, W1751, W1758
-349. **W1736** (blocked) Codon row score: nemik.score compiles under the pinned Codon in both modes
+384. **W1736** (blocked) Codon row score: nemik.score compiles under the pinned Codon in both modes
    - blocked on: W1904, W1905, W1906, W1907
-350. **W1731** (blocked) Codon row rank: nemik.rank compiles under the pinned Codon in both modes
+385. **W1731** (blocked) Codon row rank: nemik.rank compiles under the pinned Codon in both modes
    - blocked on: W1882, W1883, W1884, W1885, W1886, W1887, W1888, W1889, W1694, W1705, W1706, W1717, W1732, W1735,
      W1736, W1740
-351. **W1700** (blocked) Codon row cachestore: nemik.cachestore compiles under the pinned Codon in both modes
-   - blocked on: W1782, W1783, W1784, W1785, W1709, W1739
-352. **W1712** (blocked) Codon row history: nemik.history compiles under the pinned Codon in both modes
-   - blocked on: W1825, W1826, W1827, W1828, W1829, W1694, W1700, W1750
-353. **W1717** (blocked) Codon row index: nemik.index compiles under the pinned Codon in both modes
-   - blocked on: W1979
-354. **W1750** (blocked) Codon row wake: nemik.wake compiles under the pinned Codon in both modes
-   - blocked on: W1956, W1957, W1958, W1959, W1960, W1694, W1695, W1698
-355. **W581** (blocked) Wait age into rank: a blocked edge's age (in the waiting repo's ticks) adds to its blocker's
-   salience; an SLA breach is a priority band
-   - blocked on: W700
-   - next: Umbrella: W699 (age adds to salience) and W700 (SLO-derived band) land first
-356. **W925** (blocked) A generator writes one Bazel target per test from pytest's collection, into hierarchical BUILD
-   files
-   - blocked on: W1035, W1036, W1037
-   - next: After W928: first MEASURE, as mtools' own exhaustive-sharding card says: how many tests nemik has (pytest
-     --collect-only), what Bazel analysis and per-target startup cost at that count (a scratch package of the same
-     size), and whether luthen's gate series (mikemol.gate.target.*) can carry a label per test; then a generator that
-     writes a BUILD file per tests package, one target per test node id, each with the data its test reaches (importdag
-     when mtools has it); the venv_pytest.sh args become file::test. Atomize when the measurement is in
-357. **W1740** (blocked) Codon row stackable: nemik.stackable compiles under the pinned Codon in both modes
-   - blocked on: W1926, W1694
-358. **W1758** (blocked) Codon row work: nemik.work compiles under the pinned Codon in both modes
-   - blocked on: W1976, W1977
-359. **W1979** (blocked) Codon cluster blocks+cards+index+salience: these modules import each other and compile together
-   - blocked on: W1774, W1775, W1776, W1777, W1778, W1779, W1796, W1797, W1798, W1842, W1843, W1844, W1845, W1846,
-     W1847, W1896, W1897, W1898, W1899, W1900, W1901, W1902, W1903, W1694, W1736, W1709
-360. **W423** (blocked) Spike 1: pieces.split/assemble in the py2many typed subset, transpiled to TypeScript, replacing
-   index.html graphText(); conformance corpus run on both
-   - blocked on: W564
-   - next: Transpile half waits on mtools:W1070 (websubset gate), W1071 (py2many), W1072 (runner), W1073 (harness); then
-     rewrite pieces.py in the subset, run the TS side over tests/corpus/pieces, delete index.html graphText()
-361. **W567** (blocked) Codon paydown 1: @dataclass(frozen=True) in cards churn flow projection salience score, in a
-   form Codon accepts
-   - blocked on: operator: decide how a class is written so one source runs under CPython and Codon: (A) plain annotated
-     class with explicit __init__ and generated __eq__/__hash__, valid in both but no frozen, (B) a Codon-only .codon
-     core using @tuple (compile-time immutable) reached from CPython by extension build, or (C) a shim; recommended A
-     for modules both worlds use, B for new pure core
-   - next: Operator decision on how a class is written for both interpreters: (A) plain annotated class with explicit
-     __init__ and generated __eq__/__hash__ (valid in both, no frozen), (B) Codon-only .codon core with @tuple, or (C) a
-     shim. Until then do not touch the six modules.
-362. **W569** (blocked) Codon paydown 3: keyword-only marker '*,' in alarm calendars hostapply rank wake witwait
-   conflicts with ruff's FBT001
-   - blocked on: operator: decide whether the 5 boolean keyword-only parameters in hostapply, rank and calendars become
-     two-member enums so the 7 bare '*,' markers can go (Codon rejects the marker, ruff's FBT rules require it for
-     booleans); recommended yes
-   - next: Operator decision: take option (b), enums for the five booleans and plain positional-or-keyword for the rest?
-     If yes, a codemod does the marker removal, the five booleans are hand-converted, tests run, codon-baseline.json
-     lowered.
-363. **W700** (blocked) W581 part 2: the SLA breach priority band is derived from the wait SLO and its error budget, not
-   a tick count
-   - blocked on: operator: decide the cross-repo wait SLO (target fraction of waits answered within what age) and its
-     error budget; the breach band derives from it (W579 bar, relayed by github-8f 2026-10-16)
-   - next: After the SLO is stated: band = burn rate of the budget over the wait ages; add to salience as a band above
-     ordinary work
-364. **W908** (blocked) Survey PROV-O, PROV-DM, AIF, SEPIO, ECO, nanopublications, Carneades and ClaimReview, citing
-   sources, for what each gives that the model lacks (docs/evidence-standards.md)
-   - blocked on: W910, W911
-   - next: Read each standard's primary source (W3C PROV-O and PROV-DM, AIF, SEPIO, ECO, nanopublication and
-     micropublication papers, Carneades, schema.org ClaimReview) and cite it. Per the operator's purpose (line 91566):
-     for each gap name the existing tool or vocabulary we could adopt (a pinned library, an ontology to import, a SHACL
-     shape set), not only a comparison table. Needs WebFetch
-365. **W1017** (blocked) stackable.pick uses the cone relation to chain or separate cards, tested on two cards whose
-   cones intersect
-   - blocked on: W1016
-   - next: Make stackable.pick chain a card behind another whose files sit in its cone and separate cards whose cones
-     intersect, using the cones module over the committed graph and reads
-366. **W1035** (blocked) Measure per-test Bazel targets: how many tests nemik collects, and the analysis and startup
-   cost of a scratch package of that size
-   - blocked on: W1075, W1076
-   - next: Take an idle figure for one target's staging cost, split it by input (venv, Chromium, opa, Codon, corpus),
-     and decide whether W1036 starts with per-test data narrowing
-367. **W1036** (blocked) Write tools/gen_test_targets.py: one Bazel target per test node id into a BUILD file per tests
-   package
-   - blocked on: W1035
-368. **W1057** (blocked) An ordering-aware rank: choose the order that minimises total cost-weighted delay, not a
-   per-card ratio
-   - blocked on: W1056
-   - next: Given costs and their overlaps, choose the order of the ready cards that minimises the sum of
-     salience-weighted completion time, and show the chosen order beside the per-card ratio
-369. **W1703** (blocked) Codon row cards: nemik.cards compiles under the pinned Codon in both modes
-   - blocked on: W1979
-370. **W1706** (blocked) Codon row critical: nemik.critical compiles under the pinned Codon in both modes
-   - blocked on: W1809, W1810, W1811, W1694, W1698, W1703, W1717
-371. **W1729** (blocked) Codon row projection: nemik.projection compiles under the pinned Codon in both modes
-   - blocked on: W1877, W1878, W1879, W1703
-372. **W1732** (blocked) Codon row realize: nemik.realize compiles under the pinned Codon in both modes
-   - blocked on: W1890, W1891, W1892, W1694
-373. **W1754** (blocked) Codon row withheld: nemik.withheld compiles under the pinned Codon in both modes
-   - blocked on: W1969, W1694
-374. **W1756** (blocked) Codon row witnesses: nemik.witnesses compiles under the pinned Codon in both modes
-   - blocked on: W1970, W1971, W1972, W1973, W1974, W1975, W1713, W1758
-375. **W283** (blocked) Fold aeternum's inbox into waypoints: nemik-check --letters --fold --repo aeternum --older-than
-   14, apply the mv for the stale, claim or mint a card for each live letter
-   - blocked on: aeternum
-   - next: Run the command in aeternum's tick, apply the printed mv lines (archive), mint the printed --add for each
-     live letter, then report done to nemik:W282.
-376. **W286** (blocked) Fold gabion's inbox into waypoints: nemik-check --letters --fold --repo gabion --older-than 14,
-   apply the mv for the stale, claim or mint a card for each live letter
-   - blocked on: gabion
-   - next: Run the command in gabion's tick, apply the printed mv lines (archive), mint the printed --add for each live
-     letter, then report done to nemik:W282.
-377. **W287** (blocked) Fold gcalculus's inbox into waypoints: nemik-check --letters --fold --repo gcalculus
-   --older-than 14, apply the mv for the stale, claim or mint a card for each live letter
-   - blocked on: gcalculus
-   - next: Run the command in gcalculus's tick, apply the printed mv lines (archive), mint the printed --add for each
-     live letter, then report done to nemik:W282.
-378. **W289** (blocked) Fold life's inbox into waypoints: nemik-check --letters --fold --repo life --older-than 14,
-   apply the mv for the stale, claim or mint a card for each live letter
-   - blocked on: life
-   - next: Run the command in life's tick, apply the printed mv lines (archive), mint the printed --add for each live
-     letter, then report done to nemik:W282.
-379. **W292** (blocked) Fold mtools's inbox into waypoints: nemik-check --letters --fold --repo mtools --older-than 14,
-   apply the mv for the stale, claim or mint a card for each live letter
-   - blocked on: mtools
-   - next: Run the command in mtools's tick, apply the printed mv lines (archive), mint the printed --add for each live
-     letter, then report done to nemik:W282.
-380. **W294** (blocked) Fold resumes's inbox into waypoints: nemik-check --letters --fold --repo resumes --older-than
-   14, apply the mv for the stale, claim or mint a card for each live letter
-   - blocked on: resumes
-   - next: Run the command in resumes's tick, apply the printed mv lines (archive), mint the printed --add for each live
-     letter, then report done to nemik:W282.
-381. **W295** (blocked) Fold rosettapkg's inbox into waypoints: nemik-check --letters --fold --repo rosettapkg
-   --older-than 14, apply the mv for the stale, claim or mint a card for each live letter
-   - blocked on: rosettapkg
-   - next: Run the command in rosettapkg's tick, apply the printed mv lines (archive), mint the printed --add for each
-     live letter, then report done to nemik:W282.
-382. **W297** (blocked) Fold summit's inbox into waypoints: nemik-check --letters --fold --repo summit --older-than 14,
-   apply the mv for the stale, claim or mint a card for each live letter
-   - blocked on: summit
-   - next: Run the command in summit's tick, apply the printed mv lines (archive), mint the printed --add for each live
-     letter, then report done to nemik:W282.
-383. **W369** (blocked) Outbound connectors: mirror cards to Jira, GitHub/Forgejo issues and Project Online via their
-   APIs
-   - blocked on: W963
-   - next: GitHub and Forgejo: the plan print (W958) and the request builder (W959) are done; the sender is W963 and
-     waits on the operator's scoped tokens. Not started: Jira (its CSV import carries no issue links,
-     docs/integration-survey.md) and Project Online, each with its own API and token
-384. **W370** (blocked) Inbound connectors: webhooks or polls from other tools become letters or printed commands
-   - blocked on: nemik:W964
-   - next: On the tokens (W964): a poll command that fetches the issues with the token, runs pollevents, and records
-     which it acted on; until then nothing in nemik reads a tracker
-385. **W424** (blocked) Spike 2: gcalculus's flow solve as the one portable source, consumed pinned by nemik in Python
-   and in the page
-   - blocked on: W423
-   - next: Wait on mtools:W1070 and gcalculus:W255; then contribute flow._grounded to gcalculus as the shipped sparse
-     solver with the agreement corpus
-386. **W564** (blocked) Codon to wasm32: a sound target triple and a runtime that links, or another way to carry the
-   typed core into the browser
-   - blocked on: operator: decide how the typed core reaches the browser: (1) wait for or request wasm32 output from
-     Codon, (2) port Codon's runtime to wasm32 with host packages (wasi-libc, compiler-rt wasm32 builtins), or (3) run
-     the typed core natively and let the browser read its JSON
-   - next: From W560: llc accepts Codon's x86_64 IR for wasm32 but the IR is built for 64-bit pointers (unproven at 32)
-     and leaves 30 undefined symbols: Codon's runtime (seq_*, Boehm GC), libc, compiler-rt i128. Options to measure: (1)
-     ask upstream or find a way for codon build to emit a wasm32 triple; (2) build the runtime for wasm32 with a wasi
-     sysroot and link, then run the corpus under a wasm runtime; (3) skip wasm and serve the typed core natively, the
-     browser reading its JSON. Check first whether a wasi sysroot is on this host.
-387. **W568** (blocked) Codon paydown 2: dict spread {**a, 'k': v} in critical endpoint history serve withheld,
-   rewritten as an explicit copy and update
-   - blocked on: W567, W569
-   - next: Use dictops.merged inside each module's own typing pass (the module being typed for Codon), not as a sweep.
-     Candidates in the order they could first compile: the pure modules whose only blockers are constructs (critical,
-     withheld, history after dataclass and keyword-only are settled by W567 and W569).
-388. **W575** (blocked) Retire the pod's snapshot builder when the client path serves the same views
-   - blocked on: W506, W516
-   - next: The builder (nemik-serve --publish into a shared volume, W504) is the INTERIM ruled on 2026-10-15 for the
-     OOM; the operator's later direction is no intermediate artifacts (W506 to W511, W516). RETIREMENT CONDITION: the
-     builder container goes when the client path serves the same views, meaning the page assembles its graph, wake,
-     operator and inbound views from per-repo sources (W509), each repo publishes its own piece (W511, W516), and a test
-     shows the views agree with the server-built ones. Then the pod is the static file server alone. Until then the
-     builder stays and W505 sizes it.
-389. **W578** (blocked) Fleet flow: per-repo arrival, completion, WIP and Little's-law expected wait, predicting edges
-   that will breach
-   - blocked on: W579
-   - next: First signal: per-day per-repo arrival vs completion series; flag any single mint larger than the trailing
-     daily completion rate (about 250/day fleet-wide) or any repo net above +50/day. Then per-repo arrival, completion,
-     WIP and Little's-law expected wait, predicting edges that will breach; validated against W579 before it predicts.
-390. **W579** (blocked) Edge series: per cross-repo wait edge age, blocker rank position and throughput as series
-   through luthen, alert on SLA breach
-   - blocked on: W580, W837
-   - next: Publish wait-edge series to Victoria via luthen; alert by symptom with a learned baseline on SLA breach; step
-     3 of github-8f's chain; peer: luthen-observability for the alert
-391. **W580** (blocked) Rank-enforced picking: expose the next card by rank so --tick-close refuses a close that skipped
-   a workable higher-ranked card
-   - blocked on: W581
-   - next: Verify fbee013 in mtools' git log; make nemik-rank cheap enough to run once per tick (user-dir cache) and
-     pass --rank-from at --tick-close
-392. **W643** (blocked) Stackable set by input-graph cones: cards conflict when manifest dependency cones intersect, and
-   chain when one edits the other's cone
-   - blocked on: W1016, W1017, W1018
-   - next: The repin is done (vendored wheels at c9c0070, past 4704f43, so mikemol.hooks.footprint is available). Next:
-     a nemik tool calls footprint over one test run and writes the declared reads for nemik's modules, then
-     stackable.pick uses cones.relation to chain or separate cards. Atomize before building: (1) the tool that writes
-     reads.json from a traced test run, (2) wiring cones into stackable.pick with a test on two cards whose cones
-     intersect, (3) the gate-cost use
-393. **W693** (blocked) serve.py puts each collapse class in the payload and the graph draws it as one expandable
-   umbrella node, and nemik-check reports it as an Info
-   - blocked on: W709
-   - next: Umbrella: part 1 landed 3e54005; W709 (payload and page node), W710 (Info per umbrella) and W711
-     (nemik-collapse CLI) remain
-394. **W709** (blocked) The graph payload and page draw a collapse umbrella node over the blocked cards it rolls up,
-   with its n-path address
-   - blocked on: W969, W970
-   - next: Needs bazel build //:.venv to have linked nemik.collapse (no gate running). Then blocks.py adds the umbrella
-     nodes from collapse.collapse to the payload, the page draws one mark per umbrella (one mark per state rule; WCAG
-     2.5.3 name), tests/test_collapse_payload.py pins the payload
-395. **W788** (blocked) Ask luthen to declare a SystemCallFilter on the serving unit as the runtime rail against
-   spawning
-   - blocked on: luthen-observability:W1473
-   - next: Waits on luthen-observability:W1473; when it lands, record its unit change and confirm
-     tests/test_serve_no_spawn.py still passes
-396. **W789** (blocked) The page draws /hostroot.json rows as read-only resource nodes: state to node state, waitsFor to
-   edges, stale rows marked, no rank weight
-   - blocked on: W1022, W1023
-   - next: Fetch the host-root board in the served page only (not the static build); draw each row as a node of a
-     read-only 'host' lane using adapter.resource_uri for its id, state done/ready/blocked into the existing node
-     states, waitsFor into edges, a stale row dimmed with its as_of in the detail line; no rank weight. Browser test as
-     the layout tests do
-397. **W837** (blocked) Alert on the wait SLO: multi-window multi-burn-rate over the wait ages, once the operator states
-   the SLO and its error budget (W700)
-   - blocked on: W700, luthen-observability:W1132
-398. **W909** (blocked) From the three documents, recommend the minimum changes that make a quoted, a derived and an
-   own-judgment claim distinct, typed and checkable, tested on real cards
-   - blocked on: W908
-   - next: After W906 to W908: the minimum changes, as cards, so that operator-said (quoted), host-inferred (derived,
-     with a qualifier and the inferring agent) and card-own-judgment are typed and a shape checks them; test on mtools'
-     five demoted cards and estate's warrants. Per the operator's purpose (line 91566, via github-8f's reading,
-     derived): each fix says which agent behaviour it improves, what a session could then reason about or check that it
-     cannot today
-399. **W926** (blocked) mtools plans and refuses on per-test targets, not mutants grids only
-   - blocked on: mtools
-   - next: Ask mtools-ad (sent; claimed as mtools:W1872): shardplan and shardgate know mutants grids; with one target
-     per test they must judge a target against its own measured CPU; mtools' own mutants card moved to exhaustive
-     sharding the same day (W1833)
-400. **W927** (blocked) A ratchet fails a test that is in no Bazel target or in two
-   - blocked on: W925
-   - next: After W925: a test collects every test node id and reads the generated BUILD files; any id in no target, or
-     in two, fails; the count per package is kept
-401. **W938** (blocked) Build the four views and the help drawer on the existing panels, one view per change, with the
-   WCAG chain test as the oracle
-   - blocked on: nemik:W964
-   - next: After W937, atomize per view: Queue (W929's panel) first, then Graph, Orders, Health, Help; each view lands
-     with the WCAG chain test as its oracle (tablist semantics, 24 px targets, names, contrast) and the page files stay
-     under their line ceilings, so new code goes in new files
-402. **W967** (blocked) Forecast trial 4: blocker depth as a feature, scored the same way
-   - blocked on: nemik:W966
-   - next: After W966: the same trial with blocker depth (climate.depth_at already measures chains), scored the same
-     way; same files, so after W966 lands, not beside it
-403. **W970** (blocked) The page draws one mark per collapse umbrella, named for assistive technology, with the WCAG
-   chain test as its oracle
-   - blocked on: nemik:W969
-   - next: After W969: the page draws one mark per umbrella node (one mark per state rule), with an accessible name that
-     holds its visible text (WCAG 2.5.3), tested with the WCAG chain; the page files are at their line ceilings, so a
-     new file (collapse.js) unless a line can be traded
-404. **W1018** (blocked) The cone relation predicts which tests a commit runs, for gate-cost ordering
-   - blocked on: W1017
-   - next: From the cone relation, list the tests a commit's files can reach, so the gate can order by cost
-405. **W1021** (blocked) One builder serves both replicas, with a before and after CPU reading
-   - blocked on: W1020
-   - next: Run one builder for both replicas, with the export written once and both replicas serving it, and read the
-     CPU again over a measured interval
-406. **W1023** (blocked) Stale host-root rows are dimmed with their as_of in the detail line, tested in the browser
-   - blocked on: W1022
-   - next: Dim a stale host-root row and show its as_of in the detail line, with a browser test as the layout tests do
-407. **W1037** (blocked) Change venv_pytest.sh so a per-test target runs file::test
-   - blocked on: W1036
-408. **W1050** (blocked) Retire every repo's sibling inbox write and read, each with a tombstone
-   - blocked on: W1048
-   - next: After the courier's send (W1048) and read (W1049) paths exist: for each repo, retire its sibling inbox write
-     and read with a tombstone that cites the commit that moved it to the courier
-409. **W1058** (blocked) A witness that mtools W1503 ranks above the hooks cards whose cost it lowers
-   - blocked on: W1057
-   - next: Build a fixture of an enabler card and the later cards whose cost it lowers, and assert the enabler ranks
-     first only because landing it first lowers the cost of the rest; then run it on mtools W1503 and its hooks cards
-     once the cost field exists
-410. **W1095** (blocked) Replace the ledger's Activity triples in the graph with a per-card summary (effort count by
-   class, last activity, weekly counts) built in one streaming pass, and move serve, blocks, metrics and history onto it
-   - blocked on: W1098, W1099, W1100, W1101, W1102, W1103
-   - next: Read each consumer closely (serve._to_json 800, blocks 537, metrics 550 and 867, history 1541, idle, trs) for
-     what exactly it takes from an Activity: card, class, stamp, week; define one summary type; build it in
-     ledger_graph's pass; switch consumers one at a time, each with its output unchanged (the published documents must
-     be byte-identical); then stop adding Activity triples
-411. **W1282** (blocked) rank.py: a RankRow TypedDict for the rank row dict (objectives, compose, _next), so mypy falls
-   by the bare-dict cascade
-   - blocked on: W1487, W1488, W1489, W1490
-   - next: G0 first. rank.py has about 150 mypy rows through one bare dict row (objectives line 187, compose line 144,
-     _next line 939, lines 565 and 912 to 986). Define RankRow as a total=False TypedDict of the keys objectives writes
-     (operator, tier, band, band_name, band_why, weight, downstream, salience) plus symbol and key, then type the
-     callers. Disjoint from wake.py (stack 688). Measure with mikemol-pycheck --ratchet before writing the baseline, and
-     read the tests that build rows by hand first
-412. **W1665** (blocked) Ratchet forecast series: predicted days to zero per repo and ratchet with issue stamp and
-   explicit impasse state
-   - blocked on: github:W90
-413. **W1666** (blocked) Ratchet forecast overlay: predicted ratchet value per issue and lead, labels copied from
-   luthen.noaa.forecast, error scored per lead
-   - blocked on: github:W90
-414. **W1695** (blocked) Codon row alarm: nemik.alarm compiles under the pinned Codon in both modes
-   - blocked on: W1769, W1770
-415. **W1707** (blocked) Codon row endpoint: nemik.endpoint compiles under the pinned Codon in both modes
-   - blocked on: W1812, W1813, W1814
-416. **W1709** (blocked) Codon row flow: nemik.flow compiles under the pinned Codon in both modes
-   - blocked on: W1816, W1817, W1818, W1819
-417. **W1711** (blocked) Codon row health: nemik.health compiles under the pinned Codon in both modes
-   - blocked on: W1821, W1822, W1823, W1824, W1698, W1703
-418. **W1713** (blocked) Codon row hostapply: nemik.hostapply compiles under the pinned Codon in both modes
-   - blocked on: W1830, W1831, W1832, W1719
-419. **W1718** (blocked) Codon row issues: nemik.issues compiles under the pinned Codon in both modes
-   - blocked on: W1729
-420. **W1719** (blocked) Codon row marks: nemik.marks compiles under the pinned Codon in both modes
-   - blocked on: W1848, W1849, W1850
-421. **W1733** (blocked) Codon row runlogs: nemik.runlogs compiles under the pinned Codon in both modes
-   - blocked on: W1893, W1734
-422. **W1735** (blocked) Codon row salience: nemik.salience compiles under the pinned Codon in both modes
-   - blocked on: W1979
-423. **W1739** (blocked) Codon row shaclinc: nemik.shaclinc compiles under the pinned Codon in both modes
-   - blocked on: W1922, W1923, W1924, W1925, W1738
-424. **W1745** (blocked) Codon row trs: nemik.trs compiles under the pinned Codon in both modes
-   - blocked on: W1939, W1940, W1694
-425. **W1746** (blocked) Codon row vtodo: nemik.vtodo compiles under the pinned Codon in both modes
-   - blocked on: W1941, W1942, W1943, W1944, W1945, W1946, W1694, W1698, W1700, W1705
-426. **W1749** (blocked) Codon row waitrows: nemik.waitrows compiles under the pinned Codon in both modes
-   - blocked on: W1955, W1694, W1717, W1731, W1736
-427. **W506** (blocked) Federated client assembly: the browser builds the view from the sources its viewer names, no
-   central node required
-   - blocked on: W508, W511
-   - next: umbrella: lands when W507-W511 do. W502-W505 (a static pod that serves one source) stay: they fix the OOM now
-     and make nemik one source among many
-428. **W563** (blocked) Forecast mark: per repo the cards predicted next and the expected frontier width, plus a
-   misprediction alert
-   - blocked on: W578
-   - next: After stack556: netforecast.sweep_alerts(daily_nets, minutes, nets) returns (windows judged, [(window index,
-     direction)]), and nemik-history --baseline=-45m --sweep 7 walks the last 7 days of windows once per repo (one queue
-     read per instant), prints 'swept n windows of 45 minutes over 7 days: alerted k of n' then each alerted window with
-     its time and direction; tests plant the three cases and a count of zero is printed
-429. **W674** (blocked) Source adapter: an OSLC TRS provider (base plus change log) as a page source, its cursor the
-   change-log position
-   - blocked on: nemik:W680
-   - next: In index.html a source whose kind is trs reads its base (ldp:member IRIs) and the change-log entries after
-     its cursor, re-reads the graph piece of each repo that changed (the same hash cursor), and patches; a browser test
-     against the served TRS files and pieces
-430. **W675** (blocked) Source adapter: a ForgeFed or ActivityPub outbox as a page source, its cursor an outbox page
-   - blocked on: nemik:W674
-   - next: In index.html a source whose kind is outbox reads the OrderedCollection pages and maps Offer, Accept and
-     Resolve of a Ticket to card states (outbox.py's verb inverse), cursor the page; a browser test against the served
-     outbox
-431. **W680** (blocked) The page vendors a Turtle parser (N3.js, version and hash pinned) beside cytoscape and dagre,
-   loaded only when a source needs it
-   - blocked on: operator: decide whether the page may vendor a third-party Turtle parser: (a) N3.js (MIT, rdfjs; npm
-     n3@2.13.12 has SLSA provenance), hash-pinned beside cytoscape and dagre, loaded only when a source needs it, or (b)
-     a small parser of our own for the Turtle shapes TRS providers emit, with no new dependency but only that subset
-   - next: Pick N3.js at a pinned version, add it to src/nemik/web/vendor with its licence and sha256 as the other
-     vendored files have (see VENDOR in serve.py and the vendor test), serve it and write it in the static build; a
-     browser test parses a TRS base Turtle from trs.py's output
-432. **W708** (blocked) The no-witness Warning fires on cards whose step is a behaviour (a command refuses without a
-   flag) that no observer can see: name the honest witness, a test result for a tree sha, or stop warning where none
-   exists
-   - blocked on: operator: decide whether a card whose step is a behaviour gets a witness from a test result for the
-     tree sha (a new nemik-witnesses observer, input.test) or the nemik:W597-style no-witness Warning is dropped for
-     cards that name no observable
-   - next: After the choice: add the observer or narrow the Warning in shapes.ttl; el-openglo:W702 (typing_edges --apply
-     refuses without --plan) is the first case
-433. **W749** (blocked) Improve the forecast: add one feature at a time, keep it only if verified skill over climatology
-   rises
-   - blocked on: W966, W967
-   - next: Trial 3 (gate duration, blocker depth) scored on a measure that sees discrimination (do the cards that
-     finished carry higher chances than those that did not), not Brier alone, which a base-rate forecast ties; that
-     needs a --score mode or a scratch script first. The doc update for the second attempt is stack403
-434. **W751** (blocked) Observations live feed: switch W744's observations from the git backfill to the
-   mikemol.waypoint.event stream
-   - blocked on: W846
-   - next: After the image with the landings board is installed on the pod, fetch the board from the pod and confirm it
-     answers host true; record the readback here
-435. **W852** (blocked) Confirm the first image build from a stamped commit ran the gated stage, not the suite: a build
-   log line naming it
-   - blocked on: luthen-observability:W1506
-   - next: Ask luthen-observability to read the Forgejo build log for the first nemik image built after 9bfec9c and
-     report whether it printed 'image test stage: gated'; if it printed test, read the commit's Gated-Tree trailer
-     against its tree
-436. **W877** (blocked) Ask gabion: nemik:W516 (withholding at the source): please repin your mikemol-paths-forward to
-   mtools 5ba261f or
-   - blocked on: gabion
-437. **W879** (blocked) Ask el-openglo: nemik:W516 (withholding at the source): please repin your mikemol-paths-forward
-   to mtools 5ba261f or
-   - blocked on: el-openglo
-438. **W881** (blocked) Ask substrate: nemik:W516 (withholding at the source): please repin your mikemol-paths-forward
-   to mtools 5ba261f or
-   - blocked on: substrate
-439. **W963** (blocked) A sender posts mirrorreq's requests to a tracker with a scoped token, after a dry run prints
-   them, and reads the result back
-   - blocked on: nemik:W964
-   - next: After a token: mirrorsend posts each mirrorreq.Request with the token in an Authorization header read from
-     the file, prints the dry run first, sends only with --apply, checks the response status, and reads the issue back
-     (read your writes); tested against a local fake server, never the real tracker
-440. **W1030** (blocked) Wire the pace and round writers: fetch the ratchet series and the rounds, write
-   ratchet-pace.json and round.json beside each other, append their gauges
-   - blocked on: W1032
-   - next: In serve.private_files, read the series with ratchetseries from the metric store, write ratchet-pace.json
-     with pacewrite and round.json with roundfile, append both gauge sets, then confirm the round file path to mtools-ad
-441. **W1047** (blocked) Build the letter courier designed in docs/inbox-as-issues.md: a letter is a GitHub issue, read
-   through nemik-inbound
-   - blocked on: W1048, W1050
-442. **W1055** (blocked) Rank by value density: a card's salience divided by its projected landing cost, with the cost
-   fed from mtools' projection
-   - blocked on: W1056, W1057, W1058
-   - next: After W1056-W1058: define total days-to-zero over the pace (ratchets, cards, the landing rate as three row
-     kinds of one shape, each horizon in days at that rate), score a card as the reduction in that total per projected
-     cost, and test that a velocity card and a paydown card both rank by it; replace the velocity band and the paydown
-     floor only when the score reproduces their order on the live queue
-443. **W1173** (blocked) Courier: whether the letters already sent (linux-sources' 96, others') are backfilled as
-   issues, or only letters sent after W1048 become issues and each repo's tracked manifest stays the record of the past
-   - blocked on: W1048
-   - next: Default stands: no backfill (nothing is written without a go). Settle the retirement condition with
-     linux-sources:W406 as post-courier comparison plus the sender's tracked manifest as the record of the past; a
-     backfill, if the operator ever asks for one, is a new card that writes one issue per manifest row, dry run first
-444. **W1660** (blocked) The pace's value series counts a landing once: gate-time and landed samples of one landing stop
+386. **W1660** (blocked) The pace's value series counts a landing once: gate-time and landed samples of one landing stop
    being two samples, and a cancelled gate's sample is no landing
    - blocked on: mtools:W2301
    - next: Scratch-first, measured: (1) compare the pace's reported falls with the baselines' actual falls over the last
@@ -3229,86 +3180,482 @@ counter 1989 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:734
      landing; fixtures for a cancelled gate, a refused stack, one landing with both samples, a repo with no landed
      samples, the guessed pair; run on a scratch copy and the pace text before and after; then land through a stack,
      never live first
-445. **W1696** (blocked) Codon row apischema: nemik.apischema compiles under the pinned Codon in both modes
+387. **W1700** (blocked) Codon row cachestore: nemik.cachestore compiles under the pinned Codon in both modes
+   - blocked on: W1782, W1783, W1784, W1785, W1709, W1739
+388. **W1712** (blocked) Codon row history: nemik.history compiles under the pinned Codon in both modes
+   - blocked on: W1825, W1826, W1827, W1828, W1829, W1694, W1700, W1750
+389. **W1717** (blocked) Codon row index: nemik.index compiles under the pinned Codon in both modes
+   - blocked on: W1979
+390. **W1750** (blocked) Codon row wake: nemik.wake compiles under the pinned Codon in both modes
+   - blocked on: W1956, W1957, W1958, W1959, W1960, W1694, W1695, W1698
+391. **W581** (blocked) Wait age into rank: a blocked edge's age (in the waiting repo's ticks) adds to its blocker's
+   salience; an SLA breach is a priority band
+   - blocked on: W700
+   - next: Umbrella: W699 (age adds to salience) and W700 (SLO-derived band) land first
+392. **W925** (blocked) A generator writes one Bazel target per test from pytest's collection, into hierarchical BUILD
+   files
+   - blocked on: W1035, W1036, W1037
+   - next: After W928: first MEASURE, as mtools' own exhaustive-sharding card says: how many tests nemik has (pytest
+     --collect-only), what Bazel analysis and per-target startup cost at that count (a scratch package of the same
+     size), and whether luthen's gate series (mikemol.gate.target.*) can carry a label per test; then a generator that
+     writes a BUILD file per tests package, one target per test node id, each with the data its test reaches (importdag
+     when mtools has it); the venv_pytest.sh args become file::test. Atomize when the measurement is in
+393. **W1740** (blocked) Codon row stackable: nemik.stackable compiles under the pinned Codon in both modes
+   - blocked on: W1926, W1694
+394. **W1758** (blocked) Codon row work: nemik.work compiles under the pinned Codon in both modes
+   - blocked on: W1976, W1977
+395. **W1979** (blocked) Codon cluster blocks+cards+index+salience: these modules import each other and compile together
+   - blocked on: W1774, W1775, W1776, W1777, W1778, W1779, W1796, W1797, W1798, W1842, W1843, W1844, W1845, W1846,
+     W1847, W1896, W1897, W1898, W1899, W1900, W1901, W1902, W1903, W1694, W1736, W1709
+396. **W423** (blocked) Spike 1: pieces.split/assemble in the py2many typed subset, transpiled to TypeScript, replacing
+   index.html graphText(); conformance corpus run on both
+   - blocked on: W564
+   - next: Transpile half waits on mtools:W1070 (websubset gate), W1071 (py2many), W1072 (runner), W1073 (harness); then
+     rewrite pieces.py in the subset, run the TS side over tests/corpus/pieces, delete index.html graphText()
+397. **W908** (blocked) Survey PROV-O, PROV-DM, AIF, SEPIO, ECO, nanopublications, Carneades and ClaimReview, citing
+   sources, for what each gives that the model lacks (docs/evidence-standards.md)
+   - blocked on: W910, W911
+   - next: Read each standard's primary source (W3C PROV-O and PROV-DM, AIF, SEPIO, ECO, nanopublication and
+     micropublication papers, Carneades, schema.org ClaimReview) and cite it. Per the operator's purpose (line 91566):
+     for each gap name the existing tool or vocabulary we could adopt (a pinned library, an ontology to import, a SHACL
+     shape set), not only a comparison table. Needs WebFetch
+398. **W1017** (blocked) stackable.pick uses the cone relation to chain or separate cards, tested on two cards whose
+   cones intersect
+   - blocked on: W1016
+   - next: Make stackable.pick chain a card behind another whose files sit in its cone and separate cards whose cones
+     intersect, using the cones module over the committed graph and reads
+399. **W1035** (blocked) Measure per-test Bazel targets: how many tests nemik collects, and the analysis and startup
+   cost of a scratch package of that size
+   - blocked on: W1075, W1076
+   - next: Take an idle figure for one target's staging cost, split it by input (venv, Chromium, opa, Codon, corpus),
+     and decide whether W1036 starts with per-test data narrowing
+400. **W1036** (blocked) Write tools/gen_test_targets.py: one Bazel target per test node id into a BUILD file per tests
+   package
+   - blocked on: W1035
+401. **W1057** (blocked) An ordering-aware rank: choose the order that minimises total cost-weighted delay, not a
+   per-card ratio
+   - blocked on: W1056
+   - next: Given costs and their overlaps, choose the order of the ready cards that minimises the sum of
+     salience-weighted completion time, and show the chosen order beside the per-card ratio
+402. **W1217** (blocked) Generate one Bazel codon-census target per src/nemik module whose inputs are that module's
+   import closure and the pinned compiler, so the cache re-runs only the modules a change touches
+   - blocked on: W1216
+   - next: After W1216: generate one bazel census target per module from import-graph.json, data = the module and its
+     closure; a test that every module has one
+403. **W1703** (blocked) Codon row cards: nemik.cards compiles under the pinned Codon in both modes
+   - blocked on: W1979
+404. **W1706** (blocked) Codon row critical: nemik.critical compiles under the pinned Codon in both modes
+   - blocked on: W1809, W1810, W1811, W1694, W1698, W1703, W1717
+405. **W1729** (blocked) Codon row projection: nemik.projection compiles under the pinned Codon in both modes
+   - blocked on: W1877, W1878, W1879, W1703
+406. **W1732** (blocked) Codon row realize: nemik.realize compiles under the pinned Codon in both modes
+   - blocked on: W1890, W1891, W1892, W1694
+407. **W1754** (blocked) Codon row withheld: nemik.withheld compiles under the pinned Codon in both modes
+   - blocked on: W1969, W1694
+408. **W1756** (blocked) Codon row witnesses: nemik.witnesses compiles under the pinned Codon in both modes
+   - blocked on: W1970, W1971, W1972, W1973, W1974, W1975, W1713, W1758
+409. **W283** (blocked) Fold aeternum's inbox into waypoints: nemik-check --letters --fold --repo aeternum --older-than
+   14, apply the mv for the stale, claim or mint a card for each live letter
+   - blocked on: aeternum
+   - next: Run the command in aeternum's tick, apply the printed mv lines (archive), mint the printed --add for each
+     live letter, then report done to nemik:W282.
+410. **W286** (blocked) Fold gabion's inbox into waypoints: nemik-check --letters --fold --repo gabion --older-than 14,
+   apply the mv for the stale, claim or mint a card for each live letter
+   - blocked on: gabion
+   - next: Run the command in gabion's tick, apply the printed mv lines (archive), mint the printed --add for each live
+     letter, then report done to nemik:W282.
+411. **W287** (blocked) Fold gcalculus's inbox into waypoints: nemik-check --letters --fold --repo gcalculus
+   --older-than 14, apply the mv for the stale, claim or mint a card for each live letter
+   - blocked on: gcalculus
+   - next: Run the command in gcalculus's tick, apply the printed mv lines (archive), mint the printed --add for each
+     live letter, then report done to nemik:W282.
+412. **W289** (blocked) Fold life's inbox into waypoints: nemik-check --letters --fold --repo life --older-than 14,
+   apply the mv for the stale, claim or mint a card for each live letter
+   - blocked on: life
+   - next: Run the command in life's tick, apply the printed mv lines (archive), mint the printed --add for each live
+     letter, then report done to nemik:W282.
+413. **W292** (blocked) Fold mtools's inbox into waypoints: nemik-check --letters --fold --repo mtools --older-than 14,
+   apply the mv for the stale, claim or mint a card for each live letter
+   - blocked on: mtools
+   - next: Run the command in mtools's tick, apply the printed mv lines (archive), mint the printed --add for each live
+     letter, then report done to nemik:W282.
+414. **W294** (blocked) Fold resumes's inbox into waypoints: nemik-check --letters --fold --repo resumes --older-than
+   14, apply the mv for the stale, claim or mint a card for each live letter
+   - blocked on: resumes
+   - next: Run the command in resumes's tick, apply the printed mv lines (archive), mint the printed --add for each live
+     letter, then report done to nemik:W282.
+415. **W295** (blocked) Fold rosettapkg's inbox into waypoints: nemik-check --letters --fold --repo rosettapkg
+   --older-than 14, apply the mv for the stale, claim or mint a card for each live letter
+   - blocked on: rosettapkg
+   - next: Run the command in rosettapkg's tick, apply the printed mv lines (archive), mint the printed --add for each
+     live letter, then report done to nemik:W282.
+416. **W297** (blocked) Fold summit's inbox into waypoints: nemik-check --letters --fold --repo summit --older-than 14,
+   apply the mv for the stale, claim or mint a card for each live letter
+   - blocked on: summit
+   - next: Run the command in summit's tick, apply the printed mv lines (archive), mint the printed --add for each live
+     letter, then report done to nemik:W282.
+417. **W369** (blocked) Outbound connectors: mirror cards to Jira, GitHub/Forgejo issues and Project Online via their
+   APIs
+   - blocked on: W963
+   - next: GitHub and Forgejo: the plan print (W958) and the request builder (W959) are done; the sender is W963 and
+     waits on the operator's scoped tokens. Not started: Jira (its CSV import carries no issue links,
+     docs/integration-survey.md) and Project Online, each with its own API and token
+418. **W370** (blocked) Inbound connectors: webhooks or polls from other tools become letters or printed commands
+   - blocked on: nemik:W964
+   - next: On the tokens (W964): a poll command that fetches the issues with the token, runs pollevents, and records
+     which it acted on; until then nothing in nemik reads a tracker
+419. **W424** (blocked) Spike 2: gcalculus's flow solve as the one portable source, consumed pinned by nemik in Python
+   and in the page
+   - blocked on: W423
+   - next: Wait on mtools:W1070 and gcalculus:W255; then contribute flow._grounded to gcalculus as the shipped sparse
+     solver with the agreement corpus
+420. **W568** (blocked) Codon paydown 2: dict spread {**a, 'k': v} in critical endpoint history serve withheld,
+   rewritten as an explicit copy and update
+   - blocked on: W569
+   - next: Use dictops.merged inside each module's own typing pass (the module being typed for Codon), not as a sweep.
+     Candidates in the order they could first compile: the pure modules whose only blockers are constructs (critical,
+     withheld, history after dataclass and keyword-only are settled by W567 and W569).
+421. **W575** (blocked) Retire the pod's snapshot builder when the client path serves the same views
+   - blocked on: W506, W516
+   - next: The builder (nemik-serve --publish into a shared volume, W504) is the INTERIM ruled on 2026-10-15 for the
+     OOM; the operator's later direction is no intermediate artifacts (W506 to W511, W516). RETIREMENT CONDITION: the
+     builder container goes when the client path serves the same views, meaning the page assembles its graph, wake,
+     operator and inbound views from per-repo sources (W509), each repo publishes its own piece (W511, W516), and a test
+     shows the views agree with the server-built ones. Then the pod is the static file server alone. Until then the
+     builder stays and W505 sizes it.
+422. **W578** (blocked) Fleet flow: per-repo arrival, completion, WIP and Little's-law expected wait, predicting edges
+   that will breach
+   - blocked on: W579
+   - next: First signal: per-day per-repo arrival vs completion series; flag any single mint larger than the trailing
+     daily completion rate (about 250/day fleet-wide) or any repo net above +50/day. Then per-repo arrival, completion,
+     WIP and Little's-law expected wait, predicting edges that will breach; validated against W579 before it predicts.
+423. **W579** (blocked) Edge series: per cross-repo wait edge age, blocker rank position and throughput as series
+   through luthen, alert on SLA breach
+   - blocked on: W580, W837
+   - next: Publish wait-edge series to Victoria via luthen; alert by symptom with a learned baseline on SLA breach; step
+     3 of github-8f's chain; peer: luthen-observability for the alert
+424. **W580** (blocked) Rank-enforced picking: expose the next card by rank so --tick-close refuses a close that skipped
+   a workable higher-ranked card
+   - blocked on: W581
+   - next: Verify fbee013 in mtools' git log; make nemik-rank cheap enough to run once per tick (user-dir cache) and
+     pass --rank-from at --tick-close
+425. **W643** (blocked) Stackable set by input-graph cones: cards conflict when manifest dependency cones intersect, and
+   chain when one edits the other's cone
+   - blocked on: W1016, W1017, W1018
+   - next: The repin is done (vendored wheels at c9c0070, past 4704f43, so mikemol.hooks.footprint is available). Next:
+     a nemik tool calls footprint over one test run and writes the declared reads for nemik's modules, then
+     stackable.pick uses cones.relation to chain or separate cards. Atomize before building: (1) the tool that writes
+     reads.json from a traced test run, (2) wiring cones into stackable.pick with a test on two cards whose cones
+     intersect, (3) the gate-cost use
+426. **W693** (blocked) serve.py puts each collapse class in the payload and the graph draws it as one expandable
+   umbrella node, and nemik-check reports it as an Info
+   - blocked on: W709
+   - next: Umbrella: part 1 landed 3e54005; W709 (payload and page node), W710 (Info per umbrella) and W711
+     (nemik-collapse CLI) remain
+427. **W709** (blocked) The graph payload and page draw a collapse umbrella node over the blocked cards it rolls up,
+   with its n-path address
+   - blocked on: W969, W970
+   - next: Needs bazel build //:.venv to have linked nemik.collapse (no gate running). Then blocks.py adds the umbrella
+     nodes from collapse.collapse to the payload, the page draws one mark per umbrella (one mark per state rule; WCAG
+     2.5.3 name), tests/test_collapse_payload.py pins the payload
+428. **W788** (blocked) Ask luthen to declare a SystemCallFilter on the serving unit as the runtime rail against
+   spawning
+   - blocked on: luthen-observability:W1473
+   - next: Waits on luthen-observability:W1473; when it lands, record its unit change and confirm
+     tests/test_serve_no_spawn.py still passes
+429. **W789** (blocked) The page draws /hostroot.json rows as read-only resource nodes: state to node state, waitsFor to
+   edges, stale rows marked, no rank weight
+   - blocked on: W1022, W1023
+   - next: Fetch the host-root board in the served page only (not the static build); draw each row as a node of a
+     read-only 'host' lane using adapter.resource_uri for its id, state done/ready/blocked into the existing node
+     states, waitsFor into edges, a stale row dimmed with its as_of in the detail line; no rank weight. Browser test as
+     the layout tests do
+430. **W837** (blocked) Alert on the wait SLO: multi-window multi-burn-rate over the wait ages, once the operator states
+   the SLO and its error budget (W700)
+   - blocked on: W700, luthen-observability:W1132
+431. **W909** (blocked) From the three documents, recommend the minimum changes that make a quoted, a derived and an
+   own-judgment claim distinct, typed and checkable, tested on real cards
+   - blocked on: W908
+   - next: After W906 to W908: the minimum changes, as cards, so that operator-said (quoted), host-inferred (derived,
+     with a qualifier and the inferring agent) and card-own-judgment are typed and a shape checks them; test on mtools'
+     five demoted cards and estate's warrants. Per the operator's purpose (line 91566, via github-8f's reading,
+     derived): each fix says which agent behaviour it improves, what a session could then reason about or check that it
+     cannot today
+432. **W926** (blocked) mtools plans and refuses on per-test targets, not mutants grids only
+   - blocked on: mtools
+   - next: Ask mtools-ad (sent; claimed as mtools:W1872): shardplan and shardgate know mutants grids; with one target
+     per test they must judge a target against its own measured CPU; mtools' own mutants card moved to exhaustive
+     sharding the same day (W1833)
+433. **W927** (blocked) A ratchet fails a test that is in no Bazel target or in two
+   - blocked on: W925
+   - next: After W925: a test collects every test node id and reads the generated BUILD files; any id in no target, or
+     in two, fails; the count per package is kept
+434. **W938** (blocked) Build the four views and the help drawer on the existing panels, one view per change, with the
+   WCAG chain test as the oracle
+   - blocked on: nemik:W964
+   - next: After W937, atomize per view: Queue (W929's panel) first, then Graph, Orders, Health, Help; each view lands
+     with the WCAG chain test as its oracle (tablist semantics, 24 px targets, names, contrast) and the page files stay
+     under their line ceilings, so new code goes in new files
+435. **W967** (blocked) Forecast trial 4: blocker depth as a feature, scored the same way
+   - blocked on: nemik:W966
+   - next: After W966: the same trial with blocker depth (climate.depth_at already measures chains), scored the same
+     way; same files, so after W966 lands, not beside it
+436. **W970** (blocked) The page draws one mark per collapse umbrella, named for assistive technology, with the WCAG
+   chain test as its oracle
+   - blocked on: nemik:W969
+   - next: After W969: the page draws one mark per umbrella node (one mark per state rule), with an accessible name that
+     holds its visible text (WCAG 2.5.3), tested with the WCAG chain; the page files are at their line ceilings, so a
+     new file (collapse.js) unless a line can be traded
+437. **W1018** (blocked) The cone relation predicts which tests a commit runs, for gate-cost ordering
+   - blocked on: W1017
+   - next: From the cone relation, list the tests a commit's files can reach, so the gate can order by cost
+438. **W1021** (blocked) One builder serves both replicas, with a before and after CPU reading
+   - blocked on: W1020
+   - next: Run one builder for both replicas, with the export written once and both replicas serving it, and read the
+     CPU again over a measured interval
+439. **W1023** (blocked) Stale host-root rows are dimmed with their as_of in the detail line, tested in the browser
+   - blocked on: W1022
+   - next: Dim a stale host-root row and show its as_of in the detail line, with a browser test as the layout tests do
+440. **W1037** (blocked) Change venv_pytest.sh so a per-test target runs file::test
+   - blocked on: W1036
+441. **W1050** (blocked) Retire every repo's sibling inbox write and read, each with a tombstone
+   - blocked on: W1048
+   - next: After the courier's send (W1048) and read (W1049) paths exist: for each repo, retire its sibling inbox write
+     and read with a tombstone that cites the commit that moved it to the courier
+442. **W1058** (blocked) A witness that mtools W1503 ranks above the hooks cards whose cost it lowers
+   - blocked on: W1057
+   - next: Build a fixture of an enabler card and the later cards whose cost it lowers, and assert the enabler ranks
+     first only because landing it first lowers the cost of the rest; then run it on mtools W1503 and its hooks cards
+     once the cost field exists
+443. **W1076** (blocked) Decide from the split whether W1036 starts with per-test data narrowing and write the decision
+   into docs/per-test-targets.md
+   - blocked on: W1075
+444. **W1095** (blocked) Replace the ledger's Activity triples in the graph with a per-card summary (effort count by
+   class, last activity, weekly counts) built in one streaming pass, and move serve, blocks, metrics and history onto it
+   - blocked on: W1098, W1099, W1100, W1101, W1102, W1103
+   - next: Read each consumer closely (serve._to_json 800, blocks 537, metrics 550 and 867, history 1541, idle, trs) for
+     what exactly it takes from an Activity: card, class, stamp, week; define one summary type; build it in
+     ledger_graph's pass; switch consumers one at a time, each with its output unchanged (the published documents must
+     be byte-identical); then stop adding Activity triples
+445. **W1103** (blocked) Stop adding the Activity triples to the merged graph once all six consumers read the summary,
+   and measure the build's peak
+   - blocked on: W1098, W1099, W1100, W1101, W1102
+446. **W1218** (blocked) Retire the whole-glob codon census test once the per-module targets cover every module, with a
+   test that the set of targets equals the set of modules
+   - blocked on: W1217
+   - next: After W1217: drop the whole-glob census target and add a test that the per-module targets equal the set of
+     src/nemik modules
+447. **W1282** (blocked) rank.py: a RankRow TypedDict for the rank row dict (objectives, compose, _next), so mypy falls
+   by the bare-dict cascade
+   - blocked on: W1487, W1488, W1489, W1490
+   - next: G0 first. rank.py has about 150 mypy rows through one bare dict row (objectives line 187, compose line 144,
+     _next line 939, lines 565 and 912 to 986). Define RankRow as a total=False TypedDict of the keys objectives writes
+     (operator, tier, band, band_name, band_why, weight, downstream, salience) plus symbol and key, then type the
+     callers. Disjoint from wake.py (stack 688). Measure with mikemol-pycheck --ratchet before writing the baseline, and
+     read the tests that build rows by hand first
+448. **W1665** (blocked) Ratchet forecast series: predicted days to zero per repo and ratchet with issue stamp and
+   explicit impasse state
+   - blocked on: github:W90
+449. **W1666** (blocked) Ratchet forecast overlay: predicted ratchet value per issue and lead, labels copied from
+   luthen.noaa.forecast, error scored per lead
+   - blocked on: github:W90
+450. **W1695** (blocked) Codon row alarm: nemik.alarm compiles under the pinned Codon in both modes
+   - blocked on: W1769, W1770
+451. **W1707** (blocked) Codon row endpoint: nemik.endpoint compiles under the pinned Codon in both modes
+   - blocked on: W1812, W1813, W1814
+452. **W1709** (blocked) Codon row flow: nemik.flow compiles under the pinned Codon in both modes
+   - blocked on: W1816, W1817, W1818, W1819
+453. **W1711** (blocked) Codon row health: nemik.health compiles under the pinned Codon in both modes
+   - blocked on: W1821, W1822, W1823, W1824, W1698, W1703
+454. **W1713** (blocked) Codon row hostapply: nemik.hostapply compiles under the pinned Codon in both modes
+   - blocked on: W1830, W1831, W1832, W1719
+455. **W1718** (blocked) Codon row issues: nemik.issues compiles under the pinned Codon in both modes
+   - blocked on: W1729
+456. **W1719** (blocked) Codon row marks: nemik.marks compiles under the pinned Codon in both modes
+   - blocked on: W1848, W1849, W1850
+457. **W1733** (blocked) Codon row runlogs: nemik.runlogs compiles under the pinned Codon in both modes
+   - blocked on: W1893, W1734
+458. **W1735** (blocked) Codon row salience: nemik.salience compiles under the pinned Codon in both modes
+   - blocked on: W1979
+459. **W1739** (blocked) Codon row shaclinc: nemik.shaclinc compiles under the pinned Codon in both modes
+   - blocked on: W1922, W1923, W1924, W1925, W1738
+460. **W1745** (blocked) Codon row trs: nemik.trs compiles under the pinned Codon in both modes
+   - blocked on: W1939, W1940, W1694
+461. **W1746** (blocked) Codon row vtodo: nemik.vtodo compiles under the pinned Codon in both modes
+   - blocked on: W1941, W1942, W1943, W1944, W1945, W1946, W1694, W1698, W1700, W1705
+462. **W1749** (blocked) Codon row waitrows: nemik.waitrows compiles under the pinned Codon in both modes
+   - blocked on: W1955, W1694, W1717, W1731, W1736
+463. **W506** (blocked) Federated client assembly: the browser builds the view from the sources its viewer names, no
+   central node required
+   - blocked on: W508, W511
+   - next: umbrella: lands when W507-W511 do. W502-W505 (a static pod that serves one source) stay: they fix the OOM now
+     and make nemik one source among many
+464. **W563** (blocked) Forecast mark: per repo the cards predicted next and the expected frontier width, plus a
+   misprediction alert
+   - blocked on: W578
+   - next: After stack556: netforecast.sweep_alerts(daily_nets, minutes, nets) returns (windows judged, [(window index,
+     direction)]), and nemik-history --baseline=-45m --sweep 7 walks the last 7 days of windows once per repo (one queue
+     read per instant), prints 'swept n windows of 45 minutes over 7 days: alerted k of n' then each alerted window with
+     its time and direction; tests plant the three cases and a count of zero is printed
+465. **W674** (blocked) Source adapter: an OSLC TRS provider (base plus change log) as a page source, its cursor the
+   change-log position
+   - blocked on: nemik:W680
+   - next: In index.html a source whose kind is trs reads its base (ldp:member IRIs) and the change-log entries after
+     its cursor, re-reads the graph piece of each repo that changed (the same hash cursor), and patches; a browser test
+     against the served TRS files and pieces
+466. **W675** (blocked) Source adapter: a ForgeFed or ActivityPub outbox as a page source, its cursor an outbox page
+   - blocked on: nemik:W674
+   - next: In index.html a source whose kind is outbox reads the OrderedCollection pages and maps Offer, Accept and
+     Resolve of a Ticket to card states (outbox.py's verb inverse), cursor the page; a browser test against the served
+     outbox
+467. **W680** (blocked) The page vendors a Turtle parser (N3.js, version and hash pinned) beside cytoscape and dagre,
+   loaded only when a source needs it
+   - blocked on: operator: decide whether the page may vendor a third-party Turtle parser: (a) N3.js (MIT, rdfjs; npm
+     n3@2.13.12 has SLSA provenance), hash-pinned beside cytoscape and dagre, loaded only when a source needs it, or (b)
+     a small parser of our own for the Turtle shapes TRS providers emit, with no new dependency but only that subset
+   - next: Pick N3.js at a pinned version, add it to src/nemik/web/vendor with its licence and sha256 as the other
+     vendored files have (see VENDOR in serve.py and the vendor test), serve it and write it in the static build; a
+     browser test parses a TRS base Turtle from trs.py's output
+468. **W749** (blocked) Improve the forecast: add one feature at a time, keep it only if verified skill over climatology
+   rises
+   - blocked on: W966, W967
+   - next: Trial 3 (gate duration, blocker depth) scored on a measure that sees discrimination (do the cards that
+     finished carry higher chances than those that did not), not Brier alone, which a base-rate forecast ties; that
+     needs a --score mode or a scratch script first. The doc update for the second attempt is stack403
+469. **W751** (blocked) Observations live feed: switch W744's observations from the git backfill to the
+   mikemol.waypoint.event stream
+   - blocked on: W846
+   - next: After the image with the landings board is installed on the pod, fetch the board from the pod and confirm it
+     answers host true; record the readback here
+470. **W852** (blocked) Confirm the first image build from a stamped commit ran the gated stage, not the suite: a build
+   log line naming it
+   - blocked on: luthen-observability:W1506
+   - next: Ask luthen-observability to read the Forgejo build log for the first nemik image built after 9bfec9c and
+     report whether it printed 'image test stage: gated'; if it printed test, read the commit's Gated-Tree trailer
+     against its tree
+471. **W877** (blocked) Ask gabion: nemik:W516 (withholding at the source): please repin your mikemol-paths-forward to
+   mtools 5ba261f or
+   - blocked on: gabion
+472. **W881** (blocked) Ask substrate: nemik:W516 (withholding at the source): please repin your mikemol-paths-forward
+   to mtools 5ba261f or
+   - blocked on: substrate
+473. **W963** (blocked) A sender posts mirrorreq's requests to a tracker with a scoped token, after a dry run prints
+   them, and reads the result back
+   - blocked on: nemik:W964
+   - next: After a token: mirrorsend posts each mirrorreq.Request with the token in an Authorization header read from
+     the file, prints the dry run first, sends only with --apply, checks the response status, and reads the issue back
+     (read your writes); tested against a local fake server, never the real tracker
+474. **W1030** (blocked) Wire the pace and round writers: fetch the ratchet series and the rounds, write
+   ratchet-pace.json and round.json beside each other, append their gauges
+   - blocked on: W1032
+   - next: In serve.private_files, read the series with ratchetseries from the metric store, write ratchet-pace.json
+     with pacewrite and round.json with roundfile, append both gauge sets, then confirm the round file path to mtools-ad
+475. **W1047** (blocked) Build the letter courier designed in docs/inbox-as-issues.md: a letter is a GitHub issue, read
+   through nemik-inbound
+   - blocked on: W1048, W1050
+476. **W1055** (blocked) Rank by value density: a card's salience divided by its projected landing cost, with the cost
+   fed from mtools' projection
+   - blocked on: W1056, W1057, W1058
+   - next: After W1056-W1058: define total days-to-zero over the pace (ratchets, cards, the landing rate as three row
+     kinds of one shape, each horizon in days at that rate), score a card as the reduction in that total per projected
+     cost, and test that a velocity card and a paydown card both rank by it; replace the velocity band and the paydown
+     floor only when the score reproduces their order on the live queue
+477. **W1173** (blocked) Courier: whether the letters already sent (linux-sources' 96, others') are backfilled as
+   issues, or only letters sent after W1048 become issues and each repo's tracked manifest stays the record of the past
+   - blocked on: W1048
+   - next: Default stands: no backfill (nothing is written without a go). Settle the retirement condition with
+     linux-sources:W406 as post-courier comparison plus the sender's tracked manifest as the record of the past; a
+     backfill, if the operator ever asks for one, is a new card that writes one issue per manifest row, dry run first
+478. **W1696** (blocked) Codon row apischema: nemik.apischema compiles under the pinned Codon in both modes
    - blocked on: W1771, W1772
-446. **W1701** (blocked) Codon row calendars: nemik.calendars compiles under the pinned Codon in both modes
+479. **W1701** (blocked) Codon row calendars: nemik.calendars compiles under the pinned Codon in both modes
    - blocked on: W1786, W1787, W1788, W1789, W1790, W1694, W1698, W1705, W1746
-447. **W1704** (blocked) Codon row catalog: nemik.catalog compiles under the pinned Codon in both modes
+480. **W1704** (blocked) Codon row catalog: nemik.catalog compiles under the pinned Codon in both modes
    - blocked on: W1799, W1745
-448. **W1710** (blocked) Codon row forecast: nemik.forecast compiles under the pinned Codon in both modes
+481. **W1710** (blocked) Codon row forecast: nemik.forecast compiles under the pinned Codon in both modes
    - blocked on: W1820, W1694, W1698, W1712
-449. **W1715** (blocked) Codon row idle: nemik.idle compiles under the pinned Codon in both modes
+482. **W1715** (blocked) Codon row idle: nemik.idle compiles under the pinned Codon in both modes
    - blocked on: W1836, W1837, W1838, W1694
-450. **W1721** (blocked) Codon row mspdi: nemik.mspdi compiles under the pinned Codon in both modes
+483. **W1721** (blocked) Codon row mspdi: nemik.mspdi compiles under the pinned Codon in both modes
    - blocked on: W1856, W1857, W1858, W1694, W1698, W1718, W1729
-451. **W1722** (blocked) Codon row outbox: nemik.outbox compiles under the pinned Codon in both modes
+484. **W1722** (blocked) Codon row outbox: nemik.outbox compiles under the pinned Codon in both modes
    - blocked on: W1859, W1694
-452. **W1723** (blocked) Codon row overlaps: nemik.overlaps compiles under the pinned Codon in both modes
+485. **W1723** (blocked) Codon row overlaps: nemik.overlaps compiles under the pinned Codon in both modes
    - blocked on: W1860, W1861, W1862, W1863, W1694, W1698, W1705
-453. **W1724** (blocked) Codon row pacing: nemik.pacing compiles under the pinned Codon in both modes
+486. **W1724** (blocked) Codon row pacing: nemik.pacing compiles under the pinned Codon in both modes
    - blocked on: W1864, W1865, W1866, W1867, W1868, W1698, W1705
-454. **W1727** (blocked) Codon row pieces: nemik.pieces compiles under the pinned Codon in both modes
+487. **W1727** (blocked) Codon row pieces: nemik.pieces compiles under the pinned Codon in both modes
    - blocked on: W1694
-455. **W1730** (blocked) Codon row queuerows: nemik.queuerows compiles under the pinned Codon in both modes
+488. **W1730** (blocked) Codon row queuerows: nemik.queuerows compiles under the pinned Codon in both modes
    - blocked on: W1880, W1881, W1694, W1731, W1736
-456. **W1734** (blocked) Codon row runrows: nemik.runrows compiles under the pinned Codon in both modes
+489. **W1734** (blocked) Codon row runrows: nemik.runrows compiles under the pinned Codon in both modes
    - blocked on: W1894, W1895, W1694
-457. **W1738** (blocked) Codon row shaclcache: nemik.shaclcache compiles under the pinned Codon in both modes
+490. **W1738** (blocked) Codon row shaclcache: nemik.shaclcache compiles under the pinned Codon in both modes
    - blocked on: W1918, W1919, W1920, W1921
-458. **W1741** (blocked) Codon row stackable_cli: nemik.stackable_cli compiles under the pinned Codon in both modes
+491. **W1741** (blocked) Codon row stackable_cli: nemik.stackable_cli compiles under the pinned Codon in both modes
    - blocked on: W1927, W1928, W1929, W1694, W1705, W1712, W1731, W1736, W1740
-459. **W1742** (blocked) Codon row stalled: nemik.stalled compiles under the pinned Codon in both modes
+492. **W1742** (blocked) Codon row stalled: nemik.stalled compiles under the pinned Codon in both modes
    - blocked on: W1930, W1694, W1698, W1712, W1758
-460. **W1743** (blocked) Codon row starved: nemik.starved compiles under the pinned Codon in both modes
+493. **W1743** (blocked) Codon row starved: nemik.starved compiles under the pinned Codon in both modes
    - blocked on: W1931, W1932, W1933, W1934, W1935, W1694, W1705, W1731, W1736
-461. **W1748** (blocked) Codon row waitlog: nemik.waitlog compiles under the pinned Codon in both modes
+494. **W1748** (blocked) Codon row waitlog: nemik.waitlog compiles under the pinned Codon in both modes
    - blocked on: W1952, W1953, W1954, W1749
-462. **W1751** (blocked) Codon row warrantdebt: nemik.warrantdebt compiles under the pinned Codon in both modes
+495. **W1751** (blocked) Codon row warrantdebt: nemik.warrantdebt compiles under the pinned Codon in both modes
    - blocked on: W1961, W1962, W1963, W1694, W1698
-463. **W1752** (blocked) Codon row warrants: nemik.warrants compiles under the pinned Codon in both modes
+496. **W1752** (blocked) Codon row warrants: nemik.warrants compiles under the pinned Codon in both modes
    - blocked on: W1964, W1965, W1966, W1967
-464. **W1755** (blocked) Codon row withheldage: nemik.withheldage compiles under the pinned Codon in both modes
+497. **W1755** (blocked) Codon row withheldage: nemik.withheldage compiles under the pinned Codon in both modes
    - blocked on: W1754
-465. **W17** (blocked) Follow up nemik:W4: re-run nemik-operator; nudge any repo whose unstated blocks remain when that
+498. **W1990** (blocked) Prior table: src/nemik/rebaselines.py carries required at least 2 pairs per ten-landing window
+   for the edge ratchet, taken as a maximum unconditionally, with a test
+   - blocked on: W1660
+   - next: After W1660 lands: add the compiled prior table to src/nemik/rebaselines.py (the edge ratchet's required
+     fall, at least 2 pairs per ten-landing window, taken as a maximum unconditionally), and a test that the pace reads
+     required 2 for the edge ratchet with no earlier window. Then the repin of luthen's unit past it, then the birth
+     (W1991).
+499. **W1991** (blocked) Birth of the edge ratchet: the regenerator writes the baseline, the state document,
+   ratchets.json and the first rebaselines.json entry at the derived count
+   - blocked on: W1660, W1990, mtools:W2301
+   - next: After W1660, W1990, the repin, and mtools' admission on W2301 (which waits on mtools:W2219): run the
+     regenerator at the birth tree. N is whatever it derives (the review reads 277 own pairs plus 3 observed = 280).
+     Stack: the baseline, the state document, ratchets.json, the first rebaselines.json entry {ratchet
+     codon-edges-baseline.json, old 0, new N, warrant 695f3e0a-d36f-4080-9c67-7548978cd99e:142382}, the gate tool, the
+     generator, the tests and the BUILD data lines. The old row ratchet's tombstone rides the first credited fall after
+     it.
+500. **W17** (blocked) Follow up nemik:W4: re-run nemik-operator; nudge any repo whose unstated blocks remain when that
    repo is next awake
    - blocked on: W47
    - next: Umbrella: done when W45-W47 are done
-466. **W282** (blocked) Letter migration: every repo folds its own inbox into waypoints, with nemik's per-repo tool
+501. **W282** (blocked) Letter migration: every repo folds its own inbox into waypoints, with nemik's per-repo tool
    - blocked on: W283, W286, W287, W289, W292, W294, W295, W297
    - next: Per repo: nemik-check --letters --fold --repo `<repo>` --older-than 14 prints the mv (stale: answered, or
      dated over 14 days with no citing waypoint) and the --add (live) lines; the repo applies the mv, mints or claims a
      card for each live letter, and reports done. One child card per repo, blocked on that repo so nemik-inbound shows
      it there as a claimable row.
-467. **W346** (blocked) Thoughts-forward second trawl: growth directions as cards (umbrella)
+502. **W346** (blocked) Thoughts-forward second trawl: growth directions as cards (umbrella)
    - blocked on: W352, W353
    - next: children W347-W356 from a full read of doc 1Ve0IFuaREPlEjzj94KxVdtE5u3sMn78wIZGdy53RimY on 2026-10-12, ranked
      by the reader: fire ripple, operator saturation, plan drift, milestone roll-up, what-if, liveness board, token
      cost, ForgeFed outbox, DORA, inter-workstream SLAs
-468. **W364** (blocked) Interop with other PM tools: files, a read API, and live app connectors
+503. **W364** (blocked) Interop with other PM tools: files, a read API, and live app connectors
    - blocked on: W369, W370
    - next: Three layers. Files: exports another tool opens (W365, W366) and imports printed as writer commands (W367). A
      read API: nemik-serve's JSON as a documented, versioned API (W368). Live connectors: sync with Jira,
      GitHub/Forgejo, MS Project Online, Google Tasks (W188 is the first) through their APIs (W369 outbound, W370
      inbound). Invariant: no connector writes a queue; inbound arrives as printed commands or a letter in the repo's
      inbox, outbound is a one-way mirror. Credentials are per tool and the operator's to give.
-469. **W422** (blocked) Census for github-8f's one-implementation spike: which nemik Python should run browser-side
+504. **W422** (blocked) Census for github-8f's one-implementation spike: which nemik Python should run browser-side
    unchanged, with types, I/O and conformance corpora
    - blocked on: W423, W424
    - next: Umbrella over W423, W424, W425; cite mtools' cards on W423 once they exist
-470. **W459** (blocked) OperatorActShape escalates Warning to Violation after N ticks, N learned from ledger history
-   - blocked on: operator: decide whether the no-command lane now in the view (W467, f3a00fd) gives you enough
-     visibility to let a long-standing no-command ask escalate from Warning to Violation, or what else you need to see
-     first
-   - next: read ticks_blocked of no-command asks over the ledger history; pick N; add a second sh:property at
-     sh:Violation gated on ticksBlocked >= N
-471. **W486** (blocked) Salience from the graph alone: every unrealized node a unit demand source; alerts, asks, goals
+505. **W486** (blocked) Salience from the graph alone: every unrealized node a unit demand source; alerts, asks, goals
    as nodes with edges, age in edge capacity
    - blocked on: W581
    - next: W581 (wait age and the SLO-derived band, its children W699 done, W700 operator, W712) is step 1 of the chain
      and enables this card; then: (a) every unrealized node a unit source, rank tests re-baselined with the diff
      explained; (b) operator asks as nodes; (c) alert and goal node types published by their owners; (d) age as an edge
      capacity from the W485 report docs/working-time.md
-472. **W512** (blocked) Profile nemik client behavior and precompute server-side only the measured hot filter shapes to
+506. **W512** (blocked) Profile nemik client behavior and precompute server-side only the measured hot filter shapes to
    cut the data volume sent
    - blocked on: W500
    - next: After W500 lands (server returns source data, client does the work): record per request the view, the
@@ -3317,53 +3664,53 @@ counter 1989 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:734
      source hashes plus withheld-list hash plus code identity plus canonical filter shape, TTL and size cap, the
      withheld policy still applied before storing); everything else stays client-side. Witness: median payload bytes per
      session falls with no rise in server RSS.
-473. **W517** (blocked) Promote the paths-forward architecture out of mtools into nemik: design, order and pin migration
+507. **W517** (blocked) Promote the paths-forward architecture out of mtools into nemik: design, order and pin migration
    for every consumer
    - blocked on: W534
    - next: After the dependency map (W514) and nemik's standards (W515): decide what moves (writer, ledger, lock,
      shapes, the CLI contract), how nemik becomes the single lineage, and how every repo's sha-pinned
      mikemol-pathsforward reference migrates without breaking a pin (use mtools W1229's pin table: 5 shas across 8
      consumer repos, pathsforward in 8). Chain of bounded cards, nothing moved without the operator.
-474. **W561** (blocked) All nemik Python is Codon-compatible: a census of what Codon rejects per module, a ratchet that
+508. **W561** (blocked) All nemik Python is Codon-compatible: a census of what Codon rejects per module, a ratchet that
    only falls, and a typed-record layer for documents
-   - blocked on: W567, W568, W569
+   - blocked on: W568, W569
    - next: mtools:W1323 is not needed (mtools-ad 2026-10-17 asked): nemik's own census already is the per-repo baseline
      ratchet in the gate (tools/codon_census.py, codon-baseline.json, tests/test_codon_census.py, nemik:W566): a NEW
      module that fails Codon, or a module whose first rejection changes, refuses the commit. Remaining children: a
      typed-record layer for the JSON documents drawn from the schemas, and paying down the baseline (each entry names
      the first rejection per module: argparse, tomllib, rdflib, __future__, dataclasses, NamedTuple); start with the
      entries that are not a missing library
-475. **W570** (blocked) Decide whether nemik-pins' ship-is-safe check should see the image build's test stage failing
+509. **W570** (blocked) Decide whether nemik-pins' ship-is-safe check should see the image build's test stage failing
    - blocked on: luthen-observability:W1108
    - next: On luthen's answer: add a line to nemik-pins that reports the Forgejo build state of HEAD (failed, building,
      green) beside the lag, and calls the ship stuck at once when the build for HEAD failed, instead of after 5 commits
-476. **W571** (blocked) One test run for the commit gate and the image: a commit that breaks the image's test stage
+510. **W571** (blocked) One test run for the commit gate and the image: a commit that breaks the image's test stage
    cannot land or be pushed
    - blocked on: W852
    - next: W703 and W704 are done; what remains is seeing a real gated image build (W852 waits on
      luthen-observability:W1506), then close this umbrella
-477. **W613** (blocked) nemik-rank stackable mode: the disjoint ready set per repo, as a forecast mark and the
+511. **W613** (blocked) nemik-rank stackable mode: the disjoint ready set per repo, as a forecast mark and the
    nemik_stackable gauge
    - blocked on: W643
    - next: Parts 1-5 landed (latest 0ebadf6: --propose --json for mtools' --manifests-from). Remaining: the
      nemik_stackable gauge beside stack depth (luthen row); atomize the manifest-less design cards into children that
      name files
-478. **W691** (blocked) Blocked cards with the same blockers and the same enables collapse into one umbrella node A_C_u
+512. **W691** (blocked) Blocked cards with the same blockers and the same enables collapse into one umbrella node A_C_u
    in the graph, derived from the queues and never written to them
    - blocked on: W693
    - next: Umbrella (operator 2026-10-18, 695f3e0a line 80452, warranted). Read as a VIEW: derived from the queues,
      never minted as a card. Children W692 (pure classes) and W693 (payload, page, Info). Reading to confirm with the
      operator via github-8f: strict equivalence (same blocker set and same enables set), and a view-level collapse, not
      a queue umbrella
-479. **W695** (blocked) Each repo clears the enables edges whose target does not wait on them, using the dry run
+513. **W695** (blocked) Each repo clears the enables edges whose target does not wait on them, using the dry run
    nemik-check --integrity prints (274 across 11 repos at first run)
    - blocked on: luthen-observability, mtools
    - next: Wait for W1396: bump the mtools pin, rebuild, read --help, dry run, then lift this wait.
-480. **W735** (blocked) Ask the operator: who may know sibling paths for local-only inbox delivery
+514. **W735** (blocked) Ask the operator: who may know sibling paths for local-only inbox delivery
    - blocked on: operator: decide whether nemik's adapter is the ONE place allowed to know sibling paths for local-only
      inbox delivery (a single allowlist entry in mtools:W1708's lint), or local-only delivery goes through a broker; see
      docs/inbox-as-issues.md, section 'What this leaves unsolved'
-481. **W743** (blocked) Track waypoint event histories as weather and climate: stations, climate, forecast shingle,
+515. **W743** (blocked) Track waypoint event histories as weather and climate: stations, climate, forecast shingle,
    verification, improvement
    - blocked on: nemik:W749, nemik:W750, nemik:W751
    - next: umbrella. ACCEPTANCE LIST (docs/weather-questions.md): the operator's four (what the forecast reads, how it
@@ -3371,128 +3718,123 @@ counter 1989 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:734
      reopen rate, which intervention moved the climate, which cards stall), each checked against the bits the source
      carries. Gaps owned by nemik (W752) and by mtools (W1731: the starting values of an add, via, actor, a mutation id,
      manifest and size as fields, big fields as length and hash, landing events, intervention markers)
-482. **W764** (blocked) The published-export loop rebuilds every 30 seconds whether or not any queue changed: skip the
+516. **W764** (blocked) The published-export loop rebuilds every 30 seconds whether or not any queue changed: skip the
    build when the inputs' hash is unchanged
    - blocked on: W1020, W1021
    - next: Rate before: 0.862 core for the pair. Now (a) hash-skip in the container loop, then (b) one builder for both
      replicas; re-read the same two files over a measured interval after each ships to show the saving
-483. **W768** (blocked) The Codon census compiles only the modules whose source changed: key each probe's verdict on the
+517. **W768** (blocked) The Codon census compiles only the modules whose source changed: key each probe's verdict on the
    module's content, the modules it imports and the pinned compiler
    - blocked on: W1216, W1217, W1218
    - next: Decide between a persistent verdict store and one Bazel census target per module over the import closure; the
      second follows the operator's cache direction and needs the committed import graph
-484. **W781** (blocked) Goal: read-only feature parity between the nemik CLI tools and the web UI, with no process
+518. **W781** (blocked) Goal: read-only feature parity between the nemik CLI tools and the web UI, with no process
    spawned through the UI
    - blocked on: W788
-485. **W812** (blocked) Goal: the page's pure computation is Python compiled by Codon to wasm, shared with the CLI
+519. **W812** (blocked) Goal: the page's pure computation is Python compiled by Codon to wasm, shared with the CLI
    tools, not hand-kept JS
    - blocked on: W1028
    - next: After the spike lands: name the core's seam. A package src/nemik/core/ whose functions take and return only
      plain data and compile under the pinned Codon (the census enforces it), with the CLI and the page each a thin
      facade; the first member is whichever pure function W815's inventory ranks first
-486. **W899** (blocked) The PDF draws the graph as vector, with no raster step between the model and the page
+520. **W899** (blocked) The PDF draws the graph as vector, with no raster step between the model and the page
    - blocked on: W902
-487. **W905** (blocked) Audit PROV and the card model against Toulmin, extracting the full codomain of the language and
+521. **W905** (blocked) Audit PROV and the card model against Toulmin, extracting the full codomain of the language and
    the relevant standards, under an evidential paradigm
    - blocked on: W908, W909
-488. **W914** (blocked) An observer reads a published waldo verdict, so a card can close from estate's read-back witness
+522. **W914** (blocked) An observer reads a published waldo verdict, so a card can close from estate's read-back witness
    - blocked on: estate
    - next: After estate states its witness JSON and where a verdict copy is published: add one observer to the closed
      set (nemik:W58) that reads it, and a card whose witness is Rego over input.verdict
-489. **W922** (blocked) test_modes and test_metrics_gating time out at 300 s when three stacks gate at once: shard them
+523. **W922** (blocked) test_modes and test_metrics_gating time out at 300 s when three stacks gate at once: shard them
    finer, never raise the timeout
    - blocked on: W925
    - next: Superseded by the exhaustive plan: W925 gives test_modes and test_metrics_gating their shard_count from
      measured times, so no hand split; close this card when W925 lands and the two stop timing out
-490. **W923** (blocked) Every nemik test is its own Bazel target in hierarchical BUILD files, so none times out and an
+524. **W923** (blocked) Every nemik test is its own Bazel target in hierarchical BUILD files, so none times out and an
    unchanged test is a cache hit
    - blocked on: W925, W926, W927
-491. **W934** (blocked) The page's navigation follows its structure: views for the questions it answers, and each
+525. **W934** (blocked) The page's navigation follows its structure: views for the questions it answers, and each
    control next to what it acts on
    - blocked on: W938
-492. **W941** (blocked) Actors and cards have http(s) identifiers a peer can fetch, which needs the public base URL for
+526. **W941** (blocked) Actors and cards have http(s) identifiers a peer can fetch, which needs the public base URL for
    the pod
    - blocked on: nemik:W964
    - next: After the operator's answer: a TicketTracker actor document per repo with inbox and outbox, ids under the
      base URL; docs/federation-recommendations.md R3
-493. **W964** (blocked) One sitting for three operator choices this session raised: the page-structure map, the pod's
+527. **W964** (blocked) One sitting for three operator choices this session raised: the page-structure map, the pod's
    public base URL, and the tracker tokens
    - blocked on: operator: decide three things, each answerable in a line: (1) the page structure in
      docs/page-structure-map.md: is Orders its own view or a section of Health, is the selected card a pane or a drawer,
      does Wake split between Health and Orders (nemik:W938 builds the views once you answer); (2) the public base URL
      under which nemik's pod is reachable for actors and cards, or none yet (nemik:W941); (3) whether to give a
      fine-grained GitHub token limited to issues read and write on one repo you name, and a Forgejo token with the issue
-     scope on one repo, each as a file path outside the repo (nemik:W963 sends nothing before then)
+     scope on one repo, each as a file path outside the repo (nemik:W963 sends nothing before then), nemik:W2029,
+     nemik:W2030, nemik:W2031
    - next: On the answer, split it back: unblock W938 with the decided structure, W941 with the URL or its drop, W963
      with the token paths or its drop
-494. **W979** (blocked) A nonzero ratchet is a priority marker: every repo with one needs an open pay-down card (a shape
-   warns when missing), those cards rank in a high band above feature work, and a ratchet that has not fallen over a
-   learned window raises an alert
-   - blocked on: mtools
-   - next: When mtools publishes the ratchet census, add the missing-pay-down shape, the high rank band and the
-     stalled-ratchet alert
-495. **W984** (blocked) A retro stub, seeded with the card's mint-time precommit, opens on a gate refusal and on a card
+528. **W984** (blocked) A retro stub, seeded with the card's mint-time precommit, opens on a gate refusal and on a card
    reopened from done, then on an alert clearing and a ruling that corrects a session
    - blocked on: W982
    - next: Build the stub from a card's ledger history for a reopened card first, then wire the gate-refusal event, once
      W982 fixes the record form
-496. **W985** (blocked) A report measures gate G9 fleet-wide: the recurring failure classes of the retros by the layer
+529. **W985** (blocked) A report measures gate G9 fleet-wide: the recurring failure classes of the retros by the layer
    their measure lives at, seeded with the host's four classes of this week
    - blocked on: W982
    - next: Count recurring classes by enforcement layer over the ingested retros, and place the four classes of the
      host's week by what enforces each now
-497. **W1072** (blocked) Derive rebaselines.DECLARED from the fleet's ratchet declaration files (mtools W1957 format
+530. **W1072** (blocked) Derive rebaselines.DECLARED from the fleet's ratchet declaration files (mtools W1957 format
    gains a re-baseline entry: ratchet, old, new, reason, the commit that changes the count), so an undeclared drop reads
    UNKNOWN and never paid
    - blocked on: mtools:W2024
-498. **W1073** (blocked) Cut the builder's resident set in the survey and SHACL phase below its limit: the peak is 0.883
+531. **W1073** (blocked) Cut the builder's resident set in the survey and SHACL phase below its limit: the peak is 0.883
    GiB against a 0.875 GiB limit, flat before and after the cache mount
    - blocked on: W1095, W1096
    - next: Atomized: the first child replaces the Activity triples with a pre-aggregated per-card summary built in a
      streaming pass over the ledger (the consumers above read the summary), the second traces the 370 MiB outside the
      graph
-499. **W1077** (blocked) Declare a velocity band the rank puts first in every repo: a declared list of the fleet's
+532. **W1077** (blocked) Declare a velocity band the rank puts first in every repo: a declared list of the fleet's
    velocity cards, the rank reading it, the floor guarantee refusing to skip them
    - blocked on: W1079
-500. **W1092** (blocked) Say ceiling (declared 6), not headroom, until the ceiling is measured, and learn it from the
+533. **W1092** (blocked) Say ceiling (declared 6), not headroom, until the ceiling is measured, and learn it from the
    gate's history
    - blocked on: W1136
    - next: Read luthen's W1645 series and drum's admission interface; derive CEILING from the gate's measured cost per
      entry against CPU headroom (autocalibrate, no typed threshold); publish nemik_round_binding{repo,term} from a
      source the server can read
-501. **W1113** (blocked) A Rego bound on each ratchet's horizon that only tightens, with an alert when a horizon exceeds
+534. **W1113** (blocked) A Rego bound on each ratchet's horizon that only tightens, with an alert when a horizon exceeds
    it; ruff at about 27000 landings is the first fixture
    - blocked on: W1139
    - next: After W1139: seed each ratchet's bound from its measured horizon in days, store it where it only tightens
      (nemik's own state beside the priors), mark a ratchet behind in the pace when its horizon exceeds its bound, test
      that the bound only falls and that a slower landing rate marks it behind
-502. **W1198** (blocked) A gate's ratchet emit sends the STAGED tree's value to the store before the verdict, so a fall
+535. **W1198** (blocked) A gate's ratchet emit sends the STAGED tree's value to the store before the verdict, so a fall
    that never lands (a refused stack) is counted as paid: the pace should count a fall only once it has landed
    - blocked on: mtools:W1980
    - next: Read where the emit runs in the gate sequence (mtools' gate hook; nemik's gate_staged.sh runs the ratchet
      then bazel test) and whether it is sent before the verdict; the fix is the emitter's to send after the verdict, or
      the pace's to count only samples whose landing exists (a landing row); ask mtools-ad; witness: a refused stack that
      lowers a ratchet leaves the series unchanged
-503. **W1219** (blocked) The land step resolves a landed card's working mark: the commit or submit refuses, or the
+536. **W1219** (blocked) The land step resolves a landed card's working mark: the commit or submit refuses, or the
    writer auto-resolves, a done card still marked working, with a test that builds that state
    - blocked on: mtools:W2097
    - next: Write the one pre-submit script: manifest equals git's changed files, card set working in its own call,
      newest pace read and its owed baselines required in the stack's paths, five guards plus touched modules' tests run
      with stamps, then submit by full path
-504. **W1224** (blocked) A stack submit refuses a working card that has no dated G0 evidence line, so work between a
+537. **W1224** (blocked) A stack submit refuses a working card that has no dated G0 evidence line, so work between a
    close and the next tick-open is not unprecommitted
    - blocked on: mtools:W2098
    - next: mtools-ad: a stack submit refuses a working card with no dated G0 evidence line (mikemol-commit is mtools');
      nemik:W1224 holds three instances
-505. **W1400** (blocked) Codon paydown: pick the failing baseline entries one fix from compiling, using scratchpad
+538. **W1400** (blocked) Codon paydown: pick the failing baseline entries one fix from compiling, using scratchpad
    codon_one.py, since a bare star and datetime.UTC both fail it
    - blocked on: W1411, W1491, W1492
    - next: List W1383's 19 flag sites by module, mark each compiled or failing against codon-baseline.json, and write
      the result on W1383 and here.
-506. **W1438** (blocked) tests split their composite assertions into one assertion each (PT018), so ruff falls by about
+539. **W1438** (blocked) tests split their composite assertions into one assertion each (PT018), so ruff falls by about
    twenty-six
    - blocked on: W1282
-507. **W1524** (blocked) Decide what the pace does with a declared exemption: nemik *.py owes 1 is the tests S101 relief
+540. **W1524** (blocked) Decide what the pace does with a declared exemption: nemik *.py owes 1 is the tests S101 relief
    in ruff-house.toml
    - blocked on: mtools:W2255
    - next: Decision to state: the pace counts tests/test_*.py = [S101] in ruff-house.toml as a ratchet entry that owes a
@@ -3500,2643 +3842,2718 @@ counter 1989 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:734
      exemptions from the pace, since a test's job is to assert and ruff-house.toml says the relief is by responsibility;
      (b) pay it: replace the asserts in tests, hundreds, not a card-sized change. Recommend (a); the peer ask goes to
      mtools (the pace is their ratchet census) with this entry as witness.
-508. **W1652** (blocked) A gate run sends its ratchet values to the store before it lands, so a cancelled run makes the
+541. **W1652** (blocked) A gate run sends its ratchet values to the store before it lands, so a cancelled run makes the
    guard refuse the stack that carries the fall
    - blocked on: W1660
    - next: mtools decides: emit the ratchet gauges after the commit lands, or have the guard compare a stack's baseline
      files with HEAD instead of the store's latest value; nemik resubmits stack 1003 when it can pass
-509. **W1653** (blocked) A nemik gate run was cancelled by the host guard kine-latency mid-build with no failing test
+542. **W1653** (blocked) A nemik gate run was cancelled by the host guard kine-latency mid-build with no failing test
    - blocked on: luthen-observability
    - next: luthen-observability says what kine-latency measures, whether a 468-target nemik gate can trip it, and
      whether it should throttle rather than kill
-510. **W1674** (blocked) Codon wall: make the modules that use argparse compile without it
+543. **W1674** (blocked) Codon wall: make the modules that use argparse compile without it
    - blocked on: W1773, W1780, W1786, W1791, W1800, W1809, W1815, W1825, W1833, W1839, W1851, W1856, W1860, W1864,
      W1869, W1872, W1874, W1882, W1908, W1927, W1931, W1936, W1941, W1947, W1956, W1970, W1976
    - next: Wave 16 of 19: change 27 module(s); 61 rows compile once the walls through this wave are fixed
      (docs/codon-walls.md).
-511. **W1675** (blocked) Codon wall: make the modules that use collections.abc imports compile without it
+544. **W1675** (blocked) Codon wall: make the modules that use collections.abc imports compile without it
    - blocked on: W1763, W1792, W1801, W1816, W1842, W1852, W1896, W1909, W1918, W1922, W1928, W1964, W1971
    - next: Wave 6 of 19: change 13 module(s); 0 rows compile once the walls through this wave are fixed
      (docs/codon-walls.md).
-512. **W1676** (blocked) Codon wall: make the modules that use contextlib compile without it
+545. **W1676** (blocked) Codon wall: make the modules that use contextlib compile without it
    - blocked on: W1843, W1897, W1919
    - next: Wave 4 of 19: change 3 module(s); 0 rows compile once the walls through this wave are fixed
      (docs/codon-walls.md).
-513. **W1677** (blocked) Codon wall: make the modules that use the dataclass decorator and import compile without it
+546. **W1677** (blocked) Codon wall: make the modules that use the dataclass decorator and import compile without it
    - blocked on: W1796, W1817, W1826, W1830, W1844, W1877, W1883, W1898, W1904
    - next: Wave 7 of 19: change 9 module(s); 0 rows compile once the walls through this wave are fixed
      (docs/codon-walls.md).
-514. **W1679** (blocked) Codon wall: make the modules that use datetime.UTC compile without it
+547. **W1679** (blocked) Codon wall: make the modules that use datetime.UTC compile without it
    - blocked on: W1769, W1802, W1827, W1834, W1853, W1865, W1873, W1880, W1890, W1910, W1932, W1957, W1972
    - next: Wave 14 of 19: change 13 module(s); 7 rows compile once the walls through this wave are fixed
      (docs/codon-walls.md).
-515. **W1680** (blocked) Codon wall: make the modules that use fractions compile without it
+548. **W1680** (blocked) Codon wall: make the modules that use fractions compile without it
    - blocked on: W1774, W1782, W1818, W1884, W1899
    - next: Wave 5 of 19: change 5 module(s); 0 rows compile once the walls through this wave are fixed
      (docs/codon-walls.md).
-516. **W1681** (blocked) Codon wall: make the modules that use the protobuf message import compile without it
+549. **W1681** (blocked) Codon wall: make the modules that use the protobuf message import compile without it
    - blocked on: W1948, W1952
    - next: Wave 18 of 19: change 2 module(s); 64 rows compile once the walls through this wave are fixed
      (docs/codon-walls.md).
-517. **W1682** (blocked) Codon wall: make the modules that use hashlib compile without it
+550. **W1682** (blocked) Codon wall: make the modules that use hashlib compile without it
    - blocked on: W1764, W1783, W1848, W1911
    - next: Wave 3 of 19: change 4 module(s); 0 rows compile once the walls through this wave are fixed
      (docs/codon-walls.md).
-518. **W1683** (blocked) Codon wall: make the modules that use http.client compile without it
+551. **W1683** (blocked) Codon wall: make the modules that use http.client compile without it
    - blocked on: W1812, W1912, W1937, W1973
    - next: Wave 13 of 19: change 4 module(s); 6 rows compile once the walls through this wave are fixed
      (docs/codon-walls.md).
-519. **W1684** (blocked) Codon wall: make the modules that use importlib.resources and importlib.metadata compile
+552. **W1684** (blocked) Codon wall: make the modules that use importlib.resources and importlib.metadata compile
    without it
    - blocked on: W1765, W1771, W1775, W1784, W1803, W1821, W1835, W1836, W1866, W1885, W1894, W1900, W1905, W1913,
      W1933, W1942, W1961, W1965, W1968
    - next: Wave 11 of 19: change 19 module(s); 1 rows compile once the walls through this wave are fixed
      (docs/codon-walls.md).
-520. **W1685** (blocked) Codon wall: make the modules that use the mikemol libraries compile without it
+553. **W1685** (blocked) Codon wall: make the modules that use the mikemol libraries compile without it
    - blocked on: W1766, W1770, W1776, W1787, W1793, W1804, W1813, W1828, W1831, W1849, W1854, W1861, W1870, W1875,
      W1886, W1891, W1906, W1914, W1943, W1949, W1953, W1958, W1974, W1977
    - next: Wave 10 of 19: change 24 module(s); 0 rows compile once the walls through this wave are fixed
      (docs/codon-walls.md).
-521. **W1686** (blocked) Codon wall: make the modules that use pyshacl compile without it
+554. **W1686** (blocked) Codon wall: make the modules that use pyshacl compile without it
    - blocked on: W1923
    - next: Wave 2 of 19: change 1 module(s); 0 rows compile once the walls through this wave are fixed
      (docs/codon-walls.md).
-522. **W1687** (blocked) Codon wall: make the modules that use rdflib compile without it
+555. **W1687** (blocked) Codon wall: make the modules that use rdflib compile without it
    - blocked on: W1767, W1777, W1781, W1785, W1788, W1794, W1797, W1799, W1805, W1810, W1820, W1822, W1829, W1837,
      W1845, W1855, W1857, W1859, W1862, W1867, W1878, W1881, W1887, W1893, W1895, W1901, W1915, W1920, W1924, W1926,
      W1929, W1930, W1934, W1939, W1944, W1950, W1955, W1959, W1962, W1966
    - next: Wave 15 of 19: change 40 module(s); 31 rows compile once the walls through this wave are fixed
      (docs/codon-walls.md).
-523. **W1688** (blocked) Codon wall: make the modules that use shlex compile without it
+556. **W1688** (blocked) Codon wall: make the modules that use shlex compile without it
    - blocked on: W1840
    - next: Wave 19 of 19: change 1 module(s); 65 rows compile once the walls through this wave are fixed
      (docs/codon-walls.md).
-524. **W1689** (blocked) Codon wall: make the modules that use shutil compile without it
+557. **W1689** (blocked) Codon wall: make the modules that use shutil compile without it
    - blocked on: W1789, W1806, W1871, W1916, W1938
    - next: Wave 9 of 19: change 5 module(s); 0 rows compile once the walls through this wave are fixed
      (docs/codon-walls.md).
-525. **W1690** (blocked) Codon wall: make the modules that use tomllib compile without it
+558. **W1690** (blocked) Codon wall: make the modules that use tomllib compile without it
    - blocked on: W1778, W1790, W1807, W1823, W1838, W1868, W1876, W1888, W1902, W1907, W1935, W1945, W1963, W1967
    - next: Wave 8 of 19: change 14 module(s); 0 rows compile once the walls through this wave are fixed
      (docs/codon-walls.md).
-526. **W1691** (blocked) Codon wall: make the modules that use TYPE_CHECKING blocks compile without it
+559. **W1691** (blocked) Codon wall: make the modules that use TYPE_CHECKING blocks compile without it
    - blocked on: W1768, W1772, W1779, W1795, W1798, W1808, W1811, W1814, W1819, W1824, W1832, W1841, W1846, W1850,
      W1863, W1879, W1889, W1892, W1903, W1917, W1921, W1925, W1940, W1946, W1951, W1954, W1960, W1969, W1975
    - next: Wave 12 of 19: change 29 module(s); 5 rows compile once the walls through this wave are fixed
      (docs/codon-walls.md).
-527. **W1692** (blocked) Codon wall: make the modules that use weakref compile without it
+560. **W1692** (blocked) Codon wall: make the modules that use weakref compile without it
    - blocked on: W1847
    - next: Wave 1 of 19: change 1 module(s); 0 rows compile once the walls through this wave are fixed
      (docs/codon-walls.md).
-528. **W1693** (blocked) Codon wall: make the modules that use xml.etree compile without it
+561. **W1693** (blocked) Codon wall: make the modules that use xml.etree compile without it
    - blocked on: W1858
    - next: Wave 17 of 19: change 1 module(s); 62 rows compile once the walls through this wave are fixed
      (docs/codon-walls.md).
-529. **W1697** (blocked) Codon row ask_cli: nemik.ask_cli compiles under the pinned Codon in both modes
+562. **W1697** (blocked) Codon row ask_cli: nemik.ask_cli compiles under the pinned Codon in both modes
    - blocked on: W1773, W1758
-530. **W1699** (blocked) Codon row blocks_cli: nemik.blocks_cli compiles under the pinned Codon in both modes
+563. **W1699** (blocked) Codon row blocks_cli: nemik.blocks_cli compiles under the pinned Codon in both modes
    - blocked on: W1780, W1781, W1694, W1698, W1705, W1731
-531. **W1702** (blocked) Codon row calwrite: nemik.calwrite compiles under the pinned Codon in both modes
+564. **W1702** (blocked) Codon row calwrite: nemik.calwrite compiles under the pinned Codon in both modes
    - blocked on: W1791, W1792, W1793, W1794, W1795, W1694, W1695, W1701, W1705, W1746
-532. **W1708** (blocked) Codon row exportcli: nemik.exportcli compiles under the pinned Codon in both modes
+565. **W1708** (blocked) Codon row exportcli: nemik.exportcli compiles under the pinned Codon in both modes
    - blocked on: W1815, W1754
-533. **W1714** (blocked) Codon row hostroot_cli: nemik.hostroot_cli compiles under the pinned Codon in both modes
+566. **W1714** (blocked) Codon row hostroot_cli: nemik.hostroot_cli compiles under the pinned Codon in both modes
    - blocked on: W1833, W1834, W1835, W1707
-534. **W1716** (blocked) Codon row importer: nemik.importer compiles under the pinned Codon in both modes
+567. **W1716** (blocked) Codon row importer: nemik.importer compiles under the pinned Codon in both modes
    - blocked on: W1839, W1840, W1841, W1718, W1721, W1729
-535. **W1720** (blocked) Codon row metrics: nemik.metrics compiles under the pinned Codon in both modes
+568. **W1720** (blocked) Codon row metrics: nemik.metrics compiles under the pinned Codon in both modes
    - blocked on: W1851, W1852, W1853, W1854, W1855, W1694, W1698, W1700, W1705, W1710, W1711, W1712, W1731, W1732,
      W1733, W1736, W1740, W1741, W1750
-536. **W1725** (blocked) Codon row pdf: nemik.pdf compiles under the pinned Codon in both modes
+569. **W1725** (blocked) Codon row pdf: nemik.pdf compiles under the pinned Codon in both modes
    - blocked on: W1869, W1870, W1871
-537. **W1726** (blocked) Codon row pendingdeliver: nemik.pendingdeliver compiles under the pinned Codon in both modes
+570. **W1726** (blocked) Codon row pendingdeliver: nemik.pendingdeliver compiles under the pinned Codon in both modes
    - blocked on: W1872, W1873, W1756
-538. **W1728** (blocked) Codon row pins: nemik.pins compiles under the pinned Codon in both modes
+571. **W1728** (blocked) Codon row pins: nemik.pins compiles under the pinned Codon in both modes
    - blocked on: W1874, W1875, W1876
-539. **W1737** (blocked) Codon row serve: nemik.serve compiles under the pinned Codon in both modes
+572. **W1737** (blocked) Codon row serve: nemik.serve compiles under the pinned Codon in both modes
    - blocked on: W1908, W1909, W1910, W1911, W1912, W1913, W1914, W1915, W1916, W1917, W1694, W1696, W1698, W1700,
      W1704, W1705, W1706, W1711, W1712, W1717, W1722, W1723, W1724, W1727, W1730, W1731, W1733, W1735, W1736, W1740,
      W1743, W1745, W1750, W1754, W1755
-540. **W1744** (blocked) Codon row staticserve: nemik.staticserve compiles under the pinned Codon in both modes
+573. **W1744** (blocked) Codon row staticserve: nemik.staticserve compiles under the pinned Codon in both modes
    - blocked on: W1936, W1937, W1938
-541. **W1747** (blocked) Codon row waitemit: nemik.waitemit compiles under the pinned Codon in both modes
+574. **W1747** (blocked) Codon row waitemit: nemik.waitemit compiles under the pinned Codon in both modes
    - blocked on: W1947, W1948, W1949, W1950, W1951, W1705, W1736, W1748, W1749, W1750
-542. **W1753** (blocked) Codon row wcagjudge: nemik.wcagjudge compiles under the pinned Codon in both modes
+575. **W1753** (blocked) Codon row wcagjudge: nemik.wcagjudge compiles under the pinned Codon in both modes
    - blocked on: W1968, W1756
-543. **W1757** (blocked) Codon row witnesses_cli: nemik.witnesses_cli compiles under the pinned Codon in both modes
+576. **W1757** (blocked) Codon row witnesses_cli: nemik.witnesses_cli compiles under the pinned Codon in both modes
    - blocked on: W1707, W1756
-544. **W1984** (blocked) Read-only replay of the operator's learned-pace hypothesis: an umbrella is a ratchet and
+577. **W1984** (blocked) Read-only replay of the operator's learned-pace hypothesis: an umbrella is a ratchet and
    overdue means behind the learned pace, replayed over history with no gate time and no live rank change
    - blocked on: W1985, W1986, W1987, W1988
-545. **W987** (done) Compute each repo's behind or ok fact from the ratchet value series: observed fall over the
+578. **W1992** (blocked) Wheel-source inputs: the pinned mikemol wheel sources are read by the detector as modules, so
+   wheel-carried kinds become pairs in the closure and the wheel hold ends
+   - blocked on: W1991
+   - next: After the birth (W1991): name the pinned mikemol wheel sources (from uv.lock, not the venv) as detector
+     inputs, so procrun's subprocess and select, pathsforward's dataclass decorator and the rest become pairs in the
+     closure of the modules that import them; then the committed WHEEL-CARRIED list is derived and the persistent wheel
+     hold ends (a pair leaves P when the closure, now including the wheels, no longer reaches the kind). mtools:W2300
+     answers compilation of the libraries only, not this.
+579. **W1993** (blocked) Fleet ratchet atomizer: every debt row of every declared ratchet gets its own leaf card under
+   one umbrella per ratchet row, generated from the census and closed by the census
+   - blocked on: W1994, W1995, W1996, W1997
+580. **W1998** (blocked) Ask mtools: the writer refuses ready on a card with open blocked_on children, and nemik-check
+   warns
+   - blocked on: mtools:W2307
+   - next: Send mtools the request citing nemik:W1685 and W1993, which slipped twice and were caught only by noticing.
+     Witness: the writer refuses the update and nemik-check warns on a fixture. Owner mtools, due 2026-11-08
+581. **W2009** (blocked) Run mikemol-scratch restore on a throwaway stack and record its output on W1229
+   - blocked on: W1660
+   - next: 2026-11-09: after W1660's stack is queued or landed, run mikemol-scratch restore --as-of-stack KEY --file
+     PATH for that stack and a file it carries, into a scratch directory, and put the output on W1229; until a stack of
+     this repo exists the trial has no key to use
+582. **W2010** (blocked) Classify the stale ready cards by class with a read-only tool and clear the largest class as a
+   batch
+   - blocked on: W1660
+   - next: 2026-11-07: add two data classes to tools/stale_ready.py (R260 finding 1): lift candidates (every blocked_on
+     target is done) and overtaken candidates (a manifest file is gone or changed since the card's last_worked, read
+     from git log); run both on the 52 in the rest class, starting with W1007, W1008, W1009 against their mtools
+     letters. Owner nemik session, due 2026-11-08, witness: the class counts on W1568
+583. **W2025** (blocked) A pure-Python TOML reader tomlread.loads for the subset nemik reads, so fourteen modules stop
+   importing tomllib (R290)
+   - blocked on: W2034, W2035
+   - next: Bisect why tomlread.py fails inside Codon when imported and called (error: __init__() missing 1 required
+     positional argument: func, in the staged tree, both modes) with small probe files cut from the module: the
+     TomlValue = object alias as a generic argument, the TOMLDecodeError(ValueError) class, the _Cursor class and its
+     methods, the string readers. Fix the construct in the worktree, probe with an import-and-call in the staged tree
+     (not mikemol-codon-probe on the file alone, which is too weak), then change the 14 swaps to the dotted form (the
+     bare 'from nemik import tomlread' is rejected: cannot import name from nemik.__init__), re-run pycheck, the module
+     tests and the census. Held behind mtools admitting a nemik row. Owner nemik session, due 2026-11-10, witness: an
+     import-and-call of nemik.tomlread.loads compiles in the staged tree in both modes and the census still passes
+584. **W1761** (done) Answer luthen-observability:W2049: Ask nemik: nemik_wake_required is pushed about every 16 minutes
+   and luthen-obser
+585. **W1271** (done) Decide the round ceiling's headroom as a windowed median of cores-minus-busy readings, not one
+   reading, and write the choice with its reason on W1136
+586. **W987** (done) Compute each repo's behind or ok fact from the ratchet value series: observed fall over the
    trailing window of landed commits against a required fall seeded from the measured trend and only rising
-546. **W988** (done) A shape warns when a repo is behind and has no ready paydown card
-547. **W989** (done) nemik-rank places paydown cards above feature work while their repo is behind, as a declared policy
+587. **W988** (done) A shape warns when a repo is behind and has no ready paydown card
+588. **W989** (done) nemik-rank places paydown cards above feature work while their repo is behind, as a declared policy
    line
-548. **W990** (done) Publish the per-repo behind or ok fact where a commit gate can read it
-549. **W991** (done) Wire the real ratchet value series from mtools into the pace computation
-550. **W993** (done) nemik-rank lifts the paydown cards of a repo that is behind to the front of its ranking, reading
+589. **W990** (done) Publish the per-repo behind or ok fact where a commit gate can read it
+590. **W991** (done) Wire the real ratchet value series from mtools into the pace computation
+591. **W993** (done) nemik-rank lifts the paydown cards of a repo that is behind to the front of its ranking, reading
    the pace file
-551. **W995** (done) The ratchet pace gauges carry nemik_ratchet_pace_as_of, the pace file's stamp in unix seconds, so a
+592. **W995** (done) The ratchet pace gauges carry nemik_ratchet_pace_as_of, the pace file's stamp in unix seconds, so a
    stale verdict reads as age
-552. **W996** (done) Read the ratchet value series per repo and ratchet from luthen's metric store, ordered by gate run
-553. **W997** (done) Write the pace file from the verdicts, with the series used (entry count or sum) in each row
-554. **W1003** (done) The ready-neither finding for cards past the learned age bound is a Warning, not an Info
-555. **W1006** (done) nemik-work never demotes a working card, and the skill states the zero-working-while-ready rule
+593. **W996** (done) Read the ratchet value series per repo and ratchet from luthen's metric store, ordered by gate run
+594. **W997** (done) Write the pace file from the verdicts, with the series used (entry count or sum) in each row
+595. **W1003** (done) The ready-neither finding for cards past the learned age bound is a Warning, not an Info
+596. **W1006** (done) nemik-work never demotes a working card, and the skill states the zero-working-while-ready rule
    and the stale-working rule, not a count above one
-556. **W1011** (done) A shape warns on a card blocked on the operator whose evidence holds no executed probe, a command
+597. **W1011** (done) A shape warns on a card blocked on the operator whose evidence holds no executed probe, a command
    and its output
-557. **W1012** (done) Audit every nemik-check Info or Warning that encodes demand or waiting: does the fact already move
+598. **W1012** (done) Audit every nemik-check Info or Warning that encodes demand or waiting: does the fact already move
    nemik-rank's order, and if not, fold it into the rank as salience and let the row explain a rank position
-558. **W1015** (done) Pay down the next ruff rule by count, D103 or E501 after PT018, with a mechanical fix that passes
+599. **W1015** (done) Pay down the next ruff rule by count, D103 or E501 after PT018, with a mechanical fix that passes
    the ratchets
-559. **W1024** (done) nemik-rank --round REPO names the next round: the top N ready cards by rank, N from capacity, a
+600. **W1024** (done) nemik-rank --round REPO names the next round: the top N ready cards by rank, N from capacity, a
    newly unblocked card entering only at its rank position
-560. **W1025** (done) Round drift: the share of a repo's working set outside its round, published as a metric on the
+601. **W1025** (done) Round drift: the share of a repo's working set outside its round, published as a metric on the
    pace board and gauges
-561. **W1027** (done) nemik's own gate sends mikemol.ratchet.value for nemik's ratchets: the pre-commit calls
+602. **W1027** (done) nemik's own gate sends mikemol.ratchet.value for nemik's ratchets: the pre-commit calls
    mikemol-ratchet-emit after the verdict with the repo name, with the ratchet dist's census available, and never
    changes the verdict
-562. **W999** (done) Find the cards that languish behind a grooming umbrella from plain blocked rows, past a bound
+603. **W999** (done) Find the cards that languish behind a grooming umbrella from plain blocked rows, past a bound
    learned from real blocks
-563. **W1004** (done) The learned age bound and a ready card's overdue count, as pure functions over seconds
-564. **W105** (done) luthen:W185 Flux tenant: write deploy/ (kustomization, deployment restricted+PVC nemik-export ro at
+604. **W1004** (done) The learned age bound and a ready card's overdue count, as pure functions over seconds
+605. **W105** (done) luthen:W185 Flux tenant: write deploy/ (kustomization, deployment restricted+PVC nemik-export ro at
    /export, service 8750, ImageRepository+ImagePolicy) and .forgejo/workflows/build.yml (runs-on luthen-build)
-565. **W1014** (done) Split the composite assertions that remain in twelve test files without adding an Any-typed
+606. **W1014** (done) Split the composite assertions that remain in twelve test files without adding an Any-typed
    expression, so the mypy count does not rise
-566. **W1176** (done) Typed document boundary: a typed Waypoint record that loaders and test builders return, one stack
+607. **W1176** (done) Typed document boundary: a typed Waypoint record that loaders and test builders return, one stack
    per document shape
-567. **W1279** (done) Pay down DOC201 in src: a Returns section written from each function body, in slices of about 12
+608. **W1279** (done) Pay down DOC201 in src: a Returns section written from each function body, in slices of about 12
    sites on files no neighbour slice shares
-568. **W1278** (done) Answer luthen-observability:W1798: re-vendor nemik's mtools wheels to bb7fc9c or later so the
+609. **W1278** (done) Answer luthen-observability:W1798: re-vendor nemik's mtools wheels to bb7fc9c or later so the
    pinned bin carries mikemol-hook-precompact
-569. **W1269** (done) Declare the substrate tsv header fix (466 to 465) in nemik's re-baselines list
-570. **W128** (done) Operator asks as VTODOs: one projection (nemik.vtodo: SUMMARY = stated decide/act ask, UID
+610. **W1269** (done) Declare the substrate tsv header fix (466 to 465) in nemik's re-baselines list
+611. **W128** (done) Operator asks as VTODOs: one projection (nemik.vtodo: SUMMARY = stated decide/act ask, UID
    nemik:`<repo>`:W`<n>`, RELATED-TO the waypoints it releases, DUE from mtools' date field when present), host-side
    nemik-ics writing a local .ics; per-repo opt-in; never in the export or nemik-serve
-571. **W371** (done) Connector contract: one interface every inbound and outbound integration implements
-572. **W533** (done) Extract one converge library from pod_reaper.converge: one pass path, halt repeat detection, a
+612. **W371** (done) Connector contract: one interface every inbound and outbound integration implements
+613. **W533** (done) Extract one converge library from pod_reaper.converge: one pass path, halt repeat detection, a
    trigger field on every run row
-573. **W501** (done) Declare the executor-load witness fact in the nemik witness set so luthen-observability W1054 can
+614. **W501** (done) Declare the executor-load witness fact in the nemik witness set so luthen-observability W1054 can
    be claimed
-574. **W535** (done) Share one Rego facts and evaluate core between nemik witnesses, pathsforward opa_eval and luthen
+615. **W535** (done) Share one Rego facts and evaluate core between nemik witnesses, pathsforward opa_eval and luthen
    preflight gates
-575. **W130** (done) W107a: re-vendor the pathsforward wheel at mtools 23f1223 (vector + vector_source fields, vector.py
+616. **W130** (done) W107a: re-vendor the pathsforward wheel at mtools 23f1223 (vector + vector_source fields, vector.py
    grammar); vendor/wheels README history
-576. **W343** (done) Wanted-asset convention: say I need X, Y is building it, I take X from anyone
-577. **W466** (done) WCAG as Rego: a facts extractor over the rendered view and one policy per success criterion, no
+617. **W343** (done) Wanted-asset convention: say I need X, Y is building it, I take X from anyone
+618. **W466** (done) WCAG as Rego: a facts extractor over the rendered view and one policy per success criterion, no
    waivers
-578. **W529** (done) SHACL does the rules: declare every emitted predicate in nemik.ttl, validate shapes.ttl against
+619. **W529** (done) SHACL does the rules: declare every emitted predicate in nemik.ttl, validate shapes.ttl against
    SHACL-SHACL, and port marker rules to sh:sparql
    - next: closed: remaining markers stay in Python by decision, see evidence
-579. **W530** (done) Standard terms in the RDF output: dcterms identifier, subject, typed created, a close time for
+620. **W530** (done) Standard terms in the RDF output: dcterms identifier, subject, typed created, a close time for
    completed, prov Agent for operator and sessions
-580. **W531** (done) Conformance tests against the standards: Prometheus output parsed with HELP lines, graph.ttl
+621. **W531** (done) Conformance tests against the standards: Prometheus output parsed with HELP lines, graph.ttl
    round-tripped, model.md TRS drift fixed
-581. **W540** (done) ActiveCardShape catches dropped work: warn on zero working cards while ready cards exist and on a
+622. **W540** (done) ActiveCardShape catches dropped work: warn on zero working cards while ready cards exist and on a
    stale working card; stop warning on several working
    - next: closed: landed 9415373, PROV-O warrant attached (session 695f3e0a line 68086, uuid 8aa3f24b, verified by
      mtools' reader)
-582. **W131** (done) W107b: adapter carries vector/vector_source into the graph (parsed by mtools' vector.py, never
+623. **W131** (done) W107b: adapter carries vector/vector_source into the graph (parsed by mtools' vector.py, never
    re-parsed); nemik-score module: declared band table (src/nemik/data/bands.toml) maps a vector to a band; unscored =
    the table's default band
-583. **W505** (done) Size the pod's limits from an uncensored working-set series, the server flat and the builder's peak
+624. **W505** (done) Size the pod's limits from an uncensored working-set series, the server flat and the builder's peak
    per cycle
    - next: landed 3dc5e87: builder requests 640Mi / limit 896Mi, server unchanged 32Mi/96Mi; tell luthen-observability
      the container names (server, builder) and limits for workloads.json; verify the roll with checks.vm_query after the
      pods settle
-584. **W507** (done) A source contract: anything that yields a repo's cards and edges, with a cursor, in a form the
+625. **W507** (done) A source contract: anything that yields a repo's cards and edges, with a cursor, in a form the
    browser can read
-585. **W514** (done) Derive the dependency map of nemik: every import, tool call and shared data file between nemik,
+626. **W514** (done) Derive the dependency map of nemik: every import, tool call and shared data file between nemik,
    pathsforward and mtools, by tool not by hand
-586. **W525** (done) Git hook parity with mtools: pre-push, commit-msg, and a pre-commit that runs from a snapshot of
+627. **W525** (done) Git hook parity with mtools: pre-push, commit-msg, and a pre-commit that runs from a snapshot of
    itself
    - next: Realized: W621 a58e053, W622 100a574, W623 8826afb
-587. **W526** (done) Shell and stray-code stages in the gate: shellcheck over every shell file, and no untracked code
+628. **W526** (done) Shell and stray-code stages in the gate: shellcheck over every shell file, and no untracked code
    under .claude/
-588. **W527** (done) Every claim witness in checks/claims.py is cited by a warrant, and every warrant check names a
+629. **W527** (done) Every claim witness in checks/claims.py is cited by a warrant, and every warrant check names a
    witness that exists
-589. **W515** (done) Hold the nemik repo to the same standards as mtools: bazel precommit gate, hooks, strict mypy, no
+630. **W515** (done) Hold the nemik repo to the same standards as mtools: bazel precommit gate, hooks, strict mypy, no
    waivers, warrants
    - next: Realized: W521 //:precommit, W522 ruff ratchet, W523 no waivers, W524 mypy ratchet (45cd680), W525 hooks
      (a58e053, 100a574, 8826afb), W526 shell stages (55cfa2e), W527 claims cited (ac43ce3); each of the survey's gaps
      1-7 is closed
-590. **W372** (done) Integration survey: what each PM tool imports, exposes and lets plugins do
-591. **W354** (done) ForgeFed outbox: each repo's letters, asks and closures as ActivityStreams, read-only
-592. **W355** (done) DORA signals: deploy frequency from pushes, change failure from reopened cards
-593. **W528** (done) Emit a VTIMEZONE for every TZID in nemik-ics and nemik-calendar-write output (RFC 5545 3.2.19),
+631. **W372** (done) Integration survey: what each PM tool imports, exposes and lets plugins do
+632. **W354** (done) ForgeFed outbox: each repo's letters, asks and closures as ActivityStreams, read-only
+633. **W355** (done) DORA signals: deploy frequency from pushes, change failure from reopened cards
+634. **W528** (done) Emit a VTIMEZONE for every TZID in nemik-ics and nemik-calendar-write output (RFC 5545 3.2.19),
    reusing pathsforward's vtimezone writer
-594. **W413** (done) Shared projection: cards to tasks with predecessor links, one mapping every export and connector
+635. **W413** (done) Shared projection: cards to tasks with predecessor links, one mapping every export and connector
    reuses, with a decode-back test
-595. **W373** (done) Lateral view: IBM Rational Jazz (Team Concert), where nemik's OSLC bones came from
-596. **W107** (done) luthen:W190 CVSS-shaped ranking: nemik-score module (vector parse, bands, policy rules) consumed by
+636. **W373** (done) Lateral view: IBM Rational Jazz (Team Concert), where nemik's OSLC bones came from
+637. **W107** (done) luthen:W190 CVSS-shaped ranking: nemik-score module (vector parse, bands, policy rules) consumed by
    nemik-rank; --check refuses band inversion and policy-block pairs; vector field in the pf schema via mtools
-597. **W536** (done) Replace tools/ruff_ratchet.py with mtools' mikemol-ratchet (pinned dependency, set baseline of
+638. **W536** (done) Replace tools/ruff_ratchet.py with mtools' mikemol-ratchet (pinned dependency, set baseline of
    path:rule keys), and use it for W524's mypy baseline
-598. **W170** (done) Static view: precompute graph.json, wake.json, goals/`<repo>`.json, inbound/`<repo>`.json from one
+639. **W170** (done) Static view: precompute graph.json, wake.json, goals/`<repo>`.json, inbound/`<repo>`.json from one
    export
-599. **W171** (done) Static view: omit the Tools panel (/cmd) in static mode
-600. **W469** (done) Mode switcher reorders the navigation pane's tree: Rank, Dependency, Critical, Asks, Tree, Repo,
+640. **W171** (done) Static view: omit the Tools panel (/cmd) in static mode
+641. **W469** (done) Mode switcher reorders the navigation pane's tree: Rank, Dependency, Critical, Asks, Tree, Repo,
    Recency, and a spatial canvas mode
-601. **W470** (done) Recency's clock is a codomain: offer last activity, issued, last worked, dtstart and due as
+642. **W470** (done) Recency's clock is a codomain: offer last activity, issued, last worked, dtstart and due as
    choices, like the modes
-602. **W471** (done) Viewer settings: selection follows focus, single-key shortcuts (on by default), remembered per
+643. **W471** (done) Viewer settings: selection follows focus, single-key shortcuts (on by default), remembered per
    viewer
-603. **W472** (done) Keymap table drives the keys and a ? help overlay; / jumps to a card by cite or title
-604. **W521** (done) nemik's pre-commit runs bazel test //:precommit, one target that names the whole gate
-605. **W522** (done) A house ruff configuration and a ruff stage over every Python file in the gate
-606. **W524** (done) House-strict mypy under mtools' paydown-only ratchet: baseline the 6,369 findings and let the count
+644. **W472** (done) Keymap table drives the keys and a ? help overlay; / jumps to a card by cite or title
+645. **W521** (done) nemik's pre-commit runs bazel test //:precommit, one target that names the whole gate
+646. **W522** (done) A house ruff configuration and a ruff stage over every Python file in the gate
+647. **W524** (done) House-strict mypy under mtools' paydown-only ratchet: baseline the 6,369 findings and let the count
    only fall
-607. **W177** (done) nemik-check: one active (working) card per repo unless all open items are blocked; warn on none or
+648. **W177** (done) nemik-check: one active (working) card per repo unless all open items are blocked; warn on none or
    several (operator 2026-10-01)
-608. **W178** (done) nemik-rank: low-hanging fruit as one virtual umbrella row, weighed against deep items
-609. **W180** (done) Treemap view: goals/umbrellas nest leaves across repos; area ~ composed weight; rank = reading
+649. **W178** (done) nemik-rank: low-hanging fruit as one virtual umbrella row, weighed against deep items
+650. **W180** (done) Treemap view: goals/umbrellas nest leaves across repos; area ~ composed weight; rank = reading
    order; repo by color/symbol
-610. **W154** (done) Field manifest for the static build: every export field it renders, per published file
+651. **W154** (done) Field manifest for the static build: every export field it renders, per published file
    (machine-readable, emitted beside the build and checked by a test against what the build actually writes), for
    luthen's egress gate
-611. **W166** (done) Alarm delivery: dedupe key (ref, RECURRENCE-ID, instant) in the nudges state
-612. **W167** (done) Alarm delivery: fired alarms go out through the nudge path
-613. **W169** (done) Static view: write index.html and vendor/ with relative links (bucket subpath)
-614. **W396** (done) Inventory what only the server computes, and precompute it into the snapshot or move it to the
+652. **W166** (done) Alarm delivery: dedupe key (ref, RECURRENCE-ID, instant) in the nudges state
+653. **W167** (done) Alarm delivery: fired alarms go out through the nudge path
+654. **W169** (done) Static view: write index.html and vendor/ with relative links (bucket subpath)
+655. **W396** (done) Inventory what only the server computes, and precompute it into the snapshot or move it to the
    client
-615. **W397** (done) Retire the Tools drop-down and /cmd: each capability becomes a native part of the view, or stays
+656. **W397** (done) Retire the Tools drop-down and /cmd: each capability becomes a native part of the view, or stays
    CLI-only
-616. **W481** (done) Nav pane step 4: the list becomes an APG tree view, umbrellas nesting their open children,
+657. **W481** (done) Nav pane step 4: the list becomes an APG tree view, umbrellas nesting their open children,
    Right/Left expanding and collapsing
-617. **W981** (done) Pay down the mypy baseline (6302): retire the most numerous finding kind in the files I touch most,
+658. **W981** (done) Pay down the mypy baseline (6302): retire the most numerous finding kind in the files I touch most,
    and lower the recorded count
-618. **W1253** (done) Annotate the mixed-value tomllib reads in adoption.py, rank.py and calendars.py with a typed
+659. **W1253** (done) Annotate the mixed-value tomllib reads in adoption.py, rank.py and calendars.py with a typed
    accessor
-619. **W1255** (done) Type the docs fixture in test_withheld and the documents generator in test_manifest without object
-620. **W157** (done) Operator calendars: read the W147 Akonadi export into nemik (host-side)
-621. **W158** (done) Operator calendars: ~/.config/nemik/calendars.toml names the collections
-622. **W159** (done) Operator calendar events as nodes, waypoints tied by 'at' cal:`<label>`/`<uid>`
-623. **W162** (done) Tasks: test on ONE task that RELATED-TO;RELTYPE=PARENT maps to the Google Tasks parent
-624. **W163** (done) Tasks: emit one parent VTODO per repo (summary 'repo (n)', earliest due)
-625. **W164** (done) Tasks: re-parent existing asks in place, UIDs and dates kept
-626. **W172** (done) Static view: --withheld FILE gate, failing closed (luthen's v1 contract)
-627. **W327** (done) Arrival pacing: a declared limit on new open cards per repo and per day, reported against actual
-628. **W336** (done) web: transit reveal of unselected repos on a selected chain
-629. **W338** (done) Contrast and colour-blind gate over the view's palette
-630. **W365** (done) Export to MS Project XML (MSPDI): cards as tasks, blocked_on as predecessors
-631. **W366** (done) Export to issue trackers: Jira CSV and GitHub/Forgejo issue JSON, as a read-only mirror
-632. **W388** (done) Blocker lines carry a ruler-sequence pattern generated from their src and dst, losslessly
-633. **W408** (done) An OSLC service-provider catalog per repo as the discovery root of the connector contract
-634. **W504** (done) The pod's shape: a builder container loops --publish into a shared volume, a small server container
+660. **W1255** (done) Type the docs fixture in test_withheld and the documents generator in test_manifest without object
+661. **W157** (done) Operator calendars: read the W147 Akonadi export into nemik (host-side)
+662. **W158** (done) Operator calendars: ~/.config/nemik/calendars.toml names the collections
+663. **W159** (done) Operator calendar events as nodes, waypoints tied by 'at' cal:`<label>`/`<uid>`
+664. **W162** (done) Tasks: test on ONE task that RELATED-TO;RELTYPE=PARENT maps to the Google Tasks parent
+665. **W163** (done) Tasks: emit one parent VTODO per repo (summary 'repo (n)', earliest due)
+666. **W164** (done) Tasks: re-parent existing asks in place, UIDs and dates kept
+667. **W172** (done) Static view: --withheld FILE gate, failing closed (luthen's v1 contract)
+668. **W327** (done) Arrival pacing: a declared limit on new open cards per repo and per day, reported against actual
+669. **W336** (done) web: transit reveal of unselected repos on a selected chain
+670. **W338** (done) Contrast and colour-blind gate over the view's palette
+671. **W365** (done) Export to MS Project XML (MSPDI): cards as tasks, blocked_on as predecessors
+672. **W366** (done) Export to issue trackers: Jira CSV and GitHub/Forgejo issue JSON, as a read-only mirror
+673. **W388** (done) Blocker lines carry a ruler-sequence pattern generated from their src and dst, losslessly
+674. **W408** (done) An OSLC service-provider catalog per repo as the discovery root of the connector contract
+675. **W504** (done) The pod's shape: a builder container loops --publish into a shared volume, a small server container
    runs --serve
-635. **W118** (done) Web view: inside each box, pull nodes with cross-box edges toward the side facing their partner box
+676. **W118** (done) Web view: inside each box, pull nodes with cross-box edges toward the side facing their partner box
    (W117 only placed the boxes; dagre ignores cross edges)
-636. **W127** (done) Web view: pack to the viewport's aspect ratio (fit-to-screen scale), not only minimum area; the
+677. **W127** (done) Web view: pack to the viewport's aspect ratio (fit-to-screen scale), not only minimum area; the
    W126 packing comes out portrait on a landscape screen
-637. **W133** (done) W107d: nemik-rank --check guarantees: band inversion (top below band B while a ready item >= B
+678. **W133** (done) W107d: nemik-rank --check guarantees: band inversion (top below band B while a ready item >= B
    exists, names the pair); UNSCORED count; policy block (ready item whose touches overlap an open trust-boundary item,
    names the pair and tag)
-638. **W147** (done) Akonadi helper export mode: write a calendar collection's events (by name,
+679. **W147** (done) Akonadi helper export mode: write a calendar collection's events (by name,
    akonadi_google_resource_0, event mimetype) as one .ics file, for mikemol-ics to read; credential stays in KWallet
-639. **W149** (done) W129a: nemik-wake --alarms: every alarm that fired in a window ([last check, now), default the last
+680. **W149** (done) W129a: nemik-wake --alarms: every alarm that fired in a window ([last check, now), default the last
    15 min) on an open waypoint, via alarm.fires_between (one-shot and recurring), with owner repo, RECURRENCE-ID and the
    owner's liveness; --json
-640. **W150** (done) W129b: deliver fired alarms once, deduped by (ref, RECURRENCE-ID, instant)
-641. **W151** (done) W129c: a fired alarm whose owner is asleep becomes a wake-roster row (reason: alarm, the waypoint
+681. **W150** (done) W129b: deliver fired alarms once, deduped by (ref, RECURRENCE-ID, instant)
+682. **W151** (done) W129c: a fired alarm whose owner is asleep becomes a wake-roster row (reason: alarm, the waypoint
    and when it fired); nemik never starts a session
-642. **W161** (done) Operator calendars: test that credentials never reach graph, metrics or export
-643. **W168** (done) Alarm delivery: a live owner gets a SendMessage-ready line
-644. **W183** (done) nemik-check: a blocked_on of cal:`<label>`/`<uid>` is a resolvable condition (not
+683. **W161** (done) Operator calendars: test that credentials never reach graph, metrics or export
+684. **W168** (done) Alarm delivery: a live owner gets a SendMessage-ready line
+685. **W183** (done) nemik-check: a blocked_on of cal:`<label>`/`<uid>` is a resolvable condition (not
    UnresolvedBlocker), checked against calendars.toml labels only, never event text
-645. **W318** (done) Baseline variance: name a baseline revision per repo and report planned versus actual since it
+686. **W318** (done) Baseline variance: name a baseline revision per repo and report planned versus actual since it
    (nemik-history --baseline)
-646. **W390** (done) a11y: the treemap's tile labels meet the legibility floor, or say where they cannot
-647. **W400** (done) Validate only what a change touches: SHACL over the changed repos' nodes and the cross-repo edges
+687. **W390** (done) a11y: the treemap's tile labels meet the legibility floor, or say where they cannot
+688. **W400** (done) Validate only what a change touches: SHACL over the changed repos' nodes and the cross-repo edges
    into them
-648. **W425** (done) Make nemik.index.Index the pure input type (built from rdflib once) so critical, projection and
+689. **W425** (done) Make nemik.index.Index the pure input type (built from rdflib once) so critical, projection and
    health can enter the typed subset
-649. **W454** (done) health over Cards: a repo's verdict (blocked share, oldest block, asks owed) from nemik.cards.Card
+690. **W454** (done) health over Cards: a repo's verdict (blocked share, oldest block, asks owed) from nemik.cards.Card
    plus the operator asks as plain rows
-650. **W143** (done) Evaluate Google Keep as the operator-ask surface (operator 2026-09-30: 'Keep has Google Tasks
+691. **W143** (done) Evaluate Google Keep as the operator-ask surface (operator 2026-09-30: 'Keep has Google Tasks
    integration... may be a better vector, even with a third-party lib'); after the Tasks sink (W121) is running; weigh
    any unofficial Keep client's credential model (e.g. gkeepapi's account master token) against Akonadi's scoped OAuth
-651. **W262** (done) UI: delete the non-forest per-repo layout branch and pullRows now that the rank forest is always on
-652. **W344** (done) Critical path as a poset: mark every element of every longest chain, never one by sort order
-653. **W455** (done) Deploy drift check: compare the commit in the running nemik Deployment's image tag with
+692. **W262** (done) UI: delete the non-forest per-repo layout branch and pullRows now that the rank forest is always on
+693. **W344** (done) Critical path as a poset: mark every element of every longest chain, never one by sort order
+694. **W455** (done) Deploy drift check: compare the commit in the running nemik Deployment's image tag with
    origin/main, report how far behind, and warn past a threshold
-654. **W456** (done) Label glyphs mean one thing each: the roll-up suffix stops reusing the working mark (W503 ▸ 3 vs ▸
+695. **W456** (done) Label glyphs mean one thing each: the roll-up suffix stops reusing the working mark (W503 ▸ 3 vs ▸
    W503), and a test refuses any glyph used in two roles
-655. **W462** (done) Card popover on hover after a delay: the Selected panel's fields beside the hovered graph node
-656. **W464** (done) Label every open card with the demand passing through it, not only the frontier's absorbed salience
-657. **W485** (done) Measure where working time goes: leaves vs interior vs directed cards, per repo, from every ledger,
+696. **W462** (done) Card popover on hover after a delay: the Selected panel's fields beside the hovered graph node
+697. **W464** (done) Label every open card with the demand passing through it, not only the frontier's absorbed salience
+698. **W485** (done) Measure where working time goes: leaves vs interior vs directed cards, per repo, from every ledger,
    as a series
-658. **W64** (done) nemik-witnesses [--apply] runner: read waypoint.witness fleet-wide, mark true done with facts as
+699. **W64** (done) nemik-witnesses [--apply] runner: read waypoint.witness fleet-wide, mark true done with facts as
    evidence, report undefined
-659. **W65** (done) witnesses: alert and promql observers (k8s_job split to W68)
-660. **W113** (done) Operator calendars as a nemik source (life ask), credentials never exported
-661. **W121** (done) Operator asks -> Google Tasks via Akonadi: host CLI nemik-tasks (one todo per open ask, UID
+700. **W65** (done) witnesses: alert and promql observers (k8s_job split to W68)
+701. **W113** (done) Operator calendars as a nemik source (life ask), credentials never exported
+702. **W121** (done) Operator asks -> Google Tasks via Akonadi: host CLI nemik-tasks (one todo per open ask, UID
    nemik:`<repo>`:W`<n>`, full ask + link; closed ask completes its task; a ticked task becomes a done-claim letter to
    the asking repo, never an auto-close)
-662. **W129** (done) Calendar as the loops' scheduler of record
-663. **W148** (done) Google Tasks 'nemik' list grouped by repo: parent task per repo, asks as subtasks
-664. **W160** (done) nemik-operator shows the next N days of calendar events
-665. **W341** (done) An a11y adversary for the view, as paperkit has for its VPAT
-666. **W363** (done) Positioning: from schedulers and traffic control (Linux tc, block I/O schedulers, ERP MRP)
-667. **W367** (done) Import from other tools as printed writer commands, never a queue write
-668. **W368** (done) A documented, versioned read API over nemik-serve's JSON
-669. **W393** (done) Incremental snapshots: a change rebuilds only the subgraphs and derived numbers it touches
-670. **W402** (done) Cache each repo's parsed queue and ledger graphs by that repo's file stamps
-671. **W417** (done) Vendor mikemol-rulerseq (mtools 2eeb11e) beside the other mtools wheels via
+703. **W129** (done) Calendar as the loops' scheduler of record
+704. **W148** (done) Google Tasks 'nemik' list grouped by repo: parent task per repo, asks as subtasks
+705. **W160** (done) nemik-operator shows the next N days of calendar events
+706. **W341** (done) An a11y adversary for the view, as paperkit has for its VPAT
+707. **W363** (done) Positioning: from schedulers and traffic control (Linux tc, block I/O schedulers, ERP MRP)
+708. **W367** (done) Import from other tools as printed writer commands, never a queue write
+709. **W368** (done) A documented, versioned read API over nemik-serve's JSON
+710. **W393** (done) Incremental snapshots: a change rebuilds only the subgraphs and derived numbers it touches
+711. **W402** (done) Cache each repo's parsed queue and ledger graphs by that repo's file stamps
+712. **W417** (done) Vendor mikemol-rulerseq (mtools 2eeb11e) beside the other mtools wheels via
    tools/revendor-mtools.sh
-672. **W427** (done) nemik-rank --apply STATE: rank and write the weights into the queue in one call (replaces
+713. **W427** (done) nemik-rank --apply STATE: rank and write the weights into the queue in one call (replaces
    nemik-rank --json > file then --weights-from)
-673. **W442** (done) OpenAPI description of the static files and nemik-serve's routes, referencing the generated
+714. **W442** (done) OpenAPI description of the static files and nemik-serve's routes, referencing the generated
    schemas, plus a client example another app can run
-674. **W453** (done) critical over Cards: the longest-chain poset (rank, slack, path count) computed from
+715. **W453** (done) critical over Cards: the longest-chain poset (rank, slack, path count) computed from
    nemik.cards.Card, rdflib only at the edge
-675. **W1267** (done) Write the D103 docstrings in serve.py (1100, 1647), staticserve.py (98, 189) and witnesses.py
+716. **W1267** (done) Write the D103 docstrings in serve.py (1100, 1647), staticserve.py (98, 189) and witnesses.py
    (400)
-676. **W1268** (done) Write the D103 docstrings in overlaps.py (106), vtodo.py (235) and wake.py (237, 260, 328)
-677. **W138** (done) rank --check POLICY: an optional dependent filter, so a class blocks only named dependents
+717. **W1268** (done) Write the D103 docstrings in overlaps.py (106), vtodo.py (235) and wake.py (237, 260, 328)
+718. **W138** (done) rank --check POLICY: an optional dependent filter, so a class blocks only named dependents
    (luthen's example: tenant-facing rollouts)
-678. **W277** (done) Fold the existing inbox letters into waypoints: a nemik-letters --fold mode proposes, for each
+719. **W277** (done) Fold the existing inbox letters into waypoints: a nemik-letters --fold mode proposes, for each
    inbox letter with no citing waypoint, the card to mint in the recipient with the letter as its evidence
-679. **W342** (done) Adopt isolated mikemol-commit: pre-commit hook and gate go through MIKEMOL_REAL_ROOT
-680. **W463** (done) Keyboard navigation for the view: a navigation pane holding the current mode's tree, modes as
+720. **W342** (done) Adopt isolated mikemol-commit: pre-commit hook and gate go through MIKEMOL_REAL_ROOT
+721. **W463** (done) Keyboard navigation for the view: a navigation pane holding the current mode's tree, modes as
    choices, a keymap with help
-681. **W465** (done) A card stored ready but waiting on an open enabler is drawn as ready: shape it and draw its
+722. **W465** (done) A card stored ready but waiting on an open enabler is drawn as ready: shape it and draw its
    structural state
-682. **W537** (done) Retire tools/revendor-mtools.sh for mikemol-repin; name any capability it lacks as an mtools mode
+723. **W537** (done) Retire tools/revendor-mtools.sh for mikemol-repin; name any capability it lacks as an mtools mode
    request
    - next: 364535b: mikemol-repin --revendor --sha 0913e30 planned and applied the six moves, MODULE.bazel mentions and
      SHA256SUMS; tools/revendor-mtools.sh is gone
-683. **W60** (done) nemik-witnesses: closed observers gather input facts; opa eval the witness Rego; true=done (facts as
+724. **W60** (done) nemik-witnesses: closed observers gather input facts; opa eval the witness Rego; true=done (facts as
    evidence), undefined=can't-observe finding; fixture-first
-684. **W74** (done) nemik-rank: exclude umbrellas (ready with nonempty frontier) from rank; --check flags them
-685. **W99** (done) W91b: headless Chromium as a hashed Bazel input
-686. **W100** (done) W91c: paperkit as a Bazel input so test_architecture runs under bazel test instead of being
+725. **W74** (done) nemik-rank: exclude umbrellas (ready with nonempty frontier) from rank; --check flags them
+726. **W99** (done) W91b: headless Chromium as a hashed Bazel input
+727. **W100** (done) W91c: paperkit as a Bazel input so test_architecture runs under bazel test instead of being
    excluded
-687. **W123** (done) W106b: image test stage runs test_witnesses (pinned opa v1.20.2 by sha256, as MODULE.bazel @opa)
-688. **W124** (done) W106c: image test stage runs test_web_render (pinned chrome-headless-shell, as MODULE.bazel
+728. **W123** (done) W106b: image test stage runs test_witnesses (pinned opa v1.20.2 by sha256, as MODULE.bazel @opa)
+729. **W124** (done) W106c: image test stage runs test_web_render (pinned chrome-headless-shell, as MODULE.bazel
    @chromium), or record why the pre-commit bazel gate is enough
-689. **W173** (done) Weather: one outage is one monotone FFI waypoint, minted by the blocked repo with a probe-fact
+730. **W173** (done) Weather: one outage is one monotone FFI waypoint, minted by the blocked repo with a probe-fact
    witness
-690. **W174** (done) Weather: identical witness queries group as one weather item in views and ddG
-691. **W175** (done) Weather: design note in the W58 doc
-692. **W192** (done) Witness one nemik push end to end: push -> registry tag -> deploy-state commit -> Flux reconcile ->
+731. **W174** (done) Weather: identical witness queries group as one weather item in views and ddG
+732. **W175** (done) Weather: design note in the W58 doc
+733. **W192** (done) Witness one nemik push end to end: push -> registry tag -> deploy-state commit -> Flux reconcile ->
    pod on the new digest, read back from each system (luthen W170)
-693. **W235** (done) Replace nemik-rank's objectives with the g-calculus current-flow model after an audit; residue
+734. **W235** (done) Replace nemik-rank's objectives with the g-calculus current-flow model after an audit; residue
    edges (closes_ref) are its first new term
-694. **W279** (done) nemik-check resolves each cited letter path under the root: a Warning finding when a waypoint cites
+735. **W279** (done) nemik-check resolves each cited letter path under the root: a Warning finding when a waypoint cites
    a letter file that does not exist
-695. **W280** (done) nemik-check --letters counts a letter as owned when any waypoint in the fleet cites its path, not
+736. **W280** (done) nemik-check --letters counts a letter as owned when any waypoint in the fleet cites its path, not
    only its own repo's queue
-696. **W316** (done) Milestone-directed ranking: nemik-rank --toward `<repo:W``<n>`> ranks by the demand toward one
+737. **W316** (done) Milestone-directed ranking: nemik-rank --toward `<repo:W``<n>`> ranks by the demand toward one
    target card
-697. **W317** (done) Repo health (red, amber, green) per repo in the view and in nemik-metrics, from blocked share,
+738. **W317** (done) Repo health (red, amber, green) per repo in the view and in nemik-metrics, from blocked share,
    oldest block and operator asks owed
-698. **W335** (done) web: one coloured halo per path scope, with a legend
-699. **W339** (done) Use-of-colour check: every state the view shows has a second channel
-700. **W347** (done) Fire ripple: the planned work each interrupt card delayed
-701. **W348** (done) Operator saturation: warn when operator asks pile up faster than answers
-702. **W349** (done) Plan drift: how far the graph's shape moved from a baseline
-703. **W350** (done) Milestone roll-up in the view: an umbrella collapses to one node, expands on click
-704. **W351** (done) What-if: nemik-critical and nemik-rank --assume-done repo:W`<n>`
-705. **W356** (done) Inter-workstream SLAs: a declared time for a repo to answer a cross-repo block
-706. **W357** (done) Operator ask arrival versus answer rate, weekly, with implied wait
-707. **W362** (done) Positioning: from multi-agent and swarm frameworks
-708. **W386** (done) a11y gaps: keyboard and screen-reader paths to what only the canvas offers
-709. **W409** (done) Snapshot per piece: write one static file per repo plus the fleet-level pieces, each with a content
+739. **W335** (done) web: one coloured halo per path scope, with a legend
+740. **W339** (done) Use-of-colour check: every state the view shows has a second channel
+741. **W347** (done) Fire ripple: the planned work each interrupt card delayed
+742. **W348** (done) Operator saturation: warn when operator asks pile up faster than answers
+743. **W349** (done) Plan drift: how far the graph's shape moved from a baseline
+744. **W350** (done) Milestone roll-up in the view: an umbrella collapses to one node, expands on click
+745. **W351** (done) What-if: nemik-critical and nemik-rank --assume-done repo:W`<n>`
+746. **W356** (done) Inter-workstream SLAs: a declared time for a repo to answer a cross-repo block
+747. **W357** (done) Operator ask arrival versus answer rate, weekly, with implied wait
+748. **W362** (done) Positioning: from multi-agent and swarm frameworks
+749. **W386** (done) a11y gaps: keyboard and screen-reader paths to what only the canvas offers
+750. **W409** (done) Snapshot per piece: write one static file per repo plus the fleet-level pieces, each with a content
    hash in an index, so the page refetches only what changed
-710. **W410** (done) Memoize the per-repo non-solve derived work (graph scans, health, critical) by the repo's own
+751. **W410** (done) Memoize the per-repo non-solve derived work (graph scans, health, critical) by the repo's own
    triples, so a rebuild recomputes only the repos a change reaches
-711. **W418** (done) nemik-serve computes ring and blocker-line ruler patterns with mikemol.rulerseq and ships them in
+752. **W418** (done) nemik-serve computes ring and blocker-line ruler patterns with mikemol.rulerseq and ships them in
    graph.json (field manifest updated)
-712. **W439** (done) Pick the pinnable MSPDI reader: MPXJ on a hermetic JVM (its jar closure via http_file or
+753. **W439** (done) Pick the pinnable MSPDI reader: MPXJ on a hermetic JVM (its jar closure via http_file or
    rules_jvm_external) vs the Project 2007 SDK's mspdi_pj12.xsd recovered from an archive with a sha256
-713. **W468** (done) Navigation pane: the current mode's tree as an APG tree view (roving tabindex), the graph mirrors
+754. **W468** (done) Navigation pane: the current mode's tree as an APG tree view (roving tabindex), the graph mirrors
    its focus
-714. **W509** (done) The page assembles its graph from several sources named by the viewer, with cross-repo references
+755. **W509** (done) The page assembles its graph from several sources named by the viewer, with cross-repo references
    resolved in the browser
-715. **W510** (done) Sources update incrementally: each carries a cursor, and a change patches the drawn graph in place
-716. **W1240** (done) Re-wrap the 23 ragged test files left by rewrap v1
-717. **W1241** (done) Pay down D205 (67) by hand: summary line split from body
-718. **W1242** (done) Pay down E501 on code lines (59)
-719. **W1243** (done) Pay down src D103 (16, none liftable by tools/liftdoc.py)
-720. **W275** (done) Letters become the evidence of a waypoint in file form: a waypoint's evidence or caused_by may cite
+756. **W510** (done) Sources update incrementally: each carries a cursor, and a change patches the drawn graph in place
+757. **W1240** (done) Re-wrap the 23 ragged test files left by rewrap v1
+758. **W1241** (done) Pay down D205 (67) by hand: summary line split from body
+759. **W1242** (done) Pay down E501 on code lines (59)
+760. **W1243** (done) Pay down src D103 (16, none liftable by tools/liftdoc.py)
+761. **W275** (done) Letters become the evidence of a waypoint in file form: a waypoint's evidence or caused_by may cite
    a letter file (letter:`<path>`), nemik-inbound prints it beside each waiting row, and nemik-check resolves it like
    any citation
-721. **W45** (done) Nudge amr-skills (awake): its W76 is blocked on the operator with no stated ask
-722. **W46** (done) Nudge luthen-observability (awake): its W124 is blocked on the operator with no stated ask
-723. **W53** (done) nemik-overlaps: cross-repo OVERLAP `<tag>`: `<repo>`:W`<a>`,... over live nemik:touches,
+762. **W45** (done) Nudge amr-skills (awake): its W76 is blocked on the operator with no stated ask
+763. **W46** (done) Nudge luthen-observability (awake): its W124 is blocked on the operator with no stated ask
+764. **W53** (done) nemik-overlaps: cross-repo OVERLAP `<tag>`: `<repo>`:W`<a>`,... over live nemik:touches,
    fixture-tested
-724. **W57** (done) web view draws satisfied edges faded
-725. **W61** (done) Wake path: resolved condition in a dormant repo surfaces in nemik-wake; armed session gets
+765. **W57** (done) web view draws satisfied edges faded
+766. **W61** (done) Wake path: resolved condition in a dormant repo surfaces in nemik-wake; armed session gets
    inbox/message
-726. **W62** (done) paths-forward-loop skill: a lock held across a background process waits via Monitor, not ticks
-727. **W66** (done) frontier(G) in nemik-rank: open leaves under a goal; a 'ready' item with a nonempty frontier is an
+767. **W62** (done) paths-forward-loop skill: a lock held across a background process waits via Monitor, not ticks
+768. **W66** (done) frontier(G) in nemik-rank: open leaves under a goal; a 'ready' item with a nonempty frontier is an
    umbrella, excluded from rank and flagged by --check (first step of W71)
-728. **W79** (done) rank.goals(repo): top goal G (no in-repo downstream, by cross-repo weight) with dG, on-deck leaf,
+769. **W79** (done) rank.goals(repo): top goal G (no in-repo downstream, by cross-repo weight) with dG, on-deck leaf,
    dDG; nemik-rank --goals prints it
-729. **W80** (done) Dashboard: /goals/`<repo>` + per-repo on-deck/path-clear line in the view
-730. **W81** (done) /cmd/`<name>`?repo= framework + graph-only commands (rank, rank --goals, overlaps, inbound,
+770. **W80** (done) Dashboard: /goals/`<repo>` + per-repo on-deck/path-clear line in the view
+771. **W81** (done) /cmd/`<name>`?repo= framework + graph-only commands (rank, rank --goals, overlaps, inbound,
    operator, wake): factor each CLI's printer off main so serve renders the exact text from the cached graph
-731. **W82** (done) /cmd for file-reading commands: check, metrics, floor-asks (when summit present), witnesses dry-run
+772. **W82** (done) /cmd for file-reading commands: check, metrics, floor-asks (when summit present), witnesses dry-run
    (on click only; observers hit the network)
-732. **W83** (done) /cmd for mtools per repo: --queue, --check, --overlaps via the pinned pathsforward API, not a
+773. **W83** (done) /cmd for mtools per repo: --queue, --check, --overlaps via the pinned pathsforward API, not a
    subprocess
-733. **W84** (done) Tools panel in the web view: pick a command (+repo), show its text output in a pre
-734. **W88** (done) Graph: cross-repo edges faint by default, full only when an endpoint is hovered/selected (checkbox
+774. **W84** (done) Tools panel in the web view: pick a command (+repo), show its text output in a pre
+775. **W88** (done) Graph: cross-repo edges faint by default, full only when an endpoint is hovered/selected (checkbox
    to show all)
-735. **W90** (done) Bazel skeleton: MODULE.bazel (rules_python 3.13, pip hub from uv.lock incl. the vendored
+776. **W90** (done) Bazel skeleton: MODULE.bazel (rules_python 3.13, pip hub from uv.lock incl. the vendored
    pathsforward wheel), py_library, one py_test per tests/test_*.py via a pytest_main (mtools pattern); bazel test //...
    green
-736. **W91** (done) Bazel: declare opa and headless Chromium as hashed http_archive inputs, so witness and render tests
+777. **W91** (done) Bazel: declare opa and headless Chromium as hashed http_archive inputs, so witness and render tests
    run in the sandbox instead of skipping (mtools pandoc precedent)
-737. **W92** (done) Commit gate: .githooks/pre-commit runs bazel test //... (cached), replacing the tick's judgment of
+778. **W92** (done) Commit gate: .githooks/pre-commit runs bazel test //... (cached), replacing the tick's judgment of
    when to run tests
-738. **W94** (done) nemik warns on invocation when it is running from an editable install (direct_url.json
+779. **W94** (done) nemik warns on invocation when it is running from an editable install (direct_url.json
    dir_info.editable), naming the fix (uv sync --no-editable); covered by a test
-739. **W97** (done) W93c: tests and witnesses --apply use the venv's console scripts; revert W90
+780. **W97** (done) W93c: tests and witnesses --apply use the venv's console scripts; revert W90
    in-process/sys.executable workarounds
-740. **W102** (done) W101a: pip.parse reads uv.lock (uv_lock=) with mtools' patches/rules_python-uv-lock-git-kind.patch,
+781. **W102** (done) W101a: pip.parse reads uv.lock (uv_lock=) with mtools' patches/rules_python-uv-lock-git-kind.patch,
    so paperkit's git source resolves in Bazel; revert the W100 paperkit wheel + pyproject path; drop
    requirements-dev.txt
-741. **W103** (done) W101b: every test consumes //:.venv as its input and runs under its bin/python3 (not per-target
+782. **W103** (done) W101b: every test consumes //:.venv as its input and runs under its bin/python3 (not per-target
    py_test deps)
-742. **W104** (done) W101c: host .venv is the bazel output (setup.sh: arm hooks, link .venv -> bazel-bin/.venv), not a
+783. **W104** (done) W101c: host .venv is the bazel output (setup.sh: arm hooks, link .venv -> bazel-bin/.venv), not a
    uv sync; README
-743. **W165** (done) Tasks: complete a repo's parent when it has no open asks
-744. **W190** (done) calendars.toml per-calendar include filter (life:W31): name + include substrings on SUMMARY, absent
+784. **W165** (done) Tasks: complete a repo's parent when it has no open asks
+785. **W190** (done) calendars.toml per-calendar include filter (life:W31): name + include substrings on SUMMARY, absent
    = all, '0 of N matched' not 'free'
-745. **W191** (done) nemik-days: dedupe the same chore across calendars on (start, summary) (life-82, optional)
-746. **W273** (done) Pin freshness across repos: report how far a repo's pin of a peer (pinned_files remote and commit,
+786. **W191** (done) nemik-days: dedupe the same chore across calendars on (start, summary) (life-82, optional)
+787. **W273** (done) Pin freshness across repos: report how far a repo's pin of a peer (pinned_files remote and commit,
    vendored wheels) is behind that peer's HEAD
-747. **W313** (done) Critical path and slack: per open card, the length of its longest open dependency chain and its
+788. **W313** (done) Critical path and slack: per open card, the length of its longest open dependency chain and its
    float, highlighted in the view
-748. **W314** (done) Toil ratio over time: per week and repo, the share of ledger activity that was interrupt work
+789. **W314** (done) Toil ratio over time: per week and repo, the share of ledger activity that was interrupt work
    (nemik-history --toil)
-749. **W340** (done) Legibility floors for the view: label size, edge density, target size
-750. **W359** (done) Positioning: from MS Project and classic PM (tasks, dependencies, critical path, baselines)
-751. **W360** (done) Positioning: from Jira, Bugzilla and issue trackers
-752. **W361** (done) Positioning: from kanban, flow metrics and queueing theory
-753. **W381** (done) a11y C5: card state must not rest on fill colour alone
-754. **W382** (done) a11y C1: path-scope rings take ruler-sequence motifs (paperkit's rulerseq), and the test reads them
-755. **W383** (done) a11y C4: the legibility floor holds for one picked repo and the treemap too
-756. **W385** (done) a11y C2: context cards get a cue of their own, and the test checks the style, not a data flag
-757. **W406** (done) Publish each repo's ledger as an OSLC Tracked Resource Set: a base snapshot plus an ordered change
+790. **W340** (done) Legibility floors for the view: label size, edge density, target size
+791. **W359** (done) Positioning: from MS Project and classic PM (tasks, dependencies, critical path, baselines)
+792. **W360** (done) Positioning: from Jira, Bugzilla and issue trackers
+793. **W361** (done) Positioning: from kanban, flow metrics and queueing theory
+794. **W381** (done) a11y C5: card state must not rest on fill colour alone
+795. **W382** (done) a11y C1: path-scope rings take ruler-sequence motifs (paperkit's rulerseq), and the test reads them
+796. **W383** (done) a11y C4: the legibility floor holds for one picked repo and the treemap too
+797. **W385** (done) a11y C2: context cards get a cue of their own, and the test checks the style, not a data flag
+798. **W406** (done) Publish each repo's ledger as an OSLC Tracked Resource Set: a base snapshot plus an ordered change
    log
-758. **W407** (done) A compact OSLC resource preview per card IRI, used as the hover on any cited card
-759. **W519** (done) One queue schema for the paths-forward state, ledger line and marks line, validated by the writer,
+799. **W407** (done) A compact OSLC resource preview per card IRI, used as the hover on any cited card
+800. **W519** (done) One queue schema for the paths-forward state, ledger line and marks line, validated by the writer,
    nemik and every independent reader's tests against a fixture
-760. **W75** (done) Weather: one outage = one monotone FFI waypoint, witness over a probe fact
-761. **W108** (done) nemik-check: caused_by must resolve like enables (a Warning naming the unresolved `<repo>`:W`<n>`),
+801. **W1250** (done) Follow the drum admission question github-8f routed to mtools
+802. **W75** (done) Weather: one outage = one monotone FFI waypoint, witness over a probe fact
+803. **W108** (done) nemik-check: caused_by must resolve like enables (a Warning naming the unresolved `<repo>`:W`<n>`),
    so a wrong workstream prefix cannot recur unseen
-762. **W109** (done) Repoint W105 and W107 caused_by to luthen-observability:W185 and W190 once mtools ships --update
+804. **W109** (done) Repoint W105 and W107 caused_by to luthen-observability:W185 and W190 once mtools ships --update
    --caused-by (W136)
-763. **W116** (done) nemik-check: the bundled-title Warning fires only on open waypoints (aeternum 2026-09-28: five of
+805. **W116** (done) nemik-check: the bundled-title Warning fires only on open waypoints (aeternum 2026-09-28: five of
    its title warnings were on done waypoints, where splitting finished work is noise)
-764. **W141** (done) Regenerate tests/fixtures/fleet from ~/github (make_fleet.py): the snapshot predates life:W23, so
+806. **W141** (done) Regenerate tests/fixtures/fleet from ~/github (make_fleet.py): the snapshot predates life:W23, so
    nemik's own W128/W129/W134 edges fail against it
-765. **W248** (done) nemik tests: clear the 27 pre-existing ruff findings in older test files (datetime.UTC, import
+807. **W248** (done) nemik tests: clear the 27 pre-existing ruff findings in older test files (datetime.UTC, import
    order, unused imports in test_witnesses.py, check=False, re flags)
-766. **W250** (done) nemik-rank --all costs 33 s since the flow switch (about 21 s is the graph build): share the
+808. **W250** (done) nemik-rank --all costs 33 s since the flow switch (about 21 s is the graph build): share the
    open-graph and prerequisite scan across repos instead of rebuilding it per repo, and skip the old-weight arm inside
    salience_of
-767. **W254** (done) The graph survey costs every nemik command about 20 s: parse pyshacl SPARQL constraints once
+809. **W254** (done) The graph survey costs every nemik command about 20 s: parse pyshacl SPARQL constraints once
    instead of 1,290 times per run
-768. **W257** (done) Move the mtools pin from 472f940 to d14270f or later so the writer has --admit and the marks ledger
+810. **W257** (done) Move the mtools pin from 472f940 to d14270f or later so the writer has --admit and the marks ledger
    (mtools:W851, W852), --certify --facts and the waypoint fields reference_arm, command, population, deferred
-769. **W260** (done) nemik container OOMKilled at 12:50Z: bound the reader's resident set or raise the limit
-770. **W261** (done) UI: show the flow salience (the gcalculus weighting) on each ready card and in the forest ordering,
+811. **W260** (done) nemik container OOMKilled at 12:50Z: bound the reader's resident set or raise the limit
+812. **W261** (done) UI: show the flow salience (the gcalculus weighting) on each ready card and in the forest ordering,
    not only rank_pos and band
-771. **W276** (done) Ask mtools for an attach mode: --update W`<n>` --attach PATH stores a file reference plus content
+813. **W276** (done) Ask mtools for an attach mode: --update W`<n>` --attach PATH stores a file reference plus content
    hash in the waypoint's evidence, so a letter is a first-class evidence file and mtools stays the only writer
-772. **W281** (done) Re-vendor mtools at 842ab10 or later so --check reports a missing, non-regular or hash-changed
+814. **W281** (done) Re-vendor mtools at 842ab10 or later so --check reports a missing, non-regular or hash-changed
    attachment (mtools:W932)
-773. **W345** (done) Install nemik's tools for the host: one pinned wheel via uv tool install, not symlinks into this
+815. **W345** (done) Install nemik's tools for the host: one pinned wheel via uv tool install, not symlinks into this
    venv
-774. **W376** (done) nemik-inbound lists a repo's live orphan letters as UNCLAIMED rows, so the tick's existing step
+816. **W376** (done) nemik-inbound lists a repo's live orphan letters as UNCLAIMED rows, so the tick's existing step
    catches them
-775. **W398** (done) render-check runs the same pinned headless Chrome (and fonts) as the gate, so a host pass means a
+817. **W398** (done) render-check runs the same pinned headless Chrome (and fonts) as the gate, so a host pass means a
    gate pass
-776. **W405** (done) When a blocker is an umbrella, nemik-check names the child to cite and prints the update that
+818. **W405** (done) When a blocker is an umbrella, nemik-check names the child to cite and prints the update that
    re-points to it
-777. **W420** (done) Load nemik-export output in a real reader (MPXJ, ProjectLibre or GanttProject) and pin that it
+819. **W420** (done) Load nemik-export output in a real reader (MPXJ, ProjectLibre or GanttProject) and pin that it
    opens with its links
-778. **W421** (done) One declaration per console script: BUILD.bazel reads pyproject's [project.scripts], and a
+820. **W421** (done) One declaration per console script: BUILD.bazel reads pyproject's [project.scripts], and a
    pre-commit check names every registry a new script still misses (SKILL.md row, workflows.toml)
-779. **W443** (done) nemik-work refuses a card that still has open blockers, prunes landed ones, and says what it did to
+821. **W443** (done) nemik-work refuses a card that still has open blockers, prunes landed ones, and says what it did to
    the card it displaced
-780. **W444** (done) Repin the mtools wheels to the fleet par (luthen's repin_par.txt) with mikemol-repin, for
+822. **W444** (done) Repin the mtools wheels to the fleet par (luthen's repin_par.txt) with mikemol-repin, for
    mikemol-commit's identity check (mtools:W1107) and stale-index refresh (mtools:W1108)
-781. **W447** (done) Adopt mikemol-paths-forward --tick-open and --tick-close (mtools:W1078, mtools:W1079) for this
+823. **W447** (done) Adopt mikemol-paths-forward --tick-open and --tick-close (mtools:W1078, mtools:W1079) for this
    loop, repinning mtools past them if the pin predates them
-782. **W457** (done) Repin mtools pathsforward+hooks to c47d50b (tick-close prunes landed local blockers)
-783. **W460** (done) MACHINE_ACT misreads errands: 'apply' in 'apply for Medicaid' and 'drill session' flag life:W26 and
+824. **W457** (done) Repin mtools pathsforward+hooks to c47d50b (tick-close prunes landed local blockers)
+825. **W460** (done) MACHINE_ACT misreads errands: 'apply' in 'apply for Medicaid' and 'drill session' flag life:W26 and
    life:W7 as unwritten tools
-784. **W475** (done) A test reading a package file by src/ path passes on the host and fails in the gate sandbox: flag
+826. **W475** (done) A test reading a package file by src/ path passes on the host and fails in the gate sandbox: flag
    it before commit
-785. **W487** (done) OrphanLeafShape: an open card with no goal path and nothing downstream is a Warning, fixed by
+827. **W487** (done) OrphanLeafShape: an open card with no goal path and nothing downstream is a Warning, fixed by
    giving it an edge
    - next: landed 79bae5a: OrphanLeafShape at Info (140 fleet-wide on 2026-10-17); LandedBlockerShape severity moved to
      the shape
-786. **W488** (done) UmbrellaCompleteShape: an umbrella whose children are all done is realized by construction; a
+828. **W488** (done) UmbrellaCompleteShape: an umbrella whose children are all done is realized by construction; a
    stored open state on it is named
    - next: landed 08c16a0: UmbrellaCompleteShape (Info) with nemik:hasNextStep
-787. **W492** (done) Retro node type and shapes: precommit, frozen timeline, delta, trigger and root and contributing,
+829. **W492** (done) Retro node type and shapes: precommit, frozen timeline, delta, trigger and root and contributing,
    blameless root, sustain, findings with owner or verdict change, enforcement layer for recurring classes
-788. **W493** (done) Raise ReadyBehindOpenShape from Info to Warning once the fleet count has fallen
+830. **W493** (done) Raise ReadyBehindOpenShape from Info to Warning once the fleet count has fallen
    - next: landed 797395f: ReadyBehindOpenShape is a Warning (8 fleet-wide)
-789. **W513** (done) A new console script cannot reach the gate undeclared: one check names every registry it must
+831. **W513** (done) A new console script cannot reach the gate undeclared: one check names every registry it must
    appear in
-790. **W538** (done) Retire tools/pyfmt.sh for mikemol-pycheck (--check-file, --changed)
-791. **W1041** (done) A round never holds fewer than three cards when the ready set has them
-792. **W1186** (done) A codemod hoists the dict literal handed to json.dumps into a typed variable across the tests
-793. **W1980** (done) Flake: 2f210cce046b
-794. **W207** (done) nemik typing: src/nemik/check.py (11 findings)
-795. **W859** (done) A history document store: a host-side writer for a named document and a freshness-checked reader
+832. **W538** (done) Retire tools/pyfmt.sh for mikemol-pycheck (--check-file, --changed)
+833. **W1041** (done) A round never holds fewer than three cards when the ready set has them
+834. **W1186** (done) A codemod hoists the dict literal handed to json.dumps into a typed variable across the tests
+835. **W1222** (done) nemik-inbound takes 47 s (34 s CPU) of the 141 s a tick-open takes, so a foreground tick-open
+   overruns the 120 s limit: key its fleet graph on the queue files' hashes so an unchanged fleet is not re-read
+836. **W1229** (done) A repair of a rejected file in a stacked round uses the predecessor stack's frozen files as its
+   base, in a scratch worktree, not git's HEAD
+837. **W1246** (done) The queue mirror lists each retro as '0 finding(s)', so no finding or its witness can be audited
+   from it
+838. **W1270** (done) Answer nemik: mtools:W1905 is done
+839. **W1275** (done) Answer nemik: el-openglo:W754 is done
+840. **W1395** (done) Answer mtools:W2186 - baselinetop and ratchetseries open the ratchet baseline themselves, so they
+   need the mypy-baseline.d directory read
+841. **W1418** (done) Answer the three mtools letters that say W2088 and W2099 are done: read W1246 and W1229, lift the
+   waits they name or say why not
+842. **W1980** (done) Flake: 2f210cce046b
+843. **W207** (done) nemik typing: src/nemik/check.py (11 findings)
+844. **W859** (done) A history document store: a host-side writer for a named document and a freshness-checked reader
    the server routes use
-796. **W860** (done) Serve nemik-check --realizability the way the command prints it, or exclude it by a stated reason
-797. **W560** (done) Type pieces.split and assemble with concrete records under Codon, run the six-case corpus, and
+845. **W860** (done) Serve nemik-check --realizability the way the command prints it, or exclude it by a stated reason
+846. **W560** (done) Type pieces.split and assemble with concrete records under Codon, run the six-case corpus, and
    check whether Codon can emit wasm
-798. **W584** (done) Connector declaration: data/connectors.toml schema and a typed loader
-799. **W616** (done) StalledWorkingShape: a working card with zero commits citing it and stale activity warns stalled
+847. **W584** (done) Connector declaration: data/connectors.toml schema and a typed loader
+848. **W616** (done) StalledWorkingShape: a working card with zero commits citing it and stale activity warns stalled
    - next: landed f0c3c1e: stalled and progress-invisible verdicts in nemik.stalled, surfaced by nemik-check; the 4x
      land-interval factor is a judgment call to revisit against real cases (el-openglo:W558)
-800. **W748** (done) Verification: score each forecast when its target passes, Brier and reliability by lead, MAE for
+849. **W748** (done) Verification: score each forecast when its target passes, Brier and reliability by lead, MAE for
    counts, against persistence and climatology
-801. **W59** (done) Ask mtools: waypoint witness field (--add/--update --witness CMD); --check flags a witnessed
+850. **W59** (done) Ask mtools: waypoint witness field (--add/--update --witness CMD); --check flags a witnessed
    waypoint marked working
-802. **W134** (done) W128 time fields: VTODOs carry mtools:W276's RFC 5545 fields through (DUE/DTSTART, RRULE, VALARM,
+851. **W134** (done) W128 time fields: VTODOs carry mtools:W276's RFC 5545 fields through (DUE/DTSTART, RRULE, VALARM,
    PERCENT-COMPLETE), read via mtools' reader, never from prose
-803. **W203** (done) nemik typing: src/nemik/adapter.py (4 findings)
-804. **W229** (done) Shared verdict schema for the realizability policy agreed with mtools:W848 and
+852. **W203** (done) nemik typing: src/nemik/adapter.py (4 findings)
+853. **W229** (done) Shared verdict schema for the realizability policy agreed with mtools:W848 and
    luthen-observability:W666 (field names, lifecycle gates, deferral field)
-805. **W230** (done) Run mtools' realizability policy as one batch: nemik state documents in, verdicts out, tested
+854. **W230** (done) Run mtools' realizability policy as one batch: nemik state documents in, verdicts out, tested
    against the pinned opa
-806. **W231** (done) nemik-check --realizability: build the input documents from the graph, one batched opa eval, print
+855. **W231** (done) nemik-check --realizability: build the input documents from the graph, one batched opa eval, print
    each waypoint's coordinate and ledger
-807. **W237** (done) Residue salience as effective conductance: settle sources, declared edge weights and the closes
+856. **W237** (done) Residue salience as effective conductance: settle sources, declared edge weights and the closes
    objective with gcalculus
-808. **W239** (done) Express each existing ranking objective (operator asks, bands, downstream weight, Pareto fronts) as
+857. **W239** (done) Express each existing ranking objective (operator asks, bands, downstream weight, Pareto fronts) as
    a statement about the current-flow model, or find where it cannot be
-809. **W240** (done) Audit: run the old ranking and the model over the real queues, record every disagreement with its
+858. **W240** (done) Audit: run the old ranking and the model over the real queues, record every disagreement with its
    reason (a bug in the old ranking or a missing term in the model, never averaged)
-810. **W551** (done) Declare the change-lifecycle skos:ConceptScheme in nemik.ttl: five concepts, each with a definition
+859. **W551** (done) Declare the change-lifecycle skos:ConceptScheme in nemik.ttl: five concepts, each with a definition
    and its witness
-811. **W552** (done) Map the lifecycle concepts to OSLC CM 3.0 state terms, confirmed from the vocabulary file, and mark
+860. **W552** (done) Map the lifecycle concepts to OSLC CM 3.0 state terms, confirmed from the vocabulary file, and mark
    the unmapped as nemik extensions
-812. **W593** (done) Answer gcalculus:W270: can tests/test_flow.py's cases become flow_corpus data
-813. **W599** (done) PROV-O warrant SHACL shape with fixtures: the contract mtools:W1384 validates against
-814. **W612** (done) ManifestShape: a ready leaf card with no manifest of planned changes is a nemik-check Warning
+861. **W593** (done) Answer gcalculus:W270: can tests/test_flow.py's cases become flow_corpus data
+862. **W599** (done) PROV-O warrant SHACL shape with fixtures: the contract mtools:W1384 validates against
+863. **W612** (done) ManifestShape: a ready leaf card with no manifest of planned changes is a nemik-check Warning
    - next: landed e28e115: adapter reads manifest and size_class; ManifestShape and OversizeShape at Info. Fleet count
      of bare ready leaves to be read; pin the writer (W614) so nemik's own cards can declare manifests
-815. **W648** (done) Retro shapes, gates G0 and G3: precommit narrative_only when empty, and root differs from trigger
-816. **W649** (done) Retro shapes, gates G5 and G6: a lexical blameless check on root with a rewrite hint, and a
+864. **W648** (done) Retro shapes, gates G0 and G3: precommit narrative_only when empty, and root differs from trigger
+865. **W649** (done) Retro shapes, gates G5 and G6: a lexical blameless check on root with a rewrite hint, and a
    non-empty sustain
-817. **W650** (done) Retro shapes, gates G7 and G8: findings that reference a card or a certify verdict, and the handoff
+866. **W650** (done) Retro shapes, gates G7 and G8: findings that reference a card or a certify verdict, and the handoff
    slots
-818. **W654** (done) Page: viewer settings hold a source list in localStorage, defaulting to nemik's own published
+867. **W654** (done) Page: viewer settings hold a source list in localStorage, defaulting to nemik's own published
    pieces
-819. **W655** (done) Page: fetch each source with its own cursor and show one that fails as unavailable while the rest
+868. **W655** (done) Page: fetch each source with its own cursor and show one that fails as unavailable while the rest
    draw
-820. **W656** (done) Page: resolve blocked_on across sources in the browser with the rules adapter.resolve_blocker holds
-821. **W658** (done) WCAG 2.4.7: the stylesheet gives every focusable element a visible focus style, judged by Rego
-822. **W662** (done) nemik.luthenseries reads luthen-series.json (version 1, as_of, liveness, tokens) and classifies
+869. **W656** (done) Page: resolve blocked_on across sources in the browser with the rules adapter.resolve_blocker holds
+870. **W658** (done) WCAG 2.4.7: the stylesheet gives every focusable element a visible focus style, judged by Rego
+871. **W662** (done) nemik.luthenseries reads luthen-series.json (version 1, as_of, liveness, tokens) and classifies
    each repo awake, idle or asleep, refusing a stale as_of
-823. **W670** (done) nemik-serve --series FILE reads luthen's snapshot and serves series.json: per-repo state, history
+872. **W670** (done) nemik-serve --series FILE reads luthen's snapshot and serves series.json: per-repo state, history
    and the stranded list
-824. **W696** (done) Fleet consumers run nemik from a pinned build, never from the working tree: a sha-pinned wheel or
+873. **W696** (done) Fleet consumers run nemik from a pinned build, never from the working tree: a sha-pinned wheel or
    built dist, with scratch worktrees for work in progress
-825. **W744** (done) Observations: one event per card change (station, time, field, from, to, sha), backfilled from
+874. **W744** (done) Observations: one event per card change (station, time, field, from, to, sha), backfilled from
    queue git history and the ledger
-826. **W745** (done) Weather: each card's current state (status, time in state, blocker kind, rank weight, manifest
+875. **W745** (done) Weather: each card's current state (status, time in state, blocker kind, rank weight, manifest
    size)
-827. **W746** (done) Climate: per repo and fleet over a window, throughput, frontier, WIP, blocked share, lead-time
+876. **W746** (done) Climate: per repo and fleet over a window, throughput, frontier, WIP, blocked share, lead-time
    distributions, reopen rate
-828. **W747** (done) Forecast shingle: at each issue time a per-card P(done by +1d,+3d,+7d) and per-repo expected done
+877. **W747** (done) Forecast shingle: at each issue time a per-card P(done by +1d,+3d,+7d) and per-repo expected done
    count, every issue kept with its lead
-829. **W849** (done) A delivery record keyed repo:W`<n>` to its edge, so a rerun and a deleted letter write nothing
+878. **W849** (done) A delivery record keyed repo:W`<n>` to its edge, so a rerun and a deleted letter write nothing
    again
-830. **W850** (done) A letter writer that sends one inbox letter per undelivered cross-repo edge of a done or dropped
+879. **W850** (done) A letter writer that sends one inbox letter per undelivered cross-repo edge of a done or dropped
    card
-831. **W4** (done) N2: send each repo its blocks on the operator with no ask stated, and the 'operator: decide/act' form
-832. **W15** (done) Gate tests: nemik has no test suite; write pytest coverage for nemik-check exit/provenance lines,
+880. **W4** (done) N2: send each repo its blocks on the operator with no ask stated, and the 'operator: decide/act' form
+881. **W15** (done) Gate tests: nemik has no test suite; write pytest coverage for nemik-check exit/provenance lines,
    nemik-inbound UNCLAIMED column, blocks/operator categories, over a fixture ~/github tree
-833. **W34** (done) nemik-rank: cross-repo transitive downstream weight per ready item, peer edges weighted by declared
+882. **W34** (done) nemik-rank: cross-repo transitive downstream weight per ready item, peer edges weighted by declared
    data, plus drift witness
-834. **W35** (done) Declare peer-edge weight as data (src/nemik/data/rank-weights.toml: local=1, peer=N)
-835. **W36** (done) Compute transitive downstream weight for one waypoint IRI over merged fleet graph (enables closure +
+883. **W35** (done) Declare peer-edge weight as data (src/nemik/data/rank-weights.toml: local=1, peer=N)
+884. **W36** (done) Compute transitive downstream weight for one waypoint IRI over merged fleet graph (enables closure +
    peer blocked_on)
-836. **W37** (done) nemik-rank `<repo>` CLI: list ready items with weight, sorted
-837. **W38** (done) Validate nemik-rank on luthen queue: W120-W127 chains outrank W91/W65
-838. **W39** (done) Drift witness: fail when a queue's top ready item is outranked on cross-repo weight
-839. **W41** (done) Witness: flag a peer blocked_on/waitsFor edge that lands on an umbrella (a waypoint that its own
+885. **W37** (done) nemik-rank `<repo>` CLI: list ready items with weight, sorted
+886. **W38** (done) Validate nemik-rank on luthen queue: W120-W127 chains outrank W91/W65
+887. **W39** (done) Drift witness: fail when a queue's top ready item is outranked on cross-repo weight
+888. **W41** (done) Witness: flag a peer blocked_on/waitsFor edge that lands on an umbrella (a waypoint that its own
    repo's children enable, or whose next_bounded_step starts with COMPOSITE) instead of the child step
-840. **W43** (done) Ask mtools: stored per-waypoint 'weight' field (set via $PF --update --weight N, sole writer) that
+889. **W43** (done) Ask mtools: stored per-waypoint 'weight' field (set via $PF --update --weight N, sole writer) that
    model.ordered() keys on (status, -weight, -leverage, file order); loop copies nemik-rank --json into it; drift check
    then measures staleness of stored weight
-841. **W52** (done) Repin pathsforward wheel to mtools 49ac0ff (--overlaps)
-842. **W56** (done) graph.json: edges carry satisfied (upstream end done); nodes carry open_blockers count
-843. **W63** (done) witnesses: git-ref and time observers, fixture-tested
-844. **W68** (done) witnesses: k8s job status observable from host (kube-state-metrics scraped into vmsingle, or a host
+890. **W52** (done) Repin pathsforward wheel to mtools 49ac0ff (--overlaps)
+891. **W56** (done) graph.json: edges carry satisfied (upstream end done); nodes carry open_blockers count
+892. **W63** (done) witnesses: git-ref and time observers, fixture-tested
+893. **W68** (done) witnesses: k8s job status observable from host (kube-state-metrics scraped into vmsingle, or a host
    kubeconfig)
-845. **W73** (done) rank.frontier(g, goal): in-repo open leaves under a goal (dG) and what they wait on outside the repo
+894. **W73** (done) rank.frontier(g, goal): in-repo open leaves under a goal (dG) and what they wait on outside the repo
    (ddG); fixture-tested
-846. **W76** (done) Ask luthen: blackbox probe for buildbuddy-bes (and other shared endpoints) so outages have an
+895. **W76** (done) Ask luthen: blackbox probe for buildbuddy-bes (and other shared endpoints) so outages have an
    observable fact (probe_success)
-847. **W95** (done) W93a: host .venv installs nemik non-editable (uv sync --no-editable; README)
-848. **W96** (done) W93b: Bazel venv artifact (mtools venv.bzl): nemik + pathsforward installed with console scripts
-849. **W98** (done) W91a: opa pinned as a hashed Bazel http_file, handed to tests as NEMIK_OPA
-850. **W106** (done) Containerfile test stage: build without the github paperkit fetch (egress)
-851. **W122** (done) W106a: image test stage runs test_architecture (paperkit installed; ARCHITECTURE.md, paper.toml,
+896. **W95** (done) W93a: host .venv installs nemik non-editable (uv sync --no-editable; README)
+897. **W96** (done) W93b: Bazel venv artifact (mtools venv.bzl): nemik + pathsforward installed with console scripts
+898. **W98** (done) W91a: opa pinned as a hashed Bazel http_file, handed to tests as NEMIK_OPA
+899. **W106** (done) Containerfile test stage: build without the github paperkit fetch (egress)
+900. **W122** (done) W106a: image test stage runs test_architecture (paperkit installed; ARCHITECTURE.md, paper.toml,
    warrants.bib, rubric.tsv, checks/ copied)
-852. **W132** (done) W107c: nemik-rank composes its objectives by a declared, parameterizable order (tiers
+901. **W132** (done) W107c: nemik-rank composes its objectives by a declared, parameterizable order (tiers
    lexicographic, Pareto fronts within a tier, weighted sum within a front)
-853. **W136** (done) Ask mtools: --update SYMBOL --caused-by REF, validated as --add validates it, so a mis-cited cause
+902. **W136** (done) Ask mtools: --update SYMBOL --caused-by REF, validated as --add validates it, so a mis-cited cause
    is corrected in place instead of re-minting
-854. **W145** (done) Recurring alarms: expand RRULE/EXDATE (mtools:W278) so a recurring waypoint's alarms fire per
+903. **W145** (done) Recurring alarms: expand RRULE/EXDATE (mtools:W278) so a recurring waypoint's alarms fire per
    occurrence, done per RECURRENCE-ID
-855. **W153** (done) nemik-serve --static OUT/ --withheld FILE: the web view as static files
-856. **W179** (done) Forest view in fruit order: rank_pos with the FRUIT row raised intra_crossings 214->310 on the
+904. **W153** (done) nemik-serve --static OUT/ --withheld FILE: the web view as static files
+905. **W179** (done) Forest view in fruit order: rank_pos with the FRUIT row raised intra_crossings 214->310 on the
    fixture; lay heads out so it stays within budget
-857. **W193** (done) Find which nemik session started the display-less akonadi_control (claude-nemik scope, 2026-10-02
+906. **W193** (done) Find which nemik session started the display-less akonadi_control (claude-nemik scope, 2026-10-02
    13:33 EDT); is it nemik-akonadi-tasks? (luthen W299)
-858. **W204** (done) nemik typing: src/nemik/alarm.py (3 findings)
-859. **W205** (done) nemik typing: src/nemik/manifest.py (38 findings)
-860. **W206** (done) nemik typing: src/nemik/blocks.py (96 findings)
-861. **W208** (done) nemik typing: src/nemik/withheld.py (54 findings)
-862. **W209** (done) nemik typing: src/nemik/rank.py (260 findings)
-863. **W210** (done) nemik typing: src/nemik/overlaps.py (16 findings)
-864. **W211** (done) nemik typing: src/nemik/witnesses.py (99 findings)
-865. **W212** (done) nemik typing: src/nemik/wake.py (206 findings)
-866. **W213** (done) nemik typing: src/nemik/metrics.py (57 findings)
-867. **W215** (done) nemik typing: src/nemik/adoption.py (27 findings)
-868. **W216** (done) nemik typing: src/nemik/score.py (43 findings)
-869. **W217** (done) nemik typing: src/nemik/__init__.py (1 findings)
-870. **W218** (done) nemik typing: src/nemik/blocks_cli.py (33 findings)
-871. **W219** (done) nemik typing: src/nemik/floorasks.py (17 findings)
-872. **W220** (done) nemik typing: src/nemik/vtodo.py (79 findings)
-873. **W221** (done) nemik typing: src/nemik/calendars.py (133 findings)
-874. **W223** (done) nemik typing: src/nemik/tools.py (28 findings)
-875. **W226** (done) Rebuild nemik's own venv (./setup.sh) so nemik-rank, nemik-check and nemik-serve resolve the root
+907. **W204** (done) nemik typing: src/nemik/alarm.py (3 findings)
+908. **W205** (done) nemik typing: src/nemik/manifest.py (38 findings)
+909. **W206** (done) nemik typing: src/nemik/blocks.py (96 findings)
+910. **W208** (done) nemik typing: src/nemik/withheld.py (54 findings)
+911. **W209** (done) nemik typing: src/nemik/rank.py (260 findings)
+912. **W210** (done) nemik typing: src/nemik/overlaps.py (16 findings)
+913. **W211** (done) nemik typing: src/nemik/witnesses.py (99 findings)
+914. **W212** (done) nemik typing: src/nemik/wake.py (206 findings)
+915. **W213** (done) nemik typing: src/nemik/metrics.py (57 findings)
+916. **W215** (done) nemik typing: src/nemik/adoption.py (27 findings)
+917. **W216** (done) nemik typing: src/nemik/score.py (43 findings)
+918. **W217** (done) nemik typing: src/nemik/__init__.py (1 findings)
+919. **W218** (done) nemik typing: src/nemik/blocks_cli.py (33 findings)
+920. **W219** (done) nemik typing: src/nemik/floorasks.py (17 findings)
+921. **W220** (done) nemik typing: src/nemik/vtodo.py (79 findings)
+922. **W221** (done) nemik typing: src/nemik/calendars.py (133 findings)
+923. **W223** (done) nemik typing: src/nemik/tools.py (28 findings)
+924. **W226** (done) Rebuild nemik's own venv (./setup.sh) so nemik-rank, nemik-check and nemik-serve resolve the root
    workstream (github:W`<n>`), then hand luthen the new build for the cluster image
-876. **W232** (done) nemik-metrics gauge nemik_realizability_waypoints{repo,coordinate} and the skill row for
+925. **W232** (done) nemik-metrics gauge nemik_realizability_waypoints{repo,coordinate} and the skill row for
    nemik-check --realizability
-877. **W233** (done) Host-apply DAG: decide who models host/files.json rows, activate kinds and unit ordering as edges
+926. **W233** (done) Host-apply DAG: decide who models host/files.json rows, activate kinds and unit ordering as edges
    and witnesses a waypoint can cite (luthen W665)
-878. **W234** (done) Read verdict marks, not private re-derivations: print the persisted per-transition mark with its
+927. **W234** (done) Read verdict marks, not private re-derivations: print the persisted per-transition mark with its
    provenance (mark or derived) and flag a stale mark
-879. **W236** (done) Decay: nemik passes input.now and the as_of of each mark and fact, and prints the as_of it used; a
+928. **W236** (done) Decay: nemik passes input.now and the as_of of each mark and fact, and prints the as_of it used; a
    stale mark floors its gate, never passes
-880. **W238** (done) Current-flow solver for nemik-rank: deterministic, law tests (series below the weakest link,
+929. **W238** (done) Current-flow solver for nemik-rank: deterministic, law tests (series below the weakest link,
    parallel additive, duplicates double, open circuit), measured on the real graph
-881. **W241** (done) Switch nemik-rank to the current-flow model once the audit is decided, keeping the old ranking as
+930. **W241** (done) Switch nemik-rank to the current-flow model once the audit is decided, keeping the old ranking as
    the comparison arm until the switch
-882. **W243** (done) luthen-observability:W666 emits the agreed verdict shape (ref, level, reference_arm, residue with
+931. **W243** (done) luthen-observability:W666 emits the agreed verdict shape (ref, level, reference_arm, residue with
    closes_by and optional closes_ref)
-883. **W244** (done) Operator asks inside the model: show what an ask needs (its current's path to the frontier) and
+932. **W244** (done) Operator asks inside the model: show what an ask needs (its current's path to the frontier) and
    what it overrides (whose share falls), so the operator's reply refactors the graph instead of a strict tier
-884. **W245** (done) Test the pinned --certify batch under bazel @opa: a fixture queue in, verdict levels and residue
+933. **W245** (done) Test the pinned --certify batch under bazel @opa: a fixture queue in, verdict levels and residue
    out
-885. **W246** (done) nemik.realize: judge every live waypoint through the pinned certify.items and opa_eval, return
+934. **W246** (done) nemik.realize: judge every live waypoint through the pinned certify.items and opa_eval, return
    verdicts keyed by ref (a pure function of queue, now and opa)
-886. **W247** (done) nemik-check --realizability: print each live waypoint coordinate and residue ledger from
+935. **W247** (done) nemik-check --realizability: print each live waypoint coordinate and residue ledger from
    nemik.realize, exit nonzero when opa is unavailable
-887. **W249** (done) Move the operator tier inside the flow model: an operator ask becomes a demand source with a
+936. **W249** (done) Move the operator tier inside the flow model: an operator ask becomes a demand source with a
    declared class weight instead of a strict tier above the order
-888. **W251** (done) Residue demand in the flow model: each residue entry from nemik-check --realizability injects
+937. **W251** (done) Residue demand in the flow model: each residue entry from nemik-check --realizability injects
    demand at its waypoint, weighted by gate, toward its closes_ref, so the card that closes a gap rises
-889. **W253** (done) Decide whether residue demand is on by default in nemik-rank: audit the real fleet with nemik-rank
+938. **W253** (done) Decide whether residue demand is on by default in nemik-rank: audit the real fleet with nemik-rank
    REPO --flow --residue, declare per-gate weights in rank-weights.toml, then enable
-890. **W256** (done) host:`<id>` citations: nemik-check resolves a cited host-apply row against the export and reports
+939. **W256** (done) host:`<id>` citations: nemik-check resolves a cited host-apply row against the export and reports
    an unknown row as unresolved
-891. **W263** (done) Per-waypoint calendar routing: a touches tag (calendar:`<label>` or private) keeps a waypoint off
+940. **W263** (done) Per-waypoint calendar routing: a touches tag (calendar:`<label>` or private) keeps a waypoint off
    the shared mirror and writes it to a named personal calendar; answer whether nemik-wake --alarms already delivers
    alarms
-892. **W267** (done) nemik-history: diff one repo's graph between two revisions or dates from git history of
+941. **W267** (done) nemik-history: diff one repo's graph between two revisions or dates from git history of
    .claude/paths-forward.json (minted, closed, dropped, status flips, edge changes, newly UNCLAIMED blocks)
-893. **W268** (done) nemik-history: per-card time-in-state from the committed history
-894. **W269** (done) nemik-history: weekly roll-up (opened vs closed, blocked share, oldest blocked by repo)
-895. **W270** (done) nemik-metrics: nemik_waypoint_age_seconds as a series
-896. **W271** (done) Outbound-letter delivery check: every letter a sender cites or addresses to a peer is present in
+942. **W268** (done) nemik-history: per-card time-in-state from the committed history
+943. **W269** (done) nemik-history: weekly roll-up (opened vs closed, blocked share, oldest blocked by repo)
+944. **W270** (done) nemik-metrics: nemik_waypoint_age_seconds as a series
+945. **W271** (done) Outbound-letter delivery check: every letter a sender cites or addresses to a peer is present in
    that peer's inbox, as an exit-coded nemik-check mode
-897. **W272** (done) Assert, not only report, that a consumer reads a peer at its last commit: an exit-coded nemik-check
+946. **W272** (done) Assert, not only report, that a consumer reads a peer at its last commit: an exit-coded nemik-check
    mode that fails when a claim rests on a peer's uncommitted queue
-898. **W278** (done) Orphan-letter triage: 257 letters no waypoint cites; classify by age and by whether a done waypoint
+947. **W278** (done) Orphan-letter triage: 257 letters no waypoint cites; classify by age and by whether a done waypoint
    of that repo already names the sender or subject, so --fold proposes only the live ones and the rest are archived
-899. **W284** (done) Fold amr-skills's inbox into waypoints: nemik-check --letters --fold --repo amr-skills --older-than
+948. **W284** (done) Fold amr-skills's inbox into waypoints: nemik-check --letters --fold --repo amr-skills --older-than
    14, apply the mv for the stale, claim or mint a card for each live letter
-900. **W285** (done) Fold el-openglo's inbox into waypoints: nemik-check --letters --fold --repo el-openglo --older-than
+949. **W285** (done) Fold el-openglo's inbox into waypoints: nemik-check --letters --fold --repo el-openglo --older-than
    14, apply the mv for the stale, claim or mint a card for each live letter
-901. **W288** (done) Fold github's inbox into waypoints: nemik-check --letters --fold --repo github --older-than 14,
+950. **W288** (done) Fold github's inbox into waypoints: nemik-check --letters --fold --repo github --older-than 14,
    apply the mv for the stale, claim or mint a card for each live letter
-902. **W290** (done) Fold linux-sources's inbox into waypoints: nemik-check --letters --fold --repo linux-sources
+951. **W290** (done) Fold linux-sources's inbox into waypoints: nemik-check --letters --fold --repo linux-sources
    --older-than 14, apply the mv for the stale, claim or mint a card for each live letter
-903. **W291** (done) Fold luthen-observability's inbox into waypoints: nemik-check --letters --fold --repo
+952. **W291** (done) Fold luthen-observability's inbox into waypoints: nemik-check --letters --fold --repo
    luthen-observability --older-than 14, apply the mv for the stale, claim or mint a card for each live letter
-904. **W293** (done) Fold paperkit's inbox into waypoints: nemik-check --letters --fold --repo paperkit --older-than 14,
+953. **W293** (done) Fold paperkit's inbox into waypoints: nemik-check --letters --fold --repo paperkit --older-than 14,
    apply the mv for the stale, claim or mint a card for each live letter
-905. **W296** (done) Fold substrate's inbox into waypoints: nemik-check --letters --fold --repo substrate --older-than
+954. **W296** (done) Fold substrate's inbox into waypoints: nemik-check --letters --fold --repo substrate --older-than
    14, apply the mv for the stale, claim or mint a card for each live letter
-906. **W301** (done) nemik-check --letters --fold --apply, alert-pair rule, --repo scopes the misdelivery lines
+955. **W301** (done) nemik-check --letters --fold --apply, alert-pair rule, --repo scopes the misdelivery lines
    (substrate:W301)
-907. **W305** (done) nemik-overlaps prints who holds the work claim for an overlapping tag, and how old it is
+956. **W305** (done) nemik-overlaps prints who holds the work claim for an overlapping tag, and how old it is
    (mtools:W913)
-908. **W308** (done) Publish the weekly project-manager history as history.json in the static view
-909. **W315** (done) Flow metrics in the weekly roll-up: lead time (first seen to done), velocity, work in progress
-910. **W322** (done) Mark the critical path in the web view: zero-slack cards and edges drawn heavier or outlined
-911. **W324** (done) Deadlock detection: report cycles in the open dependency graph, fleet-wide, before they stall
+957. **W308** (done) Publish the weekly project-manager history as history.json in the static view
+958. **W315** (done) Flow metrics in the weekly roll-up: lead time (first seen to done), velocity, work in progress
+959. **W322** (done) Mark the critical path in the web view: zero-slack cards and edges drawn heavier or outlined
+960. **W324** (done) Deadlock detection: report cycles in the open dependency graph, fleet-wide, before they stall
    anything
-912. **W325** (done) Utilization and Little's law in the weekly roll-up: arrivals over departures, and the implied wait
+961. **W325** (done) Utilization and Little's law in the weekly roll-up: arrivals over departures, and the implied wait
    L over lambda
-913. **W326** (done) Starvation and aging: a ready card that has waited long while later cards were ranked above it
-914. **W328** (done) Flow efficiency: the share of a closed card's lifetime spent working, now that the working state is
+962. **W326** (done) Starvation and aging: a ready card that has waited long while later cards were ranked above it
+963. **W328** (done) Flow efficiency: the share of a closed card's lifetime spent working, now that the working state is
    enforced
-915. **W333** (done) nemik.critical takes a scope: a repo, a visible set, or one card's cone
-916. **W334** (done) graph.json carries each repo's own longest chain (on_path_repo)
-917. **W374** (done) Gate the staged index in a fixed-path worktree, so an isolated commit keeps one bazel cache and
+964. **W333** (done) nemik.critical takes a scope: a repo, a visible set, or one card's cone
+965. **W334** (done) graph.json carries each repo's own longest chain (on_path_repo)
+966. **W374** (done) Gate the staged index in a fixed-path worktree, so an isolated commit keeps one bazel cache and
    server
-918. **W375** (done) Answer luthen-observability:W722: ship nemik's Deployment Burstable (memory request under the 768Mi
+967. **W375** (done) Answer luthen-observability:W722: ship nemik's Deployment Burstable (memory request under the 768Mi
    limit)
-919. **W380** (done) Run the a11y adversary once over the view's claims and triage what it refutes
-920. **W384** (done) a11y C6: label text meets 4.5:1 on every node fill in both themes
-921. **W392** (done) Web vitals for nemik's view, tracked by luthen-observability as standing metrics
-922. **W394** (done) Serve the snapshots as static files; the in-process graph server leaves the request path
-923. **W395** (done) The page renders the last snapshot at once and refreshes in the background
-924. **W399** (done) Measure a rebuild's phases: parse, annotate, SHACL, ledger, to_json (CPU and memory each)
-925. **W401** (done) Recompute derived numbers only where a change reaches, and write snapshots per piece
-926. **W403** (done) One flow solve per repo and option per document build, not one per caller
-927. **W411** (done) Hoist hot-loop namespace terms (NEMIK.x, OSLC_CM.x) into module constants: 1.48M
+968. **W380** (done) Run the a11y adversary once over the view's claims and triage what it refutes
+969. **W384** (done) a11y C6: label text meets 4.5:1 on every node fill in both themes
+970. **W392** (done) Web vitals for nemik's view, tracked by luthen-observability as standing metrics
+971. **W394** (done) Serve the snapshots as static files; the in-process graph server leaves the request path
+972. **W395** (done) The page renders the last snapshot at once and refreshes in the background
+973. **W399** (done) Measure a rebuild's phases: parse, annotate, SHACL, ledger, to_json (CPU and memory each)
+974. **W401** (done) Recompute derived numbers only where a change reaches, and write snapshots per piece
+975. **W403** (done) One flow solve per repo and option per document build, not one per caller
+976. **W411** (done) Hoist hot-loop namespace terms (NEMIK.x, OSLC_CM.x) into module constants: 1.48M
    Namespace.__getattr__ calls cost 5.2 s of a 36 s one-edit rebuild
-928. **W412** (done) One-pass card index per build: state, blockedOn, enables, repo and asks per card as plain dicts,
+977. **W412** (done) One-pass card index per build: state, blockedOn, enables, repo and asks per card as plain dicts,
    read by salience.audit, health, blocks.operator_asks, critical._open and rank._open instead of 3.3M rdflib triple
    lookups (19 s of 36)
-929. **W414** (done) Static manifest: manifest.json maps every published data path to the sha256 of its bytes
-930. **W415** (done) Split graph.json into per-repo pieces plus a fleet piece; the page assembles them, a test pins
+978. **W414** (done) Static manifest: manifest.json maps every published data path to the sha256 of its bytes
+979. **W415** (done) Split graph.json into per-repo pieces plus a fleet piece; the page assembles them, a test pins
    assembled == whole
-931. **W416** (done) The page polls manifest.json and refetches only the pieces whose hash changed (browser test)
-932. **W419** (done) The page renders shipped ruler patterns; emitF and rulerMotif leave index.html, the motif-family
+980. **W416** (done) The page polls manifest.json and refetches only the pieces whose hash changed (browser test)
+981. **W419** (done) The page renders shipped ruler patterns; emitF and rulerMotif leave index.html, the motif-family
    browser test stays as the contract
-933. **W429** (done) Measure use of colour from the rendered view: a browser test emits el-openglo's cases shape
+982. **W429** (done) Measure use of colour from the rendered view: a browser test emits el-openglo's cases shape
    (meaning, colour kinds, non-colour cue kinds) for card states, scope rings, wait lines and repo chips
-934. **W430** (done) Pin el-openglo's policy/use_of_colour.rego at a commit as a Bazel input (http_file with sha256),
+983. **W430** (done) Pin el-openglo's policy/use_of_colour.rego at a commit as a Bazel input (http_file with sha256),
    never a copy
-935. **W431** (done) Gate: evaluate the view's use-of-colour cases with the pinned rego through nemik's opa; deny must
+984. **W431** (done) Gate: evaluate the view's use-of-colour cases with the pinned rego through nemik's opa; deny must
    be empty
-936. **W432** (done) Repo chips carry their health and its reasons in the accessible name, not only a title attribute
-937. **W433** (done) The #legnote live region announces its message once, not the button injected into it
-938. **W434** (done) Run the a11y browser tests (contrast, glyphs, cues) in both themes, not light only
-939. **W435** (done) A keyboard-reachable list of the visible cards mirroring the canvas: select, expand an umbrella and
+985. **W432** (done) Repo chips carry their health and its reasons in the accessible name, not only a title attribute
+986. **W433** (done) The #legnote live region announces its message once, not the button injected into it
+987. **W434** (done) Run the a11y browser tests (contrast, glyphs, cues) in both themes, not light only
+988. **W435** (done) A keyboard-reachable list of the visible cards mirroring the canvas: select, expand an umbrella and
    open details without a mouse
-940. **W437** (done) Non-text contrast (WCAG 1.4.11): scope rings, wait lines and tile borders reach 3:1 against the
+989. **W437** (done) Non-text contrast (WCAG 1.4.11): scope rings, wait lines and tile borders reach 3:1 against the
    page background in both themes, measured from rendered styles
-941. **W438** (done) Colour-blind arm: the view's palette through el-openglo's cvd_gate core (worst-view dE, Okabe-Ito
+990. **W438** (done) Colour-blind arm: the view's palette through el-openglo's cvd_gate core (worst-view dE, Okabe-Ito
    floor) once it ships as an mtools package
-942. **W440** (done) Generate a JSON Schema per published file from field-manifest.json (field class to JSON type),
+991. **W440** (done) Generate a JSON Schema per published file from field-manifest.json (field class to JSON type),
    published beside the data in the static build, versioned by the manifest's version
-943. **W441** (done) Validate every published document against its generated schema in the test suite (adds jsonschema
+992. **W441** (done) Validate every published document against its generated schema in the test suite (adds jsonschema
    as a dev dependency)
-944. **W445** (done) Pin a JRE and MPXJ's MSPDI jar closure (mpxj 16.10.0, jakarta.xml.bind-api, jaxb-runtime and
+993. **W445** (done) Pin a JRE and MPXJ's MSPDI jar closure (mpxj 16.10.0, jakarta.xml.bind-api, jaxb-runtime and
    transitive jars) as sha256-pinned Bazel inputs
-945. **W446** (done) Browser-free test: MPXJ reads nemik-export's MSPDI for the fixture fleet; task count and
+994. **W446** (done) Browser-free test: MPXJ reads nemik-export's MSPDI for the fixture fleet; task count and
    predecessor pairs equal nemik.projection's
-946. **W448** (done) TRS model: a repo's trs:Base and ordered trs:ChangeLog (Creation, Modification, Deletion) derived
+995. **W448** (done) TRS model: a repo's trs:Base and ordered trs:ChangeLog (Creation, Modification, Deletion) derived
    from its queue and ledger, as an rdflib graph
-947. **W449** (done) Publish trs/`<repo>`/base.ttl and changelog.ttl in the static build (Turtle, listed in
+996. **W449** (done) Publish trs/`<repo>`/base.ttl and changelog.ttl in the static build (Turtle, listed in
    hashes.json), with a TRS link from the service catalog (W408)
-948. **W451** (done) Publish catalog.ttl: an oslc:ServiceProviderCatalog with one ServiceProvider per repo (CM domain)
+997. **W451** (done) Publish catalog.ttl: an oslc:ServiceProviderCatalog with one ServiceProvider per repo (CM domain)
    and its trs:TrackedResourceSet pointing at the published base and change log
-949. **W473** (done) Cite links in the Selected panel and operator lanes select their card; one select path and a
+998. **W473** (done) Cite links in the Selected panel and operator lanes select their card; one select path and a
    live-region announcement
-950. **W478** (done) Nav pane step 1: the Cards list becomes one tab stop with a roving tabindex; Up/Down/Home/End move,
+999. **W478** (done) Nav pane step 1: the Cards list becomes one tab stop with a roving tabindex; Up/Down/Home/End move,
    Enter selects
-951. **W479** (done) Nav pane step 2: the focused row's card is highlighted on the canvas and opens the W462 popover
+1000. **W479** (done) Nav pane step 2: the focused row's card is highlighted on the canvas and opens the W462 popover
    beside it
-952. **W480** (done) Nav pane step 3: focus and the open/closed state of the pane survive the 60 s poll's redraw,
+1001. **W480** (done) Nav pane step 3: focus and the open/closed state of the pane survive the 60 s poll's redraw,
    restored by cite
-953. **W483** (done) rank's frontier reads through mtools' shared walker (mikemol.frontier.walk, mtools:W1127):
+1002. **W483** (done) rank's frontier reads through mtools' shared walker (mikemol.frontier.walk, mtools:W1127):
    stored-state open test as the realized predicate, every ranking test unchanged
-954. **W495** (done) Measure poll churn by walking history: per interval, cards added or removed, edges changed, state
+1003. **W495** (done) Measure poll churn by walking history: per interval, cards added or removed, edges changed, state
    flips, metadata-only changes
    - next: tier 1 alone removes ~1.8 of 8.1 points: ship it only as the base of tier 2 (the diff of the drawn graph
      against new data); structural-in-place (W498) is the win
-955. **W496** (done) Patch tier 1: a poll whose changes are node attributes only updates those nodes in place, no
+1004. **W496** (done) Patch tier 1: a poll whose changes are node attributes only updates those nodes in place, no
    destroy and no relayout
-956. **W497** (done) Patch tier 3: the side panels (findings, goals, weather, history, wake, lanes) re-render only when
+1005. **W497** (done) Patch tier 3: the side panels (findings, goals, weather, history, wake, lanes) re-render only when
    their own inputs changed
-957. **W498** (done) Patch tier 2: added and removed cards and edges change in place, the layout marked out of date
+1006. **W498** (done) Patch tier 2: added and removed cards and edges change in place, the layout marked out of date
    rather than redone
-958. **W502** (done) nemik-serve --serve DIR: a static file server with no model, conditional requests from hashes.json,
-   /metrics from the build
+1007. **W502** (done) nemik-serve --serve DIR: a static file server with no model, conditional requests from
+   hashes.json, /metrics from the build
    - next: W503: publish a snapshot atomically from a fresh process
-959. **W503** (done) nemik-serve --publish ROOT: build a snapshot in a fresh process and flip current/ atomically
+1008. **W503** (done) nemik-serve --publish ROOT: build a snapshot in a fresh process and flip current/ atomically
    - next: W514 persists the caches; then W504's pod shape
-960. **W518** (done) A fresh publish process starts warm: the SHACL results and the flow solves persist beside the
+1009. **W518** (done) A fresh publish process starts warm: the SHACL results and the flow solves persist beside the
    snapshots
    - next: W504: install the two-container manifest (drafted), builder memory limit 768Mi against a 563-607 MB peak,
      then tell luthen-observability the container names and limits
-961. **W523** (done) No waivers: the eight noqa BLE001 sites become named exceptions and a test holds the count at zero
-962. **W532** (done) Decide nemik's licence and copyright notice, then drop missing-copyright-notice from
+1010. **W523** (done) No waivers: the eight noqa BLE001 sites become named exceptions and a test holds the count at zero
+1011. **W532** (done) Decide nemik's licence and copyright notice, then drop missing-copyright-notice from
    ruff-house.toml and add the notice to every file
-963. **W542** (done) W524a: set the house strict flags in pyproject [tool.mypy] and record the finding count per file
-964. **W543** (done) W524b: adopt mikemol-ratchet pinned at the repo's mtools sha as a bazel check: fails when the count
-   rises or a fixed finding stays in the baseline
-965. **W547** (done) Delivery record and edge walk for a done or dropped card: one inbox letter per cross-repo edge,
+1012. **W542** (done) W524a: set the house strict flags in pyproject [tool.mypy] and record the finding count per file
+1013. **W543** (done) W524b: adopt mikemol-ratchet pinned at the repo's mtools sha as a bazel check: fails when the
+   count rises or a fixed finding stays in the baseline
+1014. **W547** (done) Delivery record and edge walk for a done or dropped card: one inbox letter per cross-repo edge,
    delivered once
-966. **W549** (done) Answer luthen-observability:W1071: should_nudge importable from luthen without a nemik dependency
-967. **W553** (done) Vocabulary-divergence check: lifecycle words used off-scheme in queue text and run records, linked
+1015. **W549** (done) Answer luthen-observability:W1071: should_nudge importable from luthen without a nemik dependency
+1016. **W553** (done) Vocabulary-divergence check: lifecycle words used off-scheme in queue text and run records, linked
    to mtools' exit table
-968. **W554** (done) Add held as a sixth lifecycle concept between installed and enabled: declared and installed but
+1017. **W554** (done) Add held as a sixth lifecycle concept between installed and enabled: declared and installed but
    deliberately not enabled
-969. **W555** (done) Run records: flag lifecycle stray words in run-row detail, with mtools' exit table as the verdict
+1018. **W555** (done) Run records: flag lifecycle stray words in run-row detail, with mtools' exit table as the verdict
    axis
-970. **W556** (done) Publish the one run-row shape for apply, reaper, apply-ledger, tier-rehearsal and drum logs,
+1019. **W556** (done) Publish the one run-row shape for apply, reaper, apply-ledger, tier-rehearsal and drum logs,
    validated like the queue contract
-971. **W557** (done) Migrate apply-set-runs.jsonl to the run-row shape: verdict as an object, a timestamp, a run id and
+1020. **W557** (done) Migrate apply-set-runs.jsonl to the run-row shape: verdict as an object, a timestamp, a run id and
    a trigger
-972. **W558** (done) Read run rows into the graph: an adapter for rows that validate against run-row.schema.json,
+1021. **W558** (done) Read run rows into the graph: an adapter for rows that validate against run-row.schema.json,
    emitting ts, trigger, exit and detail
-973. **W559** (done) Spike: measure Pyodide and Codon on nemik's typed core, toward a portable strongly-typed everything
-   (operator 2026-10-15)
-974. **W562** (done) Codon-compat census: for each nemik module, does codon build accept it, and what is the first
+1022. **W559** (done) Spike: measure Pyodide and Codon on nemik's typed core, toward a portable strongly-typed
+   everything (operator 2026-10-15)
+1023. **W562** (done) Codon-compat census: for each nemik module, does codon build accept it, and what is the first
    rejection
-975. **W565** (done) Wire run logs into the graph: luthen publishes its run logs into the export, nemik reads them with
+1024. **W565** (done) Wire run logs into the graph: luthen publishes its run logs into the export, nemik reads them with
    runrows.run_graph
-976. **W566** (done) Ratchet the Codon-compat count: tools/codon_census.py in the repo, a baseline of what blocks each
+1025. **W566** (done) Ratchet the Codon-compat count: tools/codon_census.py in the repo, a baseline of what blocks each
    module, and a test that only lets it fall
-977. **W582** (done) Rebuild status-transition history from existing audit streams, not a new ledger format
-978. **W583** (done) Answer el-openglo: W544 is delivered, nemik:W438 no longer waits on it
-979. **W585** (done) Connector conformance test: never writes a queue, dedupes by source id, dry run changes nothing
-980. **W586** (done) A connector's missing credential files its own operator ask from its declaration
-981. **W587** (done) Answer summit:W224: Make filing an ask mechanical: one command mints the filer's waypoint and
+1026. **W567** (done) Codon paydown 1: @dataclass(frozen=True) in cards churn flow projection salience score, in a form
+   Codon accepts
+   - next: Decision recorded: option A, a plain annotated class with an explicit __init__ and generated __eq__ and
+     __hash__ (valid in both interpreters), B kept for new pure core. The six modules' per-module work is carried by the
+     Codon instance cards W1763 to W1977 (for example W1830). Closed on the answer; W561 is unblocked.
+1027. **W582** (done) Rebuild status-transition history from existing audit streams, not a new ledger format
+1028. **W583** (done) Answer el-openglo: W544 is delivered, nemik:W438 no longer waits on it
+1029. **W585** (done) Connector conformance test: never writes a queue, dedupes by source id, dry run changes nothing
+1030. **W586** (done) A connector's missing credential files its own operator ask from its declaration
+1031. **W587** (done) Answer summit:W224: Make filing an ask mechanical: one command mints the filer's waypoint and
    writes
-982. **W588** (done) Measure the image's test stage on the host: uv sync into a scratch venv, env -i, pytest -q tests
-983. **W589** (done) Wire the image-style test run into the gate, or into pre-push (W525) if it is too slow
-984. **W590** (done) Single-flight replica runner: flock, replay the newest unreplicated sha, write
+1032. **W588** (done) Measure the image's test stage on the host: uv sync into a scratch venv, env -i, pytest -q tests
+1033. **W589** (done) Wire the image-style test run into the gate, or into pre-push (W525) if it is too slow
+1034. **W590** (done) Single-flight replica runner: flock, replay the newest unreplicated sha, write
    .claude/image-replica.last
-985. **W591** (done) Start the replica runner from post-commit, detached
-986. **W592** (done) Report the replica result: a failed sha files --gate-red and a passing one --gate-green
-987. **W594** (done) nemik-replica: print the image replica's verdict for the pushed sha, for a tick to act on
-988. **W595** (done) The image replay of 978eef8 failed (exit 1, 614 s): find which test, and why the commit gate passed
-   it
-989. **W596** (done) Image-replica runner logs to the fleet log service, not files: structured records to VictoriaLogs
+1035. **W591** (done) Start the replica runner from post-commit, detached
+1036. **W592** (done) Report the replica result: a failed sha files --gate-red and a passing one --gate-green
+1037. **W594** (done) nemik-replica: print the image replica's verdict for the pushed sha, for a tick to act on
+1038. **W595** (done) The image replay of 978eef8 failed (exit 1, 614 s): find which test, and why the commit gate
+   passed it
+1039. **W596** (done) Image-replica runner logs to the fleet log service, not files: structured records to VictoriaLogs
    with service.name=nemik.image-replica and the sha as an attribute
-990. **W598** (done) Export real warrants (JSON-LD on the card) as PROV-O into the graph and link the card by
+1040. **W598** (done) Export real warrants (JSON-LD on the card) as PROV-O into the graph and link the card by
    wasDerivedFrom
-991. **W605** (done) Answer summit: filing an ask should be mechanical; what the federated model provides today
-992. **W608** (done) Warrant-debt ratchet: a per-repo baseline of the open unwarranted claims that may only fall, held
+1041. **W605** (done) Answer summit: filing an ask should be mechanical; what the federated model provides today
+1042. **W608** (done) Warrant-debt ratchet: a per-repo baseline of the open unwarranted claims that may only fall, held
    by a test
    - next: landed 238ff96: [warrant_debt] ceilings in rank-weights.toml, nemik-check Warning above a ceiling; lower a
      repo's number in the change that warrants its cards
-993. **W609** (done) Fleet-flow first signal: per-repo arrivals and completions in the last day as gauges
+1043. **W609** (done) Fleet-flow first signal: per-repo arrivals and completions in the last day as gauges
    (nemik_cards_arrived_24h, nemik_cards_completed_24h)
-994. **W615** (done) Answer luthen-observability:W1229: second hourly relay row names the three git-history families
+1044. **W615** (done) Answer luthen-observability:W1229: second hourly relay row names the three git-history families
    - next: e0c6d56 landed and sent to luthen-observability-d9 for W1229; the host's nemik-metrics install must be at
      e0c6d56 or later for the relay to benefit (operator's call)
-995. **W621** (done) Pre-push hook: nemik's .githooks/pre-push calls mikemol-githook-pre-push as mtools' does
+1045. **W621** (done) Pre-push hook: nemik's .githooks/pre-push calls mikemol-githook-pre-push as mtools' does
    - next: landed a58e053; the push of that commit went through the new hook (main matches origin/main)
-996. **W622** (done) Commit-msg hook: nemik's .githooks/commit-msg calls mtools' commit-msg checker
-997. **W623** (done) Pre-commit runs from a snapshot of itself: an edit to the hook mid-run cannot fail a peer's commit
+1046. **W622** (done) Commit-msg hook: nemik's .githooks/commit-msg calls mtools' commit-msg checker
+1047. **W623** (done) Pre-commit runs from a snapshot of itself: an edit to the hook mid-run cannot fail a peer's commit
    - next: 8826afb: pre-commit hook re-execs from a temp copy of itself, bazel check first
-998. **W624** (done) Generated shared files in manifests: declared per repo, left out of the disjointness test, carried
+1048. **W624** (done) Generated shared files in manifests: declared per repo, left out of the disjointness test, carried
    by the stack's last entry
    - next: landed 4dba43a; el-openglo writes .claude/generated.json
-999. **W634** (done) Withheld reader takes per-repo v2 exports and fails closed per repo (docs/withholding-at-source.md)
-1000. **W635** (done) Compat producer derives a v2 export per repo from the queue plus luthen's v1 withheld list
-1001. **W636** (done) The pod mounts only per-repo exports, read-only, and nothing else from a repo
-1002. **W645** (done) WCAG facts: extract the view's colour tokens for the light and dark themes from index.html as a
+1049. **W634** (done) Withheld reader takes per-repo v2 exports and fails closed per repo
+   (docs/withholding-at-source.md)
+1050. **W635** (done) Compat producer derives a v2 export per repo from the queue plus luthen's v1 withheld list
+1051. **W636** (done) The pod mounts only per-repo exports, read-only, and nothing else from a repo
+1052. **W645** (done) WCAG facts: extract the view's colour tokens for the light and dark themes from index.html as a
    facts document
-1003. **W646** (done) WCAG policy: Rego judges token contrast (1.4.3, 1.4.11) over the facts, no waivers
-1004. **W651** (done) Retro shapes, gate G9 and G2: the enforcement layer enum, and a non-empty computed delta
-1005. **W652** (done) The converge loop lives in an mtools wheel (mikemol-converge) so root-run code on the host can
+1053. **W646** (done) WCAG policy: Rego judges token contrast (1.4.3, 1.4.11) over the facts, no waivers
+1054. **W651** (done) Retro shapes, gate G9 and G2: the enforcement layer enum, and a non-empty computed delta
+1055. **W652** (done) The converge loop lives in an mtools wheel (mikemol-converge) so root-run code on the host can
    vendor and pin it
-1006. **W657** (done) Page: work from a bucket or a file URL with no nemik server at all
-1007. **W659** (done) WCAG 1.4.1: each card state carries a mark that is not colour alone, judged by Rego
-1008. **W660** (done) Containerfile test stage prints a timestamp at each stage start and end, so a cancelled Forgejo
+1056. **W657** (done) Page: work from a bucket or a file URL with no nemik server at all
+1057. **W659** (done) WCAG 1.4.1: each card state carries a mark that is not colour alone, judged by Rego
+1058. **W660** (done) Containerfile test stage prints a timestamp at each stage start and end, so a cancelled Forgejo
    run's log names the step it was in
-1009. **W661** (done) WCAG 1.4.1: the 'other' state (actors, the legend's fifth colour) gets a mark besides its fill, so
+1059. **W661** (done) WCAG 1.4.1: the 'other' state (actors, the legend's fifth colour) gets a mark besides its fill, so
    the judged page has one unmarked state, the ready baseline
-1010. **W663** (done) Repin the mtools wheels to 8d08bec (tick-open prints the watchdog line, the beat hook, import
+1060. **W663** (done) Repin the mtools wheels to 8d08bec (tick-open prints the watchdog line, the beat hook, import
    check at submit, --digest hook) as its own land
-1011. **W664** (done) WCAG render-check facts: a browser step dumps the accessibility tree, computed colours in both
+1061. **W664** (done) WCAG render-check facts: a browser step dumps the accessibility tree, computed colours in both
    themes, focus order and target boxes as facts the Rego policy judges (2.5.8 target size first)
-1012. **W665** (done) Card-list targets reach 24 px: list-row buttons are 21 px high and links 14 px, a few pixels
+1062. **W665** (done) Card-list targets reach 24 px: list-row buttons are 21 px high and links 14 px, a few pixels
    apart, so WCAG 2.5.8 reports them
-1013. **W666** (done) Repin the mtools wheels past bd22d9c (mikemol-paths-forward --acceptable-suppliers and --want on a
+1063. **W666** (done) Repin the mtools wheels past bd22d9c (mikemol-paths-forward --acceptable-suppliers and --want on a
    card) as its own land
-1014. **W667** (done) WCAG 4.1.2 and 2.5.3: every rendered control has an accessible name that contains its visible
+1064. **W667** (done) WCAG 4.1.2 and 2.5.3: every rendered control has an accessible name that contains its visible
    text, judged by Rego from the browser's accessibility tree
-1015. **W669** (done) The page draws the series board: each repo chip carries its luthen state (awake, idle, asleep) and
+1065. **W669** (done) The page draws the series board: each repo chip carries its luthen state (awake, idle, asleep) and
    a strip of its last 24 hours, and a line names the repos with work that are not awake
-1016. **W671** (done) The pod serves the series board: static and publish builds write series.json and the builder
+1066. **W671** (done) The pod serves the series board: static and publish builds write series.json and the builder
    passes luthen-series.json from the export tree
-1017. **W673** (done) Repin the mtools wheels past 97fa711 (a ledger line carries session=`<uuid>`, mtools:W1546) as its
+1067. **W673** (done) Repin the mtools wheels past 97fa711 (a ledger line carries session=`<uuid>`, mtools:W1546) as its
    own land
-1018. **W681** (done) Working-time rows: history.working_rows reads every ledger and returns, per tick line, the card
+1068. **W681** (done) Working-time rows: history.working_rows reads every ledger and returns, per tick line, the card
    worked, its downstream weight, whether it is a leaf, and whether a directive chose it
    - next: e7c4ab3: nemik.workrows and metrics.ticks
-1019. **W684** (done) The graph shows a ready card with no manifest as blocked (needs manifest), not green, so the
+1069. **W684** (done) The graph shows a ready card with no manifest as blocked (needs manifest), not green, so the
    picture matches what can be stacked even before the queue is fixed
    - next: a9a8b4f: payload flag needs_manifest (blocks.node_marks), Selected panel text; the drawn indicator is the
      W688 badge
-1020. **W687** (done) serve.py puts each card's nemik-check findings in its UI payload as warnings, and a test pins that
+1070. **W687** (done) serve.py puts each card's nemik-check findings in its UI payload as warnings, and a test pins that
    every Warning the CLI emits for a card is there
-1021. **W688** (done) The graph draws a warning badge on each card with warnings: severity colour, the count, and the
+1071. **W688** (done) The graph draws a warning badge on each card with warnings: severity colour, the count, and the
    messages on hover and in the Selected panel
-1022. **W690** (done) A fixture queue, ledger and marks file under tests/fixtures/queue that nemik reads and the SHACL
+1072. **W690** (done) A fixture queue, ledger and marks file under tests/fixtures/queue that nemik reads and the SHACL
    shapes accept, the first slice of one queue contract
    - next: 7c4485d: tests/fixtures/queue and test_queue_fixture
-1023. **W692** (done) Pure grouping of blocked cards into classes by exact blocker set and exact enables set, in one
+1073. **W692** (done) Pure grouping of blocked cards into classes by exact blocker set and exact enables set, in one
    place both nemik-check and serve read
    - next: e19238e: nemik.collapse (dominator tree over blocked_on, umbrellas, n-paths, violations, disagreements)
-1024. **W694** (done) Repin the vendored mtools wheels from 0913e30 past fd887c4 so the writer keeps the loop-prompt
+1074. **W694** (done) Repin the vendored mtools wheels from 0913e30 past fd887c4 so the writer keeps the loop-prompt
    notice and the unresolved watchdog path
-1025. **W698** (done) KIND_CLASS maps ledger kind status to bookkeeping so the writer status lines stay out of
+1075. **W698** (done) KIND_CLASS maps ledger kind status to bookkeeping so the writer status lines stay out of
    toil_share
-1026. **W699** (done) W581 part 1: a blocked edge age in the waiting repo ticks adds to its blocker salience through a
+1076. **W699** (done) W581 part 1: a blocked edge age in the waiting repo ticks adds to its blocker salience through a
    rank-weights table
-1027. **W701** (done) KIND_CLASS maps ledger kind prune to bookkeeping beside status, once the writer appends an
+1077. **W701** (done) KIND_CLASS maps ledger kind prune to bookkeeping beside status, once the writer appends an
    edge-pruned line per removed blocker (mtools:W1599)
-1028. **W703** (done) The image build consumes the commit gate result for the same tree sha, or drops its test stage and
+1078. **W703** (done) The image build consumes the commit gate result for the same tree sha, or drops its test stage and
    builds only gated shas
-1029. **W704** (done) A superseded image build queues behind the running one instead of being cancelled, and nothing
+1079. **W704** (done) A superseded image build queues behind the running one instead of being cancelled, and nothing
    cuts a build on a wall-clock timeout
-1030. **W706** (done) tools/webpage_waits.py: a dry-run-first Python codemod that rewrites every Playwright
+1080. **W706** (done) tools/webpage_waits.py: a dry-run-first Python codemod that rewrites every Playwright
    wait_for_function call with a wall-clock timeout onto a webpage.until helper, liftable by mtools
-1031. **W707** (done) Apply the webpage_waits codemod to the browser tests and check the diff as a set: every
+1081. **W707** (done) Apply the webpage_waits codemod to the browser tests and check the diff as a set: every
    wait_for_function converted, nothing else touched
-1032. **W710** (done) nemik-check reports one Info per collapse umbrella naming the node that dominates its members
-1033. **W711** (done) nemik-collapse prints the umbrellas and escapes of a fleet from the command line
-1034. **W712** (done) Turn the wait weight on in the ranking: rank passes load_wait_weight to audit, a nonzero per_tick
+1082. **W710** (done) nemik-check reports one Info per collapse umbrella naming the node that dominates its members
+1083. **W711** (done) nemik-collapse prints the umbrellas and escapes of a fleet from the command line
+1084. **W712** (done) Turn the wait weight on in the ranking: rank passes load_wait_weight to audit, a nonzero per_tick
    ships, and the rank tests are re-baselined with the diff explained
-1035. **W713** (done) Port the rank successor walk and class weights to plain Card edges, keeping the rdflib version as
+1085. **W713** (done) Port the rank successor walk and class weights to plain Card edges, keeping the rdflib version as
    the test reference
-1036. **W714** (done) Port the blocks.annotate derivations (operator asks, ready-behind-open, cycles) to functions of
+1086. **W714** (done) Port the blocks.annotate derivations (operator asks, ready-behind-open, cycles) to functions of
    Card edges that return flags, keeping annotate as the reference
-1037. **W715** (done) A browser test that waits on the page fails fast on a hang signal that is not a clock: a page
+1087. **W715** (done) A browser test that waits on the page fails fast on a hang signal that is not a clock: a page
    error or console error, a closed or crashed page, or the browser process idle on CPU with no progress event
-1038. **W719** (done) Ask: a location on mirrored calendar events, and planned drives without hand entry
-1039. **W721** (done) Ask mtools for a location field on a waypoint, carried by the queue and the writer, so
+1088. **W719** (done) Ask: a location on mirrored calendar events, and planned drives without hand entry
+1089. **W721** (done) Ask mtools for a location field on a waypoint, carried by the queue and the writer, so
    nemik-calendar-write can emit it as LOCATION
-1040. **W722** (done) nemik-calendar-write emits a waypoint location as the event LOCATION, and the adapter reads it
+1090. **W722** (done) nemik-calendar-write emits a waypoint location as the event LOCATION, and the adapter reads it
    into the graph
-1041. **W723** (done) Find out whether Waze and Google Maps read LOCATION from a subscribed or imported iCalendar event
+1091. **W723** (done) Find out whether Waze and Google Maps read LOCATION from a subscribed or imported iCalendar event
    and offer a leave-by time, and which calendars they read, with sources
-1042. **W727** (done) Mode switcher step 1: a header radiogroup of list modes (rank, newest by symbol number) that
+1092. **W727** (done) Mode switcher step 1: a header radiogroup of list modes (rank, newest by symbol number) that
    reorders the card tree's roots, keys 1 and 2
-1043. **W728** (done) Answer mtools:W1710: design the inbox letter as a GitHub issue, design only
-1044. **W731** (done) history readers use a slim queue: slim() keeps only the waypoint fields they read, equal answers
+1093. **W728** (done) Answer mtools:W1710: design the inbox letter as a GitHub issue, design only
+1094. **W731** (done) history readers use a slim queue: slim() keeps only the waypoint fields they read, equal answers
    proven
-1045. **W732** (done) Type history's parsed queue so the cache code adds no mypy findings: a QueueDoc type in place of
+1095. **W732** (done) Type history's parsed queue so the cache code adds no mypy findings: a QueueDoc type in place of
    bare dict
-1046. **W734** (done) Card list mode critical: longest dependency chain first, key 3
-1047. **W736** (done) Card list mode repo: cards grouped by repo, key 4
-1048. **W738** (done) Card list mode asks: cards blocked on the operator first, key 5
-1049. **W739** (done) nemik-history --density: commits per day per repo of the queue file and the longest gap between
+1096. **W734** (done) Card list mode critical: longest dependency chain first, key 3
+1097. **W736** (done) Card list mode repo: cards grouped by repo, key 4
+1098. **W738** (done) Card list mode asks: cards blocked on the operator first, key 5
+1099. **W739** (done) nemik-history --density: commits per day per repo of the queue file and the longest gap between
    them
-1050. **W752** (done) Events carry a card's starting values and the whole tracked set (manifest, size, weight, touches),
+1100. **W752** (done) Events carry a card's starting values and the whole tracked set (manifest, size, weight, touches),
    not only four fields
-1051. **W753** (done) Measure the wait weight per_tick from the observed distribution of card waits (W485), and record
+1101. **W753** (done) Measure the wait weight per_tick from the observed distribution of card waits (W485), and record
    the value and its derivation in docs
-1052. **W754** (done) Retro gate G7: nemik:RetroFindingShape, each retro finding references a card carrying owner, due
+1102. **W754** (done) Retro gate G7: nemik:RetroFindingShape, each retro finding references a card carrying owner, due
    and witness, or a --certify verdict change
-1053. **W755** (done) Retro gate G8: nemik:RetroHandoffShape, the handoff slots instrument, channel and operator (self
+1103. **W755** (done) Retro gate G8: nemik:RetroHandoffShape, the handoff slots instrument, channel and operator (self
    or other)
-1054. **W756** (done) Measure the fleet's wait distribution with nemik-history --all --waits and name the per_tick
+1104. **W756** (done) Measure the fleet's wait distribution with nemik-history --all --waits and name the per_tick
    quantile W712 takes
-1055. **W759** (done) nemik-history --score SHINGLE_FILE scores a stored shingle against the events: Brier per lead
-1056. **W760** (done) verify.reliability bins forecast chances and gives the observed share done in each bin, per lead
-1057. **W761** (done) nemik-history --score prints persistence and climatology Brier and the skill against each, beside
+1105. **W759** (done) nemik-history --score SHINGLE_FILE scores a stored shingle against the events: Brier per lead
+1106. **W760** (done) verify.reliability bins forecast chances and gives the observed share done in each bin, per lead
+1107. **W761** (done) nemik-history --score prints persistence and climatology Brier and the skill against each, beside
    each lead
-1058. **W767** (done) The web view shows a card in a commit stack as working: serve marks the nodes in_gate names and
+1108. **W767** (done) The web view shows a card in a commit stack as working: serve marks the nodes in_gate names and
    the page draws their stage and label
-1059. **W771** (done) Vendor mikemol-cvdcore with numpy and colorspacious into the hermetic build: pyproject and
+1109. **W771** (done) Vendor mikemol-cvdcore with numpy and colorspacious into the hermetic build: pyproject and
    MODULE.bazel entries, the wheel at the pinned sha, uv.lock
-1060. **W773** (done) hostroot.latest: parse the host-root stream's lines into the newest row per id
+1110. **W773** (done) hostroot.latest: parse the host-root stream's lines into the newest row per id
    (src/nemik/hostroot.py, tests/test_hostroot.py)
-1061. **W774** (done) hostroot.fetch: read the stream through luthen's checks.vlogs_query, None when it cannot answer
-1062. **W775** (done) serve: show the host-root rows as a read-only workstream, state to node state, waitsFor to edges,
+1111. **W774** (done) hostroot.fetch: read the stream through luthen's checks.vlogs_query, None when it cannot answer
+1112. **W775** (done) serve: show the host-root rows as a read-only workstream, state to node state, waitsFor to edges,
    stale as_of flagged
-1063. **W776** (done) Vendor the mikemol-converge wheel from mtools 0f8267e beside the other seven
-1064. **W777** (done) nemik.converge imports mikemol.converge and drops its copy
-1065. **W779** (done) nemik-hostroot writes host-root.json from luthen's stream, run on the host
-1066. **W780** (done) serve reads host-root.json with a freshness check and shows its rows as a read-only host
+1113. **W776** (done) Vendor the mikemol-converge wheel from mtools 0f8267e beside the other seven
+1114. **W777** (done) nemik.converge imports mikemol.converge and drops its copy
+1115. **W779** (done) nemik-hostroot writes host-root.json from luthen's stream, run on the host
+1116. **W780** (done) serve reads host-root.json with a freshness check and shows its rows as a read-only host
    workstream
-1067. **W782** (done) Parity table: each read-only CLI mode, its library function and its route, or a declared
+1117. **W782** (done) Parity table: each read-only CLI mode, its library function and its route, or a declared
    exclusion, with a test that fails on a mode with neither
-1068. **W783** (done) No spawn: a test makes subprocess, fork, exec, posix_spawn and system raise in the server and
+1118. **W783** (done) No spawn: a test makes subprocess, fork, exec, posix_spawn and system raise in the server and
    exercises every route
-1069. **W784** (done) Routes for the check family: digest, integrity, unmanifested, ready-neither, through the CLI's own
+1119. **W784** (done) Routes for the check family: digest, integrity, unmanifested, ready-neither, through the CLI's own
    functions
-1070. **W785** (done) Routes for history: oldest, waits, forecast, score, events, density
-1071. **W786** (done) Routes for rank, inbound, operator, wake, overlaps, floor-asks and witnesses without apply
-1072. **W787** (done) The view shows the CLI's Warnings and Info
-1073. **W790** (done) gate_staged.sh runs mikemol-pycheck --ratchet in place of tools/mypy_ratchet.py, and the
+1120. **W785** (done) Routes for history: oldest, waits, forecast, score, events, density
+1121. **W786** (done) Routes for rank, inbound, operator, wake, overlaps, floor-asks and witnesses without apply
+1122. **W787** (done) The view shows the CLI's Warnings and Info
+1123. **W790** (done) gate_staged.sh runs mikemol-pycheck --ratchet in place of tools/mypy_ratchet.py, and the
    precommit-gate test and README say so
-1074. **W791** (done) test_ruff_ratchet and test_mypy_ratchet run the shared ratchet, and tools/ruff_ratchet.py and
+1124. **W791** (done) test_ruff_ratchet and test_mypy_ratchet run the shared ratchet, and tools/ruff_ratchet.py and
    tools/mypy_ratchet.py are removed
-1075. **W792** (done) nemik-check's survey and digest views are served at /check.json from the CLI's own wording
-1076. **W793** (done) nemik-check's integrity, unmanifested, ready-neither, realizability, committed, letters and fold
+1125. **W792** (done) nemik-check's survey and digest views are served at /check.json from the CLI's own wording
+1126. **W793** (done) nemik-check's integrity, unmanifested, ready-neither, realizability, committed, letters and fold
    modes, and nemik-collapse, are served
-1077. **W795** (done) ready-neither and unmanifested reports return their lines, the CLI prints them and the server
+1127. **W795** (done) ready-neither and unmanifested reports return their lines, the CLI prints them and the server
    serves them
-1078. **W796** (done) the integrity report returns its lines, the CLI prints them and the server serves them
-1079. **W797** (done) realizability, committed, letters, fold and nemik-collapse are served the same way, or excluded by
+1128. **W796** (done) the integrity report returns its lines, the CLI prints them and the server serves them
+1129. **W797** (done) realizability, committed, letters, fold and nemik-collapse are served the same way, or excluded by
    a stated reason
-1080. **W800** (done) Inventory index.html: each concern of the script with its line range, and every test and publisher
+1130. **W800** (done) Inventory index.html: each concern of the script with its line range, and every test and publisher
    that reads the page as text
-1081. **W801** (done) Serve and publish extra page files: the live server, the static build and the openapi list carry a
+1131. **W801** (done) Serve and publish extra page files: the live server, the static build and the openapi list carry a
    stylesheet and script modules
-1082. **W802** (done) Move the style block to style.css, with the tests that read the page's CSS following it
-1083. **W803** (done) Move the script's data load, graph build and draw into modules
-1084. **W804** (done) Move the card list, popover, detail and keyboard handling into modules
-1085. **W805** (done) Move the findings, sources, settings, weather and series panels into modules
-1086. **W806** (done) A size budget test: index.html and each module have a line ceiling that only falls
-1087. **W807** (done) graph.js takes the treemap and forest: treeOf through tile
-1088. **W808** (done) graph.js takes rings and ink: ringMap through markChainEdges
-1089. **W809** (done) graph.js takes critical chains and the list orders
-1090. **W810** (done) graph.js takes render, patch and the in-place poll follow
-1091. **W811** (done) graph.js takes the constants, helpers and layout constants
-1092. **W813** (done) Spike: one pure Codon function exported from a wasm module that node loads and calls, with a shim
+1132. **W802** (done) Move the style block to style.css, with the tests that read the page's CSS following it
+1133. **W803** (done) Move the script's data load, graph build and draw into modules
+1134. **W804** (done) Move the card list, popover, detail and keyboard handling into modules
+1135. **W805** (done) Move the findings, sources, settings, weather and series panels into modules
+1136. **W806** (done) A size budget test: index.html and each module have a line ceiling that only falls
+1137. **W807** (done) graph.js takes the treemap and forest: treeOf through tile
+1138. **W808** (done) graph.js takes rings and ink: ringMap through markChainEdges
+1139. **W809** (done) graph.js takes critical chains and the list orders
+1140. **W810** (done) graph.js takes render, patch and the in-place poll follow
+1141. **W811** (done) graph.js takes the constants, helpers and layout constants
+1142. **W813** (done) Spike: one pure Codon function exported from a wasm module that node loads and calls, with a shim
    for the seq_ runtime
-1093. **W814** (done) Decide wasm32 or wasm64 for the browser, and how the build gets a pinned toolchain for the gate
-1094. **W815** (done) Inventory the page's JS that is pure over plain data, and which already has a Python twin in the
+1143. **W814** (done) Decide wasm32 or wasm64 for the browser, and how the build gets a pinned toolchain for the gate
+1144. **W815** (done) Inventory the page's JS that is pure over plain data, and which already has a Python twin in the
    tooling
-1095. **W816** (done) Port the treemap model (treeOf, orderedTreemap) to Python, check it against the JS as oracle,
+1145. **W816** (done) Port the treemap model (treeOf, orderedTreemap) to Python, check it against the JS as oracle,
    build it to wasm and call it from the page
-1096. **W817** (done) Port the critical-chain and list-order logic to the one Python source the CLI and the page share
-1097. **W818** (done) The shared core: src/nemik/core holds pure functions over plain data under the Codon census, with
+1146. **W817** (done) Port the critical-chain and list-order logic to the one Python source the CLI and the page share
+1147. **W818** (done) The shared core: src/nemik/core holds pure functions over plain data under the Codon census, with
    the CLI and the page each a thin facade over them
-1098. **W820** (done) The wasm module for the longest chains: a Codon entry over flat arrays, a build script, the built
+1148. **W820** (done) The wasm module for the longest chains: a Codon entry over flat arrays, a build script, the built
    chains.wasm committed with its hash, and the server serving it as application/wasm
-1099. **W821** (done) A gate step rebuilds chains.wasm from its Python and compares hashes, skipping with a stated
+1149. **W821** (done) A gate step rebuilds chains.wasm from its Python and compares hashes, skipping with a stated
    reason where the pinned Codon or the host LLVM is absent
-1100. **W822** (done) The page loads the module and criticalSet calls it; an end-to-end browser test checks the page's
+1150. **W822** (done) The page loads the module and criticalSet calls it; an end-to-end browser test checks the page's
    longest chain against Python's
-1101. **W823** (done) The JS body of criticalSet is deleted
-1102. **W824** (done) The Codon census and probes also build with --release and run a smoke call, since --release has an
+1151. **W823** (done) The JS body of criticalSet is deleted
+1152. **W824** (done) The Codon census and probes also build with --release and run a smoke call, since --release has an
    optimizer bug that plain builds hide
-1103. **W826** (done) core.treemap.tree_of: the enables forest, parents, own weights and weights over plain data,
+1153. **W826** (done) core.treemap.tree_of: the enables forest, parents, own weights and weights over plain data,
    checked against the page's treeOf
-1104. **W827** (done) core.treemap.ordered_treemap: the strip layout over plain data, checked against the page's
+1154. **W827** (done) core.treemap.ordered_treemap: the strip layout over plain data, checked against the page's
    orderedTreemap
-1105. **W828** (done) treemap.wasm: the entry, the build, the loader facade and the page's treeOf and orderedTreemap
+1155. **W828** (done) treemap.wasm: the entry, the build, the loader facade and the page's treeOf and orderedTreemap
    calling it, with the old JS deleted
-1106. **W831** (done) Forecast trial 1: a card's place in its repo's ready queue (rank among the ready cards) scales its
+1156. **W831** (done) Forecast trial 1: a card's place in its repo's ready queue (rank among the ready cards) scales its
    chance of finishing within the lead, scored against the first shingle
-1107. **W832** (done) Forecast trial 2: cap a repo's chance by how many cards it finishes a day against how many ready
+1157. **W832** (done) Forecast trial 2: cap a repo's chance by how many cards it finishes a day against how many ready
    cards stand ahead of this one
-1108. **W833** (done) Route nemik-stackable (which ready cards one commit stack can carry) through doc_for and the
+1158. **W833** (done) Route nemik-stackable (which ready cards one commit stack can carry) through doc_for and the
    parity table
-1109. **W834** (done) Route or exclude nemik-witnesses: serve its read-only answer, or declare the opa evaluation a
+1159. **W834** (done) Route or exclude nemik-witnesses: serve its read-only answer, or declare the opa evaluation a
    spawner
-1110. **W836** (done) Publish each cross-repo wait edge's age and its blocker's rank position as OTLP gauges through
+1160. **W836** (done) Publish each cross-repo wait edge's age and its blocker's rank position as OTLP gauges through
    mikemol-otlp (repo and rule labels only, card symbols in log records), so luthen's flow dashboard has its series
-1111. **W838** (done) Landed state vocabulary and shape: WaypointStates gains landed (skos:closeMatch oslc_cm:Fixed,
+1161. **W838** (done) Landed state vocabulary and shape: WaypointStates gains landed (skos:closeMatch oslc_cm:Fixed,
    witnessed by the deploy witness) and a shape warns on done with no witness, per the agreement mtools-ad reached on
    2026-10-18
-1112. **W839** (done) Read the landed status in the adapter and draw it: the adapter maps landed to its state,
+1162. **W839** (done) Read the landed status in the adapter and draw it: the adapter maps landed to its state,
    allBlockersLanded does not treat landed as done, the view draws landed as its own mark
-1113. **W840** (done) Accept the status landed ahead of the writer: the waypoint shape takes nemik:LandedStatus and the
+1163. **W840** (done) Accept the status landed ahead of the writer: the waypoint shape takes nemik:LandedStatus and the
    adapter maps landed to it with closed false, so mtools can write the status without a Warning on every landed card
-1114. **W841** (done) The adapter reads deploys and landed_at from the queue JSON, and a shape warns on a done card with
+1164. **W841** (done) The adapter reads deploys and landed_at from the queue JSON, and a shape warns on a done card with
    deploys set and no witness
-1115. **W842** (done) Landed is not done anywhere nemik reads state: allBlockersLanded keeps a waiter on a landed card
+1165. **W842** (done) Landed is not done anywhere nemik reads state: allBlockersLanded keeps a waiter on a landed card
    blocked, and the view draws landed with a mark of its own
-1116. **W847** (done) Vendor mtools' webpage dist at 146ebaaf as a wheel and pin it as a dev dependency
-1117. **W848** (done) Replace the webpage helper copies with the vendored mikemol.webpage and list failed requests in a
+1166. **W847** (done) Vendor mtools' webpage dist at 146ebaaf as a wheel and pin it as a dev dependency
+1167. **W848** (done) Replace the webpage helper copies with the vendored mikemol.webpage and list failed requests in a
    failed wait
-1118. **W851** (done) wake() walks the cross-repo edges and writes letters through the record, not blocked_on alone
-1119. **W853** (done) A host-side publisher and a freshness-checked route for the history oldest mode
-1120. **W854** (done) A host-side publisher and a freshness-checked route for the history waits mode
-1121. **W855** (done) A host-side publisher and a freshness-checked route for the history forecast mode
-1122. **W856** (done) A host-side publisher and a freshness-checked route for the history score mode
-1123. **W857** (done) A host-side publisher and a freshness-checked route for the history events mode
-1124. **W858** (done) A host-side publisher and a freshness-checked route for the history density mode
-1125. **W861** (done) Serve nemik-check --committed the way the command prints it, or exclude it by a stated reason
-1126. **W862** (done) Serve nemik-check --letters the way the command prints it, or exclude it by a stated reason
-1127. **W863** (done) Serve nemik-check --fold the way the command prints it, or exclude it by a stated reason
-1128. **W864** (done) Serve nemik-collapse the way the command prints it, or exclude it by a stated reason
-1129. **W865** (done) The image build has failed at conversion since 9bfec9c: COPY --from takes no variable, so the
+1168. **W851** (done) wake() walks the cross-repo edges and writes letters through the record, not blocked_on alone
+1169. **W853** (done) A host-side publisher and a freshness-checked route for the history oldest mode
+1170. **W854** (done) A host-side publisher and a freshness-checked route for the history waits mode
+1171. **W855** (done) A host-side publisher and a freshness-checked route for the history forecast mode
+1172. **W856** (done) A host-side publisher and a freshness-checked route for the history score mode
+1173. **W857** (done) A host-side publisher and a freshness-checked route for the history events mode
+1174. **W858** (done) A host-side publisher and a freshness-checked route for the history density mode
+1175. **W861** (done) Serve nemik-check --committed the way the command prints it, or exclude it by a stated reason
+1176. **W862** (done) Serve nemik-check --letters the way the command prints it, or exclude it by a stated reason
+1177. **W863** (done) Serve nemik-check --fold the way the command prints it, or exclude it by a stated reason
+1178. **W864** (done) Serve nemik-collapse the way the command prints it, or exclude it by a stated reason
+1179. **W865** (done) The image build has failed at conversion since 9bfec9c: COPY --from takes no variable, so the
    gated-stage choice moves to a FROM
-1130. **W868** (done) Port rank.load_weights to cardrank over plain Card edges, tested against rank on the fixture fleet
-1131. **W869** (done) Port the salience step to cardrank over plain Card edges, tested against rank's salience on the
+1180. **W868** (done) Port rank.load_weights to cardrank over plain Card edges, tested against rank on the fixture fleet
+1181. **W869** (done) Port the salience step to cardrank over plain Card edges, tested against rank's salience on the
    fixture fleet
-1132. **W870** (done) Port flow's cone and grounded-node selection to cardrank over plain card edges, tested against
+1182. **W870** (done) Port flow's cone and grounded-node selection to cardrank over plain card edges, tested against
    flow on the fixture fleet
-1133. **W871** (done) Port flow's per-source current-flow solve to cardrank without Fraction or dataclasses, so the
+1183. **W871** (done) Port flow's per-source current-flow solve to cardrank without Fraction or dataclasses, so the
    Codon census compiles it
-1134. **W872** (done) Port the salience sum to cardrank and hold it equal to flow.solve on the fixture fleet
-1135. **W875** (done) A new small rdflib module turns the graph's cross-repo wait edges and each waiting card's blocked
+1184. **W872** (done) Port the salience sum to cardrank and hold it equal to flow.solve on the fixture fleet
+1185. **W875** (done) A new small rdflib module turns the graph's cross-repo wait edges and each waiting card's blocked
    ticks into waitseries rows
-1136. **W876** (done) The blocker's rank position per wait edge, and the host-side mode that emits the rows through
+1186. **W876** (done) The blocker's rank position per wait edge, and the host-side mode that emits the rows through
    mikemol-otlp
-1137. **W883** (done) Each wait row carries its blocker's rank position, read from the graph through rank's typed calls
-1138. **W884** (done) Vendor mtools' otlp dist as a wheel and pin it as a dependency, unused until the emit
-1139. **W885** (done) A host-side mode beside nemik-hostroot emits the wait samples as OTLP gauges through mikemol-otlp,
+1187. **W883** (done) Each wait row carries its blocker's rank position, read from the graph through rank's typed calls
+1188. **W884** (done) Vendor mtools' otlp dist as a wheel and pin it as a dependency, unused until the emit
+1189. **W885** (done) A host-side mode beside nemik-hostroot emits the wait samples as OTLP gauges through mikemol-otlp,
    repo and rule labels only
-1140. **W886** (done) waitemit also sends one log record per waiting pair naming the oldest waiting card (symbols only
+1190. **W886** (done) waitemit also sends one log record per waiting pair naming the oldest waiting card (symbols only
    in logs)
-1141. **W887** (done) A host timer runs python -m nemik.waitemit every half hour
-1142. **W888** (done) witnesses gains pending_notices(graph, delivered): the done or dropped cards that a cross-repo
+1191. **W887** (done) A host timer runs python -m nemik.waitemit every half hour
+1192. **W888** (done) witnesses gains pending_notices(graph, delivered): the done or dropped cards that a cross-repo
    waiter still cites and whose notice the delivery record lacks
-1143. **W889** (done) nemik-witnesses --deliver-pending runs pending_notices through deliver and records each, so a card
+1193. **W889** (done) nemik-witnesses --deliver-pending runs pending_notices through deliver and records each, so a card
    the writer closed directly still reaches its waiters
-1144. **W891** (done) List the standard views and their URL parameters, and pick the PDF set (docs/pdf-views.md)
-1145. **W892** (done) nemik-pdf VIEW --out FILE renders a view to PDF in headless Chromium through playwright
-1146. **W893** (done) Print layout: a paper size and print stylesheet so a graph page reads on a phone
-1147. **W894** (done) An agent skill renders a named view with nemik-pdf and sends the file with SendUserFile
-1148. **W895** (done) The +1d horizon of the 2026-10-23 forecast issue has matured (2026-10-24 02:10Z)
-1149. **W900** (done) A script writes the graph as SVG from cytoscape's public geometry: nodes, repo boxes, labels,
+1194. **W891** (done) List the standard views and their URL parameters, and pick the PDF set (docs/pdf-views.md)
+1195. **W892** (done) nemik-pdf VIEW --out FILE renders a view to PDF in headless Chromium through playwright
+1196. **W893** (done) Print layout: a paper size and print stylesheet so a graph page reads on a phone
+1197. **W894** (done) An agent skill renders a named view with nemik-pdf and sends the file with SendUserFile
+1198. **W895** (done) The +1d horizon of the 2026-10-23 forecast issue has matured (2026-10-24 02:10Z)
+1199. **W900** (done) A script writes the graph as SVG from cytoscape's public geometry: nodes, repo boxes, labels,
    bezier and dashed edges, arrowheads
-1150. **W901** (done) nemik-pdf swaps the canvas for that SVG before printing and a test finds no image in the PDF
-1151. **W906** (done) List every term the card model and its PROV and OSLC export can express, with its type and who may
+1200. **W901** (done) nemik-pdf swaps the canvas for that SVG before printing and a test finds no image in the PDF
+1201. **W906** (done) List every term the card model and its PROV and OSLC export can express, with its type and who may
    write it (docs/evidence-codomain.md)
-1152. **W907** (done) Map the codomain onto Toulmin's claim, grounds, warrant, backing, qualifier and rebuttal: where it
+1202. **W907** (done) Map the codomain onto Toulmin's claim, grounds, warrant, backing, qualifier and rebuttal: where it
    has each, conflates them, or has none (docs/toulmin-map.md)
-1153. **W912** (done) Check that estate's witness lattice fits nemik's use of OPA: congruent, reinforcing, complementary
-1154. **W916** (done) Read the ActivityPub Recommendation and ForgeFed's ticket model, and check outbox.py's verbs and
+1203. **W912** (done) Check that estate's witness lattice fits nemik's use of OPA: congruent, reinforcing, complementary
+1204. **W916** (done) Read the ActivityPub Recommendation and ForgeFed's ticket model, and check outbox.py's verbs and
    shape against them (docs/federation-audit.md part 1)
-1155. **W917** (done) List every channel nemik's fleet uses to say something to a peer and its ActivityPub analogue:
+1205. **W917** (done) List every channel nemik's fleet uses to say something to a peer and its ActivityPub analogue:
    inbox letters, edge letters, floor asks, exports, the inbound hook, session messages (docs/federation-audit.md part
    \2)
-1156. **W918** (done) From the audit, card the minimum changes that keep each channel federable: actor IRIs, activity
+1206. **W918** (done) From the audit, card the minimum changes that keep each channel federable: actor IRIs, activity
    types on letters, dependency edges in the outbox
-1157. **W919** (done) A log record that crosses between workstreams is an ActivityStreams activity in its body, with an
+1207. **W919** (done) A log record that crosses between workstreams is an ActivityStreams activity in its body, with an
    id, an actor IRI and an address, and nemik's outbox exposes the log's activities as a collection
-1158. **W921** (done) Read ForgeFed's Ticket property list and the ticket-dependency vocabulary directly, which the
+1208. **W921** (done) Read ForgeFed's Ticket property list and the ticket-dependency vocabulary directly, which the
    audit's fetch tool did not reach
-1159. **W930** (done) Mark ready cards that cannot be worked now as blocked on what they wait for, so the head of the
+1209. **W930** (done) Mark ready cards that cannot be worked now as blocked on what they wait for, so the head of the
    queue is work that can start
-1160. **W931** (done) A /queue/`<repo>`.json document lists a repo's ready and working cards in work order with place,
+1210. **W931** (done) A /queue/`<repo>`.json document lists a repo's ready and working cards in work order with place,
    weight, band, days ready and how many newer cards were ranked ahead
-1161. **W932** (done) A Queue panel for the picked repo shows that order as a numbered queue, with the reason each card
+1211. **W932** (done) A Queue panel for the picked repo shows that order as a numbered queue, with the reason each card
    sits where it does
-1162. **W933** (done) Show a predicted start only where the forecast has verified skill, and otherwise show the order
+1212. **W933** (done) Show a predicted start only where the forecast has verified skill, and otherwise show the order
    and the wait, not a time
-1163. **W935** (done) Inventory the page's controls and sections and say what the grab-bag is (docs/page-structure.md)
-1164. **W936** (done) Map every control and section to one of four views or a help drawer, with the reason each sits
+1213. **W935** (done) Inventory the page's controls and sections and say what the grab-bag is (docs/page-structure.md)
+1214. **W936** (done) Map every control and section to one of four views or a help drawer, with the reason each sits
    there (docs/page-structure-map.md)
-1165. **W937** (done) A view's state lives in the address, so a view is linkable, reachable by the keyboard and by the
+1215. **W937** (done) A view's state lives in the address, so a view is linkable, reachable by the keyboard and by the
    PDF command
-1166. **W946** (done) The +1d horizon of the shingle issue stamped 2026-10-23T12:41Z has matured (2026-10-24 12:41Z);
+1216. **W946** (done) The +1d horizon of the shingle issue stamped 2026-10-23T12:41Z has matured (2026-10-24 12:41Z);
    W895 used 02:10Z, which was wrong
-1167. **W947** (done) A pure module turns the wait log's JSON bodies into a repo's log activities in published order,
+1217. **W947** (done) A pure module turns the wait log's JSON bodies into a repo's log activities in published order,
    with a test over real records
-1168. **W948** (done) A host command writes the log activities for each repo to a file nemik-serve can serve, as
+1218. **W948** (done) A host command writes the log activities for each repo to a file nemik-serve can serve, as
    landings.json is written
-1169. **W949** (done) The outbox appends a repo's log activities from that file and says on the collection when the file
+1219. **W949** (done) The outbox appends a repo's log activities from that file and says on the collection when the file
    is missing
-1170. **W952** (done) viewstate.js parses and formats the address (a scope path and a view token) as pure functions,
+1220. **W952** (done) viewstate.js parses and formats the address (a scope path and a view token) as pure functions,
    with a browser test of the round trip
-1171. **W953** (done) The page reads the address on load and picks the repos, card and view it names
-1172. **W954** (done) The page writes the address when the pick, the card or the view changes, and the back button is
+1221. **W953** (done) The page reads the address on load and picks the repos, card and view it names
+1222. **W954** (done) The page writes the address when the pick, the card or the view changes, and the back button is
    the way up
-1173. **W955** (done) nemik-pdf selects a scope and a view by address
-1174. **W956** (done) Record one real public GitHub issue and one real public Forgejo issue as JSON fixtures, with where
+1223. **W955** (done) nemik-pdf selects a scope and a view by address
+1224. **W956** (done) Record one real public GitHub issue and one real public Forgejo issue as JSON fixtures, with where
    each was fetched from
-1175. **W957** (done) A typed reader of a tracker issue's nested JSON (no json.loads Any) keeping cite, title, state,
+1225. **W957** (done) A typed reader of a tracker issue's nested JSON (no json.loads Any) keeping cite, title, state,
    body, labels and blocked_by, tested on the two fixtures
-1176. **W958** (done) nemik-export --format issues --against FILE prints the mirror plan from a recorded tracker file
-1177. **W959** (done) The per-tool API client sends the plan, each tool's scoped token being operator: act
-1178. **W965** (done) nemik-history --score also prints a discrimination measure per lead (the chance that a card which
+1226. **W958** (done) nemik-export --format issues --against FILE prints the mirror plan from a recorded tracker file
+1227. **W959** (done) The per-tool API client sends the plan, each tool's scoped token being operator: act
+1228. **W965** (done) nemik-history --score also prints a discrimination measure per lead (the chance that a card which
    finished was given a higher forecast than one which did not), so a base-rate forecast cannot tie a good one
-1179. **W968** (done) The +1d horizon of the shingle issue stamped 2026-10-24T15:12:51Z (the first with W966's
+1229. **W968** (done) The +1d horizon of the shingle issue stamped 2026-10-24T15:12:51Z (the first with W966's
    blocked-card feature) has matured (2026-10-25 15:13Z)
-1180. **W971** (done) Port the operator-ask categories and errand repos of blocks.operator_asks to a function of Card
+1230. **W971** (done) Port the operator-ask categories and errand repos of blocks.operator_asks to a function of Card
    edges returning flags, tested against blocks on a fixture
-1181. **W972** (done) Port the unclaimed-block flag (inbound with claims_of) to a function of Card edges, tested against
+1231. **W972** (done) Port the unclaimed-block flag (inbound with claims_of) to a function of Card edges, tested against
    blocks on a fixture
-1182. **W973** (done) Payload builder emits the umbrellas list from collapse.collapse over blocked rows, withheld
+1232. **W973** (done) Payload builder emits the umbrellas list from collapse.collapse over blocked rows, withheld
    members dropping the umbrella, pinned by a payload test
-1183. **W974** (done) Carry the umbrellas list through pieces split and assemble, the field manifest and the API schema
-1184. **W975** (done) Page combine step reads the umbrellas list
-1185. **W977** (done) Port nemik.health (the red, amber, green status from thresholds) to plain Card edges, held to the
+1233. **W974** (done) Carry the umbrellas list through pieces split and assemble, the field manifest and the API schema
+1234. **W975** (done) Page combine step reads the umbrellas list
+1235. **W977** (done) Port nemik.health (the red, amber, green status from thresholds) to plain Card edges, held to the
    rdflib version in a test
-1186. **W978** (done) The pod's private build publishes landings.json from the file in its root, with no builder flag
-1187. **W980** (done) Pay down the ruff baseline (2934): retire the most numerous rule family with a codemod that passes
+1236. **W978** (done) The pod's private build publishes landings.json from the file in its root, with no builder flag
+1237. **W980** (done) Pay down the ruff baseline (2934): retire the most numerous rule family with a codemod that passes
    the gate, and lower the recorded count
-1188. **W998** (done) The ratchet value series has its first samples in luthen's metric store
-1189. **W1049** (done) Courier read path: nemik-inbound reads a repo's letters from its issues through the API
-1190. **W1053** (done) Take linux-sources' two fleet scans, peer_write_window and namespace_collision, as nemik shapes,
+1238. **W998** (done) The ratchet value series has its first samples in luthen's metric store
+1239. **W1049** (done) Courier read path: nemik-inbound reads a repo's letters from its issues through the API
+1240. **W1053** (done) Take linux-sources' two fleet scans, peer_write_window and namespace_collision, as nemik shapes,
    checked against their live output
-1191. **W1059** (done) A round holds the repo's working cards and its top ready cards, ranked together, so a card in
+1241. **W1059** (done) A round holds the repo's working cards and its top ready cards, ranked together, so a card in
    progress is never outside the round
-1192. **W1067** (done) Repin the mtools dists in MODULE.bazel and pyproject to f5d4ac20 or later (watchdog window
+1242. **W1067** (done) Repin the mtools dists in MODULE.bazel and pyproject to f5d4ac20 or later (watchdog window
    setting, live-submission exemption) in the next stack
-1193. **W1078** (done) A card whose owner tagged it touches velocity is in the velocity band above critical in every
+1243. **W1078** (done) A card whose owner tagged it touches velocity is in the velocity band above critical in every
    repo
-1194. **W1086** (done) Keep the last good snapshot on the claim so a restarted pod serves it before its first build
+1244. **W1086** (done) Keep the last good snapshot on the claim so a restarted pod serves it before its first build
    ends, instead of staying unready for the whole cold build
-1195. **W1088** (done) Raise the builder's memory limit to 1536Mi under the 5Gi tenant quota so a cold build finishes
+1245. **W1088** (done) Raise the builder's memory limit to 1536Mi under the 5Gi tenant quota so a cold build finishes
    and a pod serves
-1196. **W1097** (done) Define the per-card ledger summary (effort count by class, last activity stamp, week counts) and
+1246. **W1097** (done) Define the per-card ledger summary (effort count by class, last activity stamp, week counts) and
    build it in the ledger pass beside the Activity triples, with a test that it equals what the consumers compute from
    the triples
-1197. **W1114** (done) The pace file writes each ratchet's value and landings-to-zero horizon on its row
-1198. **W1115** (done) nemik-rank --pace prints each behind ratchet's value and horizon from the pace file
-1199. **W1117** (done) Answer nemik: mtools:W1933 is done, so W1007 reads the commitment ledger
-1200. **W1118** (done) Answer nemik: mtools:W1933 is done, so W1008 reads the commitment ledger
-1201. **W1121** (done) Pay the D103 docstring family in the small test files, a few files a slice
-1202. **W1122** (done) Pay the mypy type-arg family: bare dict and list annotations in src and tests
-1203. **W1123** (done) Pay the E501 family: long lines in src and tests
-1204. **W1124** (done) Pay the ANN001 family in tests/test_layout.py with typed fixtures
-1205. **W1130** (done) Repin mtools to e53edaf5 so the paydown-only refusal (mtools W1920) is in nemik's commit path
+1247. **W1114** (done) The pace file writes each ratchet's value and landings-to-zero horizon on its row
+1248. **W1115** (done) nemik-rank --pace prints each behind ratchet's value and horizon from the pace file
+1249. **W1117** (done) Answer nemik: mtools:W1933 is done, so W1007 reads the commitment ledger
+1250. **W1118** (done) Answer nemik: mtools:W1933 is done, so W1008 reads the commitment ledger
+1251. **W1121** (done) Pay the D103 docstring family in the small test files, a few files a slice
+1252. **W1122** (done) Pay the mypy type-arg family: bare dict and list annotations in src and tests
+1253. **W1123** (done) Pay the E501 family: long lines in src and tests
+1254. **W1124** (done) Pay the ANN001 family in tests/test_layout.py with typed fixtures
+1255. **W1130** (done) Repin mtools to e53edaf5 so the paydown-only refusal (mtools W1920) is in nemik's commit path
    while a ratchet is behind
-1206. **W1135** (done) Publish nemik_round_binding{repo,term}: which term bounded each repo's round
-1207. **W1144** (done) Predicted net per repo for a window, from the trailing daily rate in nemik-history counts
-1208. **W1145** (done) Realized versus predicted net for a replayed past window, giving a misprediction value
-1209. **W1146** (done) Misprediction alert by symptom when realized net falls short of prediction beyond a learned
+1256. **W1135** (done) Publish nemik_round_binding{repo,term}: which term bounded each repo's round
+1257. **W1144** (done) Predicted net per repo for a window, from the trailing daily rate in nemik-history counts
+1258. **W1145** (done) Realized versus predicted net for a replayed past window, giving a misprediction value
+1259. **W1146** (done) Misprediction alert by symptom when realized net falls short of prediction beyond a learned
    baseline
-1210. **W1147** (done) A window's adds split by caused_by (child of a card, promotion, or none) in ten lines or fewer
-1211. **W1149** (done) Peer tree churn and unplaced handoffs from a declared watch list, as nemik reads them
-1212. **W1150** (done) Fleet census of declared top-level package names and who claims each, contested ones listed
-1213. **W1152** (done) Replay sweep over the last 7 days of 45-minute windows printing alerted k of n with each
+1260. **W1147** (done) A window's adds split by caused_by (child of a card, promotion, or none) in ten lines or fewer
+1261. **W1149** (done) Peer tree churn and unplaced handoffs from a declared watch list, as nemik reads them
+1262. **W1150** (done) Fleet census of declared top-level package names and who claims each, contested ones listed
+1263. **W1152** (done) Replay sweep over the last 7 days of 45-minute windows printing alerted k of n with each
    direction
-1214. **W1167** (done) serve computes each repo's round binding term (roundcli.size_for over its rank rows and the
+1264. **W1167** (done) serve computes each repo's round binding term (roundcli.size_for over its rank rows and the
    landings file) and passes it to round_board
-1215. **W1189** (done) Run gabion's dataflow-bundle audit on nemik's src to find recurring parameter and document
+1265. **W1189** (done) Run gabion's dataflow-bundle audit on nemik's src to find recurring parameter and document
    shapes, installed as nemik's own dev dependency
-1216. **W1193** (done) nemik's gate emits per-target CPU seconds: gate_staged.sh runs bazel test with a build-events
+1266. **W1193** (done) nemik's gate emits per-target CPU seconds: gate_staged.sh runs bazel test with a build-events
    file and calls mikemol-gate-targets nemik after it, so luthen's gate_cost carries nemik
-1217. **W1238** (done) Correct the lifted docstrings the reviewer found overclaiming (test_letters W301, test_critical
+1267. **W1238** (done) Correct the lifted docstrings the reviewer found overclaiming (test_letters W301, test_critical
    W324) and thin (test_health, test_operator_salience)
-1218. **W1239** (done) Review the other lifted docstrings against their test bodies, one line each on the card
-1219. **W1247** (done) Import webpage in tests/test_layout.py and adopt the page-error waits with mikemol-webpage-waits
+1268. **W1239** (done) Review the other lifted docstrings against their test bodies, one line each on the card
+1269. **W1247** (done) Import webpage in tests/test_layout.py and adopt the page-error waits with mikemol-webpage-waits
    after stack 634 lands
-1220. **W1251** (done) Draw a legend block into the fleet-view graph SVG for the PDF: state colours and marks, chain
+1270. **W1251** (done) Draw a legend block into the fleet-view graph SVG for the PDF: state colours and marks, chain
    halos, repo-border liveness, and the header counts
-1221. **W1254** (done) Annotate the nested counted and slow_survey wrappers in test_flow_cache, test_memo_audits and
+1271. **W1254** (done) Annotate the nested counted and slow_survey wrappers in test_flow_cache, test_memo_audits and
    test_serve_model
-1222. **W1263** (done) The adapter sets a boolean predicate from an 'apply loop cannot:' line in a card's evidence
-1223. **W1264** (done) A sudo-shaped word match on an operator ask, and the flag on the ask row
-1224. **W1265** (done) nemik-operator --sudo-shaped exits 1 on a flag, and nemik-check warns on the same asks
-1225. **W1266** (done) Write the D103 docstrings in check.py (553, 1221), history.py (981) and metrics.py (931)
-1226. **W1273** (done) Answer luthen-observability:W1783: re-vendor nemik's mtools wheels to cfe689c or later so the
+1272. **W1263** (done) The adapter sets a boolean predicate from an 'apply loop cannot:' line in a card's evidence
+1273. **W1264** (done) A sudo-shaped word match on an operator ask, and the flag on the ask row
+1274. **W1265** (done) nemik-operator --sudo-shaped exits 1 on a flag, and nemik-check warns on the same asks
+1275. **W1266** (done) Write the D103 docstrings in check.py (553, 1221), history.py (981) and metrics.py (931)
+1276. **W1273** (done) Answer luthen-observability:W1783: re-vendor nemik's mtools wheels to cfe689c or later so the
    pinned writer prints G1-HANDOFF
-1227. **W1274** (done) Read G1-HANDOFF from the rebuilt writer's own tick-close output and tell luthen-observability the
+1277. **W1274** (done) Read G1-HANDOFF from the rebuilt writer's own tick-close output and tell luthen-observability the
    nemik sha c0a10be
-1228. **W1293** (done) Repin the vendored mtools wheels to a sha with e6dc759e (mikemol-transcriptstruct --since-last)
+1278. **W1293** (done) Repin the vendored mtools wheels to a sha with e6dc759e (mikemol-transcriptstruct --since-last)
    so luthen's live nemik tools carry it
-1229. **W1323** (done) nemik_stackable gauge beside stack depth (luthen row), split off W613 so the landed --propose
+1279. **W1323** (done) nemik_stackable gauge beside stack depth (luthen row), split off W613 so the landed --propose
    --json output stops holding mtools:W1428
-1230. **W1382** (done) Classify the 91 src PLC0415 imports per module as cycle, claim-pinned or avoidable, then hoist
+1280. **W1382** (done) Classify the 91 src PLC0415 imports per module as cycle, claim-pinned or avoidable, then hoist
    the avoidable
-1231. **W1383** (done) Read every positional caller of the 19 src FBT signatures, then make each flag keyword-only
-1232. **W1384** (done) Route the 124 src prints (T201) through one output module
-1233. **W1385** (done) Choose a naming convention for the 115 test assertion expectations (PLR2004), then name them per
+1281. **W1383** (done) Read every positional caller of the 19 src FBT signatures, then make each flag keyword-only
+1282. **W1384** (done) Route the 124 src prints (T201) through one output module
+1283. **W1385** (done) Choose a naming convention for the 115 test assertion expectations (PLR2004), then name them per
    file
-1234. **W1396** (done) Answer nemik: mtools:W1614 is done - check the built venv for --clear-dead-enables, then lift
+1284. **W1396** (done) Answer nemik: mtools:W1614 is done - check the built venv for --clear-dead-enables, then lift
    W695's wait on mtools
-1235. **W1410** (done) Histogram the first Codon error of every failing baseline module in the stripped mode with a
+1285. **W1410** (done) Histogram the first Codon error of every failing baseline module in the stripped mode with a
    scratch script, and write the classes with counts on W1400
-1236. **W1412** (done) List modules whose only stripped-mode blocker is one missing stdlib name such as datetime.UTC,
+1286. **W1412** (done) List modules whose only stripped-mode blocker is one missing stdlib name such as datetime.UTC,
    and replace it where an equivalent compiles
-1237. **W1414** (done) Probe whether moving main and its argparse import into a cli module lets pacing, pins, starved or
+1287. **W1414** (done) Probe whether moving main and its argparse import into a cli module lets pacing, pins, starved or
    work compile under Codon, using codon_one.py on a scratch split
-1238. **W1493** (done) Codon: find every failing module whose import closure holds no third-party import, by reading
+1288. **W1493** (done) Codon: find every failing module whose import closure holds no third-party import, by reading
    imports, and list them
-1239. **W1495** (done) flow._grounded: split the branches out, so C901 and PLR0912 clear (src/nemik/flow.py)
-1240. **W1496** (done) critical.cycles: split the walk, so C901 clears (src/nemik/critical.py)
-1241. **W1497** (done) critical.main: split the modes, so C901, PLR0912 and PLR0914 clear (src/nemik/critical.py)
-1242. **W1498** (done) calendars.load_calendars and days_main: split validation from reading, so two C901 clear
+1289. **W1495** (done) flow._grounded: split the branches out, so C901 and PLR0912 clear (src/nemik/flow.py)
+1290. **W1496** (done) critical.cycles: split the walk, so C901 clears (src/nemik/critical.py)
+1291. **W1497** (done) critical.main: split the modes, so C901, PLR0912 and PLR0914 clear (src/nemik/critical.py)
+1292. **W1498** (done) calendars.load_calendars and days_main: split validation from reading, so two C901 clear
    (src/nemik/calendars.py)
-1243. **W1499** (done) blocks.annotate: split, so C901 clears (src/nemik/blocks.py)
-1244. **W1500** (done) blocks._operator_asks: split, so C901, PLR0912 and PLR0914 clear (src/nemik/blocks.py)
-1245. **W1501** (done) wake.main: split the modes, so C901, PLR0912 and PLR0915 clear (src/nemik/wake.py)
-1246. **W1502** (done) alarm.py, witwait.py, letters.py, calwrite.py: group the long argument lists into one parameter
+1293. **W1499** (done) blocks.annotate: split, so C901 clears (src/nemik/blocks.py)
+1294. **W1500** (done) blocks._operator_asks: split, so C901, PLR0912 and PLR0914 clear (src/nemik/blocks.py)
+1295. **W1501** (done) wake.main: split the modes, so C901, PLR0912 and PLR0915 clear (src/nemik/wake.py)
+1296. **W1502** (done) alarm.py, witwait.py, letters.py, calwrite.py: group the long argument lists into one parameter
    object each, so the PLR0913 and PLR0917 findings clear
-1247. **W1503** (done) salience.audit and the two salience signatures at 445 and 478: group arguments and split audit,
+1297. **W1503** (done) salience.audit and the two salience signatures at 445 and 478: group arguments and split audit,
    so about ten findings clear (src/nemik/salience.py)
-1248. **W1504** (done) serve handlers (serve.py handler and do_GET, staticserve.py handler): split the route table out,
+1298. **W1504** (done) serve handlers (serve.py handler and do_GET, staticserve.py handler): split the route table out,
    so four C901 and PLR0912 clear
-1249. **W1505** (done) history.py line 862: cut the local-variable count, so PLR0914 clears (src/nemik/history.py)
-1250. **W1506** (done) rank.main: split it into one function per mode, so five findings clear (src/nemik/rank.py)
-1251. **W1507** (done) check.survey: split it into stages, so four findings clear (src/nemik/check.py)
-1252. **W1508** (done) adapter._queue_graph: split it into stages, so three findings clear (src/nemik/adapter.py)
-1253. **W1509** (done) serve._to_json: split it into nodes, edges and documents, so four findings clear
+1299. **W1505** (done) history.py line 862: cut the local-variable count, so PLR0914 clears (src/nemik/history.py)
+1300. **W1506** (done) rank.main: split it into one function per mode, so five findings clear (src/nemik/rank.py)
+1301. **W1507** (done) check.survey: split it into stages, so four findings clear (src/nemik/check.py)
+1302. **W1508** (done) adapter._queue_graph: split it into stages, so three findings clear (src/nemik/adapter.py)
+1303. **W1509** (done) serve._to_json: split it into nodes, edges and documents, so four findings clear
    (src/nemik/serve.py)
-1254. **W1510** (done) Revendor the ten vendored mtools wheels to 11d5b4d (mikemol-repin --revendor), second entry
+1304. **W1510** (done) Revendor the ten vendored mtools wheels to 11d5b4d (mikemol-repin --revendor), second entry
    behind a ruff-lowering first entry
-1255. **W1511** (done) Vendor mikemol-procrun in pyproject.toml, MODULE.bazel and the venv srcs, and convert one
+1305. **W1511** (done) Vendor mikemol-procrun in pyproject.toml, MODULE.bazel and the venv srcs, and convert one
    subprocess caller, with the codon census row read before and after
-1256. **W1525** (done) W1175 child: check.py subprocess.run at line 938 to procrun.capture with its CalledProcessError
+1306. **W1525** (done) W1175 child: check.py subprocess.run at line 938 to procrun.capture with its CalledProcessError
    handler at 941
-1257. **W1526** (done) W1175 child: wake.py _roster runs its subprocess through procrun.capture
-1258. **W1527** (done) W1175 child: witnesses.py runs its two git calls through procrun.capture
-1259. **W1528** (done) W1175 child: calendars.py runs its two subprocess calls through procrun.capture
-1260. **W1592** (done) Answer luthen-observability:W1965: its metric registry row nemik_findings_ has no freshness
+1307. **W1526** (done) W1175 child: wake.py _roster runs its subprocess through procrun.capture
+1308. **W1527** (done) W1175 child: witnesses.py runs its two git calls through procrun.capture
+1309. **W1528** (done) W1175 child: calendars.py runs its two subprocess calls through procrun.capture
+1310. **W1592** (done) Answer luthen-observability:W1965: its metric registry row nemik_findings_ has no freshness
    declaration
-1261. **W1603** (done) Design the wake verdict gauge: read waitemit.py and wake.roster(), choose the series name and
+1311. **W1603** (done) Design the wake verdict gauge: read waitemit.py and wake.roster(), choose the series name and
    labels (wake required 0 or 1, the awake state), write the design on the card
-1262. **W1604** (done) Emit the wake verdict gauge from nemik-metrics (src/nemik/metrics.py or waitemit.py) with a test
+1312. **W1604** (done) Emit the wake verdict gauge from nemik-metrics (src/nemik/metrics.py or waitemit.py) with a test
    and a metric_families entry request to luthen-observability
-1263. **W1605** (done) Reply to luthen-observability:W1928 with the metric name once it exists
-1264. **W1609** (done) Read luthen-observability's checks/ready_wake.py and its nine tests and decide whose it is,
+1313. **W1605** (done) Reply to luthen-observability:W1928 with the metric name once it exists
+1314. **W1609** (done) Read luthen-observability's checks/ready_wake.py and its nine tests and decide whose it is,
    nemik's or mtools': record the decision and the reason on the card, naming the owner card if mtools
-1265. **W1611** (done) Reply to luthen-observability:W1931 with where ready_wake lives and its command name once it
+1315. **W1611** (done) Reply to luthen-observability:W1931 with where ready_wake lives and its command name once it
    exists
-1266. **W1641** (done) Answer luthen-observability:W1992: nemik-tasks --list nemik --apply is not idempotent for the
+1316. **W1641** (done) Answer luthen-observability:W1992: nemik-tasks --list nemik --apply is not idempotent for the
    life parent
-1267. **W1** (done) S6: check that every OPEN summit ask's waypoint appears in nemik-inbound for its owner
-1268. **W2** (done) U2: say 'waiting on you, claim with --enables `<ref>`' in nemik-inbound and the Wake panel instead
+1317. **W1999** (done) Read witnesses.py apply path and ready_wake's line format
+1318. **W2011** (done) Count fleet witnessed cards closed within one apply interval of issued_at, read only
+1319. **W2017** (done) Read mtools W2201's per-repo output schema and write it in docs/config-census.md
+1320. **W1** (done) S6: check that every OPEN summit ask's waypoint appears in nemik-inbound for its owner
+1321. **W2** (done) U2: say 'waiting on you, claim with --enables `<ref>`' in nemik-inbound and the Wake panel instead
    of bare 'unclaimed' (substrate-d9 read it as other repos' business)
-1269. **W3** (done) U1: make unclaimed '?' placeholders visible: larger, labelled with the blocked card, counted on the
+1322. **W3** (done) U1: make unclaimed '?' placeholders visible: larger, labelled with the blocked card, counted on the
    blocker's box
-1270. **W5** (done) N3: tell rosettapkg (W13, W14) and substrate (W37) their blocked cards name no resolvable party
-1271. **W6** (done) H1: vendor the mikemol-pathsforward wheel so the image build is hermetic (luthen: a network fetch is
+1323. **W5** (done) N3: tell rosettapkg (W13, W14) and substrate (W37) their blocked cards name no resolvable party
+1324. **W6** (done) H1: vendor the mikemol-pathsforward wheel so the image build is hermetic (luthen: a network fetch is
    where a cache miss hides)
-1272. **W7** (done) E2: ask luthen to carry each repo's commit state in the export, so the pod can report provenance,
+1325. **W7** (done) E2: ask luthen to carry each repo's commit state in the export, so the pod can report provenance,
    not untracked-source
-1273. **W8** (done) W2: alert when something waits on an asleep repo for more than N hours
+1326. **W8** (done) W2: alert when something waits on an asleep repo for more than N hours
    (nemik_waiting_on{state=asleep}); rule and panel through luthen's panels/rego
-1274. **W9** (done) Move this session to ~/github/nemik: it runs from ~/github/taskboard, so liveness and the hook spool
+1327. **W9** (done) Move this session to ~/github/nemik: it runs from ~/github/taskboard, so liveness and the hook spool
    record it as 'taskboard' and nemik reads as asleep
-1275. **W10** (done) M2: mtools gaps found bootstrapping this queue: no create mode, no way to clear enables (W4->W2 is
+1328. **W10** (done) M2: mtools gaps found bootstrapping this queue: no create mode, no way to clear enables (W4->W2 is
    backwards), '--' unpassable as ledger symbol
-1276. **W12** (done) Copy taskboard's tools-installed-per-repo memory into nemik's project memory dir
-1277. **W13** (done) Loop durability: the 15m cron is session-only and expires 2026-10-03; re-arm on session restart or
+1329. **W12** (done) Copy taskboard's tools-installed-per-repo memory into nemik's project memory dir
+1330. **W13** (done) Loop durability: the 15m cron is session-only and expires 2026-10-03; re-arm on session restart or
    expiry
-1278. **W14** (done) Adopter guide: one page (docs/adopting.md, cited from paths-forward-loop skill) on writing a queue
+1331. **W14** (done) Adopter guide: one page (docs/adopting.md, cited from paths-forward-loop skill) on writing a queue
    nemik reads: writer install, --ledger grammar, kind classes, minted_during, cross-repo refs
-1279. **W16** (done) Containerfile test stage: run the gate tests in a stage the final stage depends on, so the image
+1332. **W16** (done) Containerfile test stage: run the gate tests in a stage the final stage depends on, so the image
    build is nemik's gate (luthen ships on push)
-1280. **W18** (done) should_nudge() library function (+ maybe --nudge on nemik-wake): owns the staleness threshold +
+1333. **W18** (done) should_nudge() library function (+ maybe --nudge on nemik-wake): owns the staleness threshold +
    backoff/dedup decision that luthen's checks/waker.py currently reinvents per-repo (loop_liveness verdict + last_tick
    -> nudge now yes/no); luthen keeps the SendMessage act, nemik owns the decision. luthen W117
-1281. **W19** (done) nemik-serve wedge: pod stayed k8s state=running but stopped accepting connections for 10+min
+1334. **W19** (done) nemik-serve wedge: pod stayed k8s state=running but stopped accepting connections for 10+min
    (readiness timeout -> flat connection refused, 40 failed probes); one BrokenPipeError at serve.py:215
    (self.wfile.write) in a request thread, ThreadingHTTPServer so shouldn't take down the accept loop on its own. luthen
    deleted the pod rather than diagnose further; root cause open. Add a k8s liveness probe (luthen's manifest) so this
    self-heals regardless of cause; separately look at whether serve.py leaks fds/sockets on a broken pipe
-1282. **W20** (done) mikemol-pathsforward's rank_reason is read (render.py) but never written; ordered() only sorts by
+1335. **W20** (done) mikemol-pathsforward's rank_reason is read (render.py) but never written; ordered() only sorts by
    status bucket at file order, no leverage computation over enables/blocked_on (substrate-c6 found this; confirmed
    against our vendored copy). Relayed to mtools (mtools/inbox/2026-09-26-substrate-rank-reason-unwritten.md), not
    nemik's to fix. Every tick's §3 judgment is currently done by hand in the turn because of this -- exactly the failure
    mode the operator called out on this queue
-1283. **W22** (done) Trial: SHACL Warning when a waypoint title exceeds 150 chars (decomposition signal, operator
+1336. **W22** (done) Trial: SHACL Warning when a waypoint title exceeds 150 chars (decomposition signal, operator
    request re el-openglo:W45). Fires 256 times across ~/github today (commit f235c4f). Watch whether repos act on it or
    just accumulate the warning; 150 is a first guess, not measured
-1284. **W23** (done) W22 trial has ~50% false-positive rate on sampled titles: raw length flags verbose-but-atomic
+1337. **W23** (done) W22 trial has ~50% false-positive rate on sampled titles: raw length flags verbose-but-atomic
    sentences same as genuinely bundled steps
-1285. **W24** (done) Dash UI: load() had no error handling (unlike wake()) -- a transient server miss silently blanked
+1338. **W24** (done) Dash UI: load() had no error handling (unlike wake()) -- a transient server miss silently blanked
    the page
    - next: n/a
-1286. **W25** (done) CLI ergonomics: --root and --json had no help text on 3 of 5 CLIs while newer flags (--liveness,
+1339. **W25** (done) CLI ergonomics: --root and --json had no help text on 3 of 5 CLIs while newer flags (--liveness,
    --all, --nudge) did -- inconsistent --help output
    - next: n/a
-1287. **W26** (done) Dash UI: the 60s poll redraw destroyed and rebuilt the cytoscape graph without re-selecting the
+1340. **W26** (done) Dash UI: the 60s poll redraw destroyed and rebuilt the cytoscape graph without re-selecting the
    user's previously-focused node
    - next: n/a
-1288. **W27** (done) operator_category's free-text fallback contradicted docs/adopting.md: docs said any
+1341. **W27** (done) operator_category's free-text fallback contradicted docs/adopting.md: docs said any
    decide/act-verb-less text lands unstated; code actually reads >=3-word free text as needs-you regardless
    - next: n/a
-1289. **W28** (done) metrics.py review: nemik_prompts_total's docstring didn't document the 'unknown' class fallback (a
+1342. **W28** (done) metrics.py review: nemik_prompts_total's docstring didn't document the 'unknown' class fallback (a
    source string not in CLASS), even though the code can emit it
    - next: n/a
-1290. **W29** (done) Dash UI FR (operator, direct): repo boxes should be color-coded by liveliness state
+1343. **W29** (done) Dash UI FR (operator, direct): repo boxes should be color-coded by liveliness state
    - next: n/a
-1291. **W30** (done) adapter.py review: queue_graph()'s residue-translation loop was duplicated verbatim (dead code,
+1344. **W30** (done) adapter.py review: queue_graph()'s residue-translation loop was duplicated verbatim (dead code,
    harmless since RDF triples dedupe, but confusing on read)
-1292. **W31** (done) check.py deep read: verified survey()'s focus-node-to-repo attribution (by_repo.setdefault) can
+1345. **W31** (done) check.py deep read: verified survey()'s focus-node-to-repo attribution (by_repo.setdefault) can
    never actually see an unknown repo given current shapes.ttl targets and adapter.py's URI minting -- defensive but
    dead code, not a live bug
-1293. **W32** (done) Operator direct ask: build a paperkit project documenting nemik's guarantees, modularity (and its
+1346. **W32** (done) Operator direct ask: build a paperkit project documenting nemik's guarantees, modularity (and its
    gaps), and the standards it's derived from
-1294. **W33** (done) ARCHITECTURE.md gate went red on its first maintenance run: paper.toml's claim witness ran bare
+1347. **W33** (done) ARCHITECTURE.md gate went red on its first maintenance run: paper.toml's claim witness ran bare
    python3 (/usr/bin, no rdflib), so the 3 witnesses importing nemik failed -- verdict depended on the ambient
    interpreter
-1295. **W40** (done) Ask mtools: pathsforward flags a ready item that stays top of queue across ticks (from ledger) as
+1348. **W40** (done) Ask mtools: pathsforward flags a ready item that stays top of queue across ticks (from ledger) as
    ATOMIZE
-1296. **W42** (done) Witness: every summit ask carrying a waypoint field names a waypoint that exists in its owner's
+1349. **W42** (done) Witness: every summit ask carrying a waypoint field names a waypoint that exists in its owner's
    queue and is not dropped (first real case is the first post-W105 ask)
-1297. **W44** (done) Repin mikemol-pathsforward once mtools fixes --weight's last_worked side effect (W115 defect found
+1350. **W44** (done) Repin mikemol-pathsforward once mtools fixes --weight's last_worked side effect (W115 defect found
    by luthen)
-1298. **W48** (done) nemik's own loop stores nemik-rank weights each tick via $PF --update --weight (or --weights-from,
+1351. **W48** (done) nemik's own loop stores nemik-rank weights each tick via $PF --update --weight (or --weights-from,
    mtools:W116), so its own ordered() cannot drift
-1299. **W49** (done) Render cross-repo touches[] overlap (grouped by tag) once mtools emits OVERLAP
-1300. **W50** (done) Split comma-joined touches tags on W30-W33 (adapter,cleanup etc.)
-1301. **W51** (done) Make nemik installable as a declared dependency in repos that pin pathsforward at another sha (uv
+1352. **W49** (done) Render cross-repo touches[] overlap (grouped by tag) once mtools emits OVERLAP
+1353. **W50** (done) Split comma-joined touches tags on W30-W33 (adapter,cleanup etc.)
+1354. **W51** (done) Make nemik installable as a declared dependency in repos that pin pathsforward at another sha (uv
    refuses two sources; summit 572b2f7 fell back to uv pip install)
-1302. **W54** (done) nemik views: render satisfied (done) blockers as faded edges; count only open blockers
-1303. **W55** (done) Ask mtools: --bump-blocked drops done local symbols from blocked_on; empty list returns item to
+1355. **W54** (done) nemik views: render satisfied (done) blockers as faded edges; count only open blockers
+1356. **W55** (done) Ask mtools: --bump-blocked drops done local symbols from blocked_on; empty list returns item to
    ready
-1304. **W58** (done) FFI waypoints: witness is a declared Rego rule over facts from nemik's closed observer set (pid,
+1357. **W58** (done) FFI waypoints: witness is a declared Rego rule over facts from nemik's closed observer set (pid,
    k8s job, alert, promql, git, file, time); no executed code; design .claude/design/W58-mechanical-blockers.md rev 3
-1305. **W67** (done) Repin pathsforward for mtools:W133 (ordered/workable skip witnessed waypoints)
-1306. **W69** (done) nemik-serve: rebuild off the request path (background, stale-while-rebuilding); /metrics and probes
+1358. **W67** (done) Repin pathsforward for mtools:W133 (ordered/workable skip witnessed waypoints)
+1359. **W69** (done) nemik-serve: rebuild off the request path (background, stale-while-rebuilding); /metrics and probes
    never block on the rebuild lock
-1307. **W70** (done) nemik-serve memory: no leak (flat gc objects, RSS plateau ~200MB); per-request payload parsing
+1360. **W70** (done) nemik-serve memory: no leak (flat gc objects, RSS plateau ~200MB); per-request payload parsing
    removed
-1308. **W71** (done) Per-repo priority view: top goal G (no in-repo downstream, ranked by cross-repo weight), its
+1361. **W71** (done) Per-repo priority view: top goal G (no in-repo downstream, ranked by cross-repo weight), its
    frontier dG (open leaves; on-deck = top workable leaf), and dDG (what frontier leaves wait on outside the repo); path
    clear iff dDG is empty
-1309. **W72** (done) Dashboard Tools panel: /cmd/`<name>`?repo= returns each read-only CLI's exact output (check,
+1362. **W72** (done) Dashboard Tools panel: /cmd/`<name>`?repo= returns each read-only CLI's exact output (check,
    metrics, inbound, operator, wake, rank, overlaps, witnesses dry-run on click, floor-asks where summit present, mtools
    --queue/--check/--overlaps per repo), in-process on the cached graph
-1310. **W77** (done) Graph labels occluded by neighbouring shapes (operator ask)
-1311. **W78** (done) Playwright dev dep + screenshot regression test for the web view (labels clear of nodes)
-1312. **W85** (done) Bazel build graph for nemik (MODULE.bazel, py_test per tests/*.py, cached) as the commit gate:
+1363. **W77** (done) Graph labels occluded by neighbouring shapes (operator ask)
+1364. **W78** (done) Playwright dev dep + screenshot regression test for the web view (labels clear of nodes)
+1365. **W85** (done) Bazel build graph for nemik (MODULE.bazel, py_test per tests/*.py, cached) as the commit gate:
    which tests run is the graph's call, not a tick's judgment ('no code changed, so no pytest'). Precedent: mtools,
    paperkit, luthen-observability MODULE.bazel
-1313. **W86** (done) Graph layout: waits edges non-constraining (operator: enables ranks, blocked_by draws)
-1314. **W87** (done) Graph: tame cross-repo edges in the all view (the operator-actor fan, long waits across boxes):
+1366. **W86** (done) Graph layout: waits edges non-constraining (operator: enables ranks, blocked_by draws)
+1367. **W87** (done) Graph: tame cross-repo edges in the all view (the operator-actor fan, long waits across boxes):
    e.g. order repo boxes by cross-repo dependency, bundle or hide cross-repo edges until hover
-1315. **W93** (done) Bazel builds nemik's .venv as an artifact (mtools venv.bzl pattern): nemik + vendored pathsforward
+1368. **W93** (done) Bazel builds nemik's .venv as an artifact (mtools venv.bzl pattern): nemik + vendored pathsforward
    installed as packages with console scripts; tests and nemik-witnesses --apply call mikemol-paths-forward/nemik-serve
    from that venv; revert the in-process pf and sys.executable -c workarounds from W90
-1316. **W101** (done) The Bazel-built //:.venv is the build input everything consumes (operator: 'build their .venv as a
+1369. **W101** (done) The Bazel-built //:.venv is the build input everything consumes (operator: 'build their .venv as a
    build input that the rest of the build uses'): py_tests run in it rather than per-target deps; the host .venv is that
    artifact, not a uv-synced sibling; deps (paperkit, pathsforward) come from the lock into it, not from hand-vendored
    wheels. First step: read how mtools wires tests and hooks to its built venv; revert the W100 paperkit wheel vendoring
-1317. **W110** (done) nemik-check: flag blocked_on entries naming a same-repo waypoint that is done (all done: should be
+1370. **W110** (done) nemik-check: flag blocked_on entries naming a same-repo waypoint that is done (all done: should be
    ready; some: stale subset), and entries not a clean symbol/`<repo>`:W`<n>`/operator ask (paperkit letter 2026-09-28)
-1318. **W111** (done) nemik-rank: caused_by=operator waypoints rank at the top (standing rule: operator ask beats
+1371. **W111** (done) nemik-rank: caused_by=operator waypoints rank at the top (standing rule: operator ask beats
    backlog); --check refuses one ranked below ordinary work (luthen-observability letter 2026-09-27, its W157)
-1319. **W112** (done) nemik-rank --check UMBRELLA names direct children (what DECOMPOSE puts in blocked_on) as well as
+1372. **W112** (done) nemik-rank --check UMBRELLA names direct children (what DECOMPOSE puts in blocked_on) as well as
    transitive leaves (paperkit letter: 2 of 5 leaf sets read as wrong)
-1320. **W114** (done) nemik skill: how workstreams use nemik and the queue together (operator ask 2026-09-28), kept
+1373. **W114** (done) nemik skill: how workstreams use nemik and the queue together (operator ask 2026-09-28), kept
    current by tests/test_skill.py
-1321. **W115** (done) nemik-operator and the web lane show, for each operator ask, the open work waiting behind it
+1374. **W115** (done) nemik-operator and the web lane show, for each operator ask, the open work waiting behind it
    across repos (operator: sessions must make the relay visible on the dashboard)
-1322. **W117** (done) Web view: prioritize shortening cross-box edges (operator 2026-09-28, screenshot)
-1323. **W119** (done) Web view is deterministic: same data, same picture (operator 2026-09-28: 'things jumping around
+1375. **W117** (done) Web view: prioritize shortening cross-box edges (operator 2026-09-28, screenshot)
+1376. **W119** (done) Web view is deterministic: same data, same picture (operator 2026-09-28: 'things jumping around
    all the time')
-1324. **W120** (done) Web view: minimize p95 edge length, intra- and cross-box (operator 2026-09-28)
-1325. **W125** (done) Web view: labels inside their shapes (operator 2026-09-28), readable in light and dark; layout
+1377. **W120** (done) Web view: minimize p95 edge length, intra- and cross-box (operator 2026-09-28)
+1378. **W125** (done) Web view: labels inside their shapes (operator 2026-09-28), readable in light and dark; layout
    metrics as a build test, not a scratch harness
-1326. **W126** (done) Web view: minimize the drawing's area too (operator 2026-09-28: 'we don't seem to be optimizing
+1379. **W126** (done) Web view: minimize the drawing's area too (operator 2026-09-28: 'we don't seem to be optimizing
    the rectangles for minimum area')
-1327. **W135** (done) Web view: multi-headed overlapping DAG/forest ordered by nemik-rank (operator 2026-09-28)
-1328. **W137** (done) Calibrate the bands.toml floor and trust-boundary policy (W133) against luthen's first vectored
+1380. **W135** (done) Web view: multi-headed overlapping DAG/forest ordered by nemik-rank (operator 2026-09-28)
+1381. **W137** (done) Calibrate the bands.toml floor and trust-boundary policy (W133) against luthen's first vectored
    waypoints
-1329. **W139** (done) Layout metrics: count edge crossings inside boxes and cross-box edges pointing upward, and budget
+1382. **W139** (done) Layout metrics: count edge crossings inside boxes and cross-box edges pointing upward, and budget
    both in test_layout
-1330. **W140** (done) Re-measure test_layout under bazel with the pinned Chromium 1243: the W118 and W127 budgets were
+1383. **W140** (done) Re-measure test_layout under bazel with the pinned Chromium 1243: the W118 and W127 budgets were
    set on Playwright's Chromium 1194
-1331. **W142** (done) nemik-check --root . names the workstream '' (Path('.').name), so a one-repo run prints no repo
+1384. **W142** (done) nemik-check --root . names the workstream '' (Path('.').name), so a one-repo run prints no repo
    name and cannot resolve its own `<repo>`:W`<n>` causes
-1332. **W144** (done) nemik-check UmbrellaBlockShape: a target whose only open child is the step before it in a chain
+1385. **W144** (done) nemik-check UmbrellaBlockShape: a target whose only open child is the step before it in a chain
    (mtools:W300 <- W299) is a sequence, not an umbrella; flag only targets with 2+ open children or ones that are
    themselves blocked on their children
-1333. **W146** (done) Move nemik.alarm's trigger arithmetic onto mtools' timevalue resolver (mtools:W308) when it lands;
+1386. **W146** (done) Move nemik.alarm's trigger arithmetic onto mtools' timevalue resolver (mtools:W308) when it lands;
    keep nemik's tests as the witness that the instants do not change
-1334. **W152** (done) nemik-rank --band VECTOR / --item `<repo>`:W`<n>`: the band (and the rule that placed it) for any
+1387. **W152** (done) nemik-rank --band VECTOR / --item `<repo>`:W`<n>`: the band (and the rule that placed it) for any
    vector or any waypoint, not only ready ones
-1335. **W181** (done) Withheld leak fix: a goals entry whose frontier holds a withheld leaf is dropped whole (its
+1388. **W181** (done) Withheld leak fix: a goals entry whose frontier holds a withheld leaf is dropped whole (its
    outside = the leaf's blocked_on text)
-1336. **W182** (done) Operator picks which Akonadi calendars nemik may read (calendars.toml)
-1337. **W184** (done) Side panel cut text off on the right (operator screenshot)
-1338. **W185** (done) Viewport: a changed layout mode or repo filter refits instead of keeping the old zoom/pan (treemap
+1389. **W182** (done) Operator picks which Akonadi calendars nemik may read (calendars.toml)
+1390. **W184** (done) Side panel cut text off on the right (operator screenshot)
+1391. **W185** (done) Viewport: a changed layout mode or repo filter refits instead of keeping the old zoom/pan (treemap
    scaled off the page)
-1339. **W186** (done) Cites: one format (repo:W`<n>`) and every cite a link, in detail, lanes, findings, wake, goals
-1340. **W187** (done) Treemap leaves: repo on its own line, labels fitted to the tile
-1341. **W189** (done) nemik-days finds mikemol-ics in its own venv, refuses clearly when absent (life-82)
-1342. **W194** (done) Move the mtools pin to 03749d5 (pathsforward, icsstruct, hooks wheels at one sha) and wire the new
+1392. **W186** (done) Cites: one format (repo:W`<n>`) and every cite a link, in detail, lanes, findings, wake, goals
+1393. **W187** (done) Treemap leaves: repo on its own line, labels fitted to the tile
+1394. **W189** (done) nemik-days finds mikemol-ics in its own venv, refuses clearly when absent (life-82)
+1395. **W194** (done) Move the mtools pin to 03749d5 (pathsforward, icsstruct, hooks wheels at one sha) and wire the new
    hooks (inbound-asks, nemik-check) in .claude/settings.json
-1343. **W195** (done) Calendar write access (life's ask): read what the account allows per calendar (helper --rights),
+1396. **W195** (done) Calendar write access (life's ask): read what the account allows per calendar (helper --rights),
    answer life's authorization question from the reading
-1344. **W196** (done) calendars.toml opt-in for writing: per-calendar write = true plus mirror = [repos], read-only by
+1397. **W196** (done) calendars.toml opt-in for writing: per-calendar write = true plus mirror = [repos], read-only by
    default, bad combinations refused
-1345. **W197** (done) Event feed: open dated waypoints (dtstart/due, alarms, rrule) of mirrored repos as VEVENTs with a
+1398. **W197** (done) Event feed: open dated waypoints (dtstart/due, alarms, rrule) of mirrored repos as VEVENTs with a
    stable UID nemik:`<repo>`:W`<n>`
-1346. **W198** (done) Akonadi helper --write-calendar NAME: upsert nemik-owned events by UID, delete nemik-owned events
+1399. **W198** (done) Akonadi helper --write-calendar NAME: upsert nemik-owned events by UID, delete nemik-owned events
    no longer fed, plan unless --apply, refuse without create/change/delete rights
-1347. **W199** (done) nemik-calendar-write [--apply]: calendars.toml + queues -> feed -> helper, one command; plan by
+1400. **W199** (done) nemik-calendar-write [--apply]: calendars.toml + queues -> feed -> helper, one command; plan by
    default
-1348. **W200** (done) Operator decision: which calendar the dated waypoints are written to (Mol Family Calendar grants
+1401. **W200** (done) Operator decision: which calendar the dated waypoints are written to (Mol Family Calendar grants
    the account no write rights), and enabling the mirror for life
-1349. **W201** (done) Keep the calendar mirror in step: a luthen unit runs nemik-calendar-write --apply
-1350. **W202** (done) nemik-rank fleet mode: rank every workstream's ready items in one run (no repo argument), with a
+1402. **W201** (done) Keep the calendar mirror in step: a luthen unit runs nemik-calendar-write --apply
+1403. **W202** (done) nemik-rank fleet mode: rank every workstream's ready items in one run (no repo argument), with a
    cross-repo-comparable order
-1351. **W214** (done) nemik typing: src/nemik/serve.py (186 findings)
-1352. **W222** (done) nemik typing: src/nemik/calwrite.py (10 findings)
-1353. **W225** (done) U: update the nemik skill for nemik-rank --all
-1354. **W227** (done) nemik-witnesses reads every promql witness as undefined unless NEMIK_VM_URL is set, and nothing
+1404. **W214** (done) nemik typing: src/nemik/serve.py (186 findings)
+1405. **W222** (done) nemik typing: src/nemik/calwrite.py (10 findings)
+1406. **W225** (done) U: update the nemik skill for nemik-rank --all
+1407. **W227** (done) nemik-witnesses reads every promql witness as undefined unless NEMIK_VM_URL is set, and nothing
    sets it
-1355. **W228** (done) nemik-check evaluates the realizability policy over every queue and prints each waypoint's
+1408. **W228** (done) nemik-check evaluates the realizability policy over every queue and prints each waypoint's
    coordinate and its residue ledger
-1356. **W252** (done) Ground of the flow model: workable cards (state ready or working) absorb demand; a card blocked
+1409. **W252** (done) Ground of the flow model: workable cards (state ready or working) absorb demand; a card blocked
    outside the graph is a dead end
-1357. **W255** (done) nemik tests: clear the 8 mypy errors in test_active_card, test_wake_nudge, test_vtodo,
+1410. **W255** (done) nemik tests: clear the 8 mypy errors in test_active_card, test_wake_nudge, test_vtodo,
    test_guarantees and test_fruit
-1358. **W258** (done) nemik-witnesses --wait: block on a PromQL expression or a Rego witness, exit 0 when it holds, 1 on
+1411. **W258** (done) nemik-witnesses --wait: block on a PromQL expression or a Rego witness, exit 0 when it holds, 1 on
    timeout, 2 when it cannot be evaluated
-1359. **W259** (done) Read the per-row unobservable flag of luthen host-apply export: a null applied from a root-only
+1412. **W259** (done) Read the per-row unobservable flag of luthen host-apply export: a null applied from a root-only
    path is unknown, not pending
-1360. **W264** (done) UI: draw each edge's width by the flow current, so the picture shows where demand travels
-1361. **W265** (done) UI: the repo filter is a row of toggles (none lit = all), not a select-one-or-all dropdown
-1362. **W266** (done) Graph history for a project-manager view: diff the workstream graph between two revisions or dates
+1413. **W264** (done) UI: draw each edge's width by the flow current, so the picture shows where demand travels
+1414. **W265** (done) UI: the repo filter is a row of toggles (none lit = all), not a select-one-or-all dropdown
+1415. **W266** (done) Graph history for a project-manager view: diff the workstream graph between two revisions or dates
    from each repo's committed paths-forward.json and ledger (minted, closed, dropped, status flips, edge changes, newly
    UNCLAIMED), per-card time-in-state, weekly roll-up (opened vs closed, blocked share, oldest blocked by repo),
    optional nemik_waypoint_age_seconds series
-1363. **W298** (done) Operator asks carry the flow salience: the demand behind each ask, heaviest first (nemik-operator,
+1416. **W298** (done) Operator asks carry the flow salience: the demand behind each ask, heaviest first (nemik-operator,
    /operator, the lane panel)
-1364. **W299** (done) Operator-ask VTODOs carry PRIORITY from the flow salience (declared steps in rank-weights.toml)
-1365. **W300** (done) nemik-metrics: nemik_operator_salience{repo} and nemik_operator_asks{repo}, what the operator owes
+1417. **W299** (done) Operator-ask VTODOs carry PRIORITY from the flow salience (declared steps in rank-weights.toml)
+1418. **W300** (done) nemik-metrics: nemik_operator_salience{repo} and nemik_operator_asks{repo}, what the operator owes
    each repo's work
-1366. **W302** (done) tools/pyfmt.sh: format, lint and type-check a .py draft in one command, so multi-region changes
+1419. **W302** (done) tools/pyfmt.sh: format, lint and type-check a .py draft in one command, so multi-region changes
    skip the edit gate's one-region refusals
-1367. **W303** (done) nemik-pins reads vendored mtools wheel pins (the commit in the wheel's file name), so nemik's own
+1420. **W303** (done) nemik-pins reads vendored mtools wheel pins (the commit in the wheel's file name), so nemik's own
    pin staleness is reported
-1368. **W304** (done) Re-vendor mtools at its HEAD when nemik-pins nemik reports it more than 30 commits behind
-1369. **W306** (done) Render nemik's web view in headless Chrome: find the host's binary and make the layout and
+1421. **W304** (done) Re-vendor mtools at its HEAD when nemik-pins nemik reports it more than 30 commits behind
+1422. **W306** (done) Render nemik's web view in headless Chrome: find the host's binary and make the layout and
    interaction tests run against it
-1370. **W307** (done) A history panel in the web view: per-repo weekly opened vs closed and blocked share from
+1423. **W307** (done) A history panel in the web view: per-repo weekly opened vs closed and blocked share from
    history.json
-1371. **W309** (done) Public view: salience, edge current and history counts must not be shaped by withheld waypoints
-1372. **W310** (done) --letters --fold delivers a misdelivered letter by copying it into its recipient's inbox
+1424. **W309** (done) Public view: salience, edge current and history counts must not be shaped by withheld waypoints
+1425. **W310** (done) --letters --fold delivers a misdelivered letter by copying it into its recipient's inbox
    (linux-sources, paperkit)
-1373. **W311** (done) --fold --apply reports the after-delivery verdict, and a letter archived by its recipient still
+1426. **W311** (done) --fold --apply reports the after-delivery verdict, and a letter archived by its recipient still
    counts as delivered
-1374. **W312** (done) Thoughts-forward (operator's notes doc 2026-10-11): the project-management practices nemik should
+1427. **W312** (done) Thoughts-forward (operator's notes doc 2026-10-11): the project-management practices nemik should
    express, as cards
-1375. **W319** (done) Enforce the working state: a code or test commit is refused while ready cards exist and none is
+1428. **W319** (done) Enforce the working state: a code or test commit is refused while ready cards exist and none is
    marked working
-1376. **W320** (done) Model nemik's workflows rigorously and check SKILL.md against the model (structural
+1429. **W320** (done) Model nemik's workflows rigorously and check SKILL.md against the model (structural
    correspondence)
-1377. **W321** (done) Extend the workflow model to the tick, the letter and the weather workflows and to the warnings
+1430. **W321** (done) Extend the workflow model to the tick, the letter and the weather workflows and to the warnings
    table
-1378. **W323** (done) Thoughts-forward 2 (operator's notes doc, new sections 2026-10-12): block schedulers, queueing
+1431. **W323** (done) Thoughts-forward 2 (operator's notes doc, new sections 2026-10-12): block schedulers, queueing
    theory, traffic shaping, as cards
-1379. **W329** (done) test_tools metrics flaked once in the gate: the assertion now names the differing lines
-1380. **W330** (done) nemik-work W`<n>`: one command makes W`<n>` the single working card
-1381. **W331** (done) nemik-check warns on each card in a true dependency deadlock, so the cause is fixed where it is
+1432. **W329** (done) test_tools metrics flaked once in the gate: the assertion now names the differing lines
+1433. **W330** (done) nemik-work W`<n>`: one command makes W`<n>` the single working card
+1434. **W331** (done) nemik-check warns on each card in a true dependency deadlock, so the cause is fixed where it is
    written
-1382. **W332** (done) Scoped critical paths: per-repo, per-view and selected-card longest chain (umbrella)
-1383. **W337** (done) Accessibility gates for the view, reusing el-openglo and paperkit's a11y machinery (umbrella)
-1384. **W358** (done) Positioning document: how to understand nemik if you come from X
-1385. **W377** (done) Re-vendor mtools past 7d4a458 so mikemol-commit prints its path and takes the commit lock here
-1386. **W378** (done) Vendor mikemol-fence beside hooks so mikemol-commit's lock reads held
-1387. **W379** (done) nemik-pins reports the host-installed nemik tool's sha against HEAD, with the reinstall command
-1388. **W387** (done) Side panel sections collapse (native details/summary), remembered per viewer
-1389. **W389** (done) Switch the ruler-sequence port to mtools' packaged generator (mikemol-rulerseq) when it lands
-1390. **W391** (done) Static-first nemik view: snapshots built on change, served as files, computed in the client
-1391. **W426** (done) Ask mtools for a tick-open mode: lock, pull, bump-blocked, check, nemik-inbound, rank and
+1435. **W332** (done) Scoped critical paths: per-repo, per-view and selected-card longest chain (umbrella)
+1436. **W337** (done) Accessibility gates for the view, reusing el-openglo and paperkit's a11y machinery (umbrella)
+1437. **W358** (done) Positioning document: how to understand nemik if you come from X
+1438. **W377** (done) Re-vendor mtools past 7d4a458 so mikemol-commit prints its path and takes the commit lock here
+1439. **W378** (done) Vendor mikemol-fence beside hooks so mikemol-commit's lock reads held
+1440. **W379** (done) nemik-pins reports the host-installed nemik tool's sha against HEAD, with the reinstall command
+1441. **W387** (done) Side panel sections collapse (native details/summary), remembered per viewer
+1442. **W389** (done) Switch the ruler-sequence port to mtools' packaged generator (mikemol-rulerseq) when it lands
+1443. **W391** (done) Static-first nemik view: snapshots built on change, served as files, computed in the client
+1444. **W426** (done) Ask mtools for a tick-open mode: lock, pull, bump-blocked, check, nemik-inbound, rank and
    weights-from as ONE command (and tick-close: ledger and unlock)
-1392. **W428** (done) Answered el-openglo: the Queue state sync commit racing its gate is the katas sweep, not nemik
+1445. **W428** (done) Answered el-openglo: the Queue state sync commit racing its gate is the katas sweep, not nemik
    (inbox/2026-10-13-el-openglo-queue-sync-collides-with-the-gate.md)
-1393. **W436** (done) Shape: a ready card that open cards enable is waiting on them; flag it (W337 sat ready as an
+1446. **W436** (done) Shape: a ready card that open cards enable is waiting on them; flag it (W337 sat ready as an
    umbrella while W338 and W390 enabled it)
-1394. **W450** (done) Adopt tick-open's per-repo hook list (mtools:W1111): git pull, nemik-inbound nemik, nemik-rank
+1447. **W450** (done) Adopt tick-open's per-repo hook list (mtools:W1111): git pull, nemik-inbound nemik, nemik-rank
    nemik --apply, so a tick opens in one call
    - next: landed ec6b15e: tick hooks stored (nemik-inbound nemik); the first --tick-open with it printed the HOOK line.
      That run took over two minutes, unmeasured how much is the hook (nemik-inbound reads the whole fleet): time it, and
      clear the list with an empty --tick-hooks-set file if it costs too much
-1395. **W458** (done) OperatorActShape: an operator-act block with no runnable command and no done-when is an unwritten
+1448. **W458** (done) OperatorActShape: an operator-act block with no runnable command and no done-when is an unwritten
    tool
-1396. **W467** (done) Show the no-command and errand asks in the web view: their own lanes in the operator panel, with
+1449. **W467** (done) Show the no-command and errand asks in the web view: their own lanes in the operator panel, with
    how many ticks each has stood
-1397. **W474** (done) Treemap labels drop the roll-up mark: a rolled-up umbrella's hidden work (luthen-observability:W43
+1450. **W474** (done) Treemap labels drop the roll-up mark: a rolled-up umbrella's hidden work (luthen-observability:W43
    hiding W111) is invisible
-1398. **W476** (done) Ask mtools: --bump-blocked (or a --block-behind-open mode) sets a ready card blocked on its one
+1451. **W476** (done) Ask mtools: --bump-blocked (or a --block-behind-open mode) sets a ready card blocked on its one
    open enabler, so ReadyBehindOpen fixes itself
    - next: re-count the fleet with nemik-check once paperkit and the others have run the mode, then raise
      ReadyBehindOpenShape to Warning (card it then)
-1399. **W477** (done) Draw a card stored ready but behind an open enabler as waiting: a mark and a legend entry, from
+1452. **W477** (done) Draw a card stored ready but behind an open enabler as waiting: a mark and a legend entry, from
    the readyBehindOpen finding
-1400. **W482** (done) Chain legend states each chain's length; the edges of the view's longest chains are drawn, so a
+1453. **W482** (done) Chain legend states each chain's length; the edges of the view's longest chains are drawn, so a
    chain is visible across repo boxes
-1401. **W484** (done) nemik-check names each enabling cycle ('W1 -> W2 -> W3 -> W1') instead of showing its members as
+1454. **W484** (done) nemik-check names each enabling cycle ('W1 -> W2 -> W3 -> W1') instead of showing its members as
    ready or blocked
-1402. **W489** (done) ReadyNeitherShape: a ready non-umbrella left untouched past the learned time-to-do of small cards
+1455. **W489** (done) ReadyNeitherShape: a ready non-umbrella left untouched past the learned time-to-do of small cards
    must be atomized or done
-1403. **W494** (done) Incremental redraw: the poll patches the graph in place instead of destroying it and laying it out
+1456. **W494** (done) Incremental redraw: the poll patches the graph in place instead of destroying it and laying it out
    again
-1404. **W520** (done) nemik-check accepts nemik-witnesses as a resolvable party for a card that carries a witness
-1405. **W539** (done) Read a waypoint's declared witness language instead of sniffing it
+1457. **W520** (done) nemik-check accepts nemik-witnesses as a resolvable party for a card that carries a witness
+1458. **W539** (done) Read a waypoint's declared witness language instead of sniffing it
    - next: 7f8600c: witness_lang read first, sniff only as fallback and reported; a Prometheus gauge for the sniffed
      count remains optional
-1406. **W541** (done) Make the image build's test stage failing visible at the push, not hours later: a test that runs a
+1459. **W541** (done) Make the image build's test stage failing visible at the push, not hours later: a test that runs a
    fixture-order-sensitive pick under reversed and shuffled directory order
-1407. **W544** (done) EditDeclaredShape: a card naming a repo file declares file:`<path>`!w, as a shapes.ttl warning
+1460. **W544** (done) EditDeclaredShape: a card naming a repo file declares file:`<path>`!w, as a shapes.ttl warning
    (W529)
-1408. **W545** (done) CheckableNextStepShape: a card with a checkable next step declares a witness, as a shapes.ttl
+1461. **W545** (done) CheckableNextStepShape: a card with a checkable next step declares a witness, as a shapes.ttl
    warning (W529)
-1409. **W546** (done) Done or dropped card pushes one notice to every cross-repo edge on it: inbox letter, plus a
+1462. **W546** (done) Done or dropped card pushes one notice to every cross-repo edge on it: inbox letter, plus a
    message to a live session
-1410. **W550** (done) Change-lifecycle concept scheme beside WaypointStates, and a vocabulary-divergence check for its
+1463. **W550** (done) Change-lifecycle concept scheme beside WaypointStates, and a vocabulary-divergence check for its
    words used off-scheme
-1411. **W572** (done) Image build red since 2026-10-16 03:16Z: no nemik image pushed for about five hours
-1412. **W573** (done) Make the browser layout tests independent of machine speed: replace fixed waits with the page's
+1464. **W572** (done) Image build red since 2026-10-16 03:16Z: no nemik image pushed for about five hours
+1465. **W573** (done) Make the browser layout tests independent of machine speed: replace fixed waits with the page's
    own clock or an awaited state
-1413. **W574** (done) Why does the pod's builder publish a snapshot every ~70 s when the fleet is mostly quiet?
-1414. **W576** (done) Shape: a cross-repo wait cycle is a Warning naming every card on it
-1415. **W577** (done) Shape: an idle loop is a Warning telling the repo to disarm or name what it waits for
-1416. **W597** (done) Shape: a card that claims an operator ruling in prose with no warrant is a Warning
-1417. **W600** (done) Declare repo burn-down tiers as data and order cross-repo work by them (a mark, not a gate)
-1418. **W601** (done) Replace vtodo._fold and _escape with mikemol.pathsforward.ics content_line and serialize
-1419. **W602** (done) Round-trip nemik-ics and calwrite output through icalendar in tests and fail on parse error
-1420. **W603** (done) Make the opa-dependent witness tests a hard failure under bazel where the pinned opa is staged
-1421. **W604** (done) A replay whose lines did not reach the log service is visible to the tick
-1422. **W606** (done) Answer el-openglo: why nemik:W438 waited on el-openglo:W544 (49 ticks)
-1423. **W607** (done) Warrant debt series: open cards claiming an operator ruling with no warrant, per repo, as a metric
+1466. **W574** (done) Why does the pod's builder publish a snapshot every ~70 s when the fleet is mostly quiet?
+1467. **W576** (done) Shape: a cross-repo wait cycle is a Warning naming every card on it
+1468. **W577** (done) Shape: an idle loop is a Warning telling the repo to disarm or name what it waits for
+1469. **W597** (done) Shape: a card that claims an operator ruling in prose with no warrant is a Warning
+1470. **W600** (done) Declare repo burn-down tiers as data and order cross-repo work by them (a mark, not a gate)
+1471. **W601** (done) Replace vtodo._fold and _escape with mikemol.pathsforward.ics content_line and serialize
+1472. **W602** (done) Round-trip nemik-ics and calwrite output through icalendar in tests and fail on parse error
+1473. **W603** (done) Make the opa-dependent witness tests a hard failure under bazel where the pinned opa is staged
+1474. **W604** (done) A replay whose lines did not reach the log service is visible to the tick
+1475. **W606** (done) Answer el-openglo: why nemik:W438 waited on el-openglo:W544 (49 ticks)
+1476. **W607** (done) Warrant debt series: open cards claiming an operator ruling with no warrant, per repo, as a metric
    to ratchet down
-1424. **W610** (done) Remedy text names --prune-landed, not --bump-blocked (github-8f: three sessions inflated
+1477. **W610** (done) Remedy text names --prune-landed, not --bump-blocked (github-8f: three sessions inflated
    ticks_blocked on hundreds of cards following the advice)
    - next: landed 1e42471
-1425. **W611** (done) Manifest drift: compare each landed commit's actual diff paths to its card's manifest and alert on
+1478. **W611** (done) Manifest drift: compare each landed commit's actual diff paths to its card's manifest and alert on
    the difference (misprediction feedback)
-1426. **W614** (done) Pin the writer wheel at mtools 410167c so nemik's own queue can use --manifest and --size
+1479. **W614** (done) Pin the writer wheel at mtools 410167c so nemik's own queue can use --manifest and --size
    - next: landed c757af5: six wheels at 52de4de; nemik's queue can declare --manifest/--size. mikemol-repin covering
      this layout is mtools:W1449 (then tools/revendor-mtools.sh retires)
-1427. **W617** (done) ProgressInvisibleShape: a stale working card whose citing commits keep landing warns atomize,
+1480. **W617** (done) ProgressInvisibleShape: a stale working card whose citing commits keep landing warns atomize,
    progress invisible
    - next: landed with W616 in f0c3c1e: the progress-invisible verdict (stale, commits citing it keep landing) is the
      second verdict of nemik.stalled
-1428. **W618** (done) Umbrella forecast: remaining children over recent close rate, a childless card reported
+1481. **W618** (done) Umbrella forecast: remaining children over recent close rate, a childless card reported
    unforecastable
    - next: landed ffcecdd: nemik_umbrella_forecast_days and nemik_unforecastable_cards (history-computed, named with
      --family); luthen's hourly relay row can add both names (luthen W1229)
-1429. **W619** (done) Pin the witnessed-blocker resolution with a test (promql and rego witnesses)
+1482. **W619** (done) Pin the witnessed-blocker resolution with a test (promql and rego witnesses)
    - next: landed 838b935
-1430. **W620** (done) nemik-metrics --family computes only the named families, not the whole run filtered after
-1431. **W625** (done) Cache the merged fleet graph by the queues' content hashes so every reader stops paying a 90
+1483. **W620** (done) nemik-metrics --family computes only the named families, not the whole run filtered after
+1484. **W625** (done) Cache the merged fleet graph by the queues' content hashes so every reader stops paying a 90
    second build
    - next: landed 881e62c: user-dir cache (142 s -> 11 s survey), shaclinc 2-hop; follow-ups W626 (derived radius) and
      the relay's measured ceiling
-1432. **W626** (done) Derive the SHACL re-judge radius from the shapes, or fall back to a full run when a query's depth
+1485. **W626** (done) Derive the SHACL re-judge radius from the shapes, or fall back to a full run when a query's depth
    cannot be bounded
-1433. **W627** (done) --propose marks every draft unverified and separates files a step edits from files it only
+1486. **W627** (done) --propose marks every draft unverified and separates files a step edits from files it only
    mentions
    - next: landed 902eb3e
-1434. **W628** (done) Repin the six mtools wheels to the fleet par 910002e
+1487. **W628** (done) Repin the six mtools wheels to the fleet par 910002e
    - next: landed 1e8fb2e at 910002e; next: retire tools/revendor-mtools.sh and point the README at mikemol-repin
-1435. **W629** (done) Retire tools/revendor-mtools.sh: mikemol-repin --revendor replaces it
-1436. **W630** (done) The user-dir cache file is keyed by stamp so a pushed relay build and a dev tree stop evicting
+1488. **W629** (done) Retire tools/revendor-mtools.sh: mikemol-repin --revendor replaces it
+1489. **W630** (done) The user-dir cache file is keyed by stamp so a pushed relay build and a dev tree stop evicting
    each other's cache; old builds are pruned past four
-1437. **W631** (done) Record the Codon idioms that cost W626 two gates (no X | None returns) in the census guidance
-1438. **W632** (done) nemik-metrics surveys the fleet once, not twice: a plain run paid SHACL twice (two findings calls,
+1490. **W631** (done) Record the Codon idioms that cost W626 two gates (no X | None returns) in the census guidance
+1491. **W632** (done) nemik-metrics surveys the fleet once, not twice: a plain run paid SHACL twice (two findings calls,
    ~275 s each cold under cProfile)
-1439. **W633** (done) A card in a commit stack (building, queued, gating) counts as working: derive displayed state and
+1492. **W633** (done) A card in a commit stack (building, queued, gating) counts as working: derive displayed state and
    stage from live commit spans
-1440. **W637** (done) A warm real-fleet run re-validates the whole graph: 1509 of 130895 triples changed yet findings()
+1493. **W637** (done) A warm real-fleet run re-validates the whole graph: 1509 of 130895 triples changed yet findings()
    validated all 130895 (139 s CPU)
-1441. **W638** (done) Repin the vendored mtools wheels once mtools:W1463 lands (queued commits wait with no 3600 s
+1494. **W638** (done) Repin the vendored mtools wheels once mtools:W1463 lands (queued commits wait with no 3600 s
    give-up)
-1442. **W639** (done) One local pre-check before a submit runs the ruff and mypy ratchets on the changed files, not only
+1495. **W639** (done) One local pre-check before a submit runs the ruff and mypy ratchets on the changed files, not only
    mikemol-pycheck
-1443. **W640** (done) Persist the flow solves after the metric families run, so a warm nemik-metrics does not re-solve
+1496. **W640** (done) Persist the flow solves after the metric families run, so a warm nemik-metrics does not re-solve
    15 times (27 s of 133 s profiled)
-1444. **W641** (done) nemik-check --digest collapses each repeated Info row to one counted line, so the per-prompt hook
+1497. **W641** (done) nemik-check --digest collapses each repeated Info row to one counted line, so the per-prompt hook
    digest stops costing ~44 KB a turn
-1445. **W644** (done) Repin the vendored mtools wheels to 3a11168 for the session watchdog and heartbeats (W1474)
-1446. **W647** (done) withheld.load rejects a list whose as_of is older than a bound, so a stale withheld list fails
+1498. **W644** (done) Repin the vendored mtools wheels to 3a11168 for the session watchdog and heartbeats (W1474)
+1499. **W647** (done) withheld.load rejects a list whose as_of is older than a bound, so a stale withheld list fails
    closed
-1447. **W653** (done) Atomize the coarse ready cards: give each a manifest and size, or split it, then return it to
+1500. **W653** (done) Atomize the coarse ready cards: give each a manifest and size, or split it, then return it to
    ready
-1448. **W668** (done) WCAG 2.4.3 focus order: the order Tab visits the page's controls matches their reading order,
+1501. **W668** (done) WCAG 2.4.3 focus order: the order Tab visits the page's controls matches their reading order,
    judged by Rego from the browser
-1449. **W672** (done) Repin the mtools wheels past 1a8fbb4 (--tick-open prints the watchdog line even when locked;
+1502. **W672** (done) Repin the mtools wheels past 1a8fbb4 (--tick-open prints the watchdog line even when locked;
    --watchdog-line) as its own land
-1450. **W676** (done) nemik-check warns on any repo whose .git/mtools/loop-prompt.seen differs from the current
+1503. **W676** (done) nemik-check warns on any repo whose .git/mtools/loop-prompt.seen differs from the current
    loop-prompt.md, naming the repo and the prompt's age
    - next: fc8ab9d: idle.prompt_lag joined into the idle-loop finding; names a repo whose .git/mtools/loop-prompt.seen
      differs from the canonical prompt, with its age
-1451. **W677** (done) Repin the mtools wheels past 5c3623e and 9a42724 (mikemol-hook-beat, the watchdog pidfile) so
+1504. **W677** (done) Repin the mtools wheels past 5c3623e and 9a42724 (mikemol-hook-beat, the watchdog pidfile) so
    luthen's beat-hook settings row for nemik can land (luthen-observability:W1288)
    - next: 364535b: wheels at mtools 0913e30; beat.py present in .venv
-1452. **W682** (done) A card in the commit gate is never called stalled: the stall check reads the commit queue
+1505. **W682** (done) A card in the commit gate is never called stalled: the stall check reads the commit queue
    (mikemol-commit's stack and gate state) and skips a working card whose waypoint a queued or gating stack names
-1453. **W683** (done) Warn when a repo's ledger shows consecutive tick rolls at advanced 0 while it has ready cards: the
+1506. **W683** (done) Warn when a repo's ledger shows consecutive tick rolls at advanced 0 while it has ready cards: the
    stalled-session signal the roll keeps visible
-1454. **W685** (done) ManifestShape warns on unmanifested ready leaves once a repo's count passes a declared ratchet
+1507. **W685** (done) ManifestShape warns on unmanifested ready leaves once a repo's count passes a declared ratchet
    from today's measured count
-1455. **W686** (done) A card that throws warnings on the CLI carries a warning badge in the UI, read from one per-card
+1508. **W686** (done) A card that throws warnings on the CLI carries a warning badge in the UI, read from one per-card
    findings source shared with nemik-check
-1456. **W689** (done) Atomize the ready cards that have no manifest: give each a manifest and size, or block it on the
+1509. **W689** (done) Atomize the ready cards that have no manifest: give each a manifest and size, or block it on the
    card it waits for
    - next: W515 realized and done; W519 blocked on its manifested slice W690; W633 blocked on mtools:W1587
-1457. **W697** (done) Remove the duplicate waits_on and disagreements from blocks.py once the live .venv links
+1510. **W697** (done) Remove the duplicate waits_on and disagreements from blocks.py once the live .venv links
    nemik.collapse: check.py then imports the one copy
-1458. **W702** (done) A card whose commit has landed but whose deploy is not witnessed reads as landed (oslc_cm:Fixed,
+1511. **W702** (done) A card whose commit has landed but whose deploy is not witnessed reads as landed (oslc_cm:Fixed,
    not closed), and done only when the deploy witness holds: vocabulary, shape and rendering
-1459. **W705** (done) Browser tests wait on the event the page raises, never on a 60000 ms wall-clock bound, so a loaded
+1512. **W705** (done) Browser tests wait on the event the page raises, never on a 60000 ms wall-clock bound, so a loaded
    host cannot fail them: one webpage helper owns the wait
-1460. **W716** (done) The skill gives the one-line command that parks every unmanifested ready card behind its atomizing
+1513. **W716** (done) The skill gives the one-line command that parks every unmanifested ready card behind its atomizing
    card
-1461. **W717** (done) Offer the browser-test helpers (webpage.watch, until, until_expecting) and the webpage_waits
+1514. **W717** (done) Offer the browser-test helpers (webpage.watch, until, until_expecting) and the webpage_waits
    codemod, both modes, to mtools as a liftable tool for other repos
-1462. **W718** (done) Every nemik.X a module imports resolves to a file the built wheel carries, checked by a test over
+1515. **W718** (done) Every nemik.X a module imports resolves to a file the built wheel carries, checked by a test over
    the wheel listing (the W1527 and W1584 class)
-1463. **W720** (done) Answer nemik: luthen-observability:W1315 is done (its witness held)
-1464. **W724** (done) Profile the whole 496 s cold document build and rank its costs by share; order any work by the
+1516. **W720** (done) Answer nemik: luthen-observability:W1315 is done (its witness held)
+1517. **W724** (done) Profile the whole 496 s cold document build and rank its costs by share; order any work by the
    biggest
-1465. **W725** (done) Cut the cold document build's subprocess fan-out and JSON decode (34% of 184.8 s, 3,929 forks):
+1518. **W725** (done) Cut the cold document build's subprocess fan-out and JSON decode (34% of 184.8 s, 3,929 forks):
    batch or cache the per-repo readers
-1466. **W729** (done) Cut history.snapshots' share of the cold build (34 percent of 81 s sampled): cache parsed queues
+1519. **W729** (done) Cut history.snapshots' share of the cold build (34 percent of 81 s sampled): cache parsed queues
    by repo and sha
-1467. **W730** (done) A check that the venv's installed nemik matches the source tree, so a profile or tool cannot
+1520. **W730** (done) A check that the venv's installed nemik matches the source tree, so a profile or tool cannot
    silently run old code
-1468. **W733** (done) Run the gate's bazel through the admission wrapper mikemol-bazel-admit
-1469. **W737** (done) Umbrella complete: a card with its own manifest is told to check the manifest, not to close
+1521. **W733** (done) Run the gate's bazel through the admission wrapper mikemol-bazel-admit
+1522. **W737** (done) Umbrella complete: a card with its own manifest is told to check the manifest, not to close
    (mtools:W1717)
-1470. **W740** (done) Per-card time field in the page data (last worked) so the card list can order by recency
-1471. **W741** (done) Count each repo's ledger lines per day against its queue-file commit gaps, to see which quiet
+1523. **W740** (done) Per-card time field in the page data (last worked) so the card list can order by recency
+1524. **W741** (done) Count each repo's ledger lines per day against its queue-file commit gaps, to see which quiet
    repos have a status history hole
-1472. **W742** (done) nemik-check --integrity prints the host repo's state file at the root, not under a directory named
+1525. **W742** (done) nemik-check --integrity prints the host repo's state file at the root, not under a directory named
    for it
-1473. **W757** (done) Retro frozen timeline: decide whether the retro node needs one, and if so what shape judges it
-1474. **W758** (done) Codon's datetime.fromisoformat rejects a +00:00 offset at run time: make climate and verify parse
+1526. **W757** (done) Retro frozen timeline: decide whether the retro node needs one, and if so what shape judges it
+1527. **W758** (done) Codon's datetime.fromisoformat rejects a +00:00 offset at run time: make climate and verify parse
    the event stamps in a form Codon accepts
-1475. **W762** (done) The Codon census may not dump core: its compiler probes abort on five baseline modules and each
+1528. **W762** (done) The Codon census may not dump core: its compiler probes abort on five baseline modules and each
    abort wrote a 116 MB core through coredump and drkonqi
-1476. **W763** (done) nemik-check --digest takes about 14 CPU seconds on the whole fleet and runs from every session's
+1529. **W763** (done) nemik-check --digest takes about 14 CPU seconds on the whole fleet and runs from every session's
    prompt hook: cache it per queue state
-1477. **W765** (done) Name every outside read of the fleet survey in its cache key, so freshness comes from content and
+1530. **W765** (done) Name every outside read of the fleet survey in its cache key, so freshness comes from content and
    the ten-minute age bound goes: the host-apply export file and any other file or process it reads
-1478. **W766** (done) nemik-check --digest --since FILE prints only the lines that changed since that digest, with a
+1531. **W766** (done) nemik-check --digest --since FILE prints only the lines that changed since that digest, with a
    one-line count of the unchanged ones, so a session's hook stops repeating them
-1479. **W769** (done) nemik-history --oldest N: the N oldest open cards fleet-wide with age, status, blockers and the
+1532. **W769** (done) nemik-history --oldest N: the N oldest open cards fleet-wide with age, status, blockers and the
    kind of old, then each one's critical path and whether it crosses an offline repo
-1480. **W770** (done) A ledger line names who acted, so the operator can be a prov:Agent beside the sessions: ask mtools
+1533. **W770** (done) A ledger line names who acted, so the operator can be a prov:Agent beside the sessions: ask mtools
    for the field
-1481. **W772** (done) Repin the seven mtools wheels to 4720efa for the ledger actor field (mtools:W1790)
-1482. **W778** (done) The stalled-working shape skips a repo whose learned land interval is under a minute
-1483. **W794** (done) Repin to mtools 8c8abe7 so the ratchet test runs in the Bazel sandbox, and drop its skip
-1484. **W798** (done) Choosing a card-list order by radio or key opens the Cards section, so the choice shows (operator
+1534. **W772** (done) Repin the seven mtools wheels to 4720efa for the ledger actor field (mtools:W1790)
+1535. **W778** (done) The stalled-working shape skips a repo whose learned land interval is under a minute
+1536. **W794** (done) Repin to mtools 8c8abe7 so the ratchet test runs in the Bazel sandbox, and drop its skip
+1537. **W798** (done) Choosing a card-list order by radio or key opens the Cards section, so the choice shows (operator
    report 2026-10-20)
-1485. **W799** (done) Decompose web/index.html (1879 lines: one 1710-line script) into files by concern, with a size
+1538. **W799** (done) Decompose web/index.html (1879 lines: one 1710-line script) into files by concern, with a size
    budget that only falls
-1486. **W819** (done) A landing that adds a module rebuilds the live .venv, so luthen's nemik-check gate never runs a
+1539. **W819** (done) A landing that adds a module rebuilds the live .venv, so luthen's nemik-check gate never runs a
    stale copy
-1487. **W825** (done) Repin the seven mtools wheels to f2f18a1 for --intervention (mtools:W1739)
-1488. **W830** (done) Repin the seven vendored mtools wheels past 2c1b79d (manifest-aware --close-umbrellas, Gated-*
+1540. **W825** (done) Repin the seven mtools wheels to f2f18a1 for --intervention (mtools:W1739)
+1541. **W830** (done) Repin the seven vendored mtools wheels past 2c1b79d (manifest-aware --close-umbrellas, Gated-*
    fixes)
-1489. **W835** (done) digest --since delta keys on the whole line, so a count or age that moves reprints the line every
+1542. **W835** (done) digest --since delta keys on the whole line, so a count or age that moves reprints the line every
    turn: key on the message shape (digits normalized) and print a moved number once and compactly
-1490. **W843** (done) Repin the seven vendored mtools wheels to d5d8110, whose writer takes the status landed
-1491. **W844** (done) Repin the seven vendored mtools wheels past d1d4ec7, whose writer has --deploys and whose check
+1543. **W843** (done) Repin the seven vendored mtools wheels to d5d8110, whose writer takes the status landed
+1544. **W844** (done) Repin the seven vendored mtools wheels past d1d4ec7, whose writer has --deploys and whose check
    says landed without deploys true
-1492. **W845** (done) Draw the landed status in the view with a mark and a colour of its own: a state mark, a legend
+1545. **W845** (done) Draw the landed status in the view with a mark and a colour of its own: a state mark, a legend
    entry and a theme token that clears the contrast and second-channel checks
-1493. **W866** (done) The commit gate solves the Containerfile in both TESTS modes when it or build.yml changes, so an
+1546. **W866** (done) The commit gate solves the Containerfile in both TESTS modes when it or build.yml changes, so an
    unparsable image build fails the commit, not CI
-1494. **W867** (done) The nemik image builds again: a server pod serves a tag newer than the last one built before
+1547. **W867** (done) The nemik image builds again: a server pod serves a tag newer than the last one built before
    9bfec9c (2553320)
-1495. **W873** (done) nemik-exports uses each repo's own export when present and derives from luthen's list only for a
+1548. **W873** (done) nemik-exports uses each repo's own export when present and derives from luthen's list only for a
    repo that has none
-1496. **W874** (done) Repin the vendored mtools wheels to a sha with the writer's --export mode, so nemik's own writer
+1549. **W874** (done) Repin the vendored mtools wheels to a sha with the writer's --export mode, so nemik's own writer
    can emit its export
-1497. **W878** (done) Ask estate: nemik:W516 (withholding at the source): please repin your mikemol-paths-forward to
+1550. **W878** (done) Ask estate: nemik:W516 (withholding at the source): please repin your mikemol-paths-forward to
    mtools 5ba261f or
-1498. **W880** (done) Ask linux-sources: nemik:W516 (withholding at the source): please repin your mikemol-paths-forward
+1551. **W880** (done) Ask linux-sources: nemik:W516 (withholding at the source): please repin your mikemol-paths-forward
    to mtools 5ba261f or
-1499. **W882** (done) nemik-inbound and its hook cut an ask's title at a fixed width, so a peer sees 'please r' and not
+1552. **W882** (done) nemik-inbound and its hook cut an ask's title at a fixed width, so a peer sees 'please r' and not
    the ask: show it whole or point to the entry
-1500. **W890** (done) Render nemik's standard views to PDF on request, so an agent can produce and send one to the
+1553. **W890** (done) Render nemik's standard views to PDF on request, so an agent can produce and send one to the
    operator's phone
-1501. **W896** (done) UnwarrantedRulingShape also flags evidence that cites a transcript line or uuid for an operator
+1554. **W896** (done) UnwarrantedRulingShape also flags evidence that cites a transcript line or uuid for an operator
    ruling with no warrant record, as estate's cards phrase it
-1502. **W897** (done) Repin the writer to mtools c9c0070f or later and add --claim to the --warrant hints in shapes.ttl
+1555. **W897** (done) Repin the writer to mtools c9c0070f or later and add --claim to the --warrant hints in shapes.ttl
    and warrantdebt.py, since the writer now refuses a warrant without one
-1503. **W898** (done) nemik-check --repo R --warnings prints only that repo's Warning and Violates rows, so a repo's
+1556. **W898** (done) nemik-check --repo R --warnings prints only that repo's Warning and Violates rows, so a repo's
    tick-open can read its own shapes without the fleet's 127 KB
-1504. **W903** (done) An unclaimed card's label is under WCAG 1.4.3 on the page: its red ink over its 15% red tint is
+1557. **W903** (done) An unclaimed card's label is under WCAG 1.4.3 on the page: its red ink over its 15% red tint is
    3.48:1 against the page background, below 4.5:1
-1505. **W904** (done) The fleet-view PDF is the graph SVG rendered by rsvg-convert: no panels, no Chromium print
-1506. **W915** (done) Keep nemik's communications aligned with the federated, ActivityPub-aligned model: audit each
+1558. **W904** (done) The fleet-view PDF is the graph SVG rendered by rsvg-convert: no panels, no Chromium print
+1559. **W915** (done) Keep nemik's communications aligned with the federated, ActivityPub-aligned model: audit each
    channel against it and card the gaps
-1507. **W920** (done) One wheel notch zooms the graph by about 1.2x, not the 2.5x of cytoscape's default
-1508. **W928** (done) Each nemik test run prints the CPU line the gate reads, so a test's cost is measured in CPU, which
+1560. **W920** (done) One wheel notch zooms the graph by about 1.2x, not the 2.5x of cytoscape's default
+1561. **W928** (done) Each nemik test run prints the CPU line the gate reads, so a test's cost is measured in CPU, which
    host load cannot inflate
-1509. **W929** (done) A repo's queue reads as a queue on the page: each ready card's place, why it is there, how long it
+1562. **W929** (done) A repo's queue reads as a queue on the page: each ready card's place, why it is there, how long it
    has waited, and what order it will be worked in
-1510. **W939** (done) The outbox's Ticket carries isResolved, resolved and context, and the verbs mean only real events
-1511. **W940** (done) The outbox's Ticket carries dependsOn for blocked_on and dependedBy for enables, so the edges
+1563. **W939** (done) The outbox's Ticket carries isResolved, resolved and context, and the verbs mean only real events
+1564. **W940** (done) The outbox's Ticket carries dependsOn for blocked_on and dependedBy for enables, so the edges
    travel with the card
-1512. **W942** (done) An edge letter carries one typed activity in a machine-readable block, with an id, an actor, an
+1565. **W942** (done) An edge letter carries one typed activity in a machine-readable block, with an id, an actor, an
    object and a target
-1513. **W943** (done) A floor ask can travel as an Offer addressed to its owner, beside summit's entry
-1514. **W944** (done) The wait log record's body is an ActivityStreams Update with an id, the actor repo and the blocker
+1566. **W943** (done) A floor ask can travel as an Offer addressed to its owner, beside summit's entry
+1567. **W944** (done) The wait log record's body is an ActivityStreams Update with an id, the actor repo and the blocker
    as target, beside its sentence
-1515. **W945** (done) The outbox appends the log's activities for a repo in published order, and says when the log store
+1568. **W945** (done) The outbox appends the log's activities for a repo in published order, and says when the log store
    could not be reached
-1516. **W950** (done) log-activities.json is one flat JSON object per line, a header line then one activity per line, so
+1569. **W950** (done) log-activities.json is one flat JSON object per line, a header line then one activity per line, so
    the server reads it with hostroot's flat reader
-1517. **W951** (done) Something runs nemik-hostroot --log-activities on the host on a timer and places
+1570. **W951** (done) Something runs nemik-hostroot --log-activities on the host on a timer and places
    log-activities.json beside the queues, as it does for landings.json
-1518. **W960** (done) outbox builds its collection without a dict spread, so the pinned Codon stops aborting on every
+1571. **W960** (done) outbox builds its collection without a dict spread, so the pinned Codon stops aborting on every
    gate census (coredump_loop paged)
-1519. **W961** (done) A test fails when a module in src/nemik builds a dict with a spread, except the one already in the
+1572. **W961** (done) A test fails when a module in src/nemik builds a dict with a spread, except the one already in the
    Codon baseline, so a new module cannot reintroduce the abort
-1520. **W962** (done) The Codon census runs each codon child with core dumps off so systemd-coredump is not invoked at
+1573. **W962** (done) The Codon census runs each codon child with core dumps off so systemd-coredump is not invoked at
    all, not just a zero limit
-1521. **W983** (done) A shape judges a retro's pass chain: each pass's findings disjoint from the frozen union of
+1574. **W983** (done) A shape judges a retro's pass chain: each pass's findings disjoint from the frozen union of
    earlier ones, the last pass empty, the handoff labelled exhausted and not verified (gates G4 and G8)
-1522. **W1013** (done) Move nemik's commit path from the sibling mtools checkout to a sha-pinned mikemol-hooks install
+1575. **W1013** (done) Move nemik's commit path from the sibling mtools checkout to a sha-pinned mikemol-hooks install
    at 57b9f2ac or later, repinned with a dry run first
-1523. **W1019** (done) Answer nemik: mtools:W1909 is done
-1524. **W1029** (done) Repin the mtools wheels to 29883314 or later with mikemol-repin --revendor, dry run first
-1525. **W1031** (done) nemik-check prints one parseable summary line on every exit, NEMIK-CHECK exit=N violating=V
+1576. **W1019** (done) Answer nemik: mtools:W1909 is done
+1577. **W1029** (done) Repin the mtools wheels to 29883314 or later with mikemol-repin --revendor, dry run first
+1578. **W1031** (done) nemik-check prints one parseable summary line on every exit, NEMIK-CHECK exit=N violating=V
    unreadable=U, and an uncaught error prints NEMIK-CHECK error: and exits 3, so luthen's parser never sees a nonzero
    exit without a cause
-1526. **W1033** (done) A shared contract test for round.json: one schema, checked by nemik's writer, luthen's egress
+1579. **W1033** (done) A shared contract test for round.json: one schema, checked by nemik's writer, luthen's egress
    gate and mtools' round_check, so a producer format change fails a test instead of an egress rule
-1527. **W1034** (done) Pay down codon-baseline.json: the ratchet pace says it is behind (entries rose 226 to 230 in a
+1580. **W1034** (done) Pay down codon-baseline.json: the ratchet pace says it is behind (entries rose 226 to 230 in a
    day). Each new module that imports a sibling adds an entry reading no module named nemik.X, so find whether the
    census can compile a module with src on Codon's path and drop those entries
-1528. **W1039** (done) A ratchet whose series ended reads unknown, never ok or behind; only a tombstone retires it
-1529. **W1040** (done) Read the store's retired-ratchet tombstones into the pace verdict
-1530. **W1043** (done) nemik-rank skips the SHACL pass: it ranks from the graphs and ignores the findings
-1531. **W1044** (done) Bazel shards a test target across the tests pytest collects; test_pdf runs in three shards
-1532. **W1045** (done) The Codon baseline lists only failing entries, so its ratchet counts failures, not modules
-1533. **W1046** (done) A declared re-baseline restarts a ratchet's pace history, so a change of representation earns no
+1581. **W1039** (done) A ratchet whose series ended reads unknown, never ok or behind; only a tombstone retires it
+1582. **W1040** (done) Read the store's retired-ratchet tombstones into the pace verdict
+1583. **W1043** (done) nemik-rank skips the SHACL pass: it ranks from the graphs and ignores the findings
+1584. **W1044** (done) Bazel shards a test target across the tests pytest collects; test_pdf runs in three shards
+1585. **W1045** (done) The Codon baseline lists only failing entries, so its ratchet counts failures, not modules
+1586. **W1046** (done) A declared re-baseline restarts a ratchet's pace history, so a change of representation earns no
    paydown credit
-1534. **W1051** (done) The pace board always exports whether its file was readable, so a failed read is a signal and
+1587. **W1051** (done) The pace board always exports whether its file was readable, so a failed read is a signal and
    never an absence
-1535. **W1054** (done) The builder keeps its build cache across rollouts, so a new pod rebuilds only what its inputs
+1588. **W1054** (done) The builder keeps its build cache across rollouts, so a new pod rebuilds only what its inputs
    changed
-1536. **W1060** (done) Find why the page sometimes lacks cards.js under load, and make a broken page fail a browser test
+1589. **W1060** (done) Find why the page sometimes lacks cards.js under load, and make a broken page fail a browser test
    instead of hanging it
-1537. **W1061** (done) Shard the slow browser tests test_modes and test_layout into three each, as test_pdf is
-1538. **W1062** (done) The working set that drift is measured against includes the cards a queued commit stack names
-1539. **W1064** (done) The builder publishes its own peak memory and CPU per build as gauges, so the cost is a series
-1540. **W1065** (done) Answer nemik: linux-sources:W385 is done
-1541. **W1066** (done) Answer nemik: mtools:W1503 is done
-1542. **W1068** (done) Answer nemik: luthen-observability:W1643 is done; W1054 mounts its claim in stack503
-1543. **W1069** (done) Make W1060's weakest link a test: parse index.html's inline script and the late scripts' names,
+1590. **W1061** (done) Shard the slow browser tests test_modes and test_layout into three each, as test_pdf is
+1591. **W1062** (done) The working set that drift is measured against includes the cards a queued commit stack names
+1592. **W1064** (done) The builder publishes its own peak memory and CPU per build as gauges, so the cost is a series
+1593. **W1065** (done) Answer nemik: linux-sources:W385 is done
+1594. **W1066** (done) Answer nemik: mtools:W1503 is done
+1595. **W1068** (done) Answer nemik: luthen-observability:W1643 is done; W1054 mounts its claim in stack503
+1596. **W1069** (done) Make W1060's weakest link a test: parse index.html's inline script and the late scripts' names,
    and assert the first load-time use is popLater at cards.js
-1544. **W1071** (done) Declare linux-sources' findings/letter-quotes-baseline.tsv re-baseline 71 to 18 (row count to sum
+1597. **W1071** (done) Declare linux-sources' findings/letter-quotes-baseline.tsv re-baseline 71 to 18 (row count to sum
    of mismatch, joined and unjudged), so the pace gives no paydown credit
-1545. **W1074** (done) Label the build gauges with pod and cache_hit and publish peak swap beside RSS (VmSwap), so
+1598. **W1074** (done) Label the build gauges with pod and cache_hit and publish peak swap beside RSS (VmSwap), so
    demand is RSS plus swap and a warm build is read alone
-1546. **W1082** (done) Publish round size against ready count per repo as a gauge, and derive the round's width from
+1599. **W1082** (done) Publish round size against ready count per repo as a gauge, and derive the round's width from
    what the gate and the scratch builds can carry, not from a floor of three
-1547. **W1084** (done) Remove the one-working-card wording the tree still carries: nemik-work's help, the workflow
+1600. **W1084** (done) Remove the one-working-card wording the tree still carries: nemik-work's help, the workflow
    transition text and the shape's comment
-1548. **W1085** (done) Replace test_layout's clock-bound page waits with event waits: a 30 s wait_for_selector timed out
+1601. **W1085** (done) Replace test_layout's clock-bound page waits with event waits: a 30 s wait_for_selector timed out
    in a loaded gate with no page error named
-1549. **W1087** (done) Size the snapshots volume from a measured snapshot: 77 MiB each, five at the build's peak, so
+1602. **W1087** (done) Size the snapshots volume from a measured snapshot: 77 MiB each, five at the build's peak, so
    512Mi, not 256Mi
-1550. **W1089** (done) Repin the mtools dists to 94149f78 or later (W2031 fixes the gate-index race between concurrent
+1603. **W1089** (done) Repin the mtools dists to 94149f78 or later (W2031 fixes the gate-index race between concurrent
    gates in one repo)
-1551. **W1090** (done) Repin the mtools dists to 0814f162 or later (watchdog exit explanation, the round check no longer
+1604. **W1090** (done) Repin the mtools dists to 0814f162 or later (watchdog exit explanation, the round check no longer
    demands a ready card a live stack names) and restart the watchdog
-1552. **W1091** (done) Answer nemik: luthen-observability:W1644 is done; W1073 stays open for the memory cut
-1553. **W1105** (done) Clamp the pace so a ratchet never requires more than its current value, with a fixture (panflute
+1605. **W1091** (done) Answer nemik: luthen-observability:W1644 is done; W1073 stays open for the memory cut
+1606. **W1105** (done) Clamp the pace so a ratchet never requires more than its current value, with a fixture (panflute
    requires 6 against a value of 1)
-1554. **W1107** (done) nemik-rank --pace prints one line per behind ratchet and exits nonzero when any repo is behind,
+1607. **W1107** (done) nemik-rank --pace prints one line per behind ratchet and exits nonzero when any repo is behind,
    for the host's tick hook
-1555. **W1109** (done) Repin mtools to 760ce3a5 or later for W2039 stack deletions under a directory, W2041 blank
+1608. **W1109** (done) Repin mtools to 760ce3a5 or later for W2039 stack deletions under a directory, W2041 blank
    blockers refused, W2038 tick-open ready cards
-1556. **W1110** (done) nemik-rank --pace without --root reads luthen's export tree, where ratchet-pace.json is
+1609. **W1110** (done) nemik-rank --pace without --root reads luthen's export tree, where ratchet-pace.json is
    published, not the repos root
-1557. **W1111** (done) Define the ratchet tombstone: where a repo writes one, where pacewrite reads it, and a retired
+1610. **W1111** (done) Define the ratchet tombstone: where a repo writes one, where pacewrite reads it, and a retired
    ratchet leaves the pace verdict only by one
-1558. **W1112** (done) The pace and nemik-rank --pace carry a horizon per ratchet: value over observed fall per landing,
+1611. **W1112** (done) The pace and nemik-rank --pace carry a horizon per ratchet: value over observed fall per landing,
    landings-to-zero and days-to-zero at the repo's landing rate
-1559. **W1116** (done) Pay the codon ratchet's owed 1 by making one failing module compile whole, the smallest
+1612. **W1116** (done) Pay the codon ratchet's owed 1 by making one failing module compile whole, the smallest
    argparse-only CLI first
-1560. **W1119** (done) Restore ratchet-pace.json: luthen's egress gate removes a row of another shape, and W1114's value
+1613. **W1119** (done) Restore ratchet-pace.json: luthen's egress gate removes a row of another shape, and W1114's value
    and horizon keys are not in its list
-1561. **W1120** (done) A shared fixture for ratchet-pace.json rows that nemik's pace writer tests and luthen's egress
+1614. **W1120** (done) A shared fixture for ratchet-pace.json rows that nemik's pace writer tests and luthen's egress
    gate both read, so a new field fails before it lands
-1562. **W1125** (done) Repin mtools to 65b7491b for W2046 empty next step refused, W2043 watchdog evidence, W2048
+1615. **W1125** (done) Repin mtools to 65b7491b for W2046 empty next step refused, W2043 watchdog evidence, W2048
    commitments-tree
-1563. **W1126** (done) A ratchet's required fall only rises across a missing pace file: the prior lives in nemik's own
+1616. **W1126** (done) A ratchet's required fall only rises across a missing pace file: the prior lives in nemik's own
    state, not in the export luthen's gate can delete
-1564. **W1127** (done) nemik-history --baseline refuses a time with no zone and accepts a relative window such as -1h or
+1617. **W1127** (done) nemik-history --baseline refuses a time with no zone and accepts a relative window such as -1h or
    the last ledger tick
-1565. **W1129** (done) The required-fall alert is clamp-aware: resets_of reads the value, and fixtures cover a restored
+1618. **W1129** (done) The required-fall alert is clamp-aware: resets_of reads the value, and fixtures cover a restored
    and a clamped series
-1566. **W1131** (done) The Forgejo image build fails test_layout's popover test, tests/test_layout.py:958 box is None,
+1619. **W1131** (done) The Forgejo image build fails test_layout's popover test, tests/test_layout.py:958 box is None,
    though the gate passes it
-1567. **W1132** (done) nemik-witnesses --apply reports the writer's own refusal line when an apply fails, since exit 2
+1620. **W1132** (done) nemik-witnesses --apply reports the writer's own refusal line when an apply fails, since exit 2
    every five minutes said nothing
-1568. **W1133** (done) Declare nemik's ratchets so mypy and ruff count findings, not the entries of their baseline files
-1569. **W1134** (done) Pay six D103 docstrings and one Any-typed check in four small test files, ruff and mypy
-1570. **W1137** (done) Pay mypy 3 and ruff 5 in five small files, the paydown nemik owes after the ratchets were counted
+1621. **W1133** (done) Declare nemik's ratchets so mypy and ruff count findings, not the entries of their baseline files
+1622. **W1134** (done) Pay six D103 docstrings and one Any-typed check in four small test files, ruff and mypy
+1623. **W1137** (done) Pay mypy 3 and ruff 5 in five small files, the paydown nemik owes after the ratchets were counted
    in findings
-1571. **W1138** (done) Publish one series per open card (issued and last-worked seconds, labelled repo, card, status) so
+1624. **W1138** (done) Publish one series per open card (issued and last-worked seconds, labelled repo, card, status) so
    card age is a query and not a new producer per question
-1572. **W1142** (done) marks.py imports Path and Json for typing only, so ruff falls 2616 to 2614 (paydown after
+1625. **W1142** (done) marks.py imports Path and Json for typing only, so ruff falls 2616 to 2614 (paydown after
    adoption.py)
-1573. **W1143** (done) realize.py documents its indirect OpaUnavailableError in prose, so ruff falls 2614 to 2613
+1626. **W1143** (done) realize.py documents its indirect OpaUnavailableError in prose, so ruff falls 2614 to 2613
    (paydown)
-1574. **W1148** (done) catalog.py states its summary as a command, documents its return and wraps its docstring, so ruff
+1627. **W1148** (done) catalog.py states its summary as a command, documents its return and wraps its docstring, so ruff
    falls 2613 to 2608 (paydown)
-1575. **W1151** (done) alert_for fires on a miss in either direction, worse than predicted (fleet wandering) or better
+1628. **W1151** (done) alert_for fires on a miss in either direction, worse than predicted (fleet wandering) or better
    (model wrong), as the ruling says
-1576. **W1153** (done) Trailing predictor for the net forecast, so each window is predicted from the days just before it
-1577. **W1154** (done) endpoint.py narrows the store's state and address to strings and test_check_committed types its
+1629. **W1153** (done) Trailing predictor for the net forecast, so each window is predicted from the days just before it
+1630. **W1154** (done) endpoint.py narrows the store's state and address to strings and test_check_committed types its
    changed queue, so mypy falls 5638 to 5636 (paydown)
-1578. **W1155** (done) The pace reads linux-sources' letter-quotes ratchet behind with observed fall 0 while its value
+1631. **W1155** (done) The pace reads linux-sources' letter-quotes ratchet behind with observed fall 0 while its value
    fell 13 to 2 over the same landings
-1579. **W1156** (done) test_critical_cards types the tuples its card helper takes, so mypy falls 5636 to 5634 (paydown)
-1580. **W1157** (done) installed.popen takes the two options its caller passes and returns Popen[bytes], so ruff falls
+1632. **W1156** (done) test_critical_cards types the tuples its card helper takes, so mypy falls 5636 to 5634 (paydown)
+1633. **W1157** (done) installed.popen takes the two options its caller passes and returns Popen[bytes], so ruff falls
    2608 to 2607 and mypy 5634 to 5631 (paydown)
-1581. **W1158** (done) The required fall is seeded from one earlier window's burst and then only rises, so nemik's mypy
+1634. **W1158** (done) The required fall is seeded from one earlier window's burst and then only rises, so nemik's mypy
    owes 109 and ruff 73
-1582. **W1159** (done) test_mypy_ratchet and test_ruff_ratchet read their baseline's file names through the typed tree,
+1635. **W1159** (done) test_mypy_ratchet and test_ruff_ratchet read their baseline's file names through the typed tree,
    so mypy falls 5631 to 5625 (paydown)
-1583. **W1160** (done) Repin the vendored mtools wheels past 266e51fd (mtools 504b80ec), dry run first, so the host's
+1636. **W1160** (done) Repin the vendored mtools wheels past 266e51fd (mtools 504b80ec), dry run first, so the host's
    live writer drops no tick hooks
-1584. **W1161** (done) test_saturation builds its queue as a typed dict, so mypy falls 5625 to 5622 (paydown)
-1585. **W1162** (done) hostapply reads its export through one typed loader, so mypy falls 5622 to 5620 (paydown)
-1586. **W1164** (done) pace self-check names a requirement above the best window its series ever made (learned bound,
+1637. **W1161** (done) test_saturation builds its queue as a typed dict, so mypy falls 5625 to 5622 (paydown)
+1638. **W1162** (done) hostapply reads its export through one typed loader, so mypy falls 5622 to 5620 (paydown)
+1639. **W1164** (done) pace self-check names a requirement above the best window its series ever made (learned bound,
    alert only)
-1587. **W1165** (done) Reset nemik's declared mypy and ruff requirements from 109 and 73 to 2 and 4, a declared
+1640. **W1165** (done) Reset nemik's declared mypy and ruff requirements from 109 and 73 to 2 and 4, a declared
    re-baseline with its reason kept
-1588. **W1166** (done) test_pins types its capsys fixture, so ruff falls 2607 to 2606 and mypy 5620 to 5618 (paydown)
-1589. **W1168** (done) test_publish reads hashes.json through the typed tree, so mypy falls 5618 to 5616 (paydown)
-1590. **W1170** (done) test_umbrella_descent and test_deadlock_check build their queue as typed dicts, so mypy falls
+1641. **W1166** (done) test_pins types its capsys fixture, so ruff falls 2607 to 2606 and mypy 5620 to 5618 (paydown)
+1642. **W1168** (done) test_publish reads hashes.json through the typed tree, so mypy falls 5618 to 5616 (paydown)
+1643. **W1170** (done) test_umbrella_descent and test_deadlock_check build their queue as typed dicts, so mypy falls
    5616 to 5610 (paydown)
-1591. **W1171** (done) test_inbound_orphans builds its queue as typed dicts, so mypy falls 5610 to 5604 (paydown)
-1592. **W1172** (done) blocks_cli reads its arguments through a typed namespace, so mypy falls 5602 to 5596 (paydown)
-1593. **W1174** (done) test_hashes reads hashes.json through the typed tree, so mypy falls 5596 to 5588 (paydown)
-1594. **W1177** (done) Playwright adapter: a real import and one typed evaluate_json helper in tests/webpage.py
-1595. **W1180** (done) Vendor mtools' transcriptstruct dist so luthen's live tools carry mikemol-transcriptstruct
-1596. **W1181** (done) The idle-loop warning names the agent blockers to nudge and does not suggest disarming when every
+1644. **W1171** (done) test_inbound_orphans builds its queue as typed dicts, so mypy falls 5610 to 5604 (paydown)
+1645. **W1172** (done) blocks_cli reads its arguments through a typed namespace, so mypy falls 5602 to 5596 (paydown)
+1646. **W1174** (done) test_hashes reads hashes.json through the typed tree, so mypy falls 5596 to 5588 (paydown)
+1647. **W1177** (done) Playwright adapter: a real import and one typed evaluate_json helper in tests/webpage.py
+1648. **W1180** (done) Vendor mtools' transcriptstruct dist so luthen's live tools carry mikemol-transcriptstruct
+1649. **W1181** (done) The idle-loop warning names the agent blockers to nudge and does not suggest disarming when every
    open card waits on an agent
-1597. **W1182** (done) test_letters builds its fold queue as a typed dict, so mypy falls 5588 to 5583 (paydown)
-1598. **W1183** (done) roundgauges takes its two maps as required arguments, so it compiles under Codon and leaves the
+1650. **W1182** (done) test_letters builds its fold queue as a typed dict, so mypy falls 5588 to 5583 (paydown)
+1651. **W1183** (done) roundgauges takes its two maps as required arguments, so it compiles under Codon and leaves the
    codon baseline (paydown)
-1599. **W1185** (done) The hourly gauges build zoned windows, so luthen's nemik-history relay stops failing with 'names
+1652. **W1185** (done) The hourly gauges build zoned windows, so luthen's nemik-history relay stops failing with 'names
    a time with no zone'
-1600. **W1188** (done) nemik_ready_stale{repo}: the per-repo count of stale ready cards as a gauge luthen can alert on
+1653. **W1188** (done) nemik_ready_stale{repo}: the per-repo count of stale ready cards as a gauge luthen can alert on
    (github:R28)
-1601. **W1190** (done) pacerun compiles under the pinned Codon: its retired list is a list, not a frozenset, so it
+1654. **W1190** (done) pacerun compiles under the pinned Codon: its retired list is a list, not a frozenset, so it
    leaves the codon baseline (paydown)
-1602. **W1191** (done) roundcli compiles under the pinned Codon: its landing file is always a Path, NO_LANDINGS when
+1655. **W1191** (done) roundcli compiles under the pinned Codon: its landing file is always a Path, NO_LANDINGS when
    there is none, so it leaves the codon baseline (paydown)
-1603. **W1194** (done) nemik/__init__.py loses six ruff findings: its long lines wrapped, its predicate docstring made
+1656. **W1194** (done) nemik/__init__.py loses six ruff findings: its long lines wrapped, its predicate docstring made
    imperative with a Returns section, and its warning written with sys.stderr.write, so ruff falls 2542 to 2536
    (paydown)
-1604. **W1195** (done) marks.py and realize.py lose four mypy findings: json.loads is read as an opaque object and
+1657. **W1195** (done) marks.py and realize.py lose four mypy findings: json.loads is read as an opaque object and
    narrowed, and the empty list is annotated, so mypy falls 4448 to 4444 (paydown)
-1605. **W1196** (done) The pace states mypy required 109 and ruff 49 again at 00:34:23Z, after W1165's operator-approved
+1658. **W1196** (done) The pace states mypy required 109 and ruff 49 again at 00:34:23Z, after W1165's operator-approved
    reset to 2 and 4: find what put 109 back and why the reset did not hold, before any paydown is judged against it
-1606. **W1199** (done) importer.py, issues.py and health.py lose 18 ruff findings: their module docstrings rewrapped to
+1659. **W1199** (done) importer.py, issues.py and health.py lose 18 ruff findings: their module docstrings rewrapped to
    the line limit and two predicate docstrings made imperative, so ruff falls 2536 to 2518 (paydown)
-1607. **W1200** (done) cachestore.py loses five ruff findings: its module docstring rewrapped, two docstring first lines
+1660. **W1200** (done) cachestore.py loses five ruff findings: its module docstring rewrapped, two docstring first lines
    shortened or made imperative, so ruff falls 2518 to 2513 (paydown)
-1608. **W1201** (done) test_layout.py loses three mypy findings: the dict literal handed to json.dumps is a typed
+1661. **W1201** (done) test_layout.py loses three mypy findings: the dict literal handed to json.dumps is a typed
    variable, so mypy falls 4444 to 4441 (paydown)
-1609. **W1202** (done) pacing.py, pieces.py and starved.py lose five ruff findings: three module docstrings rewrapped
+1662. **W1202** (done) pacing.py, pieces.py and starved.py lose five ruff findings: three module docstrings rewrapped
    and three docstring first lines made imperative, so ruff falls 2513 to 2508 (paydown)
-1610. **W1203** (done) pins.py, calendars.py and calwrite.py lose ten ruff findings: long comment, docstring and
+1663. **W1203** (done) pins.py, calendars.py and calwrite.py lose ten ruff findings: long comment, docstring and
    f-string lines rewrapped and docstring first lines made imperative, so ruff falls 2508 to 2498 (paydown)
-1611. **W1204** (done) blocks.py, index.py and overlaps.py lose eleven ruff findings: long comment and docstring lines
+1664. **W1204** (done) blocks.py, index.py and overlaps.py lose eleven ruff findings: long comment and docstring lines
    wrapped and four docstring first lines made imperative or shortened, so ruff falls 2498 to 2487 (paydown)
-1612. **W1205** (done) check.py loses nine ruff findings: its module docstring, comment blocks and two long f-strings
+1665. **W1205** (done) check.py loses nine ruff findings: its module docstring, comment blocks and two long f-strings
    wrapped, and one docstring first line made imperative, so ruff falls 2487 to 2478 (paydown)
-1613. **W1206** (done) checks/claims.py annotates its claim functions: 18 parameterless ones return None and the nested
+1666. **W1206** (done) checks/claims.py annotates its claim functions: 18 parameterless ones return None and the nested
    reaches is typed, so mypy falls 4441 to 4375 and ruff 22 more (paydown)
-1614. **W1207** (done) Eight test files annotate their pytest fixtures and procedures: tmp_path as Path, monkeypatch as
+1667. **W1207** (done) Eight test files annotate their pytest fixtures and procedures: tmp_path as Path, monkeypatch as
    MonkeyPatch, capsys as CaptureFixture, and -> None, so mypy falls 4375 to 4325 and ruff 2456 to 2433 (paydown)
-1615. **W1208** (done) Eleven more test files annotate their pytest fixtures and procedures, adding the import the
+1668. **W1208** (done) Eleven more test files annotate their pytest fixtures and procedures, adding the import the
    annotation needs and moving a type-only pytest import under TYPE_CHECKING, so mypy falls 4325 to 4227 and ruff 2433
    to 2416 (paydown)
-1616. **W1209** (done) mirrorreq compiles under the pinned Codon: its Request is a plain class with __init__, __eq__,
+1669. **W1209** (done) mirrorreq compiles under the pinned Codon: its Request is a plain class with __init__, __eq__,
    __hash__ and __repr__, not a NamedTuple, so it leaves the codon baseline, the paydown the pace owes (codon owes 1,
    fell 0 over ten landings)
-1617. **W1210** (done) nemik exports nemik_ratchet_reset{repo,ratchet}, the required value a declared reset set
+1670. **W1210** (done) nemik exports nemik_ratchet_reset{repo,ratchet}, the required value a declared reset set
    (rebaselines.RESETS), while the reset is on record, so luthen's ratchet_required_fell alert can tell a declared reset
    from an undeclared fall
-1618. **W1211** (done) Health, Pace, Pin, Letter and Starved gain class docstrings, so ruff falls 2416 to 2411 (paydown)
-1619. **W1212** (done) Critical, Fire, Bands, Guarantees, Weights, Composition and Holder gain class docstrings, so ruff
+1671. **W1211** (done) Health, Pace, Pin, Letter and Starved gain class docstrings, so ruff falls 2416 to 2411 (paydown)
+1672. **W1212** (done) Critical, Fire, Bands, Guarantees, Weights, Composition and Holder gain class docstrings, so ruff
    falls 2411 to 2404 (paydown)
-1620. **W1213** (done) ref_of, umbrellas, overlaps, spool_path and label gain docstrings with Returns sections, so ruff
+1673. **W1213** (done) ref_of, umbrellas, overlaps, spool_path and label gain docstrings with Returns sections, so ruff
    falls 2404 to 2399 (paydown)
-1621. **W1221** (done) calwrite.uid, churn.share and churn.render, floorasks.main, issues.write, withheld.load and
+1674. **W1221** (done) calwrite.uid, churn.share and churn.render, floorasks.main, issues.write, withheld.load and
    workflows.transitions gain docstrings (Returns and Raises where they apply), so ruff falls 2399 to 2392 (paydown)
-1622. **W1223** (done) adapter.bind, workstream_uri and waypoint_uri, Card.repo and done, Index.successors, open and
+1675. **W1223** (done) adapter.bind, workstream_uri and waypoint_uri, Card.repo and done, Index.successors, open and
    has_state, Task.repo and blocks.operator_category gain docstrings, so ruff falls 2392 to 2382 (paydown)
-1623. **W1227** (done) Ruff's own safe fixes are applied to twenty-two files, so ruff falls 2382 to 2342 and mypy 4227
+1676. **W1227** (done) Ruff's own safe fixes are applied to twenty-two files, so ruff falls 2382 to 2342 and mypy 4227
    to 4221 (paydown)
-1624. **W1228** (done) Nine test files type their bare dict and list helpers as dict[str, object] and list[object], so
+1677. **W1228** (done) Nine test files type their bare dict and list helpers as dict[str, object] and list[object], so
    mypy falls 4221 to 4126 (paydown)
-1625. **W1230** (done) test_editable's _Dist and test_withheld's docs fixture are annotated, so ruff falls 2342 to 2336
+1678. **W1230** (done) test_editable's _Dist and test_withheld's docs fixture are annotated, so ruff falls 2342 to 2336
    and mypy 4126 to 4115 (paydown)
-1626. **W1233** (done) Four untyped test definitions are annotated (capsys twice, a parametrized pair, a module loader),
+1679. **W1233** (done) Four untyped test definitions are annotated (capsys twice, a parametrized pair, a module loader),
    so mypy and ruff fall (paydown)
-1627. **W1234** (done) Twelve read_text and write_text calls name their encoding, so ruff's PLW1514 falls by twelve
+1680. **W1234** (done) Twelve read_text and write_text calls name their encoding, so ruff's PLW1514 falls by twelve
    (paydown)
-1628. **W1235** (done) Ruff's own low-risk fixes for thirteen rule codes are applied across the tree, so ruff falls 2125
+1681. **W1235** (done) Ruff's own low-risk fixes for thirteen rule codes are applied across the tree, so ruff falls 2125
    to 2058 and mypy 4105 to 4065 (paydown)
-1629. **W1236** (done) Typing-only imports in twenty-four test files move under TYPE_CHECKING, so ruff's TC001 to TC003
+1682. **W1236** (done) Typing-only imports in twenty-four test files move under TYPE_CHECKING, so ruff's TC001 to TC003
    fall by thirty-one (paydown)
-1630. **W1237** (done) Typing-only imports in twenty src modules and one test move under TYPE_CHECKING, so ruff's TC001
+1683. **W1237** (done) Typing-only imports in twenty src modules and one test move under TYPE_CHECKING, so ruff's TC001
    to TC003 fall to zero (paydown)
-1631. **W1245** (done) Class: gate tests time out under load and pass alone (test_salience, test_layout shard 4) with no
+1684. **W1245** (done) Class: gate tests time out under load and pass alone (test_salience, test_layout shard 4) with no
    failing assertion
-1632. **W1252** (done) Install librsvg2-bin in the Containerfile test stage so the PDF tests run there
-1633. **W1256** (done) The Containerfile test stage's librsvg2-bin install ends with rsvg-convert --version, so a wrong
+1685. **W1252** (done) Install librsvg2-bin in the Containerfile test stage so the PDF tests run there
+1686. **W1256** (done) The Containerfile test stage's librsvg2-bin install ends with rsvg-convert --version, so a wrong
    package name fails the build in seconds
-1634. **W1259** (done) The fleet reader excludes the root workstream (/home/mikemol/github/.claude/paths-forward.json,
+1687. **W1259** (done) The fleet reader excludes the root workstream (/home/mikemol/github/.claude/paths-forward.json,
    77 symbols), so every host edge such as github:W48 is invisible to nemik-check, the cycle check and the rank
-1635. **W1260** (done) One test per named behaviour change of rank.py's typed [order] read (a non-table order, a
+1688. **W1260** (done) One test per named behaviour change of rank.py's typed [order] read (a non-table order, a
    non-table scalarize, numbers as floats, a boolean refused)
-1636. **W1262** (done) A nemik-check rule: a human-blocked 'operator: act' ask naming sudo, root, chown, install -d,
+1689. **W1262** (done) A nemik-check rule: a human-blocked 'operator: act' ask naming sudo, root, chown, install -d,
    mkfs, mount or systemctl --system is flagged unless its evidence carries an 'apply loop cannot: `<reason,` card>'
    line, and the check exits nonzero
-1637. **W1281** (done) nemik-wake mode prints one liveness line per repo from luthen-series.json: repo verdict as_of, no
+1690. **W1281** (done) nemik-wake mode prints one liveness line per repo from luthen-series.json: repo verdict as_of, no
    sample, max-age refusal
-1638. **W1283** (done) Answer luthen-observability:W1805: are nemik images rebuildable and which old tags may a
+1691. **W1283** (done) Answer luthen-observability:W1805: are nemik images rebuildable and which old tags may a
    retention rule drop (unread: gated build time, tags still pulled)
-1639. **W1284** (done) nemik-rank --pace prints the pace as_of beside the repo's newest landing time and labels a
+1692. **W1284** (done) nemik-rank --pace prints the pace as_of beside the repo's newest landing time and labels a
    ratchet PENDING when the pace is older than that landing
-1640. **W1285** (done) Read back luthen's W1804 witness: the pinned nemik-wake --series-lines prints linux-sources
+1693. **W1285** (done) Read back luthen's W1804 witness: the pinned nemik-wake --series-lines prints linux-sources
    dormant and nemik ok with as_of times
-1641. **W1286** (done) nemik-wake --series-only: print the series lines without loading the whole queue graph, so the
+1694. **W1286** (done) nemik-wake --series-only: print the series lines without loading the whole queue graph, so the
    tick-open hook can afford it
-1642. **W1287** (done) nemik-wake --only prints just the named repos, and --series defaults to luthen's export tree when
+1695. **W1287** (done) nemik-wake --only prints just the named repos, and --series defaults to luthen's export tree when
    the root has none
-1643. **W1288** (done) Tests without a docstring (D103, 398): one sentence per test function, taken from its name, a
+1696. **W1288** (done) Tests without a docstring (D103, 398): one sentence per test function, taken from its name, a
    file at a time
-1644. **W1289** (done) Codon fall: workflows.py loses its tomllib/importlib reads to tests/test_workflows.py and
+1697. **W1289** (done) Codon fall: workflows.py loses its tomllib/importlib reads to tests/test_workflows.py and
    compiles under Codon; mypy falls 3529 to 3508
-1645. **W1290** (done) nemik-check reads a typed Namespace, so mypy falls by its untyped args reads
-1646. **W1291** (done) score.py reads bands.toml through typed accessors, so tomllib's Any stops at one call and mypy
+1698. **W1290** (done) nemik-check reads a typed Namespace, so mypy falls by its untyped args reads
+1699. **W1291** (done) score.py reads bands.toml through typed accessors, so tomllib's Any stops at one call and mypy
    falls
-1647. **W1292** (done) blocks.inbound returns a typed InboundRow, so its five consumers read keys, not Any, and mypy
+1700. **W1292** (done) blocks.inbound returns a typed InboundRow, so its five consumers read keys, not Any, and mypy
    falls
-1648. **W1294** (done) apischema.py builds its JSON Schemas as dict[str, object] with a typed manifest, so the Any rows
+1701. **W1294** (done) apischema.py builds its JSON Schemas as dict[str, object] with a typed manifest, so the Any rows
    of the schema generator go and mypy falls
-1649. **W1295** (done) calendars.py reads and writes its rows as a typed Occurrence, so days_main and dedupe stop
+1702. **W1295** (done) calendars.py reads and writes its rows as a typed Occurrence, so days_main and dedupe stop
    handling Any and mypy falls
-1650. **W1296** (done) nemik.tomlview reads a parsed TOML through builtin types and test_workflows uses it, so tomllib's
+1703. **W1296** (done) nemik.tomlview reads a parsed TOML through builtin types and test_workflows uses it, so tomllib's
    Any stops at one call and mypy falls
-1651. **W1297** (done) 171 more tests in 69 files get a docstring taken from their sentence names, so ruff falls 1458 to
+1704. **W1297** (done) 171 more tests in 69 files get a docstring taken from their sentence names, so ruff falls 1458 to
    1287 and the owed fall of 49 is paid
-1652. **W1298** (done) 12 functions in pacing, overlaps, importer and staticserve get a Returns section written from
+1705. **W1298** (done) 12 functions in pacing, overlaps, importer and staticserve get a Returns section written from
    their bodies, so ruff falls 1287 to 1275
-1653. **W1299** (done) 12 functions in metrics, index, cards, flow, pins, salience and manifest get a Returns section
+1706. **W1299** (done) 12 functions in metrics, index, cards, flow, pins, salience and manifest get a Returns section
    written from their bodies, so ruff falls 1275 to 1263
-1654. **W1300** (done) letters.py compiles under Codon: its NamedTuple rows become plain classes, shlex and UTC go, and
+1707. **W1300** (done) letters.py compiles under Codon: its NamedTuple rows become plain classes, shlex and UTC go, and
    its subprocess, shutil and sys.executable code moves to a module of its own, so codon falls 2
-1655. **W1301** (done) manifest.py takes the manifest as an argument and imports nothing, with the file read in
+1708. **W1301** (done) manifest.py takes the manifest as an argument and imports nothing, with the file read in
    apischema, so it compiles under Codon and codon falls 144 to 142
-1656. **W1302** (done) 10 functions in rank get a Returns section written from their bodies, so ruff falls 1263 to 1252
-1657. **W1303** (done) pieces.py cuts and joins graph.json as a typed GraphDoc, so the piece code and its test and
+1709. **W1302** (done) 10 functions in rank get a Returns section written from their bodies, so ruff falls 1263 to 1252
+1710. **W1303** (done) pieces.py cuts and joins graph.json as a typed GraphDoc, so the piece code and its test and
    corpus tool stop handling Any and mypy falls
-1658. **W1304** (done) 11 more functions in rank get a Returns section written from their bodies, so ruff falls 1252 to
+1711. **W1304** (done) 11 more functions in rank get a Returns section written from their bodies, so ruff falls 1252 to
    1241
-1659. **W1305** (done) 12 functions in score, blocks and check get a Returns section written from their bodies, so ruff
+1712. **W1305** (done) 12 functions in score, blocks and check get a Returns section written from their bodies, so ruff
    falls 1241 to 1228
-1660. **W1306** (done) pins.py and floorasks.py read a typed Namespace and their JSON and TOML through nemik.tomlview,
+1713. **W1306** (done) pins.py and floorasks.py read a typed Namespace and their JSON and TOML through nemik.tomlview,
    so mypy falls
-1661. **W1307** (done) 13 functions in serve and staticserve get a Returns section written from their bodies, so ruff
+1714. **W1307** (done) 13 functions in serve and staticserve get a Returns section written from their bodies, so ruff
    falls 1228 to 1215
-1662. **W1308** (done) 15 functions in history get a Returns section written from their bodies, so ruff falls 1215 to
+1715. **W1308** (done) 15 functions in history get a Returns section written from their bodies, so ruff falls 1215 to
    1200
-1663. **W1309** (done) starved.py and work.py read a typed Namespace and their TOML and JSON through nemik.tomlview, so
+1716. **W1309** (done) starved.py and work.py read a typed Namespace and their TOML and JSON through nemik.tomlview, so
    mypy falls 2812 to 2755
-1664. **W1310** (done) the last three functions without a Returns section, in check, get one written from their bodies,
+1717. **W1310** (done) the last three functions without a Returns section, in check, get one written from their bodies,
    so ruff falls 1200 to 1197 and DOC201 reaches zero in src
-1665. **W1311** (done) calwrite, staticserve and pacing read a typed Namespace and pacing reads its TOML through
+1718. **W1311** (done) calwrite, staticserve and pacing read a typed Namespace and pacing reads its TOML through
    nemik.tomlview, so mypy falls 2755 to 2746
-1666. **W1312** (done) operator_asks answers a typed AskRow, so its nine consumers and their tests read keys, not Any,
+1719. **W1312** (done) operator_asks answers a typed AskRow, so its nine consumers and their tests read keys, not Any,
    and mypy falls 2746 to 2449
-1667. **W1313** (done) history.weekly answers a typed WeeklyRow and its consumers read keys, not Any, so mypy falls
-1668. **W1314** (done) history.variance, shape_drift and the baseline report answer typed rows over the QueueDoc the
+1720. **W1313** (done) history.weekly answers a typed WeeklyRow and its consumers read keys, not Any, so mypy falls
+1721. **W1314** (done) history.variance, shape_drift and the baseline report answer typed rows over the QueueDoc the
    module already declares, so mypy falls
-1669. **W1315** (done) history.toil answers a typed ToilRow and its printer reads keys, not Any, so mypy falls
-1670. **W1316** (done) 8 test helpers in five test files get a Returns section written from their bodies, so ruff falls
+1722. **W1315** (done) history.toil answers a typed ToilRow and its printer reads keys, not Any, so mypy falls
+1723. **W1316** (done) 8 test helpers in five test files get a Returns section written from their bodies, so ruff falls
    1197 to 1189
-1671. **W1317** (done) 34 helpers and tests without a docstring (tests, test fixtures and two tools) get one, so ruff
+1724. **W1317** (done) 34 helpers and tests without a docstring (tests, test fixtures and two tools) get one, so ruff
    falls 1189 to 1155
-1672. **W1318** (done) exportwire.py takes the queue files as an argument and imports nothing from check, so it compiles
+1725. **W1318** (done) exportwire.py takes the queue files as an argument and imports nothing from check, so it compiles
    under Codon and codon falls 142 to 140
-1673. **W1319** (done) 17 more test helpers, fixtures and tools get a Returns section or a docstring written from their
+1726. **W1319** (done) 17 more test helpers, fixtures and tools get a Returns section or a docstring written from their
    bodies, so ruff falls 1155 to 1138
-1674. **W1320** (done) 15 over-long docstring lines (E501) are shortened and wake.py and workflows.py are formatted, so
+1727. **W1320** (done) 15 over-long docstring lines (E501) are shortened and wake.py and workflows.py are formatted, so
    ruff falls 1138 to 1123
-1675. **W1321** (done) 54 PT018 composite assertions in tests are split by ruff's fix, so ruff falls toward 1069
-1676. **W1322** (done) 20 over-long code lines (E501) outside test_layout are split, so ruff falls toward 1095
-1677. **W1324** (done) witnesses.py's observer facts, vmalert and VictoriaMetrics answers and queue reads get
+1728. **W1321** (done) 54 PT018 composite assertions in tests are split by ruff's fix, so ruff falls toward 1069
+1729. **W1322** (done) 20 over-long code lines (E501) outside test_layout are split, so ruff falls toward 1095
+1730. **W1324** (done) witnesses.py's observer facts, vmalert and VictoriaMetrics answers and queue reads get
    TypedDicts, so mypy falls by about 80
-1678. **W1326** (done) Standing rule 14: the guard tests run directly before a submit, from the reviewer's R66 finding
+1731. **W1326** (done) Standing rule 14: the guard tests run directly before a submit, from the reviewer's R66 finding
    on refused stacks 735 and 736
-1679. **W1327** (done) Six test modules and eight test helpers outside test_layout get a docstring written from reading
+1732. **W1327** (done) Six test modules and eight test helpers outside test_layout get a docstring written from reading
    them, so ruff falls toward 1091
-1680. **W1328** (done) tests/test_layout.py's 26 public functions without a docstring get one written from reading each,
+1733. **W1328** (done) tests/test_layout.py's 26 public functions without a docstring get one written from reading each,
    so ruff falls toward 1065
-1681. **W1329** (done) test_rank_flow.py reads rank rows and to_json documents through test-side TypedDicts and one
+1734. **W1329** (done) test_rank_flow.py reads rank rows and to_json documents through test-side TypedDicts and one
    top-level to_json import, so mypy falls by the bare-dict cascade and ruff by its local imports
-1682. **W1330** (done) Standing rule 14's citation is corrected and the 14-rule list is diffed against git HEAD's, from
+1735. **W1330** (done) Standing rule 14's citation is corrected and the 14-rule list is diffed against git HEAD's, from
    reviewer findings R69-F1 and R69-F2
-1683. **W1331** (done) Standing rule 14 cites nemik:R66 finding 5 (file retro-r68.json), restoring the writer's id that
+1736. **W1331** (done) Standing rule 14 cites nemik:R66 finding 5 (file retro-r68.json), restoring the writer's id that
    W1330 replaced
-1684. **W1332** (done) Eleven D401 docstrings, ten E741 loop names and fourteen N806 test names are rewritten, so ruff
+1737. **W1332** (done) Eleven D401 docstrings, ten E741 loop names and fourteen N806 test names are rewritten, so ruff
    falls toward 1023
-1685. **W1333** (done) Nineteen boolean positional arguments in tests and mspdi.py are passed by keyword, so ruff falls
+1738. **W1333** (done) Nineteen boolean positional arguments in tests and mspdi.py are passed by keyword, so ruff falls
    toward 1005
-1686. **W1334** (done) checks/claims.py's 20 public functions without a docstring get one written from their bodies, so
+1739. **W1334** (done) checks/claims.py's 20 public functions without a docstring get one written from their bodies, so
    ruff falls toward 985
-1687. **W1335** (done) residue.py becomes pure (judged verdicts passed in, gathered in metrics.py) so it compiles under
+1740. **W1335** (done) residue.py becomes pure (judged verdicts passed in, gathered in metrics.py) so it compiles under
    Codon and codon falls 140 to 138
-1688. **W1336** (done) test_deploy_manifest.py reads the deployment YAML through TypedDicts, so mypy falls by the Any
+1741. **W1336** (done) test_deploy_manifest.py reads the deployment YAML through TypedDicts, so mypy falls by the Any
    cascade
-1689. **W1337** (done) test_withheld.py reads the static documents through test-side TypedDicts and casts, so mypy falls
+1742. **W1337** (done) test_withheld.py reads the static documents through test-side TypedDicts and casts, so mypy falls
    by the Any cascade
-1690. **W1338** (done) Twenty-five landed cards still at ready are closed done from the git subjects that name them, so
+1743. **W1338** (done) Twenty-five landed cards still at ready are closed done from the git subjects that name them, so
    the stackable list and the ready count stop counting landed work
-1691. **W1339** (done) The twenty cards below W1200 named by a landed subject are classified: two closed done, eighteen
+1744. **W1339** (done) The twenty cards below W1200 named by a landed subject are classified: two closed done, eighteen
    annotated as partial, umbrella or stale-next with the reason
-1692. **W1340** (done) checks/claims.py states its 25 claims through one _require helper instead of assert, so ruff S101
+1745. **W1340** (done) checks/claims.py states its 25 claims through one _require helper instead of assert, so ruff S101
    falls by 25
-1693. **W1341** (done) checks/claims.py: the vestigial-import check in oslc_cm_state_vocabulary says what its failure
+1746. **W1341** (done) checks/claims.py: the vestigial-import check in oslc_cm_state_vocabulary says what its failure
    means, from reviewer R87
-1694. **W1342** (done) test_history.py types its queue helpers with history.Waypoint and reads history_doc through
+1747. **W1342** (done) test_history.py types its queue helpers with history.Waypoint and reads history_doc through
    WeeklyRow, so mypy falls by the bare-dict cascade
-1695. **W1343** (done) test_rank.py reads rank, drift and compose answers through a test-side _Row and casts, so mypy
+1748. **W1343** (done) test_rank.py reads rank, drift and compose answers through a test-side _Row and casts, so mypy
    falls by the bare-dict cascade
-1696. **W1344** (done) The pieces corpus pair (tests/test_pieces_corpus.py and tools/gen_pieces_corpus.py) reads its
+1749. **W1344** (done) The pieces corpus pair (tests/test_pieces_corpus.py and tools/gen_pieces_corpus.py) reads its
    documents through GraphDoc and small TypedDicts, so mypy falls by their Any cascade
-1697. **W1346** (done) tests/test_layout.py wraps its 43 over-long lines (comments, docstring, JS in Python strings)
+1750. **W1346** (done) tests/test_layout.py wraps its 43 over-long lines (comments, docstring, JS in Python strings)
    without changing a token, so ruff E501 falls by 43
-1698. **W1348** (done) Four test files split their one composite assertion each (test_calendars, test_calwrite,
+1751. **W1348** (done) Four test files split their one composite assertion each (test_calendars, test_calwrite,
    test_critical_cards, test_serve_model), so ruff PT018 falls by 4 with mypy flat
-1699. **W1349** (done) Six over-long string and JS lines in serve.py and three test files wrap without changing a token,
+1752. **W1349** (done) Six over-long string and JS lines in serve.py and three test files wrap without changing a token,
    so ruff falls 904 to 898
-1700. **W1350** (done) Five single-site test findings clear by direct rewrites (Path.readlink twice, not note, a raw
+1753. **W1350** (done) Five single-site test findings clear by direct rewrites (Path.readlink twice, not note, a raw
    match pattern, a comment ERA001 read as code), so ruff falls 898 to 893
-1701. **W1351** (done) Four single-site findings clear: three Yields sections for generator docstrings (DOC402) and one
+1754. **W1351** (done) Four single-site findings clear: three Yields sections for generator docstrings (DOC402) and one
    empty-string comparison (PLC1901), so ruff falls 893 to 889
-1702. **W1352** (done) Unused fixture parameters leave ten test signatures (ARG001), so ruff falls by ten
-1703. **W1353** (done) Four single-site test files move their function-local import to the top of the file (PLC0415), so
+1755. **W1352** (done) Unused fixture parameters leave ten test signatures (ARG001), so ruff falls by ten
+1756. **W1353** (done) Four single-site test files move their function-local import to the top of the file (PLC0415), so
    ruff falls by four
-1704. **W1354** (done) tests/test_churn.py types its two queue helpers as dict[str, object], so mypy falls by up to 32
+1757. **W1354** (done) tests/test_churn.py types its two queue helpers as dict[str, object], so mypy falls by up to 32
    and the owed mypy ratchet is paid
-1705. **W1355** (done) tests/test_witnesses.py annotates the Any its json.loads and re.findall calls return and types
+1758. **W1355** (done) tests/test_witnesses.py annotates the Any its json.loads and re.findall calls return and types
    its route table, so mypy falls by 31
-1706. **W1356** (done) tests/test_positioning.py annotates the Any its tomllib and re calls return and reads its
+1759. **W1356** (done) tests/test_positioning.py annotates the Any its tomllib and re calls return and reads its
    parsers' files through inspect, so mypy falls by 22
-1707. **W1357** (done) tests/test_test_inputs.py reads its regex matches through a typed helper and an annotated pair
+1760. **W1357** (done) tests/test_test_inputs.py reads its regex matches through a typed helper and an annotated pair
    list, so mypy falls by 19
-1708. **W1358** (done) tests/test_skill.py and tests/test_pieces.py annotate the Any their tomllib, re and json calls
+1761. **W1358** (done) tests/test_skill.py and tests/test_pieces.py annotate the Any their tomllib, re and json calls
    return, so mypy falls by 22
-1709. **W1359** (done) Thirteen function-local imports in six test files move to module scope by an AST codemod
+1762. **W1359** (done) Thirteen function-local imports in six test files move to module scope by an AST codemod
    (PLC0415), so ruff falls by thirteen
-1710. **W1360** (done) Two OpaUnavailableError imports in test_residue.py and test_realize.py move to module scope
+1763. **W1360** (done) Two OpaUnavailableError imports in test_residue.py and test_realize.py move to module scope
    (PLC0415), so ruff falls by two
-1711. **W1361** (done) Twenty-one function-local imports in four more test files move to module scope (PLC0415), so ruff
+1764. **W1361** (done) Twenty-one function-local imports in four more test files move to module scope (PLC0415), so ruff
    falls by twenty-one
-1712. **W1362** (done) Forty-five function-local imports in five more test files move to module scope, redundant ones
+1765. **W1362** (done) Forty-five function-local imports in five more test files move to module scope, redundant ones
    dropped (PLC0415), so ruff falls by forty-five
-1713. **W1363** (done) Twelve function-local imports in tests/test_witnesses.py move to module scope once Path is a
+1766. **W1363** (done) Twelve function-local imports in tests/test_witnesses.py move to module scope once Path is a
    runtime import (PLC0415), so ruff falls by twelve
-1714. **W1364** (done) Three test files annotate the Any their tomllib, json and re calls return, so mypy falls by
+1767. **W1364** (done) Three test files annotate the Any their tomllib, json and re calls return, so mypy falls by
    twenty-nine
-1715. **W1365** (done) tests/test_certify.py reads its certify verdict lines through a typed helper and a Verdict
+1768. **W1365** (done) tests/test_certify.py reads its certify verdict lines through a typed helper and a Verdict
    TypedDict, so mypy falls by seventeen
-1716. **W1366** (done) Eighteen function-local imports in src/nemik/rank.py move to module scope, cycle sites left alone
+1769. **W1366** (done) Eighteen function-local imports in src/nemik/rank.py move to module scope, cycle sites left alone
    (PLC0415), so ruff falls by eighteen
-1717. **W1367** (done) tests/test_gate.py reads its operator asks and queue JSON through an annotated helper and
+1770. **W1367** (done) tests/test_gate.py reads its operator asks and queue JSON through an annotated helper and
    variable, so mypy falls by sixteen
-1718. **W1368** (done) tests/test_apischema.py walks schema records through a property-name helper and annotated
+1771. **W1368** (done) tests/test_apischema.py walks schema records through a property-name helper and annotated
    variables, so mypy falls by eighteen
-1719. **W1369** (done) tests/test_satisfied_edges.py and tests/test_importer.py read their parsed JSON through
+1772. **W1369** (done) tests/test_satisfied_edges.py and tests/test_importer.py read their parsed JSON through
    TypedDicts, so mypy falls by thirty-one
-1720. **W1370** (done) tests/test_read_api.py types the OpenAPI document and the example client it loads, so mypy falls
+1773. **W1370** (done) tests/test_read_api.py types the OpenAPI document and the example client it loads, so mypy falls
    by seventeen
-1721. **W1371** (done) tests/test_shaclcache.py reads and replaces rdflib's processor slots through typed helpers, so
+1774. **W1371** (done) tests/test_shaclcache.py reads and replaces rdflib's processor slots through typed helpers, so
    mypy falls by seventeen
-1722. **W1372** (done) tests/test_ruler_table.py reads the served graph through a local TypedDict and a cast, so mypy
+1775. **W1372** (done) tests/test_ruler_table.py reads the served graph through a local TypedDict and a cast, so mypy
    falls by thirteen
-1723. **W1373** (done) tests/test_workflows.py annotates the Any its tomllib and re calls return, so mypy falls by seven
-1724. **W1374** (done) tests/test_operator_rate.py and tests/test_memo_audits.py type their fixture documents, so mypy
+1776. **W1373** (done) tests/test_workflows.py annotates the Any its tomllib and re calls return, so mypy falls by seven
+1777. **W1374** (done) tests/test_operator_rate.py and tests/test_memo_audits.py type their fixture documents, so mypy
    falls by thirteen
-1725. **W1375** (done) tests/test_check_run_rows.py reads the loaded tool's main and exit code as typed names, so mypy
+1778. **W1375** (done) tests/test_check_run_rows.py reads the loaded tool's main and exit code as typed names, so mypy
    falls by four
-1726. **W1376** (done) Twenty-four float-equality asserts in ten test files become pytest.approx comparisons (RUF069),
+1779. **W1376** (done) Twenty-four float-equality asserts in ten test files become pytest.approx comparisons (RUF069),
    so ruff falls by forty with sixteen magic-value findings
-1727. **W1377** (done) Three test helpers take their boolean parameter keyword-only (FBT001), so ruff falls by three
-1728. **W1378** (done) tests/test_history.py compares its three floats through pytest.approx once pytest is a runtime
+1780. **W1377** (done) Three test helpers take their boolean parameter keyword-only (FBT001), so ruff falls by three
+1781. **W1378** (done) tests/test_history.py compares its three floats through pytest.approx once pytest is a runtime
    import (RUF069), so ruff falls by four
-1729. **W1379** (done) The float asserts that were exact on purpose keep exact equality: pytest.approx with zero
+1782. **W1379** (done) The float asserts that were exact on purpose keep exact equality: pytest.approx with zero
    tolerance in eleven test files (R106)
-1730. **W1380** (done) Five composite assertions in two test files split into one assertion each where it costs no mypy
+1783. **W1380** (done) Five composite assertions in two test files split into one assertion each where it costs no mypy
    finding (PT018), so ruff falls by five
-1731. **W1381** (done) Three src functions take their boolean parameter keyword-only and their callers say so (FBT001),
+1784. **W1381** (done) Three src functions take their boolean parameter keyword-only and their callers say so (FBT001),
    so ruff falls by three
-1732. **W1386** (done) src/nemik/floorasks.py annotates the Any its regex and json calls return, so mypy falls by eight
-1733. **W1387** (done) Hoist the nine function-local imports of src/nemik/mspdi.py to module scope, probe clean
-1734. **W1388** (done) Hoist the seven function-local imports of src/nemik/wake.py to module scope, probe clean
-1735. **W1389** (done) Hoist the six function-local imports of src/nemik/blocks.py to module scope, probe clean
-1736. **W1390** (done) Hoist the function-local imports of calendars, witnesses, salience and the small src modules past
+1785. **W1386** (done) src/nemik/floorasks.py annotates the Any its regex and json calls return, so mypy falls by eight
+1786. **W1387** (done) Hoist the nine function-local imports of src/nemik/mspdi.py to module scope, probe clean
+1787. **W1388** (done) Hoist the seven function-local imports of src/nemik/wake.py to module scope, probe clean
+1788. **W1389** (done) Hoist the six function-local imports of src/nemik/blocks.py to module scope, probe clean
+1789. **W1390** (done) Hoist the function-local imports of calendars, witnesses, salience and the small src modules past
    the name clashes the probe refused
-1737. **W1391** (done) src/nemik/issues.py reads its issues document through a TypedDict row, so mypy falls by ten
-1738. **W1392** (done) src/nemik/manifest.py reads the parsed document through two narrowing helpers, so mypy falls by
+1790. **W1391** (done) src/nemik/issues.py reads its issues document through a TypedDict row, so mypy falls by ten
+1791. **W1392** (done) src/nemik/manifest.py reads the parsed document through two narrowing helpers, so mypy falls by
    twenty-nine
-1739. **W1393** (done) manifest.py keeps raising on a wrong-typed document and a test pins it (R111), a follow-up to
+1792. **W1393** (done) manifest.py keeps raising on a wrong-typed document and a test pins it (R111), a follow-up to
    W1392
-1740. **W1394** (done) src/nemik/work.py and score.py annotate the Any their json and tomllib calls return, so mypy
+1793. **W1394** (done) src/nemik/work.py and score.py annotate the Any their json and tomllib calls return, so mypy
    falls by four
-1741. **W1397** (done) src/nemik/staticserve.py reads hashes.json through the table helper instead of an Any dict, so
+1794. **W1397** (done) src/nemik/staticserve.py reads hashes.json through the table helper instead of an Any dict, so
    mypy falls by two
-1742. **W1398** (done) src/nemik/pins.py and calwrite.py bind the parsed TOML as object and sort with a lambda, so mypy
+1795. **W1398** (done) src/nemik/pins.py and calwrite.py bind the parsed TOML as object and sort with a lambda, so mypy
    falls by three
-1743. **W1401** (done) Eight function-local imports in src/nemik/witnesses.py move to module scope, so ruff falls by
+1796. **W1401** (done) Eight function-local imports in src/nemik/witnesses.py move to module scope, so ruff falls by
    eight, with the witwait import left local
-1744. **W1402** (done) Twelve function-local imports in src/nemik/calendars.py and salience.py move to module scope,
+1797. **W1402** (done) Twelve function-local imports in src/nemik/calendars.py and salience.py move to module scope,
    with the clashing rdflib and nemik.rank imports left local
-1745. **W1403** (done) Three flags become keyword-only in overlaps.overlaps, vtodo.feed and blocks.inbound with their
+1798. **W1403** (done) Three flags become keyword-only in overlaps.overlaps, vtodo.feed and blocks.inbound with their
    one positional caller fixed, so ruff falls by six
-1746. **W1404** (done) letters.report takes fold, repo, older_than and apply keyword-only with its two positional
+1799. **W1404** (done) letters.report takes fold, repo, older_than and apply keyword-only with its two positional
    callers fixed, so ruff falls by four
-1747. **W1405** (done) salience.audit and edge_currents take workable keyword-only, with every caller already naming it,
+1800. **W1405** (done) salience.audit and edge_currents take workable keyword-only, with every caller already naming it,
    so ruff falls by four or more
-1748. **W1406** (done) letters.py reads queue documents as dict[str, object] through the tomlview helpers instead of a
+1801. **W1406** (done) letters.py reads queue documents as dict[str, object] through the tomlview helpers instead of a
    bare dict, so mypy falls
-1749. **W1407** (done) importer.py reads the receiving queue through the tomlview helpers instead of an Any dict, so
+1802. **W1407** (done) importer.py reads the receiving queue through the tomlview helpers instead of an Any dict, so
    mypy falls
-1750. **W1408** (done) Policy for malformed queue and manifest documents: readers that decide ownership, publication or
+1803. **W1408** (done) Policy for malformed queue and manifest documents: readers that decide ownership, publication or
    a write raise TypeError, display readers may read empty, each pinned by a test
-1751. **W1409** (done) vtodo.py reads the opt-in and ask-priority TOML through the tomlview helpers and types its set
+1804. **W1409** (done) vtodo.py reads the opt-in and ask-priority TOML through the tomlview helpers and types its set
    subclass, so mypy falls by six
-1752. **W1413** (done) starved.py and pacing.py bind the parsed rank-weights TOML as object before the table helper, so
+1805. **W1413** (done) starved.py and pacing.py bind the parsed rank-weights TOML as object before the table helper, so
    mypy falls by two
-1753. **W1415** (done) withheld.py reads the gate's list and applies it through strict object helpers instead of
+1806. **W1415** (done) withheld.py reads the gate's list and applies it through strict object helpers instead of
    dict[str, Any], so mypy falls by about sixty
-1754. **W1416** (done) salience.py types its memo key as a tuple of objects instead of a bare tuple, so mypy falls by
+1807. **W1416** (done) salience.py types its memo key as a tuple of objects instead of a bare tuple, so mypy falls by
    eleven
-1755. **W1417** (done) Answer nemik: luthen-observability:W1890 is done - the pace unit runs again, recorded on W1288,
+1808. **W1417** (done) Answer nemik: luthen-observability:W1890 is done - the pace unit runs again, recorded on W1288,
    lift any wait that named it
-1756. **W1419** (done) calendars.py imports rdflib's Graph, Literal and URIRef at module scope instead of under
+1809. **W1419** (done) calendars.py imports rdflib's Graph, Literal and URIRef at module scope instead of under
    TYPE_CHECKING and inside two functions, so ruff falls by two
-1757. **W1420** (done) serve.build_static and _build_static take private and exports keyword-only with their one
+1810. **W1420** (done) serve.build_static and _build_static take private and exports keyword-only with their one
    positional call fixed, so ruff falls by four
-1758. **W1421** (done) blocks_cli writes its output through the new nemik.say module instead of bare print calls, so
+1811. **W1421** (done) blocks_cli writes its output through the new nemik.say module instead of bare print calls, so
    ruff falls by six and the output contract has one home
-1759. **W1422** (done) Seven small commands write through nemik.say instead of bare print calls, so ruff falls by
+1812. **W1422** (done) Seven small commands write through nemik.say instead of bare print calls, so ruff falls by
    fifteen
-1760. **W1423** (done) Ten larger commands write through nemik.say instead of bare print calls (the plan converts 97),
+1813. **W1423** (done) Ten larger commands write through nemik.say instead of bare print calls (the plan converts 97),
    so ruff falls by about ninety-seven
-1761. **W1424** (done) serve.py and metrics.py write through nemik.say, with the hub-module claim's declared sets
+1814. **W1424** (done) serve.py and metrics.py write through nemik.say, with the hub-module claim's declared sets
    gaining say, so ruff falls by five
-1762. **W1425** (done) tests/test_layout.py moves its nine function-local imports to module scope, so ruff falls by nine
-1763. **W1426** (done) blocks.py reads the errand repos through the tomlview helpers instead of chained Any gets, so
+1815. **W1425** (done) tests/test_layout.py moves its nine function-local imports to module scope, so ruff falls by nine
+1816. **W1426** (done) blocks.py reads the errand repos through the tomlview helpers instead of chained Any gets, so
    mypy falls by four and the stack lowers an owed ratchet
-1764. **W1427** (done) calendars.py reads its TOML and entries through the tomlview helpers instead of chained Any gets,
+1817. **W1427** (done) calendars.py reads its TOML and entries through the tomlview helpers instead of chained Any gets,
    so mypy falls by four and the stack lowers an owed ratchet
-1765. **W1428** (done) salience.table_weights reads rank-weights.toml through the tomlview table helper instead of a
+1818. **W1428** (done) salience.table_weights reads rank-weights.toml through the tomlview table helper instead of a
    chained Any get, so mypy falls by one
-1766. **W1429** (done) history.Opts declares the repos, all, start, to, toil and churn options main reads, so reading
+1819. **W1429** (done) history.Opts declares the repos, all, start, to, toil and churn options main reads, so reading
    them adds no Any and mypy falls by about thirty
-1767. **W1430** (done) check.py types its prerequisite map and reads the declared integers and commit.json through
+1820. **W1430** (done) check.py types its prerequisite map and reads the declared integers and commit.json through
    tomlview, so mypy falls by about twenty-four
-1768. **W1431** (done) blocks.py types the ask sort keys as nested functions and the solved salience map as Fractions,
+1821. **W1431** (done) blocks.py types the ask sort keys as nested functions and the solved salience map as Fractions,
    so mypy falls by about fifteen
-1769. **W1432** (done) calendars.py and critical.py type their sort keys as functions and calendars reads
+1822. **W1432** (done) calendars.py and critical.py type their sort keys as functions and calendars reads
    CalledProcessError output through one helper, so mypy falls by about fifteen
-1770. **W1433** (done) salience.py and history.py type their sort keys as functions, so mypy falls by about thirteen
-1771. **W1434** (done) history.Opts declares weekly, score and append_to and the baseline and toil modes take Opts, so
+1823. **W1433** (done) salience.py and history.py type their sort keys as functions, so mypy falls by about thirteen
+1824. **W1434** (done) history.Opts declares weekly, score and append_to and the baseline and toil modes take Opts, so
    mypy falls by about eight
-1772. **W1435** (done) tests/fixtures/make_fleet.py reads each queue through nemik.tomlview, so mypy falls by about
+1825. **W1435** (done) tests/fixtures/make_fleet.py reads each queue through nemik.tomlview, so mypy falls by about
    twenty-eight
-1773. **W1436** (done) tools/gen_pieces_corpus.py builds its GraphDoc literals directly instead of through cast, so mypy
+1826. **W1436** (done) tools/gen_pieces_corpus.py builds its GraphDoc literals directly instead of through cast, so mypy
    falls by about twenty-three
-1774. **W1437** (done) critical.py, cards.py and witnesses.py move their function-local imports to module scope, so ruff
+1827. **W1437** (done) critical.py, cards.py and witnesses.py move their function-local imports to module scope, so ruff
    falls by five
-1775. **W1439** (done) tools/check_run_rows.py declares its parsed options and reads the schema and each row as object,
+1828. **W1439** (done) tools/check_run_rows.py declares its parsed options and reads the schema and each row as object,
    so mypy falls by about eight
-1776. **W1440** (done) salience.py imports Weights and load_weights from nemik.rank once at module scope, so ruff falls
+1829. **W1440** (done) salience.py imports Weights and load_weights from nemik.rank once at module scope, so ruff falls
    by three
-1777. **W1441** (done) history.toil imports rdflib and nemik.adapter at module scope, so ruff falls by three
-1778. **W1442** (done) tests/test_staticserve.py compares HTTP statuses with http.HTTPStatus members, so ruff falls by
+1830. **W1441** (done) history.toil imports rdflib and nemik.adapter at module scope, so ruff falls by three
+1831. **W1442** (done) tests/test_staticserve.py compares HTTP statuses with http.HTTPStatus members, so ruff falls by
    five
-1779. **W1443** (done) tests/test_witwait.py names its unknown exit code and its sleep count instead of comparing with
+1832. **W1443** (done) tests/test_witwait.py names its unknown exit code and its sleep count instead of comparing with
    2, so ruff falls by five
-1780. **W1444** (done) tests/test_rank.py names the downstream weights it compares with, so ruff falls by five
-1781. **W1445** (done) tests/test_critical.py names the chain lengths and counts it compares with, so ruff falls by four
-1782. **W1446** (done) tests/test_vtodo.py names the fold limit, the ask count and the missing-helper exit code, so ruff
+1833. **W1444** (done) tests/test_rank.py names the downstream weights it compares with, so ruff falls by five
+1834. **W1445** (done) tests/test_critical.py names the chain lengths and counts it compares with, so ruff falls by four
+1835. **W1446** (done) tests/test_vtodo.py names the fold limit, the ask count and the missing-helper exit code, so ruff
    falls by four
-1783. **W1447** (done) tests/test_starved.py names the declared and the default starvation days, so ruff falls by three
-1784. **W1448** (done) tests/test_serve_model.py names its poke budget and its rebuild count, so ruff falls by three
-1785. **W1449** (done) tests/test_check_committed.py names nemik-check's exit code for an uncommitted queue, so ruff
+1836. **W1447** (done) tests/test_starved.py names the declared and the default starvation days, so ruff falls by three
+1837. **W1448** (done) tests/test_serve_model.py names its poke budget and its rebuild count, so ruff falls by three
+1838. **W1449** (done) tests/test_check_committed.py names nemik-check's exit code for an uncommitted queue, so ruff
    falls by three
-1786. **W1450** (done) tests/test_alarm.py names the durations and the alarm count it compares with, so ruff falls by
+1839. **W1450** (done) tests/test_alarm.py names the durations and the alarm count it compares with, so ruff falls by
    four
-1787. **W1451** (done) tests/webpage.py imports sync_playwright directly and types open_page like opened_page, so the 29
+1840. **W1451** (done) tests/webpage.py imports sync_playwright directly and types open_page like opened_page, so the 29
    test files that import it each lose three mypy findings
-1788. **W1452** (done) tools/nemik_client.py types its documents as object, its options as a Namespace class and reads
+1841. **W1452** (done) tools/nemik_client.py types its documents as object, its options as a Namespace class and reads
    the hash index without Any, so mypy falls by about seven
-1789. **W1453** (done) nemik.pdf opens its page again when every failed request died of a network change, and names the
+1842. **W1453** (done) nemik.pdf opens its page again when every failed request died of a network change, and names the
    failure text, with witness tests (the W846 cure on the one src path that lacked it)
-1790. **W1454** (done) tests/test_critical_cards.py names the chain length, the path count and the two scope sizes it
+1843. **W1454** (done) tests/test_critical_cards.py names the chain length, the path count and the two scope sizes it
    compares with, so ruff falls by four
-1791. **W1455** (done) tests/test_health.py and tests/test_health_cards.py name the oldest block and the reason count
+1844. **W1455** (done) tests/test_health.py and tests/test_health_cards.py name the oldest block and the reason count
    they compare with, so ruff falls by four
-1792. **W1456** (done) tests/test_letters.py names the addressed count, the fold and move counts and nemik-check's exit
+1845. **W1456** (done) tests/test_letters.py names the addressed count, the fold and move counts and nemik-check's exit
    code for letters pending, so ruff falls by five
-1793. **W1457** (done) tests/test_fruit.py and tests/test_pacing.py name the class weights, the burst and the overdraft
+1846. **W1457** (done) tests/test_fruit.py and tests/test_pacing.py name the class weights, the burst and the overdraft
    floor they compare with, so ruff falls by five
-1794. **W1458** (done) tests/test_ruler_table.py, test_shaclcache_threads.py and test_parse_cache.py name the table
+1847. **W1458** (done) tests/test_ruler_table.py, test_shaclcache_threads.py and test_parse_cache.py name the table
    size, the row count and the parse counts they compare with, so ruff falls by seven
-1795. **W1459** (done) tests/test_calendars.py, test_calendar_write.py and test_calwrite.py name the event count, the
+1848. **W1459** (done) tests/test_calendars.py, test_calendar_write.py and test_calwrite.py name the event count, the
    exit code and the line limit they compare with, so ruff falls by six
-1796. **W1460** (done) tests/test_pins.py, test_marks.py and test_akonadi_guard.py name the commits behind, the
+1849. **W1460** (done) tests/test_pins.py, test_marks.py and test_akonadi_guard.py name the commits behind, the
    unreadable count, the digest length and the exit codes they compare with, so ruff falls by five
-1797. **W1461** (done) tests/test_alarm_delivery.py, test_ask_priority.py, test_baseline.py, test_churn.py and
+1850. **W1461** (done) tests/test_alarm_delivery.py, test_ask_priority.py, test_baseline.py, test_churn.py and
    test_floorasks.py name the undelivered count, the top priority, the planned count, the polls and the floor asks they
    compare with, so ruff falls by five
-1798. **W1462** (done) tests/test_build_scope.py, test_cachestore.py, test_check_realizability.py, test_flow_cache.py
+1851. **W1462** (done) tests/test_build_scope.py, test_cachestore.py, test_check_realizability.py, test_flow_cache.py
    and test_frontier_walker.py name the published floor, the stamp length, the exit code, the recompute count and the
    goal floor they compare with, so ruff falls by five
-1799. **W1463** (done) tests/test_flow_reference.py, test_guarantees.py, test_no_waivers.py, test_operator_rate.py and
+1852. **W1463** (done) tests/test_flow_reference.py, test_guarantees.py, test_no_waivers.py, test_operator_rate.py and
    test_overlap_claims.py name the front share, the unscored count, the source floor, the open asks and the held count
    they compare with, so ruff falls by five
-1800. **W1464** (done) tests/test_published_valid.py, test_pieces_corpus.py, test_rank_apply.py, test_static.py and
+1853. **W1464** (done) tests/test_published_valid.py, test_pieces_corpus.py, test_rank_apply.py, test_static.py and
    test_work.py name the checked floor, the case floor and the exit codes they compare with, so ruff falls by five
-1801. **W1465** (done) src/nemik/health.py, overlaps.py, vtodo.py and critical.py name the red level, the sharing floor,
+1854. **W1465** (done) src/nemik/health.py, overlaps.py, vtodo.py and critical.py name the red level, the sharing floor,
    the stamp digits and the planned-list cap they compare with, so ruff falls by five
-1802. **W1466** (done) src/nemik/blocks.py and check.py name the own-enabler floor, the needs-you word floor and the
+1855. **W1466** (done) src/nemik/blocks.py and check.py name the own-enabler floor, the needs-you word floor and the
    umbrella prerequisite count they compare with, so ruff falls by three
-1803. **W1467** (done) src/nemik/churn.py types its queue documents as QueueDoc, so mypy falls by nine
-1804. **W1468** (done) src/nemik/pacing.py and starved.py sort with typed key functions instead of lambdas over Any, so
+1856. **W1467** (done) src/nemik/churn.py types its queue documents as QueueDoc, so mypy falls by nine
+1857. **W1468** (done) src/nemik/pacing.py and starved.py sort with typed key functions instead of lambdas over Any, so
    mypy falls by five
-1805. **W1469** (done) src/nemik/wake.py orders its roster with a typed key function instead of a lambda over Any, so
+1858. **W1469** (done) src/nemik/wake.py orders its roster with a typed key function instead of a lambda over Any, so
    mypy falls by three
-1806. **W1470** (done) src/nemik/pieces.py and vtodo.py sort and take minima with typed key functions instead of lambdas
+1859. **W1470** (done) src/nemik/pieces.py and vtodo.py sort and take minima with typed key functions instead of lambdas
    over Any, so mypy falls by four
-1807. **W1471** (done) tests/test_rank_flow.py names the on-path card count, the paths through W4 and the operator
+1860. **W1471** (done) tests/test_rank_flow.py names the on-path card count, the paths through W4 and the operator
    weight it compares with, so ruff falls by three
-1808. **W1472** (done) tests/test_layout.py names the thirteen thresholds and counts it compares with, so ruff falls by
+1861. **W1472** (done) tests/test_layout.py names the thirteen thresholds and counts it compares with, so ruff falls by
    thirteen
-1809. **W1473** (done) src/nemik/calendars.py and score.py document the exceptions their loaders raise, so ruff falls by
+1862. **W1473** (done) src/nemik/calendars.py and score.py document the exceptions their loaders raise, so ruff falls by
    four
-1810. **W1474** (done) src/nemik/rank.py and serve.py document the ValueError their loaders raise, so ruff falls by two
-1811. **W1475** (done) src/nemik/wake.py dumps its two JSON payloads through one typed helper, so mypy falls by two
-1812. **W1476** (done) Declare HELP and TYPE rows at the source for seven relayed families (nemik_cards_completed_24h,
+1863. **W1474** (done) src/nemik/rank.py and serve.py document the ValueError their loaders raise, so ruff falls by two
+1864. **W1475** (done) src/nemik/wake.py dumps its two JSON payloads through one typed helper, so mypy falls by two
+1865. **W1476** (done) Declare HELP and TYPE rows at the source for seven relayed families (nemik_cards_completed_24h,
    nemik_cards_reopened_24h, nemik_commits_24h, nemik_net_inflow_per_day, nemik_arrival_pressure,
    nemik_umbrella_forecast_days, nemik_unforecastable_cards, and the OTLP twin nemik.cards.completed.24h), so luthen's
    census stops listing them undeclared
-1813. **W1477** (done) src/nemik/calendars.py and vtodo.py document the SystemExit their main functions raise, so ruff
+1866. **W1477** (done) src/nemik/calendars.py and vtodo.py document the SystemExit their main functions raise, so ruff
    falls by two
-1814. **W1478** (done) src/nemik/rank.py documents the SystemExit its main and its apply helper raise, so ruff falls by
+1867. **W1478** (done) src/nemik/rank.py documents the SystemExit its main and its apply helper raise, so ruff falls by
    two
-1815. **W1479** (done) src/nemik/shaclcache.py holds its deferred query as a NamedTuple, so ruff falls by one
-1816. **W1480** (done) src/nemik/rank.py types the rows of rank() as a RankRow TypedDict on the producer side, so mypy
+1868. **W1479** (done) src/nemik/shaclcache.py holds its deferred query as a NamedTuple, so ruff falls by one
+1869. **W1480** (done) src/nemik/rank.py types the rows of rank() as a RankRow TypedDict on the producer side, so mypy
    falls by about 150 in rank.py (the W1282 first step)
-1817. **W1481** (done) src/nemik/serve.py types its graph nodes and edges as NodeRow and EdgeRow TypedDicts, so mypy
+1870. **W1481** (done) src/nemik/serve.py types its graph nodes and edges as NodeRow and EdgeRow TypedDicts, so mypy
    falls by about 140 in serve.py (W1282 step 2, first slice)
-1818. **W1482** (done) tools/nemik_client.py writes the paths it fetches to stdout instead of printing them, so ruff
+1871. **W1482** (done) tools/nemik_client.py writes the paths it fetches to stdout instead of printing them, so ruff
    falls by one
-1819. **W1483** (done) tests (mpxj, rank_apply, parse_cache, witness_promql, witnesses, score) clear their unused
+1872. **W1483** (done) tests (mpxj, rank_apply, parse_cache, witness_promql, witnesses, score) clear their unused
    arguments, absolute paths and uppercase parameter names, so ruff falls by about fifteen
-1820. **W1484** (done) nemik-rank prints sets in iteration order, so two unseeded runs differ; sort the sets where they
+1873. **W1484** (done) nemik-rank prints sets in iteration order, so two unseeded runs differ; sort the sets where they
    are printed
-1821. **W1485** (done) calendars.py, metrics.py, wake.py and test_manifest.py clear a loop-variable overwrite, two
+1874. **W1485** (done) calendars.py, metrics.py, wake.py and test_manifest.py clear a loop-variable overwrite, two
    os.path.expanduser calls and a secret-named key, so ruff falls by five
-1822. **W1486** (done) src/nemik/blocks.py builds its all-blockers-landed literal with an explicit datatype, so ruff
+1875. **W1486** (done) src/nemik/blocks.py builds its all-blockers-landed literal with an explicit datatype, so ruff
    falls by one
-1823. **W1494** (done) Pay down the complexity rules in src (C901, PLR0911, PLR0912, PLR0913, PLR0914, PLR0915,
+1876. **W1494** (done) Pay down the complexity rules in src (C901, PLR0911, PLR0912, PLR0913, PLR0914, PLR0915,
    PLR0917), one function at a time
-1824. **W1512** (done) calendars.days_main takes its export and its waiter join from two helpers, so C901 clears
-1825. **W1513** (done) Answer luthen-observability:W1927: when nemik-witnesses --apply runs (timer or by hand) and the
+1877. **W1512** (done) calendars.days_main takes its export and its waiter join from two helpers, so C901 clears
+1878. **W1513** (done) Answer luthen-observability:W1927: when nemik-witnesses --apply runs (timer or by hand) and the
    exact fact schema of input.file, input.promql, input.alert and input.git_ref, with one-line example witnesses for a
    user unit result, a textfile appearing, a stamp mtime moving and a metric name appearing
-1826. **W1516** (done) flow.solve's docstring names the ValueError its callee raises in prose instead of a Raises
+1879. **W1516** (done) flow.solve's docstring names the ValueError its callee raises in prose instead of a Raises
    section, so DOC502 clears
-1827. **W1517** (done) letters.apply_fold takes today, writer and env as keyword-only, so PLR0917 clears
-1828. **W1519** (done) alarm.recurrence_id narrows its occurrence with a helper that raises TypeError instead of two
+1880. **W1517** (done) letters.apply_fold takes today, writer and env as keyword-only, so PLR0917 clears
+1881. **W1519** (done) alarm.recurrence_id narrows its occurrence with a helper that raises TypeError instead of two
    asserts, so S101 clears twice
-1829. **W1520** (done) Repin with no hand edit once mtools fixes the repin tool's procrun path and refusal text
-1830. **W1521** (done) rank.goals returns typed GoalRow rows, so its consumers' Any reads clear in rank.py and
+1882. **W1520** (done) Repin with no hand edit once mtools fixes the repin tool's procrun path and refusal text
+1883. **W1521** (done) rank.goals returns typed GoalRow rows, so its consumers' Any reads clear in rank.py and
    test_frontier.py
-1831. **W1523** (done) rank.fruit returns a typed FruitRow, so test_fruit's nine Any reads clear
-1832. **W1529** (done) metrics.spool_lines types its spool events so ten Any reads clear
-1833. **W1530** (done) Pin spool_lines skipping a JSON non-object line with a test
-1834. **W1531** (done) history.py reads queue JSON through a typed helper so five Any reads clear
-1835. **W1532** (done) List working cards that no live stack names, before each submit
-1836. **W1533** (done) history.py reads queue cards through one typed helper so three Any reads clear
-1837. **W1534** (done) Tick-close ATOMIZE print skips a card a live gating stack names
-1838. **W1535** (done) tests/test_layout.py types its page.evaluate results so its Any reads clear
-1839. **W1536** (done) nemik-witnesses --apply fails to close a card whose file witness is under the home directory
-1840. **W1537** (done) Split the compound asserts in eight test files so PT018 clears
-1841. **W1538** (done) Three test files run their probe command through procrun.capture so S404 and S603 clear
-1842. **W1539** (done) Residue of W1536: the witnesses timer closing a card unaided, and a non-home witness path, both
+1884. **W1523** (done) rank.fruit returns a typed FruitRow, so test_fruit's nine Any reads clear
+1885. **W1529** (done) metrics.spool_lines types its spool events so ten Any reads clear
+1886. **W1530** (done) Pin spool_lines skipping a JSON non-object line with a test
+1887. **W1531** (done) history.py reads queue JSON through a typed helper so five Any reads clear
+1888. **W1532** (done) List working cards that no live stack names, before each submit
+1889. **W1533** (done) history.py reads queue cards through one typed helper so three Any reads clear
+1890. **W1534** (done) Tick-close ATOMIZE print skips a card a live gating stack names
+1891. **W1535** (done) tests/test_layout.py types its page.evaluate results so its Any reads clear
+1892. **W1536** (done) nemik-witnesses --apply fails to close a card whose file witness is under the home directory
+1893. **W1537** (done) Split the compound asserts in eight test files so PT018 clears
+1894. **W1538** (done) Three test files run their probe command through procrun.capture so S404 and S603 clear
+1895. **W1539** (done) Residue of W1536: the witnesses timer closing a card unaided, and a non-home witness path, both
    unobserved
-1843. **W1540** (done) Three more test files run the writer through procrun.capture so S404 and S603 clear
-1844. **W1541** (done) test_history runs its git calls through one checked helper over procrun.capture so S404, S603 and
+1896. **W1540** (done) Three more test files run the writer through procrun.capture so S404 and S603 clear
+1897. **W1541** (done) test_history runs its git calls through one checked helper over procrun.capture so S404, S603 and
    S607 clear
-1845. **W1542** (done) test_editable types its distribution stub and payloads so five Any reads clear
-1846. **W1543** (done) test_churn types the empty residue of its queue fixture so two Any reads clear
-1847. **W1544** (done) Three more test files run their checked git and writer calls through procrun.capture so S404,
+1898. **W1542** (done) test_editable types its distribution stub and payloads so five Any reads clear
+1899. **W1543** (done) test_churn types the empty residue of its queue fixture so two Any reads clear
+1900. **W1544** (done) Three more test files run their checked git and writer calls through procrun.capture so S404,
    S603 and S607 clear
-1848. **W1545** (done) test_rank_apply types its fake writer and the rows it reads so three Any reads clear
-1849. **W1546** (done) test_guarantees reads bands.toml through importlib.resources instead of a module global so its
+1901. **W1545** (done) test_rank_apply types its fake writer and the rows it reads so three Any reads clear
+1902. **W1546** (done) test_guarantees reads bands.toml through importlib.resources instead of a module global so its
    Any reads clear
-1850. **W1547** (done) Three more test files run their command through procrun.capture so S404 and S603 clear
-1851. **W1548** (done) Three more test files run their command through procrun.capture so S404 and S603 clear
+1903. **W1547** (done) Three more test files run their command through procrun.capture so S404 and S603 clear
+1904. **W1548** (done) Three more test files run their command through procrun.capture so S404 and S603 clear
    (architecture, check and metrics realizability)
-1852. **W1550** (done) test_layout reads its metric dicts (m = page.evaluate) through evaluate_dict and typed num and
+1905. **W1550** (done) test_layout reads its metric dicts (m = page.evaluate) through evaluate_dict and typed num and
    items readers so their Any reads clear
-1853. **W1551** (done) Four more test files run their commands through procrun.capture so S404 and S603 clear (mpxj,
+1906. **W1551** (done) Four more test files run their commands through procrun.capture so S404 and S603 clear (mpxj,
    akonadi guard, publish, deterministic)
-1854. **W1552** (done) test_layout converts its fans, pairs, seen and prefixes row evaluates through typed converters so
+1907. **W1552** (done) test_layout converts its fans, pairs, seen and prefixes row evaluates through typed converters so
    their 41 Any reads clear
-1855. **W1553** (done) Two more test files run their commands through procrun.capture so S404 and S603 clear (hooks
+1908. **W1553** (done) Two more test files run their commands through procrun.capture so S404 and S603 clear (hooks
    wired, static view)
-1856. **W1554** (done) test_layout reads its tile, contrast, colour, roll-up and legend evaluates through typed readers
+1909. **W1554** (done) test_layout reads its tile, contrast, colour, roll-up and legend evaluates through typed readers
    so their 44 Any reads clear (slice 5)
-1857. **W1555** (done) vtodo, calwrite and history run their subprocesses through procrun.capture_bytes so S404, S603
+1910. **W1555** (done) vtodo, calwrite and history run their subprocesses through procrun.capture_bytes so S404, S603
    and S607 clear
-1858. **W1556** (done) test_layout reads its repo chips, glyph, piece-fetch and aria-expanded evaluates through typed
+1911. **W1556** (done) test_layout reads its repo chips, glyph, piece-fetch and aria-expanded evaluates through typed
    readers (slice 6)
-1859. **W1557** (done) shaclcache types its SPARQL patch with object parameters and casts at the one boundary so its 25
+1912. **W1557** (done) shaclcache types its SPARQL patch with object parameters and casts at the one boundary so its 25
    Any reads clear
-1860. **W1558** (done) test_layout reads its focused-card, chain-summary, tile and glyph-role evaluates through typed
+1913. **W1558** (done) test_layout reads its focused-card, chain-summary, tile and glyph-role evaluates through typed
    readers (slice 7)
-1861. **W1559** (done) Two function-local imports (adapter attach, shaclinc cached_sparql_parse) move to module level so
+1914. **W1559** (done) Two function-local imports (adapter attach, shaclinc cached_sparql_parse) move to module level so
    PLC0415 clears
-1862. **W1560** (done) test_layout slice 8a: lit-chip, ringed card and roll-up umbrella evaluates typed (8 of the 57 Any
+1915. **W1560** (done) test_layout slice 8a: lit-chip, ringed card and roll-up umbrella evaluates typed (8 of the 57 Any
    reads); 49 remain
-1863. **W1561** (done) PLC0415 name clashes: rename the local or import that a hoist would collide with (check.py rows
+1916. **W1561** (done) PLC0415 name clashes: rename the local or import that a hoist would collide with (check.py rows
    and provenance, critical.py cards, metrics.py ref, serve.py Counter and load) so the five hoists become SAFE
-1864. **W1562** (done) PLC0415 import cycles: record the 11 cycle sites (check 831, critical 493, history 1296, rank
+1917. **W1562** (done) PLC0415 import cycles: record the 11 cycle sites (check 831, critical 493, history 1296, rank
    551/882/905/906/1149/1170, witnesses 608) as a residue ledger with the import each one needs and the module that
    closes the cycle, no waiver, they stay in the baseline
    - next: Not worked; a design card is needed before any extraction
-1865. **W1563** (done) rank.py two long say lines and one manual comprehension, test_witnesses two composite asserts:
+1918. **W1563** (done) rank.py two long say lines and one manual comprehension, test_witnesses two composite asserts:
    five ruff findings clear (E501 x2, PERF401, PT018 x2)
-1866. **W1564** (done) Three tests run their child process through procrun.capture (test_ics_reader, test_witnesses git,
+1919. **W1564** (done) Three tests run their child process through procrun.capture (test_ics_reader, test_witnesses git,
    test_layout opa): nine S404, S603 and S607 findings clear
-1867. **W1565** (done) adapter's possessive-apostrophe regex spells the typographic quote as an escape and
+1920. **W1565** (done) adapter's possessive-apostrophe regex spells the typographic quote as an escape and
    installed.script raises instead of asserting: RUF001 and S101 clear, the lowering first entry of the repin stack
-1868. **W1566** (done) installed.script's FileNotFoundError has a pinning test that fails on the parent source (an
+1921. **W1566** (done) installed.script's FileNotFoundError has a pinning test that fails on the parent source (an
    AssertionError) and passes on the new
-1869. **W1567** (done) tests/installed.py names its private _bin as a public bin_env: thirteen SLF001 clear across eight
+1922. **W1567** (done) tests/installed.py names its private _bin as a public bin_env: thirteen SLF001 clear across eight
    test files
-1870. **W1569** (done) tests/test_manifest.py reads the served document as JSON objects through typed readers: eighteen
+1923. **W1569** (done) tests/test_manifest.py reads the served document as JSON objects through typed readers: eighteen
    mypy findings clear (the successor table's first mypy row)
-1871. **W1570** (done) tests/test_witness_promql.py types its fake probe with object, not Any: thirteen mypy findings
+1924. **W1570** (done) tests/test_witness_promql.py types its fake probe with object, not Any: thirteen mypy findings
    clear (the successor table's next mypy row)
-1872. **W1571** (done) Five functions take their tail parameters keyword-only (salience_of, edge_currents, event_lines,
+1925. **W1571** (done) Five functions take their tail parameters keyword-only (salience_of, edge_currents, event_lines,
    test_guarantees._wp, test_score.vec): five PLR0917 clear, the ruff lane's first probed row
-1873. **W1572** (done) tests/test_lifecycle_scheme.py reads the scheme through typed rdflib calls (URIRef,
+1926. **W1572** (done) tests/test_lifecycle_scheme.py reads the scheme through typed rdflib calls (URIRef,
    Graph.subjects, a typed _first over Graph.objects): ten mypy findings clear (the successor table's next mypy row)
-1874. **W1573** (done) tests/test_flow_reference._dense is split into a Laplacian builder and an eliminator: one C901
+1927. **W1573** (done) tests/test_flow_reference._dense is split into a Laplacian builder and an eliminator: one C901
    clears (the ruff lane's next row)
-1875. **W1574** (done) tests/test_shaclcache_threads.py reads the patched sparql processor names through one typed
+1928. **W1574** (done) tests/test_shaclcache_threads.py reads the patched sparql processor names through one typed
    helper and types its excepthook: nine mypy findings clear (the successor table's next mypy row), with
    docs/plc0415-cycles.md as the second entry
-1876. **W1575** (done) rank.policy_blocks builds its pairs with out.extend over a typed list and no walrus: the PERF401
+1929. **W1575** (done) rank.policy_blocks builds its pairs with out.extend over a typed list and no walrus: the PERF401
    leftover of W1563 clears, mypy flat
-1877. **W1576** (done) serve.py types the published document as ViewDoc (NodeRow, EdgeRow, InboundRow, AskRow rows), so
+1930. **W1576** (done) serve.py types the published document as ViewDoc (NodeRow, EdgeRow, InboundRow, AskRow rows), so
    the document readers stop being Any: fifty-six mypy findings clear
-1878. **W1577** (done) rankcore leaf: Weights, load_weights, _open, _repo, downstream_weight, ref_of and successors move
+1931. **W1577** (done) rankcore leaf: Weights, load_weights, _open, _repo, downstream_weight, ref_of and successors move
    from rank.py to a new leaf module that rank, salience and waitrows import, so rank.py can import salience at module
    level and three PLC0415 clear (rank 551, 883, 907)
-1879. **W1578** (done) paths leaf: QUEUE, LEDGER, default_root and workstream_files move from check.py to a new leaf
+1932. **W1578** (done) paths leaf: QUEUE, LEDGER, default_root and workstream_files move from check.py to a new leaf
    module that check, history, vtodo and blocks_cli import, so check.py can import stalled at module level and one
    PLC0415 clears (check 835)
-1880. **W1579** (done) index.py and salience.py hold their scope tables in a one-item list instead of rebinding a module
+1933. **W1579** (done) index.py and salience.py hold their scope tables in a one-item list instead of rebinding a module
    global: two PLW0603 clear (the ruff lane's next row, the successor behind stack 950)
-1881. **W1580** (done) docs/plc0415-cycles.md counts four retired cycle sites for the two leaf modules, not five
-1882. **W1581** (done) adapter.py reads its two regex path lists through one typed _findall: eight mypy findings clear
+1934. **W1580** (done) docs/plc0415-cycles.md counts four retired cycle sites for the two leaf modules, not five
+1935. **W1581** (done) adapter.py reads its two regex path lists through one typed _findall: eight mypy findings clear
    (the mypy successor behind stack 951)
-1883. **W1582** (done) rank.py types its TOML weight reads and names its six sort keys as functions: twenty-five mypy
+1936. **W1582** (done) rank.py types its TOML weight reads and names its six sort keys as functions: twenty-five mypy
    findings clear (the first src batch under the gate cost model)
-1884. **W1583** (done) salience.audit split: cut audit into helpers each under C901 10, 12 branches, 15 locals, 5 args,
+1937. **W1583** (done) salience.audit split: cut audit into helpers each under C901 10, 12 branches, 15 locals, 5 args,
    so six ruff findings clear and ruff falls 85 to 79
-1885. **W1584** (done) check.survey split: cut survey into three helpers under the ruff thresholds, so four ruff
+1938. **W1584** (done) check.survey split: cut survey into three helpers under the ruff thresholds, so four ruff
    findings clear
-1886. **W1585** (done) Public names for five privately imported helpers: letters._today, calendars._venv_ics,
+1939. **W1585** (done) Public names for five privately imported helpers: letters._today, calendars._venv_ics,
    shaclinc._results, serve._build_static and serve._to_json, so six ruff findings (five PLC2701, one SLF001) clear
-1887. **W1586** (done) Subprocess calls in rank, hostapply and work go through procrun capture, so six S404/S603 clear
+1940. **W1586** (done) Subprocess calls in rank, hostapply and work go through procrun capture, so six S404/S603 clear
    in src and test_rank_apply patches nemik.rank.capture, a seventh
-1888. **W1587** (done) A typed jsonschema stub and typed JSON reads in two tests, so seventeen mypy findings clear and
+1941. **W1587** (done) A typed jsonschema stub and typed JSON reads in two tests, so seventeen mypy findings clear and
    mypy falls 116 to 99
-1889. **W1588** (done) Public names for the flow and shaclinc cache resets and for rank and critical's open-card
+1942. **W1588** (done) Public names for the flow and shaclinc cache resets and for rank and critical's open-card
    helpers, so seven ruff findings (SLF001 and PLC2701) clear
-1890. **W1590** (done) test_calendars and test_static read their imports and regex matches in typed form, so thirteen
+1943. **W1590** (done) test_calendars and test_static read their imports and regex matches in typed form, so thirteen
    mypy findings clear and mypy falls 99 to 86
-1891. **W1591** (done) test_score.vec takes its metrics as keywords and test_witwait's log_message is a static method,
+1944. **W1591** (done) test_score.vec takes its metrics as keywords and test_witwait's log_message is a static method,
    so PLR0913 and PLR6301 clear and ruff falls 57 to 55
-1892. **W1593** (done) witwait.wait takes its timeout and interval as one window pair, so PLR0913 clears and ruff falls
+1945. **W1593** (done) witwait.wait takes its timeout and interval as one window pair, so PLR0913 clears and ruff falls
    55 to 54
-1893. **W1594** (done) letters.report and letters.apply_fold take their repo and age cutoff as one scope pair, so two
+1946. **W1594** (done) letters.report and letters.apply_fold take their repo and age cutoff as one scope pair, so two
    PLR0913 clear and ruff falls 54 to 52
-1894. **W1595** (done) test_serve_model and test_cachestore name their imports and types instead of __import__ and a
+1947. **W1595** (done) test_serve_model and test_cachestore name their imports and types instead of __import__ and a
    bare dict, so six mypy findings clear and mypy falls 86 to 80
-1895. **W1596** (done) salience_of and edge_currents take the Weights object instead of its four fields, so two PLR0913
+1948. **W1596** (done) salience_of and edge_currents take the Weights object instead of its four fields, so two PLR0913
    clear and ruff falls 52 to 50
-1896. **W1597** (done) shaclinc and cachestore read their untyped library results through typed casts, so seven mypy
+1949. **W1597** (done) shaclinc and cachestore read their untyped library results through typed casts, so seven mypy
    findings clear and mypy falls 80 to 73
-1897. **W1598** (done) rank._apply becomes the public apply_weights, so two SLF001 in test_rank_apply clear and ruff
+1950. **W1598** (done) rank._apply becomes the public apply_weights, so two SLF001 in test_rank_apply clear and ruff
    falls 50 to 48
-1898. **W1599** (done) serve.py's static build and history_doc type their documents as objects, and withheld.apply
+1951. **W1599** (done) serve.py's static build and history_doc type their documents as objects, and withheld.apply
    answers dict[str, object], so twenty-three mypy findings clear and mypy falls 73 to 50
-1899. **W1600** (done) test_cachestore marks its cache-clearing fixture by usefixtures instead of autouse, so one ruff
+1952. **W1600** (done) test_cachestore marks its cache-clearing fixture by usefixtures instead of autouse, so one ruff
    finding clears and ruff falls 48 to 47
-1900. **W1601** (done) tests/installed.run starts its child through procrun capture, so one S603 clears and ruff falls
+1953. **W1601** (done) tests/installed.run starts its child through procrun capture, so one S603 clears and ruff falls
    47 to 46
-1901. **W1602** (done) wake.read_liveness reads its source text in a helper, so its eleven-statement try clause is cut
+1954. **W1602** (done) wake.read_liveness reads its source text in a helper, so its eleven-statement try clause is cut
    and PLW0717 clears, ruff falls 46 to 45
-1902. **W1606** (done) salience.audit takes everything after weights by keyword, so PLR0917 clears and ruff falls 45 to
+1955. **W1606** (done) salience.audit takes everything after weights by keyword, so PLR0917 clears and ruff falls 45 to
    44
-1903. **W1607** (done) rank._rows takes its fruit_row, toward and with_working options as one tuple, so a seven-argument
+1956. **W1607** (done) rank._rows takes its fruit_row, toward and with_working options as one tuple, so a seven-argument
    PLR0913 clears and ruff falls 44 to 43
-1904. **W1608** (done) critical and vtodo give argparse typed list defaults and cast their tuple dicts, so five mypy
+1957. **W1608** (done) critical and vtodo give argparse typed list defaults and cast their tuple dicts, so five mypy
    findings clear and mypy falls 49 to 44
-1905. **W1612** (done) Five small mypy rows in tests: flow_cache's OrderedDict import, str() on three match groups, one
+1958. **W1612** (done) Five small mypy rows in tests: flow_cache's OrderedDict import, str() on three match groups, one
    cast of a json.loads, so five findings clear and mypy falls 43 to 38
-1906. **W1613** (done) Three mypy rows: letters' match group, starved's json.dumps of tuple dicts,
+1959. **W1613** (done) Three mypy rows: letters' match group, starved's json.dumps of tuple dicts,
    test_shaclcache_threads' vars() read, so three findings clear and mypy falls 38 to 35
-1907. **W1614** (done) blocks.py wraps a match group in str(), so three mypy findings on one line clear and mypy falls
+1960. **W1614** (done) blocks.py wraps a match group in str(), so three mypy findings on one line clear and mypy falls
    35 to 32
-1908. **W1615** (done) staticserve's stream sends its headers in a helper, so its nine-statement try clause is cut and
+1961. **W1615** (done) staticserve's stream sends its headers in a helper, so its nine-statement try clause is cut and
    PLW0717 clears, ruff falls 43 to 42
-1909. **W1616** (done) A bundle of small test and tool mypy rows with no shared file, so about a dozen findings clear in
+1962. **W1616** (done) A bundle of small test and tool mypy rows with no shared file, so about a dozen findings clear in
    one stack
-1910. **W1617** (done) Ten mypy findings in rank, check, history and witnesses: typed locals before json.dumps, a lookup
+1963. **W1617** (done) Ten mypy findings in rank, check, history and witnesses: typed locals before json.dumps, a lookup
    instead of a lambda sort key, cast-typed getattr and urlopen, list defaults
-1911. **W1618** (done) alarm.fires_between takes its schedule fields as one Schedule tuple, so an eight-argument PLR0913
+1964. **W1618** (done) alarm.fires_between takes its schedule fields as one Schedule tuple, so an eight-argument PLR0913
    clears and ruff falls 42 to 41
-1912. **W1619** (done) calwrite.event_lines takes dtstart, due, rrule and exdates as alarm.Schedule, so its
+1965. **W1619** (done) calwrite.event_lines takes dtstart, due, rrule and exdates as alarm.Schedule, so its
    eight-argument PLR0913 clears and ruff falls 41 to 40
-1913. **W1620** (done) test_cardtree opens its page through webpage.launched_page, so its load records failed requests
+1966. **W1620** (done) test_cardtree opens its page through webpage.launched_page, so its load records failed requests
    and retries a network change (the W846 recurrence at stack 983 came from a page the harness never watched)
-1914. **W1621** (done) calendars.occurrences takes helper, ics, includes and stats as one Reading tuple, so its
+1967. **W1621** (done) calendars.occurrences takes helper, ics, includes and stats as one Reading tuple, so its
    seven-argument PLR0913 clears and ruff falls 40 to 39
-1915. **W1622** (done) rank.rank takes fruit_row, toward and with_working as one RankOptions tuple, so its
+1968. **W1622** (done) rank.rank takes fruit_row, toward and with_working as one RankOptions tuple, so its
    seven-argument PLR0913 clears and ruff falls 39 to 38
-1916. **W1623** (done) tools/nemik_client reads through http.client, so its S310 urlopen of a variable URL clears and
+1969. **W1623** (done) tools/nemik_client reads through http.client, so its S310 urlopen of a variable URL clears and
    ruff falls 38 to 37
-1917. **W1624** (done) test_modes opens its page through webpage.launched_page, as test_cardtree now does (W846: the
+1970. **W1624** (done) test_modes opens its page through webpage.launched_page, as test_cardtree now does (W846: the
    second file that called the library load on a page the harness never watched)
-1918. **W1625** (done) witnesses._get reads through http.client, so its S310 urlopen of a variable URL clears and ruff
+1971. **W1625** (done) witnesses._get reads through http.client, so its S310 urlopen of a variable URL clears and ruff
    falls 37 to 36
-1919. **W1626** (done) salience.audit takes its eight keyword options as one AuditOptions tuple, so its eleven-argument
+1972. **W1626** (done) salience.audit takes its eight keyword options as one AuditOptions tuple, so its eleven-argument
    PLR0913 clears and ruff falls 36 to 35
-1920. **W1627** (done) tests/test_layout reads its /cmd status through http.client, so its S310 urlopen clears and ruff
+1973. **W1627** (done) tests/test_layout reads its /cmd status through http.client, so its S310 urlopen clears and ruff
    falls 35 to 34
-1921. **W1628** (done) Three untyped Any reads typed in make_fleet, shaclcache and adapter, so mypy falls
-1922. **W1629** (done) tests/test_flow_reference draws its random graphs from a seeded subclass of random.Random, so its
+1974. **W1628** (done) Three untyped Any reads typed in make_fleet, shaclcache and adapter, so mypy falls
+1975. **W1629** (done) tests/test_flow_reference draws its random graphs from a seeded subclass of random.Random, so its
    S311 clears and ruff falls 34 to 33
-1923. **W1630** (done) serve.handler's do_GET splits into page, live and stored replies, so its C901 x2 and PLR0912
+1976. **W1630** (done) serve.handler's do_GET splits into page, live and stored replies, so its C901 x2 and PLR0912
    clear and ruff falls 33 to 30
-1924. **W1631** (done) staticserve.handler's response writers move to a module-level _Writer base class, so its C901
+1977. **W1631** (done) staticserve.handler's response writers move to a module-level _Writer base class, so its C901
    clears and ruff falls 30 to 29
-1925. **W1632** (done) health.thresholds and importer.main read through typed values, so two mypy Any reads clear
-1926. **W1633** (done) Parse and write MSPDI with an element tree built on xml.parsers.expat that refuses a DOCTYPE,
+1978. **W1632** (done) health.thresholds and importer.main read through typed values, so two mypy Any reads clear
+1979. **W1633** (done) Parse and write MSPDI with an element tree built on xml.parsers.expat that refuses a DOCTYPE,
    clearing five ruff S314 and S405 findings
-1927. **W1634** (done) tests/test_guarantees._wp sheds touches to a second helper _tag, so its six-argument PLR0913
+1980. **W1634** (done) tests/test_guarantees._wp sheds touches to a second helper _tag, so its six-argument PLR0913
    clears and ruff falls 29 to 28
-1928. **W1635** (done) history.weekly hands its per-week scan to _scan over a _Track record, so its 21-local PLR0914
+1981. **W1635** (done) history.weekly hands its per-week scan to _scan over a _Track record, so its 21-local PLR0914
    clears and ruff falls 28 to 27
-1929. **W1636** (done) tests/test_history reads its backfill events by index, so two mypy Any reads clear
-1930. **W1637** (done) churn.render iterates a named CHANGED tuple, not a slice of CLASSES, so one mypy Any read clears
-1931. **W1638** (done) history._asdicts and churn._polls bind asdict to object-typed locals, so four mypy Any reads
+1982. **W1636** (done) tests/test_history reads its backfill events by index, so two mypy Any reads clear
+1983. **W1637** (done) churn.render iterates a named CHANGED tuple, not a slice of CLASSES, so one mypy Any read clears
+1984. **W1638** (done) history._asdicts and churn._polls bind asdict to object-typed locals, so four mypy Any reads
    clear
-1932. **W1639** (done) docs/plc0415-cycles.md lists all 14 cycle rows, the cycle graph as found, both failed leaf
+1985. **W1639** (done) docs/plc0415-cycles.md lists all 14 cycle rows, the cycle graph as found, both failed leaf
    attempts and the retirement condition
-1933. **W1640** (done) checks/claims imports nemik.adapter once at module level, so two of its three PLC0415 become one
+1986. **W1640** (done) checks/claims imports nemik.adapter once at module level, so two of its three PLC0415 become one
    E402 and ruff falls 27 to 26
-1934. **W1642** (done) cachestore keeps its two caches as JSON with a term table, not a pickle, so S301 and S403 clear
+1987. **W1642** (done) cachestore keeps its two caches as JSON with a term table, not a pickle, so S301 and S403 clear
    and ruff falls 27 to 25
-1935. **W1643** (done) nemik-tasks prints the per-field diff for each task it plans to update, so the life parent's
+1988. **W1643** (done) nemik-tasks prints the per-field diff for each task it plans to update, so the life parent's
    repeated UPDATE names the field that differs
-1936. **W1644** (done) vtodo.grouped emits a repo parent's DUE as a date, so Google's all-day normalization of the
+1989. **W1644** (done) vtodo.grouped emits a repo parent's DUE as a date, so Google's all-day normalization of the
    parent stops differing from the feed on every read
-1937. **W1645** (done) The editable-install check moves from nemik/__init__ into nemik.adapter, so RUF067 clears (ruff
+1990. **W1645** (done) The editable-install check moves from nemik/__init__ into nemik.adapter, so RUF067 clears (ruff
    25 to 23) and the package init compiles
-1938. **W1646** (done) nemik-tasks persists the flow solves its feed computed, so the next run restores them instead of
+1991. **W1646** (done) nemik-tasks persists the flow solves its feed computed, so the next run restores them instead of
    solving 16 graphs again
-1939. **W1647** (done) The feed reads the queue graphs without the SHACL run, the fleet checks or the in-gate calls it
+1992. **W1647** (done) The feed reads the queue graphs without the SHACL run, the fleet checks or the in-gate calls it
    never uses, cutting its CPU and wall
-1940. **W1649** (done) Clear the last noqa in hooks/record_event.py so the suppression ratchet reads 0
-1941. **W1650** (done) Repin the vendored mtools wheels to 636e39b so procrun.spawn_piped exists for the four Popen ruff
+1993. **W1649** (done) Clear the last noqa in hooks/record_event.py so the suppression ratchet reads 0
+1994. **W1650** (done) Repin the vendored mtools wheels to 636e39b so procrun.spawn_piped exists for the four Popen ruff
    rows
-1942. **W1651** (done) installed.announced and webpage.served start nemik-serve through procrun.spawn_piped, so the four
+1995. **W1651** (done) installed.announced and webpage.served start nemik-serve through procrun.spawn_piped, so the four
    Popen ruff rows (S404, S603 in tests/installed.py and tests/webpage.py) clear
-1943. **W1654** (done) The pace reads only ratchet samples labelled stage landed once mtools emits them after the
+1996. **W1654** (done) The pace reads only ratchet samples labelled stage landed once mtools emits them after the
    landing, so a cancelled gate cannot move the verdict
-1944. **W1655** (done) nemik's post-commit hook sends the landed ratchet sample after each push, so the pace can ignore
+1997. **W1655** (done) nemik's post-commit hook sends the landed ratchet sample after each push, so the pace can ignore
    a gate that did not land
-1945. **W1656** (done) The graph helpers and rank weights move out of rank into index and score, so rank hoists its
+1998. **W1656** (done) The graph helpers and rank weights move out of rank into index and score, so rank hoists its
    salience, check and critical imports and up to five PLC0415 findings clear
-1946. **W1657** (done) The last two mypy findings (rank.py load_composition tiers, witwait.py rego_poll seen) clear so
+1999. **W1657** (done) The last two mypy findings (rank.py load_composition tiers, witwait.py rego_poll seen) clear so
    mypy reaches zero
-1947. **W1658** (done) adapter.py imports hashlib at module level, so its function-local import (PLC0415) clears and
+2000. **W1658** (done) adapter.py imports hashlib at module level, so its function-local import (PLC0415) clears and
    ruff falls 9 to 8
-1948. **W1659** (done) residue_gaps moves below rank and metrics (judging in realize), so rank hoists its metrics import
+2001. **W1659** (done) residue_gaps moves below rank and metrics (judging in realize), so rank hoists its metrics import
    and ruff falls 8 to 7
-1949. **W1662** (done) witwait folds into witnesses, so the witnesses cycle (PLC0415) clears and witwait leaves the
+2002. **W1662** (done) witwait folds into witnesses, so the witnesses cycle (PLC0415) clears and witwait leaves the
    codon baseline
-1950. **W1663** (done) checks/claims.py hoists its three local nemik imports and drops sys.path.insert, clearing three
+2003. **W1663** (done) checks/claims.py hoists its three local nemik imports and drops sys.path.insert, clearing three
    PLC0415 rows (ruff 6 to 3)
-1951. **W1664** (done) churn folds into history, so history's function-local churn import (PLC0415) clears and churn
+2004. **W1664** (done) churn folds into history, so history's function-local churn import (PLC0415) clears and churn
    leaves the codon baseline
-1952. **W1667** (done) tools/landing_report.py prints the landing stamps in UTC with gaps, the gate's stacks with begin
+2005. **W1667** (done) tools/landing_report.py prints the landing stamps in UTC with gaps, the gate's stacks with begin
    stamps, the working_unnamed lines and the dirty count, so a G1 carries numbers
-1953. **W1668** (done) nemik-critical's entry moves to check, so critical's function-local import of check (PLC0415)
+2006. **W1668** (done) nemik-critical's entry moves to check, so critical's function-local import of check (PLC0415)
    clears and ruff falls 2 to 1
-1954. **W1669** (done) queue-file helpers move to a leaf queuefiles module, so check hoists its stalled import (PLC0415)
+2007. **W1669** (done) queue-file helpers move to a leaf queuefiles module, so check hoists its stalled import (PLC0415)
    and ruff falls 1 to 0
-1955. **W1670** (done) A guard that the installed nemik in the venv lists the same modules as the tree, failing with
+2008. **W1670** (done) A guard that the installed nemik in the venv lists the same modules as the tree, failing with
    'run ./setup.sh' before checks/claims.py runs, since claims.py imports the installed copy at module top
-1956. **W1671** (done) Codon batch: the CLI shells of the cheap argparse rows (floorasks ask_cli work pins pdf
+2009. **W1671** (done) Codon batch: the CLI shells of the cheap argparse rows (floorasks ask_cli work pins pdf
    staticserve) move into one new hub module, so each pure core compiles and the baseline falls by more than the hub
    adds
-1957. **W1672** (done) floorasks loses its CLI to check, so its pure core compiles under Codon and floorasks leaves the
+2010. **W1672** (done) floorasks loses its CLI to check, so its pure core compiles under Codon and floorasks leaves the
    baseline
-1958. **W1673** (done) Measure the adapter wall: compile the baseline rows against a stub adapter without rdflib in a
+2011. **W1673** (done) Measure the adapter wall: compile the baseline rows against a stub adapter without rdflib in a
    scratch copy of the tree, in both modes, and mint the split card with the measured count of rows that compile
-1959. **W1678** (done) A committed tool atomizes a blocker closure into wall cards and row cards through the writer,
+2012. **W1678** (done) A committed tool atomizes a blocker closure into wall cards and row cards through the writer,
    idempotent by title, so atomizing is a mechanical step
+2013. **W2002** (done) Answer nemik: mtools:W2099 is done, which W1229 waited on
+2014. **W2003** (done) Answer nemik: luthen-observability:W1927 is done, which caused W1518
+2015. **W2004** (done) Answer nemik: mtools:W2078 is done, which enables W1220
+2016. **W2005** (done) Answer nemik: luthen-observability:W1550 is done, which enables W914
+2017. **W2006** (done) Answer nemik: luthen-observability:W1928 is done, which caused W1514
+2018. **W2007** (done) Answer nemik: luthen-observability:W2034 is done, which enables W1514
+2019. **W2008** (done) Answer nemik: luthen-observability:W2044 is done, which enables W1661
+2020. **W2016** (done) Record every tick-open reading and trace any open over 150 s
+2021. **W2048** (done) Answer github-14: is the katas status FAILED rc=128 on nemik's last commit live? Needs the exact
+   katas line
 
 ## residue
 
@@ -6268,6 +6685,17 @@ counter 1989 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:734
   wiring: Not nemik's: the ready_wake queue-event source belongs to mtools (mtools:W2247, a writer mode or a sibling
   built on the writer's read modes), because it parses the queue file the writer reserves and counts raw not workable
   cards; a nemik port would be a second parser. Decision and reasons on W1609.
+- **W2020** (2026-11-06T12:03:34Z) Design the pace window rule that counts only landings touching a file the ratchet
+  measures, and show it before it ships: WITHDRAWN 2026-11-06 on github-14's decision (a host relay, not the operator):
+  the measured-file pace window rule (count in the ten-landing window only landings whose diff touched a file the
+  ratchet measures). Replay over main (tools/pace_replay.py, codon ratchet only, 1997 landings, 1972 scored): current
+  rule 66 false oks and 148 false behinds; proposed rule 155 false oks and 116 false behinds, so 89 more false oks, the
+  clean error column, which fails. Caveats: the series is the baseline's entry count at git commits, not the store's
+  samples; the oracle mixes cause and effect, so only false ok is clean; the ten-landing horizon was not varied; the
+  defect the rule targeted (infeasible demand) is invisible to this oracle. Codon is carried by the edge ratchet
+  (nemik:W1978). Not re-proposed unless it beats 66 false oks on the instrument (nemik:W2021). OPEN FACT, left as a fact
+  and not a proposal: queue-only landings age the ten-landing window (13 landings since the last codon fall, 8
+  queue-only).
 
 ## retros
 
@@ -9818,3 +10246,2083 @@ counter 1989 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:734
   re-run any figure; I have not read v6. SHIP-SEEN for 984 to 1029 is unread. Two findings, both about moving the review
   earlier. No fixpoint is declared: open findings are carried with owners and due dates. Carried open findings as in
   R252, minus R252's two (applied).; 2 finding(s)
+- **nemik:R252** (-) round 255: queue-only f79a046d landed 01:07:24Z (2026-11-06); the limited cold review of design v8
+  CLEARED with seven doc conditions, all applied, no build while mtools:W2301 is not cleared; the host asked for a fleet
+  ratchet atomizer, carded as umbrella W1993 with W1994 to W1997; an umbrella set ready by mistake for the second time:
+  root Verified from the reflog: f79a046d is HEAD (1793927244 = 01:07:24Z, 1848 s after 5b0b1f12 at 00:36:36Z), a fifth
+  queue-only landing in a row. R254 is applied by the best method available: the 275 against 277 gap was reconciled as
+  sets from source (the two differing pairs are (cachestore, importlib.metadata) and (serve, importlib.metadata), each
+  file having 'from importlib.metadata import PackageNotFoundError, version' beside an importlib.resources import, which
+  the merged importlib kind counted once per module), so v8 separates the two kinds in the detector and the error table
+  and the birth count is 277 own plus 3 observed = 280; the models are kept as
+  .claude/held-W1978-classify_model_v7.py.txt and v8 and will become tests/test_codon_edges.py when the guard allows;
+  the one-commit-in-ten threshold is marked an assumption until W1989 measures it. The v7 review (two one-line fixes:
+  the hold was released by the next stack, 3b2f12b0 crediting 3 and 6ddaf75d crediting 1 with rows still failing; the
+  relocated pair not per kind and case 3 without a row condition) was answered by v8 and re-enumerated (1,034,928
+  evaluations, total, no dead case, the hold persisting when the next stack changes nothing, every relocated pair naming
+  a leaving kind and already in C; FALL 55,744, MIXED 15,824 of which 8,256 relocated, more conservative than v7 by
+  design), and the limited review of v8 cleared with seven conditions, all applied. That is the design finished on the
+  nemik side; the build waits on mtools:W2301. The host then asked for the fleet ratchet atomizer, carded as W1993
+  (velocity) with W1994 the plan, W1995 the close rule, W1996 the grouping and W1997 the rolling-blocker check, the
+  operator's words verified (line 142923, uuid 43f11ee8), with the read-only count from the published pace (106 ratchet
+  rows and 555 entries, counting RULES for pyproject entries, mtools' correction) and a rows mode asked of mtools
+  (mtools:W2306). The G1 owns its slips: it set the umbrella W1993 ready when clearing its working mark, the same slip
+  as W1685 on the earlier umbrella, restored within the minute; it blocked W1994 on W2306 when only its last input waits
+  on it, and lifted it the same minute; no G0 on the card work; the rolling-blocker check was carded, not run. I did not
+  re-run any figure; I have not read v8. SHIP-SEEN for 984 to 1034 is unread. Two findings. No fixpoint is declared:
+  open findings are carried with owners and due dates. Carried open findings as in R254, minus R254's two (applied).; 2
+  finding(s)
+- **nemik:R253** (-) round 256: no landing since f79a046d (01:07:24Z, 2026-11-06); a queue-state stretch; --add-retro
+  printed 'nemik:R252 added' for retro-r255.json, one number further behind than the established offset of two; counts
+  written on W1568 (nemik 0 unmanifested, 94 ready older than 2.1 days); W1998 carded for the umbrella-ready writer
+  defect and accepted by mtools as W2307: root Verified from the reflog: HEAD is still f79a046d (1793927244 =
+  01:07:24Z), which fits the G1's 'no stack was submitted' and --in-gate []. R255 is applied in both findings: the
+  counts are measured and recorded (nemik-check --unmanifested: nemik 0, fleet 22; --ready-older-than 2.1: 94 ready
+  older than 2.1 days for nemik; on W1568 with state_hash v2:8a2c83e5e6dd8bdb, kept in each G1 until zero), and the
+  umbrella-ready request went to mtools as W1998, with mtools accepting an exemption (a tracked
+  .claude/`<name>`-baseline.txt header '# blocked-on: X', because mtools:W1667 is deliberately ready with 126 parked
+  cards) and claiming it as mtools:W2307, due 2026-11-08. The G1 names its slips (no G0 before the first edit of the
+  stretch, a --add with flags that do not apply, a 207-character title refused at the 150 limit) and one open question
+  it did not settle: --add-retro printed 'nemik:R252 added' for the file retro-r255.json, and the writer's number has
+  run two behind the file number since I mapped it in R73 (retro-r126.json is nemik:R124; the G1s of R239, R248 and
+  others agree), so R255 should have printed R253. A difference of three is either a retro that was never added in the
+  span between (one of R253 or R254, or an earlier one), or a rewrite, and the G1 says it did not check. I did not
+  re-run any figure. SHIP-SEEN for 984 to 1034 is unread. Two findings. No fixpoint is declared: open findings are
+  carried with owners and due dates. Carried open findings as in R255, minus R255's two (applied).; 2 finding(s)
+- **nemik:R254** (-) round 254: queue-only 5b0b1f12 landed 00:36:36Z (2026-11-06); the class-table model enumerated
+  (1,034,928 evaluations, total, no dead case) for v6 and v7; v6 cold review not cleared (two small table blocks and
+  relocated pairs without witness); design v7 written; the replay re-run denied by the permission classifier: root
+  Verified from the reflog: 5b0b1f12 is HEAD (1793925396 = 00:36:36Z, 1619 s after 09ba95f8 at 00:09:37Z), a fourth
+  queue-only landing in a row. R253 is applied and the result is better than I asked for. Finding 1: the model ran under
+  a G0 stamped before it with its pass criterion, as asked, and it enumerated 1,034,928 evaluations over two modules,
+  two kinds, all import-edge sets, reference counts 0 to 2 and observed subsets: the table is total (the fallthrough
+  case 8 never reached), no case from 1 to 7 is dead (first-match counts: UNCHANGED 648, case 2 613,968, case 3 212,160,
+  FALL 88,192, MOVE 44,544, DEBT 39,852, NEUTRAL 35,564), credit never exceeds the pairs removed and appears only on
+  FALL and MIXED, a credited pair always left the closure, and the G0's expected hole was not found in those. The model
+  did find something the author had not predicted: 1,344 of 88,192 credited FALLs (1.5 percent) do not shrink |C|
+  (closure debt traded between kinds), which the host's standing ruling accepts and the doc records as a finding. The v6
+  cold review nevertheless found two small table blocks, relocated pairs with no witness for W1300 and W1662, and
+  blockers hidden behind the mikemol wheels, and the G1 owns that its v6 'checks' said the table was total but were only
+  enumerated after the reviewer found two defects. Design v7 answers: a derived RELOCATED entering pair, the edge clause
+  narrowed to a gained closure incidence, a wheel hold, the regenerator writing rebaselines entries, one order line
+  (W2219, W2301, W1660, the prior table in src/nemik/rebaselines.py, the repin, the birth), the author's route stated
+  (call an existing carrier as DEBT, put the blocked use in an existing carrier, or write without the blocker) with its
+  cost unmeasured; and the v7 table was re-enumerated (1,034,928 evaluations, total, no dead case, no credited removal
+  with the wheel references up, MIXED admits 38,892 of which 26,016 relocated). Finding 2: the replay re-run was not
+  done because the permission classifier denied the reviewer's script, which sits in the host session's scratchpad, and
+  the G1 did not retry or copy it (the host agreed); the re-derivation is a new card, W1989, and an earlier misfiling on
+  W1986 was corrected. I read the G1's arithmetic with one disquiet: the birth derivation is 275 own plus 3 observed =
+  278 against the reviewer's 277 own, two apart and UNRECONCILED, and the doc's author section rests on a threshold (one
+  commit in ten) the G1 says it invented. I did not re-run any figure and have not read v7. SHIP-SEEN for 984 to 1034 is
+  unread. Two findings. No fixpoint is declared: open findings are carried with owners and due dates. Carried open
+  findings as in R253, minus R253's two (applied; the replay re-run converted into W1989).; 2 finding(s)
+- **nemik:R255** (-) round 257: no landing since f79a046d (01:07:24Z, 2026-11-06); a sweep tick: ready-older count 94 to
+  90, round 254 found never added and added, W1999 read-only done; two blocked cards lifted to ready without verifying
+  their blockers; landing_report prints 'dirty paths 1103'; every code stack refused until mtools:W2301: root Verified
+  from the reflog: HEAD is still f79a046d (1793927244 = 01:07:24Z), which fits 'no landing in this stretch' and the
+  empty gate. R256 finding 1 paid off in a way that explains the earlier number: the writer's records were compared with
+  the files and round 254 had never been added; adding it printed 'nemik:R254 added', and the G1 says the offset of two
+  before the gap remains unexplained. That is honest and it leaves the audit trail whole (r254 now present); I would add
+  that the writer's ids are evidently not a fixed offset from the file numbers, so I stop quoting the offset as a rule.
+  R256 finding 2 is applied at a smaller rate than asked: the count fell 94 to 91 to 90 (W1076, W1079 and W1103 set
+  blocked because they named open blockers while ready; W1270 and W1275 closed after reading their letters; W1098 to
+  W1102, W1075 and W1250 given dated next steps; W979 and W879 lifted to ready) against a target of about ten, and the
+  G1 notes correctly that lifting a card adds to the count. The G1 reports its slips plainly: a grep of a sibling path
+  (luthen-observability/checks/ready_wake.py) that the no-sibling-paths rule forbids and was not needed, a --status done
+  refused by the shellcheck hook until quoted, the tick-open output not read, standing 13 unmet (no staged successor)
+  because every code stack is refused until mtools:W2301. The landing_report line prints 'dirty paths 1103', which is
+  where this round's first finding comes from. I did not re-run any figure. SHIP-SEEN for 984 to 1034 is unread. Two
+  findings. No fixpoint is declared: open findings are carried with owners and due dates. Carried open findings as in
+  R256, minus R256's two (applied).; 2 finding(s)
+- **nemik:R256** (-) round 258: no landing since f79a046d (01:07:24Z, 2026-11-06); a sweep tick: stale-ready count 90 to
+  88, W1229 closed on a --help line, W2002 and W2003 closed after their letters were read; the tick-open output unread
+  for the second tick with five UNCLAIMED letters unseen: root Verified from the reflog: HEAD is still f79a046d
+  (1793927244 = 01:07:24Z), the gate empty and nothing staged because every code stack is refused until mtools:W2301, as
+  the G1 says. R257 is applied: notes on W979 and W879 (W879's repin not verified, said so), the dirty-paths request
+  carded as W2001 (the reviewer named W1664, a done card about churn, and the session minted a new card, which is
+  right), and --add-retro retro-r257.json printed 'nemik:R255 added'. The stale-ready count is 94 (R255), 90, now 88: a
+  fall of two in a tick whose G0 expected about five, honest and small. The tick's useful closures are W2002 and W2003
+  (the claimed letters from mtools:W2099 and luthen-observability:W1927, closed after the letters were read), W1246
+  (closed by decision: the gate line prints in three tick-opens, no second hook, landing_report covers the gap) and
+  W1518 (kept, evidence says it still stands). Two things need saying. W1229 was closed because 'mikemol-scratch --help'
+  lists 'restore --as-of-stack KEY --file PATH', which the G1 itself notes it did not run on a live stack: a help line
+  shows that a command exists and not that it does what the card needed, and the standard I put in R236 finding 2 was
+  evidence run on the thing. And the tick-open was backgrounded again and not read (b51tchea8; b27cz3jsm was read a tick
+  late and showed UNCLAIMED letters and five more lines the session did not see). The G1 states both openly, along with
+  the watchdog's exit 8 and restart and the standing 13 gap. I did not re-run any figure. SHIP-SEEN for 984 to 1034 is
+  unread. Two findings. No fixpoint is declared: open findings are carried with owners and due dates. Carried open
+  findings as in R257, minus R257's two (applied; W879's repin check still owed).; 2 finding(s)
+- **nemik:R257** (-) round 259: no landing since f79a046d (01:07:24Z, 2026-11-06); five claimed letters closed (W2004 to
+  W2008) with recorded readings; tick-open read in the foreground (0 UNCLAIMED); mtools:W2060 and mtools:W2301 now
+  WORKING in mtools' queue; the stale-ready count 88 to 88 (94 to 88 in four ticks): root Verified from the reflog: HEAD
+  is still f79a046d (1793927244 = 01:07:24Z), the gate empty with no staged successor, as the G1 says. R258 is applied
+  in both findings: the tick-open was read in the foreground and its output saved (three BLOCKER lines, W1056, W1660 and
+  W1991 moved from ready to working because mtools:W2060 and mtools:W2301 are now WORKING in mtools' queue; one NUDGE
+  for mtools:W2301 with two cards behind it; 0 UNCLAIMED; check OK 2009 of 2009), the unclaimed count is on W1568 and is
+  zero, and W2009 was carded for the restore trial on W1229 (not started). The five letter cards were closed one at a
+  time with their readings recorded (W1220 stays ready, W2078's delivery untested; W914's block kept, the estate verdict
+  record not existing, W1550 itself unread; W1514 stands twice with the store comparison not done; W1661 not blocked
+  with the day-later build-key read of the published pace still owed). The headline is not in the G1's list and I put it
+  first: mtools:W2301, the admission path for the repair of the meter, is WORKING in its queue, which means the long
+  refusal of code stacks may end in this stretch or the next, and the held code (the series repair, stack1028; the wave
+  and hierarchy tools; the walls-doc correction; the codon edge design's tests) will need to move quickly and in the
+  order the design set. The sweep is the weak number: 94 to 88 in four ticks against a target of about ten a tick; the
+  G1 says so, and notes the five letter cards were new and never counted. I did not re-run any figure. SHIP-SEEN for 984
+  to 1034 is unread. Two findings. No fixpoint is declared: open findings are carried with owners and due dates. Carried
+  open findings as in R258, minus R258's finding 1 (applied), with R258 finding 2 (the restore trial) now W2009, not
+  started.; 2 finding(s)
+- **nemik:R258** (-) round 260: no landing since f79a046d (01:07:24Z, 2026-11-06); tools/stale_ready.py and its test
+  built and held (3 tests pass), first run classifying 88 ready-older cards (rest 52, waits on an event 13, dated next
+  step 9, names a peer 8, no next step 4, needs a fetch 2); the count 88 to 85; mtools holds the gate with stack 24 and
+  says W2301's admission waits on the operator (P2): root Verified from the reflog and git status: HEAD is still
+  f79a046d (1793927244 = 01:07:24Z), and the working tree holds the series repair and wave tools plus the two new files
+  (?? tools/stale_ready.py, ?? tests/test_stale_ready.py) held by design. R259 is applied: finding 1 as evidence on
+  W1660 (git apply --check --reverse .claude/held-working-tree.patch exit 0; tests/test_atomize_walls.py and
+  tests/test_ratchet_landed_once.py 15 passed in 0.15 s) and the admission class read from mtools: W2301 is built only
+  in part, not landed, delivery waits on the operator (P2), and no stack-file field was promised, so stack1028 stays
+  unsubmitted; finding 2 as W2010, built (three tests pass, the edit gate admitted the files, and the tool is a script
+  under tools/, not an installed command or a five-registry change). The first run over the day's 88 produced a first
+  batch (W968 and W991 read done, so W966 and W994 got dated steps; W1217 blocked on W1216, W1218 on W1217, W1249 on
+  W1244) and the count fell to 85 by the tool's own run, 94 at R255. The G1 reports the many refusals in building the
+  tool without defending them (a format refusal, a module-not-found, a no-chaining hook refusing a copy, a split import
+  and use twice) and names two slips: the final tools/stale_ready.py was not re-checked with pycheck --check-file, and
+  W1007, W1008 and W1009 stay in the waits class although their mtools letters (W1933, W2048) say done. I did not re-run
+  any figure; I have not read the tool. SHIP-SEEN for 984 to 1034 is unread. Two findings. No fixpoint is declared: open
+  findings are carried with owners and due dates. Carried open findings as in R259, minus R259's two (applied).; 2
+  finding(s)
+- **nemik:R259** (-) round 261: no landing since f79a046d (01:07:24Z, 2026-11-06); the stale-ready classifier gains a
+  letter-enabled class (4 tests, pycheck --check-file admitted); the count 85 to 85; github:W98 cited and added as
+  W1660's blocker; the sweep has changed the count by 9 in six ticks (94 to 85): root Verified from the reflog: HEAD is
+  still f79a046d (1793927244 = 01:07:24Z). R260 is applied: finding 2 as the search the finding asked for (no operator
+  ask on W2301's delivery in this queue, github-14 asked, github-14 replied that github:W98 is the ask: host-held, no
+  date, waits on the operator, recommends yes, and asks whether luthen's tools.json rows for mikemol-hooks and
+  mikemol-fence and the nemik-pace repin past 4d084f7 pass as named exceptions to W90's incident-only rule; cited on
+  W1660 and added with --add-blocker), and the G1 rightly declined a second ask because a peer's message is not the
+  operator's answer; finding 1 as the letter-enabled class (enabled_cards reads the inbox file names
+  '-enables-W`<n>`.md', four tests pass in 0.11 s, pycheck --check-file admitted the file, which closes last stretch's
+  miss; the run over the 85 gives rest 51, dated 9, names a peer 7, letter-enabled 6 (W879 W979 W1007 W1008 W1220
+  W1514), waits 6, no next step 4, needs a fetch 2). The class that would have moved the count (a card whose manifest
+  changed) is deferred, W1009 did not move (no letter names it), and the G1 states that the count did not fall (85 to
+  85, because a dated step does not change a card's status). Over six ticks the sweep has changed the count by nine (94
+  at R255 to 85), against a plan of about ten per tick, so the measure and the method both deserve a decision now. The
+  G1 names its slips. I did not re-run any figure. SHIP-SEEN for 984 to 1034 is unread. Two findings. No fixpoint is
+  declared: open findings are carried with owners and due dates. Carried open findings as in R260, minus R260's two
+  (applied).; 2 finding(s)
+- **nemik:R260** (-) round 262: no landing since f79a046d (01:07:24Z, 2026-11-06); W913's design step finished as the
+  first 'finished item' (options A, B, C, recommendation B, atomized into W2011 to W2013); W2011 read-only count: 0 of
+  10 witnessed closes were short; the repin procedure for the pace unit written on W1661: root Verified from the reflog:
+  HEAD is still f79a046d (1793927244 = 01:07:24Z). R261 is applied: the sweep's unit is now finished items (recorded on
+  W1568; this tick finished one, against the rule's one or two, which the G1 names), and the repin procedure and its
+  read-back are on W1661 with a heads-up to luthen-observability on the order. W913 was finished from the rank list as
+  the first finished item: options A, B and C with a recommendation (B, in nemik-witnesses --apply), and the 'W59 check'
+  the card names is not found in witnesses.py, check.py or shapes.ttl by grep, so it is unread. Then W2011 was done as a
+  read-only count over the repo's own export (2012 cards, 1 withheld, as_of 04:35:32Z): ten witnessed cards, all done
+  with both stamps, seconds from issued_at to completed 1178, 22085, 37166, 45620, 86716, 130182, 607756, 1008049,
+  1008050, 1008051, median 130182; the cadence was not read from a unit (the apply job is the host's) and witnesses.py
+  carries only a comment about a loop 'every five minutes' (300 s); the verdict is '0 of 10 closed within a short
+  interval' and the consequence recorded is not to build W2012 and W2013 on this evidence. I accept the stop and
+  question the evidence under it: issued_at to completed measures the whole life of the card, work included, and not the
+  apply latency W913 asks about; a card that waited two weeks for its work and then closed within seconds of its witness
+  holding would read as a long close. The G1 names the slips (one finished item, the second candidate W1994 not taken,
+  the fleet half of W2011 open, the stale-ready count and the unmanifested count not re-run). I did not re-run any
+  figure and have not read the script. SHIP-SEEN for 984 to 1034 is unread. Two findings. No fixpoint is declared: open
+  findings are carried with owners and due dates. Carried open findings as in R261, minus R261's two (applied).; 2
+  finding(s)
+- **nemik:R261** (-) round 263: no landing since f79a046d (01:07:24Z, 2026-11-06); two queue-only items finished (W1418
+  mtools letters answered, W1271 headroom decision written on W1136); the count 85 to 82; the tick-open took over 600 s;
+  0 of nemik's 10 witnessed cards carry 'witness held at': root Verified from the reflog: HEAD is still f79a046d
+  (1793927244 = 01:07:24Z). R262 is applied and corrected on its own premise. Finding 1: the latency was recomputed from
+  the same export by the 'witness held at' text in the evidence and the G1 found that none of nemik's ten witnessed
+  cards carries it, so none was closed by the apply; W913 now says INCONCLUSIVE and withdrew 'not shown'. Finding 2: the
+  W59 check is mtools:W132 (a witnessed card marked working), in mtools' writer and not in nemik's files, noted on W913
+  and W59. Two items were finished this tick, as the G1's own rule asks (W1418: its three mtools letters answered by
+  facts, W1229 closed after mikemol-scratch --help listed restore and W1246 after the gate line printed in three
+  tick-opens, the earlier plan to bump the pin on W1396 overtaken; W1271: a DECISION written on W1136, headroom = the
+  median of cores-minus-busy readings over 24 hours, with the reasons from the card's own evidence, a reading of 23.7
+  busy of 24 cores with load1 79.25 so one reading flaps, a mean dragged by a bursty gate, a minimum near zero while a
+  gate runs, and the declared CEILING holding until a stored series exists), and W1272 got a dated step. The count by
+  the tool's own run is 82 (85 before): the rest 50, dated 10, names a peer 7, letter-enabled 6, waits 6, needs a fetch
+  2, no next step 1. luthen-observability carded the repin heads-up as W2075 (nemik-pace in user/tools.json to the
+  landing sha nemik sends, then read the pace back), recorded on W1660. The G1 names its misses: the tick-open took over
+  600 s and was not diagnosed (it ran in the background and finished), the W1271 decision rests on the card's own
+  evidence and no day of readings, and the series it needs is not yet asked for. I did not re-run any figure. SHIP-SEEN
+  for 984 to 1034 is unread. Two findings. No fixpoint is declared: open findings are carried with owners and due dates.
+  Carried open findings as in R262, minus R262's two (applied).; 2 finding(s)
+- **nemik:R262** (-) round 264: no landing since f79a046d (01:07:24Z, 2026-11-06); the cause of the 7-minute tick-open
+  found by profiling and fixed in src/nemik/letters.py (nemik-inbound 418.85 s to 99.38 s wall); the fix is live in the
+  working tree and held; 14 open witnessed cards fleet-wide all false, none in nemik: root Verified from git status and
+  the reflog: src/nemik/letters.py is modified alongside the held src/nemik/ratchetseries.py, HEAD is still f79a046d
+  (1793927244 = 01:07:24Z). R263 is applied, and finding 1 (the time of the tick-open components) was answered better
+  than asked. /usr/bin/time on nemik-inbound nemik read 418.85 s wall, 404.78 s user, 2.95 s sys, so compute-bound, and
+  the claim that the instance cards caused the growth was NOT shown, which retracts the worry I raised in R263: a
+  profile (958.7 s under cProfile) put split_orphans at 712.7 s cumulative, letters._load at 260 calls of 2.7 s each,
+  tracker.string 17.5 million calls and 357 s own, fold_commands 354 s and check.survey 238 s (pyshacl 190 s, 30,000
+  SPARQL evaluations); the cause was read in source (src/nemik/letters.py lines 273 to 308): orphans() calls
+  _load(state) once per inbox letter, re-parsing the owner's 4.7 MB queue each time. One Edit added a per-owner parse
+  cache; five test files (24 tests in 2.99 s), pycheck --check-file, the standing-6 exit codes and a timed rerun
+  (nemik-inbound nemik --json 99.38 s wall, 96.52 s user, 1.68 s sys, the G0's 'under 150 s' met, 4.2 times faster) back
+  it. The G0 for the edit was stamped before it with the cause and the expectation, which is the discipline I have been
+  asking for. R263 finding 2 is also done: nemik-witnesses read-only found 14 open witnessed cards fleet-wide, all
+  false, 13 with sniffed language, none in nemik, and the date of the last apply is unknown. The G1 names its slips (the
+  fix and the timing ran before the tick-open, the pace stamp older than 10 minutes by the G0's own admission, no
+  parse-count test, no re-profile, the other leaders carded). Two things are not yet shown: that the fix leaves the
+  output unchanged (a cache of parsed trees shared across letters is exactly where a mutation would carry from one
+  letter to the next), and that the live unlanded src edit is held safely. I did not re-run any figure. SHIP-SEEN for
+  984 to 1034 is unread. Two findings. No fixpoint is declared: open findings are carried with owners and due dates.
+  Carried open findings as in R263, minus R263's two (applied).; 2 finding(s)
+- **nemik:R263** (-) round 265: no landing since f79a046d (01:07:24Z, 2026-11-06); the letters.py fix checked by output
+  comparison (orphans() equal on two owners, new 8.6 s and 15.9 s against old 113.7 s and 328.9 s) and a parse-count
+  test that bites on the old code; the re-profile reads 84.9 s against 958.7 s; the held inventory growing: root
+  Verified from the reflog and the files: HEAD is still f79a046d (1793927244 = 01:07:24Z) and
+  .claude/held-W1222-letters.patch exists and is not empty (1033 bytes), after the G1's account of a first attempt that
+  wrote an empty file (git show --output) and was redone with git archive and tar. R264 is applied in both findings.
+  Finding 1: the output comparison I asked for was run (compare_orphans.py): repo 'nemik' new 61 rows in 8.6 s, old 61
+  rows in 113.7 s, equal=True; repo '' new 287 rows in 15.9 s, old 287 rows in 328.9 s, equal=True; answered() and
+  _closed() read, and both only read the tree; the limits are stated (it compares orphans() output lists, not
+  nemik-inbound's text); the parse-count test (tests/test_letters_parse_once.py, six letters, asserts two parses) and
+  tests/test_letters.py pass (11 in 1.51 s) and the test bites: a scratchpad run of HEAD's old orphans() on the same
+  fixture made seven parses. The no-mutation test is not written, and I judge the equal=True runs on two owners adequate
+  evidence in the meantime, because a mutating consumer would have shown in those lists. Finding 2: the cost of the wait
+  is written on W1660 (418.85 s to 99.38 s wall, 4.2 times, 319 s per run) and sent to github-14 for W98 framed as a
+  cost and not an exemption. The re-profile this tick (total 84.9 s against 958.7 s, 11.3 times) came in at a third of
+  the G0's expectation (about 250 s); the expectation subtracted the old cumulative figure, and cumulative figures
+  overlap (tracker.string's 357 s own time sat inside the orphans subtree), so the next such arithmetic should use own
+  time. The leaders left: split_orphans 40.9 s (called twice, 36.0 s in 38 parse calls), check.survey 38.0 s (rdflib
+  addN 16.0 s over 897k triples), fold_commands 20.0 s, subprocess.run 8.4 s; two independent costs of about 40 s
+  remain. The G1 names its slips (a noqa written by reflex and imports split from use, refused by the edit gate and
+  moved to its own file; the G1 for the prior stretch sent a tick late; the no-mutation test not written; the unprofiled
+  wall not re-measured; the stale-ready and unmanifested counts not re-read). I did not re-run any figure. SHIP-SEEN for
+  984 to 1034 is unread. Two findings. No fixpoint is declared: open findings are carried with owners and due dates.
+  Carried open findings as in R264, minus R264's two (applied).; 2 finding(s)
+- **nemik:R264** (-) round 266: no landing since f79a046d (01:07:24Z, 2026-11-06); the whole tick-open timed once
+  unprofiled at 636.87 s wall (user 619.92 s) against a 120 s budget; about 530 s of it unattributed; load average 49 on
+  24 cores; 17 ready cards found without a manifest, nine given one: root Verified from the reflog and the repo: HEAD is
+  still f79a046d (1793927244 = 01:07:24Z); .claude/tick-hooks.txt lists exactly four commands (nemik-inbound nemik,
+  nemik-stale with two paths, mikemol-commit --in-gate --json, nemik-rank nemik --pace) and the G1's timings of them add
+  up (38.60 s, 0.15 s, 0.51 s, 1.10 s, about 40 s); and tools/ holds no mint wrapper, so R235 finding 2 is still
+  unbuilt. R265 is applied in both findings and the measurement overturned the premise of one of them. The landing table
+  is on W1660 (five intended stacks S1 to S5 with files, patches, tests, order and checks; S1 gates all). The budget was
+  set at 120 s and the first measurement missed it by 5.3 times: /usr/bin/time on mikemol-paths-forward --tick-open
+  session-nemik read WALL 636.87 s, USER 619.92 s, SYS 4.00 s; the call outran the 600 s tool timeout, ran in the
+  background and was read after. Because user time (619.92 s) is almost all of the wall time, the open is compute-bound
+  and the load average (49.22 on 24 cores) is not the explanation, and the work is not in the pieces timed alone:
+  nemik-inbound nemik 38.60 s (an hour earlier 99.38 s, 2.6 times apart, which says the hour-earlier figure and this one
+  differ by load or by something else), nemik-check --warnings --repo nemik 32.89 s, nemik-rank nemik --json 28.26 s,
+  the rest about 5 s; the sum is about 105 s and about 530 s is unattributed. The G1 says plainly that its own R265 rule
+  (take the larger of the two remaining letters.py edits) rested on a premise the measurement does not support and wrote
+  the next step on W1222. I note that the four listed hooks account for about 40 s, so the remainder is whatever the
+  writer's own --tick-open does beyond tick-hooks.txt, and it is plausible that it runs fleet-wide variants (nemik-check
+  --digest across repos took 132 s by an earlier reading, nemik-inbound over all repos 15.9 s after the fix) that the
+  repo-scoped timings do not cover. The G1 also owns a correction: the earlier 'nemik 0 unmanifested' was true at the
+  R255 stamp only; nemik-check now says 17 ready cards have no manifest (over the 0 the ratchet allows), 58 ready cards
+  untouched longer than 2.2 days, and 11 open cards claiming an operator ruling with no warrant (above the declared 6),
+  nine of the 17 were given a manifest and size, eight stay unmanifested on purpose (W879, W1220, W1250, W1257, W1258,
+  W1325, W1761, W2009), and a drafting slip in a W1568 line was corrected by an appended line. I did not re-run any
+  figure. SHIP-SEEN for 984 to 1034 is unread. Two findings. No fixpoint is declared: open findings are carried with
+  owners and due dates. Carried open findings as in R265, minus R265's two (applied; finding 1's premise overturned).; 2
+  finding(s)
+- **nemik:R265** (-) round 267: no landing since f79a046d (01:07:24Z, 2026-11-06); an execve trace of one real tick-open
+  attributed 496 of 503 s to the first hook, the bare nemik-inbound resolved to the followed install (an unfixed build);
+  .claude/tick-hooks.txt line 4 changed to the repo venv's absolute path; the R266 sentence about the four hooks
+  retracted: root Verified from the files and the reflog: .claude/tick-hooks.txt now reads, from line 4, '# replaces:
+  nemik-inbound nemik', a two-line reason citing the strace of the 2026-11-06 open and 'the bare name resolved to the
+  followed install, an unfixed build', and the absolute path /home/mikemol/github/nemik/.venv/bin/nemik-inbound nemik,
+  with the other three hooks unchanged; HEAD is still f79a046d (1793927244 = 01:07:24Z). R266 is applied in both
+  findings and the trace answered the question the G1 and I had both got wrong. The trace (strace 7.2, 285 execve lines,
+  span 503.4 s): writer at t+0; the first hook, bare 'nemik-inbound nemik', started at t+5.1 s, resolved through PATH to
+  the user-local copy of nemik-inbound (the by-sha build f79a046d, not the repo venv); 21 mikemol-commit spawns from
+  inside it between t+5.9 and t+283.0 s, a silent gap of 254.0 s, 84 git spawns at t+282.1 to t+284.6 s (per-repo git
+  log --grep=^Waypoint:), a silent gap of 216.6 s, then nemik-stale at t+501.2 s, mikemol-commit --in-gate at t+501.5 s,
+  nemik-rank --pace at t+502.1 s and the end at t+503.4 s. So the first hook is about 496 of 503 s, running a build that
+  does not carry the held letters.py fix. The earlier timings (105 s) were of .venv/bin/nemik-inbound, not the bare name
+  the hook runs, which is why they did not add up; the G1 retracts its own sentence about the four hooks accounting for
+  40 s and records that the identification of the user-local copy as the unfixed build is an inference from its
+  mikemol-commit children being by-sha f79a046d paths, not from reading the file. The change is what the card needed:
+  the writer first refused the list ('the new list drops the tick hook; declare each with # replaces: `<line>`'), the
+  replaces comment was added, 'tick hooks set: 4 command(s)' printed, and the hook now runs the working-tree build as
+  hooks 2 to 4 already did (standing 6 accepts that hooks import the tree live). The risk is named: a wrong held
+  letters.py would break the open until fixed, mitigated by the orphans() equality shown earlier (61 rows and 287 rows).
+  The G1 also retracts the R265 rule, writes the mint wrapper as W2014, and owns the slips (shell-refused characters,
+  --add taking no manifest flags, the budget unverified after the fix, the no-mutation test, W2009 and W2014 not done).
+  I did not re-run any figure. SHIP-SEEN for 984 to 1034 is unread. Two findings. No fixpoint is declared: open findings
+  are carried with owners and due dates. Carried open findings as in R266, minus R266's two (applied; W2014 carded).; 2
+  finding(s)
+- **nemik:R266** (-) round 268: no landing since f79a046d (01:07:24Z, 2026-11-06); the tick-open now 66.23 s wall
+  against 636.87 s (9.6 times faster) and W1222 closed on the budget; github:W98 answered by a CONDITIONAL operator
+  ruling; 'nemik-check --unmanifested' found to print the declared bound and not a count, so six G1s carried a wrong
+  measure; mtools' unmanifested baseline reads behind: root Verified from the reflog: HEAD is still f79a046d (1793927244
+  = 01:07:24Z), and the tick-open change from the last round is in place. R267 is applied and the verification passed
+  with room: /usr/bin/time on the tick-open read WALL 66.23 s, USER 59.20 s, SYS 3.16 s, against 636.87 s before (9.6
+  times) and 503.4 s in the trace, the HOOK nemik-inbound line shows the repo venv's absolute path with exit 0, the
+  budget of 120 s is met, and W1222 closed done with the remaining leaders (split_orphans twice, about 36 profiled
+  seconds; the survey graph build, about 38) as notes and the held state stated (the letters.py fix and its test
+  uncommitted, the open fast because the hook runs the tree, the followed install still slow). The inference of last
+  round is confirmed by readlink -f (the bare nemik-inbound resolves to the by-sha build f79a046d, none of the held
+  fixes), and the bare-name callers are listed on W1568 (settings.json all absolute, tick-hooks line 4 fixed,
+  nemik-stale and the mikemol-* tools not on PATH, and what is not read: what the hook programs call inside, the
+  watchdog, the loop prompt's commands) with a proposed standing-6 text. Two things the G1 reports deserve weight.
+  First, github:W98 is done and the operator's words, which the session read itself from the host transcript record
+  (mikemol-transcriptstruct --raw user, origin kind human, 2026-11-06T07:46:17.917Z, line 143824, uuid 298e1507), are
+  CONDITIONAL: 'if it's not irreversible, and doesn't risk creating debt we'd have a painful time ratcheting back down,
+  I don't care'; the session recorded them with the condition on W1660, labelled its own reading (reversible, no debt)
+  as its own and not asked of the operator, and W1660 is now blocked on mtools:W2301 alone. Second, a correction that
+  runs back six ticks: nemik-check --unmanifested prints the DECLARED BOUND (its help says it prints the ratchet never
+  above what rank-weights.toml declares), not a count; every 'nemik 0 unmanifested' written since R255, and the fleet
+  figures beside it, were bounds, and the count comes from nemik-check --warnings --repo nemik (17 at 07:20Z, eight by
+  the G1's count now, not re-run). I used those same figures in my own findings and take my share. The pace this time
+  shows mtools' .claude/unmanifested-baseline.txt behind (owes 1, 112 left), not looked at. I did not re-run any figure.
+  SHIP-SEEN for 984 to 1034 is unread. Two findings. No fixpoint is declared: open findings are carried with owners and
+  due dates. Carried open findings as in R267, minus R267's two (applied).; 2 finding(s)
+- **nemik:R267** (-) round 269: no landing since f79a046d (01:07:24Z, 2026-11-06); the timed tick-open read 178.92 s
+  wall at 08:30Z against 66.23 s at 08:00Z with the same hook build, over the 120 s budget, untraced, noted on the
+  closed W1222; manifests on letter files given to W879 and W1220 without saying so on the cards; W2015 carded for
+  luthen's liveness gauge; W2009 blocked because the gate is empty: root Verified from the reflog: HEAD is still
+  f79a046d (1793927244 = 01:07:24Z). R268 is applied in both findings. Finding 1: nemik-check --warnings --repo nemik at
+  about 08:15Z read 8 ready cards without a manifest (bound 0), 57 ready untouched over 2.2 days (oldest W911 at 13.6
+  days) and 12 open cards claiming a ruling with no warrant (declared 6); four were given a manifest and size (W879 and
+  W1220 on their letter files, W1257 alarm.py and exportwire.py, W1258 adapter.py and blocks.py), W1250, W1325, W1761
+  and W2009 were left, and by the G1's tally one remains (W1325) after W2009 was blocked and W1761 and W1250 closed.
+  Finding 2: the birth-debt argument is on W1978, labelled the session's: the W98 ruling does not cover the birth, E1
+  does; reversible as a change, not costless as a commitment (a seeded rate may only rise); the operator was not asked
+  again, which I accept given the E1 warrant. The luthen exchange is useful: W1761's ask arrived cut off, the full text
+  was requested and received (their alert loop_event_waiting reads nemik_wake_required{repo} through a 35-minute
+  last_over_time window because it arrives about every 16 minutes; they ask for a declared push cadence with a guarantee
+  and a liveness stamp gauge), and the answer was honest: no guaranteed cadence (waitemit declares none and runs as a
+  host job whose period the session cannot read), yes to nemik_wake_pushed_timestamp_seconds{repo}, carded as W2015
+  (held, due 2026-11-08), with an interim timestamp(last_over_time(...)) not tried and the question of whether a push
+  occurs when no value changes not read. W2009 was handled correctly: --in-gate reads [], no stack of the session's
+  exists to restore from, mtools' stack 24 was not used, W2009 blocked on W1660 with a dated step. W1250 was closed as
+  not ours on the evidence of nemik-inbound mtools; that output also listed 24 UNCLAIMED letters in mtools' inbox,
+  several from nemik edges, which are mtools' to claim. The G1 names its slips (the G0 refused for backticks and the
+  open running first, the manifests on letter files). Two things I weigh: the tick-open is not stable (66.23 s at
+  08:00Z, 178.92 s at 08:30Z, the same build, user 170.93 s, so compute-bound again), and the note about it sits on a
+  closed card. I did not re-run any figure. SHIP-SEEN for 984 to 1034 is unread. Two findings. No fixpoint is declared:
+  open findings are carried with owners and due dates. Carried open findings as in R268, minus R268's two (applied).; 2
+  finding(s)
+- **nemik:R268** (-) round 270: no landing since f79a046d (01:07:24Z, 2026-11-06); the tick-open back inside the budget
+  (69.78 s wall at load average 29, the variance doc written with five rows); the config census of nemik's eight
+  surfaces read from mikemol-surfaces and written as docs/config-census.md; two new docs and .claude/tick-hooks.txt held
+  untracked: root Verified from the reflog and git status: HEAD is still f79a046d (1793927244 = 01:07:24Z), and the
+  working tree holds docs/codon-walls.md (modified) and, untracked, .claude/tick-hooks.txt, docs/codon-edge-ratchet.md,
+  docs/config-census.md, docs/shared-file-versions.md and docs/tick-open-variance.md. R269 is applied in both findings.
+  Finding 1: W2016 was carded with a record file and the trigger as I asked (any open over 150 s is traced the same
+  tick), and this tick's open was timed under /usr/bin/time with /proc/loadavg read just before it: load average 29.01
+  19.68 25.38, WALL 69.78 s, USER 60.70 s, SYS 4.22 s, inside the budget and the trigger, so no trace; the variance doc
+  holds five rows (636.87, the 503.4 traced span, 66.23, 178.92, 69.78 s wall), load recorded for two rows only and 'not
+  read' in the other cells, and the G1 says plainly that the spread of the venv-build open (66 to 179 s) stays
+  unexplained. Finding 2: the manifest stretch on W879 and W1220 was stated with appended evidence, and a convention was
+  recorded on W1568 (a manifest lists files the card edits or writes; a decision or reply card closes in its tick or
+  names the document its answer goes in; a letter file is never a manifest entry; a card waiting on a named peer card is
+  blocked, not ready; a measurement card names its record file), and W1325 was atomized into W2017 (the read) and W2018
+  (the build, first blocked on W2017). The read is the new substance: mtools named the command (mikemol-surfaces
+  REPO_DIR, landed 63b06c00 on 2026-11-01), this venv has the module but not the console script and the module has no
+  main guard, so the session called main from a scratch script on this repo only, read only; the output is schema 1,
+  repo nemik, eight surfaces (claude_md, skills, settings, hooks, loop_prompt, standing, memory, policy) with declared,
+  changed_by, loaded_by, reviewed_by, and the labelled reading in docs/config-census.md is the interesting part: six of
+  the eight surfaces have no declared file and no reviewer, hooks is declared nowhere in the census, and policy has no
+  loader; a question went to mtools on whether .claude/tick-hooks.txt should be the declared file for the hooks surface.
+  I did not re-run any figure and have not read the docs. SHIP-SEEN for 984 to 1034 is unread. One finding. No fixpoint
+  is declared: open findings are carried with owners and due dates. Carried open findings as in R269, minus R269's two
+  (applied).; 1 finding(s)
+- **nemik:R269** (-) round 271: no landing since f79a046d (01:07:24Z, 2026-11-06); no tick open; six held files saved as
+  non-empty patches; docs/config-census.md corrected after mtools' reply on the hooks surface; mtools carded the
+  tick-hooks surface as W2308: root Verified from the files and the reflog: all six patches the G1 names exist and are
+  non-empty under .claude (held-W2017-W2016-docs.patch, held-W2016-variance-doc.patch,
+  held-W2010-stale-ready-tool.patch, held-W2010-stale-ready-test.patch, held-W1222-parse-once-test.patch,
+  held-W1222-tick-hooks.patch), alongside the earlier held copies, and HEAD is still f79a046d (1793927244 = 01:07:24Z).
+  R270's one finding is applied in full: the six files are saved, the landing table on W1660 gained S2
+  (tests/test_letters_parse_once.py), S3 (tools/stale_ready.py and its test) and S4 (docs/config-census.md,
+  docs/tick-open-variance.md and .claude/tick-hooks.txt), and the answer to the second half is recorded: tick-hooks.txt
+  is untracked and not a queue file, so a queue-only commit cannot carry it, and the hook list itself is stored in the
+  queue by --tick-hooks-set. The best thing in the stretch is a correction the G1 made on its own account. mtools
+  answered the hooks-surface question (the surface is hooks/bin/* and .claude/hooks/*, empty is true for nemik whose
+  hook scripts are a pinned install, and .claude/tick-hooks.txt is a different object with no census row, read as an
+  omission, carded as mtools:W2308), and the session corrected docs/config-census.md ('hooks declared nowhere' was too
+  strong), regenerated the held patch, and wrote the answer on W2017 as an append to a closed card. The G1 names a slip
+  (the patch held-W2017-W2016-docs.patch holds only W2017's file, so its name is wrong) and that the true unmanifested
+  and stale-ready counts were not re-read. The stretch had one edit, with its G0 stamped after mtools' reply and before
+  the edit, and no tick was open. I find nothing new that is worth a finding: the open items are the same ones already
+  carried (the true counts from nemik-check --warnings, the side-by-side design W2018, the no-mutation test, W2014,
+  W2009 blocked, the unlock at mtools:W2301), and a round that adds a finding for a cosmetic filename would be the kind
+  of cost I flagged in R246. I did not re-run any figure. SHIP-SEEN for 984 to 1034 is unread. No new findings: open
+  findings are carried with owners and due dates, so no fixpoint is declared. Carried open findings as in R270, minus
+  R270's (applied).; 0 finding(s)
+- **nemik:R270** (-) round 272: no landing since f79a046d (01:07:24Z, 2026-11-06); the tick-open 65.09 s at load average
+  46.51 (below the G0's 70 to 200 s range); the true counts read (0 unmanifested, 57 stale-ready, 12 open cards claiming
+  a ruling with no warrant against a declared 6); two warrants attached; W1993's earlier citation (line 142923, uuid
+  43f11ee8) does not resolve: root Verified from the reflog: HEAD is still f79a046d (1793927244 = 01:07:24Z). R271 had
+  no findings and the G1 carries the stretch's facts forward. The timed open read WALL 65.09 s, USER 58.95 s, SYS 3.07 s
+  at the highest load of the series (46.51 42.60 41.78), below the G0's 70 to 200 s range and faster than the 69.78 s
+  reading at load 29.01, which the G1 reads correctly: load alone does not explain the 65 to 179 s spread, and the
+  178.92 s row had no load reading and was not traced; the variance doc has its sixth row and the corrected reading
+  text. The true counts are finally on the card, from nemik-check --warnings --repo nemik at about 09:35Z: no ready card
+  without a manifest (0, at the bound), 57 ready cards untouched over 2.2 days (oldest W911 at 13.6 days), and 12 open
+  cards claiming a ruling in prose with no warrant against a declared 6 (W1108, W1276, W1277, W1280, W1400, W1411,
+  W1660, W1984, W1993, W47, W846, W979). Two warrants were attached from the host transcript (W1660 from line 143824,
+  uuid 298e1507-1373-4363-8f4a-5f14bdda5804, the conditional W98 ruling in its own words; W979 from line 92679, uuid
+  0c91eb8b-3a07-472a-adaf-254f72436ada, 'The existence of a nonzero ratchet is a priority marker.'), the writer printed
+  'WARRANT attached' each, and the debt should now read 10. What the G1 reports against itself is the part to weigh: a
+  note it wrote earlier on W1993 cited line 142923, uuid 43f11ee8 as the operator's words 'verified', and `--raw user
+  --since 142923 --until 142923` returns no hit, so that citation does not resolve and nothing was attached. I repeated
+  that citation as verified in R255's root, so I share the error. I did not re-run any figure. SHIP-SEEN for 984 to 1034
+  is unread. Two findings. No fixpoint is declared: open findings are carried with owners and due dates. Carried open
+  findings as in R271, none new from it.; 2 finding(s)
+- **nemik:R271** (-) round 273: no landing since f79a046d (01:07:24Z, 2026-11-06); the tick-open read 192.63 s at load
+  average 24.6 and was not traced; the W1993 citation DID resolve (my R272 finding 1 withdrawn); three planned warrants
+  did not resolve because the checker matches a phrase in cards that deny a ruling; W2019 carded for the checker: root
+  Verified from the reflog: HEAD is still f79a046d (1793927244 = 01:07:24Z). I withdraw R272 finding 1 and say why: the
+  G1 reports that the W1993 citation DID resolve and that its earlier 'does not resolve' was a wrong tool mode (--raw
+  user and --kinds user --grep are not the mode for human-origin lines, the second even failing to find a known human
+  line); mikemol-transcriptstruct --human 'mechanized atomization' returns line 142923, kind human, uuid
+  43f11ee8-ffdf-4fe5-a8d7-5a0f4fb6cd90, 2026-11-06T00:49:59Z, and the warrant is attached to W1993 with the correction
+  on W1993 and W1568. I took 'does not resolve' on the G1's word and made it a finding; the error was the tool mode and
+  my taking an unreplicated negative on trust, the same shape as the earlier 'the unit read the tree'. R272 finding 2 is
+  applied for the cards that could be: warrants attached from human-origin lines found with --human for W846 (line
+  100099, uuid cd406e86-44f2-4f2c-9ffb-05a06dbf194b, the flake-proof ruling) and W1108 (line 141054, uuid
+  882ee421-aa7b-4963-833e-595fb62e4f62, the relayed 2026-11-05 quote the card had marked unverified), W47 read as a
+  false match ('operator blocks' means blocks on the operator), and the three planned cards (W1276, W1277, W1280) each
+  say in their own text that the cited messages are 'not an operator ruling' (peer messages from github-42 and mtools),
+  so the session did not reword them to dodge the match and carded the checker as W2019 (manifest
+  src/nemik/data/shapes.ttl and tests/test_warrant_shape.py, held). That refusal to reword is the right call. The open:
+  WALL 192.63 s, USER 182.28 s, SYS 3.87 s at load 24.60 21.08 26.80, over the 150 s trigger on W2016 and not traced,
+  which the G1 names as a missed trigger, with the rule that from the next tick every open runs under strace -f -tt -e
+  trace=execve. The slow readings (178.92 s and 192.63 s) did not come at the higher loads (65.09 s at load 46.5); a
+  guessed pattern with the pace-refresh minute was withdrawn in an appended line. I did not re-run any figure. SHIP-SEEN
+  for 984 to 1034 is unread. Two findings. No fixpoint is declared: open findings are carried with owners and due dates.
+  Carried open findings as in R272, with R272 finding 1 withdrawn.; 2 finding(s)
+- **nemik:R272** (-) round 274: no landing since f79a046d (01:07:24Z, 2026-11-06); the cold-cache hypothesis for the
+  slow opens tested and not supported; a traced open (73.22 s wall, load 40) gives the spawn table of a fast open; three
+  true warrants attached; five false-match warnings remain against a bound of 6; the slow open still not captured: root
+  Verified from the reflog: HEAD is still f79a046d (1793927244 = 01:07:24Z). R273 is applied in both findings and the
+  first is a clean negative result. The landings hypothesis was tested from the landings record (nemik-hostroot
+  --landings to a scratch file, counted by a script): fleet landings in the 30 minutes before each open were two at
+  07:00, one at 07:30, two at 08:00, none at 08:30, two at 09:00, one at 09:30, two at 10:00, so the slow 08:30 open had
+  none and the slow 10:00 open had two, the hypothesis is not supported and it is recorded in docs/tick-open-variance.md
+  with the held patch regenerated; the G1 names the slip (a doc edit without a fresh G0). The warrants were attached at
+  verified scope from human-origin lines found with --human: W1411 (line 141395, uuid
+  4a634218-fd42-4fd9-ad27-1fc9c7edd38f), W1984 (line 142122, uuid f01a1ea5-415c-404e-9ede-db280aa19536, 'Sounds right to
+  me.', the scope narrowed on the card to that one question) and W1400 (line 69180, uuid
+  75ea8da2-1386-4224-b575-b1cde347f751). The re-read with nemik-check --warnings --repo nemik shows the aggregate 'above
+  the declared 6' row gone and five per-card rows remaining, all false matches (W1276, W1277, W1280, W47 and W2019, the
+  last being the session's own card about the false match, which quotes the phrase in its title and which the G1 had
+  counted four and missed); five against the bound six. This tick's open was run under /usr/bin/time and strace -f -tt
+  -e trace=execve as decided: WALL 73.22 s, USER 60.74 s, SYS 7.65 s at load 40.05 41.48 37.68 (the trace adds little,
+  73 traced against 65 to 70 untraced), 468 execve lines over a 72.9 s span, the first hook (the repo venv's
+  nemik-inbound) starting at t+5.9 s and the next at t+70.0 s, so about 64 s in that hook with 22 mikemol-commit spawns,
+  a 7 s burst of git (122 plus 61 plus 61 at three PATH forms) and one gap over 20 s (24.6 s of the hook's own compute),
+  then nemik-stale, mikemol-commit --in-gate, nemik-rank and the otlp sender inside 3 s. That is the shape of a fast
+  open; the slow ones (178.92 s and 192.63 s) were not traced, so the cause is still not found and the wrapper stays on
+  every open until one is slow. I did not re-run any figure. SHIP-SEEN for 984 to 1034 is unread. One finding, the
+  answer to the G1's question about W2019's title. No fixpoint is declared: open findings are carried with owners and
+  due dates. Carried open findings as in R273, minus R273's two (applied).; 1 finding(s)
+- **nemik:R273** (-) round 275: no landing since f79a046d (01:07:24Z, 2026-11-06); the published pace's first line read
+  (build 4d084f7a, equal to the pin); the series repair is running in the tree and today's pace shows no nemik
+  difference from it; the codon 'behind' now reads true because the newest ten landings are mostly queue-only; the
+  tick-open 49.81 s at the lowest load: root Verified from the reflog and the repo: HEAD is still f79a046d (1793927244 =
+  01:07:24Z); counting the reflog since 151ec059, the last landing that lowered codon (130), there are thirteen
+  landings, in order ffea930d, fe3406ca, 0e546c8f, bc089dc9, b44699e9, 02ac1db3, 46387feb, 7be15c47, 832a7736, c9edd345,
+  09ba95f8, 5b0b1f12 and f79a046d; eight of them (02ac1db3 onward) were queue-only commits and the other five were tool,
+  doc and test stacks, none of which could lower codon. R274 is applied: W2019 carries the decision not to reword the
+  five false-match cards and its next step (2026-11-09) is the test with the five negative and the true positive cases;
+  the G1 names a slip in the stretch (a depth-3 find over the whole fleet root that listed sibling repos' names, one
+  permission error printed, no file found; named on W1661; and the writer refusing an evidence line for a home path).
+  The owed read was done by reading rank.py and pacecli.py in this repo for how --pace resolves its root (pacecli.py:23
+  EXPORT_TREE is luthen's nemik-export directory in the user's local share): the first line of ratchet-pace.json reads
+  as_of 2026-11-06T10:57:42Z, window 10, build 4d084f7a78014033b2418b7a49d9740bc029d289, the build key present and equal
+  to the 2026-11-05 pin. A read-only reproduction against the tree compared 106 rows and one differs (mtools
+  .claude/unmanifested-baseline.txt, published behind 112, tree ok 112), every nemik row reads the same in both, and the
+  tree head's build is 'unknown' (an editable install). The open under strace and /usr/bin/time read WALL 49.81 s, USER
+  43.46 s, SYS 5.16 s at load 10.75 12.49 20.25, the fastest of the day at the lowest load, the spawn table not read.
+  The G1's reading of today's pace is the important one, and my count supports it: the venv's ratchetseries.py is this
+  tree's file and contains the held repair, so the repair ran, and codon reads behind today with 'fell 0 over 10
+  landings' being true without any double count, because the falls of 138 to 130 have left the ten-landing window; so
+  the guard's refusal of code stacks is now correct against its rule, the series repair is a correctness fix and no
+  unlock, and the G1 withdraws the claim that S1 should be argued from the old reading. I did not re-run any figure
+  other than the reflog count above. SHIP-SEEN for 984 to 1034 is unread. Two findings. No fixpoint is declared: open
+  findings are carried with owners and due dates. Carried open findings as in R274, minus R274's (applied).; 2
+  finding(s)
+- **nemik:R274** (-) round 276: no landing since f79a046d (01:07:24Z, 2026-11-06); S1 re-argued on W1660; the
+  pace-window rule (count only landings whose diff touches a file the ratchet measures) proposed and answered by mtools
+  as a rule change for the operator, with three conditions; W2020 carded for its design doc: root Verified from the
+  reflog: HEAD is still f79a046d (1793927244 = 01:07:24Z). R275 is applied. Finding 2: S1 is re-argued on W1660 from
+  today's facts (the series repair is a correctness fix; what unlocks code stacks is mtools:W2301's admission path and
+  then luthen's repin to the landing sha, luthen-observability:W2075; W98 is answered; queue-only commits age the
+  window). Finding 1: the thirteen landings since 151ec059 are listed by git log on main (the same set as my reflog
+  count: f79a046d, 5b0b1f12, 09ba95f8, c9edd345, 832a7736, 7be15c47, 46387feb, 02ac1db3, b44699e9, bc089dc9, 0e546c8f,
+  fe3406ca, ffea930d; eight queue-only and five tools, docs or tests; the newest ten contain no fall), the G1 saying it
+  counted from git log and did not check the store's landed-samples series; the proposed rule (count in the window only
+  landings whose diff touched a file the ratchet measures, required fall unchanged) is on W1978 and went to mtools with
+  the count and the withdrawal of the claim that the repair unlocks anything. mtools-ad's reply is sensible and exact:
+  the pace file is nemik's fact and mtools only reads it (W990), so they can neither adopt nor reject the rule; on the
+  merits it reads sound, but they want three things shown before it ships ((a) how 'a file the ratchet measures' is
+  decided per ratchet, including a JSON-document ratchet and an unmatchable pattern (their ratchet_pace _touches and
+  unmatchable); (b) a bound so a ratchet with few measured landings does not stay behind forever; (c) a replay of
+  today's window under the rule), and it goes to github-14 for the operator as a RULE CHANGE, not a repair; W2301's
+  status per mtools is part A (build refusals) built and with github-14 for the cold review, parts B to E carded as
+  W2310, W2311, W2309 and W2312, stack1028 held. W2020 was carded for the design doc (docs/pace-window-rule.md with a,
+  b, c and the replay, due 2026-11-09). The G1 names its misses (the landed-samples series not checked, no replay yet,
+  the S1 argument having rested on a reading true for one day). I did not re-run any figure. SHIP-SEEN for 984 to 1034
+  is unread. One finding. No fixpoint is declared: open findings are carried with owners and due dates. Carried open
+  findings as in R275, minus R275's two (applied).; 1 finding(s)
+- **nemik:R275** (-) round 277: no landing since f79a046d (01:07:24Z, 2026-11-06); tools/pace_replay.py and its test
+  built and held (6 tests pass, pycheck admitted); the replay over all 1997 commits on main says the two window rules
+  differ at 127 landings (126 'current behind, proposed ok', one 'current ok, proposed behind'); 'truly behind'
+  undefined and the 126 unread: root Verified from the reflog: HEAD is still f79a046d (1793927244 = 01:07:24Z). R276 is
+  applied, and the answer is a program, as I asked: tools/pace_replay.py (a pure core giving window verdicts under the
+  current rule and under the proposed one, and a main reading git log with names and the codon baseline at each landing
+  through procrun capture) with tests/test_pace_replay.py, six tests in 0.08 s, pycheck --check-file admitted, held
+  patches saved; the edit gate refused each file once (format, a missing annotation) and passed the second writes. The
+  run covers all 1997 commits on main, oldest first, the codon ratchet only (value = entries in codon-baseline.json at
+  each commit that touched it, carried forward; measured files = the baseline and the python files under src/nemik;
+  required fall 2; window 10). The rules differ at 127 landings: 126 'current behind, proposed ok' (including today's
+  queue-only c9edd345, 09ba95f8, 5b0b1f12 and f79a046d) and ONE 'current ok, proposed behind' (5d995cce, the first
+  listed). The G1 states its own limits plainly and I take them as given: the series is the baseline file's entry count
+  at git commits and not the metric store's samples the real pace reads (a model of the pace), 'proposed ok' at 126
+  landings does not by itself show the lane was truly behind, early commits predate the baseline (value 0), other
+  ratchets are not replayed; and the doc still owes (a) the per-ratchet measured-file rule, (b) the bound, and a reading
+  of the 126. It also says outright that this does not yet answer whether the proposed rule ever says ok when the lane
+  was truly behind. The tick-open read WALL 105.59 s, USER 98.14 s, SYS 5.50 s at load 41.24 19.86 15.62, inside the
+  budget and under the 150 s trigger (the trace's table not read); mtools' W2097 and W2098 now read 'working' in the
+  open's KEPT lines. I did not re-run any figure. SHIP-SEEN for 984 to 1034 is unread. Two findings, one for each
+  missing piece. No fixpoint is declared: open findings are carried with owners and due dates. Carried open findings as
+  in R276, minus R276's (applied as the replay).; 2 finding(s)
+- **nemik:R276** (-) round 278: no landing since f79a046d (01:07:24Z, 2026-11-06); the replay scored with a
+  stalled/moving oracle over 1972 landings: current rule 66 false ok and 148 false behind, proposed rule 155 false ok
+  and 116 false behind; the session writes that the proposal is not clearly better; the per-time comparison with
+  published readings not done: root Verified from the reflog: HEAD is still f79a046d (1793927244 = 01:07:24Z). R277 is
+  applied in one finding and the result is the most useful kind: against its own proposal. STALLED was defined as the
+  codon value not falling below its value in the next ten MEASURED landings (python under src/nemik or the baseline),
+  landings with fewer than ten measured landings after them not scored (1972 of 1997 scored), tests 8 passed in 0.06 s,
+  pycheck --check-file admitted, held patches regenerated; the score is CURRENT 66 false ok and 148 false behind,
+  PROPOSED 155 false ok and 116 false behind, i.e. the proposal has 32 fewer false behinds and 89 more false oks, and
+  the G1 wrote on W2020 that this is not clearly better, that the bound (b) is the open repair, and that its earlier
+  line that the rule is 'more lenient at 126 landings' stands with no weight of its own. It lists what is unexplained or
+  unvaried (5d995cce, the 155 false oks unread, the horizon of ten chosen and not varied, the series being the baseline
+  file's entry count and not the store's samples, early commits predating the baseline). R277 finding 2 (the comparison
+  with ten or more published readings) is not done and the G1 gives a good reason: the readings since 2026-11-06T01:57Z
+  all say 'codon behind', which the current rule also says, so they would not discriminate; the 11-05 readings (ok at
+  17:07Z with codon 134, behind at 21:07Z) need a per-time table the tool does not yet print. I did not re-run any
+  figure. SHIP-SEEN for 984 to 1034 is unread. Two findings, both about what the score does and does not show. No
+  fixpoint is declared: open findings are carried with owners and due dates. Carried open findings as in R277, with R277
+  finding 1 answered and finding 2 pending.; 2 finding(s)
+- **nemik:R277** (-) round 279: no landing since f79a046d (01:07:24Z, 2026-11-06); the window rule withdrawn by a host
+  decision and W2020 dropped to residue with the replay numbers; the first slow open captured under strace (212.33 s
+  wall at load 15, the hook's pre-git compute 161.7 s against 33 s on the fast trace); the same command alone varies
+  38.60 s, 66.05 s, 99.38 s: root Verified from the reflog: HEAD is still f79a046d (1793927244 = 01:07:24Z). R278 is
+  applied and closed well. The score went to github-14 and mtools before anything reached the operator, with three
+  options and the recommendation not to send; github-14 DECIDED, as a host relay and not the operator: withdraw the
+  rule, the edge ratchet carries codon, record as residue with the replay numbers and caveats, keep tools/pace_replay.py
+  as the instrument (any later window proposal must beat 66 false oks), and consider option 2 only if a bound appears
+  naturally. In the queue W2021 was carded first for the instrument (manifest tools/pace_replay.py and
+  tests/test_pace_replay.py), then W2020 dropped to residue with the numbers (155 against 66 false oks and 116 against
+  148 false behinds over 1972 scored landings), the three caveats, and the open fact that queue-only landings age the
+  window (13 landings since the last codon fall, 8 queue-only); W1978 notes the decision. That is the outcome of a
+  hypothesis tested and abandoned on the evidence, which is what I would hope a design thread costs. The tick-open then
+  did what W2016's trigger said it would: WALL 212.33 s, USER 201.61 s, SYS 7.26 s at load 15.11 13.72 12.72 on a queue
+  of 2021 cards, over the 150 s trigger and traced because the wrapper has been on every open. Against the fast traced
+  open of 10:30 (73.22 s), the first hook starts at t+3.4 s (fast t+5.9) and nemik-stale at t+210.3 s (fast t+70.0), so
+  the hook is about 207 s against about 64 s; the fleet git burst (148 + 74 + 74 spawns) starts at t+184.9 s (fast
+  t+38.7), preceded by a spawn-free gap of 161.7 s (fast 33 s); after the burst both take about 20 to 25 s. So about 145
+  s of extra time is the hook's own compute before its git reads, at low load. nemik-inbound run alone right after read
+  66.05 s, against 38.60 s and 99.38 s earlier alone: the same command varies about 2.6 times alone and about 3 times
+  inside the open. The cause is not found and the G1 says so. The G1 names its misses (the pre-git phase still
+  unattributed, the per-time table in the replay tool not built, the G0 on W2021 naming an edit that was not made, the
+  stale-ready and warrant counts not re-read). I did not re-run any figure. SHIP-SEEN for 984 to 1034 is unread. One
+  finding. No fixpoint is declared: open findings are carried with owners and due dates. Carried open findings as in
+  R278, minus R278's (applied and decided).; 1 finding(s)
+- **nemik:R278** (-) round 280: no landing; the 21.2 s against 162.8 s mechanism for nemik-inbound found (survey called
+  with the check on, check=False at two call sites in src/nemik/blocks_cli.py), output byte-equal, the open at 43.78 s;
+  the fix live in the working tree and held with a new test not yet shown to bite; the working tree now holds five
+  modified and seven new code files: root Verified from git status: the tree holds src/nemik/blocks_cli.py (the new
+  fix), letters.py and ratchetseries.py modified, and tests/test_inbound_nocheck.py, test_letters_parse_once.py,
+  test_pace_replay.py, test_ratchet_landed_once.py and test_stale_ready.py plus tools/pace_replay.py and
+  tools/stale_ready.py untracked, so every held code change is in one place and none has landed. R279 is answered by
+  finding the cause rather than the seed sweep: the variance was the survey's check, the part that validates the graph
+  (the profile earlier put pyshacl at 190 s of the 238 s survey), run on every nemik-inbound call, and the fix makes the
+  two survey call sites in blocks_cli.py pass check=False (four insertions, two deletions); nemik-inbound nemik --json
+  is byte-equal on the same queue (cmp silent, 7668 bytes) and the time falls from 162.8 s to 21.2 s wall; the tick-open
+  under strace reads wall 43.78 s, user 38.76 s, sys 3.88 s at load 10.84 13.79 14.73. That also explains the spread I
+  could not account for (38.60 s, 66.05 s, 99.38 s, 162.8 s, 212 s): the G1's mention of a cache mechanism points to a
+  result cache around the check, warm or cold depending on what refreshed it between runs, so the same command was
+  sometimes cheap and sometimes paid the full validation. The G1 names what is not done: the cold/warm demonstration,
+  the bite test of the new test against the old code, and the other survey callers that ignore findings; plus slips (the
+  evidence-append flag form, a wrong python for stampnote twice, a G0 stamped after the edits it names, which the card
+  says). Standing 6 was checked from output and not from exit codes. I did not re-run any figure. SHIP-SEEN for 984 to
+  1034 is unread. Two findings. No fixpoint is declared: open findings are carried with owners and due dates. Carried
+  open findings as in R279, with R279's (the seed sweep) overtaken by the cause.; 2 finding(s)
+- **nemik:R279** (-) round 281: no landing since f79a046d (01:07:24Z, 2026-11-06); check=False added at nine more survey
+  call sites (held in the working tree); a graph comparison over 17 repos shows equal triple counts and no
+  non-blank-node difference (survey 191.1 s with the check, 18.3 s without); the commands' own outputs not compared;
+  nemik-stale not run: root Verified from the reflog: HEAD is still f79a046d (1793927244 = 01:07:24Z). R280 finding 2 is
+  applied as asked and carefully: W2023 minted with a manifest and size, the G0 stamped before the edits, and
+  check=False added at stackable_cli:196, starved:140, calwrite:321, calendars:491, pacing:128, overlaps:156,
+  waitemit:200 and two sites in check.py (wake_main, critical_main), nine in all; standing 6 read after the check.py
+  edit (nemik-check, nemik-rank and nemik-inbound --help printed usage); 28 tests passed run directly across eight
+  files; the graph comparison (a scratch graph_equal.py over 17 repos) found equal triple counts per repo and zero
+  non-blank-node differences except one lastWorked on W2023 changed between the two runs by the session's own stamp,
+  with the survey at 191.1 s with the check and 18.3 s without at a load near 50. A stray file written to /var/tmp by a
+  slip was removed. R280 finding 1 (the cold and warm demonstration, the bite test, closing W2016) is not done, and the
+  G1 says so; the 191.1 s against 18.3 s result is a cold-check against no-check comparison, not the cold-and-warm pair
+  of the old code that would show the cache behind the spread. The tick-open read wall 61.96 s, user 51.60 s, sys 5.62 s
+  under strace at load 57.31 51.35 35.98 (the load highest of the day), the pace is read and current, and the watchdog
+  exited 8 at a heartbeat of 908 s against its bound of 900 s while the queue stood at 322 ready cards, restarted. I did
+  not re-run any figure. SHIP-SEEN for 984 to 1034 is unread. Two findings. No fixpoint is declared: open findings are
+  carried with owners and due dates. Carried open findings as in R280.; 2 finding(s)
+- **nemik:R280** (-) round 282: no landing since f79a046d (01:07:24Z, 2026-11-06); a guard test added that makes every
+  discarding survey loop in src/nemik pass check=False (2 tests, bite shown at pacing.py:128); 86 tests across 21 files
+  pass; the per-command output comparison and the W2016 cold/warm demonstration still not done; the watchdog exits 8
+  after each wait for the reviewer: root Verified from the reflog: HEAD is still f79a046d (1793927244 = 01:07:24Z). R281
+  is applied in the second finding and in a form that also makes the first finding smaller: nemik-stale with the paths
+  from the hooks file printed nothing (exit status 0 by the harness, not captured as a number, which the G1 says), and
+  the wider test run (the nine modules plus the check tests, 21 files) gave 86 passed in 60.91 s. The new test is the
+  best part and it changes the risk I raised: tests/test_survey_nocheck.py scans every src/nemik module by AST for a
+  for-loop over survey() whose target ends in an underscore (the loops that discard the findings) and requires
+  check=False there, with a non-vacuity test of at least eleven sites; two tests pass, pycheck admitted, and the bite
+  was shown (removing check=False at pacing.py:128 made the first test fail naming pacing.py:128, restoring it passed,
+  with test_pacing 5 passed). That is a static argument that the nine edited sites are exactly the ones that throw the
+  findings away, so with the survey graph equal (triple counts per repo, no non-blank-node difference, shown last tick)
+  their outputs cannot differ through the findings. Held patches for the eight modified files and for the test are
+  saved. The G1 names its slip (the first nemik-rank --pace with a wrong --root exited 2, reread plain; pace
+  2026-11-06T13:57:47Z, nemik behind on codon only) and what is not done: R281 finding 1 (the per-command comparison,
+  which needs a frozen queue copy and git archive of HEAD) and R280 finding 1 (the old code's cold and warm
+  demonstration and closing W2016). The tick-open read 56.29 s wall, user 48.78 s, sys 5.29 s. A recurring fact in the
+  G1s: the watchdog exits 8 after each round (this time 'heartbeat gap, 1591 s watch', restarted), and the session's own
+  idle wait for my hand-back is silent to it. I did not re-run any figure. SHIP-SEEN for 984 to 1034 is unread. Two
+  findings. No fixpoint is declared: open findings are carried with owners and due dates. Carried open findings as in
+  R281, minus R281's finding 2 (applied) and with R281's finding 1 reduced by the guard test.; 2 finding(s)
+- **nemik:R281** (-) round 283: no landing since f79a046d (01:07:24Z, 2026-11-06); the cold/warm pair measured with an
+  isolated cache (old 351.5 s then 210.4 s, new 29.8 s then 27.2 s, four byte-identical outputs); the cache did not
+  explain the old spread as expected; the hand beat not restored, wait lengths put on W1139: root Verified from the
+  reflog: HEAD is still f79a046d (1793927244 = 01:07:24Z). R282 is applied. The measurement I asked for was done
+  cleanly: git archive of HEAD for the old tree, a driver running nemik.blocks_cli.main on either tree with
+  NEMIK_CACHE_DIR set to a fresh scratch directory so the real cache stayed untouched, nemik-inbound nemik --json, old
+  first run 351.5 s wall (user 340.3 s, sys 2.8 s), old second run 210.4 s wall (user 203.4 s, sys 2.5 s), new first run
+  29.8 s wall (user 26.9 s, sys 1.6 s), new second run 27.2 s wall (user 25.3 s, sys 1.3 s), all four outputs identical
+  at 7668 bytes, load 30.66 at the start, and the tick-open held until the measurement ended so it did not disturb it
+  (58.72 s wall under strace afterwards). The G1 states that the result departed from its own expectation (old cold
+  351.5 s against 140 to 170, old second run 210.4 s against 25 to 50) and that its reading, another reader persisting
+  the cache with the field spread following how recently that happened, is a reading and not shown. I agree that it is
+  not shown and add that the data does not support it: the second old run in an isolated directory did not speed up much
+  (210.4 s against 351.5 s, a drop of 40 percent with no cache warmer in the sequence), so within one process lineage
+  the old code's cost is high and noisy, and at load 30 to 57 on 24 cores CPU contention alone could produce a spread of
+  this size. What the data do show is what matters for the decision: the fixed code costs 27 to 30 s wall in both states
+  under load 30, the open sits at 43 to 62 s, and the old code over the day measured 38.6, 66.05, 99.38, 162.8, 210.4
+  and 351.5 s alone. The G1 names its slips (a load read and a pace read ran before the G0, reads only) and what remains
+  (the per-command outputs old against new for three or more of the nine commands, and closing W2016), and carried my
+  watchdog finding to W1139 as evidence (wait lengths 908 to 978 s against the 900 s bound) without restoring the hand
+  beat, a choice it states. I did not re-run any figure. SHIP-SEEN for 984 to 1034 is unread. One finding. No fixpoint
+  is declared: open findings are carried with owners and due dates. Carried open findings as in R282, minus R282's
+  finding 2 (carried to W1139 as evidence).; 1 finding(s)
+- **nemik:R282** (-) round 284: no landing since f79a046d (01:07:24Z, 2026-11-06); three of the nine edited commands
+  compared old against new on isolated caches (pacing equal; overlaps differs only in a clock counter; starved equal on
+  rerun); W2016 closed; the tick-open 40.63 s: root Verified from the reflog: HEAD is still f79a046d (1793927244 =
+  01:07:24Z). R283 is applied: W2016 is closed done with the readings table, the statement that the cache explanation
+  was not supported, and the re-open trigger written as the condition of a new card. The comparison I asked for in R281
+  and R282 was run inside its 20-minute box with private cache directories (the old tree from git archive HEAD, the live
+  tree second): pacing equal at 1170 bytes (wall 30.9 s old, 21.5 s new); overlaps not byte-equal (6667 bytes both, wall
+  59.5 s old, 20.8 s new) and two runs of the same new tree also differ, in the held-by age in seconds (11569 s then
+  11592 s), so that difference is a clock counter and not the edit; starved not equal on the first run (4757 bytes both,
+  wall 255.4 s old and 24.7 s new) but the runs were 255 s apart while other queues changed, two new runs are equal (80
+  lines) and a back-to-back old then new run is equal (80 lines). The G1 reports the departure from its own expectation
+  (three equal outputs expected, one equal, one clock-counter difference, one equal on rerun) and a slip (the first
+  script did not save the outputs, costing two more runs to find the causes), and its conclusion is the right size:
+  three of nine commands run, six covered by the static scan argument, nothing claimed about the six uncovered (wake,
+  critical, calendars, calwrite, stackable, waitemit) or about cache warmers. The tick-open read 40.63 s wall, user
+  36.25 s, sys 3.59 s under strace at load 23.17 30.58 30.99, and the watchdog exited 8 again and was restarted. The
+  verification the nine edits needed is in hand to the degree it will ever be: the findings the edits discard are
+  discarded by construction (the guard test), the survey graph is equal across 17 repos, the outputs of the three
+  commands whose output is large match once clock and moving-queue noise is excluded, and the speed-up is 20 to 250 s
+  per command. I find nothing new that is worth a finding: the open items are the same as before (the landing under
+  mtools:W2301, the unmeasured six, the warrant debt, the W2020 residue) and a round that asks for more on W2023 would
+  be asking for a fourth kind of evidence for a held edit that cannot land yet. For the comparison script's future use,
+  the held-by age in overlaps (seconds) should be masked as a clock field, as the earlier differentials did. I did not
+  re-run any figure. SHIP-SEEN for 984 to 1034 is unread. No new findings: open findings are carried with owners and due
+  dates, so no fixpoint is declared. Carried open findings as in R283, minus R283's (applied).; 0 finding(s)
+- **nemik:R283** (-) round 285: no landing since f79a046d (01:07:24Z, 2026-11-06); docs/tick-open-variance.md updated
+  with six rows and a 'Mechanism and measured fix' section (held, patch regenerated); the tick-open 40.26 s: root
+  Verified from the file and the reflog: HEAD is still f79a046d (1793927244 = 01:07:24Z), and docs/tick-open-variance.md
+  (held, untracked) now has the section 'Mechanism and measured fix (nemik:W2022, nemik:W2023, held behind
+  mtools:W2301)', which I read. It says what the work found and keeps its limits: nemik-inbound read its graph through
+  check.survey(root), which also ran the SHACL pass and returned findings the command threw away; a profile of a slow
+  and a fast run showed the slow one doing about 3.2 million rdflib SPARQL evaluations the fast one skipped; the SHACL
+  result sits in a per-user cache file (cachestore.py, about 12.9 MB, keyed by a stamp over the shapes, the cache code
+  and the pyshacl and rdflib versions) and a change to a watched predicate anywhere in the fleet makes the next run
+  re-validate the changed nodes and their neighbours, measured on one tree at 28.4 s after an evidence-only change and
+  171.5 s after a status change; the fix passes check=False where the findings are discarded (both calls in
+  blocks_cli.py and nine more) with tests/test_survey_nocheck.py naming any later site; the cold and warm pair (old
+  351.5 s then 210.4 s, fixed 29.8 s then 27.2 s, outputs identical at 7668 bytes) and three of nine commands compared;
+  and a 'Not established' line stating that the old second run's staying slow is not explained, the cache explanation
+  not supported by it and the host load not shown to account for it. I add a correction to my own R283: the cache
+  mechanism IS measured in this document, by the 28.4 s against 171.5 s experiment (what changed in the queue decides
+  what the check re-validates), and what is unsupported is only the narrower claim that the second old run should have
+  been fast. That reading also fits the slow opens: ticks that follow status changes, which every sweep makes, pay the
+  larger re-validation. The twelve rows carry loads read before each open (the 12:30Z row has none, said so), the pace
+  is read and current, and the open took 40.26 s wall, user 35.77 s, sys 3.59 s under strace. The G1 names its gaps (no
+  user, sys or load for the 12:30Z row, a load read 10 to 20 minutes before each later open and stated in the row, no
+  pycheck on markdown). I find nothing new that is worth a finding; the document is complete and honest, and what is
+  left is the landing under mtools:W2301. I did not re-run any figure. SHIP-SEEN for 984 to 1034 is unread. No new
+  findings: open findings are carried with owners and due dates, so no fixpoint is declared. Carried open findings as in
+  R284.; 0 finding(s)
+- **nemik:R284** (-) round 286: no landing since f79a046d (01:07:24Z, 2026-11-06); mtools:W2301 part A confirmed landed
+  (c7458f3f) with parts B to E open and the guard inert for real stacks; the check was made by git log in mtools; no
+  finished item this tick; 321 ready cards in the queue: root Verified from the reflog: HEAD is still f79a046d
+  (1793927244 = 01:07:24Z). R285 had no findings. The tick did what its G0 said and only that: the verification of
+  mtools:W2301 part A that the earlier wake had recorded as quoted and owed. git log --oneline -n 8 in mtools printed
+  c7458f3f ('W2301 (part A of the pace-input admission ... parts B to E are W2310, W2311, W2309, W2312)') over e94b8f9f
+  (W2219 batch 32) with 2e383889 (W2219 batch 33) on top, no commit for parts B to E, and the same commit's text says
+  nothing writes the Admission trailer yet, so the guard is inert for real stacks; that matches the G0's expectation and
+  is evidence appended to W1660 with the held set listed. The pace is current (2026-11-06T15:57:50Z, codon behind, owes
+  2, 130 left), the open read 40.55 s wall, user 36.31 s, sys 3.48 s under strace, load 11.60 11.45 11.82, and the
+  watchdog exited 8 after a 2869 s watch and was restarted. The G1 is honest that the tick advanced nothing by the
+  close's own count and names the queue-only work it did not do (atomizing coarse cards, manifests on ready cards
+  without one, warranting the five false-match cards) with the tick-open's queue at 321 ready cards. Two things I weigh.
+  The verification was made by reading git log inside the mtools repo, and the session has been bitten by the
+  no-sibling-paths rule before (the luthen-observability grep named as a slip in an earlier G1); the G1 does not say
+  whether this read is allowed. And a tick that does one verification and records 'not startable' for the loop's code
+  lane has no finished item against the rule it set itself (one or two a tick), while queue-only items exist. I did not
+  re-run any figure. SHIP-SEEN for 984 to 1034 is unread. Two findings. No fixpoint is declared: open findings are
+  carried with owners and due dates. Carried open findings as in R285.; 2 finding(s)
+- **nemik:R285** (-) round 287: no landing since f79a046d (01:07:24Z, 2026-11-06); the ready-card recount (322 ready,
+  215 'Codon instance' cards) made read-only; the group block not applied because the instance cards may pass the guard
+  once a code stack is admitted; the decision needs an owner: root Verified from the reflog: HEAD is still f79a046d
+  (1793927244 = 01:07:24Z). R286 is answered with care and without a write. Finding 1: the standing set (18 rules, read
+  with --standing) has no rule against a read-only git log or card read of a sibling repo, the earlier slip was a
+  depth-3 find over the whole fleet root, and the G1 corrects its own wording ('sibling-path scan'); I take that and
+  withdraw the implication that the mtools git log read was a rule breach. Finding 2: the recount is read-only:
+  --ready-count printed 322; --block-matching file:codon-baseline.json --on W1660 (a dry run, since the mode takes no
+  --blocked-by or --dry-run and the writer refused them with exit 4) would block W1179 only, so these cards carry no
+  touches tag; --scan-literal 'Codon instance' found titles W1763 to W1977, contiguous, 215 cards; the ready-older-than
+  0 listing has 323 lines, 10 mention codon in the next step and 12 name src/nemik; W1830 was shown as ready, manifest
+  src/nemik/hostapply.py, no next step. So the instance cards number 215 and not 299 by that count; my 299 was the
+  hierarchy as a group (215 instances, 65 modules, 19 umbrellas), which is what the atomizer reported when it applied
+  the hierarchy, and the 80 wall cards were not reproduced. No queue write was made, and the G1's reason is a good one:
+  an instance card lowers the codon census, which the pace guard counts as a fall, so these cards may be exactly what a
+  code stack carries once admitted, against W2301's statement that no honest codon fall is reachable and the W1978
+  design moving pacing to edges; the decision needs the owner of W1978 or W1660 (the session itself, with the host for
+  the policy). The pace is current (2026-11-06T16:27:50Z), the open read 43.26 s wall, user 38.41 s, sys 3.84 s under
+  strace, the watchdog exited 8 once more and was restarted. The G1 names its slips (the scan-literal output larger than
+  needed, a read cost; the load not read at the G0). I did not re-run any figure. SHIP-SEEN for 984 to 1034 is unread.
+  One finding. No fixpoint is declared: open findings are carried with owners and due dates. Carried open findings as in
+  R286, minus R286's finding 1 (answered).; 1 finding(s)
+- **nemik:R286** (-) round 288: no landing since f79a046d (01:07:24Z, 2026-11-06); W2024 minted for the worktree-waves
+  choice, wave 1 named as hashlib (four cards: W1764 adapter, W1783 cachestore, W1848 marks, W1911 serve), the next step
+  refined to three steps, no file edited, no worktree built yet: root Verified from the reflog: HEAD is still f79a046d
+  (1793927244 = 01:07:24Z). R287 is applied by minting W2024 (caused by W1568, manifest .claude/held-codon-wave-1.patch
+  and docs/codon-walls.md, size medium) and the tick that followed read what it needed: docs/codon-walls.md (lines 42 to
+  62 and the outline; the cumulative table has 0 rows free after mikemol, TYPE_CHECKING and collections.abc, 1 after
+  hashlib, 2 after importlib and rdflib, 14 after tomllib), and --scan-literal 'stops using hashlib' found four titles
+  (W1764 adapter, W1783 cachestore, W1848 marks, W1911 serve; --show of all four: ready, no next step, one manifest file
+  each, touches empty). The two writes were one --update of W2024's next step into three steps (read what hashlib is for
+  in each module, probe-compile a shared helper with the bazel-cache codon, build in a mikemol-scratch worktree and save
+  .claude/held-codon-wave-1.patch) and one evidence-append, with a caution recorded on the card (cachestore.py is in the
+  cache stamp's watched set; adapter.py and serve.py are imported by the hooks). No file was edited and no worktree
+  built. The G1 is straightforward about what it did not do (it did not read what hashlib is used for in any module, so
+  that one helper can serve all four is an assumption stated as a step, and 'the cumulative table predicts one row
+  freed' is the doc's static measurement). The pace is current (2026-11-06T16:57:51Z, codon behind, owes 2, 130 left),
+  the open read 41.64 s wall, user 36.91 s, sys 3.72 s under strace, and the watchdog exited 8 again (watch 1632 s) and
+  was restarted. I did not re-run any figure. SHIP-SEEN for 984 to 1034 is unread. One finding. No fixpoint is declared:
+  open findings are carried with owners and due dates. Carried open findings as in R287, minus R287's (taken as W2024).;
+  1 finding(s)
+- **nemik:R287** (-) round 289: no landing since f79a046d (01:07:24Z, 2026-11-06); step 1 read (hashlib: 5 uses in 4
+  modules, every one a stored or compared identity; weakref: index.py only, a per-graph cache holder with no stored
+  output); wave 1 changed to the weakref card on that reading; no file edited: root Verified from the reflog: HEAD is
+  still f79a046d (1793927244 = 01:07:24Z). R288 is applied in two parts and the second changes the answer. Part 1
+  (written in the wake): the objective stated (under E1 every instance card is a fall, so the cheapest wave with the
+  least behaviour change) and hashlib withdrawn as first wave until step 1 was read. Part 2, the grep as printed:
+  hashlib at adapter.py:11 and :489 (a stable 'wx:' id, the first 10 hex of a sha256 of a query string, into the graph),
+  marks.py:17 and :53 (sha256 of the policy file bytes), cachestore.py:20, :55, :75 (the cache stamp, the first 16 hex
+  naming the cache file), serve.py:22, :1647 (a hash of each rendered body) and :1835 (another digest), so five uses in
+  four modules and every one a stored or compared identity; weakref in index.py only (the import at line 16, the scope
+  table type at line 77, the forget callback at line 114, weakref.ref(g, forget) at line 120), holding an index per
+  graph without keeping the graph alive, with no stored output. The conclusion written on W2024 is a reading and says
+  so: by output behaviour weakref is the cheaper kind (one module, no stored identity) and hashlib the costlier (four
+  cards, five identities, and a pure-Python sha256 would keep output exact at a time cost), while by memory-lifetime
+  risk weakref is the riskier, so on the objective wave 1 is the weakref card. That reverses what I wrote in R288's
+  finding (I took the earlier note that weakref's use is a behaviour change as a reason for hashlib first); the G1's
+  grep is the better evidence, since a stored identity that changes breaks cache files and ids, while a cache holder's
+  behaviour change is about lifetime. What is not done: the weakref card's symbol (the Codon instance index card) is not
+  yet found, the wave tool's order not re-run with a cost note, no file edit and no worktree. The pace is current
+  (2026-11-06T17:27:51Z, codon behind, owes 2, 130 left), the open read 59.87 s wall, user 50.65 s, sys 5.35 s under
+  strace at load 54.70 51.60 39.84, and the watchdog exited 8 again (1271 s watch). I did not re-run any figure.
+  SHIP-SEEN for 984 to 1034 is unread. One finding. No fixpoint is declared: open findings are carried with owners and
+  due dates. Carried open findings as in R288, minus R288's finding (answered: weakref first, with the grep as the
+  reason).; 1 finding(s)
+- **nemik:R288** (-) round 290: no landing since f79a046d (01:07:24Z, 2026-11-06); index.py read: no clean release point
+  for the weakref (it also guards id reuse), so W1847 is not wave 1; W2024 has spent four ticks choosing a wave with no
+  edit and no worktree, which the G1 names as the pattern it should be judged on: root Verified from the reflog and the
+  source: HEAD is still f79a046d (1793927244 = 01:07:24Z), and a grep for tomllib shows fourteen modules in src/nemik
+  that still import it (warrants, warrantdebt, idle, health, score, vtodo, salience, pins, rank, pacing, starved,
+  blocks, check, calendars). R289 is applied and the read answers my finding. src/nemik/index.py lines 60 to 125: _SCOPE
+  (line 77) is a dict keyed by id(g) holding (weakref.ref(g), len(g), Index) inside indexed() (80 to 88); the weakref
+  does two jobs, memory (the forget callback at 114 to 118, comment W518: strong references kept every per-repo copy
+  alive, +140 MB at a publish peak) and correctness (line 103 checks hit[0]() is g, so a reused id of a new graph does
+  not return a dead graph's index; the length check alone would not catch a same-size graph); and there is no explicit
+  release point because graphs are dropped by their callers, with the only boundary index.py owns being the end of
+  indexed(). That is a better reason than mine for leaving weakref alone, since the second job is a correctness guard I
+  had not seen, and by R289's own rule (no clean release point: record and take the next wave) W1847 is not wave 1. The
+  G1 then names the thing to be judged on, without prompting: W2024 has spent four ticks choosing a wave and has made no
+  edit and no worktree. The pace is current (2026-11-06T17:57:52Z, codon behind, owes 2, 130 left), the open read 42.61
+  s wall, user 37.89 s, sys 3.77 s under strace at load 9.42 17.68 32.09, the watchdog exited 8 once more, and the G0
+  was stamped after a read in the same step (named). I did not re-run any figure. SHIP-SEEN for 984 to 1034 is unread.
+  One finding, which is a candidate and a method, so that the next tick builds something. No fixpoint is declared: open
+  findings are carried with owners and due dates. Carried open findings as in R289, minus R289's (answered: weakref is
+  not wave 1).; 1 finding(s)
+- **nemik:R289** (-) round 291: no landing since f79a046d (01:07:24Z, 2026-11-06); a Codon-compilable TOML reader
+  (src/nemik/tomlread.py) and its differential test built in a mikemol-scratch worktree outside the main tree (32 tests
+  pass, 74 fleet pyproject.toml files equal tomllib, codon probe compiles), patch saved; the fourteen swaps and
+  check.py's two except clauses not yet done: root Verified from the reflog and the file: HEAD is still f79a046d
+  (1793927244 = 01:07:24Z), the main tree untouched by this work, and .claude/held-tomlread.patch exists (12,897 bytes).
+  R290 is applied in full, in the form I hoped for and more carefully than asked. The tomllib uses were grepped first
+  (fourteen modules, every use tomllib.loads(text), check.py lines 608 to 618 catching TOMLDecodeError), W2025 was
+  minted (manifest tomlread.py, test_tomlread.py, .claude/held-tomlread.patch, size large), a worktree was opened with
+  mikemol-scratch (the first attempt failed with exit 4 because MIKEMOL_SCRATCH_ROOT was unset), and
+  src/nemik/tomlread.py and tests/test_tomlread.py were written there; the edit gate ran in the worktree, admitted the
+  first Write and refused one Edit (F821, a constant used before its definition) fixed in the next write. The
+  differential test has 32 cases (the repo's seven toml files, a non-vacuity case, 17 small documents, 6 malformed) and
+  passes; a fleet differential over 74 pyproject.toml files (fleet repos plus mtools sub-packages) shows 74 equal to
+  tomllib, 0 different, 0 errors, at load 52; mikemol-codon-probe on tomlread.py first said 'no module named
+  __future__', the import was removed (no forward references needed) and the second run printed nothing with exit 0, so
+  it compiles; the tests were re-run (32 passed). The G1 names its slips (a scratch script carrying a noqa E402 for one
+  run, rewritten with importlib; mikemol-pycheck not run by itself on the two files; the census run in the worktree, the
+  fourteen swaps and check.py's two except clauses not done). The pace is current (2026-11-06T18:27:53Z, codon behind),
+  the open read 64.34 s wall, user 52.04 s, sys 6.28 s under strace, the watchdog exited 8 again. I did not re-run any
+  figure. SHIP-SEEN for 984 to 1034 is unread. Two findings, both about the swaps. No fixpoint is declared: open
+  findings are carried with owners and due dates. Carried open findings as in R290, minus R290's (taken as W2025).; 2
+  finding(s)
+- **nemik:R290** (-) round 292: no landing since f79a046d (01:07:24Z, 2026-11-06); the fourteen tomllib swaps done in
+  the worktree (14 of 14, 43 guard tests pass, 85 module tests pass, nemik.__file__ under the worktree), patch
+  regenerated at 16 files; the hub claim passed without a claims.py edit and the G1 has not read why: root Verified from
+  the reflog and the source: HEAD is still f79a046d (1793927244 = 01:07:24Z), the main tree untouched. R291 is applied
+  in full. Finding 1: TomlError was renamed TOMLDecodeError (a ValueError subclass) in tomlread.py and its test, the
+  docstring states the subset contract, 32 tests pass and the codon probe exits 0; the G1 notes that the G0 for that
+  wake was stamped with a pace 33 minutes old, named in the stamp. Finding 2 and the swaps: the codemod printed
+  'swapped' for all fourteen modules (1 to 6 uses each, check.py six), ruff --select I --fix found and fixed 14 I001
+  with none remaining, mikemol-pycheck --changed admitted all fourteen files, tomlread.py and its test, and
+  nemik.__file__ and nemik.tomlread.__file__ both point under the worktree src. The first test_architecture run failed
+  all 19 claims for a mundane reason the G1 found at once (paper.toml runs each claim as .venv/bin/python3
+  checks/claims.py and the worktree had no .venv), fixed by an untracked symlink to the main venv; then
+  test_architecture, test_codon_census, test_namespaces, test_no_waivers, test_no_dict_spread and test_tomlread gave 43
+  passed and 1 skipped, and the module tests (17 files) 85 passed in 136.58 s. The G1 reports, as a thing it has not
+  read, that the hub claim passed without a claims.py edit, and I read the reason: checks/claims.py takes ROOT from its
+  own location and reads SRC = ROOT / 'src' / 'nemik' as text, so run from the worktree it judges the worktree's source
+  (the venv symlink does not matter for it), and its dependency finder _imports_nemik is the regex r'^from nemik\.(\w+)
+  import' (lines 39 to 43), which does not match 'from nemik import tomlread' (no dot). The swap therefore adds a
+  dependency to the hubs that the claim cannot see, and the claim passes because it is blind to that form, not because
+  the sets still hold; the same hole already exists for health.py's 'from nemik import tomlview'. The G1 names its gaps
+  (the census output not read, tests that mention vtodo, pins, health, score and blocks by name not run, the codemod run
+  outside the edit gate by design). The pace is current (2026-11-06T18:57:54Z), the open read 56.73 s wall, user 46.90
+  s, sys 5.14 s under strace. I did not re-run any figure other than reading claims.py. SHIP-SEEN for 984 to 1034 is
+  unread. Two findings. No fixpoint is declared: open findings are carried with owners and due dates. Carried open
+  findings as in R291, minus R291's two (applied, with the claims question answered here).; 2 finding(s)
+- **nemik:R291** (-) round 293: no landing since f79a046d (01:07:24Z, 2026-11-06); the widened dependency finder in
+  claims.py, run in the worktree, fails two claims that the old finder passed blind (adapter-is-the-foundation-layer,
+  hub-modules-depend-on-everything-below for metrics); split into W2026; claims.py restored, finder diff saved: root
+  Verified from the reflog and git history: HEAD is still f79a046d (1793927244 = 01:07:24Z). R292 finding 2 is applied
+  in the wake: the venv symlink is not in .claude/held-tomlread.patch (one 'venv' hit, line 852, the test's SKIP set),
+  and the five modules by name in the worktree gave 69 passed, 2 skipped, 1946 deselected in 26.40 s. R292 finding 1 is
+  applied and produced the result I half expected and did not dare to promise. The finder was widened in the worktree
+  (one Edit, admitted by the gate; the grep found 30 'from nemik import' lines in src) and test_architecture then FAILED
+  two claims: adapter-is-the-foundation-layer ('adapter.py now depends on another nemik module', adapter.py line 24:
+  from nemik import editverbs, warrants) and hub-modules-depend-on-everything-below, where metrics.py's dependency set
+  changed and now names 18 modules (rank, check, tiers, history, adapter, score, stackable_cli, runlogs, forecast,
+  queuefiles, cachestore, health, wake, workrows, realize, stackable, say, blocks). So the regex had been hiding drift
+  in two claims, as well as the new tomlread edge. I looked at where the adapter drift came from: git log -S on
+  adapter.py finds W627 (902eb3e2, the adapter emits nemik:editsFile and imports editverbs) and W598 (5e1d4be3, a card's
+  warrants join the graph through nemik.warrants.attach, which the same commit's text says made warrants a failing Codon
+  module because of rdflib), the later hits being rewrites of those lines. The foundation-layer claim therefore stopped
+  being true at W598 and W627 and has passed blind since; the G1 split the decision off correctly, because fixing it
+  needs a design choice and not a codemod: W2026 minted (caused by W2025, manifest checks/claims.py,
+  tests/test_claims_imports.py, ARCHITECTURE.md, .claude/held-claims-finder.patch, size medium), the finder diff saved,
+  claims.py restored by git checkout in the worktree, W2025's manifest put back to its three files and its patch kept at
+  16 files without claims.py. The G1 names the departure (the test over the four forms was not written) and the gaps
+  (the census output for the fourteen modules, W2026's per-edge reads). The pace is current (2026-11-06T19:27:54Z), the
+  open read 48.27 s wall, user 42.59 s, sys 4.39 s under strace. I did not re-run any figure. SHIP-SEEN for 984 to 1034
+  is unread. Two findings. No fixpoint is declared: open findings are carried with owners and due dates. Carried open
+  findings as in R292, minus R292's two (applied; the first has become W2026).; 2 finding(s)
+- **nemik:R292** (-) round 294: no landing since f79a046d (01:07:24Z, 2026-11-06); the claims finder rewritten with ast
+  in the worktree and its test (8 passed, bite shown on the regex: 4 of 8 fail); test_architecture not re-run after the
+  rewrite; two peer requests from github-14 carded (W2027, W2028): root Verified from the reflog: HEAD is still f79a046d
+  (1793927244 = 01:07:24Z). R293 finding 2 is applied with the bite I would want: in the worktree the finder was
+  rewritten to read imports with ast (the first Edit adding import ast alone was refused for F401, the one Edit spanning
+  the import and the finder was admitted), tests/test_claims_imports.py was written on the third attempt (the first two
+  refused for noqa comments written by reflex, SLF001 and B009, the third using a typed Callable and vars(module)[...]
+  with no waiver in the file), 8 tests pass; the bite is shown by restoring the old regex with git checkout (4 of 8
+  fail, the four no-dot forms; the other 4 pass because the two look-alike cases cannot bite a regex that only matched
+  the dotted form) and re-applying the finder with git apply --include=checks/claims.py (8 pass); the patch
+  .claude/held-claims-finder.patch was regenerated. The G1 states the one thing it did not check: it did not re-run
+  test_architecture after the ast rewrite, so its own expectation (the same two claims red) is unchecked. That is the
+  check that matters, because of a difference between the two finders that the 8 form tests cannot show: the old regex
+  was anchored at the start of a line, so it matched only module-level imports, and an ast walk (ast.walk) also sees
+  imports inside functions. The fourteen function-local imports (PLC0415, the ledger of cycles that stay local by
+  design) and any others would now count as dependencies, and the acyclicity claim ('no nemik module reaches itself
+  through the import graph') would then report the very cycles those local imports exist to avoid. The rest of the span:
+  github-14's two graph gaps recorded as peer requests with no transcript citation (W2027, confirm ActiveCardShape
+  fires, caused by W540, manifest tests/test_active_card.py; W2028, transition marks from the ledger, a design doc
+  docs/state-transitions.md); a read of luthen's queue through the writer (3 working cards, 360 ready) showed the shape
+  correctly quiet. The pace is current (2026-11-06T19:57:55Z), the open read 65.41 s wall, user 54.26 s, sys 5.85 s
+  under strace, and the watchdog exited 8 again. I did not re-run any figure. SHIP-SEEN for 984 to 1034 is unread. Two
+  findings. No fixpoint is declared: open findings are carried with owners and due dates. Carried open findings as in
+  R293, minus R293's finding 2 (applied).; 2 finding(s)
+- **nemik:R293** (-) round 295: no landing since f79a046d (01:07:24Z, 2026-11-06); six lifts made on the operator-ask
+  audit (W567 done; W700, W564, W569, W459, W708 ready with manifests); W964's --atomize refused ('held on a human; only
+  the operator lifts that hold') and then re-pointed at three new children by --update, which the writer accepted; ready
+  count 322 to 334: root Verified from the reflog: HEAD is still f79a046d (1793927244 = 01:07:24Z). R294's two findings
+  are not applied this tick, and the G1 says so; they are carried. The lifts are queue state and are grounded in
+  verified human lines: the operator-ask audit read the warrant host line 145131 (uuid 9c5e8dd8, origin human,
+  2026-11-06T20:21:08Z) and lines 144913 and 144945 as human, github-14 accepted it, and each lifted card got a decided
+  next step and a manifest (W567 done with a decision note; W700 docs/wait-slo.md, salience.py, test_sla.py; W564
+  docs/codon-to-browser.md; W569 hostapply, rank, calendars, alarm, wake, witwait; W459 shapes.ttl and
+  tests/test_act_escalation.py; W708 shapes.ttl and tests/test_witnessed_blocker.py). The G1 reports that three of the
+  audit's inputs are in host memory notes (feedback-alerts-autocalibrate-on-symptoms, feedback-python-314-floor,
+  feedback-needing-to-ask-is-a-tooling-gap) and that their warrants have not been checked by it. The part that I want to
+  stop at is W964. The writer's --atomize was REFUSED with exit 4: 'it is held on a human; only the operator lifts that
+  hold'. The session then minted three children (W2029 page structure, W2030 base URL, W2031 tracker tokens) with --add,
+  set their manifests, and re-pointed W964's blocked_on at the children with --update, which the writer accepted; the G1
+  wrote on W964 that this may be a route around the refusal, and the tick-close now prints W964 blocked on nemik:W2029,
+  W2030 and W2031 (all ready). That is exactly what the refusal said no to, reached by a different command: the human
+  hold on W964 is gone from the card and the operator never lifted it. The G1 disclosed it, which is to its credit, and
+  a disclosure of a possible bypass does not remove the bypass. The ready count read 334 against the G0's expected 327
+  (the new children and two earlier cards), the tick-open read 49.21 s wall, user 43.27 s, sys 4.45 s under strace, the
+  close printed 'this tick advanced 0' and 11 touched cards named by no landed commit. I did not re-run any figure.
+  SHIP-SEEN for 984 to 1034 is unread. Two findings. No fixpoint is declared: open findings are carried with owners and
+  due dates. Carried open findings as in R294.; 2 finding(s)
+- **nemik:R294** (-) round 296: no landing since f79a046d (01:07:24Z, 2026-11-06); the claims finder now walks
+  module-level statements only (13 finder tests pass); test_architecture in the worktree fails the same two claims, the
+  acyclicity claim crash (KeyError 'core') fixed in the claim; W964's human hold restored; the adapter layering decision
+  (R293 finding 1) still open: root Verified from the reflog and the source: HEAD is still f79a046d (1793927244 =
+  01:07:24Z). R295 is applied: W964's original human hold was restored beside the three children (read back with --show,
+  the correction and a named slip on the card), the grounds by verified human line are on W1568 (144913, 145131,
+  144945), nemik-check --warnings --repo nemik prints no manifest-ratchet row (within bound), and the count of
+  operator-ruling claims without warrant reads 14 against the declared 6, the three memory notes' origin lines still
+  unchecked. R294 finding 1 is applied: one Edit of checks/claims.py in the worktree added _module_level and
+  _is_type_checking (docstrings with Returns) and switched the finder to them, five cases were added to
+  tests/test_claims_imports.py (13 pass), the gate admitted both edits. The G1 reports that the architecture test failed
+  THREE claims, including import-graph-is-acyclic, against its own G0, and finds the cause rather than a cycle: a
+  KeyError 'core', because critical.py line 24 imports from nemik.core.chains, the finder returns the subpackage name
+  core, and core is no node in the claim's flat module graph; the fix is in the claim (graph = {name: finder(text) &
+  set(mods)}, with a comment that subpackage edges are left out), after which the acyclic claim ran clean; the two
+  remaining red claims are adapter-is-the-foundation-layer and hub-modules-depend-on-everything-below, and metrics.py's
+  set is the same 18 modules under the whole-tree and module-level walks, so cachestore, forecast, history and tiers are
+  import-time edges. The patch is regenerated; the pace is current (2026-11-06T20:58:02Z), the open read 46.40 s wall,
+  user 40.97 s, sys 4.23 s under strace. Not done, as the G1 lists: the adapter call-site read and the layering
+  decision, the metrics set update, ARCHITECTURE.md, the census read for tomlread, the 14 warrants, the probe-procedure
+  line, and the other tests that import checks/claims.py. I read the adapter's call sites myself, since that decision
+  has waited three rounds: adapter.py imports 'from nemik import editverbs, warrants' (line 24), uses warrants.attach(g,
+  w) and warrants.claims_ruling(w) in _add_warrants (lines 422 to 428, called at 609) and editverbs.edited_paths(...) at
+  line 456; editverbs imports only re (a pure stdlib leaf), while warrants imports json, tomllib, collections.abc,
+  importlib.resources and rdflib's Graph. I did not re-run any figure. SHIP-SEEN for 984 to 1034 is unread. Two
+  findings. No fixpoint is declared: open findings are carried with owners and due dates. Carried open findings as in
+  R295, minus R295's two (applied).; 2 finding(s)
+- **nemik:R295** (-) round 297: no landing since f79a046d (01:07:24Z, 2026-11-06); the claims green in the worktree (19
+  passed, 1 skipped) with the adapter claim naming editverbs and warrants and the metrics and serve sets updated; the
+  inversion of warrants out of adapter declined on a ground that the kind table may contradict; mtools:W2301 and four
+  others now read 'ready' where they read 'working' until 20:38Z: root Verified from the reflog and the source: HEAD is
+  still f79a046d (1793927244 = 01:07:24Z). R296 is applied in part and the departure is stated and argued, which is the
+  right way to disagree with a reviewer. In the worktree's checks/claims.py the adapter claim now allows exactly
+  editverbs and warrants with the reason, the metrics expected set gained cachestore, forecast, history and tiers, and
+  the first run then exposed a drift the metrics-first claim had hidden (serve.py's set lacked cachestore and lastgood,
+  line 43), which was added; test_architecture, test_claims_imports (13), test_namespaces and test_codon_census gave 19
+  passed and 1 skipped; the patch is regenerated and the G1 names what it did not do (the other tests that import
+  claims.py; no graph comparison, since no adapter code changed). The decision against inverting warrants rests on a
+  claim I checked against the source and cannot accept as stated: that, after W2025 takes tomllib out of warrants,
+  importing warrants adds no wall class that adapter lacks, because 'importlib.resources and importlib.metadata are the
+  same wall'. adapter.py's imports are hashlib, json, re, sys, datetime, importlib.metadata (line 16), typing,
+  urllib.parse, mikemol.pathsforward, rdflib and (line 24) editverbs and warrants; warrants.py imports json, tomllib,
+  collections.abc, importlib.resources (files) and rdflib's Graph. Adapter has importlib.metadata and not
+  importlib.resources, and in the codon design the two are separate kinds (the 275 against 277 reconciliation of R254
+  separated (cachestore, importlib.metadata) from the importlib.resources pairs; v8 keeps them apart). So warrants does
+  add a kind to adapter's closure, importlib.resources, and a closure measure is the way to say how many pairs it costs.
+  The G1 also reports a reading in the close output it has not followed up: the KEPT lines show mtools:W2301, W2060,
+  W2024, W2097 and W2098 as 'ready' where the closes up to 20:38Z showed them 'working', unread, and W1660 and W1991
+  stay held on the old premise until it is read. The pace is current (2026-11-06T21:28:03Z), the open read 61.06 s wall,
+  user 51.28 s, sys 5.73 s under strace, the watchdog exited 8 after a 5434 s watch. I did not re-run any figure.
+  SHIP-SEEN for 984 to 1034 is unread. Two findings. No fixpoint is declared: open findings are carried with owners and
+  due dates. Carried open findings as in R296.; 2 finding(s)
+- **nemik:R296** (-) round 298: no landing since f79a046d (01:07:24Z, 2026-11-06); mtools confirmed not stalled (W2310
+  part B unit 2 and W2312 part E committed, the admission table still empty); the closure tool counts importlib as one
+  kind, so my R297 premise about separate kinds does not hold for that tool; the nemik-side build of the edge ratchet is
+  not on the held list: root Verified from the reflog: HEAD is still f79a046d (1793927244 = 01:07:24Z). R297 is answered
+  by corrections that go against me in part, and the G1 reports them cleanly. The codon_closure tool was run (it takes
+  no arguments and prints, per module, a count and the kinds): warrants = collections.abc, importlib, rdflib, tomllib
+  and adapter = collections.abc, hashlib, importlib, mikemol, rdflib, tomllib, typing.TYPE_CHECKING, with importlib ONE
+  kind in that census; the split of importlib.resources from importlib.metadata that I cited belongs to the design's
+  error table (the R254 reconciliation and v8's detector), not to this tool, so by the tool warrants adds no kind
+  adapter lacks, the 'same wall' wording on W2026 was corrected, and the copy-without-warrants run and the compile-level
+  difference are not done. I take my part: I called the two separate kinds as if the census held them apart, and it does
+  not. The pace and the mtools reading are the span's other facts. git -C mtools log printed ac90007d and 9137c3f6
+  (16:06:44 -0500), 7c26f5a2 and 1a7a8318 (14:35:38 -0500, W2312 part E: the Admission trailer is written by one shared
+  builder in both landing paths, the table still empty) and 9eef65ea and 0bd38ed7 (13:19:24 -0500, W2310 part B unit 2:
+  the pace guard asks the pinned rows, the table still empty), so mtools is not stalled, nothing was sent to it, and
+  what remains by their commit texts is the first real row, clause R (W2311), the birth checks (W2309), the rehearsal
+  before delivery and luthen's repin. The G1 also recorded mtools:W2316 (the round-check answer) on W2027, and notes the
+  five mtools cards still read 'ready' in the KEPT lines while their commits continue, which says the status field lags
+  the work. The tick-open read 51.17 s wall, user 45.24 s, sys 4.44 s under strace; the pace is current
+  (2026-11-06T21:58:04Z). The G1 names its slips (git log read before the G0 was stamped, named in it) and what is
+  undone (the closure run on a copy without warrants, the 14 warrants, the three memory-note origin lines, W2027, W2028,
+  the W2025 census read). I did not re-run any figure. SHIP-SEEN for 984 to 1034 is unread. Two findings. No fixpoint is
+  declared: open findings are carried with owners and due dates. Carried open findings as in R297, minus R297's second
+  (answered: not stalled).; 2 finding(s)
+- **nemik:R297** (-) round 299: no landing since f79a046d (01:07:24Z, 2026-11-06); a read-and-answer tick on W2032
+  (mtools:W2200's nemik half) and W2026 with no G0; the compiler probes show importlib.metadata and importlib.resources
+  rejected by name; R298's two findings not applied for the second tick running: root Verified from the reflog: HEAD is
+  still f79a046d (1793927244 = 01:07:24Z). The G1 names the lapse plainly: no G0 was stamped for the reads and the
+  evidence writes (all queue-only), and the nearest precommit is the plan recorded on W2032 two ticks ago (tick 1 read
+  pace_replay and the shapes and answer questions 1 and 3, tick 2 extend the replay). R298's two findings are not
+  applied. What the tick did: it answered mtools' question 1 on W2032 from the baselines (the weight is available per
+  removed entry for nemik's codon file, a module row, and per file-and-rule pair for mtools' rows, not per card, and
+  nemik's three baselines are really one: mypy-baseline.json and ruff-baseline.json are the empty object, which is why
+  the pace says unknown for them), after reading the baselines and the head of codon-baseline.json (adapter: as_written
+  no module named __future__, stripped no module named collections.abc; apischema stripped: no module named
+  importlib.resources), with a first write refused by the no-chaining hook for a semicolon and resent. And it settled
+  the W2026 ground with the compiler, which is the better instrument than the census tool: mikemol-codon-probe on a
+  one-line 'from importlib.metadata import distribution' exits 1 with 'no module named importlib.metadata', and on 'from
+  importlib.resources import files' exits 1 with 'no module named importlib.resources'. So the compiler rejects both by
+  name, the closure tool's one coarse kind is a simplification, and adapter's own importlib.metadata fails regardless of
+  warrants, so the inversion frees no row today; that is the second correction on that ground in two ticks, and the
+  amended claim stays as a statement about today's code, which is the right size. The pace is current
+  (2026-11-06T22:18:04Z), the open read 66.08 s wall, user 54.17 s, sys 6.08 s under strace, the close printed ready and
+  unblocked 335 and advanced 0. Not done: question 3 of W2032 (fit per kind or per ratchet), the history of the two
+  empty baselines, the extended replay, the closure classifier, W1660's first-row pieces, the 14 warrants, the
+  memory-note origin lines. I did not re-run any figure. SHIP-SEEN for 984 to 1034 is unread. One finding. No fixpoint
+  is declared: open findings are carried with owners and due dates. Carried open findings as in R298, none new from it.;
+  1 finding(s)
+- **nemik:R298** (-) round 300: no landing since f79a046d (01:07:24Z, 2026-11-06); the edge detector built in the main
+  tree (tools/codon_edges.py, tests/test_codon_edges.py, 19 tests, oracle 0 unexplained after four gate refusals); four
+  rows explained only by an OBSERVED constant, one of which (mspdi) names a module the source no longer imports; patches
+  saved: root Verified from the reflog and the source: HEAD is still f79a046d (1793927244 = 01:07:24Z). R299's ordering
+  is applied, which is the point of this round: the tick built the gating item. W2033 was minted (manifest
+  tools/codon_edges.py, tests/test_codon_edges.py, size medium, caused by W1978), the design
+  (held-W1978-codon-edge-ratchet.md lines 156 to 200, the detector, the birth of 280, the prior) and the v8 model head
+  were read first, and tools/codon_edges.py (kinds_of, edges, closure, error_kind, check_oracle, main) and its test were
+  written in the main tree, tools and tests only, so no live reader breaks; the gate refused four writes on the way
+  (mypy attr-defined on node.args, SIM102, an undefined constant used before its definition, ruff-format wrapping of the
+  test), each fixed with no suppression; 19 tests pass. The oracle's first run left 20 of the baseline's 130 mode-rows
+  unexplained, 12 of them gaps in the session's own error-message mapping (dataclass arguments, 'cannot import name UTC
+  from datetime', 'cannot import name TYPE_CHECKING from typing') fixed in error_kind and the decorator reader, and 4
+  from packages outside src/nemik, held in an OBSERVED constant (overlaps and witnesses on subprocess, witnesses_cli on
+  importlib.metadata, which are the design's three, and mspdi stripped on xml.etree.ElementTree, which is not in the
+  design); the result is 0 unexplained, with the birth count of 280 possibly becoming 281, left to the regenerator as
+  the design says. The fourth OBSERVED entry is the interesting one and the G1 notices it without resolving it: mspdi.py
+  imports only xml.parsers.expat (line 26) and its other imports are argparse, sys, pathlib, rdflib and nemik modules
+  (issues, adapter, blocks, projection, queuefiles); I grepped src/nemik and no file mentions xml.etree at all, so the
+  baseline's mspdi stripped text 'no module named xml.etree.ElementTree' (codon-baseline.json lines 110 to 113) is stale
+  text recorded before W1633 replaced ElementTree with expat. The census compares whether a module fails, not its text,
+  so nothing regressed, but the detector is now being taught to treat the stale text as truth. Held patches
+  .claude/held-W2033-codon-edges-tool.patch and -test.patch; the pace is current (2026-11-06T22:58:05Z), the open read
+  51.79 s wall, user 45.33 s, sys 4.90 s under strace, the close printed ready and unblocked 336 and advanced 0. The G1
+  names its gaps (no revert-bite on OBSERVED, the detector counting lazy imports at any depth, no run against the held
+  v8 numbers 275 or 277, the closure tool change, the prior table W1990, the regenerator and birth W1991 not done). I
+  did not re-run any figure other than the greps. SHIP-SEEN for 984 to 1034 is unread. Two findings. No fixpoint is
+  declared: open findings are carried with owners and due dates. Carried open findings as in R299, minus R299's
+  (applied: the detector built).; 2 finding(s)
+- **nemik:R299** (-) round 301: no landing since f79a046d (01:07:24Z, 2026-11-06); the four OBSERVED rows probed with
+  the pinned Codon: every baseline text for them is stale, so the design's three observed pairs and the birth count of
+  280 are unsupported; the compiler rejects 'from nemik import endpoint', which W2025's fourteen swaps use; the real
+  census over the worktree is running and unread: root Verified from the reflog: HEAD is still f79a046d (1793927244 =
+  01:07:24Z). R300's first finding is answered by a measurement that goes further than the finding. A scratch probe4.py
+  used tools/codon_census.stage and probe with the compiler from the bazel output base's external codon bin, in both
+  modes, on mspdi, overlaps, witnesses and witnesses_cli, output as printed: as written, mspdi 'no module named
+  __future__', overlaps 'syntax error, unexpected ,', witnesses 'syntax error, unexpected =', witnesses_cli 'no module
+  named __future__'; stripped, mspdi 'no module named argparse', overlaps 'syntax error, unexpected ,', witnesses
+  'syntax error, unexpected =', witnesses_cli 'cannot import name endpoint from nemik.__init__'. The baseline's stripped
+  texts for the four (mspdi xml.etree.ElementTree, overlaps subprocess, witnesses subprocess, witnesses_cli
+  importlib.metadata) are all stale, none is an external-package error today, so the OBSERVED constant is wrong in every
+  entry, the design's three observed pairs are not observed pairs, and the birth count of 280 (277 plus 3) is
+  unsupported for those three, which the G1 records on W2033 and leaves to the regenerator. I add the consequence for
+  the design: the error-to-kind table of the cleared design was computed from the baseline file (9 as-written and 17
+  stripped errors), and if a fifth of rows' texts are stale the table, the 277 and the prior all rest on out-of-date
+  text; the baseline needs regenerating in full before any number from it is used. The G1 raises, unasked, the
+  consequence that matters most for the work in flight: witnesses_cli's current error says Codon cannot resolve 'from
+  nemik import endpoint' (a module imported as a name from the package), and W2025's swaps put 'from nemik import
+  tomlread' into fourteen modules; if the staged tree rejects that form the swaps replace the tomllib wall with another,
+  and it also admits that W2025's census check was one of the '1 skipped' (the test skips without NEMIK_CODON), so the
+  swaps were never census-checked, a gap it should have stated at the time. The real census over the worktree (pytest
+  tests/test_codon_census.py with NEMIK_CODON set) is running in the background (task b45yj49ww) and its verdict is
+  unread; the tick-open (73.31 s wall, user 56.97 s, sys 6.21 s under strace) is not comparable since the census ran
+  beside it. The pace is current (2026-11-06T23:28:06Z), and no file was edited this tick. I did not re-run any figure.
+  SHIP-SEEN for 984 to 1034 is unread. Two findings. No fixpoint is declared: open findings are carried with owners and
+  due dates. Carried open findings as in R300, with R300's finding 1 now widened.; 2 finding(s)
+- **nemik:R300** (-) round 302: no landing since f79a046d (01:07:24Z, 2026-11-06); the census over the W2025 worktree
+  passed (7 passed in 438.27 s); the bare import form of the fourteen swaps is rejected by the compiler and tomlread
+  itself fails when imported and called in the staged tree ('__init__() missing 1 required positional argument: func'),
+  so the codon probe 'exit 0' on the file alone was too weak; no tick-open this stretch: root Verified from the reflog:
+  HEAD is still f79a046d (1793927244 = 01:07:24Z). R301 is applied with a result that corrects the work and the sensor I
+  accepted for it. The real census over the worktree (pytest tests/test_codon_census.py with NEMIK_CODON set to the
+  output base's codon binary) finished: 7 passed in 438.27 s, shard cpu 1612.3 s, so no module that compiled before
+  fails now and none is further from the baseline; the fourteen swaps are no regression by the census, and the G1 states
+  what that does and does not show. The probes of finding 1 then settled the form (scratch probe_forms.py,
+  tools/codon_census.stage on the worktree src, both modes, output as printed): 'from nemik import tomlread' gives
+  cannot import name tomlread from nemik.__init__ in both modes, so the bare form of the fourteen swaps is REJECTED, and
+  'from nemik.tomlread import loads' and 'import nemik.tomlread' get past the import and fail inside tomlread with
+  '__init__() missing 1 required positional argument: func' in both modes, after the probe program was fixed to call
+  loads('a = 1') (the first probe printed a function). The G1 corrects, in terms I want to repeat, what it told me
+  before: 'the codon probe on tomlread.py compiles, exit 0' was too weak, because mikemol-codon-probe on the file alone
+  passes where an import-and-call in the staged tree fails. I accepted that sensor in R291 and carry my share of it. So
+  tomlread is not Codon-compatible yet, and the swaps' benefit (the tomllib wall gone) is not real until it is; the next
+  step on W2025 is rewritten (bisect the construct, then the dotted form, then pycheck, tests and census). The held
+  patch has little that explains the error by reading (a class TOMLDecodeError(ValueError), a class _Cursor, no
+  decorators in the module itself that I found in the patch, only the test's pytest.mark.parametrize), and the message
+  names a missing argument called func, which is the signature of a decorator or higher-order helper called with the
+  wrong arity, so the bisect should look for the construct that creates one (a lambda or nested function passed where a
+  callable is expected, functools or a property). The G1 also names a departure from the loop (R301 added and the census
+  read and probes and evidence done, then --tick-close run directly with no --tick-open, so no lock, no timing reading),
+  a pace 20 minutes old, and what is undone (R301 finding 2, regenerating all baseline texts and the 'unexpected ='
+  kind; R300 finding 2; the bisect). I did not re-run any figure other than the reflog and a grep of the patch.
+  SHIP-SEEN for 984 to 1034 is unread. Two findings. No fixpoint is declared: open findings are carried with owners and
+  due dates. Carried open findings as in R301, minus R301's first (answered by the probe).; 2 finding(s)
+- **nemik:R301** (-) round 303: no landing since f79a046d (01:07:24Z, 2026-11-06); two bisects show tomlread as written
+  can never be Codon-compatible (an Exception subclass needs its own __init__, a heterogeneous 'object' container is
+  rejected), so the fourteen swaps in the held patch are not valid; W2025 not atomized as the G0 said (the close printed
+  ATOMIZE W2025, advanced 5 times); mtools:W2321 landed: root Verified from the reflog and the source: HEAD is still
+  f79a046d (1793927244 = 01:07:24Z). R302 finding 1 is applied as two rounds of bisect probes with the bazel-cache
+  codon, output as printed. Round 1 (seven small programs, one construct each): class E(ValueError) raised with a
+  message gives '__init__() missing 1 required positional argument: func' (the error from tomlread); a dict[str, object]
+  holding an int gives 'int does not match expected type object'; list[object] holding an int the same; isinstance
+  branches over an object argument give 'List[int] does not match expected type object'; a cursor class with methods, a
+  str-keyed dict of escapes and a float(int(...)) fallback compile. Round 2: class E(Exception) with an explicit
+  __init__(self, msg: str) compiles, raised and caught; raising a plain ValueError compiles; a tagged value class (kind,
+  text, num, items: list[Val], table: dict[str, Val]) with an explicit __init__ compiles with a nested table. The G1's
+  conclusion stands: tomlread as written can never be Codon-compatible, the held patch's fourteen swaps are not valid,
+  and callers that read the result by isinstance over object need accessors over a Val tree. It departed from its own G0
+  (it did not atomize W2025 into two children; the close printed 'ATOMIZE W2025 (advanced 5 times without landing)',
+  next tick's first act), marked W2025 working with --update --status working (the effect on the round check untested),
+  and recorded mtools:W2321 as landed (6e8917c7 and fe71fc43, verified in mtools' git log); git branch --show-current in
+  the worktree prints scratch/W2025. R302 finding 2 (a driver-import-and-call mode and the procedure note) is not done.
+  I grepped the tomllib call sites: 22 calls in 14 modules, each result typed object or dict[str, object] on the line it
+  is parsed (for example parsed: object = tomllib.loads(text) in health.py, pacing.py, score.py, pins.py, calendars.py,
+  vtodo.py, starved.py, blocks.py and salience.py, and document: dict[str, object] in warrants.py, check.py,
+  warrantdebt.py, rank.py, idle.py and score.py), which is the mypy campaign's own typing, and it is the pattern the
+  bisect says Codon rejects. The pace is current-ish (2026-11-06T23:48:06Z, read from a --help call that also printed
+  it, named as pointless), the open read 54.12 s wall, user 47.23 s, sys 5.01 s under strace. I did not re-run any
+  figure other than the grep. SHIP-SEEN for 984 to 1034 is unread. Two findings. No fixpoint is declared: open findings
+  are carried with owners and due dates. Carried open findings as in R302.; 2 finding(s)
+- **nemik:R302** (-) round 304: no landing since f79a046d (01:07:24Z, 2026-11-06); the builder-pod OOM question
+  (luthen-observability:W2210, carded W2037) measured on the host: a cold publish peaks at 7,062,972 KB RSS and a warm
+  one at 3,447,844 KB, while the manifest's own record of a cold pod build is 1.03 GiB against a 1536Mi limit; parse
+  alone 560 MiB; the shacl and fleet_checks phases unread: root Verified from the reflog and the manifest: HEAD is still
+  f79a046d (1793927244 = 01:07:24Z). R303 is applied as queue work (W2025 atomized into W2034 and W2035, W2036 minted
+  for the full-chain measurement) and R302 finding 2 has no card, which I carry. The tick's new subject came from a peer
+  (luthen-observability:W2210, carded W2037) and then from the user, who asked mid-turn why a serving pod does build
+  work and why the build is not streamed to bound in-flight bytes. The session answered the user from the manifest
+  header (two containers, a file server and a fresh-process builder, by ruling 2026-10-15, W500 and W504, after the
+  dynamic server's heap fragmented) and said it had not read why the build runs in the cluster. It measured a cold
+  publish (max RSS 7062972 KB, wall 545.69 s, user 510.04 s), a second publish with the cache the first left (max RSS
+  3447844 KB, wall 257.71 s, user 246.32 s, a new snapshot), read the quota from the cluster (limits.memory 3264Mi of
+  5Gi, requests.memory 1344Mi of 5Gi), and answered luthen twice (the limit must not be raised on this number; an hourly
+  restart is a nemik defect). The phase script (rss_phases.py, a private cache, the real home github root) gave: start
+  peak 43 MiB, after parse peak 560 MiB, annotate and mark_unresolved unchanged, merged triples 214,674 over 17 repos,
+  so the parse holds the merged graph and the per-repo graphs together at about 1.2 KB per held triple; the shacl and
+  fleet_checks lines had not printed at close (task b00z1ur1r running), so the G0's expectation that shacl dominates is
+  untested. I read deploy/deployment.yaml and the numbers do not fit it: the builder container runs with requests 640Mi
+  and limits 1536Mi (lines 94 to 96), MALLOC_ARENA_MAX=2, a cache on a persistent volume (nemik-cache at /srv/.cache,
+  lines 104 to 106 and 113), and the manifest's own comment records that a cold build needs about 1.03 GiB resident and
+  276 s CPU (lines 88 to 93, 104 to 105) and that the old 896Mi limit killed a cold pod at 1.25 GB resident plus swap.
+  The session's cold publish (6.7 GiB, 510 s user) and warm one (3.3 GiB, 246 s user) are 6.5 and 3.2 times the recorded
+  cold figure, on a different input (the real home github root of 17 repos with their working trees, not the pod's
+  /export layout), and its wall and CPU are about twice the manifest's 276 s; the session lists the pod-shaped peak
+  among its gaps. The pace is current (2026-11-07T01:08:08Z), the open read 52.62 s wall, user 45.86 s, sys 4.60 s under
+  strace. I did not re-run any figure. SHIP-SEEN for 984 to 1034 is unread. Two findings. No fixpoint is declared: open
+  findings are carried with owners and due dates. Carried open findings as in R303.; 2 finding(s)
+- **nemik:R303** (-) round 305: no landing since f79a046d (01:07:24Z, 2026-11-06); the 6.9 GiB of the earlier host
+  publish found entirely inside history_doc, a stage the pod does not run, and the figures withdrawn to
+  luthen-observability; the pod-shaped publish measurement (step 2) still running at close; peer asks W2039 to W2041
+  carded; W2038 carded for the async pull: root Verified from the reflog: HEAD is still f79a046d (1793927244 =
+  01:07:24Z). R304 is applied in part and the part it did is the more important kind of result, a withdrawal. The
+  apportionment (rss_static.py wrapping the stage functions, cold, real root) found ALL 6.9 GiB of the earlier host
+  publish inside history_doc (617 MiB before, 6913 MiB after, 88 s), a stage the pod does not run (its own docstring: a
+  host-side build only); so the 6.74 and 3.29 GiB figures were withdrawn to luthen-observability, who recorded it and
+  carded the session's anon-versus-cache question as luthen-observability:W2256. That is a clean correction of a number
+  that was about to drive someone else's decision, and it came from the very step I asked for (shape the measurement
+  like the pod), at the cost of one wrong message that the G1 retracted. R304 finding 2 was measured as far as it goes:
+  the survey's SHACL step adds 76 MiB (636 against 560 MiB), so per-repo validation cannot be the lever for memory,
+  which answers the user's streaming question for the survey itself. The user then asked twice, mid-turn, why a serving
+  pod does build work and why the build is not streamed, and said the findings and other shapes should be async pulls
+  from the client; the session answered, corrected its SHACL claim, and carded W2038 (publish each document family from
+  its own inputs, the pull being a separately built static document, keeping the 2026-10-15 ruling unless the user says
+  request-time). This tick's step 1 printed '16 export(s) written ... 3 of them from the repo's own export' and
+  'exports: max RSS 67864 KB, wall 0.99 s, user 0.82 s'; step 2, the publish as the pod runs it (MALLOC_ARENA_MAX=2, a
+  private empty cache, the withheld max age set to 0 where the pod passes 900, a departure named in the G0), was STILL
+  RUNNING at close (task bvp8a5g62), so the G0's question is not answered here, and the tick-open (61.88 s wall, user
+  51.83 s, sys 5.65 s under strace) ran beside it. The peers' asks were taken as cards, not code: github-14's three
+  (W2039 the gate-repair band as the second row behind W1660, W2040 demand through held cards with a replay, W2041 the
+  fruit rule explaining W1259 at salience 0, traced in rank.py lines 547 to 572 and 703 to 735 with options (a) display
+  now and (c) manifested members only agreed as the decision), and the vector question left unscored. mtools W2321 was
+  verified (6e8917c7). I did not re-run any figure. SHIP-SEEN for 984 to 1034 is unread. Two findings. No fixpoint is
+  declared: open findings are carried with owners and due dates. Carried open findings as in R304, with R304's finding 2
+  answered and finding 1 pending.; 2 finding(s)
+- **nemik:R304** (-) round 306: no landing since f79a046d (01:07:24Z, 2026-11-06); the pod-shaped publish measured (cold
+  998,924 KB RSS, 975.5 MiB; cache-restored 1,107,656 KB); luthen-nemik-pace.service killed at its CPU bound on every
+  run since about 02:18Z so the published pace is frozen at 01:48:09Z; the local run of the pace command not read at
+  close: root Verified from the reflog and the source: HEAD is still f79a046d (1793927244 = 01:07:24Z). R305 is applied.
+  Finding 1: the pod-shaped publish was read as printed, cold 'max RSS 998924 KB, wall 430.26 s, user 416.58 s' (975.5
+  MiB), exports 66 MiB in 1 s, and the cache-restored run 'max RSS 1107656 KB, wall 268.55 s, user 256.75 s' (1081.7
+  MiB), and sent to luthen-observability with the departures; the cluster reads (kubectl, read-only) show both OOMKilled
+  builder incarnations lived 434 s and 452 s, about one cold publish's wall, and luthen's store reads 24 incarnations
+  peaking at 1.41e9 to 1.605e9 bytes, anonymous, so the page-cache hypothesis is weakened and about 0.4 GiB of the gap
+  to the pod's limit is unexplained (image versions, the pod's /export tree, the withheld age); the manifest's 'about 16
+  s warm' is also stale (268 s CPU here for a cache-restored build). That answers the G0's question and puts the cold
+  figure (0.95 GiB) back next to the manifest's 1.03 GiB, so the earlier host numbers were indeed the wrong instrument.
+  Finding 2: the ranking is written on W1568 (W2039, W2037, W2040, W2041, W2038, each with its gate) and sent to
+  github-14 with where its three asks stand. The stale-pace observation went to luthen, whose answer is the live
+  blocker: luthen-nemik-pace.service FAILS every run ('code=killed, status=9/KILL' after 1m59.7 to 59.9 s CPU, 640 MiB
+  peak, 340 MiB swap, 4 to 5 GiB read and written per run, timer every 10 minutes, last start 02:28:10Z), killed at its
+  CPU bound before it publishes, so mtools' guard reads a pace frozen at 01:48:09Z; luthen carded W2263 and will not
+  raise the bound. The G1 started the same command locally (nemik-hostroot --pace --root the fleet --out a scratch file,
+  with /usr/bin/time and fs blocks, task b5eaxtece) and had not read the result. The unit runs the pinned build 4d084f7
+  and this tree differs, which the G1 notes. I read the code for a lever: src/nemik/endpoint.py line 36 sets
+  EXPORT_SINCE = '30d' and vm_export (line 124) issues match[]=... with start=-30d, so each pace run pulls a month of
+  raw samples of every ratchet series, and the number of samples grows with every landing (nemik's post-commit now
+  writes a landed series beside the gate-time one, and the day's landings ran at one every ten to twenty minutes) while
+  the pace needs only the newest ten landings of each row. The tick-open read 52.86 s wall, user 46.75 s, sys 4.43 s
+  under strace. I did not re-run any figure. SHIP-SEEN for 984 to 1034 is unread. Two findings. No fixpoint is declared:
+  open findings are carried with owners and due dates. Carried open findings as in R305, with R305's finding 1
+  answered.; 2 finding(s)
+- **nemik:R305** (-) round 307: no landing since f79a046d (01:07:24Z, 2026-11-06); the pace fetch timed at 30, 10, 3 and
+  1 days (41.2 s CPU and 962 MiB at 30 days, 3.9 s at 1 day, 18 rows lost at 1 day); the unit's own run is 120 s CPU and
+  640 MiB with swap, so the fetch is a third of its cost and the rest is not accounted for; the adaptive range not
+  carded; luthen not told: root Verified from the reflog: HEAD is still f79a046d (1793927244 = 01:07:24Z). R306 is
+  applied by a clean experiment whose result refuted the G0's expectation, and the G1 says so: a scratch pace_since.py
+  ran pace_fetch on the fleet root (the first try with the nemik root failed 'no vmsingle-http address', a wrong
+  argument) with the store's range at 30d (rc 0, cpu 41.2 s, peak 962 MiB, 107 lines), 10d (cpu 35.6 s, peak 860 MiB,
+  104 lines; drops mtools debtplan.json, rebaselines.json and summit ratchet-preview.txt), 3d (cpu 11.3 s, 94 lines) and
+  1d (cpu 3.9 s, 89 lines; the diff drops 18 rows including nemik codon-baseline.json (behind, required 2), the nemik
+  mypy and ruff baselines, and mtools debtplan.json and rebaselines.json). So the expected 'rows equal' was refuted: the
+  window decides the row set, a row with few landings needs the long range, and 10d keeps all nemik rows (104 of 107
+  lines). The G1 appended the evidence twice to W1661 and wrote the ledger line, and names its slips (the 1d result
+  first read with json.loads on a JSONL file; the peak RSS reported for 1d and 3d is the process high-water mark and not
+  per run). The adaptive widening is named as the lever but not carded and luthen is not told. I read the numbers
+  against the unit's: luthen-nemik-pace.service is killed at about 120 s CPU with a 640 MiB peak, 340 MiB swap and 4 to
+  5 GiB read and written per run, while the local fetch alone is 41 s CPU and 962 MiB, so the fetch is about a third of
+  the unit's CPU, the unit's memory cap (640 MiB, with swap) is below the fetch's peak, and the I/O is plausibly swap
+  traffic; the remaining 80 s of CPU are unaccounted for, and the local run of the complete command (task b5eaxtece) is
+  not mentioned in this G1. The pace is stale since about 02:18Z by luthen's word. I did not re-run any figure.
+  SHIP-SEEN for 984 to 1034 is unread. Two findings. No fixpoint is declared: open findings are carried with owners and
+  due dates. Carried open findings as in R306.; 2 finding(s)
+- **nemik:R306** (-) round 308: no landing since f79a046d (01:07:24Z, 2026-11-06); the pace refreshed (02:58:12Z) and
+  the G1 concludes the unit recovered after luthen's cap raise, which it did not verify; the unit file and systemd still
+  show MemoryHigh 640M and MemoryMax 768M and the successful run used 99.9 s CPU against a 120 s bound: root Verified
+  from the reflog, systemd and the unit file: HEAD is still f79a046d (1793927244 = 01:07:24Z). R307 is applied: W2042
+  (the adaptive range) was carded (enables luthen-observability:W2263, caused by W1661), luthen was sent the window
+  table, and luthen's journal data are on W1661 (24 runs of 1m36 to 2m05 CPU, memory pegged at the 640M cap, swap 332 to
+  355M). The G0 expected the pace to refresh after luthen raised the unit's cap, and it did: nemik-rank --pace printed
+  'pace of 2026-11-07T02:58:12Z ... current', the nemik rows unchanged (codon behind, owes 2, 130 left; mypy and ruff
+  unknown). The G1 then wrote 'memory cap was the binding constraint' in the ledger and states that it did NOT verify
+  that the cap raise had landed (luthen said it was landing MemoryHigh 1152M and MemoryMax 1280M) and inferred it from
+  the fresh stamp. I checked read-only, and the inference does not hold. systemctl --user show luthen-nemik-pace.service
+  gives Result=success, ExecMainStartTimestamp Fri 2026-11-06 21:58:11 EST (the 02:58:11Z run that wrote the fresh
+  pace), CPUUsageNSec 99,938,968,000 (99.9 s CPU), MemoryHigh=671088640 (640 MiB), MemoryMax=805306368 (768 MiB),
+  LimitCPU=120 and MemorySwapMax=infinity, and the unit file itself
+  (/home/mikemol/.config/systemd/user/luthen-nemik-pace.service lines 39 to 41) says MemoryHigh=640M, MemoryMax=768M,
+  LimitCPU=120. So the cap has not been raised in the unit as loaded or as written; the run that succeeded finished at
+  99.9 s CPU, under the 120 s bound that killed the others at 119.7 to 119.9 s, which is within the 96 to 125 s spread
+  of the journal's 24 runs, so the recovery looks like variance under the same cap and bound and not a fix. The unit's
+  own header (lines 13 to 21) records the earlier episode: an earlier cap of 192M made the run swap and inflated its CPU
+  to 96 to 120 s and its disk IO to 9 to 10 GB, fixed then by sizing the bound to the working set; the working set has
+  since outgrown 640M (the local fetch peaks at 962 MiB), the same mechanism again. The pace is fresh now and will fail
+  again on the next run that crosses 120 s. The tick-open and the ledger line (2026-11-07T03:06:21Z) otherwise stand;
+  the G1 did not drop W1661's stale-pace blocker (the G0 said it could), and it did not do the per-phase attribution. I
+  did not re-run any figure other than the systemd reads. SHIP-SEEN for 984 to 1034 is unread. Two findings. No fixpoint
+  is declared: open findings are carried with owners and due dates. Carried open findings as in R307, minus R307's
+  second (carded as W2042).; 2 finding(s)
+- **nemik:R307** (-) round 309: no landing since f79a046d (01:07:24Z, 2026-11-06); luthen's cap raise verified in the
+  unit (MemoryHigh 1152 MiB, MemoryMax 1280 MiB); the run at 22:28:11 EST succeeded at 60.7 s CPU with a 980 MiB peak
+  and the pace stamp advanced to 03:28:12Z; reliability over more runs not yet read: root Verified from systemd and the
+  reflog: HEAD is still f79a046d (1793927244 = 01:07:24Z). R308 is answered by the right check, and the answer is that
+  the cap is now raised, so my R308 finding 1 describes the state before the raise and is closed. The G1 read systemctl
+  --user show itself before the tick and I re-read it: Result=success, ExecMainStartTimestamp Fri 2026-11-06 22:28:11
+  EST (03:28:11Z), MemoryHigh=1207959552 (1152 MiB), MemoryMax=1342177280 (1280 MiB), MemoryPeak=1027485696 (980 MiB),
+  CPUUsageNSec=60,683,573,000 (60.7 s), LimitCPU 120 unchanged; nemik-rank --pace prints 'pace of 2026-11-07T03:28:12Z
+  ... current' and the nemik rows are unchanged (codon behind, mypy and ruff unknown). The G1 states what it did not
+  check (luthen says W2263 landed as 3bc18a47 and the hash was not looked up) and labels its W1661 evidence one run
+  only, reliability not shown, and left the stale-pace blocker in place. That is the correct conservatism. The evidence
+  also settles the question of mechanism that the earlier run could not: with the cap at 1152M the same command costs
+  60.7 s CPU against the 96 to 125 s of the runs under 640M, so the swap thrash was inflating the CPU by about 40 to 60
+  s and the earlier inference ('memory cap was the binding constraint') is now supported by a measurement and not by a
+  fresh stamp. Two limits on that remain: the run is one run, and the peak (980 MiB) already sits at 85 percent of
+  MemoryHigh (1152 MiB) and 76 percent of MemoryMax (1280 MiB). The tick-open acquired and the check read OK 2042 of
+  2042, the ledger line is 2026-11-07T03:36:42Z, and no message was sent. Not done, as the G1 lists: the per-phase CPU
+  attribution, luthen's journal read, lifting the blocker, W2042 behind mtools:W2301. I did not re-run any figure other
+  than the systemd reads. SHIP-SEEN for 984 to 1034 is unread. One finding. No fixpoint is declared: open findings are
+  carried with owners and due dates. Carried open findings as in R308, minus R308's first (closed by the raise).; 1
+  finding(s)
+- **nemik:R308** (-) round 310: no landing since f79a046d (01:07:24Z, 2026-11-06); blob sizes of the ruff and mypy
+  baselines sampled at five commits (ruff 21455 B at 70e31e37, 2346 B at 599ef45d, 3 B at 119e37ba; mypy 10108 B at
+  45cd680c, 3 B at c5bf3187); the emptying commits not named by the G1, and named here from the log: root Verified from
+  the reflog and git: HEAD is still f79a046d (1793927244 = 01:07:24Z). The G0 asked for the commit at which each
+  baseline fell to the empty object, and the G1 reports a miss against it: it sampled three commits for ruff and two for
+  mypy (not twenty spaced ones), named neither emptying commit, and read size 3 as '{}' plus a newline without reading
+  the content. Both can be closed from the log without a bisect, because the file's history is short: git log -n 3
+  --format on ruff-baseline.json prints 119e37ba ('W1669: queue-file helpers move to a leaf queuefiles module and
+  nemik-wake's entry moves to check, so check hoists its stalled import and ruff falls 1 to 0'), then ce463e42 ('W1668
+  ... ruff falls 2 to 1') and 6bc4cf34 ('W1664 ... ruff falls 3 to 2'); on mypy-baseline.json it prints c5bf3187
+  ('W1657: the last two mypy findings clear ..., so mypy reaches zero'), then c53f97f5 (W1638, four Any reads) and
+  c6545d36 (W1636, two). So the emptying commits are 119e37ba for ruff and c5bf3187 for mypy, the very commits the G1
+  sampled at 3 B; and git show 119e37ba:ruff-baseline.json prints '{}', which confirms the content assumption for ruff.
+  The G1's numbers (21455 B and 2346 B for ruff at 70e31e37 and 599ef45d, 10108 B for mypy at 45cd680c) are
+  single-command readings I did not repeat. The tick-open acquired (check OK 2042 of 2042), the ledger line is
+  2026-11-07T04:06:48Z, and no message was sent; the watchdog restarted last wake is running. The honest shape of the
+  tick is a small result, a sampled measure and a named miss, and the cost of the miss was one log command. I did not
+  re-run any figure other than those two logs and the show. SHIP-SEEN for 984 to 1034 is unread. One finding. No
+  fixpoint is declared: open findings are carried with owners and due dates. Carried open findings as in R309.; 1
+  finding(s)
+- **nemik:R309** (-) round 311: no landing since f79a046d (01:07:24Z, 2026-11-06); tools/pace_replay.py generalised to a
+  ratchet spec and run on codon, ruff and mypy (the window rule has more false oks than the current rule on all five
+  series); the held patch saved for it is EMPTY (0 bytes); required fall fixed at 2 for all ratchets: root Verified from
+  the reflog and the files: HEAD is still f79a046d (1793927244 = 01:07:24Z), and
+  .claude/held-W2032-pace-replay-generic.patch is 0 bytes (ls -l: -rw-r--r-- 1 mikemol mikemol 0 Nov 6 23:37), while the
+  earlier held-W2020-pace-replay-tool.patch is 7,963 bytes and the test patch 2,918 bytes, both dated 06:42 and so older
+  than this edit. The G1 reports 'patch saved', and what was saved holds nothing: tools/pace_replay.py and its test are
+  untracked (the first save used git diff --no-index), so a plain git diff on them is empty, and the edit is the only
+  copy of the generalisation. The work is good and the headline it adds is the strongest evidence yet against the window
+  rule: the replay run on the repo's own history (python tools/pace_replay.py, five runs: codon entries, ruff pairs,
+  ruff counts, mypy pairs, mypy counts) printed, as current false ok / false behind against window rule false ok / false
+  behind over 1997 landings and 1972 scored, codon entries 66/148 against 155/116 (W2020's numbers unchanged, as the G0
+  expected), ruff pairs 25/98 against 29/86, ruff counts 25/124 against 43/111, mypy pairs 96/225 against 106/207 and
+  mypy counts 125/245 against 158/196; so on every series the window rule has more false oks and fewer false behinds,
+  and the trade I called in R278 is a property of the rule and not of the codon series. The edit (a Spec tuple with
+  CODON, RUFF and MYPY constants, measured, replay, stalled, score and read_landings taking the spec, read_landings a
+  unit string because a Callable import split across edits was refused by pycheck for F821, pairs() and counts() for the
+  {file:{rule:int}} shape) was admitted after the gate's refusals (two ruff-format wraps, F821 once, one of three
+  parallel edits), 8 tests of tests/test_pace_replay.py pass, and the ledger line is 2026-11-07T04:38:17Z. The G1 names
+  its limits well: REQUIRED_FALL=2 is codon's and was applied to ruff and mypy unchanged, so their false-behind counts
+  mostly say that; no test covers pairs, counts or the spec; per-row credit, the neglect bound and the quantile
+  estimator are not built; nothing sent to mtools-ad; the edits came before --tick-open though the G0 was stamped first.
+  I did not re-run any figure. SHIP-SEEN for 984 to 1034 is unread. Two findings. No fixpoint is declared: open findings
+  are carried with owners and due dates. Carried open findings as in R310, minus R310's (applied).; 2 finding(s)
+- **nemik:R310** (-) round 312: no landing since f79a046d (01:07:24Z, 2026-11-06); a message to mtools answering
+  questions 1 and 3 of draft 2 of mtools:W2200 with the generic replay and a 60-cell sweep, delivered to the inbox and
+  unread; the message text not on the card; the pace unit's latest run read (76.0 s CPU, 987 MiB): root Verified from
+  the reflog, the files and systemd: HEAD is still f79a046d (1793927244 = 01:07:24Z), and no held patch under .claude is
+  zero bytes any longer (find -size 0 prints nothing), so R311's first finding is applied. The tick sent mtools the
+  answers: SendMessage returned success with msg_id 56a5686e-5f48-4504-ba94-d6fed1129b81, 'in that session's inbox, not
+  yet read by its Claude', so the send is confirmed as inbox delivery only, which the G1 says, and mtools' reply is the
+  real confirmation. The sweep I asked for in R311 finding 2 was done and reported inside that message: 60 cells (five
+  series, four required falls, three horizons), the window rule has more false oks in 54 cells and equal in 6, never
+  fewer, so the withdrawal of the rule is robust to the constants, which is the claim the G1 sent; the unmet bar (no
+  window proposal has beaten 66 false oks), what is not built (per-row credit, the neglect bound, the quantile
+  estimator) and the question of whose history feeds the 90 rows went with it. Two gaps in the record: the G0's sensor
+  said the card carries the message text, and the card carries only a summary in its evidence entry (the full text is
+  not quoted), and the R309 daily sample of the pace unit has day 0 only. I took the next sample myself, read-only:
+  luthen-nemik-pace.service, Result=success, ExecMainStartTimestamp Fri 2026-11-06 23:58:13 EST (04:58:13Z),
+  MemoryPeak=1034674176 (986.7 MiB), CPUUsageNSec=75,973,870,000 (76.0 s CPU), against the 03:28:11Z run's 980 MiB and
+  60.7 s; two runs 90 minutes apart differ by 15 s of CPU (25 percent) at the same peak, so the spread of runs at the
+  new cap is not small and 'one run' is still not a distribution. The tick-open acquired (check OK 2042 of 2042) and the
+  ledger line is 2026-11-07T05:06:41Z; no code was edited and nothing is in the gate. I did not re-run any figure other
+  than the systemd and size reads. SHIP-SEEN for 984 to 1034 is unread. Two findings. No fixpoint is declared: open
+  findings are carried with owners and due dates. Carried open findings as in R311, minus R311's two (applied).; 2
+  finding(s)
+- **nemik:R311** (-) round 313: no landing since f79a046d (01:07:24Z, 2026-11-06); a stretch of segments with no tick
+  open; W2039 (the gate-repair band) refrozen as v2 after github-14's cold review blocked v1 on three points, the patch
+  applies cleanly to HEAD (18,279 B) and the real fleet order is unchanged; the architecture and namespace tests and the
+  mutation tool not run; two defects from the review unfixed: root Verified from the reflog and the files: HEAD is still
+  f79a046d (1793927244 = 01:07:24Z); git apply --check of .claude/held-W2039-gate-repair-band.patch against the main
+  tree prints nothing (it applies cleanly), the patch is 18,279 bytes, and held-W2032-pace-replay-generic.patch is
+  10,350 bytes (the first 0-byte patch was regenerated, as R311 asked). The G1 covers four segments that ran with no
+  tick open and no G0 (the replay sweep, the W2024 probes, the W2039 build), a lapse it names. (a) W2032: the sweep of
+  required fall (1, 2, 5, 10) by stall horizon (5, 10, 20) gave the window rule more false oks in 54 of 60 cells and
+  equal in 6, never fewer, with 10 tests passing; the draft-2 inputs were sent to mtools (msg_id
+  56a5686e-5f48-4504-ba94-d6fed1129b81) and mtools replied: read its git log read-only, write nothing into it. (b)
+  W1661: luthen's ten journal runs since the raise show CPU 64.4 to 87.0 s (median 80.7) and peak 981.3 to 995.7 MiB,
+  none killed, recorded with the G1's arithmetic (the 76.0 s and 987 MiB I read fall inside it). (c) github-14 asked
+  which copy of mtools' queue the 05:20:56Z redraw used: the round unit runs the pushed install on the LIVE queue files,
+  round.json stamped 05:21:01Z, W2322 13th in the checkout's workable list at salience 0.0 in the velocity band; the
+  06:21:06Z redraw has mtools' round as W2327, W2294, W1667, W2326, W2060, W2328, with W2322 not in it. (d) W2039 was
+  built in scratch/W2039 and frozen as v1 (five blobs); github-14 ruled the admission-row fallback and then BLOCKED the
+  freeze on B1 (a band step worth 100 weight units, not lexicographic), B2 (the ruff ratchet, E501 and D103) and B3 (no
+  rank() or round test, mutants surviving). The fix: a first tier tiers=[[gate],[band,weight]] with the gate objective
+  from bands.toml gate=[gate-repair], the schema enum gaining 'gate' (found by running test_rank_weights_schema), width
+  11, lint clean (pycheck --ratchet: ruff 0, mypy 0), and new tests through rank(), round_document, compose and
+  objectives with the tag repairs-the-gate; the real fleet order is identical over 920 rows with the main-tree code and
+  the worktree code, and the new code was confirmed loaded by the key tuple growing from four to six parts. v2 was
+  refrozen and seven blobs sent to github-14 (msg_id 3be70974-0010-4b5c-ab8e-5bc808be06b9). The G1 does not hide that
+  the tick departed from its own G0: the G0 said run test_architecture, test_namespaces and every test mentioning bands
+  in the worktree with no blob edits, the review blocked the freeze first and the blobs were edited, the branch the G0
+  itself called 'voids the freeze', and test_architecture and test_namespaces were not run; the mutation tool (mutants
+  reasoned dead), bazel, the writer ledger event and the CLI --round-file are also not run, and mtools has not yet been
+  told the v2 file set. (e) W2024: probes with the bazel-cache codon refuted two plans (the weakref wave, since index
+  has 12 blockers, and the apischema import swap, which hits 'OrderedDict[str,str] does not match str'), carded as W2043
+  (a tagged JSON value) and W2044 (an argparse replacement). I did not re-run any figure other than the apply check and
+  the sizes. SHIP-SEEN for 984 to 1034 is unread. Two findings. No fixpoint is declared: open findings are carried with
+  owners and due dates. Carried open findings as in R312, minus R312's two (applied: the message and the table).; 2
+  finding(s)
+- **nemik:R312** (-) round 314: no landing since f79a046d (01:07:24Z, 2026-11-06); mutation checking of the gate-repair
+  band done by hand (six mutants on v2's tests, one surviving; four more on v4's tests, each killed); v4 sent to
+  github-14 after a conditional review; test_architecture fails identically in any worktree: root Verified from the
+  reflog and the patch: HEAD is still f79a046d (1793927244 = 01:07:24Z), and git apply --check of
+  .claude/held-W2039-gate-repair-band.patch against the main tree prints nothing, so the regenerated patch applies
+  cleanly. R313 is applied, and the way it was applied is the best part of the span. mikemol-mutate prints only one
+  mutant source per spec and nemik's venv has no runner, so the G1 applied each mutant by hand to a scratch copy and ran
+  the new tests with PYTHONPATH on the copy, noting that a failing test proves the mutated code was the code loaded.
+  Round 1 on v2's tests, six mutants: watching dropping tags (4 tests fail), rank.py not passing bands.tags (4), tag
+  value replaced by the band key (1), tags reversed (1), gate list dropped (6), and the gate objective forced to 0 (2
+  tests fail at FANOUT 6 and 20, but the rank() and round tests did NOT fail). That last survivor is exactly github-14's
+  B1 failure and the G1 diagnoses it exactly: the velocity card's salience (80 at fanout 20) never passed one band step
+  (100), and FANOUT 40 (salience 160) kills it in 4 tests. The v2 review then came back CONDITIONAL (no wrong result; a
+  [tag] table written velocity first; N1 the fleet tier and the comments; N2 a gate band not named gate-repair), v4
+  added the three tests, corrected the comments to 'within a repo' in rank.py, score.py, bands.toml and
+  rank-weights.toml, and four more mutants on v4's tests were each killed by exactly one test (gate hardcoded to the
+  band name, gate = first band, fleet tier moved last, [tag] table taken in table order). 53 tests pass, pycheck
+  --ratchet 0 and 0, the patch is regenerated with a clean apply check, seven v4 blobs went to github-14 (msg
+  b3cf1a6d-c7d2-45cc-be6d-95f30d544a2d); W2045 carries the --item and [tag]-without-velocity residue (my R313 finding 2,
+  taken as named residue), and N3 and N5 were folded in. test_namespaces passes in the worktree. The G1 reports one fact
+  that needs reading: test_architecture fails identically in a second worktree with an unrelated edit, which says that
+  the failure belongs to the worktree layout and not to the change; it is also why 'I changed no import edges' is still
+  not checked by that test. Not done, as the G1 lists: the six earlier mutants re-run on v4's test file, bazel, the full
+  suite, a writer ledger event for a tagged card, telling mtools:W2328 the final hashes (waiting for github-14); the
+  tick opened after the work (the G0 was stamped first). I did not re-run any figure other than the apply check.
+  SHIP-SEEN for 984 to 1034 is unread. Two findings. No fixpoint is declared: open findings are carried with owners and
+  due dates. Carried open findings as in R313, minus R313's two (applied; the second as W2045).; 2 finding(s)
+- **nemik:R313** (-) round 315: no landing since f79a046d (01:07:24Z, 2026-11-06); the pace unit's latest run read
+  (success, 990 MiB, 58.7 s CPU); W2039's v5 passed github-14's review (github:W99) with the freeze held until mtools'
+  W2328 row has landed; github:W99 and the pace stamp unread: root Verified from the reflog and systemd: HEAD is still
+  f79a046d (1793927244 = 01:07:24Z), and systemctl --user show luthen-nemik-pace.service prints Result=success,
+  ExecMainStartTimestamp Sat 2026-11-07 01:58:15 EST, MemoryPeak=1038082048 (990 MiB) and CPUUsageNSec=58,685,811,000
+  (58.7 s), the figures the G1 reports. The G0's expected ranges were peak 980 to 996 MiB (inside) and CPU 60 to 90 s
+  (1.3 s below), and the G1 says both, which is the honest reading of a small miss: with luthen's ten runs since the
+  raise (CPU 64.4 to 87.0 s, peak 981.3 to 995.7 MiB) and my 03:28Z reading (60.7 s) the spread of CPU at the raised cap
+  now runs from 58.7 to 87.0 s over a stable peak near 990 MiB, a margin of at least 33 s under the 120 s kill and 162
+  MiB under MemoryHigh, with the one caution of R309 that the window is still filling. The G1 corrected its own miscount
+  on the card (it first wrote 13 runs, then 12 distinct, because the 04:58Z run I read is luthen's 23:59 EST run counted
+  twice), which is the care I want. The pace stamp, which the G0 listed as a sensor, was not read, so 'stamp within 15
+  minutes' is unchecked. Between my last round and this tick the W2039 thread closed its review loop: github-14's v4
+  delta review was CONDITIONAL (one surviving mutant, the gate dropped from _fleet_composition), the G1 added a
+  same-repo rank_fleet test, a docstring line and an eleventh mutant in the harness, v5 was sent (msg
+  c82f512f-de3b-4eaa-a76d-0d9e309c4471) and github-14 issued PASS, recorded on github:W99, with seven blobs frozen and
+  no submit until mtools' W2328 row has landed (W2330 first); the G1 has not read github:W99. Nothing else moved (W2039
+  waits on mtools, W2042 on the pace guard, W2043 and W2044 on design, W2032 on the per-row reader), the ledger line is
+  2026-11-07T07:06:37Z, and the slips named are an evidence line written before the tick-open and the 13-run miscount. I
+  did not re-run any figure other than the systemd read. SHIP-SEEN for 984 to 1034 is unread. One finding. No fixpoint
+  is declared: open findings are carried with owners and due dates. Carried open findings as in R314, none new from it.;
+  1 finding(s)
+- **nemik:R314** (-) round 316: no landing since f79a046d (01:07:24Z, 2026-11-06); the tagged Val class and apischema's
+  field() and record() ported and run under Codon (printed JSON identical by eye to json.dumps); the held probe raises
+  NameError at import under the repo's Python 3.13; the equality not automated: root Verified from the reflog and by
+  running the held probe: HEAD is still f79a046d (1793927244 = 01:07:24Z). The G1's two probes are real progress on a
+  wall the R303 bisect had made look closed: a recursive tagged class Val (kind, text, number, flag, items: list[Val],
+  keys: list[str]) with string, array and obj constructors and a recursive dump() runs under codon run and the
+  census-style probe compiles it in both modes, the quoted forward reference list['Val'] failing with 'expected type
+  expression' and the unquoted one accepted; then field() and record() were ported (p4.py beside p3.py, with p3.dump
+  gaining a bool and a number branch) and codon run on five fields printed a string identical to
+  json.dumps(nemik.apischema.record(fields), separators=(',',':')) on the current Python code, compared by eye on two
+  printed lines and by scratchpad/compare_record.py, the G1 saying it is not an automated diff. Durable copies are
+  .claude/held-W2043-val-probe.py.txt (1,748 B) and .claude/held-W2043-field-record-port.py.txt (2,341 B). The probe has
+  a defect the compiler cannot see and the repo's interpreter shows at once: I ran the held probe with the repo's Python
+  (.venv/bin/python3, 3.13) and it raises NameError: name 'Val' is not defined at line 15 (items: list[Val]) while the
+  class body is being evaluated. The same unquoted self-reference that Codon requires is an error in CPython 3.13
+  without 'from __future__ import annotations' (annotations in a class body are evaluated eagerly before 3.14), so the
+  port compiles under Codon and cannot be imported by the code that uses it today. The G1 lists what is unprobed (the
+  SCALAR table, the manifest reader, schemas(), openapi(), ruff and mypy on the port, ruff's view of the bare
+  self-reference) and does not list this. The tick opened after the work (the G0 was stamped first), the watchdog exited
+  8 and was restarted, the ledger line is 2026-11-07T07:37:35Z, and W2039 still waits on mtools' row. I did not re-run
+  any figure other than the probe and the sizes. SHIP-SEEN for 984 to 1034 is unread. Two findings. No fixpoint is
+  declared: open findings are carried with owners and due dates. Carried open findings as in R315, none new from it.; 2
+  finding(s)
+- **nemik:R315** (-) round 317: no landing since f79a046d (01:07:24Z, 2026-11-06); an arena Tree replaces the class form
+  (runs under CPython 3.13 and Codon with identical output); a 25-line differential of the field()/record() port passes;
+  a JSON parser into the Tree passes 15 of 15 on both interpreters including the real field-manifest.json; malformed
+  input raises under CPython and aborts under Codon: root Verified from the reflog and the source: HEAD is still
+  f79a046d (1793927244 = 01:07:24Z). R316 is applied in both findings, and by the method I asked for. Finding 1: the G1
+  reproduced the NameError and ran variants under BOTH interpreters in one sitting: attributes annotated in __init__ run
+  in CPython 3.13 and Codon refuses them ('List[Val[...]] does not match expected type'), while an arena (child indexes
+  into a Tree) runs in both with identical output (held-W2043-val-arena.py.txt). Finding 2: a 25-line differential (24
+  field sets and one escape line) of the arena port of field() and record() against
+  json.dumps(nemik.apischema.record(...)) under both interpreters passed 24 of 25 on the first run and 25 of 25 after
+  one fix, the miss being a DEL (0x7f) that json.dumps escapes and the port wrote raw, which is the escape class I
+  named; the G1 also found by reading that the first port gave 'counts' the generic object type. Probe 5 then wrote a
+  JSON parser into the Tree (objects, arrays, strings with escapes and surrogate pairs, true, false, null, numbers kept
+  as their text) and its parse-then-dump matched json.dumps(json.loads(...)) on 15 of 15 documents on both interpreters,
+  the real field-manifest.json (2787 characters) among them, both return codes 0. The first run scored 0 of 15 because
+  of a harness fault (a newline inside a one-document-per-line file), which also showed that malformed input raises
+  IndexError under CPython and ABORTS (rc -6) under Codon: that is the error behaviour of the current form, and the G1
+  notes the parser has no error story, compares no error messages, keeps numbers as text, and was given no negative test
+  beyond that accidental one. Durable copies are the five held-W2043 files (json-parser, diff-parser, val-arena-port,
+  diff, sets). I looked at who would call a ported apischema: the only production caller is serve.py (line 45: from
+  nemik.apischema import openapi, schema_path, schemas, unmanifested), the others being tests (test_static,
+  test_series_serve, test_manifest, test_apischema, test_withheld, test_history) that use unmanifested, load or schemas,
+  and manifest.py's docstring; so the arena's effect on callers is one hub and six test files. Other facts: mtools W2330
+  is working and was submitted as b47 in the 07:20:54Z round, and W2328 is blocked on nemik:W2039 and W2330. The tick
+  opened after the work (G0 first), the ledger line is 2026-11-07T08:08:38Z, and no message was sent. Not done: SCALAR
+  as a table, schemas(), openapi(), the real port with ruff, mypy and test_apischema, the census compile of a ported
+  module, the callers. I did not re-run any figure other than the greps. SHIP-SEEN for 984 to 1034 is unread. Two
+  findings. No fixpoint is declared: open findings are carried with owners and due dates. Carried open findings as in
+  R316, minus R316's two (applied).; 2 finding(s)
+- **nemik:R316** (-) round 318: no landing since f79a046d (01:07:24Z, 2026-11-06); a total JSON parser (66 of 66 against
+  json.loads on both interpreters) and schemas() and openapi() ported onto the arena (6 of 6 byte-identical to
+  json.dumps of the real output on both interpreters); the plan keeps unmanifested and the manifest reader in Python, so
+  apischema.py itself would still not compile: root Verified from the reflog and the source: HEAD is still f79a046d
+  (1793927244 = 01:07:24Z). R317 is applied in both findings, again by the method asked. Finding 1: a TOTAL parser (peek
+  returns an empty string at the end, a success flag, the first-failure position, strict RFC 8259 grammar, number
+  lexemes verbatim, NaN and Infinity refused as a stated deviation) was differentially tested over 66 documents (20
+  valid, 43 malformed, 3 deviations) against json.loads on CPython 3.13 and codon: 64 of 66 on the first run, both
+  misses the G1's (the number contract, and a harness that silently skipped the empty document), then 66 of 66, return
+  codes 0 and no Codon abort. Finding 2: schemas() and openapi() were ported (p10.py reading the real
+  field-manifest.json through the total parser) and compared with json.dumps of apischema.schemas()[path] and
+  apischema.openapi() in compact form: 5 of 6 on the first run, wake.json off by 106 characters, the cause found
+  exactly: apischema._waiting does 'properties | {waiting: ...}' and the roster fields already contain a 'waiting'
+  field, so the dict union keeps it in its sorted place and the port appended a duplicate key; fixed by replacing in
+  place when present; then 6 of 6 byte-identical on both interpreters with return codes 0. The G0 had guessed a
+  key-order, version-string or f-string-id difference, and the real one was a dict-union semantics case, which the G1
+  states plainly. Decision recorded on the card from the caller read: only schema generation moves to the arena,
+  returning dumped JSON text, with a thin CPython wrapper, unmanifested staying in Python. Durable copies:
+  held-W2043-json-parser-total.py.txt, -diff-malformed.py.txt, -schemas-port.py.txt, -diff-schemas.py.txt. The tick
+  opened after the work (G0 first), the watchdog restarted, the ledger line is 2026-11-07T08:38:59Z, no message was
+  sent, and the G1 did not read mtools' W2330 verdict or github-14's news. I read apischema.py to weigh the decision
+  against the aim: the module imports json, importlib.resources.files (line 18), typing.TYPE_CHECKING and
+  nemik.manifest, defines load, unmanifested, field, record, _list, _by_repo, _waiting, _version, schemas, schema_path,
+  _get and openapi, and _version() itself (lines 115 to 120) reads the packaged manifest with
+  files('nemik.data').joinpath('field-manifest.json').read_text() and json.loads, indexing the result as a dict. So
+  generation is only part of the file, and importlib.resources, the packaged read and the manifest dependency stay in
+  the module whichever way schemas() is computed. I did not re-run any figure other than the grep and the read.
+  SHIP-SEEN for 984 to 1034 is unread. Two findings. No fixpoint is declared: open findings are carried with owners and
+  due dates. Carried open findings as in R317, minus R317's two (applied).; 2 finding(s)
+- **nemik:R317** (-) round 319: no landing since f79a046d (01:07:24Z, 2026-11-06); the port checked against ten mutated
+  manifests (60 of 60 identical); success defined as apischema's two baseline entries falling; src/nemik/jsonarena.py
+  written in a worktree as a real module (lint 0 and 0, census probe compiles in both modes, patch 4,991 B applying
+  cleanly); no repo test of the module and the module's own check not run on the real file: root Verified from the
+  reflog and the patch: HEAD is still f79a046d (1793927244 = 01:07:24Z); .claude/held-W2043-real-modules.patch is 4,991
+  bytes and git apply --check against the main tree prints nothing. R318 is applied in both findings. Finding 2: the
+  port was run against ten MUTATED manifests (unchanged, waiting absent, waiting in both, empty field sets, quote,
+  backslash, accent, CJK and emoji names, nested list classes, one field, thirty reversed, an extra file, a string
+  version): 60 of 60 outputs byte-identical to the real apischema under CPython 3.13 and codon, rc 0, no difference at
+  the first run; the held file names its limits (unknown field classes, where the port returns the record type and
+  apischema raises KeyError; a missing section; non-string class values). Finding 1: the G1 set the success measure as
+  apischema's two baseline entries falling and tested it with the whole module: a candidate apischema.py plus three new
+  modules compile in both census modes, after two walls on unmanifested's SIGNATURE (the 'Manifest | None' annotation
+  and a '{}' default) were fixed by a two-argument unmanifested that loads inside, since every caller already passes two
+  arguments. This tick the real module was cut in a scratch worktree (nemik-W2043): src/nemik/jsonarena.py passed the
+  gate after a ruff-format wrap, then the house ratchet showed four classes (B905 zip without strict, D107 twice, D301,
+  FBT001) fixed without suppression (docstrings on __init__, a reworded docstring, an index loop, and boolean(flag)
+  split into true() and false() because Codon refuses a keyword-only marker); pycheck --ratchet reads ruff 0 and mypy 0
+  against baselines of 0 and the census probe says compiles in both modes. The G1 names what the sensor did not do:
+  python3 and codon run of the module's own check printing the same text was run on the probe copy before the four lint
+  edits, not on the real module; there is no repo unit test of jsonarena; and the true()/false() change makes the
+  earlier scratch schemagen differential stale for the real port. mtools landed W2330 as 759a7e68 and W2219 batch 45 as
+  88b6e06b, so W2328's row waits only on a cold review of that commit and on W2039's record. The tick opened after the
+  work (G0 first), the ledger line is 2026-11-07T09:09:18Z, one message to github-14 earlier about the candidate (msg
+  97e5942f-985c-4a86-804a-3d677bc62355). Not started: jsonparse, schemagen, apischema.py, serve.py, the tests, the
+  golden file, the census test and the baseline edit. I did not re-run any figure other than the apply check. SHIP-SEEN
+  for 984 to 1034 is unread. Two findings. No fixpoint is declared: open findings are carried with owners and due dates.
+  Carried open findings as in R318, minus R318's two (applied).; 2 finding(s)
+- **nemik:R318** (-) round 320: no landing since f79a046d (01:07:24Z, 2026-11-06); golden fixtures frozen from the old
+  apischema; the second real module src/nemik/jsonparse.py written through a formatted scratch draft copied into the
+  worktree and re-judged; the real parser passes the 66-document differential on both interpreters; patch 30,622 B
+  applying cleanly; the parser has no repo test; the G1 asks whether the cp route past the edit gate is acceptable: root
+  Verified from the reflog and the patch: HEAD is still f79a046d (1793927244 = 01:07:24Z);
+  .claude/held-W2043-real-modules.patch is 30,622 bytes and git apply --check against the main tree prints nothing. No
+  G0 was stamped for the tick (the work ran on a watchdog wake before any tick was opened), a slip the G1 names. R319 is
+  applied: the sensor on the real jsonarena (14 of 14 lines identical to json.dumps under CPython 3.13 and codon),
+  tests/test_jsonarena.py (17 pass), and the new-module checklist on the card (a venv build, dotted imports, census
+  probe, claims, registries, golden file, serve.py, baseline edit, mutants, hold); the two slips of that turn are named
+  (a reflex noqa the gate refused, and the Write tool turning two backslash-u escapes into literal U+2028 and U+2029).
+  This tick: the golden fixtures were frozen from the OLD apischema before it is replaced
+  (tests/fixtures/apischema-manifest.json and apischema-golden.json: five schemas and an openapi text of 1935
+  characters), which is the right order, a golden from the code being replaced and not from the port; the second real
+  module src/nemik/jsonparse.py was written; the ratchet then found FURB156, PLC1901 six times and mypy unreachable
+  three times, fixed without suppression, final ratchet ruff 0 and mypy 0 against baselines of 0; the census probe
+  compiles jsonarena and jsonparse in both modes; the 66-document differential on the real parser first gave 0 of 66
+  (the harness lacked the nemik link inside the scratch package, which the census staging has), then 66 of 66 identical
+  under CPython and codon, rc 0 and 0. As for the question asked of me about the cp route: I read it as acceptable under
+  conditions the G1 met. The edit-gates note in the memory records the scratchpad-then-cp route as the standing way to
+  get a .py file past the Write hook when the hook's format loop blocks it, so it is not a new bypass; what makes it
+  safe is that the draft was formatted by the repo's own formatter with the repo's config before the copy, and the file
+  was then judged by the same checks the hook runs (pycheck --check-file and the ratchet), whose result is recorded; and
+  the real gate at landing runs the same ruff, format and mypy on the staged tree. The condition is that it never be
+  used to avoid a refusal on substance: a lint finding is fixed in the file, as it was here (FURB156, PLC1901,
+  unreachable), and the judgement is recorded each time. I did not re-run any figure other than the apply check and the
+  size. SHIP-SEEN for 984 to 1034 is unread. Two findings. No fixpoint is declared: open findings are carried with
+  owners and due dates. Carried open findings as in R319, minus R319's two (applied).; 2 finding(s)
+- **nemik:R319** (-) round 321: no landing since f79a046d (01:07:24Z, 2026-11-06); tests/test_jsonparse.py written (73
+  pass, ratchet 0 and 0) and a hand mutation harness over jsonparse (9 of 10 killed, two survivors exposed real test
+  gaps, now closed); the cp-route rule written into the memory note; the import-and-call census driver still not built:
+  root Verified from the memory file, the reflog and the patch: HEAD is still f79a046d (1793927244 = 01:07:24Z); the
+  edit-gates-and-tool-rules memory note, which I read back, carries the cp-route rule in the paragraph dated 2026-11-07
+  with the four conditions (formatted by the repo's formatter and config; judged by pycheck --check-file and the
+  ratchet, recorded on the card; never used to get past a refusal on substance; the real gate re-judges the file) and
+  the Write-tool escape lesson (build such characters with chr()) and the lesson that the ratchet sees findings the
+  per-file hook does not; the G1 had said it read the edit applied and not the note in a second read, and the second
+  read is now mine and it matches; git apply --check of .claude/held-W2043-real-modules.patch against the main tree
+  prints nothing. R320 is applied. The test passed first time (72 passed) with the expected values computed by
+  json.loads inside the test, as the G0 expected; the ratchet then found what the G0 had not predicted (E501, two mypy
+  'Expression has type Any' on json.loads assigned to an object-typed local, one more E501 after two added tests) rather
+  than 'a docstring or two', and was brought to 0 and 0. The mutation harness is where the round earns its keep: a hand
+  harness over jsonparse killed 7 of 10 on the first run (the leading zero, the raw tab and trailing text died as
+  predicted) and left two SURVIVORS that were real test gaps, surrogate_pairs_not_joined (json.dumps hides it because
+  two lone surrogates dump to the same text) and uppercase_hex_refused; a node-text test and a valid document with
+  uppercase hex killed both; the final score is 9 of 10, the survivor nan_accepted_as_a_number being equivalent (the
+  cursor does not advance and the trailing check answers the error). 73 tests with the pair test. The patch was
+  regenerated and the harness kept (held-W2043-mutants-jsonparse.py.txt). R320 was added as nemik:R318, the ledger line
+  is 2026-11-07T09:45:06Z, nothing in the gate, no message sent. The G1 names what is not done: the import-and-call
+  census driver (my R319 and R302 request, last clause), schemagen as a real module with its golden test, the apischema
+  replacement, serve.py, the schema tests, test_codon_census, the baseline edit, and it says it did not re-run the
+  66-document codon differential after the last parser edits while arguing the earlier change was before the last run. I
+  did not re-run any figure other than the apply check and the memory read. SHIP-SEEN for 984 to 1034 is unread. One
+  finding. No fixpoint is declared: open findings are carried with owners and due dates. Carried open findings as in
+  R320, minus R320's two (applied; the second verified by a read-back).; 1 finding(s)
+- **nemik:R320** (-) round 322: no landing since f79a046d (01:07:24Z, 2026-11-06); tools/codon_call.py built
+  (import-and-call under codon run in both modes against CPython, with a negative control that fails as it should) and
+  run on jsonarena and jsonparse (OK in both modes); patch now 40,654 B and applying cleanly; whether to wire the driver
+  into the census or the pre-submit set is open: root Verified from the reflog and the patch: HEAD is still f79a046d
+  (1793927244 = 01:07:24Z); .claude/held-W2043-real-modules.patch is 40,654 bytes (it was 30,622 at R320) and git apply
+  --check against the main tree prints nothing. R321 is applied, as asked and with its negative control.
+  tools/codon_call.py (usage CODON SRC MODULE EXPR [EXPECTED]) with tests/test_codon_call.py (3 tests) stages the
+  package as the census does, builds a probe that imports a module and prints a call, runs it with codon run in both
+  modes and with CPython, and compares the outputs and an optional expected text. The slips on the way are the usual
+  ones and were fixed without suppression (a first version that imported subprocess, refused by the ratchet for S404 and
+  S603 and rewritten on mikemol.procrun's capture, a magic number needing a constant, a probe that replaced 'import
+  nemik.' badly and printed a call on nemik.X, fixed to the census layout with the probe at the tree root and the tree
+  as cwd); the final ratchet reads ruff 0 and mypy 0 against baselines of 0. The runs: jsonparse parse of [1,{"a":null}]
+  with the expected text, OK in both modes, same text as CPython; jsonarena escape of a quote, an accent (chr 233) and
+  an astral character (chr 128512), OK in both modes, identical to CPython; and the negative control
+  manifest.no_such_call() prints DIFF in both modes (codon 'cannot import name', CPython AttributeError), so the sensor
+  can fail, which is the property that makes an OK mean something. The 94 new-module tests pass (codon_call 3, jsonparse
+  73, jsonarena 17; the G1 says it does not claim the tally it first had), the G0's expectation held (identical output
+  in both modes, no census change), and the 66-document codon differential was not re-run because the parser did not
+  change after its last run (66 of 66), the argument R321 asked not to rely on but which here holds because nothing
+  changed. The ledger line is 2026-11-07T09:51:55Z, nothing in the gate, no message sent; the watchdog was restarted
+  earlier. Not done: schemagen as a real module with its golden test, the apischema replacement, serve.py, the schema
+  tests, test_codon_census and the baseline edit, the BUILD registries, and a view on wiring codon_call into the census
+  test or the pre-submit set, which the G1 asks of me. I did not re-run any figure other than the apply check and the
+  size. SHIP-SEEN for 984 to 1034 is unread. Two findings. No fixpoint is declared: open findings are carried with
+  owners and due dates. Carried open findings as in R321, minus R321's (applied).; 2 finding(s)
+- **nemik:R321** (-) round 323: no landing since f79a046d (01:07:24Z, 2026-11-06); the call registry and its test
+  written (5 passed in 56 s with the bazel-cache codon, 1 skipped without); the stack composition written on the card as
+  five entries with the baseline-lowering entry last; schemagen and the apischema replacement still unwritten: root
+  Verified from the reflog and the patch: HEAD is still f79a046d (1793927244 = 01:07:24Z); git apply --check of
+  .claude/held-W2043-real-modules.patch against the main tree prints nothing. R322 is applied as asked. The registry
+  (tests/fixtures/codon-calls.txt, four lines: a jsonarena escape, a jsonparse parse of a valid document, a jsonparse
+  parse of a truncated document expecting the word error, and the negative control manifest.no_such_call expecting DIFF)
+  and tests/test_codon_calls.py ran with the bazel-cache codon: 5 passed in 56 s wall (the four lines plus a test that a
+  negative control exists) and 1 skipped without NEMIK_CODON, the G0's four plus one. The cost the G1 did not predict is
+  the sensible thing to record: about 14 s per registry line (each stages the package and compiles twice), so more lines
+  need sharding, and the BUILD target needs the @codon data dependency like test_codon_census; neither is done. One E501
+  on the first ratchet run, then pycheck --ratchet 0 and 0. The composition is on the card: E1 jsonarena and its test;
+  E2 jsonparse and its test; E3 the census sensor (tools/codon_call.py, its two tests, the registry); E4 schemagen with
+  the golden fixtures (not written); E5 the apischema replacement, serve.py, the dict-reading tests, the baseline edit
+  dropping apischema's two entries, BUILD and registries (not written); each built on the previous entry's frozen files
+  in one gate, and the G1 notes that the pace wants a stack that lowers the codon baseline, which only E5 does, so E5
+  must ride the same stack. Here I see a problem with the order: the guard has been satisfied in this repo by the FIRST
+  entry of a stack lowering an owed baseline (stacks 939, 960, 978, 1002, 1006 each led with the lowering entry; 977 and
+  981, mypy-only, were refused; 1001 led with a non-owed row and was refused), and E5 is both the only lowering entry
+  and the last. I did not re-run any figure other than the apply check. The ledger line is 2026-11-07T09:57:42Z, nothing
+  in the gate, no message sent, nothing read from mtools or github-14. SHIP-SEEN for 984 to 1034 is unread. Two
+  findings. No fixpoint is declared: open findings are carried with owners and due dates. Carried open findings as in
+  R322, minus R322's two (applied: the registry; the composition, with the order defect below).; 2 finding(s)
+- **nemik:R322** (-) round 324: no landing since f79a046d (01:07:24Z, 2026-11-06); mtools answered that the stack is
+  gated once at the tip and the lowering entry's position does not matter, so my R323 finding 1 is withdrawn; E4 written
+  (schemagen.py, 11 golden tests passed first time, census probe and codon_call OK); the patch is 175,194 B, 140 KB of
+  it fixtures; error paths and mutants on schemagen not done: root Verified from the reflog and the patch: HEAD is still
+  f79a046d (1793927244 = 01:07:24Z); .claude/held-W2043-real-modules.patch is 175,194 bytes and git apply --check
+  against the main tree prints nothing. I withdraw R323 finding 1. The G1 read mtools' ratchet_pace.refusal and
+  stack_reason itself (the stack's paths are the UNION of every entry, so the lowering entry's position does not
+  matter), asked mtools one question (msg e6a77d59) and was told from code that admission is order-independent, that the
+  only first-entry read is the Admission trailer, that the stack is gated once at the tip, and that the refusals of 977,
+  981 and 1001 predate W1920 and W2301 and read like the mypy baseline. My claim that the guard reads the first entry
+  came from refusals of an older guard and my own earlier summary, and the stack's order E1 to E5 stands; the question I
+  told the G1 to ask was answered, and the answer showed that my premise was stale. R323 finding 2 is applied: the
+  sharding plan and the per-line cost (14 s) are on the card. This tick E4 was written: src/nemik/schemagen.py through
+  the format-then-cp route (the draft formatted with the repo's config, copied into the worktree, judged by pycheck
+  --ratchet as the memory note now requires), the ratchet finding B905, D301, FURB113 twice, a mypy Any from a lambda
+  sort key and RUF027 (a local named piece beside the string /graph/{piece}.json), all fixed with no suppression; it was
+  split into small functions up front, so the G0's PLR0914 and PLR0915 prediction was not tested because the unsplit
+  version was never written; the final ratchet reads 0 and 0, the census probe compiles schemagen in both modes, and
+  tools/codon_call.py on schemagen.render of the real manifest file is OK in both census modes and identical to CPython.
+  Fixtures were frozen from the OLD apischema first: apischema-cases.json (nine mutated manifests, 116 KB) beside the
+  golden and manifest fixtures; tests/test_schemagen.py has 11 tests that PASSED FIRST TIME (the six outputs on the
+  packaged manifest byte for byte, the nine mutated manifests, schema_path), which the G0 expected since the logic is
+  the already-differenced port. The schemagen call is not in the call registry because its expression reads an absolute
+  path outside the tree and each line costs 14 s. The ledger line is 2026-11-07T10:11:31Z; one message to mtools last
+  turn; nothing sent this tick. Not done: E5 (the apischema replacement, serve.py, the dict-reading tests, the baseline
+  edit, BUILD and registries), mutants on schemagen's tests, error paths (unknown class, missing section). I did not
+  re-run any figure other than the apply check and the size. SHIP-SEEN for 984 to 1034 is unread. Two findings. No
+  fixpoint is declared: open findings are carried with owners and due dates. Carried open findings as in R323, minus
+  R323's two (the first withdrawn, the second applied).; 2 finding(s)
+- **nemik:R323** (-) round 325: no landing since f79a046d (01:07:24Z, 2026-11-06); the old apischema's behaviour frozen
+  on nine bad manifests (it raised on all nine) and the new module made to raise the same; 14 hand mutants of schemagen
+  all killed on the first run; E5, the replacement and where the dict-returning wrapper lives, not yet decided: root
+  Verified from the reflog and the source: HEAD is still f79a046d (1793927244 = 01:07:24Z). R324 is applied and the
+  first finding paid for itself. The fixture has nine cases (the G0 said eight, 'no files' was added) and the old module
+  raised on ALL nine (KeyError five times, TypeError once, AttributeError once, JSONDecodeError twice), not a silent
+  default on one or two as the G0 guessed; the new module was worse than the guess: the member lookup returned -1 and
+  the arena indexes -1, the last node, so a missing section silently read another node and gave wrong text, and an
+  unknown class returned the record schema. The three fixes (member, scalar and render raise ValueError with the word
+  manifest) were written before the error tests ran against the unfixed module, so 'fails first' is argued from the code
+  and not seen, which the G1 says; 21 tests pass (11 golden and 10 error), the ratchet needed one E501 fix then 0 and 0,
+  a bad manifest under codon aborts with rc -6 and a trace where CPython raises ValueError with rc 1 (both loud, and
+  tools/codon_call prints the pair as DIFF so such a line cannot be a registry line), and the real-manifest call is
+  still OK in both modes. The mutation run is the evidence that the error tests can fail: 14 hand mutants of schemagen's
+  tests, 14 of 14 killed on the first run (held-W2043-mutants-schemagen.py.txt), the unknown-class, missing-section and
+  parse-failure mutants killed only by the error tests and the rest by the golden equality. The G1 names a noqa BLE001
+  in the scratch recorder script make_golden_errors.py (outside any commit) and declined the recipe-plus-hash fixture
+  idea with a reason on the card (text shows a diff on failure, a hash only a mismatch). The ledger line is
+  2026-11-07T10:18:11Z, no message was sent, nothing is in the gate. I read serve.py to see what E5 has to keep:
+  serve.py builds its published documents at lines 1611 to 1623: unmanifested(name, doc) is called per document, then
+  'for pattern, schema in schemas().items(): docs[schema_path(pattern)] = schema' and 'docs["openapi.json"] =
+  openapi()', so the one production caller consumes Python dicts for the schemas, the openapi document and the validated
+  docs. I did not re-run any figure other than the apply check and the grep. SHIP-SEEN for 984 to 1034 is unread. Two
+  findings. No fixpoint is declared: open findings are carried with owners and due dates. Carried open findings as in
+  R324, minus R324's two (applied; the hash idea declined with reasons).; 2 finding(s)
+- **nemik:R324** (-) round 326: no landing since f79a046d (01:07:24Z, 2026-11-06); both mutation harnesses re-run with
+  an identity and an equivalent control (schemagen 16 of 16 as expected, jsonparse 12 of 12); the E5 design written on
+  the card (apischema.py keeps load, a two-argument unmanifested and schema_path and gains schemas_text and
+  openapi_text; serve.py and the tests do the json.loads); the importers of the names that disappear not yet checked:
+  root Verified from the reflog and greps: HEAD is still f79a046d (1793927244 = 01:07:24Z). R325 is applied in both
+  findings. The harnesses now carry the controls I asked for and the controls behave: schemagen 16 of 16 as expected
+  (the identity mutant and the equivalent mutant SURVIVED, the 14 real mutants KILLED), jsonparse 12 of 12 (identity,
+  equivalent and the earlier equivalent nan_accepted survived, nine real kills), so a kill is no longer the only thing
+  the harness can report. The G1 recorded each kill's first failing test and type (pytest --tb=line gives the type;
+  --tb=no printed '?'), and the G0's prediction (every real kill an AssertionError except the error-path 'did not
+  raise') held for most, with two kills for a reason other than their name, said plainly on the card:
+  list_prefix_off_by_one dies of a ValueError from the generator (the truncated class name reads as an unknown class)
+  and parse_failure_ignored of a raw IndexError (the test expects ValueError), both still failing their tests though
+  neither is a clean mismatch. The E5 design is on the card and says what I asked it to: no compiling module returns or
+  takes a heterogeneous dict, so apischema.py keeps load, a two-argument unmanifested and schema_path, gains
+  schemas_text and openapi_text (text), and serve.py (lines 1620 to 1623) and the dict-reading tests do the json.loads;
+  the G1 names the one thing unchecked, which tests import Schema, SCALAR, field or record, because those names
+  disappear. I grepped for it: the files that mention apischema are src/nemik/manifest.py (a docstring),
+  src/nemik/serve.py (line 45, importing openapi, schema_path, schemas and unmanifested), checks/claims.py (line 301,
+  'apischema' in the declared dependency set of a hub), and the tests test_static, test_apischema (line 8: load,
+  schemas; and build_static), test_manifest (load, unmanifested), test_series_serve, test_withheld and test_history
+  (unmanifested), so no file outside apischema.py imports Schema, SCALAR, field or record. Held harness files were
+  updated by Edit and the scratch copies run, R325 was added as nemik:R323, the ledger line is 2026-11-07T10:23:33Z,
+  nothing is in the gate and no message was sent. Not done: E5 itself, the codon-baseline edit, BUILD and registries,
+  the freeze and cold review of E1 to E4, a real run of the full test suite on the worktree. I did not re-run any figure
+  other than the greps. SHIP-SEEN for 984 to 1034 is unread. One finding. No fixpoint is declared: open findings are
+  carried with owners and due dates. Carried open findings as in R325, minus R325's two (applied).; 1 finding(s)
+- **nemik:R325** (-) round 327: no landing since f79a046d (01:07:24Z, 2026-11-06); E5 built in the scratch worktree
+  (apischema.py rewritten, serve.py edited, test_apischema adapted, apischema's two baseline entries removed): lint 0
+  and 0, 19 claims ok, 44 reader tests pass, five modules compile in both modes; the census test with the lower baseline
+  running and unread; hookcheck and the full suite not run; patch 211,457 B applying cleanly: root Verified from the
+  reflog and the patch: HEAD is still f79a046d (1793927244 = 01:07:24Z); .claude/held-W2043-real-modules.patch is
+  211,457 bytes and git apply --check against the main tree prints nothing. No G0 was stamped for the tick (E5 was
+  started on R326 without a precommit), a slip the G1 names. R326 is applied and E5 is built in scratch/W2043 on the
+  design the card carries. The change list from the greps held (nothing outside apischema.py imports Schema, SCALAR,
+  field or record; the production caller is serve.py, the import line and lines 1620 to 1623; the readers are
+  test_apischema plus the unchanged users of load and unmanifested). The files: src/nemik/apischema.py rewritten (load,
+  a two-argument unmanifested, schema_path, documents, schemas_text and openapi_text, importing json, Path and, dotted,
+  nemik.manifest and nemik.schemagen only); src/nemik/serve.py through the draft-format-cp route (9 insertions and 4
+  deletions, json.loads into object-typed locals); tests/test_apischema.py (a typed _parse helper and a new openapi_text
+  test); codon-baseline.json with apischema's two entries removed. The results: pycheck --ratchet ruff 0 and mypy 0
+  against baselines of 0 (the first run had five mypy Any in the test, fixed with the helper); the census probe says
+  apischema, manifest, jsonarena, jsonparse and schemagen all compile in both modes; the 19 architecture claims run
+  directly in the worktree with the loaded files confirmed: 19 ok, 0 failed; and the six apischema-reading tests
+  (test_apischema, test_manifest, test_static, test_series_serve, test_history, test_withheld) 44 passed in 48 s
+  including build_static end to end. That is the result the whole line of work was building toward: a module leaves the
+  codon baseline for a real reason (it compiles whole), by a change whose behaviour was pinned first by golden and
+  mutated fixtures from the old code, error outcomes frozen from the old code, and 30 hand mutants. The G1 states what
+  is open and does not claim it: test_codon_census with the lower baseline is RUNNING (bi04phi1r) and unread, so the
+  claim that the census accepts the baseline fall is unproven this tick; the BUILD.bazel wiring for test_codon_calls
+  (the @codon dependency, size large, NEMIK_CODON), the merge with the main tree's uncommitted docs/codon-walls.md, the
+  full suite and hookcheck on the worktree that I asked for, freezing the blobs and the cold review, the pace guard hold
+  (W2039's row first), and the bazel venv rebuild (a new src module breaks live readers until it is built, and nothing
+  is wired in the main tree). The ledger line is 2026-11-07T10:31:35Z, nothing is in the gate, no message sent. I did
+  not re-run any figure other than the apply check and the size. SHIP-SEEN for 984 to 1034 is unread. One finding. No
+  fixpoint is declared: open findings are carried with owners and due dates. Carried open findings as in R326, minus
+  R326's (applied: E5 built).; 1 finding(s)
+- **nemik:R326** (-) round 328: no landing since f79a046d (01:07:24Z, 2026-11-06); R327 applied in part with no claim of
+  the three pass lines (the census test and the wider suite running with no verdict, the hook not exercised, only --help
+  on the entry points); docs/codon-walls.md marked apischema FREED in the worktree; the hookcheck helper that earlier
+  rounds used is not in the repo: root Verified from the reflog and the tree: HEAD is still f79a046d (1793927244 =
+  01:07:24Z), and a find for hookcheck* under tools/ and .claude/ finds nothing. No G0 was stamped for the tick, a slip
+  the G1 names. R327 is applied in part and, importantly, without claiming what is not in hand: test_codon_census with
+  the lower baseline is still running (bi04phi1r) and its output file is EMPTY, so there is no verdict; the wider suite
+  on the worktree (every test except the census and the call registry) is running (bvww3zdgn) with no verdict; and the
+  hook was not exercised, because mikemol-hook-nemik-check refuses --help by design (it reads a PreToolUse payload on
+  stdin), so the G1 checked only that nemik-static --help and nemik-serve --help print usage with the worktree's modules
+  on PYTHONPATH, which shows serve and its new import chain wire, and says that 'hooks still import' is unproven.
+  docs/codon-walls.md in the worktree now marks apischema FREED by W2043 in its table row, the rows-that-remain list and
+  the caveat, with the note that the main tree has other uncommitted edits to the file so the hunk must apply cleanly at
+  landing and has not been checked. R327 was added as nemik:R325, the ledger line is 2026-11-07T10:35:52Z, nothing is in
+  the gate, no message was sent, and 'no freeze before the three pass lines exist' is the right rule. The hook point is
+  one I can place: earlier rounds' G1s report 'hookcheck rc=0 x4' as the standing exercise of the four hook commands
+  with a PreToolUse payload, and that helper is not in the repo (a scratch file, reaped), which is why the G1 now has no
+  way to do what it used to do in one command. I did not re-run any figure other than the finds and the reflog.
+  SHIP-SEEN for 984 to 1034 is unread. One finding. No fixpoint is declared: open findings are carried with owners and
+  due dates. Carried open findings as in R327, with R327's finding pending its three pass lines.; 1 finding(s)
+- **nemik:R327** (-) round 329: no landing since f79a046d (01:07:24Z, 2026-11-06); two of three pass lines in hand (the
+  census with apischema's entries removed: 7 passed in 479.84 s; the hooks start clean with the worktree's modules, 4 of
+  4 rc=0, through a rebuilt tools/hookcheck.py); the wider suite has one unidentified failure visible; the main patch
+  applies and the doc patch does not apply to the main tree's working copy: root Verified from the reflog and by running
+  the checks: HEAD is still f79a046d (1793927244 = 01:07:24Z); git apply --check of
+  .claude/held-W2043-real-modules.patch against the main tree prints nothing, and of held-W2043-walls-doc.patch fails
+  with 'patch failed: docs/codon-walls.md:36 ... patch does not apply', which is what the G1 reports. No G0 was stamped
+  for the tick, a slip it names. R328 is applied and the G1 is exact about what each line is. PASS 1: test_codon_census
+  with the lower baseline (apischema's two entries removed) exited 0 in the background, 7 passed in 479.84 s (shard cpu
+  1696 s), so the census accepts the baseline fall; the G1 did not check its timeout against the 50 percent rule. PASS
+  3: tools/hookcheck.py was rebuilt as a durable tool with tests/test_hookcheck.py (5 tests; it runs
+  mikemol-hook-inbound-asks and mikemol-hook-nemik-check, each on PreToolUse and PostToolUse, with PYTHONPATH on a
+  source dir and a one-line payload on stdin) and gave 4 of 4 OK rc=0 against the worktree's src with the repo venv's
+  hooks, the ratchet 0 and 0; the stated limit is that the payload is a harmless Bash call, so a hook may return before
+  it touches the changed modules, which shows the hooks start and exit clean with the worktree's modules on the path and
+  is a weaker claim than 'serve works through the hook'. Slips: a contorted context-manager helper in the first test
+  version (deleted), and mypy Any on the payload dumps and loads forced assertions on the payload text. PASS 2, the
+  wider suite (bvww3zdgn, every test but the census and the registry), is not in hand: about 8 percent when last read
+  with ONE F visible and unidentified. The G1 also records a real mistake and its correction: it wrote 'apply --check
+  passes' for the patch in the same step as the check and the check FAILED on docs/codon-walls.md:36 because the main
+  tree carries other uncommitted edits to that file; the fix is a split (held-W2043-real-modules.patch now excludes the
+  doc and passes against the main tree; held-W2043-walls-doc.patch applies to HEAD and not to the working copy), with
+  the decision whether the doc rides the stack still open. R328 was added as nemik:R326, the ledger line is
+  2026-11-07T10:42:19Z, nothing is in the gate, no message sent. I did not re-run any figure other than the two apply
+  checks. SHIP-SEEN for 984 to 1034 is unread. Two findings. No fixpoint is declared: open findings are carried with
+  owners and due dates. Carried open findings as in R328, with R328's finding applied.; 2 finding(s)
+- **nemik:R328** (-) round 330: no landing since f79a046d (01:07:24Z, 2026-11-06); the wider-suite F named
+  (test_architecture_projection_gates_clean, failing identically on pristine HEAD in a detached checkout and passing in
+  the main tree); the combined walls-doc patch cut against HEAD; the forward apply check not run by the G1 and run here;
+  the wider suite at 75 percent: root Verified from the reflog and by running the checks: HEAD is still f79a046d
+  (1793927244 = 01:07:24Z), and the index equals HEAD (git diff --cached --quiet exits 0). I ran the forward check the
+  G1 did not: git apply --check --cached of held-W2043-walls-doc-combined.patch prints nothing, and so does git apply
+  --check --cached of held-W2043-real-modules.patch, so both patches apply forward onto HEAD, which is what 'its
+  pre-image is HEAD' was arguing; with a clean index, --cached is a way to check a forward apply onto HEAD without a
+  second checkout. R329 is applied, and the G1 is clear about what it did and did not do: the F is named and run both
+  ways (tests/test_architecture.py::test_architecture_projection_gates_clean passes alone in the main tree in 2.59 s and
+  fails identically on pristine detached HEAD in 0.58 s with the same 20 claims), so it is a fact of a worktree or
+  detached layout (the claims are run through the repo's .venv, which a bare checkout lacks) and not a reader the plan
+  missed, the combined walls-doc patch was cut with git diff HEAD so its pre-image is HEAD (the reverse check passes),
+  the census (7 passed in 479.84 s) and the hooks (4 of 4 OK) stand, and the wider suite had reached 75 percent without
+  a summary line, so the G0's expectation (apply rc 0, only test_architecture fails) was not met on the reading side.
+  The misses are named: the forward apply was not run (a `git show HEAD:... --output=/dev/null` printed the file and
+  proved only that HEAD has the old text), the suite not finished, and no G0 before the work (this one is stamped late,
+  'not a prediction'). The ledger line is 11:06:30Z, tick-open acquired, check OK 2045 of 2045, nothing is in the gate,
+  and the LAPSED lines in the close concern W924, W749 and W969, untouched. I did not re-run any figure other than the
+  apply checks and the index check. SHIP-SEEN for 984 to 1034 is unread. One finding. No fixpoint is declared: open
+  findings are carried with owners and due dates. Carried open findings as in R329, minus R329's two (applied).; 1
+  finding(s)
+- **nemik:R329** (-) round 331: no landing since f79a046d (01:07:24Z, 2026-11-06); the real-modules patch regenerated as
+  held-W2043-real-modules-v2.patch (23 files, 1912 insertions, 210 deletions) and applying forward onto HEAD; the wider
+  suite 3 failed of 2096 (one the G1's own, fixed; test_architecture on layout; test_venv_current until the venv
+  builds); test_codon_calls running with no result; the Bazel wiring unproven by Bazel: root Verified from the reflog
+  and by running the checks: HEAD is still f79a046d (1793927244 = 01:07:24Z); git apply --check --cached of
+  held-W2043-real-modules-v2.patch prints nothing, and git apply --stat --cached prints 23 files changed, 1912
+  insertions, 210 deletions, matching the G1 (BUILD.bazel 9, codon-baseline.json 4, apischema.py 241 mostly deletions,
+  jsonarena.py 186, jsonparse.py 352, schemagen.py 423, serve.py 13 mostly deletions, tests/fixtures/BUILD.bazel 8, the
+  five apischema fixtures, nine test files, tools/codon_call.py 117 and tools/hookcheck.py 101). R330 is applied: the F
+  was named last turn and this turn's account of the suite is straight: 3 failed of 2096 (2093 passed), one failure (a
+  declared-inputs failure) the G1's own, fixed in the worktree by moving the fixtures to tests/fixtures/apischema/ and
+  adding BUILD.bazel data lines, one the layout fact in test_architecture, and test_venv_current failing until the bazel
+  venv is built, which is the guard of W1670 working as designed (a new src module with a stale venv). The patch was cut
+  with git add -A in the scratch worktree and git diff --cached HEAD --binary excluding docs/codon-walls.md, with the
+  old held-W2043-real-modules.patch superseded by v2. The G0's first expected reading is unobserved: test_codon_calls
+  (task bzgbur0jv) has not returned, so '4 rows pass with the negative control reading DIFF' awaits it. The G1 names its
+  misses (that test, the loop prompt not re-read this tick on the strength of an earlier read in context, the bazel venv
+  build and the cold-review request not done), tick-open acquired, check OK 2045 of 2045, ledger 11:36:43Z, no peer
+  message. I did not re-run any figure other than the apply checks. SHIP-SEEN for 984 to 1034 is unread. One finding. No
+  fixpoint is declared: open findings are carried with owners and due dates. Carried open findings as in R330, with
+  R330's freeze request still to send.; 1 finding(s)
+- **nemik:R330** (-) round 332: no landing since f79a046d (01:07:24Z, 2026-11-06); the nine-target Bazel test in the
+  worktree (bogftv4fn) gave no verdict (the tail showed only 'Analyzing: 9 targets (173 packages loaded, 10321 targets
+  configured)'); the G0's sensor read nothing; the target names guessed from the BUILD macro: root Verified from the
+  reflog and the patch: HEAD is still f79a046d (1793927244 = 01:07:24Z). The G1 reports the sensor honestly: the tail of
+  the run's output showed 'Analyzing: 9 targets (173 packages loaded, 10321 targets configured)' repeated with no PASSED
+  or FAILED line and no exit code, so the G0's expected reading (eight PASS, test_venv_current failing only if //:.venv
+  does not rebuild from the worktree) is UNMET, not failed, and the G1 says the run's target names are guesses from the
+  BUILD macro. I read the patch's BUILD.bazel hunk to weigh that: the macro creates one test target per tests/*.py file
+  with size = 'large' for test_layout, test_codon_census, test_codon_calls, test_warm_equals_cold, test_shaclinc and
+  test_cache_user and 'medium' otherwise, adds the fixtures target //tests/fixtures:apischema for test_apischema,
+  test_schemagen, test_schemagen_errors and test_codon_calls, tools/codon_call.py for test_codon_call and
+  test_codon_calls, tools/hookcheck.py for test_hookcheck, and for test_codon_calls the codon files and binary
+  (@codon//:files and @codon//:bin/codon) and an env block shared with test_codon_pin and test_codon_census; so the
+  wiring is in the patch and the names follow the macro's per-file naming, which makes the guess likely right and not
+  proven. The G1 also notes that test_codon_calls was not in the Bazel set, tick-open acquired, check OK 2045 of 2045,
+  the ledger line is 12:06:33Z, the watchdog exited 8 and was restarted (bwtqa42xb) before the run was launched, and
+  nothing was sent to peers. The substantive fact is the elapsed time: the analysis of a worktree with its own workspace
+  path starts from a cold Bazel output base, and thirty minutes of 'Analyzing' with no verdict is a result about the
+  sensor and not about the targets. I did not re-run any figure. SHIP-SEEN for 984 to 1034 is unread. One finding. No
+  fixpoint is declared: open findings are carried with owners and due dates. Carried open findings as in R331, none new
+  from it.; 1 finding(s)
+- **nemik:R331** (-) round 333: no landing since f79a046d (01:07:24Z, 2026-11-06); W1141 (per-module Bazel libraries
+  from mtools' importdag graph, under the operator's cache-hit priority) advanced: no miss-naming tool exists (mtools
+  W1985 waits on W2134), the method to reuse is W1982's importdag.resolve.derive, a scratch worktree nemik-W1141 opened,
+  no code edited, no numbers yet; the Bazel test of W2043's targets still unobserved: root Verified from the reflog and
+  the card (read with the writer's --show --state): HEAD is still f79a046d (1793927244 = 01:07:24Z). W1141's card
+  carries two warrants I read, both with their claims: the operator's work-with-the-cache ruling (line 97611, exhaustive
+  recursive sharding of build targets and actions, build as test, only cache misses become fine-grained consequences of
+  individual changes), and the operator's priority on gate-induced velocity (host line 147475, uuid
+  3de219a3-e28c-42f2-ac74-4c7eee3d41c8, 'raise cache hit rate and analysis cache hit rate by atomizing what can miss'),
+  verified human by --warrant --dry-run before attaching. The G0 expected 'a named tool' and the answer is that there is
+  none, which is a result: W1985 (name the input digest behind each miss by comparing two gate invocations) is blocked
+  on mtools:W2134 (gatephase keeping invocation ids durably), and until then it is by hand via bazel aquery in the
+  gate's output base; the reusable method is mtools W1982's importdag.resolve.derive over the dist, imports eager and
+  deferred, reporting per module the number of test files it reaches (hooks: median closure 2 modules, a one-module
+  change reaching on average 25.8 of 237 test files against 100 percent today). The pace reading was done from code
+  earlier (mtools hooks ratchet_pace.stack_reason lines 298 to 304: admitted if no owed ratchet, queue files alone,
+  touches an owed ratchet, or matches an admission row) and github-14 accepted it, so W1141's code and BUILD stack
+  cannot land before W2043 (which lowers codon-baseline.json) and lands behind W2039's row, mtools:W2328 and W2043. The
+  scratch worktree /…/scratchpad/wt/nemik-W1141 is open. The G1's misses: no nemik baseline numbers, the derive not run,
+  no loop-prompt re-read this tick, the tick-close LAPSED W924, W749 and W969 untouched; the ledger line is 12:36:43Z,
+  tick-open acquired, check OK 2045 of 2045, two messages to github-14 in the span. I read the card closely because this
+  work touches what I have been asking W2043 to prove: the per-module libraries and the gate's fresh counts are the same
+  Bazel layer as the declared-inputs failure and the unobserved Bazel verdict of R332. I did not re-run any figure.
+  SHIP-SEEN for 984 to 1034 is unread. Two findings. No fixpoint is declared: open findings are carried with owners and
+  due dates. Carried open findings as in R332.; 2 finding(s)
+- **nemik:R332** (-) round 334: no landing since f79a046d (01:07:24Z, 2026-11-06); nemik's import graph generated in
+  scratch with mikemol-graph (150 modules, 481 tests): module reach median 67, mean 89.5 (18.6 percent of tests), test
+  cone median 10 modules, max 84; built from eager imports only; 39 test files spawn processes or entry points: root
+  Verified from the reflog and a grep: HEAD is still f79a046d (1793927244 = 01:07:24Z). The G0's expected reading was
+  met in form and the G1 says precisely what it is: mikemol-closure-census failed (FileNotFoundError on
+  paperkit/components.bzl, the wrong tool for this tree), then mikemol-graph --dist `<worktree>` --package nemik --write
+  printed 'graph --write: nemik-W1141 is fresh (2 file(s) written)' (graph.json 104,518 B and dag.bzl 104,788 B, scratch
+  only), and a scratch reach.py printed modules=150, tests=481, module reach median 67, p90 226, max 264, mean 89.5
+  (18.6 percent of tests), test cone median 10 modules, p90 82, max 84, top hubs editverbs 264, adapter 263, warrants
+  263, tomlview 262. W1232's BEFORE numbers (stack619 src edit 446 fresh of 449 with the Bazel test step at 2,176 s;
+  stack624 tests-only 7 fresh of 449 in 84 s) agree with the baseline I asked for in R333. The G1 names the limits: it
+  is a prediction from eager imports and not a gate reading, graph.json omits typing_only and any lazy imports so cones
+  may be too small, 481 tests against 449 targets are different dates, a --attach flag refused, a wrong tool run, the
+  loop prompt not re-read, the after-count not measured, the BUILD wiring not done, and github-14 owed before and after
+  with only the before and a prediction in hand. I grepped the tests to weigh the number: 39 test files mention procrun,
+  subprocess or a quoted nemik-* entry point (among them test_layout, test_static_view, test_serve_port,
+  test_staticserve, test_publish, test_architecture, test_hooks_wired, test_installed_script, test_gate, test_witnesses,
+  test_rank_flow and test_vtodo), about 8 percent of the 481, and a test that spawns an entry point depends on the whole
+  venv, not on the modules it imports. I did not re-run any figure other than the grep. SHIP-SEEN for 984 to 1034 is
+  unread. Two findings. No fixpoint is declared: open findings are carried with owners and due dates. Carried open
+  findings as in R333.; 2 finding(s)
+- **nemik:R333** (-) round 335: W1141 graph.py read; the G0 prediction (outside count drops below 68) refuted before
+  running; serve cone 82, outside 68 of 150, 18 of the last 100 src-bearing commits touch only outside modules;
+  CORRECTION recorded on W1141 of the lazy-import caveat (my R334 f1 first half): root I withdraw the first half of R334
+  f1: the claim that the graph omits lazy imports was wrong. I read
+  /home/mikemol/github/mtools/importdag/src/mikemol/importdag/graph.py: line 99 walks the whole tree with ast.walk, so
+  function-level imports are in imports, and lines 22 and 109-129 make typing_only a subset of imports (the ones only
+  under TYPE_CHECKING), not extra edges; the docstring says a per-module library takes imports minus typing_only. The G1
+  is right and the correction on the card is right. The second half of R334 f1 (spawn-based tests) stands. One real gap
+  the G1 listed as unchecked I have now checked: graph.py line 77 keeps only ImportFrom nodes with level == 0, so
+  relative imports are dropped, and nemik has exactly two: hostroot.py line 17 (from .climate import _instant) and
+  landings.py line 12 (from .hostroot import fields). Two edges among 150 modules; small, but the per-module libraries
+  are built from this graph, so hostroot would lack climate and landings would lack hostroot in the sandbox, a
+  ModuleNotFoundError that only that library's tests see. No dynamic loads in src per the G1 grep, which I did not
+  repeat. R334 f2 (the test_layout share) is still open; the 18 percent figure is the same measure for the serve cone as
+  a whole and is not yet tied to test_layout, which I read as the part still to do. No fixpoint is declared: open
+  findings carried with owners and due dates.; 1 finding(s)
+- **nemik:R334** (-) round 336: graph regenerated with hostroot and landings imports made absolute (scratch only);
+  hostroot lists climate; reach mean 89.7 = 18.6 percent, p90 227, climate now a 239-test hub; serve cone 82, outside 68
+  of 150 unchanged; hist.py not rerun: root Both G0 expectations were met as written, and the R335 finding is observed
+  (hostroot's imports now list src/nemik/climate.py, per the G1's grep); I did not rerun reach.py or outside.py myself.
+  The G1 states its own gap: 18 of 100 was computed on the old outside list and the two lists were not diffed, only
+  counted. Equal counts do not show equal sets, and the edit could in principle move a module across the cone boundary
+  (hostroot or landings into or out of serve's closure) while another moves the other way; it is unlikely, since only
+  two edges were added, but it is a diff away from being known. The two absolute-import edits are still scratch-only, so
+  the card's numbers describe a tree that is not HEAD until they land with W1141 (and a no-relative-import test, my R335
+  witness, is not yet written). The remaining open items are the ones the G1 lists: the spawn-test table, the
+  test_layout share (R334 f2), the BUILD wiring and the after-count owed to github-14. No new finding this round beyond
+  tightening the R335 witness; no fixpoint is declared, open findings are carried with owners and due dates.; 1
+  finding(s)
+- **nemik:R335** (-) round 337: test_layout.py imports nemik.serve.build_static (line 31), mikemol.procrun.proc.capture
+  and webpage, and serves through webpage.served(); no subprocess or nemik-serve in the file; derived 270 test-minutes
+  per 100 commits (18 x 15 min); webpage spawn and data not read: root I did not re-run the G1's greps; I grepped
+  test_layout.py for webpage myself and the lines support the G1 (line 26 import, line 167 webpage.served(), then
+  roughly two hundred evaluate/until calls driving a page). What the grep shows beyond the G1: the test's real subject
+  is the browser page, and it waits for things like typeof coreWasm and treeOf (line 1837), cy.nodes, data.ruler, SCOPES
+  and emitF, which are produced by src/nemik/web/index.html and the core wasm, not by Python imports. The graph walks
+  python imports only, so the test's dependency on the web assets (index.html, whatever builds coreWasm from
+  src/nemik/core/) is invisible to the cone, and the 68 outside modules are outside by import only. The 270 figure
+  inherits that: it counts commits that touch only outside modules, so a commit that edits web/index.html or core/ and
+  no cone module would be counted as skipping layout when it must rerun it. The G1 names its own limits (15 min
+  unmeasured, commits not stacks, test time not gate wall time, 28 versus 39 spawn files unreconciled). No fixpoint is
+  declared: open findings are carried with owners and due dates.; 1 finding(s)
+- **nemik:R336** (-) round 338: interim report sent to github-14 (msg 1574100f-fbc8-460f-ba17-9971c482d079, delivery to
+  its Claude unconfirmed at send time); core wasm found at web/wasm.js, web/core.wasm and web/core.wasm.sha256 (the G0
+  guess of web/vendor or core/ was wrong, web/** covers it); github-14 replied with five asks, none started; katas
+  rc=128 answer owed and unread: root I did not re-run the find or read the message; the round rests on the G1. Two
+  points follow from it. First, the interim message restated derived numbers (18 of 100, 270 minutes) that R337 said are
+  computed against a cone that omits web/** and the wasm, and that count commits not stacks; the G1 says the message
+  states it is not an after-number, but a reader at github-14 will take the 270 as the saving unless the message carries
+  the R337 caveat as a sign that it is an upper bound. Second, github-14's five asks arrived and are recorded as peer
+  requests with nothing started, one of them (the katas rc=128 answer) owed with no look taken; an ask that a peer made
+  and that sits unlooked-at is the thing the queue's edges are meant to carry, and the G1 says the loop prompt was not
+  re-read again this tick. The core.wasm hashes beside the wasm (core.wasm.sha256) also matter: the wasm is a built
+  artefact, so a change in core/ that rebuilds it changes a data file of test_layout, which is another reason core/**
+  and web/** are in the cone. No fixpoint is declared: open findings are carried with owners and due dates.; 2
+  finding(s)
+- **nemik:R337** (-) round 339: helper sweep on W2046; only tests/installed.py calls a spawner (capture( or
+  subprocess.); 25 test files import it, 14 overlap the 23 direct spawners, 11 new, union 34 (upper bound; compared by
+  eye); 39 unreconciled; the G0's webpage.py expectation was wrong; the rc=128 answer sent to github-14 saying 'closed'
+  before the writer accepted the close (third attempt landed), and github-14 not told of the order: root I did not
+  re-run the greps; the round rests on the G1. The 34 is honestly labelled an upper bound, and I add one reason it may
+  also be a lower bound: the grep finds helpers that name a spawner, not tests that start a process by another door.
+  webpage.py has no capture( or subprocess., but a test that drives it launches a browser (playwright) and serves a
+  page, which is process creation and an external data dependency; the G1's sweep would not count test_layout-style
+  tests as spawners, yet they are the ones whose inputs were the problem in R337. So the 34 and the 39 may count
+  different things (calls to a process-spawning helper versus tests that need the whole venv or a browser), and
+  reconciling them by name lists will not settle it unless the rule is stated first. Separately, the message to
+  github-14 said 'closed' before the close was accepted: the writer refused twice and the third attempt landed. The
+  claim became true, but a peer was told a state the system of record did not yet hold, which is the read-your-writes
+  failure at one remove, and the order was not corrected. No fixpoint is declared: open findings are carried with owners
+  and due dates.; 2 finding(s)
+- **nemik:R338** (-) round 340: helper list completed (seven non-test modules: conftest, webpage, installed, pagetext,
+  umbrella_cases, queue_cases, flow_cases); the three new ones do not spawn; spawn-reaching count stays 61 (23 direct,
+  25 installed, 29 webpage, union 61); webpage.py unread by the session; 39 unreconciled: root I did not re-run the
+  session's rule command, but I did read what the G1 said it had not. tests/webpage.py imports installed (line 17),
+  launches Chromium through playwright (p.chromium.launch, lines 323, 437) and serves through spawn_piped from
+  mikemol.procrun.proc (line 19): so my R339 claim that it launches a browser holds, and the G1's source for it is now a
+  reading. Two consequences. First, the spawner pattern behind the 61 is capture( and subprocess. and the like, but the
+  tests import more than capture from procrun: I grepped the imports and they include capture_bytes (twice) and
+  spawn_piped (twice, one together with capture and Completed), and webpage.py itself spawns through spawn_piped, not
+  capture(. A grep for capture( does not match capture_bytes( and does not match spawn_piped(, so the direct-spawner set
+  may be short by a few files, and the claim that webpage 'has no capture( or subprocess.' was true only for the wrong
+  pattern. Second, webpage imports installed, so every webpage importer already reaches the installed spawner: the 29
+  and the 25 overlap by construction, and the union of 61 should be derived by following imports transitively (a
+  closure), not by two one-level greps. The 'count stays 61' reading therefore stands only for the patterns searched. No
+  fixpoint is declared: open findings are carried with owners and due dates.; 1 finding(s)
+- **nemik:R339** (-) round 341: tools/spawn_reach.py written in the nemik-W1141 scratch tree (second Write accepted
+  after ruff-format and mypy findings fixed); run on scratch tests/ prints 62 reaching files; count matches the scratch
+  rule, name-set equality not diffed; no test, SPAWN_WIDE list unwritten, pycheck --ratchet not run on the new file:
+  root I did not re-run the tool; the round rests on the G1, which marks its own reading correctly: the count matched,
+  the set claim is unverified. The G0's earlier 61 became 62 here without the move being explained: R340 predicted the
+  count would change if capture_bytes and spawn_piped users joined, and a one-file rise is consistent with that, but the
+  G1 does not say which file moved or whether the tool's spawner list now includes those names, so the 62 is a number
+  without its cause. A count that matches by one rule and differs by one from the previous count cannot be told apart
+  from a coincidence until the two name lists are diffed. The tool is also a guard without a test: it exists to catch
+  tests that spawn without a declared dependency, and nothing yet shows it reaches a file that does, or that it stays
+  silent on one that does not. No fixpoint is declared: open findings are carried with owners and due dates.; 2
+  finding(s)
+- **nemik:R340** (-) round 342: patch v4 cut (sha256 b25fa4e5...), pytest on three schema files 24 passed, cold-review
+  request sent to github-14 (msg 066b0549-b0b7-4c30-a7f8-06b06215c724, delivery unconfirmed) naming v4 and the combined
+  walls-doc patch; the plan's E1-E5 list not reconstructed; bazel targets and the 480 s census not rerun after v4: root
+  I checked one thing: sha256sum of /home/mikemol/github/nemik/.claude/held-W2043-real-modules-v4.patch prints
+  b25fa4e542c179778a9ed9abd39892dd24c7a83faab39837417be4381a10ba51, the hash in the message, so the reviewer is pointed
+  at the bytes that exist. The 24 passed I did not re-run. Two gaps. The cold reviewer was sent less than planned
+  (patch, hash, card, no E1-E5 list), and the evidence it is asked to judge has two holes the G1 names: the bazel
+  targets and the census were last run on an earlier cut, and v4 changed bytes after them (docstrings, a fixture move,
+  wrapped lines). A cold review of v4 whose verdict is read against a Bazel result for v2 or v3 would be a verdict on a
+  patch the evidence does not cover. And a fixed mark on the ratchet findings was set before the rerun that the fixture
+  move required, the same ordering fault as before: the mark follows the read-back, not the edit.; 2 finding(s)
+- **nemik:R341** (-) round 343: v5 cut after github-14 BLOCKed v4 (D1 fail-open, D2/D3 inputs); bazel 11 of 11 pass on
+  v5 (463 s); relayed cold review PASS; v5 frozen for the route; hookcheck four OK lines (start-and-exit only, plain
+  python3 with PYTHONPATH, not -I); wider suite on v5 unfinished at 4 percent with the known test_architecture F;
+  follow-ups W2049, W2050, W2051 filed: root I did not re-run hookcheck, bazel or the wider suite; the round rests on
+  the G1, and the G1 grades itself fairly: the second half of its expectation is unmet and the wider-suite verdict is
+  owed. Three points weigh on the freeze. The v5 'frozen for the route' mark was set while the wider suite on v5 was 4
+  percent in; the freeze is a claim that the patch is the one to land, and the whole-suite result is the evidence for
+  that claim, so the mark runs ahead of its sensor. The BLOCK on v4 was a fail-open (D1): the cold review found a path
+  where an error is read as success, the class of defect that one reviewer's attention on one patch catches once, and
+  the question it leaves open is whether the same shape sits elsewhere in the three modules (jsonparse, schemagen,
+  apischema) that the D1 fix did not touch; the G1 reports the fail-first of the new tests by the reviewer's word and
+  not by its own run. And the hookcheck lines prove the hooks start and exit zero, which the G1 itself says; they do not
+  show a hook refusing what it should refuse. No fixpoint is declared: open findings are carried with owners and due
+  dates.; 2 finding(s)
+- **nemik:R342** (-) round 344: HEAD's apischema.load has the same isinstance-dict-else-empty default as the rewrite, so
+  apischema.py:40 is inherited; wider suite on v5 at 75 percent (card says 78), no summary; D1 fail-first observed on a
+  reverted copy (2 failed, 10 passed, DID NOT RAISE ValueError); D2 and D3 fail-first not run; sweep named
+  apischema.py:40 and jsonparse -1 returns; freeze provisional: root I did not re-run git show or the suite. One
+  correction of attribution first: the note that the old load lacked the default was not mine (my R343 made no claim
+  about the old load), so nothing of mine is withdrawn, but the correction the G1 makes is right and stands. The round's
+  substantive point is what 'inherited' does and does not settle. It settles authorship, not safety: R343 asked the
+  sweep to name sites where a failed read becomes a pass, and a non-dict document becoming {} is exactly that shape,
+  present at HEAD and in the rewrite. Calling it inherited is a reason not to block v5 on it; it is not a reason to
+  leave it unrecorded, and the sweep result belongs in a card with the verdict (safe because the caller checks, or a
+  fail-open to repair), together with the jsonparse -1 returns, which are named but not judged. Separately, the card
+  line says 78 percent where the tail read 75; the same figure should not drift between the sensor and the record.; 1
+  finding(s)
+- **nemik:R343** (-) round 345: 40 test files match __file__).resolve() (counted from a printed list); D3 fail-first RAN
+  AND DID NOT FAIL (bazel passes with the manifest label dropped); wider suite on v5 finished 2 failed 2101 passed 4
+  skipped in 2971.42 s, both the known artefacts; github-14 not told that D3 did not fail; confirmation run and D2
+  fail-first not done: root I did not re-run the grep or the suite. The weightiest line in the G1 is not the 40: it is
+  that the D3 fail-first did not fail, and github-14 has not been told. D3 was about declared inputs, and the cold
+  review's PASS rests in part on the reasoning that an input belongs in the target iff the build fails without it. A
+  passing build with the label dropped falsifies that reading for this input at least, so the PASS was given on a
+  premise the session's own run contradicts; the reviewer must be told, whatever the cause turns out to be. On the
+  cause: resolve() follows symlinks, so under Bazel's runfiles tree a test that resolves its own path walks out of the
+  sandbox to the real source tree, and finds fixtures that were never declared; that is a plausible reading and 40
+  matching files fit it, but the G1 correctly calls it supporting, and the same files are what W1141 depends on, since a
+  narrow per-module library or a declared-data target that is tested only through resolve()-escaping paths is not tested
+  at all for its inputs. The consequence reaches beyond W2043: any claim in this repo that a Bazel target declares
+  everything its test reads is unchecked for these 40 files. The wider-suite figure (2 failed, both known) is a good,
+  printed result and closes that half of R343's finding for v5. No fixpoint is declared: open findings are carried with
+  owners and due dates.; 2 finding(s)

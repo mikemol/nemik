@@ -5,7 +5,7 @@
 import json
 from pathlib import Path
 
-from nemik.apischema import load, schemas
+from nemik.apischema import load, openapi_text, schemas_text
 from nemik.serve import build_static
 
 FLEET = Path(__file__).parent / "fixtures" / "fleet"
@@ -31,10 +31,21 @@ def _record_names(node: object) -> list[str]:
     return out
 
 
+def _parse(text: str) -> object:
+    """Parse JSON text into plain data.
+
+    Returns:
+        The document.
+
+    """
+    parsed: object = json.loads(text)
+    return parsed
+
+
 def test_every_manifest_field_is_in_a_schema_and_nothing_else() -> None:
     """The generated schemas name each manifest field and no other."""
     m = load()
-    generated = schemas()
+    generated = {path: _parse(text) for path, text in schemas_text().items()}
     assert set(generated) == set(m)
     for path, sections in m.items():
         declared = {f for fields in sections.values() for f in fields if f != "*"}
@@ -46,6 +57,16 @@ def test_every_manifest_field_is_in_a_schema_and_nothing_else() -> None:
             path,
             sorted(named - declared - set(sections)),
         )
+
+
+def test_the_openapi_text_is_a_compact_json_document_of_the_read_api() -> None:
+    """openapi_text parses to an OpenAPI 3.1 document whose paths include every schema pattern."""
+    api: dict[str, object] = json.loads(openapi_text())
+    assert api["openapi"] == "3.1.0"
+    paths = api["paths"]
+    assert isinstance(paths, dict)
+    for pattern in schemas_text():
+        assert "/" + pattern.replace("<repo>", "{repo}") in paths
 
 
 def test_the_static_build_publishes_one_schema_per_file(tmp_path: Path) -> None:
