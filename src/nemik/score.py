@@ -27,6 +27,12 @@ class Bands:
     unmatched: str
     # the `file:<ratchet>` tags of the ratchets the repo being ranked is behind on (nemik:W993)
     behind: frozenset[str] = frozenset()
+    # nemik:W2039: (band, touches tag) pairs from bands.toml's [tag] table. A card whose owner
+    # tagged it so is in that band (gate-repair and velocity), so no tag name is hard-coded.
+    tags: tuple[tuple[str, str], ...] = ()
+    # nemik:W2039: the bands bands.toml's `gate` key makes a strict first tier of a repo's ranking,
+    # above band and weight, so within a repo a card in one outranks every other.
+    gate: tuple[str, ...] = ()
 
     def rank(self, band: str) -> int:
         """0 is most urgent.
@@ -44,7 +50,15 @@ class Bands:
             These bands with the behind tags set, so a card that pays one down takes velocity.
 
         """
-        return Bands(self.order, self.rules, self.unscored, self.unmatched, behind)
+        return Bands(
+            self.order,
+            self.rules,
+            self.unscored,
+            self.unmatched,
+            behind,
+            self.tags,
+            self.gate,
+        )
 
 
 def _table(value: object) -> dict[str, object]:
@@ -126,7 +140,26 @@ def load_bands(text: str | None = None) -> Bands:
     if stray:
         msg = f"bands.toml: bands {sorted(stray)} are not in order"
         raise ValueError(msg)
-    return Bands(order, rules, str(d["unscored"]), str(d["unmatched"]))
+    declared = _table(d.get("tag"))
+    unknown = set(declared) - set(order)
+    if unknown:
+        msg = f"bands.toml: [tag] names bands {sorted(unknown)} that are not in order"
+        raise ValueError(msg)
+    tags = tuple((b, str(declared[b])) for b in order if b in declared)
+    gate = tuple(_strings(d.get("gate")))
+    outside = set(gate) - set(order)
+    if outside:
+        msg = f"bands.toml: gate names bands {sorted(outside)} that are not in order"
+        raise ValueError(msg)
+    return Bands(
+        order,
+        rules,
+        str(d["unscored"]),
+        str(d["unmatched"]),
+        frozenset(),
+        tags,
+        gate,
+    )
 
 
 def band(vector: str | None, bands: Bands) -> tuple[str, str]:
@@ -160,27 +193,35 @@ VELOCITY = "velocity"
 
 
 def tagged_band(
-    b: str, why: str, touches: set[str], behind: frozenset[str] = frozenset()
+    b: str,
+    why: str,
+    touches: set[str],
+    behind: frozenset[str] = frozenset(),
+    tags: tuple[tuple[str, str], ...] = (),
 ) -> tuple[str, str]:
-    """Move a card into the velocity band when its owner tagged it so or it pays a behind ratchet.
+    """Move a card into a band its owner tagged, or into velocity when it pays a behind ratchet.
 
     A paydown card is tagged `file:<the ratchet file>` (the fleet loop prompt), and a repo behind
     its required fall is owed that paydown ahead of feature work (operator 2026-10-24, host
     695f3e0a lines 92679 and 93406), beside velocity and not above it (line 100702): nemik:W993.
+    The tagged bands are the ones bands.toml's [tag] table declares, most urgent first (nemik:W2039:
+    the gate-repair band above velocity); with none declared only the velocity tag counts.
 
     Args:
         b: The band the card's vector gave.
         why: Why it gave that band.
         touches: The card's touches.
         behind: The `file:<ratchet>` tags of the ratchets its repo is behind on.
+        tags: The (band, touches tag) pairs bands.toml declares, in band order.
 
     Returns:
-        (velocity, why) when the touches carry the velocity tag or a behind ratchet's file tag;
-        otherwise the band and why given.
+        (band, why) for the first declared tag the touches carry, or (velocity, why) for a behind
+        ratchet's file tag; otherwise the band and why given.
 
     """
-    if VELOCITY in touches:
-        return VELOCITY, "touches velocity"
+    for tagged, tag in tags or ((VELOCITY, VELOCITY),):
+        if tag in touches:
+            return tagged, f"touches {tag}"
     for tag in sorted(touches):
         file = tag.removesuffix("!w")
         if file in behind:

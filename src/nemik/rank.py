@@ -64,7 +64,11 @@ if TYPE_CHECKING:
 # nemik:W600: `tier` is the repo's burn-down tier (rank-weights.toml [tiers]), higher for a more
 # urgent repo. One value per repo: in a per-repo ranking it ties every row and changes nothing, and
 # in the fleet pool it orders the repos. It is a tier of the composition only when [order] names it.
-OBJECTIVES = ("operator", "band", "weight", "tier")
+# nemik:W2039: `gate` is 1 for a card in a band bands.toml lists under `gate` (a gate repair),
+# else 0: a first tier of its own, so within a repo such a card outranks every other whatever the
+# weights and the band step. The fleet pool still puts the repo's burn-down tier ahead of it
+# (rounds are per repo).
+OBJECTIVES = ("operator", "band", "weight", "tier", "gate")
 
 
 def load_tiers(text: str | None = None) -> dict[str, str]:
@@ -179,6 +183,7 @@ class RankRow(TypedDict, total=False):
     manifest: list[str]
     operator: int
     tier: int
+    gate: int
     band: int
     band_name: str
     band_why: str
@@ -202,6 +207,8 @@ def _objective(row: RankRow, name: str) -> int | Fraction:
         return row["operator"]
     if name == "tier":
         return row["tier"]
+    if name == "gate":
+        return row.get("gate", 0)
     if name == "band":
         return row["band"]
     return row["weight"]
@@ -284,11 +291,12 @@ def objectives(
     cause = str(g.value(n, PROV.wasInformedBy) or "").strip().lower()
     b, why = band(str(g.value(n, NEMIK.vector) or "") or None, bands)
     touches = {str(t) for t in g.objects(n, NEMIK.touches)}
-    b, why = tagged_band(b, why, touches, bands.behind)
+    b, why = tagged_band(b, why, touches, bands.behind, bands.tags)
     down = downstream_weight(g, n, weights)
     return {
         "operator": int(cause == "operator" or cause.startswith("operator:")),
         "tier": -tiers.rank(TIERS.get(repo_of(n), tiers.UNLISTED)),
+        "gate": int(b in bands.gate),
         "band": -bands.rank(b),
         "band_name": b,
         "band_why": why,
@@ -667,7 +675,8 @@ def _fleet_composition(comp: Composition | None) -> Composition:
 
     Returns:
         The same composition with the `tier` objective as its first tier, so a more urgent repo's
-        cards come first and band and weight decide inside a repo tier.
+        cards come first. Inside a repo tier the gate comes first (nemik:W2039: a gate repair
+        outranks every other card of its repo), and band and weight decide after it.
 
     """
     base = comp or load_composition()
@@ -756,7 +765,7 @@ def _report_all(g: Graph, args: Options, weights: Weights) -> None:
         say(json.dumps(fleet, indent=2))
         return
     for entry in fleet:
-        head = f"{entry['weight']:4} {entry['cite']:32} {entry['band_name']:9}"
+        head = f"{entry['weight']:4} {entry['cite']:32} {entry['band_name']:11}"
         say(
             f"{head} op={entry['operator']} down={entry['downstream']:<4} "
             f"{str(entry['title'])[:60]}"
@@ -939,7 +948,7 @@ def _report_rank(g: Graph, args: Options, weights: Weights) -> None:
         return
     for listed in rows:
         say(
-            f"{listed['symbol']:6} {listed['band_name']:9} op={listed['operator']} "
+            f"{listed['symbol']:6} {listed['band_name']:11} op={listed['operator']} "
             f"down={listed['downstream']:<4} {listed['title'][:70]}"
         )
 

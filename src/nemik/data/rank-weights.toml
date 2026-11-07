@@ -47,8 +47,12 @@ operator = 15
 # `weight` as a demand source (`operator`, above), so it responds to the model instead of sitting
 # outside it. To restore the strict tier (an ask beats the backlog regardless of weight, W111):
 # tiers = [["operator"], ["band", "weight"]].
+# nemik:W2039: `gate` is a tier of its own, first: a card in a band bands.toml lists under `gate` (a
+# gate repair) outranks every other in its repo whatever its weight. Inside the band-and-weight tier a band step
+# is only worth 100 units of weight, so the gate band cannot be a band step. For every other card the
+# gate tier ties, so their order is the one the band-and-weight tier gave before.
 [order]
-tiers = [["band", "weight"]]
+tiers = [["gate"], ["band", "weight"]]
 
 # nemik:W241 (operator ruling, 2026-10-08: the gcalculus model REPLACES the ranking after an audit):
 # which model the `weight` objective is.

@@ -29,7 +29,7 @@ def vec(**given: str) -> str:
 
 def test_a_card_tagged_velocity_is_in_the_band_above_critical() -> None:
     """nemik:W1077: the owner's tag puts the card first, whatever its vector says."""
-    assert B.order[0] == "velocity"
+    assert B.order[:2] == ("gate-repair", "velocity")
     assert B.rank("velocity") < B.rank("critical")
     assert tagged_band("normal", "unscored", {"velocity", "docs"}) == (
         "velocity",
