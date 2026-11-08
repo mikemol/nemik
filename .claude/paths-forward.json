@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 1027
+      "ticks_blocked": 1028
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-18T21:49:48Z",
-      "ticks_blocked": 847,
+      "ticks_blocked": 848,
       "weight": 1
     },
     {
@@ -3520,7 +3520,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-11-06T20:29:33Z",
-      "ticks_blocked": 703,
+      "ticks_blocked": 704,
       "weight": 2,
       "completed": null
     },
@@ -4278,7 +4278,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 876,
+      "ticks_blocked": 877,
       "weight": 2,
       "completed": null,
       "warrants": [
@@ -5405,7 +5405,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 853,
+      "ticks_blocked": 854,
       "completed": null
     },
     {
@@ -5426,7 +5426,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 868,
+      "ticks_blocked": 869,
       "completed": null
     },
     {
@@ -5485,7 +5485,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 868,
+      "ticks_blocked": 869,
       "completed": null
     },
     {
@@ -5506,7 +5506,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 868,
+      "ticks_blocked": 869,
       "completed": null
     },
     {
@@ -5546,7 +5546,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 868,
+      "ticks_blocked": 869,
       "completed": null
     },
     {
@@ -5605,7 +5605,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 868,
+      "ticks_blocked": 869,
       "completed": null
     },
     {
@@ -5645,7 +5645,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 868,
+      "ticks_blocked": 869,
       "completed": null
     },
     {
@@ -5666,7 +5666,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 868,
+      "ticks_blocked": 869,
       "completed": null
     },
     {
@@ -5706,7 +5706,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 868,
+      "ticks_blocked": 869,
       "completed": null
     },
     {
@@ -6650,7 +6650,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T04:17:48Z",
-      "ticks_blocked": 668,
+      "ticks_blocked": 669,
       "completed": null
     },
     {
@@ -6789,7 +6789,7 @@
       "minted_during": "interrupt",
       "caused_by": "W346",
       "last_worked": "2026-10-19T18:16:23Z",
-      "ticks_blocked": 561,
+      "ticks_blocked": 562,
       "weight": 9,
       "completed": null,
       "manifest": [
@@ -6818,7 +6818,7 @@
       "minted_during": "interrupt",
       "caused_by": "W346",
       "last_worked": "2026-10-19T18:16:25Z",
-      "ticks_blocked": 561,
+      "ticks_blocked": 562,
       "weight": 9,
       "completed": null,
       "manifest": [
@@ -7082,7 +7082,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:34:06Z",
-      "ticks_blocked": 781,
+      "ticks_blocked": 782,
       "completed": null
     },
     {
@@ -7195,7 +7195,7 @@
       "minted_during": "interrupt",
       "caused_by": "W364",
       "last_worked": "2026-10-24T12:37:36Z",
-      "ticks_blocked": 506,
+      "ticks_blocked": 507,
       "manifest": [
         "src/nemik/mirror.py",
         "tests/test_mirror.py"
@@ -7224,7 +7224,7 @@
       "minted_during": "interrupt",
       "caused_by": "W364",
       "last_worked": "2026-10-24T13:19:24Z",
-      "ticks_blocked": 504,
+      "ticks_blocked": 505,
       "manifest": [
         "src/nemik/pollevents.py",
         "tests/test_pollevents.py",
@@ -8340,7 +8340,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T01:19:18Z",
-      "ticks_blocked": 767,
+      "ticks_blocked": 768,
       "completed": null
     },
     {
@@ -8361,7 +8361,7 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": "2026-10-16T01:35:27Z",
-      "ticks_blocked": 731,
+      "ticks_blocked": 732,
       "completed": null
     },
     {
@@ -8382,7 +8382,7 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": "2026-10-13T01:25:21Z",
-      "ticks_blocked": 800,
+      "ticks_blocked": 801,
       "completed": null
     },
     {
@@ -9065,7 +9065,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W943",
       "last_worked": "2026-10-20T18:05:40Z",
-      "ticks_blocked": 608,
+      "ticks_blocked": 609,
       "weight": 1,
       "manifest": [
         "src/nemik/adapter.py",
@@ -9605,7 +9605,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-19T10:16:00Z",
-      "ticks_blocked": 668,
+      "ticks_blocked": 669,
       "completed": null,
       "warrants": [
         {
@@ -9717,7 +9717,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-16T01:54:02Z",
-      "ticks_blocked": 732,
+      "ticks_blocked": 733,
       "weight": 1,
       "completed": null
     },
@@ -9737,7 +9737,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-16T01:54:03Z",
-      "ticks_blocked": 732,
+      "ticks_blocked": 733,
       "weight": 1,
       "completed": null
     },
@@ -9898,7 +9898,7 @@
       "minted_during": "interrupt",
       "caused_by": "luthen-observability:W1051",
       "last_worked": "2026-10-18T21:49:01Z",
-      "ticks_blocked": 668,
+      "ticks_blocked": 669,
       "completed": null,
       "weight": 6,
       "warrants": [
@@ -10075,7 +10075,7 @@
       "minted_during": "tick",
       "caused_by": "W500",
       "last_worked": "2026-10-15T11:53:53Z",
-      "ticks_blocked": 668,
+      "ticks_blocked": 669,
       "completed": null
     },
     {
@@ -10120,7 +10120,7 @@
       "minted_during": "tick",
       "caused_by": "W506",
       "last_worked": "2026-10-24T16:41:28Z",
-      "ticks_blocked": 496,
+      "ticks_blocked": 497,
       "weight": 11,
       "completed": null,
       "manifest": [
@@ -10192,7 +10192,7 @@
       "minted_during": "tick",
       "caused_by": "W506",
       "last_worked": "2026-10-18T03:08:04Z",
-      "ticks_blocked": 668,
+      "ticks_blocked": 669,
       "weight": 2,
       "completed": null
     },
@@ -10216,7 +10216,7 @@
       "minted_during": "tick",
       "caused_by": "github:W35",
       "last_worked": "2026-10-15T12:00:59Z",
-      "ticks_blocked": 761,
+      "ticks_blocked": 762,
       "completed": null
     },
     {
@@ -10301,7 +10301,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-23T12:40:08Z",
-      "ticks_blocked": 386,
+      "ticks_blocked": 387,
       "weight": 11,
       "manifest": [
         "src/nemik/withheld.py"
@@ -10329,7 +10329,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-18T19:15:01Z",
-      "ticks_blocked": 524,
+      "ticks_blocked": 525,
       "completed": null
     },
     {
@@ -10710,7 +10710,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-16T01:53:12Z",
-      "ticks_blocked": 732,
+      "ticks_blocked": 733,
       "weight": 13,
       "completed": null
     },
@@ -11332,7 +11332,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-17T10:50:53Z",
-      "ticks_blocked": 72,
+      "ticks_blocked": 73,
       "completed": null
     },
     {
@@ -11378,7 +11378,7 @@
       "minted_during": "tick",
       "caused_by": "github-8f",
       "last_worked": "2026-10-27T06:32:37Z",
-      "ticks_blocked": 385,
+      "ticks_blocked": 386,
       "completed": null,
       "warrants": [
         {
@@ -11527,7 +11527,7 @@
       "minted_during": "tick",
       "caused_by": "W566",
       "last_worked": "2026-10-23T19:25:35Z",
-      "ticks_blocked": 72,
+      "ticks_blocked": 73,
       "completed": null
     },
     {
@@ -11580,7 +11580,7 @@
       "minted_during": "tick",
       "caused_by": "W541",
       "last_worked": "2026-10-23T17:58:15Z",
-      "ticks_blocked": 723,
+      "ticks_blocked": 724,
       "completed": null
     },
     {
@@ -11602,7 +11602,7 @@
       "minted_during": "tick",
       "caused_by": "github-8f",
       "last_worked": "2026-10-23T12:09:48Z",
-      "ticks_blocked": 555,
+      "ticks_blocked": 556,
       "completed": null,
       "manifest": [
         "Containerfile",
@@ -11700,7 +11700,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-17T08:09:46Z",
-      "ticks_blocked": 714,
+      "ticks_blocked": 715,
       "completed": null
     },
     {
@@ -11764,7 +11764,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-16T15:08:10Z",
-      "ticks_blocked": 653,
+      "ticks_blocked": 654,
       "completed": null
     },
     {
@@ -11789,7 +11789,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-22T07:10:08Z",
-      "ticks_blocked": 558,
+      "ticks_blocked": 559,
       "completed": null
     },
     {
@@ -11813,7 +11813,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-17T15:38:53Z",
-      "ticks_blocked": 668,
+      "ticks_blocked": 669,
       "completed": null
     },
     {
@@ -11837,7 +11837,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-19T02:01:21Z",
-      "ticks_blocked": 637,
+      "ticks_blocked": 638,
       "completed": null,
       "manifest": [
         "src/nemik/salience.py",
@@ -12559,7 +12559,7 @@
       "minted_during": "tick",
       "caused_by": "github-8f",
       "last_worked": "2026-11-01T03:11:01Z",
-      "ticks_blocked": 292,
+      "ticks_blocked": 293,
       "completed": null
     },
     {
@@ -13219,7 +13219,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-25T02:12:38Z",
-      "ticks_blocked": 477,
+      "ticks_blocked": 478,
       "manifest": [
         "src/nemik/stackable.py",
         "src/nemik/cones.py",
@@ -14021,7 +14021,7 @@
       "minted_during": "interrupt",
       "caused_by": "W510",
       "last_worked": "2026-10-18T16:06:47Z",
-      "ticks_blocked": 668,
+      "ticks_blocked": 669,
       "manifest": [
         "src/nemik/web/index.html",
         "tests/test_sources_trs.py"
@@ -14047,7 +14047,7 @@
       "minted_during": "interrupt",
       "caused_by": "W510",
       "last_worked": "2026-10-18T14:33:41Z",
-      "ticks_blocked": 668,
+      "ticks_blocked": 669,
       "completed": null,
       "manifest": [
         "src/nemik/web/index.html",
@@ -14125,7 +14125,7 @@
       "minted_during": "interrupt",
       "caused_by": "W674",
       "last_worked": "2026-11-06T20:29:55Z",
-      "ticks_blocked": 668,
+      "ticks_blocked": 669,
       "manifest": [
         "src/nemik/serve.py",
         "src/nemik/web/vendor/n3.min.js",
@@ -14441,7 +14441,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-18T19:40:28Z",
-      "ticks_blocked": 668,
+      "ticks_blocked": 669,
       "warrants": [
         {
           "@context": {
@@ -14628,7 +14628,7 @@
       "minted_during": "interrupt",
       "caused_by": "W691",
       "last_worked": "2026-10-19T01:14:55Z",
-      "ticks_blocked": 668,
+      "ticks_blocked": 669,
       "completed": null,
       "manifest": [
         "src/nemik/serve.py",
@@ -14700,7 +14700,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-11-02T04:40:12Z",
-      "ticks_blocked": 197,
+      "ticks_blocked": 198,
       "completed": null
     },
     {
@@ -15075,7 +15075,7 @@
       "minted_during": "interrupt",
       "caused_by": "W693",
       "last_worked": "2026-10-24T15:22:53Z",
-      "ticks_blocked": 500,
+      "ticks_blocked": 501,
       "manifest": [
         "src/nemik/blocks.py",
         "src/nemik/serve.py",
@@ -15764,7 +15764,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W728",
       "last_worked": "2026-11-06T20:30:01Z",
-      "ticks_blocked": 659,
+      "ticks_blocked": 660,
       "completed": null
     },
     {
@@ -15968,7 +15968,7 @@
       "minted_during": "tick",
       "caused_by": "github-8f",
       "last_worked": "2026-10-23T19:25:28Z",
-      "ticks_blocked": 615,
+      "ticks_blocked": 616,
       "warrants": [
         {
           "@context": {
@@ -16210,7 +16210,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W743",
       "last_worked": "2026-10-24T14:11:42Z",
-      "ticks_blocked": 502,
+      "ticks_blocked": 503,
       "completed": null,
       "manifest": [
         "docs/forecast-features.md"
@@ -16265,7 +16265,7 @@
       "minted_during": "tick",
       "caused_by": "mtools:W1731",
       "last_worked": "2026-10-24T18:42:00Z",
-      "ticks_blocked": 356,
+      "ticks_blocked": 357,
       "completed": null,
       "manifest": [
         "src/nemik/landings.py",
@@ -16625,7 +16625,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-25T02:38:48Z",
-      "ticks_blocked": 475,
+      "ticks_blocked": 476,
       "manifest": [
         "deploy/deployment.yaml",
         "tests/test_deploy_manifest.py"
@@ -16740,7 +16740,7 @@
       "minted_during": "tick",
       "caused_by": "W762",
       "last_worked": "2026-10-28T14:21:12Z",
-      "ticks_blocked": 356,
+      "ticks_blocked": 357,
       "manifest": [
         "tools/codon_census.py",
         "tests/test_codon_census.py",
@@ -17079,7 +17079,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-20T22:31:27Z",
-      "ticks_blocked": 561,
+      "ticks_blocked": 562,
       "warrants": [
         {
           "@context": {
@@ -17290,7 +17290,7 @@
       "minted_during": "tick",
       "caused_by": "W781",
       "last_worked": "2026-10-23T17:58:17Z",
-      "ticks_blocked": 607,
+      "ticks_blocked": 608,
       "completed": null
     },
     {
@@ -17316,7 +17316,7 @@
       "minted_during": "tick",
       "caused_by": "W461",
       "last_worked": "2026-10-25T02:38:49Z",
-      "ticks_blocked": 475,
+      "ticks_blocked": 476,
       "manifest": [
         "src/nemik/web/index.html",
         "src/nemik/serve.py",
@@ -17902,7 +17902,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-25T03:12:35Z",
-      "ticks_blocked": 474,
+      "ticks_blocked": 475,
       "completed": null
     },
     {
@@ -18517,7 +18517,7 @@
       "minted_during": "tick",
       "caused_by": "W579",
       "last_worked": "2026-10-23T19:25:16Z",
-      "ticks_blocked": 541,
+      "ticks_blocked": 542,
       "completed": null
     },
     {
@@ -18961,7 +18961,7 @@
       "minted_during": "interrupt",
       "caused_by": "nemik:W703",
       "last_worked": "2026-10-22T20:45:21Z",
-      "ticks_blocked": 561,
+      "ticks_blocked": 562,
       "completed": null
     },
     {
@@ -19672,7 +19672,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-10-23T07:32:14Z",
-      "ticks_blocked": 561,
+      "ticks_blocked": 562,
       "completed": null
     },
     {
@@ -19746,7 +19746,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-10-23T07:32:23Z",
-      "ticks_blocked": 561,
+      "ticks_blocked": 562,
       "completed": null
     },
     {
@@ -20268,7 +20268,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-23T16:12:14Z",
-      "ticks_blocked": 545,
+      "ticks_blocked": 546,
       "completed": null
     },
     {
@@ -20444,7 +20444,7 @@
       "minted_during": "tick",
       "caused_by": "github-8f",
       "last_worked": "2026-10-24T17:33:15Z",
-      "ticks_blocked": 541,
+      "ticks_blocked": 542,
       "warrants": [
         {
           "@context": {
@@ -20596,7 +20596,7 @@
       "minted_during": "tick",
       "caused_by": "W905",
       "last_worked": "2026-10-23T18:12:28Z",
-      "ticks_blocked": 543,
+      "ticks_blocked": 544,
       "manifest": [
         "docs/evidence-standards.md"
       ],
@@ -20649,7 +20649,7 @@
       "minted_during": "tick",
       "caused_by": "W905",
       "last_worked": "2026-10-23T19:34:39Z",
-      "ticks_blocked": 541,
+      "ticks_blocked": 542,
       "completed": null,
       "manifest": [
         "docs/evidence-recommendations.md"
@@ -20800,7 +20800,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-11-06T05:19:04Z",
-      "ticks_blocked": 103,
+      "ticks_blocked": 104,
       "manifest": [
         "src/nemik/witnesses.py",
         "tests/test_witness_mint.py"
@@ -20825,7 +20825,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-11-06T03:15:45Z",
-      "ticks_blocked": 541,
+      "ticks_blocked": 542,
       "completed": null,
       "manifest": [
         "src/nemik/witnesses.py",
@@ -21016,7 +21016,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-23T20:45:05Z",
-      "ticks_blocked": 538,
+      "ticks_blocked": 539,
       "manifest": [
         "tests/test_modes.py",
         "tests/test_metrics_gating.py"
@@ -21042,7 +21042,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-23T20:57:46Z",
-      "ticks_blocked": 538,
+      "ticks_blocked": 539,
       "completed": null
     },
     {
@@ -21065,7 +21065,7 @@
       "minted_during": "tick",
       "caused_by": "W923",
       "last_worked": "2026-10-25T11:09:55Z",
-      "ticks_blocked": 457,
+      "ticks_blocked": 458,
       "completed": null,
       "manifest": [
         "tools/gen_test_targets.py",
@@ -21092,7 +21092,7 @@
       "minted_during": "tick",
       "caused_by": "W923",
       "last_worked": "2026-10-23T20:57:51Z",
-      "ticks_blocked": 538,
+      "ticks_blocked": 539,
       "completed": null
     },
     {
@@ -21113,7 +21113,7 @@
       "minted_during": "tick",
       "caused_by": "W923",
       "last_worked": "2026-10-23T20:57:53Z",
-      "ticks_blocked": 538,
+      "ticks_blocked": 539,
       "completed": null,
       "manifest": [
         "tests/test_shard_declared.py"
@@ -21299,7 +21299,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-23T21:21:43Z",
-      "ticks_blocked": 506,
+      "ticks_blocked": 507,
       "completed": null
     },
     {
@@ -21394,7 +21394,7 @@
       "minted_during": "tick",
       "caused_by": "W934",
       "last_worked": "2026-10-24T12:59:53Z",
-      "ticks_blocked": 505,
+      "ticks_blocked": 506,
       "completed": null,
       "manifest": [
         "src/nemik/web/views.js",
@@ -21463,7 +21463,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W918",
       "last_worked": "2026-10-24T12:59:54Z",
-      "ticks_blocked": 505,
+      "ticks_blocked": 506,
       "completed": null
     },
     {
@@ -22031,7 +22031,7 @@
       "minted_during": "interrupt",
       "caused_by": "nemik:W959",
       "last_worked": "2026-10-24T12:59:55Z",
-      "ticks_blocked": 505,
+      "ticks_blocked": 506,
       "completed": null,
       "manifest": [
         "src/nemik/mirrorsend.py",
@@ -22058,7 +22058,7 @@
       "minted_during": "interrupt",
       "caused_by": "nemik:W938",
       "last_worked": "2026-11-06T20:40:38Z",
-      "ticks_blocked": 72,
+      "ticks_blocked": 73,
       "completed": null,
       "size_class": "small"
     },
@@ -22138,7 +22138,7 @@
       "minted_during": "tick",
       "caused_by": "W749",
       "last_worked": "2026-10-24T14:12:01Z",
-      "ticks_blocked": 502,
+      "ticks_blocked": 503,
       "completed": null,
       "manifest": [
         "src/nemik/forecastshingle.py",
@@ -22217,7 +22217,7 @@
       "minted_during": "interrupt",
       "caused_by": "W709",
       "last_worked": "2026-10-24T15:23:12Z",
-      "ticks_blocked": 500,
+      "ticks_blocked": 501,
       "completed": null,
       "manifest": [
         "src/nemik/web/panels.js",
@@ -22586,7 +22586,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-24T17:33:12Z",
-      "ticks_blocked": 496,
+      "ticks_blocked": 497,
       "completed": null,
       "manifest": [
         "src/nemik/retrostub.py",
@@ -22610,7 +22610,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-24T17:33:14Z",
-      "ticks_blocked": 496,
+      "ticks_blocked": 497,
       "completed": null,
       "manifest": [
         "src/nemik/retrolayers.py",
@@ -22637,7 +22637,7 @@
       "minted_during": "interrupt",
       "caused_by": "github:W42",
       "last_worked": "2026-10-24T23:08:23Z",
-      "ticks_blocked": 413,
+      "ticks_blocked": 414,
       "completed": null,
       "warrants": [
         {
@@ -23368,7 +23368,7 @@
       "minted_during": "interrupt",
       "caused_by": "github:W44",
       "last_worked": "2026-10-24T23:43:28Z",
-      "ticks_blocked": 483,
+      "ticks_blocked": 484,
       "warrants": [
         {
           "@context": {
@@ -23662,7 +23662,7 @@
       "minted_during": "tick",
       "caused_by": "W643",
       "last_worked": "2026-10-25T02:12:46Z",
-      "ticks_blocked": 477,
+      "ticks_blocked": 478,
       "completed": null,
       "manifest": [
         "src/nemik/stackable.py",
@@ -23688,7 +23688,7 @@
       "minted_during": "tick",
       "caused_by": "W643",
       "last_worked": "2026-10-25T02:12:47Z",
-      "ticks_blocked": 477,
+      "ticks_blocked": 478,
       "completed": null,
       "manifest": [
         "src/nemik/cones.py",
@@ -23755,7 +23755,7 @@
       "minted_during": "tick",
       "caused_by": "W764",
       "last_worked": "2026-10-25T02:39:00Z",
-      "ticks_blocked": 475,
+      "ticks_blocked": 476,
       "completed": null,
       "manifest": [
         "deploy/deployment.yaml",
@@ -23806,7 +23806,7 @@
       "minted_during": "tick",
       "caused_by": "W789",
       "last_worked": "2026-10-25T02:39:02Z",
-      "ticks_blocked": 475,
+      "ticks_blocked": 476,
       "completed": null,
       "manifest": [
         "src/nemik/web/index.html",
@@ -24064,7 +24064,7 @@
       "minted_during": "tick",
       "caused_by": "W997",
       "last_worked": "2026-10-25T07:39:20Z",
-      "ticks_blocked": 465,
+      "ticks_blocked": 466,
       "manifest": [
         "src/nemik/pacerun.py",
         "src/nemik/hostroot_cli.py",
@@ -24195,7 +24195,7 @@
       "minted_during": "tick",
       "caused_by": "W925",
       "last_worked": "2026-10-26T00:43:08Z",
-      "ticks_blocked": 433,
+      "ticks_blocked": 434,
       "manifest": [
         "docs/per-test-targets.md"
       ],
@@ -24220,7 +24220,7 @@
       "minted_during": "tick",
       "caused_by": "W925",
       "last_worked": "2026-10-25T18:42:04Z",
-      "ticks_blocked": 457,
+      "ticks_blocked": 458,
       "completed": null,
       "manifest": [
         "tools/gen_test_targets.py",
@@ -24246,7 +24246,7 @@
       "minted_during": "tick",
       "caused_by": "W925",
       "last_worked": "2026-10-25T11:10:13Z",
-      "ticks_blocked": 457,
+      "ticks_blocked": 458,
       "completed": null,
       "manifest": [
         "tests/venv_pytest.sh"
@@ -24543,7 +24543,7 @@
       "minted_during": "tick",
       "caused_by": "W728",
       "last_worked": "2026-10-25T14:28:23Z",
-      "ticks_blocked": 379,
+      "ticks_blocked": 380,
       "warrants": [
         {
           "@context": {
@@ -24643,7 +24643,7 @@
       "minted_during": "tick",
       "caused_by": "W1047",
       "last_worked": "2026-10-27T07:42:42Z",
-      "ticks_blocked": 379,
+      "ticks_blocked": 380,
       "completed": null
     },
     {
@@ -24785,7 +24785,7 @@
       "minted_during": "tick",
       "caused_by": "github:W50",
       "last_worked": "2026-10-26T23:05:10Z",
-      "ticks_blocked": 447,
+      "ticks_blocked": 448,
       "warrants": [
         {
           "@context": {
@@ -24863,7 +24863,7 @@
       "minted_during": "tick",
       "caused_by": "W1055",
       "last_worked": "2026-11-04T10:22:37Z",
-      "ticks_blocked": 318,
+      "ticks_blocked": 319,
       "manifest": [
         "src/nemik/landcost.py",
         "tests/test_landcost.py"
@@ -24892,7 +24892,7 @@
       "minted_during": "tick",
       "caused_by": "W1055",
       "last_worked": "2026-10-25T17:06:49Z",
-      "ticks_blocked": 447,
+      "ticks_blocked": 448,
       "completed": null,
       "manifest": [
         "src/nemik/rank.py",
@@ -24921,7 +24921,7 @@
       "minted_during": "tick",
       "caused_by": "W1055",
       "last_worked": "2026-10-25T17:11:59Z",
-      "ticks_blocked": 447,
+      "ticks_blocked": 448,
       "completed": null,
       "manifest": [
         "tests/test_orderrank.py"
@@ -25328,7 +25328,7 @@
       "minted_during": "tick",
       "caused_by": "W1071",
       "last_worked": "2026-10-25T23:18:55Z",
-      "ticks_blocked": 436,
+      "ticks_blocked": 437,
       "completed": null
     },
     {
@@ -25350,7 +25350,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W1644",
       "last_worked": "2026-10-26T11:56:26Z",
-      "ticks_blocked": 424,
+      "ticks_blocked": 425,
       "completed": null
     },
     {
@@ -25425,7 +25425,7 @@
       "minted_during": "tick",
       "caused_by": "W1035",
       "last_worked": "2026-11-06T01:38:04Z",
-      "ticks_blocked": 109,
+      "ticks_blocked": 110,
       "manifest": [
         "docs/per-test-targets.md"
       ],
@@ -25448,7 +25448,7 @@
       "minted_during": "tick",
       "caused_by": "github:W50",
       "last_worked": "2026-10-26T01:03:02Z",
-      "ticks_blocked": 431,
+      "ticks_blocked": 432,
       "warrants": [
         {
           "@context": {
@@ -25524,7 +25524,7 @@
       "minted_during": "tick",
       "caused_by": "W1077",
       "last_worked": "2026-11-06T01:38:04Z",
-      "ticks_blocked": 109,
+      "ticks_blocked": 110,
       "manifest": [
         "src/nemik/rank.py",
         "tests/test_rank.py"
@@ -25800,7 +25800,7 @@
       "minted_during": "tick",
       "caused_by": "W1082",
       "last_worked": "2026-10-26T22:09:25Z",
-      "ticks_blocked": 374,
+      "ticks_blocked": 375,
       "manifest": [
         "src/nemik/roundof.py",
         "src/nemik/roundgauges.py",
@@ -25888,7 +25888,7 @@
       "minted_during": "tick",
       "caused_by": "W1073",
       "last_worked": "2026-10-26T11:58:00Z",
-      "ticks_blocked": 422,
+      "ticks_blocked": 423,
       "manifest": [
         "src/nemik/adapter.py",
         "src/nemik/blocks.py",
@@ -26109,7 +26109,7 @@
       "minted_during": "tick",
       "caused_by": "W1095",
       "last_worked": "2026-11-06T01:38:04Z",
-      "ticks_blocked": 109,
+      "ticks_blocked": 110,
       "manifest": [
         "src/nemik/adapter.py",
         "tests/test_ledger_graph.py"
@@ -26212,7 +26212,7 @@
       "minted_during": "tick",
       "caused_by": "W1107",
       "last_worked": "2026-11-06T10:01:49Z",
-      "ticks_blocked": 123,
+      "ticks_blocked": 124,
       "manifest": [
         "src/nemik/pacewrite.py",
         "src/nemik/pacerun.py",
@@ -26353,7 +26353,7 @@
       "minted_during": "tick",
       "caused_by": "inbox/2026-10-27-nemik-edge-github-W63-enables-W1113.md",
       "last_worked": "2026-10-27T00:42:25Z",
-      "ticks_blocked": 400,
+      "ticks_blocked": 401,
       "completed": null,
       "warrants": [
         {
@@ -26978,7 +26978,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1092",
       "last_worked": "2026-11-06T05:16:34Z",
-      "ticks_blocked": 102,
+      "ticks_blocked": 103,
       "manifest": [
         "src/nemik/roundof.py",
         "tests/test_roundof.py"
@@ -27088,7 +27088,7 @@
       "minted_during": "tick",
       "caused_by": "W1112",
       "last_worked": "2026-11-06T14:25:45Z",
-      "ticks_blocked": 114,
+      "ticks_blocked": 115,
       "manifest": [
         "src/nemik/history.py",
         "tests/test_history_stamps.py"
@@ -27132,12 +27132,12 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Read mtools' importdag (graph.py, how hooks/BUILD.bazel instantiates it), generate nemik's graph.json and a dag.bzl, give each src/nemik module its own py_library from the graph and each test only the libraries it imports plus its data, keep a graph_fresh test equal to the sources; atomize into: the generated graph, the per-module libraries, the tests moved one family at a time (test_layout last), measuring which tests rerun after a one-module change",
-      "evidence": "2026-10-27: 2026-10-27 github-8f: test_layout's bazel data is the whole :.venv, so every src change reruns the 15-minute browser suite and a sensor fix waits on a browser hang. Operator ruling 97611 (human, verified, warrant attached): exhaustive, recursive sharding of build targets and actions, build as test, only cache misses become fine-grained consequences of individual changes. mtools did this for hooks (W1988): per-module libraries generated from importdag's graph (hooks/closure.bzl lib/deps_of/test_deps over a generated dag.bzl, kept equal to the sources by a graph_fresh test). Reuse that generator, do not build one. NOT done: nemik's import graph is not generated; a module's imports include lazy and typing-only ones; large, so atomize | 2026-10-27: github-8f re-asked (2026-10-27): atomize test_layout's whole :.venv dependency with mtools importdag so a src change stops rerunning the 15-minute browser suite; on W1063/W1044's line. Order by rank, after the paydown. | 2026-11-07T12:20:40Z: 2026-11-07: operator priority warrant attached (host 695f3e0a line 147475, uuid 3de219a3-e28c-42f2-ac74-4c7eee3d41c8, verified human by --warrant --dry-run before attaching), relayed by github-14: raise cache hit rate and analysis cache hit rate by atomizing what can miss. Pace guard read from code (mtools hooks/src/mikemol/hooks/ratchet_pace.py stack_reason lines 298-304): a stack is admitted only if it has no owed ratchet, is queue files alone (line 299), touches an owed ratchet (line 301, here codon-baseline.json), or matches an admission row (line 303). A BUILD.bazel-only stack is none of these, so the pace HOLDS it while nemik owes codon-baseline. Consequence: W1141's code/BUILD stack cannot land before W2043 (which lowers codon-baseline.json) or an admission row. Measurement and design work in a scratch worktree is not held. Before/after measure to attach: gate hit count on a one-line change in one module, and analysis re-done; reuse mtools' miss-naming tool under W1982/W1985 (not yet located). I still need to locate that tool and check W1035-W1037 and the katas rc=128. | 2026-11-07T12:22:26Z: 2026-11-07 github-14 accepted the pace reading: no new admission row for BUILD-only stacks; W1141 lands behind W2039 row, mtools:W2328, W2043. Ask: freeze W1141 and measure it in scratch so it lands right after W2043, and send before/after numbers (gate hit count on a one-line change in one module; analysis re-done). Peer request, within the operator priority warranted above. Located: mtools/importdag (src/mikemol/importdag, the generator W1141 reuses). Not found by filename: a miss-naming tool under mtools W1982/W1985 (find on names containing miss matched only admission files and a mypy cache); I still need to read mtools W1982/W1985 for its name. Not started: the scratch worktree for W1141, the baseline measurement. | 2026-11-07T12:35:27Z: G0 2026-11-07T12:35:26Z: [NO-PACE-STAMP] Precommit: advances W1141 (operator cache priority, warranted). Actuator: read mtools W1982 and W1985 with the writer's --show against mtools' queue to name the miss-naming tool, and open a scratch worktree nemik-W1141. Sensor: the tool's name and path printed by those reads; mikemol-scratch open exit code. Expected: a named tool and an open worktree; no code edited. | 2026-11-07T12:36:38Z: 2026-11-07 miss-naming tool, read from mtools W1982 and W1985: there is NO tool yet. W1985 (name the input digest behind each miss by comparing two gate invocations) is blocked on mtools:W2134 (gatephase keeps invocation ids durably); until then by hand via bazel aquery in the gate's output base. The reusable measuring method is mtools W1982's: importdag.resolve.derive over the dist, imports eager and deferred, reporting per-module the number of test files it reaches (hooks: median closure 2 modules, a one-module change reaches on average 25.8 of 237 test files, against 100 percent today). Plan for nemik's baseline in scratch: run the same derive over src/nemik and tests, report per module the tests reached, and today's reach is every test (test_layout's data is the whole :.venv). Scratch worktree /var/tmp/claude-1000/-home-mikemol-github-nemik/ca6f3699-66ac-4ffa-a3ca-6ececbab791f/scratchpad/wt/nemik-W1141 opened. I still need to run the derive and record the numbers. | 2026-11-07T12:38:53Z: R333 applied. Finding 2: nemik-W1141 worktree is cut from HEAD f79a046d with W2043's held-W2043-real-modules-v3.patch applied (git apply printed nothing; v3 not v2, which is superseded); W2043's BUILD data lines (fixtures filegroup, codon_call, codon_census, hookcheck, @codon, NEMIK_CODON) are to stay as inputs to the new per-module macro. Base recorded here. Finding 1, not yet done: tabulate the gate's own 'N fresh of M targets' lines for ten recent stacks as the measured baseline, then run importdag derive and compare predicted reach with the measured. I still need to find those lines in the G1s/ledger and run the derive. | 2026-11-07T12:55:52Z: 2026-11-07 measured baseline from this queue's own ledger (R333 f1), partial: one-module src edits made 446 of 449 gate targets fresh (W1232's mint line, 2026-10-28), and two later gate runs read 448 fresh of 451 (2026-10-29 00:41Z and 02:20Z); a tests-only stack (991, W1629) read 6 fresh. So today's src-edit reach is ~99 percent of targets, tests-only ~1 percent. Only a few lines found by grep of paths-forward.ledger; the stack345/633/639/643 json files and retros r10/r29/r223/r238/r243/r244 also carry 'fresh of' lines and are not yet tabulated, so ten stacks are NOT yet listed. Existing card W1232 (find why one-module edits make 446 of 449 targets fresh) covers the same question: extend it with this card rather than mint a parallel one, as github-14 asked. I still need to read W1232 and tabulate ten stacks, then run importdag derive. | 2026-11-07T13:05:27Z: G0 2026-11-07T13:05:26Z: [NO-PACE-STAMP] Precommit: advances W1141. Actuator: read W1232 with --show, then run mtools importdag derive over the nemik-W1141 worktree's src/nemik and tests (usage found from its --help). Sensor: derive's printed closures; the count of tests reached per module. Expected: a per-module reach table with a median well under 100 percent of tests; or a usage error that I report. | 2026-11-07T13:06:35Z: 2026-11-07 BASELINE AND PREDICTION. Before (measured, W1232 card, 2026-10-28): any src edit makes 446 of 449 gate targets fresh, bazel test step 2176 s (stack619); a tests-only stack made 7 fresh of 449 in 84 s (stack624): every src edit reaches every test through //:test_X -> //:.venv -> src (bazel query somepath). Prediction (derived, not yet measured by a gate): mtools importdag graph (mikemol-graph --dist <worktree> --package nemik --write, run in scratch worktree nemik-W1141 on W2043's v3 patch; graph.json 104518 B, dag.bzl 104788 B) gives 150 modules and 481 tests; reach per module over the transitive import cone (scratch reach.py): median 67 tests, p90 226, max 264, mean 89.5 = 18.6 percent of tests; a test's cone: median 10 modules, p90 82, max 84. Hubs: editverbs 264, adapter 263, warrants 263, tomlview 262, flow 242, queuefiles 241, score 239, blocks 237, cards 237, index 237. Caveats: graph.json lists eager imports only (typing_only is separate) so a cone can be too small if a lazy import is missed; tests that read data files (test_layout reads the whole venv) need their data kept; 481 tests vs 449 gate targets differ (the 449 is from 2026-10-28). After: NOT measured; needs the generated per-module libraries and one gate on a one-line change. Files generated in scratch only, nothing in the main tree. I still need to wire dag.bzl into BUILD.bazel (per-module py_library, each test depends on the closure of what it imports plus its data), keep a graph_fresh test, and measure the after-count. | 2026-11-07T13:09:24Z: R334 accepted, as next steps (none done): (1) the 18.6 percent reach is a lower bound: the graph omits typing-only and deferred imports, and 39 test files (about 8 percent, by the reviewer's grep) spawn procrun/subprocess/entry points and so depend on the whole venv or the entry point's cone; the BUILD wiring must include deferred imports, and I will report two tables, eager-only and with spawn tests counted at their entry point's cone (reviewer estimates the mean rises to about 26 percent; unmeasured by me). (2) the deciding number is what the change does to test_layout (the 15-minute suite that motivated the card; it spawns nemik-serve, so likely serve's closure, maybe the max cone of 84 modules): compute the modules outside serve's cone, then count from landed history how many of the last 100 src-bearing stacks touched only those, and the gate minutes saved. I still need to do both. | 2026-11-07T13:27:09Z: 2026-11-07 R334 f2 first reading (eager-import graph, so an upper bound on what is outside): serve.py's cone is 82 modules, 68 of the 150 lie outside it. Of the last 100 src-bearing COMMITS (git log -n 600; commits, not gate stacks; .py under src/nemik/ only), 18 touched only modules outside serve's cone, so under per-module libraries test_layout (which spawns nemik-serve) would not have been a rerun candidate for those 18. Not computed: the gate minutes saved (needs test_layout's share of each gate: the 15-minute figure is from the card, not re-measured), and whether other tests that spawn entry points reach those modules. Caveats that push the 18 DOWN: serve's lazy and typing-only imports are missing from the graph, e.g. staticserve, pdf, pdfviews, preview and web/__init__ show as outside serve's eager cone yet serve may load them on a route. Scratch scripts outside.py and hist.py; files hist.txt/outside.txt in the scratchpad. I still need to add deferred imports to the graph, recompute, and the R334 f1 two-table report. | 2026-11-07T13:35:27Z: G0 2026-11-07T13:35:26Z: [NO-PACE-STAMP] Precommit: advances W1141. Actuator: read mtools graph.py lines 60-135 to learn whether graph.json imports include function-level (deferred) imports and typing_only separately, then recompute serve's cone with imports plus typing_only plus deferred if the graph carries them. Sensor: graph.py text; outside.py output. Expected: deferred imports are already in imports (the graph walks all ast nodes), typing_only is a separate list that I add; the outside count drops below 68. | 2026-11-07T13:35:43Z: 2026-11-07 CORRECTION to my and R334's caveat (read mtools importdag graph.py lines 67-130 and 229-238): graph.json 'imports' is built by ast.walk over the whole tree, so it ALREADY includes function-level (deferred) imports and TYPE_CHECKING imports; 'typing_only' is a separate list of those imported only under TYPE_CHECKING, a subset, not extra edges. So the earlier statements 'graph.json lists eager imports only' and 'serve may load staticserve lazily' were wrong as to import statements, and my G0 prediction that serve's outside count would drop below 68 is refuted before running: it stays 68 of 150, and the 18-of-100 stands for import edges. What the graph still cannot see: importlib.import_module and string-named loads, subprocess spawns of entry points (the 39 spawn-based test files, R334 f1), non-.py reads (data files, declared via reads), and relative imports (level>0 are skipped; nemik uses absolute imports, unchecked by me). So the remaining lower-bound risks are dynamic loads and spawns, not lazy imports. I still need to grep src/nemik for importlib.import_module and __import__ and to build the spawn-test table. | 2026-11-07T13:35:50Z: grep of the nemik-W1141 worktree src/nemik for import_module, __import__, importlib.util, find_spec: no matches, so the src has no dynamic-import edges the graph misses. Lazy imports are covered. The one remaining blind spot is the spawn-based tests. I still need the spawn-test table. | 2026-11-07T13:40:51Z: R335 verified by grep of the nemik-W1141 worktree: exactly two relative imports in src/nemik, landings.py:12 'from .hostroot import fields' and hostroot.py:17 'from .climate import _instant'. importdag graph.py line 77 keeps only ImportFrom with level 0, so graph.json lacks the edges landings->hostroot and hostroot->climate; per-module libraries built from it would raise ModuleNotFoundError for those two only under the narrow libraries. Fix options: make both imports absolute in the W1141 stack (a two-line src edit, which also carries the pace hold behind W2043) or ask mtools to resolve relative imports. Then regenerate the graph and assert the edge count rises by two. R334 f1's lazy-import half withdrawn by the reviewer; its spawn-test half and f2 (test_layout share) remain open. I still need to make the two imports absolute in scratch, regenerate, and count edges before and after. | 2026-11-07T13:58:20Z: 2026-11-07 R335 applied in scratch (nemik-W1141): landings.py:12 and hostroot.py:17 made absolute (from nemik.hostroot import fields; from nemik.climate import _instant), mikemol-graph --write regenerated. graph.json 4740 -> 4744 lines: landings.py now lists src/nemik/hostroot.py (observed, grep of the entry); the +4 lines, not +2, is two empty 'imports: []' lists (1 line each) becoming one-element lists (3 lines each), so two edges added; hostroot->climate edge not separately grepped. tests/test_landings.py and tests/test_hostroot.py: 6 passed in 0.16 s (pytest, not bazel). The reach and serve-cone figures above were computed BEFORE this regeneration and not recomputed: two edges could only raise them slightly. I still need to recompute reach.py/outside.py on the new graph, grep hostroot's entry, and fold the two imports into the stack as a src edit (pace-held behind W2043). | 2026-11-07T14:05:31Z: G0 2026-11-07T14:05:30Z: [NO-PACE-STAMP] Precommit: advances W1141. Actuator: rerun reach.py and outside.py on the regenerated graph.json, and grep hostroot.py's entry for climate.py. Sensor: their printed numbers and the grep. Expected: hostroot lists src/nemik/climate.py; reach mean rises by at most 1 point from 18.6 percent; serve cone stays 82 unless hostroot or landings sit in it. | 2026-11-07T14:05:49Z: 2026-11-07 recomputed on the regenerated graph (relative imports made absolute): hostroot.py entry lists src/nemik/climate.py (observed by grep). reach.py: 150 modules, 481 tests, module reach median 67, p90 227 (was 226), max 264, mean 89.7 = 18.6 percent (was 89.5, 18.6); climate.py is now a hub at 239 tests. serve cone unchanged: 82 modules, 68 of 150 outside. The earlier figures stand to within one test. Both G0 expectations met. Still open: spawn-test table (R334 f1), test_layout share and gate minutes (R334 f2), BUILD wiring of dag.bzl, the after-count. | 2026-11-07T14:07:55Z: R336 applied: diff of the sorted outside lists, old graph (outside.txt) vs regenerated (outside2.txt): empty (diff printed nothing), so the two lists are identical, not only equal in count. hist.py rerun on the new list: commits scanned 600, src-bearing taken 100, touching only modules outside serve's cone 18. The 18 stands. Still open: the no-relative-import witness test (R335), spawn-test table, test_layout share and gate minutes, BUILD wiring, the after-count; the absolute-import edits are scratch-only so the card's numbers describe the scratch tree, not HEAD. | 2026-11-07T14:24:41Z: 2026-11-07 spawn-test first cut (R334 f1): grep -l over tests/test_*.py in the W1141 scratch tree for subprocess|procrun|capture(|Popen|run_module|runpy|-m nemik matched 31 files (the reviewer's earlier grep said 39 with a different pattern; the two do not agree and I did not reconcile them): test_witnesses, realize, gate_weights, rank_apply, akonadi_guard, check_committed, layout, pins, architecture, gate, certify, rank_flow, salience, deterministic, hooks_wired, metrics_realizability, mpxj, static_view, ics_reader, precommit_gate, check_realizability, importer, serve_no_spawn, staticserve, publish, host_citations, residue, history. (count of names listed here is 28, the grep printed 30 lines for 31 per my read: unreconciled, recount before relying.) This is a name-level match: it does not say WHICH entry point or module each spawns, so the table of 'spawn tests at their entry point cone' is NOT built. Next: for each, read the command spawned and map it to a module, then add that cone to the test's reach. I still need to do that and reconcile 31 versus 39. | 2026-11-07T14:24:46Z: CORRECTION to the spawn-test entry just above: I wrote 31 files matched and that the grep printed 30 lines; both were wrong. I recounted the 28 names I listed from the grep output and that is the count: 28 files matched (not 31). The reviewer's 39 (a different pattern) still does not agree with 28 and is unreconciled. The table remains unbuilt. | 2026-11-07T14:35:28Z: G0 2026-11-07T14:35:27Z: [NO-PACE-STAMP] Precommit: advances W1141 (R334 f2). Actuator: grep tests/test_layout.py in the scratch tree for what it spawns or imports (nemik-serve, serve, subprocess argv) and for its data. Sensor: the grep lines. Expected: it spawns nemik-serve or imports serve, so its closure is serve's 82-module cone; its data is the whole venv. | 2026-11-07T14:35:45Z: 2026-11-07 R334 f2 tied to test_layout: tests/test_layout.py (worktree) imports 'from nemik.serve import build_static' (line 31) and uses webpage.served() for its server fixture (tests/webpage.py, not read by me), plus mikemol.procrun.proc.capture, playwright. So its import closure is serve.py's cone: 82 modules, with 68 of 150 outside (observed: outside2.txt). Under per-module libraries test_layout is therefore a rerun candidate only when a commit touches one of those 82. Of the last 100 src-bearing commits 18 touched only the 68 outside (hist.py), so test_layout would have been a cache hit for those 18 (commits, not gate stacks). Gate cost, DERIVED not measured: the card's 15-minute figure for test_layout x 18 = about 270 test-minutes saved per 100 src-bearing commits, i.e. about 2.7 test-minutes per commit on average; this is CPU/test time, not gate wall time, and I have not checked the figure, whether webpage.py spawns nemik-serve with a wider cone, or that test_layout is still 15 minutes. I still need those three checks. | 2026-11-07T14:38:29Z: R337 applied in part: test_layout's page waits on typeof coreWasm / treeOf (line 1837), cy.nodes, data.ruler, emitF, i.e. assets from src/nemik/web/index.html and the core wasm, which no Python import edge shows. hist.py changed so that every file under src/nemik/ (any type) of a commit must lie in the outside-module list, and a non-.py file is never in it; a commit counts as src-bearing when it has a .py under src/nemik/. Rerun on the unchanged outside list: still 18 of 100. So none of the 18 touched web/, core/ or data/ files; the figure survives this gap. The gap itself is NOT closed for the BUILD wiring: the per-module design must declare test_layout's non-Python inputs (src/nemik/web/**, the core inputs) as data, derived from what build_static reads, which I have not read. Not done: recount grouped by stack (the gate runs per stack tip, not per commit); the 15-minute figure; the spawn-test table. | 2026-11-07T14:55:54Z: 2026-11-07 non-Python inputs of test_layout via build_static (serve.py in the W1141 scratch tree): it reads the nemik.web package through importlib.resources: index.html (lines 1426, 1469) and vendor/* (lines 1427-1430, 1466-1475, each file's bytes copied to the static output); also the workstream queue/ledger files and landings, pace and round files under the root (lines 1536, 1842-1855), which are runtime inputs the test supplies from tests/fixtures/fleet. So the per-module design must put src/nemik/web/** (index.html and vendor/) in test_layout's data, besides the Python libraries of serve's cone. Whether the core wasm sits under web/vendor I did not check. Dependency on 'nemik.web' as a package: src/nemik/web/__init__.py is in the graph's outside list (68), so it would be wrongly dropped from the cone unless declared; this is a concrete miss the import-only cone would make. I still need to confirm where the core wasm lives and add web/** and web/__init__.py to the test_layout data in the macro. | 2026-11-07T15:05:29Z: G0 2026-11-07T15:05:28Z: [NO-PACE-STAMP] Precommit: advances W1141. Actuator: send github-14 the interim report (before numbers measured, prediction derived, caveats), and find where the core wasm lives (ls src/nemik/web and src/nemik/core in the scratch tree). Sensor: the message id from SendMessage; the ls listing. Expected: message accepted; wasm is under src/nemik/web/vendor or src/nemik/core. | 2026-11-07T15:05:48Z: 2026-11-07 core.wasm, core.wasm.sha256 and wasm.js sit directly under src/nemik/web/ (find in the scratch tree), so a web/** data declaration covers them. Interim report (before measured, prediction derived, gaps listed, no after-count) sent to github-14, msg_id 1574100f-fbc8-460f-ba17-9971c482d079, delivery to its Claude not yet confirmed. | 2026-11-07T15:07:29Z: 2026-11-07 github-14 reply to the interim (peer request, not operator approval): (1) reconcile 28 vs 39 spawn-based test files by a MECHANICAL rule; (2) keep each such test on its wider inputs (the whole .venv) until its inputs are declared; (3) add a check that fails when a test spawns the package without a declared dependency; (4) compare notes with mtools on W2317's results when they arrive (mutants surviving their import cone: the same class); (5) the katas rc=128 answer is still owed. I still need to do all five; none started. The wider-inputs default in (2) is the safe shape: the macro narrows a test only when it is on a declared allow-list. | 2026-11-07T15:09:16Z: R338 applied: github-14's five asks triaged into child cards W2046 (mechanical spawn rule plus the spawn-without-declared-dependency check, answers 28 vs 39; first), W2047 (compare with mtools W2317), W2048 (katas rc=128, first look recorded there). Their requests are peer requests, not operator approval. Follow-up to github-14 marking the interim 18-of-100 and 270-minute figures as UNVERIFIED upper bounds sent this tick. The core.wasm.sha256 beside the wasm means a core/ change that rebuilds the wasm changes a data file of test_layout, so core/** as well as web/** belong in its cone (R338 f1). | 2026-11-07T18:40:58Z: 2026-11-07 condition from github-14 (relayed): W1141 does not land narrowed targets for a test until that test's paths stop escaping the runfiles tree (nemik:W2052, tests that resolve their own path and read undeclared data under bazel). Edge recorded: W2052 --add-enables W1141. Each fix is to be witnessed by the drop-a-label failure and the restored-label pass (the second half has not been run for test_schemagen_errors). mtools is designing the shared checker form, so no nemik-only checker first. The result was sent to mtools under W2046. v5 of W2043 stays frozen, no v6 (github-14). | 2026-11-07T20:35:32Z: G0 2026-11-07T20:35:31Z: [NO-PACE-STAMP] Precommit: advances W1141. Actuator: open a fresh scratch worktree nemik-W1141b at HEAD eb3fd9c8, copy over the four scratch edits (tools/spawn_reach.py, tests/test_spawn_reach.py, the absolute imports in landings.py and hostroot.py), regenerate the importdag graph, rerun reach.py. Sensor: mikemol-scratch open exit, mikemol-graph --write line, reach.py totals. Expected: modules rise from 150 by the three new modules (153), tests from 481 by the new tests, module reach mean near 18.6 percent. | 2026-11-07T20:36:17Z: 2026-11-07 W1141 scratch tree moved to HEAD eb3fd9c8 (git reset --hard in the scratch tree only, after saving spawn_reach.py and its test to the scratchpad and re-applying them and the two absolute imports in landings.py and hostroot.py). mikemol-mutate-free refresh: mikemol-graph --write regenerated graph.json and dag.bzl, reach.py on the new graph printed: modules=150 tests=483, module reach median 67 p90 228 max 265 mean 90.1 = 18.6 percent of tests, test cone median 10 p90 82 max 84, hubs editverbs 265, adapter 264, warrants 264, tomlview 263, flow 243, queuefiles 242, climate 240, score 240. So the prediction is unchanged by the landings: 18.6 percent reach. My G0 expected modules to rise to 153: wrong, because the earlier 150 was already counted on a tree that carried the W2043 patch (jsonarena, jsonparse, schemagen included), so 150 is the same set. Tests rose 481 to 483 (the new gate-repair test file and test_spawn_reach). Measured before figures for the after comparison: 478 fresh of 481 (W2043 gate) and 479 fresh of 482 (W2039 gate). Not done: the dag.bzl wiring into the BUILD macro, SPAWN_WIDE, the W2052 conditions for narrowing a test, the after-count. | 2026-11-07T20:39:35Z: 2026-11-07 carried items rerun on the refreshed tree (scratch tree at HEAD eb3fd9c8 plus spawn_reach.py, its test and the two absolute imports): pytest tests/test_spawn_reach.py 2 passed in 0.11 s. mikemol-pycheck --ratchet . on that tree: ruff 0 findings baseline 0, mypy 0 findings baseline 0. NOT rerun: the mutation that should fail the spawn_reach test, and the 62-file name diff against the saved rule output (the test count is now 483 and W2039 added a test file that imports no helper, not checked). The graph and reach figures were already regenerated on this tree. | 2026-11-07T21:43:14Z: 2026-11-07 OPERATOR DIRECTION (relayed by github-14, VERIFIED by me: both records checked with --warrant --dry-run before attaching, speaker human, host lines 148779 at 21:38:38Z and 148833 at 21:40:11Z, warrants attached to this card): run tests and checks through the bazel server, not mypy, ruff or pytest directly, so the server stays warm and the verdict is the gate's; mtools is designing a shell filter that refuses direct runs. Where no fine-grained target exists, card it under W1141. From here the bazel line is the one that counts. Admission: in the W2043 and W2039 work I ran pytest directly many times (schema tests, test_spawn_reach, test_test_inputs, the wider suite) and mikemol-pycheck --ratchet directly; the bazel line existed only for the eleven W2043 targets and the final gate. Gap carded as W2055: no bazel target runs ruff or mypy on one changed file (the ratchets are whole-tree test targets). Test files each have a bazel target (the macro makes one per tests file). The memory note on running tests was already the same ruling (operator 2026-10-24) and was updated, with its stale index line, to say so. | 2026-11-07T22:08:17Z: 2026-11-07 R352 applied. Point 1 (a second explanation of the D3 result: the shared list supplied the dropped label) is answered by the experiment already run: with the shared list UNCHANGED, test_schemagen_errors built its manifest path from Path(__file__).parent (no resolve) and the label dropped failed with FileNotFoundError, while with resolve kept it passed. The shared list does not carry tests/fixtures/apischema/ (it names only //tests/fixtures:fleet), so the macro cannot have supplied the file; the escape through resolve() is what the pair of runs separates. What the 40-file count does not separate is how many of them read files the shared list does not carry. Point 2 stands and changes the plan: the shared list gives EVERY test :.venv (which holds src) and the other shared files, so every test depends by declaration on every source file whatever its import cone: that is the mechanism behind 446-448 of 449-451 targets fresh on a src edit, and it means the per-module libraries and the reach table (module median 67 of 483 tests, mean 18.6 percent) change nothing for the gate until the macro stops handing every test the venv and all of src. The reach table is a CEILING on what the first step can save, not an expectation. Reordered plan for W1141: (1) a macro variant where a test's data is its graph cone (dag.bzl closure) plus declared extras, the 62 spawn-reaching tests keeping the wide list, and tests reading web, core or data files declaring them (W2052); (2) one measured before and after on a few tests, comparing the gate's fresh count; (3) the fleet-wide switch. I have not built or run any of it. | 2026-11-07T22:25:26Z: 2026-11-07 READ of BUILD.bazel lines 1-28 (main tree): the tests are NOT py_test targets. Each is an sh_test named for its module whose srcs is tests/venv_pytest.sh, run under //:.venv's interpreter (nemik:W103), the venv being the input. There is no py_library for nemik anywhere in this file (a grep for py_test, py_library, imports, deps and main printed nothing). So step 1 of the reordered plan is larger than a data list edit: the package comes from the installed venv, so a test with a narrowed cone has no way to import nemik except by a different launcher (tests/venv_pytest.sh with PYTHONPATH set to the cone's sources instead of the venv's installed copy) or by py_library targets per module from dag.bzl that a py_test or sh_test consumes. Not designed yet, and mtools hooks/BUILD.bazel (W1988) is the existing example to read for the py_library form. I have not read tests/venv_pytest.sh nor mtools' closure.bzl. | 2026-11-07T22:35:30Z: G0 2026-11-07T22:35:28Z: [NO-PACE-STAMP] Precommit: advances W1141. Actuator: read tests/venv_pytest.sh and mtools hooks closure.bzl head to see how a narrowed test could import nemik. Sensor: the file texts. Expected: venv_pytest.sh execs the venv python with the test file and pyproject, relying on the installed package; closure.bzl exposes lib/deps_of/test_deps over a generated dag.bzl. | 2026-11-07T22:35:58Z: 2026-11-07 THE MECHANISM, read. BUILD.bazel lines 148-153: venv_from_hub(name .venv, hub_requirements = the third-party wheels plus mtools' vendored dists, srcs = glob of src/nemik/** minus pycache, console_scripts for every nemik command). So //:.venv CONTAINS every file of src/nemik, and every test sh_test runs tests/venv_pytest.sh under that venv's interpreter (comment in the script: 'what is tested is what is installed, not a py_test's per-target import path', citing the operator quote on nemik:W103 that the .venv is a build input for everything subsequent). Therefore any edit to any src file changes the venv's inputs and so every test's: that is the bazel query path test -> //:.venv -> src/nemik/X.py found on W1232 and the reason a src edit makes 446-448 of 449-451 gate targets fresh. DESIGN FORK for step 1 (not decided): (A) split the venv: a third-party-only venv for tests (hub_requirements without srcs and without console scripts, stable across src edits) and nemik's own source delivered per test as its cone (files from the dag.bzl closure) on PYTHONPATH in a launcher variant of venv_pytest.sh; the full venv stays for the non-test consumers (hooks, console scripts). (B) per-module py_library targets from dag.bzl consumed by py_test, as mtools does in hooks (not read). A reverses the W103 premise 'what is tested is what is installed' for narrowed tests, so it needs the operator's word or W103's authors' rationale answered: the image test stage runs plain pytest with the project installed editable (W571), which the gate already replays with pytest --collect-only outside bazel (step 3 of gate_staged.sh). A is the smaller change. Not decided, not built, not asked of anyone yet. Next: read mtools hooks/BUILD.bazel and closure.bzl, and ask github-14 whether the W103 premise may be reversed for narrowed tests. | 2026-11-07T22:38:26Z: 2026-11-07 R353 applied. Read mtools hooks/closure.bzl (59 lines): lib(path) names the per-module library as the label colon mod_ plus the module path with the dist prefix and .py removed and slashes written double underscore; deps_of(entry) lists an entry's imports as those labels with the typing_only ones left out (they are needed to check types, never to run, and two modules naming each other that way would be a bazel cycle); test_deps(graph, entry) adds support_deps (the libraries the conftest imports, from the graph's support section) to a test's own, deduplicated and sorted. So option B is feasible in form: nemik's graph.json already has the same modules, tests and support sections (support lists tests/conftest.py). The reviewer's proposal: the 62 spawn-reaching tests keep the full venv (a SPAWN_WIDE list), all others take the narrow carrier, so W103's premise ('what is tested is what is installed') is kept where a test runs the package as a process and need not be reversed there. My note on that: it IS still reversed for the other ~420 tests, which would import from per-module libraries or a source cone and not the installed copy, so the question for github-14 and the operator is narrower than 'reverse W103' but not empty. Recorded before any wiring; the question goes to github-14 now. | 2026-11-07T22:40:24Z: 2026-11-07 DESIGN PROPOSAL C (github-14's, a design proposal and NOT an operator ruling): neither A nor B. Keep W103's premise (what is tested is what is installed) and make the INSTALL itself per cone: the venv rule installs each module as its own action producing exactly the bytes the real install puts at that path; a narrowed test's venv is the third-party layer plus the installed files of its cone; a src edit then invalidates only the installs, hence the tests, whose cone holds that module. Two honesty checks: (1) a certification action shows the union of per-module installs equals the full venv's installed tree byte for byte; (2) spawn-reaching tests keep the full venv (62 by the spawn_reach rule). The image stage's plain pytest on the installed package stays the integration witness and should become a result-emitting action under W1978 rather than a collect-only replay. Files that cannot be installed per module must be named and counted in the shared layer. To be taken to mtools on W1978 as the carrier for both repos (hooks' py_library form has the same gap). If mtools or a measurement shows C infeasible, bring the reason back to github-14 before choosing A or B. MY READ OF bazel/venv.bzl lines 104-180 on feasibility (reading only): the venv already installs nemik's source as one SYMLINK ACTION PER FILE (ctx.actions.symlink(output = site-packages/rel, target_file = f) for each file of srcs, standing in for an editable install), and the third-party layer the same way from deps. So per-module install is already per-file in construction and is byte-identical by construction (a symlink to the same file); what makes every test depend on every file is that one rule bundles all outputs into one target and every test takes the whole target. Files that are NOT per module and would sit in the shared layer: the interpreter link (bin/python3), pyvenv.cfg, the pythonhome.runfiles note, the site hook with the sys.path line (venv.bzl around line 206-220, not fully read), all third-party site-packages, the console scripts (text written from module:function strings, so they do not change when source bytes change), and the package-root __init__.py files (src/nemik/__init__.py, core/__init__.py, web/__init__.py), which the import graph does not list as an edge of a cone but any import of a submodule needs. Package data read through importlib.resources (src/nemik/web/*, src/nemik/data/*) are files of srcs too, installable per file, but a test must DECLARE them (the W2052 concern). Not measured: whether a restricted runfiles tree really invalidates only the tests whose cone holds a changed file (needs one trial on a few tests), and what the sys.path/site hook needs. | 2026-11-07T22:42:05Z: 2026-11-07 mtools answered on carrier C (reading only, nothing run on their side): their venv rule is the same construction (venv_from_hub, one symlink action per source file, one per third-party file, all outputs in one DefaultInfo returned whole), so C is one change to a shared rule IF nemik's bazel/venv.bzl is the same rule, and nemik's file is a COPY (its first line says vendored from mtools venv.bzl, unchanged but for one line, nemik:W96): the change lands in both until they converge, and I have not diffed them. mtools:W103 is an unrelated done card, the premise wording is nemik:W103 (header of tests/venv_pytest.sh quoting an operator line I have not traced to a transcript line). mtools agrees the package-root __init__.py files are shared and prefers a pilot on a dist with few modules, not hooks (200 sites), not nemik (150 modules). Nothing measured for C by anyone. Pending: a trial on a few nemik tests (restricted runfiles tree invalidates only tests whose cone holds a changed file), and the transcript line behind the W103 quote. | 2026-11-07T23:00:49Z: 2026-11-07 DIFF RUN: nemik/bazel/venv.bzl against mtools/rules_py/venv.bzl (the mtools source is under rules_py, not hooks). The two differ in four places: the first two header lines (nemik's vendoring note vs the SPDX lines), an added LINUX-ONLY comment block of 4 lines in mtools' copy near line 209, a helper function _relative_path (11 lines) present in NEMIK's copy and absent in mtools' (so mtools' has moved on and removed it), and a new visibility attribute in mtools' venv_from_hub macro (3 added lines) that nemik's lacks. The per-file symlink loops are identical. So nemik's copy is an OLDER vendoring, not 'unchanged but for this line' any more: my reply to mtools that it was a copy stands, but the statement in its header is now stale as to mtools' current source. The shared-rule change for carrier C would have to be rebased across these four differences, not merely landed twice. | 2026-11-07T23:05:29Z: G0 2026-11-07T23:05:28Z: [NO-PACE-STAMP] Precommit: advances W1141. Actuator: find the operator line behind the W103 quote ('build input for everything subsequent') with mikemol-transcriptstruct --grep over the host transcript. Sensor: a printed record with its line and uuid, speaker human. Expected: one or a few hits in the 695f3e0a host transcript, dated September 2026; if none, the quote came from another session's transcript. | 2026-11-07T23:06:09Z: 2026-11-07 SEARCH FOR THE W103 QUOTE (operator wording 'build input for everything subsequent', quoted in the header of tests/venv_pytest.sh): mikemol-transcriptstruct --human over the host transcript 695f3e0a: 0 hits of 149177 records. The same search over this session's transcript: 0 hits of 294705 records. nemik W103 itself (done, closed 2026-09-28) carries no transcript citation: its evidence describes the py_test to sh_test change and its witnesses only. The quote was therefore written into the script from a source I cannot find: an earlier session or another repo's transcript, dated about 2026-09-27 or 28. Not found, so 'what is tested is what is installed' is a nemik-recorded premise with an unverified operator citation, which weakens it as a ruling to protect. Not searched: the other transcripts in the nemik project directory and the other repos' transcripts. | 2026-11-07T23:08:31Z: 2026-11-07 R354 applied. The reviewer ran git log -S on the exact phrase: one commit f02b5d63 (2026-09-28, subject 'W103: every test runs under the built //:.venv's interpreter'). I read that commit's message with git show -s: it is the subject line and a Co-Authored-By trailer, no body, no source citation. One last transcript search, the other half of the quote ('That .venv is then') over the host transcript, human speakers: 0 hits of 149177. I am stopping the search as the reviewer advised (not searched: the other transcripts in the nemik project directory and other repos'). CONCLUSION: the premise 'what is tested is what is installed' (W103, tests/venv_pytest.sh header) is a nemik session decision of 2026-09-28 whose operator citation I cannot source, so it is judged here on its merits and against the later operator directions on this card (host lines 148779, 148833, 148882), not as an operator constraint. The merits still count: the image test stage runs plain pytest on the installed package, which is why carrier C (per-cone install) keeps the installed shape. This is also said to github-14 in the next message. | 2026-11-07T23:09:53Z: 2026-11-07 github-14 (relayed): they know no source for the W103 premise, told the operator it was their ruling without checking and are correcting that. Recorded on W103 as a nemik session decision of 2026-09-28 with no operator warrant. Carrier C stays github-14's PROPOSAL on its merits (testing the installed shape catches packaging faults that A and B miss, the cost being one per-module install action). If mtools or a measurement shows C costs much more than B, A and B are open on merits too. The operator was told C is a proposal and has not overruled it. Next measurable step: a trial of C on a few tests (cost of per-module installs, and whether only the tests whose cone holds a changed file are invalidated).",
+      "next_bounded_step": "Do not cite 233 as a W1141 result. The after-count needs a first gate of a tree whose src edit has not been run before.",
+      "evidence": "2026-10-27: 2026-10-27 github-8f: test_layout's bazel data is the whole :.venv, so every src change reruns the 15-minute browser suite and a sensor fix waits on a browser hang. Operator ruling 97611 (human, verified, warrant attached): exhaustive, recursive sharding of build targets and actions, build as test, only cache misses become fine-grained consequences of individual changes. mtools did this for hooks (W1988): per-module libraries generated from importdag's graph (hooks/closure.bzl lib/deps_of/test_deps over a generated dag.bzl, kept equal to the sources by a graph_fresh test). Reuse that generator, do not build one. NOT done: nemik's import graph is not generated; a module's imports include lazy and typing-only ones; large, so atomize | 2026-10-27: github-8f re-asked (2026-10-27): atomize test_layout's whole :.venv dependency with mtools importdag so a src change stops rerunning the 15-minute browser suite; on W1063/W1044's line. Order by rank, after the paydown. | 2026-11-07T12:20:40Z: 2026-11-07: operator priority warrant attached (host 695f3e0a line 147475, uuid 3de219a3-e28c-42f2-ac74-4c7eee3d41c8, verified human by --warrant --dry-run before attaching), relayed by github-14: raise cache hit rate and analysis cache hit rate by atomizing what can miss. Pace guard read from code (mtools hooks/src/mikemol/hooks/ratchet_pace.py stack_reason lines 298-304): a stack is admitted only if it has no owed ratchet, is queue files alone (line 299), touches an owed ratchet (line 301, here codon-baseline.json), or matches an admission row (line 303). A BUILD.bazel-only stack is none of these, so the pace HOLDS it while nemik owes codon-baseline. Consequence: W1141's code/BUILD stack cannot land before W2043 (which lowers codon-baseline.json) or an admission row. Measurement and design work in a scratch worktree is not held. Before/after measure to attach: gate hit count on a one-line change in one module, and analysis re-done; reuse mtools' miss-naming tool under W1982/W1985 (not yet located). I still need to locate that tool and check W1035-W1037 and the katas rc=128. | 2026-11-07T12:22:26Z: 2026-11-07 github-14 accepted the pace reading: no new admission row for BUILD-only stacks; W1141 lands behind W2039 row, mtools:W2328, W2043. Ask: freeze W1141 and measure it in scratch so it lands right after W2043, and send before/after numbers (gate hit count on a one-line change in one module; analysis re-done). Peer request, within the operator priority warranted above. Located: mtools/importdag (src/mikemol/importdag, the generator W1141 reuses). Not found by filename: a miss-naming tool under mtools W1982/W1985 (find on names containing miss matched only admission files and a mypy cache); I still need to read mtools W1982/W1985 for its name. Not started: the scratch worktree for W1141, the baseline measurement. | 2026-11-07T12:35:27Z: G0 2026-11-07T12:35:26Z: [NO-PACE-STAMP] Precommit: advances W1141 (operator cache priority, warranted). Actuator: read mtools W1982 and W1985 with the writer's --show against mtools' queue to name the miss-naming tool, and open a scratch worktree nemik-W1141. Sensor: the tool's name and path printed by those reads; mikemol-scratch open exit code. Expected: a named tool and an open worktree; no code edited. | 2026-11-07T12:36:38Z: 2026-11-07 miss-naming tool, read from mtools W1982 and W1985: there is NO tool yet. W1985 (name the input digest behind each miss by comparing two gate invocations) is blocked on mtools:W2134 (gatephase keeps invocation ids durably); until then by hand via bazel aquery in the gate's output base. The reusable measuring method is mtools W1982's: importdag.resolve.derive over the dist, imports eager and deferred, reporting per-module the number of test files it reaches (hooks: median closure 2 modules, a one-module change reaches on average 25.8 of 237 test files, against 100 percent today). Plan for nemik's baseline in scratch: run the same derive over src/nemik and tests, report per module the tests reached, and today's reach is every test (test_layout's data is the whole :.venv). Scratch worktree /var/tmp/claude-1000/-home-mikemol-github-nemik/ca6f3699-66ac-4ffa-a3ca-6ececbab791f/scratchpad/wt/nemik-W1141 opened. I still need to run the derive and record the numbers. | 2026-11-07T12:38:53Z: R333 applied. Finding 2: nemik-W1141 worktree is cut from HEAD f79a046d with W2043's held-W2043-real-modules-v3.patch applied (git apply printed nothing; v3 not v2, which is superseded); W2043's BUILD data lines (fixtures filegroup, codon_call, codon_census, hookcheck, @codon, NEMIK_CODON) are to stay as inputs to the new per-module macro. Base recorded here. Finding 1, not yet done: tabulate the gate's own 'N fresh of M targets' lines for ten recent stacks as the measured baseline, then run importdag derive and compare predicted reach with the measured. I still need to find those lines in the G1s/ledger and run the derive. | 2026-11-07T12:55:52Z: 2026-11-07 measured baseline from this queue's own ledger (R333 f1), partial: one-module src edits made 446 of 449 gate targets fresh (W1232's mint line, 2026-10-28), and two later gate runs read 448 fresh of 451 (2026-10-29 00:41Z and 02:20Z); a tests-only stack (991, W1629) read 6 fresh. So today's src-edit reach is ~99 percent of targets, tests-only ~1 percent. Only a few lines found by grep of paths-forward.ledger; the stack345/633/639/643 json files and retros r10/r29/r223/r238/r243/r244 also carry 'fresh of' lines and are not yet tabulated, so ten stacks are NOT yet listed. Existing card W1232 (find why one-module edits make 446 of 449 targets fresh) covers the same question: extend it with this card rather than mint a parallel one, as github-14 asked. I still need to read W1232 and tabulate ten stacks, then run importdag derive. | 2026-11-07T13:05:27Z: G0 2026-11-07T13:05:26Z: [NO-PACE-STAMP] Precommit: advances W1141. Actuator: read W1232 with --show, then run mtools importdag derive over the nemik-W1141 worktree's src/nemik and tests (usage found from its --help). Sensor: derive's printed closures; the count of tests reached per module. Expected: a per-module reach table with a median well under 100 percent of tests; or a usage error that I report. | 2026-11-07T13:06:35Z: 2026-11-07 BASELINE AND PREDICTION. Before (measured, W1232 card, 2026-10-28): any src edit makes 446 of 449 gate targets fresh, bazel test step 2176 s (stack619); a tests-only stack made 7 fresh of 449 in 84 s (stack624): every src edit reaches every test through //:test_X -> //:.venv -> src (bazel query somepath). Prediction (derived, not yet measured by a gate): mtools importdag graph (mikemol-graph --dist <worktree> --package nemik --write, run in scratch worktree nemik-W1141 on W2043's v3 patch; graph.json 104518 B, dag.bzl 104788 B) gives 150 modules and 481 tests; reach per module over the transitive import cone (scratch reach.py): median 67 tests, p90 226, max 264, mean 89.5 = 18.6 percent of tests; a test's cone: median 10 modules, p90 82, max 84. Hubs: editverbs 264, adapter 263, warrants 263, tomlview 262, flow 242, queuefiles 241, score 239, blocks 237, cards 237, index 237. Caveats: graph.json lists eager imports only (typing_only is separate) so a cone can be too small if a lazy import is missed; tests that read data files (test_layout reads the whole venv) need their data kept; 481 tests vs 449 gate targets differ (the 449 is from 2026-10-28). After: NOT measured; needs the generated per-module libraries and one gate on a one-line change. Files generated in scratch only, nothing in the main tree. I still need to wire dag.bzl into BUILD.bazel (per-module py_library, each test depends on the closure of what it imports plus its data), keep a graph_fresh test, and measure the after-count. | 2026-11-07T13:09:24Z: R334 accepted, as next steps (none done): (1) the 18.6 percent reach is a lower bound: the graph omits typing-only and deferred imports, and 39 test files (about 8 percent, by the reviewer's grep) spawn procrun/subprocess/entry points and so depend on the whole venv or the entry point's cone; the BUILD wiring must include deferred imports, and I will report two tables, eager-only and with spawn tests counted at their entry point's cone (reviewer estimates the mean rises to about 26 percent; unmeasured by me). (2) the deciding number is what the change does to test_layout (the 15-minute suite that motivated the card; it spawns nemik-serve, so likely serve's closure, maybe the max cone of 84 modules): compute the modules outside serve's cone, then count from landed history how many of the last 100 src-bearing stacks touched only those, and the gate minutes saved. I still need to do both. | 2026-11-07T13:27:09Z: 2026-11-07 R334 f2 first reading (eager-import graph, so an upper bound on what is outside): serve.py's cone is 82 modules, 68 of the 150 lie outside it. Of the last 100 src-bearing COMMITS (git log -n 600; commits, not gate stacks; .py under src/nemik/ only), 18 touched only modules outside serve's cone, so under per-module libraries test_layout (which spawns nemik-serve) would not have been a rerun candidate for those 18. Not computed: the gate minutes saved (needs test_layout's share of each gate: the 15-minute figure is from the card, not re-measured), and whether other tests that spawn entry points reach those modules. Caveats that push the 18 DOWN: serve's lazy and typing-only imports are missing from the graph, e.g. staticserve, pdf, pdfviews, preview and web/__init__ show as outside serve's eager cone yet serve may load them on a route. Scratch scripts outside.py and hist.py; files hist.txt/outside.txt in the scratchpad. I still need to add deferred imports to the graph, recompute, and the R334 f1 two-table report. | 2026-11-07T13:35:27Z: G0 2026-11-07T13:35:26Z: [NO-PACE-STAMP] Precommit: advances W1141. Actuator: read mtools graph.py lines 60-135 to learn whether graph.json imports include function-level (deferred) imports and typing_only separately, then recompute serve's cone with imports plus typing_only plus deferred if the graph carries them. Sensor: graph.py text; outside.py output. Expected: deferred imports are already in imports (the graph walks all ast nodes), typing_only is a separate list that I add; the outside count drops below 68. | 2026-11-07T13:35:43Z: 2026-11-07 CORRECTION to my and R334's caveat (read mtools importdag graph.py lines 67-130 and 229-238): graph.json 'imports' is built by ast.walk over the whole tree, so it ALREADY includes function-level (deferred) imports and TYPE_CHECKING imports; 'typing_only' is a separate list of those imported only under TYPE_CHECKING, a subset, not extra edges. So the earlier statements 'graph.json lists eager imports only' and 'serve may load staticserve lazily' were wrong as to import statements, and my G0 prediction that serve's outside count would drop below 68 is refuted before running: it stays 68 of 150, and the 18-of-100 stands for import edges. What the graph still cannot see: importlib.import_module and string-named loads, subprocess spawns of entry points (the 39 spawn-based test files, R334 f1), non-.py reads (data files, declared via reads), and relative imports (level>0 are skipped; nemik uses absolute imports, unchecked by me). So the remaining lower-bound risks are dynamic loads and spawns, not lazy imports. I still need to grep src/nemik for importlib.import_module and __import__ and to build the spawn-test table. | 2026-11-07T13:35:50Z: grep of the nemik-W1141 worktree src/nemik for import_module, __import__, importlib.util, find_spec: no matches, so the src has no dynamic-import edges the graph misses. Lazy imports are covered. The one remaining blind spot is the spawn-based tests. I still need the spawn-test table. | 2026-11-07T13:40:51Z: R335 verified by grep of the nemik-W1141 worktree: exactly two relative imports in src/nemik, landings.py:12 'from .hostroot import fields' and hostroot.py:17 'from .climate import _instant'. importdag graph.py line 77 keeps only ImportFrom with level 0, so graph.json lacks the edges landings->hostroot and hostroot->climate; per-module libraries built from it would raise ModuleNotFoundError for those two only under the narrow libraries. Fix options: make both imports absolute in the W1141 stack (a two-line src edit, which also carries the pace hold behind W2043) or ask mtools to resolve relative imports. Then regenerate the graph and assert the edge count rises by two. R334 f1's lazy-import half withdrawn by the reviewer; its spawn-test half and f2 (test_layout share) remain open. I still need to make the two imports absolute in scratch, regenerate, and count edges before and after. | 2026-11-07T13:58:20Z: 2026-11-07 R335 applied in scratch (nemik-W1141): landings.py:12 and hostroot.py:17 made absolute (from nemik.hostroot import fields; from nemik.climate import _instant), mikemol-graph --write regenerated. graph.json 4740 -> 4744 lines: landings.py now lists src/nemik/hostroot.py (observed, grep of the entry); the +4 lines, not +2, is two empty 'imports: []' lists (1 line each) becoming one-element lists (3 lines each), so two edges added; hostroot->climate edge not separately grepped. tests/test_landings.py and tests/test_hostroot.py: 6 passed in 0.16 s (pytest, not bazel). The reach and serve-cone figures above were computed BEFORE this regeneration and not recomputed: two edges could only raise them slightly. I still need to recompute reach.py/outside.py on the new graph, grep hostroot's entry, and fold the two imports into the stack as a src edit (pace-held behind W2043). | 2026-11-07T14:05:31Z: G0 2026-11-07T14:05:30Z: [NO-PACE-STAMP] Precommit: advances W1141. Actuator: rerun reach.py and outside.py on the regenerated graph.json, and grep hostroot.py's entry for climate.py. Sensor: their printed numbers and the grep. Expected: hostroot lists src/nemik/climate.py; reach mean rises by at most 1 point from 18.6 percent; serve cone stays 82 unless hostroot or landings sit in it. | 2026-11-07T14:05:49Z: 2026-11-07 recomputed on the regenerated graph (relative imports made absolute): hostroot.py entry lists src/nemik/climate.py (observed by grep). reach.py: 150 modules, 481 tests, module reach median 67, p90 227 (was 226), max 264, mean 89.7 = 18.6 percent (was 89.5, 18.6); climate.py is now a hub at 239 tests. serve cone unchanged: 82 modules, 68 of 150 outside. The earlier figures stand to within one test. Both G0 expectations met. Still open: spawn-test table (R334 f1), test_layout share and gate minutes (R334 f2), BUILD wiring of dag.bzl, the after-count. | 2026-11-07T14:07:55Z: R336 applied: diff of the sorted outside lists, old graph (outside.txt) vs regenerated (outside2.txt): empty (diff printed nothing), so the two lists are identical, not only equal in count. hist.py rerun on the new list: commits scanned 600, src-bearing taken 100, touching only modules outside serve's cone 18. The 18 stands. Still open: the no-relative-import witness test (R335), spawn-test table, test_layout share and gate minutes, BUILD wiring, the after-count; the absolute-import edits are scratch-only so the card's numbers describe the scratch tree, not HEAD. | 2026-11-07T14:24:41Z: 2026-11-07 spawn-test first cut (R334 f1): grep -l over tests/test_*.py in the W1141 scratch tree for subprocess|procrun|capture(|Popen|run_module|runpy|-m nemik matched 31 files (the reviewer's earlier grep said 39 with a different pattern; the two do not agree and I did not reconcile them): test_witnesses, realize, gate_weights, rank_apply, akonadi_guard, check_committed, layout, pins, architecture, gate, certify, rank_flow, salience, deterministic, hooks_wired, metrics_realizability, mpxj, static_view, ics_reader, precommit_gate, check_realizability, importer, serve_no_spawn, staticserve, publish, host_citations, residue, history. (count of names listed here is 28, the grep printed 30 lines for 31 per my read: unreconciled, recount before relying.) This is a name-level match: it does not say WHICH entry point or module each spawns, so the table of 'spawn tests at their entry point cone' is NOT built. Next: for each, read the command spawned and map it to a module, then add that cone to the test's reach. I still need to do that and reconcile 31 versus 39. | 2026-11-07T14:24:46Z: CORRECTION to the spawn-test entry just above: I wrote 31 files matched and that the grep printed 30 lines; both were wrong. I recounted the 28 names I listed from the grep output and that is the count: 28 files matched (not 31). The reviewer's 39 (a different pattern) still does not agree with 28 and is unreconciled. The table remains unbuilt. | 2026-11-07T14:35:28Z: G0 2026-11-07T14:35:27Z: [NO-PACE-STAMP] Precommit: advances W1141 (R334 f2). Actuator: grep tests/test_layout.py in the scratch tree for what it spawns or imports (nemik-serve, serve, subprocess argv) and for its data. Sensor: the grep lines. Expected: it spawns nemik-serve or imports serve, so its closure is serve's 82-module cone; its data is the whole venv. | 2026-11-07T14:35:45Z: 2026-11-07 R334 f2 tied to test_layout: tests/test_layout.py (worktree) imports 'from nemik.serve import build_static' (line 31) and uses webpage.served() for its server fixture (tests/webpage.py, not read by me), plus mikemol.procrun.proc.capture, playwright. So its import closure is serve.py's cone: 82 modules, with 68 of 150 outside (observed: outside2.txt). Under per-module libraries test_layout is therefore a rerun candidate only when a commit touches one of those 82. Of the last 100 src-bearing commits 18 touched only the 68 outside (hist.py), so test_layout would have been a cache hit for those 18 (commits, not gate stacks). Gate cost, DERIVED not measured: the card's 15-minute figure for test_layout x 18 = about 270 test-minutes saved per 100 src-bearing commits, i.e. about 2.7 test-minutes per commit on average; this is CPU/test time, not gate wall time, and I have not checked the figure, whether webpage.py spawns nemik-serve with a wider cone, or that test_layout is still 15 minutes. I still need those three checks. | 2026-11-07T14:38:29Z: R337 applied in part: test_layout's page waits on typeof coreWasm / treeOf (line 1837), cy.nodes, data.ruler, emitF, i.e. assets from src/nemik/web/index.html and the core wasm, which no Python import edge shows. hist.py changed so that every file under src/nemik/ (any type) of a commit must lie in the outside-module list, and a non-.py file is never in it; a commit counts as src-bearing when it has a .py under src/nemik/. Rerun on the unchanged outside list: still 18 of 100. So none of the 18 touched web/, core/ or data/ files; the figure survives this gap. The gap itself is NOT closed for the BUILD wiring: the per-module design must declare test_layout's non-Python inputs (src/nemik/web/**, the core inputs) as data, derived from what build_static reads, which I have not read. Not done: recount grouped by stack (the gate runs per stack tip, not per commit); the 15-minute figure; the spawn-test table. | 2026-11-07T14:55:54Z: 2026-11-07 non-Python inputs of test_layout via build_static (serve.py in the W1141 scratch tree): it reads the nemik.web package through importlib.resources: index.html (lines 1426, 1469) and vendor/* (lines 1427-1430, 1466-1475, each file's bytes copied to the static output); also the workstream queue/ledger files and landings, pace and round files under the root (lines 1536, 1842-1855), which are runtime inputs the test supplies from tests/fixtures/fleet. So the per-module design must put src/nemik/web/** (index.html and vendor/) in test_layout's data, besides the Python libraries of serve's cone. Whether the core wasm sits under web/vendor I did not check. Dependency on 'nemik.web' as a package: src/nemik/web/__init__.py is in the graph's outside list (68), so it would be wrongly dropped from the cone unless declared; this is a concrete miss the import-only cone would make. I still need to confirm where the core wasm lives and add web/** and web/__init__.py to the test_layout data in the macro. | 2026-11-07T15:05:29Z: G0 2026-11-07T15:05:28Z: [NO-PACE-STAMP] Precommit: advances W1141. Actuator: send github-14 the interim report (before numbers measured, prediction derived, caveats), and find where the core wasm lives (ls src/nemik/web and src/nemik/core in the scratch tree). Sensor: the message id from SendMessage; the ls listing. Expected: message accepted; wasm is under src/nemik/web/vendor or src/nemik/core. | 2026-11-07T15:05:48Z: 2026-11-07 core.wasm, core.wasm.sha256 and wasm.js sit directly under src/nemik/web/ (find in the scratch tree), so a web/** data declaration covers them. Interim report (before measured, prediction derived, gaps listed, no after-count) sent to github-14, msg_id 1574100f-fbc8-460f-ba17-9971c482d079, delivery to its Claude not yet confirmed. | 2026-11-07T15:07:29Z: 2026-11-07 github-14 reply to the interim (peer request, not operator approval): (1) reconcile 28 vs 39 spawn-based test files by a MECHANICAL rule; (2) keep each such test on its wider inputs (the whole .venv) until its inputs are declared; (3) add a check that fails when a test spawns the package without a declared dependency; (4) compare notes with mtools on W2317's results when they arrive (mutants surviving their import cone: the same class); (5) the katas rc=128 answer is still owed. I still need to do all five; none started. The wider-inputs default in (2) is the safe shape: the macro narrows a test only when it is on a declared allow-list. | 2026-11-07T15:09:16Z: R338 applied: github-14's five asks triaged into child cards W2046 (mechanical spawn rule plus the spawn-without-declared-dependency check, answers 28 vs 39; first), W2047 (compare with mtools W2317), W2048 (katas rc=128, first look recorded there). Their requests are peer requests, not operator approval. Follow-up to github-14 marking the interim 18-of-100 and 270-minute figures as UNVERIFIED upper bounds sent this tick. The core.wasm.sha256 beside the wasm means a core/ change that rebuilds the wasm changes a data file of test_layout, so core/** as well as web/** belong in its cone (R338 f1). | 2026-11-07T18:40:58Z: 2026-11-07 condition from github-14 (relayed): W1141 does not land narrowed targets for a test until that test's paths stop escaping the runfiles tree (nemik:W2052, tests that resolve their own path and read undeclared data under bazel). Edge recorded: W2052 --add-enables W1141. Each fix is to be witnessed by the drop-a-label failure and the restored-label pass (the second half has not been run for test_schemagen_errors). mtools is designing the shared checker form, so no nemik-only checker first. The result was sent to mtools under W2046. v5 of W2043 stays frozen, no v6 (github-14). | 2026-11-07T20:35:32Z: G0 2026-11-07T20:35:31Z: [NO-PACE-STAMP] Precommit: advances W1141. Actuator: open a fresh scratch worktree nemik-W1141b at HEAD eb3fd9c8, copy over the four scratch edits (tools/spawn_reach.py, tests/test_spawn_reach.py, the absolute imports in landings.py and hostroot.py), regenerate the importdag graph, rerun reach.py. Sensor: mikemol-scratch open exit, mikemol-graph --write line, reach.py totals. Expected: modules rise from 150 by the three new modules (153), tests from 481 by the new tests, module reach mean near 18.6 percent. | 2026-11-07T20:36:17Z: 2026-11-07 W1141 scratch tree moved to HEAD eb3fd9c8 (git reset --hard in the scratch tree only, after saving spawn_reach.py and its test to the scratchpad and re-applying them and the two absolute imports in landings.py and hostroot.py). mikemol-mutate-free refresh: mikemol-graph --write regenerated graph.json and dag.bzl, reach.py on the new graph printed: modules=150 tests=483, module reach median 67 p90 228 max 265 mean 90.1 = 18.6 percent of tests, test cone median 10 p90 82 max 84, hubs editverbs 265, adapter 264, warrants 264, tomlview 263, flow 243, queuefiles 242, climate 240, score 240. So the prediction is unchanged by the landings: 18.6 percent reach. My G0 expected modules to rise to 153: wrong, because the earlier 150 was already counted on a tree that carried the W2043 patch (jsonarena, jsonparse, schemagen included), so 150 is the same set. Tests rose 481 to 483 (the new gate-repair test file and test_spawn_reach). Measured before figures for the after comparison: 478 fresh of 481 (W2043 gate) and 479 fresh of 482 (W2039 gate). Not done: the dag.bzl wiring into the BUILD macro, SPAWN_WIDE, the W2052 conditions for narrowing a test, the after-count. | 2026-11-07T20:39:35Z: 2026-11-07 carried items rerun on the refreshed tree (scratch tree at HEAD eb3fd9c8 plus spawn_reach.py, its test and the two absolute imports): pytest tests/test_spawn_reach.py 2 passed in 0.11 s. mikemol-pycheck --ratchet . on that tree: ruff 0 findings baseline 0, mypy 0 findings baseline 0. NOT rerun: the mutation that should fail the spawn_reach test, and the 62-file name diff against the saved rule output (the test count is now 483 and W2039 added a test file that imports no helper, not checked). The graph and reach figures were already regenerated on this tree. | 2026-11-07T21:43:14Z: 2026-11-07 OPERATOR DIRECTION (relayed by github-14, VERIFIED by me: both records checked with --warrant --dry-run before attaching, speaker human, host lines 148779 at 21:38:38Z and 148833 at 21:40:11Z, warrants attached to this card): run tests and checks through the bazel server, not mypy, ruff or pytest directly, so the server stays warm and the verdict is the gate's; mtools is designing a shell filter that refuses direct runs. Where no fine-grained target exists, card it under W1141. From here the bazel line is the one that counts. Admission: in the W2043 and W2039 work I ran pytest directly many times (schema tests, test_spawn_reach, test_test_inputs, the wider suite) and mikemol-pycheck --ratchet directly; the bazel line existed only for the eleven W2043 targets and the final gate. Gap carded as W2055: no bazel target runs ruff or mypy on one changed file (the ratchets are whole-tree test targets). Test files each have a bazel target (the macro makes one per tests file). The memory note on running tests was already the same ruling (operator 2026-10-24) and was updated, with its stale index line, to say so. | 2026-11-07T22:08:17Z: 2026-11-07 R352 applied. Point 1 (a second explanation of the D3 result: the shared list supplied the dropped label) is answered by the experiment already run: with the shared list UNCHANGED, test_schemagen_errors built its manifest path from Path(__file__).parent (no resolve) and the label dropped failed with FileNotFoundError, while with resolve kept it passed. The shared list does not carry tests/fixtures/apischema/ (it names only //tests/fixtures:fleet), so the macro cannot have supplied the file; the escape through resolve() is what the pair of runs separates. What the 40-file count does not separate is how many of them read files the shared list does not carry. Point 2 stands and changes the plan: the shared list gives EVERY test :.venv (which holds src) and the other shared files, so every test depends by declaration on every source file whatever its import cone: that is the mechanism behind 446-448 of 449-451 targets fresh on a src edit, and it means the per-module libraries and the reach table (module median 67 of 483 tests, mean 18.6 percent) change nothing for the gate until the macro stops handing every test the venv and all of src. The reach table is a CEILING on what the first step can save, not an expectation. Reordered plan for W1141: (1) a macro variant where a test's data is its graph cone (dag.bzl closure) plus declared extras, the 62 spawn-reaching tests keeping the wide list, and tests reading web, core or data files declaring them (W2052); (2) one measured before and after on a few tests, comparing the gate's fresh count; (3) the fleet-wide switch. I have not built or run any of it. | 2026-11-07T22:25:26Z: 2026-11-07 READ of BUILD.bazel lines 1-28 (main tree): the tests are NOT py_test targets. Each is an sh_test named for its module whose srcs is tests/venv_pytest.sh, run under //:.venv's interpreter (nemik:W103), the venv being the input. There is no py_library for nemik anywhere in this file (a grep for py_test, py_library, imports, deps and main printed nothing). So step 1 of the reordered plan is larger than a data list edit: the package comes from the installed venv, so a test with a narrowed cone has no way to import nemik except by a different launcher (tests/venv_pytest.sh with PYTHONPATH set to the cone's sources instead of the venv's installed copy) or by py_library targets per module from dag.bzl that a py_test or sh_test consumes. Not designed yet, and mtools hooks/BUILD.bazel (W1988) is the existing example to read for the py_library form. I have not read tests/venv_pytest.sh nor mtools' closure.bzl. | 2026-11-07T22:35:30Z: G0 2026-11-07T22:35:28Z: [NO-PACE-STAMP] Precommit: advances W1141. Actuator: read tests/venv_pytest.sh and mtools hooks closure.bzl head to see how a narrowed test could import nemik. Sensor: the file texts. Expected: venv_pytest.sh execs the venv python with the test file and pyproject, relying on the installed package; closure.bzl exposes lib/deps_of/test_deps over a generated dag.bzl. | 2026-11-07T22:35:58Z: 2026-11-07 THE MECHANISM, read. BUILD.bazel lines 148-153: venv_from_hub(name .venv, hub_requirements = the third-party wheels plus mtools' vendored dists, srcs = glob of src/nemik/** minus pycache, console_scripts for every nemik command). So //:.venv CONTAINS every file of src/nemik, and every test sh_test runs tests/venv_pytest.sh under that venv's interpreter (comment in the script: 'what is tested is what is installed, not a py_test's per-target import path', citing the operator quote on nemik:W103 that the .venv is a build input for everything subsequent). Therefore any edit to any src file changes the venv's inputs and so every test's: that is the bazel query path test -> //:.venv -> src/nemik/X.py found on W1232 and the reason a src edit makes 446-448 of 449-451 gate targets fresh. DESIGN FORK for step 1 (not decided): (A) split the venv: a third-party-only venv for tests (hub_requirements without srcs and without console scripts, stable across src edits) and nemik's own source delivered per test as its cone (files from the dag.bzl closure) on PYTHONPATH in a launcher variant of venv_pytest.sh; the full venv stays for the non-test consumers (hooks, console scripts). (B) per-module py_library targets from dag.bzl consumed by py_test, as mtools does in hooks (not read). A reverses the W103 premise 'what is tested is what is installed' for narrowed tests, so it needs the operator's word or W103's authors' rationale answered: the image test stage runs plain pytest with the project installed editable (W571), which the gate already replays with pytest --collect-only outside bazel (step 3 of gate_staged.sh). A is the smaller change. Not decided, not built, not asked of anyone yet. Next: read mtools hooks/BUILD.bazel and closure.bzl, and ask github-14 whether the W103 premise may be reversed for narrowed tests. | 2026-11-07T22:38:26Z: 2026-11-07 R353 applied. Read mtools hooks/closure.bzl (59 lines): lib(path) names the per-module library as the label colon mod_ plus the module path with the dist prefix and .py removed and slashes written double underscore; deps_of(entry) lists an entry's imports as those labels with the typing_only ones left out (they are needed to check types, never to run, and two modules naming each other that way would be a bazel cycle); test_deps(graph, entry) adds support_deps (the libraries the conftest imports, from the graph's support section) to a test's own, deduplicated and sorted. So option B is feasible in form: nemik's graph.json already has the same modules, tests and support sections (support lists tests/conftest.py). The reviewer's proposal: the 62 spawn-reaching tests keep the full venv (a SPAWN_WIDE list), all others take the narrow carrier, so W103's premise ('what is tested is what is installed') is kept where a test runs the package as a process and need not be reversed there. My note on that: it IS still reversed for the other ~420 tests, which would import from per-module libraries or a source cone and not the installed copy, so the question for github-14 and the operator is narrower than 'reverse W103' but not empty. Recorded before any wiring; the question goes to github-14 now. | 2026-11-07T22:40:24Z: 2026-11-07 DESIGN PROPOSAL C (github-14's, a design proposal and NOT an operator ruling): neither A nor B. Keep W103's premise (what is tested is what is installed) and make the INSTALL itself per cone: the venv rule installs each module as its own action producing exactly the bytes the real install puts at that path; a narrowed test's venv is the third-party layer plus the installed files of its cone; a src edit then invalidates only the installs, hence the tests, whose cone holds that module. Two honesty checks: (1) a certification action shows the union of per-module installs equals the full venv's installed tree byte for byte; (2) spawn-reaching tests keep the full venv (62 by the spawn_reach rule). The image stage's plain pytest on the installed package stays the integration witness and should become a result-emitting action under W1978 rather than a collect-only replay. Files that cannot be installed per module must be named and counted in the shared layer. To be taken to mtools on W1978 as the carrier for both repos (hooks' py_library form has the same gap). If mtools or a measurement shows C infeasible, bring the reason back to github-14 before choosing A or B. MY READ OF bazel/venv.bzl lines 104-180 on feasibility (reading only): the venv already installs nemik's source as one SYMLINK ACTION PER FILE (ctx.actions.symlink(output = site-packages/rel, target_file = f) for each file of srcs, standing in for an editable install), and the third-party layer the same way from deps. So per-module install is already per-file in construction and is byte-identical by construction (a symlink to the same file); what makes every test depend on every file is that one rule bundles all outputs into one target and every test takes the whole target. Files that are NOT per module and would sit in the shared layer: the interpreter link (bin/python3), pyvenv.cfg, the pythonhome.runfiles note, the site hook with the sys.path line (venv.bzl around line 206-220, not fully read), all third-party site-packages, the console scripts (text written from module:function strings, so they do not change when source bytes change), and the package-root __init__.py files (src/nemik/__init__.py, core/__init__.py, web/__init__.py), which the import graph does not list as an edge of a cone but any import of a submodule needs. Package data read through importlib.resources (src/nemik/web/*, src/nemik/data/*) are files of srcs too, installable per file, but a test must DECLARE them (the W2052 concern). Not measured: whether a restricted runfiles tree really invalidates only the tests whose cone holds a changed file (needs one trial on a few tests), and what the sys.path/site hook needs. | 2026-11-07T22:42:05Z: 2026-11-07 mtools answered on carrier C (reading only, nothing run on their side): their venv rule is the same construction (venv_from_hub, one symlink action per source file, one per third-party file, all outputs in one DefaultInfo returned whole), so C is one change to a shared rule IF nemik's bazel/venv.bzl is the same rule, and nemik's file is a COPY (its first line says vendored from mtools venv.bzl, unchanged but for one line, nemik:W96): the change lands in both until they converge, and I have not diffed them. mtools:W103 is an unrelated done card, the premise wording is nemik:W103 (header of tests/venv_pytest.sh quoting an operator line I have not traced to a transcript line). mtools agrees the package-root __init__.py files are shared and prefers a pilot on a dist with few modules, not hooks (200 sites), not nemik (150 modules). Nothing measured for C by anyone. Pending: a trial on a few nemik tests (restricted runfiles tree invalidates only tests whose cone holds a changed file), and the transcript line behind the W103 quote. | 2026-11-07T23:00:49Z: 2026-11-07 DIFF RUN: nemik/bazel/venv.bzl against mtools/rules_py/venv.bzl (the mtools source is under rules_py, not hooks). The two differ in four places: the first two header lines (nemik's vendoring note vs the SPDX lines), an added LINUX-ONLY comment block of 4 lines in mtools' copy near line 209, a helper function _relative_path (11 lines) present in NEMIK's copy and absent in mtools' (so mtools' has moved on and removed it), and a new visibility attribute in mtools' venv_from_hub macro (3 added lines) that nemik's lacks. The per-file symlink loops are identical. So nemik's copy is an OLDER vendoring, not 'unchanged but for this line' any more: my reply to mtools that it was a copy stands, but the statement in its header is now stale as to mtools' current source. The shared-rule change for carrier C would have to be rebased across these four differences, not merely landed twice. | 2026-11-07T23:05:29Z: G0 2026-11-07T23:05:28Z: [NO-PACE-STAMP] Precommit: advances W1141. Actuator: find the operator line behind the W103 quote ('build input for everything subsequent') with mikemol-transcriptstruct --grep over the host transcript. Sensor: a printed record with its line and uuid, speaker human. Expected: one or a few hits in the 695f3e0a host transcript, dated September 2026; if none, the quote came from another session's transcript. | 2026-11-07T23:06:09Z: 2026-11-07 SEARCH FOR THE W103 QUOTE (operator wording 'build input for everything subsequent', quoted in the header of tests/venv_pytest.sh): mikemol-transcriptstruct --human over the host transcript 695f3e0a: 0 hits of 149177 records. The same search over this session's transcript: 0 hits of 294705 records. nemik W103 itself (done, closed 2026-09-28) carries no transcript citation: its evidence describes the py_test to sh_test change and its witnesses only. The quote was therefore written into the script from a source I cannot find: an earlier session or another repo's transcript, dated about 2026-09-27 or 28. Not found, so 'what is tested is what is installed' is a nemik-recorded premise with an unverified operator citation, which weakens it as a ruling to protect. Not searched: the other transcripts in the nemik project directory and the other repos' transcripts. | 2026-11-07T23:08:31Z: 2026-11-07 R354 applied. The reviewer ran git log -S on the exact phrase: one commit f02b5d63 (2026-09-28, subject 'W103: every test runs under the built //:.venv's interpreter'). I read that commit's message with git show -s: it is the subject line and a Co-Authored-By trailer, no body, no source citation. One last transcript search, the other half of the quote ('That .venv is then') over the host transcript, human speakers: 0 hits of 149177. I am stopping the search as the reviewer advised (not searched: the other transcripts in the nemik project directory and other repos'). CONCLUSION: the premise 'what is tested is what is installed' (W103, tests/venv_pytest.sh header) is a nemik session decision of 2026-09-28 whose operator citation I cannot source, so it is judged here on its merits and against the later operator directions on this card (host lines 148779, 148833, 148882), not as an operator constraint. The merits still count: the image test stage runs plain pytest on the installed package, which is why carrier C (per-cone install) keeps the installed shape. This is also said to github-14 in the next message. | 2026-11-07T23:09:53Z: 2026-11-07 github-14 (relayed): they know no source for the W103 premise, told the operator it was their ruling without checking and are correcting that. Recorded on W103 as a nemik session decision of 2026-09-28 with no operator warrant. Carrier C stays github-14's PROPOSAL on its merits (testing the installed shape catches packaging faults that A and B miss, the cost being one per-module install action). If mtools or a measurement shows C costs much more than B, A and B are open on merits too. The operator was told C is a proposal and has not overruled it. Next measurable step: a trial of C on a few tests (cost of per-module installs, and whether only the tests whose cone holds a changed file are invalidated). | 2026-11-08T03:58:20Z: Reading of the 0c983127 gate for github-14: 233 fresh of 484, against 478 and 479 of about 482 earlier. This is NOT a cache win from atomization and NOT a smaller touched set. The stack edits src/nemik/serve.py, which every test sees through the full //:.venv symlink tree (the W1141 mechanism, unchanged), so nearly all 484 targets were invalid for this tree as before. The fall is because round 2 of this same stack, interrupted by the kine-latency guard, had already run and passed 251 of them on the identical staged tree (its log: Executed 251 out of 484 tests, 253 pass) and bazel cached those results, so round 5 ran the other 233 (233 + 251 = 484). So the figure measures an earlier partial run of the same tree, not a narrower dependency set. The comparable W1141 after-count must come from a fresh tree with no earlier partial run of the same inputs. Not yet measured for the macro or carrier work.",
       "issued_at": "2026-10-27T01:25:36Z",
       "minted_during": "interrupt",
       "caused_by": "W1063",
-      "last_worked": "2026-11-07T23:09:53Z",
+      "last_worked": "2026-11-08T03:58:20Z",
       "ticks_blocked": 0,
       "warrants": [
         {
@@ -28114,7 +28114,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1047",
       "last_worked": "2026-10-27T13:02:58Z",
-      "ticks_blocked": 374,
+      "ticks_blocked": 375,
       "completed": null
     },
     {
@@ -28829,7 +28829,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1196",
       "last_worked": "2026-10-28T03:10:08Z",
-      "ticks_blocked": 357,
+      "ticks_blocked": 358,
       "completed": null
     },
     {
@@ -29323,7 +29323,7 @@
       "minted_during": "interrupt",
       "caused_by": "W768",
       "last_worked": "2026-11-06T03:47:56Z",
-      "ticks_blocked": 105,
+      "ticks_blocked": 106,
       "manifest": [
         "tools/codon_census.py",
         "BUILD.bazel",
@@ -29350,7 +29350,7 @@
       "minted_during": "interrupt",
       "caused_by": "W768",
       "last_worked": "2026-11-06T03:47:57Z",
-      "ticks_blocked": 105,
+      "ticks_blocked": 106,
       "manifest": [
         "tests/test_codon_census.py",
         "BUILD.bazel"
@@ -29374,7 +29374,7 @@
       "minted_during": "interrupt",
       "caused_by": "W733",
       "last_worked": "2026-11-02T00:42:25Z",
-      "ticks_blocked": 352,
+      "ticks_blocked": 353,
       "completed": null
     },
     {
@@ -29496,7 +29496,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1215",
       "last_worked": "2026-10-29T04:37:26Z",
-      "ticks_blocked": 352,
+      "ticks_blocked": 353,
       "completed": null
     },
     {
@@ -30251,7 +30251,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1245",
       "last_worked": "2026-11-06T03:47:59Z",
-      "ticks_blocked": 105,
+      "ticks_blocked": 106,
       "manifest": [
         "tests/test_salience.py"
       ],
@@ -30940,7 +30940,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-42",
       "last_worked": "2026-10-29T18:57:42Z",
-      "ticks_blocked": 322,
+      "ticks_blocked": 323,
       "completed": null,
       "manifest": [
         "docs/pace-producer.md"
@@ -31025,7 +31025,7 @@
       "minted_during": "tick",
       "caused_by": "github-42",
       "last_worked": "2026-11-05T13:43:09Z",
-      "ticks_blocked": 128,
+      "ticks_blocked": 129,
       "completed": null,
       "weight": 20,
       "manifest": [
@@ -31076,7 +31076,7 @@
       "minted_during": "tick",
       "caused_by": "W1187",
       "last_worked": "2026-11-02T20:27:11Z",
-      "ticks_blocked": 208,
+      "ticks_blocked": 209,
       "manifest": [
         "src/nemik/rank.py",
         "mypy-baseline.json"
@@ -32062,7 +32062,7 @@
       "minted_during": "interrupt",
       "caused_by": "github:W92",
       "last_worked": "2026-11-06T08:45:58Z",
-      "ticks_blocked": 95,
+      "ticks_blocked": 96,
       "completed": null,
       "weight": 219
     },
@@ -33834,7 +33834,7 @@
       "minted_during": "interrupt",
       "caused_by": "W561",
       "last_worked": "2026-11-02T20:27:32Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null,
       "warrants": [
         {
@@ -34778,7 +34778,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1383",
       "last_worked": "2026-11-02T05:32:17Z",
-      "ticks_blocked": 231,
+      "ticks_blocked": 232,
       "manifest": [
         "tests/test_frontier.py",
         "tests/test_fruit.py",
@@ -36646,7 +36646,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W1931",
       "last_worked": "2026-11-06T01:58:38Z",
-      "ticks_blocked": 108,
+      "ticks_blocked": 109,
       "warrants": [
         {
           "@context": {
@@ -36892,7 +36892,7 @@
       "minted_during": "interrupt",
       "caused_by": "nemik:R169",
       "last_worked": "2026-11-03T05:01:11Z",
-      "ticks_blocked": 194,
+      "ticks_blocked": 195,
       "completed": null
     },
     {
@@ -39946,7 +39946,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1633",
       "last_worked": "2026-11-05T15:34:42Z",
-      "ticks_blocked": 127,
+      "ticks_blocked": 128,
       "completed": null
     },
     {
@@ -39967,7 +39967,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1633",
       "last_worked": "2026-11-05T08:59:33Z",
-      "ticks_blocked": 132,
+      "ticks_blocked": 133,
       "completed": null
     },
     {
@@ -40164,7 +40164,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1654",
       "last_worked": "2026-11-06T22:06:47Z",
-      "ticks_blocked": 98,
+      "ticks_blocked": 99,
       "manifest": [
         "src/nemik/ratchetseries.py",
         "tests/test_ratchet_landed_once.py"
@@ -40318,7 +40318,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1108",
       "last_worked": "2026-11-05T17:34:26Z",
-      "ticks_blocked": 123,
+      "ticks_blocked": 124,
       "completed": null
     },
     {
@@ -40339,7 +40339,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1108",
       "last_worked": "2026-11-05T17:37:41Z",
-      "ticks_blocked": 123,
+      "ticks_blocked": 124,
       "completed": null,
       "warrants": [
         {
@@ -40604,7 +40604,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:37Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "manifest": [
         "src/nemik/ask_cli.py",
         "src/nemik/blocks_cli.py",
@@ -40665,7 +40665,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:38Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "manifest": [
         "src/nemik/adapter.py",
         "src/nemik/calwrite.py",
@@ -40702,7 +40702,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:39Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "manifest": [
         "src/nemik/index.py",
         "src/nemik/salience.py",
@@ -40735,7 +40735,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:40Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "manifest": [
         "src/nemik/cards.py",
         "src/nemik/flow.py",
@@ -40801,7 +40801,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:40Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "manifest": [
         "src/nemik/alarm.py",
         "src/nemik/check.py",
@@ -40840,7 +40840,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:41Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "manifest": [
         "src/nemik/blocks.py",
         "src/nemik/cachestore.py",
@@ -40868,7 +40868,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:42Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "manifest": [
         "src/nemik/waitemit.py",
         "src/nemik/waitlog.py"
@@ -40895,7 +40895,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:43Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "manifest": [
         "src/nemik/adapter.py",
         "src/nemik/cachestore.py",
@@ -40924,7 +40924,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:44Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "manifest": [
         "src/nemik/endpoint.py",
         "src/nemik/serve.py",
@@ -40968,7 +40968,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:44Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "manifest": [
         "src/nemik/adapter.py",
         "src/nemik/apischema.py",
@@ -41032,7 +41032,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:58Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "manifest": [
         "src/nemik/adapter.py",
         "src/nemik/alarm.py",
@@ -41078,7 +41078,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:46Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "manifest": [
         "src/nemik/shaclinc.py"
       ],
@@ -41140,7 +41140,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:47Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "manifest": [
         "src/nemik/adapter.py",
         "src/nemik/blocks.py",
@@ -41202,7 +41202,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:48Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "manifest": [
         "src/nemik/importer.py"
       ],
@@ -41229,7 +41229,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:48Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "manifest": [
         "src/nemik/calendars.py",
         "src/nemik/check.py",
@@ -41269,7 +41269,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:49Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "manifest": [
         "src/nemik/blocks.py",
         "src/nemik/calendars.py",
@@ -41333,7 +41333,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:50Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "manifest": [
         "src/nemik/adapter.py",
         "src/nemik/apischema.py",
@@ -41384,7 +41384,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:50Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "manifest": [
         "src/nemik/index.py"
       ],
@@ -41407,7 +41407,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:51Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "manifest": [
         "src/nemik/mspdi.py"
       ],
@@ -41436,7 +41436,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:22:48Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -41456,7 +41456,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:22:48Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -41476,7 +41476,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:22:49Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -41496,7 +41496,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:22:50Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -41515,7 +41515,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:22:51Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -41539,7 +41539,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:22:51Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -41563,7 +41563,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:22:52Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -41590,7 +41590,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:22:53Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -41618,7 +41618,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:22:54Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -41637,7 +41637,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:22:54Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -41657,7 +41657,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:22:55Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -41698,7 +41698,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:22:56Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -41723,7 +41723,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:22:56Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -41744,7 +41744,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:22:57Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -41764,7 +41764,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:22:58Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -41786,7 +41786,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:22:59Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -41808,7 +41808,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:00Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -41832,7 +41832,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:01Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -41858,7 +41858,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:02Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -41880,7 +41880,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:02Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -41902,7 +41902,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:03Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -41924,7 +41924,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:04Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -41948,7 +41948,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:05Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -41967,7 +41967,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:06Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -41986,7 +41986,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:07Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -42007,7 +42007,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:07Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -42044,7 +42044,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:08Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -42069,7 +42069,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:09Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -42089,7 +42089,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:10Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -42114,7 +42114,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:11Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -42139,7 +42139,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:11Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -42160,7 +42160,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:12Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -42181,7 +42181,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:13Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -42200,7 +42200,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:14Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -42221,7 +42221,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:14Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -42243,7 +42243,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:15Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -42266,7 +42266,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:16Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -42300,7 +42300,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:17Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -42322,7 +42322,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:17Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -42342,7 +42342,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:18Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -42363,7 +42363,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:19Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -42382,7 +42382,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:19Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -42404,7 +42404,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:20Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -42457,7 +42457,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:21Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -42479,7 +42479,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:22Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -42502,7 +42502,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:22Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -42522,7 +42522,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:23Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -42549,7 +42549,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:24Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -42572,7 +42572,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:25Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -42599,7 +42599,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:25Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -42620,7 +42620,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:26Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -42641,7 +42641,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:27Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -42669,7 +42669,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:28Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -42697,7 +42697,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:28Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -42719,7 +42719,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:29Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -42742,7 +42742,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:30Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -42768,7 +42768,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:31Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -42791,7 +42791,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:31Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -42813,7 +42813,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:32Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -42833,7 +42833,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:33Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -42853,7 +42853,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:34Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -42872,7 +42872,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:34Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -42898,7 +42898,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:35Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -42918,7 +42918,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:36Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -42938,7 +42938,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:37Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "completed": null
     },
     {
@@ -47703,7 +47703,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:52Z",
-      "ticks_blocked": 115,
+      "ticks_blocked": 116,
       "manifest": [
         "src/nemik/blocks.py",
         "src/nemik/cards.py",
@@ -47824,7 +47824,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-11-06T10:15:25Z",
-      "ticks_blocked": 113,
+      "ticks_blocked": 114,
       "completed": null,
       "warrants": [
         {
@@ -47981,7 +47981,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-06T00:42:19Z",
-      "ticks_blocked": 110,
+      "ticks_blocked": 111,
       "completed": null,
       "manifest": [
         "src/nemik/rebaselines.py",
@@ -48007,7 +48007,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-06T00:42:20Z",
-      "ticks_blocked": 110,
+      "ticks_blocked": 111,
       "completed": null,
       "manifest": [
         "codon-edges-baseline.json",
@@ -48039,7 +48039,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-06T00:50:48Z",
-      "ticks_blocked": 110,
+      "ticks_blocked": 111,
       "completed": null,
       "manifest": [
         "tools/codon_closure.py",
@@ -48071,7 +48071,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-06T09:43:16Z",
-      "ticks_blocked": 109,
+      "ticks_blocked": 110,
       "completed": null,
       "warrants": [
         {
@@ -48222,7 +48222,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1993",
       "last_worked": "2026-11-06T01:20:06Z",
-      "ticks_blocked": 109,
+      "ticks_blocked": 110,
       "completed": null
     },
     {
@@ -48428,7 +48428,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1229",
       "last_worked": "2026-11-06T08:39:12Z",
-      "ticks_blocked": 96,
+      "ticks_blocked": 97,
       "completed": null
     },
     {
@@ -48447,7 +48447,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1568",
       "last_worked": "2026-11-06T04:12:13Z",
-      "ticks_blocked": 105,
+      "ticks_blocked": 106,
       "completed": null
     },
     {
@@ -48762,7 +48762,7 @@
       "minted_during": "interrupt",
       "caused_by": "W2024",
       "last_worked": "2026-11-07T00:10:55Z",
-      "ticks_blocked": 65,
+      "ticks_blocked": 66,
       "manifest": [
         "src/nemik/tomlread.py",
         "tests/test_tomlread.py",
@@ -49359,7 +49359,7 @@
       "minted_during": "interrupt",
       "caused_by": "W2043",
       "last_worked": "2026-11-08T00:08:59Z",
-      "ticks_blocked": 8,
+      "ticks_blocked": 9,
       "completed": null,
       "manifest": [
         ".githooks/pre-commit"
@@ -49517,7 +49517,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-14",
       "last_worked": "2026-11-08T01:30:26Z",
-      "ticks_blocked": 8,
+      "ticks_blocked": 9,
       "completed": null
     },
     {
@@ -49588,15 +49588,14 @@
     {
       "symbol": "W2064",
       "title": "The builder's memory grows with the fleet: a cold build over today's queues needs more than 3 GiB, against 1.03 GiB in October, and the pod is pinned at 1.5 GiB",
-      "status": "working",
+      "status": "blocked",
       "enables": [],
       "touches": [
         "velocity"
       ],
       "blocked_on": [
-        "W2066",
-        "W2067",
-        "W2068"
+        "nemik:W2067",
+        "nemik:W2068"
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "When the kine-latency guard clears, resubmit .claude/stack-W2064.json once and read git log -1. Meanwhile work W2065 or the memory root cause in a scratch worktree.",
@@ -49604,7 +49603,7 @@
       "issued_at": "2026-11-08T01:57:31Z",
       "minted_during": "interrupt",
       "caused_by": "W2063",
-      "last_worked": "2026-11-08T03:14:06Z",
+      "last_worked": "2026-11-08T04:07:06Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
@@ -49616,17 +49615,17 @@
     {
       "symbol": "W2065",
       "title": "Per-pod publish telemetry: export publish time and partial-snap removals as a count with the pod name from the downward API, scraped per pod not through the service, so the next eviction is explainable from series",
-      "status": "ready",
+      "status": "working",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "When the W2064 stack lands, stack W2065 as the next entry with its two files frozen from the scratch worktree. Ask luthen whether the pod label now stores as a distinct series per pod.",
-      "evidence": "2026-11-08T03:06:54Z: Scoped from the code: nemik_snapshot_published_seconds is written unlabelled (serve.py lines 1799-1800) while the build gauges (buildcost.py: nemik_build_peak_rss_bytes, swap, cgroup peak, cgroup swap peak, cpu_seconds) are labelled with NEMIK_POD and the warm flag at serve.py line 1757, in the same metrics file. So a successful build already leaves a pod-labelled sample, if those names are stored. Asked luthen whether any nemik_build_* name is stored with a pod label, which could give the per-pod successful-build count between restart and eviction with no code. If not stored: add the pod label to the published gauge and a nemik_partial_snaps_removed gauge fed from remove_partial_snaps's return value through build_static's private files, with a test over the metrics text. | 2026-11-08T03:36:59Z: G0 2026-11-08T03:36:58Z: [NO-PACE-STAMP] Precommit: advances W2065. Actuator: the pod label on nemik_snapshot_published_seconds, a nemik_snapshot_partial_removed gauge and tests/test_publish_pod_gauges.py, built in the scratch worktree nemik-W2065 on top of the W2064 files, run under bazel there. Sensor: bazel test of test_publish_pod_gauges, test_publish, test_publish_partial_snaps. Expected: 3 of 3 pass; no landing, since the W2064 stack is blocked on mtools:W2356. | 2026-11-08T03:38:38Z: Built in scratch worktree nemik-W2065 on top of the W2064 files (serve.py, test_publish_partial_snaps.py, test_deploy_manifest.py): publish sets NEMIK_PARTIAL_REMOVED from remove_partial_snaps, and private_files writes nemik_snapshot_published_seconds with the pod label and a new nemik_snapshot_partial_removed gauge with the pod label. tests/test_publish_pod_gauges.py (two orphans give count 2 with label nemik-abc-1, clean base gives 0). bazel test in the scratch worktree: test_publish_pod_gauges, test_publish, test_publish_partial_snaps, 3 of 3 pass. Not landed: it is a successor entry to the W2064 stack, which waits on mtools:W2356 through W2066. Still open: the scrape per pod rather than through the service, which is luthen's side (their Service-level scrape drops the pod label of the series unless the metric carries it, which it now does), and a docs line.",
+      "evidence": "2026-11-08T03:06:54Z: Scoped from the code: nemik_snapshot_published_seconds is written unlabelled (serve.py lines 1799-1800) while the build gauges (buildcost.py: nemik_build_peak_rss_bytes, swap, cgroup peak, cgroup swap peak, cpu_seconds) are labelled with NEMIK_POD and the warm flag at serve.py line 1757, in the same metrics file. So a successful build already leaves a pod-labelled sample, if those names are stored. Asked luthen whether any nemik_build_* name is stored with a pod label, which could give the per-pod successful-build count between restart and eviction with no code. If not stored: add the pod label to the published gauge and a nemik_partial_snaps_removed gauge fed from remove_partial_snaps's return value through build_static's private files, with a test over the metrics text. | 2026-11-08T03:36:59Z: G0 2026-11-08T03:36:58Z: [NO-PACE-STAMP] Precommit: advances W2065. Actuator: the pod label on nemik_snapshot_published_seconds, a nemik_snapshot_partial_removed gauge and tests/test_publish_pod_gauges.py, built in the scratch worktree nemik-W2065 on top of the W2064 files, run under bazel there. Sensor: bazel test of test_publish_pod_gauges, test_publish, test_publish_partial_snaps. Expected: 3 of 3 pass; no landing, since the W2064 stack is blocked on mtools:W2356. | 2026-11-08T03:38:38Z: Built in scratch worktree nemik-W2065 on top of the W2064 files (serve.py, test_publish_partial_snaps.py, test_deploy_manifest.py): publish sets NEMIK_PARTIAL_REMOVED from remove_partial_snaps, and private_files writes nemik_snapshot_published_seconds with the pod label and a new nemik_snapshot_partial_removed gauge with the pod label. tests/test_publish_pod_gauges.py (two orphans give count 2 with label nemik-abc-1, clean base gives 0). bazel test in the scratch worktree: test_publish_pod_gauges, test_publish, test_publish_partial_snaps, 3 of 3 pass. Not landed: it is a successor entry to the W2064 stack, which waits on mtools:W2356 through W2066. Still open: the scrape per pod rather than through the service, which is luthen's side (their Service-level scrape drops the pod label of the series unless the metric carries it, which it now does), and a docs line. | 2026-11-08T04:05:27Z: G0 2026-11-08T04:05:26Z: [NO-PACE-STAMP] Precommit: advances W2065. Actuator: mikemol-commit --stack with .claude/stack-W2065.json, serve.py and test_publish_pod_gauges.py frozen from the scratch worktree nemik-W2065, W2065 marked working. Sensor: a printed sha with git log -1 showing the W2065 subject, or the refusal line. Expected: refused at submit if W2065 is not in the round, else gated; tests and ratchets already pass in scratch.",
       "issued_at": "2026-11-08T02:27:07Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W2063",
-      "last_worked": "2026-11-08T03:43:26Z",
+      "last_worked": "2026-11-08T04:05:35Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
@@ -49637,23 +49636,21 @@
     {
       "symbol": "W2066",
       "title": "Resubmit .claude/stack-W2064.json once when the kine-latency guard reads under its threshold, record the guard line verbatim if refused",
-      "status": "blocked",
+      "status": "done",
       "enables": [
         "W2064"
       ],
       "touches": [],
-      "blocked_on": [
-        "mtools:W2356"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "Do not resubmit until github-14 or luthen says the p99 is steady under 4.0 s, or the mtools freeze-and-resume change lands.",
-      "evidence": "2026-11-08T03:10:23Z: Guard per luthen W2348: p99 of kine SQL time over 5m above 4.0 s for 6 consecutive 30 s samples sends SIGINT to the bazel under the commit, and it reads the whole store, not this gate. Kine p99 rose from 0.05 s to 1.9-8.2 s at about 01:55Z, the latest 5m point (about 03:05Z) is 2.28 s, under the limit. Resubmitting once now, as the reading stands under the threshold. Next tick's check is a read of that value against 4.0 s, asked of luthen as a series name. | 2026-11-08T03:16:51Z: Round 4 of the W2064 stack, the one resubmit after luthen read 2.28 s: guard kine-latency: TRIPPED over 4 for 6 samples, signalled the gate, bazel interrupted before a test ran (0 of 484 executed, 31 pass, 453 skipped, 0 fresh of 31), REFUSED rc=1 with no culprit, HEAD still b2d2b84. Four guard interruptions across four submits, no test failure seen. Stopped and told github-14 as asked. The fix is on mtools' side (freeze and resume rather than kill). | 2026-11-08T03:18:08Z: Blocked on mtools:W2356 (freeze and resume instead of kill, with the operator's 2026-11-05 warrants) per github-14, who moved it to the top of mtools' line. Resubmit only on luthen's or github-14's word that p99 has held under 4 s, or when W2356 lands. | 2026-11-08T03:40:03Z: Resubmit predicate corrected to the guard's own (luthen W2348): the p99 of kine SQL time over 5m, read at 30 s resolution, at or under 4.0 s for six consecutive samples before a resubmit, not a single reading. The single 2.28 s read led to a resubmit the guard tripped, as luthen warned (the value swung 1.3 to 8.2 s within 20 minutes). Blocked on mtools:W2356 in any case.",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Send the sha to github-14 for cold review (W2067), then confirm the deployed image carries remove_partial_snaps via luthen, and watch the seven-day witnesses on W2068.",
+      "evidence": "2026-11-08T03:10:23Z: Guard per luthen W2348: p99 of kine SQL time over 5m above 4.0 s for 6 consecutive 30 s samples sends SIGINT to the bazel under the commit, and it reads the whole store, not this gate. Kine p99 rose from 0.05 s to 1.9-8.2 s at about 01:55Z, the latest 5m point (about 03:05Z) is 2.28 s, under the limit. Resubmitting once now, as the reading stands under the threshold. Next tick's check is a read of that value against 4.0 s, asked of luthen as a series name. | 2026-11-08T03:16:51Z: Round 4 of the W2064 stack, the one resubmit after luthen read 2.28 s: guard kine-latency: TRIPPED over 4 for 6 samples, signalled the gate, bazel interrupted before a test ran (0 of 484 executed, 31 pass, 453 skipped, 0 fresh of 31), REFUSED rc=1 with no culprit, HEAD still b2d2b84. Four guard interruptions across four submits, no test failure seen. Stopped and told github-14 as asked. The fix is on mtools' side (freeze and resume rather than kill). | 2026-11-08T03:18:08Z: Blocked on mtools:W2356 (freeze and resume instead of kill, with the operator's 2026-11-05 warrants) per github-14, who moved it to the top of mtools' line. Resubmit only on luthen's or github-14's word that p99 has held under 4 s, or when W2356 lands. | 2026-11-08T03:40:03Z: Resubmit predicate corrected to the guard's own (luthen W2348): the p99 of kine SQL time over 5m, read at 30 s resolution, at or under 4.0 s for six consecutive samples before a resubmit, not a single reading. The single 2.28 s read led to a resubmit the guard tripped, as luthen warned (the value swung 1.3 to 8.2 s within 20 minutes). Blocked on mtools:W2356 in any case. | 2026-11-08T03:57:08Z: Landed: COMMITTED nemik 0c98312 W2064 (full sha 0c983127, git log -1 shows my subject, PUSHED). Gate: 484 of 484 tests pass, 233 fresh, green on the staged tree, after luthen read kine p99 under 4 s from 03:20Z. Round 5 and the first one past the guard. The push is the deploy: the image builds and the Deployment follows.",
       "issued_at": "2026-11-08T03:09:47Z",
       "minted_during": "interrupt",
       "caused_by": "W2064",
-      "last_worked": "2026-11-08T03:40:03Z",
-      "ticks_blocked": 1,
-      "completed": null,
+      "last_worked": "2026-11-08T03:57:08Z",
+      "ticks_blocked": 0,
+      "completed": "20261108T035708Z",
       "manifest": [
         "src/nemik/serve.py",
         "tests/test_publish_partial_snaps.py",
@@ -49918,7 +49915,12 @@
   ],
   "job_id": "74d4f68e",
   "heartbeat": "2026-11-05T01:13:32Z",
-  "lock": null,
+  "lock": {
+    "holder": "session-nemik",
+    "taken_at": "2026-11-08T04:05:37Z",
+    "pid": 1411894,
+    "start": 59456217
+  },
   "predecessor_job_id": "481476b5",
   "leases": [
     {

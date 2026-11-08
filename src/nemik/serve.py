@@ -1795,9 +1795,14 @@ def private_files(model: Model, out: Path) -> list[Path]:
     # without the grouping and sorting that made the Turtle serializer the costliest single write of
     # the build
     put("graph.ttl", model.graph.serialize(format="nt").encode())
+    # nemik:W2065: both carry the pod, so a scrape per pod ties each publish and each removal of a
+    # killed build's partial dir to the builder that did it
+    pod = f'{{pod="{os.environ.get("NEMIK_POD", "")}"}}'
     gauge = (
         "# TYPE nemik_snapshot_published_seconds gauge\n"
-        f"nemik_snapshot_published_seconds {time.time():.0f}\n"
+        f"nemik_snapshot_published_seconds{pod} {time.time():.0f}\n"
+        "# TYPE nemik_snapshot_partial_removed gauge\n"
+        f"nemik_snapshot_partial_removed{pod} {os.environ.get('NEMIK_PARTIAL_REMOVED', '0')}\n"
     )
     # nemik:W990: the ratchet pace board and its gauges, from the pace run's file in the root
     pace, pace_lines = pace_board(model.root / PACE_FILE)
@@ -1903,7 +1908,8 @@ def publish(
     # nemik:W1096: this process builds once and exits, so the parse cache only doubles the graphs
     adapter.forget_parsed()
     # nemik:W2064: before the quiet-fleet exit, so a stray dir never lingers
-    remove_partial_snaps(base)
+    # nemik:W2065: and the count rides the environment to the build's gauges, as the cache flag does
+    os.environ["NEMIK_PARTIAL_REMOVED"] = str(remove_partial_snaps(base))
     key = fleet_key(root)
     if exports is not None:  # nemik:W636: a changed export rebuilds the pod's view too
         key += "|exports:" + exports_key(exports)

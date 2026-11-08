@@ -5540,3 +5540,6 @@
 2026-11-08T03:38:38Z  status W2065 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-08T03:38:40Z  tick  W2065 advanced  collapse  "W2065 built in a scratch worktree on top of the W2064 files: the publish gauge carries the pod label and a partial-removed gauge counts the orphans a publish cleared, test_publish_pod_gauges plus test_publish and test_publish_partial_snaps pass 3 of 3 under bazel there; not landed since the W2064 stack waits on mtools:W2356 [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-08T03:43:26Z  status W2065 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-08T03:57:08Z  status W2066 blocked>done writer    "blocked -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-08T04:05:35Z  status W2065 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-08T04:07:06Z  status W2064 working>blocked writer    "working -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
