@@ -226,6 +226,28 @@ def test_the_builders_flags_are_flags_its_commands_have() -> None:
         assert [f for f in sorted(flags) if f not in help_text] == []
 
 
+def test_one_publish_runs_at_a_time_in_the_pod() -> None:
+    """The builder runs nemik-serve serially, as remove_partial_snaps relies on (nemik:W2064).
+
+    A publish removes every snapshot dir that holds no source-key, which is only safe while no
+    second build can be writing one. So the builder is one while loop that runs nemik-serve once
+    per pass with no backgrounding, and no other container publishes. A later edit that adds a
+    second publisher or backgrounds the build must replace that cleanup first.
+    """
+    containers = _containers()
+    script = "\n".join(containers["builder"]["args"])
+    assert script.count("nemik-serve") == 1
+    assert script.count("while true") == 1
+    assert "&&" in script
+    assert "&" not in script.replace("&&", "").replace(">&2", "")
+    assert "nohup" not in script
+    assert "xargs" not in script
+    for name, container in containers.items():
+        if name != "builder":
+            text = " ".join(container.get("command", []) + container.get("args", []))
+            assert "--publish" not in text, name
+
+
 def test_the_snapshot_is_written_by_the_builder_and_only_read_by_the_server() -> None:
     """(d) The server mounts the snapshot read-only and never the export."""
     server, builder = _containers()["server"], _containers()["builder"]

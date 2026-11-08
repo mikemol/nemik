@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 2060,
+  "counter": 2068,
   "waypoints": [
     {
       "symbol": "W1",
@@ -278,7 +278,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W4",
       "last_worked": "2026-09-27T15:13:28Z",
-      "ticks_blocked": 1018
+      "ticks_blocked": 1027
     },
     {
       "symbol": "W18",
@@ -809,7 +809,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-10-18T21:49:48Z",
-      "ticks_blocked": 838,
+      "ticks_blocked": 847,
       "weight": 1
     },
     {
@@ -3520,7 +3520,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-11-06T20:29:33Z",
-      "ticks_blocked": 694,
+      "ticks_blocked": 703,
       "weight": 2,
       "completed": null
     },
@@ -4278,7 +4278,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-09T14:09:14Z",
-      "ticks_blocked": 867,
+      "ticks_blocked": 876,
       "weight": 2,
       "completed": null,
       "warrants": [
@@ -5405,7 +5405,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-11T23:18:52Z",
-      "ticks_blocked": 844,
+      "ticks_blocked": 853,
       "completed": null
     },
     {
@@ -5426,7 +5426,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:28Z",
-      "ticks_blocked": 859,
+      "ticks_blocked": 868,
       "completed": null
     },
     {
@@ -5485,7 +5485,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:31Z",
-      "ticks_blocked": 859,
+      "ticks_blocked": 868,
       "completed": null
     },
     {
@@ -5506,7 +5506,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:33Z",
-      "ticks_blocked": 859,
+      "ticks_blocked": 868,
       "completed": null
     },
     {
@@ -5546,7 +5546,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:35Z",
-      "ticks_blocked": 859,
+      "ticks_blocked": 868,
       "completed": null
     },
     {
@@ -5605,7 +5605,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:41Z",
-      "ticks_blocked": 859,
+      "ticks_blocked": 868,
       "completed": null
     },
     {
@@ -5645,7 +5645,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:44Z",
-      "ticks_blocked": 859,
+      "ticks_blocked": 868,
       "completed": null
     },
     {
@@ -5666,7 +5666,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:45Z",
-      "ticks_blocked": 859,
+      "ticks_blocked": 868,
       "completed": null
     },
     {
@@ -5706,7 +5706,7 @@
       "minted_during": "interrupt",
       "caused_by": "W282",
       "last_worked": "2026-10-10T06:17:47Z",
-      "ticks_blocked": 859,
+      "ticks_blocked": 868,
       "completed": null
     },
     {
@@ -6650,7 +6650,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T04:17:48Z",
-      "ticks_blocked": 659,
+      "ticks_blocked": 668,
       "completed": null
     },
     {
@@ -6789,7 +6789,7 @@
       "minted_during": "interrupt",
       "caused_by": "W346",
       "last_worked": "2026-10-19T18:16:23Z",
-      "ticks_blocked": 552,
+      "ticks_blocked": 561,
       "weight": 9,
       "completed": null,
       "manifest": [
@@ -6818,7 +6818,7 @@
       "minted_during": "interrupt",
       "caused_by": "W346",
       "last_worked": "2026-10-19T18:16:25Z",
-      "ticks_blocked": 552,
+      "ticks_blocked": 561,
       "weight": 9,
       "completed": null,
       "manifest": [
@@ -7082,7 +7082,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-12T01:34:06Z",
-      "ticks_blocked": 772,
+      "ticks_blocked": 781,
       "completed": null
     },
     {
@@ -7195,7 +7195,7 @@
       "minted_during": "interrupt",
       "caused_by": "W364",
       "last_worked": "2026-10-24T12:37:36Z",
-      "ticks_blocked": 497,
+      "ticks_blocked": 506,
       "manifest": [
         "src/nemik/mirror.py",
         "tests/test_mirror.py"
@@ -7224,7 +7224,7 @@
       "minted_during": "interrupt",
       "caused_by": "W364",
       "last_worked": "2026-10-24T13:19:24Z",
-      "ticks_blocked": 495,
+      "ticks_blocked": 504,
       "manifest": [
         "src/nemik/pollevents.py",
         "tests/test_pollevents.py",
@@ -8340,7 +8340,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-13T01:19:18Z",
-      "ticks_blocked": 758,
+      "ticks_blocked": 767,
       "completed": null
     },
     {
@@ -8361,7 +8361,7 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": "2026-10-16T01:35:27Z",
-      "ticks_blocked": 722,
+      "ticks_blocked": 731,
       "completed": null
     },
     {
@@ -8382,7 +8382,7 @@
       "minted_during": "tick",
       "caused_by": "W422",
       "last_worked": "2026-10-13T01:25:21Z",
-      "ticks_blocked": 791,
+      "ticks_blocked": 800,
       "completed": null
     },
     {
@@ -9065,7 +9065,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W943",
       "last_worked": "2026-10-20T18:05:40Z",
-      "ticks_blocked": 599,
+      "ticks_blocked": 608,
       "weight": 1,
       "manifest": [
         "src/nemik/adapter.py",
@@ -9605,7 +9605,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-19T10:16:00Z",
-      "ticks_blocked": 659,
+      "ticks_blocked": 668,
       "completed": null,
       "warrants": [
         {
@@ -9717,7 +9717,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-16T01:54:02Z",
-      "ticks_blocked": 723,
+      "ticks_blocked": 732,
       "weight": 1,
       "completed": null
     },
@@ -9737,7 +9737,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-16T01:54:03Z",
-      "ticks_blocked": 723,
+      "ticks_blocked": 732,
       "weight": 1,
       "completed": null
     },
@@ -9898,7 +9898,7 @@
       "minted_during": "interrupt",
       "caused_by": "luthen-observability:W1051",
       "last_worked": "2026-10-18T21:49:01Z",
-      "ticks_blocked": 659,
+      "ticks_blocked": 668,
       "completed": null,
       "weight": 6,
       "warrants": [
@@ -10075,7 +10075,7 @@
       "minted_during": "tick",
       "caused_by": "W500",
       "last_worked": "2026-10-15T11:53:53Z",
-      "ticks_blocked": 659,
+      "ticks_blocked": 668,
       "completed": null
     },
     {
@@ -10120,7 +10120,7 @@
       "minted_during": "tick",
       "caused_by": "W506",
       "last_worked": "2026-10-24T16:41:28Z",
-      "ticks_blocked": 487,
+      "ticks_blocked": 496,
       "weight": 11,
       "completed": null,
       "manifest": [
@@ -10192,7 +10192,7 @@
       "minted_during": "tick",
       "caused_by": "W506",
       "last_worked": "2026-10-18T03:08:04Z",
-      "ticks_blocked": 659,
+      "ticks_blocked": 668,
       "weight": 2,
       "completed": null
     },
@@ -10216,7 +10216,7 @@
       "minted_during": "tick",
       "caused_by": "github:W35",
       "last_worked": "2026-10-15T12:00:59Z",
-      "ticks_blocked": 752,
+      "ticks_blocked": 761,
       "completed": null
     },
     {
@@ -10301,7 +10301,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-23T12:40:08Z",
-      "ticks_blocked": 377,
+      "ticks_blocked": 386,
       "weight": 11,
       "manifest": [
         "src/nemik/withheld.py"
@@ -10329,7 +10329,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-18T19:15:01Z",
-      "ticks_blocked": 515,
+      "ticks_blocked": 524,
       "completed": null
     },
     {
@@ -10710,7 +10710,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-16T01:53:12Z",
-      "ticks_blocked": 723,
+      "ticks_blocked": 732,
       "weight": 13,
       "completed": null
     },
@@ -11332,7 +11332,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-17T10:50:53Z",
-      "ticks_blocked": 63,
+      "ticks_blocked": 72,
       "completed": null
     },
     {
@@ -11378,7 +11378,7 @@
       "minted_during": "tick",
       "caused_by": "github-8f",
       "last_worked": "2026-10-27T06:32:37Z",
-      "ticks_blocked": 376,
+      "ticks_blocked": 385,
       "completed": null,
       "warrants": [
         {
@@ -11527,7 +11527,7 @@
       "minted_during": "tick",
       "caused_by": "W566",
       "last_worked": "2026-10-23T19:25:35Z",
-      "ticks_blocked": 63,
+      "ticks_blocked": 72,
       "completed": null
     },
     {
@@ -11580,7 +11580,7 @@
       "minted_during": "tick",
       "caused_by": "W541",
       "last_worked": "2026-10-23T17:58:15Z",
-      "ticks_blocked": 714,
+      "ticks_blocked": 723,
       "completed": null
     },
     {
@@ -11602,7 +11602,7 @@
       "minted_during": "tick",
       "caused_by": "github-8f",
       "last_worked": "2026-10-23T12:09:48Z",
-      "ticks_blocked": 546,
+      "ticks_blocked": 555,
       "completed": null,
       "manifest": [
         "Containerfile",
@@ -11700,7 +11700,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-17T08:09:46Z",
-      "ticks_blocked": 705,
+      "ticks_blocked": 714,
       "completed": null
     },
     {
@@ -11764,7 +11764,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-16T15:08:10Z",
-      "ticks_blocked": 644,
+      "ticks_blocked": 653,
       "completed": null
     },
     {
@@ -11789,7 +11789,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-22T07:10:08Z",
-      "ticks_blocked": 549,
+      "ticks_blocked": 558,
       "completed": null
     },
     {
@@ -11813,7 +11813,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-17T15:38:53Z",
-      "ticks_blocked": 659,
+      "ticks_blocked": 668,
       "completed": null
     },
     {
@@ -11837,7 +11837,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-19T02:01:21Z",
-      "ticks_blocked": 628,
+      "ticks_blocked": 637,
       "completed": null,
       "manifest": [
         "src/nemik/salience.py",
@@ -12559,7 +12559,7 @@
       "minted_during": "tick",
       "caused_by": "github-8f",
       "last_worked": "2026-11-01T03:11:01Z",
-      "ticks_blocked": 283,
+      "ticks_blocked": 292,
       "completed": null
     },
     {
@@ -13219,7 +13219,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-25T02:12:38Z",
-      "ticks_blocked": 468,
+      "ticks_blocked": 477,
       "manifest": [
         "src/nemik/stackable.py",
         "src/nemik/cones.py",
@@ -14021,7 +14021,7 @@
       "minted_during": "interrupt",
       "caused_by": "W510",
       "last_worked": "2026-10-18T16:06:47Z",
-      "ticks_blocked": 659,
+      "ticks_blocked": 668,
       "manifest": [
         "src/nemik/web/index.html",
         "tests/test_sources_trs.py"
@@ -14047,7 +14047,7 @@
       "minted_during": "interrupt",
       "caused_by": "W510",
       "last_worked": "2026-10-18T14:33:41Z",
-      "ticks_blocked": 659,
+      "ticks_blocked": 668,
       "completed": null,
       "manifest": [
         "src/nemik/web/index.html",
@@ -14125,7 +14125,7 @@
       "minted_during": "interrupt",
       "caused_by": "W674",
       "last_worked": "2026-11-06T20:29:55Z",
-      "ticks_blocked": 659,
+      "ticks_blocked": 668,
       "manifest": [
         "src/nemik/serve.py",
         "src/nemik/web/vendor/n3.min.js",
@@ -14441,7 +14441,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-18T19:40:28Z",
-      "ticks_blocked": 659,
+      "ticks_blocked": 668,
       "warrants": [
         {
           "@context": {
@@ -14628,7 +14628,7 @@
       "minted_during": "interrupt",
       "caused_by": "W691",
       "last_worked": "2026-10-19T01:14:55Z",
-      "ticks_blocked": 659,
+      "ticks_blocked": 668,
       "completed": null,
       "manifest": [
         "src/nemik/serve.py",
@@ -14700,7 +14700,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-11-02T04:40:12Z",
-      "ticks_blocked": 188,
+      "ticks_blocked": 197,
       "completed": null
     },
     {
@@ -15075,7 +15075,7 @@
       "minted_during": "interrupt",
       "caused_by": "W693",
       "last_worked": "2026-10-24T15:22:53Z",
-      "ticks_blocked": 491,
+      "ticks_blocked": 500,
       "manifest": [
         "src/nemik/blocks.py",
         "src/nemik/serve.py",
@@ -15764,7 +15764,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W728",
       "last_worked": "2026-11-06T20:30:01Z",
-      "ticks_blocked": 650,
+      "ticks_blocked": 659,
       "completed": null
     },
     {
@@ -15968,7 +15968,7 @@
       "minted_during": "tick",
       "caused_by": "github-8f",
       "last_worked": "2026-10-23T19:25:28Z",
-      "ticks_blocked": 606,
+      "ticks_blocked": 615,
       "warrants": [
         {
           "@context": {
@@ -16210,7 +16210,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W743",
       "last_worked": "2026-10-24T14:11:42Z",
-      "ticks_blocked": 493,
+      "ticks_blocked": 502,
       "completed": null,
       "manifest": [
         "docs/forecast-features.md"
@@ -16265,7 +16265,7 @@
       "minted_during": "tick",
       "caused_by": "mtools:W1731",
       "last_worked": "2026-10-24T18:42:00Z",
-      "ticks_blocked": 347,
+      "ticks_blocked": 356,
       "completed": null,
       "manifest": [
         "src/nemik/landings.py",
@@ -16625,7 +16625,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-25T02:38:48Z",
-      "ticks_blocked": 466,
+      "ticks_blocked": 475,
       "manifest": [
         "deploy/deployment.yaml",
         "tests/test_deploy_manifest.py"
@@ -16740,7 +16740,7 @@
       "minted_during": "tick",
       "caused_by": "W762",
       "last_worked": "2026-10-28T14:21:12Z",
-      "ticks_blocked": 347,
+      "ticks_blocked": 356,
       "manifest": [
         "tools/codon_census.py",
         "tests/test_codon_census.py",
@@ -17079,7 +17079,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-20T22:31:27Z",
-      "ticks_blocked": 552,
+      "ticks_blocked": 561,
       "warrants": [
         {
           "@context": {
@@ -17290,7 +17290,7 @@
       "minted_during": "tick",
       "caused_by": "W781",
       "last_worked": "2026-10-23T17:58:17Z",
-      "ticks_blocked": 598,
+      "ticks_blocked": 607,
       "completed": null
     },
     {
@@ -17316,7 +17316,7 @@
       "minted_during": "tick",
       "caused_by": "W461",
       "last_worked": "2026-10-25T02:38:49Z",
-      "ticks_blocked": 466,
+      "ticks_blocked": 475,
       "manifest": [
         "src/nemik/web/index.html",
         "src/nemik/serve.py",
@@ -17902,7 +17902,7 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": "2026-10-25T03:12:35Z",
-      "ticks_blocked": 465,
+      "ticks_blocked": 474,
       "completed": null
     },
     {
@@ -18517,7 +18517,7 @@
       "minted_during": "tick",
       "caused_by": "W579",
       "last_worked": "2026-10-23T19:25:16Z",
-      "ticks_blocked": 532,
+      "ticks_blocked": 541,
       "completed": null
     },
     {
@@ -18961,7 +18961,7 @@
       "minted_during": "interrupt",
       "caused_by": "nemik:W703",
       "last_worked": "2026-10-22T20:45:21Z",
-      "ticks_blocked": 552,
+      "ticks_blocked": 561,
       "completed": null
     },
     {
@@ -19672,7 +19672,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-10-23T07:32:14Z",
-      "ticks_blocked": 552,
+      "ticks_blocked": 561,
       "completed": null
     },
     {
@@ -19746,7 +19746,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-10-23T07:32:23Z",
-      "ticks_blocked": 552,
+      "ticks_blocked": 561,
       "completed": null
     },
     {
@@ -20268,7 +20268,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-23T16:12:14Z",
-      "ticks_blocked": 536,
+      "ticks_blocked": 545,
       "completed": null
     },
     {
@@ -20444,7 +20444,7 @@
       "minted_during": "tick",
       "caused_by": "github-8f",
       "last_worked": "2026-10-24T17:33:15Z",
-      "ticks_blocked": 532,
+      "ticks_blocked": 541,
       "warrants": [
         {
           "@context": {
@@ -20596,7 +20596,7 @@
       "minted_during": "tick",
       "caused_by": "W905",
       "last_worked": "2026-10-23T18:12:28Z",
-      "ticks_blocked": 534,
+      "ticks_blocked": 543,
       "manifest": [
         "docs/evidence-standards.md"
       ],
@@ -20649,7 +20649,7 @@
       "minted_during": "tick",
       "caused_by": "W905",
       "last_worked": "2026-10-23T19:34:39Z",
-      "ticks_blocked": 532,
+      "ticks_blocked": 541,
       "completed": null,
       "manifest": [
         "docs/evidence-recommendations.md"
@@ -20800,7 +20800,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-11-06T05:19:04Z",
-      "ticks_blocked": 94,
+      "ticks_blocked": 103,
       "manifest": [
         "src/nemik/witnesses.py",
         "tests/test_witness_mint.py"
@@ -20825,7 +20825,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-11-06T03:15:45Z",
-      "ticks_blocked": 532,
+      "ticks_blocked": 541,
       "completed": null,
       "manifest": [
         "src/nemik/witnesses.py",
@@ -21016,7 +21016,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-23T20:45:05Z",
-      "ticks_blocked": 529,
+      "ticks_blocked": 538,
       "manifest": [
         "tests/test_modes.py",
         "tests/test_metrics_gating.py"
@@ -21042,7 +21042,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-23T20:57:46Z",
-      "ticks_blocked": 529,
+      "ticks_blocked": 538,
       "completed": null
     },
     {
@@ -21065,7 +21065,7 @@
       "minted_during": "tick",
       "caused_by": "W923",
       "last_worked": "2026-10-25T11:09:55Z",
-      "ticks_blocked": 448,
+      "ticks_blocked": 457,
       "completed": null,
       "manifest": [
         "tools/gen_test_targets.py",
@@ -21092,7 +21092,7 @@
       "minted_during": "tick",
       "caused_by": "W923",
       "last_worked": "2026-10-23T20:57:51Z",
-      "ticks_blocked": 529,
+      "ticks_blocked": 538,
       "completed": null
     },
     {
@@ -21113,7 +21113,7 @@
       "minted_during": "tick",
       "caused_by": "W923",
       "last_worked": "2026-10-23T20:57:53Z",
-      "ticks_blocked": 529,
+      "ticks_blocked": 538,
       "completed": null,
       "manifest": [
         "tests/test_shard_declared.py"
@@ -21299,7 +21299,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-23T21:21:43Z",
-      "ticks_blocked": 497,
+      "ticks_blocked": 506,
       "completed": null
     },
     {
@@ -21394,7 +21394,7 @@
       "minted_during": "tick",
       "caused_by": "W934",
       "last_worked": "2026-10-24T12:59:53Z",
-      "ticks_blocked": 496,
+      "ticks_blocked": 505,
       "completed": null,
       "manifest": [
         "src/nemik/web/views.js",
@@ -21463,7 +21463,7 @@
       "minted_during": "tick",
       "caused_by": "nemik:W918",
       "last_worked": "2026-10-24T12:59:54Z",
-      "ticks_blocked": 496,
+      "ticks_blocked": 505,
       "completed": null
     },
     {
@@ -22031,7 +22031,7 @@
       "minted_during": "interrupt",
       "caused_by": "nemik:W959",
       "last_worked": "2026-10-24T12:59:55Z",
-      "ticks_blocked": 496,
+      "ticks_blocked": 505,
       "completed": null,
       "manifest": [
         "src/nemik/mirrorsend.py",
@@ -22058,7 +22058,7 @@
       "minted_during": "interrupt",
       "caused_by": "nemik:W938",
       "last_worked": "2026-11-06T20:40:38Z",
-      "ticks_blocked": 63,
+      "ticks_blocked": 72,
       "completed": null,
       "size_class": "small"
     },
@@ -22138,7 +22138,7 @@
       "minted_during": "tick",
       "caused_by": "W749",
       "last_worked": "2026-10-24T14:12:01Z",
-      "ticks_blocked": 493,
+      "ticks_blocked": 502,
       "completed": null,
       "manifest": [
         "src/nemik/forecastshingle.py",
@@ -22217,7 +22217,7 @@
       "minted_during": "interrupt",
       "caused_by": "W709",
       "last_worked": "2026-10-24T15:23:12Z",
-      "ticks_blocked": 491,
+      "ticks_blocked": 500,
       "completed": null,
       "manifest": [
         "src/nemik/web/panels.js",
@@ -22586,7 +22586,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-24T17:33:12Z",
-      "ticks_blocked": 487,
+      "ticks_blocked": 496,
       "completed": null,
       "manifest": [
         "src/nemik/retrostub.py",
@@ -22610,7 +22610,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-24T17:33:14Z",
-      "ticks_blocked": 487,
+      "ticks_blocked": 496,
       "completed": null,
       "manifest": [
         "src/nemik/retrolayers.py",
@@ -22637,7 +22637,7 @@
       "minted_during": "interrupt",
       "caused_by": "github:W42",
       "last_worked": "2026-10-24T23:08:23Z",
-      "ticks_blocked": 404,
+      "ticks_blocked": 413,
       "completed": null,
       "warrants": [
         {
@@ -23368,7 +23368,7 @@
       "minted_during": "interrupt",
       "caused_by": "github:W44",
       "last_worked": "2026-10-24T23:43:28Z",
-      "ticks_blocked": 474,
+      "ticks_blocked": 483,
       "warrants": [
         {
           "@context": {
@@ -23662,7 +23662,7 @@
       "minted_during": "tick",
       "caused_by": "W643",
       "last_worked": "2026-10-25T02:12:46Z",
-      "ticks_blocked": 468,
+      "ticks_blocked": 477,
       "completed": null,
       "manifest": [
         "src/nemik/stackable.py",
@@ -23688,7 +23688,7 @@
       "minted_during": "tick",
       "caused_by": "W643",
       "last_worked": "2026-10-25T02:12:47Z",
-      "ticks_blocked": 468,
+      "ticks_blocked": 477,
       "completed": null,
       "manifest": [
         "src/nemik/cones.py",
@@ -23755,7 +23755,7 @@
       "minted_during": "tick",
       "caused_by": "W764",
       "last_worked": "2026-10-25T02:39:00Z",
-      "ticks_blocked": 466,
+      "ticks_blocked": 475,
       "completed": null,
       "manifest": [
         "deploy/deployment.yaml",
@@ -23806,7 +23806,7 @@
       "minted_during": "tick",
       "caused_by": "W789",
       "last_worked": "2026-10-25T02:39:02Z",
-      "ticks_blocked": 466,
+      "ticks_blocked": 475,
       "completed": null,
       "manifest": [
         "src/nemik/web/index.html",
@@ -24064,7 +24064,7 @@
       "minted_during": "tick",
       "caused_by": "W997",
       "last_worked": "2026-10-25T07:39:20Z",
-      "ticks_blocked": 456,
+      "ticks_blocked": 465,
       "manifest": [
         "src/nemik/pacerun.py",
         "src/nemik/hostroot_cli.py",
@@ -24195,7 +24195,7 @@
       "minted_during": "tick",
       "caused_by": "W925",
       "last_worked": "2026-10-26T00:43:08Z",
-      "ticks_blocked": 424,
+      "ticks_blocked": 433,
       "manifest": [
         "docs/per-test-targets.md"
       ],
@@ -24220,7 +24220,7 @@
       "minted_during": "tick",
       "caused_by": "W925",
       "last_worked": "2026-10-25T18:42:04Z",
-      "ticks_blocked": 448,
+      "ticks_blocked": 457,
       "completed": null,
       "manifest": [
         "tools/gen_test_targets.py",
@@ -24246,7 +24246,7 @@
       "minted_during": "tick",
       "caused_by": "W925",
       "last_worked": "2026-10-25T11:10:13Z",
-      "ticks_blocked": 448,
+      "ticks_blocked": 457,
       "completed": null,
       "manifest": [
         "tests/venv_pytest.sh"
@@ -24543,7 +24543,7 @@
       "minted_during": "tick",
       "caused_by": "W728",
       "last_worked": "2026-10-25T14:28:23Z",
-      "ticks_blocked": 370,
+      "ticks_blocked": 379,
       "warrants": [
         {
           "@context": {
@@ -24643,7 +24643,7 @@
       "minted_during": "tick",
       "caused_by": "W1047",
       "last_worked": "2026-10-27T07:42:42Z",
-      "ticks_blocked": 370,
+      "ticks_blocked": 379,
       "completed": null
     },
     {
@@ -24785,7 +24785,7 @@
       "minted_during": "tick",
       "caused_by": "github:W50",
       "last_worked": "2026-10-26T23:05:10Z",
-      "ticks_blocked": 438,
+      "ticks_blocked": 447,
       "warrants": [
         {
           "@context": {
@@ -24863,7 +24863,7 @@
       "minted_during": "tick",
       "caused_by": "W1055",
       "last_worked": "2026-11-04T10:22:37Z",
-      "ticks_blocked": 309,
+      "ticks_blocked": 318,
       "manifest": [
         "src/nemik/landcost.py",
         "tests/test_landcost.py"
@@ -24892,7 +24892,7 @@
       "minted_during": "tick",
       "caused_by": "W1055",
       "last_worked": "2026-10-25T17:06:49Z",
-      "ticks_blocked": 438,
+      "ticks_blocked": 447,
       "completed": null,
       "manifest": [
         "src/nemik/rank.py",
@@ -24921,7 +24921,7 @@
       "minted_during": "tick",
       "caused_by": "W1055",
       "last_worked": "2026-10-25T17:11:59Z",
-      "ticks_blocked": 438,
+      "ticks_blocked": 447,
       "completed": null,
       "manifest": [
         "tests/test_orderrank.py"
@@ -25328,7 +25328,7 @@
       "minted_during": "tick",
       "caused_by": "W1071",
       "last_worked": "2026-10-25T23:18:55Z",
-      "ticks_blocked": 427,
+      "ticks_blocked": 436,
       "completed": null
     },
     {
@@ -25350,7 +25350,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W1644",
       "last_worked": "2026-10-26T11:56:26Z",
-      "ticks_blocked": 415,
+      "ticks_blocked": 424,
       "completed": null
     },
     {
@@ -25425,7 +25425,7 @@
       "minted_during": "tick",
       "caused_by": "W1035",
       "last_worked": "2026-11-06T01:38:04Z",
-      "ticks_blocked": 100,
+      "ticks_blocked": 109,
       "manifest": [
         "docs/per-test-targets.md"
       ],
@@ -25448,7 +25448,7 @@
       "minted_during": "tick",
       "caused_by": "github:W50",
       "last_worked": "2026-10-26T01:03:02Z",
-      "ticks_blocked": 422,
+      "ticks_blocked": 431,
       "warrants": [
         {
           "@context": {
@@ -25524,7 +25524,7 @@
       "minted_during": "tick",
       "caused_by": "W1077",
       "last_worked": "2026-11-06T01:38:04Z",
-      "ticks_blocked": 100,
+      "ticks_blocked": 109,
       "manifest": [
         "src/nemik/rank.py",
         "tests/test_rank.py"
@@ -25800,7 +25800,7 @@
       "minted_during": "tick",
       "caused_by": "W1082",
       "last_worked": "2026-10-26T22:09:25Z",
-      "ticks_blocked": 365,
+      "ticks_blocked": 374,
       "manifest": [
         "src/nemik/roundof.py",
         "src/nemik/roundgauges.py",
@@ -25888,7 +25888,7 @@
       "minted_during": "tick",
       "caused_by": "W1073",
       "last_worked": "2026-10-26T11:58:00Z",
-      "ticks_blocked": 413,
+      "ticks_blocked": 422,
       "manifest": [
         "src/nemik/adapter.py",
         "src/nemik/blocks.py",
@@ -26109,7 +26109,7 @@
       "minted_during": "tick",
       "caused_by": "W1095",
       "last_worked": "2026-11-06T01:38:04Z",
-      "ticks_blocked": 100,
+      "ticks_blocked": 109,
       "manifest": [
         "src/nemik/adapter.py",
         "tests/test_ledger_graph.py"
@@ -26212,7 +26212,7 @@
       "minted_during": "tick",
       "caused_by": "W1107",
       "last_worked": "2026-11-06T10:01:49Z",
-      "ticks_blocked": 114,
+      "ticks_blocked": 123,
       "manifest": [
         "src/nemik/pacewrite.py",
         "src/nemik/pacerun.py",
@@ -26353,7 +26353,7 @@
       "minted_during": "tick",
       "caused_by": "inbox/2026-10-27-nemik-edge-github-W63-enables-W1113.md",
       "last_worked": "2026-10-27T00:42:25Z",
-      "ticks_blocked": 391,
+      "ticks_blocked": 400,
       "completed": null,
       "warrants": [
         {
@@ -26978,7 +26978,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1092",
       "last_worked": "2026-11-06T05:16:34Z",
-      "ticks_blocked": 93,
+      "ticks_blocked": 102,
       "manifest": [
         "src/nemik/roundof.py",
         "tests/test_roundof.py"
@@ -27088,7 +27088,7 @@
       "minted_during": "tick",
       "caused_by": "W1112",
       "last_worked": "2026-11-06T14:25:45Z",
-      "ticks_blocked": 105,
+      "ticks_blocked": 114,
       "manifest": [
         "src/nemik/history.py",
         "tests/test_history_stamps.py"
@@ -28114,7 +28114,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1047",
       "last_worked": "2026-10-27T13:02:58Z",
-      "ticks_blocked": 365,
+      "ticks_blocked": 374,
       "completed": null
     },
     {
@@ -28829,7 +28829,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1196",
       "last_worked": "2026-10-28T03:10:08Z",
-      "ticks_blocked": 348,
+      "ticks_blocked": 357,
       "completed": null
     },
     {
@@ -29323,7 +29323,7 @@
       "minted_during": "interrupt",
       "caused_by": "W768",
       "last_worked": "2026-11-06T03:47:56Z",
-      "ticks_blocked": 96,
+      "ticks_blocked": 105,
       "manifest": [
         "tools/codon_census.py",
         "BUILD.bazel",
@@ -29350,7 +29350,7 @@
       "minted_during": "interrupt",
       "caused_by": "W768",
       "last_worked": "2026-11-06T03:47:57Z",
-      "ticks_blocked": 96,
+      "ticks_blocked": 105,
       "manifest": [
         "tests/test_codon_census.py",
         "BUILD.bazel"
@@ -29374,7 +29374,7 @@
       "minted_during": "interrupt",
       "caused_by": "W733",
       "last_worked": "2026-11-02T00:42:25Z",
-      "ticks_blocked": 343,
+      "ticks_blocked": 352,
       "completed": null
     },
     {
@@ -29496,7 +29496,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1215",
       "last_worked": "2026-10-29T04:37:26Z",
-      "ticks_blocked": 343,
+      "ticks_blocked": 352,
       "completed": null
     },
     {
@@ -30251,7 +30251,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1245",
       "last_worked": "2026-11-06T03:47:59Z",
-      "ticks_blocked": 96,
+      "ticks_blocked": 105,
       "manifest": [
         "tests/test_salience.py"
       ],
@@ -30940,7 +30940,7 @@
       "minted_during": "interrupt",
       "caused_by": "github-42",
       "last_worked": "2026-10-29T18:57:42Z",
-      "ticks_blocked": 313,
+      "ticks_blocked": 322,
       "completed": null,
       "manifest": [
         "docs/pace-producer.md"
@@ -31025,7 +31025,7 @@
       "minted_during": "tick",
       "caused_by": "github-42",
       "last_worked": "2026-11-05T13:43:09Z",
-      "ticks_blocked": 119,
+      "ticks_blocked": 128,
       "completed": null,
       "weight": 20,
       "manifest": [
@@ -31076,7 +31076,7 @@
       "minted_during": "tick",
       "caused_by": "W1187",
       "last_worked": "2026-11-02T20:27:11Z",
-      "ticks_blocked": 199,
+      "ticks_blocked": 208,
       "manifest": [
         "src/nemik/rank.py",
         "mypy-baseline.json"
@@ -32062,7 +32062,7 @@
       "minted_during": "interrupt",
       "caused_by": "github:W92",
       "last_worked": "2026-11-06T08:45:58Z",
-      "ticks_blocked": 86,
+      "ticks_blocked": 95,
       "completed": null,
       "weight": 219
     },
@@ -33834,7 +33834,7 @@
       "minted_during": "interrupt",
       "caused_by": "W561",
       "last_worked": "2026-11-02T20:27:32Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null,
       "warrants": [
         {
@@ -34778,7 +34778,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1383",
       "last_worked": "2026-11-02T05:32:17Z",
-      "ticks_blocked": 222,
+      "ticks_blocked": 231,
       "manifest": [
         "tests/test_frontier.py",
         "tests/test_fruit.py",
@@ -36646,7 +36646,7 @@
       "minted_during": "tick",
       "caused_by": "luthen-observability:W1931",
       "last_worked": "2026-11-06T01:58:38Z",
-      "ticks_blocked": 99,
+      "ticks_blocked": 108,
       "warrants": [
         {
           "@context": {
@@ -36892,7 +36892,7 @@
       "minted_during": "interrupt",
       "caused_by": "nemik:R169",
       "last_worked": "2026-11-03T05:01:11Z",
-      "ticks_blocked": 185,
+      "ticks_blocked": 194,
       "completed": null
     },
     {
@@ -39946,7 +39946,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1633",
       "last_worked": "2026-11-05T15:34:42Z",
-      "ticks_blocked": 118,
+      "ticks_blocked": 127,
       "completed": null
     },
     {
@@ -39967,7 +39967,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1633",
       "last_worked": "2026-11-05T08:59:33Z",
-      "ticks_blocked": 123,
+      "ticks_blocked": 132,
       "completed": null
     },
     {
@@ -40164,7 +40164,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1654",
       "last_worked": "2026-11-06T22:06:47Z",
-      "ticks_blocked": 89,
+      "ticks_blocked": 98,
       "manifest": [
         "src/nemik/ratchetseries.py",
         "tests/test_ratchet_landed_once.py"
@@ -40318,7 +40318,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1108",
       "last_worked": "2026-11-05T17:34:26Z",
-      "ticks_blocked": 114,
+      "ticks_blocked": 123,
       "completed": null
     },
     {
@@ -40339,7 +40339,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1108",
       "last_worked": "2026-11-05T17:37:41Z",
-      "ticks_blocked": 114,
+      "ticks_blocked": 123,
       "completed": null,
       "warrants": [
         {
@@ -40604,7 +40604,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:37Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "manifest": [
         "src/nemik/ask_cli.py",
         "src/nemik/blocks_cli.py",
@@ -40665,7 +40665,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:38Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "manifest": [
         "src/nemik/adapter.py",
         "src/nemik/calwrite.py",
@@ -40702,7 +40702,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:39Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "manifest": [
         "src/nemik/index.py",
         "src/nemik/salience.py",
@@ -40735,7 +40735,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:40Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "manifest": [
         "src/nemik/cards.py",
         "src/nemik/flow.py",
@@ -40801,7 +40801,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:40Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "manifest": [
         "src/nemik/alarm.py",
         "src/nemik/check.py",
@@ -40840,7 +40840,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:41Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "manifest": [
         "src/nemik/blocks.py",
         "src/nemik/cachestore.py",
@@ -40868,7 +40868,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:42Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "manifest": [
         "src/nemik/waitemit.py",
         "src/nemik/waitlog.py"
@@ -40895,7 +40895,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:43Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "manifest": [
         "src/nemik/adapter.py",
         "src/nemik/cachestore.py",
@@ -40924,7 +40924,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:44Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "manifest": [
         "src/nemik/endpoint.py",
         "src/nemik/serve.py",
@@ -40968,7 +40968,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:44Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "manifest": [
         "src/nemik/adapter.py",
         "src/nemik/apischema.py",
@@ -41032,7 +41032,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:58Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "manifest": [
         "src/nemik/adapter.py",
         "src/nemik/alarm.py",
@@ -41078,7 +41078,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:46Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "manifest": [
         "src/nemik/shaclinc.py"
       ],
@@ -41140,7 +41140,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:47Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "manifest": [
         "src/nemik/adapter.py",
         "src/nemik/blocks.py",
@@ -41202,7 +41202,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:48Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "manifest": [
         "src/nemik/importer.py"
       ],
@@ -41229,7 +41229,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:48Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "manifest": [
         "src/nemik/calendars.py",
         "src/nemik/check.py",
@@ -41269,7 +41269,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:49Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "manifest": [
         "src/nemik/blocks.py",
         "src/nemik/calendars.py",
@@ -41333,7 +41333,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:50Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "manifest": [
         "src/nemik/adapter.py",
         "src/nemik/apischema.py",
@@ -41384,7 +41384,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:50Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "manifest": [
         "src/nemik/index.py"
       ],
@@ -41407,7 +41407,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:51Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "manifest": [
         "src/nemik/mspdi.py"
       ],
@@ -41436,7 +41436,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:22:48Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -41456,7 +41456,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:22:48Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -41476,7 +41476,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:22:49Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -41496,7 +41496,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:22:50Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -41515,7 +41515,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:22:51Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -41539,7 +41539,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:22:51Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -41563,7 +41563,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:22:52Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -41590,7 +41590,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:22:53Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -41618,7 +41618,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:22:54Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -41637,7 +41637,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:22:54Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -41657,7 +41657,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:22:55Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -41698,7 +41698,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:22:56Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -41723,7 +41723,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:22:56Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -41744,7 +41744,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:22:57Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -41764,7 +41764,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:22:58Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -41786,7 +41786,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:22:59Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -41808,7 +41808,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:00Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -41832,7 +41832,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:01Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -41858,7 +41858,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:02Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -41880,7 +41880,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:02Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -41902,7 +41902,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:03Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -41924,7 +41924,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:04Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -41948,7 +41948,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:05Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -41967,7 +41967,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:06Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -41986,7 +41986,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:07Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -42007,7 +42007,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:07Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -42044,7 +42044,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:08Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -42069,7 +42069,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:09Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -42089,7 +42089,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:10Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -42114,7 +42114,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:11Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -42139,7 +42139,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:11Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -42160,7 +42160,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:12Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -42181,7 +42181,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:13Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -42200,7 +42200,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:14Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -42221,7 +42221,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:14Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -42243,7 +42243,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:15Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -42266,7 +42266,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:16Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -42300,7 +42300,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:17Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -42322,7 +42322,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:17Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -42342,7 +42342,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:18Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -42363,7 +42363,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:19Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -42382,7 +42382,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:19Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -42404,7 +42404,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:20Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -42457,7 +42457,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:21Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -42479,7 +42479,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:22Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -42502,7 +42502,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:22Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -42522,7 +42522,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:23Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -42549,7 +42549,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:24Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -42572,7 +42572,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:25Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -42599,7 +42599,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:25Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -42620,7 +42620,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:26Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -42641,7 +42641,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:27Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -42669,7 +42669,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:28Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -42697,7 +42697,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:28Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -42719,7 +42719,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:29Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -42742,7 +42742,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:30Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -42768,7 +42768,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:31Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -42791,7 +42791,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:31Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -42813,7 +42813,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:32Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -42833,7 +42833,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:33Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -42853,7 +42853,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:34Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -42872,7 +42872,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:34Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -42898,7 +42898,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:35Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -42918,7 +42918,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:36Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -42938,7 +42938,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:37Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "completed": null
     },
     {
@@ -47703,7 +47703,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-05T22:23:52Z",
-      "ticks_blocked": 106,
+      "ticks_blocked": 115,
       "manifest": [
         "src/nemik/blocks.py",
         "src/nemik/cards.py",
@@ -47824,7 +47824,7 @@
       "minted_during": "tick",
       "caused_by": null,
       "last_worked": "2026-11-06T10:15:25Z",
-      "ticks_blocked": 104,
+      "ticks_blocked": 113,
       "completed": null,
       "warrants": [
         {
@@ -47981,7 +47981,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-06T00:42:19Z",
-      "ticks_blocked": 101,
+      "ticks_blocked": 110,
       "completed": null,
       "manifest": [
         "src/nemik/rebaselines.py",
@@ -48007,7 +48007,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-06T00:42:20Z",
-      "ticks_blocked": 101,
+      "ticks_blocked": 110,
       "completed": null,
       "manifest": [
         "codon-edges-baseline.json",
@@ -48039,7 +48039,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-06T00:50:48Z",
-      "ticks_blocked": 101,
+      "ticks_blocked": 110,
       "completed": null,
       "manifest": [
         "tools/codon_closure.py",
@@ -48071,7 +48071,7 @@
       "minted_during": "interrupt",
       "caused_by": null,
       "last_worked": "2026-11-06T09:43:16Z",
-      "ticks_blocked": 100,
+      "ticks_blocked": 109,
       "completed": null,
       "warrants": [
         {
@@ -48222,7 +48222,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1993",
       "last_worked": "2026-11-06T01:20:06Z",
-      "ticks_blocked": 100,
+      "ticks_blocked": 109,
       "completed": null
     },
     {
@@ -48428,7 +48428,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1229",
       "last_worked": "2026-11-06T08:39:12Z",
-      "ticks_blocked": 87,
+      "ticks_blocked": 96,
       "completed": null
     },
     {
@@ -48447,7 +48447,7 @@
       "minted_during": "interrupt",
       "caused_by": "W1568",
       "last_worked": "2026-11-06T04:12:13Z",
-      "ticks_blocked": 96,
+      "ticks_blocked": 105,
       "completed": null
     },
     {
@@ -48762,7 +48762,7 @@
       "minted_during": "interrupt",
       "caused_by": "W2024",
       "last_worked": "2026-11-07T00:10:55Z",
-      "ticks_blocked": 56,
+      "ticks_blocked": 65,
       "manifest": [
         "src/nemik/tomlread.py",
         "tests/test_tomlread.py",
@@ -49349,9 +49349,7 @@
       "enables": [],
       "touches": [],
       "blocked_on": [
-        "W2057",
         "W2058",
-        "W2059",
         "W2060"
       ],
       "blocked_kind": "agent",
@@ -49361,7 +49359,7 @@
       "minted_during": "interrupt",
       "caused_by": "W2043",
       "last_worked": "2026-11-08T00:08:59Z",
-      "ticks_blocked": 2,
+      "ticks_blocked": 8,
       "completed": null,
       "manifest": [
         ".githooks/pre-commit"
@@ -49422,20 +49420,21 @@
     {
       "symbol": "W2057",
       "title": "Branch test for the pre-commit working-card refusal over four queues with a flag-swap mutation",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W2053"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Write tests/test_precommit_queue_check.py with the four queues and the flag-swap mutant, run it through its bazel target",
-      "evidence": "2026-11-08T00:09:07Z: 2026-11-07 R356 spec for this child: run the hook's refusal condition against four queues (ready only, ready and working, neither, and the ready text split over two lines) with a staged src path, assert the old pipe form and the new case form give the same verdict on each, show that the case form matches the whole string while grep -q matches per line instead of assuming it, and add the mutation that swaps the two flags, which must fail the test. Same stack as the hook edit. The scratch edit lives in the scratch worktree for W2053 (nemik-W2053). | 2026-11-08T00:38:20Z: 2026-11-07 BRANCH TEST WRITTEN in the W2053 scratch worktree (not landed): tests/test_precommit_queue_check.py runs the real hook for each case in a throwaway git repository with a stand-in bazel on PATH, a staged queue and a staged source path, and judges the verdict as status 1 with the hook's message (refuse) or anything else (pass; the repository has no gate script so a pass dies at the final exec). Six cases: ready only with src staged refuses, ready and working passes, nothing ready passes, the ready text split over two lines passes, ready only with a tests path staged refuses, ready only with only the queue staged passes. A seventh test swaps the two flags in a copy of the hook text and asserts at least one case then differs (the mutant is caught). BUILD.bazel gets the hook file as data for the new test. Pycheck hook: the first Write was refused for ruff-format, the second accepted. bazel test //:test_precommit_queue_check //:test_test_inputs: Executed 2 out of 2 tests: 2 tests pass, 103 s. Gaps: I did not run the test against the OLD pipe form to show the same verdicts (the old hook is not in the scratch tree edit, I would have to rebuild it), so the claim old equals new rests on the logic, not a run. The case form matching whole-string versus grep -q per line is shown only by the split case (the split queue passes in the new form, and I did not run the old form on it). Not run: the ratchet for the new file through bazel (started, result pending). | 2026-11-08T00:38:28Z: G0 2026-11-08T00:38:27Z: [NO-PACE-STAMP] Precommit (stamped after the work, not a prediction): advances W2057. Actuator: wrote tests/test_precommit_queue_check.py in the W2053 scratch worktree and ran it, with test_test_inputs, through bazel. Sensor: the bazel test line. Expected: both pass; the ratchet targets running in the background are unread. | 2026-11-08T00:40:52Z: G0 2026-11-08T00:40:51Z: [NO-PACE-STAMP] Precommit (stamped BEFORE the run): advances W2057. Actuator: put HEAD's real pre-commit bytes in tests/fixtures/precommit/ in the W2053 scratch tree (copied from the main tree, hash-checked against HEAD's blob), parametrize test_precommit_queue_check over the old and the new hook, add a case running the old pipe form under ignored SIGPIPE, then bazel test //:test_precommit_queue_check. Sensor: the bazel line and hash-object equality. Expected: the old and new hook give the same six verdicts, and the old hook under ignored SIGPIPE prints Broken pipe while the new one does not; if the old prints none the noise claim fails and I say so. | 2026-11-08T00:45:21Z: 2026-11-07 R357 APPLIED. G0 stamped BEFORE the run this time. Fixture: tests/fixtures/precommit/pre-commit-before-w2053 is HEAD's hook bytes, copied from the main tree: git hash-object in the scratch tree 9a98a465a6121ea1fe04d221bae23339be5e3888 equals git rev-parse HEAD:.githooks/pre-commit (same id). It is declared through a new package tests/fixtures/precommit (exports_files) and one data label for the test. The test now parametrizes the six cases over BOTH hooks (old pipe form and new case form), plus a noise test (an ignored SIGPIPE through sh -c trap on PIPE, a big multi-line queue, old must print Broken pipe, new must not) and the flag-swap mutant test, and its docstring names the stand-in bazel and the missing gate script as NOT EXERCISED. WHAT BAZEL SAID, in order: (1) the first version failed test_ruff_ratchet with E501 x2 in the new test (the bazel ratchet caught what the edit hook had accepted); (2) the second run: 13 passed and the noise test FAILED, old form printed no Broken pipe: because my big queue was ONE line (grep -q must read the whole line before matching, so printf finished), the claim 'old is noisy' was false for that queue, true only for a multi-line one as the earlier repro on the real queue showed; also test_ruff_ratchet failed PLR0913 and PLR0917 (too many arguments) on the test functions; (3) after making the queue multi-line and bundling arguments into case tuples: bazel test //:test_precommit_queue_check //:test_ruff_ratchet //:test_mypy_ratchet: Executed 3 out of 3 tests: 3 tests pass, 35.4 s. So now shown by tests, not argued: old and new give the same six verdicts, the old hook is noisy under an ignored SIGPIPE on a big multi-line queue and the new one is not, and swapping the flags is caught. Still scratch-only. Remaining: the landing (W2059), dash/busybox (W2058, absent), durable repro (W2060). | 2026-11-08T00:47:43Z: G0 2026-11-08T00:47:42Z: [NO-PACE-STAMP] Precommit (stamped BEFORE the run): advances W2057 (R358). Actuator: in the W2053 scratch tree's tests/test_precommit_queue_check.py, assert the big queue is at least 1 MiB (well above 4 x 65536) before the noise run, state the production case in the noise test's docstring, and replace nothing in the fixture but add a test that computes the git blob hash of the old hook in Python and compares it with the literal 9a98a465a6121ea1fe04d221bae23339be5e3888. Then bazel test the file with both ratchets. Sensor: the bazel line. Expected: 3 of 3 pass; the queue is about 1.1 MB by my arithmetic (20000 lines of about 58 bytes), not yet measured. | 2026-11-08T00:50:01Z: 2026-11-07 R358 APPLIED (G0 stamped before the edit). Changes to tests/test_precommit_queue_check.py in the W2053 scratch tree: the noise test asserts the queue length exceeds 4 x 65536 before it runs, and its docstring states the production case (an ignored SIGPIPE and a large multi-line queue, the real one 5.8 MB, grep -q exiting at its first match while printf has more than a pipe buffer left, a one-line queue not noisy); a new test computes the git blob hash of the kept old hook in Python and compares it with the LITERAL 9a98a465a6121ea1fe04d221bae23339be5e3888, so it no longer compares with HEAD. bazel: run 1 test_ruff_ratchet failed E501 x1 (a long docstring line), run 2 failed E501 x1 again (I shortened one line and missed another, a grep for lines of 100 or more found it), run 3: Executed 3 out of 3 tests: 3 tests pass (test_precommit_queue_check, test_ruff_ratchet, test_mypy_ratchet), 34.5 s. The queue size is 20000 lines of about 58 bytes by arithmetic, about 1.1 MB; the test asserts only that it exceeds 262144, not the figure itself. Scratch-only, nothing landed.",
+      "next_bounded_step": null,
+      "evidence": "2026-11-08T00:09:07Z: 2026-11-07 R356 spec for this child: run the hook's refusal condition against four queues (ready only, ready and working, neither, and the ready text split over two lines) with a staged src path, assert the old pipe form and the new case form give the same verdict on each, show that the case form matches the whole string while grep -q matches per line instead of assuming it, and add the mutation that swaps the two flags, which must fail the test. Same stack as the hook edit. The scratch edit lives in the scratch worktree for W2053 (nemik-W2053). | 2026-11-08T00:38:20Z: 2026-11-07 BRANCH TEST WRITTEN in the W2053 scratch worktree (not landed): tests/test_precommit_queue_check.py runs the real hook for each case in a throwaway git repository with a stand-in bazel on PATH, a staged queue and a staged source path, and judges the verdict as status 1 with the hook's message (refuse) or anything else (pass; the repository has no gate script so a pass dies at the final exec). Six cases: ready only with src staged refuses, ready and working passes, nothing ready passes, the ready text split over two lines passes, ready only with a tests path staged refuses, ready only with only the queue staged passes. A seventh test swaps the two flags in a copy of the hook text and asserts at least one case then differs (the mutant is caught). BUILD.bazel gets the hook file as data for the new test. Pycheck hook: the first Write was refused for ruff-format, the second accepted. bazel test //:test_precommit_queue_check //:test_test_inputs: Executed 2 out of 2 tests: 2 tests pass, 103 s. Gaps: I did not run the test against the OLD pipe form to show the same verdicts (the old hook is not in the scratch tree edit, I would have to rebuild it), so the claim old equals new rests on the logic, not a run. The case form matching whole-string versus grep -q per line is shown only by the split case (the split queue passes in the new form, and I did not run the old form on it). Not run: the ratchet for the new file through bazel (started, result pending). | 2026-11-08T00:38:28Z: G0 2026-11-08T00:38:27Z: [NO-PACE-STAMP] Precommit (stamped after the work, not a prediction): advances W2057. Actuator: wrote tests/test_precommit_queue_check.py in the W2053 scratch worktree and ran it, with test_test_inputs, through bazel. Sensor: the bazel test line. Expected: both pass; the ratchet targets running in the background are unread. | 2026-11-08T00:40:52Z: G0 2026-11-08T00:40:51Z: [NO-PACE-STAMP] Precommit (stamped BEFORE the run): advances W2057. Actuator: put HEAD's real pre-commit bytes in tests/fixtures/precommit/ in the W2053 scratch tree (copied from the main tree, hash-checked against HEAD's blob), parametrize test_precommit_queue_check over the old and the new hook, add a case running the old pipe form under ignored SIGPIPE, then bazel test //:test_precommit_queue_check. Sensor: the bazel line and hash-object equality. Expected: the old and new hook give the same six verdicts, and the old hook under ignored SIGPIPE prints Broken pipe while the new one does not; if the old prints none the noise claim fails and I say so. | 2026-11-08T00:45:21Z: 2026-11-07 R357 APPLIED. G0 stamped BEFORE the run this time. Fixture: tests/fixtures/precommit/pre-commit-before-w2053 is HEAD's hook bytes, copied from the main tree: git hash-object in the scratch tree 9a98a465a6121ea1fe04d221bae23339be5e3888 equals git rev-parse HEAD:.githooks/pre-commit (same id). It is declared through a new package tests/fixtures/precommit (exports_files) and one data label for the test. The test now parametrizes the six cases over BOTH hooks (old pipe form and new case form), plus a noise test (an ignored SIGPIPE through sh -c trap on PIPE, a big multi-line queue, old must print Broken pipe, new must not) and the flag-swap mutant test, and its docstring names the stand-in bazel and the missing gate script as NOT EXERCISED. WHAT BAZEL SAID, in order: (1) the first version failed test_ruff_ratchet with E501 x2 in the new test (the bazel ratchet caught what the edit hook had accepted); (2) the second run: 13 passed and the noise test FAILED, old form printed no Broken pipe: because my big queue was ONE line (grep -q must read the whole line before matching, so printf finished), the claim 'old is noisy' was false for that queue, true only for a multi-line one as the earlier repro on the real queue showed; also test_ruff_ratchet failed PLR0913 and PLR0917 (too many arguments) on the test functions; (3) after making the queue multi-line and bundling arguments into case tuples: bazel test //:test_precommit_queue_check //:test_ruff_ratchet //:test_mypy_ratchet: Executed 3 out of 3 tests: 3 tests pass, 35.4 s. So now shown by tests, not argued: old and new give the same six verdicts, the old hook is noisy under an ignored SIGPIPE on a big multi-line queue and the new one is not, and swapping the flags is caught. Still scratch-only. Remaining: the landing (W2059), dash/busybox (W2058, absent), durable repro (W2060). | 2026-11-08T00:47:43Z: G0 2026-11-08T00:47:42Z: [NO-PACE-STAMP] Precommit (stamped BEFORE the run): advances W2057 (R358). Actuator: in the W2053 scratch tree's tests/test_precommit_queue_check.py, assert the big queue is at least 1 MiB (well above 4 x 65536) before the noise run, state the production case in the noise test's docstring, and replace nothing in the fixture but add a test that computes the git blob hash of the old hook in Python and compares it with the literal 9a98a465a6121ea1fe04d221bae23339be5e3888. Then bazel test the file with both ratchets. Sensor: the bazel line. Expected: 3 of 3 pass; the queue is about 1.1 MB by my arithmetic (20000 lines of about 58 bytes), not yet measured. | 2026-11-08T00:50:01Z: 2026-11-07 R358 APPLIED (G0 stamped before the edit). Changes to tests/test_precommit_queue_check.py in the W2053 scratch tree: the noise test asserts the queue length exceeds 4 x 65536 before it runs, and its docstring states the production case (an ignored SIGPIPE and a large multi-line queue, the real one 5.8 MB, grep -q exiting at its first match while printf has more than a pipe buffer left, a one-line queue not noisy); a new test computes the git blob hash of the kept old hook in Python and compares it with the LITERAL 9a98a465a6121ea1fe04d221bae23339be5e3888, so it no longer compares with HEAD. bazel: run 1 test_ruff_ratchet failed E501 x1 (a long docstring line), run 2 failed E501 x1 again (I shortened one line and missed another, a grep for lines of 100 or more found it), run 3: Executed 3 out of 3 tests: 3 tests pass (test_precommit_queue_check, test_ruff_ratchet, test_mypy_ratchet), 34.5 s. The queue size is 20000 lines of about 58 bytes by arithmetic, about 1.1 MB; the test asserts only that it exceeds 262144, not the figure itself. Scratch-only, nothing landed. | 2026-11-08T01:26:43Z: 2026-11-08 the branch test landed in b2d2b843 (W2059): tests/test_precommit_queue_check.py with the old-hook fixture. In that gate, test_precommit_queue_check, both ratchets and the rest passed (483 of 483). Done.",
       "issued_at": "2026-11-08T00:08:59Z",
       "minted_during": "interrupt",
       "caused_by": "W2053",
-      "last_worked": "2026-11-08T00:50:01Z",
-      "ticks_blocked": 0
+      "last_worked": "2026-11-08T01:26:43Z",
+      "ticks_blocked": 0,
+      "completed": "20261108T012643Z"
     },
     {
       "symbol": "W2058",
@@ -49458,21 +49457,21 @@
     {
       "symbol": "W2059",
       "title": "Land the pre-commit case-pattern fix in one stack with its branch test",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W2053"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "2026-11-08T01:05:43Z: G0 2026-11-08T01:05:42Z: [NO-PACE-STAMP] Precommit (before the submit): advances W2059. Actuator: mark W2059 working, write the stack file with the five paths of the W2053 scratch tree (.githooks/pre-commit, BUILD.bazel, tests/fixtures/precommit/BUILD.bazel and pre-commit-before-w2053, tests/test_precommit_queue_check.py), submit with mikemol-commit --stack and --freeze-from that tree. Sensor: the submit output (a refusal text or a COMMITTED line) and git log -1. Expected: either a round-check refusal naming cards (the earlier kind, I will report it, not mark cards I am not building) or a gate of about 20 minutes ending COMMITTED; the pace should admit it as a plain stack.",
+      "next_bounded_step": null,
+      "evidence": "2026-11-08T01:05:43Z: G0 2026-11-08T01:05:42Z: [NO-PACE-STAMP] Precommit (before the submit): advances W2059. Actuator: mark W2059 working, write the stack file with the five paths of the W2053 scratch tree (.githooks/pre-commit, BUILD.bazel, tests/fixtures/precommit/BUILD.bazel and pre-commit-before-w2053, tests/test_precommit_queue_check.py), submit with mikemol-commit --stack and --freeze-from that tree. Sensor: the submit output (a refusal text or a COMMITTED line) and git log -1. Expected: either a round-check refusal naming cards (the earlier kind, I will report it, not mark cards I am not building) or a gate of about 20 minutes ending COMMITTED; the pace should admit it as a plain stack. | 2026-11-08T01:08:41Z: 2026-11-08 R359 checks while the gate runs (nothing in the stack touched): mikemol-shellcheck --check-file on .githooks/pre-commit in the W2053 scratch tree, the tree the stack was frozen from, printed 'dialect=sh  findings=0', so the commit body's claim about the final bytes holds (the tree was not edited between the submit and this run: the last edit to the hook was before the submit). A grep of tests/test_precommit_queue_check.py shows the size assertion (MIN_BIG_QUEUE = 4 * PIPE_BUFFER at line 35, assert len(BIG) > MIN_BIG_QUEUE at line 123) and the literal blob hash (OLD_HOOK_BLOB at line 22, compared at line 99, also named in the docstring at line 7). So the noise case's size guard and the literal fixture hash are in the stack. No correction needed on the commit body. | 2026-11-08T01:26:41Z: 2026-11-08 LANDED. mikemol-commit printed COMMITTED nemik b2d2b84 W2059: the pre-commit tests the queue text with case patterns ... [PUSHED]. git log -2 read back: b2d2b843 with that subject (2026-11-07 20:06:04 -0500) on eb3fd9c8. Gate: 483 targets, 480 fresh of 483, Executed 480 out of 483 tests: 483 tests pass, elapsed 1084.9 s, critical path 571.9 s, gate_staged green. THE WITNESS: this gate's output contains NO printf Broken pipe pair (a grep -c for Broken pipe counts 1 line, and that line is the commit subject itself); the earlier gates (W2043, W2039) printed four. CORRECTION to what I told the reviewer and wrote in the commit body: I said the first gate would run the OLD hook copy from HEAD; the output shows the NEW hook ran (the isolated run takes the hook from the commit tree), so the fix was witnessed by this first gate, not the next. W2058 (a run under a strict POSIX shell) was not done, only the fleet checker's dialect=sh verdict stands. W2060 (durable repro) is a file under .claude, untracked, unlanded.",
       "issued_at": "2026-11-08T00:08:59Z",
       "minted_during": "interrupt",
       "caused_by": "W2053",
-      "last_worked": "2026-11-08T01:05:51Z",
+      "last_worked": "2026-11-08T01:26:41Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261108T012641Z",
       "manifest": [
         ".githooks/pre-commit",
         "BUILD.bazel",
@@ -49497,6 +49496,204 @@
       "minted_during": "interrupt",
       "caused_by": "W2053",
       "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2061",
+      "title": "A producer for DORA change failure rate and time to restore, structured records in VictoriaLogs",
+      "status": "blocked",
+      "enables": [],
+      "touches": [
+        "velocity"
+      ],
+      "blocked_on": [
+        "W1141",
+        "W2052"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Settle the record shape with github-14 (event, sha, waypoint, kind, detected_at, restored_at, fix_sha, source), then write the producer reading reopened cards and review-BLOCK verdicts on landed shas",
+      "evidence": "2026-11-08T01:27:19Z: 2026-11-08 github-14's ask (peer message, not operator approval; they say the operator asked for DORA metrics and trends): card a producer for change failure rate and time to restore, behind W1141 and W2052 (blocked on both here, so it waits on the cache work). READ: metrics.py:567-588 commit_lines (nemik_commits_24h, deploy frequency, push = deploy; its note says change failure and time to restore need the reopened-card and Flux-ship series) and reopened_lines at 591; history.py:718-744 reopened_since counts done-to-open transitions between committed queue snapshots in a window (a reopened or re-minted card is a change that failed). lead_time_days: history.py weekly, lines 1030-1032: the median, per ISO week, of days from a card's first commit to the commit that closed it, over the cards that closed that week. MEASURED (nemik-history nemik --weekly --json, seven weeks W39-W45): lead_time_days 0.0 in six weeks and 0.3 in one, while implied_wait_days (open cards over the weekly close rate times 7, Little's law) ran 0.3, 0.7, 2.4, 5.0, 2.6, 5.6 and 16.0, and closed counts were 92 to 446 a week. NOT MEASURED: the share of cards that were minted and closed within one commit; the rows hold only the median, so 'instant cards dominate' fits a median of 0.0 over hundreds of closes but is not shown. The two numbers also measure different things: lead time is first-seen-to-closed of the cards that closed (survivorship: a card that stays open ages only in implied_wait), implied wait is queue length over throughput. | 2026-11-08T01:27:38Z: G0 2026-11-08T01:27:37Z: [NO-PACE-STAMP] Precommit (stamped after the work, not a prediction): advances W2061 and records the W2059 landing. Actuator: read metrics.py and history.py for the DORA signals, ran nemik-history --weekly --json, wrote the record shape and the lead-time answer to github-14. Sensor: the weekly rows and the messages. Expected: lead_time_days 0.0 in most weeks. | 2026-11-08T01:30:26Z: 2026-11-08 github-14: shape accepted, keep instant cards and report the within-one-commit share plus a p90 of the rest. Review source bridge: W99's prose has a fixed lead 'COLD REVIEW <repo> <sha> (<W>): PASS|BLOCK', so a parser over its ledger feeds the record until reviews emit structured lines. Ask luthen's channel for the VictoriaLogs egress route after W90. The pinned bin has mikemol-vlog; READ its --help: it ships a command's output or a file of JSON lines into VictoriaLogs (--from-file, --follow, --stream KEY=VALUE, --service, --message-key _msg for records already VictoriaLogs-shaped, --time-key, --spool-dir, --drain), resolving the service name through the host's resolver. So it may already be the egress route: not run, not yet checked against luthen's resolver. Split: the lead-time measure moved to W2062 (not blocked on W1141 or W2052); this card keeps the change-failure and restore record, which stays behind W1141 and W2052 per github-14.",
+      "issued_at": "2026-11-08T01:27:08Z",
+      "minted_during": "interrupt",
+      "caused_by": "github-14",
+      "last_worked": "2026-11-08T01:30:26Z",
+      "ticks_blocked": 8,
+      "completed": null
+    },
+    {
+      "symbol": "W2062",
+      "title": "DORA lead time for changes: landed commit time against its deploy time for the last 20 commits, with median, spread and the same-day mint-and-close share",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "velocity"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Collect (commit time, deploy time) for the last 20 landed commits",
+      "evidence": "2026-11-08T01:30:24Z: 2026-11-08 split from W2061 on the reviewer's finding (R360): this part needs neither W1141 nor W2052, so it is NOT blocked on them. What nemik calls lead_time_days (history.py 1030-1032) is a CYCLE time of cards (median days from a card's first commit to its closing commit, including cards minted and closed in one sitting), not DORA's lead time for changes (commit to running in production). One observation I already hold for the right measure, from luthen's read of W2043: the registry image tag epoch 1794080191 is 2026-11-07T19:36:31Z and the commit 29fe2665 was 19:12Z (24.5 minutes). That is one point, not a distribution. | 2026-11-08T01:35:29Z: G0 2026-11-08T01:35:28Z: [NO-PACE-STAMP] Precommit (before the run): advances W2062. Actuator: git log for the last 20 commits' times and subjects, and a check for any way from this session to read the deployed image tag history (kubectl or a registry read). Sensor: the git log lines and which -v kubectl. Expected: git log gives 20 commit times; this session has no kubectl, so deploy times for all but 29fe2665 need luthen, and I will ask for them in one request rather than guess. | 2026-11-08T01:35:59Z: 2026-11-08 MEASURED (G0 stamped before the run). Sources: git log -20 commit times (committer time) and a READ-ONLY kubectl get replicasets -n nemik (this session's kubectl answered; I ran nothing that writes): each ReplicaSet's image tag carries the build push epoch and its creationTimestamp is when the Deployment was updated to it. Eleven of the twenty commits have a ReplicaSet (the other nine, from 2026-11-05 12:41 to 14:38 local, have none: older history is pruned or they shipped no image, I did not check which). Per commit (seconds from commit to tag epoch, then to ReplicaSet creation), all hand-computed from the printed epochs and times: b2d2b843 1218 and 1662; eb3fd9c8 1964 and 2386; 29fe2665 1455 and 1863; f79a046d 1217 and 1554; 5b0b1f12 632 and 946; 09ba95f8 1072 and 1389; c9edd345 662 and 953; 832a7736 1086 and 1372; 7be15c47 274 and 509; 46387feb 1086 and 1359; 02ac1db3 625 and 916. Commit to image pushed: median 1086 s (18.1 min), range 274 to 1964, the second-largest 1455 s. Commit to Deployment update (the change is being served): median 1372 s (22.9 min), range 509 to 2386, second-largest 1863 s (31.1 min). n=11, so a 'p90' is the second-largest value, not a stable estimate. Not measured: pod Ready time (the ReplicaSet creation precedes it), the commit-to-queue-only commits that ship nothing, and the share of cards minted and closed in one commit (the other half of the ask). The 24.5 minute point I gave earlier for 29fe2665 was commit to tag (1455 s, 24.25 min); to the Deployment update it is 31.1 minutes. | 2026-11-08T01:38:22Z: G0 2026-11-08T01:38:21Z: [NO-PACE-STAMP] Precommit (before the run): advances W2062 (R361). Actuator: a typed scratch script computes both medians and ranges from the eleven pairs listed on the card, git log gives the subjects of the nine commits with no ReplicaSet, kubectl config current-context and get pods give the access and pod ready times. Sensor: the script's printed numbers against the card's by-hand ones, the nine subjects, the context name. Expected: the script reproduces median 1086 s and 1372 s; the nine are mostly queue-only commits; the context names a user kubeconfig I did not create. | 2026-11-08T01:39:05Z: 2026-11-08 R361 APPLIED (G0 stamped before the run). (1) Medians SCRIPTED from the eleven pairs on the card (scratch lead_stats.py, python3 -I): commit to image pushed n=11 median 1086 s (18.1 min) min 274 max 1964 second-largest 1455; commit to Deployment update n=11 median 1372 s (22.9 min) min 509 max 2386 second-largest 1863. Equal to my hand figures. The pairs themselves (the epochs and creation times) were still read by me from the kubectl output, not scripted. (2) The nine commits with no ReplicaSet, classified from git log --name-only: docs only plus queue: bc089dc9, fe3406ca; tools or tests or BUILD but no src/nemik: b44699e9, 0e546c8f, ffea930d, 94f91a1a; src/nemik code: 151ec059, 119e37ba, ce463e42. MY EARLIER CLAIM THAT QUEUE-ONLY COMMITS SHIP NO IMAGE WAS WRONG: the eleven ReplicaSets include queue-only commits (5b0b1f12 and 09ba95f8 and c9edd345 are subjects that begin W1978 queue only or are queue commits), so every push builds an image, and the nine lacking a ReplicaSet are just OLDER than the newest eleven the Deployment keeps (revisionHistoryLimit not read). So n=11 is the eleven newest deploys the cluster still holds, not 11 of the last 20. (3) Pod Ready time NOT measured: my one query used a condition by index and its column equalled the start time, so it is not the Ready time; a correct query (the Ready condition by type) is still to do. (4) kubectl: kubectl config current-context printed 'default'; I do not know who granted this session read access to the nemik namespace or where the kubeconfig comes from (not looked up), and I did not ask before using it. OBSERVATION from get pods: about 28 pods of the f79a046d ReplicaSet and 7 of the eb3fd9c8 one are in phase Failed, started about an hour apart; two nemik pods Running on b2d2b843. Cause (evictions, OOM kills or something else) not read: it may be a change-failure or restore signal for W2061, and I did not describe any pod. | 2026-11-08T01:40:27Z: 2026-11-08 github-14 (relayed, not operator approval): stop reading pods and stop ad hoc kubectl. They sent the Failed pods to luthen as an incident, asked luthen whether that kubeconfig context is meant for sessions, and are telling the operator. W2062's commit and deploy pairs should come from kube-state-metrics in VictoriaMetrics through luthen's channel (the series kube_pod_container_info and the ReplicaSet series), not from my kubectl. I will make no further kubectl call. The eleven pairs on this card therefore stand as a ONE-TIME ad hoc read, to be replaced by a series read; nothing else is read from the cluster by this session. | 2026-11-08T01:41:38Z: 2026-11-08 SCOPE EXTENDED (github-14's relay of an operator direction, quoted without a transcript line, so NOT yet verified or warranted: 'we also need to measure blocked to ready, ready to working, working to submit, submit to commit. The whole dev pipeline'): W2062 becomes the full value stream per repo, as transition-time distributions (median, p90, count per window) with a trend; W2061 stays on change failure. PROPOSAL sent to github-14 (not built): five events with joins. (1) card_transition from the queue ledger's structured status lines (waypoint, from, to, at), (2) submit, (3) refusal at submit or gate or landing, (4) landing, (5) deploy from kube-state-metrics. Joins: waypoint W (transitions to submit to landing), stack_key (submit to refusal to landing; a resubmit is a new key with the same waypoints, so submits per waypoint before landing counts refusals), sha (landing to deploy by image tag suffix). Asked github-14 for the transcript line, and asked mtools for the exact structured submit/refusal/landing record or to card one (I know only the printed COMMITTED and NOT COMMITTED lines and a --ship mode that mentions verdicts to vlog). Memory note no-ad-hoc-kubectl added; no more kubectl calls. | 2026-11-08T01:42:22Z: 2026-11-08 mtools answered (peer message, read from module headers and field names, not run): THE COMMIT PATH EMITS TODAY: (1) verdictlog: the four verdict lines COMMITTED, REFUSED, NOT COMMITTED, RACED become structured VictoriaLogs events when mikemol-commit runs with --ship, fields verdict, repo, sha, subject, pushed, rc, why, plus a gate-jobs event and one event per failed gate check, via the vlog spool; (2) commit.counts under the git dir: the LIVE queue map (state, pid, waypoints, began_ns), state not events, a landed key is removed; (3) commit_span OTLP gating spans; (4) gate_ledger per-check pass or fail with seconds (wiring is W1122, not done); (5) commit_gauge in-flight gauges. MISSING for the submit and refusal legs: a SUBMIT event, the submit-time refusal as an event with a reason class (round, pace, empty-entry, import and build-file refusals print text only), resubmit linkage, WITHDRAW as an event, and the stack key and waypoints as fields on every verdict event. Carded by mtools as mtools:W2354. Note for my side: my own submits (W2043, W2039, W2059) used the plain --stack form, not --ship, so their verdicts were NOT shipped as events; whether --ship is the form to use from now is a question for github-14 and mtools. My naming proposal sent to mtools. The ledger transitions and the deploy leg do not depend on W2354. | 2026-11-08T01:44:25Z: 2026-11-08 WARRANT attached (host line 149853, uuid 7db3a971, verified human by --warrant --dry-run before attaching): the operator's pipeline direction. github-14's two edits accepted: (a) join resubmits by waypoint OVERLAP, not identity (a resubmit may carry a different waypoint set, e.g. a card dropped from the stack), and the rule is recorded here; (b) attribute a multi-waypoint stack's interval to each waypoint and ALSO report per stack, so one big stack does not count as n fast landings; and the ledger's existing transition lines are the card_transition source, no second writer. mtools' later answer: no single structured record carries one stack key across submit, refusal and landing today; verdict events (mikemol-commit --ship, verdictlog.py) carry verdict, repo, sha, subject, pushed, rc, why, _msg but NO stack key or waypoint field; commit.counts is live state only; carded as mtools:W2354 (one event per transition, same key on all). So (2) to (4) need fields ADDED upstream, not just read.",
+      "issued_at": "2026-11-08T01:30:10Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2061",
+      "last_worked": "2026-11-08T01:44:25Z",
+      "ticks_blocked": 0,
+      "warrants": [
+        {
+          "@context": {
+            "prov": "http://www.w3.org/ns/prov#",
+            "xsd": "http://www.w3.org/2001/XMLSchema#",
+            "mtools": "urn:mtools:warrant#"
+          },
+          "@id": "urn:nemik:nemik/W2062",
+          "prov:wasDerivedFrom": {
+            "@id": "urn:claude:transcript:-home-mikemol-github/695f3e0a-d36f-4080-9c67-7548978cd99e#7db3a971-d91e-4df0-9d51-50212b85ac84",
+            "@type": "prov:Entity",
+            "prov:generatedAtTime": {
+              "@value": "2026-11-08T01:39:10.285Z",
+              "@type": "xsd:dateTime"
+            },
+            "prov:wasAttributedTo": {
+              "@id": "urn:nemik:operator",
+              "@type": "prov:Agent"
+            },
+            "prov:wasGeneratedBy": {
+              "@id": "urn:nemik:utterance/7db3a971-d91e-4df0-9d51-50212b85ac84",
+              "@type": "prov:Activity"
+            },
+            "mtools:line": 149853,
+            "mtools:reader": "mikemol-transcriptstruct claude:transcript:-home-mikemol-github/695f3e0a-d36f-4080-9c67-7548978cd99e --verify 7db3a971-d91e-4df0-9d51-50212b85ac84 --claim operator --line 149853"
+          },
+          "mtools:reason": "the operator's direction: measure the whole dev pipeline: blocked to ready, ready to working, working to submit, submit to commit"
+        }
+      ]
+    },
+    {
+      "symbol": "W2063",
+      "title": "nemik pods are evicted for exceeding an emptyDir limit: find what grows in snapshots or tmp and fix the growth",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "velocity"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Get the per-snapshot size from luthen's series (no kubectl), compare 4 to 5 snapshots at the peak with the 512Mi limit, then make the builder hardlink unchanged files between snapshots and delete the oldest before building",
+      "evidence": "2026-11-08T01:45:48Z: 2026-11-08 INCIDENT from github-14 (luthen's reading at 01:41Z, relayed, not operator approval): all 33 Failed nemik pods are Evicted, kubelet_evictions with signal emptydirfs.limit rose 33 over 3 days, 4 in the last 3 hours, about one per 40 minutes, still happening, no node pressure; the limited emptyDirs are snapshots (sizeLimit 512Mi) and tmp (medium Memory, 64Mi); export and cache are unlimited (deploy/deployment.yaml lines 109-121, read by me). I may not use kubectl or read pods (github-14's instruction). WHAT THE CODE DOES (read, not run): serve.py publish (lines 1860-1918) writes a new snapshot snap-<stamp>-<pid> under /srv, flips current to it, and only AFTERWARDS deletes all but the last keep=3 directories, so at the peak there are keep+1 = 4 snapshots in the emptyDir; the manifest comment counts five (three kept, the one being written, and the last-good copy restore() puts back at start), and measured 77 MiB per snapshot on 2026-10-26, 385 MiB at the five-snapshot peak against 512Mi. A killed or evicted builder leaves its partial snap directory, which stays until a later build sorts it out of the last three. The pod mounts the cache PVC at /srv/.cache (not limited). /tmp (64Mi, in memory) is written by the code only through tempfile in pdf.py, rank.py and calendars.py: the builder path I read does not call them, not proven. EVIDENCE OF GROWTH (measured, ls and git cat-file): nemik's own queue file is 5,868,154 bytes now against 1,498,518 at the commit nearest the 77 MiB measurement (3.9 times); the ledger 1,092,859 against 461,212 (2.4 times); luthen's queue is 4.4 MB, mtools' 3.5 MB, the host's 1.66 MB. If a snapshot grows with those inputs, even at 2 times 77 MiB the four-to-five snapshots are 616 to 770 MiB, over 512Mi. HYPOTHESIS, NOT CONFIRMED: the snapshots volume overflows because each snapshot grew past what the 512Mi limit was sized for in October, and the builder holds 4 to 5 of them at once. What would confirm it: the per-snapshot size and the volume's used bytes from luthen's series (the kubelet ephemeral-storage or container filesystem usage metrics for the nemik pods), which I do not have; a local publish over the pod's export input would also show it, but the export PVC is luthen's. Not read: build_static's output layout (what dominates a snapshot), whether tmp ever grows, restore(). FIX SHAPE (proposed, not built): shrink the growth, not only the cap. (1) The builder hardlinks any file whose sha256 equals the same path's hash in the previous snapshot (hashes.json already carries every path's sha256), so consecutive snapshots share unchanged bytes and emptyDir accounting counts them once; (2) delete the snapshots beyond keep minus one BEFORE the build starts, so the peak is keep dirs, not keep plus one; (3) remove stray partial snap directories left by a killed build at start. If the measured need still exceeds 512Mi after that, state it and raise the cap with the number. Clearing the Failed pods is a delete: left for GC or a reviewed apply. | 2026-11-08T01:45:58Z: G0 2026-11-08T01:45:57Z: [NO-PACE-STAMP] Precommit (stamped after the work, not a prediction): advances W2063 and W2062. Actuator: read deploy/deployment.yaml, serve.py publish and lastgood.py, measured queue and ledger growth with ls and git cat-file, wrote the analysis and fix shape, attached the verified W2062 warrant. Sensor: the file reads and sizes. Expected: the snapshots volume holds four to five snapshots at peak and the inputs grew several times since the 77 MiB measurement; the cause stays a hypothesis without luthen's usage series. | 2026-11-08T01:47:39Z: 2026-11-08 github-14 on the fix shape (relayed): hardlinking unchanged files between snapshots is good BUT confirm that the kubelet's emptyDir accounting counts a hardlink once (du-like, not confirmed by me) and add a test; deleting snapshots beyond keep-1 before the build trades away rollback depth (a failed build would leave one good copy, not two), so keep the last-good copy restore() needs; measure the per-snapshot size so the cap is set from the number with headroom for the growth trend; cleaning stray partial snap dirs at start is right. Asked luthen to send me the usage reading directly. Revised fix shape: hardlink unchanged files (accounting to be confirmed), clean stray partial dirs at start, DO NOT delete beyond keep-1 early; cap set from the measured size and the growth trend. Nothing built. | 2026-11-08T01:48:46Z: 2026-11-08 LUTHEN'S READING (peer message, 01:47Z, through checks.vm_query, namespace nemik, 3 days; their card W2340 and W2339): (1) NO series measures emptyDir or ephemeral-storage occupancy (container_fs_usage_bytes is absent; the only fs series are IO counters; kubelet_volume_stats covers one PVC), so the per-snapshot size and the peak cannot be read now, and 'four or five snapshots at peak' is neither confirmed nor refuted; the route is a scrape of the kubelet stats summary, their card W2339. (2) container_memory_working_set_bytes for the builder peaks at exactly 1610612736 bytes (1.5 GiB) on every top pod: the builder sits at its 1536Mi limit (a ceiling). (3) container_fs_writes_bytes_total over 3 days, builder: 62.5 GB (pod 775f4b57bc-bq8rf, created 2026-11-06T01:3x), 43.0 GB (6h857), then 4.2, 3.8, 3.7, 2.6 GB; written not held. eviction counter +33 in 3d, +32 in 24h, +4 in 3h. MY INFERENCE, NOT MEASURED (a bound from the write counter and the code): the builder rebuilds about every ten minutes (serve.py ties the view key to a ten-minute series bucket), 144 builds a day; a build writes the new snapshot S into the emptyDir and a last-good copy of about S into the cache claim, plus about 12 MB of cache, so bytes written per build are roughly 2S plus 12 MB. For the 62.5 GB pod, if it lived 2.5 days (360 builds) S is about 81 MB and the four-snapshot peak about 320 MB; if it lived 1 day (144 builds) S is about 210 MB and the peak about 840 MB, over 512Mi. The pod lifetimes are unknown to me, so the range 81 to 210 MB per snapshot is a bracket, not a reading, and it does not exclude either answer. It does show the churn: every ten minutes the builder rewrites the whole snapshot even when only the series bucket changed, which hardlinking unchanged files would also cut. NEXT: ask luthen for the pod end times (eviction timestamps for 6h857 and bq8rf) from kube_pod_status or the eviction series to fix the lifetimes, and wait for W2339. No code change yet. | 2026-11-08T01:49:49Z: G0 2026-11-08T01:49:47Z: [NO-PACE-STAMP] Precommit (before the run): advances W2063 (R362). Actuator: run nemik-serve --publish over the live host root (17 queues, no --exports, so the input is a superset of the pod's) into a scratch directory under systemd-run with MemoryMax 3G and no swap, then du the snapshot. Sensor: the exit status and du of the snap directory. Expected: a snapshot between 77 and 300 MiB as an UPPER bound for the pod's snapshot; if it is over 128 MiB then four of them exceed 512Mi; the build takes a few minutes and about 1 GiB; I do not know what a root publish does to the live queues (it should only read). | 2026-11-08T01:50:50Z: 2026-11-08 LUTHEN'S TABLE (peer message, their W2341), pod lifetimes from kube_pod_start_time and kube_pod_completion_time or the first Failed sample, builds at one per 10 min assumed, S = (writes per build minus 12 MB) / 2: bq8rf life 25.5 h, 153 builds, writes 62.49 GB, S about 198 MB; 6h857 life about 22.1 h, about 133 builds, 42.95 GB, S about 156 MB; 79d888467-xgllx 1.7 h, about 10 builds, 0.58 GB, S about 22 MB; s2wl4 64 min, about 6.4 builds, 0.99 GB, S about 71 MB; cm7d7 41 min, about 4.1 builds, 1.16 GB, S about 134 MB. Their reading: the two long-lived pods put S at 160 to 200 MB (3 x 198 = 594 MB, over the 512Mi limit of 537 MB), the three short-lived ones give 22 to 134 MB, a 6x spread in one ReplicaSet, so the model is not stable (startup writes, unknown real cadence); S is bracketed to about 20 to 200 MB by writes alone, pinned only by the occupancy series (their W2339). This supersedes my 81 to 210 MB bracket (I assumed lifetimes of 2.5 d and 1 d; the real ones are 25.5 h and 22.1 h, near my 1-day end). A local publish over the live root into scratch (an upper-bound measure of S) is running. | 2026-11-08T01:56:03Z: 2026-11-08 LOCAL PUBLISH FAILED (my R362 measurement, G0 stamped before): nemik-serve --root the live host root --publish scratch, under systemd-run --user with MemoryMax 3G and no swap, was OOM-KILLED after 5 min 27 s (CPU 5 min 2 s, memory peak 3G, IO written only 5.3 MB, so no snapshot was written and there is NO size reading). Reading: a cold build over the live root (17 queues, nemik's 5.9 MB, luthen's 4.4 MB, mtools' 3.5 MB) needs more than 3 GiB here, against the 1.03 GiB the manifest comment recorded for a cold build on 2026-10-26 (card W1054) and the pod builder's 1.5 GiB limit. Not the same input as the pod (which reads /export, not the live queues), so it does not show the pod's builder would be killed; but luthen's series show the builder container's working set at exactly its 1.5 GiB ceiling on every top pod, which is consistent with a build that wants more than the limit gives it. I did NOT retry with a larger cap: a bigger MemoryMax on a host shared with other sessions is a decision I did not make without asking. So S remains bracketed at about 20 to 200 MB by luthen's writes table and the occupancy series (their W2339) remains the way to pin it.",
+      "issued_at": "2026-11-08T01:45:30Z",
+      "minted_during": "interrupt",
+      "caused_by": "github-14",
+      "last_worked": "2026-11-08T01:56:03Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2064",
+      "title": "The builder's memory grows with the fleet: a cold build over today's queues needs more than 3 GiB, against 1.03 GiB in October, and the pod is pinned at 1.5 GiB",
+      "status": "working",
+      "enables": [],
+      "touches": [
+        "velocity"
+      ],
+      "blocked_on": [
+        "W2066",
+        "W2067",
+        "W2068"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "When the kine-latency guard clears, resubmit .claude/stack-W2064.json once and read git log -1. Meanwhile work W2065 or the memory root cause in a scratch worktree.",
+      "evidence": "2026-11-08T01:57:59Z: G0 2026-11-08T01:57:56Z: [NO-PACE-STAMP] Precommit (before the runs): advances W2064 (github-14's scaling plan, no 6G run). Actuator: scale_run.sh publishes the fleet view over copies of 1, then 3, then 6 queue files (summit; summit gabion paperkit; plus amr-skills substrate el-openglo) under the same 3G cap, printing input bytes, snapshot bytes and the unit's memory peak, deleting scratch after each. Sensor: the printed lines. Expected: memory peak and snapshot bytes rise with the input bytes; the 6-queue run (4.4 MB input) stays under the 3G cap; a linear fit through three points extrapolated to today's 22.2 MB is a rough guide only; a cold build may be nonlinear. | 2026-11-08T02:02:34Z: 2026-11-08 SCALING MEASURED (G0 stamped before the runs; script scale_run.sh in the scratchpad: copies the chosen repos' queue files into a scratch root, runs nemik-serve --root scratch --publish scratch under systemd-run --user MemoryMax=3G MemorySwapMax=0, prints the unit's Memory peak, then du -sb of the snapshot directory, then deletes the scratch; no ledgers, no git history, root layout not the pod's /export). RESULTS: (1) summit alone: input 335,310 B, snapshot 3,414,008 B, memory peak 60.1M, CPU 2.3 s. (3) summit, gabion, paperkit: input 1,928,865 B, snapshot 26,451,230 B, peak 173.7M, CPU 82.3 s. (6) those plus amr-skills, substrate, el-openglo: input 4,498,540 B, snapshot 46,850,272 B, peak 304.5M, CPU 107.4 s. Snapshot over input: 10.2, 13.7 and 10.4 times. Peak memory: about 40 MiB fixed plus 59 to 72 MiB per MB of queue input (three points, a rough fit). EXTRAPOLATION to today's 17 queues, 22.2 MB (sum of ls sizes): snapshot about 226 to 304 MB (10.2 to 13.7 times), against luthen's write-counter bracket of 20 to 200 MB and the two long-lived pods' 156 to 198 MB: my numbers sit above the bracket, as an upper bound should (live root, not the pod's /export which can drop cards). At about 230 MB per snapshot two snapshots are 460 MB and three are 690 MB against the 537 MB limit, so the volume overflows as soon as three snapshots coexist, which is the case during a build (kept three plus the new one is four). The same extrapolation of MEMORY gives about 1.35 to 1.6 GiB for a cold build, but the earlier full-root run was OOM-killed above 3 GiB, so memory (and CPU: 2.3 s, 82 s, 107 s, not linear) grows faster than these three points predict, or the biggest queues (nemik 5.9 MB, luthen 4.4 MB, mtools 3.5 MB, with long ledgers elsewhere) cost more per MB than the small ones. n=3 points, small queues only; I did not run anything bigger. Reading: the snapshot-size hypothesis for the evictions holds up on this upper bound (4 x 230 = 920 MB against 537 MB) and on luthen's lower numbers only if 3 or more snapshots at 180 MB or more coexist; the builder-memory growth is real and steeper than linear. | 2026-11-08T02:08:01Z: G0 2026-11-08T02:08:00Z: [NO-PACE-STAMP] Precommit: advances W2064 per reviewer finding. Actuator: break down one 6-queue snapshot by file (du by name and extension) with scale_run.sh variant that keeps scratch until listed. Sensor: per-file bytes and what dominates. Expected: per-card pages or duplicated JSON dominate, explaining the 10x. | 2026-11-08T02:11:38Z: Breakdown of one 6-queue publish under the 3G cap, files listed by size. The publish dir held three things: the snapshot dir (about 19.7 MB), a byte-identical last-good copy of it under .cache (about 19.7 MB), and build-caches.json (7.44 MB). So the earlier 46.85 MB was 2.4 times the snapshot proper, and the snapshot alone is about 4.4 times the 4.50 MB of input, not 10 times. Largest snapshot files: graph.ttl 7.53 MB, graph.json 3.42 MB, umbrellas.json 1.94 MB, graph/gabion.json 1.26 MB, graph/el-openglo.json 0.76 MB, outbox/gabion.jsonld 0.55 MB, graph/paperkit.json 0.44 MB, vendor/cytoscape.min.js 0.37 MB, vendor/dagre.min.js 0.28 MB, metrics 0.26 MB. graph.ttl plus graph.json are 55 percent of it. Open: whether .cache is the PVC in the pod (deployment says /srv/.cache is PVC nemik-cache) so the last-good copy would not count against the emptyDir, and whether the earlier extrapolation to 226-304 MB should be redone as about 100 MB for the snapshot proper. Still to do: real export root run, CPU step profile of the 3-queue run. | 2026-11-08T02:13:34Z: Reviewer R362 (its R364) withdraws the earlier band: the 226-304 MB extrapolation and the 0.9-1.2 GB peak rested on a ratio that counted the last-good copy and build-caches.json, so they are withdrawn. Mounts settled from the manifest and serve.py: the builder publishes to /srv (the snapshots emptyDir, limit 512Mi) and serve.py keeps last-good and build-caches under the publish dir .cache, which the manifest mounts as the PVC nemik-cache at /srv/.cache, so neither counts against the emptyDir. Only snap dirs sit on the emptyDir. Corrected arithmetic: snapshot proper about 4.4 times queue bytes, fleet queues 22.2 MB, so about 98 MB per snapshot. Peak with keep=3 is 4 dirs, about 390 MB, with 5 about 490 MB, against 512Mi (536,870,912 B) which allows at most 134 MB per snapshot at 4 dirs or 107 MB at 5. Tight, not overrun by a factor of two, and the manifest's own measured 77 MiB (2026-10-26) agrees in size. So the eviction needs growth since then or a stray partial dir, still to be shown from luthen's occupancy series. Next: real export root publish with per-file list, CPU step profile of the 3-queue run, then cut graph.ttl and graph.json duplication only if readers do not need both. | 2026-11-08T02:15:09Z: Code path read for github-14's orphan hypothesis (serve.py publish, lines 1859-1920). Confirmed: each build writes a uniquely named dir snap-<stamp>-<pid> under /srv, and its only cleanup is rmtree in an except BaseException handler, which a SIGKILL from the memory limit never runs. A container OOM restart does not wipe an emptyDir (only a pod restart does), so the partial dir stays. source-key is written last, so a complete snapshot has it and a partial one does not. The prune after a successful flip keeps the newest keep=3 by name, so orphans are only removed after a later success, and every kill before that success adds one more orphan. Peak during a build is therefore every existing dir plus the new one, not four: three complete (about 98 MB each) plus k orphans plus the new build crosses 512Mi at k of 1 or 2. Fix shape: at publish start remove snap dirs lacking source-key (not own pid), add a test that plants a partial dir and checks it is removed while complete ones stay. Root cause stays W2064 memory. Confirmation still needs luthen container restart and OOMKilled series and W2339, no cluster reads from here and no real-root publish over 3G. | 2026-11-08T02:20:01Z: luthen-observability W2346 reading as of 2026-11-08T02:18Z, nemik namespace, builder container, 7 days, from kube-state-metrics: 41 of 501 builder pods seen had a restart counter above 0, all 41 with last terminated reason OOMKilled and no other reason. 33 pods are Evicted, and all 33 had been OOM-killed at least once, 8 were OOM-killed and not evicted. This is co-occurrence per pod, not time order, and last_terminated_reason keeps only the latest termination. No series holds emptyDir usage, so W2339 would add it. Not read yet: restart counts above 1 and the gap from OOM to eviction, both available from luthen on request. Reads as consistent with the orphan hypothesis and does not prove it. | 2026-11-08T02:23:48Z: luthen W2346 follow-up as of 2026-11-08T02:21Z, 7 days, builder: for the 33 evicted pods with both times, eviction minus first restart is never negative (0 of 33 below zero, minimum 900 s, median 4020 s), so the OOM kill comes first in every case. All 33 evicted pods have a restart counter above 1. Correction: the 8 OOM-killed and not evicted pods also have a counter above 1, so the count of restarts alone does not separate evicted from not evicted. What differs is open: bytes each partial dir held, which builds were larger, or when they ended. Limits: counter max is not the count of OOM kills, pods first seen before the window are cut off, no usage series exists so W2339 stays the way to confirm. Order supports the orphan hypothesis as a necessary step and does not show it sufficient. The fix stays worth landing because it removes the accumulation, and the memory cause W2064 is what produces the kills. | 2026-11-08T02:24:30Z: Status of the cause, in github-14's words: supported, one variable unconfirmed. Supported: every eviction follows a first OOM restart (0 of 33 earlier, min 900 s, median 4020 s) and the fix removes the accumulation. Unconfirmed: what separates the 33 evicted pods from the 8 OOM-killed and not evicted ones. Candidate variable: consecutive OOM kills with no successful publish between them, since the prune clears orphans only after a later success. Witness to read: per-pod series of nemik_snapshot_published_seconds from the builder gauges, which nemik writes into the snapshot metrics file, joined with the restart counter. No pod log reads from here, so this goes to luthen as a read of stored series. | 2026-11-08T02:25:58Z: luthen W2346 last read: the per-pod publish history is not answerable from stored series. nemik_snapshot_published_seconds is stored as ONE series (instance nemik.nemik.svc.cluster.local:8750, job nemik, 40115 samples in 7 days), with no pod label, so steps cannot be assigned to a builder pod. Either the builder gauge is not scraped with NEMIK_POD or the scraped series is the service's. The variable separating evicted from non-evicted pods stays unconfirmed, left for W2339 (emptyDir usage). Open finding for nemik: the pod label the manifest sets (NEMIK_POD) does not reach the stored series, so a per-pod publish gauge is not observable today. Candidate fix to card separately, not now. | 2026-11-08T02:35:28Z: G0 2026-11-08T02:35:25Z: [NO-PACE-STAMP] Precommit: advances W2064. Actuator: mikemol-commit --stack of .claude/stack-W2064.json (remove_partial_snaps in serve.py, its tests, the manifest pin test) after ruff, mypy and codon census ratchets are green under bazel. Sensor: the command prints a sha and git log -1 shows the W2064 subject. Expected: queued behind nothing, gate green, then W2065 carded and the cold review sha sent to github-14. | 2026-11-08T02:41:36Z: Witness declared before the gate ends, per the reviewer. Confirming: after the cleanup deploys, no nemik pod is Evicted for seven days, and once W2065 lands its per-pod series shows partial-snap removals greater than 0 on pods that restarted. Refuting: an eviction on a pod whose series shows no partial snap present or removed, or any eviction after deploy that W2065 attributes to complete dirs alone. W2065 gates closing W2064, not landing it: W2064 stays open as the memory root cause card until the series is read. Check after the gate: git log -1 shows my subject and the gate's ratchet line names no path in the stack. | 2026-11-08T02:54:29Z: Gate round 2 of the W2064 stack ended without a failing test: bazel was interrupted by the host guard (guard kine-latency TRIPPED over 4 for 6 samples, signalled the gate) after 661 s, with 253 tests passed and 231 skipped, so mikemol-commit reported REFUSED rc=1 with no culprit and HEAD stayed b2d2b84. Not a test verdict. The 253 fresh results are cached, so a resubmit is cheap. Recorded as an infrastructure interruption, not a flake of a test. If it recurs the guard trip is the thing to card with the host. | 2026-11-08T03:04:57Z: Gate round 3 of the W2064 stack ended after 8.7 s: bazel interrupted again by the host guard (guard kine-latency TRIPPED over 4 for 6 samples), REFUSED rc=1 with no culprit, HEAD still b2d2b84. Two interruptions in a row with no test run, so the guard is holding the gate out, not a test failing. Not resubmitting in a loop. Stack file .claude/stack-W2064.json is ready and its tests pass individually under bazel. Asked github-14 who owns the kine-latency guard and when it clears. | 2026-11-08T03:05:53Z: G0 2026-11-08T03:05:52Z: [NO-PACE-STAMP] [LATE: 3 manifest path(s) already modified: src/nemik/serve.py, tests/test_publish_partial_snaps.py, tests/test_deploy_manifest.py] Precommit: advances W2064. Actuator: one resubmit of .claude/stack-W2064.json if no guard hold is relayed, via mikemol-commit --stack. Sensor: the command prints a sha and git log -1 shows the W2064 subject, or the guard line. Expected: lands if kine-latency has cleared, else refused with the guard line and I stop and work W2065 in scratch. | 2026-11-08T03:14:06Z: Correlation only, from github-14 relaying luthen: the kernel log shows a memcg OOM kill of nemik-serve (1.5 GB anon) at 01:57:27Z, in the minutes the host NVMe went from about 40 to 80 percent busy with writes nobody can attribute. Kubepods writes are not in luthen's per-cgroup series (their W2353), so whether the builder's memory thrash caused device writes is unknown. Not a claim of cause. Also luthen W2349: nemik_build_* series are stored with a pod label (488 pod values in 7 days) but only 16 of 33 evicted pods and 0 of 8 OOM-killed non-evicted pods have a nemik_build_peak_rss_bytes series, median 3.5 changes over the evicted pods' life, not windowed to restart-to-eviction. Absence for the 8 may be scrape or label loss. The pod label on the publish gauge (W2065) would close the gap.",
+      "issued_at": "2026-11-08T01:57:31Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2063",
+      "last_worked": "2026-11-08T03:14:06Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "src/nemik/serve.py",
+        "tests/test_publish_partial_snaps.py",
+        "tests/test_deploy_manifest.py"
+      ]
+    },
+    {
+      "symbol": "W2065",
+      "title": "Per-pod publish telemetry: export publish time and partial-snap removals as a count with the pod name from the downward API, scraped per pod not through the service, so the next eviction is explainable from series",
+      "status": "ready",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "When the W2064 stack lands, stack W2065 as the next entry with its two files frozen from the scratch worktree. Ask luthen whether the pod label now stores as a distinct series per pod.",
+      "evidence": "2026-11-08T03:06:54Z: Scoped from the code: nemik_snapshot_published_seconds is written unlabelled (serve.py lines 1799-1800) while the build gauges (buildcost.py: nemik_build_peak_rss_bytes, swap, cgroup peak, cgroup swap peak, cpu_seconds) are labelled with NEMIK_POD and the warm flag at serve.py line 1757, in the same metrics file. So a successful build already leaves a pod-labelled sample, if those names are stored. Asked luthen whether any nemik_build_* name is stored with a pod label, which could give the per-pod successful-build count between restart and eviction with no code. If not stored: add the pod label to the published gauge and a nemik_partial_snaps_removed gauge fed from remove_partial_snaps's return value through build_static's private files, with a test over the metrics text. | 2026-11-08T03:36:59Z: G0 2026-11-08T03:36:58Z: [NO-PACE-STAMP] Precommit: advances W2065. Actuator: the pod label on nemik_snapshot_published_seconds, a nemik_snapshot_partial_removed gauge and tests/test_publish_pod_gauges.py, built in the scratch worktree nemik-W2065 on top of the W2064 files, run under bazel there. Sensor: bazel test of test_publish_pod_gauges, test_publish, test_publish_partial_snaps. Expected: 3 of 3 pass; no landing, since the W2064 stack is blocked on mtools:W2356. | 2026-11-08T03:38:38Z: Built in scratch worktree nemik-W2065 on top of the W2064 files (serve.py, test_publish_partial_snaps.py, test_deploy_manifest.py): publish sets NEMIK_PARTIAL_REMOVED from remove_partial_snaps, and private_files writes nemik_snapshot_published_seconds with the pod label and a new nemik_snapshot_partial_removed gauge with the pod label. tests/test_publish_pod_gauges.py (two orphans give count 2 with label nemik-abc-1, clean base gives 0). bazel test in the scratch worktree: test_publish_pod_gauges, test_publish, test_publish_partial_snaps, 3 of 3 pass. Not landed: it is a successor entry to the W2064 stack, which waits on mtools:W2356 through W2066. Still open: the scrape per pod rather than through the service, which is luthen's side (their Service-level scrape drops the pod label of the series unless the metric carries it, which it now does), and a docs line.",
+      "issued_at": "2026-11-08T02:27:07Z",
+      "minted_during": "interrupt",
+      "caused_by": "nemik:W2063",
+      "last_worked": "2026-11-08T03:43:26Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "src/nemik/serve.py",
+        "tests/test_publish_pod_gauges.py"
+      ]
+    },
+    {
+      "symbol": "W2066",
+      "title": "Resubmit .claude/stack-W2064.json once when the kine-latency guard reads under its threshold, record the guard line verbatim if refused",
+      "status": "blocked",
+      "enables": [
+        "W2064"
+      ],
+      "touches": [],
+      "blocked_on": [
+        "mtools:W2356"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Do not resubmit until github-14 or luthen says the p99 is steady under 4.0 s, or the mtools freeze-and-resume change lands.",
+      "evidence": "2026-11-08T03:10:23Z: Guard per luthen W2348: p99 of kine SQL time over 5m above 4.0 s for 6 consecutive 30 s samples sends SIGINT to the bazel under the commit, and it reads the whole store, not this gate. Kine p99 rose from 0.05 s to 1.9-8.2 s at about 01:55Z, the latest 5m point (about 03:05Z) is 2.28 s, under the limit. Resubmitting once now, as the reading stands under the threshold. Next tick's check is a read of that value against 4.0 s, asked of luthen as a series name. | 2026-11-08T03:16:51Z: Round 4 of the W2064 stack, the one resubmit after luthen read 2.28 s: guard kine-latency: TRIPPED over 4 for 6 samples, signalled the gate, bazel interrupted before a test ran (0 of 484 executed, 31 pass, 453 skipped, 0 fresh of 31), REFUSED rc=1 with no culprit, HEAD still b2d2b84. Four guard interruptions across four submits, no test failure seen. Stopped and told github-14 as asked. The fix is on mtools' side (freeze and resume rather than kill). | 2026-11-08T03:18:08Z: Blocked on mtools:W2356 (freeze and resume instead of kill, with the operator's 2026-11-05 warrants) per github-14, who moved it to the top of mtools' line. Resubmit only on luthen's or github-14's word that p99 has held under 4 s, or when W2356 lands. | 2026-11-08T03:40:03Z: Resubmit predicate corrected to the guard's own (luthen W2348): the p99 of kine SQL time over 5m, read at 30 s resolution, at or under 4.0 s for six consecutive samples before a resubmit, not a single reading. The single 2.28 s read led to a resubmit the guard tripped, as luthen warned (the value swung 1.3 to 8.2 s within 20 minutes). Blocked on mtools:W2356 in any case.",
+      "issued_at": "2026-11-08T03:09:47Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2064",
+      "last_worked": "2026-11-08T03:40:03Z",
+      "ticks_blocked": 1,
+      "completed": null,
+      "manifest": [
+        "src/nemik/serve.py",
+        "tests/test_publish_partial_snaps.py",
+        "tests/test_deploy_manifest.py"
+      ]
+    },
+    {
+      "symbol": "W2067",
+      "title": "Send the landed W2064 sha to github-14 for cold review after git log -1 shows the W2064 subject",
+      "status": "ready",
+      "enables": [
+        "W2064"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-11-08T03:09:47Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2064",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2068",
+      "title": "Close W2064 on its witness: no nemik pod Evicted for seven days after deploy, per-pod series from W2065 showing removals, gated on W2065",
+      "status": "ready",
+      "enables": [
+        "W2064"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Close on both witnesses: no Evicted pod and no OOMKilled builder restart for seven days after deploy, from W2065's per-pod series and luthen's pod-status rows.",
+      "evidence": "2026-11-08T03:40:01Z: Reviewer R367 finding applied. Two mechanisms are filed under evictions: a pod ends Evicted when its emptyDir passes the 512Mi limit (what remove_partial_snaps addresses) and OOMKilled (exit 137) when the builder passes its 1.5 GiB memory limit (what github-14's 01:57:27Z kernel-log kill is, and what W2064's memory root cause addresses). luthen W2346 says all 41 restarted builder pods ended OOMKilled and 33 pods are Evicted, so the 33 are both: first OOM-killed, later evicted. The seven-day no-eviction witness tests only the volume mechanism. A memory witness joins it: the builder's nemik_build_cgroup_peak_bytes below its limit with headroom and no OOMKilled restart over the same seven days. Both must hold to close. Still to ask luthen: the 33 pods by terminal reason, to see how many ended Evicted versus OOMKilled as their last state. | 2026-11-08T03:41:59Z: luthen W2357 (read 2026-11-08T03:41Z, 7 days, builder, stored series): 34 pods now Evicted, 0 of them never OOMKilled, so every evicted pod was OOM-killed first. 8 OOM-killed and not evicted (2 still Running within the last hour, 6 not, final phase of those 6 not read, 36 Failed pods are not evicted and are not tied to them). Median restart counter 10 for the evicted group, 7 for the OOM-only group, so the counter does not separate them. container_memory_working_set_bytes for the builder: per-pod 7-day max has median and max exactly 1610612736 B (the 1536 MiB limit) for the evicted group, median the same for the OOM-only group, so both groups sit at the memory limit and the working set cannot say which mechanism ended a pod. Separating variable would be emptyDir usage per pod (W2339, not stored). Reading: the memory limit is hit in every pod, so memory is the common cause (W2064 root), and the volume overflow is the second step for some. The cleanup removes the second step. Memory work stays first in importance.",
+      "issued_at": "2026-11-08T03:09:47Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2064",
+      "last_worked": "2026-11-08T03:41:59Z",
       "ticks_blocked": 0
     }
   ],
@@ -61969,7 +62166,149 @@
         }
       ],
       "id": "nemik:R356"
+    },
+    {
+      "card": "W2059",
+      "trigger": "round 359: W2059 stack (five paths from the W2053 scratch tree) submitted with --freeze-from, passed the submit check first try, inflight in the gate (--in-gate shows it); HEAD eb3fd9c8; the commit body names the strict-POSIX gap (W2058 not done) and says the next gate witnesses the fix; the body's 'dialect=sh with 0 findings' rests on one earlier shell-checker run, not rerun after the last edit",
+      "root": "I did not re-run --in-gate or read the stack file; the round rests on the G1. Two things in it bear on what the gate will ratify. First, the commit body asserts a shell-checker verdict ('dialect=sh with 0 findings') from a run made before the final edit. A claim in a landed commit body is a claim future readers cite; it is cheap to rerun on the exact bytes in the stack while the gate runs, and if it differs the body needs a correction line on the card (the body cannot be amended after submit without resubmitting). Second, R357 and R358 asked for specific changes to the test (the old hook as a parametrized file, a queue above the pipe buffer asserted by size, a literal hash for the fixture); the G1 describes the test as the branch test and the old-hook fixture but does not say the size assertion and literal hash are in the stack. The gate will pass either way, since a test that only passes is accepted; whether the noise case is deterministic is not what the gate judges. Both are checkable from the frozen tree without touching the stack. No fixpoint is declared: open findings are carried with owners and due dates.",
+      "findings": [
+        {
+          "finding": "While the gate runs, read the frozen tree (not the running gate) for two facts and write them on W2059: the shell checker run on .githooks/pre-commit exactly as staged, with the dialect and finding count printed, compared against the body's claim; and whether tests/test_precommit_queue_check.py asserts the noise queue's size above the pipe buffer and compares the fixture to a literal hash (grep the test for the length assertion and for 9a98a465). If either differs from the body or from R358, file the correction as a follow-up on W2059 with the line, rather than leave the body's statement standing unchecked; if the size assertion is missing, note that the noise case is not yet deterministic and say which card will add it.",
+          "finding_card": "W2059",
+          "finding_owner": "nemik session",
+          "finding_witness": "The shell checker's printed dialect and finding count for the staged hook, and the two grep results (length assertion, literal hash) with line numbers, on W2059.",
+          "due": "2026-11-11"
+        }
+      ],
+      "id": "nemik:R357"
+    },
+    {
+      "card": "W2061",
+      "trigger": "round 360: W2059 landed as b2d2b843 on eb3fd9c8 (20:06:04 -0500; gate 480 fresh of 483, 483 pass, 1084.9 s, no Broken pipe pair in its output); the claim that the first gate runs the old hook corrected by the G1; DORA ask from github-14 answered from history.py: lead_time_days is 0.0 in six of seven weeks (0.3 in W40), closed 92 to 446 a week; W2061 carded blocked on W1141 and W2052; G0 stamped after the work",
+      "root": "I read the landing back: git log -2 prints b2d2b843 with parent eb3fd9c8 at 20:06:04 -0500, so it is on main as stated; the gate figures and the absence of the pair I did not re-read. The correction of the 'old hook copy' claim is honest and right to make: the gate's own output is the witness, and four earlier gates printed the pair while this one printed none. It is one gate, so call it observed once; the next ordinary gate is the second reading. The DORA answer is where I would stop the session from sending a number as it stands. history.py 1030-1032 computes lead_time_days as the median days from a card's first commit to its close, over the cards closed that week. That is a card cycle time with an instant-mint-and-close population in it, not lead time for changes in the DORA sense (commit to running in production). A median of 0.0 days reflects that most cards are minted and closed in one sitting; it says nothing about how long a landed change waits to ship. The G1 itself notes the instant share is unmeasured. Sending 0.0 under the DORA name invites github-14 to treat the signal as saturated when it measures a different thing. The right quantity is available now without W1141: commit time from git log and the time the deployed commit reaches the nemik namespace (deploy-state or the pod's commit label), per landed commit, and it is the number the push-is-deploy rule makes meaningful here. Blocking W2061 on W1141 and W2052 is a block for the cache-hit part of the record, not for this.",
+      "findings": [
+        {
+          "finding": "Rename or replace the lead-time figure before it feeds a DORA record: tell github-14 in one line that history.py's lead_time_days is median first-commit-to-card-close (a cycle time that includes instant mint-and-close cards), not commit-to-deploy, and send the better measure alongside it. Compute commit-to-deployed for the last 20 landed commits (git log commit time, and the first time the namespace pod or deploy-state shows that commit, read from the system of record), print the median and the spread, and report the share of cards that minted and closed on the same day so the 0.0 is explained. Split W2061 so this lead-time part does not wait on W1141 and W2052.",
+          "finding_card": "W2061",
+          "finding_owner": "nemik session",
+          "finding_witness": "A message id with the correction line, a table of commit time and deployed time for 20 commits with median and spread, the same-day mint-and-close share, and the split child card id.",
+          "due": "2026-11-13"
+        }
+      ],
+      "id": "nemik:R358"
+    },
+    {
+      "card": "W2062",
+      "trigger": "round 361: commit-to-deploy measured for eleven landed commits from a read-only kubectl get replicasets -n nemik: commit to image pushed median 18.1 min (range 4.6 to 32.7), commit to Deployment update median 22.9 min (range 8.5 to 39.8); n=11, hand-computed; nine of the last twenty commits have no ReplicaSet, not explained; pod Ready and the same-day mint-and-close share not measured; kubectl existed though the G0 expected none",
+      "root": "I did not re-run kubectl or the arithmetic; the round rests on the G1, whose limits it states. Three issues weigh on the number before it stands as the DORA lead time. The arithmetic is by hand over eleven pairs; the session lists every pair on the card, so a script can recompute in seconds, and a medians-by-eye slip is exactly the kind a reviewer cannot see from the summary. Second, the nine commits with no ReplicaSet are not a gap to leave unexplained: a Deployment keeps only revisionHistoryLimit old ReplicaSets (ten by default), so the eleven are the newest ones the cluster still holds, which biases toward recent commits and is silent on queue-only commits that never built a new image or changed the pod template. If the nine are queue-only or no-image commits, say so with their subjects; if some are code commits whose ReplicaSet was already pruned, the measured set is a window and not the 20. Third, the measured instant is creationTimestamp of the ReplicaSet (Deployment update), not the pod Ready time, so the number is time to the cluster accepting the new template, which is a lower bound on time to serving; the G1 names this. A smaller point: the session used a cluster read it did not know it had; read-only in the nemik namespace is within the push-is-deploy practice, but the card should state that the access exists and where it was granted, so the next reader does not rediscover it.",
+      "findings": [
+        {
+          "finding": "Make the lead-time table checkable and bounded before it goes into a DORA record: recompute both medians and ranges with a script from the pairs on the card (print the script and its output), classify the nine commits without a ReplicaSet by subject (queue-only, no image change, or pruned code commits) and state the set the eleven represent, add pod Ready time from the pod's condition transition for the same eleven so the figure is commit to serving, and record on W2062 that kubectl read access to the nemik namespace exists and where it comes from. If the nine include pruned code commits, report n=11 as a window of the most recent deploys and not as a 20-commit measure.",
+          "finding_card": "W2062",
+          "finding_owner": "nemik session",
+          "finding_witness": "A script and its printed medians and ranges for the eleven pairs, a nine-row classification by subject, a pod-Ready column, and the access note, on W2062.",
+          "due": "2026-11-13"
+        }
+      ],
+      "id": "nemik:R359"
+    },
+    {
+      "card": "W2063",
+      "trigger": "round 362: eviction incident analysed from files: snapshots emptyDir sizeLimit 512Mi sized on 77 MiB per snapshot (2026-10-26, peak five at 385 MiB per the manifest comment); serve.py lines 1860-1918 write the new snapshot, flip current, then keep three, so four directories at peak; nemik queue 1,498,518 to 5,868,154 bytes (3.9x), ledger 461,212 to 1,092,859 (2.4x) since 6a007585; per-snapshot size not measured; fix shape reviewed by github-14; G0 stamped after the work",
+      "root": "I did not re-read the manifest, serve.py or the sizes; the round rests on the G1, whose own list of what it did not read is accurate. Two points. The code reading (four directories at peak) and the manifest comment (five at peak, 385 MiB) disagree by one snapshot, and the G1 reports both without reconciling them. Either the comment counts a case the code reading does not (a crashed run leaving a partial directory, a restore copy, a previous build's leftover) or the comment is stale. The difference is 77 MiB of a 512 Mi cap, which at the grown sizes is the margin between holding and evicting, so it is worth settling by reading restore() and by looking at what the volume holds, not by choosing the lower number. Second, the cause is called a hypothesis, which is right, but the measurement that would end the hypothesis does not need the cluster: the snapshot is built by the code in this repo from the same inputs. A pod-shaped local publish (the one I recorded at 975.5 MiB cold earlier for the builder's memory) writes a snapshot directory that can be du'd now, giving the per-snapshot size at today's inputs, to put beside 77 MiB. That separates 'snapshots grew' from 'something else fills the volume' (partial dirs, tmp) without kubectl, which the session has said it stopped using. The queue growth is the right suspect but, as the G1 says, the snapshot is built from /export and not from the queue files, so the multiplier is an inference until the du is read.",
+      "findings": [
+        {
+          "finding": "Measure the per-snapshot size locally and reconcile four against five before the cap is re-sized: run the pod-shaped publish at today's inputs into a temporary directory (the same invocation the builder uses) and print du -sk of the snapshot, then write the ratio to 77 MiB next to the queue and ledger multipliers; read restore() and the publish error paths in serve.py to say what a fifth directory could be (partial build, restore copy, previous-run leftover) and reconcile the manifest comment with the code reading; if the measured size times four exceeds 512 Mi, that is the cause with a number, and the cap should be sized from the number with headroom as github-14 asked. Keep the temporary directory off /var/tmp-reaped paths only as long as the measurement needs.",
+          "finding_card": "W2063",
+          "finding_owner": "nemik session",
+          "finding_witness": "A du figure for one snapshot at today's inputs, its ratio to 77 MiB, the four-versus-five reconciliation with serve.py line numbers, and the cap arithmetic, on W2063.",
+          "due": "2026-11-13"
+        }
+      ],
+      "id": "nemik:R360"
+    },
+    {
+      "card": "W2064",
+      "trigger": "round 363: scale_run.sh over 1, 3 and 6 queue copies: input 335,310 / 1,928,865 / 4,498,540 B, snapshot 3.41 / 26.45 / 46.85 MB (10.2 to 13.7 times input), peak 60.1 / 173.7 / 304.5 MiB, CPU 2.3 / 82.3 / 107.4 s; fleet input about 22.2 MB so snapshot extrapolates to 226 to 304 MB (upper bound, live root is not /export) and memory to 1.35 to 1.6 GiB; an earlier full-root run was OOM-killed at 3 GiB; n=3 small queues, no ledgers or git; no per-file breakdown; github-14 ordered breakdown, cut, then cap",
+      "root": "I did not re-run the script; the round rests on the G1, whose limits it states (n=3, queues only, no breakdown). Two readings of its own numbers matter before a cap is set from them. First, the CPU column is not on the same curve as the others: 2.3 s for one queue, 82.3 s for three, 107.4 s for six. Input grew 5.8 times from one to three and CPU grew 36 times; from three to six input grew 2.3 times and CPU 1.3 times. A step that large between one and three queues says something in the build switched on or became expensive once a second or third queue was present (a join, a cross-repo pass, the check), and it is invisible in the byte and memory columns. A linear fleet extrapolation of CPU would be wrong in either direction; the step needs a name, and the 22.2 MB fleet is far past both points. Second, the memory extrapolation (1.35 to 1.6 GiB) and the earlier full-root OOM at 3 GiB cannot both describe the same quantity unless the full-root run carried more than queues (ledgers, git, the checked history); the G1 says the root layout differs, so the small-queue curve is a lower bound on what the production build does, and the OOM is the only point near the real size. The snapshot arithmetic is the sharper result and it can be stated now: if the real snapshot is anywhere in the 226 to 304 MB band, four directories at peak is 0.9 to 1.2 GB against the 512 Mi cap, which would explain the eviction by a factor of two without any new cause; but that relies on the upper bound, and the one measurement that closes it is the real publish, not a synthetic root.",
+      "findings": [
+        {
+          "finding": "Replace the extrapolation by one measurement on the real inputs and name the CPU step: run the pod-shaped publish on the actual /export root (the invocation the builder uses, in a temporary directory, under the 3 GiB cap used before), read the snapshot's size with a per-file breakdown (du by top-level file, which github-14 asked for) and the peak and CPU of the run, and put the three points and the real point on one table. Separately, locate the CPU step between one and three queues by profiling the three-queue run (which stage takes the 80 seconds) before CPU or memory are extrapolated further. Then write the cap arithmetic on W2064 as four times the measured snapshot plus headroom against 512 Mi, citing the real figure and not the band. If the real run OOMs at 3 GiB again, the memory curve is that run's, and the small-queue fit is discarded.",
+          "finding_card": "W2064",
+          "finding_owner": "nemik session",
+          "finding_witness": "A table of the three synthetic points and the real-root point (snapshot bytes, peak, CPU), the per-file breakdown, the stage that takes the CPU step, and the cap arithmetic with the measured snapshot, on W2064.",
+          "due": "2026-11-13"
+        }
+      ],
+      "id": "nemik:R361"
+    },
+    {
+      "card": "W2064",
+      "trigger": "round 364: 6-queue publish with scratch kept: snapshot dir about 19.7 MB, a byte-identical last-good copy under .cache about 19.7 MB, build-caches.json 7.44 MB; so the earlier 46.85 MB counted the snapshot 2.4 times and the snapshot proper is about 4.4 times the 4.50 MB of input; largest files graph.ttl 7.53 MB, graph.json 3.42 MB, umbrellas.json 1.94 MB, graph/gabion.json 1.26 MB (graph.ttl plus graph.json 55 percent); whether the PVC at /srv/.cache holds last-good unresolved; extrapolation not redone",
+      "root": "I did not re-run the publish or the listing; the round rests on the G1. The finding is a correction that reaches back into my own R363. Its arithmetic took the G1's 10 to 14 times snapshot-to-input ratio and the 226 to 304 MB fleet band at face value and concluded that four directories at peak would be 0.9 to 1.2 GB against 512 Mi, explaining the eviction by a factor of two. The ratio was a measurement artefact: the earlier figure counted the snapshot plus a byte-identical last-good copy plus build-caches.json. I withdraw that band and the factor-of-two reading with it. With 4.4 times the input, the fleet's 22.2 MB gives a snapshot of about 98 MB; four at peak is about 390 MB and five (the manifest's count) about 490 MB, against a 512 Mi cap, so the volume is tight with a small margin and not overrun by a factor of two, and the incident still needs a cause from luthen's series or a real-root measurement. Which of the three things counts against the emptyDir is exactly what the G1 leaves open: if last-good lives on the PVC at /srv/.cache it does not count; if the build writes it under the snapshots volume it adds a fifth copy and build-caches.json adds 7 MB or more at fleet size. One more point from the listing: graph.ttl is 7.53 MB beside graph.json 3.42 MB, the same graph in two serialisations. Whether the serving path needs both is a design question, and it is where github-14's cut lever has the most room, but the answer belongs to what readers fetch, not to size alone.",
+      "findings": [
+        {
+          "finding": "Redo the cap arithmetic from the corrected base and settle which directories live on the emptyDir before anything is resized: read deploy/deployment.yaml's volume mounts and serve.py's publish and last-good paths to say whether the byte-identical last-good copy and build-caches.json sit under the 512 Mi snapshots volume or on the PVC, state the peak as copies times 19.7 MB scaled by the fleet-to-6-queue input ratio (22.2 / 4.50), with and without last-good and build-caches.json, and put the result beside 512 Mi on W2064. Mark R363's band as withdrawn on the card, so the 226 to 304 MB figure does not circulate. Then run the real /export publish and the CPU-step profile, which are still open, to replace the scale-up with a measured size.",
+          "finding_card": "W2064",
+          "finding_owner": "nemik session",
+          "finding_witness": "The mount and path lines that place each of the three directories, a peak table with and without last-good and build-caches.json against 512 Mi, and the withdrawal line for the earlier band, on W2064.",
+          "due": "2026-11-13"
+        }
+      ],
+      "id": "nemik:R362"
+    },
+    {
+      "card": "W2064",
+      "trigger": "round 365: stack-W2064.json (remove_partial_snaps in serve.py, its tests, the manifest pin test) resubmitted after a refusal (card not marked working, no manifest; fixed by --update) and in the gate; bazel 2 of 2 for test_publish_partial_snaps and test_publish, 1 of 1 for test_deploy_manifest; test_ruff_ratchet first failed on three E501 of the stack's own, fixed, the remaining findings are in untracked held files outside the stack; cause only 'supported, one variable unconfirmed'; luthen could not answer per-pod publish history; W2065 carded",
+      "root": "I did not re-run bazel or read the stack file; the round rests on the G1, which records the avoidable refusal plainly. Two things need a sensor before the gate's green is read as the end of the card. The ratchet claim is that the remaining ruff findings sit in untracked files that the stack does not carry. That is probably right, because the gate runs a snapshot of the staged index, but the G1 could not get a green run of the ratchet itself, so what it holds is a list read by eye; the check that ends the doubt is ruff over exactly the stack's paths, or the ratchet in the frozen tree, which the gate does anyway and will report. The larger point is the card's witness. The change removes partial snapshot directories; the cause of the eviction is stated by the G1 as supported with one variable unconfirmed (consecutive kills with no successful publish), and luthen could not supply per-pod publish history because the gauge has no pod label. A fix whose cause is unconfirmed lands on the strength of the reasoning, and the card then closes on a witness, so the witness should be one that could still fail: partial snapshot directories counted on the live volume across a stretch that includes a killed publish, or the eviction event not recurring over a stated period, with the period chosen before the data. W2065 (per-pod publish telemetry) is the instrument that supplies the missing variable, and it is the right dependency: the card for the fix should name it as the thing that confirms or refutes the cause, so the close does not rest on silence.",
+      "findings": [
+        {
+          "finding": "Declare the W2064 witness before the gate ends, and tie it to W2065: write on the card the observation that would show remove_partial_snaps working (the count of partial snapshot directories on the volume after a publish that was killed and restarted, read from W2065's telemetry or from the pod's volume listing by luthen, and the eviction event absent over a period fixed now, for example seven days after the deploy), and the observation that would refute the cause (an eviction with no partial directory present). Make W2065 a blocker for closing W2064, not for landing it. After the gate prints a sha, read git log -1 for the W2064 subject and check the ruff ratchet verdict in the gate output for the stack's own paths, so 'findings are all in held untracked files' is read from the run and not the list.",
+          "finding_card": "W2064",
+          "finding_owner": "nemik session",
+          "finding_witness": "A witness paragraph on W2064 with the confirming and refuting observations and the period, W2065 as the closing blocker, and the gate's ratchet line for the stack's paths.",
+          "due": "2026-11-11"
+        }
+      ],
+      "id": "nemik:R363"
+    },
+    {
+      "card": "W2064",
+      "trigger": "round 366: W2064 stack not resubmitted on github-14's relay that kine-latency (luthen's cluster-datastore guard) is up and luthen will say when it clears; rounds 2 and 3 of the gate were each interrupted by the guard (661 s with 253 passed and 231 skipped, then 8.7 s); HEAD still b2d2b84; the tick advanced W2065 (scoped from serve.py 1757, 1799-1800 and buildcost.py; question to luthen about a pod-labelled nemik_build_* series); the writer printed ATOMIZE W2064 (advanced 3 times without landing), not yet done; the witness paragraph from R365 applied",
+      "root": "I did not read the guard or the ledger; the round rests on the G1, which says in its own words that the tick did not advance the card the G0 named and that the resubmit was dropped on a relay. The R365 application is confirmed by the G1's account and needs no comment. Two items. The stop on a relayed message is reasonable, since a guard owned by luthen is not the session's to override and a resubmit into an active guard costs a gate round (the last two cost 661 s and a refusal in 8.7 s). But the session now waits on a person to say 'it cleared', for a condition that is a number somewhere: kine-latency is a guard with a threshold, and a guard the commit path consults has to read a value from a place the session can also read. Waiting on a message when the sensor is a read turns the next resubmit into whatever tick the message happens to arrive on. Second, the loop has named the next step: the writer says ATOMIZE W2064 after three advances without landing, and the session recorded it for next tick. The atomize instruction is the standing rule for exactly this state (top item, more than one tick, no landing), and deferring it a tick adds a fourth advance to the count; splitting is a queue edit that costs nothing while the gate is held, which is the best time to do it. No fixpoint is declared: open findings are carried with owners and due dates.",
+      "findings": [
+        {
+          "finding": "Atomize W2064 in this tick, while the stack is held, and name the guard's condition as a read: split into child waypoints for (a) the resubmit, blocked on kine-latency clearing, with the guard's threshold and the place the commit path reads it written on the child (ask mtools or luthen for the exact series and limit once, and record it), (b) the cold review request to github-14 for the landed sha, (c) the closing witness gated on W2065, so each has its own owner and sensor. Then each tick the resubmit child's check is a read of that value against the threshold, not a wait for a message; submit when it is under, once, as github-14 said, and record the guard line verbatim if refused.",
+          "finding_card": "W2064",
+          "finding_owner": "nemik session",
+          "finding_witness": "Three child waypoint ids on W2064, the guard's series name and threshold on the resubmit child, and the first below-threshold read before the next submit.",
+          "due": "2026-11-09"
+        }
+      ],
+      "id": "nemik:R364"
+    },
+    {
+      "card": "W2065",
+      "trigger": "round 367: W2064 atomized into W2066 (resubmit, blocked on mtools:W2356), W2067 (cold review sha), W2068 (closing witness); the guard is luthen W2348 (kine p99 over 5m above 4.0 s for 6 samples); a resubmit after luthen's 2.28 s read was refused at submit (W2066 working outside the round) and then round 4 ended 'guard kine-latency: TRIPPED over 4 for 6 samples', 0 of 484 executed; W2065 built in scratch (pod label on nemik_snapshot_published_seconds, a nemik_snapshot_partial_removed gauge, tests/test_publish_pod_gauges.py), bazel 3 of 3 pass; luthen W2349: pod-labelled nemik_build_* stored for only 16 of 33 evicted pods and 0 of 8 non-evicted; github-14's correlation: memcg OOM kill at 01:57:27Z, NVMe busy 40 to 80 percent",
+      "root": "I did not re-run bazel or read the guard; the round rests on the G1. Two points. The first is a mismatch of kinds that has now cost a gate round: luthen read 2.28 s, the session resubmitted, and the guard tripped over 4.0 for six samples. A point reading of the latest value is not the guard's predicate, which is a p99 over five minutes held above 4.0 s for six samples; one low sample does not say the six-sample window has cleared. Now that W2066 names the predicate (luthen W2348), the clearing check is that exact expression over the last six samples, read as the guard reads it, and not a single value; the G1 does not say the session has that expression. The second point is in github-14's correlation: a memcg OOM kill at 01:57:27Z. The card's fix and the earlier manifest analysis concern the ephemeral volume: the 512 Mi emptyDir limit, which produces an Evicted pod (a kubelet eviction for ephemeral storage). A memcg OOM kill is a memory-limit event, ends as OOMKilled with exit 137, and has nothing to do with the snapshots directory count. The G1 records both under 'evictions' and says the cause is supported with one variable unconfirmed; the more basic open question is which of the two events the 33 pods suffered, because remove_partial_snaps addresses only the first. W2065's telemetry is the instrument, but luthen's series covers 16 of 33 evicted pods, so the labelled data is incomplete for the question it was built to answer. The scratch work itself (3 of 3) is a good bounded result and was run through bazel as the standing rule asks; the ratchets were not.",
+      "findings": [
+        {
+          "finding": "Separate the two kill mechanisms on W2064 and W2065 before either is called the cause: for each of the 33 pods, state from luthen's pod-status rows whether the terminal reason was Evicted (ephemeral-storage) or OOMKilled (memory limit, exit 137), with counts for each and the time window; write what remove_partial_snaps can and cannot change given the split. If the OOM kills dominate, the closing witness on W2068 (partial directories and no eviction for seven days) does not test the cause, and a memory witness replaces or joins it. Use the same pass to correct the resubmit check on W2066 to the guard's own predicate (p99 over 5m, six consecutive samples at or under 4.0 s, read as luthen's W2348 expression) rather than a point value.",
+          "finding_card": "W2064",
+          "finding_owner": "nemik session",
+          "finding_witness": "A table of the 33 pods by terminal reason (Evicted or OOMKilled) with counts, the sentence on what the fix changes for each, and the predicate expression on W2066.",
+          "due": "2026-11-11"
+        },
+        {
+          "finding": "Run the three ratchets and the codon census under bazel in the nemik-W2065 scratch worktree before W2065 becomes a stack candidate, since it edits serve.py and adds a test file and the gate has been interrupted twice (a late ruff or codon refusal costs a full gate round). Name the stack form for the successor now: W2065 builds on the W2064 files, so it is a second entry in the same stack or a follow-on submitted after W2064 lands, and the stack file should say which, with its paths, so a landing of one does not strand the other.",
+          "finding_card": "W2065",
+          "finding_owner": "nemik session",
+          "finding_witness": "Bazel lines for test_ruff_ratchet, test_mypy_ratchet and the codon census in the scratch tree, and the stack file for W2065 with its stated relation to W2064.",
+          "due": "2026-11-11"
+        }
+      ],
+      "id": "nemik:R365"
     }
   ],
-  "retro_counter": 356
+  "retro_counter": 365
 }

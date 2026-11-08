@@ -1856,6 +1856,30 @@ def fleet_key(root: Path) -> str:
     return digest.hexdigest()
 
 
+def remove_partial_snaps(base: Path) -> int:
+    """nemik:W2064: remove snapshot dirs a killed build left, which hold no source-key.
+
+    A build writes source-key last, so a dir without one is a build that died before it finished.
+    The memory limit kills with SIGKILL, so the build's own cleanup never ran, and a container
+    restart keeps an emptyDir, so the dir would otherwise sit there until the pod is replaced.
+    The builder container runs one nemik-serve at a time (a sequential shell loop) and a container
+    kill takes every process in it, so at the start of a publish no other build is writing here.
+    A pid test would be weaker: a new container reuses low pids, so a dead pid can look live.
+
+    Returns:
+        How many partial dirs were removed.
+
+    """
+    removed = 0
+    if not base.is_dir():
+        return removed
+    for snap in base.glob("snap-*"):
+        if snap.is_dir() and not (snap / "source-key").exists():
+            shutil.rmtree(snap, ignore_errors=True)
+            removed += 1
+    return removed
+
+
 def publish(
     root: Path,
     base: Path,
@@ -1878,6 +1902,8 @@ def publish(
     """
     # nemik:W1096: this process builds once and exits, so the parse cache only doubles the graphs
     adapter.forget_parsed()
+    # nemik:W2064: before the quiet-fleet exit, so a stray dir never lingers
+    remove_partial_snaps(base)
     key = fleet_key(root)
     if exports is not None:  # nemik:W636: a changed export rebuilds the pod's view too
         key += "|exports:" + exports_key(exports)
