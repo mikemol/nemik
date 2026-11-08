@@ -233,6 +233,7 @@ def solve(
         tuple(sorted((weights or {}).items())),
         edge,
     )
+    _USED.add(key)
     cached = _SOLVES.get(key)
     if cached is not None:
         _SOLVES.move_to_end(key)
@@ -255,6 +256,9 @@ SolveKey = tuple[
 ]
 _SOLVES: OrderedDict[SolveKey, Flow] = OrderedDict()
 _SOLVES_MAX = 512
+# nemik:W2080: the keys this process asked for, hit or computed. A solve restored from an earlier
+# build and never asked for is of a graph that is gone, and keeping it grew the cache to 193 MB.
+_USED: set[SolveKey] = set()
 
 
 def export_solves() -> dict[SolveKey, Flow]:
@@ -265,6 +269,16 @@ def export_solves() -> dict[SolveKey, Flow]:
 
     """
     return dict(_SOLVES)
+
+
+def export_used_solves() -> dict[SolveKey, Flow]:
+    """nemik:W2080: the solves this process used, which are the ones the next build can hit.
+
+    Returns:
+        The cached solves whose key was asked for in this process, by solve key.
+
+    """
+    return {key: held for key, held in _SOLVES.items() if key in _USED}
 
 
 def import_solves(held: dict[SolveKey, Flow]) -> None:
@@ -278,6 +292,7 @@ def import_solves(held: dict[SolveKey, Flow]) -> None:
 def reset_solves() -> None:
     """Forget the cached solves, so the next solve runs."""
     _SOLVES.clear()
+    _USED.clear()
 
 
 def solve_uncached(

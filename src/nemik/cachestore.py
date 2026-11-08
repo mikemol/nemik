@@ -41,6 +41,11 @@ WATCHED = (
     "flow.py",
     "cachestore.py",
 )
+# nemik:W2080: a cache file larger than this is a cold start and is never parsed
+MAX_BYTES = 48 * 1024 * 1024
+# save writes the stamp first, so load can read it without parsing the file
+STAMP_HEAD = b'{"stamp":"'
+STAMP_LEN = 64  # a SHA-256 in hex
 KEEP = 4  # per-build files kept in the user directory
 STRAY = 3600  # seconds before a temp file a killed run left behind is swept
 
@@ -161,7 +166,7 @@ def save(directory: Path, name: str = NAME) -> int:
     blob: dict[str, object] = {
         "stamp": stamp(),
         "shaclinc": held,
-        "flow": _solves_json(flow.export_solves()),
+        "flow": _solves_json(flow.export_used_solves()),
         "terms": terms.table,
     }
     body = json.dumps(blob, separators=(",", ":")).encode()
@@ -264,6 +269,28 @@ def _decode(
     return held, cast("dict[flow.SolveKey, flow.Flow]", _solves_value(blob["flow"]))
 
 
+def _worth_parsing(path: Path) -> bool:
+    """Say whether a cache file may be parsed at all (nemik:W2080).
+
+    Parsing turns every byte into Python objects several times its size, so a file over MAX_BYTES,
+    or one whose stamp (read from its first bytes) is not this code's, is a cold start without
+    being read. A 193 MB file kept the pod's builder OOM-killed on every start, because the stamp
+    was only compared after the whole file was parsed.
+
+    Returns:
+        False for a file that is too large or carries another stamp; True otherwise, including a
+        file whose head has no stamp, which the full parse then judges.
+
+    """
+    if path.stat().st_size > MAX_BYTES:
+        return False
+    with path.open("rb") as handle:
+        head = handle.read(len(STAMP_HEAD) + STAMP_LEN)
+    if not head.startswith(STAMP_HEAD):
+        return True
+    return head[len(STAMP_HEAD) :].decode("ascii", "replace") == stamp()
+
+
 def load(directory: Path, name: str = NAME) -> bool:
     """Restore both caches from `directory`; False (a cold start) for anything not this code's.
 
@@ -272,6 +299,8 @@ def load(directory: Path, name: str = NAME) -> bool:
 
     """
     try:
+        if not _worth_parsing(directory / name):
+            return False
         blob = _blob(directory, name)
         if blob["stamp"] != stamp():
             return False
