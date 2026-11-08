@@ -800,18 +800,39 @@ def stamp_snapshots(queue: QueueDoc) -> list[Snapshot]:
         if issued is not None:
             born.append((card, issued, _when(card.get("completed"))))
     moments = sorted({t for _, a, b in born for t in (a, b) if t is not None})
+    # nemik:W2069: a card has two states across every moment, closed or not yet, so each is built
+    # once and every moment's list holds references. A fresh copy per card per moment was about
+    # n squared dicts, 1.3 GiB for a queue of 2000 cards, and the readers do not change a card.
+    states = [
+        (
+            issued,
+            completed,
+            card | {"status": "done"},
+            card | {"status": _open_status(card)},
+        )
+        for card, issued, completed in born
+    ]
     out: list[Snapshot] = []
     for at in moments:
-        cards: list[Waypoint] = []
-        for card, issued, completed in born:
-            if issued > at:
-                continue
-            closed = completed is not None and completed <= at
-            now = str(card.get("status", ""))
-            status = "done" if closed else ("ready" if now == "done" else now)
-            cards.append(card | {"status": status})
+        cards = [
+            closed if completed is not None and completed <= at else still
+            for issued, completed, closed, still in states
+            if issued <= at
+        ]
         out.append((at, {"waypoints": cards}))
     return out
+
+
+def _open_status(card: Waypoint) -> str:
+    """Give the status a card not yet closed at a moment is shown with.
+
+    Returns:
+        "ready" for a card that is done now (its earlier states are not recorded), else its
+        status as it stands.
+
+    """
+    now = str(card.get("status", ""))
+    return "ready" if now == "done" else now
 
 
 def snapshots(

@@ -3,7 +3,7 @@
 
 state file: `.claude/paths-forward.json`
 
-counter 2077 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:2f6e04460193042c`
+counter 2077 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:9c8769f76a395590`
 
 | # | symbol | status |
 |---|---|---|
@@ -2058,9 +2058,9 @@ counter 2077 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:2f6
 
 1. **W2069** (working) Builder memory: attribute the 1536 MiB (build peak RSS, serve process, page cache) and cut what
    holds the whole fleet in memory, since every evicted pod was first OOM-killed at the limit
-   - next: Wait for github-14's word on the operator's incident-admission answer. When admitted, or when W2077 is born,
-     freeze again from a scratch worktree rebuilt from held-W2069-history.patch and the test file, rerun the 5 targets,
-     and submit .claude/stack-W2069.json.
+   - next: Wait for the operator's answer on the incident admission or the birth of W2077. Then rebuild a scratch
+     worktree at HEAD, apply .claude/held-W2069.patch, check the patch hash and the 5 targets, and submit
+     .claude/stack-W2069.json with --freeze-from that worktree.
 2. **W1075** (ready) Take an idle-host staging figure for one test target and split it by input (venv, Chromium, opa,
    Codon, corpus)
    - next: 2026-11-06: when the host is idle (load below 4), run bazel test //:test_score --nocache_test_results and
@@ -2830,8 +2830,9 @@ counter 2077 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:2f6
 326. **W2067** (ready) Send the landed W2064 sha to github-14 for cold review after git log -1 shows the W2064 subject
 327. **W2068** (ready) Close W2064 on its witness: no nemik pod Evicted for seven days after deploy, per-pod series from
    W2065 showing removals, gated on W2065
-   - next: Close on both witnesses: no Evicted pod and no OOMKilled builder restart for seven days after deploy, from
-     W2065's per-pod series and luthen's pod-status rows.
+   - next: Get the W2069 memory fix landed: regenerate one patch with both paths and the three added tests (github-14
+     cold review), compare the history document of the old and new code byte for byte on the real queues, then the
+     admission or W2077.
 328. **W2077** (ready) Design a codon wall-incidence ratchet so W1179 paydown stacks lower an owed ratchet
    - next: Wait for the operator's answer on the birth of codon-walls.json, relayed by github-14 with a verifiable
      transcript line. Then build: tools/codon_walls.py, test_codon_wall_incidence with the two rebase tests, the
@@ -12893,3 +12894,28 @@ counter 2077 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:2f6
   estimated, so it can be read for the real fleet; the daily growth is in the git history of the queues and ledgers
   (triples are a function of the queue content). The metric luthen cannot find may simply not be on /metrics, which is
   one grep of serve.py away.; 2 finding(s)
+- **nemik:R371** (-) round 373: root cause measured: nemik's own queue published alone (39,761 triples) peaks at 1467
+  MiB with the validate ending at 130 MiB; the climb is in static_data, history.snapshots +1278 MiB via
+  serve.history_doc; the pod has no git so snapshots() falls back to stamp_snapshots (history.py, W1139), which made a
+  fresh copy of every issued card at every distinct stamp (about n squared dicts, 4 million for 2077 cards); fix in
+  scratch: each card's two states built once and shared, nemik alone 1467 MiB to 195 MiB; three tests (sharing, equality
+  on 400 cards, heap under 64 MiB for 1000) fail-first (3630 distinct dicts against 120; 161 MiB against 64 MiB), 5 of 5
+  under bazel; f79a046d against HEAD identical (184 against 183 MiB), no regression; submit REFUSED by the pace guard
+  (required fall 2, observed 0); patch kept in .claude; ATOMIZE W2069 nudge unanswered; the request to luthen sent, no
+  reply: root I did not re-run the measurement or the tests; the round rests on the G1. This is the first result in the
+  stretch that moves the incident, and it comes from the plain method: a function-level scan on the smallest input that
+  reproduced the peak. The earlier hypotheses on W2069 (the cold SHACL validate, a fleet-scale triple slope) are now
+  retired by measurement and should be marked so on the card. Three things bear on the fix before it is called the fix.
+  First, sharing the two states between snapshots changes the object graph: where the old code gave every snapshot its
+  own dict for a card, consumers now receive the same dict from several snapshots. If any consumer mutates a snapshot's
+  card dict in place (a sort key added, a field popped for rendering), the change leaks across snapshots and the
+  equality test on 400 synthetic-or-sampled cards would not show it unless the test also runs the consumers. The right
+  equivalence is the old function and the new on the real queue (6 MB, 2077 cards) producing byte-identical history
+  documents, which the old code can do under the 3G cap since it peaks at 1467 MiB. Second, the pace refusal is a
+  deadlock only if the fix has no fall of its own, and one may exist: history is in codon-baseline.json (line 70) with
+  both entries failing at 'syntax error, unexpected ,' — a syntax wall, not an import wall. If that syntax is inside the
+  code the fix already rewrites (stamp_snapshots or its neighbours), the same change may take the module from failing to
+  compiling and fall 2, paying the guard itself and removing the need for an admission ruling. That is cheap to learn
+  with a probe on the scratch copy. Third, the nudge to atomize W2069 is unanswered; the card has carried the SHACL
+  hypothesis, the triple-count answer, the limit sizing for luthen and now the fix, which are separable owners.; 2
+  finding(s)
