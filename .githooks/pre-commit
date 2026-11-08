@@ -44,9 +44,14 @@ fi
 #   nemik-work W<n>
 # A queue-only commit (nothing staged under src/ or tests/) is exempt, and so is a queue with nothing ready.
 queue=$(git -C "$real_root" show :.claude/paths-forward.json)
+# nemik:W2053: the queue is megabytes, and `printf | grep -q` leaves printf writing into a pipe grep has
+# closed, which prints "Broken pipe" wherever a parent leaves SIGPIPE ignored. A case pattern needs no pipe.
+has_ready=0
+has_working=0
+case "$queue" in *'"status": "ready"'*) has_ready=1 ;; *) ;; esac
+case "$queue" in *'"status": "working"'*) has_working=1 ;; *) ;; esac
 if [ -n "$(git -C "$real_root" diff --cached --name-only -- src tests)" ] &&
-	printf '%s' "$queue" | grep -q '"status": "ready"' &&
-	! printf '%s' "$queue" | grep -q '"status": "working"'; then
+	[ "$has_ready" -eq 1 ] && [ "$has_working" -eq 0 ]; then
 	echo "pre-commit: code or tests changed, the queue has ready cards, and none is marked working." >&2
 	echo "  mark the card you are doing: nemik-work W<n>" >&2
 	exit 1

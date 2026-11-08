@@ -1,0 +1,6 @@
+# nemik:W2057: the pre-commit hook as it was at eb3fd9c8 (git blob 9a98a465), kept so a test can run
+# the old pipe form and the new case form over the same queues.
+exports_files(
+    ["pre-commit-before-w2053"],
+    visibility = ["//visibility:public"],
+)
