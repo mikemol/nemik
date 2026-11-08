@@ -3,7 +3,7 @@
 
 state file: `.claude/paths-forward.json`
 
-counter 2077 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:9c8769f76a395590`
+counter 2077 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:17204eaa26edf89e`
 
 | # | symbol | status |
 |---|---|---|
@@ -326,14 +326,14 @@ counter 2077 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:9c8
 | 317 | W2052 | ready |
 | 318 | W2058 | ready |
 | 319 | W2060 | ready |
-| 320 | W2074 | ready |
-| 321 | W2075 | ready |
-| 322 | W2076 | ready |
-| 323 | W708 | ready |
-| 324 | W879 | ready |
-| 325 | W2042 | ready |
-| 326 | W2067 | ready |
-| 327 | W2068 | ready |
+| 320 | W708 | ready |
+| 321 | W879 | ready |
+| 322 | W2042 | ready |
+| 323 | W2067 | ready |
+| 324 | W2068 | ready |
+| 325 | W2074 | ready |
+| 326 | W2075 | ready |
+| 327 | W2076 | ready |
 | 328 | W2077 | ready |
 | 329 | W459 | ready |
 | 330 | W979 | ready |
@@ -2058,9 +2058,8 @@ counter 2077 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:9c8
 
 1. **W2069** (working) Builder memory: attribute the 1536 MiB (build peak RSS, serve process, page cache) and cut what
    holds the whole fleet in memory, since every evicted pod was first OOM-killed at the limit
-   - next: Wait for the operator's answer on the incident admission or the birth of W2077. Then rebuild a scratch
-     worktree at HEAD, apply .claude/held-W2069.patch, check the patch hash and the 5 targets, and submit
-     .claude/stack-W2069.json with --freeze-from that worktree.
+   - next: Hold the frozen stack. When github-14 says the admission row has reached the pace, rebuild a scratch worktree
+     from .claude/held-W2069.patch, check the hash and the 5 targets, and submit .claude/stack-W2069.json.
 2. **W1075** (ready) Take an idle-host staging figure for one test target and split it by input (venv, Chromium, opa,
    Codon, corpus)
    - next: 2026-11-06: when the host is idle (load below 4), run bazel test //:test_score --nocache_test_results and
@@ -2799,13 +2798,31 @@ counter 2077 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:9c8
    - next: Check whether busybox exists, run the hook's snippet and the repro under it, and run the shell checker with
      -s sh
 319. **W2060** (ready) Keep the pipe repro script durable beside the branch test
-320. **W2074** (ready) Measure the codon import graph: for each codon-baseline entry, the nemik modules and third-party
+320. **W708** (ready) The no-witness Warning fires on cards whose step is a behaviour (a command refuses without a flag)
+   that no observer can see: name the honest witness, a test result for a tree sha, or stop warning where none exists
+   - next: Narrow the no-witness Warning in shapes.ttl for cards whose step is a behaviour and that name no observable
+     (the default decided in the audit; the input.test observer is carded only if a test-result witness proves wanted).
+     First case: el-openglo:W702. A test over a fixture behaviour card expects no Warning, and one over an observable
+     card still expects it. A cold review before it ships. Owner nemik session, due 2026-11-13, witness: both fixtures
+321. **W879** (ready) Ask el-openglo: nemik:W516 (withholding at the source): please repin your mikemol-paths-forward to
+   mtools 5ba261f or
+   - next: 2026-11-07: read the ask on this card (repin to mtools 5ba261f for nemik:W516) against the el-openglo reply,
+     and close it if el-openglo:W754 delivered the repin, per the 2026-10-29 letter
+322. **W2042** (ready) Pace fetch: adaptive export range (ask 3d, widen to 30d only for ratchets with too few landings)
+   so the pace unit fits its 120 s CPU and 640 MiB bounds
+323. **W2067** (ready) Send the landed W2064 sha to github-14 for cold review after git log -1 shows the W2064 subject
+324. **W2068** (ready) Close W2064 on its witness: no nemik pod Evicted for seven days after deploy, per-pod series from
+   W2065 showing removals, gated on W2065
+   - next: Get the W2069 memory fix landed: regenerate one patch with both paths and the three added tests (github-14
+     cold review), compare the history document of the old and new code byte for byte on the real queues, then the
+     admission or W2077.
+325. **W2074** (ready) Measure the codon import graph: for each codon-baseline entry, the nemik modules and third-party
    imports that block it, and which root module unblocks the most entries
    - next: Run mikemol-codon-probe on pdf, pins, work, staticserve with the argparse main removed (scratch worktree) to
      see which compile. For those that do, move their mains into ask_cli (or the existing argparse-failing module with
      the fewest dependents), repoint pyproject scripts, and remove their baseline entries: W2075's first stack, falling
      4 with W2071 riding in it.
-321. **W2075** (ready) Remove the first removable import from the root module the measure names, one stack, lowering
+326. **W2075** (ready) Remove the first removable import from the root module the measure names, one stack, lowering
    codon-baseline.json by at least 2
    - next: Rank the shared walls by the number of baseline entries each blocks (first error of both modes per entry,
      from the baseline, then one level deeper by probing). Likeliest first fall: dataclass(frozen=True) in flow and
@@ -2813,26 +2830,8 @@ counter 2077 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:9c8
      is a local edit in 6 modules, though score and issues need the other walls gone too. Ask github-14 to rule: is the
      codon ratchet payable in tick-sized steps, or does it need a design (one Codon-compatible core with the walls
      behind adapters, W1179's thin entry points)?
-322. **W2076** (ready) Remove the next removable import, one stack per import, each measured by the baseline entries it
+327. **W2076** (ready) Remove the next removable import, one stack per import, each measured by the baseline entries it
    lowers
-323. **W708** (ready) The no-witness Warning fires on cards whose step is a behaviour (a command refuses without a flag)
-   that no observer can see: name the honest witness, a test result for a tree sha, or stop warning where none exists
-   - next: Narrow the no-witness Warning in shapes.ttl for cards whose step is a behaviour and that name no observable
-     (the default decided in the audit; the input.test observer is carded only if a test-result witness proves wanted).
-     First case: el-openglo:W702. A test over a fixture behaviour card expects no Warning, and one over an observable
-     card still expects it. A cold review before it ships. Owner nemik session, due 2026-11-13, witness: both fixtures
-324. **W879** (ready) Ask el-openglo: nemik:W516 (withholding at the source): please repin your mikemol-paths-forward to
-   mtools 5ba261f or
-   - next: 2026-11-07: read the ask on this card (repin to mtools 5ba261f for nemik:W516) against the el-openglo reply,
-     and close it if el-openglo:W754 delivered the repin, per the 2026-10-29 letter
-325. **W2042** (ready) Pace fetch: adaptive export range (ask 3d, widen to 30d only for ratchets with too few landings)
-   so the pace unit fits its 120 s CPU and 640 MiB bounds
-326. **W2067** (ready) Send the landed W2064 sha to github-14 for cold review after git log -1 shows the W2064 subject
-327. **W2068** (ready) Close W2064 on its witness: no nemik pod Evicted for seven days after deploy, per-pod series from
-   W2065 showing removals, gated on W2065
-   - next: Get the W2069 memory fix landed: regenerate one patch with both paths and the three added tests (github-14
-     cold review), compare the history document of the old and new code byte for byte on the real queues, then the
-     admission or W2077.
 328. **W2077** (ready) Design a codon wall-incidence ratchet so W1179 paydown stacks lower an owed ratchet
    - next: Wait for the operator's answer on the birth of codon-walls.json, relayed by github-14 with a verifiable
      transcript line. Then build: tools/codon_walls.py, test_codon_wall_incidence with the two rebase tests, the
@@ -3103,7 +3102,7 @@ counter 2077 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:9c8
      output schema (four columns per surface) from its documented command in this venv, then decide the nemik
      side-by-side mode and its files (manifest to follow); read only, no sibling file
 372. **W1179** (blocked) Codon in larger steps: thin entry points, one dispatcher and one I/O adapter
-   - blocked on: W2074, W2075, W2076
+   - blocked on: operator: decide whether to birth the codon wall-incidence ratchet (nemik:W2077)
    - next: CORRECTION 2026-10-27 to the previous note on datetime.UTC (tested, not inferred): the pinned Codon's
      datetime module has NEITHER UTC NOR timezone ('cannot import name UTC from datetime'; 'cannot import name timezone
      from datetime', probed with codon run on two three-line files). So there is no ruff-versus-Codon choice to make:
@@ -3911,7 +3910,7 @@ counter 2077 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:9c8
      nemik:W1224 holds three instances
 554. **W1400** (blocked) Codon paydown: pick the failing baseline entries one fix from compiling, using scratchpad
    codon_one.py, since a bare star and datetime.UTC both fail it
-   - blocked on: W1411, W1491, W1492
+   - blocked on: operator: decide whether to birth the codon wall-incidence ratchet (nemik:W2077)
    - next: List W1383's 19 flag sites by module, mark each compiled or failing against codon-baseline.json, and write
      the result on W1383 and here.
 555. **W1438** (blocked) tests split their composite assertions into one assertion each (PT018), so ruff falls by about
@@ -12919,3 +12918,23 @@ counter 2077 · heartbeat 2026-11-05T01:13:32Z · job `74d4f68e` · hash `v2:9c8
   with a probe on the scratch copy. Third, the nudge to atomize W2069 is unanswered; the card has carried the SHACL
   hypothesis, the triple-count answer, the limit sizing for luthen and now the fix, which are separable owners.; 2
   finding(s)
+- **nemik:R372** (-) round 374: github-14 cold review of the fix PASS under bazel, patch frozen at sha256 df9c73d8
+  covering both paths and three tests; history document byte-identical old against fixed on the nemik,
+  luthen-observability and mtools export copies (old peak 1.3G, 1.5G, 1.7G; fixed 92M, 97M, 104M); my codon-pays-itself
+  idea refuted (history has 25 walls in its closure); ATOMIZE W2069 printed again, not split; a queue-only commit
+  submitted and in flight when the tick closed, no sha read; luthen W2371 baseline: no build published since 02:36Z,
+  builder restarts 346 in 24 h against 160 the day before; the operator's answer on incident admission and W2077
+  pending: root I did not re-read the equality runs or the review; the round rests on the G1. I accept the refutation of
+  my R373 codon idea: the wall-set table gives history 25 walls, so a syntax-error line was never going to pay the
+  guard, and my reading of the baseline's first error as the module's wall set was the same mistake as in R370 (a second
+  instance, and the point should now be a rule of reading: the baseline's text is a first error, the table is the wall
+  set). The result that matters is the first one. The old history stage alone peaks at 1.3 to 1.7 GiB on three real
+  repos, over the pod's 1.5 GiB limit for the largest, and the fixed code stays near 100 MiB with a byte-identical
+  document; the cause is measured, the fix is reviewed and frozen, and the only thing between it and the pod is the pace
+  guard. The cost of that wait is no longer abstract: luthen W2371 says no build has published since 02:36Z (five hours
+  at the time) and the builder restarted 346 times in a day against 160 the day before, so the loop is worsening and the
+  published snapshot is aging. The admission request github-14 sent went in before this evidence existed. It deserves a
+  second, self-contained version for the operator that carries the numbers in one place. Separately, the queue-only
+  commit went out and the tick closed while the gate was running; the tick-close rewrites the queue files, and the
+  commit's staged snapshot decides whether the closing ledger line is in it. Nothing is wrong with that until the
+  read-back is skipped.; 2 finding(s)
