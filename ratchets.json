@@ -10,6 +10,7 @@
       "kind": "baseline",
       "expression": "file_rule_count"
     },
-    {"path": "codon-baseline.json", "kind": "baseline"}
+    {"path": "codon-baseline.json", "kind": "baseline"},
+    {"path": "codon-walls.json", "kind": "baseline"}
   ]
 }

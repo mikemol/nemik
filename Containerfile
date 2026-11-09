@@ -36,12 +36,14 @@ COPY .githooks ./.githooks
 # nemik:W522: test_ruff_ratchet reads the house ruff config and the baseline it holds the tree to.
 COPY ruff-house.toml ruff-baseline.json ./
 COPY mypy-house.ini mypy-baseline.json codon-baseline.json ./
+COPY codon-walls.json codon-wall-table.json ratchets.json ./
 COPY stubs ./stubs
 COPY BUILD.bazel Containerfile ./
 # nemik:W703: test_containerfile holds the workflow's gated-tree branch to the Containerfile's stages.
 COPY .forgejo ./.forgejo
 # The hooks wiring (mikemol-hook-inbound-asks, mikemol-hook-nemik-check) is tested against the settings file.
 COPY .claude/settings.json ./.claude/settings.json
+COPY .claude/generated.json ./.claude/generated.json
 # paperkit is a pinned git source (nemik:W102), and uv needs a git binary to fetch it. The test stage
 # only: the final image never carries git.
 RUN apt-get update && apt-get install -y --no-install-recommends git ca-certificates && rm -rf /var/lib/apt/lists/*

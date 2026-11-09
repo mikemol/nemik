@@ -1,4 +1,5 @@
 load("@nemik_dev//:requirements.bzl", "all_requirements")
+load("//bazel:nemik_src.bzl", "NEMIK_PY")
 load("//bazel:venv.bzl", "venv_from_hub")
 load("@rules_shell//shell:sh_test.bzl", "sh_test")
 
@@ -33,7 +34,7 @@ exports_files(["pyproject.toml"])
         # nemik:W1245: test_salience passes alone in 33 s, yet timed out at 300 s in the stack631 gate with no failing
         # assertion (five of eleven tests done) at host load ~100, so it runs in three; test_layout shard 4 timed out at
         # 900 s in the stack633 gate (the whole file passes alone in 467 s), so it runs in eight
-        shard_count = 8 if src == "tests/test_layout.py" else 3 if src in ("tests/test_keymap.py", "tests/test_salience.py", "tests/test_pdf.py", "tests/test_modes.py", "tests/test_layout.py", "tests/test_viewer_settings.py", "tests/test_metrics_gating.py", "tests/test_rank_flow.py", "tests/test_viewstate.py", "tests/test_cardtree.py", "tests/test_publish.py") else 1,
+        shard_count = 8 if src in ("tests/test_layout.py", "tests/test_codon_wall_table.py") else 3 if src in ("tests/test_keymap.py", "tests/test_salience.py", "tests/test_pdf.py", "tests/test_modes.py", "tests/test_layout.py", "tests/test_viewer_settings.py", "tests/test_metrics_gating.py", "tests/test_rank_flow.py", "tests/test_viewstate.py", "tests/test_cardtree.py", "tests/test_publish.py") else 1,
         args = ["$(rootpath " + src + ")", "-c", "$(rootpath pyproject.toml)"],
         data = [src, "tests/installed.py", "tests/webpage.py", "tests/pagetext.py", "tests/conftest.py", "tools/cpuline.py", ".claude/settings.json", "//tests/fixtures:fleet", "pyproject.toml", "ARCHITECTURE.md", "skills/nemik/SKILL.md", "docs/positioning.md", "deploy/deployment.yaml", "src/nemik/data/workflows.toml", "tools/nemik_client.py", "BUILD.bazel", "Containerfile", ".forgejo/workflows/build.yml"] + glob(["tests/corpus/**"]) + [ "src/nemik/data/shapes.ttl", "src/nemik/data/nemik.ttl", "src/nemik/data/wcag.rego", "src/nemik/data/run-row.schema.json", "src/nemik/data/waypoint.schema.json", "src/nemik/data/rank-weights.schema.json", "src/nemik/data/rank-weights.toml", ":.venv", "@opa//file", "@use_of_colour_rego//file", "@chromium//:files", "@chromium//:chrome-headless-shell"]
             # nemik:W445: the JRE (52 MB) and MPXJ's jars go to the one test that reads with them
@@ -62,6 +63,18 @@ exports_files(["pyproject.toml"])
             + (["@codon//:files", "@codon//:bin/codon"] if src == "tests/test_codon_pin.py" else [])
             # nemik:W566: the Codon census compiles every module of the package with the pinned compiler
             + (["@codon//:files", "@codon//:bin/codon", "tools/codon_census.py", "tools/core_smoke.py", "codon-baseline.json"] + glob(["src/nemik/*.py", "src/nemik/core/*.py"]) if src == "tests/test_codon_census.py" else [])
+            # nemik:W2077: the wall incidence is measured over every module, against the recorded files
+            + (["tools/codon_walls.py", "codon-walls.json", "codon-wall-table.json", "ratchets.json"] + NEMIK_PY if src == "tests/test_codon_wall_incidence.py" else [])
+            # nemik:W2088: the two empty baselines are read by name
+            + (["ruff-baseline.json", "mypy-baseline.json"] if src == "tests/test_baselines_empty.py" else [])
+            # nemik:W2088: the rebaselines gate is run in a throwaway repository by its test
+            + (["tools/rebaselines_gate.py", "tools/gate_staged.sh"] if src == "tests/test_rebaselines_gate.py" else [])
+            # nemik:W2077: closure_evidence is tested on a small package, so it needs only the tool
+            + (["tools/codon_walls.py"] if src == "tests/test_codon_wall_evidence.py" else [])
+            # nemik:W2077: the wall table is checked against the pinned compiler, one import line to a test
+            + (["@codon//:files", "@codon//:bin/codon", "tools/codon_walls.py", "codon-wall-table.json"] if src == "tests/test_codon_wall_table.py" else [])
+            # nemik:W2087: the named-inputs comparison is a pure function over fixtures
+            + (["tools/nemik_src.py", ".claude/generated.json"] if src == "tests/test_nemik_src.py" else [])
             # nemik:W1150: the package-name census is read by name from tools/
             + (["tools/namespaces.py"] if src == "tests/test_namespaces.py" else [])
             # nemik:W1149: the peer-churn tool and its watch list are read by name from tools/
@@ -105,7 +118,9 @@ exports_files(["pyproject.toml"])
             + (["tools/hookcheck.py"] if src == "tests/test_hookcheck.py" else [])
             + (["@codon//:files", "@codon//:bin/codon"] if src == "tests/test_codon_calls.py" else [])
             # nemik:W623: the pre-commit hook is copied and run by its test
-            + ([".githooks/pre-commit"] if src in ("tests/test_githooks_snapshot.py", "tests/test_precommit_queue_check.py") else [])
+            + ([".githooks/pre-commit"] if src in ("tests/test_githooks_snapshot.py", "tests/test_precommit_queue_check.py", "tests/test_precommit_nemik_src.py") else [])
+            # nemik:W2087: the named-inputs guard in the hook runs the tool, which its test copies into a throwaway repo
+            + (["tools/nemik_src.py"] if src == "tests/test_precommit_nemik_src.py" else [])
             + (["//tests/fixtures/precommit:pre-commit-before-w2053"] if src == "tests/test_precommit_queue_check.py" else [])
             + (["tools/image_replica.sh", ".githooks/post-commit"] if src == "tests/test_image_replica.py" else [])
             + (["tools/image_replica_runner.sh"] if src == "tests/test_image_replica_runner.py" else [])
@@ -125,7 +140,7 @@ exports_files(["pyproject.toml"])
             "NEMIK_MPXJ_CLASSPATH": "$(rootpaths :mpxj_classpath)",
         } if src == "tests/test_mpxj.py" else {}) | ({
             "NEMIK_CODON": "$(rootpath @codon//:bin/codon)",
-        } if src in ("tests/test_codon_pin.py", "tests/test_codon_census.py", "tests/test_codon_calls.py") else {}),
+        } if src in ("tests/test_codon_pin.py", "tests/test_codon_census.py", "tests/test_codon_calls.py", "tests/test_codon_wall_table.py") else {}),
     )
     for src in glob(["tests/test_*.py"])
 ]

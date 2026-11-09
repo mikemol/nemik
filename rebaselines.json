@@ -1,0 +1,11 @@
+{
+ "rebaselines": [
+  {
+   "ratchet": "codon-walls.json",
+   "old": 0,
+   "new": 971,
+   "reason": "birth of the codon wall incidence ratchet (nemik W2077). The operator's record (host line 151496) rules only that the ratchet be CREATED; 971 is the count this tool measured at birth (971 (module, wall) pairs over 64 modules on base e739b707, each a wall the pinned Codon refuses that a module reaches through its import closure), not a number the operator chose",
+   "warrant": "695f3e0a-d36f-4080-9c67-7548978cd99e:151496"
+  }
+ ]
+}
