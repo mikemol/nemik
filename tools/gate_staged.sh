@@ -75,6 +75,16 @@ if ! out=$(env PYTHONPATH="$wt/src" .venv/bin/mikemol-pycheck --ratchet "$wt" 2>
     echo "gate_staged: the ratchet fails with the package importable from src (the image installs it editable): commit refused" >&2
     exit 1
 fi
+# nemik:W2088: a registered ratchet may rise only with a declared rebaseline (rebaselines.json). The
+# pycheck step above and the Codon census compare with the tree's own baseline file, so a change that
+# adds a finding with its baseline entry passed them. This compares the staged ratchet files with
+# HEAD's and fails closed (a git or tool failure is a refusal). Rises outside ruff and mypy were
+# unenforced before (github-14's cold review of the W2077 stack, D1).
+if ! out=$(.venv/bin/python3 tools/rebaselines_gate.py --root "$real_root" --head "$head_sha" --tree "$wt" 2>&1); then
+    printf '%s\n' "$out" | tail -n 30 >&2
+    echo "gate_staged: a ratchet rose with no declared rebaseline (rebaselines.json), or the check could not run: commit refused" >&2
+    exit 1
+fi
 # nemik:W1027 (the pilot for mtools:W1928): send nemik's ratchet values as mikemol.ratchet.value, one
 # gauge per ratchet file per gate run, so the pace (W987) is computable from the store. NOTHING HERE CAN
 # CHANGE THE VERDICT: an absent tool or a failed send is said and ignored. The name is the repo's own,
