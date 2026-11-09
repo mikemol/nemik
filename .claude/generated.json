@@ -1,0 +1,9 @@
+{
+ "version": 1,
+ "generated": [
+  {
+   "path": "bazel/nemik_src.bzl",
+   "generator": "tools/nemik_src.py"
+  }
+ ]
+}

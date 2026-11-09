@@ -27,11 +27,22 @@ if [ -z "${NEMIK_HOOK_SNAPSHOT:-}" ]; then
 	NEMIK_HOOK_SNAPSHOT=$snapshot exec sh "$snapshot" "$@"
 fi
 rm -f "$NEMIK_HOOK_SNAPSHOT"
-real_root="${MIKEMOL_REAL_ROOT:-$(git rev-parse --show-toplevel)}"
+real_root="${MIKEMOL_REAL_ROOT:-}"
+if [ -z "$real_root" ]; then
+	real_root=$(git rev-parse --show-toplevel) || {
+		echo "pre-commit: git rev-parse --show-toplevel failed, so the checkout cannot be found: commit refused" >&2
+		exit 1
+	}
+fi
 # vendor/wheels/.gitignore is `*`, so a rebuilt wheel exists on disk (and satisfies bazel) yet is not
 # in the commit; the image build then fails from a clean checkout (nemik:W276, 2026-10-10). Every
-# wheel the STAGED pyproject.toml names must be in the index.
-missing=$(git -C "$real_root" show :pyproject.toml | grep -o 'vendor/wheels/[^"]*\.whl' | while read -r wheel; do
+# wheel the STAGED pyproject.toml names must be in the index. The staged file is read into a variable
+# first: in a pipeline a failing `git show` would leave `missing` empty and skip this check silently.
+staged_pyproject=$(git -C "$real_root" show :pyproject.toml) || {
+	echo "pre-commit: git show :pyproject.toml failed, so the untracked-wheel check cannot be judged: commit refused" >&2
+	exit 1
+}
+missing=$(printf '%s\n' "$staged_pyproject" | grep -o 'vendor/wheels/[^"]*\.whl' | while read -r wheel; do
 	git -C "$real_root" ls-files --error-unmatch "$wheel" >/dev/null 2>&1 || echo "$wheel"
 done)
 if [ -n "$missing" ]; then
@@ -43,17 +54,42 @@ fi
 # cards and NO working card is refused. Mark the card you are doing first:
 #   nemik-work W<n>
 # A queue-only commit (nothing staged under src/ or tests/) is exempt, and so is a queue with nothing ready.
-queue=$(git -C "$real_root" show :.claude/paths-forward.json)
+queue=$(git -C "$real_root" show :.claude/paths-forward.json) || {
+	echo "pre-commit: git show :.claude/paths-forward.json failed, so the queue cannot be read and the working-card rule cannot be judged: commit refused" >&2
+	exit 1
+}
 # nemik:W2053: the queue is megabytes, and `printf | grep -q` leaves printf writing into a pipe grep has
 # closed, which prints "Broken pipe" wherever a parent leaves SIGPIPE ignored. A case pattern needs no pipe.
 has_ready=0
 has_working=0
 case "$queue" in *'"status": "ready"'*) has_ready=1 ;; *) ;; esac
 case "$queue" in *'"status": "working"'*) has_working=1 ;; *) ;; esac
-if [ -n "$(git -C "$real_root" diff --cached --name-only -- src tests)" ] &&
+# A failing `git diff` must refuse: inside `$(...)` in an `if` it would read as no change and skip this rule.
+code_changed=$(git -C "$real_root" diff --cached --name-only -- src tests) || {
+	echo "pre-commit: git diff --cached failed, so the working-card rule cannot be judged: commit refused" >&2
+	exit 1
+}
+if [ -n "$code_changed" ] &&
 	[ "$has_ready" -eq 1 ] && [ "$has_working" -eq 0 ]; then
 	echo "pre-commit: code or tests changed, the queue has ready cards, and none is marked working." >&2
 	echo "  mark the card you are doing: nemik-work W<n>" >&2
 	exit 1
+fi
+# nemik:W2087 (operator ruling 2026-11-08, host line 152589: inputs are named, never globbed): a commit
+# that touches src/nemik must leave bazel/nemik_src.bzl equal to what `git ls-files src/nemik` names. A
+# sandboxed bazel test sees only the files BUILD names, so it cannot notice an unnamed module; this is
+# where git exists. Fix a refusal with: python3 tools/nemik_src.py --write
+# The tool runs from the hook's cwd (under mikemol-commit that is the snapshot holding the staged
+# tool, while real_root holds HEAD's files), and its git calls go through real_root.
+nemik_changed=$(git -C "$real_root" diff --cached --name-only -- src/nemik bazel/nemik_src.bzl) || {
+	echo "pre-commit: git diff --cached failed, so the named-inputs list cannot be judged: commit refused" >&2
+	exit 1
+}
+if [ -n "$nemik_changed" ]; then
+	nemik_python="${NEMIK_PYTHON:-$real_root/.venv/bin/python3}"
+	if ! "$nemik_python" tools/nemik_src.py --root "$real_root" --staged >&2; then
+		echo "pre-commit: bazel/nemik_src.bzl does not name the tracked python files of src/nemik (tools/nemik_src.py --write)" >&2
+		exit 1
+	fi
 fi
 MIKEMOL_REAL_ROOT="$real_root" exec "$real_root/tools/gate_staged.sh"
