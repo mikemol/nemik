@@ -136,3 +136,56 @@ def test_a_new_ratchet_file_is_admitted_with_its_birth_entry(tmp_path: Path) -> 
     head = _repo(tmp_path, {"README": "x\n"})
     staged = {"foo-baseline.json": AFTER, "rebaselines.json": BIRTH}
     assert _run(tmp_path, head, staged) == ADMITTED
+
+
+EMPTY = "{}\n"
+ONE_FINDING = '{"a.py": {"E501": 1}}\n'
+COUNTS = (
+    '{"ratchets": [{"path": "foo-baseline.json", "kind": "baseline",'
+    ' "expression": "file_rule_count"}]}\n'
+)
+FROM_ZERO = (
+    '{"rebaselines": [{"ratchet": "foo-baseline.json", "old": 0, "new": 1, '
+    '"reason": "test", "warrant": "695f3e0a-d36f-4080-9c67-7548978cd99e:153941"}]}\n'
+)
+
+
+def test_an_empty_baseline_is_a_count_of_zero_not_unread(tmp_path: Path) -> None:
+    """The W2115 case: nemik's ruff and mypy baselines are {}, which the census reads as None."""
+    head = _repo(tmp_path, {"foo-baseline.json": EMPTY, "ratchets.json": COUNTS})
+    staged = {"foo-baseline.json": EMPTY, "ratchets.json": COUNTS}
+    assert _run(tmp_path, head, staged) == ADMITTED
+
+
+def test_a_rise_out_of_an_empty_baseline_is_refused_without_an_entry(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """Zero to one finding is a rise: reading {} as unread would have skipped it."""
+    head = _repo(tmp_path, {"foo-baseline.json": EMPTY, "ratchets.json": COUNTS})
+    staged = {"foo-baseline.json": ONE_FINDING, "ratchets.json": COUNTS}
+    assert _run(tmp_path, head, staged) == REFUSED
+    assert "rose 0 to 1" in capsys.readouterr().out
+
+
+def test_a_rise_out_of_an_empty_baseline_is_admitted_with_its_entry(
+    tmp_path: Path,
+) -> None:
+    """The same rise declared from 0 to 1 passes."""
+    head = _repo(tmp_path, {"foo-baseline.json": EMPTY, "ratchets.json": COUNTS})
+    staged = {
+        "foo-baseline.json": ONE_FINDING,
+        "ratchets.json": COUNTS,
+        "rebaselines.json": FROM_ZERO,
+    }
+    assert _run(tmp_path, head, staged) == ADMITTED
+
+
+@pytest.mark.parametrize("broken", ["{not json", '{"a.py": {}}\n'])
+def test_a_malformed_baseline_is_still_unread_where_an_empty_one_is_zero(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str], broken: str
+) -> None:
+    """Only exactly {} is zero: a broken file and a hollow entry stay could-not-judge."""
+    head = _repo(tmp_path, {"foo-baseline.json": EMPTY, "ratchets.json": COUNTS})
+    staged = {"foo-baseline.json": broken, "ratchets.json": COUNTS}
+    assert _run(tmp_path, head, staged) == UNJUDGED
+    assert "unreadable value" in capsys.readouterr().out

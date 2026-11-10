@@ -110,6 +110,36 @@ def retired(root: Path, head: str, tree: Path) -> list[str]:
     return sorted(declared_paths(root, head) - now)
 
 
+def _is_empty_object(file: Path) -> bool:
+    # True when the file parses as exactly the empty JSON object: nothing recorded, no debt.
+    try:
+        parsed: object = json.loads(file.read_text(encoding="utf-8"))
+    except (OSError, UnicodeDecodeError, ValueError):
+        return False
+    return parsed == {}
+
+
+def zeroed(values: dict[str, int | None], tree: Path) -> dict[str, int | None]:
+    """Read a file that is exactly `{}` as a count of 0 (nemik:W2115, until mtools:W2295 lands).
+
+    mikemol.ratchet.kinds reads an empty file-rule-count baseline as None (unread), though an
+    empty baseline is zero debt. Only a parse of exactly `{}` becomes 0: a broken file, a hollow
+    entry or any other shape that the reader cannot count stays None, so it still fails closed.
+
+    Args:
+        values: The census values of a tree, by ratchet path.
+        tree: The tree the values were read from.
+
+    Returns:
+        The same values, with an unread value of an empty-object file replaced by 0.
+
+    """
+    return {
+        path: 0 if value is None and _is_empty_object(tree / path) else value
+        for path, value in values.items()
+    }
+
+
 def unreadable(tree: Path) -> list[str]:
     """List the ratchet files of the staged tree whose value cannot be read.
 
@@ -117,10 +147,11 @@ def unreadable(tree: Path) -> list[str]:
         tree: The staged tree.
 
     Returns:
-        The paths whose value is None (corrupt JSON, a wrong shape), sorted.
+        The paths whose value is None (corrupt JSON, a wrong shape), sorted. A file that is
+        exactly `{}` is a count of 0 and is not listed.
 
     """
-    rows = rebaseline.values(tree)
+    rows = zeroed(rebaseline.values(tree), tree)
     return sorted(path for path, value in rows.items() if value is None)
 
 
@@ -210,11 +241,23 @@ def main(argv: list[str] | None = None) -> int:
         check = [sys.executable, "-m", "mikemol.ratchet.cli", "rebaselines"]
         check += ["--repo", str(args.tree), "--before", str(before)]
         done = capture(check)
+        # The check above skips a rise out of an unread value, and an empty baseline reads as
+        # unread, so a rise out of `{}` is judged here with the empty files read as 0 (W2115).
+        rose = (
+            rebaseline.refusals(
+                zeroed(rebaseline.values(before), before),
+                zeroed(rebaseline.values(args.tree), args.tree),
+                rebaseline.read(args.tree),
+            )
+            if done.returncode == 0
+            else []
+        )
     out = done.stdout + done.stderr
     sys.stdout.write(out)
-    if done.returncode == 0:
+    sys.stdout.write("".join(f"rebaselines_gate: {line}\n" for line in rose))
+    if done.returncode == 0 and not rose:
         return 0
-    if done.returncode == FAILED and "rebaselines" in out:
+    if rose or (done.returncode == FAILED and "rebaselines" in out):
         return FAILED
     sys.stdout.write(
         "rebaselines_gate: could not judge: the check did not run to a verdict\n"
