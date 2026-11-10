@@ -5718,3 +5718,35 @@
 2026-11-09T21:53:46Z  status W2077 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-09T22:08:02Z  tick  W2077 advanced  unblock   "W2077 gate refused on three ruff findings; delta built at refs/review/W2077-v8 (5486217e), not yet stacked, run or reviewed; asked github-14 about warrant ea6cf91a [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-09T22:09:54Z  interrupt W2110 minted    -         "A review ref carries its bazel lint and type verdicts before any review ask: test_ruff_ratchet and test_mypy_ratchet plus the changed tests green on the exact ref bytes, one check"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2077
+2026-11-09T22:36:53Z  tick  W2077 advanced  unblock   "quiet tick: the W2077 stack (W2087, W2088, W2077) is in flight in the gate from the v9 worktree; no shared file touched; verdict and landing are the next unit [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-09T22:38:34Z  interrupt W2111 minted    -         "The edit hook passes files the ruff ratchet refuses: it should apply pycheck --ratchet's rules (owner mtools)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2110
+2026-11-09T22:45:57Z  status W2087 blocked>landed writer    "blocked -> landed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-09T22:46:02Z  status W2088 blocked>landed writer    "blocked -> landed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-09T22:46:03Z  status W2077 working>landed writer    "working -> landed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-09T22:49:02Z  status W2111 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-09T23:07:34Z  tick  W2112 minted    -         "The web view re-lays out by itself when cards move in or out, with no click"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-14
+2026-11-09T23:07:36Z  tick  W2113 minted    -         "The web view has a log view: a newest-first stream of fleet events across every repo, filterable by repo and kind"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-14
+2026-11-09T23:09:39Z  tick  W2104 advanced  unblock   "W2104 stack prepared in scratch (importer, test_importer, codon-walls 970 measured, W564 doc as second entry); minted W2112 and W2113 (web view asks), warrants verified from the host transcript line 158563; not yet run, ref'd or submitted [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-09T23:09:57Z  status W2077 landed>done writer    "landed -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-09T23:09:58Z  status W2087 landed>done writer    "landed -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-09T23:10:00Z  status W2088 landed>done writer    "landed -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-09T23:35:08Z  interrupt W2114 minted    -         "A Codon-safe quote() is a fleet capability: ask mtools to host it in a shared dist with nemik's test as the fixture, then nemik imports it"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2104
+2026-11-09T23:36:12Z  prune W1179 edge-pruned writer    "nemik:W2077"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-09T23:36:12Z  prune W1400 edge-pruned writer    "nemik:W2077"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-09T23:36:12Z  prune W2098 edge-pruned writer    "nemik:W2077"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-09T23:36:12Z  prune W2102 edge-pruned writer    "nemik:W2077"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-09T23:36:12Z  prune W2103 edge-pruned writer    "nemik:W2077"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-09T23:36:12Z  status W1179 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-09T23:36:12Z  status W1400 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-09T23:36:12Z  status W2098 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-09T23:36:12Z  status W2102 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-09T23:36:12Z  status W2103 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-09T23:37:39Z  status W2104 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-09T23:38:02Z  tick  W2114 advanced  unblock   "W2104 stack submitted into luthen's granted window after kine, path and byte checks; asked mtools to host a shared Codon-safe quote (W2114), grep found none [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-09T23:39:35Z  status W2114 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-09T23:41:42Z  interrupt W2115 minted    -         "The rebaselines gate step refuses every tree because an empty baseline reads UNREAD, so no src commit can land"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2088
+2026-11-10T00:02:51Z  interrupt W2116 minted    -         "Remove the rebaselines_gate stop-gap that reads exactly {} as 0 once mtools reads an empty baseline as 0"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2115
+2026-11-10T00:02:56Z  status W2116 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-10T00:09:37Z  tick  W2115 advanced  unblock   "W2115 stop-gap built and green on its exact bytes (3 of 3 after fixing PLR0911), ref refs/review/W2115-v1 sent to github-14; W2116 paydown card; W2104 waits behind it [reason: warm reviewer in flight: one token spender (reviewed-loop, github:W71; operator L107593 uuid d3b98176-043d-4c73-8689-048c2b566b87) (cites github:W71)]"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-10T00:12:56Z  status W2115 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-10T00:14:44Z  status W2104 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
