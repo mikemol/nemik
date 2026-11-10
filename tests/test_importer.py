@@ -11,10 +11,27 @@ from typing import TypedDict
 import pytest
 from mikemol.procrun.proc import capture
 
-from nemik.importer import commands
+from nemik.importer import commands, quote
 from nemik.projection import Link, Task
 
 WRITER = str(Path(sys.executable).parent / "mikemol-paths-forward")
+WORDS = [
+    "",
+    "plain",
+    "with space",
+    "it's",
+    "two'quotes'here",
+    'say "hi"',
+    "a;b&c|d",
+    "$HOME and `cmd`",
+    "tab\tnewline\n",
+    "unicode-é-日本",
+    "safe@%+=:,./-_09AZaz",
+    "--caused-by",
+    "x:file#1",
+    "a" * 400 + "'" + "b c" * 100,
+    "z" * 1000,
+]
 
 
 class _Card(TypedDict, total=False):
@@ -64,6 +81,17 @@ def _queue(tmp_path: Path) -> Path:
     _run([[WRITER, "--state", str(state), "--init"]])
     _run([[WRITER, "--state", str(state), "--add", "already here"]])  # counter is 1 now
     return state
+
+
+def test_the_quoting_is_what_shlex_quote_decides() -> None:
+    """The importer quotes without shlex (a Codon wall) and agrees with it word for word."""
+    assert [quote(w) for w in WORDS] == [shlex.quote(w) for w in WORDS]
+
+
+def test_printing_with_the_importers_quoting_survives_a_shell_split() -> None:
+    """Joined with `quote`, every command splits back into the same argv."""
+    for cmd in [[WRITER, "--add", "it's a task", "--caused-by", "x:f#1"], ["", "a b"]]:
+        assert shlex.split(" ".join(quote(w) for w in cmd)) == cmd
 
 
 def test_the_printed_commands_run_and_rebuild_the_links(tmp_path: Path) -> None:

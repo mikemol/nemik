@@ -19,7 +19,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import shlex
 import sys
 from pathlib import Path
 from typing import TYPE_CHECKING
@@ -31,6 +30,29 @@ from nemik.tomlview import table, tables
 
 if TYPE_CHECKING:
     from nemik.projection import Task
+
+# The characters a POSIX shell word may hold unquoted, as shlex.quote decides it (ASCII letters and
+# digits, underscore, and @ % + = : , . / -). shlex is a Codon wall, so the quoting lives here.
+UNQUOTED = frozenset(
+    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_@%+=:,./-"
+)
+SINGLE_QUOTE = "'"
+ESCAPED_QUOTE = "'\"'\"'"
+
+
+def quote(word: str) -> str:
+    """Quote one word for a POSIX shell exactly as shlex.quote does.
+
+    Returns:
+        The word itself when every character is safe, '' for the empty word, else the word in single
+        quotes with each single quote written as '"'"'.
+
+    """
+    if not word:
+        return "''"
+    if all(c in UNQUOTED for c in word):
+        return word
+    return SINGLE_QUOTE + word.replace(SINGLE_QUOTE, ESCAPED_QUOTE) + SINGLE_QUOTE
 
 
 def _read(fmt: str, path: Path) -> list[Task]:
@@ -140,7 +162,7 @@ def main(argv: list[str] | None = None) -> int:
     for cmd in commands(
         _read(args.fmt, args.file), args.fmt, args.file.name, args.state, writer
     ):
-        say(shlex.join(cmd))
+        say(" ".join(quote(word) for word in cmd))
     return 0
 
 

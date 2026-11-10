@@ -364,7 +364,6 @@
   "importlib.resources": "reached",
   "mikemol.* (third-party)": "reached",
   "rdflib": "reached",
-  "shlex": "reached",
   "tomllib": "reached",
   "typing.TypedDict": "reached",
   "typing.cast": "reached",
