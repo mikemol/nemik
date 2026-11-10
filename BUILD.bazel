@@ -71,6 +71,8 @@ exports_files(["pyproject.toml"])
             + (["tools/rebaselines_gate.py", "tools/gate_staged.sh"] if src == "tests/test_rebaselines_gate.py" else [])
             # nemik:W2077: closure_evidence is tested on a small package, so it needs only the tool
             + (["tools/codon_walls.py"] if src == "tests/test_codon_wall_evidence.py" else [])
+            # nemik:W2103: the closure test imports the walls tool by name from tools/
+            + (["tools/codon_walls.py"] if src == "tests/test_codon_wall_closure.py" else [])
             # nemik:W2077: the wall table is checked against the pinned compiler, one import line to a test
             + (["@codon//:files", "@codon//:bin/codon", "tools/codon_walls.py", "codon-wall-table.json"] if src == "tests/test_codon_wall_table.py" else [])
             # nemik:W2087: the named-inputs comparison is a pure function over fixtures
