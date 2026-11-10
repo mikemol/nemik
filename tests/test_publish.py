@@ -11,15 +11,24 @@ import installed
 from mikemol.procrun.proc import capture
 
 from nemik.serve import fleet_key, publish
+from nemik.staticserve import TYPES
 from nemik.tracker import parse_tree
 
 FLEET = Path(__file__).parent / "fixtures" / "fleet"
+# served by a route of their own (/metrics) or never asked for by a client (source-key)
+UNTYPED = ["metrics", "source-key"]
 
 
 def test_a_publish_flips_current_and_writes_the_private_files(tmp_path: Path) -> None:
     """A publish flips current and writes the private files."""
     snap = publish(FLEET, tmp_path / "pub", None)
     assert snap is not None
+    # nemik:W1179: every file a publish writes has a suffix the static server has a type for, so a
+    # new kind of file turns this red instead of being served as application/octet-stream
+    untyped = sorted(
+        {p.suffix or p.name for p in snap.rglob("*") if p.is_file()} - set(TYPES)
+    )
+    assert untyped == UNTYPED, untyped
     current = tmp_path / "pub" / "current"
     assert current.is_symlink()
     assert (tmp_path / "pub" / current.readlink()) == snap

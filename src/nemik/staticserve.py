@@ -15,7 +15,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import mimetypes
 import os
 import shutil
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -24,13 +23,22 @@ from urllib.parse import unquote, urlsplit
 
 from nemik.tomlview import table
 
+# nemik:W1179: a fixed suffix table, not the host's mimetypes module (a Codon wall, and its answer
+# also depends on the machine's /etc/mime.types). A suffix not listed is served as octet-stream.
 TYPES = {
     ".html": "text/html; charset=utf-8",
     ".js": "text/javascript",
     ".json": "application/json",
+    ".jsonld": "application/ld+json",
     ".ttl": "text/turtle",
     ".css": "text/css",
+    ".wasm": "application/wasm",
+    ".svg": "image/svg+xml",
+    ".ics": "text/calendar",
+    ".md": "text/markdown",
+    ".txt": "text/plain",
 }
+UNKNOWN_TYPE = "application/octet-stream"
 METRICS_TYPE = "text/plain; version=0.0.4"
 
 
@@ -213,10 +221,7 @@ def handler(root: Path) -> type[BaseHTTPRequestHandler]:
                 self.send_header("Cache-Control", "no-cache")
                 self.end_headers()
                 return
-            ctype = TYPES.get(real.suffix) or (
-                mimetypes.guess_type(real.name)[0] or "application/octet-stream"
-            )
-            self.stream(real, ctype, tag)
+            self.stream(real, TYPES.get(real.suffix, UNKNOWN_TYPE), tag)
 
         def do_GET(self) -> None:
             self.serve()

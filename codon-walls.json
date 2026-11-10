@@ -847,7 +847,6 @@
  "staticserve": {
   "argparse": "reached",
   "http.server": "reached",
-  "mimetypes": "reached",
   "shutil": "reached",
   "urllib.parse": "reached"
  },
@@ -1094,7 +1093,6 @@
   "urllib.parse": "reached"
  },
  "work": {
-  "argparse": "reached",
   "mikemol.* (third-party)": "reached"
  }
 }
