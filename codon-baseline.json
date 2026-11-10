@@ -253,6 +253,6 @@
  },
  "work": {
   "as_written": "no module named '__future__'",
-  "stripped": "no module named 'argparse'"
+  "stripped": "no module named 'mikemol.procrun.proc'"
  }
 }

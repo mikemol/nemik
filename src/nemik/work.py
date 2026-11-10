@@ -11,7 +11,6 @@ writer, mikemol-paths-forward. It never edits the queue file itself.
 
 from __future__ import annotations
 
-import argparse
 import json
 import sys
 from pathlib import Path
@@ -172,13 +171,116 @@ def plan(current: list[str], symbol: str) -> list[tuple[str, str]]:
     return [] if symbol in current else [(symbol, "working")]
 
 
-class Options(argparse.Namespace):
-    """The parsed command line of nemik-work (nemik:W1187)."""
+USAGE = "usage: nemik-work [-h] [--state STATE] [--dry-run] [--force] symbol"
+LONG_OPTIONS = ("--state", "--dry-run", "--force", "--help")
+USAGE_ERROR = 2
+
+
+class Options:
+    """The parsed command line of nemik-work (nemik:W1187, W2126)."""
 
     symbol: str
     state: Path
     dry_run: bool
     force: bool
+
+    def __init__(self) -> None:
+        """Start with the defaults: no symbol, the queue file here, nothing forced."""
+        self.symbol = ""
+        self.state = Path(".claude/paths-forward.json")
+        self.dry_run = False
+        self.force = False
+
+
+def _usage_error(message: str) -> int:
+    # print the usage and the complaint on standard error, give the exit status of a usage error
+    sys.stderr.write(f"{USAGE}\nnemik-work: error: {message}\n")
+    return USAGE_ERROR
+
+
+def _resolve(name: str) -> str:
+    # a long option, or the one long option that `name` is a prefix of; "" for none or several
+    if name in LONG_OPTIONS:
+        return name
+    found = [n for n in LONG_OPTIONS if n.startswith(name)]
+    return found[0] if len(found) == 1 else ""
+
+
+def _apply(out: Options, arg: str, argv: list[str], at: int) -> int:
+    """Apply one option argument to `out`; `at` is the index after it in `argv`.
+
+    Returns:
+        The index of the next argument to read.
+
+    Raises:
+        SystemExit: 0 after the usage for -h, 2 for an unknown, ambiguous or malformed option.
+
+    """
+    name, has_value, value = arg.partition("=")
+    long_name = _resolve(name) if arg.startswith("--") else ""
+    resolved = "--help" if arg == "-h" else long_name
+    if not resolved:
+        raise SystemExit(_usage_error(f"unrecognized arguments: {arg}"))
+    if resolved == "--help":
+        sys.stdout.write(f"{USAGE}\n")
+        raise SystemExit(0)
+    if resolved == "--state":
+        if has_value:
+            out.state = Path(value)
+            return at
+        if at < len(argv) and (not argv[at].startswith("-") or argv[at] == "-"):
+            out.state = Path(argv[at])
+            return at + 1
+        raise SystemExit(_usage_error("argument --state: expected one argument"))
+    if has_value:
+        raise SystemExit(
+            _usage_error(f"argument {resolved}: ignored explicit argument {value!r}")
+        )
+    if resolved == "--dry-run":
+        out.dry_run = True
+    else:
+        out.force = True
+    return at
+
+
+def parse(argv: list[str]) -> Options:
+    """Read the command line of nemik-work without argparse (nemik:W2126).
+
+    One positional (the waypoint) and --state PATH, --dry-run, --force and -h, as argparse took
+    them: a long option may be given as a unique prefix or as --name=value, and a bare -- ends
+    the options.
+
+    Args:
+        argv: The arguments after the program name.
+
+    Returns:
+        The parsed options.
+
+    Raises:
+        SystemExit: 0 after the usage for -h, 2 for a missing or extra argument or a bad option.
+
+    """
+    out = Options()
+    positional: list[str] = []
+    at = 0
+    while at < len(argv):
+        arg = argv[at]
+        at += 1
+        if arg == "--":
+            positional.extend(argv[at:])
+            break
+        if not arg.startswith("-") or arg == "-":
+            positional.append(arg)
+        else:
+            at = _apply(out, arg, argv, at)
+    if not positional:
+        raise SystemExit(_usage_error("the following arguments are required: symbol"))
+    if len(positional) > 1:
+        raise SystemExit(
+            _usage_error(f"unrecognized arguments: {' '.join(positional[1:])}")
+        )
+    out.symbol = positional[0]
+    return out
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -188,23 +290,7 @@ def main(argv: list[str] | None = None) -> int:
         0 when done, 2 when the card is blocked, else the writer's nonzero code.
 
     """
-    ap = argparse.ArgumentParser(
-        prog="nemik-work", description=(main.__doc__ or "").splitlines()[0]
-    )
-    ap.add_argument("symbol", help="the waypoint to work, W<n>")
-    ap.add_argument(
-        "--state",
-        type=Path,
-        default=Path(".claude/paths-forward.json"),
-        help="the queue file (default: .claude/paths-forward.json here)",
-    )
-    ap.add_argument("--dry-run", action="store_true", help="print the updates only")
-    ap.add_argument(
-        "--force",
-        action="store_true",
-        help="work it even though blocked_on names something not known to have landed",
-    )
-    args = ap.parse_args(argv, namespace=Options())
+    args = parse(sys.argv[1:] if argv is None else argv)
     still, landed = blockers(args.state, args.symbol)
     if still and not args.force:
         # nemik:W443: working a blocked card left it 'working' with a stale blocked_on (W441).
