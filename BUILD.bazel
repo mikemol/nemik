@@ -209,6 +209,15 @@ venv_from_hub(
         "mikemol-scratch": "mikemol.hooks.scratch_cli:main",
         # nemik:W378: beside the interpreter, where mikemol-commit looks for its commit lock.
         "mikemol-membudget": "mikemol.fence.membudget_cli:main",
+        # nemik:W2155: the gate runs bazel only through admission (gate_staged refuses without it), and it
+        # looks for this script in this repo's own install, not another repo's venv by path.
+        "mikemol-bazel-admit": "mikemol.hooks.bazel_admit:main",
+        # nemik:W2155: tools/gate_staged.sh runs the shell checker and the gate-target emitter from this
+        # repo's install too (the same rebuild dropped them: line 149 refused the commit-msg hook).
+        "mikemol-shellcheck": "mikemol.hooks.shellcheck_cli:main",
+        "mikemol-gate-targets": "mikemol.hooks.gatetargets:main",
+        # nemik:W2155: .githooks/pre-push refuses when this launcher is absent, and nemik's push is the deploy.
+        "mikemol-githook-pre-push": "mikemol.hooks.githook_pre_push:main",
         # nemik:W1027: the gate sends nemik's ratchet values (mtools:W1909, W1927): the census tool
         # and the emitter, both from the pinned mtools wheels.
         "mikemol-ratchet": "mikemol.ratchet.cli:main",
