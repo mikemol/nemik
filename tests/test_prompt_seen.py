@@ -3,9 +3,12 @@
 """nemik:W676: a repo whose last acknowledged loop prompt differs from the current one is named."""
 
 import os
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 from nemik.idle import prompt_lag
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 HOUR = 3600
 NOW = 1_800_000_000.0

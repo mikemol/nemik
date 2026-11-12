@@ -25,9 +25,12 @@ or NamedTuple. What acts on the filesystem or the writer lives in nemik.check (`
 import re
 import time
 from datetime import date
-from pathlib import Path
 
+from nemik._typing import TYPE_CHECKING
 from nemik.tracker import DICT, LIST, STR, Tree, parse_tree
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 _HEADER = re.compile(
     r"^(?:#\s*)?([A-Za-z0-9][\w.-]*)\s*(?:→|->)\s*([A-Za-z0-9][\w.-]*)\s*[:(]"

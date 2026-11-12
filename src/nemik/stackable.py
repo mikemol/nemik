@@ -11,10 +11,12 @@ how a stack is built by hand, it keeps the highest-ranked cards, and it is linea
 """
 
 import json
-
-from rdflib import Graph
+from typing import TYPE_CHECKING
 
 from nemik.adapter import NEMIK, waypoint_uri
+
+if TYPE_CHECKING:
+    from rdflib import Graph
 
 SMALL_FILES = 3  # a manifest this short is probably a small change
 MEDIUM_FILES = 8  # and this short a medium one

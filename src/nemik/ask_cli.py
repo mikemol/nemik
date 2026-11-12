@@ -20,7 +20,7 @@ import sys
 from pathlib import Path
 
 from nemik.ask import blocked_on, braces_balanced, entry, offer, slug_ok, title
-from nemik.work import run_writer
+from nemik.shims.work_cli import run_writer
 
 DEFAULT_FLOOR = Path.home() / "github" / "summit" / "floor" / "inbox"
 

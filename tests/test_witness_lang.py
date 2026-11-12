@@ -3,9 +3,12 @@
 """nemik:W539: a waypoint's declared witness language is read; the sniff is only a fallback."""
 
 import json
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 from nemik.witnesses import is_rego, open_witnesses
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 PLAIN = "up == 0"
 READS_INPUT = 'input.file["/x"].exists'

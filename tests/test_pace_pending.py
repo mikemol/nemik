@@ -2,7 +2,8 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W1284: a pace older than the repo's newest landing is printed PENDING, with both times."""
 
-from pathlib import Path
+
+from typing import TYPE_CHECKING
 
 import pytest
 
@@ -13,6 +14,9 @@ from nemik.pacecli import (
     pace_exit,
     show_pace,
 )
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 # stack 694's landing in nemik's own reflog: 2026-10-30 00:57:32 -0400
 LANDED = 1793336252

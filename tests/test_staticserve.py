@@ -7,15 +7,18 @@ import http.client
 import json
 import sys
 import threading
-from collections.abc import Iterator
 from http import HTTPStatus
 from http.server import ThreadingHTTPServer
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 import pytest
 from mikemol.procrun.proc import capture
 
 from nemik.staticserve import handler, resolve, snapshot
+
+if TYPE_CHECKING:
+    from collections.abc import Iterator
+    from pathlib import Path
 
 
 def _publish(root: Path) -> None:

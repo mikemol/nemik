@@ -1,0 +1,2 @@
+# nemik:W2137: the console-script launcher test reads the template out of the venv rule.
+exports_files(["venv.bzl"])

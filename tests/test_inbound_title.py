@@ -3,11 +3,14 @@
 """nemik:W882: nemik-inbound shows a waiting card's whole title, not its first sixty characters."""
 
 import json
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 import pytest
 
 from nemik.blocks_cli import main
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 LONG = (
     "please route the fleet's wait series through the shared emitter, then confirm "

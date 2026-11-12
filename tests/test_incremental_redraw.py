@@ -9,11 +9,15 @@ removed ones leave their place empty, nothing already placed moves, and the layo
 of date it is until the reader asks for it afresh.
 """
 
-from collections.abc import Iterator
+
+from typing import TYPE_CHECKING
 
 import pytest
 import webpage
 from playwright.sync_api import sync_playwright
+
+if TYPE_CHECKING:
+    from collections.abc import Iterator
 
 # two animation frames on the page's own clock: whatever a change queued to draw has been drawn
 TWO_FRAMES = (

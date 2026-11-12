@@ -2,10 +2,14 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W157: mtools' mikemol-ics is installed in nemik's venv and reads an exported calendar."""
 
-from pathlib import Path
+
+from typing import TYPE_CHECKING
 
 import installed
 from mikemol.procrun.proc import capture
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 ICS = (
     "BEGIN:VCALENDAR\r\n"

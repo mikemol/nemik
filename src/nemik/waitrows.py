@@ -9,13 +9,18 @@ uses only rdflib's typed calls (Graph.triples and Graph.value) and rank.rank_fle
 typed, so it adds no untyped expression to the baselines.
 """
 
-from rdflib import Graph
+
+from typing import TYPE_CHECKING
 
 from nemik.adapter import NEMIK, OSLC_CM
 from nemik.index import ref_of
 from nemik.rank import rank_fleet
-from nemik.score import Weights
-from nemik.waitseries import Row
+
+if TYPE_CHECKING:
+    from rdflib import Graph
+
+    from nemik.score import Weights
+    from nemik.waitseries import Row
 
 # (waiting repo, blocking repo, ticks blocked, the blocker's rank position; 0 when it is not ranked)
 Edge = tuple[str, str, int, int]

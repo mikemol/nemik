@@ -2,10 +2,14 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W1051: the pace board always says whether its file was readable; absence is no answer."""
 
-from pathlib import Path
+
+from typing import TYPE_CHECKING
 
 from nemik.pacepublish import readable_lines
 from nemik.serve import pace_board
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 HEAD = '{"as_of": "2026-10-25T14:00:00Z", "window": "10"}\n'
 ROW = (

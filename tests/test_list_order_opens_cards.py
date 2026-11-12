@@ -7,12 +7,15 @@ is closed by default. A viewer who picked an order saw nothing change (operator 
 """
 
 import os
-from collections.abc import Iterator
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 import pytest
 import webpage
 from playwright.sync_api import Error, Page, ViewportSize, sync_playwright
+
+if TYPE_CHECKING:
+    from collections.abc import Iterator
 
 VIEWPORT = ViewportSize(width=1700, height=1250)
 READY = "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0"

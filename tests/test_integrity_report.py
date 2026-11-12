@@ -3,11 +3,14 @@
 """nemik:W695: nemik-check --integrity reports every repo, or only the one named with --repo."""
 
 import json
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 import pytest
 
 from nemik.check import integrity_report
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 
 def _card(symbol: str, enables: list[str]) -> dict[str, object]:

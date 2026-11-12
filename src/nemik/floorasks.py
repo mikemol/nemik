@@ -8,10 +8,13 @@ a waypoint in that repo's queue that is not dropped; otherwise the ask cites not
 
 import json
 import re
-from pathlib import Path
 
+from nemik._typing import TYPE_CHECKING
 from nemik.queuefiles import QUEUE, workstream_files
 from nemik.tomlview import table, tables
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 # Same field regex as summit's scripts/place_intake.py (`waypoint` is a real top-level field).
 _WAYPOINT = re.compile(r"^\s*waypoint\s*=\s*\{([^}]*)\}", re.MULTILINE)

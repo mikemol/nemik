@@ -19,12 +19,15 @@ import json
 import re
 from datetime import datetime
 from importlib.resources import files
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 from rdflib import RDF, Graph, Literal, URIRef
 from rdflib.namespace import PROV, RDFS, XSD
 
 from nemik.adapter import BASE, NEMIK, bind, stray_words
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 
 def decode(text: str) -> object:

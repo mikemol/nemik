@@ -3,14 +3,17 @@
 """nemik:W714: the plain-edge unresolved-blocker flag equals the one blocks.annotate writes."""
 
 import json
-from pathlib import Path
-
-from rdflib import Graph
+from typing import TYPE_CHECKING
 
 from nemik.adapter import NEMIK, OSLC_CM, queue_graph
 from nemik.blocks import annotate
 from nemik.cardflags import unresolved_blockers
 from nemik.index import ref_of
+
+if TYPE_CHECKING:
+    from pathlib import Path
+
+    from rdflib import Graph
 
 
 def _card(

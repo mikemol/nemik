@@ -3,12 +3,15 @@
 """nemik:W613: the stackable report reads manifests from the graph and picks in rank order."""
 
 import json
-from pathlib import Path
-
-from rdflib import Graph
+from typing import TYPE_CHECKING
 
 from nemik.adapter import queue_graph
 from nemik.stackable import manifest, report
+
+if TYPE_CHECKING:
+    from pathlib import Path
+
+    from rdflib import Graph
 
 
 def _queue(tmp_path: Path) -> Graph:

@@ -3,15 +3,17 @@
 """nemik:W715: a test that waits on a page with no clock still ends when the page breaks."""
 
 import os
-from collections.abc import Callable
 from pathlib import Path
-from typing import cast
+from typing import TYPE_CHECKING, cast
 from urllib.parse import quote
 
 import pytest
 import webpage
 from playwright.sync_api import Browser, Page, Route, sync_playwright
 from playwright.sync_api import Error as PlaywrightError
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
 
 BREAKS = "<script>setTimeout(() => { throw new Error('boom'); }, 200);</script>"
 READIES = "<script>setTimeout(() => { window.ready = true; }, 200);</script>"

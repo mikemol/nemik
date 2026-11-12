@@ -5,13 +5,17 @@
 nemik:W529: the rule is a SPARQL constraint in shapes.ttl over the workstream's cards.
 """
 
+from typing import TYPE_CHECKING
+
 from rdflib import Graph
-from rdflib.term import Node
 
 from nemik.adapter import NEMIK, OSLC_CM, STATE, waypoint_uri, workstream_uri
 from nemik.blocks import annotate
 from nemik.check import shapes
 from nemik.shaclinc import findings
+
+if TYPE_CHECKING:
+    from rdflib.term import Node
 
 
 def _repo(g: Graph, repo: str, *statuses: str) -> Node:

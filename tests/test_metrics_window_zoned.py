@@ -9,12 +9,15 @@ window each gauge builds and hand it to the real resolver.
 """
 
 from datetime import UTC, datetime
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 import pytest
 
 from nemik import history, metrics
 from nemik.metrics import commit_lines, completed_lines, reopened_lines
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 NOW = datetime(2030, 1, 2, 12, 0, tzinfo=UTC)
 

@@ -7,6 +7,7 @@ stale (nemik:W2087).
 
 NEMIK_PY = [
     "src/nemik/__init__.py",
+    "src/nemik/_typing.py",
     "src/nemik/adapter.py",
     "src/nemik/adoption.py",
     "src/nemik/ageing.py",
@@ -125,6 +126,10 @@ NEMIK_PY = [
     "src/nemik/shaclcache.py",
     "src/nemik/shaclinc.py",
     "src/nemik/shapedepth.py",
+    "src/nemik/shellquote.py",
+    "src/nemik/shims/__init__.py",
+    "src/nemik/shims/work_cli.py",
+    "src/nemik/spawn.py",
     "src/nemik/stackable.py",
     "src/nemik/stackable_cli.py",
     "src/nemik/stale.py",

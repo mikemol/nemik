@@ -2,11 +2,14 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W472: one keymap table drives the keys and the ? overlay, and / jumps to a card."""
 
-from collections.abc import Generator
 from contextlib import contextmanager
+from typing import TYPE_CHECKING
 
 import webpage
 from playwright.sync_api import Page, sync_playwright
+
+if TYPE_CHECKING:
+    from collections.abc import Generator
 
 EVERY_KEY_HAS_A_HANDLER = (
     "() => KEYMAP.every(k => typeof ACTIONS[k.action] === 'function')"

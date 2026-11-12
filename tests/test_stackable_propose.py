@@ -3,12 +3,15 @@
 """nemik:W613: --propose drafts a manifest from the step, the touches and the commits."""
 
 import json
-from pathlib import Path
-
-from rdflib import Graph
+from typing import TYPE_CHECKING
 
 from nemik.adapter import queue_graph
 from nemik.stackable import draft, guess_size, proposal_rows, propose, resolve
+
+if TYPE_CHECKING:
+    from pathlib import Path
+
+    from rdflib import Graph
 
 WIDE_FILES = 8
 KNOWN = {

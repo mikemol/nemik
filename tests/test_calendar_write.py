@@ -3,13 +3,17 @@
 """nemik:W199 (life's ask): nemik-calendar-write ties calendars.toml, the queues and the helper."""
 
 import json
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 import pytest
-from rdflib import Graph
 
 from nemik.adapter import queue_graph
 from nemik.calwrite import main
+
+if TYPE_CHECKING:
+    from pathlib import Path
+
+    from rdflib import Graph
 
 EXIT_REFUSED = 2
 TWO_GONE = 2

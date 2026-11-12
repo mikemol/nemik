@@ -12,8 +12,8 @@ already staged in REPO. A card with no manifest is counted, never stacked.
 import argparse
 import json
 import sys
-from collections.abc import Callable
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 from rdflib import Graph
 
@@ -25,6 +25,9 @@ from nemik.queuefiles import default_root
 from nemik.rank import rank
 from nemik.score import load_weights
 from nemik.stackable import generated_files, manifest, proposal_rows, propose, report
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
 
 RIDE_ALONG_BAR = 2
 

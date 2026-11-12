@@ -2,11 +2,15 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W774: vlogs_lines refuses, with OSError, when luthen's query tool is not there."""
 
-from pathlib import Path
+
+from typing import TYPE_CHECKING
 
 import pytest
 
 from nemik.endpoint import vlogs_lines
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 
 def test_a_missing_luthen_checkout_raises(tmp_path: Path) -> None:

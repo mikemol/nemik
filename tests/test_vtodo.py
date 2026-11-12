@@ -4,12 +4,16 @@
 
 import json
 import sys
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 import installed
 
-from nemik.blocks import AskRow
 from nemik.vtodo import calendar, grouped, opted_in, stated_ask, time_property, vtodos
+
+if TYPE_CHECKING:
+    from pathlib import Path
+
+    from nemik.blocks import AskRow
 
 FOLD_LIMIT = 75  # RFC 5545 3.1: a content line is at most 75 octets before folding
 NEEDS_YOU_ASKS = 2  # the two needs-you asks in ASKS

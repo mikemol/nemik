@@ -4,11 +4,14 @@
 
 from datetime import UTC, datetime
 from http import HTTPStatus
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 from nemik.histdocs import decode
 from nemik.history import Opts, emit
 from nemik.serve import history_response
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 ROWS = {"alpha": {"ready": {"n": 3, "median_days": 1.5, "p90_days": 4.0}}}
 NOON = datetime(2026, 10, 22, 12, 0, 0, tzinfo=UTC)

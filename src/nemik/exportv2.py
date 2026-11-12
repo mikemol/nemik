@@ -7,7 +7,11 @@ Shape v2 (docs/withholding-at-source.md):
 """
 
 import json
-from pathlib import Path
+
+from nemik._typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 VERSION = 2
 

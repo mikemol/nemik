@@ -13,13 +13,16 @@ import http.client
 import importlib
 import os
 import threading
-from collections.abc import Iterator
 from http.server import ThreadingHTTPServer
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 import pytest
 
 from nemik.serve import Model, handler
+
+if TYPE_CHECKING:
+    from collections.abc import Iterator
 
 FLEET = Path(__file__).parent / "fixtures" / "fleet"
 SERVER_ERROR = 500

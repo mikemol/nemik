@@ -11,14 +11,17 @@ same.
 """
 
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 from rdflib import Graph
-from rdflib.term import Node
 
 from nemik.adapter import NEMIK, OSLC_CM, waypoint_uri
 from nemik.cards import cards
 from nemik.index import indexed
 from nemik.serve import build_static, build_static_unscoped
+
+if TYPE_CHECKING:
+    from rdflib.term import Node
 
 FLEET = Path(__file__).parent / "fixtures" / "fleet"
 MIN_PUBLISHED = 20

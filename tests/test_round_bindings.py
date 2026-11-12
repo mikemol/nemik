@@ -3,11 +3,14 @@
 """nemik:W1167: the server names the term that bounded each repo's round from the graph."""
 
 import json
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 from nemik.adapter import queue_graph
 from nemik.roundcli import NO_LANDINGS, bindings_of
 from nemik.serve import round_bindings
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 
 def _card(symbol: str, status: str, files: list[str]) -> dict[str, object]:

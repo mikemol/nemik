@@ -12,9 +12,12 @@ caller's.
 """
 
 import json
-from pathlib import Path
 
+from nemik._typing import TYPE_CHECKING
 from nemik.exportv2 import export_refs
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 
 def repo_symbols(files: list[tuple[str, Path]]) -> dict[str, list[str]]:

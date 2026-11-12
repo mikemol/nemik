@@ -3,12 +3,13 @@
 """nemik:W1169: nemik-inbound --issues FILE prints the unclaimed letters, --census the counts."""
 
 import json
-from pathlib import Path
 from typing import TYPE_CHECKING
 
 from nemik.blocks_cli import main
 
 if TYPE_CHECKING:
+    from pathlib import Path
+
     import pytest
 
 
@@ -39,7 +40,7 @@ def _saved(tmp_path: Path) -> Path:
 
 
 def test_the_open_letters_no_waypoint_cites_print_as_unclaimed_rows(
-    tmp_path: Path, capsys: "pytest.CaptureFixture[str]"
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
 ) -> None:
     """With no queue read every open letter is unclaimed; a queue citing one claims it."""
     saved = _saved(tmp_path)
@@ -60,7 +61,7 @@ def test_the_open_letters_no_waypoint_cites_print_as_unclaimed_rows(
 
 
 def test_by_peer_sums_the_kinds_into_one_line_per_sender(
-    tmp_path: Path, capsys: "pytest.CaptureFixture[str]"
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
 ) -> None:
     """The per-peer grouping linux-sources compares against: n letters, open and closed."""
     argv = ["--issues", str(_saved(tmp_path)), "--census", "--by-peer"]
@@ -72,7 +73,7 @@ def test_by_peer_sums_the_kinds_into_one_line_per_sender(
 
 
 def test_the_census_prints_the_counts_and_no_rows(
-    tmp_path: Path, capsys: "pytest.CaptureFixture[str]"
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
 ) -> None:
     """One line per sender and kind."""
     main(["--issues", str(_saved(tmp_path)), "--census", "--root", str(tmp_path)])

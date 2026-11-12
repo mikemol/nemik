@@ -15,14 +15,17 @@ in the gate, whatever the gate's length.
 """
 
 from datetime import datetime
-from pathlib import Path
-
-from rdflib import Graph
+from typing import TYPE_CHECKING
 
 from nemik import history
 from nemik.adapter import NEMIK, OSLC_CM
 from nemik.blocks import ref
-from nemik.work import in_gate
+from nemik.shims.work_cli import in_gate
+
+if TYPE_CHECKING:
+    from pathlib import Path
+
+    from rdflib import Graph
 
 # A card is stale after this many land intervals without activity: one interval alone would flag
 # every card worked an hour ago in a repo that lands every twenty minutes.

@@ -9,10 +9,13 @@ one inbound row per (blocked, blocker) pair survived, chosen by that order.
 """
 
 import json
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 import installed
 from mikemol.procrun.proc import capture_bytes
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 
 def _queue(root: Path, repo: str, wps: list[dict[str, object]]) -> None:

@@ -3,9 +3,12 @@
 """nemik:W643: cones over the input graph decide which cards run in parallel and which chain."""
 
 import json
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 from nemik.cones import Graph, cone, load, parallel, relation
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 GRAPH: Graph = {
     "src/a.py": {"src/b.py"},

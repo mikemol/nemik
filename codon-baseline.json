@@ -250,9 +250,5 @@
  "witnesses_cli": {
   "as_written": "no module named '__future__'",
   "stripped": "no module named 'importlib.metadata'"
- },
- "work": {
-  "as_written": "no module named '__future__'",
-  "stripped": "no module named 'mikemol.procrun.proc'"
  }
 }

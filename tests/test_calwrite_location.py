@@ -3,12 +3,15 @@
 """nemik:W722: a waypoint's location is its calendar event's LOCATION."""
 
 import json
-from pathlib import Path
-
-from rdflib import Graph
+from typing import TYPE_CHECKING
 
 from nemik.adapter import queue_graph
 from nemik.calwrite import events, uid
+
+if TYPE_CHECKING:
+    from pathlib import Path
+
+    from rdflib import Graph
 
 
 def _graph(tmp_path: Path) -> Graph:

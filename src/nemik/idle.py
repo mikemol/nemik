@@ -18,11 +18,14 @@ import time
 import tomllib
 from importlib.resources import files
 from pathlib import Path
+from typing import TYPE_CHECKING
 
-from rdflib import Graph
 from rdflib.namespace import PROV
 
 from nemik.adapter import BASE, NEMIK, OSLC_CM, ledger_graph
+
+if TYPE_CHECKING:
+    from rdflib import Graph
 
 DEFAULT_TICKS = 16
 DEFAULT_OUTCOMES = ["idle"]

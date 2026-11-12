@@ -5,9 +5,9 @@
 import os
 import shutil
 import threading
-from collections.abc import Iterator
 from http.server import ThreadingHTTPServer
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 import pytest
 import webpage
@@ -16,6 +16,9 @@ from playwright.sync_api import sync_playwright
 
 from nemik.serve import build_static
 from nemik.staticserve import handler
+
+if TYPE_CHECKING:
+    from collections.abc import Iterator
 
 WITHHELD_NONE = '{"version": 1, "as_of": "test", "items": []}'
 CHANGED = "gabion"

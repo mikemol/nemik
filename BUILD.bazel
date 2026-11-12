@@ -45,6 +45,8 @@ exports_files(["pyproject.toml"])
             + (["checks/claims.py", "warrants.bib"] if src == "tests/test_claims_cited.py" else [])
             # nemik:W523: the no-waivers test scans every Python file the repo keeps outside the package
             + (glob(["tests/*.py", "tools/*.py", "checks/*.py"], exclude = [src, "tests/installed.py", "tests/webpage.py", "tests/pagetext.py", "tests/conftest.py", "tools/cpuline.py", "tools/nemik_client.py", "checks/claims.py"]) if src == "tests/test_no_waivers.py" else [])
+            # nemik:W2125: the runtime-annotation test reads the house lint's exempt list and the named files that hand handlers to playwright (webpage.py and conftest.py are in every target's data)
+            + (["ruff-house.toml", "tests/test_layout.py", "tests/test_pdf_load_retry.py"] if src == "tests/test_runtime_annotation_imports.py" else [])
             # nemik:W557: the run-row tool runs against the schema it validates with
             + (["tools/check_run_rows.py"] if src == "tests/test_check_run_rows.py" else [])
             # nemik:W1532: the standing-17 probe is imported by name from tools/
@@ -65,6 +67,10 @@ exports_files(["pyproject.toml"])
             + (["@codon//:files", "@codon//:bin/codon", "tools/codon_census.py", "tools/core_smoke.py", "codon-baseline.json"] + glob(["src/nemik/*.py", "src/nemik/core/*.py"]) if src == "tests/test_codon_census.py" else [])
             # nemik:W2077: the wall incidence is measured over every module, against the recorded files
             + (["tools/codon_walls.py", "codon-walls.json", "codon-wall-table.json", "ratchets.json"] + NEMIK_PY if src == "tests/test_codon_wall_incidence.py" else [])
+            # nemik:W2125: the per-file ignore pin reads the house lint config
+            + (["ruff-house.toml"] if src == "tests/test_ruff_house_ignores.py" else [])
+            # nemik:W2137: the console-script launcher test renders the template out of the venv rule
+            + (["//bazel:venv.bzl"] if src == "tests/test_console_script_launcher.py" else [])
             # nemik:W2088: the two empty baselines are read by name
             + (["ruff-baseline.json", "mypy-baseline.json"] if src == "tests/test_baselines_empty.py" else [])
             # nemik:W2088: the rebaselines gate is run in a throwaway repository by its test
@@ -166,8 +172,8 @@ filegroup(
 venv_from_hub(
     name = ".venv",
     hub_requirements = all_requirements + ["@pathsforward//:pkg", "@icsstruct//:pkg", "@hooks//:pkg", "@fence//:pkg", "@rulerseq//:pkg", "@frontier//:pkg", "@cvdcore//:pkg", "@converge//:pkg", "@webpage//:pkg", "@endpoints//:pkg", "@otlp//:pkg", "@ratchet//:pkg", "@atomicwrite//:pkg", "@procrun//:pkg", "@transcriptstruct//:pkg"],
-    python_version = "3.13",
-    python_version_short = "3.13",
+    python_version = "3.14",
+    python_version_short = "3.14",
     srcs = glob(["src/nemik/**"], exclude = ["**/__pycache__/**"]),
     console_scripts = {
         "nemik-check": "nemik.check:main",
@@ -215,7 +221,7 @@ venv_from_hub(
         "nemik-history": "nemik.history:main",
         "nemik-pins": "nemik.pins:main",
         "nemik-critical": "nemik.check:critical_main",
-        "nemik-work": "nemik.work:main",
+        "nemik-work": "nemik.shims.work_cli:cli",
         "nemik-starved": "nemik.starved:main",
         "nemik-hostroot": "nemik.hostroot_cli:main",
         "nemik-replica": "nemik.replica_cli:main",

@@ -3,9 +3,12 @@
 """nemik:W634: a repo's own export decides what leaves it, and fails closed per repo."""
 
 import json
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 from nemik.exportv2 import export_refs
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 SYMBOLS = ["W1", "W2", "W3"]
 

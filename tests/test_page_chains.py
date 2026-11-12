@@ -10,8 +10,8 @@ says so and draws no chain marks: there is no JS copy (nemik:W814).
 
 import os
 import re
-from collections.abc import Iterator
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 import pytest
 import webpage
@@ -26,6 +26,9 @@ from playwright.sync_api import (
 
 from nemik.critical import critical
 from nemik.serve import Model
+
+if TYPE_CHECKING:
+    from collections.abc import Iterator
 
 FLEET = Path(__file__).parent / "fixtures" / "fleet"
 VIEWPORT = ViewportSize(width=1700, height=1250)

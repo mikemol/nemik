@@ -12,14 +12,16 @@ wait and a long list of newer cards ahead is what the operator described.
 """
 
 from datetime import UTC, datetime
-from typing import NamedTuple
+from typing import TYPE_CHECKING, NamedTuple
 
-from rdflib import Graph
 from rdflib.namespace import DCTERMS
 
 from nemik.adapter import waypoint_uri
 from nemik.rank import fleet_repos, load_composition, rank
 from nemik.score import load_weights
+
+if TYPE_CHECKING:
+    from rdflib import Graph
 
 SECONDS_A_DAY = 86400
 UNKNOWN = -1.0

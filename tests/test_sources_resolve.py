@@ -3,13 +3,16 @@
 """nemik:W656: a wait on another source's card is resolved in the browser, or left as a stub."""
 
 import os
-from collections.abc import Iterator
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 import pytest
 import webpage
 from playwright.sync_api import Error as PlaywrightError
 from playwright.sync_api import Page, sync_playwright
+
+if TYPE_CHECKING:
+    from collections.abc import Iterator
 
 COMBINE = "docs => JSON.stringify(combine(docs))"
 EDGE = '{"source":"urn:nemik:A/W1","target":"urn:nemik:B/W5","kind":"waits"}'

@@ -3,12 +3,15 @@
 """nemik:W635: the derived export withholds exactly what the version-1 list does."""
 
 import os
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 import pytest
 
 from nemik.exportcompat import derive, write
 from nemik.exportv2 import export_refs
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 SYMBOLS = ["W1", "W2", "W3"]
 EPOCH = 1_000_000  # a fixed modification time to compare against

@@ -2,12 +2,16 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W763: an unchanged fleet answers the per-prompt digest from the last run."""
 
-from pathlib import Path
+
+from typing import TYPE_CHECKING
 
 import pytest
 from rdflib import Graph
 
 from nemik import cachestore, check, queuefiles
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 QUEUE = '{"waypoints": [], "residue": []}'
 

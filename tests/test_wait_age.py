@@ -4,12 +4,15 @@
 
 import json
 from fractions import Fraction
-from pathlib import Path
-
-from rdflib import Graph
+from typing import TYPE_CHECKING
 
 from nemik.adapter import queue_graph
 from nemik.salience import AuditOptions, audit, load_wait_weight
+
+if TYPE_CHECKING:
+    from pathlib import Path
+
+    from rdflib import Graph
 
 WEIGHT = Fraction(1)
 OLD_WAIT = 10

@@ -2,9 +2,13 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W1150: two repos declaring one top-level package name are listed, and unread ones named."""
 
-from pathlib import Path
+
+from typing import TYPE_CHECKING
 
 from namespaces import census, declared, report
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 SINGLE = """\
 [project]

@@ -4,8 +4,7 @@
 
 import json
 from datetime import UTC, datetime
-from pathlib import Path
-from typing import cast
+from typing import TYPE_CHECKING, cast
 
 import pytest
 from rdflib import Graph, Literal
@@ -13,6 +12,9 @@ from rdflib import Graph, Literal
 from nemik.adapter import NEMIK, queue_graph, waypoint_uri
 from nemik.check import wake_main as main
 from nemik.wake import Liveness, due_nudges, fired_alarms, read_liveness, roster
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 
 def _alarms(printed: str) -> list[str]:

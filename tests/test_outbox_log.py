@@ -3,15 +3,18 @@
 """nemik:W949: an outbox appends its repo's log activities, or says the log was not read."""
 
 import json
-from pathlib import Path
-
-from rdflib import Graph
+from typing import TYPE_CHECKING
 
 from nemik.adapter import queue_graph, waypoint_uri
 from nemik.ask import quoted
 from nemik.hostroot_cli import log_document
 from nemik.outbox import outbox
 from nemik.waitlog import activity
+
+if TYPE_CHECKING:
+    from pathlib import Path
+
+    from rdflib import Graph
 
 FIRST = 1_700_000_000_000_000_000
 SECOND = FIRST + 60_000_000_000

@@ -4,8 +4,8 @@
 
 import json
 import os
-from collections.abc import Callable, Iterator
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 import pytest
 import webpage
@@ -17,6 +17,9 @@ from playwright.sync_api import (
     expect,
     sync_playwright,
 )
+
+if TYPE_CHECKING:
+    from collections.abc import Callable, Iterator
 
 VIEWPORT = ViewportSize(width=1700, height=1250)
 READY = "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0"

@@ -2,8 +2,12 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W528: a TZID in the output is defined by a VTIMEZONE (RFC 5545 3.2.19)."""
 
-from nemik.blocks import AskRow
+from typing import TYPE_CHECKING
+
 from nemik.vtodo import calendar, timezones, vtodos
+
+if TYPE_CHECKING:
+    from nemik.blocks import AskRow
 
 ZONE = "America/New_York"
 ASK: AskRow = {

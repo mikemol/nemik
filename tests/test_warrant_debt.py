@@ -3,12 +3,15 @@
 """nemik:W607: the warrant debt is a gauge per repo, zero when clean, counting only open claims."""
 
 import json
-from pathlib import Path
-
-from rdflib import Graph
+from typing import TYPE_CHECKING
 
 from nemik.adapter import queue_graph
 from nemik.metrics import only_families, warrant_lines
+
+if TYPE_CHECKING:
+    from pathlib import Path
+
+    from rdflib import Graph
 
 CLAIM = "2026-10-13 operator ruling: demand is salience"
 

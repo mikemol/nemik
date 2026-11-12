@@ -3,9 +3,12 @@
 """floorasks: each bad waypoint pointer in a bibliography is named."""
 
 import json
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 from nemik.floorasks import floor_asks, unresolved
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 FLOOR_ASKS = 5
 

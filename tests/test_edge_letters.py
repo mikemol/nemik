@@ -3,10 +3,13 @@
 """nemik:W850: a finished card's cross-repo edges become inbox letters, once each."""
 
 import json
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 from nemik.edgeletters import name, text
 from nemik.witnesses import RECORD, deliver
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 ALPHA: dict[str, list[dict[str, object]]] = {"waypoints": [{"symbol": "W1"}]}
 BETA: dict[str, list[dict[str, object]]] = {

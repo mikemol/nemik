@@ -4,13 +4,16 @@
 
 import json
 from datetime import UTC, datetime
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 import pytest
 
 from nemik import metrics
 from nemik.adapter import queue_graph
 from nemik.metrics import arrivals_within, flow_lines, flow_sample
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 NOW = datetime(2026, 10, 19, 12, 0, 0, tzinfo=UTC)
 WEEK = 7 * 86400

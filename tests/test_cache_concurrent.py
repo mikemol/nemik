@@ -3,9 +3,12 @@
 """nemik:W642: the cache store under two writers and a run that was killed mid-write."""
 
 import os
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 from nemik import cachestore
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 
 def test_two_writers_leave_both_builds_loadable(tmp_path: Path) -> None:

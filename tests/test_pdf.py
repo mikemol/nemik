@@ -2,7 +2,8 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W892: nemik-pdf sets a view's controls and prints a PDF; the views are pure steps."""
 
-from pathlib import Path
+
+from typing import TYPE_CHECKING
 
 import pytest
 import webpage
@@ -10,6 +11,9 @@ from playwright.sync_api import Error as PlaywrightError
 
 from nemik import pdfviews
 from nemik.pdf import render
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 MIN_PDF_BYTES = 1000
 MAX_PDF_BYTES = 2_000_000

@@ -3,12 +3,15 @@
 """nemik:W530: the symbol, tags and issue time also appear as the standard Dublin Core terms."""
 
 import json
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 from rdflib import Graph, Literal
 from rdflib.namespace import DCTERMS, XSD
 
 from nemik.adapter import NEMIK, OSLC, OSLC_CM, queue_graph, waypoint_uri
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 
 def test_a_card_names_its_workstream_as_its_service_provider(tmp_path: Path) -> None:

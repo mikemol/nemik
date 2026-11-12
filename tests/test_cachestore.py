@@ -3,13 +3,16 @@
 """nemik:W518: the build's caches survive a process boundary, and only while still valid."""
 
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 import pytest
-from rdflib import Graph
-from rdflib.term import Node
 
 from nemik import cachestore, flow, shaclinc
 from nemik.serve import Model
+
+if TYPE_CHECKING:
+    from rdflib import Graph
+    from rdflib.term import Node
 
 FLEET = Path(__file__).parent / "fixtures" / "fleet"
 STAMP_LENGTH = 64

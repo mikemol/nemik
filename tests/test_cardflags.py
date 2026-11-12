@@ -3,7 +3,7 @@
 """nemik:W714: the plain-edge allBlockersLanded flag equals the one blocks.annotate writes."""
 
 import json
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 from rdflib import RDF, Graph
 
@@ -11,6 +11,9 @@ from nemik.adapter import NEMIK, OSLC_CM, queue_graph
 from nemik.blocks import annotate
 from nemik.cardflags import all_blockers_landed
 from nemik.index import ref_of
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 
 def _card(symbol: str, status: str, waits: list[str]) -> dict[str, object]:

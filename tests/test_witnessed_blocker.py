@@ -3,14 +3,17 @@
 """nemik:W520: a witnessed card blocked on nemik-witnesses names a party; a bare one does not."""
 
 import json
-from pathlib import Path
-
-from rdflib import Graph
+from typing import TYPE_CHECKING
 
 from nemik.adapter import queue_graph, waypoint_uri
 from nemik.blocks import annotate
 from nemik.check import shapes
 from nemik.shaclinc import findings
+
+if TYPE_CHECKING:
+    from pathlib import Path
+
+    from rdflib import Graph
 
 
 def _queue(tmp_path: Path, witness: str, lang: str) -> Graph:

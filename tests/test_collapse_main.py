@@ -3,11 +3,14 @@
 """nemik:W711: nemik-collapse reads a fleet's queues and prints its umbrellas and escapes."""
 
 import json
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 import pytest
 
 from nemik.check import collapse_main
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 
 def _card(symbol: str, waits: list[str], enables: list[str]) -> dict[str, object]:

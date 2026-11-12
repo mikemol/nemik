@@ -2,7 +2,8 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W611: nemik_manifest_drift counts done cards whose commits strayed from the manifest."""
 
-from pathlib import Path
+
+from typing import TYPE_CHECKING
 
 import pytest
 from rdflib import Graph, Literal
@@ -10,6 +11,9 @@ from rdflib import Graph, Literal
 from nemik import history
 from nemik.adapter import NEMIK, OSLC_CM, STATE, waypoint_uri
 from nemik.metrics import drift_lines
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 
 def _touched(repo: Path, symbol: str) -> list[str]:

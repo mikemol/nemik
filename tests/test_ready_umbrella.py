@@ -8,14 +8,17 @@ nemik:W529: ReadyUmbrellaShape is a SPARQL constraint in shapes.ttl over the ena
 """
 
 from itertools import count
+from typing import TYPE_CHECKING
 
 from rdflib import RDF, Graph
-from rdflib.term import Node
 
 from nemik.adapter import NEMIK, OSLC_CM, waypoint_uri, workstream_uri
 from nemik.blocks import annotate
 from nemik.check import shapes
 from nemik.shaclinc import findings
+
+if TYPE_CHECKING:
+    from rdflib.term import Node
 
 _KEYS = count()
 

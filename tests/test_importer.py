@@ -11,8 +11,9 @@ from typing import TypedDict
 import pytest
 from mikemol.procrun.proc import capture
 
-from nemik.importer import commands, quote
+from nemik.importer import commands
 from nemik.projection import Link, Task
+from nemik.shellquote import quote
 
 WRITER = str(Path(sys.executable).parent / "mikemol-paths-forward")
 WORDS = [

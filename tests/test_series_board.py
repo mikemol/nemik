@@ -4,10 +4,13 @@
 
 import json
 import time
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 import webpage
 from playwright.sync_api import sync_playwright
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 READY = "() => document.getElementById('wake').innerText.length > 5"
 SHOWN = "() => document.getElementById('wake').innerText"

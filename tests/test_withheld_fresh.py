@@ -4,12 +4,15 @@
 
 import json
 from datetime import UTC, datetime
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 import pytest
 
 from nemik.withheld import WithheldError
 from nemik.withheldage import require_fresh
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 NOW = datetime(2026, 10, 18, 2, 0, 0, tzinfo=UTC).timestamp()
 LIMIT = 900

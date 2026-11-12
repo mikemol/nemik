@@ -2,18 +2,22 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W400: validating only what a change touches gives exactly the full run's findings."""
 
-from collections.abc import Callable
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 import pytest
 from rdflib import Graph, Literal
-from rdflib.term import Node
 
 from nemik.adapter import NEMIK, OSLC_CM, queue_graph
 from nemik.blocks import annotate
 from nemik.check import shapes
 from nemik.queuefiles import QUEUE, workstream_files
 from nemik.shaclinc import findings, shacl_results
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
+
+    from rdflib.term import Node
 
 FLEET = Path(__file__).parent / "fixtures" / "fleet"
 

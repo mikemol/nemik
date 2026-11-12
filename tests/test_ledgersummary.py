@@ -9,10 +9,13 @@ back from their N-Triples text, so the comparison is plain strings.
 """
 
 from collections import Counter
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 from nemik.adapter import ledger_graph, ledger_rows
 from nemik.ledgersummary import Summary, summarize
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 LEDGER = (
     '2026-10-05T10:00:00Z  tick  W1  advanced  unblock  "one"\n'

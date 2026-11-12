@@ -3,12 +3,15 @@
 """nemik:W355: nemik_commits_24h counts the commits in the window, the deploy-frequency signal."""
 
 from datetime import UTC, datetime
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 import pytest
 
 from nemik import history
 from nemik.metrics import commit_lines
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 
 def _three(repo: Path, since: str) -> int | None:

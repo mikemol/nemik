@@ -3,7 +3,7 @@
 # baseline reaches zero, because selecting every rule there would refuse any edit to a file that already
 # carries a finding. Relief is never granted here: a finding is fixed or it stays in the baseline.
 line-length = 100
-target-version = "py313"
+target-version = "py314"
 extend-exclude = ["bazel-*", ".claude", ".venv"]
 # tests/, tools/ and checks/ are scripts and test modules, not packages (mtools declares its own the same way).
 namespace-packages = ["tests", "tools", "checks"]
@@ -11,6 +11,9 @@ namespace-packages = ["tests", "tools", "checks"]
 [lint]
 preview = true
 select = ["ALL"]
+# nemik:W2125: Codon cannot import typing.TYPE_CHECKING, so the modules that compile under it take the
+# guard from nemik/_typing.py (a plain constant); ruff reads that name as typing's.
+typing-modules = ["nemik._typing"]
 ignore = [
     "incorrect-blank-line-before-class",
     "multi-line-summary-second-line",
@@ -22,6 +25,18 @@ ignore = [
 "tests/test_*.py" = ["S101"]
 # Running the ratchet is the whole job of its test: an argv list, no shell, this interpreter.
 "tests/test_ruff_ratchet.py" = ["suspicious-subprocess-import", "subprocess-without-shell-equals-true"]
+# nemik:W2125 (github-14's ruling, 2026-11-10): starting a process through the shell is the sole
+# responsibility of nemik/spawn.py, because the pinned Codon has no subprocess and os.system is all it
+# offers. One per-responsibility entry, S605 only (a hardcoded temp root, S108, was fixed, not ignored).
+"src/nemik/spawn.py" = ["S605"]
+
+# nemik:W2125: at 3.14 an annotation is evaluated lazily, and pluggy reads a hook's signature at run time
+# (inspect.signature), so a pytest name used only in a hook annotation must stay a real import. Playwright
+# does the same for a route or event handler (playwright/_impl/_impl_to_api_mapping.py), and at 3.14
+# inspect.signature evaluates the annotation: a handler typed `route: Route` with Route under TYPE_CHECKING
+# raised NameError in the dispatch and the test waited forever (test_layout shard 2, 2026-11-10).
+[lint.flake8-type-checking]
+exempt-modules = ["typing", "typing_extensions", "pytest", "playwright"]
 
 [lint.flake8-copyright]
 notice-rgx = '(?i)SPDX-License-Identifier: Apache-2\.0[ \t]*\n#[ \t]*Copyright \(c\) \d{4} Mike Mol'

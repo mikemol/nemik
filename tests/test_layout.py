@@ -25,15 +25,14 @@ from typing import TYPE_CHECKING, Literal, Protocol
 import pytest
 import webpage
 from mikemol.procrun.proc import capture
+from playwright.sync_api import Browser, Page, Playwright, Route, sync_playwright
 from playwright.sync_api import Error as PlaywrightError
-from playwright.sync_api import sync_playwright
 
 from nemik.serve import build_static
 
 if TYPE_CHECKING:
     from collections.abc import Iterator
 
-    from playwright.sync_api import Browser, Page, Playwright, Route
 
 Scheme = Literal["light", "dark"]  # the colour schemes the parametrized tests take
 FLEET = Path(__file__).parent / "fixtures" / "fleet"
@@ -54,7 +53,7 @@ MIN_ROWS = 2
 HTTP_NOT_FOUND = http.HTTPStatus.NOT_FOUND
 
 
-def _launch(playwright: "Playwright") -> "Browser":
+def _launch(playwright: Playwright) -> Browser:
     """Launch the staged Chromium, or skip the test when it is unavailable.
 
     Returns:
@@ -157,7 +156,7 @@ METRICS = """() => {
 
 
 @pytest.fixture(scope="module")
-def server() -> "Iterator[str]":
+def server() -> Iterator[str]:
     """nemik:W1060: the server binds its own port and says so (webpage.served), not a picked one.
 
     Yields:
@@ -289,7 +288,7 @@ def test_the_history_panel_shows_the_weekly_roll_up_when_there_is_one(
         page = browser.new_page(viewport={"width": 1700, "height": 1250})
         history = json.dumps(doc)
 
-        def fulfil(route: "Route") -> None:
+        def fulfil(route: Route) -> None:
             route.fulfill(status=200, content_type="application/json", body=history)
 
         page.route("**/history.json", fulfil)
@@ -1348,7 +1347,7 @@ def test_the_card_list_is_one_tab_stop_walked_by_arrows(server: str) -> None:
     assert outside, "Tab stayed inside the list"
 
 
-def _settle(page: "Page") -> None:
+def _settle(page: Page) -> None:
     """Wait until the graph has stopped moving: no cytoscape animation running, two frames painted.
 
     nemik:W573: a view change redraws synchronously, so what is left to wait for is cytoscape's own
@@ -1366,7 +1365,7 @@ def _settle(page: "Page") -> None:
     )
 
 
-def _open_on_a_fake_clock(page: "Page", url: str) -> None:
+def _open_on_a_fake_clock(page: Page, url: str) -> None:
     """Open the page with its timers on Playwright's fake clock, paused once the graph is up.
 
     nemik:W573: the page's own timers (POP_OPEN_MS 500, POP_CLOSE_MS 300) then advance only by

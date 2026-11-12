@@ -3,11 +3,14 @@
 """nemik:W864: nemik-serve answers /collapse.json with the lines nemik-collapse prints."""
 
 import json
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 from nemik.check import blocked_rows
 from nemik.collapse import lines
 from nemik.serve import DOC_ROUTES, Model
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 QUEUE: dict[str, list[dict[str, object]]] = {
     "waypoints": [

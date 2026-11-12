@@ -8,11 +8,15 @@ module makes, is wrapped to count its calls and to fail the test at the call pas
 references in the package, so the mutant is a named failure at once.
 """
 
-from pathlib import Path
+
+from typing import TYPE_CHECKING
 
 import codon_walls
 import pytest
 from codon_walls import Ref, closure, read_package
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 CYCLE = {
     "a.py": "from nemik import b\n",

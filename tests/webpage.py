@@ -9,10 +9,9 @@ are mtools' mikemol.webpage (nemik:W717, W848), re-exported here so the tests ke
 
 import os
 import tempfile
-from collections.abc import Callable, Generator
 from contextlib import contextmanager
 from pathlib import Path
-from typing import Protocol, cast
+from typing import TYPE_CHECKING, Protocol, cast
 
 import installed
 import pytest
@@ -34,6 +33,9 @@ from playwright.sync_api import Response as LaunchedResponse
 from playwright.sync_api import sync_playwright
 
 from nemik.tracker import BOOL, INT, Tree, parse_tree
+
+if TYPE_CHECKING:
+    from collections.abc import Callable, Generator
 
 __all__ = [
     "CY_READY",

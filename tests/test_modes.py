@@ -2,12 +2,15 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W727: the card list's order is a mode: rank by default, newest first on 2."""
 
-from collections.abc import Generator
 from contextlib import contextmanager
+from typing import TYPE_CHECKING
 
 import pytest
 import webpage
 from playwright.sync_api import Page, sync_playwright
+
+if TYPE_CHECKING:
+    from collections.abc import Generator
 
 # the symbol numbers of the list's top-level cards, in the order shown
 ROOT_NUMBERS = """() => [...document.querySelectorAll('#cardlist > li > button[data-card]')]

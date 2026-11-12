@@ -4,13 +4,16 @@
 
 import json
 import os
-from collections.abc import Iterator
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 import pytest
 import webpage
 from playwright.sync_api import Error as PlaywrightError
 from playwright.sync_api import Page, Playwright, sync_playwright
+
+if TYPE_CHECKING:
+    from collections.abc import Iterator
 
 STATUS = "() => JSON.stringify(sourceStatus)"
 NODES = "() => cy.nodes('[symbol]').length"

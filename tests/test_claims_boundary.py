@@ -12,7 +12,10 @@ them to still catching the real thing.
 import importlib.util
 import re
 from pathlib import Path
-from types import ModuleType
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from types import ModuleType
 
 ROOT = Path(__file__).resolve().parents[1]
 LOAD = re.compile(r"(?<![A-Za-z0-9_])store\.load\s?\(")

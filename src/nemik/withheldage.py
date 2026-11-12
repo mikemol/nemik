@@ -10,9 +10,12 @@ reads only `as_of`, so nemik.withheld's parsing is untouched and the check is op
 
 import json
 from datetime import datetime
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 from nemik.withheld import WithheldError
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 SKEW = 300  # seconds a stamp may sit in the future before the clocks are suspect
 STOPPED = "its producer has stopped, so it may miss a card that must not pass"

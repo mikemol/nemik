@@ -5,11 +5,14 @@
 import threading
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, HTTPServer
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 import pytest
 
 from nemik.endpoint import vm_export
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 BODY = '{"metric":{"repo":"a","ratchet":"x"},"values":[1],"timestamps":[2]}\n'
 SELECTOR = '{__name__="mikemol.ratchet.value"}'

@@ -2,12 +2,16 @@
 # Copyright (c) 2026 Mike Mol
 """Tests for waitlog: the longest-waiting card per pair as log records (nemik:W886)."""
 
-from pathlib import Path
-
-from mikemol.otlp.sender import Post
+from typing import TYPE_CHECKING
 
 from nemik.waitlog import ENDPOINT, FAILED, emit, entries
-from nemik.waitrows import Oldest
+
+if TYPE_CHECKING:
+    from pathlib import Path
+
+    from mikemol.otlp.sender import Post
+
+    from nemik.waitrows import Oldest
 
 NOW = 1_700_000_000_000_000_000
 OK = 200

@@ -3,12 +3,15 @@
 """nemik:W355: a card that goes from done back to open is a change failure."""
 
 from datetime import UTC, datetime
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 import pytest
 
 from nemik import history
 from nemik.metrics import reopened_lines
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 TWICE = 2
 

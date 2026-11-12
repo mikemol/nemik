@@ -3,12 +3,15 @@
 """nemik:W842: a card waiting on a landed card keeps waiting; done or dropped lifts it."""
 
 import json
-from pathlib import Path
-
-from rdflib import Graph
+from typing import TYPE_CHECKING
 
 from nemik.adapter import NEMIK, queue_graph, waypoint_uri
 from nemik.blocks import annotate
+
+if TYPE_CHECKING:
+    from pathlib import Path
+
+    from rdflib import Graph
 
 
 def _annotated(tmp_path: Path, blocker_status: str) -> Graph:

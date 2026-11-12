@@ -2,11 +2,14 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W725: the card list is a tree: a card sits under the heaviest card it enables."""
 
-from collections.abc import Generator
 from contextlib import contextmanager
+from typing import TYPE_CHECKING
 
 import webpage
 from playwright.sync_api import Page, sync_playwright
+
+if TYPE_CHECKING:
+    from collections.abc import Generator
 
 ITEMS = "[...document.querySelectorAll('#cardlist button[data-card]')]"
 LIST_IS_A_TREE = (

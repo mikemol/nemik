@@ -2,11 +2,15 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W618: a forecast is open children over the close rate; a bare working card is flagged."""
 
+from typing import TYPE_CHECKING
+
 from rdflib import RDF, Graph
-from rdflib.term import Node
 
 from nemik.adapter import NEMIK, OSLC_CM, waypoint_uri, workstream_uri
 from nemik.forecast import days_left, summary
+
+if TYPE_CHECKING:
+    from rdflib.term import Node
 
 RATE = 2.0  # cards closed per day
 FOUR = 4

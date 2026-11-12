@@ -3,10 +3,13 @@
 """nemik:W751: nemik-hostroot --landings writes mikemol-commit's landings, or says why not."""
 
 import json
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 from nemik.hostroot_cli import main
 from nemik.landings import read_document, series
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 GATE_NEMIK = 692
 GATE_MTOOLS = 938

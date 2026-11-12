@@ -2,7 +2,8 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W1024: the round printed for a repo takes its size from the stacks it landed."""
 
-from pathlib import Path
+
+from typing import TYPE_CHECKING
 
 from nemik.landings import Landing, document
 from nemik.roundcli import (
@@ -12,6 +13,9 @@ from nemik.roundcli import (
     sizes_of,
     write_round_file,
 )
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 RANKED = [
     ("W5", "9.0", "first"),

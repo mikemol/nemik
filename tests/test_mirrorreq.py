@@ -2,11 +2,15 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W959: a mirror plan's calls become the GitHub or Forgejo requests, with no network."""
 
+from typing import TYPE_CHECKING
+
 import pytest
 
-from nemik.mirror import Call
 from nemik.mirrorreq import FORGEJO, GITHUB, Request, numbers, requests_for
 from nemik.tracker import Issue
+
+if TYPE_CHECKING:
+    from nemik.mirror import Call
 
 FIELDS: dict[str, object] = {
     "title": "t",

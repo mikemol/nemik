@@ -2,11 +2,15 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W730: a stale or missing installed module is named, a matching install is clean."""
 
-from pathlib import Path
+
+from typing import TYPE_CHECKING
 
 import pytest
 
 from nemik.stale import STALE_EXIT, USAGE_EXIT, check, main, stale_modules
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 
 def _tree(root: Path, files: dict[str, str]) -> Path:

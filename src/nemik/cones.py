@@ -10,7 +10,11 @@ does not import the generator.
 """
 
 import json
-from pathlib import Path
+
+from nemik._typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 Graph = dict[str, set[str]]  # path -> the paths it imports or reads
 

@@ -2,13 +2,17 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W1083: a ready card a queued or gating commit stack names is being worked, and says so."""
 
+from typing import TYPE_CHECKING
+
 from rdflib import RDF, Graph, Literal
-from rdflib.term import Node
 
 from nemik.adapter import NEMIK, OSLC_CM, STATE, waypoint_uri, workstream_uri
 from nemik.blocks import annotate
 from nemik.check import shapes
 from nemik.shaclinc import findings
+
+if TYPE_CHECKING:
+    from rdflib.term import Node
 
 SAYS = "ready, but a queued"
 

@@ -4,7 +4,6 @@
 
 import json
 from datetime import UTC, datetime
-from pathlib import Path
 from typing import TYPE_CHECKING
 
 from nemik.adapter import NEMIK, queue_graph, waypoint_uri
@@ -12,6 +11,8 @@ from nemik.alarm import Schedule, duration, fires_at, fires_between
 from nemik.vtodo import vtodos
 
 if TYPE_CHECKING:
+    from pathlib import Path
+
     from nemik.blocks import AskRow
 
 FIFTEEN_MINUTES_BEFORE = -900  # -PT15M, in seconds

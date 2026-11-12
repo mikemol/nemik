@@ -2,14 +2,18 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W355: the git-history families are computed only when asked for by name."""
 
-from collections.abc import Iterator
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 import pytest
-from rdflib import Graph
 
 from nemik.check import Finding, survey
 from nemik.metrics import main
+
+if TYPE_CHECKING:
+    from collections.abc import Iterator
+
+    from rdflib import Graph
 
 FLEET = Path(__file__).parent / "fixtures" / "fleet"
 HISTORY = (

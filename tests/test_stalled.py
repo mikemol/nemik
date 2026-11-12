@@ -4,14 +4,18 @@
 
 import json
 from datetime import UTC, datetime
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 import pytest
-from rdflib import Graph
 
 from nemik import history, stalled
 from nemik.adapter import queue_graph
 from nemik.stalled import FACTOR, findings, verdict
+
+if TYPE_CHECKING:
+    from pathlib import Path
+
+    from rdflib import Graph
 
 HOUR = 3600
 INTERVAL = HOUR

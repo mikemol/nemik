@@ -3,12 +3,15 @@
 """nemik:W952: the page's address is state: a scope path and a view token, round-tripped."""
 
 import os
-from collections.abc import Iterator
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 import pytest
 import webpage
 from playwright.sync_api import Error, Page, ViewportSize, sync_playwright
+
+if TYPE_CHECKING:
+    from collections.abc import Iterator
 
 VIEWPORT = ViewportSize(width=1700, height=1250)
 READY = "() => typeof parseAddress === 'function' && typeof cy !== 'undefined' && cy"

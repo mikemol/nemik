@@ -7,14 +7,16 @@ import http.server
 import importlib.util
 import json
 import threading
-from collections.abc import Callable, Iterator
 from pathlib import Path
-from types import ModuleType
-from typing import Protocol, TypedDict
+from typing import TYPE_CHECKING, Protocol, TypedDict
 
 import pytest
 
 from nemik.serve import build_static
+
+if TYPE_CHECKING:
+    from collections.abc import Callable, Iterator
+    from types import ModuleType
 
 ROOT = Path(__file__).resolve().parents[1]
 FLEET = Path(__file__).parent / "fixtures" / "fleet"

@@ -2,7 +2,8 @@
 # Copyright (c) 2026 Mike Mol
 """Tests for waitemit: the wait series as gauges (nemik:W885) and the wake gauges (nemik:W1604)."""
 
-from pathlib import Path
+
+from typing import TYPE_CHECKING
 
 from mikemol.otlp.sender import Post, SendError
 from rdflib import Graph
@@ -20,7 +21,11 @@ from nemik.waitemit import (
     wake_samples,
 )
 from nemik.waitrows import UNRANKED, Edge
-from nemik.wake import Waiter, WakeRow
+
+if TYPE_CHECKING:
+    from pathlib import Path
+
+    from nemik.wake import Waiter, WakeRow
 
 NOW = 1_700_000_000_000_000_000
 OK = 200

@@ -3,10 +3,13 @@
 """nemik:W489: a ready card left untouched past how long small cards take to finish."""
 
 import json
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 from nemik.check import Finding, add_ready_neither_infos, ready_neither
 from nemik.workrows import NO_BOUND, upper_quantile
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 NOW = "2026-01-10T00:00:00Z"
 DAY = 86400.0

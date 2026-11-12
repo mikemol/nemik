@@ -3,12 +3,15 @@
 """nemik:W624: a repo's generated files leave the overlap test and ride the last entry."""
 
 import json
-from pathlib import Path
-
-from rdflib import Graph
+from typing import TYPE_CHECKING
 
 from nemik.adapter import queue_graph
 from nemik.stackable import generated_files, report
+
+if TYPE_CHECKING:
+    from pathlib import Path
+
+    from rdflib import Graph
 
 
 def _card(symbol: str, *files: str) -> dict[str, object]:

@@ -2,12 +2,17 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W973: the umbrellas document, over a queue where two blocked cards wait on one."""
 
-from pathlib import Path
+
+from typing import TYPE_CHECKING
 
 from queue_cases import make_card, write_queue
-from rdflib import Graph
 
 from nemik.serve import umbrella_docs
+
+if TYPE_CHECKING:
+    from pathlib import Path
+
+    from rdflib import Graph
 
 
 def graph(root: Path) -> Graph:

@@ -2,10 +2,14 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W766: a reader sees only what changed since the digest it last saw."""
 
-from pathlib import Path
+
+from typing import TYPE_CHECKING
 
 from nemik.check import unseen
 from nemik.digest import delta
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 FIRST = [
     "provenance: nemik abc",

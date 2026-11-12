@@ -2,11 +2,15 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W535: witnesses resolve opa through pathsforward's pin, so a stray opa decides nothing."""
 
-from pathlib import Path
+
+from typing import TYPE_CHECKING
 
 import pytest
 
 from nemik.witnesses import evaluate
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 
 def test_an_opa_that_is_not_the_pinned_version_is_undefined(

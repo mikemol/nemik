@@ -3,12 +3,15 @@
 """nemik:W131: WV:1 vectors -> declared bands; unscored and invalid are visible, never a zero."""
 
 import json
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 import pytest
 
 from nemik.adapter import NEMIK, queue_graph, waypoint_uri
 from nemik.score import band, load_bands, load_guarantees, tagged_band
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 B = load_bands()
 V = "WV:1/R:{R}/E:{E}/C:{C}/I:{I}/A:{A}/X:N/S:{S}/F:K/W:N"

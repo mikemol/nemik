@@ -3,11 +3,14 @@
 """nemik:W973: builders for small fixture queues, shared by the tests that read them as graphs."""
 
 import json
-from pathlib import Path
-
-from rdflib import Graph
+from typing import TYPE_CHECKING
 
 from nemik.adapter import queue_graph
+
+if TYPE_CHECKING:
+    from pathlib import Path
+
+    from rdflib import Graph
 
 KNOWN = frozenset({"alpha", "beta"})
 

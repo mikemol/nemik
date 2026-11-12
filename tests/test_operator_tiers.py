@@ -3,14 +3,18 @@
 """nemik:W600: nemik-operator lists a category's asks grouped by the repo's burn-down tier."""
 
 import json
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 import pytest
-from rdflib import Graph
 
 from nemik.adapter import queue_graph
 from nemik.blocks_cli import operator_main
 from nemik.tiers import of_cite
+
+if TYPE_CHECKING:
+    from pathlib import Path
+
+    from rdflib import Graph
 
 
 def _asking(tmp_path: Path, repo: str) -> Graph:

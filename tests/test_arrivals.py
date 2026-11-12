@@ -4,12 +4,15 @@
 
 import json
 from datetime import UTC, datetime
-from pathlib import Path
-
-from rdflib import Graph
+from typing import TYPE_CHECKING
 
 from nemik.adapter import queue_graph
 from nemik.metrics import arrival_lines, render
+
+if TYPE_CHECKING:
+    from pathlib import Path
+
+    from rdflib import Graph
 
 NOW = datetime(2026, 10, 16, 12, 0, 0, tzinfo=UTC)
 

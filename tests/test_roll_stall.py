@@ -3,10 +3,13 @@
 """nemik:W683: nemik-check warns on a repo that keeps rolling its tick at advanced 0."""
 
 import json
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 from nemik.adapter import queue_graph
 from nemik.check import Finding, add_roll_warnings
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 IDLE = '2026-10-18T10:0{n}:00Z  tick  W1  advanced  unblock  "closed [rolled; advanced 0]"\n'
 BUSY = '2026-10-18T10:0{n}:00Z  tick  W1  advanced  unblock  "closed [rolled; advanced 3]"\n'

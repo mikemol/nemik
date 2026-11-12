@@ -3,7 +3,7 @@
 """nemik:W681: each tick line that worked a card becomes a row: weight, leaf, directed."""
 
 import json
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 from nemik.metrics import ticks
 from nemik.workrows import (
@@ -13,6 +13,9 @@ from nemik.workrows import (
     is_leaf,
     working_rows,
 )
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 CARDS: list[dict[str, object]] = [
     {"symbol": "W1", "enables": ["W2"], "blocked_on": [], "caused_by": None},

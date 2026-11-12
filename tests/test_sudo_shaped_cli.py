@@ -3,7 +3,7 @@
 """nemik:W1265: the Warning shape and nemik-operator --sudo-shaped for root-shaped operator acts."""
 
 import json
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 import pytest
 from rdflib import RDF, Graph, Literal, URIRef
@@ -13,6 +13,9 @@ from nemik.adapter import NEMIK, OSLC_CM
 from nemik.blocks_cli import operator_main
 from nemik.check import shapes
 from nemik.shaclinc import findings
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 SAID = "names a root-shaped command"
 

@@ -3,12 +3,15 @@
 """nemik:W597: a card that claims an operator ruling in prose, with no warrant, is warned."""
 
 import json
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 from nemik.adapter import queue_graph
 from nemik.check import shapes
 from nemik.shaclinc import findings
 from nemik.warrants import claims_ruling, ruling_words
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 RULED = "2026-10-13 operator ruling: demand is salience"
 WARRANT: dict[str, object] = {

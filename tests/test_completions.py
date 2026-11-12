@@ -2,12 +2,16 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W609: nemik_cards_completed_24h counts the cards the queue's history shows closing."""
 
-from pathlib import Path
+
+from typing import TYPE_CHECKING
 
 import pytest
 
 from nemik import history
 from nemik.metrics import completed_in
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 
 def _queue(*done: str) -> dict[str, object]:

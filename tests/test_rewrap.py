@@ -4,8 +4,10 @@
 
 import importlib.util
 from pathlib import Path
-from types import ModuleType
-from typing import cast
+from typing import TYPE_CHECKING, cast
+
+if TYPE_CHECKING:
+    from types import ModuleType
 
 ROOT = Path(__file__).resolve().parents[1]
 WIDTH = 40

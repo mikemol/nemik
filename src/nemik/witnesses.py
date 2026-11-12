@@ -36,7 +36,7 @@ from nemik.delivery import owed, stamp
 from nemik.hostapply import fact, load
 from nemik.queuefiles import QUEUE, default_root, workstream_files
 from nemik.say import say, warn
-from nemik.work import run_writer
+from nemik.shims.work_cli import run_writer
 from nemik.workrows import edges_of
 
 if TYPE_CHECKING:

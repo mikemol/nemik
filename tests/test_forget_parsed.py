@@ -2,11 +2,15 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W1096: a one-shot build keeps no parsed graphs, so none is held beside the copy it uses."""
 
-from pathlib import Path
+
+from typing import TYPE_CHECKING
 
 import pytest
 
 from nemik import adapter
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 LEDGER = '2026-10-05T10:00:00Z  tick  W1  advanced  unblock  "one"\n'
 

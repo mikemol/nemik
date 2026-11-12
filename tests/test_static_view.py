@@ -9,8 +9,8 @@ it, and fetches nothing the server cannot answer from a file.
 """
 
 import threading
-from collections.abc import Iterator
 from http.server import ThreadingHTTPServer
+from typing import TYPE_CHECKING
 
 import installed
 import pytest
@@ -19,6 +19,9 @@ from mikemol.procrun.proc import capture
 from playwright.sync_api import sync_playwright
 
 from nemik.staticserve import handler
+
+if TYPE_CHECKING:
+    from collections.abc import Iterator
 
 WITHHELD_NONE = '{"version": 1, "as_of": "test", "items": []}'
 MIN_CARDS = 10

@@ -2,13 +2,17 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W993: a repo behind a ratchet's required fall ranks that ratchet's paydown cards first."""
 
-from pathlib import Path
+
+from typing import TYPE_CHECKING
 
 import pytest
 
 from nemik import pacecli
 from nemik.pacecli import behind_files
 from nemik.score import load_bands, tagged_band
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 HEAD = '{"as_of": "2026-10-26T09:34:35Z", "window": "10"}\n'
 BEHIND_ROW = (

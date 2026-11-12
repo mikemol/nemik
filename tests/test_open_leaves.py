@@ -4,10 +4,13 @@
 
 import json
 from datetime import UTC, datetime
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 from nemik.metrics import open_leaf_lines
 from nemik.workrows import open_leaf_stamps
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 NOW = datetime(2026, 10, 19, 12, 0, 0, tzinfo=UTC)
 HOUR = 3600

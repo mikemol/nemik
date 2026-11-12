@@ -10,11 +10,14 @@ and written with only the solves the build used.
 
 import json
 from fractions import Fraction
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 import pytest
 
 from nemik import cachestore, flow
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 OTHER_STAMP = "0" * cachestore.STAMP_LEN
 STALE_KEY: flow.SolveKey = ((), (), (), (), Fraction(1))

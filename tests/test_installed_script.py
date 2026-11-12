@@ -2,10 +2,14 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W1566: installed.script names an uninstalled script with FileNotFoundError."""
 
-from pathlib import Path
+
+from typing import TYPE_CHECKING
 
 import installed
 import pytest
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 
 def test_an_uninstalled_script_is_a_file_not_found(

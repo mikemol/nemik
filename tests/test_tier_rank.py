@@ -3,13 +3,17 @@
 """nemik:W600: the fleet ranking puts a more urgent repo's cards first."""
 
 import json
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 import pytest
-from rdflib import Graph
 
 from nemik.adapter import queue_graph
 from nemik.rank import load_composition, main
+
+if TYPE_CHECKING:
+    from pathlib import Path
+
+    from rdflib import Graph
 
 
 def _queue(tmp_path: Path, repo: str, symbols: list[str]) -> Graph:

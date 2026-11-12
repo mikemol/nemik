@@ -291,6 +291,31 @@ def test_the_typing_guard_is_one_wall_and_its_body_is_skipped(tmp_path: Path) ->
     assert _walls(tmp_path)["a"] == [TYPE_CHECKING]
 
 
+def test_a_guard_taken_from_the_local_module_is_not_a_wall(tmp_path: Path) -> None:
+    """The pinned Codon cannot import typing.TYPE_CHECKING but compiles nemik._typing (W2125).
+
+    A module that guards with the name taken from the local module has no wall for the guard, its
+    guarded import is still skipped, and the same guard taken from typing stays a wall.
+    """
+    _package(
+        tmp_path,
+        {
+            "_typing.py": "TYPE_CHECKING = False\n",
+            "a.py": (
+                "from nemik._typing import TYPE_CHECKING\n"
+                "if TYPE_CHECKING:\n    import hashlib\n"
+            ),
+            "b.py": (
+                "from typing import TYPE_CHECKING\n"
+                "if TYPE_CHECKING:\n    import hashlib\n"
+            ),
+        },
+    )
+    walls = _walls(tmp_path)
+    assert walls["a"] == []
+    assert walls["b"] == [TYPE_CHECKING]
+
+
 def test_the_else_branch_of_the_typing_guard_is_read(tmp_path: Path) -> None:
     """The else branch runs at run time, so an import there counts."""
     _package(

@@ -3,9 +3,12 @@
 """nemik:W780: nemik-serve shows the host-root frontier from nemik-hostroot's file."""
 
 from datetime import UTC, datetime, timedelta
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 from nemik.serve import Model
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 STAMP = "%Y-%m-%dT%H:%M:%SZ"
 

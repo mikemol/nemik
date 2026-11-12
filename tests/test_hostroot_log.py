@@ -2,12 +2,16 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W948: nemik-hostroot --log-activities writes nemik's wait activities, or says why not."""
 
-from pathlib import Path
+
+from typing import TYPE_CHECKING
 
 from nemik.ask import quoted
 from nemik.hostroot_cli import main
 from nemik.logactivities import read_log
 from nemik.waitlog import activity
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 FIRST = 1_700_000_000_000_000_000
 SECOND = FIRST + 60_000_000_000

@@ -7,12 +7,15 @@ nemik:W77).
 """
 
 import json
-from collections.abc import Iterator
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 import pytest
 import webpage
 from playwright.sync_api import sync_playwright
+
+if TYPE_CHECKING:
+    from collections.abc import Iterator
+    from pathlib import Path
 
 VIEWPORT = (1400, 900)
 LOADED = "() => typeof cy !== 'undefined' && cy && cy.nodes('[symbol]').length > 0"

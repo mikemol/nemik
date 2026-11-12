@@ -14,13 +14,13 @@ from typing import TYPE_CHECKING, NamedTuple, cast
 
 import pytest
 from mikemol.webpage.page import PageBrokenError
+from playwright.sync_api import Browser, ViewportSize
 
 from nemik import pdf
 
 if TYPE_CHECKING:
     from collections.abc import Callable
 
-    from playwright.sync_api import Browser, ViewportSize
 
 CHANGED = "net::ERR_NETWORK_CHANGED"
 REFUSED = "net::ERR_CONNECTION_REFUSED"

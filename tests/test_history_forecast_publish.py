@@ -4,14 +4,18 @@
 
 from datetime import UTC, datetime
 from http import HTTPStatus
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 import pytest
 
-from nemik.cardevents import Event
 from nemik.histdocs import decode
 from nemik.history import main
 from nemik.serve import history_response
+
+if TYPE_CHECKING:
+    from pathlib import Path
+
+    from nemik.cardevents import Event
 
 ROW = ["alpha:W1", "2026-10-22T10:00:00+00:00", "+1", "0.5"]
 

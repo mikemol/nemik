@@ -2,10 +2,14 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W1179: adoption judges a parsed pyproject, and check reads the repo for it."""
 
-from pathlib import Path
+
+from typing import TYPE_CHECKING
 
 from nemik import adoption
 from nemik.check import adoption_state
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 PACKAGE = adoption.PACKAGE
 

@@ -4,10 +4,13 @@
 
 import json
 from datetime import date
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 from nemik.pendingdeliver import since_day, sweep
 from nemik.witnesses import RECORD
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 TODAY = date(2026, 10, 23)
 

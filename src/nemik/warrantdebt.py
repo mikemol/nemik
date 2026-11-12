@@ -13,11 +13,13 @@ cards; a repo absent from the table has a baseline of zero.
 import tomllib
 from collections import Counter
 from importlib.resources import files
-
-from rdflib import Graph
+from typing import TYPE_CHECKING
 
 from nemik.adapter import NEMIK
 from nemik.blocks import ref
+
+if TYPE_CHECKING:
+    from rdflib import Graph
 
 
 def baseline(text: str | None = None) -> dict[str, int]:

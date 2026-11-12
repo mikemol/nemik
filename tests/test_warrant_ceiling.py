@@ -3,12 +3,15 @@
 """nemik:W608: nemik-check warns on a repo whose warrant debt is above its declared ceiling."""
 
 import json
-from pathlib import Path
-
-from rdflib import Graph
+from typing import TYPE_CHECKING
 
 from nemik.adapter import queue_graph
 from nemik.warrantdebt import baseline, findings
+
+if TYPE_CHECKING:
+    from pathlib import Path
+
+    from rdflib import Graph
 
 PACKAGED_DEBT = 72
 

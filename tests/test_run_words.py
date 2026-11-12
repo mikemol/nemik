@@ -3,12 +3,15 @@
 """nemik:W555: lifecycle words in a run row's detail are flagged, as in a card's next step."""
 
 import json
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 from nemik.adapter import stray_words
 from nemik.check import shapes
 from nemik.runlogs import runs_graph
 from nemik.shaclinc import findings
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 ROW: dict[str, object] = {
     "ts": "2026-10-16T00:09:04Z",

@@ -83,10 +83,10 @@ from nemik.realize import runtime_valid, verdicts
 from nemik.rolls import idle_run, stalled
 from nemik.say import say
 from nemik.shaclinc import findings as shacl_findings
+from nemik.shims.work_cli import in_gate
 from nemik.tomlview import table
 from nemik.wake import parse_args as wake_args
 from nemik.wake import report as wake_report
-from nemik.work import in_gate
 from nemik.workrows import NO_BOUND, ready_stamps, small_done_stamps, upper_quantile
 
 if TYPE_CHECKING:
@@ -605,8 +605,8 @@ def adoption_state(queue_path: Path) -> str:
     repo = queue_path.parents[1]
     for sub in repo.glob("*/pyproject.toml"):
         try:
-            owned: dict[str, object] = tomllib.loads(sub.read_text())
-        except (OSError, tomllib.TOMLDecodeError):
+            owned: dict[str, object] = tomllib.loads(sub.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
             continue
         if adoption.owns(owned):
             return "owner"
@@ -614,8 +614,8 @@ def adoption_state(queue_path: Path) -> str:
     if not py.exists():
         return "no-pyproject"
     try:
-        doc: dict[str, object] = tomllib.loads(py.read_text())
-    except (OSError, tomllib.TOMLDecodeError):
+        doc: dict[str, object] = tomllib.loads(py.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
         return "missing"
     return "declared" if adoption.declares(doc) else "missing"
 

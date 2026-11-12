@@ -2,9 +2,13 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W594: nemik-replica reads the result line and the pushed sha from a .git directory."""
 
-from pathlib import Path
+
+from typing import TYPE_CHECKING
 
 from nemik.replica_cli import pushed_sha, report, run, shipped
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 SHA = "c" * 40
 

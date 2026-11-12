@@ -5,7 +5,7 @@
 import json
 from fractions import Fraction
 from importlib.resources import files
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 import pytest
 from rdflib import Graph
@@ -23,6 +23,9 @@ from nemik.flow import solve
 from nemik.index import downstream_weight as graph_weight
 from nemik.index import ref_of, successors
 from nemik.score import Weights, load_weights
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 LOCAL, PEER, PEER_BLOCKED = 5, 3, 2
 CYCLE_LEN = 2

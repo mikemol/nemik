@@ -9,15 +9,18 @@ no children at all has nothing to count, so it is reported as unforecastable, ne
 """
 
 from datetime import datetime, timedelta
-from pathlib import Path
-
-from rdflib import Graph
-from rdflib.term import Node
+from typing import TYPE_CHECKING
 
 from nemik import history
 from nemik.adapter import NEMIK, OSLC_CM
 from nemik.blocks import ref
 from nemik.queuefiles import QUEUE, workstream_files
+
+if TYPE_CHECKING:
+    from pathlib import Path
+
+    from rdflib import Graph
+    from rdflib.term import Node
 
 WINDOW_DAYS = 14  # the close rate is read over this many days
 UMBRELLA = 2  # open children that make a card an umbrella

@@ -4,15 +4,19 @@
 
 import json
 import time
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 import pytest
-from rdflib import Graph
 
 from nemik.adapter import queue_graph
 from nemik.check import wake_main as main
 from nemik.luthenseries import parse
 from nemik.wake import series_lines
+
+if TYPE_CHECKING:
+    from pathlib import Path
+
+    from rdflib import Graph
 
 AS_OF = 1_793_000_000
 STAMP = "2026-10-26T07:33:20Z"

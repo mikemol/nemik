@@ -16,10 +16,10 @@ from mikemol.otlp.logs import Entry, request
 from mikemol.otlp.metrics import resource_here
 from mikemol.otlp.sender import LOGS_PATH, Post, SendError, post, send
 
-from nemik.waitrows import Oldest
-
 if TYPE_CHECKING:
     from google.protobuf.message import Message
+
+    from nemik.waitrows import Oldest
 
 ENDPOINT = "victorialogs-http"
 SERVICE = "nemik-waits"

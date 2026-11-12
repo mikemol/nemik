@@ -3,12 +3,15 @@
 """nemik:W565: the run logs luthen publishes become activities, and the source counts ride along."""
 
 import json
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 from rdflib import RDF
 from rdflib.namespace import PROV
 
 from nemik.runlogs import runs_graph, unmigrated_at_source
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 ROW = {
     "ts": "2026-10-16T00:09:04Z",

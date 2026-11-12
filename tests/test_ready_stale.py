@@ -3,12 +3,15 @@
 """nemik:W489, github:R28: nemik_ready_stale counts each repo's stale ready cards, 0 where none."""
 
 from datetime import UTC, datetime
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 import pytest
 
 from nemik import metrics
 from nemik.metrics import ready_stale_lines
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 NOW = datetime(2030, 1, 2, 12, 0, tzinfo=UTC)
 WEEK = 7 * 86400.0

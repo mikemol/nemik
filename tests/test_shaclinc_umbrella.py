@@ -2,13 +2,17 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W625: a kid's change must re-judge the umbrella and the waiter two hops away."""
 
+from typing import TYPE_CHECKING
+
 from rdflib import RDF, Graph
-from rdflib.term import Node
 
 from nemik.adapter import NEMIK, OSLC_CM, waypoint_uri, workstream_uri
 from nemik.blocks import annotate
 from nemik.check import shapes
 from nemik.shaclinc import findings
+
+if TYPE_CHECKING:
+    from rdflib.term import Node
 
 
 def _card(g: Graph, repo: str, symbol: str, state: Node) -> Node:

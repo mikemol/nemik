@@ -12,7 +12,11 @@ would read as live. docs/luthen-series.md has the design.
 """
 
 import json
-from pathlib import Path
+
+from nemik._typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 VERSION = 1
 NO_TICK = -1

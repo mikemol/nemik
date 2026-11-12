@@ -3,7 +3,7 @@
 """nemik:W714: the plain-edge ready-behind-open flag equals blocks.ready_behind_open."""
 
 import json
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 from rdflib import Graph
 
@@ -11,6 +11,9 @@ from nemik.adapter import NEMIK, OSLC_CM, queue_graph
 from nemik.blocks import ready_behind_open as graph_flag
 from nemik.cardflags import ready_behind_open
 from nemik.index import ref_of
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 
 def _card(symbol: str, status: str, enables: list[str]) -> dict[str, object]:

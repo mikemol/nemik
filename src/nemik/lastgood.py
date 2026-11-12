@@ -11,7 +11,11 @@ absent. Only os and pathlib, no shutil, so the Codon census compiles it.
 """
 
 import os
-from pathlib import Path
+
+from nemik._typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 LAST = "last-good"
 # the new copy and the one before it, so a reader of the old link keeps its files

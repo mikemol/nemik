@@ -154,15 +154,29 @@ def _constructs(node: ast.AST) -> set[str]:
     return found
 
 
+def _local_guard(tree: ast.AST) -> bool:
+    # True when the module takes TYPE_CHECKING from nemik._typing, a plain constant Codon compiles
+    # (typing.TYPE_CHECKING is a name the pinned Codon cannot import), nemik:W2125.
+    return any(
+        isinstance(node, ast.ImportFrom)
+        and node.module == f"{PACKAGE}._typing"
+        and any(alias.name == TYPE_CHECKING for alias in node.names)
+        for node in ast.walk(tree)
+    )
+
+
 def _guarded(tree: ast.AST) -> tuple[set[int], set[str]]:
-    # The ids of every node in the body of `if TYPE_CHECKING:`, and the guard itself as a wall.
+    # The ids of every node in the body of `if TYPE_CHECKING:`, and the guard itself as a wall,
+    # unless the module took the guard from the local module.
     # The else branch runs at run time, so it is read like any other code.
     skipped: set[int] = set()
     walls: set[str] = set()
     names = {TYPE_CHECKING, f"typing.{TYPE_CHECKING}"}
+    local = _local_guard(tree)
     for node in ast.walk(tree):
         if isinstance(node, ast.If) and ast.unparse(node.test) in names:
-            walls.add(TYPE_CHECKING)
+            if not local:
+                walls.add(TYPE_CHECKING)
             skipped.update(id(inner) for s in node.body for inner in ast.walk(s))
     return skipped, walls
 

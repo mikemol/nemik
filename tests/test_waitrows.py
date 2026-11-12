@@ -3,7 +3,7 @@
 """nemik:W875, W883: the graph's cross-repo wait edges become waitseries rows."""
 
 import json
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 from rdflib import Graph
 
@@ -11,6 +11,9 @@ from nemik.adapter import queue_graph
 from nemik.score import Weights
 from nemik.waitrows import UNRANKED, blocker_positions, wait_edges, wait_rows
 from nemik.waitseries import samples
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 EXCLUDED_AGES = {3, 4, 5, 9}
 W5_TICKS, W6_TICKS, W11_TICKS = 7, 2, 6

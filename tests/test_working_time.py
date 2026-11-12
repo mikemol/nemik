@@ -3,10 +3,13 @@
 """nemik:W485: where a repo's working ticks went, by directed, leaf and interior cards."""
 
 import json
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 from nemik.metrics import working_tick_lines
 from nemik.workrows import tick_kinds, working_rows
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 TICKS = [
     ("2026-10-18T10:00:00Z", "W1"),

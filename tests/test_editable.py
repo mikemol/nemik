@@ -3,11 +3,14 @@
 """nemik.adapter.editable_install tells an editable install from a package install."""
 
 import json
-from collections.abc import Callable
+from typing import TYPE_CHECKING
 
 import pytest
 
 from nemik import adapter
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
 
 
 class _Dist:

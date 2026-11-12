@@ -2,9 +2,13 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W1112: a card minted after the last commit shows in a window at once."""
 
-from pathlib import Path
+
+from typing import TYPE_CHECKING
 
 from nemik.history import QueueDoc, burn_counts, live_queue
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 COMMITTED: QueueDoc = {
     "waypoints": [{"symbol": "W1", "status": "ready"}],

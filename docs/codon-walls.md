@@ -77,3 +77,36 @@ So the work is a campaign over about seven kinds before the first fourteen rows 
 above is by how many closures a kind sits in; a cheaper order may exist and is a question for a
 measurement, not a conclusion. This is a static bound from imports, so it overstates what compiles:
 a freed row can still fail on a type error, as `apischema.load` still does (nemik:W2049).
+
+## Constructs the compiler refuses that the import table does not see (nemik:W2125, W2140)
+
+`codon-walls.json` counts import walls. Probing `work` (the one module with a single recorded wall)
+with the pinned Codon, with its `mikemol.procrun` import stubbed and its `__future__` import removed,
+found two more, one at a time:
+
+1. `int | None` as an annotation: "unsupported operand type(s) for |: 'type[int]' and
+   'Optional[T.8]'". Three signatures in `work.py` had it.
+2. A `json.loads` result bound to `object`: "'object' does not match expected type 'JSON'" (four
+   sites).
+
+**Rule: no optional parameter or return types on the Codon path.** No single spelling passes all
+three tools: Codon rejects `X | None` and cannot import `TypeVar` (so no generic `Opt[X]` alias, even
+behind `if TYPE_CHECKING:`, which Codon does not skip), mypy rejects a bare alias `Opt = Optional`
+("not valid as a type"), and ruff's UP045 refuses `Optional[X]`. So "absent" is a value of the plain
+type. The compile-ready modules already do this, by a named integer sentinel: `NO_TICK = -1`
+(`luthenseries`), `NO_CUTOFF = -1` (`letters`), and now `NO_LIMIT = -1` (`work`: no limit, not a new
+wall-clock limit, and not 0 because `subprocess` reads a timeout of 0 as "expire at once"). `None` appears in them only as an expression, as a `dict.get`
+result (`floorasks`, `luthenseries`), never in a signature.
+
+**Limit of the `nemik/_typing.py` shim.** Codon compiles a dead `if TYPE_CHECKING:` branch, so the
+shim only works where the guarded imports themselves resolve in Codon (stdlib names, as in `cones`). A
+guarded third-party or Codon-missing import still walls the module.
+
+**A wall moved into a shim is not a wall removed (nemik:W2125, W2140).** `work` compiles because the
+lookup of the tools beside `sys.executable`, which Codon's `sys` lacks, moved into
+`nemik/shims/work_cli.py`, a CPython-only entry layer the census does not stage and the wall table does
+not count (it counts import lines and a few constructs, not attribute accesses). Both instruments see the
+fall and neither sees the moved code. Rule: a wall may move into a shim only when the shim is on a
+declared list, with the reason each is not compiled, that the census probes (its first error recorded as
+data) and the incidence tool counts. Until that exists, a stack that relocates a wall says so in its body
+and gives the net count with the shim's walls included.

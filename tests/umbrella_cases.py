@@ -3,13 +3,15 @@
 """nemik:W529: read what UmbrellaBlockShape names, for the tests that build umbrella graphs."""
 
 from itertools import count
-
-from rdflib import Graph
-from rdflib.term import Node
+from typing import TYPE_CHECKING
 
 from nemik.blocks import annotate
 from nemik.check import shapes
 from nemik.shaclinc import findings
+
+if TYPE_CHECKING:
+    from rdflib import Graph
+    from rdflib.term import Node
 
 _KEYS = count()
 

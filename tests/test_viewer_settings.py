@@ -2,11 +2,14 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W471: viewer settings (follow focus, single-key shortcuts), remembered per viewer."""
 
-from collections.abc import Generator
 from contextlib import contextmanager
+from typing import TYPE_CHECKING
 
 import webpage
 from playwright.sync_api import Page, sync_playwright
+
+if TYPE_CHECKING:
+    from collections.abc import Generator
 
 STATE = """() => ({
   follow: document.getElementById('followFocus').checked,

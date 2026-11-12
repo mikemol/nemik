@@ -21,13 +21,17 @@ stops at the outbox document.
 """
 
 import json
-from pathlib import Path
+from typing import TYPE_CHECKING
 
-from rdflib import Graph
 from rdflib.namespace import DCTERMS
 
 from nemik.adapter import NEMIK, OSLC_CM, workstream_uri
 from nemik.logactivities import read_log
+
+if TYPE_CHECKING:
+    from pathlib import Path
+
+    from rdflib import Graph
 
 CONTEXT = ["https://www.w3.org/ns/activitystreams", "https://forgefed.org/ns"]
 LOG_KEYS = ("id", "type", "actor", "object", "target", "content", "published")

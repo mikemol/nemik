@@ -2,7 +2,7 @@
 name = "nemik"
 version = "0.0.0"
 description = "Standards-first project management over federated agent workstreams: OSLC state, ForgeFed messages."
-requires-python = ">=3.13"
+requires-python = ">=3.14"
 dependencies = [
     "rdflib>=7",
     "pyshacl>=0.26",
@@ -51,7 +51,7 @@ nemik-calendar-write = "nemik.calwrite:main"
 nemik-history = "nemik.history:main"
 nemik-pins = "nemik.pins:main"
 nemik-critical = "nemik.check:critical_main"
-nemik-work = "nemik.work:main"
+nemik-work = "nemik.shims.work_cli:cli"
 nemik-starved = "nemik.starved:main"
 nemik-replica = "nemik.replica_cli:main"
 nemik-ask = "nemik.ask_cli:main"

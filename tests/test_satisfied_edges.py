@@ -3,10 +3,12 @@
 """nemik:W56: edges from done work are marked satisfied; open_blockers counts the rest."""
 
 import json
-from pathlib import Path
-from typing import TypedDict
+from typing import TYPE_CHECKING, TypedDict
 
 from nemik.serve import Model
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 
 class _Edge(TypedDict):

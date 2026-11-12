@@ -3,12 +3,15 @@
 """Tests for waitrows.oldest_waits: the longest-waiting card of each pair of repos (nemik:W886)."""
 
 import json
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 from rdflib import Graph
 
 from nemik.adapter import queue_graph
 from nemik.waitrows import oldest_waits
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 LONGEST = 7
 SHORTER = 2

@@ -3,14 +3,18 @@
 """nemik:W602: what nemik writes as iCalendar parses by the standard's reader, whole."""
 
 import json
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 from icalendar import Calendar
 
 from nemik.adapter import queue_graph
-from nemik.blocks import AskRow
 from nemik.calwrite import feed
 from nemik.vtodo import calendar, vtodos
+
+if TYPE_CHECKING:
+    from pathlib import Path
+
+    from nemik.blocks import AskRow
 
 TITLE = "trip; to, the lake \\ " + "x" * 120
 ASK: AskRow = {

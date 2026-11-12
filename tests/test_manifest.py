@@ -3,9 +3,8 @@
 """nemik:W154: the field manifest covers every field the export renders and flags a new one."""
 
 import json
-from collections.abc import Iterator
 from pathlib import Path
-from typing import Protocol
+from typing import TYPE_CHECKING, Protocol
 
 import pytest
 
@@ -14,6 +13,9 @@ from nemik.rank import goals
 from nemik.score import load_weights
 from nemik.serve import Model
 from nemik.wake import operator_row, read_liveness, roster
+
+if TYPE_CHECKING:
+    from collections.abc import Iterator
 
 FLEET = Path(__file__).parent / "fixtures" / "fleet"
 

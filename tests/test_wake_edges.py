@@ -3,9 +3,12 @@
 """nemik:W851: waking a finished witnessed card sends every cross-repo edge its letter, once."""
 
 import json
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 from nemik.witnesses import RECORD, wake
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 ALPHA: dict[str, list[dict[str, object]]] = {
     "waypoints": [

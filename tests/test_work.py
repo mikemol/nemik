@@ -7,7 +7,7 @@ from __future__ import annotations
 import json
 from typing import TYPE_CHECKING
 
-from nemik.work import blockers, main, plan, working
+from nemik.work import Env, blockers, main, plan, working
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -16,6 +16,8 @@ if TYPE_CHECKING:
 
 
 EXIT_REFUSED = 2
+# A dry run never starts the writer, so neither directory is looked in.
+ENV = Env("/nonexistent", "/nonexistent")
 
 
 def _queue(tmp_path: Path) -> Path:
@@ -54,10 +56,11 @@ def test_a_card_with_open_blockers_is_refused_and_a_landed_one_goes_through(
 ) -> None:
     """A card with open blockers is refused and a landed one goes through."""
     state = _queue(tmp_path)
-    assert main(["W4", "--state", str(state), "--dry-run"]) == EXIT_REFUSED
+    refused = main(["W4", "--state", str(state), "--dry-run"], ENV)
+    assert refused == EXIT_REFUSED
     assert "blocked on W2, other:W7" in capsys.readouterr().err
-    assert main(["W4", "--state", str(state), "--dry-run", "--force"]) == 0
-    assert main(["W5", "--state", str(state), "--dry-run"]) == 0
+    assert main(["W4", "--state", str(state), "--dry-run", "--force"], ENV) == 0
+    assert main(["W5", "--state", str(state), "--dry-run"], ENV) == 0
     assert "cleared landed blocker(s): W1" in capsys.readouterr().out
 
 

@@ -2,13 +2,17 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W637: a change to a predicate no shape reads re-judges nothing."""
 
+from typing import TYPE_CHECKING
+
 import pytest
 from rdflib import Graph, Literal, URIRef
-from rdflib.term import Node
 
 from nemik.adapter import BASE, NEMIK
 from nemik.check import shapes
 from nemik.shaclinc import Result, findings, watched_predicates
+
+if TYPE_CHECKING:
+    from rdflib.term import Node
 
 
 def test_the_real_shapes_do_not_read_queue_position() -> None:

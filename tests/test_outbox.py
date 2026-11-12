@@ -3,12 +3,15 @@
 """nemik:W354: a repo's cards render as a read-only ForgeFed outbox."""
 
 import json
-from pathlib import Path
-
-from rdflib import Graph
+from typing import TYPE_CHECKING
 
 from nemik.adapter import queue_graph, waypoint_uri
 from nemik.outbox import outbox
+
+if TYPE_CHECKING:
+    from pathlib import Path
+
+    from rdflib import Graph
 
 
 def _queue(tmp_path: Path) -> Graph:

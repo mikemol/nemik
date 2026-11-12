@@ -22,7 +22,7 @@ single_version_override(
 )
 
 python = use_extension("@rules_python//python/extensions:python.bzl", "python")
-python.toolchain(python_version = "3.13", is_default = True)
+python.toolchain(python_version = "3.14", is_default = True)
 
 # nemik:W102: the dev closure is read from uv.lock itself, so the host and Bazel resolve one lock
 # (paperkit from its git pin via the patch above). mikemol-pathsforward is a local-path wheel in the
@@ -31,7 +31,7 @@ python.toolchain(python_version = "3.13", is_default = True)
 pip = use_extension("@rules_python//python/extensions:pip.bzl", "pip")
 pip.parse(
     hub_name = "nemik_dev",
-    python_version = "3.13",
+    python_version = "3.14",
     uv_lock = "//:uv.lock",
 )
 use_repo(pip, "nemik_dev")

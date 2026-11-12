@@ -2,9 +2,13 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W1086: a pod with no snapshot of its own serves the last good one kept on the claim."""
 
-from pathlib import Path
+
+from typing import TYPE_CHECKING
 
 from nemik.lastgood import KEEP, LAST, restore, save
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 KEY = "source-key"
 

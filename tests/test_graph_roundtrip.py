@@ -3,12 +3,15 @@
 """nemik:W531: the graph nemik serves as Turtle or N-Triples parses back to the same graph."""
 
 import json
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 from rdflib import Graph
 from rdflib.compare import isomorphic
 
 from nemik.adapter import queue_graph
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 
 def _graph(tmp_path: Path) -> Graph:

@@ -4,11 +4,14 @@
 
 import json
 import os
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 import pytest
 
 from nemik.exportcli import main
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 QUEUE: dict[str, list[dict[str, object]]] = {
     "waypoints": [

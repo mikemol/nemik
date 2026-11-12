@@ -3,10 +3,13 @@
 """nemik:W751: nemik-serve shows the commit landings from nemik-hostroot --landings' file."""
 
 from datetime import UTC, datetime, timedelta
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 from nemik.landings import Landing, document
 from nemik.serve import Model
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 STAMP = "%Y-%m-%dT%H:%M:%SZ"
 ROWS = [

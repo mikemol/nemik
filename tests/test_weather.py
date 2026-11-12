@@ -3,11 +3,14 @@
 """nemik:W174: waypoints with one witness query share one weather id; the query stays private."""
 
 import json
-from pathlib import Path
-
-from rdflib import Graph
+from typing import TYPE_CHECKING
 
 from nemik.adapter import NEMIK, queue_graph, waypoint_uri
+
+if TYPE_CHECKING:
+    from pathlib import Path
+
+    from rdflib import Graph
 
 
 def _q(tmp_path: Path, repo: str, witnesses: list[str | None]) -> Graph:

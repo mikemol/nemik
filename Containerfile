@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1.7
 # nemik-serve: read-only graph view. Mount the export (<repo>/paths-forward.{json,ledger}) read-only at /export.
-ARG BASE=ghcr.io/astral-sh/uv:python3.13-bookworm-slim
+ARG BASE=ghcr.io/astral-sh/uv:python3.14-bookworm-slim
 # nemik:W703: which stage the final one takes the gate marker from (`test`, or `gated` when the commit
 # gate already ran on this tree). It must be a global ARG (before the first FROM) because only a
 # `FROM` expands it; a variable in a `COPY --from` fails the whole build ("failed to parse stage name").

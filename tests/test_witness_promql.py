@@ -12,7 +12,7 @@ undefined when the probe cannot answer: unknown is never false.
 """
 
 import json
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 import pytest
 
@@ -25,6 +25,9 @@ from nemik.witnesses import (
     rego_poll,
     witness,
 )
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 # luthen-observability:W1054's witness, verbatim
 EXECUTOR_LOAD = (

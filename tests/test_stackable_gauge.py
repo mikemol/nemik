@@ -3,13 +3,16 @@
 """nemik:W613: nemik_stackable counts the ready cards one commit stack can carry now."""
 
 import json
-from pathlib import Path
-
-from rdflib import Graph
+from typing import TYPE_CHECKING
 
 from nemik import metrics
 from nemik.adapter import queue_graph
 from nemik.stackable import stackable_count
+
+if TYPE_CHECKING:
+    from pathlib import Path
+
+    from rdflib import Graph
 
 
 def _fleet(root: Path) -> Graph:

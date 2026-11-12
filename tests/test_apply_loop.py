@@ -3,12 +3,15 @@
 """nemik:W1263: a card whose evidence has an 'apply loop cannot:' line says so in the graph."""
 
 import json
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 from rdflib import Literal
 from rdflib.namespace import XSD
 
 from nemik.adapter import NEMIK, apply_loop_cannot, queue_graph
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 
 def test_a_line_with_a_reason_counts() -> None:

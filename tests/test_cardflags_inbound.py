@@ -2,7 +2,8 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W972: the inbound waits and unclaimed blocks, from plain edges, on a two-repo fleet."""
 
-from pathlib import Path
+
+from typing import TYPE_CHECKING
 
 from queue_cases import make_card, write_queue
 from rdflib import RDF, Graph
@@ -11,6 +12,9 @@ from rdflib.namespace import PROV
 from nemik.adapter import BASE, NEMIK, OSLC_CM
 from nemik.cardflags import inbound_rows, unclaimed_blocks
 from nemik.index import ref_of
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 Plain = dict[str, list[str]]
 EXPECTED = [

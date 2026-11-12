@@ -3,12 +3,15 @@
 """nemik:W343: a card says what it wants and who else may deliver it, and the graph carries it."""
 
 import json
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 from rdflib import Graph, Literal
 
 from nemik.adapter import NEMIK, queue_graph, reference_uri, waypoint_uri
 from nemik.serve import suppliers_of
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 
 def test_the_served_card_lists_its_suppliers_as_citations(tmp_path: Path) -> None:

@@ -4,13 +4,16 @@
 
 from datetime import UTC, datetime
 from http import HTTPStatus
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 import pytest
 
 from nemik.histdocs import decode
 from nemik.history import main
 from nemik.serve import history_response
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 COMMITS = (
     "2026-10-20T10:00:00+00:00\n2026-10-21T10:00:00+00:00\n2026-10-22T10:00:00+00:00\n"

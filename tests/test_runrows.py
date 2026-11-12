@@ -3,7 +3,7 @@
 """nemik:W558: run rows become activities, and the reader's verdicts are jsonschema's."""
 
 import json
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 import jsonschema
 import pytest
@@ -11,6 +11,9 @@ from rdflib import RDF
 from rdflib.namespace import PROV
 
 from nemik.runrows import SCHEMA, run_graph, valid
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 GOOD = {
     "ts": "2026-10-16T00:09:04Z",

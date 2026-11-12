@@ -3,10 +3,13 @@
 """nemik:W779: nemik-hostroot writes the newest row of each resource, or says why it cannot."""
 
 import json
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 from nemik.hostroot import read_document
 from nemik.hostroot_cli import main
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 OLD = (
     '{"as_of": "2026-10-20T10:00:00Z", "gate": "", "id": "a", "reading": "r", '

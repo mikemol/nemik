@@ -4,10 +4,13 @@
 
 import json
 from http import HTTPStatus
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 from nemik.letters import report
 from nemik.serve import Model
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 EMPTY: dict[str, list[dict[str, object]]] = {"waypoints": []}
 

@@ -10,8 +10,11 @@ a last line for openapi.json; key order is the order the dicts had, so the text 
 trailing text, a missing section, a section that is not an object, or an unknown class.
 """
 
-from nemik.jsonarena import Tree
+from nemik._typing import TYPE_CHECKING
 from nemik.jsonparse import Parser
+
+if TYPE_CHECKING:
+    from nemik.jsonarena import Tree
 
 DIALECT = "https://json-schema.org/draft/2020-12/schema"
 NULLABLE = {

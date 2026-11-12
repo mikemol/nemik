@@ -3,10 +3,13 @@
 """nemik:W551: the change-lifecycle scheme names five steps, each defined and witnessed."""
 
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 from rdflib import Graph, URIRef
 from rdflib.namespace import RDF, SKOS
-from rdflib.term import Node
+
+if TYPE_CHECKING:
+    from rdflib.term import Node
 
 NEMIK = "https://github.com/mikemol/nemik/ns#"
 DATA = Path(__file__).resolve().parents[1] / "src" / "nemik" / "data" / "nemik.ttl"

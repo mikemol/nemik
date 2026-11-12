@@ -10,14 +10,16 @@ leaves (dG) and what they wait on outside (ddG) must be the same set, card for c
 
 import re
 from pathlib import Path
-
-from rdflib import Graph
-from rdflib.term import Node
+from typing import TYPE_CHECKING
 
 from nemik.adapter import BASE, NEMIK, OSLC_CM
 from nemik.index import open_card, ref_of, repo_of
 from nemik.rank import frontier
 from nemik.serve import Model
+
+if TYPE_CHECKING:
+    from rdflib import Graph
+    from rdflib.term import Node
 
 FLEET = Path(__file__).parent / "fixtures" / "fleet"
 MIN_GOALS = 10

@@ -3,11 +3,14 @@
 """nemik:W853: nemik-serve answers /oldest.json with the rows nemik-history --oldest prints."""
 
 import json
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 from nemik.history import oldest_rows
 from nemik.queuefiles import QUEUE, workstream_files
 from nemik.serve import DOC_ROUTES, OLDEST_SHOWN, Model
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 ALPHA: dict[str, list[dict[str, object]]] = {
     "waypoints": [

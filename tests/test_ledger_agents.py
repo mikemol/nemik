@@ -2,12 +2,16 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W530: a ledger line's session is a prov:Agent the line's activity is associated with."""
 
-from pathlib import Path
+
+from typing import TYPE_CHECKING
 
 from rdflib import URIRef
 from rdflib.namespace import PROV, RDF
 
 from nemik.adapter import OPERATOR, ledger_graph
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 SESSION = "695f3e0a-d36f-4080-9c67-7548978cd99e"
 STAMPED = '2026-10-19T10:00:00Z  tick  W7  advanced  unblock  "a note"'

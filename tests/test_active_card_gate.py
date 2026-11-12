@@ -2,13 +2,17 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W633: a card that a queued or gating commit stack names counts as working."""
 
+from typing import TYPE_CHECKING
+
 from rdflib import Graph, Literal
-from rdflib.term import Node
 
 from nemik.adapter import NEMIK, OSLC_CM, STATE, waypoint_uri, workstream_uri
 from nemik.blocks import annotate
 from nemik.check import shapes
 from nemik.shaclinc import findings
+
+if TYPE_CHECKING:
+    from rdflib.term import Node
 
 
 def _repo(g: Graph, *, gating: tuple[str, ...]) -> Node:

@@ -2,12 +2,16 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W1043: nemik-rank reads the graphs and never asks the survey for its findings."""
 
-from collections.abc import Iterator
-from pathlib import Path
+
+from typing import TYPE_CHECKING
 
 import pytest
 
 from nemik import rank
+
+if TYPE_CHECKING:
+    from collections.abc import Iterator
+    from pathlib import Path
 
 
 def test_the_ranking_asks_the_survey_for_graphs_only(

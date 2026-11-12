@@ -203,9 +203,11 @@ def _venv_impl(ctx):
 # is what keeps `bazel-bin`'s exec_prefix warning away, as in the launchers); Python reads the same
 # lines as one string literal and skips them. So a direct run and `python3 bin/<entry>` — the form
 # the tracked launchers use from `$CLAUDE_PROJECT_DIR` — both reach one interpreter.
-# ⚑ The `sys.path` line makes the venv's own site-packages reachable when
+# ⚑ The `sys.path` lines make the site-packages of the RUNNING interpreter's version reachable when
 # the script is run by an interpreter that is not this venv's, which is what lets one launcher
-# serve a venv whose absolute location is only known at run time.
+# serve a venv whose absolute location is only known at run time. They take that one directory only
+# (nemik:W2137): another interpreter's lib/pythonX.Y, left by an earlier build, is never put on the
+# path, and a venv with no directory for the running interpreter refuses, naming what it holds.
 _CONSOLE_SCRIPT = """\
 #!/bin/sh
 '''exec' "$(dirname -- "$(readlink -f -- "$0")")/python3" "$(readlink -f -- "$0")" "$@"
@@ -217,9 +219,15 @@ import sys
 from pathlib import Path
 
 _site = Path(__file__).parent.parent / "lib"
-for _libdir in sorted(_site.glob("python*/site-packages")):
-    if str(_libdir) not in sys.path:
-        sys.path.insert(0, str(_libdir))
+# nemik:W2137: only the running interpreter's own directory. A leftover lib/python3.13 beside
+# lib/python3.14 (an earlier build in the same output base) must not stay importable, and a venv
+# with no directory for this interpreter does not belong to it: refuse, naming what is there.
+_own = _site / ("python%d.%d" % sys.version_info[:2]) / "site-packages"
+if not _own.is_dir():
+    _have = sorted(str(p) for p in _site.glob("python*/site-packages"))
+    sys.exit("no %s for this interpreter; the venv holds %s" % (_own, _have))
+if str(_own) not in sys.path:
+    sys.path.insert(0, str(_own))
 
 from {module} import {function}
 

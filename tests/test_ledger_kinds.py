@@ -2,10 +2,14 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W698: the writer's status lines are bookkeeping and leave toil_share where it was."""
 
-from pathlib import Path
+
+from typing import TYPE_CHECKING
 
 from nemik.adapter import KIND_CLASS, NEMIK, ledger_graph
 from nemik.history import toil
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 LINES = (
     '2026-10-12T10:00:00Z  tick  W1  advanced  unblock  "worked"  evidence=commit abc1234\n'

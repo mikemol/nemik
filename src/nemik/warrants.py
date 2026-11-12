@@ -13,10 +13,13 @@ marks the card.
 
 import json
 import tomllib
-from collections.abc import Mapping
 from importlib.resources import files
+from typing import TYPE_CHECKING
 
-from rdflib import Graph
+if TYPE_CHECKING:
+    from collections.abc import Mapping
+
+    from rdflib import Graph
 
 
 def ruling_words(text: str | None = None) -> list[str]:

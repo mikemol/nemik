@@ -9,11 +9,14 @@ Tasks) joins MEMBERS once the operator supplies its read-only token.
 """
 
 from collections.abc import Callable
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 import pytest
 
 from nemik.connectors import Connector, Credential
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 Item = tuple[str, str]  # (source id, text)
 Sink = Callable[[str, str], None]

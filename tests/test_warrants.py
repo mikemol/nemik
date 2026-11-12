@@ -4,7 +4,7 @@
 
 import copy
 import json
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 from rdflib import Graph, URIRef
 from rdflib.namespace import PROV
@@ -12,6 +12,9 @@ from rdflib.namespace import PROV
 from nemik.adapter import OPERATOR, queue_graph, waypoint_uri
 from nemik.check import shapes
 from nemik.shaclinc import findings
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 RECORD = URIRef("file:///t/s.jsonl#a74e004d-6a0c-4f99-897b-cc174b1ee8a4")
 # the shape of `mikemol-paths-forward --warrant` output (mtools a9d4080), one human record

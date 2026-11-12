@@ -3,13 +3,16 @@
 """nemik:W487: an open card with no edge at all is named; one with any edge is not."""
 
 import json
-from pathlib import Path
-
-from rdflib import Graph
+from typing import TYPE_CHECKING
 
 from nemik.adapter import queue_graph, waypoint_uri
 from nemik.check import shapes
 from nemik.shaclinc import findings
+
+if TYPE_CHECKING:
+    from pathlib import Path
+
+    from rdflib import Graph
 
 
 def _queue(tmp_path: Path, cards: list[dict[str, object]]) -> Graph:

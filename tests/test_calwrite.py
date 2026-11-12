@@ -3,13 +3,17 @@
 """nemik:W197 (life's ask): dated waypoints as VEVENTs with a stable UID, ready to write."""
 
 import json
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 import pytest
-from rdflib import Graph
 
 from nemik.adapter import queue_graph
 from nemik.calwrite import event_times, events, feed, uid
+
+if TYPE_CHECKING:
+    from pathlib import Path
+
+    from rdflib import Graph
 
 TWO_EVENTS = 2
 FOLD_LIMIT = 75

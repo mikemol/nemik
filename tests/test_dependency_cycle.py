@@ -5,13 +5,16 @@
 import json
 import tempfile
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 from rdflib import Graph
-from rdflib.term import Node
 
 from nemik.adapter import NEMIK, OSLC_CM, waypoint_uri
 from nemik.blocks import dependency_cycles
 from nemik.check import survey
+
+if TYPE_CHECKING:
+    from rdflib.term import Node
 
 
 def _ring(last_state: Node) -> Graph:

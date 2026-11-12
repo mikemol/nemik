@@ -3,11 +3,14 @@
 """nemik:W898: nemik-check --warnings --repo R prints that repo's Warning rows and nothing else."""
 
 import json
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 import pytest
 
 from nemik.check import warnings_report
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 
 def _repo(root: Path, name: str) -> None:

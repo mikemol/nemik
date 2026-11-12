@@ -6,13 +6,15 @@ import functools
 import http.server
 import json
 import threading
-from pathlib import Path
-from typing import cast
+from typing import TYPE_CHECKING, cast
 
 import webpage
 from playwright.sync_api import sync_playwright
 
 from nemik.serve import build_static
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 READY = "() => typeof data !== 'undefined' && data"
 # Both rounds begin before either piece has come back, which is what a poll that starts while a

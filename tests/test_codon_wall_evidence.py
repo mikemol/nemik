@@ -7,9 +7,13 @@ the closure evidence of the modules it moved: a module's hash changes when any m
 changes, and does not change when a module it does not reach does.
 """
 
-from pathlib import Path
+
+from typing import TYPE_CHECKING
 
 import codon_walls
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 FILES = {"a.py": "X = 1\n", "b.py": "from nemik import a\n", "c.py": "Y = 1\n"}
 

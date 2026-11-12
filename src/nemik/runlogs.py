@@ -10,11 +10,14 @@ health can be reported without publishing the old rows.
 """
 
 import json
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 from rdflib import Graph
 
 from nemik.runrows import run_graph
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 STREAMS = ("apply_set_runs", "apply_ledger", "reaper_runs", "tier_rehearsal")
 INDEX = "index.json"

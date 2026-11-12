@@ -8,9 +8,12 @@ what the version-1 list withholds today.
 """
 
 import json
-from pathlib import Path
 
+from nemik._typing import TYPE_CHECKING
 from nemik.exportv2 import VERSION
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 
 def derive(repo: str, symbols: list[str], withheld: set[str]) -> dict[str, object]:
