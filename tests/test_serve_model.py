@@ -27,7 +27,6 @@ if TYPE_CHECKING:
 
     from nemik.check import Finding
 
-POKE_BUDGET_SECONDS = 0.5  # a poke while a rebuild is in flight returns at once
 REBUILDS_AFTER_RELEASE = 2  # the first rebuild, then the one the second poke queued
 
 
@@ -81,30 +80,34 @@ def test_refresh_is_idempotent_when_nothing_changed(tmp_path: Path) -> None:
 
 
 def test_poke_serves_stale_while_rebuilding(tmp_path: Path) -> None:
-    """nemik:W69: after the first build, a changed export rebuilds in the background."""
+    """nemik:W69: after the first build, a changed export rebuilds in the background.
+
+    nemik:W2163: no wall clock decides this test. The background rebuild says when it has entered
+    its survey (an event); a poke that blocked on it would never reach the next line, and the
+    rebuild is waited for by calling refresh(), which takes the model's lock and so returns only
+    once the build is complete, whoever ran it.
+    """
     write_queue(tmp_path, "alpha")
     model = Model(tmp_path)
     model.poke()
     assert model.rebuilds == 1
+    entered = threading.Event()
     released = threading.Event()
 
     def gated_survey(
         root: Path, phases: dict[str, float] | None = None
     ) -> Iterator[tuple[str, Graph | None, list[Finding]]]:
-        released.wait(timeout=2)
+        entered.set()
+        released.wait()
         yield from check_survey(root, phases)
 
     q = tmp_path / "alpha" / ".claude" / "paths-forward.json"
     os.utime(q, ns=(q.stat().st_atime_ns, q.stat().st_mtime_ns + 10**9))
     with mock.patch("nemik.serve.survey", gated_survey):
-        t0 = time.monotonic()
         model.poke()
+        entered.wait()  # the rebuild is running in the background, holding the lock
         model.poke()  # a second request while the rebuild is in flight starts nothing new
-        assert time.monotonic() - t0 < POKE_BUDGET_SECONDS
         assert model.rebuilds == 1
         released.set()
-        for _ in range(100):
-            if model.rebuilds == REBUILDS_AFTER_RELEASE:
-                break
-            time.sleep(0.02)
+        model.refresh()  # waits on the lock until the one background rebuild is complete
     assert model.rebuilds == REBUILDS_AFTER_RELEASE

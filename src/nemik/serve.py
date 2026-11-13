@@ -481,9 +481,13 @@ class Model:
             if self.runs is not None:
                 g += runs_graph(self.runs)[0]
             phases["ledger"] = time.process_time() - t
-            self.graph, self.key = g, key
-            self.findings = findings
-            self.rebuilds += 1
+            # nemik:W2163: nothing a request reads is replaced until the document it describes
+            # exists. poke() serves the last payload whenever `rebuilds` is nonzero and refresh()
+            # returns early when the key matches, so setting either before to_json ran let a
+            # request that arrived during it read the initial b"{}" and an empty doc (the page
+            # then threw reading `map` of undefined, test_page_landings in a cold gate). The
+            # counter and the key are therefore the LAST writes: a request that sees them sees a
+            # complete document, and one that does not waits for this lock.
             t = time.process_time()
             numbers = without(g, self.withheld) if self.withheld else None
             doc = to_json(g, findings, numbers)
@@ -495,7 +499,11 @@ class Model:
                 len(doc["edges"]),
                 len(findings),
             )
+            self.graph = g
+            self.findings = findings
             self.doc, self.payload = doc, json.dumps(doc).encode()
+            self.key = key
+            self.rebuilds += 1
 
     def series_doc(self) -> dict[str, object]:
         """Build the series board from luthen's snapshot (nemik:W670).
