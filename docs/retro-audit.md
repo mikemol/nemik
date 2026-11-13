@@ -7,10 +7,11 @@ cards (W982 to W985), and where it overlaps the evidential audit it is folded in
 
 ## What exists
 
-Nine of the ten gates have a SHACL shape over a `nemik:Retro` node (shapes.ttl, vocabulary in nemik.ttl), each with a
-test on a fixture graph: G0 `RetroPrecommitShape`, G1 `RetroTimelineShape`, G2 `RetroDeltaShape`, G3 `RetroRootShape`,
-G5 `RetroBlamelessShape`, G6 `RetroSustainShape`, G7 `RetroFindingShape`, G8 `RetroHandoffShape`, G9
-`RetroEnforcementShape`. G4 (decorrelate) has no shape.
+Each of the ten gates has a SHACL shape over a `nemik:Retro` node (shapes.ttl, vocabulary in nemik.ttl): G0
+`RetroPrecommitShape`, G1 `RetroTimelineShape`, G2 `RetroDeltaShape`, G3 `RetroRootShape`, G4 `RetroPassShape`
+(W983: a pass may not re-find what an earlier pass found), G5 `RetroBlamelessShape`, G6 `RetroSustainShape`, G7
+`RetroFindingShape`, G8 `RetroHandoffShape` and `RetroFixpointShape` (W983), G9 `RetroEnforcementShape`. When this audit
+was written G4 had no shape; W983 added it, and the sections below that say otherwise are marked.
 
 ## Which gates the card model can witness
 
@@ -20,11 +21,11 @@ G5 `RetroBlamelessShape`, G6 `RetroSustainShape`, G7 `RetroFindingShape`, G8 `Re
 | G1 freeze | the ledger lines, hashed (`frozenTimeline`) | yes: write-once by content hash |
 | G2 delta | the done claim against the card's witness | yes, mechanically, when the card has a witness; a card with none has no delta to compute |
 | G3 trigger, root, contributing | three fields, required and distinct | presence and non-equality only; whether the root is a root is a judgement |
-| G4 decorrelate | nothing | no shape: needs the pass chain (W983) |
+| G4 decorrelate | the pass chain (`passOf`, `passNumber`, `passFinding`) | yes, since W983: `RetroPassShape` refuses a pass that re-finds an earlier pass's finding (when audited: no shape) |
 | G5 blameless | a lexical check on the cause text | weak: a character flaw in new words passes |
 | G6 sustain | a required non-empty field | presence only |
 | G7 commit | a finding must name a card or a `--certify` verdict change | yes, and an owned card carries a witness |
-| G8 fixpoint, handoff | the instrument, channel and operator slots | the slots, not the fixpoint across passes (W983) |
+| G8 fixpoint, handoff | the instrument, channel and operator slots | the slots, and since W983 the fixpoint across passes (`RetroFixpointShape`) |
 | G9 escalate | `enforcementLayer`, `recurring`, `oneOff` | the layer is declared by the retro, not measured (W985) |
 
 ## The gap that matters most
@@ -34,8 +35,8 @@ so no retro has ever been judged by them. The shape set is the cheap part; the m
 
 ## Gaps, carded
 
-- W982: ingest retro records from a durable file into the graph, so the nine shapes judge real retros.
-- W983: a shape for G4 and the G8 fixpoint over the pass chain: each pass's findings disjoint from the union of the
+- W982: ingest retro records from a durable file into the graph, so the shapes judge real retros.
+- W983 (done): a shape for G4 and the G8 fixpoint over the pass chain: each pass's findings disjoint from the union of the
   frozen earlier ones, the last pass empty, the handoff labelled exhausted and not verified.
 - W984: triggers. A retro stub, seeded with the card's precommit, opens on a gate refusal, a reopened card (done back
   to open), an incident alert clearing, and a ruling that corrects a session. The first two are in the queue's own

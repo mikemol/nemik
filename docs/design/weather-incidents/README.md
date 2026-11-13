@@ -62,8 +62,8 @@ nothing new is built yet for these points.
 ## Findings of the first review that are nemik's
 
 - 8.4, retro ingestion: no module under src/nemik reads real retro records into nemik:Retro; the
-  shapes run on fixtures only (nemik:W2170).
-- 8.4, the G4 doc and shape disagree: docs/retro-audit.md says G4 has no shape, and
-  src/nemik/data/shapes.ttl has one (nemik:W2169).
+  shapes run on fixtures only (confirmed in this tree; carried by nemik:W982).
+- 8.4, the G4 doc and shape disagreed: docs/retro-audit.md said G4 has no shape, and
+  src/nemik/data/shapes.ttl has one (W983). Fixed in docs/retro-audit.md (nemik:W2169).
 - 8.2, 8.3, 9.3 and 16: A kept out of ready-work ranking, typed edges, rank-inversion and no-cycle
   checks: recorded on nemik:W2166 (the hold on them is lifted with the ruling above).
