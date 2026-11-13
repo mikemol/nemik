@@ -7,6 +7,7 @@ model over every queue, and its semantics are read and enforced in nemik (nemik:
 |---|---|
 | [outline.md](outline.md) | The host's outline, skeleton only (github-cb, 2026-11-13) |
 | [architecture-review.md](architecture-review.md) | An external architecture review of the outline, supplied by the operator; it surveyed nemik main at e496230 |
+| [second-review.pdf](second-review.pdf) | A second external review (a PDF, 2026-11-13), a critique and framework cross-reference of the outline and of the first review |
 
 Owners: the writer side is mtools:W2410, the producer is luthen-observability:W2609, the reader, rank,
 witness and operator view are nemik:W2166.
@@ -27,7 +28,22 @@ transcript):
 The outline predates this ruling: where it says "A for weather" (its 4.1 and 4.2), read it through
 the ruling above. The hold on the A semantics in nemik:W2166 is lifted.
 
-## Findings of the review that are nemik's
+## Points of the second review that are nemik's
+
+Relayed by github-cb; each is the review's claim, not yet checked against this tree. Design only:
+nothing new is built until the operator rules on the two open questions.
+
+- Follow-up precedence comes from nemik-rank's band and floor rules plus `--weights-from`, with cycle
+  and inversion tests; it is not weightless topology (the first review assumed topology).
+- `prov:wasInformedBy` is used loosely for "what caused a waypoint": typed causal predicates mean
+  cleaning that up.
+- A-cards carry compact immutable evidence digests at each transition, so an R audit survives
+  telemetry retention.
+- Area Command (several concurrent incidents contending for one resource) is distinct from Unified
+  Command.
+- Proactive umbrella Ws from forecasts without any outage: waiting on the operator.
+
+## Findings of the first review that are nemik's
 
 - 8.4, retro ingestion: no module under src/nemik reads real retro records into nemik:Retro; the
   shapes run on fixtures only (nemik:W2170).

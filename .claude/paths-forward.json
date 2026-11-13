@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 2172,
+  "counter": 2173,
   "waypoints": [
     {
       "symbol": "W1",
@@ -52064,17 +52064,34 @@
     {
       "symbol": "W2172",
       "title": "Record the operator's A-is-the-occurrence ruling in the weather-incident design README",
+      "status": "done",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-11-13T15:04:29Z: landed 7ff9637 (docs only; gate green)",
+      "issued_at": "2026-11-13T14:51:46Z",
+      "minted_during": "interrupt",
+      "caused_by": "mtools:W2410",
+      "last_worked": "2026-11-13T15:04:29Z",
+      "ticks_blocked": 0,
+      "completed": "20261113T150429Z"
+    },
+    {
+      "symbol": "W2173",
+      "title": "File the second external review of the incident card model beside the other design docs",
       "status": "working",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Replace the README's open item with the ruling (A is the occurrence, weather is a W blocked on <repo>:A<n>), land it, then reply to github-cb with the committed paths.",
+      "next_bounded_step": "Add second-review.pdf to docs/design/weather-incidents with its README row and the nemik-relevant points, land it, then reply to github-cb with all committed paths.",
       "evidence": "",
-      "issued_at": "2026-11-13T14:51:46Z",
+      "issued_at": "2026-11-13T15:04:07Z",
       "minted_during": "interrupt",
       "caused_by": "mtools:W2410",
-      "last_worked": "2026-11-13T14:52:01Z",
+      "last_worked": "2026-11-13T15:04:26Z",
       "ticks_blocked": 0,
       "completed": null
     }
