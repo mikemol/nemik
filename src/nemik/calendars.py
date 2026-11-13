@@ -13,8 +13,8 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
-import shutil
 import sys
 import tempfile
 import tomllib
@@ -260,7 +260,7 @@ def occurrences(
     """
     helper, ics, includes, stats = reading or Reading()
     ics = ics or venv_ics()
-    if not Path(ics).exists() and not shutil.which(ics):
+    if not Path(ics).exists() and not on_path(ics):
         msg = f"the calendar reader {ics} is missing: rebuild nemik's venv (bazel build //:.venv)"
         raise FileNotFoundError(msg)
     tmp = Path(tempfile.mkdtemp(prefix="nemik-cal-"))  # mkdtemp is 0700
@@ -301,7 +301,46 @@ def occurrences(
             f.unlink()
         return sorted(out, key=_by_start)
     finally:
-        shutil.rmtree(tmp, ignore_errors=True)
+        remove_scratch(tmp)
+
+
+def on_path(name: str) -> bool:
+    """Say whether an executable of this name sits in a directory of PATH (nemik:W2179).
+
+    nemik:W2179 (codon paydown): shutil is a Codon wall and shutil.which was one of its two uses
+    here. An empty PATH entry means the current directory, as it does for shutil.which.
+
+    Args:
+        name: The command name.
+
+    Returns:
+        True when a file of that name in a PATH directory is executable.
+
+    """
+    for folder in os.environ.get("PATH", "").split(os.pathsep):
+        found = Path(folder or ".") / name
+        if found.is_file() and os.access(found, os.X_OK):
+            return True
+    return False
+
+
+def remove_scratch(tmp: Path) -> None:
+    """Remove the flat scratch directory the exports went to, ignoring any failure (nemik:W2179).
+
+    nemik:W2179 (codon paydown): the other of shutil's two uses here, shutil.rmtree. The directory
+    holds only the .ics files of this run, so its files are unlinked and then it is removed; a
+    failure leaves the rest to the system's temp cleaner, as rmtree(ignore_errors=True) did.
+
+    Args:
+        tmp: The scratch directory.
+
+    """
+    try:
+        for child in tmp.iterdir():
+            child.unlink(missing_ok=True)
+        tmp.rmdir()
+    except OSError:
+        return
 
 
 def _by_start(r: Occurrence) -> tuple[str, str, str]:
