@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 2181,
+  "counter": 2182,
   "waypoints": [
     {
       "symbol": "W1",
@@ -52149,36 +52149,36 @@
     {
       "symbol": "W2178",
       "title": "Record the ratchet-impasse weather ruling in the weather-incident design README",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Add a Resolved section to docs/design/weather-incidents/README.md: repo-local impasse is no incident, cross-repo impasse is an A-card, detection from nemik:W1665 plus blocked_on (nemik:W2177), then land it.",
-      "evidence": "2026-11-13T20:31:52Z: READY, not landed (2026-11-13): the stack is built and staged (worktree .nemik-docs-wt, ref refs/review/W2178-v1, .claude/stack-W2178-v1.json) but the pace verdict REFUSED it: nemik owes codon-baseline.json (required fall 2, observed 0, paydown cards W1179, W1400) and codon-walls.json (required fall 1, observed 0, no paydown card named), and a docs-only stack lowers neither. The earlier weather docs stacks (W2171 to W2174, W2169) were admitted when the pace record differed. To land: bundle with a genuine paydown (a codon-walls pair removed, or a baseline leaf) or wait for mtools:W2417 and the pace row change; no cheap paydown candidate is recorded on W2176. The ruling is carried on nemik:W2177.",
+      "next_bounded_step": null,
+      "evidence": "2026-11-13T20:31:52Z: READY, not landed (2026-11-13): the stack is built and staged (worktree .nemik-docs-wt, ref refs/review/W2178-v1, .claude/stack-W2178-v1.json) but the pace verdict REFUSED it: nemik owes codon-baseline.json (required fall 2, observed 0, paydown cards W1179, W1400) and codon-walls.json (required fall 1, observed 0, no paydown card named), and a docs-only stack lowers neither. The earlier weather docs stacks (W2171 to W2174, W2169) were admitted when the pace record differed. To land: bundle with a genuine paydown (a codon-walls pair removed, or a baseline leaf) or wait for mtools:W2417 and the pace row change; no cheap paydown candidate is recorded on W2176. The ruling is carried on nemik:W2177. | 2026-11-13T21:00:39Z: landed 288afbf (docs only, rode with W2179; gate green)",
       "issued_at": "2026-11-13T20:31:26Z",
       "minted_during": "interrupt",
       "caused_by": "luthen-observability:W2609",
-      "last_worked": "2026-11-13T20:44:31Z",
+      "last_worked": "2026-11-13T21:00:39Z",
       "ticks_blocked": 0,
-      "completed": null
+      "completed": "20261113T210039Z"
     },
     {
       "symbol": "W2179",
       "title": "Codon walls paydown: calendars.py reads PATH and removes its scratch directory without shutil",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Replace shutil.which (calendars.py:263) with a PATH scan over os and pathlib and shutil.rmtree (:304) with unlinking the flat scratch dir then rmdir; pin both with tests; re-record codon-walls.json (calendars carries shutil alone for 2 pairs); bazel the affected targets; bundle with the staged W2178 docs stack.",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-11-13T21:00:38Z: landed a4a3f36 (gate green; walls 897 to 895)",
       "issued_at": "2026-11-13T20:33:50Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W2177",
-      "last_worked": "2026-11-13T20:44:30Z",
+      "last_worked": "2026-11-13T21:00:38Z",
       "ticks_blocked": 0,
-      "completed": null
+      "completed": "20261113T210038Z"
     },
     {
       "symbol": "W2180",
@@ -52191,11 +52191,11 @@
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "When mtools:W2430 sorts each dist's first wall, take the leaf it unblocks (waitlog then pins) and remove its baseline entry with the compiler importing the dist.",
-      "evidence": "2026-11-13T20:39:10Z: mtools:W2430 is the upstream card (mtools sorts each dist's first wall: (a) Codon cannot see an installed dist, (b) stdlib gap mtools:W1344, (c) language construct W1319/W1340/W1343/W1341). nemik's census probe (pinned Codon, one-line import files) printed class (a) for all six composed dists probed, both modes: no module named mikemol.otlp.logs, mikemol.endpoints.resolve, mikemol.procrun.proc, mikemol.pathsforward.lock, mikemol.frontier.walk, mikemol.rulerseq. Not probed: webpage, hooks. mtools runs the pinned Codon itself (python -m mikemol.hooks.codon_probe FILE --mtools DIR) and will take the per-dist measurement; nemik's lines are a cross-check, sent.",
+      "evidence": "2026-11-13T20:39:10Z: mtools:W2430 is the upstream card (mtools sorts each dist's first wall: (a) Codon cannot see an installed dist, (b) stdlib gap mtools:W1344, (c) language construct W1319/W1340/W1343/W1341). nemik's census probe (pinned Codon, one-line import files) printed class (a) for all six composed dists probed, both modes: no module named mikemol.otlp.logs, mikemol.endpoints.resolve, mikemol.procrun.proc, mikemol.pathsforward.lock, mikemol.frontier.walk, mikemol.rulerseq. Not probed: webpage, hooks. mtools runs the pinned Codon itself (python -m mikemol.hooks.codon_probe FILE --mtools DIR) and will take the per-dist measurement; nemik's lines are a cross-check, sent. | 2026-11-13T21:00:46Z: SECOND WALLS from mtools (mtools:W2430, relayed, measured by mtools with codon_probe): Codon finds a package only beside the importing file and the mikemol namespace needs a mikemol/__init__.py (CODON_PATH had no effect), so staging = copy the dist's package into the consumer's directory with that __init__. Then: otlp, pathsforward, frontier stop at 'class decorator got unexpected argument' (@dataclass(frozen=True), mtools:W1341); endpoints at 'no module named collections.abc' and procrun at 'no module named select' (stdlib, mtools:W1344); rulerseq at an absolute sibling import from inside __init__ (mtools:W2431). Nemik-side note: the record form W1341 waited on is already decided (nemik:W567 done: option A, a plain annotated class with explicit __init__ and generated __eq__ and __hash__); sent to mtools.",
       "issued_at": "2026-11-13T20:36:51Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W2177",
-      "last_worked": "2026-11-13T20:39:10Z",
+      "last_worked": "2026-11-13T21:00:46Z",
       "ticks_blocked": 0,
       "completed": null
     },
@@ -52214,6 +52214,23 @@
       "caused_by": null,
       "last_worked": "2026-11-13T20:42:13Z",
       "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2182",
+      "title": "Codon walls paydown: shaclcache's SPARQL cache block is a class, not a contextlib generator",
+      "status": "working",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Run the shacl and codon targets under bazel, cut the ref, pace verdict, submit once, mark done on landing.",
+      "evidence": "",
+      "issued_at": "2026-11-13T21:24:32Z",
+      "minted_during": "interrupt",
+      "caused_by": "nemik:W2177",
+      "last_worked": "2026-11-13T21:43:27Z",
+      "ticks_blocked": 0,
+      "completed": null
     }
   ],
   "residue": [

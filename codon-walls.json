@@ -64,7 +64,6 @@
  "cachestore": {
   "TYPE_CHECKING": "reached",
   "class decorator with arguments": "reached",
-  "contextlib": "reached",
   "dataclasses.dataclass": "reached",
   "dataclasses.field": "reached",
   "fractions": "reached",
@@ -700,13 +699,11 @@
  },
  "shaclcache": {
   "TYPE_CHECKING": "reached",
-  "contextlib": "reached",
   "rdflib": "reached",
   "typing.cast": "reached"
  },
  "shaclinc": {
   "TYPE_CHECKING": "reached",
-  "contextlib": "reached",
   "pyshacl": "reached",
   "rdflib": "reached",
   "typing.cast": "reached"
