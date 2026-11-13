@@ -16,10 +16,6 @@
   "dateutil": "reached",
   "mikemol.* (third-party)": "reached"
  },
- "ask_cli": {
-  "argparse": "reached",
-  "tempfile": "reached"
- },
  "blocks": {
   "TYPE_CHECKING": "reached",
   "bare '*,' keyword-only marker": "reached",
@@ -57,7 +53,6 @@
   "mikemol.* (third-party)": "reached",
   "pyshacl": "reached",
   "rdflib": "reached",
-  "shutil": "reached",
   "tempfile": "reached",
   "tomllib": "reached",
   "typing.TypedDict": "reached",
@@ -182,7 +177,6 @@
   "mikemol.* (third-party)": "reached",
   "pyshacl": "reached",
   "rdflib": "reached",
-  "shutil": "reached",
   "tempfile": "reached",
   "tomllib": "reached",
   "typing.TypedDict": "reached",
@@ -416,7 +410,6 @@
   "mikemol.* (third-party)": "reached",
   "pyshacl": "reached",
   "rdflib": "reached",
-  "shutil": "reached",
   "tempfile": "reached",
   "tomllib": "reached",
   "typing.TypedDict": "reached",
@@ -475,7 +468,6 @@
   "mikemol.* (third-party)": "reached",
   "pyshacl": "reached",
   "rdflib": "reached",
-  "shutil": "reached",
   "tempfile": "reached",
   "tomllib": "reached",
   "typing.TypedDict": "reached",
@@ -502,7 +494,6 @@
   "mikemol.* (third-party)": "reached",
   "pyshacl": "reached",
   "rdflib": "reached",
-  "shutil": "reached",
   "tempfile": "reached",
   "tomllib": "reached",
   "typing.TypedDict": "reached",
@@ -588,7 +579,6 @@
   "mikemol.* (third-party)": "reached",
   "pyshacl": "reached",
   "rdflib": "reached",
-  "shutil": "reached",
   "tempfile": "reached",
   "tomllib": "reached",
   "typing.TypedDict": "reached",
@@ -615,7 +605,6 @@
   "mikemol.* (third-party)": "reached",
   "pyshacl": "reached",
   "rdflib": "reached",
-  "shutil": "reached",
   "tempfile": "reached",
   "tomllib": "reached",
   "typing.TypedDict": "reached",
@@ -724,6 +713,9 @@
   "rdflib": "reached",
   "typing.cast": "reached"
  },
+ "shims.ask_cli": {
+  "tempfile": "reached"
+ },
  "shims.work_cli": {
   "tempfile": "reached"
  },
@@ -756,7 +748,6 @@
   "mikemol.* (third-party)": "reached",
   "pyshacl": "reached",
   "rdflib": "reached",
-  "shutil": "reached",
   "tempfile": "reached",
   "tomllib": "reached",
   "typing.TypedDict": "reached",
@@ -809,7 +800,6 @@
   "mikemol.* (third-party)": "reached",
   "pyshacl": "reached",
   "rdflib": "reached",
-  "shutil": "reached",
   "tempfile": "reached",
   "tomllib": "reached",
   "typing.TypedDict": "reached",
@@ -853,7 +843,6 @@
   "mikemol.* (third-party)": "reached",
   "pyshacl": "reached",
   "rdflib": "reached",
-  "shutil": "reached",
   "tempfile": "reached",
   "tomllib": "reached",
   "typing.TypedDict": "reached",
@@ -880,7 +869,6 @@
   "mikemol.* (third-party)": "reached",
   "pyshacl": "reached",
   "rdflib": "reached",
-  "shutil": "reached",
   "tempfile": "reached",
   "tomllib": "reached",
   "typing.TypedDict": "reached",
@@ -911,7 +899,6 @@
   "mikemol.* (third-party)": "reached",
   "pyshacl": "reached",
   "rdflib": "reached",
-  "shutil": "reached",
   "tempfile": "reached",
   "tomllib": "reached",
   "typing.TypedDict": "reached",

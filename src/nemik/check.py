@@ -17,7 +17,6 @@ import argparse
 import datetime as dt
 import json
 import os
-import shutil
 import sys
 import time
 import tomllib
@@ -1162,6 +1161,31 @@ def apply_fold(
     return done
 
 
+PERMISSION_BITS = 0o7777  # the mode bits of st_mode, without the file type
+
+
+def copy_letter(src: Path, dst: Path) -> None:
+    """Copy a letter's bytes, permission bits and times, as shutil.copy2 does for a file.
+
+    nemik:W2164 (codon paydown): shutil is a Codon wall and this was its one use in check.py.
+    The copy is ATOMIC, which copy2 is not: the bytes go to a sibling name in dst's directory, get
+    their mode and times, and os.replace puts the whole file onto dst, so a crash midway leaves the
+    older dst (or none) and never a truncated letter. A temp file left by a failure is removed.
+    Extended attributes and file flags, which copy2's copystat also copies, are not carried: a
+    letter has neither.
+    """
+    stat = src.stat()
+    part = dst.with_name(f".{dst.name}.{os.getpid()}.part")
+    try:
+        part.write_bytes(src.read_bytes())
+        part.chmod(stat.st_mode & PERMISSION_BITS)
+        os.utime(part, ns=(stat.st_atime_ns, stat.st_mtime_ns))
+        part.replace(dst)
+    finally:
+        if part.exists():
+            part.unlink()
+
+
 def letters_report(
     root: Path,
     workstreams: set[str],
@@ -1186,7 +1210,7 @@ def letters_report(
         return report(root, workstreams, FOLD if fold else PLAIN, repo or "", cutoff)
     delivery: list[str] = []
     for src, dst in redeliveries(root, workstreams, repo or ""):
-        shutil.copy2(src, dst)
+        copy_letter(src, dst)
         delivery.append(f"delivered {dst}")
     lines, code = report(root, workstreams, APPLY, repo or "", cutoff)
     return lines + delivery + apply_fold(root, scope), code

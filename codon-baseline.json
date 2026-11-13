@@ -7,10 +7,6 @@
   "as_written": "syntax error, unexpected ','",
   "stripped": "syntax error, unexpected ','"
  },
- "ask_cli": {
-  "as_written": "no module named 'argparse'",
-  "stripped": "no module named 'argparse'"
- },
  "blocks": {
   "as_written": "no module named '__future__'",
   "stripped": "no module named 'rdflib'"

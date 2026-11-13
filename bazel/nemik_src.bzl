@@ -128,6 +128,7 @@ NEMIK_PY = [
     "src/nemik/shapedepth.py",
     "src/nemik/shellquote.py",
     "src/nemik/shims/__init__.py",
+    "src/nemik/shims/ask_cli.py",
     "src/nemik/shims/work_cli.py",
     "src/nemik/spawn.py",
     "src/nemik/stackable.py",

@@ -9,6 +9,7 @@ import pytest
 
 from nemik.ask import blocked_on, braces_balanced, entry, slug_ok, title
 from nemik.ask_cli import main
+from nemik.shims.work_cli import env
 
 CLAIM = "fence admission records no waiter, so `hold` cannot be fair (a {nested} brace is fine)"
 
@@ -113,7 +114,7 @@ def test_a_dry_run_changes_nothing(tmp_path: Path) -> None:
     args = _args(tmp_path)
     queue = Path(args[args.index("--state") + 1])
     before = queue.read_text(encoding="utf-8")
-    assert main(args) == 0
+    assert main(args, env()) == 0
     assert queue.read_text(encoding="utf-8") == before
     assert list((tmp_path / "floor").iterdir()) == []
 
@@ -124,7 +125,7 @@ def test_applying_mints_blocks_and_writes_then_a_second_filing_is_refused(
 ) -> None:
     """The card waits on the owner's card, the entry cites it, a reuse is refused."""
     args = _args(tmp_path, "--apply")
-    assert main(args) == 0
+    assert main(args, env()) == 0
     stored: dict[str, list[dict[str, object]]] = json.loads(
         (tmp_path / "github" / "life" / ".claude" / "paths-forward.json").read_text(
             encoding="utf-8"
@@ -138,4 +139,4 @@ def test_applying_mints_blocks_and_writes_then_a_second_filing_is_refused(
     )
     assert "waypoint = {life:W13}" in written
     refused = 2
-    assert main(args) == refused
+    assert main(args, env()) == refused
