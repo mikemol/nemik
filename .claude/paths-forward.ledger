@@ -5880,3 +5880,8 @@
 2026-11-13T01:03:42Z  status W2159 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-13T01:04:23Z  status W2144 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-13T01:13:41Z  interrupt W2160 minted    -         "Stamp-based alerts cannot tell a new pod's own publish from its restored one"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W2159
+2026-11-13T01:42:40Z  status W2144 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-13T02:04:55Z  interrupt W2161 minted    -         "Pin the 3.14 interpreter to 3.14.7 or newer: the image base and .python-version"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W2159
+2026-11-13T02:04:55Z  interrupt W2162 minted    -         "The bazel toolchain runs 3.14.4, whose incremental collector costs about 20 percent memory"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W2159
+2026-11-13T02:18:03Z  status W2161 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-13T02:37:24Z  interrupt W2163 minted    -         "Flake: test_page_landings first page load throws TypeError reading map in the cold gate"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

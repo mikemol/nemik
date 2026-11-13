@@ -1,11 +1,23 @@
 # syntax=docker/dockerfile:1.7
 # nemik-serve: read-only graph view. Mount the export (<repo>/paths-forward.{json,ledger}) read-only at /export.
-ARG BASE=ghcr.io/astral-sh/uv:python3.14-bookworm-slim
+# nemik:W2161: the interpreter and the uv binary are each pinned by DIGEST, not by a floating tag. The
+# old base, ghcr.io/astral-sh/uv:python3.14-bookworm-slim, is uv 0.9.30 built 2026-02-04 and bundles
+# CPython 3.14.2, which has the incremental collector: the builder's nemik-serve used about 20 percent
+# more memory than on 3.13 and the pods were OOMKilled at 1536Mi (nemik:W2159; the same code is 998M on
+# 3.14.7 and 1.2G on 3.14.4, measured). astral publishes no uv image with a newer 3.14, so the
+# interpreter is the official python image at 3.14.7, whose index digest is below, and uv is copied in from
+# astral's plain uv image. Bumping either is a reviewed edit of its digest.
+ARG PYTHON=docker.io/library/python:3.14.7-slim-bookworm@sha256:82bc3c539b8813ada9d68c63b40158fa002f7f33de9bf3312a3dfdc0620dff56
+ARG UV=ghcr.io/astral-sh/uv:0.9.30@sha256:538e0b39736e7feae937a65983e49d2ab75e1559d35041f9878b7b7e51de91e4
 # nemik:W703: which stage the final one takes the gate marker from (`test`, or `gated` when the commit
 # gate already ran on this tree). It must be a global ARG (before the first FROM) because only a
 # `FROM` expands it; a variable in a `COPY --from` fails the whole build ("failed to parse stage name").
 ARG TESTS=test
-FROM ${BASE} AS base
+FROM ${UV} AS uv
+FROM ${PYTHON} AS base
+COPY --from=uv /uv /uvx /bin/
+# uv runs on this image's own interpreter and never fetches or picks another one.
+ENV UV_PYTHON_DOWNLOADS=never UV_PYTHON_PREFERENCE=only-system
 # nemik:W6/H1: mikemol-pathsforward is a vendored wheel (vendor/wheels), not a build-time git+https
 # fetch, so the build has no egress to github.com. No git binary needed: nemik-serve never shells
 # out to git (only nemik-check does, for provenance, and it isn't run from inside the image).
@@ -14,6 +26,10 @@ COPY pyproject.toml uv.lock ./
 COPY vendor ./vendor
 COPY src ./src
 RUN uv sync --frozen --no-dev
+# nemik:W2161: the interpreter that runs is checked by its behaviour, not by trusting the digest: a
+# 3.14.7 or newer with the generational collector, or the build stops here.
+COPY tools/interpreter_floor.py ./tools/interpreter_floor.py
+RUN /app/.venv/bin/python tools/interpreter_floor.py
 
 # The gate: the image does not build unless the tests pass. BuildKit skips stages nothing depends
 # on, so the final stage copies the marker this stage writes.
