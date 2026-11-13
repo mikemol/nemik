@@ -47,6 +47,8 @@ exports_files(["pyproject.toml"])
             + (glob(["tests/*.py", "tools/*.py", "checks/*.py"], exclude = [src, "tests/installed.py", "tests/webpage.py", "tests/pagetext.py", "tests/conftest.py", "tools/cpuline.py", "tools/nemik_client.py", "checks/claims.py"]) if src == "tests/test_no_waivers.py" else [])
             # nemik:W2125: the runtime-annotation test reads the house lint's exempt list and the named files that hand handlers to playwright (webpage.py and conftest.py are in every target's data)
             + (["ruff-house.toml", "tests/test_layout.py", "tests/test_pdf_load_retry.py"] if src == "tests/test_runtime_annotation_imports.py" else [])
+            # nemik:W2144: the architecture gate runs paperkit over the sandbox's tree, so its config, rubric, warrants, claim witnesses and the sources they read are named inputs (the claims' interpreter is the .venv every target already carries)
+            + (["paper.toml", "rubric.tsv", "warrants.bib", "checks/claims.py"] + NEMIK_PY if src == "tests/test_architecture.py" else [])
             # nemik:W557: the run-row tool runs against the schema it validates with
             + (["tools/check_run_rows.py"] if src == "tests/test_check_run_rows.py" else [])
             # nemik:W1532: the standing-17 probe is imported by name from tools/

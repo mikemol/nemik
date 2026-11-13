@@ -16,7 +16,12 @@ from mikemol.procrun.proc import capture
 
 pytest.importorskip("paperkit")
 
-ROOT = Path(__file__).resolve().parents[1]
+# nemik:W2144: the sandbox's own tree, not the checkout a symlink resolves to. Resolved, the root
+# was the real worktree, whose untracked .venv symlink (made by the gate, absent in a scratch tree)
+# the claims' interpreter needs, so the same bytes passed in the gate and failed everywhere else.
+# Absolute, the root is the runfiles tree, which holds exactly the target's named inputs in
+# BUILD.bazel.
+ROOT = Path(__file__).absolute().parents[1]
 
 
 def test_architecture_projection_gates_clean() -> None:
