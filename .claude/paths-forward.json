@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 2173,
+  "counter": 2174,
   "waypoints": [
     {
       "symbol": "W1",
@@ -51968,11 +51968,11 @@
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "Declare the table; make check, inbound, rank and the witness tools resolve by it; then split: nemik-witnesses closes A-cards like weather cards, nemik-operator lists open A-cards apart from work.",
-      "evidence": "2026-11-13T14:07:30Z: RELAYED by github-cb (operator ruling, not yet checked against the transcript): A<n> is the namespace for ALL weather cards; the per-condition class is an umbrella W-card; the driving card is blocked on both the A-card and the umbrella W. Reader scope: (1) the weather rules (one per episode, witness closes it, never reopened) apply to A-cards; (2) nemik-rank ranks the A-card and the umbrella above the driver through those edges, and checks that an A-card's weight propagates to the umbrella's follow-up; (3) nemik-check warns on an A-card with no umbrella W parent once a cause is named. Writer side: mtools:W2410. | 2026-11-13T14:08:09Z: RELAYED addendum from github-cb (operator, unchecked against the transcript): prior art is IMAG (Google incident management, from the Incident Command System) alongside ITIL. A-card = incident, closes on mitigation; umbrella W = postmortem; its children = action items, which outrank new work. nemik-operator: consider listing open A-cards with the incident commander (the owning session) and the postmortem's open action items. | 2026-11-13T14:46:08Z: External review (operator-shared, the weather-incidents nemik-architecture review, surveyed e496230): also asks typed edges (attribution, association, dependency, retrospective) rather than overloading blocked_on (8.3, 9.3); A kept out of ready-work ranking as ordinary work (8.2); rank-inversion and no-cycle checks with a test that unrelated work is not blocked (16). HOLD the A semantics until the operator rules the open conflict, A as an occurrence vs weather as blocked work (relayed by github-cb); the namespace-table read is unaffected. 8.4 verified in this tree and carded as W2169 (stale G4 doc) and W2170 (no retro ingestion). | 2026-11-13T14:48:01Z: RELAYED by github-cb (operator ruling, supersedes weather-takes-A; unchecked against the transcript): A<n> is the OCCURRENCE. Weather is a ROLE: a W blocked on <repo>:A<n>. Reader: weather detection keys off that edge; A-cards stay out of ready-work ranking; the witness closes the A (the occurrence), which unblocks the waiting Ws. The hold on the A semantics is lifted. Resolves the review's 8.1 conflict; to be recorded in docs/design/weather-incidents (README) after W2171 lands.",
+      "evidence": "2026-11-13T14:07:30Z: RELAYED by github-cb (operator ruling, not yet checked against the transcript): A<n> is the namespace for ALL weather cards; the per-condition class is an umbrella W-card; the driving card is blocked on both the A-card and the umbrella W. Reader scope: (1) the weather rules (one per episode, witness closes it, never reopened) apply to A-cards; (2) nemik-rank ranks the A-card and the umbrella above the driver through those edges, and checks that an A-card's weight propagates to the umbrella's follow-up; (3) nemik-check warns on an A-card with no umbrella W parent once a cause is named. Writer side: mtools:W2410. | 2026-11-13T14:08:09Z: RELAYED addendum from github-cb (operator, unchecked against the transcript): prior art is IMAG (Google incident management, from the Incident Command System) alongside ITIL. A-card = incident, closes on mitigation; umbrella W = postmortem; its children = action items, which outrank new work. nemik-operator: consider listing open A-cards with the incident commander (the owning session) and the postmortem's open action items. | 2026-11-13T14:46:08Z: External review (operator-shared, the weather-incidents nemik-architecture review, surveyed e496230): also asks typed edges (attribution, association, dependency, retrospective) rather than overloading blocked_on (8.3, 9.3); A kept out of ready-work ranking as ordinary work (8.2); rank-inversion and no-cycle checks with a test that unrelated work is not blocked (16). HOLD the A semantics until the operator rules the open conflict, A as an occurrence vs weather as blocked work (relayed by github-cb); the namespace-table read is unaffected. 8.4 verified in this tree and carded as W2169 (stale G4 doc) and W2170 (no retro ingestion). | 2026-11-13T14:48:01Z: RELAYED by github-cb (operator ruling, supersedes weather-takes-A; unchecked against the transcript): A<n> is the OCCURRENCE. Weather is a ROLE: a W blocked on <repo>:A<n>. Reader: weather detection keys off that edge; A-cards stay out of ready-work ranking; the witness closes the A (the occurrence), which unblocks the waiting Ws. The hold on the A semantics is lifted. Resolves the review's 8.1 conflict; to be recorded in docs/design/weather-incidents (README) after W2171 lands. | 2026-11-13T15:06:12Z: RELAYED by github-cb (operator ruling, unchecked against the transcript): every A is declared internally on mint, with no declaration gate. The operator is an escalation point only, reached through the existing needs-you asks (operator: decide|act), never by routine alert paging. Reader: nemik-operator shows A-cards only when one carries an operator ask or a commander is past span of control. Resolves the review's declaration conflict; to be recorded in docs/design/weather-incidents README (W2174). | 2026-11-13T15:07:20Z: RELAYED by github-cb (operator ruling, unchecked against the transcript): a forecast may mint a condition umbrella W with no prior A, and later As attach to it. Rank treats a proactive umbrella like any follow-up umbrella. Closes the second review's proactive-umbrella open question; to be recorded in the design README with W2174.",
       "issued_at": "2026-11-13T13:55:47Z",
       "minted_during": "interrupt",
       "caused_by": "luthen-observability:W2609",
-      "last_worked": "2026-11-13T14:48:01Z",
+      "last_worked": "2026-11-13T15:07:20Z",
       "ticks_blocked": 0,
       "completed": null
     },
@@ -52081,17 +52081,34 @@
     {
       "symbol": "W2173",
       "title": "File the second external review of the incident card model beside the other design docs",
+      "status": "done",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-11-13T15:16:24Z: landed 0e75c7c (docs only; gate green)",
+      "issued_at": "2026-11-13T15:04:07Z",
+      "minted_during": "interrupt",
+      "caused_by": "mtools:W2410",
+      "last_worked": "2026-11-13T15:16:24Z",
+      "ticks_blocked": 0,
+      "completed": "20261113T151624Z"
+    },
+    {
+      "symbol": "W2174",
+      "title": "Record the operator's declare-on-mint ruling in the weather-incident design README",
       "status": "working",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Add second-review.pdf to docs/design/weather-incidents with its README row and the nemik-relevant points, land it, then reply to github-cb with all committed paths.",
-      "evidence": "",
-      "issued_at": "2026-11-13T15:04:07Z",
+      "next_bounded_step": "After W2173 lands, add a Resolved section to docs/design/weather-incidents/README.md: every A is declared on mint with no gate; the operator is reached only through operator: decide|act asks; nemik-operator shows A-cards only with an operator ask or a commander past span of control. Then reply to github-cb with the committed paths.",
+      "evidence": "2026-11-13T15:07:21Z: Also record in the same README edit (operator ruling relayed by github-cb, unchecked): a forecast may mint a condition umbrella W with no prior A, later As attach to it, and rank treats a proactive umbrella like any follow-up umbrella.",
+      "issued_at": "2026-11-13T15:06:13Z",
       "minted_during": "interrupt",
       "caused_by": "mtools:W2410",
-      "last_worked": "2026-11-13T15:04:26Z",
+      "last_worked": "2026-11-13T15:16:23Z",
       "ticks_blocked": 0,
       "completed": null
     }

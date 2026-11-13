@@ -28,10 +28,26 @@ transcript):
 The outline predates this ruling: where it says "A for weather" (its 4.1 and 4.2), read it through
 the ruling above. The hold on the A semantics in nemik:W2166 is lifted.
 
+## Resolved: declaration, and proactive umbrellas
+
+Two more operator rulings, relayed by github-cb on 2026-11-13 (not checked here against the operator's
+transcript):
+
+- Declaration (the review's declaration conflict): every A is declared internally on mint, with no
+  declaration gate. The operator is an escalation point only, reached through the existing needs-you
+  asks (`operator: decide|act`), never by routine alert paging. nemik-operator shows A-cards only when
+  one carries an operator ask or a commander is past span of control.
+- Proactive umbrellas (the second review's last open question): a forecast may mint a condition
+  umbrella W with no prior A, and later As attach to it. Rank treats a proactive umbrella like any
+  follow-up umbrella.
+
+The outline's declaration gate (its 7) and its one-umbrella-per-declared-incident rule (its 4.3) are
+read through these rulings.
+
 ## Points of the second review that are nemik's
 
 Relayed by github-cb; each is the review's claim, not yet checked against this tree. Design only:
-nothing new is built until the operator rules on the two open questions.
+nothing new is built yet for these points.
 
 - Follow-up precedence comes from nemik-rank's band and floor rules plus `--weights-from`, with cycle
   and inversion tests; it is not weightless topology (the first review assumed topology).
@@ -41,7 +57,7 @@ nothing new is built until the operator rules on the two open questions.
   telemetry retention.
 - Area Command (several concurrent incidents contending for one resource) is distinct from Unified
   Command.
-- Proactive umbrella Ws from forecasts without any outage: waiting on the operator.
+- Proactive umbrella Ws from forecasts without any outage: resolved above.
 
 ## Findings of the first review that are nemik's
 

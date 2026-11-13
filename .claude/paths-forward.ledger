@@ -5909,3 +5909,6 @@
 2026-11-13T15:04:07Z  interrupt W2173 minted    -         "File the second external review of the incident card model beside the other design docs"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=mtools:W2410
 2026-11-13T15:04:26Z  status W2173 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-13T15:04:29Z  status W2172 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-13T15:06:13Z  interrupt W2174 minted    -         "Record the operator's declare-on-mint ruling in the weather-incident design README"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=mtools:W2410
+2026-11-13T15:16:23Z  status W2174 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-13T15:16:24Z  status W2173 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
