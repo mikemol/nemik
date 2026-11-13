@@ -119,10 +119,25 @@ class Template(TypedDict, total=False):
     spec: PodSpec
 
 
+class RollingUpdate(TypedDict, total=False):
+    """The rolling update bounds of a deployment strategy."""
+
+    maxSurge: int
+    maxUnavailable: int
+
+
+class Strategy(TypedDict, total=False):
+    """The rollout strategy of a deployment."""
+
+    type: str
+    rollingUpdate: RollingUpdate
+
+
 class DeploymentSpec(TypedDict, total=False):
     """The deployment spec."""
 
     replicas: int
+    strategy: Strategy
     template: Template
 
 
@@ -275,15 +290,29 @@ def test_the_builder_knows_its_pod_so_its_gauges_read_apart() -> None:
     assert "fieldPath: metadata.name" in builder_part
 
 
-def test_the_pod_fits_the_tenant_quota_with_a_surge_pod() -> None:
-    """Replicas plus one surge pod, at their limits, stay under the tenant quota."""
+def test_the_pods_a_rollout_can_run_fit_the_tenant_quota() -> None:
+    """Replicas plus the declared surge pods, at their limits, stay under the tenant quota."""
     limits = sum(
         _mi(c["resources"]["limits"]["memory"]) for c in _containers().values()
     )
-    pods = _spec()["spec"]["replicas"] + 1
+    spec = _spec()["spec"]
+    pods = spec["replicas"] + spec["strategy"]["rollingUpdate"]["maxSurge"]
     assert limits * pods <= TENANT_QUOTA_MI, (
         f"{pods} pods x {limits:.0f} Mi > {TENANT_QUOTA_MI} Mi"
     )
+
+
+def test_a_rollout_never_takes_every_replica_down() -> None:
+    """The rollout is rolling with no surge pod and leaves at least one replica serving.
+
+    nemik:W2159: the quota holds two pods at the larger builder limit, so there is no surge pod, and
+    one replica keeps serving while the other restarts (the publish pauses for one restart).
+    """
+    spec = _spec()["spec"]
+    rolling = spec["strategy"]["rollingUpdate"]
+    assert spec["strategy"]["type"] == "RollingUpdate"
+    assert rolling["maxSurge"] == 0
+    assert rolling["maxUnavailable"] < spec["replicas"]
 
 
 def test_every_container_keeps_the_restricted_security_context() -> None:

@@ -17,7 +17,16 @@
 #       snapshot served rather than a restart;
 #   (d) container names and requests/limits go to luthen-observability for its workloads.json row.
 # Kept: 2 replicas (zero-downtime ship, operator 2026-09-26), the export PVC read-only (builder only),
-# restricted Pod Security. Tenant quota 5Gi: (96Mi + 1536Mi) x 3 pods (2 + 1 surge) = 4896Mi.
+# restricted Pod Security. Tenant quota 5Gi: (96Mi + 2304Mi) x 2 pods (no surge pod, below) = 4800Mi.
+#
+# nemik:W2159 (host reviewer ruling 2026-11-12): the builder's nemik-serve peaked at the 1536Mi limit on every
+# run on the Python 3.14 image (OOMKilled about every 12 to 30 minutes, publish stalled on one pod), about 22
+# percent above the 3.13 image on the same data (measured locally, 1.2G against 0.98G) and capped, so its true
+# peak is unknown. The limit rises to 2304Mi, a step that shows the peak, and the rollout keeps no surge pod
+# (maxSurge 0, maxUnavailable 1): a builder does not need a zero-downtime rollout, one replica keeps serving
+# while the other restarts and the publish pauses for one restart, and two pods fit the quota with the larger
+# limit where three would not ((96Mi + 2304Mi) x 3 = 7200Mi). The limit is to be re-sized from the measured
+# peak (nemik:W2159).
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -25,6 +34,9 @@ metadata:
   labels: {app.kubernetes.io/name: nemik}
 spec:
   replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate: {maxSurge: 0, maxUnavailable: 1}
   selector:
     matchLabels: {app.kubernetes.io/name: nemik}
   template:
@@ -89,11 +101,11 @@ spec:
           # 896Mi limit show about 1.25 GB resident plus swap (nemik:W1074), so a pod with no warm cache
           # was killed before its first snapshot and never became ready. 1536Mi is 1.25 GB plus about 20%
           # (luthen-observability's proposal, W1644). The request stays 640Mi, under the limit, so swap
-          # still applies. The quota (5Gi since luthen's 2026-10-26 change) caps the pair: (96Mi + 1536Mi)
-          # x 3 pods = 4896Mi.
+          # still applies. The quota (5Gi since luthen's 2026-10-26 change) caps the pair: (96Mi + 2304Mi)
+          # x 2 pods = 4800Mi (nemik:W2159: 1536Mi was the old limit, the 3.14 image needs more, see the head).
           resources:
             requests: {memory: 640Mi, cpu: 250m}
-            limits: {memory: 1536Mi, cpu: "1"}
+            limits: {memory: 2304Mi, cpu: "1"}
           securityContext:
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true

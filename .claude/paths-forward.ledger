@@ -5872,3 +5872,8 @@
 2026-11-12T23:12:08Z  status W2149 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-12T23:12:51Z  status W2144 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-12T23:13:30Z  interrupt W2157 minted    -         "mtools: gate_staged declares the scripts it requires and a build check fails when the venv lacks them"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W2155
+2026-11-12T23:50:22Z  interrupt W2158 minted    -         "Operator: warrant the W2125 revert's two ratchet rises, or rule a limit bump"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W2146
+2026-11-12T23:50:29Z  status W2158 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-12T23:52:10Z  interrupt W2159 minted    -         "Measure what grows in the builder on 3.14: anon vs file cache, slope, then tracemalloc"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W2146
+2026-11-13T00:34:47Z  status W2155 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-13T00:45:04Z  status W2159 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
