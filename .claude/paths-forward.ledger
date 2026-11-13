@@ -5892,3 +5892,14 @@
 2026-11-13T03:59:48Z  interrupt W2165 minted    -         "Codon leaves: nemik.ask_cli compiles, reading its own command line"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W1179
 2026-11-13T12:25:02Z  status W2165 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-13T12:25:42Z  status W2165 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-13T13:55:09Z  status W2163 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-13T13:55:09Z  status W2164 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-13T13:55:10Z  status W2165 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-13T13:55:47Z  interrupt W2166 minted    -         "Read card namespaces (W, R, A) from a declared table so <repo>:A<n> resolves"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=luthen-observability:W2609
+2026-11-13T13:56:55Z  status W2166 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-13T14:39:54Z  interrupt W2167 minted    -         "Pick one test target and record the staged bytes of each input (venv, Chromium, opa, Codon, corpus) from its sandbox, no timing"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1075
+2026-11-13T14:39:54Z  interrupt W2168 minted    -         "Take the idle-host staging time of that target once luthen reports the host idle, and split it by input"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1075
+2026-11-13T14:45:32Z  interrupt W2169 minted    -         "docs/retro-audit.md says G4 has no shape but shapes.ttl has one (W983): correct the doc"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-13T14:45:33Z  interrupt W2170 minted    -         "Ingest the queue's real retro records as nemik:Retro so the retro shapes run on them, not only on fixtures"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-13T14:46:38Z  interrupt W2171 minted    -         "File the weather-incident design docs under docs/design/weather-incidents and reply with their committed paths"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github:W2410
+2026-11-13T14:47:02Z  status W2171 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

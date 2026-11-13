@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 2165,
+  "counter": 2171,
   "waypoints": [
     {
       "symbol": "W1",
@@ -25382,21 +25382,24 @@
     {
       "symbol": "W1075",
       "title": "Take an idle-host staging figure for one test target and split it by input (venv, Chromium, opa, Codon, corpus)",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W1035"
       ],
       "touches": [
         "file:docs/per-test-targets.md!w"
       ],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W2167",
+        "W2168"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "2026-11-06: when the host is idle (load below 4), run bazel test //:test_score --nocache_test_results and record elapsed and critical path; then list which of venv, Chromium, opa, Codon, corpus the target stages and write the split in docs/per-test-targets.md",
       "evidence": "2026-10-26: 2026-10-26 first reading, NOT idle: bazel test //:test_score --nocache_test_results took 13.0 s elapsed (critical path 10.3 s) for a test whose own run is about a second, on a host with load average 50.3, 67.2, 67.6 (1, 5, 15 min) while a 400-target gate ran. So staging for one small target is about 10 s on a loaded host; the split by input (venv, Chromium, opa, Codon, corpus) is not measured and the idle figure is not taken",
       "issued_at": "2026-10-26T00:43:08Z",
       "minted_during": "tick",
       "caused_by": "W1035",
-      "last_worked": "2026-11-06T01:37:59Z",
+      "last_worked": "2026-11-13T14:39:54Z",
       "ticks_blocked": 0,
       "manifest": [
         "docs/per-test-targets.md"
@@ -51902,55 +51905,159 @@
     {
       "symbol": "W2163",
       "title": "Flake: test_page_landings first page load throws TypeError reading map in the cold gate",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Instance 1, 2026-11-13: the gate for W2161 (a Containerfile and tools change, no web or server file) was refused with tests/test_page_landings.py::test_a_host_board_is_drawn_per_repo failing 1 of 2 after 77 s: PageBrokenError, the page raised TypeError: Cannot read properties of undefined (reading map), no resource failed to load; run alone on the same tree the target passes in 32 s. It is the module's first test, i.e. the first page load against the module-scoped live server (webpage.served) in a cold gate (503 of 506 tests ran, 24 parallel actions). Find the failing .map by proof, not reruns: enumerate the page fetches that run at load (panels.js wake(), goals(), weather(), history(), queuePanel(), findings()) and the live server routes that answer them, name which can answer a body without its array under load (a partial or error document, a model not yet built when the socket listens), and force that interleaving with a deterministic test (a route handler that returns the partial body); replace the assumed ordering with an explicit one (the server answers only when ready, or the page checks the shape). Add later instances here. Witness: the forced-interleaving test fails before the fix and passes after.",
-      "evidence": "2026-11-13T02:38:49Z: Gate run ids (github-cb 2026-11-13: record both): instance 1 REFUSED, gate entry key 1794536286032166486 (began_ns 1794536287229752714), stack W2161 from refs/review/W2161-v1 753e3f66: 506 test targets, 503 executed, 505 tests passed, //:test_page_landings FAILED in 81.5 s (1 failed, 1 passed), gate elapsed 944.7 s, refused 'unattributed'. RESUBMIT of the same stack, gate entry key 1794537452342750752 (began_ns 1794537454246631304), inflight at the time of writing: its verdict is recorded here when it ends; a pass is not evidence about this flake (a refusal that passes on an identical resubmit is not green, host rule) and W2163 stays blocker-class, landing next after W2161 with the forced-interleaving witness. host reviewer ruling: do not hold W2161 (live OOM incident, a stack disjoint from the flaking page path). | 2026-11-13T02:49:14Z: RESUBMIT result: gate entry 1794537452342750752 GREEN, COMMITTED nemik 909b195, gate targets '1 fresh of 506': the cache held every passing result from the refused run and only test_page_landings re-ran, and passed (consistent with a load-dependent failure, not evidence it is fixed: a refusal that passes on an identical resubmit is not green). The stack W2161 has landed, so this fix is the next stack. | 2026-11-13T02:58:41Z: RACE PROVED AND FIXED 2026-11-13: src/nemik/serve.py Model.refresh() set self.graph and self.key and raised self.rebuilds (lines 484-486) before building the document (to_json, 487-498); poke() builds synchronously only while rebuilds == 0 and refresh() returns early when the key matches, so a request that arrived while to_json ran was served the initial payload b-braces and the empty doc, the page read nodes of {} and threw reading map of undefined. 24 parallel runs of the test did not reproduce it (all passed in 90 s). The fix publishes graph, findings, doc, payload, key and rebuilds only after the document is built, key and counter last. tests/test_serve_first_request.py forces the interleaving with events (to_json held open, a second request mid-build); mutant measured: the unfixed serve.py fails it, the fix passes; 9 of 9 bazel targets pass. refs/review/W2163-v1 e3910449, stack-W2163-v1.json. NOT submittable yet: the pace guard refuses a stack that lowers no owed ratchet (codon-baseline.json required fall 2, observed 0; codon-walls.json required fall 1, observed 0) and the earlier stacks passed only because the pace file had been stale; asked the host reviewer for a ruling (pinned admission row, or a genuine paydown first, or an operator hold). A moved wall is not paydown, so none is faked. | 2026-11-13T03:10:40Z: 2026-11-13 bundled with the genuine paydown W2164 per the host ruling (no exemptions: an admission row would be the exemption by another name): refs/review/W2163-v2 beee607c over main 909b1953, stack-W2163-v1.json with two entries (W2163: serve.py + tests/test_serve_first_request.py; W2164: check.py copy_letter without shutil, tests/test_copy_letter.py, codon-walls.json 910 to 898), pace guard ADMITTED, 13 of 13 bazel targets pass, sent to github-cb for review; not submitted. If a gate refuses on this race again, record the instance here, never rerun it as the fix. | 2026-11-13T03:36:41Z: Gate result 2026-11-13: entry 1794539623451676548 (W2163 + W2164, refs/review/W2163-v3, the atomic copy_letter version) REFUSED after 1222.8 s, 508 targets, 505 executed, 502 passed, 6 failed, culprit 'unattributed': (1) tests/test_serve_model.py::test_poke_serves_stale_while_rebuilding FAILED 'assert 1 == 2' (a real consequence of this change, not a flake: it polled the background rebuild for 2 s of wall clock, and rebuilds is now raised only after the document is built, so the wait spans the whole build, seconds under load: idle_wall 11.7 s in the gate; fixed in refs/review/W2163-v4 beee..: 63cefd89: the poll is a 120 s cap, the file's own convention); (2) FIVE TIMEOUTS with no failing assertion: test_check_digest 304.9 s, test_gate 307.2 s, test_serve_check_reports 304.7 s, test_metrics_gating shard 1 304.8 s, test_warm_equals_cold 914.2 s, while the host was overloaded (the cluster datastore and API dark since 03:12:37Z, the kine guard blind: an empty series leaves its streak unchanged); not caused by this stack (none touches serve.py's first-build path beyond the test above); to be run ALONE before a resubmit (loop rule), not rerun as the fix and not given more time. The race witness test_serve_first_request did not fail. NOT resubmitted: luthen-observability asked that nothing new be submitted until kubectl answers or the kine series is non-empty (still empty at 03:36Z).",
+      "next_bounded_step": null,
+      "evidence": "2026-11-13T02:38:49Z: Gate run ids (github-cb 2026-11-13: record both): instance 1 REFUSED, gate entry key 1794536286032166486 (began_ns 1794536287229752714), stack W2161 from refs/review/W2161-v1 753e3f66: 506 test targets, 503 executed, 505 tests passed, //:test_page_landings FAILED in 81.5 s (1 failed, 1 passed), gate elapsed 944.7 s, refused 'unattributed'. RESUBMIT of the same stack, gate entry key 1794537452342750752 (began_ns 1794537454246631304), inflight at the time of writing: its verdict is recorded here when it ends; a pass is not evidence about this flake (a refusal that passes on an identical resubmit is not green, host rule) and W2163 stays blocker-class, landing next after W2161 with the forced-interleaving witness. host reviewer ruling: do not hold W2161 (live OOM incident, a stack disjoint from the flaking page path). | 2026-11-13T02:49:14Z: RESUBMIT result: gate entry 1794537452342750752 GREEN, COMMITTED nemik 909b195, gate targets '1 fresh of 506': the cache held every passing result from the refused run and only test_page_landings re-ran, and passed (consistent with a load-dependent failure, not evidence it is fixed: a refusal that passes on an identical resubmit is not green). The stack W2161 has landed, so this fix is the next stack. | 2026-11-13T02:58:41Z: RACE PROVED AND FIXED 2026-11-13: src/nemik/serve.py Model.refresh() set self.graph and self.key and raised self.rebuilds (lines 484-486) before building the document (to_json, 487-498); poke() builds synchronously only while rebuilds == 0 and refresh() returns early when the key matches, so a request that arrived while to_json ran was served the initial payload b-braces and the empty doc, the page read nodes of {} and threw reading map of undefined. 24 parallel runs of the test did not reproduce it (all passed in 90 s). The fix publishes graph, findings, doc, payload, key and rebuilds only after the document is built, key and counter last. tests/test_serve_first_request.py forces the interleaving with events (to_json held open, a second request mid-build); mutant measured: the unfixed serve.py fails it, the fix passes; 9 of 9 bazel targets pass. refs/review/W2163-v1 e3910449, stack-W2163-v1.json. NOT submittable yet: the pace guard refuses a stack that lowers no owed ratchet (codon-baseline.json required fall 2, observed 0; codon-walls.json required fall 1, observed 0) and the earlier stacks passed only because the pace file had been stale; asked the host reviewer for a ruling (pinned admission row, or a genuine paydown first, or an operator hold). A moved wall is not paydown, so none is faked. | 2026-11-13T03:10:40Z: 2026-11-13 bundled with the genuine paydown W2164 per the host ruling (no exemptions: an admission row would be the exemption by another name): refs/review/W2163-v2 beee607c over main 909b1953, stack-W2163-v1.json with two entries (W2163: serve.py + tests/test_serve_first_request.py; W2164: check.py copy_letter without shutil, tests/test_copy_letter.py, codon-walls.json 910 to 898), pace guard ADMITTED, 13 of 13 bazel targets pass, sent to github-cb for review; not submitted. If a gate refuses on this race again, record the instance here, never rerun it as the fix. | 2026-11-13T03:36:41Z: Gate result 2026-11-13: entry 1794539623451676548 (W2163 + W2164, refs/review/W2163-v3, the atomic copy_letter version) REFUSED after 1222.8 s, 508 targets, 505 executed, 502 passed, 6 failed, culprit 'unattributed': (1) tests/test_serve_model.py::test_poke_serves_stale_while_rebuilding FAILED 'assert 1 == 2' (a real consequence of this change, not a flake: it polled the background rebuild for 2 s of wall clock, and rebuilds is now raised only after the document is built, so the wait spans the whole build, seconds under load: idle_wall 11.7 s in the gate; fixed in refs/review/W2163-v4 beee..: 63cefd89: the poll is a 120 s cap, the file's own convention); (2) FIVE TIMEOUTS with no failing assertion: test_check_digest 304.9 s, test_gate 307.2 s, test_serve_check_reports 304.7 s, test_metrics_gating shard 1 304.8 s, test_warm_equals_cold 914.2 s, while the host was overloaded (the cluster datastore and API dark since 03:12:37Z, the kine guard blind: an empty series leaves its streak unchanged); not caused by this stack (none touches serve.py's first-build path beyond the test above); to be run ALONE before a resubmit (loop rule), not rerun as the fix and not given more time. The race witness test_serve_first_request did not fail. NOT resubmitted: luthen-observability asked that nothing new be submitted until kubectl answers or the kine series is non-empty (still empty at 03:36Z). | 2026-11-13T13:55:09Z: landed 74cb09f (gate entry 1794572745179427596, 509 of 509 pass, 506 fresh)",
       "issued_at": "2026-11-13T02:37:24Z",
       "minted_during": "interrupt",
       "caused_by": null,
-      "last_worked": "2026-11-13T12:25:01Z",
+      "last_worked": "2026-11-13T13:55:09Z",
       "ticks_blocked": 0,
-      "completed": null
+      "completed": "20261113T135509Z"
     },
     {
       "symbol": "W2164",
       "title": "Codon walls: check.py copies a letter without shutil",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [
         "file:codon-walls.json"
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Replace shutil.copy2 in nemik.check.letters_report with copy_letter (bytes, permission bits, mtime, pathlib and os only), drop the shutil import, re-record codon-walls.json (910 to 898 pairs: 12 modules no longer reach shutil through check); tests/test_copy_letter.py pins content, mode and mtime; witness: tools/codon_walls.py reports 898 and test_codon_wall_incidence passes. A genuine replacement (a wall removed from the closure), not a relocation.",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-11-13T13:55:09Z: landed e496230 (same gate entry): walls 910 to 897, check.py copy_letter, ask_cli off argparse (W2165 folded in)",
       "issued_at": "2026-11-13T03:10:05Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W2163",
-      "last_worked": "2026-11-13T12:25:01Z",
+      "last_worked": "2026-11-13T13:55:09Z",
       "ticks_blocked": 0,
-      "completed": null
+      "completed": "20261113T135509Z"
     },
     {
       "symbol": "W2165",
       "title": "Codon leaves: nemik.ask_cli compiles, reading its own command line",
-      "status": "ready",
+      "status": "done",
       "enables": [],
       "touches": [
         "file:codon-baseline.json"
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Built in /home/mikemol/github/.nemik-ask-wt (a worktree of main 909b1953), not yet run under bazel (luthen-observability holds new load while the cluster datastore is dark): ask_cli.py reads its command line by hand (parse, as nemik.work does: --name=value, unique prefixes, bare --, -h) and takes an Env, no argparse; the CPython entry is the new nemik/shims/ask_cli.py (cli() fills the Env from nemik.shims.work_cli); console scripts nemik-ask repointed to nemik.shims.ask_cli:cli in pyproject.toml and BUILD.bazel; tests/test_ask.py passes the Env, tests/test_ask_parse.py checks the hand parser against a frozen copy of the old argparse one (9 accepted lines equal, 9 rejected lines the same exit status, usage, missing options named); codon-baseline.json loses ask_cli (both leaves: probe under the pinned Codon: 'ask_cli as_written: COMPILES, ask_cli stripped: COMPILES'), codon-walls.json 910 to 909 (ask_cli's argparse and tempfile pairs fall, the new shim's tempfile counts), bazel/nemik_src.bzl names the shim. Behaviour changes to state: the usage text, and error wording for a bad command line, differ from argparse's. Verify: test_ask, test_ask_parse, test_work_cli, test_codon_census, test_codon_wall_incidence, test_nemik_src, both ratchets; then stack after nemik:W2163/W2164 lands; witness: both ask_cli leaves absent from codon-baseline.json and the census green.",
-      "evidence": "2026-11-13T04:31:32Z: Registries checked 2026-11-13 (read-only, no load): skills/nemik/SKILL.md and src/nemik/data/workflows.toml name the COMMAND nemik-ask, never the module path, so repointing the console script to nemik.shims.ask_cli:cli needs only pyproject.toml and BUILD.bazel (both done); src/nemik/ask.py's docstring still names nemik.ask_cli, which stays true. The new src/nemik/shims/ask_cli.py is named in bazel/nemik_src.bzl (regenerated with tools/nemik_src.py --write after git add). The kine series is still empty at this check, so the bazel verification waits for luthen's go.",
+      "next_bounded_step": null,
+      "evidence": "2026-11-13T04:31:32Z: Registries checked 2026-11-13 (read-only, no load): skills/nemik/SKILL.md and src/nemik/data/workflows.toml name the COMMAND nemik-ask, never the module path, so repointing the console script to nemik.shims.ask_cli:cli needs only pyproject.toml and BUILD.bazel (both done); src/nemik/ask.py's docstring still names nemik.ask_cli, which stays true. The new src/nemik/shims/ask_cli.py is named in bazel/nemik_src.bzl (regenerated with tools/nemik_src.py --write after git add). The kine series is still empty at this check, so the bazel verification waits for luthen's go. | 2026-11-13T13:55:10Z: landed in e496230 (folded into W2164's commit because the pace guard owed codon-baseline.json); codon-baseline.json lost the ask_cli entry",
       "issued_at": "2026-11-13T03:59:48Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W1179",
-      "last_worked": "2026-11-13T12:25:42Z",
+      "last_worked": "2026-11-13T13:55:10Z",
+      "ticks_blocked": 0,
+      "completed": "20261113T135510Z"
+    },
+    {
+      "symbol": "W2166",
+      "title": "Read card namespaces (W, R, A) from a declared table so <repo>:A<n> resolves",
+      "status": "blocked",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [
+        "mtools:W2410"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Declare the table; make check, inbound, rank and the witness tools resolve by it; then split: nemik-witnesses closes A-cards like weather cards, nemik-operator lists open A-cards apart from work.",
+      "evidence": "2026-11-13T14:07:30Z: RELAYED by github-cb (operator ruling, not yet checked against the transcript): A<n> is the namespace for ALL weather cards; the per-condition class is an umbrella W-card; the driving card is blocked on both the A-card and the umbrella W. Reader scope: (1) the weather rules (one per episode, witness closes it, never reopened) apply to A-cards; (2) nemik-rank ranks the A-card and the umbrella above the driver through those edges, and checks that an A-card's weight propagates to the umbrella's follow-up; (3) nemik-check warns on an A-card with no umbrella W parent once a cause is named. Writer side: mtools:W2410. | 2026-11-13T14:08:09Z: RELAYED addendum from github-cb (operator, unchecked against the transcript): prior art is IMAG (Google incident management, from the Incident Command System) alongside ITIL. A-card = incident, closes on mitigation; umbrella W = postmortem; its children = action items, which outrank new work. nemik-operator: consider listing open A-cards with the incident commander (the owning session) and the postmortem's open action items. | 2026-11-13T14:46:08Z: External review (operator-shared, the weather-incidents nemik-architecture review, surveyed e496230): also asks typed edges (attribution, association, dependency, retrospective) rather than overloading blocked_on (8.3, 9.3); A kept out of ready-work ranking as ordinary work (8.2); rank-inversion and no-cycle checks with a test that unrelated work is not blocked (16). HOLD the A semantics until the operator rules the open conflict, A as an occurrence vs weather as blocked work (relayed by github-cb); the namespace-table read is unaffected. 8.4 verified in this tree and carded as W2169 (stale G4 doc) and W2170 (no retro ingestion).",
+      "issued_at": "2026-11-13T13:55:47Z",
+      "minted_during": "interrupt",
+      "caused_by": "luthen-observability:W2609",
+      "last_worked": "2026-11-13T14:46:08Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W2167",
+      "title": "Pick one test target and record the staged bytes of each input (venv, Chromium, opa, Codon, corpus) from its sandbox, no timing",
+      "status": "ready",
+      "enables": [
+        "W1075"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-11-13T14:39:54Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1075",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2168",
+      "title": "Take the idle-host staging time of that target once luthen reports the host idle, and split it by input",
+      "status": "ready",
+      "enables": [
+        "W1075"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-11-13T14:39:54Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1075",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2169",
+      "title": "docs/retro-audit.md says G4 has no shape but shapes.ttl has one (W983): correct the doc",
+      "status": "ready",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Edit docs/retro-audit.md lines 13, 23 and 38 to name the shape at src/nemik/data/shapes.ttl:650 and what it still lacks (the G8 fixpoint), then run the doc's test.",
+      "evidence": "",
+      "issued_at": "2026-11-13T14:45:32Z",
+      "minted_during": "interrupt",
+      "caused_by": null,
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2170",
+      "title": "Ingest the queue's real retro records as nemik:Retro so the retro shapes run on them, not only on fixtures",
+      "status": "ready",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Read the retros list through the writer, map each to nemik:Retro/RetroFinding in the adapter, run shapes.ttl over it, and pin with a test on a real retro record; no module under src/nemik mentions Retro today, only nemik.ttl and shapes.ttl do.",
+      "evidence": "",
+      "issued_at": "2026-11-13T14:45:33Z",
+      "minted_during": "interrupt",
+      "caused_by": null,
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2171",
+      "title": "File the weather-incident design docs under docs/design/weather-incidents and reply with their committed paths",
+      "status": "working",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Commit docs/design/weather-incidents/{README,outline,architecture-review}.md through the gate; reply to github-cb with the paths so mtools and luthen cite the committed copies.",
+      "evidence": "",
+      "issued_at": "2026-11-13T14:46:38Z",
+      "minted_during": "interrupt",
+      "caused_by": "mtools:W2410",
+      "last_worked": "2026-11-13T14:47:02Z",
       "ticks_blocked": 0,
       "completed": null
     }
