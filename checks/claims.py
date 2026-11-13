@@ -257,6 +257,8 @@ def hub_modules_depend_on_everything_below() -> None:
     # set also names what they imported inside functions: health and stackable_cli for metrics.
     # nemik:W1669: both read the queue file names, the default root and the workstream list from
     # queuefiles, a leaf of standard library only, where check used to define them.
+    # nemik:W2147: serve reads graph.json's nodes through tomlview.tables, a leaf of pure functions,
+    # now that nemik.pieces' GraphDoc is a plain dict and not a TypedDict.
     expected = {
         "metrics": lower
         | {
@@ -306,6 +308,7 @@ def hub_modules_depend_on_everything_below() -> None:
             "rank",
             "salience",
             "score",
+            "tomlview",
             "trs",
             "withheld",
             "queuefiles",

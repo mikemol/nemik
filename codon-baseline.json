@@ -123,10 +123,6 @@
   "as_written": "no module named 'argparse'",
   "stripped": "no module named 'argparse'"
  },
- "pieces": {
-  "as_written": "no module named '__future__'",
-  "stripped": "no module named 'collections.abc'"
- },
  "pins": {
   "as_written": "no module named '__future__'",
   "stripped": "no module named 'argparse'"

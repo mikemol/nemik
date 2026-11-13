@@ -141,6 +141,7 @@ NEMIK_PY = [
     "src/nemik/tomlview.py",
     "src/nemik/tracker.py",
     "src/nemik/trs.py",
+    "src/nemik/urnbase.py",
     "src/nemik/verify.py",
     "src/nemik/vtodo.py",
     "src/nemik/waitemit.py",

@@ -522,18 +522,6 @@
   "typing.cast": "reached",
   "urllib.parse": "reached"
  },
- "pieces": {
-  "TYPE_CHECKING": "reached",
-  "hashlib": "reached",
-  "importlib.metadata": "reached",
-  "importlib.resources": "reached",
-  "mikemol.* (third-party)": "reached",
-  "rdflib": "reached",
-  "tomllib": "reached",
-  "typing.TypedDict": "reached",
-  "typing.cast": "reached",
-  "urllib.parse": "reached"
- },
  "pins": {
   "argparse": "reached",
   "mikemol.* (third-party)": "reached",

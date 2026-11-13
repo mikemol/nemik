@@ -21,6 +21,7 @@ from typing import TYPE_CHECKING, cast
 
 from nemik.pieces import Row, assemble, split
 from nemik.serve import Model
+from nemik.tomlview import table, tables
 
 if TYPE_CHECKING:
     from nemik.pieces import GraphDoc
@@ -116,15 +117,18 @@ def _first_repos(doc: GraphDoc, n: int) -> GraphDoc:
         and no inbound or operator rows.
 
     """
-    keep = sorted({str(x["repo"]) for x in doc["nodes"] if x["repo"]})[:n]
-    nodes = [x for x in doc["nodes"] if x["repo"] in keep]
+    every = tables(doc["nodes"])
+    keep = sorted({str(x["repo"]) for x in every if x["repo"]})[:n]
+    nodes = [x for x in every if x["repo"] in keep]
     ids = {x["id"] for x in nodes}
     cut: GraphDoc = {
         **doc,
         "nodes": nodes,
-        "edges": [e for e in doc["edges"] if e["source"] in ids and e["target"] in ids],
-        "findings": {r: v for r, v in doc["findings"].items() if r in keep},
-        "health": {r: v for r, v in doc["health"].items() if r in keep},
+        "edges": [
+            e for e in tables(doc["edges"]) if e["source"] in ids and e["target"] in ids
+        ],
+        "findings": {r: v for r, v in table(doc["findings"]).items() if r in keep},
+        "health": {r: v for r, v in table(doc["health"]).items() if r in keep},
         "inbound": [],
         "operator": [],
     }
@@ -140,7 +144,7 @@ def main() -> None:
         (OUT / f"{name}.json").write_text(
             json.dumps(case, indent=1, sort_keys=True, default=str) + "\n"
         )
-        sys.stdout.write(f"{name}: {len(doc['nodes'])} nodes, {len(cut)} pieces\n")
+        sys.stdout.write(f"{name}: {len(tables(doc['nodes']))} nodes, {len(cut)} pieces\n")
 
 
 if __name__ == "__main__":

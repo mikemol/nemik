@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 2182,
+  "counter": 2184,
   "waypoints": [
     {
       "symbol": "W1",
@@ -51647,7 +51647,7 @@
     {
       "symbol": "W2147",
       "title": "W423a: pieces.split/assemble compiles under the pinned Codon and passes the pieces corpus",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W423"
       ],
@@ -51655,12 +51655,13 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "Edit src/nemik/pieces.py into the Codon-strict subset (no import walls), add it to the census with no baseline entry, run tests/corpus/pieces through the native build in tests/test_pieces_corpus.py; witness: test_codon_census and test_pieces_corpus pass with pieces absent from codon-baseline.json.",
-      "evidence": "",
+      "evidence": "2026-11-13T22:25:52Z: READ 2026-11-13 at 98a2135 (no edit yet): pieces.py is 112 lines and reaches two walls. (1) BASE = 'urn:nemik:' imported from nemik.adapter (adapter.py:84), which drags the whole adapter closure (rdflib, urllib.parse, hashlib, importlib.metadata, typing.cast, mikemol.*); the constant can move to a pure leaf that adapter re-imports, one small edit. (2) typing.TypedDict for GraphDoc (8 optional keys): GraphDoc is subscripted and built as a dict literal in pieces.py, serve.py:84 and :1625 (cast), tests/test_pieces.py, tests/test_pieces_corpus.py and tools/gen_pieces_corpus.py, so replacing it changes every reader; it is the same TypedDict wall that blocks and witnesses carry (6 and 4 pairs), so the choice of a Codon-valid form for typed JSON documents is shared: carried as the decision card below. Until that form is chosen the baseline entry for pieces cannot leave.",
       "issued_at": "2026-11-10T18:00:11Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W423",
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-11-13T23:16:49Z",
+      "ticks_blocked": 0,
+      "completed": null
     },
     {
       "symbol": "W2148",
@@ -52139,11 +52140,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "Read the forecast's explicit impasse (nemik:W1665) with the blocked_on graph and design the detection: an impasse whose clearing cards all belong to another repo mints or proposes an A-card, the stuck work is blocked on it, and the upstream paydown card is cited; a repo-local impasse stays no incident. Record the ruling in docs/design/weather-incidents/README.md in a docs stack first.",
-      "evidence": "2026-11-13T20:31:21Z: RULING relayed by github-cb (operator, host session 2026-11-13; the quote is theirs, not checked against the transcript): a repo painted into a corner by ratchets is WEATHER. (a) Repo-local: no incident, the ratchet's intended forcing function, which justifies design or heavy work. (b) Cross-repo: the repo is truly stuck because another repo has not finished a paydown asked of it: an INCIDENT, an A card for the occurrence, the stuck work blocked on it, the upstream paydown card cited. Quote as relayed: 'If it's cross-repo, then that's an incident, because the other repo didn't finish paying down whatever was asked for it before the first repo got truly stuck.' Detection to design: the forecast's explicit impasse (nemik:W1665) combined with the blocked_on graph; an impasse whose clearing cards all belong to another repo mints or proposes the A card. Sits on W2166 (A semantics, blocked on mtools:W2410) and the design in docs/design/weather-incidents. | 2026-11-13T20:34:34Z: FIRST LIVE INSTANCE, classified by hand 2026-11-13 (github-cb's ask; facts read at f081845 with held-W2163-wall-fixes.py.txt and held-W2163-leaf-candidates.py.txt). OWED: codon-walls.json fall 1 (no paydown card named), codon-baseline.json fall 2 (cards W1179, W1400). WALLS (fall 1): nemik's OWN work clears it, so by the ruling this is the forcing function, not an incident: calendars carries shutil alone for 2 pairs (shutil.which, shutil.rmtree), carded as W2179 and being done (895 recorded vs 897); others a nemik edit can clear: shaclcache contextlib 3, witnesses 3 each for argparse/datetime/http.client/urllib.parse, blocks typing.TypedDict 6, marks hashlib 6, adapter urllib.parse 43 (design change). BASELINE (fall 2): every leaf candidate (closure reaching at most 3 walls) is walled by something outside nemik's reach alone: waitlog = TYPE_CHECKING (nemik) plus mikemol.* third-party (cross-repo or composition); pins = argparse (nemik) plus tomllib plus mikemol.procrun; warrants = TYPE_CHECKING, importlib.resources, tomllib. Clearing: mikemol.* needs the compiler to import composed dists (mtools dists compile under Codon, or Codon gains third-party import); tomllib and importlib.resources need a Codon-safe boundary (mtools:W1344, blocked on mtools:W1667) or a nemik hand reader; no upstream card names the mikemol.* import wall (asked of mtools). Upstream cards for the admission side: mtools:W2417 (admit by fall), mtools:W2410 (A namespace writer), mtools:W1341 (record form, waits on nemik:W567). So BASELINE fall 2 is the cross-repo case in principle, but an A-card cannot be minted yet: the A namespace is unbuilt (mtools:W2410). TENSION, reported not resolved: the operator ruled today (relayed) that mikemol.* composition is good and proper, so a Codon wall at that import is a wall in the composed pieces, not a reason to inline them.",
+      "evidence": "2026-11-13T20:31:21Z: RULING relayed by github-cb (operator, host session 2026-11-13; the quote is theirs, not checked against the transcript): a repo painted into a corner by ratchets is WEATHER. (a) Repo-local: no incident, the ratchet's intended forcing function, which justifies design or heavy work. (b) Cross-repo: the repo is truly stuck because another repo has not finished a paydown asked of it: an INCIDENT, an A card for the occurrence, the stuck work blocked on it, the upstream paydown card cited. Quote as relayed: 'If it's cross-repo, then that's an incident, because the other repo didn't finish paying down whatever was asked for it before the first repo got truly stuck.' Detection to design: the forecast's explicit impasse (nemik:W1665) combined with the blocked_on graph; an impasse whose clearing cards all belong to another repo mints or proposes the A card. Sits on W2166 (A semantics, blocked on mtools:W2410) and the design in docs/design/weather-incidents. | 2026-11-13T20:34:34Z: FIRST LIVE INSTANCE, classified by hand 2026-11-13 (github-cb's ask; facts read at f081845 with held-W2163-wall-fixes.py.txt and held-W2163-leaf-candidates.py.txt). OWED: codon-walls.json fall 1 (no paydown card named), codon-baseline.json fall 2 (cards W1179, W1400). WALLS (fall 1): nemik's OWN work clears it, so by the ruling this is the forcing function, not an incident: calendars carries shutil alone for 2 pairs (shutil.which, shutil.rmtree), carded as W2179 and being done (895 recorded vs 897); others a nemik edit can clear: shaclcache contextlib 3, witnesses 3 each for argparse/datetime/http.client/urllib.parse, blocks typing.TypedDict 6, marks hashlib 6, adapter urllib.parse 43 (design change). BASELINE (fall 2): every leaf candidate (closure reaching at most 3 walls) is walled by something outside nemik's reach alone: waitlog = TYPE_CHECKING (nemik) plus mikemol.* third-party (cross-repo or composition); pins = argparse (nemik) plus tomllib plus mikemol.procrun; warrants = TYPE_CHECKING, importlib.resources, tomllib. Clearing: mikemol.* needs the compiler to import composed dists (mtools dists compile under Codon, or Codon gains third-party import); tomllib and importlib.resources need a Codon-safe boundary (mtools:W1344, blocked on mtools:W1667) or a nemik hand reader; no upstream card names the mikemol.* import wall (asked of mtools). Upstream cards for the admission side: mtools:W2417 (admit by fall), mtools:W2410 (A namespace writer), mtools:W1341 (record form, waits on nemik:W567). So BASELINE fall 2 is the cross-repo case in principle, but an A-card cannot be minted yet: the A namespace is unbuilt (mtools:W2410). TENSION, reported not resolved: the operator ruled today (relayed) that mikemol.* composition is good and proper, so a Codon wall at that import is a wall in the composed pieces, not a reason to inline them. | 2026-11-13T22:02:21Z: WALLS PAYDOWN STATE 2026-11-13 after W2179 (a4a3f36, 897 to 895) and W2182 (98a2135, 895 to 892): the cheap nemik-only candidates are spent. Read at 98a2135: witnesses carries http.client and urllib.parse because _read fetches a PromQL URL itself (a network client, so a design change: the composed mikemol.endpoints/otlp dists would carry it, which is the mikemol.* wall), plus argparse and datetime; blocks carries typing.TypedDict for AskRow and its siblings (consumers index them as dicts, so plain classes change every reader); marks carries hashlib (a hash, which would mean reimplementing sha256); endpoint carries TYPE_CHECKING for one annotation-only 'from pathlib import Path', and removing that guard makes the house ruff rule TC003 (annotation-only import belongs under TYPE_CHECKING) fail, so the TYPE_CHECKING wall and ruff's TC rules conflict for every module that has one (waitlog, warrants, endpoint, ...): that needs a ruling on which wins, or a ruff-house exemption, not a code edit. So further walls paydown is design work, not a one-line replacement.",
       "issued_at": "2026-11-13T20:31:15Z",
       "minted_during": "interrupt",
       "caused_by": "luthen-observability:W2609",
-      "last_worked": "2026-11-13T20:34:34Z",
+      "last_worked": "2026-11-13T22:02:21Z",
       "ticks_blocked": 0
     },
     {
@@ -52218,19 +52219,51 @@
     {
       "symbol": "W2182",
       "title": "Codon walls paydown: shaclcache's SPARQL cache block is a class, not a contextlib generator",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Run the shacl and codon targets under bazel, cut the ref, pace verdict, submit once, mark done on landing.",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-11-13T22:02:08Z: landed 98a2135 (gate green; walls 895 to 892)",
       "issued_at": "2026-11-13T21:24:32Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W2177",
-      "last_worked": "2026-11-13T21:43:27Z",
+      "last_worked": "2026-11-13T22:02:08Z",
       "ticks_blocked": 0,
-      "completed": null
+      "completed": "20261113T220208Z"
+    },
+    {
+      "symbol": "W2183",
+      "title": "Decide how TYPE_CHECKING guards meet Codon and ruff TC003, which both claim the same import",
+      "status": "ready",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Default, acted on now: keep ruff TC003 (annotation-only imports stay under TYPE_CHECKING) and treat the TYPE_CHECKING wall as the compiler's to clear, so no code edit removes it; the operator's answer amends this. Alternative to weigh: make the census's stripped mode drop 'if TYPE_CHECKING:' blocks as it drops __future__, which would clear the wall for every module at once but changes what the baseline counts.",
+      "evidence": "",
+      "issued_at": "2026-11-13T22:25:20Z",
+      "minted_during": "interrupt",
+      "caused_by": "nemik:W2177",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2184",
+      "title": "Choose a Codon-valid form for typed JSON documents in place of TypedDict (pieces, blocks, witnesses)",
+      "status": "ready",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Default, acted on now: a plain annotated class per document with an explicit __init__ and from_json/to_json, option A of nemik:W567, starting with pieces.GraphDoc as the smallest case; the operator's answer amends this. Measure first: count GraphDoc's readers (pieces, serve.py:84 and :1625, test_pieces, test_pieces_corpus, tools/gen_pieces_corpus) and what a class form costs each.",
+      "evidence": "",
+      "issued_at": "2026-11-13T22:25:53Z",
+      "minted_during": "interrupt",
+      "caused_by": "nemik:W2147",
+      "last_worked": null,
+      "ticks_blocked": 0
     }
   ],
   "residue": [

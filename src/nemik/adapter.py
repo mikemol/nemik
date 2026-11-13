@@ -21,7 +21,7 @@ from mikemol.pathsforward import attach, ledger, model, store
 from rdflib import RDF, Graph, Literal, Namespace, URIRef
 from rdflib.namespace import DCTERMS, PROV, RDFS, XSD
 
-from nemik import editverbs, warrants
+from nemik import editverbs, urnbase, warrants
 
 if TYPE_CHECKING:
     from collections.abc import Callable
@@ -81,7 +81,7 @@ class _Terms(Namespace):
 OSLC_CM = _Terms("http://open-services.net/ns/cm#")
 OSLC = _Terms("http://open-services.net/ns/core#")
 NEMIK = _Terms("https://github.com/mikemol/nemik/ns#")
-BASE = "urn:nemik:"
+BASE = urnbase.BASE  # nemik:W2147: defined in nemik.urnbase, a pure module; kept here by name
 
 STATE = {
     "ready": NEMIK.Ready,

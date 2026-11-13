@@ -8,6 +8,7 @@ from pathlib import Path
 
 from nemik.pieces import FLEET, GraphDoc, assemble, split
 from nemik.serve import build_static
+from nemik.tomlview import strings, table, tables
 
 FLEET_FIXTURE = Path(__file__).parent / "fixtures" / "fleet"
 
@@ -32,12 +33,11 @@ def test_published_pieces_assemble_to_the_published_graph(tmp_path: Path) -> Non
     build_static(FLEET_FIXTURE, out, withheld)
     whole = _piece(out / "graph.json")
     fleet = _piece(out / "graph" / f"{FLEET}.json")
-    assert fleet["repos"], "the fixture has repos, so there are repo pieces"
-    pieces = {FLEET: fleet} | {
-        r: _piece(out / "graph" / f"{r}.json") for r in fleet["repos"]
-    }
+    repos = strings(fleet["repos"])
+    assert repos, "the fixture has repos, so there are repo pieces"
+    pieces = {FLEET: fleet} | {r: _piece(out / "graph" / f"{r}.json") for r in repos}
     back = assemble(pieces)
-    whole["nodes"] = sorted(whole["nodes"], key=operator.itemgetter("id"))
+    whole["nodes"] = sorted(tables(whole["nodes"]), key=operator.itemgetter("id"))
     assert back == whole
 
 
@@ -60,12 +60,12 @@ def test_a_repo_piece_holds_only_that_repo() -> None:
         "health": {"a": {}, "b": {}},
     }
     pieces = split(doc)
-    assert [n["id"] for n in pieces["a"]["nodes"]] == ["urn:nemik:a/W1"]
-    assert len(pieces["a"]["edges"]) == 1
-    assert set(pieces[FLEET]["findings"]) == {"c"}
+    assert [n["id"] for n in tables(pieces["a"]["nodes"])] == ["urn:nemik:a/W1"]
+    assert len(tables(pieces["a"]["edges"])) == 1
+    assert set(table(pieces[FLEET]["findings"])) == {"c"}
     expected: GraphDoc = {
         **doc,
-        "nodes": sorted(doc["nodes"], key=operator.itemgetter("id")),
+        "nodes": sorted(tables(doc["nodes"]), key=operator.itemgetter("id")),
         "findings": {"a": [], "c": []},
         "ruler": {},
     }

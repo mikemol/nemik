@@ -94,6 +94,7 @@ from nemik.say import say, warn
 from nemik.score import load_weights
 from nemik.stackable import manifest
 from nemik.starved import days_limit, starved_fleet
+from nemik.tomlview import tables
 from nemik.trs import turtle
 from nemik.wake import operator_row, read_liveness, roster
 from nemik.withheld import _id, apply
@@ -1641,7 +1642,7 @@ def build_static_unscoped(
     # withheld card leaves both the base and the change log
     hidden = frozenset(_id(r) for r in refs)
     bodies = {name: json.dumps(doc, indent=1) for name, doc in docs.items()}
-    repos = {str(n["repo"]) for n in graph["nodes"] if n["repo"]}
+    repos = {str(n["repo"]) for n in tables(graph["nodes"]) if n["repo"]}
     for repo in sorted(repos):
         feed = turtle(repo, model.graph, model.graph, hidden)
         for part in ("base", "changelog"):

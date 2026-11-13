@@ -5932,3 +5932,7 @@
 2026-11-13T21:00:39Z  status W2178 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-13T21:24:32Z  interrupt W2182 minted    -         "Codon walls paydown: shaclcache's SPARQL cache block is a class, not a contextlib generator"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W2177
 2026-11-13T21:43:27Z  status W2182 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-13T22:02:08Z  status W2182 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-13T22:25:20Z  interrupt W2183 minted    -         "Decide how TYPE_CHECKING guards meet Codon and ruff TC003, which both claim the same import"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W2177
+2026-11-13T22:25:53Z  interrupt W2184 minted    -         "Choose a Codon-valid form for typed JSON documents in place of TypedDict (pieces, blocks, witnesses)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W2147
+2026-11-13T23:16:49Z  status W2147 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
