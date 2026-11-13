@@ -11,11 +11,21 @@ model over every queue, and its semantics are read and enforced in nemik (nemik:
 Owners: the writer side is mtools:W2410, the producer is luthen-observability:W2609, the reader, rank,
 witness and operator view are nemik:W2166.
 
-## Open, waiting on the operator
+## Resolved: the A-card is the occurrence, weather is a role (the review's 8.1)
 
-The review holds that an A-card (an occurrence) and the existing weather card (blocked work) are
-different resources. The operator's ruling folded weather into A. This is NOT resolved here: the A
-semantics are held until the operator rules. The namespace-table read in nemik:W2166 is unaffected.
+The review held that an A-card (an occurrence) and the existing weather card (blocked work) are
+different resources, while an earlier operator ruling folded weather into A. The operator has since
+ruled, superseding that (relayed by github-cb on 2026-11-13; not checked here against the operator's
+transcript):
+
+- A<n> is the OCCURRENCE.
+- Weather is a ROLE: a W-card blocked on `<repo>:A<n>`.
+- Weather detection keys off that edge.
+- A-cards stay out of ready-work ranking.
+- The witness closes the A (the occurrence), which unblocks the waiting W-cards.
+
+The outline predates this ruling: where it says "A for weather" (its 4.1 and 4.2), read it through
+the ruling above. The hold on the A semantics in nemik:W2166 is lifted.
 
 ## Findings of the review that are nemik's
 
@@ -24,4 +34,4 @@ semantics are held until the operator rules. The namespace-table read in nemik:W
 - 8.4, the G4 doc and shape disagree: docs/retro-audit.md says G4 has no shape, and
   src/nemik/data/shapes.ttl has one (nemik:W2169).
 - 8.2, 8.3, 9.3 and 16: A kept out of ready-work ranking, typed edges, rank-inversion and no-cycle
-  checks: recorded on nemik:W2166 and held with the A semantics.
+  checks: recorded on nemik:W2166 (the hold on them is lifted with the ruling above).
