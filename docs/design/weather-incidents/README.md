@@ -44,6 +44,21 @@ transcript):
 The outline's declaration gate (its 7) and its one-umbrella-per-declared-incident rule (its 4.3) are
 read through these rulings.
 
+## Resolved: a ratchet impasse is weather only across repos
+
+Another operator ruling, relayed by github-cb on 2026-11-13 (not checked here against the operator's
+transcript). A repo painted into a corner by ratchets is weather:
+
+- Repo-local: no incident. It is the ratchet's intended forcing function, and it justifies design or
+  heavy work.
+- Cross-repo: the repo is truly stuck because another repo has not finished a paydown asked of it.
+  That is an incident: an A-card for the occurrence, the stuck work blocked on it, and the upstream
+  paydown card cited.
+
+Detection, still to design (nemik:W2177): the forecast's explicit impasse (nemik:W1665) combined with
+the blocked_on graph. An impasse whose clearing cards all belong to another repo mints or proposes
+the A-card.
+
 ## Points of the second review that are nemik's
 
 Relayed by github-cb; each is the review's claim, not yet checked against this tree. Design only:

@@ -5914,3 +5914,17 @@
 2026-11-13T15:16:24Z  status W2173 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-13T15:26:24Z  status W2174 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-13T15:45:42Z  status W2169 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-13T15:48:44Z  status W2169 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-13T17:03:06Z  interrupt W2175 minted    -         "check.mark_gating calls work.in_gate without its Env, so nemik-inbound and every survey that marks gating crash"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=mtools:W2396
+2026-11-13T17:03:50Z  status W2175 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-13T19:28:39Z  interrupt W2176 minted    -         "Flag an operator: act ask that has the operator hand-supply a credential, extending the sudo_shaped rule (W1264, W1265)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=luthen-observability:W703
+2026-11-13T20:31:15Z  interrupt W2177 minted    -         "Mint or propose an A-card when a ratchet impasse is cleared only by another repo's cards (weather ruling, 2026-11-13)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=luthen-observability:W2609
+2026-11-13T20:31:26Z  interrupt W2178 minted    -         "Record the ratchet-impasse weather ruling in the weather-incident design README"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=luthen-observability:W2609
+2026-11-13T20:31:46Z  status W2178 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-13T20:31:52Z  status W2178 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-13T20:33:50Z  interrupt W2179 minted    -         "Codon walls paydown: calendars.py reads PATH and removes its scratch directory without shutil"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W2177
+2026-11-13T20:36:51Z  interrupt W2180 minted    -         "Pay codon-baseline fall 2 through the mikemol.* import wall, once mtools says what a consumer needs"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W2177
+2026-11-13T20:36:56Z  status W2180 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-13T20:40:35Z  interrupt W2181 minted    -         "Fleet gate-parity census: warn on a lint or build gate present in one repo and absent in another"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=mtools:W2430
+2026-11-13T20:44:30Z  status W2179 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-13T20:44:31Z  status W2178 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
