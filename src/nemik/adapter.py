@@ -21,7 +21,7 @@ from mikemol.pathsforward import attach, ledger, model, store
 from rdflib import RDF, Graph, Literal, Namespace, URIRef
 from rdflib.namespace import DCTERMS, PROV, RDFS, XSD
 
-from nemik import editverbs, urnbase, warrants
+from nemik import editverbs, retroingest, urnbase, warrants
 
 if TYPE_CHECKING:
     from collections.abc import Callable
@@ -641,7 +641,28 @@ def _queue_graph(repo: str, state_path: Path, known: frozenset[str]) -> Graph:
         _add_letters(g, node, w)
         _add_schedule(g, repo, node, w)
     _drop_residue(g, repo, ws, state)
+    _add_retros(g, repo, state.doc.get("retros"))
     return g
+
+
+def _add_retros(g: Graph, repo: str, retros: object) -> None:
+    """Add the queue's scaffold-form retros as the nodes the retro shapes judge (nemik:W982).
+
+    nemik.retroingest reads the retros list into text tuples; a predicate `a` is rdf:type, an
+    object that is a node becomes a urn:nemik: reference and any other object a literal. The
+    nodes live under the repo (`urn:nemik:<repo>/retro/<id>`) because nemik.check files a finding
+    under the first path segment of its focus node: one under `retro/...` would be filed under a
+    repo called "retro" and reported nowhere. The shapes had only ever run on fixtures, so a real
+    retro reached none of them.
+    """
+    for subject, predicate, obj, is_node in retroingest.all_triples(retros):
+        node = URIRef(f"{BASE}{repo}/{subject}")
+        if predicate == "a":
+            g.add((node, RDF.type, URIRef(f"{NEMIK}{obj}")))
+        elif is_node:
+            g.add((node, URIRef(f"{NEMIK}{predicate}"), URIRef(f"{BASE}{repo}/{obj}")))
+        else:
+            g.add((node, URIRef(f"{NEMIK}{predicate}"), Literal(obj)))
 
 
 # Ledger kind -> effort class. Only `tick` has a defined meaning upstream (see the friction report

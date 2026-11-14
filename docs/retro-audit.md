@@ -30,8 +30,15 @@ was written G4 had no shape; W983 added it, and the sections below that say othe
 
 ## The gap that matters most
 
-The shapes judge fixtures. Nothing reads a real retro into the graph: the adapter has no source of `nemik:Retro` nodes,
-so no retro has ever been judged by them. The shape set is the cheap part; the missing part is ingestion (W982).
+When this audit was written the shapes judged fixtures only: nothing read a real retro into the graph, so no retro had
+ever been judged by them. Ingestion is W982: `nemik.retroingest` reads a queue's `retros` list into triples and
+`nemik.adapter` adds them to the queue's graph, so a retro that comes through a queue file is judged by the shapes.
+
+The ingest reads only the SCAFFOLD FORM, a retro that carries a `precommit`. Measured 2026-11-13 over the 493 retros of
+nemik's own queue: 449 are the older free form (no precommit, delta, sustain or frozen timeline) and the shapes give 524
+Violations on them, history and not live defects, so they are left out until a back-fill rule is chosen; the 44 scaffold
+retros are held to the shapes. The cut-over is `retroingest.in_scope`. Retros written without a precommit are not
+judged: that is the gap that remains.
 
 ## Gaps, carded
 
