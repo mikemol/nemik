@@ -5939,3 +5939,6 @@
 2026-11-14T00:59:15Z  status W2147 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-14T01:16:51Z  interrupt W2185 minted    -         "Codon walls paydown: hostapply's three frozen dataclasses are plain classes with explicit __init__, __eq__ and __hash__"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W2177
 2026-11-14T01:34:47Z  status W2185 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-14T01:55:48Z  status W2185 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-14T02:13:53Z  interrupt W2186 minted    -         "Codon walls paydown: history turns Diff and Churn into JSON rows without dataclasses.asdict"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W2177
+2026-11-14T02:24:29Z  status W2186 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

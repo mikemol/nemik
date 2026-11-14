@@ -20,7 +20,7 @@ import statistics
 import sys
 import zlib
 from collections import Counter
-from dataclasses import asdict, dataclass, field
+from dataclasses import dataclass, field
 from datetime import UTC, datetime, timedelta
 from itertools import starmap
 from pathlib import Path
@@ -1091,7 +1091,7 @@ def weekly(snaps: list[Snapshot]) -> list[WeeklyRow]:
 BASELINE_PATH = ".claude/baseline"
 
 
-def _asdicts(items: dict[str, Diff]) -> dict[str, object]:
+def diff_rows(items: dict[str, Diff]) -> dict[str, object]:
     """Turn each repo's Diff into its field dict, for JSON.
 
     Returns:
@@ -1100,7 +1100,18 @@ def _asdicts(items: dict[str, Diff]) -> dict[str, object]:
     """
     rows: dict[str, object] = {}
     for repo, change in items.items():
-        row: object = asdict(change)
+        # nemik:W2186 (codon paydown): asdict was dataclasses.asdict, a Codon wall history carried
+        # alone for 18 pairs. Diff's seven fields, as the dict asdict made of them: its lists are
+        # copied, and its tuples become lists, as asdict's recursion did, so the JSON is the same.
+        row: object = {
+            "minted": list(change.minted),
+            "closed": list(change.closed),
+            "dropped": list(change.dropped),
+            "flips": [list(f) for f in change.flips],
+            "edges_added": [list(e) for e in change.edges_added],
+            "edges_removed": [list(e) for e in change.edges_removed],
+            "new_cross_blocks": [list(b) for b in change.new_cross_blocks],
+        }
         rows[repo] = row
     return rows
 
@@ -1443,7 +1454,7 @@ def render_churn(
     return "\n".join(lines)
 
 
-def _polls(rows: list[Churn]) -> list[object]:
+def poll_rows(rows: list[Churn]) -> list[object]:
     """Turn each poll row into its field dict, for JSON.
 
     Returns:
@@ -1452,7 +1463,8 @@ def _polls(rows: list[Churn]) -> list[object]:
     """
     polls: list[object] = []
     for row in rows:
-        poll: object = asdict(row)
+        # nemik:W2186: Churn's three fields, as the dict dataclasses.asdict made of them
+        poll: object = {"step": row.step, "polls": row.polls, "counts": dict(row.counts)}
         polls.append(poll)
     return polls
 
@@ -1474,7 +1486,7 @@ def run_churn(
     rows = [churn(fleet, start, end, step) for step in STEPS]
     commits = commit_classes(fleet, start, end)
     if as_json:
-        out = {"commits": commits, "polls": _polls(rows)}
+        out = {"commits": commits, "polls": poll_rows(rows)}
         say(json.dumps(out, indent=1))
     else:
         say(render_churn((start, end), len(names), commits, rows))
@@ -1655,7 +1667,7 @@ def main(argv: list[str] | None = None) -> int:
         new = queue_at(repo, resolve(repo, args.to))
         out[name] = diff(old, new)
     if args.json:
-        say(json.dumps(_asdicts(out), indent=1))
+        say(json.dumps(diff_rows(out), indent=1))
     else:
         say("\n".join(starmap(render, out.items())))
     return 0
