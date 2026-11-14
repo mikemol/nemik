@@ -62,9 +62,6 @@
  },
  "cachestore": {
   "TYPE_CHECKING": "reached",
-  "class decorator with arguments": "reached",
-  "dataclasses.dataclass": "reached",
-  "dataclasses.field": "reached",
   "fractions": "reached",
   "hashlib": "reached",
   "importlib.metadata": "reached",
@@ -218,9 +215,6 @@
  },
  "flow": {
   "TYPE_CHECKING": "reached",
-  "class decorator with arguments": "reached",
-  "dataclasses.dataclass": "reached",
-  "dataclasses.field": "reached",
   "fractions": "reached"
  },
  "forecast": {

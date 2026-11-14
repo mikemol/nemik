@@ -29,7 +29,6 @@ from __future__ import annotations
 
 import heapq
 from collections import OrderedDict
-from dataclasses import dataclass, field
 from fractions import Fraction
 from typing import TYPE_CHECKING
 
@@ -40,7 +39,6 @@ ZERO = Fraction(0)
 ONE = Fraction(1)
 
 
-@dataclass(frozen=True)
 class Flow:
     """One solve.
 
@@ -49,13 +47,60 @@ class Flow:
     its cone; `potential[source]` is the potential at the source for its injected demand, whose
     ratio to the demand is the effective resistance from the source to the frontier. `current[(card,
     prerequisite)]` is the demand that crossed that dependency, summed over sources (nemik:W264).
+
+    nemik:W2187 (codon paydown, option A of nemik:W567): this was a frozen dataclass. dataclasses,
+    field and a decorator with arguments are three Codon walls that flow carried alone for 6 pairs.
+    It is a plain annotated class with an explicit __init__ and __eq__ and __hash__ over the same
+    fields. Every caller passes all five fields (solve, the cache reader and the tests), so
+    `current` has no default now. A solve is built once and only read after, so it is immutable by
+    convention (the dataclass raised on assignment; nothing here assigns).
     """
 
     salience: dict[str, Fraction]
     fibre: dict[str, dict[str, Fraction]]
     stranded: dict[str, Fraction]
     potential: dict[str, Fraction]
-    current: dict[tuple[str, str], Fraction] = field(default_factory=dict)
+    current: dict[tuple[str, str], Fraction]
+
+    def __init__(
+        self,
+        salience: dict[str, Fraction],
+        fibre: dict[str, dict[str, Fraction]],
+        stranded: dict[str, Fraction],
+        potential: dict[str, Fraction],
+        current: dict[tuple[str, str], Fraction],
+    ) -> None:
+        """Hold one solve's five tables."""
+        self.salience = salience
+        self.fibre = fibre
+        self.stranded = stranded
+        self.potential = potential
+        self.current = current
+
+    def __eq__(self, other: object) -> bool:
+        """Say whether another Flow holds equal tables.
+
+        Returns:
+            True when `other` is a Flow whose five tables are equal to this one's.
+
+        """
+        return (
+            isinstance(other, Flow)
+            and self.salience == other.salience
+            and self.fibre == other.fibre
+            and self.stranded == other.stranded
+            and self.potential == other.potential
+            and self.current == other.current
+        )
+
+    def __hash__(self) -> int:
+        """Hash the card names of the salience table; equal solves have equal hashes.
+
+        Returns:
+            The hash of the sorted salience keys (the tables themselves do not hash).
+
+        """
+        return hash(tuple(sorted(self.salience)))
 
 
 def _cone(

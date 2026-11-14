@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 2186,
+  "counter": 2187,
   "waypoints": [
     {
       "symbol": "W1",
@@ -52285,17 +52285,34 @@
     {
       "symbol": "W2186",
       "title": "Codon walls paydown: history turns Diff and Churn into JSON rows without dataclasses.asdict",
+      "status": "done",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-11-14T02:45:20Z: landed ba71eb5 (gate green; walls 867 to 849)",
+      "issued_at": "2026-11-14T02:13:53Z",
+      "minted_during": "interrupt",
+      "caused_by": "nemik:W2177",
+      "last_worked": "2026-11-14T02:45:20Z",
+      "ticks_blocked": 0,
+      "completed": "20261114T024520Z"
+    },
+    {
+      "symbol": "W2187",
+      "title": "Codon walls paydown: flow's frozen Flow dataclass is a plain class with explicit __init__, __eq__ and __hash__",
       "status": "working",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Bazel the history targets, test_architecture, both ratchets and the codon targets, cut the ref, pace verdict, submit once.",
+      "next_bounded_step": "Bazel the flow, cache and salience targets with test_architecture and both ratchets, cut the ref, pace verdict, submit once.",
       "evidence": "",
-      "issued_at": "2026-11-14T02:13:53Z",
+      "issued_at": "2026-11-14T03:03:39Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W2177",
-      "last_worked": "2026-11-14T02:24:29Z",
+      "last_worked": "2026-11-14T03:15:26Z",
       "ticks_blocked": 0,
       "completed": null
     }
