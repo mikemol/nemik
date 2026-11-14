@@ -17,9 +17,11 @@ from __future__ import annotations
 import hashlib
 import json
 from datetime import datetime
-from typing import TYPE_CHECKING, cast
+from typing import TYPE_CHECKING
 
 from mikemol.pathsforward.opa_eval import POLICY
+
+from nemik.tomlview import table
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -40,7 +42,8 @@ def _decoded(raw: str) -> object:
         what json.loads read, typed as object.
 
     """
-    return cast("object", json.loads(raw))
+    loaded: object = json.loads(raw)
+    return loaded
 
 
 def policy_version() -> str:
@@ -75,7 +78,7 @@ def read(path: Path) -> tuple[dict[str, Json], int]:
         if not isinstance(record, dict):
             unreadable += 1
             continue
-        fields = cast("Json", record)
+        fields = table(record)
         symbol = fields.get("symbol")
         if not isinstance(symbol, str):
             unreadable += 1

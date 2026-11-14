@@ -288,8 +288,7 @@
   "TYPE_CHECKING": "reached",
   "bare '*,' keyword-only marker": "reached",
   "hashlib": "reached",
-  "mikemol.* (third-party)": "reached",
-  "typing.cast": "reached"
+  "mikemol.* (third-party)": "reached"
  },
  "hostroot_cli": {
   "TYPE_CHECKING": "reached",
@@ -370,8 +369,7 @@
  "marks": {
   "TYPE_CHECKING": "reached",
   "hashlib": "reached",
-  "mikemol.* (third-party)": "reached",
-  "typing.cast": "reached"
+  "mikemol.* (third-party)": "reached"
  },
  "metrics": {
   "TYPE_CHECKING": "reached",
