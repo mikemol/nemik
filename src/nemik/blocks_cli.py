@@ -20,6 +20,7 @@ from nemik import tiers
 from nemik.adapter import ledger_graph
 from nemik.blocks import (
     CATEGORIES,
+    credential_shaped_asks,
     inbound,
     operator_asks,
     sudo_shaped_asks,
@@ -68,6 +69,7 @@ class _Operator(argparse.Namespace):
     root: Path
     json: bool
     sudo_shaped: bool
+    credential_shaped: bool
 
 
 class _Inbound(argparse.Namespace):
@@ -173,6 +175,20 @@ def _report_sudo_shaped(g: Graph) -> None:
         sys.exit(1)
 
 
+def _report_credential_shaped(g: Graph) -> None:
+    """Print the asks that have the operator hand-supply a credential, exit 1 on one (nemik:W2176).
+
+    Args:
+        g: The fleet graph.
+
+    """
+    flagged = credential_shaped_asks(g)
+    for ref, ask in flagged:
+        sys.stdout.write(f"{ref:28} {ask[:70]}\n")
+    if flagged:
+        sys.exit(1)
+
+
 def operator_main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     """nemik-operator: blocks on the operator, by needs-you / answered / condition / unstated."""
     ap = argparse.ArgumentParser(
@@ -194,6 +210,16 @@ def operator_main(argv: list[str] | None = None, g: Graph | None = None) -> None
             "one, 0 otherwise, so a tick hook can read it without anything paging"
         ),
     )
+    ap.add_argument(
+        "--credential-shaped",
+        action="store_true",
+        help=(
+            "print each 'operator: act' ask that has the operator hand-supply a credential "
+            "(set or export a *_SECRET, *_TOKEN, *_KEY or *_PASSWORD variable, paste or type a "
+            "token) and has no 'no machine-held source:' line in its evidence (nemik:W2176); "
+            "exit 1 only when there is one, 0 otherwise"
+        ),
+    )
     args = ap.parse_args(argv, namespace=_Operator())
 
     root = Path(args.root)
@@ -206,6 +232,9 @@ def operator_main(argv: list[str] | None = None, g: Graph | None = None) -> None
             g += ledger_graph(repo, path)[0]
     if args.sudo_shaped:
         _report_sudo_shaped(g)
+        return
+    if args.credential_shaped:
+        _report_credential_shaped(g)
         return
     asks = with_salience(g, operator_asks(g))
     if args.json:

@@ -257,6 +257,24 @@ def apply_loop_cannot(text: str) -> bool:
     return _APPLY_LOOP_CANNOT.search(text) is not None
 
 
+# nemik:W2176 (github-cb, operator 2026-11-13): a card blocked on an 'operator: act' that has the
+# operator hand-supply a credential carries a line 'no machine-held source: <reason, card>' saying
+# why no file or store could supply it. The line is the exception; its text stays out of the graph.
+_NO_MACHINE_SOURCE = re.compile(
+    r"^\s*no machine-held source:\s*\S", flags=re.IGNORECASE | re.MULTILINE
+)
+
+
+def no_machine_source(text: str) -> bool:
+    """Say whether evidence has a 'no machine-held source: <reason>' line.
+
+    Returns:
+        True when a line of the text starts 'no machine-held source:' and gives a reason after it.
+
+    """
+    return _NO_MACHINE_SOURCE.search(text) is not None
+
+
 def stray_words(text: str) -> list[str]:
     """Find the words in a text that blur the change-lifecycle steps.
 
@@ -471,6 +489,9 @@ def _add_plans(g: Graph, node: URIRef, w: model.Json) -> None:
     # nemik:W1263: the evidence says why the root apply loop could not carry an operator act
     if apply_loop_cannot(model.text(w, "evidence")):
         g.add((node, NEMIK.applyLoopCannot, Literal("true", datatype=XSD.boolean)))
+    # nemik:W2176: the evidence says why no machine-held source could supply a credential
+    if no_machine_source(model.text(w, "evidence")):
+        g.add((node, NEMIK.noMachineSource, Literal("true", datatype=XSD.boolean)))
 
 
 def _add_signals(g: Graph, node: URIRef, w: model.Json) -> None:

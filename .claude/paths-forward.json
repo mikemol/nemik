@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 2187,
+  "counter": 2188,
   "waypoints": [
     {
       "symbol": "W1",
@@ -52118,7 +52118,7 @@
     {
       "symbol": "W2176",
       "title": "Flag an operator: act ask that has the operator hand-supply a credential, extending the sudo_shaped rule (W1264, W1265)",
-      "status": "ready",
+      "status": "working",
       "enables": [],
       "touches": [],
       "blocked_on": [],
@@ -52128,8 +52128,9 @@
       "issued_at": "2026-11-13T19:28:39Z",
       "minted_during": "interrupt",
       "caused_by": "luthen-observability:W703",
-      "last_worked": "2026-11-13T20:20:01Z",
-      "ticks_blocked": 0
+      "last_worked": "2026-11-14T04:09:39Z",
+      "ticks_blocked": 0,
+      "completed": null
     },
     {
       "symbol": "W2177",
@@ -52302,17 +52303,34 @@
     {
       "symbol": "W2187",
       "title": "Codon walls paydown: flow's frozen Flow dataclass is a plain class with explicit __init__, __eq__ and __hash__",
+      "status": "done",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-11-14T03:33:07Z: landed 737096c (gate green; walls 849 to 843)",
+      "issued_at": "2026-11-14T03:03:39Z",
+      "minted_during": "interrupt",
+      "caused_by": "nemik:W2177",
+      "last_worked": "2026-11-14T03:33:07Z",
+      "ticks_blocked": 0,
+      "completed": "20261114T033307Z"
+    },
+    {
+      "symbol": "W2188",
+      "title": "Codon walls paydown: marks reads its JSON lines without typing.cast",
       "status": "working",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Bazel the flow, cache and salience targets with test_architecture and both ratchets, cut the ref, pace verdict, submit once.",
+      "next_bounded_step": "Rides with nemik:W2176 (the pace guard owes a ratchet fall): bazel both, cut the ref, pace verdict, submit once.",
       "evidence": "",
-      "issued_at": "2026-11-14T03:03:39Z",
+      "issued_at": "2026-11-14T03:55:36Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W2177",
-      "last_worked": "2026-11-14T03:15:26Z",
+      "last_worked": "2026-11-14T04:09:38Z",
       "ticks_blocked": 0,
       "completed": null
     }

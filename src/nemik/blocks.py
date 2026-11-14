@@ -642,6 +642,61 @@ def sudo_shaped_asks(g: Graph) -> list[tuple[str, str]]:
     return out
 
 
+# nemik:W2176 (github-cb, operator 2026-11-13): an 'operator: act' ask that has the operator hand-
+# supply a credential is a tooling gap: luthen-observability:W703 asked the operator to set
+# TAILSCALE_OAUTH_CLIENT_ID and TAILSCALE_OAUTH_CLIENT_SECRET while luthen's own W690 evidence named
+# the file that holds them. The exception is 'no machine-held source: <reason, card>' in the
+# evidence. The pattern is kept in step with shapes.ttl's OperatorActCredentialShape.
+_CREDENTIAL_SHAPED = re.compile(
+    r"[a-z0-9]_(?:secret|token|key|password)(?![a-z0-9_])"
+    r"|(?:paste|pasting|type|typing|enter|writes?|writing|supply|supplies|set|sets|export|exports)"
+    r"[^|]{0,60}(?:token|secret|password|credential|api[ _]key)"
+    r"|credentials? held outside the tree",
+    flags=re.IGNORECASE,
+)
+
+
+def credential_shaped(ask: str) -> bool:
+    """Say whether an ask is an 'operator: act' that has the operator hand-supply a credential.
+
+    Args:
+        ask: The blocked_on texts of a card, joined by ' | '.
+
+    Returns:
+        True when one of them starts 'operator: act' and the text names a *_SECRET, *_TOKEN, *_KEY
+        or *_PASSWORD variable, has the operator paste, type, write, supply, set or export a
+        token, secret, password, credential or API key, or names a credential held outside the tree.
+
+    """
+    return (
+        _ACT_ASK.search(ask) is not None and _CREDENTIAL_SHAPED.search(ask) is not None
+    )
+
+
+def credential_shaped_asks(g: Graph) -> list[tuple[str, str]]:
+    """List the blocked cards whose credential-supplying 'operator: act' ask is not excused.
+
+    A card is excused by a 'no machine-held source:' line in its evidence (nemik:W2176).
+
+    Args:
+        g: The fleet graph.
+
+    Returns:
+        (ref, ask text) for each flagged card, in ref order.
+
+    """
+    out: list[tuple[str, str]] = []
+    for node in sorted(set(g.subjects(NEMIK.blockedOn, None)), key=str):
+        if (node, OSLC_CM.state, NEMIK.Blocked) not in g:
+            continue
+        if (node, NEMIK.noMachineSource, None) in g:
+            continue
+        text = " | ".join(sorted(str(o) for o in g.objects(node, NEMIK.blockedOn)))
+        if credential_shaped(text):
+            out.append((ref(node), text))
+    return out
+
+
 class AskRow(TypedDict, total=False):
     """One open waypoint waiting on the operator, as `operator_asks` and `with_salience` give it."""
 
