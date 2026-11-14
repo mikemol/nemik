@@ -762,6 +762,32 @@ def ledger_rows(ledger_path: Path) -> list[tuple[str, str, str, str]]:
     return rows
 
 
+def activity_by_card(
+    repo: str, rows: list[tuple[str, str, str, str]]
+) -> tuple[dict[str, dict[str, int]], dict[str, str]]:
+    """Sum a ledger's rows per card IRI, as serve reads the Activity triples (nemik:W2198).
+
+    Args:
+        repo: The ledger's repo; a local symbol resolves in it, a foreign one in its own repo.
+        rows: The (stamp, kind, symbol, effort class) rows of `ledger_rows`.
+
+    Returns:
+        ({card IRI: effort count by class}, {card IRI: latest stamp}), the two things
+        `serve._activity` finds from the ledger's graph.
+
+    """
+    effort: dict[str, dict[str, int]] = {}
+    last: dict[str, str] = {}
+    for stamp, _kind, symbol, cls in rows:
+        if not symbol:
+            continue
+        card = str(reference_uri(repo, symbol))
+        counts = effort.setdefault(card, {})
+        counts[cls] = counts.get(cls, 0) + 1
+        last[card] = max(last.get(card, ""), stamp)
+    return effort, last
+
+
 def tick_notes(ledger_path: Path) -> list[str]:
     """Give the notes of a ledger's tick lines, oldest first (nemik:W683).
 

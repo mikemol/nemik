@@ -718,11 +718,16 @@ class AskRow(TypedDict, total=False):
     salience: float
 
 
-def operator_asks(g: Graph) -> list[AskRow]:
+def operator_asks(g: Graph, last: dict[str, str] | None = None) -> list[AskRow]:
     """Every open waypoint waiting on the operator, categorised, with duplicate asks grouped.
 
     nemik:W412: answered once per graph inside a build (health asks it once per repo); each caller
     gets its own copies of the rows, so a caller that annotates them touches nothing shared.
+
+    Args:
+        g: The graph.
+        last: Each card IRI's latest activity stamp, from the ledger summary (nemik:W1099), or None
+            to read it off the graph's Activity triples. The rows are the same either way.
 
     Returns:
         The rows of every open waypoint waiting on the operator, copied for the caller.
@@ -730,9 +735,9 @@ def operator_asks(g: Graph) -> list[AskRow]:
     """
     ix = index(g)
     if ix is None:
-        return _operator_asks(g)
+        return _operator_asks(g, last)
     if ix.operator_asks is None:
-        ix.operator_asks = _operator_asks(g)
+        ix.operator_asks = _operator_asks(g, last)
     return [row.copy() for row in ix.operator_asks]
 
 
@@ -849,8 +854,12 @@ def _group_asks(out: list[AskRow], keys: dict[str, str], repos: set[str]) -> Non
         a["same_ask"] = same_ask[a["ref"]]
 
 
-def _operator_asks(g: Graph) -> list[AskRow]:
-    last = _last_activity(g)
+def _operator_asks(g: Graph, summary: dict[str, str] | None = None) -> list[AskRow]:
+    last: dict[Node, str] = {}
+    if summary is None:
+        last = _last_activity(g)
+    else:
+        last.update({URIRef(k): v for k, v in summary.items()})
     out: list[AskRow] = []
     keys: dict[str, str] = {}
     # On the operator: resolved to them, or declared blocked_kind human (e.g. "event: ...", "a

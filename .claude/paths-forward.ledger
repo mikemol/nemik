@@ -5961,3 +5961,24 @@
 2026-11-14T06:23:17Z  interrupt W2191 minted    -         "Read each repo's gate presence (strict mypy, ruff, pace guard, Rego bars, precommit build) from the surfaces census, for the gate-parity Warning"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W2181
 2026-11-14T06:26:58Z  status W2191 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-14T08:09:51Z  status W982 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-14T09:32:31Z  interrupt W2192 minted    -         "Decide the back-fill rule for the 449 older retros and triage the 54 Violations the ingest now shows on the scaffold ones"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W982
+2026-11-14T09:32:32Z  status W982 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-14T09:32:32Z  status W984 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-14T09:32:32Z  status W985 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-14T09:32:32Z  status W1010 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-14T10:22:48Z  interrupt W2193 minted    -         "Read a findings-only review retro as its own class, judged by the findings shapes only, so the 428 reviewer retros are not held to the session's fields"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2192
+2026-11-14T10:22:48Z  interrupt W2194 minted    -         "Split a retro handoff's operator into self, reviewer and human so the 44 reviewer handoffs stop being false positives, and ask mtools for the record-form field"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2192
+2026-11-14T10:22:48Z  interrupt W2195 minted    -         "Hold the 10 recurring-below-hook Violations as a baseline, warn on a list in a boolean field, and store this stretch's tick retros in scaffold form"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2192
+2026-11-14T19:25:06Z  interrupt W2196 minted    -         "Interpreter floor is CPython >=3.14, not >=3.14.7: drop the .7 assertion, keep the gc.get_threshold()[2] != 0 behaviour check, sys.executable and UV_PYTHON_DOWNLOADS=never checks"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-cb:W2161
+2026-11-14T19:26:17Z  interrupt W2197 minted    -         "Bump the python image digest to the newest 3.14.z as a routine step, not a hold at .7: check for a newer digest and move the pin"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-cb:W2161
+2026-11-14T21:04:14Z  status W2193 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-14T21:05:10Z  status W2193 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-14T21:22:05Z  interrupt W2198 minted    -         "Pure activity_by_card(repo, rows) in ledgersummary: per-card-IRI effort Counter and last stamp from ledger_rows, equal to serve._activity on the same ledger's graph (equivalence test over a fixture ledger)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1098
+2026-11-14T21:22:05Z  interrupt W2199 minted    -         "Give runs_graph's rows the same plain (stamp, kind, symbol, class) form so serve sums luthen's run logs with the ledger, equal to _activity on the runs graph"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1098
+2026-11-14T21:22:05Z  interrupt W2200 minted    -         "Switch serve.Model to hold the summed activity beside the graph and _to_json to read it, with /graph.json byte-identical to the Activity-triple read (test_ledger_effort)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1098
+2026-11-14T21:37:55Z  status W2198 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-14T21:37:55Z  status W2193 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-14T21:38:38Z  status W2193 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-14T21:38:38Z  status W2198 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-14T22:05:31Z  status W1099 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-14T22:10:27Z  interrupt W2201 minted    -         "core.wasm's hash depends on Bazel's output-base path (the real checkout's base changed after W982 landed, so every gate refuses core.wasm): make build_wasm.sh path-independent or compare the module modulo the embedded path"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W1099

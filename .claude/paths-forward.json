@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 2191,
+  "counter": 2201,
   "waypoints": [
     {
       "symbol": "W1",
@@ -22527,17 +22527,17 @@
     {
       "symbol": "W982",
       "title": "Retro records enter the graph from a durable file, so the nine retro shapes judge real retros and not only fixtures",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Design the ingest as a small new module read by the adapter (new module must compile under Codon and be named in bazel/nemik_src.bzl): read the retros list from the queue, map fields, booleans to literals; test with a retro in mtools' form; ride a pace-admitted stack after W2077",
-      "evidence": "2026-10-24: 2026-10-24: record form settled with mtools-ad: a retros list beside waypoints, ids repo:R<n> from a retro_counter, snake_case fields, action card caused_by the retro id; recorded in the retro-audit doc. The writer side is mtools:W1918; the nemik side (reading it into the graph) waits on it | 2026-11-01: 2026-11-01 CLASSIFIED by W1339 (reviewer R85, nemik:R83 on W613): partial. Commit ec97cf7d (2026-10-24T13:36:53-04:00): 'W982: docs/retro-audit.md audits nemik against the retrospective ritual and settles the re'. Reason, read from this card's own title and next step: the audit and the retro record form landed; reading retro records into the graph and judging them remains. Scan criterion: the last 1500 commit subjects of the form W<n>:, number below 1200, status not done or landed. Read from titles and next steps, not from the code. | 2026-11-09T15:59:53Z: 2026-11-09 mtools asked (mtools:W2268): the doc form (docs/retro-audit.md lines 51-60: frozen_timeline, recurring, one_off, and more) has fields mtools' retros.RETRO_FIELDS refuses, so a record in the doc's form is refused; which side moves. ANSWER sent: mtools adds, nemik keeps the doc. Reason: nemik's shape tests (tests/test_retro_g9_g2.py) use recurring, oneOff, enforcementLayer and delta in fixtures, and W982's purpose is that the shapes judge real retros; real records today (the reviewer's) carry only card, trigger, root, findings, finding_card, finding_owner, finding_witness, due. NOT verified: RETRO_FIELDS itself (which of the other doc fields it has), whether frozen_timeline is writer-computed. Asked mtools to compare the whole doc list. I am the W982 owner. | 2026-11-09T16:01:53Z: 2026-11-09 mtools built (uncommitted, rides the pathsforward stack once a gate runs): RETRO_FIELDS now has frozen_timeline (a string, not writer-computed), recurring and one_off (booleans only, a string like false is refused); the rest of the doc's list was already present. Their retroscaffold change (stack key into frozen_timeline) is open. My reply: no writer-computed hash on my account. NEXT STEP (owed by nemik, not verified): check that nemik's adapter maps a JSON boolean recurring or one_off from a real retro to the literal true/false the G9 shape reads (the shape fixtures in tests/test_retro_g9_g2.py pass strings), with a test over a real-form retro file, so G9 judges a real retro and not only fixtures. This is W982's own next step: read a durable retro record into the graph and judge it with the nine shapes. | 2026-11-09T16:05:26Z: G0 2026-11-09T16:05:25Z: [NO-PACE-STAMP] Precommit: read src/nemik/adapter.py's retro ingest for how recurring and one_off reach the graph (read-only), and the G9 shape's expectation, to answer whether a JSON boolean from a real retro reaches G9. Sensor: the lines read. Expected: either a mapping that handles booleans or a gap I can name with a test to write. | 2026-11-09T16:06:35Z: 2026-11-09 READ (answers the unverified point above): nemik has NO retro ingest at all. grep for retro in src/nemik/*.py finds nothing and adapter.py has no recurring, oneOff or enforcement handling; tests/test_retro_ingest.py (in this card's manifest) does not exist; tests/test_retro_g9_g2.py builds fixture retros as RDF triples directly (strings 'true'/'false' as literals) and runs the shapes. So a real retro from a queue's retros list never reaches G9 today, whatever the JSON types: the ingest (read the retros list, map snake_case fields to the vocabulary's camelCase properties, booleans to the literal the shape reads) is the unbuilt remainder of W982, exactly its title. It is non-queue code, so by the pace it cannot land alone while nemik is behind its ratchets: it rides a stack the pace admits (after W2077, with the incidence ratchet to lower), like W564's doc and W2104. Manifest: src/nemik/adapter.py, tests/test_retro_ingest.py, docs/retro-audit.md. My message to mtools that the adapter mapping was 'unverified' was right but understated: there is no mapping. | 2026-11-09T16:08:26Z: 2026-11-09 R436 (due 2026-11-12): the no-ingest claim now rests on observation, not only greps. Experiment: queue_graph('nemik', .claude/paths-forward.json) from the repo's adapter (script in the scratchpad, read-only; the queue holds hundreds of retros) built a graph of 40282 triples with Retro 0, RetroFinding 0, RetroPass 0, RetroHandoff 0 typed nodes. The reviewer's check from the other side: src/nemik mentions retro only in comments (adapter.py 222, 241, 468; blocks.py 598) and in the data files nemik.ttl (22 lines) and shapes.ttl (57 lines): the vocabulary and shapes exist, no Python emits them from a queue. So the retro gates in nemik-check pass real retros VACUOUSLY (they never enter the graph); the gates that hold retros to a standard live in mtools' writer. WHAT THE INGEST MUST EMIT, from nemik.ttl comments (shapes.ttl not yet read for datatypes): classes Retro, RetroFinding, RetroHandoff, RetroPass; properties precommit, finding, frozenTimeline (the hash), enforcementLayer (memory, instructions, trigger, hook, gate), recurring and oneOff (documented as the STRING 'true', not xsd:boolean, so a JSON boolean must be mapped to that literal; to confirm against shapes.ttl), delta, passOf, fixpointLabel. Owed: a test with one real retro copied from the repo's queue plus a negative control (a boolean mis-typed as a string or an unknown layer refused), and landing waits behind W2077: a stack of non-queue code lowers no ratchet unless it also removes a wall. | 2026-11-13T15:45:24Z: The external review (8.4) independently finds the same gap: no module under src/nemik reads real retro records into nemik:Retro, the shapes run on fixtures only (checked in this tree 2026-11-13: only nemik.ttl and shapes.ttl mention Retro). nemik:W2170 was minted for it and dropped as a duplicate of this card. | 2026-11-14T06:44:18Z: READ 2026-11-13 before building (no edit): (1) the vocabulary to emit is all in nemik.ttl lines 125-159: Retro, RetroFinding, RetroHandoff, RetroPass; properties precommit, root, contributing, sustain, trigger (shared with run rows), finding, findingCard, findingOwner, findingWitness, frozenTimeline, enforcementLayer, recurring and oneOff (the STRING 'true'), delta, handoffInstrument/Channel/Operator, selfProbe, passOf/passNumber/passFinding, fixpointLabel. (2) A real record, nemik:R470 read through --retros, carries id, card, trigger, root, findings[{finding_card, finding_owner, due, finding_witness}] and no frozen_timeline, enforcement_layer, recurring, one_off, delta, sustain or handoff. (3) The adapter's queue_graph is the hot path (cached by file stamp, one-shot publish builds drop the cache, nemik:W1096 measured the graph as memory-heavy), so adding hundreds of retros to every queue's graph costs triples and SHACL time on every survey. (4) CONSEQUENCE not yet measured: the retro shapes have never judged a real retro, so ingesting the whole retros list will produce findings on every old record that lacks a field the shapes require (frozenTimeline, enforcementLayer, sustain, handoff); that could flood nemik-check with Warnings or fail it. DESIGN DECISION owed before wiring: which retros are judged (all, or those from a cut-over id or date), and at which severity. NEXT STEP: a scratch script (a file under .claude, read-only) builds the triples for the real retros with the pure mapping and runs the shapes, to count the findings per shape and the triples added, BEFORE nemik.adapter is touched; then bring the counts to the reviewer. The new pure module (tomlview-based, no walls) and the nemik_src.bzl entry stay as the card says. | 2026-11-14T07:01:30Z: MEASURED 2026-11-13 (scratch .claude/held-W982-retro-measure.py.txt, read-only: the ingest's mapping built inline, nemik.check.shapes run over it; nothing in src touched): the queue's 493 real retros add 6940 triples (the graph was ~40k, so +17 percent) and the shapes give 1936 findings: Info 1509 (493 no frozen timeline, 449 no precommit, 449 no sustain, 118 other), VIOLATION 524 (449 'a retro needs a non-empty computed delta', 44 handoff goes to another operator with no self probe executed-and-failed, 21 'a retro must name its trigger and its root', 10 recurring failure class fixed below the hook layer), Warning 21 (the root reads as blame). Only 44 of the 493 retros carry a precommit and a delta (the scaffold form, recent); the other 449 are the older free form. CONSEQUENCE: wiring the ingest as is would put 524 Violations on nemik-check for retros that are history, not live defects. DEFAULT (acted on, the reviewer's answer amends it): ingest only retros that carry a precommit (the scaffold form, 44 today) and leave the older 449 out until a back-fill rule is chosen; the cut-over is stated in the module and counted in a test. Also owed to the reviewer: whether the 44 handoff and 10 recurring Violations among them are real defects (they would be new findings on live retros).",
+      "next_bounded_step": null,
+      "evidence": "2026-10-24: 2026-10-24: record form settled with mtools-ad: a retros list beside waypoints, ids repo:R<n> from a retro_counter, snake_case fields, action card caused_by the retro id; recorded in the retro-audit doc. The writer side is mtools:W1918; the nemik side (reading it into the graph) waits on it | 2026-11-01: 2026-11-01 CLASSIFIED by W1339 (reviewer R85, nemik:R83 on W613): partial. Commit ec97cf7d (2026-10-24T13:36:53-04:00): 'W982: docs/retro-audit.md audits nemik against the retrospective ritual and settles the re'. Reason, read from this card's own title and next step: the audit and the retro record form landed; reading retro records into the graph and judging them remains. Scan criterion: the last 1500 commit subjects of the form W<n>:, number below 1200, status not done or landed. Read from titles and next steps, not from the code. | 2026-11-09T15:59:53Z: 2026-11-09 mtools asked (mtools:W2268): the doc form (docs/retro-audit.md lines 51-60: frozen_timeline, recurring, one_off, and more) has fields mtools' retros.RETRO_FIELDS refuses, so a record in the doc's form is refused; which side moves. ANSWER sent: mtools adds, nemik keeps the doc. Reason: nemik's shape tests (tests/test_retro_g9_g2.py) use recurring, oneOff, enforcementLayer and delta in fixtures, and W982's purpose is that the shapes judge real retros; real records today (the reviewer's) carry only card, trigger, root, findings, finding_card, finding_owner, finding_witness, due. NOT verified: RETRO_FIELDS itself (which of the other doc fields it has), whether frozen_timeline is writer-computed. Asked mtools to compare the whole doc list. I am the W982 owner. | 2026-11-09T16:01:53Z: 2026-11-09 mtools built (uncommitted, rides the pathsforward stack once a gate runs): RETRO_FIELDS now has frozen_timeline (a string, not writer-computed), recurring and one_off (booleans only, a string like false is refused); the rest of the doc's list was already present. Their retroscaffold change (stack key into frozen_timeline) is open. My reply: no writer-computed hash on my account. NEXT STEP (owed by nemik, not verified): check that nemik's adapter maps a JSON boolean recurring or one_off from a real retro to the literal true/false the G9 shape reads (the shape fixtures in tests/test_retro_g9_g2.py pass strings), with a test over a real-form retro file, so G9 judges a real retro and not only fixtures. This is W982's own next step: read a durable retro record into the graph and judge it with the nine shapes. | 2026-11-09T16:05:26Z: G0 2026-11-09T16:05:25Z: [NO-PACE-STAMP] Precommit: read src/nemik/adapter.py's retro ingest for how recurring and one_off reach the graph (read-only), and the G9 shape's expectation, to answer whether a JSON boolean from a real retro reaches G9. Sensor: the lines read. Expected: either a mapping that handles booleans or a gap I can name with a test to write. | 2026-11-09T16:06:35Z: 2026-11-09 READ (answers the unverified point above): nemik has NO retro ingest at all. grep for retro in src/nemik/*.py finds nothing and adapter.py has no recurring, oneOff or enforcement handling; tests/test_retro_ingest.py (in this card's manifest) does not exist; tests/test_retro_g9_g2.py builds fixture retros as RDF triples directly (strings 'true'/'false' as literals) and runs the shapes. So a real retro from a queue's retros list never reaches G9 today, whatever the JSON types: the ingest (read the retros list, map snake_case fields to the vocabulary's camelCase properties, booleans to the literal the shape reads) is the unbuilt remainder of W982, exactly its title. It is non-queue code, so by the pace it cannot land alone while nemik is behind its ratchets: it rides a stack the pace admits (after W2077, with the incidence ratchet to lower), like W564's doc and W2104. Manifest: src/nemik/adapter.py, tests/test_retro_ingest.py, docs/retro-audit.md. My message to mtools that the adapter mapping was 'unverified' was right but understated: there is no mapping. | 2026-11-09T16:08:26Z: 2026-11-09 R436 (due 2026-11-12): the no-ingest claim now rests on observation, not only greps. Experiment: queue_graph('nemik', .claude/paths-forward.json) from the repo's adapter (script in the scratchpad, read-only; the queue holds hundreds of retros) built a graph of 40282 triples with Retro 0, RetroFinding 0, RetroPass 0, RetroHandoff 0 typed nodes. The reviewer's check from the other side: src/nemik mentions retro only in comments (adapter.py 222, 241, 468; blocks.py 598) and in the data files nemik.ttl (22 lines) and shapes.ttl (57 lines): the vocabulary and shapes exist, no Python emits them from a queue. So the retro gates in nemik-check pass real retros VACUOUSLY (they never enter the graph); the gates that hold retros to a standard live in mtools' writer. WHAT THE INGEST MUST EMIT, from nemik.ttl comments (shapes.ttl not yet read for datatypes): classes Retro, RetroFinding, RetroHandoff, RetroPass; properties precommit, finding, frozenTimeline (the hash), enforcementLayer (memory, instructions, trigger, hook, gate), recurring and oneOff (documented as the STRING 'true', not xsd:boolean, so a JSON boolean must be mapped to that literal; to confirm against shapes.ttl), delta, passOf, fixpointLabel. Owed: a test with one real retro copied from the repo's queue plus a negative control (a boolean mis-typed as a string or an unknown layer refused), and landing waits behind W2077: a stack of non-queue code lowers no ratchet unless it also removes a wall. | 2026-11-13T15:45:24Z: The external review (8.4) independently finds the same gap: no module under src/nemik reads real retro records into nemik:Retro, the shapes run on fixtures only (checked in this tree 2026-11-13: only nemik.ttl and shapes.ttl mention Retro). nemik:W2170 was minted for it and dropped as a duplicate of this card. | 2026-11-14T06:44:18Z: READ 2026-11-13 before building (no edit): (1) the vocabulary to emit is all in nemik.ttl lines 125-159: Retro, RetroFinding, RetroHandoff, RetroPass; properties precommit, root, contributing, sustain, trigger (shared with run rows), finding, findingCard, findingOwner, findingWitness, frozenTimeline, enforcementLayer, recurring and oneOff (the STRING 'true'), delta, handoffInstrument/Channel/Operator, selfProbe, passOf/passNumber/passFinding, fixpointLabel. (2) A real record, nemik:R470 read through --retros, carries id, card, trigger, root, findings[{finding_card, finding_owner, due, finding_witness}] and no frozen_timeline, enforcement_layer, recurring, one_off, delta, sustain or handoff. (3) The adapter's queue_graph is the hot path (cached by file stamp, one-shot publish builds drop the cache, nemik:W1096 measured the graph as memory-heavy), so adding hundreds of retros to every queue's graph costs triples and SHACL time on every survey. (4) CONSEQUENCE not yet measured: the retro shapes have never judged a real retro, so ingesting the whole retros list will produce findings on every old record that lacks a field the shapes require (frozenTimeline, enforcementLayer, sustain, handoff); that could flood nemik-check with Warnings or fail it. DESIGN DECISION owed before wiring: which retros are judged (all, or those from a cut-over id or date), and at which severity. NEXT STEP: a scratch script (a file under .claude, read-only) builds the triples for the real retros with the pure mapping and runs the shapes, to count the findings per shape and the triples added, BEFORE nemik.adapter is touched; then bring the counts to the reviewer. The new pure module (tomlview-based, no walls) and the nemik_src.bzl entry stay as the card says. | 2026-11-14T07:01:30Z: MEASURED 2026-11-13 (scratch .claude/held-W982-retro-measure.py.txt, read-only: the ingest's mapping built inline, nemik.check.shapes run over it; nothing in src touched): the queue's 493 real retros add 6940 triples (the graph was ~40k, so +17 percent) and the shapes give 1936 findings: Info 1509 (493 no frozen timeline, 449 no precommit, 449 no sustain, 118 other), VIOLATION 524 (449 'a retro needs a non-empty computed delta', 44 handoff goes to another operator with no self probe executed-and-failed, 21 'a retro must name its trigger and its root', 10 recurring failure class fixed below the hook layer), Warning 21 (the root reads as blame). Only 44 of the 493 retros carry a precommit and a delta (the scaffold form, recent); the other 449 are the older free form. CONSEQUENCE: wiring the ingest as is would put 524 Violations on nemik-check for retros that are history, not live defects. DEFAULT (acted on, the reviewer's answer amends it): ingest only retros that carry a precommit (the scaffold form, 44 today) and leave the older 449 out until a back-fill rule is chosen; the cut-over is stated in the module and counted in a test. Also owed to the reviewer: whether the 44 handoff and 10 recurring Violations among them are real defects (they would be new findings on live retros). | 2026-11-14T09:32:32Z: landed 171704e (gate green): nemik.retroingest and nemik.adapter._add_retros put scaffold-form retros (those with a precommit, 44 today) in the graph under urn:nemik:<repo>/retro/<id>; nemik-check on a copy of nemik's queue: Violations 73 to 127, Warnings 540 to 541, Info +44. Left out by a stated cut-over: the 449 older retros. Follow-up decisions carded.",
       "issued_at": "2026-10-24T17:32:57Z",
       "minted_during": "interrupt",
       "caused_by": "github-8f",
-      "last_worked": "2026-11-14T08:09:51Z",
+      "last_worked": "2026-11-14T09:32:32Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/adapter.py",
@@ -22546,7 +22546,7 @@
       ],
       "size_class": "medium",
       "weight": 209,
-      "completed": null
+      "completed": "20261114T093232Z"
     },
     {
       "symbol": "W983",
@@ -22574,20 +22574,18 @@
     {
       "symbol": "W984",
       "title": "A retro stub, seeded with the card's mint-time precommit, opens on a gate refusal and on a card reopened from done, then on an alert clearing and a ruling that corrects a session",
-      "status": "blocked",
+      "status": "ready",
       "enables": [],
       "touches": [],
-      "blocked_on": [
-        "W982"
-      ],
-      "blocked_kind": "agent",
+      "blocked_on": [],
+      "blocked_kind": null,
       "next_bounded_step": "Build the stub from a card's ledger history for a reopened card first, then wire the gate-refusal event, once W982 fixes the record form",
       "evidence": "",
       "issued_at": "2026-10-24T17:32:59Z",
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-24T17:33:12Z",
-      "ticks_blocked": 618,
+      "ticks_blocked": 0,
       "completed": null,
       "manifest": [
         "src/nemik/retrostub.py",
@@ -22598,20 +22596,18 @@
     {
       "symbol": "W985",
       "title": "A report measures gate G9 fleet-wide: the recurring failure classes of the retros by the layer their measure lives at, seeded with the host's four classes of this week",
-      "status": "blocked",
+      "status": "ready",
       "enables": [],
       "touches": [],
-      "blocked_on": [
-        "W982"
-      ],
-      "blocked_kind": "agent",
+      "blocked_on": [],
+      "blocked_kind": null,
       "next_bounded_step": "Count recurring classes by enforcement layer over the ingested retros, and place the four classes of the host's week by what enforces each now",
       "evidence": "",
       "issued_at": "2026-10-24T17:33:00Z",
       "minted_during": "interrupt",
       "caused_by": "github-8f",
       "last_worked": "2026-10-24T17:33:14Z",
-      "ticks_blocked": 618,
+      "ticks_blocked": 0,
       "completed": null,
       "manifest": [
         "src/nemik/retrolayers.py",
@@ -23354,22 +23350,20 @@
     {
       "symbol": "W1010",
       "title": "A shape warns on a retro record with zero sustain rows",
-      "status": "blocked",
+      "status": "ready",
       "enables": [
         "github:W44"
       ],
       "touches": [],
-      "blocked_on": [
-        "W982"
-      ],
-      "blocked_kind": "agent",
+      "blocked_on": [],
+      "blocked_kind": null,
       "next_bounded_step": "Raise the sustain finding from Info to a Warning for a retro with zero sustain rows, once retro records are read into the graph (W982)",
       "evidence": "",
       "issued_at": "2026-10-24T23:42:56Z",
       "minted_during": "interrupt",
       "caused_by": "github:W44",
       "last_worked": "2026-10-24T23:43:28Z",
-      "ticks_blocked": 605,
+      "ticks_blocked": 0,
       "warrants": [
         {
           "@context": {
@@ -25961,33 +25955,38 @@
     {
       "symbol": "W1098",
       "title": "Move serve._to_json's effort and last-activity onto the ledger summary, published documents byte-identical",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W1095"
       ],
       "touches": [
         "velocity"
       ],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W2198",
+        "W2199",
+        "W2200"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "2026-11-07: move serve._to_json's effort and last-activity onto the ledger summary and prove the published documents byte-identical with tests/test_ledger_effort.py; src edit, rides the next src stack",
       "evidence": "",
       "issued_at": "2026-10-26T11:58:00Z",
       "minted_during": "tick",
       "caused_by": "W1095",
-      "last_worked": "2026-11-06T01:38:20Z",
+      "last_worked": "2026-11-14T21:22:05Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/serve.py",
         "tests/test_ledger_effort.py"
       ],
       "size_class": "small",
-      "weight": 220
+      "weight": 220,
+      "completed": null
     },
     {
       "symbol": "W1099",
       "title": "Move blocks.annotate's last-activity read onto the ledger summary, output unchanged",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W1095"
       ],
@@ -26001,14 +26000,15 @@
       "issued_at": "2026-10-26T11:58:00Z",
       "minted_during": "tick",
       "caused_by": "W1095",
-      "last_worked": "2026-11-06T01:38:19Z",
+      "last_worked": "2026-11-14T22:05:31Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/blocks.py",
         "tests/test_blocks_activity.py"
       ],
       "size_class": "small",
-      "weight": 220
+      "weight": 220,
+      "completed": null
     },
     {
       "symbol": "W1100",
@@ -52392,6 +52392,189 @@
       "last_worked": "2026-11-14T06:26:58Z",
       "ticks_blocked": 0,
       "completed": null
+    },
+    {
+      "symbol": "W2192",
+      "title": "Decide the back-fill rule for the 449 older retros and triage the 54 Violations the ingest now shows on the scaffold ones",
+      "status": "blocked",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [
+        "W2193",
+        "W2194",
+        "W2195"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Ask the warm reviewer: (1) judge the older free-form retros, from a cut-over id or date, or never; (2) of the 44 handoff Violations (another operator, no self probe recorded) and 10 recurring-below-hook Violations on retros that carry a precommit, which are real misses and which are retros that never recorded the probe; then fix or excuse each by writing the missing field through the writer.",
+      "evidence": "",
+      "issued_at": "2026-11-14T09:32:31Z",
+      "minted_during": "interrupt",
+      "caused_by": "nemik:W982",
+      "last_worked": "2026-11-14T10:22:48Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W2193",
+      "title": "Read a findings-only review retro as its own class, judged by the findings shapes only, so the 428 reviewer retros are not held to the session's fields",
+      "status": "ready",
+      "enables": [
+        "W2192"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-11-14T10:22:48Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2192",
+      "last_worked": "2026-11-14T21:38:38Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W2194",
+      "title": "Split a retro handoff's operator into self, reviewer and human so the 44 reviewer handoffs stop being false positives, and ask mtools for the record-form field",
+      "status": "ready",
+      "enables": [
+        "W2192"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-11-14T10:22:48Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2192",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2195",
+      "title": "Hold the 10 recurring-below-hook Violations as a baseline, warn on a list in a boolean field, and store this stretch's tick retros in scaffold form",
+      "status": "ready",
+      "enables": [
+        "W2192"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-11-14T10:22:48Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2192",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2196",
+      "title": "Interpreter floor is CPython >=3.14, not >=3.14.7: drop the .7 assertion, keep the gc.get_threshold()[2] != 0 behaviour check, sys.executable and UV_PYTHON_DOWNLOADS=never checks",
+      "status": "ready",
+      "enables": [
+        "nemik:W2161"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-11-14T19:25:06Z",
+      "minted_during": "interrupt",
+      "caused_by": "github-cb:W2161",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2197",
+      "title": "Bump the python image digest to the newest 3.14.z as a routine step, not a hold at .7: check for a newer digest and move the pin",
+      "status": "ready",
+      "enables": [
+        "nemik:W2196"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-11-14T19:26:17Z",
+      "minted_during": "interrupt",
+      "caused_by": "github-cb:W2161",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2198",
+      "title": "Pure activity_by_card(repo, rows) in ledgersummary: per-card-IRI effort Counter and last stamp from ledger_rows, equal to serve._activity on the same ledger's graph (equivalence test over a fixture ledger)",
+      "status": "ready",
+      "enables": [
+        "W1098"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-11-14T21:22:05Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1098",
+      "last_worked": "2026-11-14T21:38:38Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W2199",
+      "title": "Give runs_graph's rows the same plain (stamp, kind, symbol, class) form so serve sums luthen's run logs with the ledger, equal to _activity on the runs graph",
+      "status": "ready",
+      "enables": [
+        "W1098"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-11-14T21:22:05Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1098",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2200",
+      "title": "Switch serve.Model to hold the summed activity beside the graph and _to_json to read it, with /graph.json byte-identical to the Activity-triple read (test_ledger_effort)",
+      "status": "ready",
+      "enables": [
+        "W1098"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-11-14T21:22:05Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1098",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2201",
+      "title": "core.wasm's hash depends on Bazel's output-base path (the real checkout's base changed after W982 landed, so every gate refuses core.wasm): make build_wasm.sh path-independent or compare the module modulo the embedded path",
+      "status": "ready",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-11-14T22:10:27Z",
+      "minted_during": "interrupt",
+      "caused_by": "nemik:W1099",
+      "last_worked": null,
+      "ticks_blocked": 0
     }
   ],
   "residue": [
@@ -66880,7 +67063,36 @@
         }
       ],
       "id": "nemik:R493"
+    },
+    {
+      "card": "W2192",
+      "trigger": "round 496 (a catch-up G1 from nemik-b5, 2026-11-14, with the slip of no G0 or G1 for the whole stretch named by the coordinator): walls paydown W2179 a4a3f36, W2182 98a2135, W2147 d77dd24 (pieces leaves codon-baseline), W2185 b544393, W2186 ba71eb5, W2187 737096c, W2188 81e85a0 (codon-walls 910 to 841); weather docs W2171, W2172, W2173, W2174, W2169; W2176 c0d75b3 (credential-courier Warning), W2189 5f7f110, W2190 7f98463; W982 171704e (scaffold-form retros enter the graph); refusals met and fixed (test_architecture on W2147, test_skill on W2176, ratchet fails on the session's own tests); wrongs named (a fixture landed as the session's own wording until github-cb asked, an excuse rule defeated by the writer's timestamp, an inline python3 -c against the standing rule, a first ingest whose findings were filed under a repo called 'retro'); two decisions asked (nemik:W2192): (1) should the older retros ever be judged and from what id or date, (2) of the 44 scaffold retros' shape Violations (44 handoff-to-other with no self probe, 10 recurring-below-hook) which are real misses",
+      "root": "I read the stored retros instead of the Violation counts, because the two decisions turn on what the records contain. The queue holds 493 retros. The 44 that carry a precommit are ids R22 to R65 and no stored retro after R65 carries one. The other 449 are two different populations: R1 to R21 are 21 fixpoint-list records (keys fixpoint, id, retros, subtracted_set, not retros in the record form at all), and R66 to R493 are 428 records with exactly the keys card, findings, id, root, trigger, which are the warm reviewer's retros (mine). So the 524 Violations on the older retros are the session's G0 to G9 shapes (precommit, delta, sustain, handoff, enforcement layer) applied to a review record that by design has none of those fields, a category error and not 524 defects; of the 428 reviewer retros, 382 carry findings and every one of those 382 has a witness, an owner and a due date on every finding, so the substance the findings shapes ask for is present in all of them. On the 44 handoff Violations: all 44 have handoff operator 'other', every one has exactly the three keys instrument, channel and operator, the instrument is 'nemik-paths-forward --add-retro' in 38 and 'a fresh reader of the stored retros' in 6, and the channel is 'the cold review' in all 44. They are handoffs to the reviewer, which is the reviewed-loop's design, not asks that reach the human operator, which is what the shape's purpose (nemik:W755, 'asks reach the operator needlessly') is about; and the record form in docs/retro-audit.md (lines 64 to 66) defines a handoff as instrument, channel and operator only, retroingest.py maps a self_probe key to selfProbe but nothing in the record form or in mtools (grep over its py, md, toml and json files finds none) can write one. So no retro could have satisfied the rule: the 44 are false positives by construction, none of them is a miss, and none is an unwritten field. On the 10 recurring-below-hook Violations (R34, R35, R36, R37, R38, R41, R42, R43, R44, R46): these are true positives as the shape means them. Each declares recurring true and layer 'instructions' with one_off false, and the roots say so in their own words (R34: the practice sits in the session's habit, so it can lapse; R42 to R44: the gap target missed a fourth round); several findings in them propose a gate or a refusal (R38, R41, R42, R44, R46 mention gate or refus), so the retros name the move to a hook or gate that the shape asks for, but the declared layer is what the shape reads, and a historic record cannot be amended by the work. One data issue sits under both: from R51 to R65 (15 retros) the fields recurring and one_off hold lists of description strings, where R22 to R50 (29) hold booleans and the record form says booleans; the ingest reads only the JSON true, so the 15 are silently neither recurring nor one-off. Counting non-empty lists as true adds no G9 hit (each has a non-empty one_off list too), but R51, R53 and R57 have layer 'instructions' with recurring items listed and would be candidates if lists had a defined meaning. One further fact bears on what W982 achieves: no scaffold retro was stored after R65, so today the shapes judge 44 historical records and no live ones; the tick retros of this whole stretch (this catch-up included) live in chat.",
+      "findings": [
+        {
+          "finding": "Decision 1: do not judge the older retros by the scaffold shapes, and cut by form and not by date. Keep the ingest's rule (a precommit makes a retro a scaffold retro), do not back-fill R1 to R21 (fixpoint records, not retros) or R66 and later (the reviewer's record form). Add a second, narrower class for the reviewer's record (a retro with findings and no precommit, for example nemik:ReviewRetro) judged by the findings-level shapes only (finding, witness, owner, due, certify), which the 382 existing reviewer retros with findings already satisfy, so it adds a live audit without adding Violations; state the two forms and their shapes in docs/retro-audit.md. No id or date cut is needed, the key set is the discriminator.",
+          "finding_card": "W2192",
+          "finding_owner": "nemik session",
+          "finding_witness": "The ingest handling a findings-only retro as its own class with a test (a reviewer-form retro with a finding lacking a witness gives one Violation, the 382 real ones give none), the form statement in docs/retro-audit.md, and a nemik-check count before and after showing no new Violations from the 428.",
+          "due": "2026-11-17"
+        },
+        {
+          "finding": "Decision 2a: fix the handoff shape and the record form, not the 44 retros. Split the operator vocabulary so that the self-probe requirement binds only a handoff to the human operator (for example operator values self, reviewer and human, or keep 'other' and add a target slot), carry self_probe in the record form and in mtools' writer vocabulary only for that case, and tell mtools through the existing channel since the writer owns the form; until then keep the 44 handoff messages out of the Violation count (an expected-baseline entry for exactly those ids, or the shape gated on the new slot) so that a Violation count of 127 is not read as 44 more misses, and do not edit the stored retros.",
+          "finding_card": "W2192",
+          "finding_owner": "nemik session",
+          "finding_witness": "The shape change with a test over the three cases (self, reviewer, human with and without a probe), the letter or card to mtools for the record-form field with its reply, and a nemik-check run on a copy of the queue showing the 44 handoff Violations gone and none added.",
+          "due": "2026-11-17"
+        },
+        {
+          "finding": "Decision 2b and the type drift: treat the 10 recurring-below-hook Violations (R34, R35, R36, R37, R38, R41, R42, R43, R44, R46) as real and carry them as a known baseline that the count may not exceed, since a historic record cannot be cleared by later work, and judge every new scaffold retro live; make the ingest report a non-boolean in recurring or one_off (the 15 list-type retros R51 to R65) as a Warning naming the retro and the field instead of silently reading it as absent, ask mtools' writer to reject a list in those two fields so the form has one type, and decide what R51, R53 and R57 (layer instructions, recurring items listed) mean under G9 once the type is one. Finally, close the coverage gap behind W982: store the session's tick retros in scaffold form from now (a precommit, delta, sustain, handoff and layer per tick or per stretch) so that the shapes judge current practice, with this catch-up as the first.",
+          "finding_card": "W2192",
+          "finding_owner": "nemik session",
+          "finding_witness": "The baseline of ten ids recorded with the count check, the ingest Warning for a list in a boolean field with its test, the mtools request and answer, and the first scaffold retro of the current stretch stored with an id after R493 and judged by nemik-check.",
+          "due": "2026-11-17"
+        }
+      ],
+      "id": "nemik:R494"
     }
   ],
-  "retro_counter": 493
+  "retro_counter": 494
 }
