@@ -2,9 +2,10 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W2176: an operator act that has the operator hand-supply a credential is flagged.
 
-The live instance is luthen-observability:W703, which asked the operator to set
+The motivating instance is luthen-observability:W703, which asked the operator to set
 TAILSCALE_OAUTH_CLIENT_ID and TAILSCALE_OAUTH_CLIENT_SECRET while luthen's own W690 evidence
-named the file that holds them (github-cb, operator 2026-11-13). The rule has three parts, each
+named the file that holds them (github-cb, operator 2026-11-13); luthen has since rewritten the ask,
+so the W703 constant below is its original text from git history. The rule has three parts, each
 tested here:
 the text rule (nemik.blocks.credential_shaped), the excuse line in the evidence
 ('no machine-held source: <reason, card>', read by nemik.adapter), and the SHACL Warning shape and
@@ -28,11 +29,17 @@ if TYPE_CHECKING:
     from pathlib import Path
 
 SAID = "hand-supply a credential"
-# the wording of luthen-observability:W703's ask, as relayed by github-cb (the card's own text was
-# not read here): set two variables, one of them a *_SECRET
+# luthen-observability:W703's ORIGINAL ask, verbatim: read (read-only) from luthen-observability's
+# git history, `git grep TAILSCALE_OAUTH_CLIENT_SECRET f440e0ad -- .claude/paths-forward.json`, the
+# commit before luthen rewrote the ask. It names the two variables AND "the credential held outside
+# the tree", so it matches the rule two ways.
 W703 = (
-    "operator: act set TAILSCALE_OAUTH_CLIENT_ID and TAILSCALE_OAUTH_CLIENT_SECRET "
-    "in the environment of the exit-node unit"
+    "operator: act with TAILSCALE_OAUTH_CLIENT_ID and TAILSCALE_OAUTH_CLIENT_SECRET set in your "
+    "shell from the credential held outside the tree, run: tofu -chdir=/home/mikemol/github/"
+    "luthen-observability/terraform/tailnet init, then tofu -chdir=/home/mikemol/github/"
+    "luthen-observability/terraform/tailnet import tailscale_acl.policy acl, then tofu -chdir="
+    "/home/mikemol/github/luthen-observability/terraform/tailnet plan. Done when the plan prints "
+    "'No changes.' (any diff: paste it to the session, do not apply)."
 )
 # the first draft of luthen-observability:W2623, as relayed by github-cb
 W2623_DRAFT = "operator: act the operator writes the secret once, into the unit's environment"

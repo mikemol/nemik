@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 2188,
+  "counter": 2189,
   "waypoints": [
     {
       "symbol": "W1",
@@ -3515,11 +3515,11 @@
       ],
       "blocked_kind": "human",
       "next_bounded_step": "",
-      "evidence": "2026-10-02: 2026-10-02: an Akonadi resource synchronize is NOT a Google read: after try 2, a forced synchronize still showed life:W12 parent=nemik:repo:life in Akonadi while Google's list (operator screenshot) was flat. Today's HAVE (parent=ZXot..., the Google id we wrote) is likewise unconfirmable from Akonadi. A true read-back needs Google's API with the account's token, which so far stays inside Akonadi/KWallet by operator rule: the operator's call. | 2026-10-12: 2026-10-12 operator: W188 is the first instance of a CLASS of integrations, so it is built on the connector contract (W371) as its first member, not as a one-off helper. | 2026-11-06T20:29:33Z: Operator-ask audit 2026-11-06 (warrant: host line 145131, uuid 9c5e8dd8-a5a4-4cbd-9e07-84e844cc8b00). CLASS: a real ACT, kept as one unless something else serves. What would serve instead, to check before asking: a Google read through a connector the operator already granted (this session lists Google Drive and Docs connectors, no Tasks connector), or the helper's own fetch with the resource's account inside Akonadi (the evidence of 2026-10-02 says Akonadi's cache is not a Google read). So today nothing serves, and the ask stands exactly as written: a read-only Google Tasks API token supplied by the operator as a file path outside the repo. It is also the first member of the connector class (W371). Not obsolete, not a pipeline step. W188",
+      "evidence": "2026-10-02: 2026-10-02: an Akonadi resource synchronize is NOT a Google read: after try 2, a forced synchronize still showed life:W12 parent=nemik:repo:life in Akonadi while Google's list (operator screenshot) was flat. Today's HAVE (parent=ZXot..., the Google id we wrote) is likewise unconfirmable from Akonadi. A true read-back needs Google's API with the account's token, which so far stays inside Akonadi/KWallet by operator rule: the operator's call. | 2026-10-12: 2026-10-12 operator: W188 is the first instance of a CLASS of integrations, so it is built on the connector contract (W371) as its first member, not as a one-off helper. | 2026-11-06T20:29:33Z: Operator-ask audit 2026-11-06 (warrant: host line 145131, uuid 9c5e8dd8-a5a4-4cbd-9e07-84e844cc8b00). CLASS: a real ACT, kept as one unless something else serves. What would serve instead, to check before asking: a Google read through a connector the operator already granted (this session lists Google Drive and Docs connectors, no Tasks connector), or the helper's own fetch with the resource's account inside Akonadi (the evidence of 2026-10-02 says Akonadi's cache is not a Google read). So today nothing serves, and the ask stands exactly as written: a read-only Google Tasks API token supplied by the operator as a file path outside the repo. It is also the first member of the connector class (W371). Not obsolete, not a pipeline step. W188 | 2026-11-14T04:48:01Z: no machine-held source: the Google Tasks token stays inside Akonadi/KWallet by operator rule (this card's own 2026-10-02 and 2026-11-06 evidence: a resource synchronize is not a Google read, and no connector the operator granted reads Tasks), so the operator supplies a read-only token as a file path outside the repo (operator ruling 2026-10-09, relayed in the ask); W188. Added 2026-11-13 after nemik-operator --credential-shaped flagged this ask (nemik:W2176).",
       "issued_at": "2026-10-02T16:28:13Z",
       "minted_during": "interrupt",
       "caused_by": "operator",
-      "last_worked": "2026-11-06T20:29:33Z",
+      "last_worked": "2026-11-14T04:48:01Z",
       "ticks_blocked": 825,
       "weight": 2,
       "completed": null
@@ -52118,19 +52118,19 @@
     {
       "symbol": "W2176",
       "title": "Flag an operator: act ask that has the operator hand-supply a credential, extending the sudo_shaped rule (W1264, W1265)",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Build it as the sudo_shaped pattern, read at f081845: (1) adapter.py:246 add a 'no machine-held source:' evidence regex beside the apply-loop one and emit nemik:noMachineHeldSource at :473; (2) nemik.ttl:165 declare it; (3) blocks.py:598-642 add credential_shaped(ask) (an 'operator: act' ask naming a *_SECRET/_TOKEN/_KEY/_PASSWORD variable, pasting or typing a token, or a credential held outside the tree) and credential_shaped_asks(g) skipping excused blocked cards; (4) AskRow gains credential_shaped next to sudo_shaped (blocks.py:752,754); (5) blocks_cli.py:163-210 a --credential-shaped flag; (6) tests beside tests/test_sudo_shaped_cli.py and tests/test_apply_loop.py: W703's blocked_on text flags, the evidence line excuses, and a mutant dropping the excuse fails; run it over luthen-observability:W2623 once it lands (github-cb: its first draft said 'the operator writes the secret once'). Pace guard: this stack lowers no ratchet, so bundle it with a codon-baseline paydown (owed fall 1 more) or it is refused.",
-      "evidence": "2026-11-13T19:28:44Z: ASK from github-cb (relayed; the operator's quote is theirs, not checked against the transcript): the live instance is luthen-observability:W703, which asked the operator to set TAILSCALE_OAUTH_CLIENT_ID and TAILSCALE_OAUTH_CLIENT_SECRET while luthen's own W690 evidence names the file that holds them; this is the second time (the fleet's earlier lesson, an operator as courier of secrets is a tooling gap, lives only in card prose). Witness asked: a test that fails on W703's blocked_on text. | 2026-11-13T19:29:51Z: Read 2026-11-13 at f081845: the sudo_shaped rule is blocks.py:598-642 (regex plus sudo_shaped_asks), excused by NEMIK.applyLoopCannot set from an evidence line (adapter.py:246, :473), surfaced as AskRow.sudo_shaped (blocks.py:754) and the --sudo-shaped flag (blocks_cli.py:190); tests tests/test_apply_loop.py and tests/test_sudo_shaped_cli.py. A sibling rule extends it without a new module. | 2026-11-13T20:20:01Z: Paydown search 2026-11-13 at f081845 (held-W2163-leaf-candidates.py.txt, closures reaching at most 3 walls): shims.ask_cli and shims.work_cli (tempfile, 1 wall each, but they are CPython-only shims outside the census, so removing it is a moved wall, not a paydown); waitlog (TYPE_CHECKING plus mikemol.* third-party); pins (argparse, mikemol.*, tomllib); warrants (TYPE_CHECKING, importlib.resources, tomllib). No codon-baseline leaf is one honest edit away: each real candidate reaches a mikemol.* third-party import or tomllib, which nemik cannot remove alone. So W2176's stack has no cheap paydown to ride with; options are a design-change paydown (as W2163 chose to defer adapter urllib.parse, 43 pairs) or waiting on mtools:W2417 (admit by fall) and the pace row for codon-walls.",
+      "next_bounded_step": null,
+      "evidence": "2026-11-13T19:28:44Z: ASK from github-cb (relayed; the operator's quote is theirs, not checked against the transcript): the live instance is luthen-observability:W703, which asked the operator to set TAILSCALE_OAUTH_CLIENT_ID and TAILSCALE_OAUTH_CLIENT_SECRET while luthen's own W690 evidence names the file that holds them; this is the second time (the fleet's earlier lesson, an operator as courier of secrets is a tooling gap, lives only in card prose). Witness asked: a test that fails on W703's blocked_on text. | 2026-11-13T19:29:51Z: Read 2026-11-13 at f081845: the sudo_shaped rule is blocks.py:598-642 (regex plus sudo_shaped_asks), excused by NEMIK.applyLoopCannot set from an evidence line (adapter.py:246, :473), surfaced as AskRow.sudo_shaped (blocks.py:754) and the --sudo-shaped flag (blocks_cli.py:190); tests tests/test_apply_loop.py and tests/test_sudo_shaped_cli.py. A sibling rule extends it without a new module. | 2026-11-13T20:20:01Z: Paydown search 2026-11-13 at f081845 (held-W2163-leaf-candidates.py.txt, closures reaching at most 3 walls): shims.ask_cli and shims.work_cli (tempfile, 1 wall each, but they are CPython-only shims outside the census, so removing it is a moved wall, not a paydown); waitlog (TYPE_CHECKING plus mikemol.* third-party); pins (argparse, mikemol.*, tomllib); warrants (TYPE_CHECKING, importlib.resources, tomllib). No codon-baseline leaf is one honest edit away: each real candidate reaches a mikemol.* third-party import or tomllib, which nemik cannot remove alone. So W2176's stack has no cheap paydown to ride with; options are a design-change paydown (as W2163 chose to defer adapter urllib.parse, 43 pairs) or waiting on mtools:W2417 (admit by fall) and the pace row for codon-walls. | 2026-11-14T04:40:51Z: landed c0d75b3 (gate green; rode with W2188 81e85a0); first submit refused on test_skill (SKILL.md did not document OperatorActCredentialShape), fixed | 2026-11-14T04:48:01Z: FIRST LIVE RUN 2026-11-13 after landing (c0d75b3), nemik-operator --credential-shaped over ~/github, built from the worktree venv (the main tree's installed copy predates the flag): two asks flagged. (1) nemik:W188 (provide a read-only Google Tasks API token): a true instance, flagged by the 'supply ... credential' alternative (its text says 'they will supply their own ... no credential is used before it is given'); excused now by an evidence line, with the reason from the card's own audit. (2) el-openglo:W113 (create an AMO API key and secret and put them in WEB_EXT_API_KEY and WEB_EXT_API_SECRET, plus a Chrome developer registration): a true instance, a key the operator creates at a vendor, so likely 'no machine-held source' but the card is el-openglo's, not edited here; github-cb told. NOT flagged: luthen-observability:W703 (its text may already have been rewritten: not read here) and the W2623 draft (not landed). No other card matched, so no false positive seen on the live fleet; rate of match is 2 of the cards blocked on the operator.",
       "issued_at": "2026-11-13T19:28:39Z",
       "minted_during": "interrupt",
       "caused_by": "luthen-observability:W703",
-      "last_worked": "2026-11-14T04:09:39Z",
+      "last_worked": "2026-11-14T04:48:01Z",
       "ticks_blocked": 0,
-      "completed": null
+      "completed": "20261114T044051Z"
     },
     {
       "symbol": "W2177",
@@ -52320,17 +52320,34 @@
     {
       "symbol": "W2188",
       "title": "Codon walls paydown: marks reads its JSON lines without typing.cast",
+      "status": "done",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-11-14T04:40:50Z: landed 81e85a0 (gate green; walls 843 to 841)",
+      "issued_at": "2026-11-14T03:55:36Z",
+      "minted_during": "interrupt",
+      "caused_by": "nemik:W2177",
+      "last_worked": "2026-11-14T04:40:50Z",
+      "ticks_blocked": 0,
+      "completed": "20261114T044050Z"
+    },
+    {
+      "symbol": "W2189",
+      "title": "Hold nemik:W2176's test to W703's verbatim original ask, not wording inferred from a description",
       "status": "working",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Rides with nemik:W2176 (the pace guard owes a ratchet fall): bazel both, cut the ref, pace verdict, submit once.",
+      "next_bounded_step": "Land the test fixture change (tests/test_credential_shaped.py) once the pace guard admits it; read from luthen-observability's git history f440e0ad.",
       "evidence": "",
-      "issued_at": "2026-11-14T03:55:36Z",
+      "issued_at": "2026-11-14T04:51:15Z",
       "minted_during": "interrupt",
-      "caused_by": "nemik:W2177",
-      "last_worked": "2026-11-14T04:09:38Z",
+      "caused_by": "nemik:W2176",
+      "last_worked": "2026-11-14T04:51:29Z",
       "ticks_blocked": 0,
       "completed": null
     }
