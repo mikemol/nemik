@@ -259,9 +259,12 @@ def hub_modules_depend_on_everything_below() -> None:
     # queuefiles, a leaf of standard library only, where check used to define them.
     # nemik:W2147: serve reads graph.json's nodes through tomlview.tables, a leaf of pure functions,
     # now that nemik.pieces' GraphDoc is a plain dict and not a TypedDict.
+    # nemik:W1100: metrics counts the ledger's lines and tick pairs through ledgersummary, a leaf
+    # of pure functions over plain rows (no import).
     expected = {
         "metrics": lower
         | {
+            "ledgersummary",
             "realize",
             "runlogs",
             "workrows",

@@ -749,9 +749,26 @@ def ledger_rows(ledger_path: Path) -> list[tuple[str, str, str, str]]:
         for a line that names no card.
 
     """
+    return ledger_rows_counted(ledger_path)[0]
+
+
+def ledger_rows_counted(
+    ledger_path: Path,
+) -> tuple[list[tuple[str, str, str, str]], int]:
+    """Reduce a ledger to its plain rows and count the lines it could not parse (nemik:W1100).
+
+    Args:
+        ledger_path: The ledger file.
+
+    Returns:
+        (the rows of `ledger_rows`, the number of unparsed lines), as `ledger_graph` counts them.
+
+    """
     rows: list[tuple[str, str, str, str]] = []
+    unparsed = 0
     for rec in ledger.read(ledger_path):
         if isinstance(rec, ledger.Unparsed):
+            unparsed += 1
             continue
         e = rec.entry
         symbol = "" if e.symbol == model.NO_SYMBOL else e.symbol
@@ -759,7 +776,7 @@ def ledger_rows(ledger_path: Path) -> list[tuple[str, str, str, str]]:
         # moves from the triples to the summary publishes the same text
         stamp = str(Literal(rec.stamp, datatype=XSD.dateTime))
         rows.append((stamp, e.kind, symbol, KIND_CLASS.get(e.kind, "unclassified")))
-    return rows
+    return rows, unparsed
 
 
 def activity_by_card(

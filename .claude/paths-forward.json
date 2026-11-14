@@ -25986,7 +25986,7 @@
     {
       "symbol": "W1099",
       "title": "Move blocks.annotate's last-activity read onto the ledger summary, output unchanged",
-      "status": "working",
+      "status": "landed",
       "enables": [
         "W1095"
       ],
@@ -25996,11 +25996,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "2026-11-07: move blocks.annotate's last-activity read onto the ledger summary and prove output unchanged with tests/test_blocks_activity.py; src edit, rides the next src stack",
-      "evidence": "",
+      "evidence": "2026-11-14T22:38:04Z: Landed 0862e43: mikemol-commit printed COMMITTED nemik 0862e43 W1099 [PUSHED]; git log main subject matches. blocks.operator_asks(g, last) reads last activity from the summary when given it; nothing passes it yet (delivery is W2200's). The first submit was refused on core.wasm (output-base path in the module hash, nemik:W2201); v2 carried a rebuilt module.",
       "issued_at": "2026-10-26T11:58:00Z",
       "minted_during": "tick",
       "caused_by": "W1095",
-      "last_worked": "2026-11-14T22:05:31Z",
+      "last_worked": "2026-11-14T22:38:10Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/blocks.py",
@@ -26008,12 +26008,13 @@
       ],
       "size_class": "small",
       "weight": 220,
-      "completed": null
+      "completed": null,
+      "landed_at": "20261114T223810Z"
     },
     {
       "symbol": "W1100",
       "title": "Move metrics' last-activity and effort-class reads onto the ledger summary, output unchanged",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W1095"
       ],
@@ -26027,14 +26028,15 @@
       "issued_at": "2026-10-26T11:58:00Z",
       "minted_during": "tick",
       "caused_by": "W1095",
-      "last_worked": "2026-11-06T01:38:17Z",
+      "last_worked": "2026-11-14T23:15:34Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/metrics.py",
         "tests/test_metrics_activity.py"
       ],
       "size_class": "small",
-      "weight": 220
+      "weight": 220,
+      "completed": null
     },
     {
       "symbol": "W1101",
@@ -52429,7 +52431,7 @@
       "issued_at": "2026-11-14T10:22:48Z",
       "minted_during": "interrupt",
       "caused_by": "W2192",
-      "last_worked": "2026-11-14T21:38:38Z",
+      "last_worked": "2026-11-14T22:56:02Z",
       "ticks_blocked": 0,
       "completed": null
     },
@@ -52508,7 +52510,7 @@
     {
       "symbol": "W2198",
       "title": "Pure activity_by_card(repo, rows) in ledgersummary: per-card-IRI effort Counter and last stamp from ledger_rows, equal to serve._activity on the same ledger's graph (equivalence test over a fixture ledger)",
-      "status": "ready",
+      "status": "landed",
       "enables": [
         "W1098"
       ],
@@ -52516,13 +52518,14 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-11-14T22:38:03Z: Landed with W1099 as 0862e43 (the stack of W2198 alone is outside the published round, mtools:W1942); mikemol-commit printed COMMITTED nemik 0862e43 [PUSHED], git log main subject matches.",
       "issued_at": "2026-11-14T21:22:05Z",
       "minted_during": "interrupt",
       "caused_by": "W1098",
-      "last_worked": "2026-11-14T21:38:38Z",
+      "last_worked": "2026-11-14T22:38:11Z",
       "ticks_blocked": 0,
-      "completed": null
+      "completed": null,
+      "landed_at": "20261114T223811Z"
     },
     {
       "symbol": "W2199",

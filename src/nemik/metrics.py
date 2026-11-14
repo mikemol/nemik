@@ -63,13 +63,14 @@ from mikemol.pathsforward.lock import stamp
 from mikemol.pathsforward.opa_eval import OpaUnavailableError
 from mikemol.pathsforward.store import UnreadableStateError
 from rdflib import RDF, Graph
-from rdflib.namespace import DCTERMS, PROV
+from rdflib.namespace import DCTERMS
 
 from nemik import cachestore, forecast, history, tiers
-from nemik.adapter import BASE, NEMIK, OSLC_CM, ledger_graph
+from nemik.adapter import BASE, NEMIK, OSLC_CM, ledger_rows_counted, reference_uri
 from nemik.blocks import inbound, operator_asks, ref, with_salience
 from nemik.check import Finding, ready_neither, survey
 from nemik.health import STATUSES, health, thresholds
+from nemik.ledgersummary import summarize
 from nemik.queuefiles import LEDGER, QUEUE, default_root, workstream_files
 from nemik.rank import TIERS, rank
 from nemik.realize import judged, verdicts
@@ -620,14 +621,12 @@ def ticks(repo: str, ledger: Path) -> list[tuple[str, str]]:
         One pair per line of kind `tick` that carries a symbol, in file order.
 
     """
-    g, _ = ledger_graph(repo, ledger)
-    out: list[tuple[str, str]] = []
-    for act in g.subjects(RDF.type, PROV.Activity):
-        used = g.value(act, PROV.used)
-        if str(g.value(act, NEMIK.kind)) == "tick" and used is not None:
-            stamp = str(g.value(act, PROV.startedAtTime))
-            out.append((stamp, str(used).rpartition("/")[2]))
-    return out
+    rows, _ = ledger_rows_counted(ledger)
+    return [
+        (stamp, str(reference_uri(repo, symbol)).rpartition("/")[2])
+        for stamp, kind, symbol, _cls in rows
+        if kind == "tick" and symbol
+    ]
 
 
 def drift_lines(root: Path, merged: Graph) -> list[str]:
@@ -976,14 +975,8 @@ def ledger_rows(root: Path) -> list[str]:
     """
     out = ["# TYPE nemik_ledger_lines gauge", "# TYPE nemik_ledger_unparsed gauge"]
     for repo, path in workstream_files(root, LEDGER):
-        g, unparsed = ledger_graph(repo, path)
-        lines = Counter(
-            (str(c), str(k))
-            for a in g.subjects(RDF.type, PROV.Activity)
-            for c in g.objects(a, NEMIK.effortClass)
-            for k in g.objects(a, NEMIK.kind)
-        )
-        for (cls, kind), n in sorted(lines.items()):
+        rows, unparsed = ledger_rows_counted(path)
+        for (cls, kind), n in sorted(summarize(rows)[2].items()):
             out.append(
                 f"nemik_ledger_lines{label(repo=repo, kind=kind, **{'class': cls})} {n}"
             )
