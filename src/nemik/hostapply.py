@@ -24,7 +24,6 @@ from __future__ import annotations
 
 import json
 import re
-from dataclasses import dataclass, field
 from datetime import datetime
 from typing import TYPE_CHECKING
 
@@ -57,15 +56,48 @@ EXPORTER = "checks.host_apply_export"
 EXPORTER_TIMEOUT_S = 60
 
 
-@dataclass(frozen=True)
+# nemik:W2185 (codon paydown, option A of nemik:W567): the three records below were frozen
+# dataclasses. dataclasses, field and a decorator with arguments are three Codon walls, and the
+# decorator generated __init__, __eq__ and __hash__: they are written out here as a plain annotated
+# class with an explicit __init__ and __eq__ and __hash__ over the same fields. The records are
+# built once by `parse` and only read after, so they are treated as immutable by convention (the
+# dataclass raised on assignment; nothing here assigns).
+
+
 class Kind:
     """What activating one kind does: its effect class and the units it touches, in order."""
 
     effect: str
     restarts: tuple[tuple[str, str], ...]
 
+    def __init__(self, effect: str, restarts: tuple[tuple[str, str], ...]) -> None:
+        """Hold the effect class and the restart units in order."""
+        self.effect = effect
+        self.restarts = restarts
 
-@dataclass(frozen=True)
+    def __eq__(self, other: object) -> bool:
+        """Say whether another Kind has the same effect and restarts.
+
+        Returns:
+            True when `other` is a Kind with equal effect and restarts.
+
+        """
+        return (
+            isinstance(other, Kind)
+            and self.effect == other.effect
+            and self.restarts == other.restarts
+        )
+
+    def __hash__(self) -> int:
+        """Hash the fields that __eq__ compares.
+
+        Returns:
+            The hash of the effect and the restarts.
+
+        """
+        return hash((self.effect, self.restarts))
+
+
 class Row:
     """One declared host file: its kind, what it must follow, and whether the live file matches."""
 
@@ -73,10 +105,52 @@ class Row:
     activate: str
     after: tuple[str, ...]
     applied: tuple[str, str] | None
-    unobservable: bool = False
+    unobservable: bool
+
+    def __init__(
+        self,
+        row_id: str,
+        activate: str,
+        after: tuple[str, ...],
+        applied: tuple[str, str] | None,
+        *,
+        unobservable: bool = False,
+    ) -> None:
+        """Hold one row's id, kind, ordering, applied stamp and whether it could be observed."""
+        self.id = row_id
+        self.activate = activate
+        self.after = after
+        self.applied = applied
+        self.unobservable = unobservable
+
+    def __eq__(self, other: object) -> bool:
+        """Say whether another Row has the same fields.
+
+        Returns:
+            True when `other` is a Row with equal fields.
+
+        """
+        return (
+            isinstance(other, Row)
+            and self.id == other.id
+            and self.activate == other.activate
+            and self.after == other.after
+            and self.applied == other.applied
+            and self.unobservable == other.unobservable
+        )
+
+    def __hash__(self) -> int:
+        """Hash the fields that __eq__ compares.
+
+        Returns:
+            The hash of the row's fields.
+
+        """
+        return hash(
+            (self.id, self.activate, self.after, self.applied, self.unobservable)
+        )
 
 
-@dataclass(frozen=True)
 class HostApply:
     """A parsed export. `problems` names everything that was malformed or inconsistent."""
 
@@ -84,7 +158,47 @@ class HostApply:
     kinds: dict[str, Kind]
     rows: dict[str, Row]
     ordering: str
-    problems: tuple[str, ...] = field(default_factory=tuple)
+    problems: tuple[str, ...]
+
+    def __init__(
+        self,
+        as_of: str,
+        kinds: dict[str, Kind],
+        rows: dict[str, Row],
+        ordering: str,
+        problems: tuple[str, ...] = (),
+    ) -> None:
+        """Hold the parsed export: its stamp, kinds, rows, ordering and problems."""
+        self.as_of = as_of
+        self.kinds = kinds
+        self.rows = rows
+        self.ordering = ordering
+        self.problems = problems
+
+    def __eq__(self, other: object) -> bool:
+        """Say whether another HostApply has the same fields.
+
+        Returns:
+            True when `other` is a HostApply with equal fields.
+
+        """
+        return (
+            isinstance(other, HostApply)
+            and self.as_of == other.as_of
+            and self.kinds == other.kinds
+            and self.rows == other.rows
+            and self.ordering == other.ordering
+            and self.problems == other.problems
+        )
+
+    def __hash__(self) -> int:
+        """Hash the scalar fields; equal exports have equal hashes (the dict fields are left out).
+
+        Returns:
+            The hash of the stamp, the ordering and the problems.
+
+        """
+        return hash((self.as_of, self.ordering, self.problems))
 
 
 def _dict(value: object) -> dict[str, object]:
@@ -128,7 +242,9 @@ def _row(raw: object, kinds: dict[str, Kind], problems: list[str]) -> Row | None
     stamp = (str(applied.get("at")), str(applied.get("digest"))) if applied else None
     after = tuple(str(x) for x in _list(body.get("after")))
     # An absent flag (an export older than luthen's W680) reads as observable, the old behaviour.
-    return Row(ident, activate, after, stamp, body.get("unobservable") is True)
+    return Row(
+        ident, activate, after, stamp, unobservable=body.get("unobservable") is True
+    )
 
 
 def parse(doc: object) -> HostApply:

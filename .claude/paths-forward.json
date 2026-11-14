@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 2184,
+  "counter": 2185,
   "waypoints": [
     {
       "symbol": "W1",
@@ -51647,21 +51647,21 @@
     {
       "symbol": "W2147",
       "title": "W423a: pieces.split/assemble compiles under the pinned Codon and passes the pieces corpus",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W423"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Edit src/nemik/pieces.py into the Codon-strict subset (no import walls), add it to the census with no baseline entry, run tests/corpus/pieces through the native build in tests/test_pieces_corpus.py; witness: test_codon_census and test_pieces_corpus pass with pieces absent from codon-baseline.json.",
-      "evidence": "2026-11-13T22:25:52Z: READ 2026-11-13 at 98a2135 (no edit yet): pieces.py is 112 lines and reaches two walls. (1) BASE = 'urn:nemik:' imported from nemik.adapter (adapter.py:84), which drags the whole adapter closure (rdflib, urllib.parse, hashlib, importlib.metadata, typing.cast, mikemol.*); the constant can move to a pure leaf that adapter re-imports, one small edit. (2) typing.TypedDict for GraphDoc (8 optional keys): GraphDoc is subscripted and built as a dict literal in pieces.py, serve.py:84 and :1625 (cast), tests/test_pieces.py, tests/test_pieces_corpus.py and tools/gen_pieces_corpus.py, so replacing it changes every reader; it is the same TypedDict wall that blocks and witnesses carry (6 and 4 pairs), so the choice of a Codon-valid form for typed JSON documents is shared: carried as the decision card below. Until that form is chosen the baseline entry for pieces cannot leave.",
+      "next_bounded_step": null,
+      "evidence": "2026-11-13T22:25:52Z: READ 2026-11-13 at 98a2135 (no edit yet): pieces.py is 112 lines and reaches two walls. (1) BASE = 'urn:nemik:' imported from nemik.adapter (adapter.py:84), which drags the whole adapter closure (rdflib, urllib.parse, hashlib, importlib.metadata, typing.cast, mikemol.*); the constant can move to a pure leaf that adapter re-imports, one small edit. (2) typing.TypedDict for GraphDoc (8 optional keys): GraphDoc is subscripted and built as a dict literal in pieces.py, serve.py:84 and :1625 (cast), tests/test_pieces.py, tests/test_pieces_corpus.py and tools/gen_pieces_corpus.py, so replacing it changes every reader; it is the same TypedDict wall that blocks and witnesses carry (6 and 4 pairs), so the choice of a Codon-valid form for typed JSON documents is shared: carried as the decision card below. Until that form is chosen the baseline entry for pieces cannot leave. | 2026-11-14T00:59:15Z: landed d77dd24 (gate green; codon-baseline.json loses pieces, walls 892 to 882); first submit refused on test_architecture (serve's declared import set), fixed in checks/claims.py",
       "issued_at": "2026-11-10T18:00:11Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W423",
-      "last_worked": "2026-11-13T23:16:49Z",
+      "last_worked": "2026-11-14T00:59:15Z",
       "ticks_blocked": 0,
-      "completed": null
+      "completed": "20261114T005915Z"
     },
     {
       "symbol": "W2148",
@@ -52264,6 +52264,23 @@
       "caused_by": "nemik:W2147",
       "last_worked": null,
       "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2185",
+      "title": "Codon walls paydown: hostapply's three frozen dataclasses are plain classes with explicit __init__, __eq__ and __hash__",
+      "status": "working",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Test under bazel (test_hostapply, test_witnesses, test_architecture, ratchets, codon targets), re-record codon-walls.json, cut the ref, pace verdict, submit once.",
+      "evidence": "",
+      "issued_at": "2026-11-14T01:16:51Z",
+      "minted_during": "interrupt",
+      "caused_by": "nemik:W2177",
+      "last_worked": "2026-11-14T01:34:47Z",
+      "ticks_blocked": 0,
+      "completed": null
     }
   ],
   "residue": [
