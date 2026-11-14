@@ -242,8 +242,13 @@ def has_probe(text: str) -> bool:
 # root-shaped command carries a line 'apply loop cannot: <reason, card>' saying why the root apply
 # loop could not carry it. The line is the exception; its text stays out of the graph, only that
 # it is there.
+# nemik:W2190: the writer's --evidence-append puts 'YYYY-MM-DDTHH:MM:SSZ: ' before the text and
+# joins entries with ' | ', so an excuse appended through it never starts a line. The phrase counts
+# at a line start, or at the start of an entry (after ' | '), optionally after that stamp; it still
+# does not count in the middle of a sentence.
+_ENTRY_START = r"(?:^|\|)[ \t]*(?:\d{4}-\d{2}-\d{2}T[0-9:]+Z:[ \t]*)?"
 _APPLY_LOOP_CANNOT = re.compile(
-    r"^\s*apply loop cannot:\s*\S", flags=re.IGNORECASE | re.MULTILINE
+    _ENTRY_START + r"apply loop cannot:\s*\S", flags=re.IGNORECASE | re.MULTILINE
 )
 
 
@@ -251,7 +256,8 @@ def apply_loop_cannot(text: str) -> bool:
     """Say whether evidence has an 'apply loop cannot: <reason>' line.
 
     Returns:
-        True when a line of the text starts 'apply loop cannot:' and gives a reason after it.
+        True when a line or an entry of the text starts 'apply loop cannot:' (after an optional
+        writer timestamp) and gives a reason after it.
 
     """
     return _APPLY_LOOP_CANNOT.search(text) is not None
@@ -261,7 +267,7 @@ def apply_loop_cannot(text: str) -> bool:
 # operator hand-supply a credential carries a line 'no machine-held source: <reason, card>' saying
 # why no file or store could supply it. The line is the exception; its text stays out of the graph.
 _NO_MACHINE_SOURCE = re.compile(
-    r"^\s*no machine-held source:\s*\S", flags=re.IGNORECASE | re.MULTILINE
+    _ENTRY_START + r"no machine-held source:\s*\S", flags=re.IGNORECASE | re.MULTILINE
 )
 
 
@@ -269,7 +275,8 @@ def no_machine_source(text: str) -> bool:
     """Say whether evidence has a 'no machine-held source: <reason>' line.
 
     Returns:
-        True when a line of the text starts 'no machine-held source:' and gives a reason after it.
+        True when a line or an entry of the text starts 'no machine-held source:' (after an
+        optional writer timestamp) and gives a reason after it.
 
     """
     return _NO_MACHINE_SOURCE.search(text) is not None

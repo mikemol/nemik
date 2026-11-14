@@ -153,6 +153,24 @@ def test_the_phrase_inside_a_sentence_does_not() -> None:
     assert not no_machine_source("there is no machine-held source: so ask")
 
 
+def test_the_writers_stamp_and_entry_separator_do_not_hide_it() -> None:
+    """nemik:W2190: --evidence-append puts a stamp before the text and joins entries with ' | '.
+
+    This is how nemik:W188's excuse first went unread: appended through the writer, it never
+    started a line.
+    """
+    reason = "no machine-held source: the vendor shows it once, luthen-observability:W9"
+    assert no_machine_source(f"2026-11-13T22:25:52Z: {reason}")
+    assert no_machine_source(f"an earlier entry | 2026-11-06T20:29:33Z: {reason}")
+    assert no_machine_source(f"an earlier entry | {reason}")
+
+
+def test_a_stamp_does_not_excuse_a_phrase_that_is_mid_sentence() -> None:
+    """A stamp or a separator only opens an entry: the phrase must still start it."""
+    assert not no_machine_source("2026-11-13T22:25:52Z: so there is no machine-held source: x")
+    assert not no_machine_source("an earlier entry | there is no machine-held source: x")
+
+
 def test_the_graph_carries_the_excuse_for_a_card_that_says_so(tmp_path: Path) -> None:
     """A card with the line gets the predicate; the same card without it does not."""
     cards = [

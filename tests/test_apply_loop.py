@@ -31,6 +31,20 @@ def test_the_phrase_inside_a_sentence_does_not() -> None:
     assert not apply_loop_cannot("the apply loop cannot: do it from here")
 
 
+def test_the_writers_stamp_and_entry_separator_do_not_hide_it() -> None:
+    """nemik:W2190: --evidence-append puts a stamp before the text and joins entries with ' | '."""
+    reason = "apply loop cannot: needs the operator's key, luthen-observability:W9"
+    assert apply_loop_cannot(f"2026-11-13T22:25:52Z: {reason}")
+    assert apply_loop_cannot(f"an earlier entry | 2026-11-06T20:29:33Z: {reason}")
+    assert apply_loop_cannot(f"an earlier entry | {reason}")
+
+
+def test_a_stamp_does_not_excuse_a_phrase_that_is_mid_sentence() -> None:
+    """A stamp or a separator only opens an entry: the phrase must still start it."""
+    assert not apply_loop_cannot("2026-11-13T22:25:52Z: so the apply loop cannot: do it")
+    assert not apply_loop_cannot("an earlier entry | the apply loop cannot: do it")
+
+
 def test_the_graph_carries_it_for_a_card_that_says_so(tmp_path: Path) -> None:
     """A card with the line gets the predicate; the same card without it does not."""
     cards = [

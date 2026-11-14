@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 2189,
+  "counter": 2190,
   "waypoints": [
     {
       "symbol": "W1",
@@ -3515,11 +3515,11 @@
       ],
       "blocked_kind": "human",
       "next_bounded_step": "",
-      "evidence": "2026-10-02: 2026-10-02: an Akonadi resource synchronize is NOT a Google read: after try 2, a forced synchronize still showed life:W12 parent=nemik:repo:life in Akonadi while Google's list (operator screenshot) was flat. Today's HAVE (parent=ZXot..., the Google id we wrote) is likewise unconfirmable from Akonadi. A true read-back needs Google's API with the account's token, which so far stays inside Akonadi/KWallet by operator rule: the operator's call. | 2026-10-12: 2026-10-12 operator: W188 is the first instance of a CLASS of integrations, so it is built on the connector contract (W371) as its first member, not as a one-off helper. | 2026-11-06T20:29:33Z: Operator-ask audit 2026-11-06 (warrant: host line 145131, uuid 9c5e8dd8-a5a4-4cbd-9e07-84e844cc8b00). CLASS: a real ACT, kept as one unless something else serves. What would serve instead, to check before asking: a Google read through a connector the operator already granted (this session lists Google Drive and Docs connectors, no Tasks connector), or the helper's own fetch with the resource's account inside Akonadi (the evidence of 2026-10-02 says Akonadi's cache is not a Google read). So today nothing serves, and the ask stands exactly as written: a read-only Google Tasks API token supplied by the operator as a file path outside the repo. It is also the first member of the connector class (W371). Not obsolete, not a pipeline step. W188 | 2026-11-14T04:48:01Z: no machine-held source: the Google Tasks token stays inside Akonadi/KWallet by operator rule (this card's own 2026-10-02 and 2026-11-06 evidence: a resource synchronize is not a Google read, and no connector the operator granted reads Tasks), so the operator supplies a read-only token as a file path outside the repo (operator ruling 2026-10-09, relayed in the ask); W188. Added 2026-11-13 after nemik-operator --credential-shaped flagged this ask (nemik:W2176).",
+      "evidence": "2026-10-02: 2026-10-02: an Akonadi resource synchronize is NOT a Google read: after try 2, a forced synchronize still showed life:W12 parent=nemik:repo:life in Akonadi while Google's list (operator screenshot) was flat. Today's HAVE (parent=ZXot..., the Google id we wrote) is likewise unconfirmable from Akonadi. A true read-back needs Google's API with the account's token, which so far stays inside Akonadi/KWallet by operator rule: the operator's call. | 2026-10-12: 2026-10-12 operator: W188 is the first instance of a CLASS of integrations, so it is built on the connector contract (W371) as its first member, not as a one-off helper. | 2026-11-06T20:29:33Z: Operator-ask audit 2026-11-06 (warrant: host line 145131, uuid 9c5e8dd8-a5a4-4cbd-9e07-84e844cc8b00). CLASS: a real ACT, kept as one unless something else serves. What would serve instead, to check before asking: a Google read through a connector the operator already granted (this session lists Google Drive and Docs connectors, no Tasks connector), or the helper's own fetch with the resource's account inside Akonadi (the evidence of 2026-10-02 says Akonadi's cache is not a Google read). So today nothing serves, and the ask stands exactly as written: a read-only Google Tasks API token supplied by the operator as a file path outside the repo. It is also the first member of the connector class (W371). Not obsolete, not a pipeline step. W188 | 2026-11-14T04:48:01Z: no machine-held source: the Google Tasks token stays inside Akonadi/KWallet by operator rule (this card's own 2026-10-02 and 2026-11-06 evidence: a resource synchronize is not a Google read, and no connector the operator granted reads Tasks), so the operator supplies a read-only token as a file path outside the repo (operator ruling 2026-10-09, relayed in the ask); W188. Added 2026-11-13 after nemik-operator --credential-shaped flagged this ask (nemik:W2176). | 2026-11-14T05:01:55Z: \nno machine-held source: the Google Tasks token stays inside Akonadi/KWallet by operator rule (this card's own 2026-10-02 and 2026-11-06 evidence), so the operator supplies a read-only token as a file path outside the repo (operator ruling 2026-10-09); W188.",
       "issued_at": "2026-10-02T16:28:13Z",
       "minted_during": "interrupt",
       "caused_by": "operator",
-      "last_worked": "2026-11-14T04:48:01Z",
+      "last_worked": "2026-11-14T05:01:55Z",
       "ticks_blocked": 825,
       "weight": 2,
       "completed": null
@@ -52337,17 +52337,34 @@
     {
       "symbol": "W2189",
       "title": "Hold nemik:W2176's test to W703's verbatim original ask, not wording inferred from a description",
+      "status": "done",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-11-14T04:53:45Z: landed 5f7f110 (gate green; test only)",
+      "issued_at": "2026-11-14T04:51:15Z",
+      "minted_during": "interrupt",
+      "caused_by": "nemik:W2176",
+      "last_worked": "2026-11-14T04:53:45Z",
+      "ticks_blocked": 0,
+      "completed": "20261114T045345Z"
+    },
+    {
+      "symbol": "W2190",
+      "title": "Excuse lines in evidence are read after the writer's timestamp and entry separator, not only at a line start",
       "status": "working",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Land the test fixture change (tests/test_credential_shaped.py) once the pace guard admits it; read from luthen-observability's git history f440e0ad.",
+      "next_bounded_step": "Widen _APPLY_LOOP_CANNOT and _NO_MACHINE_SOURCE in adapter.py to accept the phrase after an optional 'YYYY-MM-DDTHH:MM:SSZ:' stamp at a line start or after ' | ', keep the mid-sentence guard, add tests, land.",
       "evidence": "",
-      "issued_at": "2026-11-14T04:51:15Z",
+      "issued_at": "2026-11-14T05:06:36Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W2176",
-      "last_worked": "2026-11-14T04:51:29Z",
+      "last_worked": "2026-11-14T05:11:24Z",
       "ticks_blocked": 0,
       "completed": null
     }
