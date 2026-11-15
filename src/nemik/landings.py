@@ -159,20 +159,42 @@ def read_document(text: str) -> tuple[str, list[Landing]]:
     start = at + len(AS_OF_KEY)
     as_of = head[start : head.find('"', start)]
     rows: list[Landing] = []
-    for line in lines[1:]:
-        body = line.strip().rstrip(",")
-        if body.startswith("{"):
-            fields_of = fields(body)
-            rows.append(
-                Landing(
-                    _first(fields_of, "repo"),
-                    _first(fields_of, "sha"),
-                    _first(fields_of, "card"),
-                    int(_first(fields_of, "gate_s")),
-                    _first(fields_of, "when"),
-                )
+    for body in _objects(text):
+        if '"repo"' not in body:
+            continue
+        fields_of = fields(body)
+        rows.append(
+            Landing(
+                _first(fields_of, "repo"),
+                _first(fields_of, "sha"),
+                _first(fields_of, "card"),
+                int(_first(fields_of, "gate_s")),
+                _first(fields_of, "when"),
             )
+        )
     return as_of, rows
+
+
+def _objects(text: str) -> list[str]:
+    """Cut a document into its flat JSON objects, whatever its line layout.
+
+    The host writes the stamp and then a row per line; luthen's egress gate rewrites a filtered file
+    as one line (nemik:W1997: the one-line form read as no rows at all). A row holds no nested
+    object, so each object runs from a brace to the next closing brace.
+
+    Returns:
+        The text of each innermost object, in order.
+
+    """
+    found: list[str] = []
+    start = -1
+    for at, char in enumerate(text):
+        if char == "{":
+            start = at
+        elif char == "}" and start >= 0:
+            found.append(text[start : at + 1])
+            start = -1
+    return found
 
 
 def series(rows: list[Landing]) -> dict[str, list[int]]:

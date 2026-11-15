@@ -148,6 +148,13 @@ cross_repo_ticks = 48
 ticks = 16
 outcomes = ["idle"]
 
+# nemik:W1997: a card waiting on an open blocker that has landed more commits than `percentile` percent of
+# cards ever do is a Warning (rolling blocker, split it). The bound is learned from the landings document,
+# never typed. Measured 2026-11-15 over 1726 landings and 1272 cards (2026-10-22 to 11-15): p50 1, p90 2,
+# p95 3, p99 7, max 58 (mtools:W2219, the card that held a second card for days).
+[rolling]
+percentile = 90
+
 # nemik:W327: arrival pacing (nemik-pacing), a token bucket over each repo's new cards: `rate` per day,
 # `burst` on top, over `window_days`. Measured 2026-10-12 over 14 days: daily medians 2 to 53, peaks to
 # 844 (a bulk import). Report only; enforcing a pace is a separate decision.

@@ -7,7 +7,7 @@
   "required": [
     "local", "peer", "peer_blocked", "operator", "order", "residue",
     "ask_priority", "errand", "starvation", "health", "saturation", "tiers",
-    "rulings", "sla", "idle", "pacing", "warrant_debt", "manifest_ratchet", "wait_age"
+    "rulings", "sla", "idle", "rolling", "pacing", "warrant_debt", "manifest_ratchet", "wait_age"
   ],
   "properties": {
     "local": {"$ref": "#/$defs/demand"},
@@ -104,6 +104,11 @@
         "ticks": {"$ref": "#/$defs/count"},
         "outcomes": {"$ref": "#/$defs/names"}
       }
+    },
+    "rolling": {
+      "type": "object",
+      "required": ["percentile"],
+      "properties": {"percentile": {"$ref": "#/$defs/count"}}
     },
     "pacing": {
       "type": "object",

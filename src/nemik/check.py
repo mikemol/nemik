@@ -63,6 +63,7 @@ from nemik.floorasks import floor_asks, unresolved
 from nemik.hostapply import HOST_REF, load
 from nemik.idle import findings as idle_findings
 from nemik.index import successors
+from nemik.landings import read_document
 from nemik.letters import (
     APPLY,
     FOLD,
@@ -79,6 +80,9 @@ from nemik.marks import provenance as mark_provenance
 from nemik.queuefiles import LEDGER, QUEUE, default_root, workstream_files
 from nemik.realize import rows as realize_rows
 from nemik.realize import runtime_valid, verdicts
+from nemik.rolling import bound as landing_bound
+from nemik.rolling import counts as landing_counts
+from nemik.rolling import message as rolling_message
 from nemik.rolls import idle_run, stalled
 from nemik.say import say
 from nemik.shaclinc import findings as shacl_findings
@@ -807,6 +811,39 @@ def _sla_findings(merged: Graph, by_repo: dict[str, list[Finding]], sla: int) ->
         by_repo.setdefault(trepo, []).append(("Warning", tcite.partition(":")[2], late))
 
 
+def _rolling_findings(
+    root: Path, merged: Graph, by_repo: dict[str, list[Finding]], percent: int
+) -> None:
+    """Warn a card waiting on a blocker that keeps landing (nemik:W1997).
+
+    The landings document is `root/landings.json` (the export layout's, written hourly by luthen);
+    without it nothing is known of any landing, so nothing is filed. The bound is the declared
+    percentile of landings per card over that document, not a typed number.
+    """
+    path = root / "landings.json"
+    if not path.exists():
+        return
+    try:
+        _, rows = read_document(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return
+    landed = landing_counts([(row.repo, row.card) for row in rows])
+    limit = landing_bound(landed, percent)
+    for waiter, _, target in merged.triples((None, NEMIK.waitsFor, None)):
+        if (target, OSLC_CM.state, None) not in merged:
+            continue
+        if (target, OSLC_CM.state, NEMIK.Done) in merged:
+            continue
+        blocker = ref(target)
+        if landed.get(blocker, 0) <= limit:
+            continue
+        wcite = ref(waiter)
+        text = rolling_message(blocker, landed[blocker], limit, percent)
+        by_repo.setdefault(wcite.partition(":")[0], []).append(
+            ("Warning", wcite.partition(":")[2], text)
+        )
+
+
 def _add_notes(by_repo: dict[str, list[Finding]], notes: dict[str, str]) -> None:
     """File one repo-level Warning per repo whose note is given."""
     for repo, text in notes.items():
@@ -946,6 +983,10 @@ def _fleet_checks(
     )
     # nemik:W577: a loop that ticks idle with nothing workable is told to disarm or name its wait.
     _add_notes(by_repo, idle_findings(root, merged, repos))
+    # nemik:W1997: a card waiting on a blocker that keeps landing, from the landings document.
+    _rolling_findings(
+        root, merged, by_repo, _declared_int(weights_toml, "rolling", "percentile", 90)
+    )
     # nemik:W616, W617: a working card that looks stalled, or whose progress is invisible.
     _add_rows(by_repo, "Warning", stalled_rows.findings(root, merged, int(time.time())))
     # nemik:W608: the warrant debt may only fall: a repo above its ceiling is told to warrant.
