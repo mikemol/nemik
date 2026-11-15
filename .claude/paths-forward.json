@@ -26042,7 +26042,7 @@
     {
       "symbol": "W1101",
       "title": "Move history's weekly roll-up onto the ledger summary, output unchanged",
-      "status": "working",
+      "status": "landed",
       "enables": [
         "W1095"
       ],
@@ -26052,11 +26052,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "2026-11-07: move history's weekly roll-up onto the ledger summary and prove output unchanged with tests/test_history_activity.py; src edit, rides the next src stack",
-      "evidence": "",
+      "evidence": "2026-11-15T00:26:33Z: Landed 64484e8: mikemol-commit printed COMMITTED nemik 64484e8 W1101 [PUSHED]; git log main subject matches. history.toil reads the ledger's rows through ledgersummary's per-day counts; equality with the triple route tested (tests/test_history_activity.py). Serve, idle and trs still read the triples.",
       "issued_at": "2026-10-26T11:58:00Z",
       "minted_during": "tick",
       "caused_by": "W1095",
-      "last_worked": "2026-11-15T00:04:32Z",
+      "last_worked": "2026-11-15T00:26:34Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/history.py",
@@ -26064,12 +26064,13 @@
       ],
       "size_class": "small",
       "weight": 220,
-      "completed": null
+      "completed": null,
+      "landed_at": "20261115T002634Z"
     },
     {
       "symbol": "W1102",
       "title": "Move idle and trs off the Activity triples onto the ledger summary, output unchanged",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W1095"
       ],
@@ -26083,7 +26084,7 @@
       "issued_at": "2026-10-26T11:58:00Z",
       "minted_during": "tick",
       "caused_by": "W1095",
-      "last_worked": "2026-11-06T01:38:14Z",
+      "last_worked": "2026-11-15T00:53:56Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/idle.py",
@@ -26091,7 +26092,8 @@
         "tests/test_idle_summary.py"
       ],
       "size_class": "small",
-      "weight": 220
+      "weight": 220,
+      "completed": null
     },
     {
       "symbol": "W1103",
@@ -52433,7 +52435,7 @@
       "issued_at": "2026-11-14T10:22:48Z",
       "minted_during": "interrupt",
       "caused_by": "W2192",
-      "last_worked": "2026-11-14T22:56:02Z",
+      "last_worked": "2026-11-15T00:44:17Z",
       "ticks_blocked": 0,
       "completed": null
     },

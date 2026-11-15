@@ -805,6 +805,25 @@ def activity_by_card(
     return effort, last
 
 
+def tick_outcomes(ledger_path: Path) -> list[str]:
+    """Give the outcomes of a ledger's tick lines, oldest first (nemik:W1102).
+
+    Args:
+        ledger_path: The ledger file.
+
+    Returns:
+        The outcome of each parsed line of kind tick, in stamp order (ties by outcome), as the
+        graph's Activity triples gave them.
+
+    """
+    rows = sorted(
+        (str(Literal(rec.stamp, datatype=XSD.dateTime)), rec.entry.outcome)
+        for rec in ledger.read(ledger_path)
+        if not isinstance(rec, ledger.Unparsed) and rec.entry.kind == "tick"
+    )
+    return [outcome for _, outcome in rows]
+
+
 def tick_notes(ledger_path: Path) -> list[str]:
     """Give the notes of a ledger's tick lines, oldest first (nemik:W683).
 

@@ -20,9 +20,7 @@ from importlib.resources import files
 from pathlib import Path
 from typing import TYPE_CHECKING
 
-from rdflib.namespace import PROV
-
-from nemik.adapter import BASE, NEMIK, OSLC_CM, ledger_graph
+from nemik.adapter import BASE, NEMIK, OSLC_CM, tick_outcomes
 
 if TYPE_CHECKING:
     from rdflib import Graph
@@ -75,27 +73,6 @@ def idle_run(outcomes: list[str], idle: list[str]) -> int:
             break
         run += 1
     return run
-
-
-def tick_outcomes(ledger: Graph) -> list[str]:
-    """List a ledger's tick outcomes, oldest first.
-
-    Args:
-        ledger: The repo's ledger as activities (adapter.ledger_graph).
-
-    Returns:
-        The outcome of each line of kind tick, in time order.
-
-    """
-    rows = sorted(
-        (
-            str(ledger.value(node, PROV.startedAtTime)),
-            str(ledger.value(node, NEMIK.outcome)),
-        )
-        for node in ledger.subjects(NEMIK.kind, None)
-        if str(ledger.value(node, NEMIK.kind)) == "tick"
-    )
-    return [outcome for _, outcome in rows]
 
 
 def workable(merged: Graph, repo: str) -> int:
@@ -199,7 +176,7 @@ def findings(root: Path, merged: Graph, repos: list[str]) -> dict[str, str]:
         path = root / repo / ".claude" / "paths-forward.ledger"
         if not path.exists() or workable(merged, repo):
             continue
-        run = idle_run(tick_outcomes(ledger_graph(repo, path)[0]), idle)
+        run = idle_run(tick_outcomes(path), idle)
         if run >= limit:
             waits = agent_blockers(merged, repo)
             remedy = (
