@@ -19,19 +19,25 @@ from pace_replay import (
     fit_median,
     fit_quantile,
     held_start,
+    landings_to_zero,
     learned_required,
+    learned_wait,
     measured,
     median_required,
+    neglected_rows,
     paid_fraction,
     pairs,
     quantile_required,
     replay,
     rose,
+    row_ages,
+    row_gaps,
     row_series,
     row_values,
     score,
     score_admission,
     score_learned,
+    score_neglect,
     split_log,
     stalled,
     stalled_rows,
@@ -40,6 +46,22 @@ from pace_replay import (
 )
 
 WINDOW = 10
+A_ROW = "src/nemik/a.py"
+B_ROW = "src/nemik/b.py"
+HALF_AS_MANY = [60 - at // 2 for at in range(40)]
+TOTALS = [a + 5 for a in HALF_AS_MANY]
+TWO_ROWS = {A_ROW: HALF_AS_MANY, B_ROW: [5] * 40}
+NEGLECTED = neglected_rows(TWO_ROWS, 50)
+TOUCHES_A = [(f"s{at}", [A_ROW], total) for at, total in enumerate(TOTALS)]
+TOUCHES_BOTH = [(f"s{at}", [A_ROW, B_ROW], total) for at, total in enumerate(TOTALS)]
+SCORED_A = score_neglect(TOUCHES_A, NEGLECTED, CODON, (0, 40))
+SCORED_BOTH = score_neglect(TOUCHES_BOTH, NEGLECTED, CODON, (0, 40))
+STEPS = [3, 3, 2, 2, 2, 1]
+STEP_GAPS = row_gaps(STEPS)
+STEP_AGES = row_ages(STEPS)
+EARLY_WAIT = learned_wait(STEP_GAPS, 1, 50)
+LATER_WAIT = learned_wait(STEP_GAPS, 5, 50)
+FIVE_TO_ZERO = landings_to_zero([10, 9, 8, 7, 6, 5], 0)
 ROWS_TEXT = '{"a.py": {"X": 3, "Y": 1}, "b.py": {"X": 2}, "c.py": 5}'
 ROW_COUNTS = row_values(ROWS_TEXT, "counts")
 ROW_ENTRIES = row_values(ROWS_TEXT, "pairs")
@@ -290,6 +312,44 @@ def test_days_to_zero_is_the_value_over_the_historical_rate() -> None:
     assert round(days_to_zero(epochs, values, 0)) == values[-1]
     assert days_to_zero(epochs, [FIFTY] * TWENTY, 0) < 0
     assert days_to_zero([EPOCH] * TWENTY, values, 0) < 0
+
+
+def test_a_row_ages_from_its_last_fall_or_from_its_appearance() -> None:
+    """A row that never fell is aged from where it appeared, so an untouched row has an age."""
+    assert STEP_AGES == [0, 1, 0, 1, 2, 0]
+    assert row_ages([0, 0, 4, 4, 4]) == [0, 1, 0, 1, 2]
+    assert row_ages([7] * THIRTY)[-1] == THIRTY - 1
+
+
+def test_a_wait_is_completed_by_a_fall_since_the_previous_fall_or_birth() -> None:
+    """Each fall completes one wait; the first runs from the row's appearance."""
+    assert STEP_GAPS == [(2, 2), (5, 3)]
+
+
+def test_the_learned_wait_needs_a_completed_wait_and_grows_with_history() -> None:
+    """MUTANT: a rule with a constant N would not change; none completed yet means -1."""
+    assert EARLY_WAIT == -1
+    assert LATER_WAIT == THREE_ENTRIES
+
+
+def test_only_a_row_nobody_pays_is_neglected() -> None:
+    """The payer's age never passes its own wait; the untouched row's age does."""
+    assert NEGLECTED[1] == []
+    assert NEGLECTED[2] == []
+    assert NEGLECTED[THREE_ENTRIES] == [B_ROW]
+
+
+def test_touching_a_neglected_row_is_the_way_out() -> None:
+    """MUTANT: a rule that blocked every stack would refuse the one touching the neglected row."""
+    assert SCORED_A[1] > 0
+    assert SCORED_BOTH[1] == 0
+    assert SCORED_A[2] == SCORED_BOTH[2]
+
+
+def test_landings_to_zero_is_the_value_over_the_rate_per_landing() -> None:
+    """Five fell in five landings, so the five left need five more; no fall gives -1."""
+    assert round(FIVE_TO_ZERO) == WINDOW // 2
+    assert landings_to_zero([4] * THIRTY, 0) < 0
 
 
 def test_a_row_is_valued_as_its_counts_or_its_entries() -> None:

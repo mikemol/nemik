@@ -697,6 +697,128 @@ def stalled_rows(series: dict[str, list[int]], at: int) -> list[str]:
     ]
 
 
+NEGLECT_PERCENTS = (50, 75, 90)
+
+
+def row_ages(values: list[int]) -> list[int]:
+    """Give, per landing, the landings since the row last fell, or since it appeared.
+
+    A row that has never fallen is aged from its appearance (right-censored), so a row nobody
+    touches still has an age.
+
+    Returns:
+        The age after each landing; it is 0 on the landing of a fall or of an appearance.
+
+    """
+    ages: list[int] = []
+    last = 0
+    for at, value in enumerate(values):
+        before = values[at - 1] if at else 0
+        if value < before or (before == 0 and value > 0):
+            last = at
+        ages.append(at - last)
+    return ages
+
+
+def row_gaps(values: list[int]) -> list[tuple[int, int]]:
+    """Give each completed wait of a row: the landing of a fall and the landings it had waited.
+
+    Returns:
+        (index of the fall, landings since the previous fall or since the row appeared).
+
+    """
+    gaps: list[tuple[int, int]] = []
+    last = 0
+    for at, value in enumerate(values):
+        before = values[at - 1] if at else 0
+        if value < before:
+            gaps.append((at, at - last))
+            last = at
+        elif before == 0 and value > 0:
+            last = at
+    return gaps
+
+
+def learned_wait(gaps: list[tuple[int, int]], at: int, percent: int) -> int:
+    """Give the percentile of the waits completed at or before landing `at`.
+
+    Returns:
+        The learned wait N, or -1 when no wait has completed yet (nothing can be neglected).
+
+    """
+    seen = sorted(gap for index, gap in gaps if index <= at)
+    if not seen:
+        return -1
+    return seen[min(len(seen) - 1, len(seen) * percent // 100)]
+
+
+def neglected_rows(series: dict[str, list[int]], percent: int) -> list[list[str]]:
+    """Name, after each landing, the owing rows whose age is above the wait learned so far.
+
+    The wait is a percentile of every row's completed waits in the same series, recomputed as the
+    history grows, never a constant.
+
+    Returns:
+        One list of row names per landing.
+
+    """
+    pooled = [gap for values in series.values() for gap in row_gaps(values)]
+    ages = {name: row_ages(values) for name, values in series.items()}
+    count = len(next(iter(series.values()), []))
+    out: list[list[str]] = []
+    for at in range(count):
+        wait = learned_wait(pooled, at, percent)
+        out.append(
+            [
+                name
+                for name, values in sorted(series.items())
+                if wait >= 0 and values[at] > 0 and ages[name][at] > wait
+            ]
+        )
+    return out
+
+
+def score_neglect(
+    landings: list[tuple[str, list[str], int]],
+    neglected: list[list[str]],
+    spec: Spec,
+    span: tuple[int, int],
+) -> tuple[int, int, int]:
+    """Score the neglect rule as an admission rule over the landings in `span` that paid nothing.
+
+    A landing is refused when some row was neglected before it and the landing touches none of
+    them; touching a neglected row is the way out. Scored as `score_admission` scores.
+
+    Returns:
+        (false oks, false behinds, landings scored).
+
+    """
+    false_ok = false_behind = scored = 0
+    for at, (_sha, files, value) in enumerate(landings):
+        if at == 0 or not span[0] <= at < span[1] or value < landings[at - 1][2]:
+            continue
+        truth = stalled(landings, at, spec)
+        if truth is None or rose(landings, at, spec):
+            continue
+        blocked = bool(neglected[at - 1]) and not set(neglected[at - 1]) & set(files)
+        scored += 1
+        false_ok += not blocked and truth
+        false_behind += blocked and not truth
+    return false_ok, false_behind, scored
+
+
+def landings_to_zero(values: list[int], start: int) -> float:
+    """Give the landings a row would need to reach zero at the rate it fell from `start`.
+
+    Returns:
+        Landings at the observed rate, or -1.0 when the row did not fall.
+
+    """
+    return days_to_zero(
+        [i * SECONDS_PER_DAY for i in range(len(values))], values, start
+    )
+
+
 def report_rows(name: str, series: dict[str, list[int]], held: int) -> None:
     """Print how many rows are owing and how many stand still, at the held-out start and the end."""
     last = len(next(iter(series.values()), [])) - 1
@@ -709,6 +831,32 @@ def report_rows(name: str, series: dict[str, list[int]], held: int) -> None:
             f" {label}: {len(owing)} owing, {len(stalled_rows(series, at))} stalled;"
         )
     sys.stdout.write("\n")
+
+
+def report_neglect(
+    name: str,
+    landings: list[tuple[str, list[str], int]],
+    series: dict[str, list[int]],
+    spec: Spec,
+) -> None:
+    """Print the held-out score of the neglect rule at each learned percentile."""
+    held = held_start(len(landings))
+    for percent in NEGLECT_PERCENTS:
+        neglected = neglected_rows(series, percent)
+        ok, behind, scored = score_neglect(
+            landings, neglected, spec, (held, len(landings))
+        )
+        sys.stdout.write(
+            f"neglect of {name} at the {percent}th percentile of waits: false ok {ok}, "
+            f"false behind {behind} (scored {scored}); neglected rows at the end "
+            f"{len(neglected[-1]) if neglected else 0}\n"
+        )
+    owing = [values for values in series.values() if values and values[-1] > 0]
+    moving = [v for v in owing if landings_to_zero(v, held) >= 0]
+    sys.stdout.write(
+        f"rows owing at the end: {len(owing)}, of which fell over the held-out span "
+        f"{len(moving)} and did not {len(owing) - len(moving)}\n"
+    )
 
 
 def report_admission(
@@ -796,11 +944,9 @@ def main() -> int:
             f"historical days to zero over the held-out span (no rule's effect): {days:.1f}\n"
         )
         per_row = read_rows(repo, spec, unit)
-        report_rows(
-            name,
-            row_series([rows for _sha, _epoch, _files, rows in per_row]),
-            held_start(len(per_row)),
-        )
+        rows_by_name = row_series([rows for _sha, _epoch, _files, rows in per_row])
+        report_rows(name, rows_by_name, held_start(len(per_row)))
+        report_neglect(name, landings, rows_by_name, spec)
     return 0
 
 
