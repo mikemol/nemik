@@ -26014,7 +26014,7 @@
     {
       "symbol": "W1100",
       "title": "Move metrics' last-activity and effort-class reads onto the ledger summary, output unchanged",
-      "status": "working",
+      "status": "landed",
       "enables": [
         "W1095"
       ],
@@ -26024,11 +26024,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "2026-11-07: move metrics' last-activity and effort-class reads onto the ledger summary and prove output unchanged with tests/test_metrics_activity.py; src edit, rides the next src stack",
-      "evidence": "",
+      "evidence": "2026-11-14T23:38:14Z: Landed d8f1230: mikemol-commit printed COMMITTED nemik d8f1230 W1100 [PUSHED]; git log main subject matches. metrics.ticks and metrics.ledger_rows read the ledger's plain rows through ledgersummary; equality with the triple route is tested (tests/test_metrics_activity.py). Serve, history, idle and trs still read the triples.",
       "issued_at": "2026-10-26T11:58:00Z",
       "minted_during": "tick",
       "caused_by": "W1095",
-      "last_worked": "2026-11-14T23:15:34Z",
+      "last_worked": "2026-11-14T23:38:16Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/metrics.py",
@@ -26036,12 +26036,13 @@
       ],
       "size_class": "small",
       "weight": 220,
-      "completed": null
+      "completed": null,
+      "landed_at": "20261114T233816Z"
     },
     {
       "symbol": "W1101",
       "title": "Move history's weekly roll-up onto the ledger summary, output unchanged",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W1095"
       ],
@@ -26055,14 +26056,15 @@
       "issued_at": "2026-10-26T11:58:00Z",
       "minted_during": "tick",
       "caused_by": "W1095",
-      "last_worked": "2026-11-06T01:38:16Z",
+      "last_worked": "2026-11-15T00:04:32Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/history.py",
         "tests/test_history_activity.py"
       ],
       "size_class": "small",
-      "weight": 220
+      "weight": 220,
+      "completed": null
     },
     {
       "symbol": "W1102",

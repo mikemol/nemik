@@ -29,8 +29,8 @@ def test_a_prune_line_is_bookkeeping_and_leaves_the_toil_share(tmp_path: Path) -
     classes = sorted(str(o) for o in g.objects(None, NEMIK.effortClass))
     assert KIND_CLASS["prune"] == "bookkeeping"
     assert classes == ["bookkeeping", "forecast", "interrupt"]
-    before: list[dict[str, object]] = toil("alpha", plain)
-    after: list[dict[str, object]] = toil("alpha", pruned)
+    before: list[dict[str, object]] = toil(plain)
+    after: list[dict[str, object]] = toil(pruned)
     assert [r["toil_share"] for r in before] == [r["toil_share"] for r in after]
 
 
@@ -50,6 +50,6 @@ def test_status_lines_leave_the_toil_share_unchanged(tmp_path: Path) -> None:
     plain.write_text(LINES)
     withstatus = tmp_path / "status.ledger"
     withstatus.write_text(LINES + STATUS)
-    before: list[dict[str, object]] = toil("alpha", plain)
-    after: list[dict[str, object]] = toil("alpha", withstatus)
+    before: list[dict[str, object]] = toil(plain)
+    after: list[dict[str, object]] = toil(withstatus)
     assert [r["toil_share"] for r in before] == [r["toil_share"] for r in after]

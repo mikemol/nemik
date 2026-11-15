@@ -21,16 +21,14 @@ import sys
 import zlib
 from collections import Counter
 from dataclasses import dataclass, field
-from datetime import UTC, datetime, timedelta
+from datetime import UTC, date, datetime, timedelta
 from itertools import starmap
 from pathlib import Path
 from typing import NamedTuple, TypedDict, cast
 
 from mikemol.procrun.proc import capture_bytes
-from rdflib import RDF
-from rdflib.namespace import PROV
 
-from nemik.adapter import NEMIK, ledger_graph
+from nemik.adapter import ledger_rows
 from nemik.cachestore import user_dir
 from nemik.cardevents import Event, events_of
 from nemik.climate import (
@@ -42,6 +40,7 @@ from nemik.climate import (
 )
 from nemik.forecastshingle import HORIZONS, issue_blocked, issue_in_line, shingle_rows
 from nemik.histdocs import encode, file_name
+from nemik.ledgersummary import summarize
 from nemik.netforecast import replay_row, sweep_alerts, sweep_report, trailing_alerts
 from nemik.queuefiles import LEDGER, QUEUE, default_root, workstream_files
 from nemik.say import say, warn
@@ -2887,7 +2886,7 @@ def _baseline(args: Opts, names: list[str], dirs: dict[str, Path]) -> int:
     return 0
 
 
-def toil(repo: str, ledger: Path) -> list[dict[str, object]]:
+def toil(ledger: Path) -> list[dict[str, object]]:
     """nemik:W314: per ISO week, the repo's ledger activity by effort class and the interrupt share.
 
     Each ledger line is one PROV activity with a start time and an effort class (forecast: a
@@ -2899,16 +2898,12 @@ def toil(repo: str, ledger: Path) -> list[dict[str, object]]:
         One row per ISO week: the counts by effort class and `toil_share`.
 
     """
-    g, _ = ledger_graph(repo, ledger)
     weeks: dict[str, dict[str, int]] = {}
-    for act in g.subjects(RDF.type, PROV.Activity):
-        stamp = str(g.value(act, PROV.startedAtTime) or "")
-        if not stamp:
-            continue
-        iso = datetime.fromisoformat(stamp).isocalendar()
-        cls = str(g.value(act, NEMIK.effortClass) or "unclassified")
+    for day, by_class in summarize(ledger_rows(ledger))[3].items():
+        iso = date.fromisoformat(day).isocalendar()
         week = weeks.setdefault(f"{iso.year}-W{iso.week:02d}", {})
-        week[cls] = week.get(cls, 0) + 1
+        for cls, n in by_class.items():
+            week[cls] = week.get(cls, 0) + n
     rows: list[dict[str, object]] = []
     for label, counts in sorted(weeks.items()):
         planned = counts.get("forecast", 0)
@@ -2929,7 +2924,7 @@ def _toil(args: Opts, names: list[str], dirs: dict[str, Path]) -> int:
         0, after printing the rows or the JSON.
 
     """
-    doc = {n: toil(n, dirs[n] / ".claude" / LEDGER) for n in names}
+    doc = {n: toil(dirs[n] / ".claude" / LEDGER) for n in names}
     if args.json:
         say(json.dumps(doc, indent=1))
         return 0
