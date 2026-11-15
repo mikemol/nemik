@@ -66,7 +66,14 @@ from rdflib import RDF, Graph
 from rdflib.namespace import DCTERMS
 
 from nemik import cachestore, forecast, history, tiers
-from nemik.adapter import BASE, NEMIK, OSLC_CM, ledger_rows_counted, reference_uri
+from nemik.adapter import (
+    BASE,
+    NEMIK,
+    OSLC_CM,
+    STATE,
+    ledger_rows_counted,
+    reference_uri,
+)
 from nemik.blocks import inbound, operator_asks, ref, with_salience
 from nemik.check import Finding, ready_neither, survey
 from nemik.health import STATUSES, health, thresholds
@@ -227,6 +234,7 @@ HELP = {
     "nemik_cards_reopened_24h": "Cards that went from done back to open in the last 24 hours.",
     "nemik_manifest_drift": "Done cards whose commits touched files outside their manifest.",
     "nemik_stackable": "Ready cards one commit stack can carry now: pairwise disjoint manifests.",
+    "nemik_landed_open_candidates": "Ready cards leading a landed commit's subject, none closed.",
     "nemik_ready_stale": "Ready cards untouched past how long 9 in 10 small cards take to finish.",
     "nemik_run_log_unmigrated": "Source run-log lines that predate the run-row shape, by stream.",
 }
@@ -629,6 +637,45 @@ def ticks(repo: str, ledger: Path) -> list[tuple[str, str]]:
     ]
 
 
+def candidate_lines(
+    root: Path,
+    merged: Graph,
+    read: Callable[[Path], list[str] | None] = history.recent_subjects,
+) -> list[str]:
+    """nemik:W1083: per repo, the ready cards whose symbol leads a landed commit's subject.
+
+    A candidate is not a ghost: a card worked in slices leads a commit per slice. This counts the
+    candidates apart from green and closes nothing. A repo whose git log cannot be read prints no
+    sample, so a refusal never reads as zero. The ready cards come from the merged queue graph:
+    only adapter parses a state file.
+
+    Args:
+        root: The fleet root.
+        merged: The merged queue graph (the cards' states are read from it).
+        read: Reads a repo's recent commit subjects, None when it cannot.
+
+    Returns:
+        The gauge's TYPE line and a sample for each repo with a readable history.
+
+    """
+    out = ["# TYPE nemik_landed_open_candidates gauge"]
+    for repo, path in workstream_files(root, QUEUE):
+        top = path.parents[1] if path.parent.name == ".claude" else path.parent
+        subjects = read(top) if (top / ".git").exists() else None
+        if subjects is None:
+            continue
+        ready = {
+            ref(n).partition(":")[2]
+            for n in merged.subjects(OSLC_CM.state, STATE["ready"])
+            if ref(n).partition(":")[0] == repo
+        }
+        # a commit subject is `W<n>: ...`; the head before the first colon names the card
+        heads = {s.partition(":")[0] for s in subjects}
+        leading = {h for h in heads if h.startswith("W") and h[1:].isdigit()}
+        out.append(f"nemik_landed_open_candidates{label(repo=repo)} {len(ready & leading)}")
+    return out
+
+
 def drift_lines(root: Path, merged: Graph) -> list[str]:
     """nemik:W611: per repo, the done cards whose commits touched files outside their manifest.
 
@@ -710,6 +757,8 @@ def history_lines(
         out += drift_lines(root, merged)
     if "nemik_stackable" in wanted:
         out += stackable_lines(root, merged)
+    if "nemik_landed_open_candidates" in wanted:
+        out += candidate_lines(root, merged)
     return out
 
 
@@ -845,6 +894,7 @@ HISTORY_FAMILIES = (
     "nemik_unforecastable_cards",
     "nemik_manifest_drift",
     "nemik_stackable",
+    "nemik_landed_open_candidates",
 )
 REALIZABILITY = ("nemik_realizability_waypoints", "nemik_realizability_unjudged")
 GRAPH_FREE = frozenset(

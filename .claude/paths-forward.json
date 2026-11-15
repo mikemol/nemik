@@ -25560,7 +25560,7 @@
     {
       "symbol": "W1083",
       "title": "Flag working-mark dishonesty: ready cards that are being worked, and working cards that are idle",
-      "status": "ready",
+      "status": "working",
       "enables": [],
       "touches": [
         "velocity"
@@ -25568,11 +25568,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "Case (3) is built on mtools:W2033's candidate list: read it, show each candidate beside the commit subjects and the card's done-when, and count the candidates apart from green, never as landed. Cases (1) and (2) are nemik's own",
-      "evidence": "2026-10-26: 2026-10-26: operator, host 695f3e0a line 100951 (human, verified; relayed by github-8f): 'Prep something for the gate, enqueue it, work the next thing, enqueue it. We have way, _way_ too much idle time.' github-8f: idle time is the measured target: publish per session the fraction of wall time with ready cards and no gate or scratch build in flight (heartbeat gaps plus the commit queue's state, from mtools' heartbeat and commit-queue facts), as a series that can fall. I have not read those mtools facts yet; carried on W1082 too | 2026-10-26: 2026-10-26: third honesty case, luthen via github-8f: ready cards already LANDED (luthen-observability W1613 26bda7d6, W1614 b49aa7fe, W1615 157a9cd1, W1620 aec4c324, W1631 e4d07998: four landed days ago, still open, counted green). Detectable from the repo's history: a ready or working card whose symbol leads a commit subject, with no later commit saying part or NOT DONE for it, is landed-but-open; count it in the green-card figure as a ghost, not idle work. Not verified by me: those shas, they are in luthen's repo | 2026-10-26: 2026-10-26: correction from the sweeps (github-8f): a leading symbol overstates landings. luthen: 24 of 136 cards have a symbol-led commit, about half of those are stage 1, first part or step 1 commits, 7 real ghosts so far; mtools: 10 of 97, 0 ghosts. Partial markers vary (step one, first slice, NOT DONE, first part). So the landed-but-open case does not close or flag on the symbol alone: nemik lists candidates with their commit subjects and the card's done-when side by side, the verdict is the owner's reading or a declared done-when witness. Build it on mtools:W2033 (the queue writer produces the candidate list with subjects); nemik shows and counts it, with no second detector | 2026-10-26: landed 32aee4a (on origin/main): ReadyButGatingShape. Open: the landed-but-open case, on mtools:W2033's candidate list | 2026-10-26: 2026-10-26 21:50Z: letter read, mtools:W2033 is done (the candidate list exists), so case (3) can be built on it | 2026-11-01: 2026-11-01 CLASSIFIED by W1339 (reviewer R85, nemik:R83 on W613): partial. Commit 32aee4a7 (2026-10-26T07:34:35-04:00): 'W1083: a card marked ready that a queued or gating commit stack names is a Warning, since '. Reason, read from this card's own title and next step: the ready-card-that-a-queued-stack-names case landed; the case built on mtools:W2033's candidate list remains. Scan criterion: the last 1500 commit subjects of the form W<n>:, number below 1200, status not done or landed. Read from titles and next steps, not from the code.",
+      "evidence": "2026-10-26: 2026-10-26: operator, host 695f3e0a line 100951 (human, verified; relayed by github-8f): 'Prep something for the gate, enqueue it, work the next thing, enqueue it. We have way, _way_ too much idle time.' github-8f: idle time is the measured target: publish per session the fraction of wall time with ready cards and no gate or scratch build in flight (heartbeat gaps plus the commit queue's state, from mtools' heartbeat and commit-queue facts), as a series that can fall. I have not read those mtools facts yet; carried on W1082 too | 2026-10-26: 2026-10-26: third honesty case, luthen via github-8f: ready cards already LANDED (luthen-observability W1613 26bda7d6, W1614 b49aa7fe, W1615 157a9cd1, W1620 aec4c324, W1631 e4d07998: four landed days ago, still open, counted green). Detectable from the repo's history: a ready or working card whose symbol leads a commit subject, with no later commit saying part or NOT DONE for it, is landed-but-open; count it in the green-card figure as a ghost, not idle work. Not verified by me: those shas, they are in luthen's repo | 2026-10-26: 2026-10-26: correction from the sweeps (github-8f): a leading symbol overstates landings. luthen: 24 of 136 cards have a symbol-led commit, about half of those are stage 1, first part or step 1 commits, 7 real ghosts so far; mtools: 10 of 97, 0 ghosts. Partial markers vary (step one, first slice, NOT DONE, first part). So the landed-but-open case does not close or flag on the symbol alone: nemik lists candidates with their commit subjects and the card's done-when side by side, the verdict is the owner's reading or a declared done-when witness. Build it on mtools:W2033 (the queue writer produces the candidate list with subjects); nemik shows and counts it, with no second detector | 2026-10-26: landed 32aee4a (on origin/main): ReadyButGatingShape. Open: the landed-but-open case, on mtools:W2033's candidate list | 2026-10-26: 2026-10-26 21:50Z: letter read, mtools:W2033 is done (the candidate list exists), so case (3) can be built on it | 2026-11-01: 2026-11-01 CLASSIFIED by W1339 (reviewer R85, nemik:R83 on W613): partial. Commit 32aee4a7 (2026-10-26T07:34:35-04:00): 'W1083: a card marked ready that a queued or gating commit stack names is a Warning, since '. Reason, read from this card's own title and next step: the ready-card-that-a-queued-stack-names case landed; the case built on mtools:W2033's candidate list remains. Scan criterion: the last 1500 commit subjects of the form W<n>:, number below 1200, status not done or landed. Read from titles and next steps, not from the code. | 2026-11-15T05:01:48Z: 2026-11-15 CANDIDATE LIST READ (mikemol-paths-forward --ghosts, read-only): 13 of 411 ready cards lead a landed commit's subject, none closed, none with a part or NOT DONE marker: W2159, W1179, W1978 (three queue-only commits), W1762, W1411 (three), W1759, W1568 (five), W846 (eight), W1490 (three), W1175 (four), W1187 (seven), W1225, W1244. Reading by sight: most are cards worked in slices (a paydown card, a tool card with several commits), so a symbol-led commit does not mean landed, as github-8f's sweep said (about half stage 1 or first part). The list the writer prints already shows card, sha, marker and subject. The not-yet-built half is nemik's: a count apart from green (a gauge nemik_landed_open_candidates per repo, never closing a card) and the done-when beside each subject. src/nemik/workmarks.py named in the manifest does not exist yet. Not done: any code.",
       "issued_at": "2026-10-26T01:15:40Z",
       "minted_during": "tick",
       "caused_by": "inbox/2026-10-26-nemik-edge-mtools-W2033-blocked_on-W1083.md",
-      "last_worked": "2026-11-01T03:05:44Z",
+      "last_worked": "2026-11-15T05:34:32Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/workmarks.py",
@@ -48234,11 +48234,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "Design first: write docs/ratchet-atomizer.md from the evidence on W1993 (input rows with file and rule, one umbrella per ratchet row, leaf per entry, title stable across runs, dry run by default, applied by each repo to its own queue). Then generalize atomize_walls.plan to take rows as data, not the Codon closure, with a test on fixture rows. Ask mtools for a census mode that lists each row's file and rule. No stack until the guard admits one.",
-      "evidence": "2026-11-06T00:54:46Z: 2026-11-06T01:5xZ: the host ruled (nemik:W1993 exchange) that nemik sends mtools the rows-mode ask itself, citing W1994, ranking it after mtools' W2301 v4 and rule (c) so it does not displace them, that unmanifested-baseline.txt's existing cards are its LEAVES (not duplicates), and that the rest is dry-run on nemik's own rows until the mode exists. SENT to the mtools session: a read-only census mode listing each row's entries with file and rule (a JSON-lines shape with ratchet, key, file and rule), reading only. Dry run on nemik's own rows (codon-baseline.json, mypy and ruff at zero or unknown, the edge ratchet once born) is this card's first step. | 2026-11-06T00:57:21Z: 2026-11-06T02:0xZ: mtools carded the rows-mode ask as mtools:W2306, ranked after W2301 v4 and rule (c), to co-land with a W2219 batch. Intended shape: mikemol-ratchet census --entries, read-only, one JSON line per entry of each ratchet file the census reads: ratchet (path), kind, key (the entry's identity in its file), file and rule where the shape has them; the per-entry counts equal the census value, pinned by a test over a planted repo of each kind. TWO SHAPES to design for: (1) a pyproject per-file-ignores entry is one (file, rule) per RULE, so mtools' 144 hooks 'value' counts RULES, not file entries (my published-pace count of 113 for hooks/pyproject.toml and the fleet figure of 555 leaf cards count rules, one card per (file, rule) pair); (2) text baselines (unmanifested) list the line as the key. Their remark: the operator's rolling-blocker point was about mtools' own use of W2219, corrected: the 21 cards are unblocked and hooks-lane changes now co-land with each batch. Until the mode lands, the generator dry-runs on nemik's own rows. This card is blocked on mtools:W2306 for the real census input, and its dry run on nemik's rows is the first step that needs nothing. | 2026-11-06T00:57:32Z: Block lifted the same minute: only the final census input waits on mtools:W2306. The dry run on nemik's own rows (codon, and the edge ratchet once born) and the plan function over rows as data need nothing from mtools, so the card stays ready; W2306 is cited here as the input it will read, not as a block.",
+      "evidence": "2026-11-06T00:54:46Z: 2026-11-06T01:5xZ: the host ruled (nemik:W1993 exchange) that nemik sends mtools the rows-mode ask itself, citing W1994, ranking it after mtools' W2301 v4 and rule (c) so it does not displace them, that unmanifested-baseline.txt's existing cards are its LEAVES (not duplicates), and that the rest is dry-run on nemik's own rows until the mode exists. SENT to the mtools session: a read-only census mode listing each row's entries with file and rule (a JSON-lines shape with ratchet, key, file and rule), reading only. Dry run on nemik's own rows (codon-baseline.json, mypy and ruff at zero or unknown, the edge ratchet once born) is this card's first step. | 2026-11-06T00:57:21Z: 2026-11-06T02:0xZ: mtools carded the rows-mode ask as mtools:W2306, ranked after W2301 v4 and rule (c), to co-land with a W2219 batch. Intended shape: mikemol-ratchet census --entries, read-only, one JSON line per entry of each ratchet file the census reads: ratchet (path), kind, key (the entry's identity in its file), file and rule where the shape has them; the per-entry counts equal the census value, pinned by a test over a planted repo of each kind. TWO SHAPES to design for: (1) a pyproject per-file-ignores entry is one (file, rule) per RULE, so mtools' 144 hooks 'value' counts RULES, not file entries (my published-pace count of 113 for hooks/pyproject.toml and the fleet figure of 555 leaf cards count rules, one card per (file, rule) pair); (2) text baselines (unmanifested) list the line as the key. Their remark: the operator's rolling-blocker point was about mtools' own use of W2219, corrected: the 21 cards are unblocked and hooks-lane changes now co-land with each batch. Until the mode lands, the generator dry-runs on nemik's own rows. This card is blocked on mtools:W2306 for the real census input, and its dry run on nemik's rows is the first step that needs nothing. | 2026-11-06T00:57:32Z: Block lifted the same minute: only the final census input waits on mtools:W2306. The dry run on nemik's own rows (codon, and the edge ratchet once born) and the plan function over rows as data need nothing from mtools, so the card stays ready; W2306 is cited here as the input it will read, not as a block. | 2026-11-15T04:17:49Z: 2026-11-14 BASE CHECK: tools/atomize_walls.py and tests/test_atomize_walls.py in the main working tree carry W1759's built-but-uncommitted deliverable (waves() and wave_note(), 260 and 75 added lines; docs/codon-walls.md also modified), refused at submit on 2026-11-05 by the pace guard and never landed; the held copy .claude/held-W1759-atomize_walls.py.txt is OLDER than the working file (diff differs). W1994 and W1996 edit the same two files, so they must build on W1759's tree. W1759 is not in the published round, so a stack of W1759 alone is refused by the round check; the way through is W1759's code riding in W1994's commit (as W2198 rode with W1099), with W1994 alone in the working set. Plan: copy the working files into a clean worktree, add docs/ratchet-atomizer.md and the rows-as-data plan function, test, stack as W1994, then close W1759 with it.",
       "issued_at": "2026-11-06T00:52:41Z",
       "minted_during": "interrupt",
       "caused_by": "W1993",
-      "last_worked": "2026-11-06T00:57:32Z",
+      "last_worked": "2026-11-15T04:44:45Z",
       "ticks_blocked": 0,
       "manifest": [
         "tools/atomize_walls.py",
@@ -48251,53 +48251,59 @@
     {
       "symbol": "W1995",
       "title": "Ratchet atomizer close rule: a leaf closes when its row leaves the census, derived from the ratchet and never by hand, with a check that refuses a hand close",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W1993"
       ],
       "touches": [
         "velocity"
       ],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W1994"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "After W1994: a leaf closes only when its row has left the census (derive the open set from the ratchet file, close the cards of rows that are gone, through the writer), and a nemik-check shape that warns on a leaf closed by hand while its row is still in the census. Test on a fixture ratchet that loses one row.",
-      "evidence": "",
+      "evidence": "2026-11-15T04:44:45Z: 2026-11-14: the next step says 'After W1994' in prose, with no blocked_on edge, so the rank listed this card in the round ahead of its own prerequisite and the round check then refused W1994's stack for being outside the round. Edge added: blocked on nemik:W1994 (its design and plan function are built; stack refused at submit by the round check).",
       "issued_at": "2026-11-06T00:52:41Z",
       "minted_during": "interrupt",
       "caused_by": "W1993",
-      "last_worked": "2026-11-06T00:53:13Z",
+      "last_worked": "2026-11-15T04:44:45Z",
       "ticks_blocked": 0,
       "manifest": [
         "tools/atomize_walls.py",
         "src/nemik/check.py",
         "tests/test_atomize_walls.py"
       ],
-      "size_class": "medium"
+      "size_class": "medium",
+      "completed": null
     },
     {
       "symbol": "W1996",
       "title": "Ratchet atomizer grouping: group leaf cards by the import graph where one exists, so the flow salience finds the levers",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W1993"
       ],
       "touches": [
         "velocity"
       ],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W1994"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "After W1994: for a ratchet whose rows are Python modules, group leaves by the import graph (tools/codon_closure.py own_row deps: the leaves of a module wait on the leaves of the modules it imports), as the hierarchy mode already does for Codon; a ratchet without a graph gets leaves under its umbrella only. Test the grouping on a fixture graph.",
-      "evidence": "",
+      "evidence": "2026-11-15T04:44:46Z: 2026-11-14: same as W1995: the next step says 'After W1994' in prose with no blocked_on edge, so the rank put it in the round ahead of its prerequisite. Blocked on nemik:W1994.",
       "issued_at": "2026-11-06T00:52:41Z",
       "minted_during": "interrupt",
       "caused_by": "W1993",
-      "last_worked": "2026-11-06T00:53:15Z",
+      "last_worked": "2026-11-15T04:44:46Z",
       "ticks_blocked": 0,
       "manifest": [
         "tools/atomize_walls.py",
         "tests/test_atomize_walls.py"
       ],
-      "size_class": "small"
+      "size_class": "small",
+      "completed": null
     },
     {
       "symbol": "W1997",
@@ -49444,7 +49450,7 @@
     {
       "symbol": "W2052",
       "title": "Tests that resolve their own path can read undeclared data under bazel",
-      "status": "working",
+      "status": "landed",
       "enables": [
         "W1141"
       ],
@@ -49454,13 +49460,14 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "Confirm on test_schemagen_errors (runfiles-relative path, label dropped fails, restored passes), then run each of the up to 40 resolve users with its data labels removed and count the escapers",
-      "evidence": "2026-11-07T18:39:30Z: 2026-11-07 CONFIRMED on test_schemagen_errors (W2043 tree): with PACKAGED built from Path(__file__).parent (no resolve) and the apischema-manifest.json label dropped from the test's data, bazel test //:test_schemagen_errors --test_output=errors FAILED: 2 failed, 10 passed, FileNotFoundError on .../test_schemagen_errors.runfiles/_main/tests/fixtures/apischema/apischema-manifest.json, 'Executed 1 out of 1 test: 1 fails locally', elapsed 60.5 s. The earlier run, resolve kept and label dropped, passed. So .resolve() on __file__ lets a test read an undeclared workspace file under bazel, and removing it makes the missing declaration fail. Both edits reverted afterwards: git diff --stat against the staged v5 tree is empty. Not done: the restored-label pass with the unresolved path (the sensor's second half) was not run, and the other up to 40 resolve users were not run. The same fix in v5 would be a v6 and v5 stays frozen. | 2026-11-07T18:59:24Z: 2026-11-07 SECOND HALF OF THE WITNESS RUN (test_schemagen_errors, W2043 tree): path built from Path(__file__).parent (no resolve) AND the apischema-manifest.json label restored in the test's data: bazel test //:test_schemagen_errors printed 'Executed 1 out of 1 test: 1 test passes', elapsed 56.3 s. With the previous run (same path, label dropped: FAILED with FileNotFoundError) this is the drop-a-label failure plus the restored pass github-14 asked of each fix. It is a witness for this ONE test, run as an experiment: the edit is reverted (git diff --stat against the staged v5 tree is empty), v5 stays frozen, no v6. The remaining resolve users (up to 40 by a text match) are not witnessed. | 2026-11-07T22:05:34Z: G0 2026-11-07T22:05:33Z: [NO-PACE-STAMP] Precommit: advances W2052. Actuator: read the test macro's shared data list in BUILD.bazel (lines 30-45 of the main tree) to see what every test target is given. Sensor: the data list text. Expected: every test gets :.venv, installed.py, webpage.py, conftest.py and Chromium, so a dropped per-test label would rarely matter for tests outside W2043's three; the resolve escape is therefore mostly moot until W1141 narrows the shared list. | 2026-11-07T22:05:46Z: 2026-11-07 READ of the test macro's shared data list (BUILD.bazel line 38, main tree at HEAD): EVERY test target is given its own test file plus tests/installed.py, webpage.py, pagetext.py, conftest.py, tools/cpuline.py, .claude/settings.json, the fleet fixture, pyproject.toml, ARCHITECTURE.md, skills/nemik/SKILL.md, docs/positioning.md, deploy/deployment.yaml, src/nemik/data/workflows.toml, tools/nemik_client.py, BUILD.bazel, Containerfile, the forgejo workflow, tests/corpus/**, several data files (shapes.ttl, nemik.ttl, wcag.rego, run-row.schema.json, waypoint.schema.json, rank-weights.schema.json, rank-weights.toml), :.venv, opa, the use-of-colour rego, and Chromium (files and headless shell), and further per-test lines below it. Consequence: a test outside W2043's three (whose data I named per file) has most of what it reads declared by the SHARED list, so dropping a per-test label rarely tests anything for them, and the resolve() escape matters only once W1141 narrows that shared list: the resolve escape is a hazard the narrowing introduces to each test it narrows, not a failure of today's declarations. The W2052 witness (drop a label fails, restore passes) is therefore per test AFTER its list is narrowed, which is already the condition github-14 set on W1141. Status stays ready: nothing is being built on it. Read only, no run. | 2026-11-15T03:05:29Z: 2026-11-14 WITNESS RUN, the other two resolve users with a per-test data label (scratch worktree at main, BUILD.bazel edited, reverted): of 58 tests that call .resolve(), only three also carry a per-test label in BUILD.bazel (lines 126 to 128): test_schemagen_errors (witnessed 2026-11-07), test_schemagen and test_codon_calls. Dropping the labels of test_schemagen (apischema golden, manifest, cases) and of test_codon_calls (codon-calls.txt) and running bazel test //:test_schemagen //:test_codon_calls --test_output=errors: Executed 2 out of 2 tests: 2 tests pass. So BOTH are escapers: with the declaration gone they still read the file, through the resolved path. For every other resolve user the shared data list already declares what it reads, so a dropped per-test label tests nothing (the 2026-11-07 reading). Next: build their paths without .resolve() and repeat (label dropped must FAIL, restored must PASS), as for test_schemagen_errors.",
+      "evidence": "2026-11-07T18:39:30Z: 2026-11-07 CONFIRMED on test_schemagen_errors (W2043 tree): with PACKAGED built from Path(__file__).parent (no resolve) and the apischema-manifest.json label dropped from the test's data, bazel test //:test_schemagen_errors --test_output=errors FAILED: 2 failed, 10 passed, FileNotFoundError on .../test_schemagen_errors.runfiles/_main/tests/fixtures/apischema/apischema-manifest.json, 'Executed 1 out of 1 test: 1 fails locally', elapsed 60.5 s. The earlier run, resolve kept and label dropped, passed. So .resolve() on __file__ lets a test read an undeclared workspace file under bazel, and removing it makes the missing declaration fail. Both edits reverted afterwards: git diff --stat against the staged v5 tree is empty. Not done: the restored-label pass with the unresolved path (the sensor's second half) was not run, and the other up to 40 resolve users were not run. The same fix in v5 would be a v6 and v5 stays frozen. | 2026-11-07T18:59:24Z: 2026-11-07 SECOND HALF OF THE WITNESS RUN (test_schemagen_errors, W2043 tree): path built from Path(__file__).parent (no resolve) AND the apischema-manifest.json label restored in the test's data: bazel test //:test_schemagen_errors printed 'Executed 1 out of 1 test: 1 test passes', elapsed 56.3 s. With the previous run (same path, label dropped: FAILED with FileNotFoundError) this is the drop-a-label failure plus the restored pass github-14 asked of each fix. It is a witness for this ONE test, run as an experiment: the edit is reverted (git diff --stat against the staged v5 tree is empty), v5 stays frozen, no v6. The remaining resolve users (up to 40 by a text match) are not witnessed. | 2026-11-07T22:05:34Z: G0 2026-11-07T22:05:33Z: [NO-PACE-STAMP] Precommit: advances W2052. Actuator: read the test macro's shared data list in BUILD.bazel (lines 30-45 of the main tree) to see what every test target is given. Sensor: the data list text. Expected: every test gets :.venv, installed.py, webpage.py, conftest.py and Chromium, so a dropped per-test label would rarely matter for tests outside W2043's three; the resolve escape is therefore mostly moot until W1141 narrows the shared list. | 2026-11-07T22:05:46Z: 2026-11-07 READ of the test macro's shared data list (BUILD.bazel line 38, main tree at HEAD): EVERY test target is given its own test file plus tests/installed.py, webpage.py, pagetext.py, conftest.py, tools/cpuline.py, .claude/settings.json, the fleet fixture, pyproject.toml, ARCHITECTURE.md, skills/nemik/SKILL.md, docs/positioning.md, deploy/deployment.yaml, src/nemik/data/workflows.toml, tools/nemik_client.py, BUILD.bazel, Containerfile, the forgejo workflow, tests/corpus/**, several data files (shapes.ttl, nemik.ttl, wcag.rego, run-row.schema.json, waypoint.schema.json, rank-weights.schema.json, rank-weights.toml), :.venv, opa, the use-of-colour rego, and Chromium (files and headless shell), and further per-test lines below it. Consequence: a test outside W2043's three (whose data I named per file) has most of what it reads declared by the SHARED list, so dropping a per-test label rarely tests anything for them, and the resolve() escape matters only once W1141 narrows that shared list: the resolve escape is a hazard the narrowing introduces to each test it narrows, not a failure of today's declarations. The W2052 witness (drop a label fails, restore passes) is therefore per test AFTER its list is narrowed, which is already the condition github-14 set on W1141. Status stays ready: nothing is being built on it. Read only, no run. | 2026-11-15T03:05:29Z: 2026-11-14 WITNESS RUN, the other two resolve users with a per-test data label (scratch worktree at main, BUILD.bazel edited, reverted): of 58 tests that call .resolve(), only three also carry a per-test label in BUILD.bazel (lines 126 to 128): test_schemagen_errors (witnessed 2026-11-07), test_schemagen and test_codon_calls. Dropping the labels of test_schemagen (apischema golden, manifest, cases) and of test_codon_calls (codon-calls.txt) and running bazel test //:test_schemagen //:test_codon_calls --test_output=errors: Executed 2 out of 2 tests: 2 tests pass. So BOTH are escapers: with the declaration gone they still read the file, through the resolved path. For every other resolve user the shared data list already declares what it reads, so a dropped per-test label tests nothing (the 2026-11-07 reading). Next: build their paths without .resolve() and repeat (label dropped must FAIL, restored must PASS), as for test_schemagen_errors. | 2026-11-15T03:43:15Z: Landed 4da7192: mikemol-commit printed COMMITTED nemik 4da7192 W2052 [PUSHED]; git log main subject matches. Witness both halves for the two remaining per-test-label resolve users (test_schemagen, test_codon_calls): .resolve() removed, sources declared for test_codon_calls (a second escape the fix exposed: it compiled the registry's modules from the real checkout); labels restored: pass; labels dropped: FAIL, FileNotFoundError on apischema-cases.json and codon-calls.txt. The other 55 resolve users have no per-test label to drop; they matter once W1141 narrows the shared data list, and each slice carries this witness.",
       "issued_at": "2026-11-07T18:37:47Z",
       "minted_during": "interrupt",
       "caused_by": "W2046",
-      "last_worked": "2026-11-15T03:18:44Z",
+      "last_worked": "2026-11-15T03:43:16Z",
       "ticks_blocked": 0,
-      "completed": null
+      "completed": null,
+      "landed_at": "20261115T034316Z"
     },
     {
       "symbol": "W2053",
@@ -52438,7 +52445,7 @@
       "issued_at": "2026-11-14T10:22:48Z",
       "minted_during": "interrupt",
       "caused_by": "W2192",
-      "last_worked": "2026-11-15T01:32:34Z",
+      "last_worked": "2026-11-15T04:00:55Z",
       "ticks_blocked": 0,
       "completed": null
     },

@@ -744,6 +744,21 @@ def reopened_since(repo: Path, since: str) -> int | None:
     return reopened
 
 
+def recent_subjects(repo: Path, count: int = 500) -> list[str] | None:
+    """List the subject lines of the last commits on HEAD, newest first (nemik:W1083).
+
+    Args:
+        repo: The repo's working directory.
+        count: How many commits to read.
+
+    Returns:
+        The subjects, or None when the directory has no readable git history.
+
+    """
+    out = _git(repo, "log", f"-n{count}", "--format=%s")
+    return None if out is None else out.splitlines()
+
+
 def commits_since(repo: Path, since: str) -> int | None:
     """Count the commits on HEAD after a point in time (nemik:W355: a push is a deploy).
 
