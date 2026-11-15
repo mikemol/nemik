@@ -93,16 +93,41 @@ def _baseline() -> Census:
     }
 
 
-def test_no_module_is_further_from_codon_than_the_baseline(tmp_path: Path) -> None:
+# nemik:W2203: the census compiled every module in one test (about 400 s alone, 915 s under the
+# gate's load against a 900 s limit). Each part measures every PARTS-th module, so Bazel shards the
+# target (BUILD.bazel shard_count) and no shard holds the whole census.
+PARTS = 8
+
+
+@pytest.mark.parametrize("part", range(PARTS))
+def test_no_module_of_a_part_is_further_from_codon_than_the_baseline(
+    part: int, tmp_path: Path
+) -> None:
     """A module that compiled stops compiling, or a new one fails to, and the gate refuses."""
+    names = modules(ROOT / "src")[part::PARTS]
+    now = census(ROOT / "src", tmp_path, _build, names)
+    base = _baseline()
+    worse = regressions(now, {n: base[n] for n in names if n in base}) if base else []
+    assert worse == [], "\n".join(worse)
+
+
+def test_the_parts_together_measure_every_module() -> None:
+    """MUTANT: a part count that skipped a module would leave it outside the ratchet."""
+    names = modules(ROOT / "src")
+    covered = [name for part in range(PARTS) for name in names[part::PARTS]]
+    assert sorted(covered) == names
+
+
+def test_the_baseline_is_rewritten_when_asked_and_nothing_is_worse(
+    tmp_path: Path,
+) -> None:
+    """On the host `NEMIK_CODON_WRITE=1` records the whole census, only when nothing is worse."""
+    if not os.environ.get("NEMIK_CODON_WRITE"):
+        pytest.skip("set NEMIK_CODON_WRITE=1 to rewrite codon-baseline.json")
     now = census(ROOT / "src", tmp_path, _build)
     base = _baseline()
-    worse = regressions(now, base) if base else []
-    assert worse == [], "\n".join(worse)
-    if os.environ.get("NEMIK_CODON_WRITE") or not base:
-        BASELINE.write_text(
-            json.dumps(only_failing(now), indent=1, sort_keys=True) + "\n"
-        )
+    assert (regressions(now, base) if base else []) == []
+    BASELINE.write_text(json.dumps(only_failing(now), indent=1, sort_keys=True) + "\n")
 
 
 def test_the_baseline_names_only_modules_that_exist() -> None:

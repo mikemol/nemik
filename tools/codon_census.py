@@ -113,19 +113,23 @@ def probe(build: Build, tree: Path, module: str) -> str:
     return "" if status == 0 else first_error(stderr)
 
 
-def census(src: Path, work: Path, build: Build) -> Census:
-    """Measure every module in both modes.
+def census(
+    src: Path, work: Path, build: Build, only: list[str] | None = None
+) -> Census:
+    """Measure every module in both modes, or only the named ones (nemik:W2203).
 
     Args:
         src: The directory holding the nemik package.
         work: An empty scratch directory.
         build: Runs the compiler on a probe file, writing to an output path.
+        only: The modules to measure, or None for every module; a shard of the test measures its
+            own part so the whole census need not fit in one target's timeout.
 
     Returns:
         {module: {"as_written": first error or "", "stripped": first error or ""}}.
 
     """
-    names = modules(src)
+    names = modules(src) if only is None else only
     result: Census = {name: {} for name in names}
     for mode, strip in (("as_written", False), ("stripped", True)):
         tree = work / mode

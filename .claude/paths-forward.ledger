@@ -6046,3 +6046,17 @@
 2026-11-15T10:28:02Z  status W1094 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-15T10:28:41Z  status W1094 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-15T11:30:37Z  status W1997 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-15T12:56:52Z  status W1997 working>landed writer    "working -> landed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-15T13:23:01Z  status W1094 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-15T13:23:40Z  status W1094 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-15T13:35:56Z  interrupt W2204 minted    -         "PRIORITY: five PreToolUse hooks wired in settings.json have no executable in the bazel-built .venv, so no standing rule is enforced on any edit"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-cb:W2161
+2026-11-15T13:36:18Z  interrupt W2205 minted    -         "Round check: a child of a round card, or a card minted from a reviewer finding on one, counts as inside the round (asked of mtools)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-cb:W2161
+2026-11-15T13:36:33Z  status W2205 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-15T13:42:35Z  status W2204 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-15T13:43:21Z  status W2204 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-15T13:56:43Z  status W2116 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-15T14:00:52Z  interrupt W2206 minted    -         "Import mikemol.procrun.quote at the next procrun pin and delete nemik.shellquote"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=mtools:W2545
+2026-11-15T14:00:57Z  status W2206 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-15T14:21:23Z  status W2046 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-15T14:45:32Z  status W1063 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-15T15:03:48Z  interrupt W2207 minted    -         "A gate run beside the btrfs balance stalled two targets (test_layout shard 6 cpu 43 s in 346 s wall, test_codon_wall_table shard timed out at 300 s)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=luthen-observability:W2660
