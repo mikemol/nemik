@@ -360,6 +360,153 @@ def fit(
     return best
 
 
+QParams = tuple[int, int, int]
+# (paying windows kept K, lower quantile percent, min_rate): github-14's estimator (mtools:W2200)
+QGRID: list[QParams] = [
+    (k, pct, floor) for k in (5, 10, 20) for pct in (10, 25, 50) for floor in (1, 2)
+]
+FALSE_OK_WEIGHT = 2
+
+
+def quantile_required(values: list[int], params: QParams) -> list[int]:
+    """Learn, before each landing, the required fall from the windows that actually paid.
+
+    The rate is a lower quantile of the share paid by the last K PAYING windows only (a stall adds
+    nothing, so it cannot lower the rate), the required fall never falls, and it is capped by the
+    most any recent paying window paid; it is never below min_rate.
+
+    Returns:
+        The required fall in force before each landing, from the windows that ended before it.
+
+    """
+    keep, pct, floor = params
+    required: list[int] = []
+    paid: list[tuple[int, int]] = []
+    best = floor
+    for at, value in enumerate(values):
+        required.append(best)
+        if at >= WINDOW and values[at - WINDOW] > value:
+            paid.append((values[at - WINDOW] - value, values[at - WINDOW]))
+            share, cap = lower_share(paid[-keep:], pct)
+            best = max(best, min(cap, max(floor, int(-(-(share * value) // 1)))))
+    return required
+
+
+def lower_share(recent: list[tuple[int, int]], pct: int) -> tuple[float, int]:
+    """Give the lower quantile of the shares the recent paying windows paid, and the cap.
+
+    Args:
+        recent: (fall, value at the window's start) for each recent paying window.
+        pct: The percentile, 1 to 100, nearest rank.
+
+    Returns:
+        (the share at that percentile, the largest fall any of the windows paid).
+
+    """
+    shares = sorted(gained / max(1, start) for gained, start in recent)
+    return (
+        shares[max(0, (pct * len(shares) + 99) // 100 - 1)],
+        max(gained for gained, _ in recent),
+    )
+
+
+def rose(landings: list[tuple[str, list[str], int]], at: int, spec: Spec) -> bool:
+    """Say whether the value rose in the ten measured landings after landing `at`.
+
+    A rise from an honest discovery is not a regression (operator, 2026-11-05), so a landing
+    followed by one is not evidence against a rule that called it ok.
+
+    Returns:
+        True when any of the next ten measured values is above this landing's.
+
+    """
+    here = landings[at][2]
+    later = [
+        value for _sha, files, value in landings[at + 1 :] if measured(files, spec)
+    ]
+    return any(value > here for value in later[:WINDOW])
+
+
+def admission(rule: str, every: list[int], counted: list[int], required: int) -> str:
+    """Say what a rule would do with a landing that pays nothing, from the state before it.
+
+    Args:
+        rule: `current` (the last ten landings), `window` (the last ten measured landings) or
+            `learned` (the last ten landings against a learned required fall).
+        every: The ratchet's value after each earlier landing.
+        counted: The same, for earlier landings the ratchet measures.
+        required: The learned required fall in force before this landing.
+
+    Returns:
+        `ok` (admit a landing that pays nothing) or `behind` (refuse it).
+
+    """
+    if rule == "current":
+        return verdict(every)
+    if rule == "window":
+        return verdict(counted)
+    return "ok" if fall(every) >= required else "behind"
+
+
+def score_admission(
+    landings: list[tuple[str, list[str], int]],
+    spec: Spec,
+    rule: str,
+    required: list[int],
+    span: tuple[int, int],
+) -> tuple[int, int, int]:
+    """Score a rule as an admission rule, over the landings in `span` that paid nothing.
+
+    A landing that lowers the value is always admitted, so only a landing that pays nothing can be
+    wrongly admitted (a false ok: it was followed by a stall) or wrongly refused (a false behind:
+    the value fell soon anyway). A landing followed by a rise is left out.
+
+    Returns:
+        (false oks, false behinds, landings scored).
+
+    """
+    every: list[int] = []
+    counted: list[int] = []
+    false_ok = false_behind = scored = 0
+    for at, (_sha, files, value) in enumerate(landings):
+        pays = bool(every) and value < every[-1]
+        in_span = span[0] <= at < span[1]
+        truth = stalled(landings, at, spec) if in_span and not pays else None
+        if truth is not None and not rose(landings, at, spec):
+            said = admission(rule, every, counted, required[at])
+            scored += 1
+            false_ok += said == "ok" and truth
+            false_behind += said == "behind" and not truth
+        every.append(value)
+        if measured(files, spec):
+            counted.append(value)
+    return false_ok, false_behind, scored
+
+
+def fit_quantile(
+    landings: list[tuple[str, list[str], int]],
+    spec: Spec,
+    stop: int,
+) -> QParams:
+    """Pick the grid point with the lowest weighted error on the fit part, a false ok costing more.
+
+    Returns:
+        The best (K, percent, min_rate); the first of equals, so the choice is deterministic.
+
+    """
+    values = [value for _sha, _files, value in landings]
+    best, cheapest = QGRID[0], -1
+    for params in QGRID:
+        required = quantile_required(values, params)
+        false_ok, false_behind, _ = score_admission(
+            landings, spec, "learned", required, (0, stop)
+        )
+        cost = FALSE_OK_WEIGHT * false_ok + false_behind
+        if cheapest < 0 or cost < cheapest:
+            best, cheapest = params, cost
+    return best
+
+
 def split_log(text: str) -> list[tuple[str, int, list[str]]]:
     """Split `git log --format="@%h %ct" --name-only` output into (sha, epoch, files) per commit.
 
@@ -413,8 +560,63 @@ def read_landings(
     return filled
 
 
+def report_admission(
+    landings: list[tuple[str, list[str], int]], spec: Spec, held: int
+) -> None:
+    """Print the held-out admission score of the current, window and quantile rules."""
+    quantile = fit_quantile(landings, spec, fit_end(held))
+    required = quantile_required([v for _s, _f, v in landings], quantile)
+    sys.stdout.write(
+        f"admission (a landing that paid nothing), held-out, a false ok weighted "
+        f"{FALSE_OK_WEIGHT}x in the fit; quantile estimator K {quantile[0]}, lower "
+        f"{quantile[1]} percent, min_rate {quantile[2]}\n"
+    )
+    for label, rule in (
+        ("current", "current"),
+        ("window", "window"),
+        ("quantile", "learned"),
+    ):
+        ok, behind, scored = score_admission(
+            landings, spec, rule, required, (held, len(landings))
+        )
+        sys.stdout.write(
+            f"  {label}: false ok {ok}, false behind {behind} (scored {scored})\n"
+        )
+
+
+def report_series(
+    name: str, landings: list[tuple[str, list[str], int]], spec: Spec
+) -> None:
+    """Print one series: where the rules differ, their all-history score and the held-out ones."""
+    result = score(landings, spec)
+    sys.stdout.write(
+        f"== {name}: landings {len(landings)}, differing {len(replay(landings, spec))}\n"
+        f"scored {len(result['scored'])}\n"
+    )
+    for key, shas in result.items():
+        if key != "scored":
+            sys.stdout.write(f"{key}: {len(shas)}\n")
+    held = held_start(len(landings))
+    out = score(landings, spec, held)
+    sys.stdout.write(
+        f"held-out from landing {held} (fit part ends at {fit_end(held)} after the "
+        f"embargo): scored {len(out['scored'])}; current false ok "
+        f"{len(out['current false ok'])}, false behind {len(out['current false behind'])}; "
+        f"proposed false ok {len(out['proposed false ok'])}, false behind "
+        f"{len(out['proposed false behind'])}\n"
+    )
+    params = fit(landings, spec, fit_end(held))
+    learned = score_learned(landings, spec, params, (held, len(landings)))
+    sys.stdout.write(
+        f"learned required, fitted before landing {fit_end(held)}: K {params[0]}, "
+        f"alpha {params[1]}, min_rate {params[2]}; held-out false ok {learned[0]}, "
+        f"false behind {learned[1]} (scored {learned[2]})\n"
+    )
+    report_admission(landings, spec, held)
+
+
 def main() -> int:
-    """Print the landings where the rules differ, then the score of each rule.
+    """Print, per series, the landings where the rules differ and the score of each rule.
 
     Returns:
         0.
@@ -431,32 +633,7 @@ def main() -> int:
     for name, spec, unit in runs:
         full = read_landings(repo, spec, unit)
         landings = [(sha, files, value) for sha, _epoch, files, value in full]
-        differing = replay(landings, spec)
-        head = f"== {name}: landings {len(landings)}, differing {len(differing)}\n"
-        sys.stdout.write(head)
-        result = score(landings, spec)
-        sys.stdout.write(f"scored {len(result['scored'])}\n")
-        for key, shas in result.items():
-            if key != "scored":
-                sys.stdout.write(f"{key}: {len(shas)}\n")
-        shown = " ".join(result["proposed false ok"][:SHOWN])
-        sys.stdout.write(f"proposed false ok (first {SHOWN}): {shown}\n")
-        held = held_start(len(landings))
-        out = score(landings, spec, held)
-        sys.stdout.write(
-            f"held-out from landing {held} (fit part ends at {fit_end(held)} after the "
-            f"embargo): scored {len(out['scored'])}; current false ok "
-            f"{len(out['current false ok'])}, false behind {len(out['current false behind'])}; "
-            f"proposed false ok {len(out['proposed false ok'])}, false behind "
-            f"{len(out['proposed false behind'])}\n"
-        )
-        params = fit(landings, spec, fit_end(held))
-        learned = score_learned(landings, spec, params, (held, len(landings)))
-        sys.stdout.write(
-            f"learned required, fitted before landing {fit_end(held)}: K {params[0]}, "
-            f"alpha {params[1]}, min_rate {params[2]}; held-out false ok {learned[0]}, "
-            f"false behind {learned[1]} (scored {learned[2]})\n"
-        )
+        report_series(name, landings, spec)
     return 0
 
 

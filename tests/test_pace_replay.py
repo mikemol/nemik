@@ -6,19 +6,25 @@ from pace_replay import (
     CODON,
     GRID,
     MYPY,
+    QGRID,
     RUFF,
+    admission,
     counts,
     entries,
     fall,
     fit,
     fit_end,
+    fit_quantile,
     held_start,
     learned_required,
     measured,
     paid_fraction,
     pairs,
+    quantile_required,
     replay,
+    rose,
     score,
+    score_admission,
     score_learned,
     split_log,
     stalled,
@@ -39,6 +45,7 @@ TWENTY = 20
 SHARE_OF_FALLING = 0.323
 FLOOR_ONE = (3, 0.3, 1)
 FLOOR_TWO = (3, 0.3, 2)
+QUANTILE = (5, 25, 1)
 EPOCH = 1_700_000_000
 BASELINE_TEXT = '{"a": {"as_written": "x", "stripped": "y"}, "b": {"as_written": "z"}}'
 LINT_TEXT = '{"a.py": {"PLC0415": 3, "S404": 1}, "b.py": {"misc": 2}, "c.py": 5}'
@@ -48,6 +55,10 @@ LOG_TEXT = (
 )
 FALLING = [100 - 2 * i for i in range(THIRTY)]
 FLAT = [50] * THIRTY
+SPAN = (0, THIRTY)
+REQUIRED = [1] * THIRTY
+ONE_FALSE_BEHIND = (0, 1, 1)
+NO_ERROR = (0, 0, TWENTY)
 
 
 def test_pairs_count_rules_and_counts_sum_them() -> None:
@@ -176,5 +187,52 @@ def test_a_series_that_pays_is_ok_and_one_that_stops_is_behind() -> None:
 def test_scoring_a_flat_series_finds_no_error_and_scores_every_judged_landing() -> None:
     """MUTANT: a rule that said ok on a flat series would be a false ok on a stalled one."""
     flat = [(f"s{i}", SRC, 10) for i in range(THIRTY)]
-    assert score_learned(flat, CODON, FLOOR_ONE, (0, THIRTY)) == (0, 0, TWENTY)
+    assert score_learned(flat, CODON, FLOOR_ONE, SPAN) == NO_ERROR
     assert fit(flat, CODON, TWENTY) == GRID[0]
+
+
+def test_the_quantile_required_fall_never_falls_and_a_stall_does_not_lower_it() -> None:
+    """github-14's point 1: paying windows only, ratcheted upward; a flat tail leaves it alone."""
+    required = quantile_required(FALLING + [FALLING[-1]] * THIRTY, QUANTILE)
+    assert required == sorted(required)
+    assert required[-1] == required[THIRTY]
+    assert required[-1] > QUANTILE[2]
+
+
+def test_a_series_that_never_pays_keeps_the_minimum_rate() -> None:
+    """MUTANT: a rule that learned from stalled windows would drift to zero; this one stays put."""
+    assert set(quantile_required(FLAT, QUANTILE)) == {QUANTILE[2]}
+
+
+def test_a_rise_within_ten_measured_landings_is_seen() -> None:
+    """Honest discovery raises the value; the replay must not count it against a rule."""
+    landings = [(f"s{i}", SRC, 10 if i < WINDOW else 12) for i in range(THIRTY)]
+    assert rose(landings, 0, CODON)
+    flat = [(f"s{i}", SRC, 10) for i in range(THIRTY)]
+    assert not rose(flat, 0, CODON)
+
+
+def test_each_rule_names_the_admission_of_a_landing_that_pays_nothing() -> None:
+    """`current` and `window` read their own series; `learned` reads the required fall."""
+    paying = [9, *([5] * WINDOW)]
+    assert admission("current", paying, [], 1) == "ok"
+    assert admission("window", [], paying, 1) == "ok"
+    assert admission("window", paying, [], 1) == "behind"
+    assert admission("learned", paying, [], FALL_OF_FOUR) == "ok"
+    assert admission("learned", paying, [], FALL_OF_FOUR + 1) == "behind"
+
+
+def test_only_a_landing_that_paid_nothing_is_scored_as_an_admission() -> None:
+    """A landing that lowers the value is always admitted, so it can be neither error."""
+    falling = [(f"s{i}", SRC, 100 - 2 * i) for i in range(THIRTY)]
+    flat = [(f"s{i}", SRC, 10) for i in range(THIRTY)]
+    first = score_admission(falling, CODON, "current", REQUIRED, SPAN)
+    second = score_admission(flat, CODON, "current", REQUIRED, SPAN)
+    assert first == ONE_FALSE_BEHIND
+    assert second == NO_ERROR
+
+
+def test_the_quantile_fit_is_deterministic_on_a_flat_series() -> None:
+    """With no error anywhere on the grid, the first grid point is chosen."""
+    flat = [(f"s{i}", SRC, 10) for i in range(THIRTY)]
+    assert fit_quantile(flat, CODON, TWENTY) == QGRID[0]
