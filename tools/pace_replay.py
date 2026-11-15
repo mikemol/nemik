@@ -25,6 +25,7 @@ BASELINE = "codon-baseline.json"
 MEASURED_PREFIX = "src/nemik/"
 LOG_ARGS = ["log", "--reverse", "--format=@%h %ct", "--name-only", "main"]
 SHOWN = 40
+FIT_PERCENT = 70
 
 
 def _table(value: object) -> dict[str, object]:
@@ -181,11 +182,41 @@ def stalled(
     return min(later[:WINDOW]) >= here
 
 
+def held_start(count: int, fit_percent: int = FIT_PERCENT) -> int:
+    """Give the index where the held-out part of `count` landings begins (R462).
+
+    Returns:
+        The first held-out index: the landings before it are the fit part, in time order.
+
+    """
+    return count * fit_percent // 100
+
+
+def fit_end(held: int, embargo: int = WINDOW) -> int:
+    """Give the index where fitting must stop so no fit label reads held-out landings (R464).
+
+    A landing is labelled stalled by looking `embargo` measured landings ahead, so the last
+    `embargo` landings of the fit part carry labels built from the held-out part.
+
+    Returns:
+        The end of the fit part after the embargo, never below zero.
+
+    """
+    return max(0, held - embargo)
+
+
 def score(
     landings: list[tuple[str, list[str], int]],
     spec: Spec = CODON,
+    first: int = 0,
 ) -> dict[str, list[str]]:
     """Score both rules against what followed each landing.
+
+    Args:
+        landings: (sha, files touched, ratchet value after the landing), oldest first.
+        spec: The ratchet's baseline file and measured prefixes.
+        first: The index of the first landing to score; earlier landings still feed the
+            windows, so a held-out part is judged by the history that really preceded it.
 
     Returns:
         The shas of the false oks and false behinds of each rule, under the keys
@@ -207,7 +238,7 @@ def score(
         if measured(files, spec):
             counted.append(value)
         truth = stalled(landings, at, spec)
-        if truth is None:
+        if truth is None or at < first:
             continue
         out["scored"].append(sha)
         for name, series in (("current", every), ("proposed", counted)):
@@ -300,6 +331,15 @@ def main() -> int:
                 sys.stdout.write(f"{key}: {len(shas)}\n")
         shown = " ".join(result["proposed false ok"][:SHOWN])
         sys.stdout.write(f"proposed false ok (first {SHOWN}): {shown}\n")
+        held = held_start(len(landings))
+        out = score(landings, spec, held)
+        sys.stdout.write(
+            f"held-out from landing {held} (fit part ends at {fit_end(held)} after the "
+            f"embargo): scored {len(out['scored'])}; current false ok "
+            f"{len(out['current false ok'])}, false behind {len(out['current false behind'])}; "
+            f"proposed false ok {len(out['proposed false ok'])}, false behind "
+            f"{len(out['proposed false behind'])}\n"
+        )
     return 0
 
 

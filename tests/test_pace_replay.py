@@ -3,11 +3,14 @@
 """pace_replay judges a ratchet's window under the current and the proposed rule (nemik:W2020)."""
 
 from pace_replay import (
+    CODON,
     MYPY,
     RUFF,
     counts,
     entries,
     fall,
+    fit_end,
+    held_start,
     measured,
     pairs,
     replay,
@@ -23,6 +26,8 @@ FALL_OF_FOUR = 4
 THREE_ENTRIES = 3
 PAIRS_IN_LINT = 3
 COUNT_IN_LINT = 6
+SEVENTY = 70
+SEVEN = 7
 EPOCH = 1_700_000_000
 BASELINE_TEXT = '{"a": {"as_written": "x", "stripped": "y"}, "b": {"as_written": "z"}}'
 LINT_TEXT = '{"a.py": {"PLC0415": 3, "S404": 1}, "b.py": {"misc": 2}, "c.py": 5}'
@@ -114,3 +119,23 @@ def test_a_verdict_ok_on_a_stalled_landing_is_a_false_ok() -> None:
     assert "s10" in result["current false ok"]
     assert "s10" in result["proposed false ok"]
     assert "s10" in result["scored"]
+
+
+def test_the_held_out_part_starts_at_seventy_percent_and_fitting_stops_early() -> None:
+    """R462 and R464: 70 of 100 landings fit, and the last ten of those are embargoed."""
+    assert held_start(100) == SEVENTY
+    assert held_start(10) == SEVEN
+    assert fit_end(SEVENTY) == SEVENTY - WINDOW
+    assert fit_end(WINDOW - 1) == 0
+
+
+def test_scoring_from_a_later_landing_scores_only_the_held_out_part() -> None:
+    """Earlier landings still feed the windows, but only landings from `first` on are scored."""
+    falling = [(f"s{i}", SRC, 30 - 2 * i) for i in range(WINDOW_PLUS_ONE)]
+    flat = [(f"t{i}", SRC, 10) for i in range(WINDOW_PLUS_ONE)]
+    landings = falling + flat
+    everything = score(landings)["scored"]
+    later = score(landings, CODON, WINDOW)["scored"]
+    assert later == everything[WINDOW:]
+    assert "s10" in later
+    assert "s0" not in later
