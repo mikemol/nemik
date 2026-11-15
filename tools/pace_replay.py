@@ -632,6 +632,85 @@ def read_landings(
     return filled
 
 
+def row_values(text: str, unit: str) -> dict[str, int]:
+    """Give each row of a baseline document its own value: `counts` sums, else entries.
+
+    Returns:
+        The value of each top-level row (a file or a module), keyed by its name; a row that is
+        not an object is 0, as in `pairs` and `counts`.
+
+    """
+    table = _document(text)
+    if unit == "counts":
+        return {
+            name: sum(v for v in _table(row).values() if isinstance(v, int))
+            for name, row in table.items()
+        }
+    return {name: len(_table(row)) for name, row in table.items()}
+
+
+def read_rows(
+    repo: Path, spec: Spec = CODON, unit: str = "entries"
+) -> list[tuple[str, int, list[str], dict[str, int]]]:
+    """Read main's landings, oldest first, with the value of every row after each.
+
+    Returns:
+        (sha, epoch, files, rows) per landing; the rows are carried forward from the last landing
+        that changed the baseline, as `read_landings` carries the total.
+
+    """
+    baseline = spec[0]
+    log = capture(["git", "-C", str(repo), *LOG_ARGS])
+    rows: dict[str, int] = {}
+    filled: list[tuple[str, int, list[str], dict[str, int]]] = []
+    for sha, epoch, files in split_log(log.stdout):
+        if baseline in files:
+            shown = capture(["git", "-C", str(repo), "show", f"{sha}:{baseline}"])
+            rows = row_values(shown.stdout, unit) if shown.returncode == 0 else rows
+        filled.append((sha, epoch, files, rows))
+    return filled
+
+
+def row_series(rows: list[dict[str, int]]) -> dict[str, list[int]]:
+    """Turn the rows after each landing into one series per row; a row not there yet is 0.
+
+    Returns:
+        For each row name that ever appears, its value after each landing.
+
+    """
+    names = sorted({name for row in rows for name in row})
+    return {name: [row.get(name, 0) for row in rows] for name in names}
+
+
+def stalled_rows(series: dict[str, list[int]], at: int) -> list[str]:
+    """Name the rows still owing something at landing `at` that did not fall in the last window.
+
+    Returns:
+        The rows whose value at `at` is above zero and whose fall over the window ending there
+        is zero or less.
+
+    """
+    return [
+        name
+        for name, values in sorted(series.items())
+        if values[at] > 0 and fall(values[: at + 1]) <= 0
+    ]
+
+
+def report_rows(name: str, series: dict[str, list[int]], held: int) -> None:
+    """Print how many rows are owing and how many stand still, at the held-out start and the end."""
+    last = len(next(iter(series.values()), [])) - 1
+    if last < 0:
+        return
+    sys.stdout.write(f"rows of {name}:")
+    for label, at in (("held-out start", held), ("end", last)):
+        owing = [n for n, values in series.items() if values[at] > 0]
+        sys.stdout.write(
+            f" {label}: {len(owing)} owing, {len(stalled_rows(series, at))} stalled;"
+        )
+    sys.stdout.write("\n")
+
+
 def report_admission(
     landings: list[tuple[str, list[str], int]], spec: Spec, held: int
 ) -> None:
@@ -715,6 +794,12 @@ def main() -> int:
         days = days_to_zero(epochs, values, held_start(len(landings)))
         sys.stdout.write(
             f"historical days to zero over the held-out span (no rule's effect): {days:.1f}\n"
+        )
+        per_row = read_rows(repo, spec, unit)
+        report_rows(
+            name,
+            row_series([rows for _sha, _epoch, _files, rows in per_row]),
+            held_start(len(per_row)),
         )
     return 0
 

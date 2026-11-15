@@ -27,16 +27,28 @@ from pace_replay import (
     quantile_required,
     replay,
     rose,
+    row_series,
+    row_values,
     score,
     score_admission,
     score_learned,
     split_log,
     stalled,
+    stalled_rows,
     verdict,
     verdict_learned,
 )
 
 WINDOW = 10
+ROWS_TEXT = '{"a.py": {"X": 3, "Y": 1}, "b.py": {"X": 2}, "c.py": 5}'
+ROW_COUNTS = row_values(ROWS_TEXT, "counts")
+ROW_ENTRIES = row_values(ROWS_TEXT, "pairs")
+ROW_AFTER = [{"a.py": 4}, {"a.py": 3, "b.py": 2}, {"b.py": 2}]
+ROW_SERIES = row_series(ROW_AFTER)
+PAYER_AND_STALLER = row_series(
+    [{"a.py": 30 - i, "b.py": 5} for i in range(WINDOW + WINDOW)]
+)
+STALLED_AT_END = stalled_rows(PAYER_AND_STALLER, WINDOW + WINDOW - 1)
 WINDOW_PLUS_ONE = 11
 FALL_OF_FOUR = 4
 THREE_ENTRIES = 3
@@ -278,3 +290,21 @@ def test_days_to_zero_is_the_value_over_the_historical_rate() -> None:
     assert round(days_to_zero(epochs, values, 0)) == values[-1]
     assert days_to_zero(epochs, [FIFTY] * TWENTY, 0) < 0
     assert days_to_zero([EPOCH] * TWENTY, values, 0) < 0
+
+
+def test_a_row_is_valued_as_its_counts_or_its_entries() -> None:
+    """A file's value is the sum of its rule counts, or its number of rules; a bare number is 0."""
+    assert ROW_COUNTS == {"a.py": 4, "b.py": 2, "c.py": 0}
+    assert ROW_ENTRIES == {"a.py": 2, "b.py": 1, "c.py": 0}
+    assert row_values("not json", "counts") == {}
+
+
+def test_a_row_not_there_yet_or_gone_is_zero_in_its_series() -> None:
+    """The series of a file has one value per landing, zero before it appears and after it goes."""
+    assert ROW_SERIES == {"a.py": [4, 3, 0], "b.py": [0, 2, 2]}
+
+
+def test_only_the_row_that_stands_still_is_stalled() -> None:
+    """MUTANT: a repo that pays the cheapest row forever is stalled on every other row."""
+    assert STALLED_AT_END == ["b.py"]
+    assert stalled_rows({"z.py": [0] * (WINDOW + WINDOW)}, WINDOW + WINDOW - 1) == []
