@@ -410,6 +410,78 @@ def lower_share(recent: list[tuple[int, int]], pct: int) -> tuple[float, int]:
     )
 
 
+MParams = tuple[int, int]
+# (paying windows kept K, min_rate): option (b), a median of the paying windows (mtools:W2200)
+MGRID: list[MParams] = [(k, floor) for k in (3, 5, 10, 20) for floor in (1, 2)]
+SECONDS_PER_DAY = 86400
+
+
+def median_required(values: list[int], params: MParams) -> list[int]:
+    """Learn, before each landing, the required fall as a median of the paying windows' shares.
+
+    A stalled window is not in the set, so a stall cannot lower the rate, and one burst cannot set
+    it (a median ignores a single large window). Unlike the quantile estimator it may fall, but
+    only when the repo's own recent paying windows get smaller; it is never below min_rate.
+
+    Returns:
+        The required fall in force before each landing, from the windows that ended before it.
+
+    """
+    keep, floor = params
+    required: list[int] = []
+    shares: list[float] = []
+    best = floor
+    for at, value in enumerate(values):
+        required.append(best)
+        if at >= WINDOW and values[at - WINDOW] > value:
+            start = values[at - WINDOW]
+            shares.append((start - value) / max(1, start))
+            middle = sorted(shares[-keep:])
+            best = max(floor, int(-(-(middle[len(middle) // 2] * value) // 1)))
+    return required
+
+
+def fit_median(
+    landings: list[tuple[str, list[str], int]],
+    spec: Spec,
+    stop: int,
+) -> MParams:
+    """Pick the grid point with the lowest weighted error on the fit part, a false ok costing more.
+
+    Returns:
+        The best (K, min_rate); the first of equals, so the choice is deterministic.
+
+    """
+    values = [value for _sha, _files, value in landings]
+    best, cheapest = MGRID[0], -1
+    for params in MGRID:
+        required = median_required(values, params)
+        false_ok, false_behind, _ = score_admission(
+            landings, spec, "learned", required, (0, stop)
+        )
+        cost = FALSE_OK_WEIGHT * false_ok + false_behind
+        if cheapest < 0 or cost < cheapest:
+            best, cheapest = params, cost
+    return best
+
+
+def days_to_zero(epochs: list[int], values: list[int], start: int) -> float:
+    """Give the days the value would need to reach zero at the rate it fell from `start` to the end.
+
+    This is the HISTORICAL rate, the same for every rule: a replay of landed commits cannot say
+    what pace a rule would have produced (R470).
+
+    Returns:
+        Days at the observed rate, or -1.0 when the value did not fall or the span has no time.
+
+    """
+    days = (epochs[-1] - epochs[start]) / SECONDS_PER_DAY
+    fell = values[start] - values[-1]
+    if fell <= 0 or days <= 0:
+        return -1.0
+    return values[-1] / (fell / days)
+
+
 def rose(landings: list[tuple[str, list[str], int]], at: int, spec: Spec) -> bool:
     """Say whether the value rose in the ten measured landings after landing `at`.
 
@@ -563,21 +635,25 @@ def read_landings(
 def report_admission(
     landings: list[tuple[str, list[str], int]], spec: Spec, held: int
 ) -> None:
-    """Print the held-out admission score of the current, window and quantile rules."""
+    """Print the held-out admission score of the current, window, quantile and median rules."""
+    values = [v for _s, _f, v in landings]
     quantile = fit_quantile(landings, spec, fit_end(held))
-    required = quantile_required([v for _s, _f, v in landings], quantile)
+    median = fit_median(landings, spec, fit_end(held))
     sys.stdout.write(
         f"admission (a landing that paid nothing), held-out, a false ok weighted "
         f"{FALSE_OK_WEIGHT}x in the fit; quantile estimator K {quantile[0]}, lower "
-        f"{quantile[1]} percent, min_rate {quantile[2]}\n"
+        f"{quantile[1]} percent, min_rate {quantile[2]}; median estimator K {median[0]}, "
+        f"min_rate {median[1]}\n"
     )
-    for label, rule in (
-        ("current", "current"),
-        ("window", "window"),
-        ("quantile", "learned"),
+    span = (held, len(landings))
+    for label, rule, required in (
+        ("current", "current", []),
+        ("window", "window", []),
+        ("quantile", "learned", quantile_required(values, quantile)),
+        ("median", "learned", median_required(values, median)),
     ):
         ok, behind, scored = score_admission(
-            landings, spec, rule, required, (held, len(landings))
+            landings, spec, rule, required or [0] * len(landings), span
         )
         sys.stdout.write(
             f"  {label}: false ok {ok}, false behind {behind} (scored {scored})\n"
@@ -634,6 +710,12 @@ def main() -> int:
         full = read_landings(repo, spec, unit)
         landings = [(sha, files, value) for sha, _epoch, files, value in full]
         report_series(name, landings, spec)
+        epochs = [epoch for _sha, epoch, _files, _value in full]
+        values = [value for _sha, _files, value in landings]
+        days = days_to_zero(epochs, values, held_start(len(landings)))
+        sys.stdout.write(
+            f"historical days to zero over the held-out span (no rule's effect): {days:.1f}\n"
+        )
     return 0
 
 

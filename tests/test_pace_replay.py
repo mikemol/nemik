@@ -5,19 +5,23 @@
 from pace_replay import (
     CODON,
     GRID,
+    MGRID,
     MYPY,
     QGRID,
     RUFF,
     admission,
     counts,
+    days_to_zero,
     entries,
     fall,
     fit,
     fit_end,
+    fit_median,
     fit_quantile,
     held_start,
     learned_required,
     measured,
+    median_required,
     paid_fraction,
     pairs,
     quantile_required,
@@ -46,7 +50,9 @@ SHARE_OF_FALLING = 0.323
 FLOOR_ONE = (3, 0.3, 1)
 FLOOR_TWO = (3, 0.3, 2)
 QUANTILE = (5, 25, 1)
+MEDIAN = (5, 1)
 EPOCH = 1_700_000_000
+DAY = 86400
 BASELINE_TEXT = '{"a": {"as_written": "x", "stripped": "y"}, "b": {"as_written": "z"}}'
 LINT_TEXT = '{"a.py": {"PLC0415": 3, "S404": 1}, "b.py": {"misc": 2}, "c.py": 5}'
 SRC = ["src/nemik/a.py"]
@@ -59,6 +65,7 @@ SPAN = (0, THIRTY)
 REQUIRED = [1] * THIRTY
 ONE_FALSE_BEHIND = (0, 1, 1)
 NO_ERROR = (0, 0, TWENTY)
+FIFTY = 50
 
 
 def test_pairs_count_rules_and_counts_sum_them() -> None:
@@ -236,3 +243,38 @@ def test_the_quantile_fit_is_deterministic_on_a_flat_series() -> None:
     """With no error anywhere on the grid, the first grid point is chosen."""
     flat = [(f"s{i}", SRC, 10) for i in range(THIRTY)]
     assert fit_quantile(flat, CODON, TWENTY) == QGRID[0]
+
+
+def test_the_median_required_fall_does_not_move_on_a_stall() -> None:
+    """A stall adds no paying window, so the median stays where the last payer left it."""
+    required = median_required(FALLING + [FALLING[-1]] * THIRTY, MEDIAN)
+    assert required[-1] == required[THIRTY + WINDOW]
+    assert required[-1] > MEDIAN[1]
+
+
+def test_the_median_can_fall_when_the_paying_windows_shrink() -> None:
+    """MUTANT: unlike the never-falling quantile, a median follows the repo's recent payers down."""
+    big = [2000 - 100 * i for i in range(WINDOW + WINDOW)]
+    small = [big[-1] - i for i in range(1, THIRTY)]
+    required = median_required([*big, *small], (3, 1))
+    assert required[-1] < max(required)
+
+
+def test_a_series_that_never_pays_keeps_the_median_floor() -> None:
+    """MUTANT: a median that learned from stalled windows would drift to zero."""
+    assert set(median_required(FLAT, MEDIAN)) == {MEDIAN[1]}
+
+
+def test_the_median_fit_is_deterministic_on_a_flat_series() -> None:
+    """With no error anywhere on the grid, the first grid point is chosen."""
+    flat = [(f"s{i}", SRC, 10) for i in range(THIRTY)]
+    assert fit_median(flat, CODON, TWENTY) == MGRID[0]
+
+
+def test_days_to_zero_is_the_value_over_the_historical_rate() -> None:
+    """Two a day over 38 days fell 38; the 62 left need 62 days at that rate."""
+    epochs = [EPOCH + DAY * 2 * i for i in range(TWENTY)]
+    values = [100 - 2 * i for i in range(TWENTY)]
+    assert round(days_to_zero(epochs, values, 0)) == values[-1]
+    assert days_to_zero(epochs, [FIFTY] * TWENTY, 0) < 0
+    assert days_to_zero([EPOCH] * TWENTY, values, 0) < 0
