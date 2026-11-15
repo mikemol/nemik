@@ -125,7 +125,8 @@ exports_files(["pyproject.toml"])
             # nemik:W2043: the apischema goldens, and the call census's registry, tool and codon
             + (["//tests/fixtures/apischema:apischema-golden.json", "//tests/fixtures/apischema:apischema-manifest.json", "//tests/fixtures/apischema:apischema-cases.json"] if src == "tests/test_schemagen.py" else [])
             + (["//tests/fixtures/apischema:apischema-errors.json", "//tests/fixtures/apischema:apischema-manifest.json"] if src == "tests/test_schemagen_errors.py" else [])
-            + (["//tests/fixtures/apischema:codon-calls.txt"] if src == "tests/test_codon_calls.py" else [])
+            # nemik:W2052: the registry's modules are read from the declared source, not through a resolved path
+            + (["//tests/fixtures/apischema:codon-calls.txt"] + glob(["src/nemik/*.py"]) if src == "tests/test_codon_calls.py" else [])
             + (["tools/codon_call.py", "tools/codon_census.py"] if src in ("tests/test_codon_call.py", "tests/test_codon_calls.py") else [])
             + (["tools/hookcheck.py"] if src == "tests/test_hookcheck.py" else [])
             + (["@codon//:files", "@codon//:bin/codon"] if src == "tests/test_codon_calls.py" else [])

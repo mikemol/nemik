@@ -17,7 +17,7 @@ import pytest
 
 from nemik.schemagen import render, schema_path
 
-HERE = Path(__file__).resolve().parent
+HERE = Path(__file__).parent
 GOLDEN = HERE / "fixtures" / "apischema" / "apischema-golden.json"
 MANIFEST = HERE / "fixtures" / "apischema" / "apischema-manifest.json"
 MUTATED = HERE / "fixtures" / "apischema" / "apischema-cases.json"

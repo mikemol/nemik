@@ -14,7 +14,7 @@ from pathlib import Path
 import pytest
 from codon_call import verdicts
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).parents[1]
 REGISTRY = ROOT / "tests" / "fixtures" / "apischema" / "codon-calls.txt"
 _STAGED = os.environ.get("NEMIK_CODON")
 if not _STAGED:
