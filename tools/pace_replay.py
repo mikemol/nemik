@@ -250,6 +250,116 @@ def score(
     return out
 
 
+Params = tuple[int, float, int]
+# (windows looked back K, smoothing alpha, min_rate): the grid the fit searches (mtools:W2200)
+GRID: list[Params] = [
+    (k, alpha, floor) for k in (3, 5, 10) for alpha in (0.3, 0.6) for floor in (1, 2)
+]
+
+
+def paid_fraction(values: list[int], end: int, window: int = WINDOW) -> float:
+    """Give the share of the value paid down over the window that ends before index `end`.
+
+    Returns:
+        The fall over the window divided by the value at its start (a rise counts as nothing);
+        0.0 when there is not a full window of history.
+
+    """
+    if end <= window:
+        return 0.0
+    before = values[end - window - 1]
+    return max(0, before - values[end - 1]) / max(1, before)
+
+
+def learned_required(values: list[int], params: Params) -> int:
+    """Learn the required fall: a share of the value, from how much recent windows really paid.
+
+    The rate is an exponentially weighted mean of the paid fraction over the last K windows
+    (newest weighted most), and the required fall is that share of the current value, never below
+    min_rate (the smallest fall one landing can make: not zero, as ruled).
+
+    Returns:
+        The required fall for the next landing.
+
+    """
+    lookback, alpha, floor = params
+    weighted = total = 0.0
+    for age in range(lookback):
+        end = len(values) - age
+        if end <= WINDOW:
+            break
+        weight = (1 - alpha) ** age
+        weighted += weight * paid_fraction(values, end)
+        total += weight
+    rate = weighted / total if total else 0.0
+    return max(floor, int(-(-(rate * values[-1]) // 1)))
+
+
+def verdict_learned(values: list[int], params: Params) -> str:
+    """Judge a series under the learned required fall.
+
+    Returns:
+        `ok` or `behind`.
+
+    """
+    return "ok" if fall(values) >= learned_required(values, params) else "behind"
+
+
+def score_learned(
+    landings: list[tuple[str, list[str], int]],
+    spec: Spec,
+    params: Params,
+    span: tuple[int, int],
+) -> tuple[int, int, int]:
+    """Score the learned rule against the stalled label over the landings in `span`.
+
+    Args:
+        landings: (sha, files touched, ratchet value after the landing), oldest first.
+        spec: The ratchet's baseline file and measured prefixes.
+        params: The rule's K, smoothing and min_rate.
+        span: The first and one past the last landing index to score; earlier landings still
+            feed the windows.
+
+    Returns:
+        (false oks, false behinds, landings scored).
+
+    """
+    every: list[int] = []
+    false_ok = false_behind = scored = 0
+    for at, (_sha, _files, value) in enumerate(landings):
+        every.append(value)
+        if not span[0] <= at < span[1]:
+            continue
+        truth = stalled(landings, at, spec)
+        if truth is None:
+            continue
+        scored += 1
+        said = verdict_learned(every, params)
+        false_ok += said == "ok" and truth
+        false_behind += said == "behind" and not truth
+    return false_ok, false_behind, scored
+
+
+def fit(
+    landings: list[tuple[str, list[str], int]],
+    spec: Spec,
+    stop: int,
+) -> Params:
+    """Pick the grid point with the fewest errors on the fit part, landings before `stop`.
+
+    Returns:
+        The best (K, alpha, min_rate); the first of equals, so the choice is deterministic.
+
+    """
+    best, fewest = GRID[0], -1
+    for params in GRID:
+        false_ok, false_behind, _ = score_learned(landings, spec, params, (0, stop))
+        errors = false_ok + false_behind
+        if fewest < 0 or errors < fewest:
+            best, fewest = params, errors
+    return best
+
+
 def split_log(text: str) -> list[tuple[str, int, list[str]]]:
     """Split `git log --format="@%h %ct" --name-only` output into (sha, epoch, files) per commit.
 
@@ -339,6 +449,13 @@ def main() -> int:
             f"{len(out['current false ok'])}, false behind {len(out['current false behind'])}; "
             f"proposed false ok {len(out['proposed false ok'])}, false behind "
             f"{len(out['proposed false behind'])}\n"
+        )
+        params = fit(landings, spec, fit_end(held))
+        learned = score_learned(landings, spec, params, (held, len(landings)))
+        sys.stdout.write(
+            f"learned required, fitted before landing {fit_end(held)}: K {params[0]}, "
+            f"alpha {params[1]}, min_rate {params[2]}; held-out false ok {learned[0]}, "
+            f"false behind {learned[1]} (scored {learned[2]})\n"
         )
     return 0
 

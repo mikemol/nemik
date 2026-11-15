@@ -4,20 +4,26 @@
 
 from pace_replay import (
     CODON,
+    GRID,
     MYPY,
     RUFF,
     counts,
     entries,
     fall,
+    fit,
     fit_end,
     held_start,
+    learned_required,
     measured,
+    paid_fraction,
     pairs,
     replay,
     score,
+    score_learned,
     split_log,
     stalled,
     verdict,
+    verdict_learned,
 )
 
 WINDOW = 10
@@ -28,6 +34,11 @@ PAIRS_IN_LINT = 3
 COUNT_IN_LINT = 6
 SEVENTY = 70
 SEVEN = 7
+THIRTY = 30
+TWENTY = 20
+SHARE_OF_FALLING = 0.323
+FLOOR_ONE = (3, 0.3, 1)
+FLOOR_TWO = (3, 0.3, 2)
 EPOCH = 1_700_000_000
 BASELINE_TEXT = '{"a": {"as_written": "x", "stripped": "y"}, "b": {"as_written": "z"}}'
 LINT_TEXT = '{"a.py": {"PLC0415": 3, "S404": 1}, "b.py": {"misc": 2}, "c.py": 5}'
@@ -35,6 +46,8 @@ SRC = ["src/nemik/a.py"]
 LOG_TEXT = (
     f"@aaa {EPOCH}\nsrc/nemik/a.py\ndocs/b.md\n\n@bbb\n\n@ccc {EPOCH + 1}\nx.py\n"
 )
+FALLING = [100 - 2 * i for i in range(THIRTY)]
+FLAT = [50] * THIRTY
 
 
 def test_pairs_count_rules_and_counts_sum_them() -> None:
@@ -139,3 +152,29 @@ def test_scoring_from_a_later_landing_scores_only_the_held_out_part() -> None:
     assert later == everything[WINDOW:]
     assert "s10" in later
     assert "s0" not in later
+
+
+def test_the_paid_fraction_is_the_window_fall_over_the_value_it_started_from() -> None:
+    """Twenty paid off 62 is about a third; too little history pays nothing."""
+    assert round(paid_fraction(FALLING, THIRTY), 3) == SHARE_OF_FALLING
+    assert not paid_fraction([5] * WINDOW, WINDOW)
+    assert not paid_fraction([5, 9, 12, *([20] * WINDOW)], WINDOW + 3)
+
+
+def test_a_flat_series_learns_the_minimum_rate_never_zero() -> None:
+    """Nothing paid means a rate of zero, and the required fall is min_rate, not zero."""
+    assert learned_required(FLAT, FLOOR_ONE) == FLOOR_ONE[2]
+    assert learned_required(FLAT, FLOOR_TWO) == FLOOR_TWO[2]
+
+
+def test_a_series_that_pays_is_ok_and_one_that_stops_is_behind() -> None:
+    """The learned required fall is a share of the value, so a steady payer clears it."""
+    assert verdict_learned(FALLING, FLOOR_ONE) == "ok"
+    assert verdict_learned(FLAT, FLOOR_ONE) == "behind"
+
+
+def test_scoring_a_flat_series_finds_no_error_and_scores_every_judged_landing() -> None:
+    """MUTANT: a rule that said ok on a flat series would be a false ok on a stalled one."""
+    flat = [(f"s{i}", SRC, 10) for i in range(THIRTY)]
+    assert score_learned(flat, CODON, FLOOR_ONE, (0, THIRTY)) == (0, 0, TWENTY)
+    assert fit(flat, CODON, TWENTY) == GRID[0]
