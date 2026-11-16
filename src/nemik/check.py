@@ -62,6 +62,7 @@ from nemik.digest import collapse, delta
 from nemik.floorasks import floor_asks, unresolved
 from nemik.hostapply import HOST_REF, load
 from nemik.idle import findings as idle_findings
+from nemik.idle import stale_findings as stale_tick_findings
 from nemik.index import successors
 from nemik.landings import read_document
 from nemik.letters import (
@@ -987,6 +988,8 @@ def _fleet_checks(
     _rolling_findings(
         root, merged, by_repo, _declared_int(weights_toml, "rolling", "percentile", 90)
     )
+    # nemik:W1094: a live loop whose ledger has no recent tick line runs none of the practice.
+    _add_notes(by_repo, stale_tick_findings(root, repos, time.time()))
     # nemik:W616, W617: a working card that looks stalled, or whose progress is invisible.
     _add_rows(by_repo, "Warning", stalled_rows.findings(root, merged, int(time.time())))
     # nemik:W608: the warrant debt may only fall: a repo above its ceiling is told to warrant.

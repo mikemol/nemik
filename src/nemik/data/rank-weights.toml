@@ -147,6 +147,10 @@ cross_repo_ticks = 48
 [idle]
 ticks = 16
 outcomes = ["idle"]
+# nemik:W1094: a live loop (luthen's liveness export) whose newest ledger tick line is older than this
+# is a Warning: the loop's cadence (30 minutes) plus slack for one long gate wait. Measured 2026-11-15:
+# nemik's own ledger had no tick line for 109 hours while its loop beat on.
+tick_stale_minutes = 90
 
 # nemik:W1997: a card waiting on an open blocker that has landed more commits than `percentile` percent of
 # cards ever do is a Warning (rolling blocker, split it). The bound is learned from the landings document,

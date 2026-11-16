@@ -14,17 +14,21 @@ canonical loop prompt. mtools keeps each repo's last acknowledged reading beside
 `~/github/.claude/loop-prompt.md`; a repo whose reading differs from the prompt is behind.
 """
 
+import json
 import time
 import tomllib
 from importlib.resources import files
 from pathlib import Path
 from typing import TYPE_CHECKING
 
-from nemik.adapter import BASE, NEMIK, OSLC_CM, tick_outcomes
+from nemik.adapter import BASE, NEMIK, OSLC_CM, ledger_rows, tick_outcomes
+from nemik.tomlview import table
 
 if TYPE_CHECKING:
     from rdflib import Graph
 
+DEFAULT_STALE_MINUTES = 90
+STAMP_CHARS = 19  # YYYY-MM-DDTHH:MM:SS
 DEFAULT_TICKS = 16
 DEFAULT_OUTCOMES = ["idle"]
 PROMPT = Path(".claude") / "loop-prompt.md"
@@ -155,6 +159,103 @@ def agent_blockers(merged: Graph, repo: str) -> list[str]:
             for who in merged.objects(node, NEMIK.blockedOn)
         }
     )
+
+
+def declared_stale_minutes(text: str) -> int:
+    """Read the declared age, in minutes, past which a live loop's newest tick line is stale.
+
+    Args:
+        text: The rank-weights TOML; the caller reads the one that ships with the package.
+
+    Returns:
+        `tick_stale_minutes` of [idle], or the default when it is absent or not a whole number.
+
+    """
+    document: dict[str, object] = tomllib.loads(text)
+    minutes = table(document.get("idle")).get(
+        "tick_stale_minutes", DEFAULT_STALE_MINUTES
+    )
+    return minutes if isinstance(minutes, int) else DEFAULT_STALE_MINUTES
+
+
+def live_repos(root: Path) -> tuple[set[str], str]:
+    """Name the repos whose loop luthen's liveness export says is running, or why it cannot say.
+
+    Reads only an exported `liveness.json` under the root (the file wake reads first): running
+    luthen's own checker on every nemik-check is a subprocess. The answer is two parts, never a
+    maybe: the repos with verdict `ok`, and the reason the export was not read (empty when it was).
+    An empty set with an empty reason means no loop is live; an empty set WITH a reason means blind.
+
+    Args:
+        root: The directory holding the repos.
+
+    Returns:
+        (the repos with verdict `ok`, the reason the export could not be read or an empty string).
+
+    """
+    export = root / "liveness.json"
+    if not export.exists():
+        return set(), "there is no liveness.json under the root"
+    try:
+        document: object = json.loads(export.read_text(encoding="utf-8"))
+    except OSError:
+        return set(), "liveness.json cannot be read"
+    except ValueError:
+        return set(), "liveness.json is not JSON"
+    repos = table(table(document).get("repos"))
+    live = {
+        name for name, record in repos.items() if table(record).get("verdict") == "ok"
+    }
+    return live, ""
+
+
+def stale_findings(root: Path, repos: list[str], now: float) -> dict[str, str]:
+    """Name each repo whose loop is live but whose ledger has no recent tick line (nemik:W1094).
+
+    A session can work, commit and land with no tick open, and then none of the practice that hangs
+    on a tick runs: no precommit, no G1, no landed-needs-witness check. The signal is a live loop
+    (luthen's export) with a stale newest tick, not a stale tick alone: most repos are dormant on
+    purpose. Silence is UNKNOWN, not clean (github-cb 2026-11-16): with no readable export every
+    live loop is unjudged, so that is its own finding, not an empty answer.
+
+    Args:
+        root: The directory holding the repos.
+        repos: The repos with a queue.
+        now: The instant the age is read at, in seconds since the epoch.
+
+    Returns:
+        The warning text per live repo whose newest tick line is older than the declared bound; when
+        the export cannot be read, one text saying tick staleness was not judged, on the host
+        workstream (the root's own name) when it has a queue, else on the first repo.
+
+    """
+    live, blind = live_repos(root)
+    if blind:
+        host = root.resolve().name
+        where = host if host in repos else (min(repos) if repos else "")
+        unjudged = f"liveness export absent: tick staleness not judged ({blind})"
+        return {where: unjudged} if where else {}
+    minutes = declared_stale_minutes(
+        files("nemik.data").joinpath("rank-weights.toml").read_text()
+    )
+    cutoff = time.strftime("%Y-%m-%dT%H:%M:%S", time.gmtime(now - minutes * 60))
+    found: dict[str, str] = {}
+    for repo in repos:
+        path = root / repo / ".claude" / "paths-forward.ledger"
+        if repo not in live or not path.exists():
+            continue
+        ticks = [
+            stamp for stamp, kind, _symbol, _cls in ledger_rows(path) if kind == "tick"
+        ]
+        newest = max(ticks) if ticks else ""
+        if newest[:STAMP_CHARS] < cutoff:
+            since = f"since {newest}" if newest else "at all"
+            found[repo] = (
+                f"its loop is live but its ledger has no tick line {since} (bound {minutes} "
+                "minutes): work with no tick open runs no G0, no G1 and no landed-needs-witness "
+                "check; open a tick, or say why the loop is live and not ticking"
+            )
+    return found
 
 
 def findings(root: Path, merged: Graph, repos: list[str]) -> dict[str, str]:
