@@ -4,3 +4,11 @@ common --enable_bzlmod
 # minutes keeps the warm cache through a tick and frees the heap after it.
 startup --max_idle_secs=600
 test --test_output=errors --test_summary=terse
+# nemik:W2221 (operator 2026-11-16, relayed by github-cb: "Not streaming to build buddy, even if not
+# using a gate, is a bug."): every bazel run streams to BuildBuddy, so a scratch run has an invocation
+# id to read per-target durations from (the bes-logs skill). The two addresses are the directory's
+# answers (luthen-observability checks/endpoints_query.py grpc-bes and http-web, --side host, as_of
+# 2026-11-16T12:21:55Z and 12:22:02Z), the same shape mtools and eight other repos carry; re-ask the
+# directory before editing them, and do not copy them from another repo's file.
+build --bes_backend=grpc://buildbuddy-bes.buildbuddy.svc.cluster.local:1985
+build --bes_results_url=http://buildbuddy-web.buildbuddy.svc.cluster.local:8080/invocation/

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 2219,
+  "counter": 2221,
   "waypoints": [
     {
       "symbol": "W1",
@@ -9014,12 +9014,12 @@
       "touches": [],
       "blocked_on": [],
       "blocked_kind": "agent",
-      "next_bounded_step": "Read ticks_blocked of the no-command asks over the ledger history, learn N (no typed number), add a second sh:property at sh:Violation gated on ticksBlocked >= N in shapes.ttl, with a test over a fixture; a cold review decides whether the escalation ships. Owner nemik session, due 2026-11-13, witness: a fixture ask past N yields a Violation and one under N a Warning",
+      "next_bounded_step": "DECIDED (mine, as the card's owner; github-cb 2026-11-16: a decision that is mine is not a block): route (b): learn N from the ticks_blocked of ALL operator asks that were lifted, which the ledger holds as lift lines (the graph holds open asks only). Build: read the lift lines from paths-forward.ledger, take the ticks_blocked at lift per ask, N = a percentile of them (declared in rank-weights.toml like W489's bound, not a typed number), add the second sh:property at sh:Violation in shapes.ttl gated on ticksBlocked >= N, with a fixture test (an ask past N yields a Violation, one under yields a Warning). Whether the escalation SHIPS is a cold review's decision (host line 144945): run it after the code and tests exist, with only the frozen artifacts. Probe first: how many lift lines the ledger holds and their ticks_blocked spread.",
       "evidence": "2026-10-13: 2026-10-13 operator: wants better visibility before any escalation to Violation, and the shape is still being worked; held behind W467 (lanes in the view) and W460 (errands split out) | 2026-11-06T20:29:57Z: Operator-ask audit 2026-11-06 (warrant: host line 145131, uuid 9c5e8dd8-a5a4-4cbd-9e07-84e844cc8b00). CLASS: a pipeline step with one real question inside. The question the operator asked on 2026-10-13 was visibility first; the lanes are now in the view (W467 landed f3a00fd, per this card), so 'wait for visibility' is met. What is left is N, which the card already says is learned from the ledger (no typed threshold). Lift: learn N from ticks_blocked of no-command asks, add the Violation property gated on it, and let a cold review (host line 144945, verified human) decide whether the escalation ships, not a standing ask. W459 | 2026-11-15T02:29:14Z: 2026-11-14 POPULATION MEASURED (nemik-operator --json over the whole fleet root, scratch .claude/held-W459-no-command.py.txt, read-only): ONE ask has category no-command (substrate, a no-verify bootstrap commit, ticks_blocked 1). A learned N has nothing to learn from: no closed no-command asks are in the graph (it holds open asks only), and the one open ask has been blocked for 1 tick. So the next step as written (learn N from ticks_blocked of no-command asks over the ledger history) cannot be run: the coverable gate fails (population 1, no history). Routes: (a) wait until the population is large enough to learn from (a witness on the count of no-command asks); (b) learn N from the ticks_blocked of ALL operator asks that were lifted, which the ledger holds as lift lines but the graph does not; (c) ship the Violation property with N read from rank-weights.toml like W489's bound, declared and not typed in the shape. Not done: any shape change.",
       "issued_at": "2026-10-13T17:49:16Z",
       "minted_during": "tick",
       "caused_by": "W458",
-      "last_worked": "2026-11-15T02:29:14Z",
+      "last_worked": "2026-11-16T12:12:25Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
@@ -48221,7 +48221,7 @@
     {
       "symbol": "W1994",
       "title": "Ratchet atomizer plan: tools/atomize_walls.py generalizes from Codon to any declared ratchet, reading the census rows (file and rule) and printing a dry-run plan of leaf cards under one umbrella per ratchet, idempotent by title",
-      "status": "working",
+      "status": "ready",
       "enables": [
         "W1993"
       ],
@@ -48230,12 +48230,12 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Design first: write docs/ratchet-atomizer.md from the evidence on W1993 (input rows with file and rule, one umbrella per ratchet row, leaf per entry, title stable across runs, dry run by default, applied by each repo to its own queue). Then generalize atomize_walls.plan to take rows as data, not the Codon closure, with a test on fixture rows. Ask mtools for a census mode that lists each row's file and rule. No stack until the guard admits one.",
-      "evidence": "2026-11-06T00:54:46Z: 2026-11-06T01:5xZ: the host ruled (nemik:W1993 exchange) that nemik sends mtools the rows-mode ask itself, citing W1994, ranking it after mtools' W2301 v4 and rule (c) so it does not displace them, that unmanifested-baseline.txt's existing cards are its LEAVES (not duplicates), and that the rest is dry-run on nemik's own rows until the mode exists. SENT to the mtools session: a read-only census mode listing each row's entries with file and rule (a JSON-lines shape with ratchet, key, file and rule), reading only. Dry run on nemik's own rows (codon-baseline.json, mypy and ruff at zero or unknown, the edge ratchet once born) is this card's first step. | 2026-11-06T00:57:21Z: 2026-11-06T02:0xZ: mtools carded the rows-mode ask as mtools:W2306, ranked after W2301 v4 and rule (c), to co-land with a W2219 batch. Intended shape: mikemol-ratchet census --entries, read-only, one JSON line per entry of each ratchet file the census reads: ratchet (path), kind, key (the entry's identity in its file), file and rule where the shape has them; the per-entry counts equal the census value, pinned by a test over a planted repo of each kind. TWO SHAPES to design for: (1) a pyproject per-file-ignores entry is one (file, rule) per RULE, so mtools' 144 hooks 'value' counts RULES, not file entries (my published-pace count of 113 for hooks/pyproject.toml and the fleet figure of 555 leaf cards count rules, one card per (file, rule) pair); (2) text baselines (unmanifested) list the line as the key. Their remark: the operator's rolling-blocker point was about mtools' own use of W2219, corrected: the 21 cards are unblocked and hooks-lane changes now co-land with each batch. Until the mode lands, the generator dry-runs on nemik's own rows. This card is blocked on mtools:W2306 for the real census input, and its dry run on nemik's rows is the first step that needs nothing. | 2026-11-06T00:57:32Z: Block lifted the same minute: only the final census input waits on mtools:W2306. The dry run on nemik's own rows (codon, and the edge ratchet once born) and the plan function over rows as data need nothing from mtools, so the card stays ready; W2306 is cited here as the input it will read, not as a block. | 2026-11-15T04:17:49Z: 2026-11-14 BASE CHECK: tools/atomize_walls.py and tests/test_atomize_walls.py in the main working tree carry W1759's built-but-uncommitted deliverable (waves() and wave_note(), 260 and 75 added lines; docs/codon-walls.md also modified), refused at submit on 2026-11-05 by the pace guard and never landed; the held copy .claude/held-W1759-atomize_walls.py.txt is OLDER than the working file (diff differs). W1994 and W1996 edit the same two files, so they must build on W1759's tree. W1759 is not in the published round, so a stack of W1759 alone is refused by the round check; the way through is W1759's code riding in W1994's commit (as W2198 rode with W1099), with W1994 alone in the working set. Plan: copy the working files into a clean worktree, add docs/ratchet-atomizer.md and the rows-as-data plan function, test, stack as W1994, then close W1759 with it.",
+      "next_bounded_step": "DECIDED (mine, as the design's owner): the unit is one leaf per (ratchet, key), not per entry: for codon one card per module (61), for ruff and mypy one per file, with the rules or modes listed in the card; the dry run showed two leaves per module sharing one manifest file. Build: leaf_title(ratchet, key, rules), plan() grouping rows by (ratchet, key), update docs/ratchet-atomizer.md and tests/test_ratchet_atomizer.py (a leaf per key, rules listed, a mutant that plans one leaf per entry). Import-graph grouping beyond the module stays W1996. No src file, so no Codon wall. Apply and the census input still wait on mtools:W2306.",
+      "evidence": "2026-11-06T00:54:46Z: 2026-11-06T01:5xZ: the host ruled (nemik:W1993 exchange) that nemik sends mtools the rows-mode ask itself, citing W1994, ranking it after mtools' W2301 v4 and rule (c) so it does not displace them, that unmanifested-baseline.txt's existing cards are its LEAVES (not duplicates), and that the rest is dry-run on nemik's own rows until the mode exists. SENT to the mtools session: a read-only census mode listing each row's entries with file and rule (a JSON-lines shape with ratchet, key, file and rule), reading only. Dry run on nemik's own rows (codon-baseline.json, mypy and ruff at zero or unknown, the edge ratchet once born) is this card's first step. | 2026-11-06T00:57:21Z: 2026-11-06T02:0xZ: mtools carded the rows-mode ask as mtools:W2306, ranked after W2301 v4 and rule (c), to co-land with a W2219 batch. Intended shape: mikemol-ratchet census --entries, read-only, one JSON line per entry of each ratchet file the census reads: ratchet (path), kind, key (the entry's identity in its file), file and rule where the shape has them; the per-entry counts equal the census value, pinned by a test over a planted repo of each kind. TWO SHAPES to design for: (1) a pyproject per-file-ignores entry is one (file, rule) per RULE, so mtools' 144 hooks 'value' counts RULES, not file entries (my published-pace count of 113 for hooks/pyproject.toml and the fleet figure of 555 leaf cards count rules, one card per (file, rule) pair); (2) text baselines (unmanifested) list the line as the key. Their remark: the operator's rolling-blocker point was about mtools' own use of W2219, corrected: the 21 cards are unblocked and hooks-lane changes now co-land with each batch. Until the mode lands, the generator dry-runs on nemik's own rows. This card is blocked on mtools:W2306 for the real census input, and its dry run on nemik's rows is the first step that needs nothing. | 2026-11-06T00:57:32Z: Block lifted the same minute: only the final census input waits on mtools:W2306. The dry run on nemik's own rows (codon, and the edge ratchet once born) and the plan function over rows as data need nothing from mtools, so the card stays ready; W2306 is cited here as the input it will read, not as a block. | 2026-11-15T04:17:49Z: 2026-11-14 BASE CHECK: tools/atomize_walls.py and tests/test_atomize_walls.py in the main working tree carry W1759's built-but-uncommitted deliverable (waves() and wave_note(), 260 and 75 added lines; docs/codon-walls.md also modified), refused at submit on 2026-11-05 by the pace guard and never landed; the held copy .claude/held-W1759-atomize_walls.py.txt is OLDER than the working file (diff differs). W1994 and W1996 edit the same two files, so they must build on W1759's tree. W1759 is not in the published round, so a stack of W1759 alone is refused by the round check; the way through is W1759's code riding in W1994's commit (as W2198 rode with W1099), with W1994 alone in the working set. Plan: copy the working files into a clean worktree, add docs/ratchet-atomizer.md and the rows-as-data plan function, test, stack as W1994, then close W1759 with it. | 2026-11-16T09:24:00Z: 2026-11-16 LANDED ecd3f79 (mikemol-commit printed COMMITTED nemik ecd3f79 W1994 [PUSHED]; git log main subject matches). docs/ratchet-atomizer.md, tools/ratchet_atomizer.py (the plan over rows as data), tests/test_ratchet_atomizer.py, BUILD.bazel data line. landing_kind: ref. The first gate on 0ff07d3 was refused on the single 900 s test_shaclinc target (landed fix: W2214, five named targets); the rebuilt stack on 9c69c6a passed. NOT DONE (stated in the commit): it reads no census and writes no card (the apply step and the census input wait on mtools:W2306), it is not the generalization of tools/atomize_walls.py, and the dry run on nemik's own rows is not run. | 2026-11-16T09:41:32Z: 2026-11-16 DRY RUN (read-only, nothing written; a script in the session scratchpad, run with PYTHONPATH=tools): plan() over nemik's own codon-baseline.json read as rows (ratchet codon, key = module, file = src/nemik/<module>.py, rule = mode as_written or stripped): 122 rows give 122 leaf cards and one umbrella ('Ratchet codon: every debt entry removed', waiting on 122). Titles are functions of the row alone, e.g. 'Ratchet codon: remove the entry adapter as_written' [src/nemik/adapter.py]. So the codon ratchet alone would add 123 cards, two per module (one per compile mode) with the same manifest file: that is the grouping question the design carries as W1996 (by import graph / by module), and the reason a run must be dry first. Not run against ruff and mypy (their rows come from mtools' census, mtools:W2306).",
       "issued_at": "2026-11-06T00:52:41Z",
       "minted_during": "interrupt",
       "caused_by": "W1993",
-      "last_worked": "2026-11-16T07:28:50Z",
+      "last_worked": "2026-11-16T12:12:28Z",
       "ticks_blocked": 0,
       "manifest": [
         "tools/atomize_walls.py",
@@ -52849,12 +52849,14 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-11-16T11:38:52Z: 2026-11-16 vector set by me as the agent (github-cb's rule: an unscored card is the defect W2211 made visible): reach local to this repo (R:L), no egress, an integrity impact of low (a rule that is undocumented is applied wrongly, I:L), no availability impact, no precondition, scope unchanged, fix known, witness yes (tests/test_skill.py renders the skill text): WV:1/R:L/E:N/C:N/I:L/A:N/X:N/S:U/F:K/W:Y.",
       "issued_at": "2026-11-16T03:10:10Z",
       "minted_during": "interrupt",
       "caused_by": "W2213",
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-11-16T11:38:52Z",
+      "ticks_blocked": 0,
+      "vector": "WV:1/R:L/E:N/C:N/I:L/A:N/X:N/S:U/F:K/W:Y",
+      "vector_source": "agent"
     },
     {
       "symbol": "W2216",
@@ -52867,12 +52869,14 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-11-16T11:38:53Z: 2026-11-16 vector set by me as the agent: reach local, no egress, integrity low (an untagged fix to the rank or round check is refused by the round check or rides, I:L), availability low (the lane it blocks), no precondition, scope unchanged, fix known, witness yes (a test of the warning): WV:1/R:L/E:N/C:N/I:L/A:L/X:N/S:U/F:K/W:Y.",
       "issued_at": "2026-11-16T03:10:10Z",
       "minted_during": "interrupt",
       "caused_by": "W2213",
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-11-16T11:38:53Z",
+      "ticks_blocked": 0,
+      "vector": "WV:1/R:L/E:N/C:N/I:L/A:L/X:N/S:U/F:K/W:Y",
+      "vector_source": "agent"
     },
     {
       "symbol": "W2217",
@@ -52900,18 +52904,21 @@
     {
       "symbol": "W2218",
       "title": "Split the three SHACL passes inside each shaclinc edit item into separate targets",
-      "status": "ready",
+      "status": "done",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "github-cb 2026-11-16 (relayed): the four edit items (test_shaclinc_done, _blocked, _bad_blocker, _untitled) run at medium and sit AT the 50 percent line under gate load (CPU 52 to 54 s, wall 58 to 61 s at load 46 to 60; about 44 to 50 percent of 300 s at the gate's inflation). The 2026-10-18 rule (shard before the next run once past 50 percent) makes this due now, next after W2214's decomposition lands. Each item does three SHACL passes (a findings pass, an incremental after an edit, a full pass), about 17 s CPU each; make each pass its own target, which is a change to tests/test_shaclinc.py, not to the build. Next after W2214 lands.",
-      "evidence": "",
+      "next_bounded_step": null,
+      "evidence": "2026-11-16T10:40:52Z: github-cb 2026-11-16: (c) give an honest vector so it ranks by band; not gate-repair (a false label). Vector set by me as the agent: reach local to this repo (R:L), no egress, no confidentiality or integrity impact, low availability impact (a flake in the gate's tests, A:L), no precondition, scope unchanged, fix known, witness yes (the gate's own series and the BES record): WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:Y. | 2026-11-16T12:15:51Z: 2026-11-16 CLOSED 'measured under the line' (github-cb's criterion: if the edit items are under 50 percent of 300 s at gate wall, close it, with the load). MEASURED by me, not from a BES record: bazel test of the five test_shaclinc targets in one invocation, --cache_test_results=no, --test_summary=detailed, under tools/iowatch.py (kine 0.11 to 0.16 throughout), in a scratch worktree at main 9c69c6a, host loadavg 83.88 / 78.88 / 52.61 at the start and 109.66 / 83.58 / 58.15 at the end (1, 5 and 15 minute); the gate's own earlier loads were 82 to 103. WALL from bazel's 'PASSED in': bad_blocker 60.1 s, blocked 65.7 s, done 64.3 s, untitled 62.6 s, i.e. 20 to 22 percent of the 300 s medium limit; sequence 130.3 s, 14 percent of 900. At a load above the gate's the wall did not inflate over my earlier 58.5 to 61.2 s at load 46 to 60 (the five targets running together are CPU-bound, about 53 s CPU each), so the 2.5 times from the single 900.7 s gate reading was the old single target's contention, not these. LIMIT STATED: there is no BES invocation id: a bazel run in a scratch worktree does not stream to BuildBuddy (only the gate's does), so I cite bazel's own per-target wall and the loadavg, not an id. If the next gate shows an edit item above 150 s, reopen this card with that gate's number. W2219 (the sequence at explicit large) stands regardless. | 2026-11-16T12:20:50Z: 2026-11-16 LIMIT REVISED: the missing BES invocation id is a DEFECT, not a limit (operator, relayed by github-cb, unchecked by me: 'Not streaming to build buddy, even if not using a gate, is a bug.'). Cause found: nemik's .bazelrc has no bes_ line (mtools' has build --bes_backend and --bes_results_url at lines 182 to 183). Carded as nemik:W2221 with the fix. The wall figures above stand as bazel's own per-target PASSED-in times; re-read them from an invocation record once W2221 lands.",
       "issued_at": "2026-11-16T08:14:04Z",
       "minted_during": "interrupt",
       "caused_by": "W2214",
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-11-16T12:20:50Z",
+      "ticks_blocked": 0,
+      "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:Y",
+      "vector_source": "agent",
+      "completed": "20261116T121551Z"
     },
     {
       "symbol": "W2219",
@@ -52922,12 +52929,33 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "github-cb 2026-11-16 (relayed): test_shaclinc_sequence runs at an explicit size large (900 s), which the rulings call a finding to remove. Measured: CPU 126.8 s, wall 135.7 s at host load 46 to 60 (about 340 s at 2.5 times, one reading). Its structure: one findings pass, then four edits each followed by an incremental pass and a full pass, with the graph accumulating the edits. Decompose along what is independent: the accumulated state is sequential, so look at whether each step can be its own target built from a fixed intermediate graph, or whether the full-pass comparison can move out of the sequence; then size medium. Same sibling as the edit items' split or separate if the structure differs; read the test first. After W2214 lands.",
-      "evidence": "",
+      "evidence": "2026-11-16T10:40:53Z: github-cb 2026-11-16: (c) give an honest vector so it ranks by band; W2219 stands whatever W2218's measurement shows: an explicit large is a finding to remove. Vector set by me as the agent, same reading as W2218: WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:Y (fix known: decompose the sequence's accumulated state; read the test first).",
       "issued_at": "2026-11-16T08:14:06Z",
       "minted_during": "interrupt",
       "caused_by": "W2214",
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-11-16T10:40:53Z",
+      "ticks_blocked": 0,
+      "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:Y",
+      "vector_source": "agent"
+    },
+    {
+      "symbol": "W2221",
+      "title": "Make every bazel run in this repo stream to BuildBuddy, not only the gate's",
+      "status": "working",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Operator 2026-11-16 (relayed by github-cb, unchecked by me): 'Not streaming to build buddy, even if not using a gate, is a bug.' FACT (mine): nemik's .bazelrc has no bes_ line (it holds enable_bzlmod, startup max_idle_secs, test output flags only), so a scratch run prints no 'Streaming build results to' and has no invocation id; mtools' .bazelrc carries build --bes_backend=grpc://buildbuddy-bes.buildbuddy.svc.cluster.local:1985 and --bes_results_url=http://buildbuddy-web.buildbuddy.svc.cluster.local:8080/invocation/ (lines 182 to 183), copied from luthen's directory (checks/endpoints_query.py grpc-bes and http-web --side host, with an as_of): take the values from the directory at edit time, not from mtools' copy. Fix: those two lines in nemik's .bazelrc; check how the gate gets its sink today (mtools' bazel_admit reads the host and port from the repo's .bazelrc bes_backend line and returns None when there is none, so the gate may be admitting nemik with no sink); a small test that the .bazelrc names a bes_backend; then read one scratch run's invocation id. mtools is carding the fleet-wide form (github-cb asked).",
+      "evidence": "",
+      "issued_at": "2026-11-16T12:20:30Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2218",
+      "last_worked": "2026-11-16T12:26:29Z",
+      "ticks_blocked": 0,
+      "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:Y",
+      "vector_source": "agent",
+      "completed": null
     }
   ],
   "residue": [
@@ -53174,6 +53202,13 @@
       "title": "Ingest the queue's real retro records as nemik:Retro so the retro shapes run on them, not only on fixtures",
       "dropped_at": "2026-11-13T15:45:15Z",
       "reason": "duplicate of W982, which already carries retro ingestion (ready); the review's 8.4 finding is recorded on W982",
+      "recoverable": true
+    },
+    {
+      "symbol": "W2220",
+      "title": "Key pacecli's ratchet display by repo, ratchet and kind once mtools fixes the pace row shape",
+      "dropped_at": "2026-11-16T10:05:28Z",
+      "reason": "mtools-ad 2026-11-16 corrected the premise and I verified it: nemik's pace file is written by nemik-hostroot (hostroot_cli.py pace_run), not by mtools, and it reads the mikemol.ratchet.value series grouped by (repo, ratchet) alone (ratchetseries.py lines 53 and 185 read only the repo and ratchet labels; the kind label is ignored, and two series with the same (repo, ratchet) are MERGED by sample time, line 161). So mtools will send ONE series per (repo, ratchet) (no plain exemption series when an exemption-expanded count exists), and no nemik change is needed. My earlier answer said mtools writes the pace file; that was wrong.",
       "recoverable": true
     }
   ],
