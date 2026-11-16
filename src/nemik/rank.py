@@ -269,6 +269,59 @@ def compose(rows: list[RankRow], comp: Composition) -> list[RankRow]:
     return go(list(rows), comp.tiers, ())
 
 
+def gate_chain(g: Graph, bands: Bands) -> tuple[tuple[str, tuple[str, ...]], ...]:
+    """Name the open cards a gate-repair card waits on, with the repairs they are on the chain of.
+
+    A gate repair that waits behind the work the gate carries cannot land (nemik:W2039), and
+    neither can one that waits behind a card ranked below the gate tier: the cards on its
+    blocked_on chain take the gate band by a declared rule, not by a tag each owner must
+    remember. The gate tags are the ones bands.toml's [tag] table maps to a gate band. Each card
+    keeps the refs of EVERY root it is reached from, so an audit sees the path (nemik:W2212).
+
+    Returns:
+        (`repo:W<n>`, root refs) for every open card reached from an open gate-repair card by
+        waitsFor, sorted; the gate-repair cards themselves are not in it.
+
+    """
+    gate_tags = {tag for band_name, tag in bands.tags if band_name in bands.gate}
+    roots = {
+        n
+        for tag in gate_tags
+        for n in g.subjects(NEMIK.touches, Literal(tag))
+        if open_card(g, n)
+    }
+    reached: dict[str, set[str]] = {}
+    for root in roots:
+        seen: set[Node] = set()
+        todo = [root]
+        while todo:
+            for target in g.objects(todo.pop(), NEMIK.waitsFor):
+                if target not in seen and target not in roots and open_card(g, target):
+                    seen.add(target)
+                    todo.append(target)
+        for n in seen:
+            reached.setdefault(ref_of(n), set()).add(ref_of(root))
+    return tuple(sorted((ref, tuple(sorted(r))) for ref, r in reached.items()))
+
+
+def placed(g: Graph, n: Node, bands: Bands) -> tuple[str, str]:
+    """Give the band of a card and why: its vector, its owner's tag, or the gate chain it is on.
+
+    Returns:
+        (band, why); a card on the chain of a gate-repair card takes the first gate band, and its
+        why names the repair card(s), e.g. "on the chain of mtools:W2544 (gate-repair)".
+
+    """
+    b, why = band(str(g.value(n, NEMIK.vector) or "") or None, bands)
+    touches = {str(t) for t in g.objects(n, NEMIK.touches)}
+    b, why = tagged_band(b, why, touches, bands.behind, bands.tags)
+    roots = dict(bands.chain).get(ref_of(n))
+    if roots and bands.gate:
+        name = bands.gate[0]
+        return name, f"on the chain of {', '.join(roots)} ({name})"
+    return b, why
+
+
 def objectives(
     g: Graph,
     n: Node,
@@ -289,9 +342,7 @@ def objectives(
 
     """
     cause = str(g.value(n, PROV.wasInformedBy) or "").strip().lower()
-    b, why = band(str(g.value(n, NEMIK.vector) or "") or None, bands)
-    touches = {str(t) for t in g.objects(n, NEMIK.touches)}
-    b, why = tagged_band(b, why, touches, bands.behind, bands.tags)
+    b, why = placed(g, n, bands)
     down = downstream_weight(g, n, weights)
     return {
         "operator": int(cause == "operator" or cause.startswith("operator:")),
@@ -530,6 +581,7 @@ def _rows(
         key=str,
     )
     bands = load_bands().watching(frozenset(behind_files(repo)))
+    bands = bands.chained(gate_chain(g, bands))
     flow = (comp or load_composition()).weight_model == "flow"
     salience = (
         salience_of(
@@ -785,7 +837,8 @@ def _report_item(g: Graph, args: Options) -> None:
         say(f"rank: {args.item} is not a waypoint in any workstream")
         raise SystemExit(2)
     vec = str(g.value(n, NEMIK.vector) or "") or None
-    b, why = band(vec, load_bands())
+    bands = load_bands()
+    b, why = placed(g, n, bands.chained(gate_chain(g, bands)))
     state = str(g.value(n, OSLC_CM.state) or "").rsplit("/", 1)[-1].rsplit("#", 1)[-1]
     say(f"{args.item}  {state}  {b}  ({why})  {vec or 'no vector'}")
 

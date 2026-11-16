@@ -33,6 +33,10 @@ class Bands:
     # nemik:W2039: the bands bands.toml's `gate` key makes a strict first tier of a repo's ranking,
     # above band and weight, so within a repo a card in one outranks every other.
     gate: tuple[str, ...] = ()
+    # nemik:W2212: each open card a gate-repair card waits on, directly or through other cards, with
+    # the gate-repair card(s) it is on the chain of, as (`repo:W<n>`, roots) pairs: a repair that
+    # waits behind them cannot land, so they take the gate band, and an audit sees the path.
+    chain: tuple[tuple[str, tuple[str, ...]], ...] = ()
 
     def rank(self, band: str) -> int:
         """0 is most urgent.
@@ -58,6 +62,25 @@ class Bands:
             behind,
             self.tags,
             self.gate,
+            self.chain,
+        )
+
+    def chained(self, chain: tuple[tuple[str, tuple[str, ...]], ...]) -> Bands:
+        """Say which cards a gate-repair card waits on (nemik:W2212).
+
+        Returns:
+            These bands with the chain set, so each of those cards takes the gate band.
+
+        """
+        return Bands(
+            self.order,
+            self.rules,
+            self.unscored,
+            self.unmatched,
+            self.behind,
+            self.tags,
+            self.gate,
+            chain,
         )
 
 

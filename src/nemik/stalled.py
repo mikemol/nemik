@@ -116,4 +116,56 @@ def findings(root: Path, merged: Graph, now: int) -> dict[str, list[tuple[str, s
             found.setdefault(repo, []).append(
                 (symbol, text(said, now - worked, interval))
             )
+    for repo, rows in unvectored(merged).items():
+        found.setdefault(repo, []).extend(rows)
     return found
+
+
+UNVECTORED = (
+    "working card(s) with no vector: {cards}. Each ranks unscored, so a round of the top N "
+    "leaves it out and the commit gate's round check refuses a stack that works it; give "
+    "each a vector (--vector WV:1/...)"
+)
+
+
+def unvectored(merged: Graph) -> dict[str, list[tuple[str, str]]]:
+    """Name the working cards of each repo that carry no vector (nemik:W2211).
+
+    A card without a vector ranks unscored, so a round of the top N leaves it out, and the commit
+    gate's round check then refuses any stack that works it (mtools:W2531, github-cb 2026-11-15).
+    Marking it working does not change that; the vector does. One repo-level note names every
+    such card (symbol "--", as a note does), so the page's per-card warning badges and their
+    layout do not move for a card the check merely names.
+
+    Args:
+        merged: The merged queue graph.
+
+    Returns:
+        ("--", warning text) pairs by repo; a repo with no such card has none.
+
+    """
+    names: dict[str, list[str]] = {}
+    for node in merged.subjects(OSLC_CM.state, NEMIK.Working):
+        if merged.value(node, NEMIK.vector) is None:
+            repo, _, symbol = ref(node).partition(":")
+            names.setdefault(repo, []).append(symbol)
+    return {
+        repo: [
+            (
+                "--",
+                UNVECTORED.format(cards=", ".join(sorted(symbols, key=_number))),
+            )
+        ]
+        for repo, symbols in names.items()
+    }
+
+
+def _number(symbol: str) -> int:
+    """Give the number of a symbol like W2531, so cards sort in number order.
+
+    Returns:
+        The integer after the W, or 0 when there is none.
+
+    """
+    digits = symbol.lstrip("W")
+    return int(digits) if digits.isdigit() else 0

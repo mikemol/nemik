@@ -39,12 +39,13 @@ def test_stale_with_commits_landing_is_invisible() -> None:
     assert verdict(NOW, worked, [worked + 60], INTERVAL) == "invisible"
 
 
-def _queue(tmp_path: Path, stamp: str) -> Graph:
+def _queue(tmp_path: Path, stamp: str, vector: str = "WV:1/R:H") -> Graph:
     """Read a queue whose W1 is working since a stamp.
 
     Args:
         tmp_path: A scratch directory.
         stamp: The card's last_worked time.
+        vector: The card's vector; empty for a card that carries none.
 
     Returns:
         The queue's graph.
@@ -57,6 +58,8 @@ def _queue(tmp_path: Path, stamp: str) -> Graph:
         "status": "working",
         "last_worked": stamp,
     }
+    if vector:
+        card["vector"] = vector
     state: dict[str, object] = {
         "version": 1,
         "project_root": "/a",
@@ -176,3 +179,29 @@ def test_a_card_in_the_commit_gate_is_never_called_stalled(
     merged = _queue(tmp_path, "2026-10-17T00:00:00Z")
     now = int(datetime(2026, 10, 17, 10, tzinfo=UTC).timestamp())
     assert findings(tmp_path, merged, now) == {}
+
+
+def test_a_working_card_with_no_vector_is_named(tmp_path: Path) -> None:
+    """nemik:W2211: it ranks unscored, so the round check will refuse the stack that works it."""
+    rows = stalled.unvectored(_queue(tmp_path, "2026-10-17T00:00:00Z", vector=""))
+    assert [sym for sym, _ in rows["a"]] == ["--"]
+    assert "no vector: W1." in rows["a"][0][1]
+
+
+def test_a_working_card_with_a_vector_is_not_named(tmp_path: Path) -> None:
+    """MUTANT: a check that named every working card would name this one too."""
+    assert stalled.unvectored(_queue(tmp_path, "2026-10-17T00:00:00Z")) == {}
+
+
+def test_the_survey_findings_carry_the_unvectored_card(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    """findings() is what nemik-check files, so the unvectored card must be in it, once."""
+    monkeypatch.setattr(history, "land_interval", _interval)
+    monkeypatch.setattr(history, "citing_epochs", _uncited)
+    monkeypatch.setattr(stalled, "in_gate", _no_gate)
+    merged = _queue(tmp_path, "2026-10-17T09:59:00Z", vector="")
+    now = int(datetime(2026, 10, 17, 10, tzinfo=UTC).timestamp())
+    rows = findings(tmp_path, merged, now)
+    assert [sym for sym, _ in rows["a"]] == ["--"]
+    assert "no vector: W1." in rows["a"][0][1]

@@ -36,6 +36,8 @@ class _Row(TypedDict, total=False):
     symbol: str
     downstream: int
     weight: int
+    band_name: str
+    band_why: str
 
 
 def _wp(g: Graph, repo: str, sym: str, status: str = "ready") -> URIRef:
@@ -124,6 +126,74 @@ def test_a_round_ranks_the_work_in_progress_among_the_ready_cards() -> None:
         "list[_Row]", rank(g, "a", W, options=RankOptions(with_working=True))
     )
     assert [r["symbol"] for r in working] == ["W5", "W2"]
+
+
+def _gate_chain_graph() -> Graph:
+    """Build a graph where a gate-repair card waits on a working card and on a chain.
+
+    Returns:
+        The graph: W1 (the repair, blocked) waits on W5 (working) and on W2 (an umbrella, which
+        waits on W3, ready); W4 (ready) is on no chain.
+
+    """
+    g = Graph()
+    ws = workstream_uri("a")
+    repair = _wp(g, "a", "W1", "blocked")
+    middle = _wp(g, "a", "W2", "blocked")
+    far = _wp(g, "a", "W3")
+    other = _wp(g, "a", "W4")
+    busy = _wp(g, "a", "W5", "working")
+    for n, s in (
+        (repair, "W1"),
+        (middle, "W2"),
+        (far, "W3"),
+        (other, "W4"),
+        (busy, "W5"),
+    ):
+        g.add((n, NEMIK.workstream, ws))
+        g.add((n, NEMIK.symbol, Literal(s)))
+    g.add((repair, NEMIK.touches, Literal("gate-repair")))
+    g.add((repair, NEMIK.waitsFor, busy))
+    g.add((repair, NEMIK.waitsFor, middle))
+    g.add((middle, NEMIK.waitsFor, far))
+    return g
+
+
+def test_a_card_on_the_chain_of_a_gate_repair_takes_the_gate_band() -> None:
+    """nemik:W2212: a repair that waits behind the work the gate carries cannot land."""
+    rows = cast(
+        "list[_Row]",
+        rank(_gate_chain_graph(), "a", W, options=RankOptions(with_working=True)),
+    )
+    bands = {r["symbol"]: r["band_name"] for r in rows}
+    assert bands["W5"] == "gate-repair"
+    assert bands["W3"] == "gate-repair"
+    assert bands["W4"] != "gate-repair"
+    assert {r["symbol"] for r in rows[:2]} == {"W5", "W3"}
+    why = {r["symbol"]: r["band_why"] for r in rows}
+    assert why["W3"] == "on the chain of a:W1 (gate-repair)"
+
+
+def test_a_card_two_repairs_wait_on_names_both_roots() -> None:
+    """nemik:W2212 (github-cb): the why names every repair, so an audit sees the path."""
+    g = _gate_chain_graph()
+    second = _wp(g, "a", "W6", "blocked")
+    g.add((second, NEMIK.workstream, workstream_uri("a")))
+    g.add((second, NEMIK.symbol, Literal("W6")))
+    g.add((second, NEMIK.touches, Literal("gate-repair")))
+    g.add((second, NEMIK.waitsFor, waypoint_uri("a", "W5")))
+    rows = cast("list[_Row]", rank(g, "a", W, options=RankOptions(with_working=True)))
+    why = {r["symbol"]: r["band_why"] for r in rows}
+    assert why["W5"] == "on the chain of a:W1, a:W6 (gate-repair)"
+    assert why["W3"] == "on the chain of a:W1 (gate-repair)"
+
+
+def test_a_card_that_no_gate_repair_waits_on_keeps_its_own_band() -> None:
+    """MUTANT: a rule that put every card in the gate band would put W4 there too."""
+    g = _gate_chain_graph()
+    g.remove((waypoint_uri("a", "W1"), NEMIK.touches, Literal("gate-repair")))
+    rows = cast("list[_Row]", rank(g, "a", W, options=RankOptions(with_working=True)))
+    assert all(r["band_name"] != "gate-repair" for r in rows)
 
 
 def test_fleet_rank_pools_repos_into_one_comparable_order() -> None:
