@@ -3,6 +3,7 @@
 """pace_replay judges a ratchet's window under the current and the proposed rule (nemik:W2020)."""
 
 from pace_replay import (
+    BOUNDS,
     CODON,
     GRID,
     MGRID,
@@ -10,11 +11,13 @@ from pace_replay import (
     QGRID,
     RUFF,
     admission,
+    bounded_blocks,
     counts,
     days_to_zero,
     entries,
     fall,
     fit,
+    fit_bound,
     fit_end,
     fit_median,
     fit_quantile,
@@ -25,6 +28,7 @@ from pace_replay import (
     measured,
     median_required,
     neglected_rows,
+    neglected_share,
     paid_fraction,
     pairs,
     quantile_required,
@@ -36,11 +40,13 @@ from pace_replay import (
     row_values,
     score,
     score_admission,
+    score_blocks,
     score_learned,
     score_neglect,
     split_log,
     stalled,
     stalled_rows,
+    trajectory,
     verdict,
     verdict_learned,
 )
@@ -56,6 +62,14 @@ TOUCHES_A = [(f"s{at}", [A_ROW], total) for at, total in enumerate(TOTALS)]
 TOUCHES_BOTH = [(f"s{at}", [A_ROW, B_ROW], total) for at, total in enumerate(TOTALS)]
 SCORED_A = score_neglect(TOUCHES_A, NEGLECTED, CODON, (0, 40))
 SCORED_BOTH = score_neglect(TOUCHES_BOTH, NEGLECTED, CODON, (0, 40))
+SHARES = neglected_share(TWO_ROWS, NEGLECTED)
+BLOCKS_AT_ZERO = bounded_blocks(TOUCHES_A, NEGLECTED, SHARES, BOUNDS[0])
+BLOCKS_AT_HALF = bounded_blocks(TOUCHES_A, NEGLECTED, SHARES, 50)
+BLOCKS_BOTH = bounded_blocks(TOUCHES_BOTH, NEGLECTED, SHARES, BOUNDS[0])
+SCORED_BLOCKS = score_blocks(TOUCHES_A, BLOCKS_AT_ZERO, CODON, (0, 40))
+BY_PERCENT = dict.fromkeys((50, 75, 90), (NEGLECTED, SHARES))
+FITTED = fit_bound(TOUCHES_A, BY_PERCENT, CODON, 30)
+TRAJECTORY_TEXT = trajectory(TOUCHES_A, BLOCKS_AT_ZERO, SHARES, (10, 30))
 STEPS = [3, 3, 2, 2, 2, 1]
 STEP_GAPS = row_gaps(STEPS)
 STEP_AGES = row_ages(STEPS)
@@ -350,6 +364,36 @@ def test_landings_to_zero_is_the_value_over_the_rate_per_landing() -> None:
     """Five fell in five landings, so the five left need five more; no fall gives -1."""
     assert round(FIVE_TO_ZERO) == WINDOW // 2
     assert landings_to_zero([4] * THIRTY, 0) < 0
+
+
+def test_the_neglected_share_is_neglected_rows_over_owing_rows() -> None:
+    """Nothing is neglected before the first wait completes; then one of the two owing rows is."""
+    assert round(SHARES[1] * 100) == 0
+    assert round(SHARES[THREE_ENTRIES] * 100) == FIFTY
+
+
+def test_a_share_above_the_bound_refuses_a_stack_touching_no_neglected_row() -> None:
+    """MUTANT: a bound of zero refuses such landings; a bound at the share refuses none."""
+    assert any(BLOCKS_AT_ZERO)
+    assert not any(BLOCKS_AT_HALF)
+    assert not any(BLOCKS_BOTH)
+
+
+def test_scoring_blocks_agrees_with_scoring_neglect_at_a_bound_of_zero() -> None:
+    """A bound of zero is the unbounded rule, so the two scorers must agree."""
+    assert SCORED_BLOCKS == SCORED_A
+
+
+def test_the_fitted_bound_is_the_first_grid_point_with_no_error() -> None:
+    """The first percentile, and the lowest bound that refuses nothing wrongly."""
+    assert FITTED == (FIFTY, FIFTY)
+
+
+def test_the_trajectory_names_refusals_and_what_paying_landings_paid() -> None:
+    """Ten landings that paid nothing were refused; ten paid one each; the share never cleared."""
+    assert "refused (paid nothing) 10" in TRAJECTORY_TEXT
+    assert "never" in TRAJECTORY_TEXT
+    assert "total fall 10" in TRAJECTORY_TEXT
 
 
 def test_a_row_is_valued_as_its_counts_or_its_entries() -> None:

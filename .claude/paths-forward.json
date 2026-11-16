@@ -49023,7 +49023,7 @@
     {
       "symbol": "W2032",
       "title": "Learned required fall for the ratchet pace: nemik's half is the weight of a fall, the fit and the replay (mtools:W2200)",
-      "status": "ready",
+      "status": "working",
       "enables": [],
       "touches": [],
       "blocked_on": [],
@@ -49033,7 +49033,7 @@
       "issued_at": "2026-11-06T22:09:43Z",
       "minted_during": "interrupt",
       "caused_by": "mtools:W2200",
-      "last_worked": "2026-11-15T23:38:27Z",
+      "last_worked": "2026-11-16T02:41:00Z",
       "ticks_blocked": 0,
       "manifest": [
         "tools/pace_replay.py",
@@ -52754,7 +52754,7 @@
     {
       "symbol": "W2211",
       "title": "PRIORITY: nemik-check flags a WORKING card that has no vector",
-      "status": "working",
+      "status": "landed",
       "enables": [
         "mtools:W2548"
       ],
@@ -52762,30 +52762,38 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "github-cb ruling 2026-11-15 (relayed, unchecked by me): (iii) the data fix; rank formula unchanged; (i) rejected (free pass), (ii) needs history. mtools gives mtools:W2531 its vector. THIS CARD: nemik-check (or rank --check) flags a WORKING card with no vector, naming the card, so an unscored card marked working does not die silently at the round check. Tests included. Optional mtools part: the round check's refusal says 'unscored' when that is the reason. Find the existing unscored() in rank.py and the check wiring in check.py.",
-      "evidence": "2026-11-16T00:03:40Z: PROBE 2026-11-15 (mine, read-only, nemik-rank at this checkout): the relayed premise 'rank and round list READY cards only' is HALF WRONG. nemik/src/nemik/rank.py _write_round already ranks with RankOptions(with_working=True) (nemik:W1059): a working card is ranked among the ready ones, each by its own salience. 'nemik-rank mtools --round' prints 'round mtools: 3 of 110 cards (size 3, from floor)': W2337, W2433, W2219. 'nemik-rank mtools --item mtools:W2531' prints 'Working normal (unscored) no vector'. So W2531 is ranked but UNSCORED (salience 0, bottom) and falls outside a top-3 round; plain 'nemik-rank mtools --json' (no --round) IS ready-only, which is what mtools reads. The cause is the top-N cut on an unscored working card, not the ready-only filter. Candidate fixes for github-cb to rule: (i) round = top N ready PLUS every working card (cheap; risk: marking a card working becomes a free pass past the round check); (ii) a working card keeps the rank it held as ready (needs rank history we do not store); (iii) score the working card (its vector) so it ranks. Not changed yet. | 2026-11-16T00:05:01Z: github-cb ruling (relayed, unchecked by me): round.json already ranks working cards (W1059); the cause is W2531 has NO VECTOR so salience 0 and the top-3 cut drops it; fix is data (mtools vectors it, PRIORITY band); instrument gap here: flag a working card with no vector.",
+      "evidence": "2026-11-16T00:03:40Z: PROBE 2026-11-15 (mine, read-only, nemik-rank at this checkout): the relayed premise 'rank and round list READY cards only' is HALF WRONG. nemik/src/nemik/rank.py _write_round already ranks with RankOptions(with_working=True) (nemik:W1059): a working card is ranked among the ready ones, each by its own salience. 'nemik-rank mtools --round' prints 'round mtools: 3 of 110 cards (size 3, from floor)': W2337, W2433, W2219. 'nemik-rank mtools --item mtools:W2531' prints 'Working normal (unscored) no vector'. So W2531 is ranked but UNSCORED (salience 0, bottom) and falls outside a top-3 round; plain 'nemik-rank mtools --json' (no --round) IS ready-only, which is what mtools reads. The cause is the top-N cut on an unscored working card, not the ready-only filter. Candidate fixes for github-cb to rule: (i) round = top N ready PLUS every working card (cheap; risk: marking a card working becomes a free pass past the round check); (ii) a working card keeps the rank it held as ready (needs rank history we do not store); (iii) score the working card (its vector) so it ranks. Not changed yet. | 2026-11-16T00:05:01Z: github-cb ruling (relayed, unchecked by me): round.json already ranks working cards (W1059); the cause is W2531 has NO VECTOR so salience 0 and the top-3 cut drops it; fix is data (mtools vectors it, PRIORITY band); instrument gap here: flag a working card with no vector. | 2026-11-16T02:39:58Z: ab0181c landed (commit gate: second resubmit; v1 and the first v2 refused on test_layout, recorded on W2207). nemik-check now names working cards with no vector in one repo-level note per repo (stalled.unvectored, via findings). Probe after deploy: does nemik-check name mtools:W2531 while it has no vector (it may now carry one).",
       "issued_at": "2026-11-15T23:59:31Z",
       "minted_during": "interrupt",
       "caused_by": "mtools:W2548",
-      "last_worked": "2026-11-16T00:17:07Z",
+      "last_worked": "2026-11-16T02:39:58Z",
       "ticks_blocked": 0,
-      "completed": null
+      "completed": null,
+      "landed_at": "20261116T023958Z",
+      "witness": "input.git_ref[\"nemik@ab0181c91e6bf9938f366fa89fafec89f75b32d6\"].resolves == true",
+      "witness_lang": "rego",
+      "deploys": true
     },
     {
       "symbol": "W2212",
       "title": "PRIORITY: a blocker of an open gate-repair card takes the gate tier",
-      "status": "ready",
+      "status": "landed",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "Relayed by github-cb, unchecked by me: mtools:W2544 (round check repair) is tagged gate-repair, its only blocker mtools:W2531 is working, has a vector, is tagged velocity, yet nemik-rank mtools --round and round.json (as_of 2026-11-16T00:12:15Z) still omit it. Proposed form: a card on the blocked_on chain of an open gate-repair card takes the gate tier, by a declared rule in bands.toml, with a test (cf nemik:W2039). Second defect to fix or explain: nemik-rank mtools --item mtools:W2531 prints 'Working normal (unmatched)' so the velocity tag is not read; either --item ignores bands.toml [tag] or the touches were not seen. Probe first, with pinned 4c82bc66.",
-      "evidence": "",
+      "evidence": "2026-11-16T02:39:59Z: ab0181c landed, riding in W2211's commit (W2212 was not in the published round). A gate-repair card's blockers take the gate band, naming the repair; --item reads the tag. TAKES EFFECT for mtools:W2531's b71 only after the luthen-tools pin moves to the new nemik sha AND the hourly round refresh runs; mtools resubmits b71 after that, not at the landing.",
       "issued_at": "2026-11-16T00:17:15Z",
       "minted_during": "interrupt",
       "caused_by": "mtools:W2548",
-      "last_worked": "2026-11-16T02:06:25Z",
+      "last_worked": "2026-11-16T02:39:59Z",
       "ticks_blocked": 0,
-      "completed": null
+      "completed": null,
+      "landed_at": "20261116T023959Z",
+      "witness": "input.git_ref[\"nemik@ab0181c91e6bf9938f366fa89fafec89f75b32d6\"].resolves == true",
+      "witness_lang": "rego",
+      "deploys": true
     }
   ],
   "residue": [

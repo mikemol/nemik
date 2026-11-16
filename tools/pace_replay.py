@@ -807,6 +807,134 @@ def score_neglect(
     return false_ok, false_behind, scored
 
 
+BOUNDS = (0, 10, 25, 50, 75)
+Bound = tuple[int, int]
+
+
+def neglected_share(
+    series: dict[str, list[int]], neglected: list[list[str]]
+) -> list[float]:
+    """Give, after each landing, the share of the owing rows that are neglected.
+
+    Returns:
+        Neglected rows over owing rows per landing; 0.0 when no row is owing.
+
+    """
+    count = len(neglected)
+    owing = [
+        sum(1 for values in series.values() if values[at] > 0) for at in range(count)
+    ]
+    return [len(neglected[at]) / owing[at] if owing[at] else 0.0 for at in range(count)]
+
+
+def bounded_blocks(
+    landings: list[tuple[str, list[str], int]],
+    neglected: list[list[str]],
+    shares: list[float],
+    bound: int,
+) -> list[bool]:
+    """Say, per landing, whether the bounded neglect rule refuses it if it pays nothing.
+
+    A landing is refused when the neglected share before it is above `bound` percent and it
+    touches none of the neglected rows (touching one is the way out).
+
+    Returns:
+        One flag per landing; the first is never refused.
+
+    """
+    return [
+        at > 0
+        and shares[at - 1] * 100 > bound
+        and not set(neglected[at - 1]) & set(landings[at][1])
+        for at in range(len(landings))
+    ]
+
+
+def score_blocks(
+    landings: list[tuple[str, list[str], int]],
+    blocks: list[bool],
+    spec: Spec,
+    span: tuple[int, int],
+) -> tuple[int, int, int]:
+    """Score refusals as `score_admission` scores a rule: only a landing that paid nothing.
+
+    Returns:
+        (false oks, false behinds, landings scored).
+
+    """
+    false_ok = false_behind = scored = 0
+    for at, (_sha, _files, value) in enumerate(landings):
+        if at == 0 or not span[0] <= at < span[1] or value < landings[at - 1][2]:
+            continue
+        truth = stalled(landings, at, spec)
+        if truth is None or rose(landings, at, spec):
+            continue
+        scored += 1
+        false_ok += not blocks[at] and truth
+        false_behind += blocks[at] and not truth
+    return false_ok, false_behind, scored
+
+
+def fit_bound(
+    landings: list[tuple[str, list[str], int]],
+    by_percent: dict[int, tuple[list[list[str]], list[float]]],
+    spec: Spec,
+    stop: int,
+) -> Bound:
+    """Pick the (percentile of waits, bound on the neglected share) with the lowest weighted error.
+
+    Fitted on the landings before `stop` only, a false ok costing `FALSE_OK_WEIGHT` false behinds.
+
+    Returns:
+        The best (percent, bound); the first of equals, so the choice is deterministic.
+
+    """
+    best: Bound = (NEGLECT_PERCENTS[0], BOUNDS[0])
+    cheapest = -1
+    for percent in NEGLECT_PERCENTS:
+        neglected, shares = by_percent[percent]
+        for bound in BOUNDS:
+            blocks = bounded_blocks(landings, neglected, shares, bound)
+            ok, behind, _scored = score_blocks(landings, blocks, spec, (0, stop))
+            cost = FALSE_OK_WEIGHT * ok + behind
+            if cheapest < 0 or cost < cheapest:
+                best, cheapest = (percent, bound), cost
+    return best
+
+
+def trajectory(
+    landings: list[tuple[str, list[str], int]],
+    blocks: list[bool],
+    shares: list[float],
+    span: tuple[int, int],
+) -> str:
+    """Describe the held-out span under the bounded rule: refusals and what admissions paid.
+
+    Returns:
+        One line: the landings that paid nothing and were refused, the first landing after which
+        the neglected share is zero (or none), and the fall of each landing that paid, summed.
+
+    """
+    refused = [
+        at
+        for at in range(*span)
+        if blocks[at] and landings[at][2] >= landings[at - 1][2]
+    ]
+    paid = [
+        landings[at - 1][2] - landings[at][2]
+        for at in range(*span)
+        if landings[at][2] < landings[at - 1][2]
+    ]
+    clear = next((at for at in range(*span) if shares[at] <= 0), None)
+    return (
+        f"held-out landings {span[1] - span[0]}: refused (paid nothing) {len(refused)}, "
+        f"last refused {refused[-1] if refused else 'none'}; neglected share first zero at "
+        f"{clear if clear is not None else 'never'}; landings that paid {len(paid)}, "
+        f"total fall {sum(paid)}, per paying landing "
+        f"{sum(paid) / len(paid) if paid else 0.0:.2f}"
+    )
+
+
 def landings_to_zero(values: list[int], start: int) -> float:
     """Give the landings a row would need to reach zero at the rate it fell from `start`.
 
@@ -856,6 +984,30 @@ def report_neglect(
     sys.stdout.write(
         f"rows owing at the end: {len(owing)}, of which fell over the held-out span "
         f"{len(moving)} and did not {len(owing) - len(moving)}\n"
+    )
+
+
+def report_bound(
+    name: str,
+    landings: list[tuple[str, list[str], int]],
+    series: dict[str, list[int]],
+    spec: Spec,
+) -> None:
+    """Print the bounded neglect rule fitted before the embargo and judged held-out."""
+    held = held_start(len(landings))
+    by_percent: dict[int, tuple[list[list[str]], list[float]]] = {}
+    for percent in NEGLECT_PERCENTS:
+        neglected = neglected_rows(series, percent)
+        by_percent[percent] = (neglected, neglected_share(series, neglected))
+    percent, bound = fit_bound(landings, by_percent, spec, fit_end(held))
+    neglected, shares = by_percent[percent]
+    blocks = bounded_blocks(landings, neglected, shares, bound)
+    ok, behind, scored = score_blocks(landings, blocks, spec, (held, len(landings)))
+    sys.stdout.write(
+        f"bounded neglect of {name}, fitted before landing {fit_end(held)}: wait at the "
+        f"{percent}th percentile, bound {bound} percent; held-out false ok {ok}, false "
+        f"behind {behind} (scored {scored})\n"
+        f"  {trajectory(landings, blocks, shares, (held, len(landings)))}\n"
     )
 
 
@@ -947,6 +1099,7 @@ def main() -> int:
         rows_by_name = row_series([rows for _sha, _epoch, _files, rows in per_row])
         report_rows(name, rows_by_name, held_start(len(per_row)))
         report_neglect(name, landings, rows_by_name, spec)
+        report_bound(name, landings, rows_by_name, spec)
     return 0
 
 
