@@ -47,6 +47,7 @@ from nemik.say import say, warn
 from nemik.verify import lead_report, score_shingle, shingle_pairs
 from nemik.wake import read_liveness
 from nemik.where import matches, parse
+from nemik.workmarks import pair
 
 RELIABILITY_BINS = 4  # --score cuts each lead's chances into this many bins
 # nemik:W966: the status whose cards take no place in a repo's line
@@ -93,6 +94,7 @@ SERIES_MODES = (
     "forecast",
     "score",
     "oldest",
+    "landed_open",
 )
 
 
@@ -1552,6 +1554,13 @@ def main(argv: list[str] | None = None) -> int:
         "attribute-only, status flip, structural), sampled over --from..now, default a week (W495)",
     )
     mode.add_argument(
+        "--landed-open",
+        action="store_true",
+        help="per repo, each ready card that leads a landed commit's subject: the newest such "
+        "subject beside what the card says is left. Closes nothing; the verdict is the owner's "
+        "(W1083)",
+    )
+    mode.add_argument(
         "--events",
         action="store_true",
         help="every change to a card in the queue history, one event a line: station, time, "
@@ -2080,6 +2089,7 @@ class Opts(argparse.Namespace):
     to: str | None
     toil: bool
     churn: bool
+    landed_open: bool
     weekly: bool
     score: str | None
     append_to: str | None
@@ -2955,6 +2965,34 @@ def _toil(args: Opts, names: list[str], dirs: dict[str, Path]) -> int:
     return 0
 
 
+def _landed_open(_args: Opts, names: list[str], dirs: dict[str, Path]) -> int:
+    """`--landed-open`: each ready card that leads a landed commit, beside what it says is left.
+
+    A candidate is not a ghost (a card worked in slices leads a commit per slice), so this lists
+    and closes nothing; a repo whose log cannot be read says so and is never counted as zero.
+
+    Returns:
+        0, after printing each repo's candidates.
+
+    """
+    for name in names:
+        subjects = recent_subjects(dirs[name])
+        if subjects is None:
+            say(f"{name}: no readable history")
+            continue
+        ready: dict[str, str] = {}
+        for card in queue_at(dirs[name], "HEAD").get("waypoints", []):
+            symbol, status = card.get("symbol"), card.get("status")
+            step = card.get("next_bounded_step", "")
+            if status == "ready" and isinstance(symbol, str):
+                ready[symbol] = step if isinstance(step, str) else ""
+        lines = pair(ready, subjects)
+        say(f"{name}: {len(lines)} ready card(s) lead a landed commit")
+        for line in lines:
+            say(line)
+    return 0
+
+
 def _days(seconds: float) -> str:
     return f"{seconds / 86400:.1f}d"
 
@@ -2973,6 +3011,7 @@ def _series(args: Opts, names: list[str], dirs: dict[str, Path]) -> int:
         ("forecast", _forecast),
         ("score", _score),
         ("oldest", _oldest),
+        ("landed_open", _landed_open),
     ):
         if cast("object", getattr(args, mode)):
             return run(args, names, dirs)

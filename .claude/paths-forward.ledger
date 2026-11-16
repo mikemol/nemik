@@ -6119,3 +6119,16 @@
 2026-11-16T13:42:36Z  status W735 blocked>done writer    "blocked -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-16T13:46:34Z  status W1094 working>landed writer    "working -> landed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-16T13:53:04Z  status W1994 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-16T13:59:58Z  status W1994 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-16T14:09:59Z  status W1994 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-16T14:12:49Z  interrupt W2223 minted    -         "May nemik read peers' live queue files, or must it read a published ref"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github:W92
+2026-11-16T14:12:59Z  status W2223 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-16T14:21:36Z  interrupt W2224 minted    -         "nemik reads each repo's queue from its trunk ref, with a branch-local view as a mode, never the working tree"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2223
+2026-11-16T14:21:42Z  status W2223 blocked>done writer    "blocked -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-16T14:21:50Z  status W2224 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-16T14:24:13Z  interrupt W2225 minted    -         "nemik-check --warnings --repo substrate runs past 300 s, over every hook's call timeout"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=substrate:W1
+2026-11-16T14:53:59Z  interrupt W2226 minted    -         "Delete nemik's own two beat-hook entries (PostToolUse, PostToolUseFailure) from .claude/settings.json once luthen-observability says its user-level beat hook is applied and witnessed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=luthen-observability:W2698
+2026-11-16T14:54:02Z  status W2226 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-16T16:23:27Z  interrupt W2227 minted    -         "Writer: --tick-open calls a queue-only commit naming W<n> that card's LANDING"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=substrate:W355
+2026-11-16T16:23:50Z  status W2227 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-16T17:03:16Z  status W1083 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
