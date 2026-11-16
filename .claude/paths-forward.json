@@ -15749,21 +15749,21 @@
     {
       "symbol": "W735",
       "title": "Ask the operator: who may know sibling paths for local-only inbox delivery",
-      "status": "blocked",
-      "enables": [],
-      "touches": [],
-      "blocked_on": [
-        "operator: decide whether nemik's adapter is the ONE place allowed to know sibling paths for local-only inbox delivery (a single allowlist entry in mtools:W1708's lint), or local-only delivery goes through a broker; see docs/inbox-as-issues.md, section 'What this leaves unsolved'"
+      "status": "done",
+      "enables": [
+        "W1047"
       ],
-      "blocked_kind": "human",
-      "next_bounded_step": "",
-      "evidence": "2026-11-06T20:30:01Z: Operator-ask audit 2026-11-06 (warrant: host line 145131, uuid 9c5e8dd8-a5a4-4cbd-9e07-84e844cc8b00). CLASS: a real choice, in plain words, and it is a policy for mtools' lint. Local-only inbox delivery needs a sibling repo's path. (a) nemik's adapter is the ONE module allowed to know sibling paths: a single allowlist entry in mtools:W1708's lint; simple, one reviewed exception. (b) Delivery goes through a broker: no module knows a sibling path, one more moving part. What differs: one allowlisted exception versus a new service. The review route (host line 144945) fits: mtools owns the lint, so the cold review of mtools:W1708 can decide, and the operator only if it splits. Note: this is the likely source of the 'no sibling paths' habit this session's reviewer cited; I have not found the lint's text. W735",
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-11-06T20:30:01Z: Operator-ask audit 2026-11-06 (warrant: host line 145131, uuid 9c5e8dd8-a5a4-4cbd-9e07-84e844cc8b00). CLASS: a real choice, in plain words, and it is a policy for mtools' lint. Local-only inbox delivery needs a sibling repo's path. (a) nemik's adapter is the ONE module allowed to know sibling paths: a single allowlist entry in mtools:W1708's lint; simple, one reviewed exception. (b) Delivery goes through a broker: no module knows a sibling path, one more moving part. What differs: one allowlisted exception versus a new service. The review route (host line 144945) fits: mtools owns the lint, so the cold review of mtools:W1708 can decide, and the operator only if it splits. Note: this is the likely source of the 'no sibling paths' habit this session's reviewer cited; I have not found the lint's text. W735 | 2026-11-16T13:42:36Z: 2026-11-16 ANSWERED by a standing ruling, so it does not wait on the operator (github-cb relayed it; I checked the record myself): host 695f3e0a line 84035, uuid 67efb1bc-8739-4ee0-9c3d-d6cfc68907d0, 2026-10-19T13:07:08Z: mikemol-transcriptstruct --verify returned ok true, kind human, at that line and stamp. The operator's words, as this queue's W728 and W1047 warrants already carry them (and not re-read here, because the record at line 84035 carries an image and the reader prints it whole): 'I really need repos to stop being aware sibling paths are even a thing. If need be, we can take the inbox pattern and map it to GitHub issues (public repo or private; ...)'. READING (github-cb's, with the operator's own condition kept): the aim is that no repo knows sibling paths, so no allowlist entry in mtools:W1708's lint and no broker that keeps local-only delivery; the cure the operator named is the inbox pattern as GitHub issues, which is nemik:W1047 (the courier) and W1048 (the send path). The words 'if need be' leave the route conditioned on need, as W1047's evidence already says; the answer to W735's question as asked (an allowlist entry, or a broker) is therefore no, and the work moves to W1047.",
       "issued_at": "2026-10-19T15:12:04Z",
       "minted_during": "tick",
       "caused_by": "nemik:W728",
-      "last_worked": "2026-11-06T20:30:01Z",
-      "ticks_blocked": 782,
-      "completed": null
+      "last_worked": "2026-11-16T13:42:36Z",
+      "ticks_blocked": 0,
+      "completed": "20261116T134236Z"
     },
     {
       "symbol": "W736",
@@ -25838,7 +25838,7 @@
     {
       "symbol": "W1094",
       "title": "Warn on a queue whose ledger has no tick line for longer than its loop cadence plus slack",
-      "status": "working",
+      "status": "landed",
       "enables": [],
       "touches": [
         "velocity"
@@ -25846,11 +25846,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "A nemik-check shape: a queue whose newest ledger tick line is older than its loop cadence plus slack is a Warning ('no tick line since T'); the cadence is the watchdog window (15 to 20 min) and the loop's 30 min re-arm; the host's ledger had none from 2026-10-25T18:44Z because its ticks touched only the liveness stamp",
-      "evidence": "2026-10-26: 2026-10-26 ordering caveat (github-8f agreed): the newest tick line may come from the ledger summary W1095 builds, so build this after W1097, or read the ledger file's last line directly | 2026-11-15T07:02:55Z: 2026-11-15 MEASURED (read-only, scratch .claude/held-W1094-stale.py.txt over every fleet ledger): newest tick line age in hours: luthen-observability 21.0, nemik 108.9, mtools 220.7, then 394 to 973 for the other repos (linux-sources, el-openglo, paperkit, summit, amr-skills, estate, scc, gabion, gcalculus, aeternum, substrate, life, resumes, rosettapkg). So a shape that warns on any ledger with no tick for cadence plus slack would flag about twenty repos, nearly all deliberately dormant (the operator wakes repos selectively), which is noise. The host's case was a LIVE loop (heartbeats fresh) whose ledger had no tick line: the signal is a fresh liveness heartbeat AND a stale newest tick, not a stale tick alone. nemik itself would be flagged: its newest tick line is 2026-11-10T18:06Z while the loop has beaten since; this session's work since then closed no tick in the ledger. Design: warn only for a repo whose wake.read_liveness heartbeat is within the watchdog window and whose newest tick is older than the declared cadence plus slack (a rank-weights [idle] int, not typed in the shape); read the newest tick through a new adapter helper over ledger.read. Not done: any code. | 2026-11-15T07:19:28Z: G0 2026-11-15T07:19:28Z: [NO-PACE-STAMP] Precommit (written after the work of this stretch, stated as such): this boundary tick advances W1094 by measuring, not building. Actuator: the fleet ledger tick-age read (scratch held-W1094-stale.py.txt). Sensor: the newest tick age per ledger. Expected: most ledgers stale for dormant-by-design reasons, nemik itself stale since 2026-11-10; the shape must key on a fresh heartbeat plus a stale tick. | 2026-11-15T07:23:24Z: 2026-11-15 reviewer finding nemik:R495 f1 (due 2026-11-18): the practice has no trigger work cannot skip; no tick line 2026-11-11 to 11-14 (about 109 h, at least fourteen commits landed, the driver dead too). Ask: a submit refused or a landing line written with no open tick past a stated bound (mikemol-commit or the post-commit hook), stampnote adds the 'stamped after' prefix itself, and a supervised driver (request to mtools or a unit file). Witness: a test over a throwaway repo (stale-tick and fresh-tick cases), stampnote's test, the request, and the measured gap. This widens the card beyond a stale-ledger Warning; the Warning stays the sensor. | 2026-11-15T07:52:15Z: 2026-11-15 DESIGN CONSTRAINTS FOUND (read-only): (1) the queue document's own heartbeat field is NOT a liveness signal here: nemik's reads 2026-11-05T01:13:32Z while the watchdog has beaten all along (the beats go elsewhere). (2) The liveness nemik already reads is luthen's checks.loop_liveness (wake.read_liveness: root/liveness.json when exported, else luthen's own python, a subprocess); running that on every nemik-check is too heavy, so the finding may read only an exported root/liveness.json and print nothing when there is none (a refusal, never a zero). (3) The check wires in check._fleet_checks like idle.findings (nemik:W577); the newest tick comes from a new adapter helper over ledger.read (the rows already give stamp and kind), the bound is a declared int in rank-weights.toml [idle] (cadence plus slack), never typed in the shape. Reviewer finding R495 f1 widens this card to a trigger the work cannot skip (a landing with no open tick past a bound); that is a hook or mikemol-commit change (mtools) and a supervised driver, not nemik-check alone. Not done: any code. This card is in the published round; W2110's //:pre_gate stack (refs/review/W2110-v1) is outside it and waits to ride in this card's commit. | 2026-11-15T08:19:56Z: 2026-11-15 BUILT AND TESTED, HELD: refs/review/W1094-v1 and .claude/stack-W1094-v1.json carry the live-loop stale-tick Warning (idle.stale_findings, tick_stale_minutes in rank-weights.toml, test_stale_ledger) and W2110's //:pre_gate suite; bazel test //:pre_gate and the W1094 tests passed in a clean worktree. Refused at submit by the round check: W1094 was in the published round at the previous refusal and is not in it now (round W2032, W1141, W1997, W459, W1063, W1083); membership rotates hourly, so a stack of a card that was in the round an hour ago is outside it. Resubmit when W1094 is in the round, or ride it with a round card.",
+      "evidence": "2026-10-26: 2026-10-26 ordering caveat (github-8f agreed): the newest tick line may come from the ledger summary W1095 builds, so build this after W1097, or read the ledger file's last line directly | 2026-11-15T07:02:55Z: 2026-11-15 MEASURED (read-only, scratch .claude/held-W1094-stale.py.txt over every fleet ledger): newest tick line age in hours: luthen-observability 21.0, nemik 108.9, mtools 220.7, then 394 to 973 for the other repos (linux-sources, el-openglo, paperkit, summit, amr-skills, estate, scc, gabion, gcalculus, aeternum, substrate, life, resumes, rosettapkg). So a shape that warns on any ledger with no tick for cadence plus slack would flag about twenty repos, nearly all deliberately dormant (the operator wakes repos selectively), which is noise. The host's case was a LIVE loop (heartbeats fresh) whose ledger had no tick line: the signal is a fresh liveness heartbeat AND a stale newest tick, not a stale tick alone. nemik itself would be flagged: its newest tick line is 2026-11-10T18:06Z while the loop has beaten since; this session's work since then closed no tick in the ledger. Design: warn only for a repo whose wake.read_liveness heartbeat is within the watchdog window and whose newest tick is older than the declared cadence plus slack (a rank-weights [idle] int, not typed in the shape); read the newest tick through a new adapter helper over ledger.read. Not done: any code. | 2026-11-15T07:19:28Z: G0 2026-11-15T07:19:28Z: [NO-PACE-STAMP] Precommit (written after the work of this stretch, stated as such): this boundary tick advances W1094 by measuring, not building. Actuator: the fleet ledger tick-age read (scratch held-W1094-stale.py.txt). Sensor: the newest tick age per ledger. Expected: most ledgers stale for dormant-by-design reasons, nemik itself stale since 2026-11-10; the shape must key on a fresh heartbeat plus a stale tick. | 2026-11-15T07:23:24Z: 2026-11-15 reviewer finding nemik:R495 f1 (due 2026-11-18): the practice has no trigger work cannot skip; no tick line 2026-11-11 to 11-14 (about 109 h, at least fourteen commits landed, the driver dead too). Ask: a submit refused or a landing line written with no open tick past a stated bound (mikemol-commit or the post-commit hook), stampnote adds the 'stamped after' prefix itself, and a supervised driver (request to mtools or a unit file). Witness: a test over a throwaway repo (stale-tick and fresh-tick cases), stampnote's test, the request, and the measured gap. This widens the card beyond a stale-ledger Warning; the Warning stays the sensor. | 2026-11-15T07:52:15Z: 2026-11-15 DESIGN CONSTRAINTS FOUND (read-only): (1) the queue document's own heartbeat field is NOT a liveness signal here: nemik's reads 2026-11-05T01:13:32Z while the watchdog has beaten all along (the beats go elsewhere). (2) The liveness nemik already reads is luthen's checks.loop_liveness (wake.read_liveness: root/liveness.json when exported, else luthen's own python, a subprocess); running that on every nemik-check is too heavy, so the finding may read only an exported root/liveness.json and print nothing when there is none (a refusal, never a zero). (3) The check wires in check._fleet_checks like idle.findings (nemik:W577); the newest tick comes from a new adapter helper over ledger.read (the rows already give stamp and kind), the bound is a declared int in rank-weights.toml [idle] (cadence plus slack), never typed in the shape. Reviewer finding R495 f1 widens this card to a trigger the work cannot skip (a landing with no open tick past a bound); that is a hook or mikemol-commit change (mtools) and a supervised driver, not nemik-check alone. Not done: any code. This card is in the published round; W2110's //:pre_gate stack (refs/review/W2110-v1) is outside it and waits to ride in this card's commit. | 2026-11-15T08:19:56Z: 2026-11-15 BUILT AND TESTED, HELD: refs/review/W1094-v1 and .claude/stack-W1094-v1.json carry the live-loop stale-tick Warning (idle.stale_findings, tick_stale_minutes in rank-weights.toml, test_stale_ledger) and W2110's //:pre_gate suite; bazel test //:pre_gate and the W1094 tests passed in a clean worktree. Refused at submit by the round check: W1094 was in the published round at the previous refusal and is not in it now (round W2032, W1141, W1997, W459, W1063, W1083); membership rotates hourly, so a stack of a card that was in the round an hour ago is outside it. Resubmit when W1094 is in the round, or ride it with a round card. | 2026-11-16T13:46:34Z: 2026-11-16 LANDED 98ac3b2 (mikemol-commit printed COMMITTED nemik 98ac3b2 W1094 [PUSHED]; git log main subject matches). Passed on an IDENTICAL resubmit after the first gate (invocation 187325b6-089e-4b82-85d3-3d9b0332775a) refused on test_codon_wall_table (1 of 16 shards, 300.6 s) and test_layout (1 of 16, 281.0 s, a playwright Page.check timeout): per the flake rule that is not green, so the instance is on W1140 and W2207, with my own confound named there (a six-target scratch bazel run beside that gate, which the loop prompt forbids); the resubmit ran with nothing of mine beside it. github-cb passed the content (two entries then one; R2 and R3 made). STILL OPEN on this card (stated in the commit): the reviewer's wider ask, a trigger work cannot skip (mtools'), learning the 90-minute bound from each repo's tick cadence, and a probe on the real fleet once a liveness export exists. landing_kind: image (src).",
       "issued_at": "2026-10-26T11:52:22Z",
       "minted_during": "tick",
       "caused_by": "github:W59",
-      "last_worked": "2026-11-16T13:01:49Z",
+      "last_worked": "2026-11-16T13:46:34Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/data/shapes.ttl",
@@ -25860,7 +25860,11 @@
       ],
       "size_class": "small",
       "weight": 218,
-      "completed": null
+      "completed": null,
+      "landed_at": "20261116T134634Z",
+      "witness": "input.git_ref[\"nemik@98ac3b209b775cc29080813f9c417cef73070a07\"].resolves == true",
+      "witness_lang": "rego",
+      "deploys": true
     },
     {
       "symbol": "W1095",
@@ -48221,7 +48225,7 @@
     {
       "symbol": "W1994",
       "title": "Ratchet atomizer plan: tools/atomize_walls.py generalizes from Codon to any declared ratchet, reading the census rows (file and rule) and printing a dry-run plan of leaf cards under one umbrella per ratchet, idempotent by title",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W1993"
       ],
@@ -48235,7 +48239,7 @@
       "issued_at": "2026-11-06T00:52:41Z",
       "minted_during": "interrupt",
       "caused_by": "W1993",
-      "last_worked": "2026-11-16T12:12:28Z",
+      "last_worked": "2026-11-16T13:53:04Z",
       "ticks_blocked": 0,
       "manifest": [
         "tools/atomize_walls.py",

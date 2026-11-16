@@ -1,10 +1,13 @@
-# The ratchet atomizer: one leaf card per debt row, one umbrella per ratchet row
+# The ratchet atomizer: one leaf card per debt key, one umbrella per ratchet row
 
 Design for nemik:W1994 under nemik:W1993. The operator's words (host transcript 695f3e0a, line
 142923, uuid 43f11ee8-ffdf-4fe5-a8d7-5a0f4fb6cd90, 2026-11-06T00:49:59.912Z, human origin):
 "This is why I want mechanized atomization of ratchet work." The case that prompted it: one rolling
 card over about 45 `hooks/pyproject.toml` entries held a second card for days, and nothing could say
-which entry mattered. One card per entry makes such a block precise, or visibly false.
+which entry mattered. One card per key (a file, or a module) makes such a block precise, or visibly
+false; the rules or modes the key owes are listed in the card (a dry run of nemik's own
+`codon-baseline.json` on 2026-11-16 gave 122 rows for 61 modules: two leaves per module sharing one
+manifest file, which is one edit cone, so the unit is the key, nemik:W1994's decision).
 
 ## What it generalizes
 
@@ -31,19 +34,22 @@ it fixture rows.
 ## Output: a dry-run plan
 
 - One umbrella card per ratchet row (the ratchet file, or the file within it that holds the debt).
-- One leaf card per entry `(file, rule)`, under its umbrella through an `enables` edge.
+- One leaf card per KEY (a file, or a module), listing the rules or modes it owes, under its umbrella
+  through an `enables` edge. Rows of one key are one leaf: they share a file, so they are one edit.
 - The plan is a list of specs (title, manifest, size, waits-on) and is printed by default; `--apply`
   writes it, through the repo's own paths-forward writer and never the file, and never through a
   sibling's queue.
 
-Idempotent by title. A title is a function of the row alone (ratchet, key, rule), so a second run
+Idempotent by title. A title is a function of the key and its rules alone (ratchet, key, the sorted
+rules), so a second run
 finds each card again, writes its manifest and blockers again, and creates none. A partial run is
 finished by running it again.
 
 ## Close: derived, never by hand
 
-A leaf closes when its row has left the census. The open set is derived from the ratchet file; the
-cards of rows that are gone are closed through the writer. A check warns on a leaf closed by hand
+A leaf closes when its key has left the census, that is when every rule or mode it listed is gone.
+The open set is derived from the ratchet file; the cards of keys that are gone are closed through
+the writer. A check warns on a leaf closed by hand
 while its row is still in the census (nemik:W1995). This is the half that stops a card claiming a
 fall the ratchet does not show.
 
