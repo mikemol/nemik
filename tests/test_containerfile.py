@@ -35,7 +35,8 @@ def _bazel_data_paths() -> set[str]:
 
     """
     build = (ROOT / "BUILD.bazel").read_text()
-    block = build[build.index("sh_test(") : build.index("for src in glob")]
+    start = build.index("sh_test(")
+    block = build[start : build.index("for src, item in TARGETS", start)]
     names = set(_strings(r'"([A-Za-z.][^":@$]*)"', block))
     names |= set(_strings(r'glob\(\["([^"*]+)', block))
     return {n for n in names if (ROOT / n.split("/")[0]).exists()}

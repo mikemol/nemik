@@ -82,9 +82,11 @@ def test_the_suite_covers_every_test_target() -> None:
     suite = build[build.index("test_suite(") :]
     suite = suite[: suite.index(")\n")]
     assert 'name = "precommit"' in suite
-    # the suite and the macro that makes the tests take their modules from the same glob
-    assert TESTS_GLOB in suite
-    assert f"for src in {TESTS_GLOB}" in build
+    # the suite and the macro that makes the tests take their targets from the same list, which is
+    # built from the one glob of test modules (nemik:W2214: a module may be several named targets)
+    assert "for src, item in TARGETS" in suite
+    assert "for src, item in TARGETS" in build[: build.index("test_suite(")]
+    assert TESTS_GLOB in build[: build.index("sh_test(")]
 
 
 def test_the_hook_refuses_when_bazel_is_absent(tmp_path: Path) -> None:

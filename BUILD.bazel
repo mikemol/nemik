@@ -6,16 +6,28 @@ load("@rules_shell//shell:sh_test.bzl", "sh_test")
 exports_files(["pyproject.toml"])
 
 # One target per test module, so a failure is located and an unchanged module is a cache hit.
+# nemik:W2214: except test_shaclinc, which is one named target per item (pytest node ids below): a single
+# target ran 353 s alone and timed out at 900 s in the gate. The items are decomposed, not sliced: each
+# is its own target, with its own name and its own cache entry, and none carries a longer timeout.
+SHACLINC_ITEMS = {
+    "done": "test_incremental_equals_full_after_an_edit[_done]",
+    "blocked": "test_incremental_equals_full_after_an_edit[_blocked]",
+    "bad_blocker": "test_incremental_equals_full_after_an_edit[_bad_blocker]",
+    "untitled": "test_incremental_equals_full_after_an_edit[_untitled]",
+    "sequence": "test_edits_in_sequence_stay_equal",
+}
+TARGETS = [(src, "") for src in glob(["tests/test_*.py"]) if src != "tests/test_shaclinc.py"] + [("tests/test_shaclinc.py", item) for item in SHACLINC_ITEMS]
+
 # nemik:W103: each runs under //:.venv's interpreter (tests/venv_pytest.sh); the venv is the input.
 [
     sh_test(
-        name = src.removeprefix("tests/").removesuffix(".py"),
+        name = src.removeprefix("tests/").removesuffix(".py") + ("_" + item if item else ""),
         srcs = ["tests/venv_pytest.sh"],
         # nemik:W339: the browser suite is many page loads and grows with each view check; at host
         # load ~100 it crossed medium's 300 s (284 s alone, then a timeout in the gate). The rest stay medium.
         # nemik:W625: the SHACL cache tests are full surveys (a cold one is tens of seconds); the warm-equals-cold
         # property runs five of them beside five twins.
-        size = "large" if src in ("tests/test_layout.py", "tests/test_codon_census.py", "tests/test_codon_calls.py", "tests/test_warm_equals_cold.py", "tests/test_shaclinc.py", "tests/test_cache_user.py") else "medium",
+        size = "large" if src in ("tests/test_layout.py", "tests/test_codon_census.py", "tests/test_codon_calls.py", "tests/test_warm_equals_cold.py", "tests/test_cache_user.py") or item == "sequence" else "medium",
         # nemik:W1044: six browser PDF prints; run alone it passed, in the full gate it timed out at 300 s
         # nemik:W1061: test_modes alone takes 190 s of its 300 s timeout, and test_layout 296 s of 900 s
         # but timed out at 900 s in a loaded gate, so both run in three as well
@@ -40,7 +52,7 @@ exports_files(["pyproject.toml"])
         # 301 s of 300 in the gate (141 s with the others running); test_modes and test_pdf ran 174 s and 177 s of
         # 300 (58 and 59 percent) in three shards. So layout and the wall table run in sixteen, modes and pdf in six
         shard_count = 16 if src in ("tests/test_layout.py", "tests/test_codon_wall_table.py") else 8 if src == "tests/test_codon_census.py" else 6 if src in ("tests/test_pdf.py", "tests/test_modes.py") else 3 if src in ("tests/test_keymap.py", "tests/test_salience.py", "tests/test_viewer_settings.py", "tests/test_metrics_gating.py", "tests/test_rank_flow.py", "tests/test_viewstate.py", "tests/test_cardtree.py", "tests/test_publish.py") else 1,
-        args = ["$(rootpath " + src + ")", "-c", "$(rootpath pyproject.toml)"],
+        args = ["$(rootpath " + src + ")" + ("::" + SHACLINC_ITEMS[item] if item else ""), "-c", "$(rootpath pyproject.toml)"],
         data = [src, "tests/installed.py", "tests/webpage.py", "tests/pagetext.py", "tests/conftest.py", "tools/cpuline.py", ".claude/settings.json", "//tests/fixtures:fleet", "pyproject.toml", "ARCHITECTURE.md", "skills/nemik/SKILL.md", "docs/positioning.md", "deploy/deployment.yaml", "src/nemik/data/workflows.toml", "tools/nemik_client.py", "BUILD.bazel", "Containerfile", ".forgejo/workflows/build.yml"] + glob(["tests/corpus/**"]) + [ "src/nemik/data/shapes.ttl", "src/nemik/data/nemik.ttl", "src/nemik/data/wcag.rego", "src/nemik/data/run-row.schema.json", "src/nemik/data/waypoint.schema.json", "src/nemik/data/rank-weights.schema.json", "src/nemik/data/rank-weights.toml", ":.venv", "@opa//file", "@use_of_colour_rego//file", "@chromium//:files", "@chromium//:chrome-headless-shell"]
             # nemik:W445: the JRE (52 MB) and MPXJ's jars go to the one test that reads with them
             + (["@temurin_jre//:files", "@temurin_jre//:bin/java", ":mpxj_classpath"] if src == "tests/test_mpxj.py" else [])
@@ -164,14 +176,14 @@ exports_files(["pyproject.toml"])
             "NEMIK_CODON": "$(rootpath @codon//:bin/codon)",
         } if src in ("tests/test_codon_pin.py", "tests/test_codon_census.py", "tests/test_codon_calls.py", "tests/test_codon_wall_table.py") else {}),
     )
-    for src in glob(["tests/test_*.py"])
+    for src, item in TARGETS
 ]
 
 # nemik:W521: the commit gate as one target: every test above, and (as they land) the lint, type, shell and
 # warrant stages. tools/gate_staged.sh runs `bazel test //:precommit`; the hook refuses when bazel is absent.
 test_suite(
     name = "precommit",
-    tests = [":" + src.removeprefix("tests/").removesuffix(".py") for src in glob(["tests/test_*.py"])],
+    tests = [":" + src.removeprefix("tests/").removesuffix(".py") + ("_" + item if item else "") for src, item in TARGETS],
 )
 
 # nemik:W445: MPXJ and the JAXB jars its MSPDI reader needs (pinned in MODULE.bazel)

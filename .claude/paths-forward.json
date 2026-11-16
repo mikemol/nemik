@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 2217,
+  "counter": 2219,
   "waypoints": [
     {
       "symbol": "W1",
@@ -48221,7 +48221,7 @@
     {
       "symbol": "W1994",
       "title": "Ratchet atomizer plan: tools/atomize_walls.py generalizes from Codon to any declared ratchet, reading the census rows (file and rule) and printing a dry-run plan of leaf cards under one umbrella per ratchet, idempotent by title",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W1993"
       ],
@@ -48235,7 +48235,7 @@
       "issued_at": "2026-11-06T00:52:41Z",
       "minted_during": "interrupt",
       "caused_by": "W1993",
-      "last_worked": "2026-11-15T06:38:52Z",
+      "last_worked": "2026-11-16T07:28:50Z",
       "ticks_blocked": 0,
       "manifest": [
         "tools/atomize_walls.py",
@@ -52821,19 +52821,22 @@
     },
     {
       "symbol": "W2214",
-      "title": "Bound test_layout's playwright actions by resources, never by a longer timeout",
-      "status": "ready",
+      "title": "Replace test_shaclinc's one 900 s wall target with five named targets, each bounded by CPU",
+      "status": "working",
       "enables": [],
-      "touches": [],
+      "touches": [
+        "gate-repair"
+      ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Watch the next gates' per-shard series for test_layout, test_codon_wall_table, test_modes and test_pdf (finer shards landed in adbf946); if every shard stays under half its timeout at gate load across two or three gates, mark done. If a playwright wait still times out, read that timeout line: an event wait with a wall timeout inside the test is a different defect (luthen's note) and gets its own card. Enforcement for test shards is mtools:W2562.",
-      "evidence": "2026-11-16T02:42:12Z: W1063 (in nemik's round, rank 2) is the standing card for sharding the browser tests finer; this flake is its concrete case, so W2214 waits on W1063's shard bound and records which test failed and how.",
+      "next_bounded_step": "github-cb 2026-11-16 (relayed, unchecked by me): tag gate-repair (done: a test that refuses the commit gate is a defect in the gate; W2213's rule), CHANGE THE FORM: not shard_count = 5 (opaque slices; the operator ruled 2026-11-14 that 'shard' means decompose along cones, never opaque slices, and the fleet is moving away from sharding): five NAMED test targets (test_shaclinc_done, _blocked, _bad_blocker, _untitled, _sequence), each with its own named data so the cache skips what an edit does not touch; bound each by CPU not wall (luthen-observability's W2673, checks/cpu_bound.py: RLIMIT_CPU soft limit at K times the recorded CPU, a SIGXCPU handler, a hard limit above; luthen-observability:W2675 converges it with procrun). SEND THE MANIFEST to github-cb BEFORE submitting. Do not build before the manifest is answered.",
+      "evidence": "2026-11-16T02:42:12Z: W1063 (in nemik's round, rank 2) is the standing card for sharding the browser tests finer; this flake is its concrete case, so W2214 waits on W1063's shard bound and records which test failed and how. | 2026-11-16T08:02:46Z: 2026-11-16 the W1994 v3 commit gate (main 0ff07d3, four files none touching shaclinc) got 524 of 525 and was refused on //:test_shaclinc TIMEOUT in 900.7 s, a single-shard large test (900 s). ALONE (bazel test //:test_shaclinc --cache_test_results=no under iowatch, host load about 40): PASSED in 353.3 s, 39 percent of 900, so the gate's load inflated it about 2.5 times, over the operator's 50 percent line. The file has five items: test_incremental_equals_full_after_an_edit x4 (a findings, an edit, an incremental and a full shacl pass each) and test_edits_in_sequence_stay_equal (one findings pass then four edits each with an incremental and a full pass, about three times a param item). Fix by proof, not rerun: shard_count 5 gives each item its own shard; by that cost model the worst shard is the sequence test at about 150 s alone (17 percent of 900), about 42 percent at the gate's 2.5 times load. Not yet built: the BUILD.bazel change needs a card in the round to land (W2214 is not), see the ask to github-cb. | 2026-11-16T08:04:34Z: github-cb 2026-11-16: YES to gate-repair for a flake repair that refuses the commit gate; asking first and not rerunning was right. | 2026-11-16T08:14:07Z: 2026-11-16 github-cb ruling (relayed): land the decomposition now (it strictly improves on one large target that refused the gate); no CPU bound in this stack (the fleet pattern converges in luthen-observability:W2675; adopt it from there, not a fourth copy). Two findings recorded as cards, not accepted states: the edit items at medium sit at the 50 percent line (card W2218: split the three SHACL passes) and test_shaclinc_sequence at an explicit large (card W2219). THE 2.5 TIMES INFLATION IS ONE READING (the single 900.7 s gate timeout against 353.3 s alone); replace it with what the gate's own per-target series records once the decomposed targets have run a few gates. Measured here: done 52.9 s CPU / 58.9 s wall, blocked 54.3 / 61.2, bad_blocker 54.0 / 60.0, untitled 52.2 / 58.5, sequence 126.8 / 135.7, at host load 46 to 60.",
       "issued_at": "2026-11-16T02:42:02Z",
       "minted_during": "interrupt",
       "caused_by": null,
-      "last_worked": "2026-11-16T04:08:18Z",
-      "ticks_blocked": 0
+      "last_worked": "2026-11-16T08:23:47Z",
+      "ticks_blocked": 0,
+      "completed": null
     },
     {
       "symbol": "W2215",
@@ -52874,7 +52877,7 @@
     {
       "symbol": "W2217",
       "title": "Re-export round.json on a queue write that changes status, tags or vector",
-      "status": "working",
+      "status": "landed",
       "enables": [],
       "touches": [
         "gate-repair"
@@ -52882,13 +52885,49 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "Build option (b) with the digest OUTSIDE the export tree (luthen-observability, relayed, unchecked by me, after reading checks/nemik_egress.py): the nemik pod reads the whole export tree through PVC nemik-export, so a digest file beside round.json would be SERVED, and a digest over every repo's cards includes the queues of repos the egress gate refuses to export (the amr- repos): a side channel. So the entry point takes --digest-file PATH, NO default inside the export tree, and luthen's unit passes it (where last_good_dir and the stamps live). Everything else as before: if-changed mode digests per card (repo, symbol, status, touches, vector, blocked_on, enables) plus the landings document's hash, exits without ranking when equal, ranks when changed; hourly timer always ranks. Tests: same inputs same digest no rank; a status, tag or vector change changes it; an evidence-only edit does not; refuses to run if the digest path is inside the round file's directory tree.",
-      "evidence": "2026-11-16T04:42:14Z: luthen-observability 2026-11-16 (relayed, unchecked by me): the schedule is theirs: host/systemd/user/luthen-nemik-round.service and .timer (OnBootSec 18min, OnUnitActiveSec 1h, six minutes behind the landings timer), running nemik-rank nemik --round-file .../nemik-export/round.json --landings .../landings.json then the egress gate (checks.nemik_egress), LimitCPU 600, MemoryMax 1536M. Measured by them 2026-10-25: one run 61.1 s user plus 1.4 s sys CPU and 716 MB, so a trigger on every queue write is unaffordable unless debounced and CPU-bounded. Their card: luthen-observability:W2681 (a user .path unit on the queue files). They ran the unit once by hand to republish for mtools:W2442. | 2026-11-16T04:44:40Z: luthen-observability 2026-11-16 (relayed): (b) agreed; I define the digest, their .path unit calls my entry point; digest file path is an ARGUMENT with no default inside the export tree (side channel through unexported amr- queues otherwise). FACT: they ran the unit by hand: as_of 2026-11-16T04:42:07Z, 36 rows; it still does NOT name mtools:W2442 because W2442 is BLOCKED (on luthen-observability) and the round holds ready cards only, so mtools' refused b72 is partly a circle on mtools' side (which they tell mtools), not only a stale export; an if-changed mode helps the staleness, not that circle. | 2026-11-16T05:01:31Z: Tagged gate-repair: it changes the round writer (src/nemik/rank.py, the thing the commit gate's round check reads), which is what github-cb's 2026-11-16 ruling on nemik:W2213 says to tag, and it admits the card at round rank 1 so it needs no ride-along (the mistake with W2212).",
+      "evidence": "2026-11-16T04:42:14Z: luthen-observability 2026-11-16 (relayed, unchecked by me): the schedule is theirs: host/systemd/user/luthen-nemik-round.service and .timer (OnBootSec 18min, OnUnitActiveSec 1h, six minutes behind the landings timer), running nemik-rank nemik --round-file .../nemik-export/round.json --landings .../landings.json then the egress gate (checks.nemik_egress), LimitCPU 600, MemoryMax 1536M. Measured by them 2026-10-25: one run 61.1 s user plus 1.4 s sys CPU and 716 MB, so a trigger on every queue write is unaffordable unless debounced and CPU-bounded. Their card: luthen-observability:W2681 (a user .path unit on the queue files). They ran the unit once by hand to republish for mtools:W2442. | 2026-11-16T04:44:40Z: luthen-observability 2026-11-16 (relayed): (b) agreed; I define the digest, their .path unit calls my entry point; digest file path is an ARGUMENT with no default inside the export tree (side channel through unexported amr- queues otherwise). FACT: they ran the unit by hand: as_of 2026-11-16T04:42:07Z, 36 rows; it still does NOT name mtools:W2442 because W2442 is BLOCKED (on luthen-observability) and the round holds ready cards only, so mtools' refused b72 is partly a circle on mtools' side (which they tell mtools), not only a stale export; an if-changed mode helps the staleness, not that circle. | 2026-11-16T05:01:31Z: Tagged gate-repair: it changes the round writer (src/nemik/rank.py, the thing the commit gate's round check reads), which is what github-cb's 2026-11-16 ruling on nemik:W2213 says to tag, and it admits the card at round rank 1 so it needs no ride-along (the mistake with W2212). | 2026-11-16T07:08:12Z: 2026-11-16 LANDED 0ff07d3 (mikemol-commit printed COMMITTED nemik 0ff07d3 W2217 [PUSHED]; git log main subject matches). nemik-rank --round-file F --digest-file D ranks only when the digest of what the round reads changed; D must be outside F's directory (exit 2). The first submit was refused by the pre-commit hook for a missing line in bazel/nemik_src.bzl (my write ran before the file was staged); the second ran about 70 minutes cold at host load 58 to 103 and passed. TAKES EFFECT only after luthen's pin moves to 0ff07d3 and their .path unit (luthen-observability:W2681) passes --digest-file outside the export tree. Witness still to read: tag a card, round.json's as_of moves within a minute.",
       "issued_at": "2026-11-16T04:38:11Z",
       "minted_during": "interrupt",
       "caused_by": "mtools:W2442",
-      "last_worked": "2026-11-16T05:40:33Z",
+      "last_worked": "2026-11-16T07:08:12Z",
       "ticks_blocked": 0,
-      "completed": null
+      "completed": null,
+      "landed_at": "20261116T070812Z",
+      "witness": "input.git_ref[\"nemik@0ff07d3781b81b52f82f46895664eb89b4b1c466\"].resolves == true",
+      "witness_lang": "rego",
+      "deploys": true
+    },
+    {
+      "symbol": "W2218",
+      "title": "Split the three SHACL passes inside each shaclinc edit item into separate targets",
+      "status": "ready",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "github-cb 2026-11-16 (relayed): the four edit items (test_shaclinc_done, _blocked, _bad_blocker, _untitled) run at medium and sit AT the 50 percent line under gate load (CPU 52 to 54 s, wall 58 to 61 s at load 46 to 60; about 44 to 50 percent of 300 s at the gate's inflation). The 2026-10-18 rule (shard before the next run once past 50 percent) makes this due now, next after W2214's decomposition lands. Each item does three SHACL passes (a findings pass, an incremental after an edit, a full pass), about 17 s CPU each; make each pass its own target, which is a change to tests/test_shaclinc.py, not to the build. Next after W2214 lands.",
+      "evidence": "",
+      "issued_at": "2026-11-16T08:14:04Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2214",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2219",
+      "title": "Decompose test_shaclinc_sequence until it fits medium and drop its explicit large",
+      "status": "ready",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "github-cb 2026-11-16 (relayed): test_shaclinc_sequence runs at an explicit size large (900 s), which the rulings call a finding to remove. Measured: CPU 126.8 s, wall 135.7 s at host load 46 to 60 (about 340 s at 2.5 times, one reading). Its structure: one findings pass, then four edits each followed by an incremental pass and a full pass, with the graph accumulating the edits. Decompose along what is independent: the accumulated state is sequential, so look at whether each step can be its own target built from a fixed intermediate graph, or whether the full-pass comparison can move out of the sequence; then size medium. Same sibling as the edit items' split or separate if the structure differs; read the test first. After W2214 lands.",
+      "evidence": "",
+      "issued_at": "2026-11-16T08:14:06Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2214",
+      "last_worked": null,
+      "ticks_blocked": 0
     }
   ],
   "residue": [

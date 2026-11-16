@@ -6101,3 +6101,8 @@
 2026-11-16T04:08:17Z  status W2214 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-16T04:38:11Z  interrupt W2217 minted    -         "Re-export round.json on a queue write that changes status, tags or vector"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=mtools:W2442
 2026-11-16T05:40:33Z  status W2217 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-16T07:08:12Z  status W2217 working>landed writer    "working -> landed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-16T07:28:50Z  status W1994 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-16T08:14:04Z  interrupt W2218 minted    -         "Split the three SHACL passes inside each shaclinc edit item into separate targets"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2214
+2026-11-16T08:14:06Z  interrupt W2219 minted    -         "Decompose test_shaclinc_sequence until it fits medium and drop its explicit large"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2214
+2026-11-16T08:23:47Z  status W2214 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
