@@ -19,10 +19,8 @@ from mikemol.procrun.proc import spawn_piped
 from mikemol.webpage.page import (
     PageBrokenError,
     Waitable,
-    load,
     until_expecting,
 )
-from mikemol.webpage.page import until as library_until
 from mikemol.webpage.page import watch as library_watch
 from playwright.sync_api import Browser as LaunchedBrowser
 from playwright.sync_api import Error as PlaywrightError
@@ -94,6 +92,28 @@ RECORD_FAILED = (
     " if (t && t !== window && (t.src || t.href)) window.__failed.push(String(t.src || t.href));"
     "}, true);"
 )
+# nemik:W2235: how many animation frames a wait lets pass with no sign of life before it fails,
+# counted in the page's own frames, not in seconds: a starved browser draws fewer of them, so a host
+# that is merely busy stretches this out, and a page that waits for a state that never comes spends
+# no CPU, so no CPU budget would ever end it. Sixty seconds of an idle desktop browser.
+IDLE_FRAMES = 3600
+# nemik:W2235: a sign of life is a change to the DOM or a fetch begun or finished. The page counts
+# them (events) and the frames since the last one (idle), on its own animation frames; a wait reads
+# idle and fails with the count when it passes IDLE_FRAMES. A layout that holds the main thread
+# draws no frames, so it counts no idle ones.
+RECORD_PROGRESS = (
+    "window.__progress = { events: 0, idle: 0 };"
+    "new MutationObserver(() => { window.__progress.events++; }).observe(document,"
+    " { subtree: true, childList: true, attributes: true, characterData: true });"
+    "const realFetch = window.fetch;"
+    "window.fetch = (...args) => { window.__progress.events++;"
+    " return realFetch(...args).finally(() => { window.__progress.events++; }); };"
+    "let seen = 0;"
+    "const frame = () => { const p = window.__progress;"
+    " p.idle = p.events === seen ? p.idle + 1 : 0; seen = p.events;"
+    " requestAnimationFrame(frame); };"
+    "requestAnimationFrame(frame);"
+)
 
 
 class Unbounded(Waitable, Protocol):
@@ -121,11 +141,43 @@ def watch(page: Unbounded) -> None:
     """
     library_watch(page)
     page.add_init_script(RECORD_FAILED)
+    page.add_init_script(RECORD_PROGRESS)
     page.set_default_timeout(0)
     page.set_default_navigation_timeout(0)
 
 
-def until(page: Waitable, expr: str) -> None:
+def wait_ready(page: Waitable, expr: str, idle_frames: int) -> None:
+    """Wait on a page predicate with no clock, ending when the page breaks or shows no life.
+
+    Args:
+        page: The Playwright page, watched before it navigated.
+        expr: A JS arrow function that is truthy once the page is ready.
+        idle_frames: How many animation frames with no DOM change and no fetch end the wait.
+
+    Raises:
+        PageBrokenError: The page raised an error or an unhandled rejection before the predicate
+            held, or drew `idle_frames` frames with no sign of life and was still not ready.
+
+    """
+    idle = "(window.__progress ? window.__progress.idle : 0)"
+    page.wait_for_function(
+        f"() => window.__broken != null || {idle} > {idle_frames} || ({expr})()",
+        timeout=0,
+    )
+    broken = page.evaluate("() => window.__broken")
+    if broken is not None:
+        message = f"the page broke while the test waited on it: {broken}"
+        raise PageBrokenError(message)
+    if not page.evaluate(f"() => !!({expr})()"):
+        events = page.evaluate("() => window.__progress.events")
+        message = (
+            f"no progress: {idle_frames} animation frames passed with no DOM change and no "
+            f"request ({events} events in all) and the page was still not ready"
+        )
+        raise PageBrokenError(message)
+
+
+def until(page: Waitable, expr: str, idle_frames: int = IDLE_FRAMES) -> None:
     """Wait on a page predicate with no clock; a broken page names the resources that failed.
 
     A page that lost scripts or stylesheets is loaded again, at most LOAD_TRIES times in all: the
@@ -133,18 +185,23 @@ def until(page: Waitable, expr: str) -> None:
     (net::ERR_NETWORK_CHANGED, W846), which no code under test caused. A resource that is really
     missing fails the same way on each try, so the retry costs time and hides nothing.
 
+    nemik:W2235: a page that waits for a state that never comes fails after `idle_frames` frames of
+    no sign of life (wait_ready), so an idle hang ends as a failure that names itself, which no CPU
+    budget can do.
+
     Args:
         page: The Playwright page, watched before it navigated.
         expr: A JS arrow function that is truthy once the page is ready.
+        idle_frames: How many animation frames with no sign of life end the wait.
 
     Raises:
-        PageBrokenError: The page broke; the message lists the resources that failed to load, so
-            a script missing under load names the asset (W846, W1060).
+        PageBrokenError: The page broke or went quiet; the message lists the resources that failed
+            to load, so a script missing under load names the asset (W846, W1060).
 
     """
     for tries in range(1, LOAD_TRIES + 1):
         try:
-            library_until(page, expr)
+            wait_ready(page, expr, idle_frames)
         except PageBrokenError as e:
             failed = page.evaluate("() => window.__failed || []")
             if failed and tries < LOAD_TRIES:
@@ -153,6 +210,25 @@ def until(page: Waitable, expr: str) -> None:
             message = f"{e}; resources that failed to load: {failed}"
             raise PageBrokenError(message) from e
         return
+
+
+def load(page: Unbounded, url: str, wait: str, idle_frames: int = IDLE_FRAMES) -> None:
+    """Watch a page, navigate it to `url`, and wait until `wait` holds or the page shows no life.
+
+    mtools' load watches with the library's watch, which sets no deadline and records no progress;
+    this one watches with ours (nemik:W1140, W2235), so a page opened through it has Playwright's
+    deadlines off and its idle hang ends.
+
+    Args:
+        page: A new Playwright page.
+        url: The address to open.
+        wait: A JS arrow function that is truthy once the page is ready.
+        idle_frames: How many animation frames with no sign of life end the wait.
+
+    """
+    watch(page)
+    page.goto(url)
+    until(page, wait, idle_frames)
 
 
 def page_errors(page: LaunchedPage) -> list[str]:

@@ -6142,3 +6142,12 @@
 2026-11-16T19:35:19Z  status W1140 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-16T20:33:53Z  interrupt W2232 minted    -         "Writer: --tick-close has no honest form for a read-scoped tick that leaves its card ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=substrate:W355
 2026-11-16T20:34:09Z  status W2232 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-16T21:17:21Z  interrupt W2233 minted    -         "Writer: --help prints no WV:1 vector grammar or example"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=substrate:W355
+2026-11-16T21:17:26Z  interrupt W2234 minted    -         "Hook: structural-query advisory did not fire on git grep over .py sources (unverified)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=substrate:W355
+2026-11-16T21:17:39Z  status W2233 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-16T21:17:43Z  status W2234 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-16T21:44:13Z  interrupt W2235 minted    -         "Browser tests: a no-progress check in webpage.until, so a page that idles ends as a named failure"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1140
+2026-11-16T21:44:15Z  interrupt W2236 minted    -         "tests/test_pdf_load_retry.py opens a page without watch and keeps Playwright's 30 s defaults"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1140
+2026-11-16T21:44:33Z  status W1140 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-16T21:46:54Z  status W1140 done>blocked writer    "done -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-16T21:57:53Z  status W2235 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
