@@ -28,6 +28,11 @@ TARGETS = [(src, "") for src in glob(["tests/test_*.py"]) if src != "tests/test_
         # nemik:W625: the SHACL cache tests are full surveys (a cold one is tens of seconds); the warm-equals-cold
         # property runs five of them beside five twins.
         size = "large" if src in ("tests/test_layout.py", "tests/test_codon_census.py", "tests/test_codon_calls.py", "tests/test_warm_equals_cold.py", "tests/test_cache_user.py") or item == "sequence" else "medium",
+        # nemik:W1140: bazel's timeout is wall time, and a loaded host spent it for tests that were not
+        # slow (eight in one gate; test_keymap passed in 293.9 s of 300 and was killed). The stop on a
+        # test is the CPU it spends (tools/cpuline.py, set in tests/conftest.py by this size), so the
+        # wall timeout is only the outermost guard: an hour.
+        timeout = "eternal",
         # nemik:W1044: six browser PDF prints; run alone it passed, in the full gate it timed out at 300 s
         # nemik:W1061: test_modes alone takes 190 s of its 300 s timeout, and test_layout 296 s of 900 s
         # but timed out at 900 s in a loaded gate, so both run in three as well

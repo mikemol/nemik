@@ -96,8 +96,24 @@ RECORD_FAILED = (
 )
 
 
-def watch(page: Waitable) -> None:
+class Unbounded(Waitable, Protocol):
+    """A page whose action and navigation deadlines can be set (Playwright's own two knobs)."""
+
+    def set_default_timeout(self, timeout: float) -> None:
+        """Set the deadline, in milliseconds, of every action on the page; 0 is none."""
+
+    def set_default_navigation_timeout(self, timeout: float) -> None:
+        """Set the deadline, in milliseconds, of every navigation; 0 is none."""
+
+
+def watch(page: Unbounded) -> None:
     """Install the page's error record and the failed-resource record, before it navigates.
+
+    nemik:W1140: and take every wall-clock deadline off the page's actions and navigations. A click,
+    a check or a goto that waits 30 s of wall time inside a browser a loaded host starves fails a
+    test through no fault of the code under test (W1083-v2's gate: page.check('#showDone') stalled
+    in 'performing click action'); the page's own state, awaited by `until`, is the only wait, and
+    the test's stop is its CPU budget (tools/cpuline.py, set in tests/conftest.py).
 
     Args:
         page: The Playwright page.
@@ -105,6 +121,8 @@ def watch(page: Waitable) -> None:
     """
     library_watch(page)
     page.add_init_script(RECORD_FAILED)
+    page.set_default_timeout(0)
+    page.set_default_navigation_timeout(0)
 
 
 def until(page: Waitable, expr: str) -> None:
@@ -180,7 +198,7 @@ class Route(Protocol):
         """Fail the request as a refused connection would."""
 
 
-class Pager(Waitable, Protocol):
+class Pager(Unbounded, Protocol):
     """A page that reports its requests and responses."""
 
     def on(self, event: str, handler: Callable[[Seen], None]) -> None:

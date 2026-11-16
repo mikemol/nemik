@@ -1,13 +1,13 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Mike Mol
-"""pytest hooks: the session's CPU line (nemik:W928) and Bazel's test shards (W1044)."""
+"""pytest hooks: the session's CPU line and stop (W928, W1140) and Bazel's test shards (W1044)."""
 
 import os
 import sys
 import time
 
 import pytest
-from cpuline import cpu_line
+from cpuline import bound_cpu, budget_for, cpu_line
 
 STARTED = time.monotonic()
 
@@ -25,6 +25,16 @@ def shard_of[T](items: list[T], total: int, index: int) -> list[T]:
 
     """
     return [item for position, item in enumerate(items) if position % total == index]
+
+
+def pytest_configure(config: pytest.Config) -> None:
+    """Give the session its CPU stop, by the size its target declares (nemik:W1140).
+
+    Bazel's own timeout is wall time, which a loaded host spends for a test that is not slow; the
+    stop here is the CPU the test spends (tools/cpuline.py), and bazel's timeout is the outer guard.
+    """
+    del config
+    bound_cpu(budget_for(os.environ.get("TEST_SIZE", "medium")))
 
 
 def pytest_collection_modifyitems(items: list[pytest.Item]) -> None:
