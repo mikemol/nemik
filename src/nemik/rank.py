@@ -35,6 +35,7 @@ from nemik.pacecli import behind_files, pace_exit, pace_process
 from nemik.queuefiles import QUEUE, default_root, workstream_files
 from nemik.realize import residue_gaps
 from nemik.roundcli import NO_LANDINGS, show_round, write_round_file
+from nemik.rounddigest import inside, queue_digest, remember, unchanged
 from nemik.salience import (
     AuditOptions,
     ask_effect,
@@ -1026,6 +1027,7 @@ class Options(argparse.Namespace):
     round: bool
     landings: Path
     round_file: Path | None
+    digest_file: Path | None
     assume_done: list[str]
     pace: bool
 
@@ -1139,6 +1141,15 @@ def _parse(argv: list[str] | None, root: Path) -> Options:
         "--landings gives the stack sizes",
     )
     ap.add_argument(
+        "--digest-file",
+        type=Path,
+        default=None,
+        metavar="FILE",
+        help="with --round-file: keep a digest of what the round reads in FILE and rank only when "
+        "it changed (nemik:W2217); FILE must be OUTSIDE the round file's directory, which the "
+        "export serves",
+    )
+    ap.add_argument(
         "--assume-done",
         nargs="+",
         metavar="REPO:W<n>",
@@ -1181,6 +1192,26 @@ def _dispatch(g: Graph, args: Options, weights: Weights) -> bool:
     return handled
 
 
+def _round_digest(args: Options) -> str:
+    """Digest what the round reads when --digest-file is asked (nemik:W2217).
+
+    Returns:
+        The digest, or an empty string when no digest file is asked.
+
+    Raises:
+        SystemExit: with code 2, when the digest file sits inside the round file's directory.
+
+    """
+    if args.round_file is None or args.digest_file is None:
+        return ""
+    if inside(str(args.round_file), str(args.digest_file)):
+        say(
+            f"rank: {args.digest_file} is inside the round file's directory: keep it outside"
+        )
+        raise SystemExit(2)
+    return queue_digest(str(args.root), str(args.landings))
+
+
 def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     """nemik-rank REPO: REPO's ready waypoints ordered by cross-repo downstream weight.
 
@@ -1199,6 +1230,11 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
         b, why = band(args.band, load_bands())
         say(f"{b}  ({why})")
         raise SystemExit(1 if why.startswith("invalid") else 0)
+    # nemik:W2217: a round whose inputs did not change is not ranked again (about a minute of CPU)
+    fresh = _round_digest(args)
+    kept = str(args.digest_file) if args.digest_file is not None else ""
+    if fresh and unchanged(fresh, kept):
+        return
     if g is None:
         g = Graph()
         # nemik:W1043: ranking reads the graphs only; the findings (SHACL) go unused
@@ -1209,6 +1245,8 @@ def main(argv: list[str] | None = None, g: Graph | None = None) -> None:
     if args.assume_done:
         g = assume_done(g, args.assume_done)
     if _dispatch(g, args, weights):
+        if fresh:
+            remember(fresh, kept)
         return
     _report_rank(g, args, weights)
 

@@ -6096,3 +6096,8 @@
 2026-11-16T03:10:10Z  interrupt W2215 minted    -         "Document gate-repair tagging in bands.toml and the nemik skill text"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2213
 2026-11-16T03:10:10Z  interrupt W2216 minted    -         "nemik-check warns on an open rank or round fix with no gate-repair tag"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2213
 2026-11-16T03:26:44Z  status W1063 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-16T03:50:08Z  status W1063 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-16T04:08:17Z  status W1063 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-16T04:08:17Z  status W2214 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-16T04:38:11Z  interrupt W2217 minted    -         "Re-export round.json on a queue write that changes status, tags or vector"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=mtools:W2442
+2026-11-16T05:40:33Z  status W2217 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

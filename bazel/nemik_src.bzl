@@ -115,6 +115,7 @@ NEMIK_PY = [
     "src/nemik/rolling.py",
     "src/nemik/rolls.py",
     "src/nemik/roundcli.py",
+    "src/nemik/rounddigest.py",
     "src/nemik/roundfile.py",
     "src/nemik/roundgauges.py",
     "src/nemik/roundof.py",
