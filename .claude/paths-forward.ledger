@@ -6151,3 +6151,9 @@
 2026-11-16T21:44:33Z  status W1140 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-16T21:46:54Z  status W1140 done>blocked writer    "done -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-16T21:57:53Z  status W2235 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-16T22:27:11Z  status W1140 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-16T22:27:11Z  status W2235 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-16T22:27:16Z  status W1140 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-16T22:27:35Z  status W1083 ready>landed writer    "ready -> landed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-16T22:28:43Z  interrupt W2237 minted    -         "Browser tests: a page whose animation frames stop (a hidden tab) has no non-wall stop but bazel's hour"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1140
+2026-11-16T23:02:54Z  status W1128 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

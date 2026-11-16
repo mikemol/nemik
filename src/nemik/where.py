@@ -10,11 +10,15 @@ is a number and a unit, `30m`, `12h` or `2d`. Predicates combine with `and`, `or
 parentheses; `not` binds tightest, then `and`, then `or`. A value with spaces is quoted.
 
 The expression is parsed once into a postfix list of strings and run against each row, so the same
-language serves every mode that lists cards. Plain lists and strings only: the Codon census holds
-this module.
+language serves every mode that lists cards. Over events (`nemik-history --events --where`) the
+fields are EVENT_FIELDS: repo, station (the symbol), field, from, to, commit and the change's age.
+Plain lists and strings only: the Codon census holds this module.
 """
 
-FIELDS = ("status", "age", "flag", "repo", "blocked_on", "title")
+FIELDS = ["status", "age", "flag", "repo", "blocked_on", "title"]
+# nemik:W1128: an event's row (nemik.cardevents.Event): its card's repo and symbol, the field that
+# changed, what it was and became, the commit that carried it, and how old the change is
+EVENT_FIELDS = ["repo", "station", "field", "from", "to", "commit", "age"]
 OPERATORS = ("=", "!=", "<", ">", "<=", ">=", "~")
 SYMBOLS = "=!<>~"
 SPLIT = "\x00"
@@ -88,7 +92,9 @@ def _take(tokens: list[str], pos: list[int], what: str) -> str:
     return tokens[pos[0] - 1]
 
 
-def _predicate(tokens: list[str], pos: list[int], out: list[str]) -> None:
+def _predicate(
+    tokens: list[str], pos: list[int], out: list[str], fields: list[str]
+) -> None:
     """Parse `field op value` and emit it.
 
     Raises:
@@ -98,8 +104,8 @@ def _predicate(tokens: list[str], pos: list[int], out: list[str]) -> None:
     field = _take(tokens, pos, "a field")
     op = _take(tokens, pos, f"an operator after {field}")
     value = _take(tokens, pos, f"a value after {field}{op}")
-    if field not in FIELDS:
-        message = f"{field} is not a field; the fields are {', '.join(FIELDS)}"
+    if field not in fields:
+        message = f"{field} is not a field; the fields are {', '.join(fields)}"
         raise ValueError(message)
     if op not in OPERATORS:
         message = f"{op} is not an operator; the operators are {' '.join(OPERATORS)}"
@@ -107,7 +113,9 @@ def _predicate(tokens: list[str], pos: list[int], out: list[str]) -> None:
     out.append(field + SPLIT + op + SPLIT + value)
 
 
-def _atom(tokens: list[str], pos: list[int], out: list[str]) -> None:
+def _atom(
+    tokens: list[str], pos: list[int], out: list[str], fields: list[str]
+) -> None:
     """Parse a parenthesised expression or a predicate.
 
     Raises:
@@ -116,47 +124,69 @@ def _atom(tokens: list[str], pos: list[int], out: list[str]) -> None:
     """
     if _peek(tokens, pos) == "(":
         pos[0] += 1
-        _or(tokens, pos, out)
+        _or(tokens, pos, out, fields)
         if _take(tokens, pos, "a closing parenthesis") != ")":
             message = "a parenthesis in the filter is not closed"
             raise ValueError(message)
     else:
-        _predicate(tokens, pos, out)
+        _predicate(tokens, pos, out, fields)
 
 
-def _not(tokens: list[str], pos: list[int], out: list[str]) -> None:
+def _not(
+    tokens: list[str], pos: list[int], out: list[str], fields: list[str]
+) -> None:
     """Parse `not` and what it negates."""
     if _peek(tokens, pos) == "not":
         pos[0] += 1
-        _not(tokens, pos, out)
+        _not(tokens, pos, out, fields)
         out.append("NOT")
     else:
-        _atom(tokens, pos, out)
+        _atom(tokens, pos, out, fields)
 
 
-def _and(tokens: list[str], pos: list[int], out: list[str]) -> None:
+def _and(
+    tokens: list[str], pos: list[int], out: list[str], fields: list[str]
+) -> None:
     """Parse terms joined by `and`."""
-    _not(tokens, pos, out)
+    _not(tokens, pos, out, fields)
     while _peek(tokens, pos) == "and":
         pos[0] += 1
-        _not(tokens, pos, out)
+        _not(tokens, pos, out, fields)
         out.append("AND")
 
 
-def _or(tokens: list[str], pos: list[int], out: list[str]) -> None:
+def _or(
+    tokens: list[str], pos: list[int], out: list[str], fields: list[str]
+) -> None:
     """Parse terms joined by `or`."""
-    _and(tokens, pos, out)
+    _and(tokens, pos, out, fields)
     while _peek(tokens, pos) == "or":
         pos[0] += 1
-        _and(tokens, pos, out)
+        _and(tokens, pos, out, fields)
         out.append("OR")
 
 
 def parse(text: str) -> list[str]:
-    """Parse a filter into postfix.
+    """Parse a filter over a card's row into postfix.
 
     Args:
         text: The expression, e.g. `status=ready and not blocked_on=*`.
+
+    Returns:
+        The postfix list parse_fields gives for FIELDS; a malformed expression raises ValueError
+        there, naming what is wrong.
+
+    """
+    return parse_fields(text, FIELDS)
+
+
+def parse_fields(text: str, fields: list[str]) -> list[str]:
+    """Parse a filter into postfix, its predicates naming only `fields`.
+
+    Args:
+        text: The expression, e.g. `status=ready and not blocked_on=*`.
+        fields: The fields the rows it will run against have: FIELDS for a card, EVENT_FIELDS for
+            an event.
 
     Returns:
         The postfix list: a predicate is `field`, `op` and `value` joined by NUL; the combinators
@@ -171,7 +201,7 @@ def parse(text: str) -> list[str]:
         return []
     out: list[str] = []
     pos = [0]
-    _or(tokens, pos, out)
+    _or(tokens, pos, out, fields)
     if pos[0] < len(tokens):
         message = f"unexpected {tokens[pos[0]]} in the filter"
         raise ValueError(message)
@@ -277,3 +307,29 @@ def matches(postfix: list[str], row: dict[str, str]) -> bool:
             field, op, value = item.split(SPLIT)
             stack.append(_holds(field, op, value, row))
     return all(stack)
+
+
+def event_row(
+    event: tuple[str, str, str, str, str, str], age_days: float
+) -> dict[str, str]:
+    """Give an event the row a filter over EVENT_FIELDS runs against (nemik:W1128).
+
+    Args:
+        event: One nemik.cardevents.Event: station, time, field, from, to, commit.
+        age_days: How old the change is, in days.
+
+    Returns:
+        The row: cite (the station, so `repo` reads its repo), station (the symbol alone), field,
+        from, to, commit and age_days, as text.
+
+    """
+    station, _when, field, old, new, sha = event
+    return {
+        "cite": station,
+        "station": station.partition(":")[2],
+        "field": field,
+        "from": old,
+        "to": new,
+        "commit": sha,
+        "age_days": str(age_days),
+    }

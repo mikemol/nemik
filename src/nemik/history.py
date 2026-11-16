@@ -46,7 +46,7 @@ from nemik.queuefiles import LEDGER, QUEUE, default_root, workstream_files
 from nemik.say import say, warn
 from nemik.verify import lead_report, score_shingle, shingle_pairs
 from nemik.wake import read_liveness
-from nemik.where import matches, parse
+from nemik.where import EVENT_FIELDS, event_row, matches, parse, parse_fields
 from nemik.workmarks import IDLE_MINUTES, idle, pair
 
 RELIABILITY_BINS = 4  # --score cuts each lead's chances into this many bins
@@ -1646,7 +1646,10 @@ def main(argv: list[str] | None = None) -> int:
         "--where",
         default="",
         metavar="EXPRESSION",
-        help="with --oldest: keep only the cards a find(1)-shaped filter names, then take N. "
+        help="with --events: keep only the events it names; the fields are repo, station (the "
+        "symbol), field, from, to, commit and age (of the change), e.g. 'field=status and "
+        "to=done and age<7d'. With --oldest: keep only the cards a find(1)-shaped filter names, "
+        "then take N. "
         "Predicates field OP value over status, age (30m, 12h, 2d), flag, repo, blocked_on and "
         "title, with = != < > <= >= and ~ (contains); * is any; combine with and, or, not and "
         "parentheses. Example: 'status=ready and not blocked_on=* and age>2d' (W1128)",
@@ -1998,14 +2001,48 @@ def _oldest(args: Opts, names: list[str], dirs: dict[str, Path]) -> int:
     return 0
 
 
+def kept_events(events: list[Event], expression: str) -> list[Event]:
+    """Keep the events a --where filter over EVENT_FIELDS names (nemik:W1128).
+
+    Args:
+        events: The events, each (station, time, field, from, to, commit).
+        expression: The filter, e.g. `field=status and to=done and age<7d`.
+
+    Returns:
+        The events the filter keeps, in order; an expression that is not well formed, or a
+        predicate that cannot be judged, raises ValueError from nemik.where.
+
+    """
+    keep = parse_fields(expression, EVENT_FIELDS)
+    now = datetime.now(UTC)
+    return [
+        event
+        for event in events
+        if matches(
+            keep,
+            event_row(
+                event, (now - datetime.fromisoformat(event[1])).total_seconds() / 86400
+            ),
+        )
+    ]
+
+
 def _events(args: Opts, names: list[str], dirs: dict[str, Path]) -> int:
     """Print every change to a card in the repos' queue history, one event a line (nemik:W744).
 
+    With --where EXPRESSION only the events it keeps are printed (nemik:W1128).
+
     Returns:
-        0.
+        0; 2 when the --where expression is not well formed, the error on stderr.
 
     """
     rows = [event for name in names for event in backfill(name, dirs[name], args.start)]
+    if args.where:
+        try:
+            rows = kept_events(rows, args.where)
+        except ValueError as error:
+            sys.stderr.write(f"nemik-history: --where: {error}\n")
+            return 2
     if emit(args, "events", rows):
         return 0
     for event in rows:
