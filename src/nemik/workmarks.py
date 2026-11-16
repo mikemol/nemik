@@ -6,7 +6,28 @@ A symbol-led commit does not mean the card landed: a card worked in slices leads
 slice (github-8f's sweep: about half are first parts). So nothing here closes or flags a card. It
 lines each candidate's newest commit subject up with the card's own statement of what is left
 (its next bounded step), so the owner reads the verdict from both and not from the symbol alone.
+
+The other mark is a working card nobody is working: its last_worked stamp (a UTC ISO text, which
+sorts as text) is older than a cutoff, or absent. That is judged from the card alone, so a card
+marked working while its owner is elsewhere is listed and not touched.
 """
+
+# the span nemik-check allows a live loop between ticks (nemik:W1094)
+IDLE_MINUTES = 90
+
+
+def idle(working: dict[str, str], cutoff: str) -> list[str]:
+    """List the working cards whose last_worked stamp is before the cutoff, or missing.
+
+    Args:
+        working: The repo's working cards, symbol to its last_worked stamp (empty when unstamped).
+        cutoff: A UTC ISO stamp, 2026-11-16T10:00:00Z; a card worked since is not idle.
+
+    Returns:
+        The idle symbols, sorted; an unstamped card is idle, since nothing says it is being worked.
+
+    """
+    return sorted(s for s, worked in working.items() if not worked or worked < cutoff)
 
 
 def head(subject: str) -> str:

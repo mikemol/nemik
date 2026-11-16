@@ -6132,3 +6132,9 @@
 2026-11-16T16:23:27Z  interrupt W2227 minted    -         "Writer: --tick-open calls a queue-only commit naming W<n> that card's LANDING"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=substrate:W355
 2026-11-16T16:23:50Z  status W2227 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-16T17:03:16Z  status W1083 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-16T18:23:45Z  interrupt W2228 minted    -         "A retro handoff Violation cannot be cleared once recorded: no amend or superseding form"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=substrate:R13
+2026-11-16T18:32:48Z  status W1083 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-16T18:58:11Z  status W1083 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-16T19:21:22Z  interrupt W2229 minted    -         "darkrepos.py: a repo's learned bound from its own landing gaps, and whether it is dark"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1106
+2026-11-16T19:21:22Z  interrupt W2230 minted    -         "nemik_repo_dark gauge: one sample per now-tier repo with ready cards"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1106
+2026-11-16T19:21:22Z  interrupt W2231 minted    -         "A Warning shape for a dark now-tier repo with ready cards, and the SKILL.md line"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1106

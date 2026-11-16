@@ -47,7 +47,7 @@ from nemik.say import say, warn
 from nemik.verify import lead_report, score_shingle, shingle_pairs
 from nemik.wake import read_liveness
 from nemik.where import matches, parse
-from nemik.workmarks import pair
+from nemik.workmarks import IDLE_MINUTES, idle, pair
 
 RELIABILITY_BINS = 4  # --score cuts each lead's chances into this many bins
 # nemik:W966: the status whose cards take no place in a repo's line
@@ -1557,8 +1557,8 @@ def main(argv: list[str] | None = None) -> int:
         "--landed-open",
         action="store_true",
         help="per repo, each ready card that leads a landed commit's subject: the newest such "
-        "subject beside what the card says is left. Closes nothing; the verdict is the owner's "
-        "(W1083)",
+        "subject beside what the card says is left, then each working card not worked in the "
+        "last 90 minutes. Closes nothing; the verdict is the owner's (W1083)",
     )
     mode.add_argument(
         "--events",
@@ -2975,22 +2975,45 @@ def _landed_open(_args: Opts, names: list[str], dirs: dict[str, Path]) -> int:
         0, after printing each repo's candidates.
 
     """
+    cutoff = (datetime.now(UTC) - timedelta(minutes=IDLE_MINUTES)).strftime(
+        "%Y-%m-%dT%H:%M:%SZ"
+    )
     for name in names:
         subjects = recent_subjects(dirs[name])
         if subjects is None:
             say(f"{name}: no readable history")
             continue
-        ready: dict[str, str] = {}
-        for card in queue_at(dirs[name], "HEAD").get("waypoints", []):
-            symbol, status = card.get("symbol"), card.get("status")
-            step = card.get("next_bounded_step", "")
-            if status == "ready" and isinstance(symbol, str):
-                ready[symbol] = step if isinstance(step, str) else ""
+        ready, working = _marks(dirs[name])
         lines = pair(ready, subjects)
         say(f"{name}: {len(lines)} ready card(s) lead a landed commit")
         for line in lines:
             say(line)
+        stale = idle(working, cutoff)
+        say(f"{name}: {len(stale)} working card(s) idle since before {cutoff}")
+        for symbol in stale:
+            say(f"{symbol}\n  last worked: {working[symbol] or '(never stamped)'}")
     return 0
+
+
+def _marks(repo: Path) -> tuple[dict[str, str], dict[str, str]]:
+    """Read a repo's committed queue as the two marks W1083 judges (nemik:W1083).
+
+    Returns:
+        The ready cards (symbol to next bounded step) and the working cards (symbol to last_worked).
+
+    """
+    ready: dict[str, str] = {}
+    working: dict[str, str] = {}
+    for card in queue_at(repo, "HEAD").get("waypoints", []):
+        symbol, status = card.get("symbol"), card.get("status")
+        if not isinstance(symbol, str):
+            continue
+        step, worked = card.get("next_bounded_step", ""), card.get("last_worked", "")
+        if status == "ready":
+            ready[symbol] = step if isinstance(step, str) else ""
+        elif status == "working":
+            working[symbol] = worked if isinstance(worked, str) else ""
+    return ready, working
 
 
 def _days(seconds: float) -> str:

@@ -5,12 +5,13 @@
 from __future__ import annotations
 
 import json
+from datetime import UTC, datetime
 from typing import TYPE_CHECKING
 
 from mikemol.procrun.proc import capture
 
 from nemik.history import main
-from nemik.workmarks import head, leading, pair
+from nemik.workmarks import head, idle, leading, pair
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -66,6 +67,18 @@ def test_pair_closes_nothing_and_lists_in_symbol_order() -> None:
     assert pair({"W5": "x"}, SUBJECTS) == []
 
 
+def test_idle_lists_a_working_card_not_worked_since_the_cutoff() -> None:
+    """A stamp before the cutoff is idle, one at or after it is not, and none at all is idle."""
+    working = {
+        "W3": "2026-11-16T08:00:00Z",
+        "W1": "2026-11-16T09:30:00Z",
+        "W2": "2026-11-16T09:00:00Z",
+        "W4": "",
+    }
+    assert idle(working, "2026-11-16T09:30:00Z") == ["W2", "W3", "W4"]
+    assert idle({}, "2026-11-16T09:30:00Z") == []
+
+
 def _git(repo: Path, *args: str) -> None:
     """Run git in `repo` as a fixed author and fail the test when it exits nonzero."""
     env = {
@@ -79,14 +92,19 @@ def _git(repo: Path, *args: str) -> None:
     assert done.returncode == 0, done.stderr
 
 
-def _card(symbol: str, status: str, step: str) -> dict[str, str]:
+def _card(symbol: str, status: str, step: str, worked: str = "") -> dict[str, str]:
     """Build one queue card with the fields the mode reads.
 
     Returns:
         The card as the queue file stores it.
 
     """
-    return {"symbol": symbol, "status": status, "next_bounded_step": step}
+    return {
+        "symbol": symbol,
+        "status": status,
+        "next_bounded_step": step,
+        "last_worked": worked,
+    }
 
 
 def test_the_mode_prints_a_ready_candidate_beside_its_next_step(
@@ -95,10 +113,13 @@ def test_the_mode_prints_a_ready_candidate_beside_its_next_step(
     """On a real repo a ready card leading a commit is listed; a blocked one is not."""
     repo = tmp_path / "demo"
     (repo / ".claude").mkdir(parents=True)
+    now = datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
     cards = [
         _card("W1", "ready", "finish the second half"),
         _card("W2", "blocked", "wait"),
         _card("W3", "ready", "never committed"),
+        _card("W4", "working", "", "2020-01-01T00:00:00Z"),
+        _card("W5", "working", "", now),
     ]
     doc = {"waypoints": cards}
     (repo / ".claude" / "paths-forward.json").write_text(
@@ -114,3 +135,6 @@ def test_the_mode_prints_a_ready_candidate_beside_its_next_step(
     assert "left:   finish the second half" in out
     assert "W2" not in out
     assert "W3" not in out
+    assert "demo: 1 working card(s) idle since before" in out
+    assert "W4\n  last worked: 2020-01-01T00:00:00Z" in out
+    assert "W5" not in out
