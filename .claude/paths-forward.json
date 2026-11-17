@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 2243,
+  "counter": 2244,
   "waypoints": [
     {
       "symbol": "W1",
@@ -50884,7 +50884,7 @@
     {
       "symbol": "W2110",
       "title": "A review ref carries its bazel lint and type verdicts before any review ask: test_ruff_ratchet and test_mypy_ratchet plus the changed tests green on the exact ref bytes, one check",
-      "status": "ready",
+      "status": "working",
       "enables": [],
       "touches": [
         "velocity"
@@ -50896,7 +50896,7 @@
       "issued_at": "2026-11-09T22:09:54Z",
       "minted_during": "interrupt",
       "caused_by": "W2077",
-      "last_worked": "2026-11-16T12:37:38Z",
+      "last_worked": "2026-11-17T04:14:27Z",
       "ticks_blocked": 0,
       "manifest": [
         "tools/gate_staged.sh"
@@ -53051,21 +53051,25 @@
     {
       "symbol": "W2225",
       "title": "nemik-check --warnings --repo substrate runs past 300 s, over every hook's call timeout",
-      "status": "working",
+      "status": "landed",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Reported by substrate-a5 2026-11-16 (via github-cb), measured by them: as a --tick-open hook, nemik-check --warnings --repo substrate took --tick-open past 300 s wall twice, a read-only run timed out at the 120 s foreground limit with empty output, and the SessionStart hook timed out at 60 s fleet-wide (this session's own start-of-day context also said the check of this repo's queue could not run, timed out after 60 s). Scoping to --repo substrate did not help. substrate moved it to a background run every tick under a standing rule, not skipped. Witness: nemik-check --warnings --repo substrate completes within the --tick-open call timeout on substrate's queue (354 cards). Not profiled by them. First step: PROFILE which phase is slow: check.survey takes a phases argument that the phases write seconds into, the survey reads and SHACL-checks every queue (W1043 split ranking from findings), and nemik-check --repo may still survey the whole fleet. Measure wall AND CPU per phase on this host before changing anything. Then fix the largest phase by decomposing or caching (cached_survey exists), never by raising a timeout.",
-      "evidence": "2026-11-16T14:34:22Z: 2026-11-16 MEASURED here (/usr/bin/time -v around nemik-check --warnings --repo substrate, output to scratch, host loadavg 153.9 / 163.0 / 145.8 right after): wall 9:10.45 (550 s), user 361.76 s plus system 6.61 s = 368 s CPU, 66 percent of a CPU, peak RSS 1,016,328 kB, exit 0. So the run is CPU-bound (about 6 minutes of CPU), not waiting: under no load it would still be over every hook timeout (60, 120, 300 s). substrate's own wall figures (over 300 s, a 120 s timeout) agree with a CPU cost of this size. NEXT: where the 368 CPU-seconds go (the survey's phases). | 2026-11-16T14:50:57Z: 2026-11-16 profile of survey(default_root()) via restore_user: run1 wall 237.9 s cpu 205.5 s (shacl 187.5, parse 14.7, fleet_checks 2.9, annotate 0.4); run2 right after (cache file build-caches-24358f31d092d153.json 9.4 MB present, restore_user()=True, _LAST holds 1 key) wall 425.7 s cpu 344.4 s (shacl 325.3). So the cache restores and does not help: shaclinc.findings revalidates the whole neighbourhood of any changed triple, and a hub (workstream, adjacent > HUB) pulls in every neighbour, so one edited card in a repo revalidates that repo's whole subgraph, and the queue changes every tick. Next: measure len(changed), len(focus), len(near) per repo to confirm, then scope the validated subgraph (per-repo, not merged fleet) in _shacl_by_repo. Scratch: scratchpad/survey-phases2.txt, restore_probe.py. | 2026-11-16T15:12:34Z: 2026-11-16 reach probe (scratchpad shacl_reach.py), against the restored cache: diff 824 triples, changed 16, touched 5, focus 29, near 74, BUT 3 hubs (adjacent 2738, 2622, 563) are live, so shaclinc.findings adds all their neighbours: 5950 nodes, 104496 of 247189 triples (42%) re-validated whole on every small change. Cause confirmed: the hub expansion (HUB threshold) for whole-repo shapes. Fix direction: validate hub-level shapes without dragging each neighbour's full triples (restrict hub neighbours to the predicates the hub shapes read), keep test_warm_equals_cold green; or per-repo hub subgraph so one repo's edit does not pull another's. | 2026-11-16T15:48:08Z: 2026-11-16 fix built in working tree (src/nemik/shaclinc.py hub_reads + findings: a hub's neighbours that are not near the change enter the validated subgraph with only the predicates the Workstream-targeted shapes read, no rdf:type; tests/test_hub_reads.py new, passes). Deterministic measure (scratchpad shacl_reach.py, restored cache): revalidated subgraph 94871 -> 18756 triples (-80%), nodes unchanged (5407) but untyped so no card shape targets them. test_warm_equals_cold, test_shaclinc{,_new_shape,_umbrella,_unwatched}, test_cache_user pass. Wall/CPU comparisons are NOT usable: sp3 (cold stamp) 26.3 s cpu, sp4 (warm) 88.3 s cpu, earlier runs 205/344 s at load ~150, so load dominates; the triple count is the evidence. Not yet landed: needs round entry or gate-repair ruling.",
+      "next_bounded_step": "Close with the image witness once W2244 is carded as the remainder, or attach the witness now and re-file the rest",
+      "evidence": "2026-11-16T14:34:22Z: 2026-11-16 MEASURED here (/usr/bin/time -v around nemik-check --warnings --repo substrate, output to scratch, host loadavg 153.9 / 163.0 / 145.8 right after): wall 9:10.45 (550 s), user 361.76 s plus system 6.61 s = 368 s CPU, 66 percent of a CPU, peak RSS 1,016,328 kB, exit 0. So the run is CPU-bound (about 6 minutes of CPU), not waiting: under no load it would still be over every hook timeout (60, 120, 300 s). substrate's own wall figures (over 300 s, a 120 s timeout) agree with a CPU cost of this size. NEXT: where the 368 CPU-seconds go (the survey's phases). | 2026-11-16T14:50:57Z: 2026-11-16 profile of survey(default_root()) via restore_user: run1 wall 237.9 s cpu 205.5 s (shacl 187.5, parse 14.7, fleet_checks 2.9, annotate 0.4); run2 right after (cache file build-caches-24358f31d092d153.json 9.4 MB present, restore_user()=True, _LAST holds 1 key) wall 425.7 s cpu 344.4 s (shacl 325.3). So the cache restores and does not help: shaclinc.findings revalidates the whole neighbourhood of any changed triple, and a hub (workstream, adjacent > HUB) pulls in every neighbour, so one edited card in a repo revalidates that repo's whole subgraph, and the queue changes every tick. Next: measure len(changed), len(focus), len(near) per repo to confirm, then scope the validated subgraph (per-repo, not merged fleet) in _shacl_by_repo. Scratch: scratchpad/survey-phases2.txt, restore_probe.py. | 2026-11-16T15:12:34Z: 2026-11-16 reach probe (scratchpad shacl_reach.py), against the restored cache: diff 824 triples, changed 16, touched 5, focus 29, near 74, BUT 3 hubs (adjacent 2738, 2622, 563) are live, so shaclinc.findings adds all their neighbours: 5950 nodes, 104496 of 247189 triples (42%) re-validated whole on every small change. Cause confirmed: the hub expansion (HUB threshold) for whole-repo shapes. Fix direction: validate hub-level shapes without dragging each neighbour's full triples (restrict hub neighbours to the predicates the hub shapes read), keep test_warm_equals_cold green; or per-repo hub subgraph so one repo's edit does not pull another's. | 2026-11-16T15:48:08Z: 2026-11-16 fix built in working tree (src/nemik/shaclinc.py hub_reads + findings: a hub's neighbours that are not near the change enter the validated subgraph with only the predicates the Workstream-targeted shapes read, no rdf:type; tests/test_hub_reads.py new, passes). Deterministic measure (scratchpad shacl_reach.py, restored cache): revalidated subgraph 94871 -> 18756 triples (-80%), nodes unchanged (5407) but untyped so no card shape targets them. test_warm_equals_cold, test_shaclinc{,_new_shape,_umbrella,_unwatched}, test_cache_user pass. Wall/CPU comparisons are NOT usable: sp3 (cold stamp) 26.3 s cpu, sp4 (warm) 88.3 s cpu, earlier runs 205/344 s at load ~150, so load dominates; the triple count is the evidence. Not yet landed: needs round entry or gate-repair ruling. | 2026-11-17T04:01:52Z: 2026-11-17 Landed 3caa25a (full sha 3caa25ad154a043dc1ecc6797da4ffb26a9c4f1d): mikemol-commit printed COMMITTED nemik 3caa25a W2225 [PUSHED]; git log main shows my subject. Gate 536 of 536 green (the stack's first gate, on d5af7f0, was refused on test_serve_no_spawn's wall deadline: nemik:W2243, fixed and landed 23535d4; this is the re-gate, not counted as clean green on a resubmit). shaclinc.hub_reads and _judged: a hub's other neighbours enter the validated subgraph with only the predicates the hub shapes read, no type: 18756 triples instead of 94871 on the probe state; tests/test_hub_reads.py. Image landing: witness to attach by hand when the card closes (git_ref nemik@3caa25ad154a043dc1ecc6797da4ffb26a9c4f1d resolves). No end-to-end timing claimed. REMAINDER carded as nemik:W2244 (the whole-fleet survey filtered by repo). | 2026-11-17T04:01:57Z: 2026-11-17 closed on the landing: image witness attached by hand (git_ref nemik@3caa25ad154a043dc1ecc6797da4ffb26a9c4f1d resolves) until mtools:W2542. The remainder is nemik:W2244; this card's own title (substrate's slow warnings) is partly addressed (the hub revalidation) and the whole-fleet filter is W2244's.",
       "issued_at": "2026-11-16T14:24:13Z",
       "minted_during": "interrupt",
       "caused_by": "substrate:W1",
-      "last_worked": "2026-11-17T01:34:59Z",
+      "last_worked": "2026-11-17T04:01:57Z",
       "ticks_blocked": 0,
       "vector": "WV:1/R:C/E:N/C:N/I:N/A:L/X:N/S:U/F:U/W:Y",
       "vector_source": "agent",
-      "completed": null
+      "completed": null,
+      "landed_at": "20261117T040157Z",
+      "witness": "input.git_ref[\"nemik@3caa25ad154a043dc1ecc6797da4ffb26a9c4f1d\"].resolves == true",
+      "witness_lang": "rego",
+      "deploys": true
     },
     {
       "symbol": "W2226",
@@ -53434,6 +53438,26 @@
       "completed": null,
       "manifest": [
         "tests/test_serve_no_spawn.py"
+      ]
+    },
+    {
+      "symbol": "W2244",
+      "title": "nemik-check --warnings --repo R surveys the whole fleet, then filters to R: validate only R's findings",
+      "status": "ready",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Read check.warnings_report: it calls survey over the default root and filters by repo name; scope the SHACL result to the repo's nodes (the merged graph must stay whole for cross-repo edges) or serve it from the digest-keyed cached survey; measure by triple count, not wall time",
+      "evidence": "2026-11-17T04:01:50Z: 2026-11-17 split from W2225 after 3caa25a landed the hub half. The other cost I measured: warnings_report surveys the whole fleet (17 repos, 247k triples) then filters by repo name, so one repo's report pays for all of them; phase profile of survey(default_root()): shacl 187.5 s of 205.5 s CPU, parse 14.7, fleet_checks 2.9. Not started.",
+      "issued_at": "2026-11-17T04:01:42Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2225",
+      "last_worked": "2026-11-17T04:01:50Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "src/nemik/check.py",
+        "tests/test_check_warnings_repo.py"
       ]
     }
   ],

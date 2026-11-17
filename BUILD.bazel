@@ -196,6 +196,26 @@ test_suite(
     tests = [":" + src.removeprefix("tests/").removesuffix(".py") + ("_" + item if item else "") for src, item in TARGETS],
 )
 
+# nemik:W2110: the tests the gate runs that a hand-picked pre-gate run kept leaving out, each named by a
+# refusal (nemik:R495): the ratchets, the registries, the Codon census and its wall tests, the source
+# list and the precommit gate. `bazel test //:pre_gate` runs them in minutes; it is a subset of
+# //:precommit and does not replace it. tests/test_pre_gate_suite.py holds the member list.
+test_suite(
+    name = "pre_gate",
+    tests = [
+        ":test_architecture",
+        ":test_codon_census",
+        ":test_codon_wall_incidence",
+        ":test_codon_wall_table",
+        ":test_mypy_ratchet",
+        ":test_nemik_src",
+        ":test_precommit_gate",
+        ":test_precommit_nemik_src",
+        ":test_ruff_ratchet",
+        ":test_skill",
+    ],
+)
+
 # nemik:W445: MPXJ and the JAXB jars its MSPDI reader needs (pinned in MODULE.bazel)
 filegroup(
     name = "mpxj_classpath",

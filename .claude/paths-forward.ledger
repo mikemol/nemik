@@ -6173,3 +6173,7 @@
 2026-11-17T02:13:42Z  interrupt W2243 minted    -         "Tests wait on HTTP and thread timeouts counted in wall seconds: a loaded host fails them (test_serve_no_spawn /wake, 120 s)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1140
 2026-11-17T02:13:52Z  status W2243 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-17T03:15:42Z  status W2243 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T04:01:42Z  interrupt W2244 minted    -         "nemik-check --warnings --repo R surveys the whole fleet, then filters to R: validate only R's findings"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2225
+2026-11-17T04:01:52Z  status W2225 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T04:01:57Z  status W2225 ready>landed writer    "ready -> landed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T04:14:27Z  status W2110 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
