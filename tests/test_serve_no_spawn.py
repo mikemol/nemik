@@ -123,8 +123,14 @@ def server() -> Iterator[int]:
 
 @pytest.mark.parametrize("route", ROUTES)
 def test_a_route_answers_without_starting_a_process(server: int, route: str) -> None:
-    """GET the route: any answer but a server error means no spawner was reached."""
-    connection = http.client.HTTPConnection("127.0.0.1", server, timeout=120)
+    """GET the route: any answer but a server error means no spawner was reached.
+
+    nemik:W2243: the connection has no wall deadline. A 120 s one failed /wake and /wake.json
+    when the server was starved (34.9 CPU seconds of work took 150 s of wall time in a gate,
+    350 s at a tenth of a core); the stop on this test is its CPU budget (tests/conftest.py),
+    and bazel's hour is the outer guard.
+    """
+    connection = http.client.HTTPConnection("127.0.0.1", server, timeout=None)
     connection.request("GET", route)
     reply = connection.getresponse()
     reply.read()

@@ -6165,3 +6165,10 @@
 2026-11-16T23:30:45Z  interrupt W2241 minted    -         "nemik-history --weekly and --density take --where, or say in --help why they do not"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1128
 2026-11-16T23:31:09Z  status W2047 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-17T00:22:09Z  status W2055 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T01:03:28Z  status W2055 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T01:03:32Z  interrupt W2242 minted    -         "Per-file bazel targets for the codon probe and shellcheck, beside //:pycheck_file"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2055
+2026-11-17T01:04:19Z  status W2062 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T01:12:50Z  status W2062 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T01:34:59Z  status W2225 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T02:13:42Z  interrupt W2243 minted    -         "Tests wait on HTTP and thread timeouts counted in wall seconds: a loaded host fails them (test_serve_no_spawn /wake, 120 s)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1140
+2026-11-17T02:13:52Z  status W2243 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
