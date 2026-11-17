@@ -151,6 +151,7 @@ NEMIK_PY = [
     "src/nemik/waitlog.py",
     "src/nemik/waitrows.py",
     "src/nemik/waitseries.py",
+    "src/nemik/waitslo.py",
     "src/nemik/wake.py",
     "src/nemik/warrantdebt.py",
     "src/nemik/warrants.py",

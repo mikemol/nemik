@@ -6177,3 +6177,11 @@
 2026-11-17T04:01:52Z  status W2225 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-17T04:01:57Z  status W2225 ready>landed writer    "ready -> landed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-17T04:14:27Z  status W2110 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T04:54:59Z  status W2110 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T05:13:47Z  status W2056 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T05:14:05Z  status W2063 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T05:18:19Z  status W2063 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T05:49:47Z  status W700 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T05:53:42Z  interrupt W2245 minted    -         "Bazel's server startup gives up after 120 wall seconds under load: a gate was refused before it ran a test"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1140
+2026-11-17T05:53:53Z  status W2245 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T05:56:59Z  status W2245 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
