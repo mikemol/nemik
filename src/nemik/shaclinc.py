@@ -182,6 +182,73 @@ def watched_predicates(shapes: Graph, texts: list[str]) -> frozenset[str]:
     return frozenset(names)
 
 
+def hub_reads(shapes: Graph) -> frozenset[str]:
+    """Name the predicates a hub-level shape reads off the hub's neighbours (nemik:W2225).
+
+    A hub is a workstream: the shapes that judge it target the Workstream class or the objects of
+    `workstream`, and read its cards through the predicates their queries and paths name. A card
+    that is only a hub's neighbour is read through those and no others, and is no focus node, so
+    the rest of its triples (its type above all, which would target it for every card shape) add
+    validation work and no verdict.
+
+    Args:
+        shapes: The shapes graph.
+
+    Returns:
+        The last segments of `workstream` and of every predicate those shapes' constraints name.
+
+    """
+    names = {"workstream"}
+    for shape in shapes.subjects():
+        target = {
+            _tail(str(o))
+            for p in (SH.targetClass, SH.targetObjectsOf)
+            for o in shapes.objects(shape, p)
+        }
+        if not target & {"Workstream", "workstream"}:
+            continue
+        for constraint in shapes.objects(shape, SH.sparql):
+            for text in shapes.objects(constraint, SH.select):
+                names |= {_tail(p) for p in predicates(str(text))}
+        for prop in shapes.objects(shape, SH.property):
+            names |= {_tail(str(p)) for p in shapes.objects(prop, SH.path)}
+    return frozenset(names)
+
+
+def _judged(
+    now: frozenset[tuple[Node, Node, Node]],
+    adjacent: dict[Node, set[Node]],
+    live: set[Node],
+    hops: int,
+    shapes: Graph,
+) -> Graph:
+    """Build the subgraph the live nodes are judged in (nemik:W2225).
+
+    The live nodes' neighbourhood keeps every triple, so a card is judged against all it reads. A
+    hub (a workstream) among them is also judged against every card it joins, but those cards only
+    as far as the hub-level shapes read them (hub_reads), with no type: they are no focus node, and
+    their other triples would only be validated against the card shapes for results thrown away.
+
+    Returns:
+        The graph to validate.
+
+    """
+    near = _neighbourhood(adjacent, live, hops)
+    wide: set[Node] = set()
+    for hub in live:
+        if len(adjacent.get(hub, ())) > HUB:
+            wide |= adjacent[hub]
+    wide -= near
+    reads = hub_reads(shapes)
+    sub = Graph()
+    for t in now:
+        if t[0] in near or (
+            t[0] in wide and ("?" in reads or _tail(str(t[1])) in reads)
+        ):
+            sub.add(t)
+    return sub
+
+
 def findings(key: str, data: Graph, shapes: Graph) -> list[tuple[Node, str, str]]:
     """(focus, severity IRI, message) for every result, re-validating only what changed.
 
@@ -222,14 +289,7 @@ def findings(key: str, data: Graph, shapes: Graph) -> list[tuple[Node, str, str]
             # whole, so targets select exactly as in a full run; only the focus nodes' results are
             # kept. A hub judged here (a workstream) is judged against ALL its neighbours, or a
             # shape over the whole repo ("no working card") would see only part of it.
-            near = _neighbourhood(adjacent, live, hops)
-            for hub in live:
-                if len(adjacent.get(hub, ())) > HUB:
-                    near |= adjacent[hub]
-            sub = Graph()
-            for t in now:
-                if t[0] in near:
-                    sub.add(t)
+            sub = _judged(now, adjacent, live, hops, shapes)
             for f, rows in shacl_results(sub, shapes).items():
                 if f in live:
                     by_focus[f] = rows

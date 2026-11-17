@@ -6172,3 +6172,4 @@
 2026-11-17T01:34:59Z  status W2225 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-17T02:13:42Z  interrupt W2243 minted    -         "Tests wait on HTTP and thread timeouts counted in wall seconds: a loaded host fails them (test_serve_no_spawn /wake, 120 s)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1140
 2026-11-17T02:13:52Z  status W2243 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T03:15:42Z  status W2243 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
