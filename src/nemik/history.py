@@ -761,6 +761,75 @@ def recent_subjects(repo: Path, count: int = 500) -> list[str] | None:
     return None if out is None else out.splitlines()
 
 
+BRANCH_DAYS = 30  # a branch whose newest commit is older than this is not current work
+BRANCHES_SHOWN = 10  # at most this many branches a repo, the newest first
+
+
+def _newest_branch_first(row: tuple[str, int, int]) -> int:
+    """Sort key for branch rows: the newest commit first.
+
+    Returns:
+        The commit time, negated.
+
+    """
+    return -row[2]
+
+
+def trunk_of(repo: Path) -> str:
+    """Name the ref the repo counts landed work from (nemik:W2251).
+
+    Returns:
+        The target of origin/HEAD when the repo has one (origin/main, origin/master, ...), else
+        main.
+
+    """
+    named = _git(repo, "symbolic-ref", "--short", "refs/remotes/origin/HEAD")
+    return named.strip() if named and named.strip() else "main"
+
+
+def branch_work(repo: Path) -> list[tuple[str, int, int]]:
+    """List the branches holding commits the trunk does not, from git alone (nemik:W2251).
+
+    One git process: for-each-ref over refs/heads with the commits each branch is ahead of the
+    trunk (trunk_of: origin/HEAD's target, else main) and its newest commit's time. A stacked
+    branch counts its parents' commits too (there is no branch graph here to subtract them). The
+    trunk's own branch, merged branches (ahead 0) and branches whose newest commit is older than
+    BRANCH_DAYS days are left out, and at most BRANCHES_SHOWN are returned.
+
+    Args:
+        repo: The repo's working directory.
+
+    Returns:
+        (branch, commits ahead of the trunk, newest commit's Unix time), newest first; empty when
+        there is no such branch, no readable git history, or no trunk to count from: nothing is
+        emitted for those, so an unreadable repo never reads as a zero.
+
+    """
+    trunk = trunk_of(repo)
+    out = _git(
+        repo,
+        "for-each-ref",
+        "refs/heads",
+        f"--format=%(refname:short) %(ahead-behind:{trunk}) %(committerdate:unix)",
+    )
+    if out is None:
+        return []
+    cutoff = datetime.now(UTC).timestamp() - BRANCH_DAYS * 86400
+    rows: list[tuple[str, int, int]] = []
+    for line in out.splitlines():
+        parts = line.split()
+        if len(parts) != BRANCH_FIELDS or parts[0] == trunk.removeprefix("origin/"):
+            continue
+        name, ahead, _behind, newest = parts
+        if int(ahead) > 0 and int(newest) >= cutoff:
+            rows.append((name, int(ahead), int(newest)))
+    rows.sort(key=_newest_branch_first)
+    return rows[:BRANCHES_SHOWN]
+
+
+BRANCH_FIELDS = 4  # a for-each-ref line: the name, ahead, behind and the commit time
+
+
 def commits_since(repo: Path, since: str) -> int | None:
     """Count the commits on HEAD after a point in time (nemik:W355: a push is a deploy).
 

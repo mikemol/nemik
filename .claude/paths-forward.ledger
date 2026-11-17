@@ -6192,3 +6192,13 @@
 2026-11-17T08:42:05Z  status W2246 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-17T08:42:08Z  status W2062 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-17T09:17:56Z  status W2063 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T11:28:12Z  interrupt W2247 minted    -         "After af54763 ships: read the snapshots volume's usedBytes per nemik pod and confirm the kubelet counts hardlinked files once"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2063
+2026-11-17T11:28:21Z  status W2247 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T11:28:24Z  status W2063 working>landed writer    "working -> landed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T12:03:45Z  interrupt W2248 minted    -         "ratchetseries: a pure join of a renamed ratchet's old series ahead of its new one, from a renames map, tested on a fixture rename"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2106
+2026-11-17T12:03:45Z  interrupt W2249 minted    -         "ended_series does not flag a renamed-away path as ended: a guard test beside the join"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2106
+2026-11-17T12:03:45Z  interrupt W2250 minted    -         "Read the retired gauge's to label (mikemol.ratchet.retired) into the renames map once mtools ships it"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2106
+2026-11-17T12:05:23Z  status W2250 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T12:47:39Z  interrupt W2251 minted    -         "Branch work gauge: per repo and branch, commits ahead of main and the newest commit time, read from git alone"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-cb
+2026-11-17T13:09:00Z  interrupt W2252 minted    -         "Queue discipline metric: per repo, whether the queue file differs from HEAD and for how long"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-cb
+2026-11-17T13:16:50Z  status W2251 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

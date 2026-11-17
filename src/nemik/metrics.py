@@ -235,6 +235,13 @@ HELP = {
     "nemik_manifest_drift": "Done cards whose commits touched files outside their manifest.",
     "nemik_stackable": "Ready cards one commit stack can carry now: pairwise disjoint manifests.",
     "nemik_landed_open_candidates": "Ready cards leading a landed commit's subject, none closed.",
+    "nemik_branch_commits_ahead": (
+        "Commits a current branch holds that the trunk does not "
+        "(a stacked branch counts its parents')."
+    ),
+    "nemik_branch_newest_commit_seconds": (
+        "Unix time of the newest commit on a current branch ahead of the trunk."
+    ),
     "nemik_ready_stale": "Ready cards untouched past how long 9 in 10 small cards take to finish.",
     "nemik_run_log_unmigrated": "Source run-log lines that predate the run-row shape, by stream.",
 }
@@ -676,6 +683,37 @@ def candidate_lines(
     return out
 
 
+def branch_lines(
+    root: Path,
+    read: Callable[[Path], list[tuple[str, int, int]]] = history.branch_work,
+) -> list[str]:
+    """nemik:W2251: per repo and branch, the commits ahead of the trunk and the newest's time.
+
+    Git metadata only, no queue: the work that lives on a feature branch and never reaches the
+    trunk is visible here while every reader that follows main sees nothing. A repo whose git
+    cannot be read, or that has no trunk to count from, yields no rows and so prints no sample: a
+    refusal never reads as zero.
+
+    Args:
+        root: The fleet root.
+        read: Reads a repo's branch rows (history.branch_work), empty when there are none.
+
+    Returns:
+        The two gauges' TYPE lines and a sample of each for every current branch ahead of the trunk.
+
+    """
+    ahead = ["# TYPE nemik_branch_commits_ahead gauge"]
+    newest = ["# TYPE nemik_branch_newest_commit_seconds gauge"]
+    for repo, path in workstream_files(root, QUEUE):
+        top = path.parents[1] if path.parent.name == ".claude" else path.parent
+        rows = read(top) if (top / ".git").exists() else []
+        for branch, count, when in rows:
+            tags = label(repo=repo, branch=branch)
+            ahead.append(f"nemik_branch_commits_ahead{tags} {count}")
+            newest.append(f"nemik_branch_newest_commit_seconds{tags} {when}")
+    return ahead + newest
+
+
 def drift_lines(root: Path, merged: Graph) -> list[str]:
     """nemik:W611: per repo, the done cards whose commits touched files outside their manifest.
 
@@ -759,6 +797,8 @@ def history_lines(
         out += stackable_lines(root, merged)
     if "nemik_landed_open_candidates" in wanted:
         out += candidate_lines(root, merged)
+    if {"nemik_branch_commits_ahead", "nemik_branch_newest_commit_seconds"} & set(wanted):
+        out += branch_lines(root)
     return out
 
 
@@ -895,6 +935,8 @@ HISTORY_FAMILIES = (
     "nemik_manifest_drift",
     "nemik_stackable",
     "nemik_landed_open_candidates",
+    "nemik_branch_commits_ahead",
+    "nemik_branch_newest_commit_seconds",
 )
 REALIZABILITY = ("nemik_realizability_waypoints", "nemik_realizability_unjudged")
 GRAPH_FREE = frozenset(
