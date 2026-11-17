@@ -133,6 +133,7 @@ NEMIK_PY = [
     "src/nemik/shims/__init__.py",
     "src/nemik/shims/ask_cli.py",
     "src/nemik/shims/work_cli.py",
+    "src/nemik/snaplink.py",
     "src/nemik/spawn.py",
     "src/nemik/stackable.py",
     "src/nemik/stackable_cli.py",

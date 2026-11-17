@@ -40,7 +40,7 @@ from mikemol.rulerseq import emit_f, morse_motif
 from rdflib import RDF, Graph, URIRef
 from rdflib.namespace import DCTERMS, PROV
 
-from nemik import adapter, cachestore, lastgood
+from nemik import adapter, cachestore, lastgood, snaplink
 from nemik.adapter import BASE, NEMIK, OPERATOR, OSLC_CM, bind, ledger_graph
 from nemik.apischema import openapi_text, schema_path, schemas_text, unmanifested
 from nemik.blocks import inbound, node_flags, operator_asks, ref, with_salience
@@ -1938,9 +1938,13 @@ def publish(
     # nemik:W518: start warm, as the long-lived server was; W1074: and say so on the build's gauges
     restored = cachestore.load(base / ".cache")
     os.environ["NEMIK_CACHE_HIT"] = "1" if restored else "0"
+    previous = (base / "current").resolve()
     try:
         build_static(root, snap, withheld, private=True, exports=exports)
         (snap / "source-key").write_text(key)
+        # nemik:W2063: bytes the last snapshot already holds are shared with it, not held twice
+        if previous.is_dir():
+            snaplink.link_unchanged(snap, previous)
     except BaseException:
         shutil.rmtree(snap, ignore_errors=True)
         raise
