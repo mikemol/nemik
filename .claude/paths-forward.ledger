@@ -6202,3 +6202,10 @@
 2026-11-17T12:47:39Z  interrupt W2251 minted    -         "Branch work gauge: per repo and branch, commits ahead of main and the newest commit time, read from git alone"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-cb
 2026-11-17T13:09:00Z  interrupt W2252 minted    -         "Queue discipline metric: per repo, whether the queue file differs from HEAD and for how long"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-cb
 2026-11-17T13:16:50Z  status W2251 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T13:53:10Z  interrupt W2253 minted    -         "Freshness alert rows for nemik_branch_commits_ahead and nemik_branch_newest_commit_seconds (and later nemik_queue_dirty*) in luthen's metric registry"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2251
+2026-11-17T13:53:25Z  status W2253 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T13:53:29Z  status W2251 working>landed writer    "working -> landed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T14:04:26Z  interrupt W2254 minted    -         "W2225 regression: nemik-check reports a false 'enables names a symbol that is neither a waypoint nor residue' on a card with many children"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2225
+2026-11-17T14:19:19Z  status W2254 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T14:19:26Z  interrupt W2255 minted    -         "shaclinc._judged matches a Workstream by the last segment of its type IRI: compare the exact nemik Workstream URIRef"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2254
+2026-11-17T14:19:27Z  interrupt W2256 minted    -         "The enables, blocked_on and workstream shape messages do not name the unresolved symbol, so a Violation cannot be acted on"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2254

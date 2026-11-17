@@ -21,7 +21,7 @@ import re
 from typing import TYPE_CHECKING, cast
 
 from pyshacl import validate
-from rdflib import Graph
+from rdflib import RDF, Graph
 from rdflib.namespace import SH
 from rdflib.term import Node, URIRef
 
@@ -225,19 +225,29 @@ def _judged(
     """Build the subgraph the live nodes are judged in (nemik:W2225).
 
     The live nodes' neighbourhood keeps every triple, so a card is judged against all it reads. A
-    hub (a workstream) among them is also judged against every card it joins, but those cards only
-    as far as the hub-level shapes read them (hub_reads), with no type: they are no focus node, and
+    WORKSTREAM hub among them is also judged against every card it joins, but those cards only as
+    far as the hub-level shapes read them (hub_reads), with no type: they are no focus node, and
     their other triples would only be validated against the card shapes for results thrown away.
+    Any other hub is a card with many children (an umbrella): the card shapes read its own edges
+    (enables, blocked_on, the children's state), so its neighbours keep every triple, as they did
+    before 3caa25a, whose restriction hid the type of el-openglo:W762's enables targets and
+    reported both as unresolved while they existed.
 
     Returns:
         The graph to validate.
 
     """
     near = _neighbourhood(adjacent, live, hops)
+    workstreams = {
+        s for s, p, o in now if p == RDF.type and _tail(str(o)) == "Workstream"
+    }
     wide: set[Node] = set()
     for hub in live:
         if len(adjacent.get(hub, ())) > HUB:
-            wide |= adjacent[hub]
+            if hub in workstreams:
+                wide |= adjacent[hub]
+            else:
+                near |= adjacent[hub]
     wide -= near
     reads = hub_reads(shapes)
     sub = Graph()

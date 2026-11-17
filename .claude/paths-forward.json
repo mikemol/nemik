@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 2252,
+  "counter": 2256,
   "waypoints": [
     {
       "symbol": "W1",
@@ -53617,7 +53617,7 @@
     {
       "symbol": "W2251",
       "title": "Branch work gauge: per repo and branch, commits ahead of main and the newest commit time, read from git alone",
-      "status": "working",
+      "status": "landed",
       "enables": [],
       "touches": [
         "velocity"
@@ -53625,18 +53625,22 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "Add nemik_branch_commits_ahead{repo,branch} and nemik_branch_newest_commit_seconds{repo,branch} to the history gauge families: for each repo, git for-each-ref refs/heads, rev-list --count main..branch and the newest commit time, no queue reading; a repo with no main or no git prints no sample; test on a real temp repo with a feature branch ahead of main; this is the git-only first slice of W2224 mode (a) and does not wait on mtools:W2591",
-      "evidence": "2026-11-17T12:47:55Z: 2026-11-17 carded from github-cb's operator question (why work in paperkit, el-openglo and substrate does not show). READINGS (nemik's own readers; git metadata of their checkouts read-only, no file contents): paperkit: HEAD feature/onboarding; the queue and ledger are UNTRACKED on every branch (git log --all -- .claude/paths-forward.json prints nothing; main's .claude holds agents, settings.json, skills only); history.queue_at(HEAD) = 0 cards against 432 in the live file (100 done, 318 blocked, 14 ready); nemik-history paperkit --from 2026-10-01 --events prints nothing. el-openglo: HEAD feature/w808-settle; commits in 2 days: main 0, HEAD 10; queue committed in step (796 cards both, 1 status differs); 63 card events in 5 commits since 2026-11-15, last 07:43 EST. substrate: HEAD gate-rebuild; main 0, HEAD 28; queue committed in step (384 vs 385); 2432 card events in 15 commits, last 2026-11-16 20:50 EST. SO: card readers that follow the checked-out HEAD see el-openglo and substrate; landing readers that read main (pace, landings, DORA, dark-repo) see zero for both; paperkit is invisible to every git-based reader because its queue was never committed. | 2026-11-17T12:49:56Z: 2026-11-17 github-cb ruling (peer): build W2251 first; tag it velocity (the operator's missing view); send the design or blob before building; paperkit gets NO live-file fallback in the history readers (its queue must be committed: operator line 176585, row 176697; github-cb tells paperkit); substrate's 12 h lag is substrate's to fix. DESIGN (sent to github-cb): history.branch_work(repo) runs ONE git process, for-each-ref refs/heads with %(refname:short) %(ahead-behind:main) %(committerdate:unix) (git 2.55 here supports ahead-behind; verified read-only on nemik's own checkout), returning (branch, ahead, newest commit epoch) for each branch ahead of main with a commit in the last 30 days, None when the repo has no main or no readable git; metrics.branch_lines(root, read) prints nemik_branch_commits_ahead{repo,branch} and nemik_branch_newest_commit_seconds{repo,branch} (epoch seconds) per such branch, a repo with no readable git prints no sample (never zero), cardinality bounded by the 30-day and ahead-only filters and a cap of the 10 newest branches per repo; HELP lines and HISTORY_FAMILIES entries; tests/test_branch_work.py on a real temp git repo (a feature branch two ahead is listed with ahead 2, a merged branch is not, a branch older than 30 days is not, a repo without main and a plain directory print nothing). Not built: any queue reading, the served view, W2224's modes.",
+      "evidence": "2026-11-17T12:47:55Z: 2026-11-17 carded from github-cb's operator question (why work in paperkit, el-openglo and substrate does not show). READINGS (nemik's own readers; git metadata of their checkouts read-only, no file contents): paperkit: HEAD feature/onboarding; the queue and ledger are UNTRACKED on every branch (git log --all -- .claude/paths-forward.json prints nothing; main's .claude holds agents, settings.json, skills only); history.queue_at(HEAD) = 0 cards against 432 in the live file (100 done, 318 blocked, 14 ready); nemik-history paperkit --from 2026-10-01 --events prints nothing. el-openglo: HEAD feature/w808-settle; commits in 2 days: main 0, HEAD 10; queue committed in step (796 cards both, 1 status differs); 63 card events in 5 commits since 2026-11-15, last 07:43 EST. substrate: HEAD gate-rebuild; main 0, HEAD 28; queue committed in step (384 vs 385); 2432 card events in 15 commits, last 2026-11-16 20:50 EST. SO: card readers that follow the checked-out HEAD see el-openglo and substrate; landing readers that read main (pace, landings, DORA, dark-repo) see zero for both; paperkit is invisible to every git-based reader because its queue was never committed. | 2026-11-17T12:49:56Z: 2026-11-17 github-cb ruling (peer): build W2251 first; tag it velocity (the operator's missing view); send the design or blob before building; paperkit gets NO live-file fallback in the history readers (its queue must be committed: operator line 176585, row 176697; github-cb tells paperkit); substrate's 12 h lag is substrate's to fix. DESIGN (sent to github-cb): history.branch_work(repo) runs ONE git process, for-each-ref refs/heads with %(refname:short) %(ahead-behind:main) %(committerdate:unix) (git 2.55 here supports ahead-behind; verified read-only on nemik's own checkout), returning (branch, ahead, newest commit epoch) for each branch ahead of main with a commit in the last 30 days, None when the repo has no main or no readable git; metrics.branch_lines(root, read) prints nemik_branch_commits_ahead{repo,branch} and nemik_branch_newest_commit_seconds{repo,branch} (epoch seconds) per such branch, a repo with no readable git prints no sample (never zero), cardinality bounded by the 30-day and ahead-only filters and a cap of the 10 newest branches per repo; HELP lines and HISTORY_FAMILIES entries; tests/test_branch_work.py on a real temp git repo (a feature branch two ahead is listed with ahead 2, a merged branch is not, a branch older than 30 days is not, a repo without main and a plain directory print nothing). Not built: any queue reading, the served view, W2224's modes. | 2026-11-17T13:53:29Z: 2026-11-17 Landed 6230c2a (full sha 6230c2a9a0551df15449140d1000500e720db733): mikemol-commit printed COMMITTED nemik 6230c2a W2251 [PUSHED]; git log main shows my subject. Gate 540 of 540 green on the first submit. history.trunk_of and branch_work (one for-each-ref with ahead-behind, empty list for no branch, no readable git and no trunk; the trunk's own branch, merged and stale branches left out, at most 10), metrics.branch_lines with the two gauges and HELP and families; tests/test_branch_work.py on real temp repos. Reviewed first: github-cb PASS on refs/review/W2251-v1 (6f15129e) before the submit; their three changes taken. The stack also carried the working queue, so it is committed (queue discipline). Image witness attached by hand (git_ref nemik@6230c2a9a0551df15449140d1000500e720db733 resolves) until mtools:W2542. REMAINDER carded: the freshness rows nemik:W2253 (luthen's registry); the gauges are produced by the host-side exporter, not the pod.",
       "issued_at": "2026-11-17T12:47:39Z",
       "minted_during": "interrupt",
       "caused_by": "github-cb",
-      "last_worked": "2026-11-17T13:16:50Z",
+      "last_worked": "2026-11-17T13:53:29Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/history.py",
         "src/nemik/metrics.py",
         "tests/test_branch_work.py"
       ],
-      "completed": null
+      "completed": null,
+      "landed_at": "20261117T135329Z",
+      "witness": "input.git_ref[\"nemik@6230c2a9a0551df15449140d1000500e720db733\"].resolves == true",
+      "witness_lang": "rego",
+      "deploys": true
     },
     {
       "symbol": "W2252",
@@ -53660,6 +53664,81 @@
         "src/nemik/metrics.py",
         "tests/test_queue_dirty.py"
       ]
+    },
+    {
+      "symbol": "W2253",
+      "title": "Freshness alert rows for nemik_branch_commits_ahead and nemik_branch_newest_commit_seconds (and later nemik_queue_dirty*) in luthen's metric registry",
+      "status": "blocked",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [
+        "luthen-observability:W2728"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Ask luthen for the registry rows (a learned staleness rule per family, window learned from the family's own reporting interval, never typed) for nemik_branch_commits_ahead and nemik_branch_newest_commit_seconds now, and for nemik_queue_dirty and nemik_queue_dirty_seconds when W2252 lands; cite their W<n> back",
+      "evidence": "2026-11-17T13:53:25Z: 2026-11-17 github-cb: every new metric gets a freshness alert row (operator 2026-10-17, memory feedback-every-metric-has-a-freshness-alert: enforced in Rego, a registry row is not admitted without a staleness rule, the window learned from the family's inter-arrival, the rule generated for every registered family). Nemik declares the families (HELP and HISTORY_FAMILIES, landed 6230c2a); the registry and the rule generation are luthen's. Asked luthen (message sent). | 2026-11-17T13:55:31Z: 2026-11-17 luthen-observability claimed it as luthen-observability:W2728 and explained registration: one row per family in policy/metric_families/data.json under the otel map keyed by the dotted OTLP name (owner nemik, unit, labels, ceiling, purpose); the freshness window is derived (checks/metric_freshness.py publishes each family's mean and max sample gap and age; metric_stale reads them), a row declares class continuous or event_driven; rows can also self-register (W1625) from datapoint attributes mikemol.owner, mikemol.freshness_class set by the PRODUCER. Their proposal: nemik.branch.commits_ahead and nemik.branch.newest_commit.seconds, labels [repo, branch], continuous, ceiling about 200. Asked of me: the exact OTLP names and units my host job pushes, and my pick of hand rows or self-register. ANSWER (sent): nemik pushes nothing (metrics.py header: pushing is luthen's host job); it prints exposition names nemik_branch_commits_ahead (a count, unit {commit}) and nemik_branch_newest_commit_seconds (Unix time, unit s), so I have no dotted names: luthen's existing conversion yields them; pick: rows BY HAND (self-register needs the producer to set OTLP attributes, and mine prints exposition, so it would be a change to luthen's push path).",
+      "issued_at": "2026-11-17T13:53:10Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2251",
+      "last_worked": "2026-11-17T13:55:31Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W2254",
+      "title": "W2225 regression: nemik-check reports a false 'enables names a symbol that is neither a waypoint nor residue' on a card with many children",
+      "status": "working",
+      "enables": [],
+      "touches": [
+        "velocity",
+        "gate-repair"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Run the pre-gate set, submit the fix as an incident (github-cb: admit W2254), then ask el-openglo to re-run nemik-check after the stack lands",
+      "evidence": "2026-11-17T14:04:44Z: 2026-11-17 INCIDENT (github-cb relayed el-openglo's report): nemik-check --warnings --repo el-openglo printed 'Violation W762 enables names a symbol that is neither a waypoint nor residue in any workstream' (a Violation that pages the operator through luthen) while W762.enables = W760, W761, both existing. READINGS: (1) nemik's merged graph, read directly, resolves both edges (both typed ChangeRequest); (2) the real path with the user cache REPRODUCES the Violation; (3) the same command with an EMPTY cache dir (NEMIK_CACHE_DIR=<new>) prints OK el-openglo, no violation: so a cached, incremental verdict is wrong; (4) loading the user cache: it holds W762's stored result 'Violation: enables names a symbol...' while its own held triples show W760 and W761 typed ChangeRequest and W762 enabling both; (5) replaying shaclinc's incremental step for a change touching W762 on that snapshot: W762 has 98 neighbours (> HUB, 40), so it counts as a HUB; live = {W762} only, W760 and W761 are not walked in (a hub is reached, not passed), they enter only as hub neighbours with the predicates the Workstream shapes read and NO rdf:type (my W2225 change, 3caa25a: hub_reads), so the sh:class ChangeRequest check on enables fails; the replay printed the same Violation plus 'Value does not have class nemik:Workstream'. CAUSE: my W2225 assumed a hub is a workstream; a card with many children (an umbrella) is a hub too, and the card shapes read its OWN edges. The fixture fleet has no such card, so test_warm_equals_cold and the shaclinc targets passed. FIX (built, under test): _judged restricts only a hub that is a Workstream (rdf:type nemik:Workstream); any other hub keeps every neighbour's triples, as before 3caa25a. tests/test_shaclinc_hub_card.py: a card with HUB+5 children enabling two real cards, one child changed: it FAILED on 3caa25a's code (the incremental run reported the false enables Violation, the full run did not), and must pass with the fix. The shaclinc.py edit changes the cache stamp, so every cache (the user's, the pod's claim) is cold on first use and the stale verdicts clear themselves. | 2026-11-17T14:06:25Z: 2026-11-17 admitted as incident work by github-cb (peer message): a false VIOLATES pages the operator; tagged gate-repair (a true tag: it repairs nemik's own check's verdict), citing github-cb's message and el-openglo's report (W762). Review ref to github-cb before the submit; their PASS first.",
+      "issued_at": "2026-11-17T14:04:26Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2225",
+      "last_worked": "2026-11-17T14:19:19Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "src/nemik/shaclinc.py",
+        "tests/test_shaclinc_hub_card.py"
+      ],
+      "completed": null
+    },
+    {
+      "symbol": "W2255",
+      "title": "shaclinc._judged matches a Workstream by the last segment of its type IRI: compare the exact nemik Workstream URIRef",
+      "status": "ready",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-11-17T14:19:26Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2254",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2256",
+      "title": "The enables, blocked_on and workstream shape messages do not name the unresolved symbol, so a Violation cannot be acted on",
+      "status": "ready",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-11-17T14:19:27Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2254",
+      "last_worked": null,
+      "ticks_blocked": 0
     }
   ],
   "residue": [
