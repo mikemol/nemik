@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 2237,
+  "counter": 2241,
   "waypoints": [
     {
       "symbol": "W1",
@@ -26752,20 +26752,24 @@
     {
       "symbol": "W1128",
       "title": "nemik-history takes one --where predicate language (status, age, flag, repo, blocked_on, title; and, or, not) in every mode",
-      "status": "working",
+      "status": "blocked",
       "enables": [],
       "touches": [
         "velocity",
         "file:src/nemik/where.py!w"
       ],
-      "blocked_on": [],
-      "blocked_kind": null,
-      "next_bounded_step": "Wire --where into --events and the other history modes (they read events, so they need their own field set: station, field, from, to, repo); a witness for it is the test in tests/test_history_oldest_where.py",
-      "evidence": "2026-10-26: 2026-10-26: verified line 282096 (origin human, 19:44:40Z): 'the proper shape probably looks a lot like the find command's filter language'; the first cited line 281985 (a queued_command) did not come back as a user record from the reader, so only 282096 is attached as the warrant, which carries the find(1) shape; the ask itself (a not-blocked mode on --oldest) is relayed from github-8f and luthen | 2026-10-26: 2026-10-26 github-8f: --baseline -45m is read by argparse as an option (only --baseline=-45m works); folded here, not W1127 (done): ago:45m, ago:1h, ago:2d now spell a window, and --help names both forms (stack537). The where language is still to build | 2026-10-27: github-8f re-asked after W65 closed (2026-10-27): nemik-history --all --landings with a window (--from ago:45m; --baseline is itself a mode), one line per commit: repo, sha, time, subject, over every queue-bearing repo; retires 16 typed git-log hooks. Not urgent ahead of the paydown (codon 1, mypy 2, ruff 4). Tell github-8f when it lands. | 2026-11-01: 2026-11-01 CLASSIFIED by W1339 (reviewer R85, nemik:R83 on W613): partial. Commit 9f4608cd (2026-10-26T17:01:59-04:00): 'W1128: --oldest --where is pinned by tests that count N over the kept cards, the oldest tw'. Reason, read from this card's own title and next step: the filter language and --oldest --where landed; wiring --where into --events and the other history modes remains. Scan criterion: the last 1500 commit subjects of the form W<n>:, number below 1200, status not done or landed. Read from titles and next steps, not from the code.",
+      "blocked_on": [
+        "W2239",
+        "W2240",
+        "W2241"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Decide which of the remaining history modes read events and so can take the event filter (--forecast and --score read events through backfill; --waits and --time-in-state read per-card series), and wire those; the rest need their own field set",
+      "evidence": "2026-10-26: 2026-10-26: verified line 282096 (origin human, 19:44:40Z): 'the proper shape probably looks a lot like the find command's filter language'; the first cited line 281985 (a queued_command) did not come back as a user record from the reader, so only 282096 is attached as the warrant, which carries the find(1) shape; the ask itself (a not-blocked mode on --oldest) is relayed from github-8f and luthen | 2026-10-26: 2026-10-26 github-8f: --baseline -45m is read by argparse as an option (only --baseline=-45m works); folded here, not W1127 (done): ago:45m, ago:1h, ago:2d now spell a window, and --help names both forms (stack537). The where language is still to build | 2026-10-27: github-8f re-asked after W65 closed (2026-10-27): nemik-history --all --landings with a window (--from ago:45m; --baseline is itself a mode), one line per commit: repo, sha, time, subject, over every queue-bearing repo; retires 16 typed git-log hooks. Not urgent ahead of the paydown (codon 1, mypy 2, ruff 4). Tell github-8f when it lands. | 2026-11-01: 2026-11-01 CLASSIFIED by W1339 (reviewer R85, nemik:R83 on W613): partial. Commit 9f4608cd (2026-10-26T17:01:59-04:00): 'W1128: --oldest --where is pinned by tests that count N over the kept cards, the oldest tw'. Reason, read from this card's own title and next step: the filter language and --oldest --where landed; wiring --where into --events and the other history modes remains. Scan criterion: the last 1500 commit subjects of the form W<n>:, number below 1200, status not done or landed. Read from titles and next steps, not from the code. | 2026-11-16T23:29:59Z: 2026-11-16 Landed 0af9f42 (full sha 0af9f424b0dd5f30fa05d4d32f7c47af410ee8f2): mikemol-commit printed COMMITTED nemik 0af9f42 W1128 [PUSHED]; git log main shows my subject. Gate 534 of 534 green on the first submit. nemik-history --events --where: where.py EVENT_FIELDS, parse_fields, event_row; history.kept_events; tests/test_where.py (event fields, age of the change, the two languages kept apart). Image landing: witness to attach by hand until mtools:W2542. STILL OPEN on this card: --where in the other history modes (--time-in-state, --weekly, --waits, --density, --forecast, --score).",
       "issued_at": "2026-10-26T19:47:26Z",
       "minted_during": "interrupt",
       "caused_by": "luthen-observability:W1692",
-      "last_worked": "2026-11-16T23:02:54Z",
+      "last_worked": "2026-11-16T23:30:45Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
@@ -49389,20 +49393,23 @@
     {
       "symbol": "W2047",
       "title": "Compare W1141's cone findings with mtools W2317 (mutants surviving their import cone) when its results arrive",
-      "status": "ready",
+      "status": "blocked",
       "enables": [],
       "touches": [
         "velocity"
       ],
-      "blocked_on": [],
-      "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "",
+      "blocked_on": [
+        "mtools:W2317"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "When mtools:W2317 reports mutants surviving their import cone, compare its list with W1141's cone findings and record agreement and differences",
+      "evidence": "2026-11-16T23:31:09Z: 2026-11-16 the card's own title says 'when its results arrive': it cannot start until mtools:W2317 has results, so it was mis-marked ready (a ready card the round counted). Re-filed blocked on mtools:W2317, kind agent. Not read from mtools' queue (no sibling paths); the blocker's state comes through nemik's edges.",
       "issued_at": "2026-11-07T15:08:57Z",
       "minted_during": "interrupt",
       "caused_by": "W1141",
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-11-16T23:31:09Z",
+      "ticks_blocked": 0,
+      "completed": null
     },
     {
       "symbol": "W2048",
@@ -49539,7 +49546,7 @@
     {
       "symbol": "W2055",
       "title": "No bazel target runs ruff or mypy on one changed file",
-      "status": "ready",
+      "status": "working",
       "enables": [],
       "touches": [
         "velocity"
@@ -49551,8 +49558,9 @@
       "issued_at": "2026-11-07T21:43:03Z",
       "minted_during": "interrupt",
       "caused_by": "W1141",
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-11-17T00:22:09Z",
+      "ticks_blocked": 0,
+      "completed": null
     },
     {
       "symbol": "W2056",
@@ -53292,6 +53300,92 @@
         "tests/webpage.py",
         "tests/test_webpage_frameless.py"
       ]
+    },
+    {
+      "symbol": "W2238",
+      "title": "Watchdog: no status mode that shows liveness over a window",
+      "status": "blocked",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [
+        "mtools:W2618"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Send mtools the ask; then block on their card",
+      "evidence": "2026-11-16T23:09:35Z: 2026-11-16 substrate-a5 (peer): github-cb's unfreeze review asks repos to show watchdog liveness OVER A WINDOW, not a pgrep spot read (memory feedback-check-liveness-over-a-window). mikemol-watchdog --help offers only run flags (--state, --writer, --poll-s, --phi-fire, --min-fire-s, --max-fire-s), no status mode; it writes .git/mtools/watchdog.pid and watchdog.last, but nothing documents a monotone heartbeat a reader could compare across a window. ASK: a read mode, e.g. mikemol-watchdog --status --state Q [--window S], reporting the running pid and whether its own heartbeat ADVANCED across the window, printing 'not confirmed live' rather than 'dead' when it did not. WITNESS: two reads S apart on a running watchdog report 'live (advanced)', and on a stopped one 'not confirmed live'. Owner: the mtools watchdog. | 2026-11-16T23:10:57Z: 2026-11-16 mtools carded it as mtools:W2618 (a --status read mode for mikemol-watchdog: pid plus whether its own heartbeat advanced across a window, 'not confirmed live' rather than 'dead'), enabling and caused-by nemik:W2238, queued behind the W2596 incident. Blocked on it; witness: two reads S apart on a running watchdog report 'live (advanced)', on a stopped one 'not confirmed live'.",
+      "issued_at": "2026-11-16T23:09:22Z",
+      "minted_during": "interrupt",
+      "caused_by": "substrate:W355",
+      "last_worked": "2026-11-16T23:10:57Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W2239",
+      "title": "nemik-history --forecast and --score take --where over the events they read",
+      "status": "ready",
+      "enables": [
+        "W1128"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Filter the events backfill returns in _forecast and _score with kept_events (already landed in 0af9f42) before they are read; test on a real git repo that --forecast --where narrows the rows, a malformed expression returns 2",
+      "evidence": "2026-11-16T23:30:53Z: 2026-11-16 atomized from W1128 after 0af9f42 landed the events half. Both modes read events through backfill, so the event filter applies to their input; the cleanest cut and the first of the three.",
+      "issued_at": "2026-11-16T23:30:45Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1128",
+      "last_worked": "2026-11-16T23:30:53Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "src/nemik/history.py",
+        "tests/test_history_forecast_where.py"
+      ]
+    },
+    {
+      "symbol": "W2240",
+      "title": "nemik-history --waits and --time-in-state take --where over their per-card rows",
+      "status": "ready",
+      "enables": [
+        "W1128"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Read what rows --waits and --time-in-state print (per repo and status; per open card), name the fields each has, and give them a field set and a row builder in where.py; then filter and test",
+      "evidence": "2026-11-16T23:30:55Z: 2026-11-16 atomized from W1128: these two modes read per-card stints, not events, so they need their own field set before the language can filter them. Not started.",
+      "issued_at": "2026-11-16T23:30:45Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1128",
+      "last_worked": "2026-11-16T23:30:55Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "src/nemik/where.py",
+        "src/nemik/history.py",
+        "tests/test_where.py"
+      ]
+    },
+    {
+      "symbol": "W2241",
+      "title": "nemik-history --weekly and --density take --where, or say in --help why they do not",
+      "status": "ready",
+      "enables": [
+        "W1128"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Decide per mode: --weekly is per ISO week and --density per repo, neither a per-card row, so a card filter has nothing to keep; if so, say it in their --help lines and refuse --where with a message, with a test; else give them a field set",
+      "evidence": "2026-11-16T23:30:57Z: 2026-11-16 atomized from W1128: the weekly and density rows are aggregates, not cards or events; the honest outcome may be to refuse --where there and say why. Not started.",
+      "issued_at": "2026-11-16T23:30:45Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1128",
+      "last_worked": "2026-11-16T23:30:57Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "src/nemik/history.py",
+        "tests/test_where.py"
+      ]
     }
   ],
   "residue": [
@@ -53622,15 +53716,6 @@
       "renewed_at": "2026-10-24T15:23:11Z",
       "expires_at": "2026-10-24T15:53:11Z",
       "lapse_ledgered": true
-    },
-    {
-      "tag": "file:src/nemik/where.py!w",
-      "holder": "(unlocked)",
-      "waypoint": "W1128",
-      "base_sha": "a773a88d39e5c5762387b996fa7c66c97fb1c196",
-      "taken_at": "2026-11-16T23:02:54Z",
-      "renewed_at": "2026-11-16T23:02:54Z",
-      "expires_at": "2026-11-16T23:32:54Z"
     }
   ],
   "advice": [

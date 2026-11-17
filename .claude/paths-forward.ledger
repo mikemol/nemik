@@ -6157,3 +6157,11 @@
 2026-11-16T22:27:35Z  status W1083 ready>landed writer    "ready -> landed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-16T22:28:43Z  interrupt W2237 minted    -         "Browser tests: a page whose animation frames stop (a hidden tab) has no non-wall stop but bazel's hour"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1140
 2026-11-16T23:02:54Z  status W1128 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-16T23:09:22Z  interrupt W2238 minted    -         "Watchdog: no status mode that shows liveness over a window"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=substrate:W355
+2026-11-16T23:09:35Z  status W2238 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-16T23:29:59Z  status W1128 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-16T23:30:45Z  interrupt W2239 minted    -         "nemik-history --forecast and --score take --where over the events they read"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1128
+2026-11-16T23:30:45Z  interrupt W2240 minted    -         "nemik-history --waits and --time-in-state take --where over their per-card rows"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1128
+2026-11-16T23:30:45Z  interrupt W2241 minted    -         "nemik-history --weekly and --density take --where, or say in --help why they do not"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1128
+2026-11-16T23:31:09Z  status W2047 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T00:22:09Z  status W2055 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

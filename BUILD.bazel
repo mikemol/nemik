@@ -1,6 +1,7 @@
 load("@nemik_dev//:requirements.bzl", "all_requirements")
 load("//bazel:nemik_src.bzl", "NEMIK_PY")
 load("//bazel:venv.bzl", "venv_from_hub")
+load("@rules_shell//shell:sh_binary.bzl", "sh_binary")
 load("@rules_shell//shell:sh_test.bzl", "sh_test")
 
 exports_files(["pyproject.toml"])
@@ -121,6 +122,8 @@ TARGETS = [(src, "") for src in glob(["tests/test_*.py"]) if src != "tests/test_
             + (["tools/peerwindow.py", "tools/peer-watch.json"] if src == "tests/test_peerwindow.py" else [])
             # nemik:W541: the order-sensitive pick test reads every Python file under tests, tools and checks
             + (glob(["tests/*.py", "tools/*.py", "checks/*.py"], exclude = [src, "tests/installed.py", "tests/webpage.py", "tests/pagetext.py", "tests/conftest.py", "tools/cpuline.py", "tools/nemik_client.py", "checks/claims.py"]) if src == "tests/test_order_sensitive_picks.py" else [])
+            # nemik:W2055: the per-file lint target's own script, which its test reads
+            + (["tools/pycheck_file.sh"] if src == "tests/test_pycheck_file.py" else [])
             # nemik:W521: the gate test reads the hook and the script that runs the //:precommit suite
             + ([".githooks/pre-commit", "tools/gate_staged.sh"] if src == "tests/test_precommit_gate.py" else [])
             # nemik:W589: the replica script's buildctl command line is held to the Containerfile's stage
@@ -274,4 +277,14 @@ venv_from_hub(
         # nemik:W635: derive each repo's version-2 export from the queues and luthen's v1 list.
         "nemik-exports": "nemik.exportcli:main",
     },
+)
+
+# nemik:W2055: the lint and type verdict on ONE file, through bazel (the operator's rule: ruff and mypy
+# run only as bazel targets). `bazel run //:pycheck_file -- src/nemik/x.py [more files]` runs the
+# mikemol-pycheck of the built //:.venv on each, with the repository's own configuration: the edit gate's
+# verdict, in seconds, where test_ruff_ratchet and test_mypy_ratchet are whole-tree test targets.
+sh_binary(
+    name = "pycheck_file",
+    srcs = ["tools/pycheck_file.sh"],
+    data = [":.venv", "pyproject.toml", "ruff-house.toml", "mypy-house.ini"],
 )
