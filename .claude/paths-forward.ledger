@@ -6209,3 +6209,11 @@
 2026-11-17T14:19:19Z  status W2254 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-17T14:19:26Z  interrupt W2255 minted    -         "shaclinc._judged matches a Workstream by the last segment of its type IRI: compare the exact nemik Workstream URIRef"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2254
 2026-11-17T14:19:27Z  interrupt W2256 minted    -         "The enables, blocked_on and workstream shape messages do not name the unresolved symbol, so a Violation cannot be acted on"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2254
+2026-11-17T14:19:29Z  interrupt W2257 minted    -         "Prove or fix the W2225 hub restriction for a WORKSTREAM hub: an equivalence test over a fixture workstream with more than HUB cards and a change to one"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2254
+2026-11-17T15:18:35Z  status W2254 working>landed writer    "working -> landed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T15:23:34Z  interrupt W2258 minted    -         "A landing whose base moved exits with git's rc=128 instead of a RACED verdict, and a 19-day-old failed log keeps the katas pulse row alive"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-cb
+2026-11-17T15:23:43Z  status W2258 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T15:32:16Z  status W2254 landed>done writer    "landed -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T16:24:04Z  status W2255 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T17:22:18Z  interrupt W2259 minted    -         "test_layout::test_a_static_build_refetches_only_the_pieces_whose_hash_moved failed once in a gate: the page fetched pieces for 10 repos outside the fixture fleet"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2255
+2026-11-17T18:12:37Z  status W2259 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

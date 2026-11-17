@@ -991,6 +991,52 @@ def test_every_meaning_the_view_colours_has_a_second_channel(
     assert admitted == len(cases) >= MIN_ADMITTED_CASES
 
 
+def _page_saw(page: Page) -> str:
+    """nemik:W2259: where the page is and the fleet file it reads, for a failure's message.
+
+    Returns:
+        The page's URL and its own graph/_fleet.json text.
+
+    """
+    fleet_text = webpage.evaluate_value(
+        page, "() => fetch('graph/_fleet.json').then(r => r.text())"
+    )
+    return f"page at {page.url}; its _fleet.json: {fleet_text}"
+
+
+def _move_a_hash(out: Path, one: object) -> None:
+    """Change one piece's hash in a static build's hashes.json, after the first read's second."""
+    hashes = _json((out / "hashes.json").read_text())
+    hashes[f"graph/{one}.json"] = "moved"
+    # Last-Modified has one-second resolution: a rewrite within the second of the first
+    # read would answer 304 and look unchanged, so the rewrite waits out the second
+    time.sleep(1.1)
+    (out / "hashes.json").write_text(json.dumps(hashes))
+
+
+def _graph_nodes(out: Path) -> int:
+    """Count the nodes in a static build's graph.json.
+
+    Returns:
+        The number of nodes.
+
+    """
+    whole = _json((out / "graph.json").read_text())
+    return len(webpage.as_list(whole["nodes"]))
+
+
+def _assert_first_fetch(first: list[str], fleet: dict[str, object], saw: str) -> None:
+    """Assert the first load fetched _fleet.json and a piece per repo, naming any difference."""
+    expected = [
+        "graph/_fleet.json",
+        *(f"graph/{r}.json" for r in webpage.as_list(fleet["repos"])),
+    ]
+    extra = sorted(set(first) - set(expected))
+    missing = sorted(set(expected) - set(first))
+    note = f"unexpected {extra}, missing {missing}, fetched {first}; {saw}"
+    assert sorted(first) == sorted(expected), note
+
+
 def test_a_static_build_refetches_only_the_pieces_whose_hash_moved(
     tmp_path: Path,
 ) -> None:
@@ -1006,49 +1052,38 @@ def test_a_static_build_refetches_only_the_pieces_whose_hash_moved(
     withheld.write_text(json.dumps(payload))
     out = tmp_path / "out"
     build_static(FLEET, out, withheld)
-    whole = _json((out / "graph.json").read_text())
     fleet = _json((out / "graph" / "_fleet.json").read_text())
     handler = functools.partial(
         http.server.SimpleHTTPRequestHandler, directory=str(out)
     )
     httpd = http.server.ThreadingHTTPServer(("127.0.0.1", 0), handler)
     threading.Thread(target=httpd.serve_forever, daemon=True).start()
-    url = f"http://127.0.0.1:{httpd.server_address[1]}/"
     try:
         with sync_playwright() as p:
             browser = _launch(p)
             page = browser.new_page()
             webpage.watch(page)
-            page.goto(url)
+            page.goto(f"http://127.0.0.1:{httpd.server_address[1]}/")
             webpage.until(page, "() => typeof data !== 'undefined' && data")
             drawn = webpage.evaluate_int(page, "() => data.nodes.length")
             first = webpage.as_strs(
                 webpage.evaluate_value(page, "() => [...window.__pieceFetches]")
             )
             one = webpage.as_list(fleet["repos"])[0]
-            hashes = _json((out / "hashes.json").read_text())
-            hashes[f"graph/{one}.json"] = "moved"
-            # Last-Modified has one-second resolution: a rewrite within the second of the first
-            # read would answer 304 and look unchanged, so the rewrite waits out the second
-            time.sleep(1.1)
-            (out / "hashes.json").write_text(json.dumps(hashes))
+            _move_a_hash(out, one)
             webpage.evaluate_value(page, "() => load()")
             second = webpage.as_strs(
                 webpage.evaluate_value(
                     page, "n => window.__pieceFetches.slice(n)", len(first)
                 )
             )
+            saw = _page_saw(page)
             browser.close()
     finally:
         httpd.shutdown()
-    assert drawn == len(webpage.as_list(whole["nodes"]))
-    assert sorted(first) == sorted(
-        [
-            "graph/_fleet.json",
-            *(f"graph/{r}.json" for r in webpage.as_list(fleet["repos"])),
-        ]
-    )
-    assert second == [f"graph/{one}.json"]
+    assert drawn == _graph_nodes(out)
+    _assert_first_fetch(first, fleet, saw)
+    assert second == [f"graph/{one}.json"], f"second {second}; {saw}"
 
 
 def test_every_repo_chip_names_its_health_in_words(server: str) -> None:

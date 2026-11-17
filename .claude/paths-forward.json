@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 2256,
+  "counter": 2259,
   "waypoints": [
     {
       "symbol": "W1",
@@ -53687,7 +53687,7 @@
     {
       "symbol": "W2254",
       "title": "W2225 regression: nemik-check reports a false 'enables names a symbol that is neither a waypoint nor residue' on a card with many children",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [
         "velocity",
@@ -53695,34 +53695,45 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Run the pre-gate set, submit the fix as an incident (github-cb: admit W2254), then ask el-openglo to re-run nemik-check after the stack lands",
-      "evidence": "2026-11-17T14:04:44Z: 2026-11-17 INCIDENT (github-cb relayed el-openglo's report): nemik-check --warnings --repo el-openglo printed 'Violation W762 enables names a symbol that is neither a waypoint nor residue in any workstream' (a Violation that pages the operator through luthen) while W762.enables = W760, W761, both existing. READINGS: (1) nemik's merged graph, read directly, resolves both edges (both typed ChangeRequest); (2) the real path with the user cache REPRODUCES the Violation; (3) the same command with an EMPTY cache dir (NEMIK_CACHE_DIR=<new>) prints OK el-openglo, no violation: so a cached, incremental verdict is wrong; (4) loading the user cache: it holds W762's stored result 'Violation: enables names a symbol...' while its own held triples show W760 and W761 typed ChangeRequest and W762 enabling both; (5) replaying shaclinc's incremental step for a change touching W762 on that snapshot: W762 has 98 neighbours (> HUB, 40), so it counts as a HUB; live = {W762} only, W760 and W761 are not walked in (a hub is reached, not passed), they enter only as hub neighbours with the predicates the Workstream shapes read and NO rdf:type (my W2225 change, 3caa25a: hub_reads), so the sh:class ChangeRequest check on enables fails; the replay printed the same Violation plus 'Value does not have class nemik:Workstream'. CAUSE: my W2225 assumed a hub is a workstream; a card with many children (an umbrella) is a hub too, and the card shapes read its OWN edges. The fixture fleet has no such card, so test_warm_equals_cold and the shaclinc targets passed. FIX (built, under test): _judged restricts only a hub that is a Workstream (rdf:type nemik:Workstream); any other hub keeps every neighbour's triples, as before 3caa25a. tests/test_shaclinc_hub_card.py: a card with HUB+5 children enabling two real cards, one child changed: it FAILED on 3caa25a's code (the incremental run reported the false enables Violation, the full run did not), and must pass with the fix. The shaclinc.py edit changes the cache stamp, so every cache (the user's, the pod's claim) is cold on first use and the stale verdicts clear themselves. | 2026-11-17T14:06:25Z: 2026-11-17 admitted as incident work by github-cb (peer message): a false VIOLATES pages the operator; tagged gate-repair (a true tag: it repairs nemik's own check's verdict), citing github-cb's message and el-openglo's report (W762). Review ref to github-cb before the submit; their PASS first.",
+      "next_bounded_step": null,
+      "evidence": "2026-11-17T14:04:44Z: 2026-11-17 INCIDENT (github-cb relayed el-openglo's report): nemik-check --warnings --repo el-openglo printed 'Violation W762 enables names a symbol that is neither a waypoint nor residue in any workstream' (a Violation that pages the operator through luthen) while W762.enables = W760, W761, both existing. READINGS: (1) nemik's merged graph, read directly, resolves both edges (both typed ChangeRequest); (2) the real path with the user cache REPRODUCES the Violation; (3) the same command with an EMPTY cache dir (NEMIK_CACHE_DIR=<new>) prints OK el-openglo, no violation: so a cached, incremental verdict is wrong; (4) loading the user cache: it holds W762's stored result 'Violation: enables names a symbol...' while its own held triples show W760 and W761 typed ChangeRequest and W762 enabling both; (5) replaying shaclinc's incremental step for a change touching W762 on that snapshot: W762 has 98 neighbours (> HUB, 40), so it counts as a HUB; live = {W762} only, W760 and W761 are not walked in (a hub is reached, not passed), they enter only as hub neighbours with the predicates the Workstream shapes read and NO rdf:type (my W2225 change, 3caa25a: hub_reads), so the sh:class ChangeRequest check on enables fails; the replay printed the same Violation plus 'Value does not have class nemik:Workstream'. CAUSE: my W2225 assumed a hub is a workstream; a card with many children (an umbrella) is a hub too, and the card shapes read its OWN edges. The fixture fleet has no such card, so test_warm_equals_cold and the shaclinc targets passed. FIX (built, under test): _judged restricts only a hub that is a Workstream (rdf:type nemik:Workstream); any other hub keeps every neighbour's triples, as before 3caa25a. tests/test_shaclinc_hub_card.py: a card with HUB+5 children enabling two real cards, one child changed: it FAILED on 3caa25a's code (the incremental run reported the false enables Violation, the full run did not), and must pass with the fix. The shaclinc.py edit changes the cache stamp, so every cache (the user's, the pod's claim) is cold on first use and the stale verdicts clear themselves. | 2026-11-17T14:06:25Z: 2026-11-17 admitted as incident work by github-cb (peer message): a false VIOLATES pages the operator; tagged gate-repair (a true tag: it repairs nemik's own check's verdict), citing github-cb's message and el-openglo's report (W762). Review ref to github-cb before the submit; their PASS first. | 2026-11-17T15:18:35Z: 2026-11-17 Landed 6b85278 (full sha 6b85278e7ffe85d06b446bd35bf79cb89f86fb74): mikemol-commit printed COMMITTED nemik 6b85278 W2254 [PUSHED]; git log main shows my subject. Gate 541 of 541 green on the first submit. shaclinc._judged restricts a hub's neighbours only when the hub is a Workstream; a card hub keeps every neighbour's triples; tests/test_shaclinc_hub_card.py (red on 3caa25a, green now). github-cb PASS-SUBMIT on refs/review/W2254-v1 (7848628) dated before the submit. Image witness attached by hand (git_ref resolves) until mtools:W2542. NEXT, read-your-writes: nemik-check --warnings --repo el-openglo on the real path (the stamp changed, so the first run is cold) must no longer print the W762 Violation; the pod's served view clears when the new image ships. Follow-ups carded: W2255 (exact Workstream URIRef), W2256 (name the symbol in the shape messages), W2257 (workstream-hub soundness). | 2026-11-17T15:25:14Z: 2026-11-17 luthen-observability read (peer, ~15:24Z, W2729): 6b85278 has NO image yet and no sign of a failure: the Flux ImagePolicy for nemik still resolves to 1794924225-6230c2a9 (786 tags scanned), deploy-state up to date, the deployment runs 6230c2a9, and the Forgejo server shows a runner task reporting UpdateTask about every second (runner 10.42.0.144): a build in flight, not tied to nemik by repo name, so 'building' is best supported and not confirmed. 6230c2a9 took about 46 min commit to image and 9 min to pods; 6b85278 (committed 14:19Z) is past that pace, so it is slow or queued. luthen re-reads the tag and the cluster and tells me when it moves or a run fails. Until it ships the pod's served view may still show the false W762 Violation. | 2026-11-17T15:29:27Z: 2026-11-17 luthen-observability (peer, W2729): 6b85278 BUILT: the Flux ImagePolicy for nemik resolves to nemik:1794929022-6b85278e7ffe85d06b446bd35bf79cb89f86fb74 (built 2026-11-17 15:23:42Z); the in-flight runner task was that build, no failure. The deployment still ran 6230c2a9 at their read; deploy-state must commit the new tag and Flux roll it (about 9 min last time). luthen tells me when the pods run 6b85278. Commit 14:19Z to image 15:23Z is about 64 min, slower than 6230c2a9's 46. | 2026-11-17T15:32:16Z: 2026-11-17 READ-YOUR-WRITES (the real path, after 6b85278 landed; the cache stamp changed so the user cache was cold): nemik-check --warnings --repo el-openglo prints 'OK el-openglo' with two Warnings (2 ready cards untouched past 2.5 d, 24 ready cards without a manifest) and NO Violation and no W762 line; before the fix the same command printed 'VIOLATES el-openglo / Violation W762 enables names a symbol...'. Scope: the host check; the pod's served view clears when the image with 6b85278 rolls (luthen: built 15:23Z, deploy pending; they tell me). Follow-ups carded: W2255, W2256, W2257. Closed on the reading for the host check; the pod reading is luthen's report.",
       "issued_at": "2026-11-17T14:04:26Z",
       "minted_during": "interrupt",
       "caused_by": "W2225",
-      "last_worked": "2026-11-17T14:19:19Z",
+      "last_worked": "2026-11-17T15:32:16Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "src/nemik/shaclinc.py",
+        "tests/test_shaclinc_hub_card.py"
+      ],
+      "completed": "20261117T153216Z",
+      "landed_at": "20261117T151835Z",
+      "witness": "input.git_ref[\"nemik@6b85278e7ffe85d06b446bd35bf79cb89f86fb74\"].resolves == true",
+      "witness_lang": "rego",
+      "deploys": true
+    },
+    {
+      "symbol": "W2255",
+      "title": "shaclinc._judged matches a Workstream by the last segment of its type IRI: compare the exact nemik Workstream URIRef",
+      "status": "working",
+      "enables": [],
+      "touches": [
+        "gate-repair"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "In shaclinc._judged compare the type with the exact nemik Workstream URIRef (nemik.adapter.NEMIK.Workstream if importable without a cycle, else the namespace string), not _tail; a test with a foreign-namespace type named Workstream on an umbrella: it must keep every neighbour's triples",
+      "evidence": "2026-11-17T14:19:40Z: 2026-11-17 github-cb's follow-up on the W2254 PASS: _tail(str(o)) == 'Workstream' counts any namespace's Workstream, so a foreign type that shares the name could put the hub_reads restriction back on an umbrella.",
+      "issued_at": "2026-11-17T14:19:26Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2254",
+      "last_worked": "2026-11-17T16:24:04Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/shaclinc.py",
         "tests/test_shaclinc_hub_card.py"
       ],
       "completed": null
-    },
-    {
-      "symbol": "W2255",
-      "title": "shaclinc._judged matches a Workstream by the last segment of its type IRI: compare the exact nemik Workstream URIRef",
-      "status": "ready",
-      "enables": [],
-      "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "",
-      "issued_at": "2026-11-17T14:19:26Z",
-      "minted_during": "interrupt",
-      "caused_by": "W2254",
-      "last_worked": null,
-      "ticks_blocked": 0
     },
     {
       "symbol": "W2256",
@@ -53732,13 +53743,79 @@
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "",
+      "next_bounded_step": "Convert the enables property constraint in WaypointShape (and the other sh:class constraints whose message names no value: blocked_on resolution, workstream) to SPARQL constraints with {?value} in the message, as CausedByResolvesShape does; check the incremental radius for the new texts; tests that the message names el-openglo:W760-style unresolved symbols; the existing tests read some messages: grep them first",
+      "evidence": "2026-11-17T14:19:42Z: 2026-11-17 github-cb and el-openglo: nemik-check printed 'Violation W762 enables names a symbol that is neither a waypoint nor residue in any workstream' without the symbol, so its owner could not act on it: a VIOLATES its owner cannot act on is unactionable by construction. The enables rule is a sh:property with sh:or over sh:class (shapes.ttl line 19-20) and no {?value}; CausedByResolvesShape already names the value through a SPARQL constraint.",
       "issued_at": "2026-11-17T14:19:27Z",
       "minted_during": "interrupt",
       "caused_by": "W2254",
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-11-17T14:19:42Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "src/nemik/data/shapes.ttl",
+        "tests/test_shape_messages.py"
+      ]
+    },
+    {
+      "symbol": "W2257",
+      "title": "Prove or fix the W2225 hub restriction for a WORKSTREAM hub: an equivalence test over a fixture workstream with more than HUB cards and a change to one",
+      "status": "ready",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Fixture: one workstream with HUB+5 cards, a change to one card; incremental must equal full, for each card shape that reads a neighbour across the workstream's edges (the shared workstream node): if it fails, restrict less; if it passes, say what it covers",
+      "evidence": "2026-11-17T14:19:44Z: 2026-11-17 W2254 showed the hub restriction was unsound for a card hub, found by el-openglo's report, not by a test. The same claim for a WORKSTREAM hub (the W2225 case it was written for) is pinned only on the fixture fleet, whose workstreams are small. github-cb: stays carded.",
+      "issued_at": "2026-11-17T14:19:29Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2254",
+      "last_worked": "2026-11-17T14:19:44Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "tests/test_shaclinc_hub_workstream.py",
+        "src/nemik/shaclinc.py"
+      ]
+    },
+    {
+      "symbol": "W2258",
+      "title": "A landing whose base moved exits with git's rc=128 instead of a RACED verdict, and a 19-day-old failed log keeps the katas pulse row alive",
+      "status": "blocked",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [
+        "mtools:W2676",
+        "mtools:W2677"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Send mtools the readings; they classify: was the failed run a mikemol-commit that lost the update-ref CAS to the run that landed 1fee34b2 (then a stale-base landing should end as a RACED verdict, not git's rc=128), or a hand git command (then use the lease); and why the katas pulse still reads a log from 2026-10-29",
+      "evidence": "2026-11-17T15:23:43Z: 2026-11-17 github-cb (peer): the 'nemik commit FAILED rc=128 at 6230c2a9' pulse row is a line in the host's katas log nemik.log (line 42): 'fatal: cannot lock ref HEAD: is at 1fee34b2 but expected b136ac49', a compare-and-swap loss on HEAD. READINGS from nemik's repo (own git): b136ac49 = W1014 stack, committed 2026-10-29T14:54:09-04:00; 1fee34b2 = the next W1014 stack, 2026-10-29T15:22:44-04:00; both mine, 28 minutes apart; the HEAD reflog in that window shows b136ac49 (mikemol-commit stack) and NO entry for 1fee34b2, consistent with a landing by update-ref rather than a checkout; so the failed run read HEAD at b136ac49 and wrote after 1fee34b2 had landed. Both are old (19 days): the row is not about 6230c2a9 (that stack's gate verdict: passed; luthen read the shipped image: 6230c2a9 is running, 2/2 pods, 0 restarts). Not read: the failed run's own log (mtools' katas logs dir; not in nemik's repo). Questions for mtools: (1) was it a second mikemol-commit that gated a tree on b136ac49 while another run landed (then the CAS loss is a lease or queue gap, and the verdict should be RACED, which exists, not a raw rc=128); (2) why does the pulse still show it (katas reads the last line of a detached run's log; a run that is not overwritten stays 'FAILED' forever). | 2026-11-17T15:26:03Z: 2026-11-17 mtools carded both asks: mtools:W2676 (a landing whose base moved should end as the RACED verdict, not git's rc=128) and mtools:W2677 (the katas pulse reading the last line of a never-overwritten detached log as current); both cite nemik:W2258. Question (1), which path produced rc=128, they cannot answer yet: it needs the failed run's own log (neither side has read it); they will not call it a second mikemol-commit or a hand git command until W2676's reproduction (move the base between freeze and land, read the exit) shows which path gives rc=128. They asked for nemik.log lines 30-50 around line 42; asked github-cb, who read it.",
+      "issued_at": "2026-11-17T15:23:34Z",
+      "minted_during": "interrupt",
+      "caused_by": "github-cb",
+      "last_worked": "2026-11-17T15:26:03Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W2259",
+      "title": "test_layout::test_a_static_build_refetches_only_the_pieces_whose_hash_moved failed once in a gate: the page fetched pieces for 10 repos outside the fixture fleet",
+      "status": "working",
+      "enables": [],
+      "touches": [
+        "gate-repair"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Make the assertion say what the page saw (the unexpected pieces, the page's own graph/_fleet.json body fetched through the browser, and window.__pieceFetches) so the next occurrence names its source; then decide whether the cause is the page, the server in the test, or the build",
+      "evidence": "2026-11-17T17:22:30Z: 2026-11-17 INSTANCE (W2255-v1 gate, refs/review/W2255-v1 25d8aea, a stack touching only src/nemik/shaclinc.py and tests/test_shaclinc_hub_card.py): REFUSED, 540 of 541 passed; //:test_layout shard 2 of 16 failed an ASSERTION (not a timeout): test_a_static_build_refetches_only_the_pieces_whose_hash_moved, tests/test_layout.py:1045, sorted(first) == sorted(['graph/_fleet.json', *fixture repos]): the page fetched 10 more pieces than the fixture lists, starting graph/paperkit.json (index 10: graph/luthen-observability.json where the fixture has graph/mat230.json): real fleet repo names, with no base URL (panels.js sourceGraph keys a source with a url as base+path), so the pieces were listed by the page's own server's _fleet.json, which differed from the out/graph/_fleet.json the test had read from the same directory moments before. NOT REPRODUCED: the test alone on clean main 6b85278 passed; the whole of test_layout (16 shards, --nocache_test_results) passed on clean main and again on the stack's tree. The fixture fleet cannot contain those repos (the test builds FLEET into a tmp out dir). UNEXPLAINED. The failure ran in the gate's staged-tree worktree under 538 fresh targets and load above 100; my reruns ran one target set at a time. Not a wall-timeout instance.",
+      "issued_at": "2026-11-17T17:22:18Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2255",
+      "last_worked": "2026-11-17T18:12:37Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "tests/test_layout.py"
+      ],
+      "completed": null
     }
   ],
   "residue": [
