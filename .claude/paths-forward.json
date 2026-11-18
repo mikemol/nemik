@@ -22645,59 +22645,6 @@
       "completed": "20261024T180137Z"
     },
     {
-      "symbol": "W979",
-      "title": "A nonzero ratchet is a priority marker: every repo with one needs an open pay-down card (a shape warns when missing), those cards rank in a high band above feature work, and a ratchet that has not fallen over a learned window raises an alert",
-      "status": "ready",
-      "enables": [
-        "W2296"
-      ],
-      "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
-      "next_bounded_step": "Decide whether W988 (nemik:BehindWithoutPaydownShape, shapes.ttl 697 to 712: a repo behind a ratchet's required paydown RATE has an open card touching that ratchet's file), W993 (a card that pays a behind ratchet down takes velocity) and W986/W987 (the behind verdict from the ratchet value series; the alert) already ARE this card's three parts, with the operator's later rate ruling (host line 93406) replacing 'nonzero' by 'behind a required rate'. If so drop this card to residue naming them; if the operator's 'nonzero ratchet is a priority marker' still stands as the stronger form, state that as an 'operator: decide' ask with both forms.",
-      "evidence": "2026-10-24: operator 2026-10-24 (host 695f3e0a line 92679, uuid 0c91eb8b-3a07-472a-adaf-254f72436ada, origin human, verified in the transcript): 'The existence of a nonzero ratchet is a priority marker.' The shape, the rank band and the alert are github-8f's relayed design of it; the card waits on mtools publishing ratchet_value{repo, ratchet} from its census. | 2026-11-06T02:06:17Z: 2026-11-06 lifted: the letter inbox/2026-10-29-nemik-edge-mtools-W1905-enables-W979.md says mtools:W1905 was done on 2026-10-29 and the wait can lift. I have not verified that W1905 is the census publication the card waits on. | 2026-11-06T02:10:25Z: 2026-11-06 verification (R257 finding 2): the lift stands. The census W979 waits on exists: nemik-rank nemik --pace at 2026-11-06T01:57:26Z prints ratchet rows for mtools with values (for example 'ok mtools .claude/unmanifested-baseline.txt; 122 left'), so mtools publishes the ratchet values the shape needs. The letter says mtools:W1905 is done. Remaining unverified: that W1905 is the publication itself, not a step before it. | 2026-11-17T20:32:35Z: 2026-11-17 groom, read: the card's three parts exist in nemik. (1) shape: shapes.ttl 697 BehindWithoutPaydownShape (W988): a Workstream with a behindOn ratchet and no open card touching file:<that ratchet's path> is a Warning; (2) band: a card that pays a behind ratchet down takes velocity (score.Bands.watching, W993); (3) the alert and the verdict: W986/W987 (behind from the ratchet value series over a trailing window of landed commits). The one difference: the operator's 2026-10-24 sentence says a NONZERO ratchet is the marker; W988 keys on BEHIND a required rate (the operator's rate ruling, host line 93406, later). mtools publishes the ratchet values (nemik-rank --pace prints them; verified 2026-11-06). Not found in the store: no ratchet_value series by name (a PromQL count over ratchet_value* and mikemol_ratchet_value* was empty), so the publication is the pace file, not a gauge.",
-      "issued_at": "2026-10-24T16:47:47Z",
-      "minted_during": "tick",
-      "caused_by": null,
-      "last_worked": "2026-11-17T20:32:35Z",
-      "ticks_blocked": 0,
-      "completed": null,
-      "manifest": [
-        "src/nemik/data/shapes.ttl"
-      ],
-      "size_class": "medium",
-      "warrants": [
-        {
-          "@context": {
-            "prov": "http://www.w3.org/ns/prov#",
-            "xsd": "http://www.w3.org/2001/XMLSchema#",
-            "mtools": "urn:mtools:warrant#"
-          },
-          "@id": "urn:nemik:nemik/W979",
-          "prov:wasDerivedFrom": {
-            "@id": "urn:claude:transcript:-home-mikemol-github/695f3e0a-d36f-4080-9c67-7548978cd99e#0c91eb8b-3a07-472a-adaf-254f72436ada",
-            "@type": "prov:Entity",
-            "prov:generatedAtTime": {
-              "@value": "2026-10-24T16:46:07.332Z",
-              "@type": "xsd:dateTime"
-            },
-            "prov:wasAttributedTo": {
-              "@id": "urn:nemik:operator",
-              "@type": "prov:Agent"
-            },
-            "prov:wasGeneratedBy": {
-              "@id": "urn:nemik:utterance/0c91eb8b-3a07-472a-adaf-254f72436ada",
-              "@type": "prov:Activity"
-            },
-            "mtools:line": 92679,
-            "mtools:reader": "mikemol-transcriptstruct claude:transcript:-home-mikemol-github/695f3e0a-d36f-4080-9c67-7548978cd99e --verify 0c91eb8b-3a07-472a-adaf-254f72436ada --claim The existence of a nonzero ratchet is a priority marker. --line 92679"
-          }
-        }
-      ],
-      "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
-      "vector_source": "default"
-    },
-    {
       "symbol": "W980",
       "title": "Pay down the ruff baseline (2934): retire the most numerous rule family with a codemod that passes the gate, and lower the recorded count",
       "status": "done",
@@ -56165,25 +56112,25 @@
     {
       "symbol": "W2260",
       "title": "the page's setInterval(load, 60000) starts a second load() while the first is in flight, so a slow host fetches the graph pieces twice: make load() single-flight, proven by a fake-clock case red on today's page first",
-      "status": "working",
+      "status": "landed",
       "enables": [],
       "touches": [
         "gate-repair"
       ],
-      "blocked_on": [
-        "W2283"
-      ],
+      "blocked_on": [],
       "blocked_kind": "agent",
-      "next_bounded_step": "Submit .claude/stack-W2260-v1.json (now carrying the v2 body) once github-cb confirms their PASS carries over to refs/review/W2260-v2 = 1b18d9eb (delta from v1 8f7e913c is panels.js and tests/test_load_overlap.py only). github-cb was not in ListAgents at send time (socket 90526 gone): re-run ListAgents and send the delta message again (text on this card's evidence); until a PASS dated after v2 exists, do not submit.",
-      "evidence": "2026-11-17T18:33:46Z: 2026-11-17 FIRST RESULT, against the hypothesis: panels.js sourceGraph already shares overlapping rounds (W1140: pieceCache holds the PROMISE, so a second round asks for a piece only when its hash moved or its fetch failed). The forced case (tests/test_load_overlap.py, fake clock, the first load's graph pieces held back by a route, clock advanced 60 s + 1 s, then released) is GREEN on today's page: no piece asked twice (bazel //:test_load_overlap, --nocache_test_results, clean worktree on main). CAVEAT: the test does not yet assert that the tick started a second load(), so green could also mean the tick never ran one; that assertion is the next step. Remaining candidate for duplicates: a piece fetch that FAILED is deleted from pieceCache and asked for again by the next round (panels.js: 'a failed piece is asked for again'), so ~10 failed fetches in one burst followed by a 60 s poll retry would put 10 duplicates in __pieceFetches. No single-flight change is justified by the evidence yet. | 2026-11-17T18:40:20Z: 2026-11-17 RESULT (bazel //:test_load_overlap, --nocache_test_results, clean worktree on main, both cases pass): (a) the poll tick DID start a second load (>=2 hashes.json requests) with the first load's pieces held, and no piece was asked twice: the overlap mechanism is refuted, not merely unwitnessed. (b) with the first 10 piece requests aborted by the server, the next round (60 s poll) asked for the failed pieces again: duplicates in __pieceFetches, at most 10, and data drawn only after the poll. That reproduces the refusal's shape (10 extra pieces, a piece twice at the index where the fixture lists the next one). NOT shown: that the real test server ever refuses connections (the listen backlog is request_queue_size 5, a guess). Plan: the test servers get a backlog covering the page's fan-out, and test_layout's first-load assertion checks the cache contract (every piece fetched, none fetched while its hash is unchanged and its fetch succeeded) rather than raw attempts. No user defect claimed: a retry of a failed fetch is the page's intended behaviour. | 2026-11-17T20:07:31Z: 2026-11-17 github-cb PASS-SUBMIT on refs/review/W2260-v1 (8f7e913c) on one condition: panels.js's catch deleted pieceCache[key] unconditionally, so an old fetch failing late after a hash move would drop the NEWER entry and the next round would fetch it again (a duplicate the cache contract does not explain); fix on this line and add a case. RED: tests/test_load_overlap.py case (c) (hold the first fetch of one piece, move its hash in hashes.json, start a second round, abort the old fetch, check the newer entry is still cached and the piece was fetched twice, not three times) FAILED on today's panels.js: 'the old fetch's late failure dropped the newer entry, assert False is True' (bazel //:test_load_overlap, 1 failed 2 passed). An earlier run of the case HUNG on that page because its route held a third request forever; the route now holds only the first two requests for the piece. GREEN pending: the fix captures the entry and deletes only if pieceCache[key] === entry. | 2026-11-17T20:11:08Z: 2026-11-17 v2 built: refs/review/W2260-v2 = 1b18d9eb9307462132146ce139ee8168456a5ed3 (main 728485f + the v1 tree + the late-failure guard in panels.js + case (c)); delta from v1 (8f7e913c): panels.js +9/-3 and tests/test_load_overlap.py +60, nothing else. GREEN: //:test_load_overlap //:test_piece_fetch_once //:test_layout //:test_ruff_ratchet //:test_mypy_ratchet pass (--nocache_test_results, docs worktree); RED proven on v1's panels.js. NOT SENT: github-cb is unreachable (not in ListAgents, socket 90526 gone), so no PASS covers v2 yet; a peer's PASS of v1 does not carry to v2 until they say so.",
+      "next_bounded_step": "Wait for the deploy witness: the nemik pods run an image epoch at or after the landing of 675c1193; nemik-witnesses --apply then marks it done",
+      "evidence": "2026-11-17T18:33:46Z: 2026-11-17 FIRST RESULT, against the hypothesis: panels.js sourceGraph already shares overlapping rounds (W1140: pieceCache holds the PROMISE, so a second round asks for a piece only when its hash moved or its fetch failed). The forced case (tests/test_load_overlap.py, fake clock, the first load's graph pieces held back by a route, clock advanced 60 s + 1 s, then released) is GREEN on today's page: no piece asked twice (bazel //:test_load_overlap, --nocache_test_results, clean worktree on main). CAVEAT: the test does not yet assert that the tick started a second load(), so green could also mean the tick never ran one; that assertion is the next step. Remaining candidate for duplicates: a piece fetch that FAILED is deleted from pieceCache and asked for again by the next round (panels.js: 'a failed piece is asked for again'), so ~10 failed fetches in one burst followed by a 60 s poll retry would put 10 duplicates in __pieceFetches. No single-flight change is justified by the evidence yet. | 2026-11-17T18:40:20Z: 2026-11-17 RESULT (bazel //:test_load_overlap, --nocache_test_results, clean worktree on main, both cases pass): (a) the poll tick DID start a second load (>=2 hashes.json requests) with the first load's pieces held, and no piece was asked twice: the overlap mechanism is refuted, not merely unwitnessed. (b) with the first 10 piece requests aborted by the server, the next round (60 s poll) asked for the failed pieces again: duplicates in __pieceFetches, at most 10, and data drawn only after the poll. That reproduces the refusal's shape (10 extra pieces, a piece twice at the index where the fixture lists the next one). NOT shown: that the real test server ever refuses connections (the listen backlog is request_queue_size 5, a guess). Plan: the test servers get a backlog covering the page's fan-out, and test_layout's first-load assertion checks the cache contract (every piece fetched, none fetched while its hash is unchanged and its fetch succeeded) rather than raw attempts. No user defect claimed: a retry of a failed fetch is the page's intended behaviour. | 2026-11-17T20:07:31Z: 2026-11-17 github-cb PASS-SUBMIT on refs/review/W2260-v1 (8f7e913c) on one condition: panels.js's catch deleted pieceCache[key] unconditionally, so an old fetch failing late after a hash move would drop the NEWER entry and the next round would fetch it again (a duplicate the cache contract does not explain); fix on this line and add a case. RED: tests/test_load_overlap.py case (c) (hold the first fetch of one piece, move its hash in hashes.json, start a second round, abort the old fetch, check the newer entry is still cached and the piece was fetched twice, not three times) FAILED on today's panels.js: 'the old fetch's late failure dropped the newer entry, assert False is True' (bazel //:test_load_overlap, 1 failed 2 passed). An earlier run of the case HUNG on that page because its route held a third request forever; the route now holds only the first two requests for the piece. GREEN pending: the fix captures the entry and deletes only if pieceCache[key] === entry. | 2026-11-17T20:11:08Z: 2026-11-17 v2 built: refs/review/W2260-v2 = 1b18d9eb9307462132146ce139ee8168456a5ed3 (main 728485f + the v1 tree + the late-failure guard in panels.js + case (c)); delta from v1 (8f7e913c): panels.js +9/-3 and tests/test_load_overlap.py +60, nothing else. GREEN: //:test_load_overlap //:test_piece_fetch_once //:test_layout //:test_ruff_ratchet //:test_mypy_ratchet pass (--nocache_test_results, docs worktree); RED proven on v1's panels.js. NOT SENT: github-cb is unreachable (not in ListAgents, socket 90526 gone), so no PASS covers v2 yet; a peer's PASS of v1 does not carry to v2 until they say so. | 2026-11-18T16:24:41Z: 2026-11-18: LANDED as 675c1193 (v4 9cc86160; git log -1 and ls-remote origin refs/heads/main read back). v2 was refused by the gate on test_web_size (panels.js 317 against 312); v3 compressed lines and github-b0 revised it as evasion; v4 moved the piece cache to src/nemik/web/pieces.js with its own ceiling, panels.js ceiling 312 to 302, index.html 282 to 283 for the script tag.",
       "issued_at": "2026-11-17T18:18:08Z",
       "minted_during": "interrupt",
       "caused_by": "W2259",
-      "last_worked": "2026-11-18T13:15:42Z",
+      "last_worked": "2026-11-18T16:24:41Z",
       "ticks_blocked": 0,
       "completed": null,
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
-      "vector_source": "default"
+      "vector_source": "default",
+      "landed_at": "20261118T162441Z",
+      "deploys": true
     },
     {
       "symbol": "W2261",
@@ -57599,6 +57546,13 @@
       "title": "Remove the next removable import, one stack per import, each measured by the baseline entries it lowers",
       "dropped_at": "2026-11-17T22:02:39Z",
       "reason": "2026-11-17 groom (W2286): superseded by the 215 generated instance cards W1763 to W2024 (one per module and blocker kind, each now with its own next step), which are exactly 'remove the next removable import, one stack per import'; the umbrella W1179 carries the order.",
+      "recoverable": true
+    },
+    {
+      "symbol": "W979",
+      "title": "A nonzero ratchet is a priority marker: every repo with one needs an open pay-down card (a shape warns when missing), those cards rank in a high band above feature work, and a ratchet that has not fallen over a learned window raises an alert",
+      "dropped_at": "2026-11-18T15:17:05Z",
+      "reason": "Its three parts exist and the operator's later rate ruling (host line 93406) replaced 'nonzero' with 'behind a required rate': W987 (behind fact from the ratchet series, done), W988 (BehindWithoutPaydownShape, done), W993 (paydown cards take velocity, done), with W986 (the rate requirement itself) still open and blocked on W994 and W1002. Revive only if the operator restates 'nonzero is a priority marker' as the stronger form.",
       "recoverable": true
     }
   ],

@@ -6349,3 +6349,4 @@
 2026-11-18T13:37:28Z  status W2307 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-18T13:49:15Z  interrupt W2308 minted    -         "nemik-check warns on an open card with neither its own enables nor its own blocked_on, though another card enables it: today only a card with no edge in or out is flagged (shapes.ttl W487)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=operator
 2026-11-18T13:50:45Z  interrupt W2309 minted    -         "nemik-check and nemik-rank's UNSCORED line count a card whose vector_source is default as UNSCORED, so 725 default-stamped cards read UNSCORED 725 and not no-vector 0"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=operator
+2026-11-18T16:24:41Z  status W2260 working>landed writer    "working -> landed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
