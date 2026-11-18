@@ -434,6 +434,7 @@ TESTS_PY = [
     "tests/test_shaclinc_new_shape.py",
     "tests/test_shaclinc_umbrella.py",
     "tests/test_shaclinc_unwatched.py",
+    "tests/test_shaclinc_workstream_hub.py",
     "tests/test_shapedepth.py",
     "tests/test_shapes_meta.py",
     "tests/test_shard_select.py",

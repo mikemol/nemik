@@ -56039,7 +56039,7 @@
     {
       "symbol": "W2257",
       "title": "Prove or fix the W2225 hub restriction for a WORKSTREAM hub: an equivalence test over a fixture workstream with more than HUB cards and a change to one",
-      "status": "blocked",
+      "status": "working",
       "enables": [],
       "touches": [],
       "blocked_on": [
@@ -56051,7 +56051,7 @@
       "issued_at": "2026-11-17T14:19:29Z",
       "minted_during": "interrupt",
       "caused_by": "W2254",
-      "last_worked": "2026-11-17T21:46:30Z",
+      "last_worked": "2026-11-18T17:41:02Z",
       "ticks_blocked": 0,
       "manifest": [
         "tests/test_shaclinc_hub_workstream.py",
