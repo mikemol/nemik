@@ -89,3 +89,23 @@ def test_a_card_hub_keeps_the_types_of_the_cards_it_enables() -> None:
     )
     assert inc == full
     assert not any("enables names a symbol" in m for _, _, m in inc)
+
+
+FOREIGN = URIRef("http://example.org/other#Workstream")
+
+
+def test_a_foreign_type_named_workstream_does_not_restrict_a_card_hub() -> None:
+    """Only the nemik Workstream type restricts a hub; the same name from another vocabulary no."""
+    g, sh = _fleet(), shapes()
+    hub = _umbrella(g)
+    g.add((hub, RDF.type, FOREIGN))
+    findings("test-hub-foreign", g, sh)
+    kid = _kid(hub, 0)
+    g.remove((kid, OSLC_CM.state, None))
+    g.add((kid, OSLC_CM.state, NEMIK.Done))
+    inc = sorted(findings("test-hub-foreign", g, sh))
+    full = sorted(
+        (f, s, m) for f, rows in shacl_results(g, sh).items() for s, m in rows
+    )
+    assert inc == full
+    assert not any("enables names a symbol" in m for _, _, m in inc)

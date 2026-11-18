@@ -37,6 +37,9 @@ Held = dict[str, tuple[frozenset[tuple[Node, Node, Node]], dict[Node, list[Resul
 _LAST: Held = {}
 _NS: Mapping[str, object] = {"sh": SH}
 HUB = 40  # a node with more neighbours than this (a workstream) is judged, not walked through
+# nemik:W2255: the one type that makes a hub a workstream, by its whole IRI: a type from another
+# vocabulary that happens to be called Workstream must not put the hub restriction on an umbrella
+WORKSTREAM = URIRef("https://github.com/mikemol/nemik/ns#Workstream")
 
 
 def export_cache() -> Held:
@@ -238,9 +241,7 @@ def _judged(
 
     """
     near = _neighbourhood(adjacent, live, hops)
-    workstreams = {
-        s for s, p, o in now if p == RDF.type and _tail(str(o)) == "Workstream"
-    }
+    workstreams = {s for s, p, o in now if p == RDF.type and o == WORKSTREAM}
     wide: set[Node] = set()
     for hub in live:
         if len(adjacent.get(hub, ())) > HUB:

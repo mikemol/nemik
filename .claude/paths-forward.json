@@ -55989,21 +55989,19 @@
     {
       "symbol": "W2255",
       "title": "shaclinc._judged matches a Workstream by the last segment of its type IRI: compare the exact nemik Workstream URIRef",
-      "status": "blocked",
+      "status": "working",
       "enables": [],
       "touches": [
         "gate-repair"
       ],
-      "blocked_on": [
-        "W2260"
-      ],
+      "blocked_on": [],
       "blocked_kind": "agent",
       "next_bounded_step": "Resubmit .claude/stack-W2255-v1.json (refs/review/W2255-v1 25d8aea, github-cb PASS-SUBMIT dated before) once W2260 lands (github-cb's order: W2260, then the seven-test PageServer migration W2261, then W2255). Set it ready at that point so the round check admits it.",
       "evidence": "2026-11-17T14:19:40Z: 2026-11-17 github-cb's follow-up on the W2254 PASS: _tail(str(o)) == 'Workstream' counts any namespace's Workstream, so a foreign type that shares the name could put the hub_reads restriction back on an umbrella.",
       "issued_at": "2026-11-17T14:19:26Z",
       "minted_during": "interrupt",
       "caused_by": "W2254",
-      "last_worked": "2026-11-17T20:09:12Z",
+      "last_worked": "2026-11-18T17:13:01Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/shaclinc.py",
