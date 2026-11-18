@@ -93,6 +93,8 @@ TARGETS = [(src, "") for src in glob(["tests/test_*.py"]) if src != "tests/test_
             + (["tools/landing_report.py", "tools/working_unnamed.py"] if src == "tests/test_landing_report.py" else [])
             # nemik:W1568: the stamp tool is imported by name from tools/
             + (["tools/stampnote.py"] if src == "tests/test_stampnote.py" else [])
+            # nemik:W2262: the deploy-witness tool is imported by name from tools/
+            + (["tools/deploy_witness.py"] if src == "tests/test_deploy_witness.py" else [])
             # nemik:W2261: the guard reads every python file under tests with ast, named from git ls-files
             # (minus what every test already has, and tests/fixtures, a package of its own)
             + ([f for f in TESTS_PY if f not in (src, "tests/installed.py", "tests/webpage.py", "tests/pagetext.py", "tests/conftest.py") and not f.startswith("tests/fixtures/")] if src == "tests/test_no_plain_threading_server.py" else [])

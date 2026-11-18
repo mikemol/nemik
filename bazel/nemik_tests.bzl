@@ -118,6 +118,7 @@ TESTS_PY = [
     "tests/test_delivery.py",
     "tests/test_dependency_cycle.py",
     "tests/test_deploy_manifest.py",
+    "tests/test_deploy_witness.py",
     "tests/test_deterministic.py",
     "tests/test_dictops.py",
     "tests/test_digest.py",

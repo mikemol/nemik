@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 2310,
+  "counter": 2311,
   "waypoints": [
     {
       "symbol": "W1",
@@ -56014,27 +56014,33 @@
     {
       "symbol": "W2256",
       "title": "The enables, blocked_on and workstream shape messages do not name the unresolved symbol, so a Violation cannot be acted on",
-      "status": "working",
+      "status": "landed",
       "enables": [],
       "touches": [],
       "blocked_on": [
         "W2283"
       ],
       "blocked_kind": "agent",
-      "next_bounded_step": "Review ref built: refs/review/W2256-v1 = bd120726 (the enables constraint names the unresolved symbol; first slice). Needs a reviewer's PASS dated before the submit (W2283), then submit .claude/stack-W2256-v1.json (landing kind image: src/nemik/data/shapes.ttl; set the writer's deploys flag and attach the deploy witness from tools/deploy_witness.py once W2262 lands, or the hand-built promql form). Remaining slices: the blocked_on resolution and the workstream class constraints, as a second stack.",
-      "evidence": "2026-11-17T14:19:42Z: 2026-11-17 github-cb and el-openglo: nemik-check printed 'Violation W762 enables names a symbol that is neither a waypoint nor residue in any workstream' without the symbol, so its owner could not act on it: a VIOLATES its owner cannot act on is unactionable by construction. The enables rule is a sh:property with sh:or over sh:class (shapes.ttl line 19-20) and no {?value}; CausedByResolvesShape already names the value through a SPARQL constraint. | 2026-11-17T21:04:46Z: 2026-11-17 built refs/review/W2256-v1 = bd120726f60ced7d15e30d2f6d1ecbc6ca2d9a24 (main 728485f): enables sh:property to a sh:sparql constraint with {?value}; tests/test_shape_messages.py (red on the old shapes.ttl, shown; green with the fix); the hub-card test prefix-matched; nine targets green with the ratchets. Held; not sent for review, not submitted.",
+      "next_bounded_step": "Wait for the deploy witness: the nemik pods run an image epoch at or after the landing of 0234a72b",
+      "evidence": "2026-11-17T14:19:42Z: 2026-11-17 github-cb and el-openglo: nemik-check printed 'Violation W762 enables names a symbol that is neither a waypoint nor residue in any workstream' without the symbol, so its owner could not act on it: a VIOLATES its owner cannot act on is unactionable by construction. The enables rule is a sh:property with sh:or over sh:class (shapes.ttl line 19-20) and no {?value}; CausedByResolvesShape already names the value through a SPARQL constraint. | 2026-11-17T21:04:46Z: 2026-11-17 built refs/review/W2256-v1 = bd120726f60ced7d15e30d2f6d1ecbc6ca2d9a24 (main 728485f): enables sh:property to a sh:sparql constraint with {?value}; tests/test_shape_messages.py (red on the old shapes.ttl, shown; green with the fix); the hub-card test prefix-matched; nine targets green with the ratchets. Held; not sent for review, not submitted. | 2026-11-18T18:34:27Z: 2026-11-18: LANDED as 0234a72b (v4 e586f7f5; src data landing; git log -1 and ls-remote read back). Earlier gate refusals: v3 on E501 (one 101-character docstring line). Pins: no subclass of the enables classes (red with a planted subclass), the hub cases red under two restriction mutants.",
       "issued_at": "2026-11-17T14:19:27Z",
       "minted_during": "interrupt",
       "caused_by": "W2254",
-      "last_worked": "2026-11-18T18:05:46Z",
+      "last_worked": "2026-11-18T18:34:27Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/data/shapes.ttl",
-        "tests/test_shape_messages.py"
+        "tests/test_shape_messages.py",
+        "tests/test_shaclinc_hub_card.py",
+        "BUILD.bazel",
+        "bazel/nemik_tests.bzl"
       ],
       "completed": null,
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
-      "vector_source": "default"
+      "vector_source": "default",
+      "size_class": "small",
+      "landed_at": "20261118T183427Z",
+      "deploys": true
     },
     {
       "symbol": "W2257",
@@ -56157,7 +56163,7 @@
     {
       "symbol": "W2262",
       "title": "A landed src card's deploy witness is generated from its landed_at (pods' image build epoch against the landing), not hand-written",
-      "status": "blocked",
+      "status": "working",
       "enables": [],
       "touches": [
         "velocity",
@@ -56172,7 +56178,7 @@
       "issued_at": "2026-11-17T20:03:20Z",
       "minted_during": "interrupt",
       "caused_by": "W2063",
-      "last_worked": "2026-11-17T20:58:55Z",
+      "last_worked": "2026-11-18T18:38:07Z",
       "ticks_blocked": 0,
       "completed": null,
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
@@ -57292,6 +57298,25 @@
       "minted_during": "interrupt",
       "caused_by": "github-b0",
       "last_worked": "2026-11-18T18:10:36Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2311",
+      "title": "The image tag names the commit the image holds: stamp the cloned tip's commit time AND its own sha into the tag (today the epoch is the build START and the sha is the event's github.sha, which differs from the cloned tip when a push races the clone)",
+      "status": "ready",
+      "enables": [
+        "W2295",
+        "W2262"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Read how Flux's ImagePolicy orders the tags (deploy/image-automation.yaml extract of the leading number), then propose the tag as the cloned tip's commit time (git -C src log -1 --format=%ct) with the same pattern; ask luthen whether it owns the policy or only records it; a review ref for build.yml",
+      "evidence": "2026-11-18T18:38:08Z: 2026-11-18 github-b0: residual window, stated precisely: a landing pushed between the build's clone and its date call can satisfy the deploy witness without being in the image. SECOND finding: the tag's sha (github.sha) can differ from the code the image contains whenever a push races the clone, so the image names the wrong commit: a traceability defect, not only a witness one. W2311 enables W2262's soundness. No typed margin.",
+      "issued_at": "2026-11-18T18:36:46Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2262",
+      "last_worked": "2026-11-18T18:38:08Z",
       "ticks_blocked": 0
     }
   ],

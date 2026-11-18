@@ -6358,3 +6358,6 @@
 2026-11-18T18:07:12Z  status W2257 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-18T18:07:13Z  status W2253 blocked>done writer    "blocked -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-18T18:07:14Z  interrupt W2310 minted    -         "mikemol-commit refuses a stack whose entry paths differ from the review ref's diff (git diff --name-only base ref), naming the missing paths before the gate starts, or derives them: a hand-kept path list missed files twice (nemik:W2261's first submit, nemik:W2256's first stack file)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-b0
+2026-11-18T18:34:27Z  status W2256 working>landed writer    "working -> landed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-18T18:36:46Z  interrupt W2311 minted    -         "The image tag's epoch is the build START, so a landing pushed between the build's clone and its date call can satisfy the deploy witness without being in the image: stamp the cloned tip's commit time into the tag (build.yml and the tag pattern in deploy/image-automation.yaml), or key the witness on it"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2262
+2026-11-18T18:38:07Z  status W2262 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
