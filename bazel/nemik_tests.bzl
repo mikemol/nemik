@@ -542,6 +542,7 @@ TESTS_PY = [
     "tests/test_witnessed_blocker.py",
     "tests/test_witnesses.py",
     "tests/test_witnesses_home.py",
+    "tests/test_witnessreads.py",
     "tests/test_witwait.py",
     "tests/test_work.py",
     "tests/test_work_cli.py",

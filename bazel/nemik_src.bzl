@@ -165,6 +165,7 @@ NEMIK_PY = [
     "src/nemik/withheldage.py",
     "src/nemik/witnesses.py",
     "src/nemik/witnesses_cli.py",
+    "src/nemik/witnessreads.py",
     "src/nemik/work.py",
     "src/nemik/workflows.py",
     "src/nemik/workmarks.py",

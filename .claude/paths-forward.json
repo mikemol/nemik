@@ -15190,7 +15190,6 @@
         "file:tests/test_collapse_payload.py!w"
       ],
       "blocked_on": [
-        "W969",
         "W970"
       ],
       "blocked_kind": "agent",
@@ -15200,7 +15199,7 @@
       "minted_during": "interrupt",
       "caused_by": "W693",
       "last_worked": "2026-10-24T15:22:53Z",
-      "ticks_blocked": 623,
+      "ticks_blocked": 0,
       "manifest": [
         "src/nemik/blocks.py",
         "src/nemik/serve.py",
@@ -22383,7 +22382,7 @@
     {
       "symbol": "W969",
       "title": "The graph payload carries a collapse umbrella node over the blocked cards it rolls up, with its n-path address, in the field manifest and the API schema",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W709"
       ],
@@ -22391,18 +22390,16 @@
         "file:src/nemik/serve.py!w",
         "file:src/nemik/data/field-manifest.json!w"
       ],
-      "blocked_on": [
-        "W2283"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "Review ref built: refs/review/W969-v1 = 77ccbd3a (tests/test_collapse_payload.py only, three withholding cases, green under bazel with the ratchets). Needs a reviewer's PASS dated before the submit (github-cb is not in ListAgents; the fleet rule is blob first). Then submit .claude/stack-W969-v1.json (landing kind ref). Open question left on this card: whether the stronger form (drop any umbrella that had a withheld member) is wanted.",
-      "evidence": "2026-10-24: 2026-10-24 read before building: the payload builder is serve.py around line 740 to 900 (nodes then edges, open_blockers set at 821, rank and slack added after). Two ways to carry an umbrella, each with a cost found by reading. (a) As a node with its own state: the page lists known states in graph.js with an 'other' fallback, so an unknown state draws, but every consumer that counts or lays out nodes (the layout tests, the card list, the Cards tree, withheld.py's stub shape) sees a new kind of node that is not a card. (b) As a separate top-level list beside nodes and edges: no consumer of nodes sees it, but a new top-level key has to be carried through pieces.split and assemble, the page's combine() in panels.js, hashes.json and the field manifest and API schema. Neither is a small slice. (b) keeps cards and umbrellas apart, which the model says they are (a view, never a card: W691), so (b) is recommended; it is not built | 2026-11-17T20:14:10Z: 2026-11-17 groom, read: the separate list this card asks for EXISTS as its own document, umbrellas.json (W973): serve.umbrella_docs (serve.py 802) builds one row per member (id, blockers, enables, card, address), the static build writes docs['umbrellas.json'] (1527) and Model.umbrellas_json serves it (693), field-manifest.json declares it (line 25), schemagen and the apischema fixtures cover it, panels.js reads it (the page side, W970/W975), tests/test_collapse_payload.py has two cases (two waiters form an umbrella, no blocked pair means none). It is a document of its own, not a key carried through the graph pieces (the design chose a separate document over (b)). NOT pinned: withholding. No test mentions withheld; umbrella_docs takes the graph without the withheld cards, so a withheld card never appears, but the card's stronger wording (drop any umbrella with a withheld member) is neither built nor refused by a test. That is the remaining slice. | 2026-11-17T20:53:52Z: 2026-11-17 built refs/review/W969-v1 = 77ccbd3ae82c53a4fc5d6371e7ebe1918c649b54 (main 728485f): tests/test_collapse_payload.py +47/-2, three cases over serve.without; //:test_collapse_payload //:test_ruff_ratchet //:test_mypy_ratchet pass (--nocache_test_results). Not sent for review (no reviewer reachable), not submitted.",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-10-24: 2026-10-24 read before building: the payload builder is serve.py around line 740 to 900 (nodes then edges, open_blockers set at 821, rank and slack added after). Two ways to carry an umbrella, each with a cost found by reading. (a) As a node with its own state: the page lists known states in graph.js with an 'other' fallback, so an unknown state draws, but every consumer that counts or lays out nodes (the layout tests, the card list, the Cards tree, withheld.py's stub shape) sees a new kind of node that is not a card. (b) As a separate top-level list beside nodes and edges: no consumer of nodes sees it, but a new top-level key has to be carried through pieces.split and assemble, the page's combine() in panels.js, hashes.json and the field manifest and API schema. Neither is a small slice. (b) keeps cards and umbrellas apart, which the model says they are (a view, never a card: W691), so (b) is recommended; it is not built | 2026-11-17T20:14:10Z: 2026-11-17 groom, read: the separate list this card asks for EXISTS as its own document, umbrellas.json (W973): serve.umbrella_docs (serve.py 802) builds one row per member (id, blockers, enables, card, address), the static build writes docs['umbrellas.json'] (1527) and Model.umbrellas_json serves it (693), field-manifest.json declares it (line 25), schemagen and the apischema fixtures cover it, panels.js reads it (the page side, W970/W975), tests/test_collapse_payload.py has two cases (two waiters form an umbrella, no blocked pair means none). It is a document of its own, not a key carried through the graph pieces (the design chose a separate document over (b)). NOT pinned: withholding. No test mentions withheld; umbrella_docs takes the graph without the withheld cards, so a withheld card never appears, but the card's stronger wording (drop any umbrella with a withheld member) is neither built nor refused by a test. That is the remaining slice. | 2026-11-17T20:53:52Z: 2026-11-17 built refs/review/W969-v1 = 77ccbd3ae82c53a4fc5d6371e7ebe1918c649b54 (main 728485f): tests/test_collapse_payload.py +47/-2, three cases over serve.without; //:test_collapse_payload //:test_ruff_ratchet //:test_mypy_ratchet pass (--nocache_test_results). Not sent for review (no reviewer reachable), not submitted. | 2026-11-18T19:12:29Z: 2026-11-18: LANDED as c7add8e8 (test-only ref landing; git log -1 and ls-remote read back). v3 e48ad15b, PASS-SUBMIT from github-b0.",
       "issued_at": "2026-10-24T15:22:53Z",
       "minted_during": "interrupt",
       "caused_by": "W709",
-      "last_worked": "2026-11-18T19:02:20Z",
+      "last_worked": "2026-11-18T19:12:29Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261118T191229Z",
       "manifest": [
         "src/nemik/serve.py",
         "src/nemik/data/field-manifest.json",
@@ -22417,22 +22414,20 @@
     {
       "symbol": "W970",
       "title": "The page draws one mark per collapse umbrella, named for assistive technology, with the WCAG chain test as its oracle",
-      "status": "blocked",
+      "status": "ready",
       "enables": [
         "W709"
       ],
       "touches": [],
-      "blocked_on": [
-        "nemik:W969"
-      ],
-      "blocked_kind": "agent",
+      "blocked_on": [],
+      "blocked_kind": null,
       "next_bounded_step": "After W969: the page draws one mark per umbrella node (one mark per state rule), with an accessible name that holds its visible text (WCAG 2.5.3), tested with the WCAG chain; the page files are at their line ceilings, so a new file (collapse.js) unless a line can be traded",
       "evidence": "",
       "issued_at": "2026-10-24T15:22:53Z",
       "minted_during": "interrupt",
       "caused_by": "W709",
-      "last_worked": "2026-10-24T15:23:12Z",
-      "ticks_blocked": 623,
+      "last_worked": "2026-11-18T19:23:17Z",
+      "ticks_blocked": 0,
       "completed": null,
       "manifest": [
         "src/nemik/web/panels.js",
@@ -56600,7 +56595,7 @@
     {
       "symbol": "W2284",
       "title": "A pure reader of the fact references a Rego witness text reads (observer, key, field), shared by --on and the unknown-field check",
-      "status": "blocked",
+      "status": "working",
       "enables": [
         "W2150",
         "W2285",
@@ -56616,7 +56611,7 @@
       "issued_at": "2026-11-17T21:33:56Z",
       "minted_during": "interrupt",
       "caused_by": "W2150",
-      "last_worked": "2026-11-17T23:51:54Z",
+      "last_worked": "2026-11-18T19:23:07Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/witnessreads.py",
@@ -57305,7 +57300,10 @@
         "W2295",
         "W2262"
       ],
-      "touches": [],
+      "touches": [
+        "file:.forgejo/workflows/build.yml!w",
+        "file:deploy/image-automation.yaml!w"
+      ],
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "Read how Flux's ImagePolicy orders the tags (deploy/image-automation.yaml extract of the leading number), then propose the tag as the cloned tip's commit time (git -C src log -1 --format=%ct) with the same pattern; ask luthen whether it owns the policy or only records it; a review ref for build.yml",
@@ -57646,24 +57644,6 @@
       "renewed_at": "2026-10-24T12:59:32Z",
       "expires_at": "2026-10-24T13:29:32Z",
       "lapse_ledgered": true
-    },
-    {
-      "tag": "file:src/nemik/serve.py!w",
-      "holder": "(unlocked)",
-      "waypoint": "W969",
-      "base_sha": "7a9f93710c25f585693112a0c4d229c9009d423b",
-      "taken_at": "2026-11-18T19:02:20Z",
-      "renewed_at": "2026-11-18T19:02:20Z",
-      "expires_at": "2026-11-18T19:32:20Z"
-    },
-    {
-      "tag": "file:src/nemik/data/field-manifest.json!w",
-      "holder": "(unlocked)",
-      "waypoint": "W969",
-      "base_sha": "7a9f93710c25f585693112a0c4d229c9009d423b",
-      "taken_at": "2026-11-18T19:02:20Z",
-      "renewed_at": "2026-11-18T19:02:20Z",
-      "expires_at": "2026-11-18T19:32:20Z"
     }
   ],
   "advice": [
