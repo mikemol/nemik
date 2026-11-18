@@ -22383,7 +22383,7 @@
     {
       "symbol": "W969",
       "title": "The graph payload carries a collapse umbrella node over the blocked cards it rolls up, with its n-path address, in the field manifest and the API schema",
-      "status": "blocked",
+      "status": "working",
       "enables": [
         "W709"
       ],
@@ -22400,7 +22400,7 @@
       "issued_at": "2026-10-24T15:22:53Z",
       "minted_during": "interrupt",
       "caused_by": "W709",
-      "last_worked": "2026-11-17T20:55:22Z",
+      "last_worked": "2026-11-18T19:02:20Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
@@ -56163,24 +56163,22 @@
     {
       "symbol": "W2262",
       "title": "A landed src card's deploy witness is generated from its landed_at (pods' image build epoch against the landing), not hand-written",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [
         "velocity",
         "evidence"
       ],
-      "blocked_on": [
-        "W2283"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "Review ref built: refs/review/W2262-v1 = bd04332b (tools/deploy_witness.py, tests/test_deploy_witness.py, BUILD.bazel; green under bazel with the ratchets). Needs a reviewer's PASS dated before the submit (W2283: no reviewer reachable), then submit .claude/stack-W2262-v1.json (landing kind ref). Afterwards: tell mtools:W2542 the tool exists; W2263 is the sibling check.",
-      "evidence": "2026-11-17T20:58:55Z: 2026-11-17 built refs/review/W2262-v1 = bd04332b4dfe178c3931370970ec240445b948b2 (main 728485f): //:test_deploy_witness //:test_ruff_ratchet //:test_mypy_ratchet pass (--nocache_test_results); the printed command's quoting is round-tripped through a real shell by the test. Held; not sent for review, not submitted.",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-11-17T20:58:55Z: 2026-11-17 built refs/review/W2262-v1 = bd04332b4dfe178c3931370970ec240445b948b2 (main 728485f): //:test_deploy_witness //:test_ruff_ratchet //:test_mypy_ratchet pass (--nocache_test_results); the printed command's quoting is round-tripped through a real shell by the test. Held; not sent for review, not submitted. | 2026-11-18T19:00:55Z: 2026-11-18: LANDED as 7a9f9371 (ref landing: tools and tests; git log -1 and ls-remote read back). v4 fa4da4ae, PASS-SUBMIT from github-b0. Residual window named: nemik:W2311.",
       "issued_at": "2026-11-17T20:03:20Z",
       "minted_during": "interrupt",
       "caused_by": "W2063",
-      "last_worked": "2026-11-18T18:38:07Z",
+      "last_worked": "2026-11-18T19:00:55Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261118T190055Z",
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
       "vector_source": "default"
     },
@@ -56918,7 +56916,6 @@
         "W1518",
         "W2092",
         "W2107",
-        "W2262",
         "W2151"
       ],
       "blocked_kind": "agent",
@@ -57649,6 +57646,24 @@
       "renewed_at": "2026-10-24T12:59:32Z",
       "expires_at": "2026-10-24T13:29:32Z",
       "lapse_ledgered": true
+    },
+    {
+      "tag": "file:src/nemik/serve.py!w",
+      "holder": "(unlocked)",
+      "waypoint": "W969",
+      "base_sha": "7a9f93710c25f585693112a0c4d229c9009d423b",
+      "taken_at": "2026-11-18T19:02:20Z",
+      "renewed_at": "2026-11-18T19:02:20Z",
+      "expires_at": "2026-11-18T19:32:20Z"
+    },
+    {
+      "tag": "file:src/nemik/data/field-manifest.json!w",
+      "holder": "(unlocked)",
+      "waypoint": "W969",
+      "base_sha": "7a9f93710c25f585693112a0c4d229c9009d423b",
+      "taken_at": "2026-11-18T19:02:20Z",
+      "renewed_at": "2026-11-18T19:02:20Z",
+      "expires_at": "2026-11-18T19:32:20Z"
     }
   ],
   "advice": [
