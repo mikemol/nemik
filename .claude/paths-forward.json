@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 2311,
+  "counter": 2312,
   "waypoints": [
     {
       "symbol": "W1",
@@ -37283,11 +37283,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "Extend nemik.witnesses._file: for a path that exists answer {exists: true, mtime: RFC 3339 UTC text, size: bytes}, so a Rego witness can compare time.parse_rfc3339_ns(input.file[PATH].mtime) with input.now (luthen-observability:W2739, case: a repo's heartbeat file advancing after a hook was applied); a missing path stays {exists: false} with no mtime or size; a path that cannot be read (permission) is undefined, not zero (the W259 rule). Stat only, never read content. Update nemik.witnessreads.FIELDS['file'] to exists, mtime, size (W2263 pins that table against the observer), tests for the three shapes, and the module docstring and skills/nemik/SKILL.md. Compile under the pinned Codon.",
-      "evidence": "2026-11-06T02:36:34Z: 2026-11-06 checked against the letter inbox/2026-11-03-nemik-edge-luthen-observability-W1927-caused_by-W1518.md: luthen-observability:W1927, which caused this card, is done as of 2026-11-03. The card still stands: its deliverable (mtime and size in witnesses._file) is not built and a witness consumer waits on it. Not closed. | 2026-11-18T13:23:46Z: 2026-11-17 luthen-observability:W2739 (peer message) asks for exactly this: a file fact with mtime as RFC 3339 and size, undefined for an unreadable path; they build a metric producer route regardless, so it does not block them. Note the earlier form here said mtime in epoch seconds: RFC 3339 is what Rego's time.parse_rfc3339_ns reads, so that is the form.",
+      "evidence": "2026-11-06T02:36:34Z: 2026-11-06 checked against the letter inbox/2026-11-03-nemik-edge-luthen-observability-W1927-caused_by-W1518.md: luthen-observability:W1927, which caused this card, is done as of 2026-11-03. The card still stands: its deliverable (mtime and size in witnesses._file) is not built and a witness consumer waits on it. Not closed. | 2026-11-18T13:23:46Z: 2026-11-17 luthen-observability:W2739 (peer message) asks for exactly this: a file fact with mtime as RFC 3339 and size, undefined for an unreadable path; they build a metric producer route regardless, so it does not block them. Note the earlier form here said mtime in epoch seconds: RFC 3339 is what Rego's time.parse_rfc3339_ns reads, so that is the form. | 2026-11-18T20:36:58Z: 2026-11-18 github-b0: when the file observer gains mtime and size, it must extend witnessreads.FIELDS[\"file\"] (nemik:W2263); the pin of the file observer against FIELDS will fail if it does not.",
       "issued_at": "2026-11-03T02:27:32Z",
       "minted_during": "interrupt",
       "caused_by": "luthen-observability:W1927",
-      "last_worked": "2026-11-18T13:23:46Z",
+      "last_worked": "2026-11-18T20:36:58Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/witnesses.py",
@@ -56180,7 +56180,7 @@
     {
       "symbol": "W2263",
       "title": "nemik-check warns on a witness that reads a fact field no observer produces (git_ref has exists and sha, not resolves)",
-      "status": "blocked",
+      "status": "working",
       "enables": [],
       "touches": [
         "velocity",
@@ -56195,7 +56195,7 @@
       "issued_at": "2026-11-17T20:03:21Z",
       "minted_during": "interrupt",
       "caused_by": "W2063",
-      "last_worked": "2026-11-18T00:33:02Z",
+      "last_worked": "2026-11-18T20:40:02Z",
       "ticks_blocked": 0,
       "prior_status": "ready",
       "completed": null,
@@ -56595,7 +56595,7 @@
     {
       "symbol": "W2284",
       "title": "A pure reader of the fact references a Rego witness text reads (observer, key, field), shared by --on and the unknown-field check",
-      "status": "working",
+      "status": "landed",
       "enables": [
         "W2150",
         "W2285",
@@ -56606,20 +56606,25 @@
         "W2283"
       ],
       "blocked_kind": "agent",
-      "next_bounded_step": "Review ref built: refs/review/W2284-v1 = 921e71e9 (src/nemik/witnessreads.py, tests/test_witnessreads.py, bazel/nemik_src.bzl; green under bazel with the ratchets and the Codon census). Needs a reviewer's PASS dated before the submit (W2283), then submit .claude/stack-W2284-v1.json (landing kind image: set deploys true and attach the deploy witness from tools/deploy_witness.py once W2262 lands). Then W2285 (the --on filter) and W2263 (the field check) consume refs.",
-      "evidence": "2026-11-17T23:51:54Z: 2026-11-17 built refs/review/W2284-v1 = 921e71e9b6e6740bf5d7f6b4cf6c3d72943d437b (main 728485f): pure string scanner, five test cases, one src module registered. //:test_witnessreads //:test_nemik_src //:test_ruff_ratchet //:test_mypy_ratchet //:test_codon_census pass (--nocache_test_results); the first nine-target run also passed codon_wall_incidence, codon_calls, import_closure and vocabulary_declared. Held; not sent for review, not submitted.",
+      "next_bounded_step": "Wait for the deploy witness: the nemik pods run an image epoch at or after the landing of 4eebe387 (a module nothing imports yet; W2263 is the first importer)",
+      "evidence": "2026-11-17T23:51:54Z: 2026-11-17 built refs/review/W2284-v1 = 921e71e9b6e6740bf5d7f6b4cf6c3d72943d437b (main 728485f): pure string scanner, five test cases, one src module registered. //:test_witnessreads //:test_nemik_src //:test_ruff_ratchet //:test_mypy_ratchet //:test_codon_census pass (--nocache_test_results); the first nine-target run also passed codon_wall_incidence, codon_calls, import_closure and vocabulary_declared. Held; not sent for review, not submitted. | 2026-11-18T20:34:58Z: 2026-11-18: LANDED as 4eebe387 (v4 c8eb1ede, PASS-SUBMIT from github-b0 after the backtick test ran red on v3; git log -1 and ls-remote read back).",
       "issued_at": "2026-11-17T21:33:56Z",
       "minted_during": "interrupt",
       "caused_by": "W2150",
-      "last_worked": "2026-11-18T19:23:07Z",
+      "last_worked": "2026-11-18T20:34:58Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/witnessreads.py",
-        "tests/test_witnessreads.py"
+        "tests/test_witnessreads.py",
+        "bazel/nemik_src.bzl",
+        "bazel/nemik_tests.bzl"
       ],
       "completed": null,
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
-      "vector_source": "default"
+      "vector_source": "default",
+      "size_class": "small",
+      "landed_at": "20261118T203458Z",
+      "deploys": true
     },
     {
       "symbol": "W2285",
@@ -57313,6 +57318,28 @@
       "caused_by": "W2262",
       "last_worked": "2026-11-18T18:38:08Z",
       "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2312",
+      "title": "witnessreads.FIELDS is a hand list mirroring the observers: pin the alert, promql and apply fields (file, git_ref and pid are already pinned against the real observers) from the observer code's own declaration or a fixture response, with no live endpoint, so a field added to one of those observers cannot make the unknown-field check warn falsely",
+      "status": "ready",
+      "enables": [
+        "W2295"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Read how nemik.witnesses builds the alert, promql and apply facts, then write the test that compares each fact's keys with FIELDS[observer] from a fixture response (the same shape the file, git_ref and pid pins use); red when a key is added to one observer",
+      "evidence": "",
+      "issued_at": "2026-11-18T20:37:06Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2263",
+      "last_worked": null,
+      "ticks_blocked": 0,
+      "manifest": [
+        "tests/test_witness_fields_pinned.py"
+      ],
+      "size_class": "small"
     }
   ],
   "residue": [

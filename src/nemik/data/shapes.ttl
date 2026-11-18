@@ -783,3 +783,17 @@ nemik:OperatorActCredentialShape a sh:NodeShape ;
                 FILTER(REGEX(STR(?b), "[a-z0-9]_(secret|token|key|password)([^a-z0-9_]|$)|(paste|pasting|type|typing|enter|writes?|writing|supply|supplies|set|sets|export|exports)[^|]{0,60}(token|secret|password|credential|api[ _]key)|credential[s]? held outside the tree", "i"))
                 FILTER NOT EXISTS { $this <https://github.com/mikemol/nemik/ns#noMachineSource> ?p }
             }""" ] .
+
+# nemik:W2263: a Rego witness that reads a fact field no observer produces is undefined, so the
+# witness is false forever: nine landed cards carried input.git_ref[...].resolves (the observer
+# answers exists and sha) and none could ever close. The adapter keeps the unknown names (never
+# the key text) from nemik.witnessreads.unknown, whose field table the tests pin to the observers.
+nemik:WitnessUnknownFieldShape a sh:NodeShape ;
+    sh:targetSubjectsOf nemik:witnessUnknownField ;
+    sh:severity sh:Warning ;
+    sh:sparql [
+        sh:message "this card's witness reads {?value}, which no observer produces: it is undefined in Rego, so the witness is false forever; read a field the observer answers (nemik.witnessreads.FIELDS lists them) or write the witness in PromQL" ;
+        sh:select """
+            SELECT $this ?value WHERE {
+                $this <https://github.com/mikemol/nemik/ns#witnessUnknownField> ?value .
+            }""" ] .

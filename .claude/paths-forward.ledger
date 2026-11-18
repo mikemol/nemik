@@ -6366,3 +6366,6 @@
 2026-11-18T19:12:29Z  status W969 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-18T19:23:07Z  status W2284 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-18T19:23:17Z  status W970 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-18T20:34:58Z  status W2284 working>landed writer    "working -> landed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-18T20:37:06Z  interrupt W2312 minted    -         "witnessreads.FIELDS is a hand list mirroring the observers: pin the alert, promql and apply fields (file, git_ref and pid are already pinned against the real observers) from the observer code's own declaration or a fixture response, with no live endpoint, so a field added to one of those observers cannot make the unknown-field check warn falsely"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2263
+2026-11-18T20:40:02Z  status W2263 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

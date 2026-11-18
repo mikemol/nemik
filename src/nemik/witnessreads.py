@@ -94,3 +94,40 @@ def refs(text: str) -> list[tuple[str, str, str]]:
                 found.append((observer, key, field))
         at = following
     return found
+
+
+# nemik:W2263: the fields each observer's fact carries (nemik.witnesses.OBSERVERS), the names a
+# witness may read after the bracket. A field outside its observer's list is undefined in Rego, so
+# the witness is false forever (nine landed cards carried input.git_ref[...].resolves, which the
+# observer never answers). tests/test_witnessreads.py pins the lists against the observers that run
+# offline (file, git_ref, pid) and states the ones that need an endpoint (alert, promql, apply).
+FIELDS: dict[str, list[str]] = {
+    "pid": ["alive", "start"],
+    "file": ["exists"],
+    "git_ref": ["exists", "sha"],
+    "alert": ["state"],
+    "promql": ["values", "empty"],
+    "apply": ["applied", "unobservable", "at", "digest", "as_of", "stale"],
+}
+
+
+def unknown(text: str) -> list[str]:
+    """Name the facts a witness reads that no observer produces.
+
+    Returns:
+        `observer.field` for a field outside its observer's list, and `observer` for an observer
+        that does not exist; a reference with no field (the whole fact) is not unknown, and each
+        name appears once, in reading order.
+
+    """
+    out: list[str] = []
+    for observer, _, field in refs(text):
+        if observer not in FIELDS:
+            name = observer
+        elif field and field not in FIELDS[observer]:
+            name = observer + "." + field
+        else:
+            continue
+        if name not in out:
+            out.append(name)
+    return out

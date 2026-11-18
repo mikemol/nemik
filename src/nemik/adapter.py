@@ -21,7 +21,7 @@ from mikemol.pathsforward import attach, ledger, model, store
 from rdflib import RDF, Graph, Literal, Namespace, URIRef
 from rdflib.namespace import DCTERMS, PROV, RDFS, XSD
 
-from nemik import editverbs, retroingest, urnbase, warrants
+from nemik import editverbs, retroingest, urnbase, warrants, witnessreads
 
 if TYPE_CHECKING:
     from collections.abc import Callable
@@ -517,6 +517,10 @@ def _add_signals(g: Graph, node: URIRef, w: model.Json) -> None:
                 Literal("wx:" + hashlib.sha256(wq.encode()).hexdigest()[:10]),
             )
         )
+        # nemik:W2263: a field no observer produces is undefined in Rego, so the witness never
+        # holds; the names (observer.field, never the key) are safe to keep in the graph
+        for name in witnessreads.unknown(wq):
+            g.add((node, NEMIK.witnessUnknownField, Literal(name)))
     if tb := model.ticks(w):
         g.add((node, NEMIK.ticksBlocked, Literal(tb)))
     if issued := model.text(w, "issued_at"):

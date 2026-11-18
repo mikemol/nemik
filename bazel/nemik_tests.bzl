@@ -539,6 +539,7 @@ TESTS_PY = [
     "tests/test_witness_lang.py",
     "tests/test_witness_party.py",
     "tests/test_witness_promql.py",
+    "tests/test_witness_unknown_field.py",
     "tests/test_witnessed_blocker.py",
     "tests/test_witnesses.py",
     "tests/test_witnesses_home.py",
