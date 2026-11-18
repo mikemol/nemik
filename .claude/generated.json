@@ -4,6 +4,10 @@
   {
    "path": "bazel/nemik_src.bzl",
    "generator": "tools/nemik_src.py"
+  },
+  {
+   "path": "bazel/nemik_tests.bzl",
+   "generator": "tools/nemik_src.py"
   }
  ]
 }

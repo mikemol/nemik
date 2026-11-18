@@ -9,7 +9,6 @@ it, and fetches nothing the server cannot answer from a file.
 """
 
 import threading
-from http.server import ThreadingHTTPServer
 from typing import TYPE_CHECKING
 
 import installed
@@ -18,6 +17,7 @@ import webpage
 from mikemol.procrun.proc import capture
 from playwright.sync_api import sync_playwright
 
+from nemik.serve import PageServer
 from nemik.staticserve import handler
 
 if TYPE_CHECKING:
@@ -50,7 +50,7 @@ def snapshot_url(tmp_path_factory: pytest.TempPathFactory) -> Iterator[str]:
     ]
     built = capture(build, env=installed.bin_env()[1])
     assert built.returncode == 0, built.stderr
-    server = ThreadingHTTPServer(("127.0.0.1", 0), handler(root))
+    server = PageServer(("127.0.0.1", 0), handler(root))
     threading.Thread(target=server.serve_forever, daemon=True).start()
     yield f"http://127.0.0.1:{server.server_address[1]}/"
     server.shutdown()

@@ -18,7 +18,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from mikemol.procrun.proc import capture
-from nemik_src import render
+from nemik_src import TESTS_SPEC, render
 
 HERE = Path(__file__).parent
 HOOK = HERE.parent / ".githooks" / "pre-commit"
@@ -87,6 +87,10 @@ def _run(
     if opts.real_has_tool:
         shutil.copy(TOOL, repo / "tools" / "nemik_src.py")
     listing.write_text(render(staged), encoding="utf-8")
+    # nemik:W2261: the tool judges the tests list too; the throwaway repo tracks no test file
+    (repo / "bazel" / "nemik_tests.bzl").write_text(
+        render([], TESTS_SPEC), encoding="utf-8"
+    )
     for module in MODULES:
         (repo / module).parent.mkdir(parents=True, exist_ok=True)
         (repo / module).write_text("X = 1\n", encoding="utf-8")

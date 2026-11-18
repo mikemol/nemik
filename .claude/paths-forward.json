@@ -56135,7 +56135,7 @@
     {
       "symbol": "W2261",
       "title": "seven tests build a plain ThreadingHTTPServer (backlog 5, below a browser's fan-out): migrate them mechanically to nemik.serve.PageServer, and pin it with a test that no tests/ file constructs ThreadingHTTPServer directly",
-      "status": "blocked",
+      "status": "working",
       "enables": [
         "W2289"
       ],
@@ -56143,16 +56143,14 @@
         "velocity",
         "gate-repair"
       ],
-      "blocked_on": [
-        "W2260"
-      ],
+      "blocked_on": [],
       "blocked_kind": "agent",
-      "next_bounded_step": "refs/review/W2261-v3 = d74f9d5e sent to github-b0 (v2 minus the hook pathspec, which is W2307, plus the fixtures-exclusion docstring); submit .claude/stack-W2261-v2.json (it describes v3) after W2260 lands and their word that the PASS carries.",
+      "next_bounded_step": "Submitted as refs/review/W2261-v4 = c3f98ebe (parent 675c1193, PASS-SUBMIT from github-b0): watch the gate, then read back git log -1 and ls-remote",
       "evidence": "2026-11-17T21:50:12Z: 2026-11-17 built refs/review/W2261-v1 = 080c5e8303a413417fc164ac17096abe05442dad on refs/review/W2260-v2: seven tests migrated by a mechanical codemod, a guard test, a BUILD data entry. //:test_no_plain_threading_server and the seven migrated tests and //:test_test_inputs pass, ratchets pass (one E501 in the guard fixed). Held; not sent for review, not submitted. | 2026-11-18T13:36:02Z: 2026-11-18 github-b0 (formerly github-cb) PASS-SUBMIT'd W2260 v2 and reviewed W2261 v1: codemod fine, guard too weak (text match, test_*.py only, a glob in BUILD). v2 built and sent.",
       "issued_at": "2026-11-17T19:52:43Z",
       "minted_during": "interrupt",
       "caused_by": "W2260",
-      "last_worked": "2026-11-18T13:39:39Z",
+      "last_worked": "2026-11-18T16:35:16Z",
       "ticks_blocked": 0,
       "completed": null,
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",

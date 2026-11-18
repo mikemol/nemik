@@ -13,13 +13,12 @@ import http.client
 import importlib
 import os
 import threading
-from http.server import ThreadingHTTPServer
 from pathlib import Path
 from typing import TYPE_CHECKING
 
 import pytest
 
-from nemik.serve import Model, handler
+from nemik.serve import Model, PageServer, handler
 
 if TYPE_CHECKING:
     from collections.abc import Iterator
@@ -109,7 +108,7 @@ def server() -> Iterator[int]:
 
     """
     patch = pytest.MonkeyPatch()
-    httpd = ThreadingHTTPServer(("127.0.0.1", 0), handler(Model(FLEET)))
+    httpd = PageServer(("127.0.0.1", 0), handler(Model(FLEET)))
     for module_name, name in SPAWNERS:
         module = importlib.import_module(module_name)
         if hasattr(module, name):

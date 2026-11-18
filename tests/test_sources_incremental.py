@@ -5,7 +5,6 @@
 import os
 import shutil
 import threading
-from http.server import ThreadingHTTPServer
 from pathlib import Path
 from typing import TYPE_CHECKING
 
@@ -14,7 +13,7 @@ import webpage
 from playwright.sync_api import Error as PlaywrightError
 from playwright.sync_api import sync_playwright
 
-from nemik.serve import build_static
+from nemik.serve import PageServer, build_static
 from nemik.staticserve import handler
 
 if TYPE_CHECKING:
@@ -62,7 +61,7 @@ def published(tmp_path_factory: pytest.TempPathFactory) -> Iterator[tuple[str, P
     withheld = root / "withheld.json"
     withheld.write_text(WITHHELD_NONE, encoding="utf-8")
     build_static(fleet, root / "current", withheld)
-    server = ThreadingHTTPServer(("127.0.0.1", 0), handler(root))
+    server = PageServer(("127.0.0.1", 0), handler(root))
     threading.Thread(target=server.serve_forever, daemon=True).start()
     yield f"http://127.0.0.1:{server.server_address[1]}/", root
     server.shutdown()

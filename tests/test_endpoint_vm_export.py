@@ -4,12 +4,13 @@
 
 import threading
 from http import HTTPStatus
-from http.server import BaseHTTPRequestHandler, HTTPServer
+from http.server import BaseHTTPRequestHandler
 from typing import TYPE_CHECKING
 
 import pytest
 
 from nemik.endpoint import vm_export
+from nemik.serve import PageServer
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -35,7 +36,7 @@ def _checkout(root: Path, port: int) -> None:
     )
 
 
-def _serve(status: HTTPStatus, requests: list[str]) -> HTTPServer:
+def _serve(status: HTTPStatus, requests: list[str]) -> PageServer:
     """Answer one request on a free local port, recording its request line.
 
     Args:
@@ -58,7 +59,7 @@ def _serve(status: HTTPStatus, requests: list[str]) -> HTTPServer:
             self.end_headers()
             self.wfile.write(BODY.encode("utf-8"))
 
-    server = HTTPServer(("127.0.0.1", 0), Answer)
+    server = PageServer(("127.0.0.1", 0), Answer)
     threading.Thread(target=server.handle_request, daemon=True).start()
     return server
 

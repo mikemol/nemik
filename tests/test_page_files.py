@@ -10,14 +10,13 @@ file exists; an unlisted file is never served.
 import http.client
 import shutil
 import threading
-from http.server import ThreadingHTTPServer
 from importlib.resources import files
 from pathlib import Path
 
 import pytest
 
 from nemik import serve
-from nemik.serve import PAGE_FILES, Model, handler, page_file, write_static
+from nemik.serve import PAGE_FILES, Model, PageServer, handler, page_file, write_static
 
 PROBE = "style.css"
 BODY = b"body { margin: 0; }\n"
@@ -65,7 +64,7 @@ def test_the_live_server_answers_a_listed_file_with_its_type(
 ) -> None:
     """GET /style.css is the file, as text/css."""
     del web
-    httpd = ThreadingHTTPServer(("127.0.0.1", 0), handler(Model(tmp_path)))
+    httpd = PageServer(("127.0.0.1", 0), handler(Model(tmp_path)))
     threading.Thread(target=httpd.serve_forever, daemon=True).start()
     port = int(httpd.server_address[1])
     try:

@@ -5,11 +5,10 @@
 import hashlib
 import http.client
 import threading
-from http.server import ThreadingHTTPServer
 from importlib.resources import files
 from pathlib import Path
 
-from nemik.serve import PAGE_FILES, Model, handler
+from nemik.serve import PAGE_FILES, Model, PageServer, handler
 
 WEB = Path(str(files("nemik.web")))
 MAGIC = b"\0asm"
@@ -29,7 +28,7 @@ def test_the_module_is_a_wasm_binary() -> None:
 
 def test_the_server_answers_it_as_application_wasm(tmp_path: Path) -> None:
     """GET /core.wasm is the file's bytes under the wasm media type the browser needs."""
-    httpd = ThreadingHTTPServer(("127.0.0.1", 0), handler(Model(tmp_path)))
+    httpd = PageServer(("127.0.0.1", 0), handler(Model(tmp_path)))
     threading.Thread(target=httpd.serve_forever, daemon=True).start()
     port = int(httpd.server_address[1])
     try:

@@ -12,7 +12,7 @@ from typing import TYPE_CHECKING, Protocol, TypedDict
 
 import pytest
 
-from nemik.serve import build_static
+from nemik.serve import PageServer, build_static
 
 if TYPE_CHECKING:
     from collections.abc import Callable, Iterator
@@ -74,7 +74,7 @@ def served(built: Path) -> Iterator[str]:
     handler = functools.partial(
         http.server.SimpleHTTPRequestHandler, directory=str(built)
     )
-    httpd = http.server.ThreadingHTTPServer(("127.0.0.1", 0), handler)
+    httpd = PageServer(("127.0.0.1", 0), handler)
     threading.Thread(target=httpd.serve_forever, daemon=True).start()
     yield f"http://127.0.0.1:{httpd.server_address[1]}/"
     httpd.shutdown()

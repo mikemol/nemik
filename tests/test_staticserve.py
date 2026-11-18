@@ -8,12 +8,12 @@ import json
 import sys
 import threading
 from http import HTTPStatus
-from http.server import ThreadingHTTPServer
 from typing import TYPE_CHECKING
 
 import pytest
 from mikemol.procrun.proc import capture
 
+from nemik.serve import PageServer
 from nemik.staticserve import handler, resolve, snapshot
 
 if TYPE_CHECKING:
@@ -43,7 +43,7 @@ def served(tmp_path: Path) -> Iterator[tuple[Path, int]]:
     """
     root = tmp_path / "pub"
     root.mkdir()
-    server = ThreadingHTTPServer(("127.0.0.1", 0), handler(root))
+    server = PageServer(("127.0.0.1", 0), handler(root))
     thread = threading.Thread(target=server.serve_forever, daemon=True)
     thread.start()
     yield root, server.server_address[1]

@@ -10,7 +10,7 @@ the generated text on fixtures, with no git.
 
 from pathlib import Path
 
-from nemik_src import check, compare, named_in, render
+from nemik_src import TESTS_SPEC, check, compare, named_in, render
 
 from nemik.stackable import generated_files
 
@@ -70,3 +70,25 @@ def test_the_list_is_registered_as_generated() -> None:
     """Listed in .claude/generated.json, a stack that regenerates it holds no lease on it."""
     text = (ROOT / ".claude" / "generated.json").read_text(encoding="utf-8")
     assert "bazel/nemik_src.bzl" in generated_files(text)
+    assert "bazel/nemik_tests.bzl" in generated_files(text)
+
+
+def test_the_tests_list_names_the_python_files_of_the_tests_tree() -> None:
+    """nemik:W2261: the second list names tests/ files (helpers and conftest included), not data."""
+    tracked = [
+        "tests/test_a.py",
+        "tests/conftest.py",
+        "tests/webpage.py",
+        "tests/data.json",
+    ]
+    text = render(tracked, TESTS_SPEC)
+    assert named_in(text, TESTS_SPEC) == {
+        "tests/test_a.py",
+        "tests/conftest.py",
+        "tests/webpage.py",
+    }
+    assert "TESTS_PY = [" in text.splitlines()
+    assert check(text, tracked, TESTS_SPEC) == []
+    missing = check(text, [*tracked, "tests/test_new.py"], TESTS_SPEC)
+    assert len(missing) == 1
+    assert "tests/test_new.py" in missing[0]

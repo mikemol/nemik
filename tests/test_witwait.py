@@ -7,11 +7,12 @@ from __future__ import annotations
 import json
 import threading
 from contextlib import contextmanager
-from http.server import BaseHTTPRequestHandler, HTTPServer
+from http.server import BaseHTTPRequestHandler
 from typing import TYPE_CHECKING
 
 import pytest
 
+from nemik.serve import PageServer
 from nemik.witnesses import HELD, NOT_YET, UNKNOWN, main, promql_poll, seconds, wait
 
 EXIT_UNKNOWN = 2  # the exit code of an unknown answer (and of a bad duration)
@@ -149,7 +150,7 @@ def _victoria(series: list[list[str]]) -> Generator[str]:
         def log_message(*_: object) -> None:
             return
 
-    server = HTTPServer(("127.0.0.1", 0), Handler)
+    server = PageServer(("127.0.0.1", 0), Handler)
     thread = threading.Thread(target=server.serve_forever, daemon=True)
     thread.start()
     try:

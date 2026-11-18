@@ -1,8 +1,8 @@
 """The python files of src/nemik, named (operator ruling 2026-11-08, host line 152589).
 
-Names come from `git ls-files src/nemik`, the .py files only. Adding or removing a module is a
-reviewed edit of this list. tools/nemik_src.py --write regenerates it and --check fails when it is
-stale (nemik:W2087).
+Names come from `git ls-files src/nemik`, the .py files only. Adding or removing a
+file is a reviewed edit of this list. tools/nemik_src.py --write regenerates it and
+--check fails when it is stale (nemik:W2087).
 """
 
 NEMIK_PY = [

@@ -10,7 +10,7 @@ import re
 import shutil
 import threading
 from datetime import UTC, datetime
-from http.server import BaseHTTPRequestHandler, HTTPServer
+from http.server import BaseHTTPRequestHandler
 from pathlib import Path
 from typing import TYPE_CHECKING
 from urllib.parse import parse_qs, urlparse
@@ -19,6 +19,7 @@ import installed
 import pytest
 from mikemol.procrun.proc import capture
 
+from nemik.serve import PageServer
 from nemik.witnesses import witness
 
 if TYPE_CHECKING:
@@ -174,7 +175,7 @@ def _serve(
         def log_message(self, *a: object) -> None:
             pass
 
-    srv = HTTPServer(("127.0.0.1", 0), H)
+    srv = PageServer(("127.0.0.1", 0), H)
     threading.Thread(target=srv.serve_forever, daemon=True).start()
     base = f"http://127.0.0.1:{srv.server_port}"
     monkeypatch.setenv("NEMIK_VMALERT_URL", base)
