@@ -16,8 +16,18 @@ nemik:WaypointShape a sh:NodeShape ;
                   sh:severity sh:Warning ;
                   sh:message "status outside ready, working, blocked, landed and done (vocabulary divergence)" ] ;
     sh:property [ sh:path oslc_cm:closed ; sh:maxCount 1 ; sh:datatype xsd:boolean ] ;
-    sh:property [ sh:path nemik:enables ; sh:or ( [ sh:class oslc_cm:ChangeRequest ] [ sh:class nemik:Dropped ] ) ;
-                  sh:message "enables names a symbol that is neither a waypoint nor residue in any workstream" ] ;
+    # nemik:W2256: the dangling edge is named, as CausedByResolvesShape names its value: a Violation
+    # whose owner cannot tell which symbol is unresolved cannot be acted on (el-openglo:W762, whose
+    # false report named none).
+    sh:sparql [
+        sh:message "enables names {?value}, which is neither a waypoint nor residue in any workstream: fix the repo prefix or the symbol" ;
+        sh:select """
+            SELECT $this ?value WHERE {
+                $this <https://github.com/mikemol/nemik/ns#enables> ?target .
+                FILTER NOT EXISTS { ?target a <http://open-services.net/ns/cm#ChangeRequest> }
+                FILTER NOT EXISTS { ?target a <https://github.com/mikemol/nemik/ns#Dropped> }
+                BIND (REPLACE(STR(?target), "^urn:nemik:([^/]+)/", "$1:") AS ?value)
+            }""" ] ;
     sh:property [ sh:path nemik:blockedKind ; sh:maxCount 1 ; sh:in ( "agent" "human" ) ;
                   sh:severity sh:Warning ;
                   sh:message "blocked_kind outside agent|human (vocabulary divergence, not yet agreed)" ] .

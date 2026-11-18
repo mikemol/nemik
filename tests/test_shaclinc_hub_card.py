@@ -10,10 +10,11 @@ residue' while both its targets existed. The fixture fleet has no such card, so 
 test saw it.
 """
 
+from importlib.resources import files
 from pathlib import Path
 
 from rdflib import RDF, Graph, Literal, URIRef
-from rdflib.namespace import DCTERMS, PROV
+from rdflib.namespace import DCTERMS, PROV, RDFS
 
 from nemik.adapter import NEMIK, OSLC_CM, queue_graph
 from nemik.blocks import annotate
@@ -88,7 +89,7 @@ def test_a_card_hub_keeps_the_types_of_the_cards_it_enables() -> None:
         (f, s, m) for f, rows in shacl_results(g, sh).items() for s, m in rows
     )
     assert inc == full
-    assert not any("enables names a symbol" in m for _, _, m in inc)
+    assert not any(m.startswith("enables names") for _, _, m in inc)
 
 
 FOREIGN = URIRef("http://example.org/other#Workstream")
@@ -108,4 +109,16 @@ def test_a_foreign_type_named_workstream_does_not_restrict_a_card_hub() -> None:
         (f, s, m) for f, rows in shacl_results(g, sh).items() for s, m in rows
     )
     assert inc == full
-    assert not any("enables names a symbol" in m for _, _, m in inc)
+    assert not any(m.startswith("enables names") for _, _, m in inc)
+
+
+def test_no_class_the_enables_shape_accepts_has_a_subclass() -> None:
+    """The enables shape asks for the class itself: it equals sh:class while no subclass exists."""
+    onto = Graph()
+    onto.parse(
+        data=files("nemik.data").joinpath("nemik.ttl").read_text(), format="turtle"
+    )
+    accepted = {OSLC_CM.ChangeRequest, NEMIK.Dropped}
+    assert not [
+        s for s, _, o in onto.triples((None, RDFS.subClassOf, None)) if o in accepted
+    ]

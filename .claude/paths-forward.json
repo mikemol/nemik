@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 2309,
+  "counter": 2310,
   "waypoints": [
     {
       "symbol": "W1",
@@ -55940,21 +55940,19 @@
     {
       "symbol": "W2253",
       "title": "Freshness alert rows for nemik_branch_commits_ahead and nemik_branch_newest_commit_seconds (and later nemik_queue_dirty*) in luthen's metric registry",
-      "status": "blocked",
+      "status": "done",
       "enables": [],
       "touches": [],
-      "blocked_on": [
-        "luthen-observability:W2728"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "Ask luthen for the registry rows (a learned staleness rule per family, window learned from the family's own reporting interval, never typed) for nemik_branch_commits_ahead and nemik_branch_newest_commit_seconds now, and for nemik_queue_dirty and nemik_queue_dirty_seconds when W2252 lands; cite their W<n> back",
-      "evidence": "2026-11-17T13:53:25Z: 2026-11-17 github-cb: every new metric gets a freshness alert row (operator 2026-10-17, memory feedback-every-metric-has-a-freshness-alert: enforced in Rego, a registry row is not admitted without a staleness rule, the window learned from the family's inter-arrival, the rule generated for every registered family). Nemik declares the families (HELP and HISTORY_FAMILIES, landed 6230c2a); the registry and the rule generation are luthen's. Asked luthen (message sent). | 2026-11-17T13:55:31Z: 2026-11-17 luthen-observability claimed it as luthen-observability:W2728 and explained registration: one row per family in policy/metric_families/data.json under the otel map keyed by the dotted OTLP name (owner nemik, unit, labels, ceiling, purpose); the freshness window is derived (checks/metric_freshness.py publishes each family's mean and max sample gap and age; metric_stale reads them), a row declares class continuous or event_driven; rows can also self-register (W1625) from datapoint attributes mikemol.owner, mikemol.freshness_class set by the PRODUCER. Their proposal: nemik.branch.commits_ahead and nemik.branch.newest_commit.seconds, labels [repo, branch], continuous, ceiling about 200. Asked of me: the exact OTLP names and units my host job pushes, and my pick of hand rows or self-register. ANSWER (sent): nemik pushes nothing (metrics.py header: pushing is luthen's host job); it prints exposition names nemik_branch_commits_ahead (a count, unit {commit}) and nemik_branch_newest_commit_seconds (Unix time, unit s), so I have no dotted names: luthen's existing conversion yields them; pick: rows BY HAND (self-register needs the producer to set OTLP attributes, and mine prints exposition, so it would be a change to luthen's push path). | 2026-11-17T20:20:38Z: 2026-11-17 luthen-observability (W2728): NO PIN NEEDED, correcting what they told me earlier. The host's live nemik (luthen's live tool tree, by-sha 728485f2, committed 13:12 EST) descends from 6230c2a9, and the installed nemik-metrics with --family nemik_branch_commits_ahead --family nemik_branch_newest_commit_seconds prints both families now (44 series, 12 repos). The relay produces them once its argv names them. They register as an 'ours' prefix row (nemik_branch_) with freshness generated and two projected panels, like nemik_commits_24h, not as OTLP rows with dotted names (the relay pushes text). Their change is in review with github-cb (refs/review/W2728-A) and lands after their word. A repo with no branch ahead prints no sample, so per-series absence cannot alert, only the whole family going dark. Nothing is owed from nemik but this note; my earlier install-pin message to them (6b85278e) was unnecessary.",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-11-17T13:53:25Z: 2026-11-17 github-cb: every new metric gets a freshness alert row (operator 2026-10-17, memory feedback-every-metric-has-a-freshness-alert: enforced in Rego, a registry row is not admitted without a staleness rule, the window learned from the family's inter-arrival, the rule generated for every registered family). Nemik declares the families (HELP and HISTORY_FAMILIES, landed 6230c2a); the registry and the rule generation are luthen's. Asked luthen (message sent). | 2026-11-17T13:55:31Z: 2026-11-17 luthen-observability claimed it as luthen-observability:W2728 and explained registration: one row per family in policy/metric_families/data.json under the otel map keyed by the dotted OTLP name (owner nemik, unit, labels, ceiling, purpose); the freshness window is derived (checks/metric_freshness.py publishes each family's mean and max sample gap and age; metric_stale reads them), a row declares class continuous or event_driven; rows can also self-register (W1625) from datapoint attributes mikemol.owner, mikemol.freshness_class set by the PRODUCER. Their proposal: nemik.branch.commits_ahead and nemik.branch.newest_commit.seconds, labels [repo, branch], continuous, ceiling about 200. Asked of me: the exact OTLP names and units my host job pushes, and my pick of hand rows or self-register. ANSWER (sent): nemik pushes nothing (metrics.py header: pushing is luthen's host job); it prints exposition names nemik_branch_commits_ahead (a count, unit {commit}) and nemik_branch_newest_commit_seconds (Unix time, unit s), so I have no dotted names: luthen's existing conversion yields them; pick: rows BY HAND (self-register needs the producer to set OTLP attributes, and mine prints exposition, so it would be a change to luthen's push path). | 2026-11-17T20:20:38Z: 2026-11-17 luthen-observability (W2728): NO PIN NEEDED, correcting what they told me earlier. The host's live nemik (luthen's live tool tree, by-sha 728485f2, committed 13:12 EST) descends from 6230c2a9, and the installed nemik-metrics with --family nemik_branch_commits_ahead --family nemik_branch_newest_commit_seconds prints both families now (44 series, 12 repos). The relay produces them once its argv names them. They register as an 'ours' prefix row (nemik_branch_) with freshness generated and two projected panels, like nemik_commits_24h, not as OTLP rows with dotted names (the relay pushes text). Their change is in review with github-cb (refs/review/W2728-A) and lands after their word. A repo with no branch ahead prints no sample, so per-series absence cannot alert, only the whole family going dark. Nothing is owed from nemik but this note; my earlier install-pin message to them (6b85278e) was unnecessary. | 2026-11-18T18:07:13Z: 2026-11-18: nothing is owed from nemik (luthen-observability:W2728 registers the nemik_branch_ families itself, per its 2026-11-17T20:20Z note) and nemik-check reports that blocker as landed.",
       "issued_at": "2026-11-17T13:53:10Z",
       "minted_during": "interrupt",
       "caused_by": "W2251",
-      "last_worked": "2026-11-17T20:20:38Z",
+      "last_worked": "2026-11-18T18:07:13Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261118T180713Z",
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
       "vector_source": "default"
     },
@@ -55989,19 +55987,19 @@
     {
       "symbol": "W2255",
       "title": "shaclinc._judged matches a Workstream by the last segment of its type IRI: compare the exact nemik Workstream URIRef",
-      "status": "working",
+      "status": "landed",
       "enables": [],
       "touches": [
         "gate-repair"
       ],
       "blocked_on": [],
       "blocked_kind": "agent",
-      "next_bounded_step": "Resubmit .claude/stack-W2255-v1.json (refs/review/W2255-v1 25d8aea, github-cb PASS-SUBMIT dated before) once W2260 lands (github-cb's order: W2260, then the seven-test PageServer migration W2261, then W2255). Set it ready at that point so the round check admits it.",
-      "evidence": "2026-11-17T14:19:40Z: 2026-11-17 github-cb's follow-up on the W2254 PASS: _tail(str(o)) == 'Workstream' counts any namespace's Workstream, so a foreign type that shares the name could put the hub_reads restriction back on an umbrella.",
+      "next_bounded_step": "Wait for the deploy witness: the nemik pods run an image epoch at or after the landing of 6eb5147e",
+      "evidence": "2026-11-17T14:19:40Z: 2026-11-17 github-cb's follow-up on the W2254 PASS: _tail(str(o)) == 'Workstream' counts any namespace's Workstream, so a foreign type that shares the name could put the hub_reads restriction back on an umbrella. | 2026-11-18T18:05:58Z: 2026-11-18: LANDED as 6eb5147e (src landing; git log -1 and ls-remote read back).",
       "issued_at": "2026-11-17T14:19:26Z",
       "minted_during": "interrupt",
       "caused_by": "W2254",
-      "last_worked": "2026-11-18T17:13:01Z",
+      "last_worked": "2026-11-18T18:05:58Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/shaclinc.py",
@@ -56009,12 +56007,14 @@
       ],
       "completed": null,
       "vector": "WV:1/R:L/E:N/C:N/I:L/A:N/X:N/S:U/F:K/W:Y",
-      "vector_source": "agent"
+      "vector_source": "agent",
+      "landed_at": "20261118T180558Z",
+      "deploys": true
     },
     {
       "symbol": "W2256",
       "title": "The enables, blocked_on and workstream shape messages do not name the unresolved symbol, so a Violation cannot be acted on",
-      "status": "blocked",
+      "status": "working",
       "enables": [],
       "touches": [],
       "blocked_on": [
@@ -56026,7 +56026,7 @@
       "issued_at": "2026-11-17T14:19:27Z",
       "minted_during": "interrupt",
       "caused_by": "W2254",
-      "last_worked": "2026-11-17T21:04:46Z",
+      "last_worked": "2026-11-18T18:05:46Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/data/shapes.ttl",
@@ -56039,25 +56039,23 @@
     {
       "symbol": "W2257",
       "title": "Prove or fix the W2225 hub restriction for a WORKSTREAM hub: an equivalence test over a fixture workstream with more than HUB cards and a change to one",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [],
-      "blocked_on": [
-        "W2283"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "Review ref built: refs/review/W2257-v1 = 90ebbdd6 (tests/test_shaclinc_workstream_hub.py only; the mutant of _judged's workstream branch turns case 2 red, shown). Needs a reviewer's PASS dated before the submit (W2283), then submit .claude/stack-W2257-v1.json (landing kind ref). Remaining: BehindWithoutPaydownShape over a hub, not covered; the test takes about 130 s alone.",
-      "evidence": "2026-11-17T14:19:44Z: 2026-11-17 W2254 showed the hub restriction was unsound for a card hub, found by el-openglo's report, not by a test. The same claim for a WORKSTREAM hub (the W2225 case it was written for) is pinned only on the fixture fleet, whose workstreams are small. github-cb: stays carded. | 2026-11-17T21:46:30Z: 2026-11-17 built refs/review/W2257-v1 = 90ebbdd6d5c86e803799dc7e51f8e5f2e1af0b8d (main 728485f). The first version of the test PASSED under the mutant (wide |= set()), so it proved nothing; a second case (another card working while card 0 toggles) FAILS under the mutant with a false 'no working card while items are ready' on the workstream, and passes on main's code. //:test_shaclinc_workstream_hub //:test_ruff_ratchet //:test_mypy_ratchet pass. Held; not sent for review, not submitted.",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-11-17T14:19:44Z: 2026-11-17 W2254 showed the hub restriction was unsound for a card hub, found by el-openglo's report, not by a test. The same claim for a WORKSTREAM hub (the W2225 case it was written for) is pinned only on the fixture fleet, whose workstreams are small. github-cb: stays carded. | 2026-11-17T21:46:30Z: 2026-11-17 built refs/review/W2257-v1 = 90ebbdd6d5c86e803799dc7e51f8e5f2e1af0b8d (main 728485f). The first version of the test PASSED under the mutant (wide |= set()), so it proved nothing; a second case (another card working while card 0 toggles) FAILS under the mutant with a false 'no working card while items are ready' on the workstream, and passes on main's code. //:test_shaclinc_workstream_hub //:test_ruff_ratchet //:test_mypy_ratchet pass. Held; not sent for review, not submitted. | 2026-11-18T18:07:12Z: 2026-11-18: LANDED as e170b2ff (test-only, ref landing; git log -1 and ls-remote read back). PASS-SUBMIT from github-b0 on refs/review/W2257-v2 a2aa5ca7.",
       "issued_at": "2026-11-17T14:19:29Z",
       "minted_during": "interrupt",
       "caused_by": "W2254",
-      "last_worked": "2026-11-18T17:41:02Z",
+      "last_worked": "2026-11-18T18:07:12Z",
       "ticks_blocked": 0,
       "manifest": [
         "tests/test_shaclinc_hub_workstream.py",
         "src/nemik/shaclinc.py"
       ],
-      "completed": null,
+      "completed": "20261118T180712Z",
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
       "vector_source": "default"
     },
@@ -56111,7 +56109,9 @@
       "symbol": "W2260",
       "title": "the page's setInterval(load, 60000) starts a second load() while the first is in flight, so a slow host fetches the graph pieces twice: make load() single-flight, proven by a fake-clock case red on today's page first",
       "status": "landed",
-      "enables": [],
+      "enables": [
+        "W2289"
+      ],
       "touches": [
         "gate-repair"
       ],
@@ -56769,7 +56769,6 @@
       "blocked_on": [
         "W2255",
         "W2256",
-        "W2257",
         "W2244",
         "W2152",
         "W2153"
@@ -57164,8 +57163,7 @@
         "W2015",
         "W2061",
         "W2246",
-        "W2247",
-        "W2253"
+        "W2247"
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "Umbrella (a goal, not work of its own): it waits on the cards below. Work the ready ones in the order their own steps say; when the last lands or is dropped, re-read the goal in the title against what landed and close it or write what is left.",
@@ -57274,6 +57272,26 @@
       "minted_during": "interrupt",
       "caused_by": "operator",
       "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2310",
+      "title": "mikemol-commit refuses a stack whose entry paths differ from the review ref's diff (git diff --name-only base ref), naming the missing paths before the gate starts, or derives them: a hand-kept path list missed files twice (nemik:W2261's first submit, nemik:W2256's first stack file)",
+      "status": "ready",
+      "enables": [
+        "W2289"
+      ],
+      "touches": [
+        "velocity"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Ask mtools to take all three items (stack paths from or checked against the ref's diff; COMMITTED marks the stack's cards landed or done; pycheck --check-file applies the gate's ruff config or the ratchet baselines and says so); cite this symbol back",
+      "evidence": "2026-11-18T18:08:31Z: 2026-11-18 github-b0, second item for the mtools ask: when mikemol-commit prints COMMITTED it should mark the stack's waypoints landed (deploys true) or done (ref landing), because a landed card left working makes the round check refuse the NEXT stack (W2260 earlier, W2257 later); the landing already knows the card. | 2026-11-18T18:10:36Z: 2026-11-18 github-b0, third item for mtools (pycheck): mikemol-pycheck --check-file admitted tests/test_shaclinc_hub_card.py and the ruff ratchet then refused it for E501 (101-character docstring line), costing a whole gate run. A pre-check looser than the gate should apply the repo's ratchet baselines or the gate's ruff config, and say which it applied.",
+      "issued_at": "2026-11-18T18:07:14Z",
+      "minted_during": "interrupt",
+      "caused_by": "github-b0",
+      "last_worked": "2026-11-18T18:10:36Z",
       "ticks_blocked": 0
     }
   ],
