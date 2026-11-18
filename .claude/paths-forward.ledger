@@ -6217,3 +6217,135 @@
 2026-11-17T16:24:04Z  status W2255 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-17T17:22:18Z  interrupt W2259 minted    -         "test_layout::test_a_static_build_refetches_only_the_pieces_whose_hash_moved failed once in a gate: the page fetched pieces for 10 repos outside the fixture fleet"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2255
 2026-11-17T18:12:37Z  status W2259 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T18:18:08Z  interrupt W2260 minted    -         "the page's setInterval(load, 60000) starts a second load() while the first is in flight, so a slow host fetches the graph pieces twice: make load() single-flight, proven by a fake-clock case red on today's page first"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2259
+2026-11-17T18:45:17Z  status W2259 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T19:52:43Z  interrupt W2261 minted    -         "seven tests build a plain ThreadingHTTPServer (backlog 5, below a browser's fan-out): migrate them mechanically to nemik.serve.PageServer, and pin it with a test that no tests/ file constructs ThreadingHTTPServer directly"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2260
+2026-11-17T19:56:38Z  status W1491 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T19:56:39Z  status W1492 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T20:01:54Z  status W1083 landed>done writer    "landed -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T20:01:55Z  status W1094 landed>done writer    "landed -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T20:01:56Z  status W1997 landed>done writer    "landed -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T20:01:57Z  status W2063 landed>done writer    "landed -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T20:01:57Z  status W2211 landed>done writer    "landed -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T20:01:58Z  status W2212 landed>done writer    "landed -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T20:01:59Z  status W2217 landed>done writer    "landed -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T20:02:00Z  status W2225 landed>done writer    "landed -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T20:02:00Z  status W2251 landed>done writer    "landed -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T20:03:20Z  interrupt W2262 minted    -         "A landed src card's deploy witness is generated from its landed_at (pods' image build epoch against the landing), not hand-written"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2063
+2026-11-17T20:03:21Z  interrupt W2263 minted    -         "nemik-check warns on a witness that reads a fact field no observer produces (git_ref has exists and sha, not resolves)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2063
+2026-11-17T20:09:12Z  status W2255 working>blocked writer    "working -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T20:09:15Z  prune W2181 edge-pruned writer    "mtools:W2290"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T20:09:15Z  prune W2181 edge-pruned writer    "mtools:W2295"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T20:12:05Z  status W2037 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T20:13:35Z  interrupt W2264 minted    -         "Ask mtools whether it owns the stall-class emitter, since its W2163 refuses a tick-close on an undisposed class line"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1276
+2026-11-17T20:13:35Z  interrupt W2265 minted    -         "Decide which host fields github-42 named nemik reads and which are passed in, and write the answer in docs/stall-classes.md"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1276
+2026-11-17T20:13:35Z  interrupt W2266 minted    -         "Write the stall class table (IDLE, JUGGLING STALL, RED GATE, STARVED RATCHET, OVER PACE, PENDING, series break, behind) with one witness each"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1276
+2026-11-17T20:16:46Z  status W2124 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T20:17:19Z  status W2180 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T20:17:23Z  status W2180 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T20:17:38Z  interrupt W2267 minted    -         "Answer nemik: mtools is done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=inbox/2026-11-13-nemik-edge-mtools-W2396-enables-W2124.md
+2026-11-17T20:17:39Z  status W2267 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T20:17:39Z  interrupt W2268 minted    -         "Answer nemik: mtools is done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=inbox/2026-11-13-nemik-edge-mtools-W2397-enables-W2127.md
+2026-11-17T20:17:40Z  status W2268 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T20:17:40Z  interrupt W2269 minted    -         "Answer nemik: mtools is done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=inbox/2026-11-13-nemik-edge-mtools-W2398-enables-W2128.md
+2026-11-17T20:17:41Z  status W2269 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T20:17:41Z  interrupt W2270 minted    -         "Answer nemik: mtools is done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=inbox/2026-11-13-nemik-edge-mtools-W2399-enables-W2129.md
+2026-11-17T20:17:42Z  status W2270 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T20:17:42Z  interrupt W2271 minted    -         "Answer nemik: mtools is done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=inbox/2026-11-13-nemik-edge-mtools-W2400-enables-W2130.md
+2026-11-17T20:17:43Z  status W2271 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T20:17:44Z  interrupt W2272 minted    -         "Answer nemik: mtools is done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=inbox/2026-11-13-nemik-edge-mtools-W2430-enables-W2177.md
+2026-11-17T20:17:44Z  status W2272 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T20:17:45Z  interrupt W2273 minted    -         "Answer nemik: mtools is done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=inbox/2026-11-13-nemik-edge-mtools-W2430-blocked_on-W2180.md
+2026-11-17T20:17:45Z  status W2273 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T20:17:46Z  interrupt W2274 minted    -         "Answer nemik: mtools is done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=inbox/2026-11-15-nemik-edge-mtools-W2290-blocked_on-W2181.md
+2026-11-17T20:17:46Z  status W2274 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T20:17:47Z  interrupt W2275 minted    -         "Answer nemik: mtools is done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=inbox/2026-11-15-nemik-edge-mtools-W2295-blocked_on-W2181.md
+2026-11-17T20:17:47Z  status W2275 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T20:18:00Z  interrupt W2276 minted    -         "Answer github-cb: home for the weather/incident (A/W/R) design is nemik's docs tree"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=inbox/2026-11-13-github-weather-incident-model-design.md
+2026-11-17T20:18:00Z  interrupt W2277 minted    -         "Weather, incidents and follow-up: the card model (outline) is filed in docs/design/weather-incidents"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=inbox/weather-incident-card-model-outline.md
+2026-11-17T20:18:01Z  interrupt W2278 minted    -         "Weather, Incidents, and Follow-up in Nemik (architecture review) is filed in docs/design/weather-incidents"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=inbox/26ffbde1-weather-incidents-nemik-architecture-review.md
+2026-11-17T20:18:11Z  status W2276 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T20:18:12Z  status W2277 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T20:18:13Z  status W2278 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T20:19:19Z  interrupt W2279 minted    -         "Commit the inbox archive: 69 answered or stale edge letters moved to inbox/archive by nemik-check --letters --fold --apply"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2062
+2026-11-17T20:20:52Z  status W423 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T20:21:07Z  status W1399 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T20:21:17Z  status W2143 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T20:21:20Z  status W2035 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T20:25:39Z  status W2228 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T20:30:24Z  interrupt W2280 minted    -         "Build the courier send behind an off-by-default flag, with a dry run that prints repo, title and body and sends nothing"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1048
+2026-11-17T20:30:24Z  interrupt W2281 minted    -         "Test the courier send against a recorded gh api fixture, dry run and flagged send"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1048
+2026-11-17T20:30:24Z  interrupt W2282 minted    -         "Mint the operator card 'operator: act <exact command>' carrying the courier dry-run output; no session sends"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1048
+2026-11-17T20:32:43Z  status W2022 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T20:32:49Z  status W569 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T20:32:49Z  status W1272 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T20:32:49Z  status W2014 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T20:32:49Z  status W2015 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T20:32:49Z  status W2023 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T20:32:49Z  status W2024 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T20:50:19Z  status W1179 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T20:55:10Z  interrupt W2283 minted    -         "Reviewer github-cb is not reachable: refs/review/W2260-v2 and W969-v1 wait for a PASS"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2260
+2026-11-17T20:55:16Z  status W2283 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T20:55:17Z  status W2260 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T20:55:22Z  status W969 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T20:58:55Z  status W2262 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T21:04:46Z  status W2256 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T21:33:56Z  interrupt W2284 minted    -         "A pure reader of the fact references a Rego witness text reads (observer, key, field), shared by --on and the unknown-field check"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2150
+2026-11-17T21:33:56Z  interrupt W2285 minted    -         "nemik-witnesses --on FACT evaluates only the witnesses whose text reads that fact, with a test that a land then an apply closes its waiting card"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2150
+2026-11-17T21:34:11Z  status W2263 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T21:46:30Z  status W2257 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T21:50:12Z  status W2261 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T21:56:43Z  interrupt W2286 minted    -         "Open-card hygiene: 99 percent have no vector, 47 percent no next step, 27 percent no edge at all (census 2026-11-17)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=operator
+2026-11-17T22:02:36Z  status W1978 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T22:02:39Z  status W2067 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T22:02:42Z  status W2084 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T22:02:43Z  status W2168 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T22:02:47Z  status W2200 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T22:04:46Z  status W2084 done>ready writer    "done -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T22:06:28Z  status W2084 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T22:51:54Z  interrupt W2287 minted    -         "Python 3.14 is the floor on every path nemik ships and runs, and its first deploy is watched"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T22:51:54Z  status W2287 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T22:51:55Z  interrupt W2288 minted    -         "The builder's cache and memory are bounded, tested across processes and observed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T22:51:55Z  status W2288 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T22:51:56Z  interrupt W2289 minted    -         "A gate failure names its cause: no test fails on a wall-clock wait, and no refusal is an unexplained flake"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T22:51:56Z  status W2289 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T22:51:57Z  interrupt W2290 minted    -         "nemik-check's verdicts are specific, equal in the incremental and full runs, and fast enough for every hook"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T22:51:57Z  status W2290 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T22:52:47Z  interrupt W2291 minted    -         "The pace reads landed samples only, states the build that computed it, and admits a stack by the fall it pays"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T22:52:48Z  status W2291 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T22:52:48Z  interrupt W2292 minted    -         "The tests carry no ruff or mypy debt of their own: composites split, fixtures annotated, test_layout typed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T22:52:49Z  status W2292 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T22:52:50Z  interrupt W2293 minted    -         "mtools has answered or built what nemik asked of the writer, hooks, admission and ratchet dists"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T22:52:50Z  status W2293 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T22:52:51Z  interrupt W2294 minted    -         "The writer, hooks and watchdog have the forms substrate's session found missing (substrate:W355)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T22:52:51Z  status W2294 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T22:52:52Z  interrupt W2295 minted    -         "Witnesses can say what a card needs: richer file and PromQL facts, a field check, a deploy witness, an --on filter"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T22:52:52Z  status W2295 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T22:52:53Z  interrupt W2296 minted    -         "The queue stays honest: operator asks capped, stale cards classed, mints carry a manifest, hygiene counted"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T22:52:53Z  status W2296 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T22:52:54Z  interrupt W2297 minted    -         "The gate's own tooling (hooks, target globs, precommit, per-file targets) is sound and judges what the ratchet judges"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T22:52:54Z  status W2297 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T22:52:54Z  interrupt W2298 minted    -         "The fleet machinery nemik owns runs smoothly: the loop, gate, pace, check, view and queue (operator priority)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T22:52:55Z  status W2298 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T23:24:56Z  interrupt W2299 minted    -         "Read the host's apply_set_runs record in VictoriaLogs and record one real answer as a fixture: its fields, its time and how an empty result reads"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2151
+2026-11-17T23:24:56Z  interrupt W2300 minted    -         "Add the apply_set_runs fact observer to nemik.witnesses (set, state, exit, run_id, the planned list), compiling under Codon and registered with its field table"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2151
+2026-11-17T23:24:56Z  interrupt W2301 minted    -         "Test a Rego witness over input.apply_set_runs against the recorded fixture, and an unknown field naming itself"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2151
+2026-11-17T23:26:02Z  status W2299 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T23:44:55Z  redact W2233 redacted  --        "sha256:6153b6b5bfbb n=1"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-17T23:51:54Z  status W2284 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-18T00:00:01Z  interrupt W2302 minted    -         "retroingest maps fixpoint_label, passes and pass_kind from a retro record to the vocabulary the G4 and G8 shapes already read"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=mtools:W2159
+2026-11-18T00:00:14Z  status W2302 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-18T00:50:44Z  interrupt W2303 minted    -         "nemik-rank orders by evidence and explains itself: size, demand through blockers, tags and tiers"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-18T00:50:45Z  status W2303 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-18T00:50:46Z  interrupt W2304 minted    -         "Delivery and pod metrics are produced and their freshness is alerted: DORA, value stream, branch work, volumes, push time"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-18T00:50:46Z  status W2304 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-18T01:22:45Z  status W2157 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-18T01:22:45Z  interrupt W2305 minted    -         "Answer mtools: nemik:W2164 claimed as mtools:W2711, W2127 and W2128 already answered (letter 2026-11-17)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=inbox/2026-11-17-mtools-claims-w2164-and-points-w2127-w2128-at-their-answers.md
+2026-11-18T01:22:46Z  interrupt W2306 minted    -         "Answer mtools: nemik:W2155 claimed as mtools:W2713, W2154 answered by mtools:W2395 (letter 2026-11-17)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=inbox/2026-11-17-mtools-claims-w2155-and-answers-w2154-on-w2395.md
+2026-11-18T01:22:51Z  status W2305 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-18T01:22:52Z  status W2306 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-18T13:15:42Z  status W2260 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-18T13:37:19Z  interrupt W2307 minted    -         "The pre-commit hook fires the named-inputs check when tests or bazel/nemik_tests.bzl change (a gate-hook change, split from W2261, for a cold review)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2261
+2026-11-18T13:37:28Z  status W2307 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-18T13:49:15Z  interrupt W2308 minted    -         "nemik-check warns on an open card with neither its own enables nor its own blocked_on, though another card enables it: today only a card with no edge in or out is flagged (shapes.ttl W487)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=operator
+2026-11-18T13:50:45Z  interrupt W2309 minted    -         "nemik-check and nemik-rank's UNSCORED line count a card whose vector_source is default as UNSCORED, so 725 default-stamped cards read UNSCORED 725 and not no-vector 0"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=operator

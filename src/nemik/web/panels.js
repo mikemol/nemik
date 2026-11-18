@@ -57,11 +57,8 @@ async function history() {
   paint("history", `<dl>${rows.join("")}</dl>`);
 }
 
-// nemik:W416: a static build publishes hashes.json and graph.json's pieces (graph/<repo>.json and
-// graph/_fleet.json, W414/W415). The page refetches only the pieces whose hash moved and assembles
-// them as nemik.pieces.assemble does; without hashes.json (nemik-serve) it reads graph.json whole.
-const pieceCache = {};  // path -> {hash, doc}
-window.__pieceFetches = [];  // the paths fetched, in order: what a browser test counts
+// nemik:W416: the page refetches only the pieces whose hash moved (pieces.js) and assembles them as
+// nemik.pieces.assemble does; without hashes.json (nemik-serve) it reads graph.json whole.
 // nemik:W655 (W509): one source's graph, fetched on its own cursor (the hash of each piece it last
 // returned, kept per source and path). An empty URL is this server's own pieces. A source that cannot be
 // reached, refuses (CORS), or answers something unreadable throws, and graphText shows it as unavailable
@@ -75,14 +72,7 @@ async function sourceGraph(src) {
     return whole.json();
   }
   const hashes = await res.json();
-  const piece = path => {  // nemik:W1140: the cache holds the PROMISE, so rounds that overlap share one fetch
-    const key = base + path;
-    if (!pieceCache[key] || pieceCache[key].hash !== hashes[path]) {
-      window.__pieceFetches.push(key); pieceCache[key] = {hash: hashes[path], doc: fetch(base + path).then(r => r.json())};
-      pieceCache[key].doc.catch(() => { delete pieceCache[key]; });  // a failed piece is asked for again
-    }
-    return pieceCache[key].doc;
-  };
+  const piece = pieceFetcher(base, hashes);  // pieces.js
   const fleet = await piece("graph/_fleet.json");
   const parts = [...await Promise.all(fleet.repos.map(r => piece(`graph/${r}.json`))), fleet];
   const byId = (a, b) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0;

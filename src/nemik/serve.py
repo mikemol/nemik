@@ -172,6 +172,7 @@ PAGE_FILES = {
     "cards.js": "text/javascript; charset=utf-8",
     "panels.js": "text/javascript; charset=utf-8",
     "queue.js": "text/javascript; charset=utf-8",
+    "pieces.js": "text/javascript; charset=utf-8",
     "viewstate.js": "text/javascript; charset=utf-8",
     "render.js": "text/javascript; charset=utf-8",
     # nemik:W820: the Python core compiled to wasm64 (docs/wasm-pipeline.md) and the loader that

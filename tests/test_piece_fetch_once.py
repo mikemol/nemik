@@ -11,7 +11,7 @@ from typing import TYPE_CHECKING, cast
 import webpage
 from playwright.sync_api import sync_playwright
 
-from nemik.serve import build_static
+from nemik.serve import PageServer, build_static
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -39,7 +39,7 @@ def test_two_overlapping_rounds_fetch_each_piece_once(tmp_path: Path) -> None:
     handler = functools.partial(
         http.server.SimpleHTTPRequestHandler, directory=str(out)
     )
-    httpd = http.server.ThreadingHTTPServer(("127.0.0.1", 0), handler)
+    httpd = PageServer(("127.0.0.1", 0), handler)
     threading.Thread(target=httpd.serve_forever, daemon=True).start()
     url = f"http://127.0.0.1:{httpd.server_address[1]}/"
     try:

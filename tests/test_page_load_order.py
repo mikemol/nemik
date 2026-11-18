@@ -16,13 +16,13 @@ from pathlib import Path
 from webpage import first_error
 
 SIXTH = 6  # Chromium fetches six at once; these follow the first six
-LATE = ("viewstate.js", "panels.js", "cards.js", "wasm.js")
-OTHERS = ("viewstate.js", "panels.js", "wasm.js")
+LATE = ("pieces.js", "viewstate.js", "panels.js", "cards.js", "wasm.js")
+OTHERS = ("pieces.js", "viewstate.js", "panels.js", "wasm.js")
 NAME = "popLater is not defined"
 
 
 def test_losing_every_late_script_breaks_on_pop_later() -> None:
-    """The four scripts after the sixth are refused: the first error names popLater."""
+    """The five scripts after the sixth are refused: the first error names popLater."""
     assert NAME in first_error(LATE)
 
 
@@ -37,7 +37,7 @@ def test_losing_the_other_late_scripts_does_not_break_on_pop_later() -> None:
 
 
 def test_the_late_scripts_are_those_the_page_loads_after_the_sixth() -> None:
-    """The files refused above are the page's last four script tags, in this order."""
+    """The files refused above are the page's last five script tags, in this order."""
     page = (Path(str(files("nemik.web"))) / "index.html").read_text()
     sources = [part.split('"')[0] for part in page.split('<script src="')[1:]]
     assert tuple(sources[SIXTH:]) == LATE

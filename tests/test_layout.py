@@ -19,6 +19,7 @@ import shutil
 import threading
 import time
 import urllib.parse
+from collections import Counter
 from pathlib import Path
 from typing import TYPE_CHECKING, Literal, Protocol
 
@@ -28,7 +29,7 @@ from mikemol.procrun.proc import capture
 from playwright.sync_api import Browser, Page, Playwright, Route, sync_playwright
 from playwright.sync_api import Error as PlaywrightError
 
-from nemik.serve import build_static
+from nemik.serve import PageServer, build_static
 
 if TYPE_CHECKING:
     from collections.abc import Iterator
@@ -991,17 +992,89 @@ def test_every_meaning_the_view_colours_has_a_second_channel(
     assert admitted == len(cases) >= MIN_ADMITTED_CASES
 
 
-def _page_saw(page: Page) -> str:
-    """nemik:W2259: where the page is and the fleet file it reads, for a failure's message.
+def _listen_counts() -> tuple[int, int]:
+    """Read the kernel's listen-queue counters, which rise when a server's backlog overflows.
+
+    They are host-wide: a rise is evidence of an overflow, never a verdict on its own (nemik:W2260).
 
     Returns:
-        The page's URL and its own graph/_fleet.json text.
+        TcpExtListenOverflows and TcpExtListenDrops; zeros where /proc/net/netstat is unreadable.
+
+    """
+    try:
+        lines = Path("/proc/net/netstat").read_text(encoding="utf-8").splitlines()
+    except OSError:
+        return 0, 0
+    for head, body in zip(lines[::2], lines[1::2], strict=False):
+        if head.startswith("TcpExt:"):
+            row = dict(zip(head.split()[1:], body.split()[1:], strict=False))
+            return int(row.get("ListenOverflows", "0")), int(
+                row.get("ListenDrops", "0")
+            )
+    return 0, 0
+
+
+def _page_saw(page: Page, before: tuple[int, int]) -> str:
+    """nemik:W2259: where the page is and the fleet file it reads, for a failure's message.
+
+    nemik:W2260: with the listen-queue counters' movement since `before`, so a refusal at the
+    server's backlog names itself.
+
+    Returns:
+        The page's URL, its own graph/_fleet.json text, and the listen counters' movement.
 
     """
     fleet_text = webpage.evaluate_value(
         page, "() => fetch('graph/_fleet.json').then(r => r.text())"
     )
-    return f"page at {page.url}; its _fleet.json: {fleet_text}"
+    after = _listen_counts()
+    moved = (
+        f"+{after[0] - before[0]} overflows, +{after[1] - before[1]} drops (host-wide)"
+    )
+    return f"page at {page.url}; its _fleet.json: {fleet_text}; listen queue {moved}"
+
+
+def _page_list(page: Page, name: str) -> list[str]:
+    """Read one of the page's recorded path lists (__pieceFetches, __pieceFailures).
+
+    Returns:
+        The paths, in order.
+
+    """
+    return webpage.as_strs(webpage.evaluate_value(page, f"() => [...window.{name}]"))
+
+
+def _built(tmp_path: Path) -> tuple[Path, dict[str, object]]:
+    """Build the fixture fleet's static view under tmp_path.
+
+    Returns:
+        The build's directory and its graph/_fleet.json.
+
+    """
+    withheld = tmp_path / "withheld.json"
+    payload: dict[str, object] = {"version": 1, "as_of": "x", "items": []}
+    withheld.write_text(json.dumps(payload))
+    out = tmp_path / "out"
+    build_static(FLEET, out, withheld)
+    return out, _json((out / "graph" / "_fleet.json").read_text())
+
+
+def _serve(out: Path) -> PageServer:
+    """Serve a directory on a port the server picks, with the page server's listen backlog.
+
+    A plain ThreadingHTTPServer listens with a backlog of 5, which a page's fan-out of piece
+    fetches can exceed on a loaded host (nemik:W846, W2260).
+
+    Returns:
+        The running server.
+
+    """
+    handler = functools.partial(
+        http.server.SimpleHTTPRequestHandler, directory=str(out)
+    )
+    httpd = PageServer(("127.0.0.1", 0), handler)
+    threading.Thread(target=httpd.serve_forever, daemon=True).start()
+    return httpd
 
 
 def _move_a_hash(out: Path, one: object) -> None:
@@ -1025,16 +1098,28 @@ def _graph_nodes(out: Path) -> int:
     return len(webpage.as_list(whole["nodes"]))
 
 
-def _assert_first_fetch(first: list[str], fleet: dict[str, object], saw: str) -> None:
-    """Assert the first load fetched _fleet.json and a piece per repo, naming any difference."""
+def _assert_first_fetch(
+    first: list[str], failed: list[str], fleet: dict[str, object], saw: str
+) -> None:
+    """Assert the cache contract of the first load, naming any difference (nemik:W2260).
+
+    Each expected piece is attempted once, plus once for each of its RECORDED failures (a failed
+    fetch is asked for again by the next round); a piece nobody expects is never attempted. A
+    duplicate with no recorded failure stays a failure.
+    """
     expected = [
         "graph/_fleet.json",
         *(f"graph/{r}.json" for r in webpage.as_list(fleet["repos"])),
     ]
-    extra = sorted(set(first) - set(expected))
-    missing = sorted(set(expected) - set(first))
-    note = f"unexpected {extra}, missing {missing}, fetched {first}; {saw}"
-    assert sorted(first) == sorted(expected), note
+    attempts, failures = Counter(first), Counter(failed)
+    wrong = {p: attempts[p] for p in expected if attempts[p] != 1 + failures[p]}
+    extra = sorted(set(attempts) - set(expected))
+    note = (
+        f"attempts differing from 1 + recorded failures {wrong}, unexpected {extra}, "
+        f"failures {sorted(failures.items())}, fetched {first}; {saw}"
+    )
+    assert not wrong, note
+    assert not extra, note
 
 
 def test_a_static_build_refetches_only_the_pieces_whose_hash_moved(
@@ -1047,17 +1132,9 @@ def test_a_static_build_refetches_only_the_pieces_whose_hash_moved(
     # nemik:W416: the page reads graph.json's pieces by hashes.json, draws the same graph, and on a
     # refresh fetches only the piece whose hash changed.
 
-    withheld = tmp_path / "withheld.json"
-    payload: dict[str, object] = {"version": 1, "as_of": "x", "items": []}
-    withheld.write_text(json.dumps(payload))
-    out = tmp_path / "out"
-    build_static(FLEET, out, withheld)
-    fleet = _json((out / "graph" / "_fleet.json").read_text())
-    handler = functools.partial(
-        http.server.SimpleHTTPRequestHandler, directory=str(out)
-    )
-    httpd = http.server.ThreadingHTTPServer(("127.0.0.1", 0), handler)
-    threading.Thread(target=httpd.serve_forever, daemon=True).start()
+    out, fleet = _built(tmp_path)
+    httpd = _serve(out)
+    before = _listen_counts()
     try:
         with sync_playwright() as p:
             browser = _launch(p)
@@ -1066,9 +1143,8 @@ def test_a_static_build_refetches_only_the_pieces_whose_hash_moved(
             page.goto(f"http://127.0.0.1:{httpd.server_address[1]}/")
             webpage.until(page, "() => typeof data !== 'undefined' && data")
             drawn = webpage.evaluate_int(page, "() => data.nodes.length")
-            first = webpage.as_strs(
-                webpage.evaluate_value(page, "() => [...window.__pieceFetches]")
-            )
+            first = _page_list(page, "__pieceFetches")
+            failed = _page_list(page, "__pieceFailures")
             one = webpage.as_list(fleet["repos"])[0]
             _move_a_hash(out, one)
             webpage.evaluate_value(page, "() => load()")
@@ -1077,12 +1153,12 @@ def test_a_static_build_refetches_only_the_pieces_whose_hash_moved(
                     page, "n => window.__pieceFetches.slice(n)", len(first)
                 )
             )
-            saw = _page_saw(page)
+            saw = _page_saw(page, before)
             browser.close()
     finally:
         httpd.shutdown()
     assert drawn == _graph_nodes(out)
-    _assert_first_fetch(first, fleet, saw)
+    _assert_first_fetch(first, failed, fleet, saw)
     assert second == [f"graph/{one}.json"], f"second {second}; {saw}"
 
 

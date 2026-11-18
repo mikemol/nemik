@@ -55,6 +55,10 @@ look for, or move the look with it:
 8. W932: the Queue section (a repo's working cards, then its ready cards numbered in work order with
    the reason each sits where it does, read from `/queue.json`) to `queue.js`, a file of its own so
    `panels.js` keeps its ceiling.
+9. W2260: the piece cache (`pieceCache`, the per-source `pieceFetcher`, the fetch and failure records
+   the browser tests read, and the guard that a late failure drops only its own entry) to `pieces.js`,
+   loaded before `panels.js`. `index.html`'s ceiling rises by the script tag; a size refusal on
+   `panels.js` was answered by this split, not by compressing lines.
 
 The script is global `function`s and `let`s today, so the first split keeps them global by loading
 the modules as classic scripts in order; turning them into ES modules is a later, separate step.
