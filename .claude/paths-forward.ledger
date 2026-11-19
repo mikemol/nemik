@@ -6399,3 +6399,7 @@
 2026-11-19T04:12:15Z  status W2322 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-19T04:13:05Z  status W2252 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-19T04:35:48Z  interrupt W2329 minted    -         "A no-ground component (a cycle of cards waiting on each other) is typed as wanted and blocked and routed to breaking the cycle, never ranked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-00
+2026-11-19T04:41:21Z  interrupt W2330 minted    -         "The host metrics job names the queue-dirty families and luthen registers a freshness row for each, so queue discipline is watched"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2252
+2026-11-19T04:43:37Z  interrupt W2331 minted    -         "Format src/nemik/history.py and src/nemik/metrics.py at the width the edit hook enforces, with no semantic change, so they can be edited through the hook"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-00
+2026-11-19T04:43:44Z  status W2252 working>blocked writer    "working -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-19T04:43:46Z  status W2331 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

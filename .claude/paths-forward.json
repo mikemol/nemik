@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 2329,
+  "counter": 2331,
   "waypoints": [
     {
       "symbol": "W1",
@@ -55909,21 +55909,23 @@
     {
       "symbol": "W2252",
       "title": "Queue discipline metric: per repo, whether the queue file differs from HEAD and for how long",
-      "status": "working",
+      "status": "blocked",
       "enables": [
         "W2296"
       ],
       "touches": [
         "velocity"
       ],
-      "blocked_on": [],
-      "blocked_kind": null,
-      "next_bounded_step": "history.queue_dirty(repo) from git alone (git diff --quiet HEAD -- .claude/paths-forward.json and the ledger: metadata, no content read); nemik_queue_dirty{repo} 0|1 and nemik_queue_dirty_seconds{repo} where the second is how long it has been dirty, kept as the first-seen time in a small state file under the user cache dir (written when a scrape first sees dirty, removed when clean), so the resolution is the scrape interval; a repo with no readable git prints no sample; tests on a real temp repo (clean, dirty, dirty then committed clears the clock); HELP, HISTORY_FAMILIES; and a freshness alert row for both series through luthen's registry (their rule generation, the window learned)",
-      "evidence": "2026-11-17T13:09:35Z: 2026-11-17 github-cb (peer; operator 2026-11-17 line 184270 per their relay, not yet verified by me): queue discipline is part of the unfreeze readiness checklist (section 4 of the readiness file, which I have not read: a sibling path); measured against nemik: queue on main dirty by +150/-13, last queue commit af547637 at 04:18, about 3.5 h before. M3 asked: per-repo queue_dirty and queue_dirty_since (seconds since the working-tree queue first differed from HEAD) with a learned freshness alert, so queue discipline is a metric, not a spot read. Carded beside W2251, not folded in (it needs per-repo state; W2251 does not). The pod's builder reads /export (no git), so these gauges, like the branch ones, are produced where git exists: the host-side exporter. Not built.",
+      "blocked_on": [
+        "W2331"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Revise as v2 on github-00's review: (1) the format-only entry W2331 first (mikemol-pycheck --format on history.py and metrics.py, zero semantic change), (2) then the semantic edit made through the hook, with a typed three-state outcome (dirty, clean, unknown) and an unknown sample, not silence; send both shas",
+      "evidence": "2026-11-17T13:09:35Z: 2026-11-17 github-cb (peer; operator 2026-11-17 line 184270 per their relay, not yet verified by me): queue discipline is part of the unfreeze readiness checklist (section 4 of the readiness file, which I have not read: a sibling path); measured against nemik: queue on main dirty by +150/-13, last queue commit af547637 at 04:18, about 3.5 h before. M3 asked: per-repo queue_dirty and queue_dirty_since (seconds since the working-tree queue first differed from HEAD) with a learned freshness alert, so queue discipline is a metric, not a spot read. Carded beside W2251, not folded in (it needs per-repo state; W2251 does not). The pod's builder reads /export (no git), so these gauges, like the branch ones, are produced where git exists: the host-side exporter. Not built. | 2026-11-19T04:43:44Z: 2026-11-19 github-00 REVISE on refs/review/W2252-v1 (197bdbfa): the feature is good, but building the source in a scratchpad copy because the edit hook refuses edits to files with pre-existing format diffs is a route around the gate; the path is a FORMAT-ONLY entry first (zero semantic change, shown by git show), THEN the semantic edit through the hook; if the hook formats at 88 while the house config says 100 that is the hook's defect and is carded (W2310), and until it lands format at whatever the hook enforces. Second: [1], [0], [] respells a maybe-result; make git-cannot-answer a typed outcome (an exception, or a three-state: dirty, clean, unknown) and print UNKNOWN as its own sample or counted tombstone, since silence without a tombstone is UNKNOWN.",
       "issued_at": "2026-11-17T13:09:00Z",
       "minted_during": "interrupt",
       "caused_by": "github-cb",
-      "last_worked": "2026-11-19T04:13:05Z",
+      "last_worked": "2026-11-19T04:43:44Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/history.py",
@@ -57302,11 +57304,11 @@
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "Wait for mtools:W2740, W2741 and W2742 (behind mtools' W2573 cutover); until then check each stack's paths against the ref's diff by hand before submitting",
-      "evidence": "2026-11-18T18:08:31Z: 2026-11-18 github-b0, second item for the mtools ask: when mikemol-commit prints COMMITTED it should mark the stack's waypoints landed (deploys true) or done (ref landing), because a landed card left working makes the round check refuse the NEXT stack (W2260 earlier, W2257 later); the landing already knows the card. | 2026-11-18T18:10:36Z: 2026-11-18 github-b0, third item for mtools (pycheck): mikemol-pycheck --check-file admitted tests/test_shaclinc_hub_card.py and the ruff ratchet then refused it for E501 (101-character docstring line), costing a whole gate run. A pre-check looser than the gate should apply the repo's ratchet baselines or the gate's ruff config, and say which it applied. | 2026-11-19T02:35:22Z: 2026-11-18 mtools carded the three items: mtools:W2740 (stack paths checked against the review ref's diff before the gate; github-00 now wants every review as a branch sha, so the ref is the one source), mtools:W2741 (mark the stack's waypoints landed or done on COMMITTED), mtools:W2742 (pycheck --check-file applies the gate's ruff config or the ratchet baselines and says which). All hooks-dist: they land behind the W2573 cutover (shard guard). W2311's image-tag note: mtools reads no image tags in its deploy witnesses today, so no card.",
+      "evidence": "2026-11-18T18:08:31Z: 2026-11-18 github-b0, second item for the mtools ask: when mikemol-commit prints COMMITTED it should mark the stack's waypoints landed (deploys true) or done (ref landing), because a landed card left working makes the round check refuse the NEXT stack (W2260 earlier, W2257 later); the landing already knows the card. | 2026-11-18T18:10:36Z: 2026-11-18 github-b0, third item for mtools (pycheck): mikemol-pycheck --check-file admitted tests/test_shaclinc_hub_card.py and the ruff ratchet then refused it for E501 (101-character docstring line), costing a whole gate run. A pre-check looser than the gate should apply the repo's ratchet baselines or the gate's ruff config, and say which it applied. | 2026-11-19T02:35:22Z: 2026-11-18 mtools carded the three items: mtools:W2740 (stack paths checked against the review ref's diff before the gate; github-00 now wants every review as a branch sha, so the ref is the one source), mtools:W2741 (mark the stack's waypoints landed or done on COMMITTED), mtools:W2742 (pycheck --check-file applies the gate's ruff config or the ratchet baselines and says which). All hooks-dist: they land behind the W2573 cutover (shard guard). W2311's image-tag note: mtools reads no image tags in its deploy witnesses today, so no card. | 2026-11-19T04:41:27Z: 2026-11-18, found while building W2252: the PreToolUse edit hook (pycheck) refuses ANY edit to src/nemik/history.py or src/nemik/metrics.py in the real checkout, because both already carry ruff-format diffs (3 and 3 in the unchanged files) under the hook's format check, which reads pyproject.toml line-length default (88) while the house ruff config the gate uses allows 100. The hook judges the whole file, not the edit, so a file with any 89 to 100 character line cannot be edited in place; the workaround is a scratchpad copy copied into a worktree. Fourth item for the mtools ask (mtools:W2742 family): the edit hook should judge the lines an edit changes, or use the gate's line length.",
       "issued_at": "2026-11-18T18:07:14Z",
       "minted_during": "interrupt",
       "caused_by": "github-b0",
-      "last_worked": "2026-11-19T02:35:22Z",
+      "last_worked": "2026-11-19T04:41:27Z",
       "ticks_blocked": 0,
       "completed": null
     },
@@ -58059,6 +58061,45 @@
       "caused_by": "github-00",
       "last_worked": null,
       "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2330",
+      "title": "The host metrics job names the queue-dirty families and luthen registers a freshness row for each, so queue discipline is watched",
+      "status": "ready",
+      "enables": [
+        "W2296"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "After nemik_queue_dirty and nemik_queue_dirty_seconds land: ask luthen-observability to add the two families to the host job's --family list and to register freshness rows for them (their rule generation, the window learned from the family's own reporting interval, never typed); the first-seen marks live under the user cache directory of whichever account runs the job; cite their W<n> back",
+      "evidence": "",
+      "issued_at": "2026-11-19T04:41:21Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2252",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2331",
+      "title": "Format src/nemik/history.py and src/nemik/metrics.py at the width the edit hook enforces, with no semantic change, so they can be edited through the hook",
+      "status": "working",
+      "enables": [
+        "W2252"
+      ],
+      "touches": [
+        "velocity"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "In a worktree on main run mikemol-pycheck --format on each file, show the diff is whitespace and layout only (git show, and the ast of each file equal before and after), build a review ref, and submit it on its own after the PASS; then W2252's semantic edit goes through the hook on top of it",
+      "evidence": "",
+      "issued_at": "2026-11-19T04:43:37Z",
+      "minted_during": "interrupt",
+      "caused_by": "github-00",
+      "last_worked": "2026-11-19T04:43:46Z",
+      "ticks_blocked": 0,
+      "completed": null
     }
   ],
   "residue": [

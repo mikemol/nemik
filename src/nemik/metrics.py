@@ -291,7 +291,7 @@ def realizability_lines(root: Path) -> list[str]:
     for repo, path in workstream_files(root, QUEUE):
         try:
             found = verdicts(repo, path, root, now)
-        except (OpaUnavailableError, UnreadableStateError):
+        except OpaUnavailableError, UnreadableStateError:
             out.append(f"nemik_realizability_unjudged{label(repo=repo)} 1")
             continue
         by_level = Counter(str(v.get("level")) for v in found)
@@ -679,7 +679,9 @@ def candidate_lines(
         # a commit subject is `W<n>: ...`; the head before the first colon names the card
         heads = {s.partition(":")[0] for s in subjects}
         leading = {h for h in heads if h.startswith("W") and h[1:].isdigit()}
-        out.append(f"nemik_landed_open_candidates{label(repo=repo)} {len(ready & leading)}")
+        out.append(
+            f"nemik_landed_open_candidates{label(repo=repo)} {len(ready & leading)}"
+        )
     return out
 
 
@@ -797,7 +799,9 @@ def history_lines(
         out += stackable_lines(root, merged)
     if "nemik_landed_open_candidates" in wanted:
         out += candidate_lines(root, merged)
-    if {"nemik_branch_commits_ahead", "nemik_branch_newest_commit_seconds"} & set(wanted):
+    if {"nemik_branch_commits_ahead", "nemik_branch_newest_commit_seconds"} & set(
+        wanted
+    ):
         out += branch_lines(root)
     return out
 

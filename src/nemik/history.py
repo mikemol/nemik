@@ -1549,7 +1549,11 @@ def poll_rows(rows: list[Churn]) -> list[object]:
     polls: list[object] = []
     for row in rows:
         # nemik:W2186: Churn's three fields, as the dict dataclasses.asdict made of them
-        poll: object = {"step": row.step, "polls": row.polls, "counts": dict(row.counts)}
+        poll: object = {
+            "step": row.step,
+            "polls": row.polls,
+            "counts": dict(row.counts),
+        }
         polls.append(poll)
     return polls
 
@@ -2030,7 +2034,7 @@ def oldest_rows(
     for name, path in files.items():
         try:
             value: object = json.loads(path.read_text(encoding="utf-8"))
-        except (OSError, ValueError):
+        except OSError, ValueError:
             continue
         docs[name] = value
     rows = oldest_cards(docs, datetime.now(UTC), limit, keep)
@@ -2505,7 +2509,7 @@ def live_queue(repo: Path, committed: QueueDoc) -> QueueDoc:
         return committed
     try:
         return queue_at(repo, "HEAD", known=path.read_text(encoding="utf-8"))
-    except (OSError, ValueError):
+    except OSError, ValueError:
         return committed
 
 
