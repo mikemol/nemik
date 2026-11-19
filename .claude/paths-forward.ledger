@@ -6395,3 +6395,7 @@
 2026-11-19T03:39:00Z  interrupt W2327 minted    -         "nemik.flow returns the potential drop across each dependency per source, so the sensitivity of total delay to an edge is computable"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-00
 2026-11-19T03:57:25Z  status W2280 working>landed writer    "working -> landed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-19T03:59:00Z  status W2325 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-19T04:12:10Z  interrupt W2328 minted    -         "A typed speed-up edge in the card schema (a card names what it accelerates), distinct from enables, so a velocity card can say what it speeds without making it wait"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2325
+2026-11-19T04:12:15Z  status W2322 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-19T04:13:05Z  status W2252 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-19T04:35:48Z  interrupt W2329 minted    -         "A no-ground component (a cycle of cards waiting on each other) is typed as wanted and blocked and routed to breaking the cycle, never ranked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-00

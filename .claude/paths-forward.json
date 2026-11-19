@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 2327,
+  "counter": 2329,
   "waypoints": [
     {
       "symbol": "W1",
@@ -55909,7 +55909,7 @@
     {
       "symbol": "W2252",
       "title": "Queue discipline metric: per repo, whether the queue file differs from HEAD and for how long",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W2296"
       ],
@@ -55923,7 +55923,7 @@
       "issued_at": "2026-11-17T13:09:00Z",
       "minted_during": "interrupt",
       "caused_by": "github-cb",
-      "last_worked": "2026-11-17T13:09:35Z",
+      "last_worked": "2026-11-19T04:13:05Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/history.py",
@@ -55931,7 +55931,8 @@
         "tests/test_queue_dirty.py"
       ],
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
-      "vector_source": "default"
+      "vector_source": "default",
+      "completed": null
     },
     {
       "symbol": "W2253",
@@ -57611,22 +57612,25 @@
     {
       "symbol": "W2322",
       "title": "nemik-check warns on an open velocity or gate-repair card that enables nothing: velocity must name what it speeds",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W2290"
       ],
       "touches": [
         "velocity"
       ],
-      "blocked_on": [],
-      "blocked_kind": null,
-      "next_bounded_step": "A shape beside OrphanLeafShape in the SHACL shapes: an open (not landed) card touching velocity or gate-repair with no nemik:enables is a Warning naming the card and saying to enable the cards whose gate it shortens; measured on nemik's own queue 2026-11-18: 14 of 37 open velocity or gate-repair cards enable nothing (some are landed cards awaiting a witness, which the shape excludes); a test with a planted velocity card with and without an enables edge; run //:test_skill because the shapes change",
-      "evidence": "",
+      "blocked_on": [
+        "W2328"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Blocked on W2328 (the typed speed-up edge): as first carded, this check told a velocity or gate-repair card to ENABLE what it speeds, but an enables edge is a dependency in nemik's flow (the card enabled would WAIT on it), so the check would push owners to add waits. Once the typed edge exists, the check is: an open velocity or gate-repair card that declares no speed-up edge and no measured effect warns",
+      "evidence": "2026-11-19T04:12:15Z: 2026-11-18 RESCOPED by the rank design (W2325, v6): enables and blocked_on are one dependency edge in nemik.flow, so asking a velocity card to enable what it speeds would make those cards wait on it. The measurement stands (14 of 37 open velocity or gate-repair cards enable nothing) but the remedy was wrong. The check waits for the typed speed-up edge (W2328).",
       "issued_at": "2026-11-19T03:01:28Z",
       "minted_during": "interrupt",
       "caused_by": "github-00",
-      "last_worked": "2026-11-19T03:10:05Z",
-      "ticks_blocked": 0
+      "last_worked": "2026-11-19T04:12:15Z",
+      "ticks_blocked": 0,
+      "completed": null
     },
     {
       "symbol": "W2323",
@@ -57792,6 +57796,195 @@
             "mtools:reader": "mikemol-transcriptstruct claude:transcript:-home-mikemol-github/695f3e0a-d36f-4080-9c67-7548978cd99e --verify 44b92f94-038a-423b-8b4a-fff2a6a482fd --claim operator --line 188975"
           },
           "mtools:reason": "the operator said 2026-11-19T03:18Z: velocity is the conductor everything passes through, blocked on is resistance and enables is conductance"
+        },
+        {
+          "@context": {
+            "prov": "http://www.w3.org/ns/prov#",
+            "xsd": "http://www.w3.org/2001/XMLSchema#",
+            "mtools": "urn:mtools:warrant#"
+          },
+          "@id": "urn:nemik:nemik/W2325",
+          "prov:wasDerivedFrom": {
+            "@id": "urn:claude:transcript:-home-mikemol-github/695f3e0a-d36f-4080-9c67-7548978cd99e#1ce9f2c8-4bd2-470c-aadc-fe3dfae290aa",
+            "@type": "prov:Entity",
+            "prov:generatedAtTime": {
+              "@value": "2026-11-19T03:46:21.202Z",
+              "@type": "xsd:dateTime"
+            },
+            "prov:wasAttributedTo": {
+              "@id": "urn:nemik:operator",
+              "@type": "prov:Agent"
+            },
+            "prov:wasGeneratedBy": {
+              "@id": "urn:nemik:utterance/1ce9f2c8-4bd2-470c-aadc-fe3dfae290aa",
+              "@type": "prov:Activity"
+            },
+            "mtools:line": 189088,
+            "mtools:reader": "mikemol-transcriptstruct claude:transcript:-home-mikemol-github/695f3e0a-d36f-4080-9c67-7548978cd99e --verify 1ce9f2c8-4bd2-470c-aadc-fe3dfae290aa --claim operator --line 189088"
+          },
+          "mtools:reason": "the operator said 2026-11-19T03:46Z: the front contradiction is why the circuit model works, and woke substrate and gcalculus to help with paraconsistent logic, harmonic and geometric means, AND OR NOT through log and exp, and circuit solving"
+        },
+        {
+          "@context": {
+            "prov": "http://www.w3.org/ns/prov#",
+            "xsd": "http://www.w3.org/2001/XMLSchema#",
+            "mtools": "urn:mtools:warrant#"
+          },
+          "@id": "urn:nemik:nemik/W2325",
+          "prov:wasDerivedFrom": {
+            "@id": "urn:claude:transcript:-home-mikemol-github/695f3e0a-d36f-4080-9c67-7548978cd99e#3d777c76-6971-4e2f-9644-46bd92ab9dd0",
+            "@type": "prov:Entity",
+            "prov:generatedAtTime": {
+              "@value": "2026-11-19T04:12:59.640Z",
+              "@type": "xsd:dateTime"
+            },
+            "prov:wasAttributedTo": {
+              "@id": "urn:nemik:operator",
+              "@type": "prov:Agent"
+            },
+            "prov:wasGeneratedBy": {
+              "@id": "urn:nemik:utterance/3d777c76-6971-4e2f-9644-46bd92ab9dd0",
+              "@type": "prov:Activity"
+            },
+            "mtools:line": 189510,
+            "mtools:reader": "mikemol-transcriptstruct claude:transcript:-home-mikemol-github/695f3e0a-d36f-4080-9c67-7548978cd99e --verify 3d777c76-6971-4e2f-9644-46bd92ab9dd0 --claim operator --line 189510"
+          },
+          "mtools:reason": "the operator ruled 2026-11-19T04:12Z: no card lacks a cost, and one that does has not been groomed or decomposed"
+        },
+        {
+          "@context": {
+            "prov": "http://www.w3.org/ns/prov#",
+            "xsd": "http://www.w3.org/2001/XMLSchema#",
+            "mtools": "urn:mtools:warrant#"
+          },
+          "@id": "urn:nemik:nemik/W2325",
+          "prov:wasDerivedFrom": {
+            "@id": "urn:claude:transcript:-home-mikemol-github/695f3e0a-d36f-4080-9c67-7548978cd99e#b3b86ed4-0e90-41c2-ab81-b1d27876980b",
+            "@type": "prov:Entity",
+            "prov:generatedAtTime": {
+              "@value": "2026-11-19T04:15:32.256Z",
+              "@type": "xsd:dateTime"
+            },
+            "prov:wasAttributedTo": {
+              "@id": "urn:nemik:operator",
+              "@type": "prov:Agent"
+            },
+            "prov:wasGeneratedBy": {
+              "@id": "urn:nemik:utterance/b3b86ed4-0e90-41c2-ab81-b1d27876980b",
+              "@type": "prov:Activity"
+            },
+            "mtools:line": 189533,
+            "mtools:reader": "mikemol-transcriptstruct claude:transcript:-home-mikemol-github/695f3e0a-d36f-4080-9c67-7548978cd99e --verify b3b86ed4-0e90-41c2-ab81-b1d27876980b --claim operator --line 189533"
+          },
+          "mtools:reason": "the operator said 2026-11-19T04:15Z: De Morgan answers parallel versus series, series is NOT of parallel, AND is NOT of OR"
+        },
+        {
+          "@context": {
+            "prov": "http://www.w3.org/ns/prov#",
+            "xsd": "http://www.w3.org/2001/XMLSchema#",
+            "mtools": "urn:mtools:warrant#"
+          },
+          "@id": "urn:nemik:nemik/W2325",
+          "prov:wasDerivedFrom": {
+            "@id": "urn:claude:transcript:-home-mikemol-github/695f3e0a-d36f-4080-9c67-7548978cd99e#312e6ec8-17ed-4557-8566-ac144b4647d8",
+            "@type": "prov:Entity",
+            "prov:generatedAtTime": {
+              "@value": "2026-11-19T04:17:16.761Z",
+              "@type": "xsd:dateTime"
+            },
+            "prov:wasAttributedTo": {
+              "@id": "urn:nemik:operator",
+              "@type": "prov:Agent"
+            },
+            "prov:wasGeneratedBy": {
+              "@id": "urn:nemik:utterance/312e6ec8-17ed-4557-8566-ac144b4647d8",
+              "@type": "prov:Activity"
+            },
+            "mtools:line": 189553,
+            "mtools:reader": "mikemol-transcriptstruct claude:transcript:-home-mikemol-github/695f3e0a-d36f-4080-9c67-7548978cd99e --verify 312e6ec8-17ed-4557-8566-ac144b4647d8 --claim operator --line 189553"
+          },
+          "mtools:reason": "the operator said 2026-11-19T04:17Z: the two rails are independent, which is why it is paraconsistent logic"
+        },
+        {
+          "@context": {
+            "prov": "http://www.w3.org/ns/prov#",
+            "xsd": "http://www.w3.org/2001/XMLSchema#",
+            "mtools": "urn:mtools:warrant#"
+          },
+          "@id": "urn:nemik:nemik/W2325",
+          "prov:wasDerivedFrom": {
+            "@id": "urn:claude:transcript:-home-mikemol-github/695f3e0a-d36f-4080-9c67-7548978cd99e#35510666-686c-4a1b-9585-f8d28105c56e",
+            "@type": "prov:Entity",
+            "prov:generatedAtTime": {
+              "@value": "2026-11-19T04:22:12.219Z",
+              "@type": "xsd:dateTime"
+            },
+            "prov:wasAttributedTo": {
+              "@id": "urn:nemik:operator",
+              "@type": "prov:Agent"
+            },
+            "prov:wasGeneratedBy": {
+              "@id": "urn:nemik:utterance/35510666-686c-4a1b-9585-f8d28105c56e",
+              "@type": "prov:Activity"
+            },
+            "mtools:line": 189606,
+            "mtools:reader": "mikemol-transcriptstruct claude:transcript:-home-mikemol-github/695f3e0a-d36f-4080-9c67-7548978cd99e --verify 35510666-686c-4a1b-9585-f8d28105c56e --claim operator --line 189606"
+          },
+          "mtools:reason": "the operator said 2026-11-19T04:22Z: the rails read as a differential pair or as independent accumulators, and a wheatstone bridge translates between the two"
+        },
+        {
+          "@context": {
+            "prov": "http://www.w3.org/ns/prov#",
+            "xsd": "http://www.w3.org/2001/XMLSchema#",
+            "mtools": "urn:mtools:warrant#"
+          },
+          "@id": "urn:nemik:nemik/W2325",
+          "prov:wasDerivedFrom": {
+            "@id": "urn:claude:transcript:-home-mikemol-github/695f3e0a-d36f-4080-9c67-7548978cd99e#1f0dc067-4308-4c10-84d2-fcaf23c90c57",
+            "@type": "prov:Entity",
+            "prov:generatedAtTime": {
+              "@value": "2026-11-19T04:23:44.884Z",
+              "@type": "xsd:dateTime"
+            },
+            "prov:wasAttributedTo": {
+              "@id": "urn:nemik:operator",
+              "@type": "prov:Agent"
+            },
+            "prov:wasGeneratedBy": {
+              "@id": "urn:nemik:utterance/1f0dc067-4308-4c10-84d2-fcaf23c90c57",
+              "@type": "prov:Activity"
+            },
+            "mtools:line": 189636,
+            "mtools:reader": "mikemol-transcriptstruct claude:transcript:-home-mikemol-github/695f3e0a-d36f-4080-9c67-7548978cd99e --verify 1f0dc067-4308-4c10-84d2-fcaf23c90c57 --claim operator --line 189636"
+          },
+          "mtools:reason": "the operator said 2026-11-19T04:23Z: the word for a speed-up card is gain"
+        },
+        {
+          "@context": {
+            "prov": "http://www.w3.org/ns/prov#",
+            "xsd": "http://www.w3.org/2001/XMLSchema#",
+            "mtools": "urn:mtools:warrant#"
+          },
+          "@id": "urn:nemik:nemik/W2325",
+          "prov:wasDerivedFrom": {
+            "@id": "urn:claude:transcript:-home-mikemol-github/695f3e0a-d36f-4080-9c67-7548978cd99e#b4d0c696-7510-4362-a3e7-e8a742730b01",
+            "@type": "prov:Entity",
+            "prov:generatedAtTime": {
+              "@value": "2026-11-19T04:26:54.777Z",
+              "@type": "xsd:dateTime"
+            },
+            "prov:wasAttributedTo": {
+              "@id": "urn:nemik:operator",
+              "@type": "prov:Agent"
+            },
+            "prov:wasGeneratedBy": {
+              "@id": "urn:nemik:utterance/b4d0c696-7510-4362-a3e7-e8a742730b01",
+              "@type": "prov:Activity"
+            },
+            "mtools:line": 189692,
+            "mtools:reader": "mikemol-transcriptstruct claude:transcript:-home-mikemol-github/695f3e0a-d36f-4080-9c67-7548978cd99e --verify b4d0c696-7510-4362-a3e7-e8a742730b01 --claim operator --line 189692"
+          },
+          "mtools:reason": "the operator said 2026-11-19T04:26Z: gain is also logsumexp partially applied, and happens when you exponentiate to change the domain"
         }
       ]
     },
@@ -57826,6 +58019,42 @@
       "next_bounded_step": "Today flow returns the salience, the fibre per source, the potential at each source and the current per dependency summed over sources, not the drop across an edge per source; return the squared drops summed over sources per dependency (exact Fractions), tested on the three-card chain (current 3 at v = 1, 2, 1/2, delay 18, 9, 36, edge sensitivity -9) and with every g = 1 reproducing today's salience; src change, so a review ref and the round order apply",
       "evidence": "",
       "issued_at": "2026-11-19T03:39:00Z",
+      "minted_during": "interrupt",
+      "caused_by": "github-00",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2328",
+      "title": "A typed speed-up edge in the card schema (a card names what it accelerates), distinct from enables, so a velocity card can say what it speeds without making it wait",
+      "status": "ready",
+      "enables": [
+        "W2325"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Ask mtools (the writer owns the card schema) for a new typed field, such as accelerates, holding the cards or paths a card speeds up, read by nemik's adapter as its own edge and never as a dependency; the rank design (docs/rank-from-the-vector.md) needs it for velocity as a marginal; cite their W<n> back",
+      "evidence": "",
+      "issued_at": "2026-11-19T04:12:10Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2325",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2329",
+      "title": "A no-ground component (a cycle of cards waiting on each other) is typed as wanted and blocked and routed to breaking the cycle, never ranked",
+      "status": "ready",
+      "enables": [
+        "W2325"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Cold check D case 3 (W2212's cycle) strands all its demand on today's code because mtools' red() blocks the chain card (relayed, mtools' code not read by me): either a red() change (an ask to mtools) or the typed cycle-break in nemik: find the no-ground components in the dependency graph, report them as one finding naming the cycle, and keep the gate-chain pull-in until it exists; a test with a fixture cycle that must not strand demand",
+      "evidence": "",
+      "issued_at": "2026-11-19T04:35:48Z",
       "minted_during": "interrupt",
       "caused_by": "github-00",
       "last_worked": null,
