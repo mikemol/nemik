@@ -98,6 +98,14 @@ dev = [
     "mikemol-endpoints",  # nemik:W884: otlp's one dist-to-dist dependency, the named-endpoint resolver (mtools:W1419)
 ]
 
+[tool.ruff]
+# nemik:W2362: the edit hook formats with this config, and with no target ruff infers py314 from
+# requires-python, whose formatter rewrites `except (A, B):` into PEP 758's `except A, B:` across any
+# edited file. PEP 758 is 3.14-only syntax Codon cannot parse (the operator wants nemik's Python
+# Codon-compatible), and no other 3.14 syntax is one the formatter introduces, so the formatter
+# targets 3.13. The interpreter is still 3.14, and the house ratchet keeps its own target.
+target-version = "py313"
+
 [tool.pytest.ini_options]
 # bazel-* are output symlinks into the Bazel cache; collecting them would run every test twice.
 testpaths = ["tests"]
