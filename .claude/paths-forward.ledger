@@ -6373,3 +6373,25 @@
 2026-11-18T21:15:20Z  status W2280 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-18T21:17:10Z  interrupt W2313 minted    -         "A nemik-courier command: the dry run by default, and the gh send only when the operator-owned config holds courier_send = true"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2280
 2026-11-19T02:25:15Z  interrupt W2314 minted    -         "Ask mtools for a standing PreToolUse rule that refuses an agent's Write, Edit and Bash redirection to the courier config path, with its remedy (ask the operator)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-00
+2026-11-19T02:25:29Z  status W2313 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-19T02:29:10Z  interrupt W2315 minted    -         "Forge waist: one canonical activity between many encoders (cards, letters, witness events) and many forge decoders (local Forgejo, then GitHub)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-00
+2026-11-19T02:29:17Z  interrupt W2316 minted    -         "Ask luthen-observability for the local Forgejo endpoint and a scoped agent identity, and where the credential lives"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-00
+2026-11-19T02:29:22Z  interrupt W2317 minted    -         "The pure waist: a canonical activity record and the letter encoder and decoder, round-tripped over every letter in the fixture fleet"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2315
+2026-11-19T02:29:23Z  interrupt W2318 minted    -         "The Forgejo decoder: an activity to the Forgejo REST request descriptions (create issue, comment, close, list), tested on a recorded fixture with no network"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2315
+2026-11-19T02:29:33Z  status W2315 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-19T02:34:34Z  status W2316 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-19T02:35:16Z  interrupt W2319 minted    -         "Name the courier config path and the forge credential directory, so mtools can write the deny rule for them"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=mtools
+2026-11-19T02:35:22Z  status W2314 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-19T02:35:22Z  status W2310 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-19T02:36:14Z  interrupt W2320 minted    -         "W2315 design doc (docs/forge-waist.md): the forge waist designed and reviewed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2315
+2026-11-19T02:36:39Z  interrupt W2321 minted    -         "nemik-rank mtools --json omits mtools:W2680 from its ready cards while --item mtools:W2680 reports it Ready gate-repair: find the filter that drops it"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=mtools
+2026-11-19T03:01:28Z  interrupt W2322 minted    -         "nemik-check warns on an open velocity or gate-repair card that enables nothing: velocity must name what it speeds"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-00
+2026-11-19T03:01:29Z  interrupt W2323 minted    -         "A velocity card inherits the MEASURED gate cost of the paths it accelerates as demand, so an expensive recurring gate pulls its own fix to the top"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-00
+2026-11-19T03:01:30Z  interrupt W2324 minted    -         "nemik-check warns on a card whose title or evidence names gate cost or hours but carries no velocity or gate-repair tag"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-00
+2026-11-19T03:01:33Z  interrupt W2325 minted    -         "Operator decision: should a velocity card that shortens a gate-repair chain's gate take the gate band, as the cards the chain waits on already do"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-00
+2026-11-19T03:01:36Z  status W2325 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-19T03:09:37Z  status W2325 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-19T03:38:57Z  interrupt W2326 minted    -         "The open gate card is a typed fact in the graph, not found by its title prefix, so a ranking can read the red-gate state"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-00
+2026-11-19T03:39:00Z  interrupt W2327 minted    -         "nemik.flow returns the potential drop across each dependency per source, so the sensitivity of total delay to an edge is computable"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-00
+2026-11-19T03:57:25Z  status W2280 working>landed writer    "working -> landed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-19T03:59:00Z  status W2325 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

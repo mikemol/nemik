@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 2314,
+  "counter": 2327,
   "waypoints": [
     {
       "symbol": "W1",
@@ -24748,7 +24748,8 @@
       "status": "blocked",
       "enables": [
         "linux-sources:W395",
-        "gcalculus:W293"
+        "gcalculus:W293",
+        "W2315"
       ],
       "touches": [],
       "blocked_on": [
@@ -56500,22 +56501,23 @@
     {
       "symbol": "W2280",
       "title": "Build the courier send behind an off-by-default flag, with a dry run that prints repo, title and body and sends nothing",
-      "status": "working",
+      "status": "landed",
       "enables": [
         "W1048",
-        "W2281"
+        "W2281",
+        "W2315"
       ],
       "touches": [
         "velocity"
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "New module (a letter to a peer becomes a GitHub issue in the peer's private repo): off by default, enabled only by an explicit flag; the dry run prints the issue it would create (repo, title, body) and sends nothing. The credential route is the host's gh login, repo scope (docs/courier-read-path.md); no new credential, key material never plaintext, YubiKey never opened. A new src module must compile under the pinned Codon (probe first with the bazel-cache codon) and be registered (tools/nemik_src.py --write). Reads: nemik-inbound --issues/--census already read the issue side (W1169).",
-      "evidence": "",
+      "next_bounded_step": "Wait for the deploy witness: the nemik pods run an image epoch at or after the landing of 8864dd79 (a module nothing imports yet)",
+      "evidence": "2026-11-19T02:29:34Z: 2026-11-18 operator idea relayed by github-00: the adapter pattern, a canonical message at the waist (gcd of the forges, ForgeFed's Ticket) with many encoders and many decoders. Consequence: this module is ONE DECODER (GitHub, behind the operator-config gate), not the courier. It lands as built (pure, off, harmless); the courier is re-planned under the forge-waist umbrella W2315. | 2026-11-19T03:57:25Z: 2026-11-18: LANDED as 8864dd79 (v1 0e00bd24, PASS-SUBMIT from github-00 after the red run: with enabled() mutated to return True, 7 failed and 9 passed; git log -1 and ls-remote read back). Gate ran about an hour and a half contended with mtools' full-grid run. nemik.courier is the GitHub decoder of the forge waist (W2315), behind the operator-config gate and W2314.",
       "issued_at": "2026-11-17T20:30:24Z",
       "minted_during": "interrupt",
       "caused_by": "W1048",
-      "last_worked": "2026-11-18T21:15:20Z",
+      "last_worked": "2026-11-19T03:57:25Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/courier.py",
@@ -56523,7 +56525,9 @@
       ],
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
       "vector_source": "default",
-      "completed": null
+      "completed": null,
+      "landed_at": "20261119T035725Z",
+      "deploys": true
     },
     {
       "symbol": "W2281",
@@ -57283,22 +57287,27 @@
     {
       "symbol": "W2310",
       "title": "mikemol-commit refuses a stack whose entry paths differ from the review ref's diff (git diff --name-only base ref), naming the missing paths before the gate starts, or derives them: a hand-kept path list missed files twice (nemik:W2261's first submit, nemik:W2256's first stack file)",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W2289"
       ],
       "touches": [
         "velocity"
       ],
-      "blocked_on": [],
-      "blocked_kind": null,
-      "next_bounded_step": "Ask mtools to take all three items (stack paths from or checked against the ref's diff; COMMITTED marks the stack's cards landed or done; pycheck --check-file applies the gate's ruff config or the ratchet baselines and says so); cite this symbol back",
-      "evidence": "2026-11-18T18:08:31Z: 2026-11-18 github-b0, second item for the mtools ask: when mikemol-commit prints COMMITTED it should mark the stack's waypoints landed (deploys true) or done (ref landing), because a landed card left working makes the round check refuse the NEXT stack (W2260 earlier, W2257 later); the landing already knows the card. | 2026-11-18T18:10:36Z: 2026-11-18 github-b0, third item for mtools (pycheck): mikemol-pycheck --check-file admitted tests/test_shaclinc_hub_card.py and the ruff ratchet then refused it for E501 (101-character docstring line), costing a whole gate run. A pre-check looser than the gate should apply the repo's ratchet baselines or the gate's ruff config, and say which it applied.",
+      "blocked_on": [
+        "mtools:W2740",
+        "mtools:W2741",
+        "mtools:W2742"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Wait for mtools:W2740, W2741 and W2742 (behind mtools' W2573 cutover); until then check each stack's paths against the ref's diff by hand before submitting",
+      "evidence": "2026-11-18T18:08:31Z: 2026-11-18 github-b0, second item for the mtools ask: when mikemol-commit prints COMMITTED it should mark the stack's waypoints landed (deploys true) or done (ref landing), because a landed card left working makes the round check refuse the NEXT stack (W2260 earlier, W2257 later); the landing already knows the card. | 2026-11-18T18:10:36Z: 2026-11-18 github-b0, third item for mtools (pycheck): mikemol-pycheck --check-file admitted tests/test_shaclinc_hub_card.py and the ruff ratchet then refused it for E501 (101-character docstring line), costing a whole gate run. A pre-check looser than the gate should apply the repo's ratchet baselines or the gate's ruff config, and say which it applied. | 2026-11-19T02:35:22Z: 2026-11-18 mtools carded the three items: mtools:W2740 (stack paths checked against the review ref's diff before the gate; github-00 now wants every review as a branch sha, so the ref is the one source), mtools:W2741 (mark the stack's waypoints landed or done on COMMITTED), mtools:W2742 (pycheck --check-file applies the gate's ruff config or the ratchet baselines and says which). All hooks-dist: they land behind the W2573 cutover (shard guard). W2311's image-tag note: mtools reads no image tags in its deploy witnesses today, so no card.",
       "issued_at": "2026-11-18T18:07:14Z",
       "minted_during": "interrupt",
       "caused_by": "github-b0",
-      "last_worked": "2026-11-18T18:10:36Z",
-      "ticks_blocked": 0
+      "last_worked": "2026-11-19T02:35:22Z",
+      "ticks_blocked": 0,
+      "completed": null
     },
     {
       "symbol": "W2311",
@@ -57347,36 +57356,476 @@
     {
       "symbol": "W2313",
       "title": "A nemik-courier command: the dry run by default, and the gh send only when the operator-owned config holds courier_send = true",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
-        "W2282"
+        "W2282",
+        "W2315"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
-      "next_bounded_step": "After nemik.courier lands: write the command that reads the operator's config file (a path outside the repo, stated in its help and in docs/courier-read-path.md), calls courier.dry_run by default and courier.send_argv with the config text only on an explicit send verb, never an enabled argument; a new command needs pyproject, BUILD.bazel, SKILL.md, workflows.toml and codon-baseline in one stack; a test with a temp config file (absent, false, true)",
-      "evidence": "",
+      "blocked_on": [
+        "W2314"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Blocked on W2314 (the mtools ask for a PreToolUse rule refusing an agent's write to the courier config path): the command must not ship enabled-by-file without that refusal in place; when it lands, write the command that reads the operator's config file, dry run by default, send only on the explicit verb, five registries in one stack",
+      "evidence": "2026-11-19T02:25:29Z: 2026-11-18 github-00: every agent runs as the same uid, so a file outside the repo is not a boundary; the guarantee needs a standing PreToolUse rule that refuses Write, Edit and Bash redirections targeting the courier config path, documented with its remedy (ask the operator). Carded against mtools as W2314; this card is blocked on it so the courier never ships enabled-by-file without the write refusal. | 2026-11-19T02:29:35Z: 2026-11-18 re-planned (github-00 relaying the operator's adapter-pattern idea): the command runs the waist (W2317) and its decoders (the Forgejo one first, W2318; GitHub is nemik.courier, W2280), not only the GitHub send. Still blocked on W2314 for any decoder that reads a credential or enable file.",
       "issued_at": "2026-11-18T21:17:10Z",
       "minted_during": "interrupt",
       "caused_by": "W2280",
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-11-19T02:29:35Z",
+      "ticks_blocked": 0,
+      "completed": null
     },
     {
       "symbol": "W2314",
       "title": "Ask mtools for a standing PreToolUse rule that refuses an agent's Write, Edit and Bash redirection to the courier config path, with its remedy (ask the operator)",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W2313"
+      ],
+      "touches": [
+        "evidence"
+      ],
+      "blocked_on": [
+        "W2319",
+        "mtools:W2739"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Name the path (W2319), send it to mtools, then wait for mtools:W2739 to land",
+      "evidence": "2026-11-19T02:30:58Z: 2026-11-18: SENT to mtools by cross-session message (with the W2310 items and a note on W2311). Awaiting their W<n>. | 2026-11-19T02:35:22Z: 2026-11-18 mtools carded it as mtools:W2739 (a standing deny on the courier config path, with the remedy, as a Rego METADATA annotation per github-00's ruling; the same shape for the forge credential files, nemik:W2315). It needs the path first: nemik:W2319 names it (a cycle through W2313 otherwise, since W2313 is blocked on this card).",
+      "issued_at": "2026-11-19T02:25:15Z",
+      "minted_during": "interrupt",
+      "caused_by": "github-00",
+      "last_worked": "2026-11-19T02:35:22Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W2315",
+      "title": "Forge waist: one canonical activity between many encoders (cards, letters, witness events) and many forge decoders (local Forgejo, then GitHub)",
+      "status": "blocked",
+      "enables": [
+        "W2298"
+      ],
+      "touches": [
+        "file:docs/forge-waist.md!w"
+      ],
+      "blocked_on": [
+        "W1047",
+        "W2280",
+        "W2313",
+        "W2317",
+        "W2318",
+        "W2320"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Design in docs/forge-waist.md (extends docs/inbox-as-issues.md W728), sent to github-00 and reviewed before any build; children: the pure waist and letter encoder, the Forgejo decoder, the luthen ask for endpoint and identity; W2280 is the GitHub decoder, W2313 is re-planned around the waist",
+      "evidence": "",
+      "issued_at": "2026-11-19T02:29:10Z",
+      "minted_during": "interrupt",
+      "caused_by": "github-00",
+      "last_worked": "2026-11-19T02:36:17Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "warrants": [
+        {
+          "@context": {
+            "prov": "http://www.w3.org/ns/prov#",
+            "xsd": "http://www.w3.org/2001/XMLSchema#",
+            "mtools": "urn:mtools:warrant#"
+          },
+          "@id": "urn:nemik:nemik/W2315",
+          "prov:wasDerivedFrom": {
+            "@id": "urn:claude:transcript:-home-mikemol-github/695f3e0a-d36f-4080-9c67-7548978cd99e#d842cfc1-249b-4af0-aec7-8bf95f595b1d",
+            "@type": "prov:Entity",
+            "prov:generatedAtTime": {
+              "@value": "2026-11-19T02:54:14.463Z",
+              "@type": "xsd:dateTime"
+            },
+            "prov:wasAttributedTo": {
+              "@id": "urn:nemik:operator",
+              "@type": "prov:Agent"
+            },
+            "prov:wasGeneratedBy": {
+              "@id": "urn:nemik:utterance/d842cfc1-249b-4af0-aec7-8bf95f595b1d",
+              "@type": "prov:Activity"
+            },
+            "mtools:line": 188637,
+            "mtools:reader": "mikemol-transcriptstruct claude:transcript:-home-mikemol-github/695f3e0a-d36f-4080-9c67-7548978cd99e --verify d842cfc1-249b-4af0-aec7-8bf95f595b1d --claim operator --line 188637"
+          },
+          "mtools:reason": "the operator ruled 2026-11-19T02:54Z: local forgejo is not outward publishing, not at this time"
+        }
+      ]
+    },
+    {
+      "symbol": "W2316",
+      "title": "Ask luthen-observability for the local Forgejo endpoint and a scoped agent identity, and where the credential lives",
+      "status": "done",
+      "enables": [
+        "W2315"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-11-19T02:30:57Z: 2026-11-18: SENT to luthen-observability by cross-session message: the base URL (host and cluster), the Forgejo version, which fleet repos exist on it, an issues-only agent identity, the token route (no plaintext key material, YubiKey never opened), rate limits, and whether ticket federation is on. Nothing is sent to their Forgejo by the ask. Awaiting their W<n>. | 2026-11-19T02:34:34Z: 2026-11-18 ANSWERED by luthen-observability on luthen-observability:W2745 (read-only: unauthenticated GETs of the instance plus their declarations, nothing sent). (1) Service forgejo, row forgejo-http of endpoints.json, port 3000, ClusterIP only (in-cluster); resolve by name. Version MEASURED at /api/v1/version: 16.0.5+gitea-1.22.0, so the Gitea 1.22 API shape under /api/v1. (2) Only tenants in terraform/files/flux_tenants.json have repos: a PRIVATE org nemik holding the private pull-mirror nemik/nemik (GitHub is primary, read-only for pushes) plus deploy_state and build_witness (Forgejo-primary). amr-skills and aeternum declared but disabled. mtools and luthen-observability are NOT on the instance. (3) No issues-only identity exists yet; the one token is the terraform provider's and must not be reused. W2745 provisions a bot user limited to issues (create, comment, close, labels) on named repos, token in OpenBao, delivered to the host job as environment, never a readable file, YubiKey untouched; a pull-mirror repo's issue unit is an open design point there. (4) No rate limits declared; max_response_items 50, default_paging_num 30. Federation: no FORGEJO__federation key declared and /api/v1/nodeinfo answers an HTTP error, so declared-off, NOT measured-off (app.ini not read); ticket-delivery completeness NOT measured. The federation lab idea is luthen-observability:W2746 (design, no build before review, enables this card). The recorded fixture can be written from the 1.22 API shape; the credential gates only live sends.",
+      "issued_at": "2026-11-19T02:29:17Z",
+      "minted_during": "interrupt",
+      "caused_by": "github-00",
+      "last_worked": "2026-11-19T02:34:34Z",
+      "ticks_blocked": 0,
+      "completed": "20261119T023434Z"
+    },
+    {
+      "symbol": "W2317",
+      "title": "The pure waist: a canonical activity record and the letter encoder and decoder, round-tripped over every letter in the fixture fleet",
+      "status": "ready",
+      "enables": [
+        "W2315"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Per the forge-waist design: a module of plain strings and lists (Codon-safe) holding the activity fields, letter_to_activity and activity_to_letter, and a test that every fixture-fleet letter round-trips byte for byte; no network, no file write; this is step 2 of the letters-as-issues design (W728)",
+      "evidence": "",
+      "issued_at": "2026-11-19T02:29:22Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2315",
+      "last_worked": "2026-11-19T03:10:03Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "src/nemik/waist.py",
+        "tests/test_waist.py"
+      ],
+      "size_class": "medium"
+    },
+    {
+      "symbol": "W2318",
+      "title": "The Forgejo decoder: an activity to the Forgejo REST request descriptions (create issue, comment, close, list), tested on a recorded fixture with no network",
+      "status": "ready",
+      "enables": [
+        "W2315"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Write the decoder against the Gitea 1.22 API shape with a recorded fixture; the operator ruled (warranted: host line 188637) that a write to the local Forgejo is not outward publishing, not at this time, so no operator-act card gates a Forgejo write; a send once ENABLED still waits on luthen-observability:W2745 (the issues-only bot identity, custody as a system unit under its own uid); the first target repo is nemik/nemik, whose pull-mirror issue unit is an open point on W2745",
+      "evidence": "2026-11-19T02:34:35Z: 2026-11-18 luthen-observability:W2745: the recorded fixture can be written from the Gitea 1.22 API shape (the instance reports 16.0.5+gitea-1.22.0); this card is blocked on luthen-observability:W2745 only for LIVE sends (the issues-only bot identity), not for the fixture. Today only the private org nemik exists on the instance (nemik/nemik pull-mirror, deploy_state, build_witness): mtools and luthen-observability are not on it, so letters to them cannot ride the Forgejo decoder yet. | 2026-11-19T02:56:48Z: 2026-11-18 OPERATOR RULING (warranted, verified with mikemol-transcriptstruct --verify and --human): host transcript 695f3e0a line 188637, 2026-11-19T02:54:14Z, human: 'Local forgejo is not outward publishing. Not at this time. When I decide I may wish to change that, I'll take the time and care to discuss it.' So the planned operator-act card for the Forgejo decoder's first live write is DROPPED. Scoped to now: a change to Forgejo's exposure (federation on, outside reachability) re-opens it as an operator discussion; the federation lab stays inside the cluster. Unchanged: credential custody (W2745) and the outward decoders (GitHub) behind the operator-config gate and W2314.",
+      "issued_at": "2026-11-19T02:29:23Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2315",
+      "last_worked": "2026-11-19T03:10:04Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "src/nemik/forgejo.py",
+        "tests/test_forgejo.py"
+      ],
+      "size_class": "medium",
+      "warrants": [
+        {
+          "@context": {
+            "prov": "http://www.w3.org/ns/prov#",
+            "xsd": "http://www.w3.org/2001/XMLSchema#",
+            "mtools": "urn:mtools:warrant#"
+          },
+          "@id": "urn:nemik:nemik/W2318",
+          "prov:wasDerivedFrom": {
+            "@id": "urn:claude:transcript:-home-mikemol-github/695f3e0a-d36f-4080-9c67-7548978cd99e#d842cfc1-249b-4af0-aec7-8bf95f595b1d",
+            "@type": "prov:Entity",
+            "prov:generatedAtTime": {
+              "@value": "2026-11-19T02:54:14.463Z",
+              "@type": "xsd:dateTime"
+            },
+            "prov:wasAttributedTo": {
+              "@id": "urn:nemik:operator",
+              "@type": "prov:Agent"
+            },
+            "prov:wasGeneratedBy": {
+              "@id": "urn:nemik:utterance/d842cfc1-249b-4af0-aec7-8bf95f595b1d",
+              "@type": "prov:Activity"
+            },
+            "mtools:line": 188637,
+            "mtools:reader": "mikemol-transcriptstruct claude:transcript:-home-mikemol-github/695f3e0a-d36f-4080-9c67-7548978cd99e --verify d842cfc1-249b-4af0-aec7-8bf95f595b1d --claim operator --line 188637"
+          },
+          "mtools:reason": "the operator ruled 2026-11-19T02:54Z: local forgejo is not outward publishing, not at this time"
+        }
+      ]
+    },
+    {
+      "symbol": "W2319",
+      "title": "Name the courier config path and the forge credential directory, so mtools can write the deny rule for them",
+      "status": "ready",
+      "enables": [
+        "W2314"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Propose in the forge-waist design: the operator-owned courier config at .config/nemik/courier.conf under the operator's home (the file nemik.courier's caller reads for courier_send), and forge credentials held only by a system unit's credentials directory (no agent-readable path or environment), so the deny rule needs one path; send it to mtools (mtools:W2739) and github-00 to confirm; the command W2313 reads exactly that path",
+      "evidence": "",
+      "issued_at": "2026-11-19T02:35:16Z",
+      "minted_during": "interrupt",
+      "caused_by": "mtools",
+      "last_worked": "2026-11-19T03:10:04Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2320",
+      "title": "W2315 design doc (docs/forge-waist.md): the forge waist designed and reviewed",
+      "status": "ready",
+      "enables": [
+        "W2315"
+      ],
+      "touches": [
+        "file:docs/forge-waist.md!w"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Submit the doc from the review ref and read back git log -1 and ls-remote; this card closes on the landing",
+      "evidence": "",
+      "issued_at": "2026-11-19T02:36:14Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2315",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2321",
+      "title": "nemik-rank --item says why a ready card is not in the ranked list (a frontier question), so a reader does not chase the weights",
+      "status": "ready",
+      "enables": [
+        "W2303"
       ],
       "touches": [
         "velocity"
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Send mtools the ask: every agent runs as the same uid, so a file outside the repo is not a boundary; the courier send reads courier_send = true from the operator-owned config (nemik.courier, W2280), so a PreToolUse rule must refuse Write, Edit and Bash redirections (and cp, mv, tee) that target that path and say to ask the operator; name the path once W2313 fixes it; cite mtools' symbol back and put it in W2313's blocked_on",
+      "next_bounded_step": "In _report_item, after the band line, say whether the card is in rank() and, when it is not, why (an umbrella: its frontier, or the card names that wait on it; or not ready); a fixture queue with a ready card that is not a frontier leaf, and one that is; a src landing, so a review ref and the round order apply",
+      "evidence": "2026-11-19T02:40:32Z: 2026-11-18 github-00 (relaying mtools): WITHDRAWN as a ranking defect. mtools found the cause: three of its open cards still listed mtools:W2680 in their enables, left over from an old single-stack plan, so not ranking W2680 as a frontier card was right. What remains is PRESENTATION: --item printed 'Ready gate-repair (on the chain of ...)' without saying 'not a frontier leaf: waited on by W2632, W2636 and W2640'. MY READING (rank.py, 2026-11-18): rank() has no row cap and its only exclusion beyond state is is_umbrella (frontier(g, n)[0] != {n}); _report_item calls only placed(), never the filter. So --item cannot say why a card is absent. Not shown by a tool run: nemik-rank mtools --check printed no UMBRELLA line for mtools, so which condition dropped W2680 is not named by nemik today, which is the defect.",
+      "issued_at": "2026-11-19T02:36:39Z",
+      "minted_during": "interrupt",
+      "caused_by": "mtools",
+      "last_worked": "2026-11-19T02:40:32Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2322",
+      "title": "nemik-check warns on an open velocity or gate-repair card that enables nothing: velocity must name what it speeds",
+      "status": "ready",
+      "enables": [
+        "W2290"
+      ],
+      "touches": [
+        "velocity"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "A shape beside OrphanLeafShape in the SHACL shapes: an open (not landed) card touching velocity or gate-repair with no nemik:enables is a Warning naming the card and saying to enable the cards whose gate it shortens; measured on nemik's own queue 2026-11-18: 14 of 37 open velocity or gate-repair cards enable nothing (some are landed cards awaiting a witness, which the shape excludes); a test with a planted velocity card with and without an enables edge; run //:test_skill because the shapes change",
       "evidence": "",
-      "issued_at": "2026-11-19T02:25:15Z",
+      "issued_at": "2026-11-19T03:01:28Z",
+      "minted_during": "interrupt",
+      "caused_by": "github-00",
+      "last_worked": "2026-11-19T03:10:05Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2323",
+      "title": "A velocity card inherits the MEASURED gate cost of the paths it accelerates as demand, so an expensive recurring gate pulls its own fix to the top",
+      "status": "ready",
+      "enables": [
+        "W2303"
+      ],
+      "touches": [
+        "velocity"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Design first, no build: what the store holds (ask luthen-observability what mikemol.gate.* carries per landing: CPU or wall, targets, paths), attribute each landing's gate cost to the paths it touched, let a velocity card declare the paths or targets it accelerates and take their summed cost over a window as weight; counters and CPU time, never wall as evidence; a replay over past landings in the style of the pace replay tool must show a W2727-like card rising before it ships; it feeds the accelerates flow of the rank design (W2325)",
+      "evidence": "",
+      "issued_at": "2026-11-19T03:01:29Z",
+      "minted_during": "interrupt",
+      "caused_by": "github-00",
+      "last_worked": "2026-11-19T03:10:06Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2324",
+      "title": "nemik-check warns on a card whose title or evidence names gate cost or hours but carries no velocity or gate-repair tag",
+      "status": "ready",
+      "enables": [
+        "W2290"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Measure the false-positive rate first: a keyword scan of nemik's open cards (gate cost, gate time, full-grid, hours, gate run) matched 21 untagged cards on 2026-11-18, a crude guess whose sample (W846, a flake card, among them) shows it over-matches; only a shape whose hits a reader mostly agrees with ships, as an Info before any Warning; a test with a planted card naming hours with and without the tag",
+      "evidence": "",
+      "issued_at": "2026-11-19T03:01:30Z",
+      "minted_during": "interrupt",
+      "caused_by": "github-00",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2325",
+      "title": "Rank from the vector and the graph's demand, with bands as display labels only: the design (operator ruling, warranted)",
+      "status": "ready",
+      "enables": [
+        "W2303"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Hold at v5 and build nothing; wait for github-00's synthesis from gcalculus and substrate, then write v6 from it with cold checks A to D as fixtures",
+      "evidence": "2026-11-19T03:09:37Z: 2026-11-18 OPERATOR RULING (warranted, verified): host transcript 695f3e0a line 188832, 2026-11-19T03:06Z, human: the vector is more meaningful than the bands, which are a flat ranking of a hyperdimensional weighting problem. W2325 is answered by NEITHER option A NOR B: the defect is that bands, a total order of named classes, take precedence over the vector and the weights. Re-scoped as a design: rank from the vector's axes plus propagated demand (Pareto fronts keep their dimensions), a band survives only as a display label, velocity is a dimension carried by an accelerates edge and propagated by a second flow, hard constraints stay constraints and the rest become weights, and a replay over the fleet with mtools:W2727 rising as the witness. Found while reading rank-weights.toml: the Pareto fronts and the flow model already exist; the band feeds them as a 7-valued label worth 100 weight units a step, which is lexicographic in effect. | 2026-11-19T03:22:56Z: 2026-11-18 v3: four operator records warranted (lines 188832, 188919, 188939, 188975). CHECKED: enables and blocked_on are one edge kind in nemik.flow today (index.successors), so an enables edge makes the target wait and cannot mean accelerates; a uniform velocity coefficient leaves absorbed currents unchanged and scales potentials by 1/v, so the observable is total delay D = demand x potential, value of raising velocity -dD/dv = D0/v^2, edge sensitivity -(potential drop)^2 (verified on a three-card chain in exact fractions); a broken gate is v=0, an open circuit. OPEN: comparing a ready card's absorbed current with a velocity card's delay reduction; whether the operator wants a soft maximum over competing paths (it would give up Kirchhoff and W241's conserved solve); tau is derived here, gcalculus defines none. | 2026-11-19T03:24:22Z: 2026-11-18 github-00: warm review of v3 (f150bfa2) PASSES; a cold review is running. Two open questions go to the operator: (a) enables as conductance and blocked_on as resistance need the distinction introduced (today one edge kind) or a speed-up edge type, with a migration; (b) LSE over competing paths versus exact Kirchhoff for paths with LSE only across unlike reasons. To fold into v4 after the cold review: a migration paragraph (drafted: one relation with two views, a per-edge g and a system v added as coefficients not edge kinds, a typed speed-up edge owned by the writer, and the regression property that with every g = 1 and v = 1 the new solver reproduces today's salience exactly), the delay-versus-current comparability as the build's FIRST gate, and the replay's fixed property that cards with no velocity role keep their relative order. | 2026-11-19T03:53:59Z: 2026-11-18 github-00: scoped cold pass on v5 (090ecb85): of 26 prior findings 18 resolved, 7 partly, 1 not (#37). NEW failures all from the Pareto layer: only the LARGEST accelerator reaches front 1 (check A), unscored cards break dominance either way (check B: critical below normal, or about 737 of 743 in front 1), front-1 width hands the order to the unsolved unit problem (check C), the red-gate argument holds in 1 of 3 cases (check D: W2212's cycle strands all demand and dropping the W2212 chain pull-in brings that deadlock back). DECISION: do not patch v5; hold, build nothing. Direction from gcalculus and substrate, being gathered by github-00: every reason a SOURCE in ONE network added by superposition (no per-reason units), velocity a MARGINAL (the change in network throughput when a card's edge closes) and not a series factor, exact Fractions throughout, substrate's Belnap two-rail logic for a card both wanted and blocked; removes the Pareto layer. v6 starts from that synthesis; the cold review's executable checks A to D (v5check/) are the test fixtures v6 must pass. | 2026-11-19T03:59:00Z: 2026-11-18: set back to ready: the card is HELD (v5 is the last cut, v6 waits on the gcalculus and substrate synthesis and the reviews), so it is not being worked, and the round check refused a queue commit while it was marked working outside the round (W2322, W2167, W2252, W2018 are the round). Drafting from the synthesis is not a working mark; the card goes back to working only if the round reaches it.",
+      "issued_at": "2026-11-19T03:01:33Z",
+      "minted_during": "interrupt",
+      "caused_by": "github-00",
+      "last_worked": "2026-11-19T03:59:00Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "warrants": [
+        {
+          "@context": {
+            "prov": "http://www.w3.org/ns/prov#",
+            "xsd": "http://www.w3.org/2001/XMLSchema#",
+            "mtools": "urn:mtools:warrant#"
+          },
+          "@id": "urn:nemik:nemik/W2325",
+          "prov:wasDerivedFrom": {
+            "@id": "urn:claude:transcript:-home-mikemol-github/695f3e0a-d36f-4080-9c67-7548978cd99e#32e8efe9-7573-4f29-9858-e85f12290829",
+            "@type": "prov:Entity",
+            "prov:generatedAtTime": {
+              "@value": "2026-11-19T03:06:32.419Z",
+              "@type": "xsd:dateTime"
+            },
+            "prov:wasAttributedTo": {
+              "@id": "urn:nemik:operator",
+              "@type": "prov:Agent"
+            },
+            "prov:wasGeneratedBy": {
+              "@id": "urn:nemik:utterance/32e8efe9-7573-4f29-9858-e85f12290829",
+              "@type": "prov:Activity"
+            },
+            "mtools:line": 188832,
+            "mtools:reader": "mikemol-transcriptstruct claude:transcript:-home-mikemol-github/695f3e0a-d36f-4080-9c67-7548978cd99e --verify 32e8efe9-7573-4f29-9858-e85f12290829 --claim operator --line 188832"
+          },
+          "mtools:reason": "the operator ruled 2026-11-19T03:06Z: the vector is more meaningful than the bands, which are a flat ranking of a hyperdimensional weighting problem"
+        },
+        {
+          "@context": {
+            "prov": "http://www.w3.org/ns/prov#",
+            "xsd": "http://www.w3.org/2001/XMLSchema#",
+            "mtools": "urn:mtools:warrant#"
+          },
+          "@id": "urn:nemik:nemik/W2325",
+          "prov:wasDerivedFrom": {
+            "@id": "urn:claude:transcript:-home-mikemol-github/695f3e0a-d36f-4080-9c67-7548978cd99e#4e9acf9e-ed55-4b9b-84ce-26109b4b3ffb",
+            "@type": "prov:Entity",
+            "prov:generatedAtTime": {
+              "@value": "2026-11-19T03:13:02.448Z",
+              "@type": "xsd:dateTime"
+            },
+            "prov:wasAttributedTo": {
+              "@id": "urn:nemik:operator",
+              "@type": "prov:Agent"
+            },
+            "prov:wasGeneratedBy": {
+              "@id": "urn:nemik:utterance/4e9acf9e-ed55-4b9b-84ce-26109b4b3ffb",
+              "@type": "prov:Activity"
+            },
+            "mtools:line": 188919,
+            "mtools:reader": "mikemol-transcriptstruct claude:transcript:-home-mikemol-github/695f3e0a-d36f-4080-9c67-7548978cd99e --verify 4e9acf9e-ed55-4b9b-84ce-26109b4b3ffb --claim operator --line 188919"
+          },
+          "mtools:reason": "the operator hinted 2026-11-19T03:13Z: what is the velocity of a broken gate (zero), so gate precedence is the limit case of the velocity flow"
+        },
+        {
+          "@context": {
+            "prov": "http://www.w3.org/ns/prov#",
+            "xsd": "http://www.w3.org/2001/XMLSchema#",
+            "mtools": "urn:mtools:warrant#"
+          },
+          "@id": "urn:nemik:nemik/W2325",
+          "prov:wasDerivedFrom": {
+            "@id": "urn:claude:transcript:-home-mikemol-github/695f3e0a-d36f-4080-9c67-7548978cd99e#c4ed093f-2c67-458c-8fde-ee02ef4d461e",
+            "@type": "prov:Entity",
+            "prov:generatedAtTime": {
+              "@value": "2026-11-19T03:13:30.109Z",
+              "@type": "xsd:dateTime"
+            },
+            "prov:wasAttributedTo": {
+              "@id": "urn:nemik:operator",
+              "@type": "prov:Agent"
+            },
+            "prov:wasGeneratedBy": {
+              "@id": "urn:nemik:utterance/c4ed093f-2c67-458c-8fde-ee02ef4d461e",
+              "@type": "prov:Activity"
+            },
+            "mtools:line": 188939,
+            "mtools:reader": "mikemol-transcriptstruct claude:transcript:-home-mikemol-github/695f3e0a-d36f-4080-9c67-7548978cd99e --verify c4ed093f-2c67-458c-8fde-ee02ef4d461e --claim operator --line 188939"
+          },
+          "mtools:reason": "the operator directed 2026-11-19T03:13Z: do not make the order within a front linear, and use the salience and gcalculus conductance and logsumexp math"
+        },
+        {
+          "@context": {
+            "prov": "http://www.w3.org/ns/prov#",
+            "xsd": "http://www.w3.org/2001/XMLSchema#",
+            "mtools": "urn:mtools:warrant#"
+          },
+          "@id": "urn:nemik:nemik/W2325",
+          "prov:wasDerivedFrom": {
+            "@id": "urn:claude:transcript:-home-mikemol-github/695f3e0a-d36f-4080-9c67-7548978cd99e#44b92f94-038a-423b-8b4a-fff2a6a482fd",
+            "@type": "prov:Entity",
+            "prov:generatedAtTime": {
+              "@value": "2026-11-19T03:18:38.367Z",
+              "@type": "xsd:dateTime"
+            },
+            "prov:wasAttributedTo": {
+              "@id": "urn:nemik:operator",
+              "@type": "prov:Agent"
+            },
+            "prov:wasGeneratedBy": {
+              "@id": "urn:nemik:utterance/44b92f94-038a-423b-8b4a-fff2a6a482fd",
+              "@type": "prov:Activity"
+            },
+            "mtools:line": 188975,
+            "mtools:reader": "mikemol-transcriptstruct claude:transcript:-home-mikemol-github/695f3e0a-d36f-4080-9c67-7548978cd99e --verify 44b92f94-038a-423b-8b4a-fff2a6a482fd --claim operator --line 188975"
+          },
+          "mtools:reason": "the operator said 2026-11-19T03:18Z: velocity is the conductor everything passes through, blocked on is resistance and enables is conductance"
+        }
+      ]
+    },
+    {
+      "symbol": "W2326",
+      "title": "The open gate card is a typed fact in the graph, not found by its title prefix, so a ranking can read the red-gate state",
+      "status": "ready",
+      "enables": [
+        "W2325"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Ask mtools whether the writer's --gate-red can set a typed field on the card it mints (the card is found by title prefix today, per the W2325 cold review, mtools' code not read by me), then carry it in the adapter as a typed triple and a test; the red-gate case of the rank design (docs/rank-from-the-vector.md) reads it",
+      "evidence": "",
+      "issued_at": "2026-11-19T03:38:57Z",
+      "minted_during": "interrupt",
+      "caused_by": "github-00",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2327",
+      "title": "nemik.flow returns the potential drop across each dependency per source, so the sensitivity of total delay to an edge is computable",
+      "status": "ready",
+      "enables": [
+        "W2325"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Today flow returns the salience, the fibre per source, the potential at each source and the current per dependency summed over sources, not the drop across an edge per source; return the squared drops summed over sources per dependency (exact Fractions), tested on the three-card chain (current 3 at v = 1, 2, 1/2, delay 18, 9, 36, edge sensitivity -9) and with every g = 1 reproducing today's salience; src change, so a review ref and the round order apply",
+      "evidence": "",
+      "issued_at": "2026-11-19T03:39:00Z",
       "minted_during": "interrupt",
       "caused_by": "github-00",
       "last_worked": null,
