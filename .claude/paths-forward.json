@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 2333,
+  "counter": 2337,
   "waypoints": [
     {
       "symbol": "W1",
@@ -57639,7 +57639,7 @@
     {
       "symbol": "W2323",
       "title": "A velocity card inherits the MEASURED gate cost of the paths it accelerates as demand, so an expensive recurring gate pulls its own fix to the top",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W2303"
       ],
@@ -57648,14 +57648,14 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Submit .claude/stack-W2323-v2.json (refs/review/W2323-v2 = 8818f494, docs only, github-00's PASS on v1 carries) when the round reaches it, from the .nemik-w2323-wt worktree, then read back git log -1 and ls-remote and mark done (ref landing). After it lands: mint children for the doc's steps 2 to 4 (a by-name reader of target.cpu.seconds for repo nemik with a recorded fixture, C(card) printed beside the band, the replay) caused by W2323, and send mtools the asks",
-      "evidence": "2026-11-19T06:34:02Z: 2026-11-19: round order after W2321 (in review). Asked luthen-observability what the gate series carry; the metrics store is not reachable from this session (NEMIK_VM_URL unset, 127.0.0.1:30829 refused), so I did not guess an endpoint. | 2026-11-19T06:37:00Z: 2026-11-19 luthen-observability's answer, all READ from the store and its repo files at 06:35Z (UNKNOWN marked by them). NAMES (dotted, query as __name__ equal to mikemol.gate.target.cpu.seconds): target.cpu.seconds, target.wall.seconds, target.children, target.failed (per uncached target, labels target with the shard in the name, kind mutants or pytest (other on wall and failed), repo), run.emitted (uncached targets measured in the last run), run.seconds and run_seconds (two spellings, probably one measure), admission_wait_seconds (label repo). CPU yes, wall yes, user+sys split NO (target.cpu.seconds is taken from a test.log shard line, mtools:W1783 and W1769, mtools owns the definition, so UNKNOWN). The fresh count is run.emitted, the TOTAL M is NOT recorded (a cached target is absent), the gate's N fresh of M line is not a series, and M and the fresh set live in the BuildBuddy invocation record. NO series ties a cost to a commit sha, landing id or paths touched, the only key is timestamp. COVERAGE: in 7 days per-target cpu series exist for repo mtools (mutants 418, pytest 935) and repo nemik (pytest 536) only, luthen-observability emits none. Retention flag is -retentionPeriod=1, one month in VictoriaMetrics. Access by name: endpoint row vmsingle-http in luthen's endpoints.json, resolved there by checks.vm_loaded.node_port, and the port in the telemetry skill text is stale. Published queries: recording rules gate:luthen_gate_target_cpu_samples:count7d, :median7d and :p90_7d. Producer defects they name: a literal repo=repo in admission_wait and run_seconds, and repo=tree for the first gate until mtools:W1793. Consequence for this card: nemik's own gate has measured per-target CPU, so a velocity card for nemik paths can be weighed today. The join to paths needs a landing-window attribution this card must propose, and user+sys needs mtools. | 2026-11-19T06:59:34Z: 2026-11-19: built refs/review/W2323-v1 = 81f595c084743fc0e19e7c576f845a3ba4a8d2dd on main 2a2364ab, one file, docs/gate-cost-velocity.md +107, from luthen's answer (relayed, nothing queried by me). Sent to github-00 for review, not submitted. Stack file written. | 2026-11-19T07:01:50Z: 2026-11-19: github-00 PASS-SUBMIT on refs/review/W2323-v1 = 81f595c0 with three additions before it lands. (1) cite mtools:W2684 as the dependency that replaces the timestamp assumption: I READ it in mtools' queue (open, blocked on mtools:W2573, title: the gate's per-target CPU series carries no commit label) and the doc now cites it, in the worktree. (2) luthen's own gate emits no per-target cpu series, a gate-parity gap: asked luthen-observability for the symbol of the card it said it would mint. (3) the telemetry skill text names a stale port, a skill fact out of date, which is a missing input to the rendered skill: asked luthen who owns that skill text and for a card. Both pending. | 2026-11-19T07:03:12Z: 2026-11-19: v2 built, refs/review/W2323-v2 = 8818f494cecdb86571c22b62d2386ddb3b1a2830 on main 562e49a0, one file +125, with github-00's three additions: mtools:W2684 READ and cited as the dependency that replaces the timestamp join, luthen-observability:W2749 READ (luthen's own gate emits no per-target series), luthen-observability:W2689 READ with draft diff W2403 (named, not read). Corrected my earlier wording: the telemetry skill's ports are another host's constants stated as universal, not stale, and the skill is the operator's fleet skill. Sent to github-00.",
+      "next_bounded_step": null,
+      "evidence": "2026-11-19T06:34:02Z: 2026-11-19: round order after W2321 (in review). Asked luthen-observability what the gate series carry; the metrics store is not reachable from this session (NEMIK_VM_URL unset, 127.0.0.1:30829 refused), so I did not guess an endpoint. | 2026-11-19T06:37:00Z: 2026-11-19 luthen-observability's answer, all READ from the store and its repo files at 06:35Z (UNKNOWN marked by them). NAMES (dotted, query as __name__ equal to mikemol.gate.target.cpu.seconds): target.cpu.seconds, target.wall.seconds, target.children, target.failed (per uncached target, labels target with the shard in the name, kind mutants or pytest (other on wall and failed), repo), run.emitted (uncached targets measured in the last run), run.seconds and run_seconds (two spellings, probably one measure), admission_wait_seconds (label repo). CPU yes, wall yes, user+sys split NO (target.cpu.seconds is taken from a test.log shard line, mtools:W1783 and W1769, mtools owns the definition, so UNKNOWN). The fresh count is run.emitted, the TOTAL M is NOT recorded (a cached target is absent), the gate's N fresh of M line is not a series, and M and the fresh set live in the BuildBuddy invocation record. NO series ties a cost to a commit sha, landing id or paths touched, the only key is timestamp. COVERAGE: in 7 days per-target cpu series exist for repo mtools (mutants 418, pytest 935) and repo nemik (pytest 536) only, luthen-observability emits none. Retention flag is -retentionPeriod=1, one month in VictoriaMetrics. Access by name: endpoint row vmsingle-http in luthen's endpoints.json, resolved there by checks.vm_loaded.node_port, and the port in the telemetry skill text is stale. Published queries: recording rules gate:luthen_gate_target_cpu_samples:count7d, :median7d and :p90_7d. Producer defects they name: a literal repo=repo in admission_wait and run_seconds, and repo=tree for the first gate until mtools:W1793. Consequence for this card: nemik's own gate has measured per-target CPU, so a velocity card for nemik paths can be weighed today. The join to paths needs a landing-window attribution this card must propose, and user+sys needs mtools. | 2026-11-19T06:59:34Z: 2026-11-19: built refs/review/W2323-v1 = 81f595c084743fc0e19e7c576f845a3ba4a8d2dd on main 2a2364ab, one file, docs/gate-cost-velocity.md +107, from luthen's answer (relayed, nothing queried by me). Sent to github-00 for review, not submitted. Stack file written. | 2026-11-19T07:01:50Z: 2026-11-19: github-00 PASS-SUBMIT on refs/review/W2323-v1 = 81f595c0 with three additions before it lands. (1) cite mtools:W2684 as the dependency that replaces the timestamp assumption: I READ it in mtools' queue (open, blocked on mtools:W2573, title: the gate's per-target CPU series carries no commit label) and the doc now cites it, in the worktree. (2) luthen's own gate emits no per-target cpu series, a gate-parity gap: asked luthen-observability for the symbol of the card it said it would mint. (3) the telemetry skill text names a stale port, a skill fact out of date, which is a missing input to the rendered skill: asked luthen who owns that skill text and for a card. Both pending. | 2026-11-19T07:03:12Z: 2026-11-19: v2 built, refs/review/W2323-v2 = 8818f494cecdb86571c22b62d2386ddb3b1a2830 on main 562e49a0, one file +125, with github-00's three additions: mtools:W2684 READ and cited as the dependency that replaces the timestamp join, luthen-observability:W2749 READ (luthen's own gate emits no per-target series), luthen-observability:W2689 READ with draft diff W2403 (named, not read). Corrected my earlier wording: the telemetry skill's ports are another host's constants stated as universal, not stale, and the skill is the operator's fleet skill. Sent to github-00. | 2026-11-19T07:14:09Z: 2026-11-19: LANDED as ee79a63a (PASS-SUBMIT from github-00 on refs/review/W2323-v1 and carried to v2 = 8818f494 after three citations were added and read in the owners' queues, mtools:W2684, luthen-observability:W2749 and W2689. git log -1 subject read back as this card's and git ls-remote origin refs/heads/main = ee79a63a065bcde579c0d96db3ff24119ed138c6. Gate green on the staged tree. Docs only, landing_kind ref: done, not landed. This card was the design (no build); the doc's steps 2 to 4 are minted as their own cards, caused by this one.",
       "issued_at": "2026-11-19T03:01:29Z",
       "minted_during": "interrupt",
       "caused_by": "github-00",
-      "last_worked": "2026-11-19T07:03:12Z",
+      "last_worked": "2026-11-19T07:14:09Z",
       "ticks_blocked": 0,
-      "completed": null
+      "completed": "20261119T071409Z"
     },
     {
       "symbol": "W2324",
@@ -58148,6 +58148,108 @@
       "minted_during": "interrupt",
       "caused_by": "github-00",
       "last_worked": "2026-11-19T06:04:10Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2334",
+      "title": "A reader of mikemol.gate.target.cpu.seconds for repo nemik, by endpoint name, tested on a recorded response with no live endpoint",
+      "status": "ready",
+      "enables": [
+        "W2303"
+      ],
+      "touches": [
+        "evidence"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Per docs/gate-cost-velocity.md step 2: one small module reads target.cpu.seconds for repo nemik by endpoint NAME (the address from the environment or the operator's config, never a port in the code), returns the per-target CPU seconds over a window, and a test runs it against a recorded response, no live endpoint. Ask luthen-observability how a nemik session is to resolve the name (its resolver, W2691, is not shipped yet)",
+      "evidence": "",
+      "issued_at": "2026-11-19T07:14:12Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2323",
+      "last_worked": "2026-11-19T07:14:20Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "src/nemik/gatecost.py",
+        "tests/test_gatecost.py"
+      ],
+      "size_class": "small"
+    },
+    {
+      "symbol": "W2335",
+      "title": "nemik-rank prints the measured gate CPU of a velocity card's declared targets beside its band and changes no order",
+      "status": "ready",
+      "enables": [
+        "W2303"
+      ],
+      "touches": [
+        "evidence"
+      ],
+      "blocked_on": [
+        "W2334",
+        "W2328"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Per docs/gate-cost-velocity.md step 3: once the reader (W2334) and the typed speed-up field (W2328) exist, C(card) = the sum over the card's declared targets of their CPU seconds over a window, printed as one more line of nemik-rank --item beside the band, in CPU seconds per window and not a score. A target label that no longer exists is a refusal, not a silent zero. No order changes",
+      "evidence": "",
+      "issued_at": "2026-11-19T07:14:21Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2323",
+      "last_worked": "2026-11-19T07:14:26Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "src/nemik/rank.py",
+        "tests/test_rank_gatecost.py"
+      ],
+      "size_class": "small"
+    },
+    {
+      "symbol": "W2336",
+      "title": "A replay over the month the store retains shows a velocity card rises with its measured gate cost, before the number enters the order",
+      "status": "ready",
+      "enables": [
+        "W2303"
+      ],
+      "touches": [
+        "evidence"
+      ],
+      "blocked_on": [
+        "W2335"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Per docs/gate-cost-velocity.md: for each landing in the retained month the cost its gate spent (by the commit label once mtools:W2684 exists, by the timestamp join until then, checking by counting samples outside every landing window that no two runs overlapped), and for each velocity card C(card); the card the rank design names as one that must rise (W2727, relayed there) must rise with the measured cost and not without it. A replay longer than the month needs figures exported by luthen, not re-read",
+      "evidence": "",
+      "issued_at": "2026-11-19T07:14:27Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2323",
+      "last_worked": "2026-11-19T07:14:32Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "tools/gate_cost_replay.py",
+        "tests/test_gate_cost_replay.py"
+      ],
+      "size_class": "medium"
+    },
+    {
+      "symbol": "W2337",
+      "title": "mtools states what the gate's run, admission and failed series measure, whether cpu.seconds is user plus sys, and which run spelling is the family",
+      "status": "ready",
+      "enables": [
+        "W2336"
+      ],
+      "touches": [
+        "evidence"
+      ],
+      "blocked_on": [
+        "mtools"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Sent to mtools 2026-11-19 with this card's symbol (nemik:W2337) so mtools can claim it: what run, admission and failed measure, whether target.cpu.seconds is user plus sys, and which of run.seconds and run_seconds is the family. luthen's registry says these families wait on mtools. Related and already carded by mtools: mtools:W2684 (the commit label)",
+      "evidence": "",
+      "issued_at": "2026-11-19T07:14:34Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2323",
+      "last_worked": "2026-11-19T07:14:42Z",
       "ticks_blocked": 0
     }
   ],
