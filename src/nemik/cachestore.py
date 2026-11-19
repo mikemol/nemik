@@ -32,7 +32,7 @@ from rdflib.util import from_n3
 
 from nemik import flow, shaclinc
 
-FORMAT = 2
+FORMAT = 3  # nemik:W2357: each result carries its source shape
 NAME = "build-caches.json"
 WATCHED = (
     "data/shapes.ttl",
@@ -121,7 +121,7 @@ def _held_json(held: shaclinc.Held, terms: Terms) -> object:
                 [terms.add(s), terms.add(p), terms.add(o)] for s, p, o in triples
             ],
             "results": [
-                [terms.add(focus), [[sev, msg] for sev, msg in rows]]
+                [terms.add(focus), [[sev, msg, src] for sev, msg, src in rows]]
                 for focus, rows in results.items()
             ],
         }
@@ -209,7 +209,7 @@ def _held_value(raw: object, table: list[Node]) -> shaclinc.Held:
         )
         results = {
             table[cast("int", row[0])]: [
-                (sev, msg) for sev, msg in cast("list[list[str]]", row[1])
+                (sev, msg, src) for sev, msg, src in cast("list[list[str]]", row[1])
             ]
             for row in cast("list[list[object]]", body["results"])
         }

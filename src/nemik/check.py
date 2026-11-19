@@ -81,12 +81,13 @@ from nemik.marks import provenance as mark_provenance
 from nemik.queuefiles import LEDGER, QUEUE, default_root, workstream_files
 from nemik.realize import rows as realize_rows
 from nemik.realize import runtime_valid, verdicts
+from nemik.retrobaseline import STALE, Row, demote, stale, violators
 from nemik.rolling import bound as landing_bound
 from nemik.rolling import counts as landing_counts
 from nemik.rolling import message as rolling_message
 from nemik.rolls import idle_run, stalled
 from nemik.say import say
-from nemik.shaclinc import findings as shacl_findings
+from nemik.shaclinc import identified as shacl_identified
 from nemik.shims.work_cli import in_gate
 from nemik.tomlview import table
 from nemik.wake import parse_args as wake_args
@@ -105,6 +106,7 @@ NEITHER_QUANTILE = 0.9  # the share of small cards that finished within the boun
 NEITHER_SAMPLES = 10  # fewer finished small cards than this and no bound is learned
 SECONDS_A_DAY = 86400
 UMBRELLA_PREREQS = 2
+RETRO_BASELINE = "retro-handoff-baseline.json"  # nemik:W2357
 
 
 def mark_gating(graph: Graph, repo: str, repo_dir: Path) -> None:
@@ -680,10 +682,46 @@ def _mark_unresolved(root: Path, merged: Graph) -> None:
             merged.add((node, NEMIK.unresolvedBlocker, cited))
 
 
-def _shacl_by_repo(
-    root: Path, merged: Graph, graphs: dict[str, Graph | None]
-) -> dict[str, list[Finding]]:
-    """Validate the merged graph once and file each finding under its focus node's repo.
+def parse_retro_baseline(text: str) -> list[str]:
+    """nemik:W2357: read the retro handoff baseline's text.
+
+    Args:
+        text: The baseline file's text.
+
+    Returns:
+        The sorted baselined retro ids (`gcalculus:R12`).
+
+    Raises:
+        TypeError: the text is not a JSON list.
+        ValueError: an item of the list is not a retro id's text. Either way nemik-check names
+            the cause (exit 3, on stdout), as for any unreadable input, and never demotes nothing
+            in silence.
+
+    """
+    parsed: object = json.loads(text)
+    if not isinstance(parsed, list):
+        msg = f"{RETRO_BASELINE} is not a JSON list"
+        raise TypeError(msg)
+    ids = [str(item) for item in parsed if isinstance(item, str)]
+    if len(ids) != len(parsed):
+        msg = f"{RETRO_BASELINE} holds an item that is not a retro id"
+        raise ValueError(msg)
+    return sorted(ids)
+
+
+def retro_baseline() -> list[str]:
+    """nemik:W2357: the retro handoff baseline that ships with the package.
+
+    Returns:
+        The sorted baselined retro ids (see parse_retro_baseline).
+
+    """
+    shipped = files("nemik.data").joinpath(RETRO_BASELINE)
+    return parse_retro_baseline(shipped.read_text(encoding="utf-8"))
+
+
+def _identified(root: Path, merged: Graph) -> list[tuple[Node, str, str, str]]:
+    """Validate the merged graph once, each result with the shape that produced it.
 
     nemik:W400: a rebuild in the same process re-validates only the nodes its change touches.
     nemik:W625: and a fresh process starts from the last reader's caches (142 s CPU cold, 11 s
@@ -691,22 +729,93 @@ def _shacl_by_repo(
     temporary root does not grow it.
 
     Returns:
-        the findings by repo, an empty list for each repo in `graphs`.
+        Every result's focus, severity IRI, message and source shape IRI.
 
     """
     kept = root.resolve() == default_root().resolve()
     if kept:
         cachestore.restore_user()
-    results = shacl_findings(str(root.resolve()), merged, shapes())
+    results = shacl_identified(str(root.resolve()), merged, shapes())
     if kept:
         cachestore.persist_user()
-    by_repo: dict[str, list[Finding]] = {repo: [] for repo in graphs}
-    for focus, sev, msg in sorted(results):
+    return results
+
+
+def repo_rows(
+    results: list[tuple[Node, str, str, str]], repos: list[str]
+) -> dict[str, list[Row]]:
+    """File each result under its focus node's repo, severity and shape as short texts.
+
+    Returns:
+        The rows by repo, an empty list for each repo in `repos`.
+
+    """
+    by_repo: dict[str, list[Row]] = {repo: [] for repo in repos}
+    for focus, sev, msg, src in sorted(results):
         repo, _, sym = str(focus).removeprefix(BASE).partition("/")
         by_repo.setdefault(repo, []).append(
-            (str(sev).rsplit("#", 1)[-1], sym or "--", str(msg))
+            (sev.rsplit("#", 1)[-1], sym or "--", msg, src)
         )
     return by_repo
+
+
+def demoted(
+    rows: dict[str, list[Row]], baseline: list[str]
+) -> dict[str, list[Finding]]:
+    """nemik:W2357: each repo's findings, the self-probe rule's baselined retros read as Info.
+
+    The demotion keys on each result's shape and focus, never its message. A baselined retro of a
+    surveyed repo that no longer breaks the rule is an Info line on that repo, so the baseline
+    cannot hold a dead entry silently.
+
+    Args:
+        rows: The results by repo, each with its source shape.
+        baseline: The baselined retro ids.
+
+    Returns:
+        The findings by repo.
+
+    """
+    held = set(baseline)
+    by_repo = {repo: demote(found, held) for repo, found in rows.items()}
+    today = violators([row for found in rows.values() for row in found])
+    for ident in stale(baseline, today):
+        repo = ident.partition(":")[0]
+        if repo in by_repo:
+            by_repo[repo].append(("Info", f"retro/{ident}/handoff", f"{ident} {STALE}"))
+    return by_repo
+
+
+def probe_violators(root: Path) -> list[str]:
+    """nemik:W2357: the retros whose handoff breaks the self-probe rule today, fleet-wide.
+
+    tools/retro_handoff_baseline.py intersects the committed baseline with this, so the baseline
+    can only shrink.
+
+    Returns:
+        The sorted retro ids (`gcalculus:R12`).
+
+    """
+    graphs, _, merged = _read_queues(root, "")
+    annotate(merged)
+    _mark_unresolved(root, merged)
+    rows = repo_rows(_identified(root, merged), list(graphs))
+    return violators([row for found in rows.values() for row in found])
+
+
+def _shacl_by_repo(
+    root: Path, merged: Graph, graphs: dict[str, Graph | None]
+) -> dict[str, list[Finding]]:
+    """Validate the merged graph once and file each finding under its focus node's repo.
+
+    nemik:W2357: the self-probe rule's results on baselined retros read as Info (demoted).
+
+    Returns:
+        the findings by repo, an empty list for each repo in `graphs`.
+
+    """
+    rows = repo_rows(_identified(root, merged), list(graphs))
+    return demoted(rows, retro_baseline())
 
 
 def _cycle_findings(merged: Graph, by_repo: dict[str, list[Finding]]) -> None:

@@ -6450,3 +6450,36 @@
 2026-11-19T09:22:01Z  interrupt W2351 minted    -         "The W2344 structural pin of the gate's facts call matches a whole non-comment line, so a commented-out call fails it"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2345
 2026-11-19T09:46:36Z  status W2344 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-19T09:48:48Z  status W2350 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-19T10:03:09Z  status W2350 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-19T10:03:10Z  status W2345 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-19T10:03:10Z  status W2351 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-19T11:24:45Z  interrupt W2352 minted    -         "The gate's gate_checks run is not in the build events mikemol-gate-targets reads, so its per-target CPU never reaches luthen's gate cost"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2345
+2026-11-19T12:02:03Z  interrupt W2353 minted    -         "Replace object in tools/side_by_side.py's cell fields with a recursive Json alias, Absent kept a separate type, and the null case decided"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2340
+2026-11-19T12:02:03Z  interrupt W2354 minted    -         "Ask mtools what mikemol-surfaces' census fields hold, so a precise cell type can replace the Json alias"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2340
+2026-11-19T12:24:49Z  interrupt W2355 minted    -         "Add a paragraph to bands.toml's tag section naming --touches gate-repair, what it admits and that a false tag is a defect"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2215
+2026-11-19T12:24:49Z  interrupt W2356 minted    -         "Add the same --touches gate-repair paragraph to skills/nemik/SKILL.md so tests/test_skill.py renders it"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2215
+2026-11-19T20:50:48Z  interrupt W2357 minted    -         "Retro handoff shape: today's historic violators in a committed shrink-only baseline read as Info, any new violation stays VIOLATES"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=inbox/2026-11-19-github-00-retro-handoff-shape-flags-history.md
+2026-11-19T20:50:50Z  interrupt W2358 minted    -         "Name the standard a commit uses to say it closes a reviewer finding or a card, as git trailers in the commit message"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=inbox/2026-11-19-github-00-closing-signal-standard.md
+2026-11-19T20:50:51Z  interrupt W2359 minted    -         "W2325 fixture: band order kept an applier-unfreezing fix out of the round, the rule read from bands.toml"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=inbox/2026-11-19-github-00-w2325-fixture-frozen-applier.md
+2026-11-19T20:50:52Z  interrupt W2360 minted    -         "Every card estimates its delivery cost and its effect on CPU-s and attempts per landing, and velocity comes from that estimate, not a tag"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=inbox/2026-11-19-github-00-w2325-velocity-from-cost-estimates.md
+2026-11-19T20:50:53Z  interrupt W2361 minted    -         "A rosetta of typed signals: every signal nemik's shapes use mapped to prior art and standards and back, generated from the shapes, held by test"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=inbox/2026-11-19-github-00-rosetta-of-typed-signals.md
+2026-11-19T20:51:52Z  status W2357 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-19T22:19:45Z  status W2357 working>blocked writer    "working -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-19T22:22:31Z  interrupt W2362 minted    -         "Format-only: check.py and cachestore.py take the edit hook's formatter output (PEP 758 except) as their own commit, before W2357"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2357
+2026-11-19T22:22:32Z  interrupt W2363 minted    -         "Baseline the handoff-slots and trigger-and-root retro shapes too, each cut by the retro's own timestamp against its rule's knowable date"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2357
+2026-11-19T22:22:33Z  interrupt W2364 minted    -         "Ask mtools: the edit hook's formatter forces PEP 758 except syntax into any touched file, which Codon cannot parse"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2357
+2026-11-19T22:22:51Z  status W2362 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-19T22:29:07Z  status W2364 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-19T23:00:35Z  status W2362 working>blocked writer    "working -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-19T23:19:03Z  status W2358 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-19T23:22:45Z  status W2362 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-19T23:22:46Z  status W2357 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-19T23:23:57Z  status W2358 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-19T23:43:53Z  interrupt W2365 minted    -         "Gate parity: the pre-submit target set runs tools/rebaselines_gate.py, so a ratchet birth or rise without a warranted rebaselines.json entry shows before submit, not first at the commit gate"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W2357
+2026-11-19T23:48:00Z  status W2357 working>blocked writer    "working -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-19T23:48:02Z  status W2362 working>blocked writer    "working -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-19T23:48:36Z  status W2365 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-19T23:50:57Z  status W2357 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-19T23:50:58Z  status W2362 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-19T23:50:59Z  status W2365 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-19T23:51:11Z  status W2345 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

@@ -91,7 +91,7 @@ def _both(g: Graph) -> tuple[Rows, Rows]:
     sh = shapes()
     inc = sorted(findings(KEY, g, sh), key=str)
     full = sorted(
-        ((f, s, m) for f, rows in shacl_results(g, sh).items() for s, m in rows),
+        ((f, s, m) for f, rows in shacl_results(g, sh).items() for s, m, _ in rows),
         key=str,
     )
     return list(inc), full

@@ -112,6 +112,7 @@ NEMIK_PY = [
     "src/nemik/replica.py",
     "src/nemik/replica_cli.py",
     "src/nemik/residue.py",
+    "src/nemik/retrobaseline.py",
     "src/nemik/retroingest.py",
     "src/nemik/rolling.py",
     "src/nemik/rolls.py",

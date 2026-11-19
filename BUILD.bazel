@@ -91,6 +91,8 @@ TARGETS = [(src, "") for src in glob(["tests/test_*.py"]) if src != "tests/test_
             + (["tools/hook_facts.py", "tools/nemik_src.py"] if src == "tests/test_hook_facts.py" else [])
             # nemik:W2344: the gate's facts writer is run by its test in a throwaway repository, its output parsed by the judgments' own parser, and the gate script is read to pin the call
             + (["tools/gate_facts.sh", "tools/gate_staged.sh", "tools/hook_facts.py", "tools/nemik_src.py"] if src == "tests/test_gate_facts.py" else [])
+            # nemik:W2357: the retro baseline's test reads the ratchet declaration and the declared rises
+            + (["ratchets.json", "rebaselines.json"] if src == "tests/test_retro_baseline.py" else [])
             # nemik:W1994: the ratchet atomizer's plan is imported by name from tools/
             + (["tools/ratchet_atomizer.py"] if src == "tests/test_ratchet_atomizer.py" else [])
             # nemik:W1411: the codon closure map is imported by name from tools/

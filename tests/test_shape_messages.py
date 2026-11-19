@@ -27,7 +27,7 @@ def enables_messages(root: Path, targets: list[str]) -> list[str]:
     """
     cards = [make_card("W1", "ready", [], targets)]
     g = write_queue(root / "alpha.json", "alpha", cards)
-    found = [m for rows in shacl_results(g, shapes()).values() for _, m in rows]
+    found = [m for rows in shacl_results(g, shapes()).values() for _, m, _ in rows]
     return sorted(m for m in found if m.startswith("enables names"))
 
 
@@ -45,5 +45,5 @@ def test_an_enables_that_resolves_is_not_reported(tmp_path: Path) -> None:
     """A card that enables a card of its own queue draws no enables result."""
     cards = [make_card("W1", "ready", [], ["W2"]), make_card("W2", "ready", [], [])]
     g = write_queue(tmp_path / "alpha.json", "alpha", cards)
-    found = [m for rows in shacl_results(g, shapes()).values() for _, m in rows]
+    found = [m for rows in shacl_results(g, shapes()).values() for _, m, _ in rows]
     assert not [m for m in found if m.startswith("enables names")]

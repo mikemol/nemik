@@ -6,6 +6,13 @@
    "new": 971,
    "reason": "birth of the codon wall incidence ratchet (nemik W2077). The operator's record (host line 151496) rules only that the ratchet be CREATED; 971 is the count this tool measured at birth (971 (module, wall) pairs over 64 modules on base e739b707, each a wall the pinned Codon refuses that a module reaches through its import closure), not a number the operator chose",
    "warrant": "695f3e0a-d36f-4080-9c67-7548978cd99e:151496"
+  },
+  {
+   "ratchet": "src/nemik/data/retro-handoff-baseline.json",
+   "old": 0,
+   "new": 296,
+   "reason": "birth of the retro handoff baseline (nemik W2357): the historic retros whose handoff breaks the self-probe rule (nemik:RetroHandoffProbeShape), which read as Info because retros are write-once. The host ruled the shrink-only baseline (inbox/2026-11-19-github-00-retro-handoff-shape-flags-history.md) and the operator's record (nemik line 401288) rules that it be CREATED at 296; 296 is the count tools/retro_handoff_baseline.py --seed measured over the live fleet, not a number the operator chose",
+   "warrant": "ca6f3699-66ac-4ffa-a3ca-6ececbab791f:401288"
   }
  ]
 }

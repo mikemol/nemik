@@ -70,7 +70,7 @@ def test_incremental_equals_full_after_an_edit(edit: Callable[[Graph], None]) ->
     edit(g)
     inc = sorted(findings(key, g, sh))
     full = sorted(
-        (f, s, m) for f, rows in shacl_results(g, sh).items() for s, m in rows
+        (f, s, m) for f, rows in shacl_results(g, sh).items() for s, m, _ in rows
     )
     assert inc == full
 
@@ -83,6 +83,6 @@ def test_edits_in_sequence_stay_equal() -> None:
         edit(g)
         inc = sorted(findings("test-sequence", g, sh))
         full = sorted(
-            (f, s, m) for f, rows in shacl_results(g, sh).items() for s, m in rows
+            (f, s, m) for f, rows in shacl_results(g, sh).items() for s, m, _ in rows
         )
         assert inc == full, edit.__name__

@@ -86,7 +86,7 @@ def test_a_card_hub_keeps_the_types_of_the_cards_it_enables() -> None:
     g.add((kid, OSLC_CM.state, NEMIK.Done))
     inc = sorted(findings("test-hub-card", g, sh))
     full = sorted(
-        (f, s, m) for f, rows in shacl_results(g, sh).items() for s, m in rows
+        (f, s, m) for f, rows in shacl_results(g, sh).items() for s, m, _ in rows
     )
     assert inc == full
     assert not any(m.startswith("enables names") for _, _, m in inc)
@@ -106,7 +106,7 @@ def test_a_foreign_type_named_workstream_does_not_restrict_a_card_hub() -> None:
     g.add((kid, OSLC_CM.state, NEMIK.Done))
     inc = sorted(findings("test-hub-foreign", g, sh))
     full = sorted(
-        (f, s, m) for f, rows in shacl_results(g, sh).items() for s, m in rows
+        (f, s, m) for f, rows in shacl_results(g, sh).items() for s, m, _ in rows
     )
     assert inc == full
     assert not any(m.startswith("enables names") for _, _, m in inc)

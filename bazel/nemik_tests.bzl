@@ -372,6 +372,7 @@ TESTS_PY = [
     "tests/test_reset_gauge.py",
     "tests/test_residue.py",
     "tests/test_retired_series.py",
+    "tests/test_retro_baseline.py",
     "tests/test_retro_behind.py",
     "tests/test_retro_g0_g3.py",
     "tests/test_retro_g1.py",

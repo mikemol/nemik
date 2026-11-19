@@ -52,7 +52,7 @@ COPY .githooks ./.githooks
 # nemik:W522: test_ruff_ratchet reads the house ruff config and the baseline it holds the tree to.
 COPY ruff-house.toml ruff-baseline.json ./
 COPY mypy-house.ini mypy-baseline.json codon-baseline.json ./
-COPY codon-walls.json codon-wall-table.json ratchets.json ./
+COPY codon-walls.json codon-wall-table.json ratchets.json rebaselines.json ./
 COPY stubs ./stubs
 COPY BUILD.bazel Containerfile ./
 # nemik:W703: test_containerfile holds the workflow's gated-tree branch to the Containerfile's stages.

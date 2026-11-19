@@ -65,7 +65,7 @@ def test_a_card_with_an_unknown_field_draws_the_warning_naming_it(
     found = {
         str(focus): m
         for focus, rows in shacl_results(g, shapes()).items()
-        for _, m in rows
+        for _, m, _ in rows
         if m.startswith(NAMED)
     }
     assert list(found) == ["urn:nemik:alpha/W1"]

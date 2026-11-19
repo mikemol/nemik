@@ -587,7 +587,14 @@ nemik:RetroHandoffShape a sh:NodeShape ;
                     || NOT EXISTS { $this <https://github.com/mikemol/nemik/ns#handoffChannel> ?c . FILTER(STRLEN(STR(?c)) > 0) }
                     || NOT EXISTS { $this <https://github.com/mikemol/nemik/ns#handoffOperator> ?o . FILTER(STR(?o) IN ("self", "other")) }
                 )
-            }""" ] ;
+            }""" ] .
+
+# The self-probe half of G8 is its own shape (nemik:W2357), so a result can be told apart by its
+# sh:sourceShape: nemik.retrobaseline reads the historic violators of THIS shape as Info by that
+# identity, never by the message text, and no other shape's result on the same handoff is touched.
+nemik:RetroHandoffProbeShape a sh:NodeShape ;
+    sh:targetClass nemik:RetroHandoff ;
+    sh:severity sh:Violation ;
     sh:sparql [
         sh:message "the handoff goes to another operator with no self probe recorded executed-and-failed: try it yourself first, and record the result" ;
         sh:select """

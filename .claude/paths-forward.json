@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 2351,
+  "counter": 2365,
   "waypoints": [
     {
       "symbol": "W1",
@@ -55115,22 +55115,26 @@
     {
       "symbol": "W2215",
       "title": "Document gate-repair tagging in bands.toml and the nemik skill text",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W2213"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W2355",
+        "W2356"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "Add a paragraph to bands.toml's tag section and skills/nemik/SKILL.md naming --touches gate-repair: what it admits (a repair of nemik's own check or gate; incident work a peer admits) and that a false tag is a defect; tests/test_skill.py renders the skill text.",
       "evidence": "2026-11-16T11:38:52Z: 2026-11-16 vector set by me as the agent (github-cb's rule: an unscored card is the defect W2211 made visible): reach local to this repo (R:L), no egress, an integrity impact of low (a rule that is undocumented is applied wrongly, I:L), no availability impact, no precondition, scope unchanged, fix known, witness yes (tests/test_skill.py renders the skill text): WV:1/R:L/E:N/C:N/I:L/A:N/X:N/S:U/F:K/W:Y.",
       "issued_at": "2026-11-16T03:10:10Z",
       "minted_during": "interrupt",
       "caused_by": "W2213",
-      "last_worked": "2026-11-17T22:02:49Z",
+      "last_worked": "2026-11-19T12:24:49Z",
       "ticks_blocked": 0,
       "vector": "WV:1/R:L/E:N/C:N/I:L/A:N/X:N/S:U/F:K/W:Y",
-      "vector_source": "agent"
+      "vector_source": "agent",
+      "completed": null
     },
     {
       "symbol": "W2216",
@@ -58326,22 +58330,26 @@
     {
       "symbol": "W2340",
       "title": "side_by_side's cell fields are typed with a recursive Json alias, not dict[str, object], derived from the schema",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W1325"
       ],
       "touches": [
         "evidence"
       ],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W2353",
+        "W2354"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "After W2018 lands: replace object in tools/side_by_side.py (the cell's field values, _dict, _list, _loads) with a recursive alias, type Json = str | int | float | bool | list[Json] | dict[str, Json], with Absent kept a separate type and the null case decided (a JSON null is neither of those, so the alias needs None or the schema must say the fields are never null). The house rule asks the boundary type to be derived from its consumers, and the only consumer so far is a table printer and a by-value comparison. Ask mtools what mikemol-surfaces fields hold (declared a bool? the other three lists of strings?) so a precise cell type can replace Json; the schema-1 document states the names and not the types",
       "evidence": "2026-11-19T07:50:44Z: 2026-11-19: github-00 PASS-SUBMIT on refs/review/W2018-v2 with one non-blocking card: dict[str, object] puts object at a boundary, which the house rule asks to derive from consumers. A recursive JSON alias types it without Any or object, Absent staying a separate type.",
       "issued_at": "2026-11-19T07:50:35Z",
       "minted_during": "interrupt",
       "caused_by": "github-00",
-      "last_worked": "2026-11-19T07:50:44Z",
-      "ticks_blocked": 0
+      "last_worked": "2026-11-19T12:02:03Z",
+      "ticks_blocked": 0,
+      "completed": null
     },
     {
       "symbol": "W2341",
@@ -58428,11 +58436,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": null,
-      "evidence": "2026-11-19T08:53:18Z: 2026-11-19: built refs/review/W2344-v1 = b6b543e3efd02988e8b4e7c02791418d46e66493 on the W2343 ref a6191aaf, 7 files +208: tools/gate_facts.sh, tests/test_gate_facts.py (5 cases), tools/gate_staged.sh (+4), .claude/generated.json, .gitignore, BUILD.bazel, bazel/nemik_tests.bzl. 9 of 9 pass under bazel. Mutations: reading git ls-files instead of the tree fails two tests (my first test did not catch it, so I tightened it), stamping HEAD instead of the tree fails the stamp test; reverted. Every file written through Write or Edit. Sent to github-00; not submitted (W2343 is still in the gate). | 2026-11-19T09:46:36Z: 2026-11-19 LANDED as b39fbc50 (PASS-SUBMIT from github-00 on refs/review/W2344-v2 = 32b79de7, scoped cold pass 16 of 21 mutants killed; git log -1 subject read back as this card's and git ls-remote origin refs/heads/main = b39fbc50f7249e9e06dd359d7f2fa821ab6beaa4). The gate ran 554 targets, 551 fresh, green on the staged tree; the gate that ran it was the OLD gate_staged.sh (the hook runs the real checkout's), so the new facts call first runs on the NEXT stack. Eight paths: .gitignore, BUILD.bazel, bazel/nemik_tests.bzl, tests/test_gate_facts.py, tests/test_hook_facts.py, tools/gate_facts.sh, tools/gate_staged.sh, tools/hook_facts.py. landing_kind ref: done, not landed. WHAT LANDED DIFFERS FROM THIS CARD'S ORIGINAL TEXT (github-00's N3), each with its reason: (1) the card said git ls-files of the staged tree; what lands is git ls-tree of the staged TREE OBJECT, because ls-files reads the index and a file staged after the tree was taken would leak into the facts (my own v1 mutant showed my first test missed it). (2) the card said plus pyproject.toml's presence; what lands has no presence fact: tracked.txt holds only the paths under src/nemik, tests and vendor/wheels, and the wheel check reads the pyproject.toml TEXT of the staged tree as a declared input of its own target in W2345. (3) the card said changed.txt is git diff --name-only HEAD TREE and each file's first line is tree <sha>; what lands is git diff-tree on the two shas, and changed.txt stamps the tree AND the head (R1), because it is a function of both. (4) the card said register the files in .claude/generated.json with a freshness check; they are NOT registered (R4): nothing committed is generated, and freshness holds because gate_staged.sh runs git clean -fdxq under its flock before the call, with gate_facts.sh --check for a hand run. (5) the manifest named generated.json and not the tests, BUILD.bazel, the lists or hook_facts.py; it now names the eight landed paths. Carried: N1 and N4 are W2351 and W2350, which land before W2345; N2 is on W2345; R5 and R6 are W2347 and W2348.",
+      "evidence": "2026-11-19T08:53:18Z: 2026-11-19: built refs/review/W2344-v1 = b6b543e3efd02988e8b4e7c02791418d46e66493 on the W2343 ref a6191aaf, 7 files +208: tools/gate_facts.sh, tests/test_gate_facts.py (5 cases), tools/gate_staged.sh (+4), .claude/generated.json, .gitignore, BUILD.bazel, bazel/nemik_tests.bzl. 9 of 9 pass under bazel. Mutations: reading git ls-files instead of the tree fails two tests (my first test did not catch it, so I tightened it), stamping HEAD instead of the tree fails the stamp test; reverted. Every file written through Write or Edit. Sent to github-00; not submitted (W2343 is still in the gate). | 2026-11-19T09:46:36Z: 2026-11-19 LANDED as b39fbc50 (PASS-SUBMIT from github-00 on refs/review/W2344-v2 = 32b79de7, scoped cold pass 16 of 21 mutants killed; git log -1 subject read back as this card's and git ls-remote origin refs/heads/main = b39fbc50f7249e9e06dd359d7f2fa821ab6beaa4). The gate ran 554 targets, 551 fresh, green on the staged tree; the gate that ran it was the OLD gate_staged.sh (the hook runs the real checkout's), so the new facts call first runs on the NEXT stack. Eight paths: .gitignore, BUILD.bazel, bazel/nemik_tests.bzl, tests/test_gate_facts.py, tests/test_hook_facts.py, tools/gate_facts.sh, tools/gate_staged.sh, tools/hook_facts.py. landing_kind ref: done, not landed. WHAT LANDED DIFFERS FROM THIS CARD'S ORIGINAL TEXT (github-00's N3), each with its reason: (1) the card said git ls-files of the staged tree; what lands is git ls-tree of the staged TREE OBJECT, because ls-files reads the index and a file staged after the tree was taken would leak into the facts (my own v1 mutant showed my first test missed it). (2) the card said plus pyproject.toml's presence; what lands has no presence fact: tracked.txt holds only the paths under src/nemik, tests and vendor/wheels, and the wheel check reads the pyproject.toml TEXT of the staged tree as a declared input of its own target in W2345. (3) the card said changed.txt is git diff --name-only HEAD TREE and each file's first line is tree <sha>; what lands is git diff-tree on the two shas, and changed.txt stamps the tree AND the head (R1), because it is a function of both. (4) the card said register the files in .claude/generated.json with a freshness check; they are NOT registered (R4): nothing committed is generated, and freshness holds because gate_staged.sh runs git clean -fdxq under its flock before the call, with gate_facts.sh --check for a hand run. (5) the manifest named generated.json and not the tests, BUILD.bazel, the lists or hook_facts.py; it now names the eight landed paths. Carried: N1 and N4 are W2351 and W2350, which land before W2345; N2 is on W2345; R5 and R6 are W2347 and W2348. | 2026-11-19T10:03:12Z: 2026-11-19 FIRST LIVE WITNESS of this card's call under the real gate, read back from the gate's fixed worktree after the gate run of W2350 (landed 4d05db4e; the gate that ran it carried W2344's call): .gate-facts/changed.txt held, line 1 'facts changed', line 2 'tree c4a88b5cf150419d6e904dd77e839cb5c8e1d6e4' (equal to git show -s --format=%T 4d05db4e, read back), line 3 'head b39fbc50f7249e9e06dd359d7f2fa821ab6beaa4' (HEAD at gate time), then the six paths the commit changed (the two queue files carried by the stack, tests/test_gate_facts.py, tests/test_hook_facts.py, tools/gate_facts.sh, tools/hook_facts.py); .gate-facts/tracked.txt began 'facts tracked', the same tree line, then src/nemik/__init__.py. The kind lines are W2350's, which that stack landed.",
       "issued_at": "2026-11-19T08:34:26Z",
       "minted_during": "interrupt",
       "caused_by": "W2110",
-      "last_worked": "2026-11-19T09:46:36Z",
+      "last_worked": "2026-11-19T10:03:12Z",
       "ticks_blocked": 0,
       "manifest": [
         ".gitignore",
@@ -58457,23 +58465,23 @@
       ],
       "touches": [],
       "blocked_on": [
-        "W2350",
-        "W2351"
+        "nemik:W2365"
       ],
       "blocked_kind": "agent",
-      "next_bounded_step": "BLOCKED on W2350 and W2351 (the facts format gains its kind line first; W2345's fixtures take it). Built meanwhile in the scratch worktree .nemik-w2345-wt on refs/review/W2344-v2: gate_live.py helper (under bazel an unset NEMIK_GATE_TREE or NEMIK_GATE_HEAD, a missing facts file or a stale stamp FAILS saying to run under the gate; under plain pytest, as the image runs it, it skips with its reason), three live tests, test_gate_live.py (the refusals), test_gate_checks_suite.py (manual tag, env_inherit once, only //:gate_checks holds them, named facts files never a glob, the gate call as a whole non-comment line first), BUILD.bazel (LIVE table, manual tag, env_inherit = LIVE.get(src, []), gate_checks suite), gate_staged.sh runs the suite first with NEMIK_GATE_TREE and NEMIK_GATE_HEAD set for that call (HEAD on the working-card target too: github-00's N2). PROVE in a normal checkout with no .gate-facts: bazel build //... and bazel test //:pre_gate succeed, bazel test //:gate_checks fails with a clear missing-input error; then the same suite green under the gate's own call, with mutants. Re-cut onto W2350's landed main and submit after github-00's PASS",
-      "evidence": "2026-11-19T09:13:21Z: 2026-11-19 design sent to github-00 with W2344 v2 (refs/review/W2344-v2 = 32b79de7), R7: the facts are DECLARED INPUTS (glob of .gate-facts/*.txt, allow_empty) of the three targets, tagged manual, in a gate-only suite //:gate_checks kept out of //:pre_gate and //:precommit; env_inherit NEMIK_GATE_TREE on those three only (NEMIK_GATE_HEAD on the working-card one), each refusing an unset or malformed value with a message saying to run under the gate; gate_staged.sh runs the suite first. Rejected: the facts through the env channel (path plus digest), because the linux-sandbox cannot read an undeclared path, so the target would need no-sandbox. CONSEQUENCE awaiting github-00's ruling: the stamp holds the tree sha and NEMIK_GATE_TREE is in the key, so these three targets hit the cache only when the same tree is gated again, never across trees; every other target keeps its hits because env_inherit is per target. Alternative if wanted (card it as residue then): stamp-free bodies for the judgment tests plus a separate freshness guard, which changes the W2343 stamp contract. Not built until the design is approved. | 2026-11-19T09:15:15Z: 2026-11-19 github-00 ruled on the design sent with W2344 v2: keep the stamped cache design (per-tree misses on three small pure targets, every other target keeps its key); stamp-free alternative carded as W2349 residue; the glob is refused as a directory input, name the two files; the manual tag means a missing named source file errors only when those targets are analyzed, i.e. only outside the gate | 2026-11-19T09:22:19Z: 2026-11-19 github-00's cold pass of W2344-v2 PASSED; carried here: N2 (NEMIK_GATE_HEAD on the working-card target, on the card now); N1 and N4 atomized as W2351 and W2350, which land first.",
+      "next_bounded_step": "After W2365 (tools/presubmit.sh) lands: re-scope per github-00 2026-11-19: the pre-submit runs in the gate's worktree where .gate-facts exists, so a live check run outside the gate cannot judge (exit 7), a refusal, not a case to design for. Don't build v3 for the old case meanwhile.",
+      "evidence": "2026-11-19T09:13:21Z: 2026-11-19 design sent to github-00 with W2344 v2 (refs/review/W2344-v2 = 32b79de7), R7: the facts are DECLARED INPUTS (glob of .gate-facts/*.txt, allow_empty) of the three targets, tagged manual, in a gate-only suite //:gate_checks kept out of //:pre_gate and //:precommit; env_inherit NEMIK_GATE_TREE on those three only (NEMIK_GATE_HEAD on the working-card one), each refusing an unset or malformed value with a message saying to run under the gate; gate_staged.sh runs the suite first. Rejected: the facts through the env channel (path plus digest), because the linux-sandbox cannot read an undeclared path, so the target would need no-sandbox. CONSEQUENCE awaiting github-00's ruling: the stamp holds the tree sha and NEMIK_GATE_TREE is in the key, so these three targets hit the cache only when the same tree is gated again, never across trees; every other target keeps its hits because env_inherit is per target. Alternative if wanted (card it as residue then): stamp-free bodies for the judgment tests plus a separate freshness guard, which changes the W2343 stamp contract. Not built until the design is approved. | 2026-11-19T09:15:15Z: 2026-11-19 github-00 ruled on the design sent with W2344 v2: keep the stamped cache design (per-tree misses on three small pure targets, every other target keeps its key); stamp-free alternative carded as W2349 residue; the glob is refused as a directory input, name the two files; the manual tag means a missing named source file errors only when those targets are analyzed, i.e. only outside the gate | 2026-11-19T09:22:19Z: 2026-11-19 github-00's cold pass of W2344-v2 PASSED; carried here: N2 (NEMIK_GATE_HEAD on the working-card target, on the card now); N1 and N4 atomized as W2351 and W2350, which land first. | 2026-11-19T10:27:30Z: 2026-11-19 built refs/review/W2345-v1 = e2f1f42850b6dde39f52312e62ffee05bde393f3 on main 4d05db4e, 10 files +467 -2. 12 of 12 pass under bazel on the reverted tree. Normal checkout with no .gate-facts: bazel build //... succeeded (565 targets), bazel test //:pre_gate 10 of 10, bazel test //:gate_checks FAILED TO BUILD on missing input '//:.gate-facts/changed.txt'. Gate-style run 3 of 3 on tree c83be850. Mutants R0 to R8 all bite and are reverted (stale tree, no env, no HEAD, env_inherit dropped, unlisted module, untracked wheel, manual tag removed, gate call deleted). Honest limit: the gate that lands this runs the OLD gate_staged.sh, so the suite first runs in the next stack's gate. Sent to github-00 for review; not submitted. | 2026-11-19T10:31:53Z: 2026-11-19 PRE-LANDING PROBE of the gate call through the real admission wrapper: a scratch script (session scratchpad, not in the repo) replays the gate's own lines, the bazel() function over mikemol-bazel-admit and the per-call prefix NEMIK_GATE_TREE=... NEMIK_GATE_HEAD=... bazel test //:gate_checks --noshow_progress --nocache_test_results, over the scratch worktree's facts for tree c83be850 against HEAD 4d05db4e: Executed 3 out of 3 tests, 3 pass, exit 0. It shows the variables reach the targets through the function and the wrapper; the first real gate run (the next stack) is still to be cited. github-00 warm review PASS on v1; the cold review of gate_staged.sh is running. | 2026-11-19T12:06:47Z: 2026-11-19 github-00's cold review of v1 (e2f1f428) was REVISE: 12 pass, 4 fail, 3 low, 9 of 17 text mutants killed. R1 a skip could pass for a pass (the guard tests caught pytest.fail only): v2 has NO skip anywhere, the live files are renamed tests/gate_named_inputs.py, gate_wheels_tracked.py and gate_working_card.py (not test_*.py, so the image's plain pytest never collects them and no skip is needed), the guard tests catch both outcomes and assert the kind, and an AST pin forbids skip, skipif, importorskip, xfail and resolve in them. R2 the refusal was not pinned: the four-line block (call, echo, exit 1, fi) is pinned whole. R3 the pins read comments and substrings: they now read code with whole-line and trailing comments removed, and the gate_checks and precommit suite blocks are pinned by exact text. Lows: .gate-facts names are counted in code only, ROOT is no longer resolved through the sandbox symlink (pinned), W2352 carries the gate-cost telemetry gap, the commit body carries the evidence and trailers. Mutants M1 to M7 each bite (skip in the helper, exit 1 turned into a no-op, suite tag commented out, a member filtered out of the suite, a fact file hidden in a comment, a resolved ROOT, a neutered judge); 12 of 12 pass on the reverted v2 tree; normal-checkout proofs re-run on v2 (build //... succeeds, //:pre_gate 10 of 10, //:gate_checks fails to build on the missing input, and with the manual tag removed //... fails on all three). | 2026-11-19T21:19:38Z: 2026-11-19 drill leg A1 on v2 (a deliberately broken gate_wheels_tracked.py) was refused at the gate's first test call, as designed. Leg A2 on the fixed v2 tree ran the whole gate: live suite 3 of 3, fast pass 3 of 3, then //:precommit 555 of 556, refused on //:test_containerfile (above). The full gate found a defect the 12-target set did not cover. | 2026-11-19T23:51:11Z: 2026-11-19 github-00: revisit W2345 once presubmit.sh lands; absent-outside-the-gate becomes a refusal (exit 7).",
       "issued_at": "2026-11-19T08:34:26Z",
       "minted_during": "interrupt",
       "caused_by": "W2110",
-      "last_worked": "2026-11-19T09:22:19Z",
+      "last_worked": "2026-11-19T23:51:11Z",
       "ticks_blocked": 0,
       "manifest": [
         "BUILD.bazel",
+        "bazel/BUILD.bazel",
         "bazel/nemik_tests.bzl",
         "tests/gate_live.py",
-        "tests/test_gate_live.py",
         "tests/test_gate_checks_suite.py",
+        "tests/test_gate_live.py",
         "tests/test_named_inputs_live.py",
         "tests/test_wheels_tracked_live.py",
         "tests/test_working_card_live.py",
@@ -58493,16 +58501,24 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "After W2345 is in the gate: remove the hook's three shell checks (named-inputs, working-card, wheels-tracked) and the tests that exist only to run them (test_precommit_queue_check, test_precommit_nemik_src, their fixture hook), keeping bazel on PATH as the one shell line and the snapshot behaviour; the cold review of the gate-hook text comes before this lands",
-      "evidence": "",
+      "evidence": "2026-11-19T10:34:31Z: 2026-11-19 SCOPING READ (before building; waiting on W2345's cold review and recovery drill). (1) The hook's three shell blocks are lines 37 to 96 of .githooks/pre-commit; what stays is the bazel-on-PATH refusal, the self-snapshot, the real_root lookup (with its rev-parse failure message) and the final exec of gate_staged.sh. (2) tests/test_precommit_queue_check.py and tests/test_precommit_nemik_src.py exist for the retired blocks, with the old-hook fixture under tests/fixtures/precommit; their coverage moves: the six working-card cases are already in test_hook_facts except the SPLIT-text case, which must be added there before the file goes; the stale-list cases are test_hook_facts's named-inputs cases and test_gate_facts; two retained hook behaviors in test_precommit_nemik_src (the failing rev-parse refusal, and the isolated plain-snapshot run reaching the gate) need a new tests/test_precommit_hook.py. (3) //:pre_gate lists :test_precommit_nemik_src and tests/test_pre_gate_suite.py lists it in MEMBERS: both change, and BUILD.bazel's per-test data clauses and bazel/nemik_tests.bzl change with the deleted files. (4) FOUND: src/nemik/data/workflows.toml line 23 declares the working-card rule enforced_by the hook with text 'none is marked working', and tests/test_workflows.py asserts the hook file contains that text. After this card the enforcer is tools/hook_facts.py (NO_WORKING_CARD, which contains the phrase) run by //:test_working_card_live in the gate, so the entry must point there; the test accepts any file path for a hook entry, but writing a comment into the hook to keep the substring would be a false enforcement claim, so it is not an option. workflows.toml is package data under src/nemik, so this card ships in the image: landing_kind src, --deploys true, status landed and a deploy witness, not done. (5) Sequence: after W2345 lands and the first real gate run of //:gate_checks is green; this card's own gate is that run.",
       "issued_at": "2026-11-19T08:34:26Z",
       "minted_during": "interrupt",
       "caused_by": "W2110",
-      "last_worked": "2026-11-19T08:34:51Z",
+      "last_worked": "2026-11-19T10:34:31Z",
       "ticks_blocked": 0,
       "manifest": [
         ".githooks/pre-commit",
+        "BUILD.bazel",
+        "bazel/nemik_tests.bzl",
+        "src/nemik/data/workflows.toml",
         "tests/test_precommit_queue_check.py",
-        "tests/test_precommit_nemik_src.py"
+        "tests/test_precommit_nemik_src.py",
+        "tests/test_precommit_hook.py",
+        "tests/test_pre_gate_suite.py",
+        "tests/test_hook_facts.py",
+        "tests/fixtures/precommit/BUILD.bazel",
+        "tests/fixtures/precommit/pre-commit-before-w2053"
       ],
       "size_class": "medium"
     },
@@ -58581,19 +58597,19 @@
     {
       "symbol": "W2350",
       "title": "Each facts file opens with its own kind line and each parser refuses the other file's text, so a wrongly wired file is refused",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W2345"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "SUBMITTED .claude/stack-W2350-v1.json (refs/review/W2350-v1 = f9f6eaf5, one commit for W2350 and W2351) after github-00's PASS-SUBMIT; on landing mark W2350 and W2351 done, read back .gate-facts in the gate worktree as the first live witness of W2344's call and cite its first lines on W2344, then unblock W2345",
-      "evidence": "2026-11-19T09:22:12Z: 2026-11-19 minted from github-00's scoped cold pass of W2344-v2 (PASS-SUBMIT, 16 of 21 mutants killed, 5 survivors explained), note N4; atomized out of W2345 because the format change would make it large and W2345's fixtures depend on the new header, so W2350 lands first. | 2026-11-19T09:48:48Z: 2026-11-19 built refs/review/W2350-v1 = f9f6eaf5 on main b39fbc50, 4 files +146 -46, 9 of 9 pass under bazel, three mutants bite (kind check dropped from parse fails 8; the facts changed line dropped fails 4; the gate call commented out fails exactly the structural pin); github-00 PASS-SUBMIT, no cold pass needed (gate_staged.sh unchanged, gate_facts.sh changes only its output format).",
+      "next_bounded_step": null,
+      "evidence": "2026-11-19T09:22:12Z: 2026-11-19 minted from github-00's scoped cold pass of W2344-v2 (PASS-SUBMIT, 16 of 21 mutants killed, 5 survivors explained), note N4; atomized out of W2345 because the format change would make it large and W2345's fixtures depend on the new header, so W2350 lands first. | 2026-11-19T09:48:48Z: 2026-11-19 built refs/review/W2350-v1 = f9f6eaf5 on main b39fbc50, 4 files +146 -46, 9 of 9 pass under bazel, three mutants bite (kind check dropped from parse fails 8; the facts changed line dropped fails 4; the gate call commented out fails exactly the structural pin); github-00 PASS-SUBMIT, no cold pass needed (gate_staged.sh unchanged, gate_facts.sh changes only its output format). | 2026-11-19T10:03:09Z: 2026-11-19 LANDED as 4d05db4e, one commit for W2350 and W2351 (PASS-SUBMIT from github-00 on refs/review/W2350-v1 = f9f6eaf5, no cold pass needed: gate_staged.sh unchanged, gate_facts.sh changes only its output format; git log -1 subject read back as this card's and git ls-remote origin refs/heads/main = 4d05db4ee3ac37605aa3996942bbc2e46684426a). Gate green, 554 targets, 8 fresh. Four paths: tools/hook_facts.py, tools/gate_facts.sh, tests/test_hook_facts.py, tests/test_gate_facts.py. landing_kind ref: done, not landed. Each facts file now opens with its own kind line and each parser refuses the other file's text; the planted red and the three mutants are on the commit body. W2351 (the whole-line pin) landed in the same commit.",
       "issued_at": "2026-11-19T09:22:01Z",
       "minted_during": "interrupt",
       "caused_by": "W2345",
-      "last_worked": "2026-11-19T09:48:48Z",
+      "last_worked": "2026-11-19T10:03:09Z",
       "ticks_blocked": 0,
       "manifest": [
         "tools/hook_facts.py",
@@ -58602,29 +58618,333 @@
         "tests/test_gate_facts.py"
       ],
       "size_class": "small",
-      "completed": null
+      "completed": "20261119T100309Z"
     },
     {
       "symbol": "W2351",
       "title": "The W2344 structural pin of the gate's facts call matches a whole non-comment line, so a commented-out call fails it",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W2345"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "In the same stack as W2350, after it: the structural test of tools/gate_staged.sh's facts call matches the call as a WHOLE non-comment line (the code lines, stripped, equal the call), so a commented-out call fails it; mutation: comment the call out and the test fails (github-00's N1 on the W2344 cold pass, where the substring match stayed green on a commented-out call)",
-      "evidence": "2026-11-19T09:22:13Z: 2026-11-19 minted from github-00's scoped cold pass of W2344-v2, note N1; the same file as W2350, so one stack of two entries, W2350 first.",
+      "next_bounded_step": null,
+      "evidence": "2026-11-19T09:22:13Z: 2026-11-19 minted from github-00's scoped cold pass of W2344-v2, note N1; the same file as W2350, so one stack of two entries, W2350 first. | 2026-11-19T10:03:10Z: 2026-11-19 LANDED in W2350's commit 4d05db4e (one commit for both cards, github-00 agreed: the two share tests/test_gate_facts.py). The structural pin of gate_staged.sh's facts call now matches a whole non-comment line, once, after the read-tree line and before bazel build //:.venv; the mutant that comments the call out fails exactly that test (1 failed, 7 passed), which the old substring match did not catch.",
       "issued_at": "2026-11-19T09:22:01Z",
       "minted_during": "interrupt",
       "caused_by": "W2345",
-      "last_worked": "2026-11-19T09:22:13Z",
+      "last_worked": "2026-11-19T10:03:10Z",
       "ticks_blocked": 0,
       "manifest": [
         "tests/test_gate_facts.py"
       ],
+      "size_class": "small",
+      "completed": "20261119T100310Z"
+    },
+    {
+      "symbol": "W2352",
+      "title": "The gate's gate_checks run is not in the build events mikemol-gate-targets reads, so its per-target CPU never reaches luthen's gate cost",
+      "status": "ready",
+      "enables": [
+        "W2323"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "After W2345 has landed and run in a real gate: tools/gate_staged.sh writes a build-events file only for the //:precommit call (bep, read by mikemol-gate-targets nemik), so the three gate-only targets' CPU seconds are never sent and W2323's per-target series has no row for them. Give the //:gate_checks call its own --build_event_json_file and send it through the same tool (or merge the two files), best effort, never able to change the verdict, and pin the flag in the gate-call test. Ask mtools whether mikemol-gate-targets takes several files before building",
+      "evidence": "2026-11-19T11:24:50Z: 2026-11-19 minted from github-00's cold review of W2345-v1 (low finding): //:gate_checks CPU is not reported to gate-cost telemetry. It is data for W2323's per-target series (each live target is about 1 s of CPU), so the omission is small, but the series then understates what the gate costs by a fixed three targets.",
+      "issued_at": "2026-11-19T11:24:45Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2345",
+      "last_worked": "2026-11-19T11:36:33Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "tools/gate_staged.sh",
+        "tests/test_gate_checks_suite.py"
+      ],
       "size_class": "small"
+    },
+    {
+      "symbol": "W2353",
+      "title": "Replace object in tools/side_by_side.py's cell fields with a recursive Json alias, Absent kept a separate type, and the null case decided",
+      "status": "ready",
+      "enables": [
+        "W2340"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "type Json = str | int | float | bool | list[Json] | dict[str, Json] in tools/side_by_side.py for the cell's field values, _dict, _list and _loads in place of object; Absent stays its own type; decide the null case (a JSON null is none of those, so either the alias takes None or the schema states the fields are never null: read what mikemol-surfaces' schema-1 document says before choosing); the existing fixture tests stay green and a planted red hands a nested value of the wrong shape in; every Python edit through the hook; mutation run; review ref for github-00",
+      "evidence": "2026-11-19T12:02:10Z: 2026-11-19 atomized from W2340 by the watchdog wake: the alias change and the question to mtools are separate steps with separate owners.",
+      "issued_at": "2026-11-19T12:02:03Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2340",
+      "last_worked": "2026-11-19T12:02:10Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "tools/side_by_side.py",
+        "tests/test_side_by_side.py"
+      ],
+      "size_class": "small"
+    },
+    {
+      "symbol": "W2354",
+      "title": "Ask mtools what mikemol-surfaces' census fields hold, so a precise cell type can replace the Json alias",
+      "status": "ready",
+      "enables": [
+        "W2340"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Send mtools one message naming nemik:W2354: tools/side_by_side.py aligns each repo's schema-1 surfaces census by surface; the schema-1 document states the field names and not their types. Ask what each field of a surface's row holds (is declared a bool, are the other three lists of strings, can any be null) so a precise cell type can replace the recursive Json alias (nemik:W2353). Block this card on mtools' answer, citing their waypoint if they mint one (mtools:W2754 is the reader of surfaces.export.json, which may already answer it)",
+      "evidence": "2026-11-19T12:02:12Z: 2026-11-19 atomized from W2340 by the watchdog wake. Related and already open: mtools:W2754 and luthen-observability:W2751 (W2341 waits on them), which may answer the field types.",
+      "issued_at": "2026-11-19T12:02:03Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2340",
+      "last_worked": "2026-11-19T12:02:12Z",
+      "ticks_blocked": 0,
+      "size_class": "small"
+    },
+    {
+      "symbol": "W2355",
+      "title": "Add a paragraph to bands.toml's tag section naming --touches gate-repair, what it admits and that a false tag is a defect",
+      "status": "ready",
+      "enables": [
+        "W2215"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Read bands.toml's tag section first (find the file: it may live outside src/nemik/data), then add one paragraph naming --touches gate-repair: it admits a repair of nemik's own check or gate and incident work a peer admits, and a false tag is a defect. If the file is package data the card ships in the image (deploys true); if it is a repo-level file it is a ref landing. Decide which before submitting",
+      "evidence": "2026-11-19T12:24:55Z: 2026-11-19 atomized from W2215 by the watchdog wake: the bands.toml paragraph and the SKILL.md paragraph are separate files and separate registries, so separate cards. The manifest names the expected path and must be corrected after the read.",
+      "issued_at": "2026-11-19T12:24:49Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2215",
+      "last_worked": "2026-11-19T12:24:55Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "src/nemik/data/bands.toml"
+      ],
+      "size_class": "small"
+    },
+    {
+      "symbol": "W2356",
+      "title": "Add the same --touches gate-repair paragraph to skills/nemik/SKILL.md so tests/test_skill.py renders it",
+      "status": "ready",
+      "enables": [
+        "W2215"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Add the same --touches gate-repair paragraph to skills/nemik/SKILL.md (what it admits: a repair of nemik's own check or gate, incident work a peer admits; a false tag is a defect), in the section that teaches --touches; run //:test_skill and //:test_workflows (the skill is held against workflows.toml and shapes) and the gate's fast pass; SKILL.md is the fleet-facing skill text, so github-00 reviews it before submit",
+      "evidence": "2026-11-19T12:24:57Z: 2026-11-19 atomized from W2215 by the watchdog wake. skills/nemik/SKILL.md is rendered by tests/test_skill.py and checked against workflows.toml by tests/test_workflows.py, so it is its own stack.",
+      "issued_at": "2026-11-19T12:24:49Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2215",
+      "last_worked": "2026-11-19T12:24:57Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "skills/nemik/SKILL.md",
+        "tests/test_skill.py"
+      ],
+      "size_class": "small"
+    },
+    {
+      "symbol": "W2357",
+      "title": "Retro handoff shape: today's historic violators in a committed shrink-only baseline read as Info, any new violation stays VIOLATES",
+      "status": "working",
+      "enables": [
+        "gcalculus:W445"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": "agent",
+      "next_bounded_step": "On github-00's PASS-SUBMIT of refs/review/W2357-v3 = 22b214bc: resubmit .claude/stack-W2362-W2357.json frozen from .nemik-w2357-wt (re-cut if main moved), verify landing, then send github-00 the G8 field wording",
+      "evidence": "2026-11-19T20:51:52Z: 2026-11-19 claims inbox/2026-11-19-github-00-retro-handoff-shape-flags-history.md (the host's ruling, relayed by github-00). READ: the shape is nemik:RetroHandoffShape's second sparql (shapes.ttl); DEFINED in f1b458a6 (2026-10-19, W755, gate G8), first judging real retros in 171704e7 (2026-11-14, W982, scaffold-form retros carrying a precommit enter the graph via retroingest.in_scope). The field reviewers record: handoff.self_probe equal to the text executed-and-failed when handoff.operator is the text other (retroingest.HANDOFF_FIELDS maps self_probe to nemik:selfProbe). Design sent to github-00: a committed shrink-only baseline keyed by repo and retro id (repo:Rn) in package data, demotion to Info only for this message on a baselined focus, registered in ratchets.json with a pin that rebaselines.json never declares it. | 2026-11-19T22:19:45Z: 2026-11-19 built refs/review/W2357-v1 = 9abedf6c66ec45e6ebac526f6f064de9cc26dbf9 on main 4d05db4e, 19 files +817 -40. //:precommit 555 of 555. Baseline seeded with 296 retros from the live fleet by this tree's code (independently 296 by the installed checker). Four mutants killed. Fleet after: 0 self-probe Violations; gcalculus, paperkit, substrate OK; six repos still VIOLATES only on two other retro shapes (246 handoffs missing slots, 205 retros missing trigger or root, 10 of those written since this morning). | 2026-11-19T22:22:50Z: 2026-11-19 github-00 REVISE on v1 (small): R1 the baseline reader's None default and silent empty list on a bad file, split into a reader of the shipped file and a pure parse that raises; R2 empty-string sentinels in retro_id and _probe, make _probe a predicate and retro_id raise on a non-handoff; R3 the five PEP 758 except rewrites in check.py are formatter output and go in a format-only entry first (W2362). Approved as its own card: the two other retro shapes (W2363), cut by timestamp against each rule's knowable date. | 2026-11-19T23:18:27Z: 2026-11-19 built refs/review/W2357-v2 = 5c882350b9b4e3ccc299f083fc2c30abbd126277 on refs/review/W2362-v1 (8eae9e79), 19 files +899 -34, no except line changes. R1 parse_retro_baseline raises, R2 retro_id raises and is_probe is a predicate, R3 resolved by W2362. //:precommit 555 of 555; six mutants killed. In review at github:W120. | 2026-11-19T23:22:46Z: 2026-11-19 github-00 PASS-SUBMIT on refs/review/W2357-v2 = 5c882350; submitting stacked on W2362 (.claude/stack-W2362-W2357.json), frozen from .nemik-w2357-wt, main unmoved at 4d05db4e. | 2026-11-19T23:41:19Z: 2026-11-19 SUBMIT REFUSED (stack W2362+W2357, b1lnsr6wz): tools/rebaselines_gate.py: 'src/nemik/data/retro-handoff-baseline.json: was born at 296 with no rebaselines entry'; nothing landed, HEAD 4d05db4. mtools' rebaseline counts a birth above 0 as a rise needing the OPERATOR's record; v2's pin (rebaselines.json never names it) contradicted that. The letter's ruling is github-00's; no operator line on it in host 695f3e0a (searched --human baseline|ratchet|handoff). Asked the operator (AskUserQuestion): 'Yes, create it' at ca6f3699 line 401195 uuid b0ac2b3f-3a69-401d-80c1-eb3b8ee85599, but --verify --claim operator refuses it (kind tool_result, not human), so a typed confirmation is asked to serve as the warrant. Pin test rewritten in the wt: rebaselines.json names the file exactly once, old 0 new 296. Manifest corrected (gate's DRIFT: codon-baseline.json not taken, ten paths missing). | 2026-11-19T23:45:20Z: 2026-11-19 WARRANT: the operator typed 'Yes, create the retro-handoff baseline ratchet (W2357) at 296.' at ca6f3699 line 401288 uuid e92a2eb5-0ec4-4444-8c87-1bc4e1f16108; --verify --claim operator ok (kind human). v3 in .nemik-w2357-wt: rebaselines.json birth entry {old 0, new 296, warrant ca6f3699-66ac-4ffa-a3ca-6ececbab791f:401288}; tools/rebaselines_gate.py --head 4d05db4 --tree the wt exits 0 (it refused v2). mtools:W2787 (dialog answers as operator) declined: AskUserQuestion's answers field is agent-written, so --verify refusing a tool_result stays correct. //:precommit running (bcumyl27a). | 2026-11-19T23:48:00Z: 2026-11-19 v3 = refs/review/W2357-v3 = 22b214bc (tree 11c0b7a9, parent W2362-v1 8eae9e79); diff over v2: rebaselines.json +7, tests/test_retro_baseline.py; //:precommit 555 of 555 (bcumyl27a). In review at github:W120. | 2026-11-19T23:50:57Z: 2026-11-19 github-00 PASS-SUBMIT on refs/review/W2357-v3 = 22b214bc; resubmitting .claude/stack-W2362-W2357.json. Fold-in owed (non-blocking): the mutant 'a second rebaselines entry naming the file goes red'.",
+      "issued_at": "2026-11-19T20:50:48Z",
+      "minted_during": "interrupt",
+      "caused_by": "inbox/2026-11-19-github-00-retro-handoff-shape-flags-history.md",
+      "last_worked": "2026-11-19T23:50:57Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "BUILD.bazel",
+        "Containerfile",
+        "bazel/nemik_src.bzl",
+        "bazel/nemik_tests.bzl",
+        "ratchets.json",
+        "rebaselines.json",
+        "skills/nemik/SKILL.md",
+        "src/nemik/cachestore.py",
+        "src/nemik/check.py",
+        "src/nemik/data/retro-handoff-baseline.json",
+        "src/nemik/data/shapes.ttl",
+        "src/nemik/retrobaseline.py",
+        "src/nemik/shaclinc.py",
+        "tests/test_retro_baseline.py",
+        "tests/test_shaclinc.py",
+        "tests/test_shaclinc_hub_card.py",
+        "tests/test_shaclinc_workstream_hub.py",
+        "tests/test_shape_messages.py",
+        "tests/test_witness_unknown_field.py",
+        "tools/retro_handoff_baseline.py"
+      ],
+      "size_class": "medium",
+      "deploys": true
+    },
+    {
+      "symbol": "W2358",
+      "title": "Name the standard a commit uses to say it closes a reviewer finding or a card, as git trailers in the commit message",
+      "status": "ready",
+      "enables": [
+        "mtools:W2781"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Build stage (a): the Closes-Finding standard in skills/nemik/SKILL.md plus a pure parser of a commit's trailer block into (repo, retro, k) with k 1-based, and the conversion k-1 to the graph's retro/<id>/finding/<k-1> pinned by a test (k=2 resolves to finding/1). Write-time validation (mikemol-commit --closes-finding refusing an id naming no finding) is mtools' tool: asked of mtools. Then (b) reader, (c) shape",
+      "evidence": "2026-11-19T21:22:27Z: 2026-11-19 claims inbox/2026-11-19-github-00-closing-signal-standard.md. PRIOR ART READ (a fetch of the three pages, quoted): git-interpret-trailers: a trailer is Key: value, key ASCII alphanumerics and hyphens, repeated keys allowed (Signed-off-by twice in its example), the block at the end of the message after a blank line. Linux submitting-patches: Closes: takes a URL to the bug report (Closes: https://example.com/issues/1234), Fixes: takes at least 12 characters of a commit id plus its one-line summary, Link: a URL to background. GitHub linking docs: the keywords close/closes/closed/fix/fixes/fixed/resolve/resolves/resolved, optionally with a colon, followed by #N or owner/repo#N, acted on only when merged to the default branch; the page says nothing about other value forms. So a Closes: trailer carrying a card id would bend the kernel's URL-valued Closes, which argues for distinct keys. | 2026-11-19T21:38:13Z: 2026-11-19 the operator pointed at GitHub's Autolink references (repository Settings, Integrations). READ GitHub's page on it (quoted by the fetch): set per repository by anyone with admin permission, applied to issues, pull requests, commit messages and release descriptions (comments not named), a reference prefix plus a target URL with a num placeholder, alphanumeric or numeric identifiers, and prefixes may not overlap (TICKET and TICK). SILENT on which characters a prefix may hold (its one example, JIRA-, has a hyphen; nothing on a colon as in nemik:W) and on which characters the identifier may hold (nothing on a dot as in R12.3), and it names no API. Consequence for the design: autolinks are the human-readable half of the standard on the forge (the same token in a commit becomes a link to the card or finding, with no closing semantics, so it cannot trip GitHub's own Closes #N), and the grammar should be chosen so it survives an autolink matcher either way. Whether nemik:W and a dotted finding id work is an empirical question, a probe on a repository's settings that only an admin may make. | 2026-11-19T22:30:00Z: 2026-11-19 VERIFIED against the primary pages (prompted by research the operator pasted): GitHub's REST reference for autolinks says, of is_alphanumeric (default true), that url_template's num part matches alphanumeric characters A-Z (case insensitive), 0-9, and -, and with false only numeric characters; gh repo autolink create says the same (alphanumeric A-Z case insensitive, 0-9 and -, numeric 0-9) and that only the first num placeholder in a template is replaced. NEITHER page gives any allowed-character rule for key_prefix (examples TICKET-, STORY-), nor a left-boundary rule. CONSEQUENCES for the grammar: a dotted finding id (R12.3) links only as far as the dot, so a finding's ordinal joins with a hyphen if it is to autolink whole; and whether a repo-qualified prefix with a colon (nemik:W) is accepted, and whether a bare-prefix rule would mislink gcalculus:W445, is still empirical: a probe needs an admin on the repository, which is the operator's to allow. The pasted research's other claims (plan limits, no org-level autolinks, no update endpoint, comment rendering) are unverified by me and stay unadopted until read at their sources. | 2026-11-19T23:19:03Z: 2026-11-19 design notes sent to github-00, with the prior art read and quoted on this card, three questions (key name, no card trailer, value contents). | 2026-11-19T23:23:57Z: 2026-11-19 github-00 RULINGS: key Closes-Finding stands; no card-closing trailer; value is the id only <repo>:R<n>-<k>, reasons in the body; base of k = what the fleet writes; ADD write-time validation (mikemol-commit --closes-finding refuses an id naming no finding). BASE READ: records citing a finding with k=0 vs k=1, regex 'R<n> finding <k>|R<n>.<k>|R<n>-F<k>|finding <k> of': nemik transcript ca6f3699 (via mikemol-transcriptstruct --grep --kinds text) 0 vs 81; host 695f3e0a (grep -c over records) 0 vs 108; mtools 0709aae6 0 vs 15. The fleet writes 1-based. mtools read pathsforward retros.py _retro_block: enumerate(findings, start=1), and the unlanded --owed prints <id>.<k> 1-based. RULING: k is 1-based; the reader converts to the graph's 0-based node. | 2026-11-19T23:25:22Z: 2026-11-19 mtools: --owed will print the hyphen form (mtools:R1-2) once its running bazel run finishes; write-time validation carded as mtools:W2786 (mikemol-commit --closes-finding), caused_by and enabling nemik:W2358; open in its design: how the hooks dist reads a repo's retros without importing the writer. Stage (b), the reader, blocks on mtools:W2786; stage (a) does not.",
+      "issued_at": "2026-11-19T20:50:50Z",
+      "minted_during": "interrupt",
+      "caused_by": "inbox/2026-11-19-github-00-closing-signal-standard.md",
+      "last_worked": "2026-11-19T23:25:22Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W2359",
+      "title": "W2325 fixture: band order kept an applier-unfreezing fix out of the round, the rule read from bands.toml",
+      "status": "ready",
+      "enables": [
+        "W2325"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-11-19T20:50:51Z",
+      "minted_during": "interrupt",
+      "caused_by": "inbox/2026-11-19-github-00-w2325-fixture-frozen-applier.md",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2360",
+      "title": "Every card estimates its delivery cost and its effect on CPU-s and attempts per landing, and velocity comes from that estimate, not a tag",
+      "status": "ready",
+      "enables": [
+        "W2325"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-11-19T20:50:52Z",
+      "minted_during": "interrupt",
+      "caused_by": "inbox/2026-11-19-github-00-w2325-velocity-from-cost-estimates.md",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2361",
+      "title": "A rosetta of typed signals: every signal nemik's shapes use mapped to prior art and standards and back, generated from the shapes, held by test",
+      "status": "ready",
+      "enables": [
+        "W2315"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-11-19T20:50:53Z",
+      "minted_during": "interrupt",
+      "caused_by": "inbox/2026-11-19-github-00-rosetta-of-typed-signals.md",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2362",
+      "title": "The edit hook's formatter targets py313 (pyproject [tool.ruff] target-version), so an edit no longer forces PEP 758 except syntax",
+      "status": "working",
+      "enables": [
+        "W2357"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Lands with W2357 v3 in .claude/stack-W2362-W2357.json on github-00's PASS-SUBMIT of 22b214bc",
+      "evidence": "2026-11-19T22:22:51Z: 2026-11-19 minted from github-00's R3 on W2357 v1. The edit hook judges a whole file, and its formatter (ruff 0.16.6 in mtools' hook venv, target py314 from nemik's pyproject) rewrites except (A, B): as except A, B: (PEP 758), so any edit to these files must carry those lines. CODON FACTS: main's codon-baseline.json already records check.py's first Codon error as syntax error, unexpected ',' (main's check.py has no PEP 758 except, so something else), and cachestore's as no module named '__future__', an import wall before any except; main already holds PEP 758 excepts in history.py and metrics.py. So the census cannot see these lines either way; W2364 takes the conflict with Codon to mtools. | 2026-11-19T22:29:06Z: 2026-11-19 RE-SCOPED on mtools' reading (mtools:W2785): the hook formats with the governing project's own ruff (nemik's 0.16.10, not the hooks venv's 0.16.6 as I had wrongly said) against nemik's pyproject, which has no [tool.ruff] table, so ruff inferred py314 from requires-python and its formatter rewrote except (A, B) into PEP 758. CONFIRMED through the hook: with target-version py313 added, a trivial edit to main's check.py (five parenthesized excepts) was ACCEPTED, where before every edit was refused until they were rewritten; the probe edit is reverted. So no format-only commit is needed: W2357 keeps the original except lines. ruff-house.toml (the ratchet's config, py314) is unchanged. | 2026-11-19T23:00:35Z: 2026-11-19 built refs/review/W2362-v1 = 8eae9e7993b0bd7d81cb112095e6fd8a03d6e8db on main 4d05db4e, one file (pyproject.toml). bazel test //:precommit 554 of 554. In review at github:W120 together with W2357 v2, which stacks on it. | 2026-11-19T23:22:45Z: 2026-11-19 github-00 PASS-SUBMIT on refs/review/W2362-v1 = 8eae9e79; submitting as one stack with W2357 (.claude/stack-W2362-W2357.json) on main 4d05db4e. | 2026-11-19T23:48:02Z: 2026-11-19 first submit refused on W2357's entry (rebaselines gate); W2362 unchanged at 8eae9e79, rides under W2357 v3. | 2026-11-19T23:50:58Z: 2026-11-19 github-00 PASS-SUBMIT (8eae9e79, under W2357 v3 22b214bc); resubmitting.",
+      "issued_at": "2026-11-19T22:22:31Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2357",
+      "last_worked": "2026-11-19T23:50:58Z",
+      "ticks_blocked": 0,
+      "completed": null,
+      "manifest": [
+        "pyproject.toml"
+      ],
+      "size_class": "small",
+      "deploys": true
+    },
+    {
+      "symbol": "W2363",
+      "title": "Baseline the handoff-slots and trigger-and-root retro shapes too, each cut by the retro's own timestamp against its rule's knowable date",
+      "status": "ready",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "After W2357 lands: extend the identity-keyed baseline to RetroHandoffShape (slots: 246 today) and the retro trigger-and-root shape (205 today), keyed by shape and repo-qualified retro. CUT (github-00's ruling): a retro is history only if written before its rule was knowable to its author. State both dates per shape on this card: trigger and root are in the retrospective-ritual skill (G3) and judged since 171704e7 (2026-11-14), so a retro written after that and missing them stays live and keeps paging, today's ten certainly; find the slots rule's knowable date the same way (W755, f1b458a6 defined 2026-10-19, judged from 171704e7). Needs each retro's own timestamp: read whether retro records carry one before designing; design notes to github-00 first",
+      "evidence": "2026-11-19T22:22:52Z: 2026-11-19 approved by github-00 as its own card after W2357, with the timestamp cut instead of the landing-commit cut.",
+      "issued_at": "2026-11-19T22:22:32Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2357",
+      "last_worked": "2026-11-19T22:22:52Z",
+      "ticks_blocked": 0,
+      "size_class": "medium",
+      "deploys": true
+    },
+    {
+      "symbol": "W2364",
+      "title": "Ask mtools: the edit hook's formatter forces PEP 758 except syntax into any touched file, which Codon cannot parse",
+      "status": "done",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-11-19T22:22:52Z: 2026-11-19 found building W2357: the hook refused every edit of check.py until five unrelated except lines were rewritten; github-00 flagged the rewrites as unrelated hunks (R3). | 2026-11-19T22:29:07Z: 2026-11-19 ANSWERED by mtools (mtools:W2785, to be dropped): the hook already runs nemik's own pinned ruff; the PEP 758 rewrite came from nemik's pyproject lacking a ruff target. My claim that the hook ran the hooks venv's ruff 0.16.6 was an inference from installed packages, not an observation, and is withdrawn. The fix is nemik's: W2362 (target-version py313), confirmed through the hook.",
+      "issued_at": "2026-11-19T22:22:33Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2357",
+      "last_worked": "2026-11-19T22:29:07Z",
+      "ticks_blocked": 0,
+      "size_class": "small",
+      "completed": "20261119T222907Z"
+    },
+    {
+      "symbol": "W2365",
+      "title": "Gate parity: the pre-submit target set runs tools/rebaselines_gate.py, so a ratchet birth or rise without a warranted rebaselines.json entry shows before submit, not first at the commit gate",
+      "status": "ready",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "On github-00's ruling: build tools/presubmit.sh WT (refuse non-worktree or unstaged; run gate_staged.sh from the real root with GIT_INDEX_FILE=WT's index; print the gated tree sha), pin test, two refusal fixtures, the planted-birth drill",
+      "evidence": "2026-11-19T23:48:36Z: 2026-11-19 design notes sent to github-00: the pre-submit is gate_staged.sh itself fed the review worktree's index (gate_staged captures GIT_INDEX_FILE at line 21 and write-trees from it at line 40), because rebaselines_gate needs git and //:precommit is one of eight gate steps. Interim: run tools/rebaselines_gate.py by hand before review (done for W2357 v3). | 2026-11-19T23:50:59Z: 2026-11-19 github-00 DESIGN APPROVED: presubmit.sh = gate_staged.sh over the review worktree's index; plants: not-a-worktree and unstaged refusals, whole-line pin of the only gate call, planted ratchet-birth drill; from then on review messages cite presubmit's tree sha. And: re-scope W2345 after this lands (a check outside the gate cannot judge, exit 7); don't build for the old case meanwhile.",
+      "issued_at": "2026-11-19T23:43:53Z",
+      "minted_during": "interrupt",
+      "caused_by": "nemik:W2357",
+      "last_worked": "2026-11-19T23:50:59Z",
+      "ticks_blocked": 0,
+      "completed": null
     }
   ],
   "residue": [

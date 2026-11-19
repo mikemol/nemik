@@ -31,7 +31,8 @@ from nemik.shapedepth import UNBOUNDED, predicates, radius
 if TYPE_CHECKING:
     from collections.abc import Iterable, Mapping
 
-Result = tuple[str, str]  # (severity IRI, message)
+# (severity IRI, message, source shape IRI): nemik:W2357 keys on the shape, never the message
+Result = tuple[str, str, str]
 
 Held = dict[str, tuple[frozenset[tuple[Node, Node, Node]], dict[Node, list[Result]]]]
 _LAST: Held = {}
@@ -70,7 +71,7 @@ def shacl_results(data: Graph, shapes: Graph) -> dict[Node, list[Result]]:
     """Validate `data` against `shapes` in full.
 
     Returns:
-        The results by focus node.
+        The results by focus node, each with the shape that produced it.
 
     """
     # nemik:W254: pyshacl hands rdflib the same constraint text for every focus node; parse it once.
@@ -78,15 +79,15 @@ def shacl_results(data: Graph, shapes: Graph) -> dict[Node, list[Result]]:
         _, report, _ = validate(data, shacl_graph=shapes)
     out: dict[Node, list[Result]] = {}
     rows = cast(
-        "Iterable[tuple[Node, Node, Node]]",
+        "Iterable[tuple[Node, Node, Node, Node]]",
         report.query(
-            "SELECT ?f ?s ?m WHERE { ?r sh:focusNode ?f ; "
-            "sh:resultSeverity ?s ; sh:resultMessage ?m }",
+            "SELECT ?f ?s ?m ?src WHERE { ?r sh:focusNode ?f ; "
+            "sh:resultSeverity ?s ; sh:resultMessage ?m ; sh:sourceShape ?src }",
             initNs=_NS,
         ),
     )
-    for f, sev, msg in rows:
-        out.setdefault(f, []).append((str(sev), str(msg)))
+    for f, sev, msg, src in rows:
+        out.setdefault(f, []).append((str(sev), str(msg), str(src)))
     return out
 
 
@@ -263,11 +264,26 @@ def _judged(
 def findings(key: str, data: Graph, shapes: Graph) -> list[tuple[Node, str, str]]:
     """(focus, severity IRI, message) for every result, re-validating only what changed.
 
+    Returns:
+        The (focus, severity IRI, message) rows for every result (see identified).
+
+    """
+    return [(f, s, m) for f, s, m, _ in identified(key, data, shapes)]
+
+
+def identified(
+    key: str, data: Graph, shapes: Graph
+) -> list[tuple[Node, str, str, str]]:
+    """(focus, severity IRI, message, source shape IRI) for every result, incrementally.
+
+    nemik:W2357: a reader that treats one rule's results specially keys on the result's identity,
+    the shape that produced it, never on its message text, so rewording a message cannot change
+    which results it picks, and another shape's result on the same node is never picked by mistake.
     Changed means since `key`'s last run: everything on the first, and always when the shapes'
     depth cannot be bounded.
 
     Returns:
-        The (focus, severity IRI, message) rows for every result.
+        The (focus, severity IRI, message, source shape IRI) rows for every result.
 
     """
     now = frozenset(data)
@@ -305,4 +321,4 @@ def findings(key: str, data: Graph, shapes: Graph) -> list[tuple[Node, str, str]
                 if f in live:
                     by_focus[f] = rows
     _LAST[key] = (now, by_focus)
-    return [(f, s, m) for f, rows in by_focus.items() for s, m in rows]
+    return [(f, s, m, src) for f, rows in by_focus.items() for s, m, src in rows]
