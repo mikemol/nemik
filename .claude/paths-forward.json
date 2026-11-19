@@ -55909,7 +55909,7 @@
     {
       "symbol": "W2252",
       "title": "Queue discipline metric: per repo, whether the queue file differs from HEAD and for how long",
-      "status": "blocked",
+      "status": "landed",
       "enables": [
         "W2296"
       ],
@@ -55920,12 +55920,12 @@
         "W2331"
       ],
       "blocked_kind": "agent",
-      "next_bounded_step": "Revise as v2 on github-00's review: (1) the format-only entry W2331 first (mikemol-pycheck --format on history.py and metrics.py, zero semantic change), (2) then the semantic edit made through the hook, with a typed three-state outcome (dirty, clean, unknown) and an unknown sample, not silence; send both shas",
-      "evidence": "2026-11-17T13:09:35Z: 2026-11-17 github-cb (peer; operator 2026-11-17 line 184270 per their relay, not yet verified by me): queue discipline is part of the unfreeze readiness checklist (section 4 of the readiness file, which I have not read: a sibling path); measured against nemik: queue on main dirty by +150/-13, last queue commit af547637 at 04:18, about 3.5 h before. M3 asked: per-repo queue_dirty and queue_dirty_since (seconds since the working-tree queue first differed from HEAD) with a learned freshness alert, so queue discipline is a metric, not a spot read. Carded beside W2251, not folded in (it needs per-repo state; W2251 does not). The pod's builder reads /export (no git), so these gauges, like the branch ones, are produced where git exists: the host-side exporter. Not built. | 2026-11-19T04:43:44Z: 2026-11-19 github-00 REVISE on refs/review/W2252-v1 (197bdbfa): the feature is good, but building the source in a scratchpad copy because the edit hook refuses edits to files with pre-existing format diffs is a route around the gate; the path is a FORMAT-ONLY entry first (zero semantic change, shown by git show), THEN the semantic edit through the hook; if the hook formats at 88 while the house config says 100 that is the hook's defect and is carded (W2310), and until it lands format at whatever the hook enforces. Second: [1], [0], [] respells a maybe-result; make git-cannot-answer a typed outcome (an exception, or a three-state: dirty, clean, unknown) and print UNKNOWN as its own sample or counted tombstone, since silence without a tombstone is UNKNOWN.",
+      "next_bounded_step": "Wait for the deploy witness: the nemik pods run an image epoch at or after the landing of df640460; W2330 then names the three families in the host job and adds luthen's freshness rows",
+      "evidence": "2026-11-17T13:09:35Z: 2026-11-17 github-cb (peer; operator 2026-11-17 line 184270 per their relay, not yet verified by me): queue discipline is part of the unfreeze readiness checklist (section 4 of the readiness file, which I have not read: a sibling path); measured against nemik: queue on main dirty by +150/-13, last queue commit af547637 at 04:18, about 3.5 h before. M3 asked: per-repo queue_dirty and queue_dirty_since (seconds since the working-tree queue first differed from HEAD) with a learned freshness alert, so queue discipline is a metric, not a spot read. Carded beside W2251, not folded in (it needs per-repo state; W2251 does not). The pod's builder reads /export (no git), so these gauges, like the branch ones, are produced where git exists: the host-side exporter. Not built. | 2026-11-19T04:43:44Z: 2026-11-19 github-00 REVISE on refs/review/W2252-v1 (197bdbfa): the feature is good, but building the source in a scratchpad copy because the edit hook refuses edits to files with pre-existing format diffs is a route around the gate; the path is a FORMAT-ONLY entry first (zero semantic change, shown by git show), THEN the semantic edit through the hook; if the hook formats at 88 while the house config says 100 that is the hook's defect and is carded (W2310), and until it lands format at whatever the hook enforces. Second: [1], [0], [] respells a maybe-result; make git-cannot-answer a typed outcome (an exception, or a three-state: dirty, clean, unknown) and print UNKNOWN as its own sample or counted tombstone, since silence without a tombstone is UNKNOWN. | 2026-11-19T05:49:21Z: 2026-11-19: LANDED as df640460 (PASS-SUBMIT from github-00 on refs/review/W2252-v2 = 5afa80f2, re-cut onto main 123db64a as refs/review/W2252-v2-main = 14182d81, the four paths byte-identical; git log -1 subject read back as this card's and git ls-remote origin refs/heads/main = df6404603059a04070e2c122250ccd0898628409). Gate: 547 fresh of 550 targets, 550 pass, which includes the three I had not re-run (branch_work, codon_census, skill): the inference that the test-file fixes did not touch them held. Three named states: DIRTY, CLEAN, UNKNOWN as its own sample; an unknown scrape neither starts nor resets the clock. Follow-up W2330 (host job families, luthen freshness rows).",
       "issued_at": "2026-11-17T13:09:00Z",
       "minted_during": "interrupt",
       "caused_by": "github-cb",
-      "last_worked": "2026-11-19T04:43:44Z",
+      "last_worked": "2026-11-19T05:49:21Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/history.py",
@@ -55934,7 +55934,9 @@
       ],
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
       "vector_source": "default",
-      "completed": null
+      "completed": null,
+      "landed_at": "20261119T054921Z",
+      "deploys": true
     },
     {
       "symbol": "W2253",
@@ -56138,7 +56140,7 @@
     {
       "symbol": "W2261",
       "title": "seven tests build a plain ThreadingHTTPServer (backlog 5, below a browser's fan-out): migrate them mechanically to nemik.serve.PageServer, and pin it with a test that no tests/ file constructs ThreadingHTTPServer directly",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W2289"
       ],
@@ -56147,15 +56149,15 @@
         "gate-repair"
       ],
       "blocked_on": [],
-      "blocked_kind": "agent",
-      "next_bounded_step": "Submitted as refs/review/W2261-v4 = c3f98ebe (parent 675c1193, PASS-SUBMIT from github-b0): watch the gate, then read back git log -1 and ls-remote",
-      "evidence": "2026-11-17T21:50:12Z: 2026-11-17 built refs/review/W2261-v1 = 080c5e8303a413417fc164ac17096abe05442dad on refs/review/W2260-v2: seven tests migrated by a mechanical codemod, a guard test, a BUILD data entry. //:test_no_plain_threading_server and the seven migrated tests and //:test_test_inputs pass, ratchets pass (one E501 in the guard fixed). Held; not sent for review, not submitted. | 2026-11-18T13:36:02Z: 2026-11-18 github-b0 (formerly github-cb) PASS-SUBMIT'd W2260 v2 and reviewed W2261 v1: codemod fine, guard too weak (text match, test_*.py only, a glob in BUILD). v2 built and sent.",
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-11-17T21:50:12Z: 2026-11-17 built refs/review/W2261-v1 = 080c5e8303a413417fc164ac17096abe05442dad on refs/review/W2260-v2: seven tests migrated by a mechanical codemod, a guard test, a BUILD data entry. //:test_no_plain_threading_server and the seven migrated tests and //:test_test_inputs pass, ratchets pass (one E501 in the guard fixed). Held; not sent for review, not submitted. | 2026-11-18T13:36:02Z: 2026-11-18 github-b0 (formerly github-cb) PASS-SUBMIT'd W2260 v2 and reviewed W2261 v1: codemod fine, guard too weak (text match, test_*.py only, a glob in BUILD). v2 built and sent. | 2026-11-19T05:50:07Z: 2026-11-19: found still marked working with a stale next step. LANDED earlier as 64c3e570 (2026-11-18 12:00 ET; its subject read back from git log -1 64c3e570 as this card, and git merge-base --is-ancestor 64c3e570 HEAD succeeds on main df640460). refs/review/W2261-v4 (c3f98ebe) and 64c3e570 differ only in .claude/paths-forward.json and .ledger (git diff --stat), so the landed code is the reviewed v4. landing_kind ref (tests, tools, BUILD, hook): done, not landed.",
       "issued_at": "2026-11-17T19:52:43Z",
       "minted_during": "interrupt",
       "caused_by": "W2260",
-      "last_worked": "2026-11-18T16:35:16Z",
+      "last_worked": "2026-11-19T05:50:07Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261119T055007Z",
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
       "vector_source": "default"
     },
@@ -57227,21 +57229,19 @@
     {
       "symbol": "W2307",
       "title": "The pre-commit hook fires the named-inputs check when tests or bazel/nemik_tests.bzl change (a gate-hook change, split from W2261, for a cold review)",
-      "status": "blocked",
+      "status": "working",
       "enables": [],
       "touches": [
         "gate-repair"
       ],
-      "blocked_on": [
-        "W2261"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "After W2261 (v3, without the hook) lands: a cold review of the one-pathspec hook change, after 21:00 ET 2026-11-18 (github-b0: the operator's token budget is low until then). The diff, before and after, is held at .claude/held-W2307-hook-pathspec.patch: the pathspec of nemik_changed gains tests and bazel/nemik_tests.bzl so the named-inputs check (tools/nemik_src.py --staged, which now checks both lists) also fires when a test changes, and the refusal message names both lists. The bazel precommit target already enforces --check; this only widens when the hook fires. Then a stack: the hook, tests/test_precommit_nemik_src.py cases for a staged stale tests list, and a review ref.",
-      "evidence": "2026-11-18T13:37:28Z: 2026-11-18 split out of W2261 v2 on github-b0's review: a gate-hook change gets a cold review, deferred to after 21:00 ET (operator token budget).",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Wait for github-00's cold review of refs/review/W2307-v1 = 24add752 (the hook diff); on PASS-SUBMIT re-cut onto main if it moved, check the diff equals the stack paths, submit .claude/stack-W2307-v1.json with --freeze-from the worktree, read back git log -1 and ls-remote, mark done (ref landing)",
+      "evidence": "2026-11-18T13:37:28Z: 2026-11-18 split out of W2261 v2 on github-b0's review: a gate-hook change gets a cold review, deferred to after 21:00 ET (operator token budget). | 2026-11-19T05:51:27Z: 2026-11-19: W2261 is done (landed 64c3e570), so this is unblocked, and it is past 21:00 ET 2026-11-18. Scratch worktree .nemik-w2307-wt on df640460: the held patch applies cleanly (git apply --check then apply) and three tests are added to tests/test_precommit_nemik_src.py: a staged test file the tests list does not name is refused, a staged tests list with a file dropped is refused, a staged edit to a named test file passes the check. | 2026-11-19T05:55:11Z: 2026-11-19: built refs/review/W2307-v1 = 24add752926784813280c97f8b4b3716dfb25e64 on main df640460, two files, +83/-2. Red run: with the hook change stashed, //:test_precommit_nemik_src failed on exactly the two refusal tests (status 127 at the missing gate script instead of the refusal 1). Green run with the change restored: test_precommit_nemik_src, test_precommit_queue_check, test_githooks_snapshot, test_nemik_src, test_test_inputs, test_ruff_ratchet, test_mypy_ratchet 7 of 7 pass. Sent to github-00 for the cold review; not submitted.",
       "issued_at": "2026-11-18T13:37:19Z",
       "minted_during": "interrupt",
       "caused_by": "W2261",
-      "last_worked": "2026-11-18T13:37:28Z",
+      "last_worked": "2026-11-19T05:55:11Z",
       "ticks_blocked": 0,
       "completed": null,
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
@@ -57344,17 +57344,18 @@
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Read how nemik.witnesses builds the alert, promql and apply facts, then write the test that compares each fact's keys with FIELDS[observer] from a fixture response (the same shape the file, git_ref and pid pins use); red when a key is added to one observer",
-      "evidence": "",
+      "next_bounded_step": "Pick up after the round: copy the held test from .claude/held-W2312-test_witness_fields_pinned.py.txt (header lists the two ratchet findings to fix, PT001 and a mypy misc, never baselined), git add it, tools/nemik_src.py --write, bazel run, a mutation run that adds a key to FIELDS and goes red, then a review ref",
+      "evidence": "2026-11-19T05:57:56Z: 2026-11-19: scratch worktree .nemik-w2312-wt on df640460: tests/test_witness_fields_pinned.py runs the real alert, promql and apply observers against fixture responses (a PageServer answering the vmalert alert list and an instant query; a host-apply export in a temp NEMIK_ROOT, fresh and stale, an applied and a pending row) and compares each fact's keys with FIELDS[observer]; bazel/nemik_tests.bzl regenerated after git add (the tool names tracked files only). | 2026-11-19T06:01:13Z: 2026-11-19: set back to ready, HELD behind the round: mikemol-commit refused W2307's stack because this card was working and not in the round (W2321, W2323, W2167, W2110, W2018 are ready in it); I will not mark those working to pass. The test is built and one bazel run passed 7 of 8 targets, the new test and test_witness_unknown_field and test_witnesses among them; //:test_ruff_ratchet failed on PT001 and a mypy misc finding in the new file (fix, never baseline). The file is held in the repo at .claude/held-W2312-test_witness_fields_pinned.py.txt and in a scratch worktree .nemik-w2312-wt.",
       "issued_at": "2026-11-18T20:37:06Z",
       "minted_during": "interrupt",
       "caused_by": "W2263",
-      "last_worked": null,
+      "last_worked": "2026-11-19T06:01:13Z",
       "ticks_blocked": 0,
       "manifest": [
         "tests/test_witness_fields_pinned.py"
       ],
-      "size_class": "small"
+      "size_class": "small",
+      "completed": null
     },
     {
       "symbol": "W2313",
@@ -57683,11 +57684,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "Hold at v5 and build nothing; wait for github-00's synthesis from gcalculus and substrate, then write v6 from it with cold checks A to D as fixtures",
-      "evidence": "2026-11-19T03:09:37Z: 2026-11-18 OPERATOR RULING (warranted, verified): host transcript 695f3e0a line 188832, 2026-11-19T03:06Z, human: the vector is more meaningful than the bands, which are a flat ranking of a hyperdimensional weighting problem. W2325 is answered by NEITHER option A NOR B: the defect is that bands, a total order of named classes, take precedence over the vector and the weights. Re-scoped as a design: rank from the vector's axes plus propagated demand (Pareto fronts keep their dimensions), a band survives only as a display label, velocity is a dimension carried by an accelerates edge and propagated by a second flow, hard constraints stay constraints and the rest become weights, and a replay over the fleet with mtools:W2727 rising as the witness. Found while reading rank-weights.toml: the Pareto fronts and the flow model already exist; the band feeds them as a 7-valued label worth 100 weight units a step, which is lexicographic in effect. | 2026-11-19T03:22:56Z: 2026-11-18 v3: four operator records warranted (lines 188832, 188919, 188939, 188975). CHECKED: enables and blocked_on are one edge kind in nemik.flow today (index.successors), so an enables edge makes the target wait and cannot mean accelerates; a uniform velocity coefficient leaves absorbed currents unchanged and scales potentials by 1/v, so the observable is total delay D = demand x potential, value of raising velocity -dD/dv = D0/v^2, edge sensitivity -(potential drop)^2 (verified on a three-card chain in exact fractions); a broken gate is v=0, an open circuit. OPEN: comparing a ready card's absorbed current with a velocity card's delay reduction; whether the operator wants a soft maximum over competing paths (it would give up Kirchhoff and W241's conserved solve); tau is derived here, gcalculus defines none. | 2026-11-19T03:24:22Z: 2026-11-18 github-00: warm review of v3 (f150bfa2) PASSES; a cold review is running. Two open questions go to the operator: (a) enables as conductance and blocked_on as resistance need the distinction introduced (today one edge kind) or a speed-up edge type, with a migration; (b) LSE over competing paths versus exact Kirchhoff for paths with LSE only across unlike reasons. To fold into v4 after the cold review: a migration paragraph (drafted: one relation with two views, a per-edge g and a system v added as coefficients not edge kinds, a typed speed-up edge owned by the writer, and the regression property that with every g = 1 and v = 1 the new solver reproduces today's salience exactly), the delay-versus-current comparability as the build's FIRST gate, and the replay's fixed property that cards with no velocity role keep their relative order. | 2026-11-19T03:53:59Z: 2026-11-18 github-00: scoped cold pass on v5 (090ecb85): of 26 prior findings 18 resolved, 7 partly, 1 not (#37). NEW failures all from the Pareto layer: only the LARGEST accelerator reaches front 1 (check A), unscored cards break dominance either way (check B: critical below normal, or about 737 of 743 in front 1), front-1 width hands the order to the unsolved unit problem (check C), the red-gate argument holds in 1 of 3 cases (check D: W2212's cycle strands all demand and dropping the W2212 chain pull-in brings that deadlock back). DECISION: do not patch v5; hold, build nothing. Direction from gcalculus and substrate, being gathered by github-00: every reason a SOURCE in ONE network added by superposition (no per-reason units), velocity a MARGINAL (the change in network throughput when a card's edge closes) and not a series factor, exact Fractions throughout, substrate's Belnap two-rail logic for a card both wanted and blocked; removes the Pareto layer. v6 starts from that synthesis; the cold review's executable checks A to D (v5check/) are the test fixtures v6 must pass. | 2026-11-19T03:59:00Z: 2026-11-18: set back to ready: the card is HELD (v5 is the last cut, v6 waits on the gcalculus and substrate synthesis and the reviews), so it is not being worked, and the round check refused a queue commit while it was marked working outside the round (W2322, W2167, W2252, W2018 are the round). Drafting from the synthesis is not a working mark; the card goes back to working only if the round reaches it. | 2026-11-19T05:09:17Z: v8 at refs/review/W2325-v8 = 274aaf38 (parent 4c49a41d = main): folds the v7 cold review. The ranking is the odds pro over cost (cost counts against); mass is read from the supply (product), bias the ratio; BOTH on a ready card is wanted and expensive, action decompose; p, output-or-increment, the cost-less card's ranking, the critical floor and the cycle (#51) are marked OPEN. The doc's python block (275 lines) runs from the doc under python3 -I, every assertion held. Sent to github-00 for the cold pass scoped to the diff.",
+      "evidence": "2026-11-19T03:09:37Z: 2026-11-18 OPERATOR RULING (warranted, verified): host transcript 695f3e0a line 188832, 2026-11-19T03:06Z, human: the vector is more meaningful than the bands, which are a flat ranking of a hyperdimensional weighting problem. W2325 is answered by NEITHER option A NOR B: the defect is that bands, a total order of named classes, take precedence over the vector and the weights. Re-scoped as a design: rank from the vector's axes plus propagated demand (Pareto fronts keep their dimensions), a band survives only as a display label, velocity is a dimension carried by an accelerates edge and propagated by a second flow, hard constraints stay constraints and the rest become weights, and a replay over the fleet with mtools:W2727 rising as the witness. Found while reading rank-weights.toml: the Pareto fronts and the flow model already exist; the band feeds them as a 7-valued label worth 100 weight units a step, which is lexicographic in effect. | 2026-11-19T03:22:56Z: 2026-11-18 v3: four operator records warranted (lines 188832, 188919, 188939, 188975). CHECKED: enables and blocked_on are one edge kind in nemik.flow today (index.successors), so an enables edge makes the target wait and cannot mean accelerates; a uniform velocity coefficient leaves absorbed currents unchanged and scales potentials by 1/v, so the observable is total delay D = demand x potential, value of raising velocity -dD/dv = D0/v^2, edge sensitivity -(potential drop)^2 (verified on a three-card chain in exact fractions); a broken gate is v=0, an open circuit. OPEN: comparing a ready card's absorbed current with a velocity card's delay reduction; whether the operator wants a soft maximum over competing paths (it would give up Kirchhoff and W241's conserved solve); tau is derived here, gcalculus defines none. | 2026-11-19T03:24:22Z: 2026-11-18 github-00: warm review of v3 (f150bfa2) PASSES; a cold review is running. Two open questions go to the operator: (a) enables as conductance and blocked_on as resistance need the distinction introduced (today one edge kind) or a speed-up edge type, with a migration; (b) LSE over competing paths versus exact Kirchhoff for paths with LSE only across unlike reasons. To fold into v4 after the cold review: a migration paragraph (drafted: one relation with two views, a per-edge g and a system v added as coefficients not edge kinds, a typed speed-up edge owned by the writer, and the regression property that with every g = 1 and v = 1 the new solver reproduces today's salience exactly), the delay-versus-current comparability as the build's FIRST gate, and the replay's fixed property that cards with no velocity role keep their relative order. | 2026-11-19T03:53:59Z: 2026-11-18 github-00: scoped cold pass on v5 (090ecb85): of 26 prior findings 18 resolved, 7 partly, 1 not (#37). NEW failures all from the Pareto layer: only the LARGEST accelerator reaches front 1 (check A), unscored cards break dominance either way (check B: critical below normal, or about 737 of 743 in front 1), front-1 width hands the order to the unsolved unit problem (check C), the red-gate argument holds in 1 of 3 cases (check D: W2212's cycle strands all demand and dropping the W2212 chain pull-in brings that deadlock back). DECISION: do not patch v5; hold, build nothing. Direction from gcalculus and substrate, being gathered by github-00: every reason a SOURCE in ONE network added by superposition (no per-reason units), velocity a MARGINAL (the change in network throughput when a card's edge closes) and not a series factor, exact Fractions throughout, substrate's Belnap two-rail logic for a card both wanted and blocked; removes the Pareto layer. v6 starts from that synthesis; the cold review's executable checks A to D (v5check/) are the test fixtures v6 must pass. | 2026-11-19T03:59:00Z: 2026-11-18: set back to ready: the card is HELD (v5 is the last cut, v6 waits on the gcalculus and substrate synthesis and the reviews), so it is not being worked, and the round check refused a queue commit while it was marked working outside the round (W2322, W2167, W2252, W2018 are the round). Drafting from the synthesis is not a working mark; the card goes back to working only if the round reaches it. | 2026-11-19T05:09:17Z: v8 at refs/review/W2325-v8 = 274aaf38 (parent 4c49a41d = main): folds the v7 cold review. The ranking is the odds pro over cost (cost counts against); mass is read from the supply (product), bias the ratio; BOTH on a ready card is wanted and expensive, action decompose; p, output-or-increment, the cost-less card's ranking, the critical floor and the cycle (#51) are marked OPEN. The doc's python block (275 lines) runs from the doc under python3 -I, every assertion held. Sent to github-00 for the cold pass scoped to the diff. | 2026-11-19T05:28:13Z: 2026-11-19: v8 cold review (github-00 relay): v7's 14 findings 13 resolved, 1 partly; v8 new 26 consistent, 5 contradicts, 6 unwarranted. v9 at refs/review/W2325-v9 = 080e5153 (parent 123db64a): the value is demand through a cost gain u0/cost, a named external projection (el-atlas Law 3.1, Lemma 3.2, Law 4.2, CX-1, P-1 cited), the exponent forced by the premise that a speed-up by G is a cost cut by G; mass is the product (line 177), not a bridge supply; the median stand-in for a cost-less card withdrawn; W_c is the unsplit demand; flag boundaries stated; decompose labelled my policy. Appendix 321 lines runs from the doc under python3 -I. Sent to github-00 for the cold pass on the diff. Open operator questions: output or increment, unconditional velocity-first, the cost-less card, the critical floor, the exponent premise, whether BOTH routes to decomposition. | 2026-11-19T05:30:31Z: 2026-11-19: gcalculus landed the exact checks this design rests on at 727db7b2 (W381; commit exists, and the five witness keys are in gcalc/families/network/reduction.py at that sha, read by me via git grep): network/nodal/grounding-is-conditioning, grounding-gain-is-phi-squared-over-m (D - D(c grounded) = phi_c^2 / M_cc), closing-an-edge-is-d-squared-over-r (a conductance change delta removes delta d^2 / (1 + delta R_e)), the-ground-set-is-one-node, the-derivative-is-not-the-discrete-change; also W380 at 8860ea1b (a component cut off from the ground is a typed Disconnected naming a node, not a StopIteration). NEXT REVISION: cite these at 727db7b2 in place of the doc's own appendix derivations and the relays; I have not run the witnesses (python3 -m gcalc network/nodal/<name> in the gcalculus tree) and the doc's per-cone use of the formulas is still mine. The v9 ref is with the cold pass and is not changed for this. | 2026-11-19T05:42:20Z: 2026-11-19: v9 cold review (github-00 relay): v8's 15 prior 7 resolved, 6 partly, 2 not; v9 new 18 consistent, 3 contradicts, 6 unwarranted. Core: pro * u0 / cost IS pro / cost (order-identical to v8's odds), the forced-exponent premise is degree -1 homogeneity restated; admissible only as a named external decision (Law 3.1 235, CX-1, Remark 3.5). github-00 puts the form to the operator and asked for mechanical fixes only. v10 at refs/review/W2325-v10 = 4e5e8daf (parent 123db64a): the order said plainly as a ratio and a choice, Remark 2.5c misread withdrawn, two declared scales (u0 and the source-size table), ties at the median unflagged for every tied card, pro=0 vs absent-cost asymmetry labelled, |b| notation, regression only at common cost = u0, series composition open, stale appendix comments fixed. Appendix 371 lines runs from the doc under python3 -I. HOLDING for the operator's answers; no further iteration on the form.",
       "issued_at": "2026-11-19T03:01:33Z",
       "minted_during": "interrupt",
       "caused_by": "github-00",
-      "last_worked": "2026-11-19T05:09:17Z",
+      "last_worked": "2026-11-19T05:42:20Z",
       "ticks_blocked": 0,
       "completed": null,
       "warrants": [
@@ -58055,11 +58056,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "Cold check D case 3 (W2212's cycle) strands all its demand on today's code because mtools' red() blocks the chain card (relayed, mtools' code not read by me): either a red() change (an ask to mtools) or the typed cycle-break in nemik: find the no-ground components in the dependency graph, report them as one finding naming the cycle, and keep the gate-chain pull-in until it exists; a test with a fixture cycle that must not strand demand",
-      "evidence": "",
+      "evidence": "2026-11-19T05:30:32Z: 2026-11-19: gcalculus W380 (8860ea1b, read by me: commit exists) makes a network with a component cut off from the ground a typed Disconnected naming a node, not an uncaught StopIteration. Relevant to this card: a cycle or any component with demand and no path to a workable card is exactly that case in gcalculus's solve; the typed refusal is a candidate source for the cycle's typed answer. Not yet checked how nemik.flow (which solves its own per-source cones) meets it.",
       "issued_at": "2026-11-19T04:35:48Z",
       "minted_during": "interrupt",
       "caused_by": "github-00",
-      "last_worked": null,
+      "last_worked": "2026-11-19T05:30:32Z",
       "ticks_blocked": 0
     },
     {

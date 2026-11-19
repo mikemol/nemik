@@ -81,14 +81,16 @@ fi
 # where git exists. Fix a refusal with: python3 tools/nemik_src.py --write
 # The tool runs from the hook's cwd (under mikemol-commit that is the snapshot holding the staged
 # tool, while real_root holds HEAD's files), and its git calls go through real_root.
-nemik_changed=$(git -C "$real_root" diff --cached --name-only -- src/nemik bazel/nemik_src.bzl) || {
+# nemik:W2261: the same for tests, whose python files bazel/nemik_tests.bzl names for the guard that
+# reads every test with ast (tools/nemik_src.py checks both lists).
+nemik_changed=$(git -C "$real_root" diff --cached --name-only -- src/nemik bazel/nemik_src.bzl tests bazel/nemik_tests.bzl) || {
 	echo "pre-commit: git diff --cached failed, so the named-inputs list cannot be judged: commit refused" >&2
 	exit 1
 }
 if [ -n "$nemik_changed" ]; then
 	nemik_python="${NEMIK_PYTHON:-$real_root/.venv/bin/python3}"
 	if ! "$nemik_python" tools/nemik_src.py --root "$real_root" --staged >&2; then
-		echo "pre-commit: bazel/nemik_src.bzl does not name the tracked python files of src/nemik (tools/nemik_src.py --write)" >&2
+		echo "pre-commit: bazel/nemik_src.bzl or bazel/nemik_tests.bzl does not name the tracked python files of src/nemik or tests (tools/nemik_src.py --write)" >&2
 		exit 1
 	fi
 fi

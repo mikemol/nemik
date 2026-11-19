@@ -266,3 +266,82 @@ def test_the_isolated_gate_path_runs_from_a_plain_snapshot(tmp_path: Path) -> No
     status, err = _run(tmp_path / "fresh", MODULES, opts=Opts(snapshot=True))
     assert REFUSAL not in err
     assert status != REFUSED
+
+
+TEST_FILE = "tests/test_a.py"
+
+
+def _tests_repo(tmp: Path) -> tuple[Path, dict[str, str]]:
+    """Commit a repository whose two lists are exact, and build the hook's environment.
+
+    Returns:
+        The repository and the environment to run the hook with.
+
+    """
+    repo = tmp / "repo"
+    (repo / "bazel").mkdir(parents=True)
+    (repo / "tools").mkdir()
+    (repo / ".claude").mkdir()
+    _git(repo, "init", "-q")
+    (repo / "pyproject.toml").write_text("", encoding="utf-8")
+    (repo / ".claude" / "paths-forward.json").write_text(QUIET_QUEUE, encoding="utf-8")
+    shutil.copy(TOOL, repo / "tools" / "nemik_src.py")
+    (repo / "bazel" / "nemik_src.bzl").write_text(render(MODULES), encoding="utf-8")
+    (repo / "bazel" / "nemik_tests.bzl").write_text(
+        render([TEST_FILE], TESTS_SPEC), encoding="utf-8"
+    )
+    for path in [*MODULES, TEST_FILE]:
+        (repo / path).parent.mkdir(parents=True, exist_ok=True)
+        (repo / path).write_text("X = 1\n", encoding="utf-8")
+    _git(repo, "add", "-A")
+    identity = ["-c", "user.name=t", "-c", "user.email=t@t"]
+    _git(repo, *identity, "commit", "-q", "-m", "base")
+    bindir = tmp / "bin"
+    bindir.mkdir()
+    fake = bindir / "bazel"
+    fake.write_text("#!/bin/sh\nexit 0\n", encoding="utf-8")
+    fake.chmod(0o755)
+    env = dict(os.environ, PATH=f"{bindir}:{os.environ['PATH']}")
+    env.pop("NEMIK_HOOK_SNAPSHOT", None)
+    env["MIKEMOL_REAL_ROOT"] = str(repo)
+    env["NEMIK_PYTHON"] = sys.executable
+    return repo, env
+
+
+def test_staging_only_a_test_file_the_tests_list_does_not_name_is_refused(
+    tmp_path: Path,
+) -> None:
+    """nemik:W2307: the guard fires on a tests change alone, not only on a src/nemik one."""
+    repo, env = _tests_repo(tmp_path)
+    (repo / "tests" / "test_b.py").write_text("X = 1\n", encoding="utf-8")
+    _git(repo, "add", "tests/test_b.py")
+    done = capture(["sh", str(HOOK)], cwd=repo, env=env)
+    assert done.returncode == REFUSED
+    assert REFUSAL in done.stderr
+    assert "bazel/nemik_tests.bzl" in done.stderr
+
+
+def test_staging_only_the_tests_list_with_a_file_dropped_is_refused(
+    tmp_path: Path,
+) -> None:
+    """The guard also fires when only bazel/nemik_tests.bzl is staged."""
+    repo, env = _tests_repo(tmp_path)
+    (repo / "bazel" / "nemik_tests.bzl").write_text(
+        render([], TESTS_SPEC), encoding="utf-8"
+    )
+    _git(repo, "add", "bazel/nemik_tests.bzl")
+    done = capture(["sh", str(HOOK)], cwd=repo, env=env)
+    assert done.returncode == REFUSED
+    assert REFUSAL in done.stderr
+
+
+def test_staging_a_changed_test_file_the_list_names_passes_the_check(
+    tmp_path: Path,
+) -> None:
+    """An edit to a named test file leaves the list exact: the hook goes on to the gate."""
+    repo, env = _tests_repo(tmp_path)
+    (repo / TEST_FILE).write_text("X = 2\n", encoding="utf-8")
+    _git(repo, "add", TEST_FILE)
+    done = capture(["sh", str(HOOK)], cwd=repo, env=env)
+    assert REFUSAL not in done.stderr
+    assert done.returncode != REFUSED
