@@ -444,6 +444,7 @@ TESTS_PY = [
     "tests/test_shapes_meta.py",
     "tests/test_shard_select.py",
     "tests/test_shellquote.py",
+    "tests/test_side_by_side.py",
     "tests/test_skill.py",
     "tests/test_sla.py",
     "tests/test_snaplink.py",

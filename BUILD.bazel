@@ -85,6 +85,8 @@ TARGETS = [(src, "") for src in glob(["tests/test_*.py"]) if src != "tests/test_
             + (["tools/landing_kind.py"] if src == "tests/test_landing_kind.py" else [])
             # nemik:W2032: the pace replay is imported by name from tools/
             + (["tools/pace_replay.py"] if src == "tests/test_pace_replay.py" else [])
+            # nemik:W2018: the side-by-side surfaces view is imported by name from tools/
+            + (["tools/side_by_side.py"] if src == "tests/test_side_by_side.py" else [])
             # nemik:W1994: the ratchet atomizer's plan is imported by name from tools/
             + (["tools/ratchet_atomizer.py"] if src == "tests/test_ratchet_atomizer.py" else [])
             # nemik:W1411: the codon closure map is imported by name from tools/

@@ -6424,3 +6424,8 @@
 2026-11-19T07:14:21Z  interrupt W2335 minted    -         "nemik-rank prints the measured gate CPU of a velocity card's declared targets beside its band and changes no order"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2323
 2026-11-19T07:14:27Z  interrupt W2336 minted    -         "A replay over the month the store retains shows a velocity card rises with its measured gate cost, before the number enters the order"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2323
 2026-11-19T07:14:34Z  interrupt W2337 minted    -         "mtools states what the gate's run, admission and failed series measure, whether cpu.seconds is user plus sys, and which run spelling is the family"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2323
+2026-11-19T07:27:59Z  status W2018 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-19T07:30:49Z  interrupt W2338 minted    -         "queuefiles.workstream_files docstring says luthen's export carries two files per repo, and it carries more"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=luthen-observability
+2026-11-19T07:31:58Z  status W2319 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-19T07:45:37Z  interrupt W2339 minted    -         "Ask mtools for a standing PreToolUse rule refusing a Bash cp, mv or redirect from a scratchpad path into a repo tree"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-00
+2026-11-19T07:50:35Z  interrupt W2340 minted    -         "side_by_side's cell fields are typed with a recursive Json alias, not dict[str, object], derived from the schema"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-00
