@@ -87,6 +87,20 @@ def test_the_facts_are_the_staged_trees_paths_stamped_with_its_sha(
         "vendor/wheels/x.whl",
     ]
     assert changed.paths == CHANGED
+    assert _read(repo, "tracked.txt").splitlines()[0] == "facts tracked"
+    assert _read(repo, "changed.txt").splitlines()[0] == "facts changed"
+
+
+def test_each_facts_file_is_refused_by_the_other_files_parser(
+    staged: tuple[Path, str, str],
+) -> None:
+    """The planted red of nemik:W2350 on the writer's own files: a wrongly wired one is refused."""
+    repo, tree, head = staged
+    assert _run(str(repo), tree, head)[0] == 0
+    with pytest.raises(ValueError, match=r"not 'facts tracked' \('facts changed'\)"):
+        parse(_read(repo, "changed.txt"), "changed.txt")
+    with pytest.raises(ValueError, match=r"not 'facts changed' \('facts tracked'\)"):
+        parse_diff(_read(repo, "tracked.txt"), "tracked.txt")
 
 
 def test_the_facts_come_from_the_tree_not_the_live_checkout_or_its_index(
@@ -160,9 +174,16 @@ def test_the_wrong_number_of_arguments_is_a_usage_error() -> None:
 
 
 def test_the_gate_runs_the_writer_after_read_tree_and_before_bazel() -> None:
-    """Deleting, weakening or moving the call must fail here, not pass silently."""
-    text = GATE.read_text("utf-8")
+    """Deleting, commenting out, weakening or moving the call must fail here."""
+    lines = [
+        ln.strip()
+        for ln in GATE.read_text("utf-8").splitlines()
+        if not ln.lstrip().startswith("#")
+    ]
     call = 'sh "$wt/tools/gate_facts.sh" "$wt" "$tree" "$head_sha" || exit 1'
-    assert text.count(call) == 1
-    assert text.index('read-tree --reset -u "$tree"') < text.index(call)
-    assert text.index(call) < text.index("bazel build //:.venv")
+    assert lines.count(call) == 1
+    read_tree = lines.index('git -C "$wt" read-tree --reset -u "$tree" || exit 1')
+    venv = next(
+        at for at, ln in enumerate(lines) if ln.startswith("bazel build //:.venv")
+    )
+    assert read_tree < lines.index(call) < venv

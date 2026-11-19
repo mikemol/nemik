@@ -5,11 +5,13 @@
 # answers are collected here as DATA, and each test declares the file it reads as an input.
 #
 # The facts come from the STAGED TREE object the gate is about to test (ls-tree and diff-tree on the
-# tree's sha), never from the live checkout. Each file's first line stamps the tree it describes, and
-# changed.txt, which is a function of the tree AND of the HEAD it is diffed against, stamps both:
+# tree's sha), never from the live checkout. Each file's first line names its KIND, so a text handed to
+# the wrong parser is refused (nemik:W2350), and then stamps the tree it describes. changed.txt, which
+# is a function of the tree AND of the HEAD it is diffed against, stamps both:
 #
-#   tree <sha>             (both files)
-#   head <sha>             (changed.txt only, its second line)
+#   facts tracked          (tracked.txt, its first line)   facts changed   (changed.txt)
+#   tree <sha>             (both files, the second line)
+#   head <sha>             (changed.txt only, its third line)
 #
 # the tests refuse facts stamped for another tree or HEAD, so a stale file cannot silently lie. In the
 # gate a stale file cannot survive anyway: tools/gate_staged.sh cleans the worktree (git clean -fdx,
@@ -37,11 +39,13 @@ head=$3
 dir="$wt/.gate-facts"
 
 emit() {
-	printf 'tree %s\n' "$tree"
 	case "$1" in
-	tracked) git -C "$wt" ls-tree -r --name-only "$tree" -- src/nemik tests vendor/wheels ;;
+	tracked)
+		printf 'facts tracked\ntree %s\n' "$tree"
+		git -C "$wt" ls-tree -r --name-only "$tree" -- src/nemik tests vendor/wheels
+		;;
 	changed)
-		printf 'head %s\n' "$head"
+		printf 'facts changed\ntree %s\nhead %s\n' "$tree" "$head"
 		git -C "$wt" diff-tree -r --name-only --no-commit-id "$head" "$tree"
 		;;
 	*)

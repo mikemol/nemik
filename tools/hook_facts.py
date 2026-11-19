@@ -12,13 +12,16 @@ them into facts files from the STAGED tree, and each check here is judged by its
 bazel test that declares those files as inputs (the operator, host transcript 695f3e0a line
 190734: work with bazel's cache, never around it).
 
-The tracked paths are a function of the tree alone: `tree <40 hex>` on the first line, then one
-path per line. The changed paths are a function of the tree AND the HEAD it was diffed against
-(nemik:W2344's cold review: one tree, two HEADs, one stamp, two bodies): `tree <40 hex>` then
-`head <40 hex>`, then one path per line. The stamps are how a stale file is caught: `require_tree`
-and `require_diff` refuse facts that describe another tree or HEAD than the one the caller says
-it is judging, so facts cannot silently lie. Every check returns its problems as a list, empty
-when there are none; a malformed or stale facts text is an exception, never an empty list.
+The tracked paths are a function of the tree alone: `facts tracked`, then `tree <40 hex>`, then
+one path per line. The changed paths are a function of the tree AND the HEAD it was diffed against
+(nemik:W2344's cold review: one tree, two HEADs, one stamp, two bodies): `facts changed`, then
+`tree <40 hex>`, then `head <40 hex>`, then one path per line. The first line names the KIND of
+file, so a text handed to the wrong parser is refused, not read as paths (nemik:W2350, the same
+review's N4: a changed-paths text read as tracked paths passed, its head line becoming a path). The
+stamps are how a stale file is caught: `require_tree` and `require_diff` refuse facts that describe
+another tree or HEAD than the one the caller says it is judging, so facts cannot silently lie.
+Every check returns its problems as a list, empty when there are none; a malformed, misplaced or
+stale facts text is an exception, never an empty list.
 """
 
 import re
@@ -27,6 +30,9 @@ from typing import NamedTuple
 from nemik_src import SRC_SPEC, TESTS_SPEC, check
 
 STAMP_FIELDS = 2
+TRACKED = "facts tracked"
+CHANGED = "facts changed"
+ORDINALS = ("first", "second", "third")
 SHA = re.compile(r"[0-9a-f]{40}")
 WHEEL = re.compile(r'vendor/wheels/[^"]*\.whl')
 CODE_TREES = ("src/", "tests/")
@@ -56,6 +62,22 @@ class Diff(NamedTuple):
     paths: list[str]
 
 
+def _kind(lines: list[str], expected: str, source: str) -> None:
+    """Refuse a text whose first line does not name the kind of file being read.
+
+    Raises:
+        FactsError: the first line is not `expected`, so the text is another facts file's.
+
+    """
+    got = lines[0] if lines else ""
+    if got != expected:
+        msg = (
+            f"{source}: the first line is not '{expected}' ({got!r}), so this text "
+            "is not that facts file"
+        )
+        raise FactsError(msg)
+
+
 def _stamp(lines: list[str], at: int, key: str, source: str) -> str:
     """Read the sha of a stamp line.
 
@@ -68,8 +90,7 @@ def _stamp(lines: list[str], at: int, key: str, source: str) -> str:
     """
     parts = lines[at].split(" ") if at < len(lines) else []
     if len(parts) != STAMP_FIELDS or parts[0] != key or not SHA.fullmatch(parts[1]):
-        where = ("first", "second")[at]
-        msg = f"{source}: the {where} line is not '{key} <40 hex>'"
+        msg = f"{source}: the {ORDINALS[at]} line is not '{key} <40 hex>'"
         raise FactsError(msg)
     return parts[1]
 
@@ -86,7 +107,8 @@ def parse(text: str, source: str) -> Facts:
 
     """
     lines = text.splitlines()
-    return Facts(_stamp(lines, 0, "tree", source), [ln for ln in lines[1:] if ln])
+    _kind(lines, TRACKED, source)
+    return Facts(_stamp(lines, 1, "tree", source), [ln for ln in lines[2:] if ln])
 
 
 def parse_diff(text: str, source: str) -> Diff:
@@ -101,8 +123,9 @@ def parse_diff(text: str, source: str) -> Diff:
 
     """
     lines = text.splitlines()
-    tree = _stamp(lines, 0, "tree", source)
-    return Diff(tree, _stamp(lines, 1, "head", source), [ln for ln in lines[2:] if ln])
+    _kind(lines, CHANGED, source)
+    tree = _stamp(lines, 1, "tree", source)
+    return Diff(tree, _stamp(lines, 2, "head", source), [ln for ln in lines[3:] if ln])
 
 
 def _require_sha(value: str, what: str, source: str) -> None:

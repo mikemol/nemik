@@ -28,6 +28,8 @@ TESTS_LIST = render(TESTS, TESTS_SPEC)
 READY = '{"waypoints": [{"symbol": "W1", "status": "ready"}]}'
 WORKING = '{"waypoints": [{"symbol": "W1", "status": "ready"}, {"status": "working"}]}'
 DONE = '{"waypoints": [{"symbol": "W1", "status": "done"}]}'
+TRACKED_HEAD = f"facts tracked\ntree {TREE}\n"
+CHANGED_HEAD = f"facts changed\ntree {TREE}\nhead {HEAD}\n"
 
 
 def _facts(*paths: str, tree: str = TREE) -> Facts:
@@ -38,11 +40,11 @@ def _diff(*paths: str, tree: str = TREE, head: str = HEAD) -> Diff:
     return Diff(tree, head, list(paths))
 
 
-def test_a_facts_text_is_a_stamp_then_one_path_per_line() -> None:
-    """The first line names the tree; blank lines are not paths."""
-    text = f"tree {TREE}\nsrc/nemik/a.py\n\ntests/test_a.py\n"
+def test_a_facts_text_is_a_kind_a_stamp_then_one_path_per_line() -> None:
+    """The first line names the kind, the second the tree; blank lines are not paths."""
+    text = f"facts tracked\ntree {TREE}\nsrc/nemik/a.py\n\ntests/test_a.py\n"
     assert parse(text, "t.txt") == Facts(TREE, ["src/nemik/a.py", "tests/test_a.py"])
-    assert parse(f"tree {TREE}\n", "t.txt") == Facts(TREE, [])
+    assert parse(TRACKED_HEAD, "t.txt") == Facts(TREE, [])
 
 
 @pytest.mark.parametrize(
@@ -50,48 +52,98 @@ def test_a_facts_text_is_a_stamp_then_one_path_per_line() -> None:
     [
         "",
         "src/nemik/a.py\n",
-        "tree\n",
-        f"tree {TREE} x\n",
-        "tree xyz\n",
-        f"Tree {TREE}\n",
+        f"tree {TREE}\n",
+        f"facts changed\ntree {TREE}\nhead {HEAD}\n",
+        f"Facts tracked\ntree {TREE}\n",
+        f"facts tracked x\ntree {TREE}\n",
     ],
 )
-def test_a_text_without_a_good_stamp_is_refused_with_its_source_named(
+def test_a_text_that_is_not_a_tracked_file_is_refused_with_its_source_named(
     text: str,
 ) -> None:
-    """No stamp means nothing says which tree the paths describe."""
-    with pytest.raises(FactsError, match="first line is not 'tree <40 hex>'") as raised:
+    """The first line must name the tracked kind, so another file's text is not read as paths."""
+    with pytest.raises(FactsError, match="first line is not 'facts tracked'") as raised:
         parse(text, "gate/tracked.txt")
     assert str(raised.value).startswith("gate/tracked.txt:")
 
 
-def test_a_diff_text_is_two_stamps_then_one_path_per_line() -> None:
+@pytest.mark.parametrize(
+    "text",
+    [
+        "facts tracked\n",
+        "facts tracked\ntree\n",
+        f"facts tracked\ntree {TREE} x\n",
+        "facts tracked\ntree xyz\n",
+        f"facts tracked\nTree {TREE}\n",
+    ],
+)
+def test_a_tracked_text_without_a_good_stamp_is_refused_naming_the_line(
+    text: str,
+) -> None:
+    """No stamp means nothing says which tree the paths describe."""
+    with pytest.raises(
+        FactsError, match="second line is not 'tree <40 hex>'"
+    ) as raised:
+        parse(text, "gate/tracked.txt")
+    assert str(raised.value).startswith("gate/tracked.txt:")
+
+
+def test_a_diff_text_is_a_kind_two_stamps_then_one_path_per_line() -> None:
     """The changed paths name the tree AND the HEAD they were diffed against."""
-    text = f"tree {TREE}\nhead {HEAD}\nREADME.md\n\nsrc/nemik/b.py\n"
+    text = f"{CHANGED_HEAD}README.md\n\nsrc/nemik/b.py\n"
     assert parse_diff(text, "c.txt") == Diff(
         TREE, HEAD, ["README.md", "src/nemik/b.py"]
     )
-    assert parse_diff(f"tree {TREE}\nhead {HEAD}\n", "c.txt") == Diff(TREE, HEAD, [])
+    assert parse_diff(CHANGED_HEAD, "c.txt") == Diff(TREE, HEAD, [])
 
 
 @pytest.mark.parametrize(
-    ("text", "where"),
+    "text",
     [
-        ("", "first"),
-        (f"tree {TREE}\n", "second"),
-        (f"tree {TREE}\nREADME.md\n", "second"),
-        (f"tree {TREE}\ntree {HEAD}\n", "second"),
-        (f"tree {TREE}\nhead xyz\n", "second"),
-        (f"head {HEAD}\ntree {TREE}\n", "first"),
+        "",
+        "README.md\n",
+        f"tree {TREE}\nhead {HEAD}\n",
+        f"facts tracked\ntree {TREE}\n",
+        f"Facts changed\ntree {TREE}\nhead {HEAD}\n",
+    ],
+)
+def test_a_text_that_is_not_a_changed_file_is_refused_with_its_source_named(
+    text: str,
+) -> None:
+    """The first line must name the changed kind, so another file's text is not read as paths."""
+    with pytest.raises(FactsError, match="first line is not 'facts changed'") as raised:
+        parse_diff(text, "gate/changed.txt")
+    assert str(raised.value).startswith("gate/changed.txt:")
+
+
+@pytest.mark.parametrize(
+    ("stamps", "where"),
+    [
+        ("", "second"),
+        (f"tree {TREE}\n", "third"),
+        (f"tree {TREE}\nREADME.md\n", "third"),
+        (f"tree {TREE}\ntree {HEAD}\n", "third"),
+        (f"tree {TREE}\nhead xyz\n", "third"),
+        (f"head {HEAD}\ntree {TREE}\n", "second"),
     ],
 )
 def test_a_diff_text_without_both_stamps_is_refused_naming_the_line(
-    text: str, where: str
+    stamps: str, where: str
 ) -> None:
     """A changed-paths file with only a tree stamp is the gap the cold review found."""
     with pytest.raises(FactsError, match=f"the {where} line is not '") as raised:
-        parse_diff(text, "gate/changed.txt")
+        parse_diff(f"facts changed\n{stamps}", "gate/changed.txt")
     assert str(raised.value).startswith("gate/changed.txt:")
+
+
+def test_each_parser_refuses_the_other_files_text() -> None:
+    """The planted red of nemik:W2350: a changed text read as tracked once passed require_tree."""
+    changed = f"{CHANGED_HEAD}README.md\n"
+    tracked = f"{TRACKED_HEAD}src/nemik/a.py\n"
+    with pytest.raises(FactsError, match=r"\('facts changed'\)"):
+        parse(changed, "gate/tracked.txt")
+    with pytest.raises(FactsError, match=r"\('facts tracked'\)"):
+        parse_diff(tracked, "gate/changed.txt")
 
 
 def test_facts_for_another_tree_are_refused_as_stale() -> None:
