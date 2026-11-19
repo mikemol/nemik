@@ -828,6 +828,63 @@ def branch_work(repo: Path) -> list[tuple[str, int, int]]:
 
 
 BRANCH_FIELDS = 4  # a for-each-ref line: the name, ahead, behind and the commit time
+QUEUE_FILES = (f".claude/{QUEUE}", f".claude/{LEDGER}")
+# the three states of a repo's queue (nemik:W2252): a closed set, so "git cannot answer" is a state
+# of its own and never a missing value
+DIRTY, CLEAN, UNKNOWN = "dirty", "clean", "unknown"
+
+
+def queue_state(repo: Path) -> str:
+    """Say whether a repo's queue differs from HEAD, from git metadata alone (nemik:W2252).
+
+    `git status --porcelain` over the queue file and its ledger names a path that differs from
+    HEAD and reads no content: queue discipline is that the queue is committed by tick close, and
+    a queue that stays modified is the failure.
+
+    Args:
+        repo: The repo's working directory.
+
+    Returns:
+        DIRTY when the queue or its ledger differs from HEAD (a modified, staged or untracked
+        file), CLEAN when neither does, UNKNOWN when git could not answer: an unreadable repo is
+        a state of its own, never read as clean.
+
+    """
+    lines = git_lines(repo, "status", "--porcelain", "--", *QUEUE_FILES)
+    if lines is None:
+        return UNKNOWN
+    return DIRTY if lines else CLEAN
+
+
+def dirty_for(mark: Path, *, dirty: bool, now: int) -> int:
+    """Count how many seconds a queue has been dirty, from the time a scrape first saw it (W2252).
+
+    The first scrape that sees the queue dirty writes `now` to `mark`; a clean scrape removes the
+    mark, so a queue committed and then modified again starts a new clock. The resolution is the
+    scrape interval. A mark that is not a number is replaced by `now`, so a damaged file restarts
+    the clock and is never read as an old one. A scrape that could not read the repo does not call
+    this at all, so it neither starts nor resets a clock.
+
+    Args:
+        mark: The repo's first-seen file.
+        dirty: Whether this scrape saw the queue differ from HEAD.
+        now: This scrape's Unix time.
+
+    Returns:
+        0 for a clean queue, else the seconds since the first scrape that saw it dirty.
+
+    """
+    if not dirty:
+        mark.unlink(missing_ok=True)
+        return 0
+    since = now
+    if mark.exists():
+        text = mark.read_text(encoding="utf-8").strip()
+        since = int(text) if text.isdigit() else now
+    if since == now:
+        mark.parent.mkdir(parents=True, exist_ok=True)
+        mark.write_text(str(now), encoding="utf-8")
+    return now - since
 
 
 def commits_since(repo: Path, since: str) -> int | None:

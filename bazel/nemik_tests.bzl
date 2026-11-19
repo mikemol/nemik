@@ -338,6 +338,7 @@ TESTS_PY = [
     "tests/test_publish_without_git.py",
     "tests/test_published_valid.py",
     "tests/test_pycheck_file.py",
+    "tests/test_queue_dirty.py",
     "tests/test_queue_fixture.py",
     "tests/test_queuerows.py",
     "tests/test_rank.py",

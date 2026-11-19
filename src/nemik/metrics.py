@@ -242,6 +242,15 @@ HELP = {
     "nemik_branch_newest_commit_seconds": (
         "Unix time of the newest commit on a current branch ahead of the trunk."
     ),
+    "nemik_queue_dirty": (
+        "1 when a repo's queue or its ledger differs from HEAD, else 0 (queue discipline)."
+    ),
+    "nemik_queue_dirty_seconds": (
+        "Seconds since a scrape first saw the repo's queue differ from HEAD, 0 when clean."
+    ),
+    "nemik_queue_dirty_unknown": (
+        "1 for a repo whose queue state could not be read (no git, or git refused): never clean."
+    ),
     "nemik_ready_stale": "Ready cards untouched past how long 9 in 10 small cards take to finish.",
     "nemik_run_log_unmigrated": "Source run-log lines that predate the run-row shape, by stream.",
 }
@@ -716,6 +725,77 @@ def branch_lines(
     return ahead + newest
 
 
+def queue_dirty_lines(
+    root: Path,
+    now: datetime,
+    read: Callable[[Path], str] = history.queue_state,
+    marks: Path | None = None,
+) -> list[str]:
+    """nemik:W2252: per repo, whether the queue differs from HEAD and for how long.
+
+    Git metadata only, no queue content: queue discipline is that the queue is committed by tick
+    close, so a queue that stays modified is visible here, not as a spot read. The seconds are
+    kept as the time a scrape first saw the queue dirty (history.dirty_for), in a small file under
+    the user cache directory that a clean scrape removes. A repo whose state cannot be read (no
+    .git, or git refused) is UNKNOWN and prints its own sample, nemik_queue_dirty_unknown, never
+    silence: an unknown scrape neither starts nor resets a clock.
+
+    Args:
+        root: The fleet root.
+        now: This scrape's instant.
+        read: Reads a repo's queue state (history.queue_state): DIRTY, CLEAN or UNKNOWN.
+        marks: The directory of first-seen files (default: queue-dirty in the user cache).
+
+    Returns:
+        The three gauges' TYPE lines, a dirty flag and seconds for every repo whose state was
+        read, and an unknown sample for every repo whose state was not.
+
+    """
+    folder = marks or cachestore.user_dir() / "queue-dirty"
+    flags = ["# TYPE nemik_queue_dirty gauge"]
+    seconds = ["# TYPE nemik_queue_dirty_seconds gauge"]
+    unknown = ["# TYPE nemik_queue_dirty_unknown gauge"]
+    for repo, path in workstream_files(root, QUEUE):
+        top = path.parents[1] if path.parent.name == ".claude" else path.parent
+        state = read(top) if (top / ".git").exists() else history.UNKNOWN
+        tags = label(repo=repo)
+        if state == history.UNKNOWN:
+            unknown.append(f"nemik_queue_dirty_unknown{tags} 1")
+            continue
+        dirty = state == history.DIRTY
+        mark = folder / f"{repo}.since"
+        held = history.dirty_for(mark, dirty=dirty, now=int(now.timestamp()))
+        flags.append(f"nemik_queue_dirty{tags} {int(dirty)}")
+        seconds.append(f"nemik_queue_dirty_seconds{tags} {held}")
+    return flags + seconds + unknown
+
+
+def git_family_lines(root: Path, now: datetime, wanted: list[str]) -> list[str]:
+    """Compute the families read from git alone, only the ones named (nemik:W2251, W2252).
+
+    Args:
+        root: The fleet root.
+        now: This scrape's instant.
+        wanted: The family names the caller asked for.
+
+    Returns:
+        The branch gauges and the queue-dirty gauges, for whichever names were asked.
+
+    """
+    out: list[str] = []
+    branches = {"nemik_branch_commits_ahead", "nemik_branch_newest_commit_seconds"}
+    queues = {
+        "nemik_queue_dirty",
+        "nemik_queue_dirty_seconds",
+        "nemik_queue_dirty_unknown",
+    }
+    if branches & set(wanted):
+        out += branch_lines(root)
+    if queues & set(wanted):
+        out += queue_dirty_lines(root, now)
+    return out
+
+
 def drift_lines(root: Path, merged: Graph) -> list[str]:
     """nemik:W611: per repo, the done cards whose commits touched files outside their manifest.
 
@@ -799,10 +879,7 @@ def history_lines(
         out += stackable_lines(root, merged)
     if "nemik_landed_open_candidates" in wanted:
         out += candidate_lines(root, merged)
-    if {"nemik_branch_commits_ahead", "nemik_branch_newest_commit_seconds"} & set(
-        wanted
-    ):
-        out += branch_lines(root)
+    out += git_family_lines(root, now, wanted)
     return out
 
 
@@ -941,6 +1018,9 @@ HISTORY_FAMILIES = (
     "nemik_landed_open_candidates",
     "nemik_branch_commits_ahead",
     "nemik_branch_newest_commit_seconds",
+    "nemik_queue_dirty",
+    "nemik_queue_dirty_seconds",
+    "nemik_queue_dirty_unknown",
 )
 REALIZABILITY = ("nemik_realizability_waypoints", "nemik_realizability_unjudged")
 GRAPH_FREE = frozenset(
