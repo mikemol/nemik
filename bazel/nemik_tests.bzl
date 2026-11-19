@@ -344,6 +344,7 @@ TESTS_PY = [
     "tests/test_rank.py",
     "tests/test_rank_apply.py",
     "tests/test_rank_flow.py",
+    "tests/test_rank_item.py",
     "tests/test_rank_paydown.py",
     "tests/test_rank_survey.py",
     "tests/test_rank_weights_schema.py",

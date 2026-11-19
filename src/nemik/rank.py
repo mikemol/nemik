@@ -543,6 +543,49 @@ def umbrellas(g: Graph, repo: str) -> list[Node]:
     )
 
 
+def _state_name(g: Graph, n: Node) -> str:
+    """Name a waypoint's state without its namespace.
+
+    Returns:
+        The state's local name (`ready`, `blocked`, ...), or "" when the node has none.
+
+    """
+    return str(g.value(n, OSLC_CM.state) or "").rsplit("/", 1)[-1].rsplit("#", 1)[-1]
+
+
+class NotRankedError(Exception):
+    """A waypoint is not in `rank`'s list; the message says why (nemik:W2321)."""
+
+
+def require_ranked(g: Graph, n: Node, *, with_working: bool = False) -> None:
+    """Return when `rank` lists the waypoint, and raise when it does not (nemik:W2321).
+
+    It applies the two tests `_rows` applies, so a reader of `--item` need not chase the weights:
+    a card is listed when it is ready (or working, when asked) and is not an umbrella.
+    tests/test_rank_item.py checks this against `rank` for every card of a fixture.
+
+    Raises:
+        NotRankedError: the card is not listed. The message gives the reason, naming for an
+            umbrella the open cards that feed it and the leaves ranked in its place.
+
+    """
+    listed = (n, OSLC_CM.state, NEMIK.Ready) in g or (
+        with_working and (n, OSLC_CM.state, NEMIK.Working) in g
+    )
+    if not listed:
+        state = _state_name(g, n).lower() or "stateless"
+        msg = f"it is {state}, and only ready cards are ranked"
+        raise NotRankedError(msg)
+    if is_umbrella(g, n):
+        feeders = ", ".join(sorted(ref_of(x) for x in children(g, n)))
+        leaves = ", ".join(sorted(ref_of(x) for x in frontier(g, n)[0]))
+        msg = (
+            "it is an umbrella, ready with open work under it, so not a frontier leaf: "
+            f"{feeders} feed it, and the leaves ranked in its place are {leaves}"
+        )
+        raise NotRankedError(msg)
+
+
 def _rows(
     g: Graph,
     repo: str,
@@ -840,8 +883,15 @@ def _report_item(g: Graph, args: Options) -> None:
     vec = str(g.value(n, NEMIK.vector) or "") or None
     bands = load_bands()
     b, why = placed(g, n, bands.chained(gate_chain(g, bands)))
-    state = str(g.value(n, OSLC_CM.state) or "").rsplit("/", 1)[-1].rsplit("#", 1)[-1]
-    say(f"{args.item}  {state}  {b}  ({why})  {vec or 'no vector'}")
+    say(f"{args.item}  {_state_name(g, n)}  {b}  ({why})  {vec or 'no vector'}")
+    # nemik:W2321: the band says where a card would sit; whether it is in the list at all is a
+    # separate question, so a reader does not chase the weights for a card the list leaves out.
+    try:
+        require_ranked(g, n)
+    except NotRankedError as gone:
+        say(f"rank: {args.item} is not in the ranked list: {gone}")
+    else:
+        say(f"rank: {args.item} is in the ranked list")
 
 
 def _report_check(g: Graph, args: Options, weights: Weights) -> None:

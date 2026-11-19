@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 2331,
+  "counter": 2333,
   "waypoints": [
     {
       "symbol": "W1",
@@ -25639,7 +25639,6 @@
         "file:docs/per-test-targets.md!w"
       ],
       "blocked_on": [
-        "W2167",
         "W2168"
       ],
       "blocked_kind": "agent",
@@ -25649,7 +25648,7 @@
       "minted_during": "tick",
       "caused_by": "W1035",
       "last_worked": "2026-11-13T14:39:54Z",
-      "ticks_blocked": 1,
+      "ticks_blocked": 0,
       "manifest": [
         "docs/per-test-targets.md"
       ],
@@ -54168,6 +54167,27 @@
     {
       "symbol": "W2167",
       "title": "Pick one test target and record the staged bytes of each input (venv, Chromium, opa, Codon, corpus) from its sandbox, no timing",
+      "status": "done",
+      "enables": [
+        "W1075"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-11-13T18:02:48Z: PARTIAL, measured 2026-11-13 (apparent size, MiB, du -sm --apparent-size; the venv with -L because its entries are symlinks): chromium repo 260, opa 61, codon 263, tests/corpus 1, .venv 403. These are WHOLE input repos as installed, not one target's staged subset: no test target was picked and no sandbox was read. Still owed: pick the target (the one whose BUILD clause names chromium, opa, codon and the venv together) and read its sandbox directory for the staged bytes per input. | 2026-11-19T06:34:33Z: 2026-11-19: taking the round after W2321 and W2323 (W2323 waits on luthen). Plan: the runfiles tree of a built test target is what the sandbox stages (symlinks), so build //:test_layout (no test run) and du -L its inputs; BUILD.bazel shows every test target names the same data (the venv, @opa//file, @chromium//:files and chrome-headless-shell, tests/corpus), codon only for the codon tests. | 2026-11-19T06:35:28Z: 2026-11-19 MEASURED, no timing (target //:test_layout, built and not run, in a scratch worktree on main 2a2364ab; method du -L -s -m --apparent-size on bazel-bin/test_layout.runfiles, the tree the sandbox stages by symlink): the whole runfiles tree is 992 MiB of distinct files (du counts each inode once). Per input: chromium 260, python interpreter (rules_python python_3_14) 386, .venv 395, opa 61, use_of_colour_rego 1, tests/corpus 1, src and tests under 1 (rounded). The .venv's symlinks reach into the interpreter, so those two overlap and do not sum (260+386+395+61+1+1 is 1104, 112 over the distinct total 992). CODON IS NOT STAGED for this target: the BUILD clause names @chromium, @opa, the venv and the corpus, and codon only for the codon tests (the card's premise that test_layout names codon was wrong); the python interpreter, 386 MiB, is a staged input the earlier whole-repo list did not name. Earlier whole-repo figures (chromium 260, opa 61, codon 263, corpus 1, .venv 403) agree for chromium, opa and corpus, so for those the staged subset is the whole repo. NOT verified: an actual sandbox directory read during a test run; I read the runfiles tree, which is the staged set by construction, but did not catch a live sandbox. Every test target's data names the same five inputs, so the per-target staged size is about this for any of them.",
+      "issued_at": "2026-11-13T14:39:54Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1075",
+      "last_worked": "2026-11-19T06:35:28Z",
+      "ticks_blocked": 0,
+      "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
+      "vector_source": "default",
+      "completed": "20261119T063528Z"
+    },
+    {
+      "symbol": "W2168",
+      "title": "Take the idle-host staging time of that target once luthen reports the host idle, and split it by input",
       "status": "ready",
       "enables": [
         "W1075"
@@ -54175,28 +54195,6 @@
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Pick tests/test_layout.py (its BUILD clause names chromium, opa, codon and the venv together) and read its bazel sandbox directory for the staged bytes per input (du -L per input), no timing; write the five numbers on this card.",
-      "evidence": "2026-11-13T18:02:48Z: PARTIAL, measured 2026-11-13 (apparent size, MiB, du -sm --apparent-size; the venv with -L because its entries are symlinks): chromium repo 260, opa 61, codon 263, tests/corpus 1, .venv 403. These are WHOLE input repos as installed, not one target's staged subset: no test target was picked and no sandbox was read. Still owed: pick the target (the one whose BUILD clause names chromium, opa, codon and the venv together) and read its sandbox directory for the staged bytes per input.",
-      "issued_at": "2026-11-13T14:39:54Z",
-      "minted_during": "interrupt",
-      "caused_by": "W1075",
-      "last_worked": "2026-11-17T22:02:43Z",
-      "ticks_blocked": 0,
-      "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
-      "vector_source": "default"
-    },
-    {
-      "symbol": "W2168",
-      "title": "Take the idle-host staging time of that target once luthen reports the host idle, and split it by input",
-      "status": "blocked",
-      "enables": [
-        "W1075"
-      ],
-      "touches": [],
-      "blocked_on": [
-        "W2167"
-      ],
-      "blocked_kind": "agent",
       "next_bounded_step": "After W2167 names the target: take its idle-host staging time once luthen-observability reports the host idle, and split it by input.",
       "evidence": "",
       "issued_at": "2026-11-13T14:39:54Z",
@@ -57229,21 +57227,21 @@
     {
       "symbol": "W2307",
       "title": "The pre-commit hook fires the named-inputs check when tests or bazel/nemik_tests.bzl change (a gate-hook change, split from W2261, for a cold review)",
-      "status": "working",
+      "status": "done",
       "enables": [],
       "touches": [
         "gate-repair"
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Wait for github-00's cold review of refs/review/W2307-v1 = 24add752 (the hook diff); on PASS-SUBMIT re-cut onto main if it moved, check the diff equals the stack paths, submit .claude/stack-W2307-v1.json with --freeze-from the worktree, read back git log -1 and ls-remote, mark done (ref landing)",
-      "evidence": "2026-11-18T13:37:28Z: 2026-11-18 split out of W2261 v2 on github-b0's review: a gate-hook change gets a cold review, deferred to after 21:00 ET (operator token budget). | 2026-11-19T05:51:27Z: 2026-11-19: W2261 is done (landed 64c3e570), so this is unblocked, and it is past 21:00 ET 2026-11-18. Scratch worktree .nemik-w2307-wt on df640460: the held patch applies cleanly (git apply --check then apply) and three tests are added to tests/test_precommit_nemik_src.py: a staged test file the tests list does not name is refused, a staged tests list with a file dropped is refused, a staged edit to a named test file passes the check. | 2026-11-19T05:55:11Z: 2026-11-19: built refs/review/W2307-v1 = 24add752926784813280c97f8b4b3716dfb25e64 on main df640460, two files, +83/-2. Red run: with the hook change stashed, //:test_precommit_nemik_src failed on exactly the two refusal tests (status 127 at the missing gate script instead of the refusal 1). Green run with the change restored: test_precommit_nemik_src, test_precommit_queue_check, test_githooks_snapshot, test_nemik_src, test_test_inputs, test_ruff_ratchet, test_mypy_ratchet 7 of 7 pass. Sent to github-00 for the cold review; not submitted.",
+      "next_bounded_step": null,
+      "evidence": "2026-11-18T13:37:28Z: 2026-11-18 split out of W2261 v2 on github-b0's review: a gate-hook change gets a cold review, deferred to after 21:00 ET (operator token budget). | 2026-11-19T05:51:27Z: 2026-11-19: W2261 is done (landed 64c3e570), so this is unblocked, and it is past 21:00 ET 2026-11-18. Scratch worktree .nemik-w2307-wt on df640460: the held patch applies cleanly (git apply --check then apply) and three tests are added to tests/test_precommit_nemik_src.py: a staged test file the tests list does not name is refused, a staged tests list with a file dropped is refused, a staged edit to a named test file passes the check. | 2026-11-19T05:55:11Z: 2026-11-19: built refs/review/W2307-v1 = 24add752926784813280c97f8b4b3716dfb25e64 on main df640460, two files, +83/-2. Red run: with the hook change stashed, //:test_precommit_nemik_src failed on exactly the two refusal tests (status 127 at the missing gate script instead of the refusal 1). Green run with the change restored: test_precommit_nemik_src, test_precommit_queue_check, test_githooks_snapshot, test_nemik_src, test_test_inputs, test_ruff_ratchet, test_mypy_ratchet 7 of 7 pass. Sent to github-00 for the cold review; not submitted. | 2026-11-19T06:05:00Z: 2026-11-19: LANDED as 2a2364ab (PASS-SUBMIT from github-00 on refs/review/W2307-v1 = 24add752 after the warm and the cold review; git log -1 subject read back as this card's, git ls-remote origin refs/heads/main = 2a2364ab53396d4c21d3792db15c49e17b5285d0). Gate: 10 fresh of 550 targets, green. landing_kind ref (a hook and a test; the hook is not shipped in the image): done. The held patch's content is now in git on main, so .claude/held-W2307-hook-pathspec.patch is removed.",
       "issued_at": "2026-11-18T13:37:19Z",
       "minted_during": "interrupt",
       "caused_by": "W2261",
-      "last_worked": "2026-11-19T05:55:11Z",
+      "last_worked": "2026-11-19T06:05:00Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261119T060500Z",
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
       "vector_source": "default"
     },
@@ -57344,12 +57342,12 @@
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Pick up after the round: copy the held test from .claude/held-W2312-test_witness_fields_pinned.py.txt (header lists the two ratchet findings to fix, PT001 and a mypy misc, never baselined), git add it, tools/nemik_src.py --write, bazel run, a mutation run that adds a key to FIELDS and goes red, then a review ref",
-      "evidence": "2026-11-19T05:57:56Z: 2026-11-19: scratch worktree .nemik-w2312-wt on df640460: tests/test_witness_fields_pinned.py runs the real alert, promql and apply observers against fixture responses (a PageServer answering the vmalert alert list and an instant query; a host-apply export in a temp NEMIK_ROOT, fresh and stale, an applied and a pending row) and compares each fact's keys with FIELDS[observer]; bazel/nemik_tests.bzl regenerated after git add (the tool names tracked files only). | 2026-11-19T06:01:13Z: 2026-11-19: set back to ready, HELD behind the round: mikemol-commit refused W2307's stack because this card was working and not in the round (W2321, W2323, W2167, W2110, W2018 are ready in it); I will not mark those working to pass. The test is built and one bazel run passed 7 of 8 targets, the new test and test_witness_unknown_field and test_witnesses among them; //:test_ruff_ratchet failed on PT001 and a mypy misc finding in the new file (fix, never baseline). The file is held in the repo at .claude/held-W2312-test_witness_fields_pinned.py.txt and in a scratch worktree .nemik-w2312-wt.",
+      "next_bounded_step": "Pick up after the round: git worktree add a tree on the branch scratch/W2312 (e6663b0f), fix the two ratchet findings in tests/test_witness_fields_pinned.py (PT001 and a mypy misc, never baselined), regenerate bazel/nemik_tests.bzl if the file set changes, bazel run, a mutation run that adds a key to FIELDS and goes red, then a review ref",
+      "evidence": "2026-11-19T05:57:56Z: 2026-11-19: scratch worktree .nemik-w2312-wt on df640460: tests/test_witness_fields_pinned.py runs the real alert, promql and apply observers against fixture responses (a PageServer answering the vmalert alert list and an instant query; a host-apply export in a temp NEMIK_ROOT, fresh and stale, an applied and a pending row) and compares each fact's keys with FIELDS[observer]; bazel/nemik_tests.bzl regenerated after git add (the tool names tracked files only). | 2026-11-19T06:01:13Z: 2026-11-19: set back to ready, HELD behind the round: mikemol-commit refused W2307's stack because this card was working and not in the round (W2321, W2323, W2167, W2110, W2018 are ready in it); I will not mark those working to pass. The test is built and one bazel run passed 7 of 8 targets, the new test and test_witness_unknown_field and test_witnesses among them; //:test_ruff_ratchet failed on PT001 and a mypy misc finding in the new file (fix, never baseline). The file is held in the repo at .claude/held-W2312-test_witness_fields_pinned.py.txt and in a scratch worktree .nemik-w2312-wt. | 2026-11-19T06:03:51Z: 2026-11-19: github-00's correction applied: the held work is a COMMIT on a branch, not a .claude/held-*.txt file. refs/heads/scratch/W2312 = e6663b0f414558d83d6213f5d37647fa20b2fd8d (parent df640460; tests/test_witness_fields_pinned.py and the regenerated bazel/nemik_tests.bzl, +119 lines), committed with plumbing so no hook ran, never pushed. The .claude/held-W2312 copy is removed.",
       "issued_at": "2026-11-18T20:37:06Z",
       "minted_during": "interrupt",
       "caused_by": "W2263",
-      "last_worked": "2026-11-19T06:01:13Z",
+      "last_worked": "2026-11-19T06:03:51Z",
       "ticks_blocked": 0,
       "manifest": [
         "tests/test_witness_fields_pinned.py"
@@ -57595,7 +57593,7 @@
     {
       "symbol": "W2321",
       "title": "nemik-rank --item says why a ready card is not in the ranked list (a frontier question), so a reader does not chase the weights",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W2303"
       ],
@@ -57604,13 +57602,14 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "In _report_item, after the band line, say whether the card is in rank() and, when it is not, why (an umbrella: its frontier, or the card names that wait on it; or not ready); a fixture queue with a ready card that is not a frontier leaf, and one that is; a src landing, so a review ref and the round order apply",
-      "evidence": "2026-11-19T02:40:32Z: 2026-11-18 github-00 (relaying mtools): WITHDRAWN as a ranking defect. mtools found the cause: three of its open cards still listed mtools:W2680 in their enables, left over from an old single-stack plan, so not ranking W2680 as a frontier card was right. What remains is PRESENTATION: --item printed 'Ready gate-repair (on the chain of ...)' without saying 'not a frontier leaf: waited on by W2632, W2636 and W2640'. MY READING (rank.py, 2026-11-18): rank() has no row cap and its only exclusion beyond state is is_umbrella (frontier(g, n)[0] != {n}); _report_item calls only placed(), never the filter. So --item cannot say why a card is absent. Not shown by a tool run: nemik-rank mtools --check printed no UMBRELLA line for mtools, so which condition dropped W2680 is not named by nemik today, which is the defect.",
+      "next_bounded_step": "Wait for github-00's PASS on refs/review/W2321-v2 = 8045fe08; then check main has not moved (else re-cut with the same tree), submit .claude/stack-W2321-v2.json with --freeze-from the W2321 worktree, read back git log -1 and ls-remote, mark landed with --deploys true (image landing)",
+      "evidence": "2026-11-19T02:40:32Z: 2026-11-18 github-00 (relaying mtools): WITHDRAWN as a ranking defect. mtools found the cause: three of its open cards still listed mtools:W2680 in their enables, left over from an old single-stack plan, so not ranking W2680 as a frontier card was right. What remains is PRESENTATION: --item printed 'Ready gate-repair (on the chain of ...)' without saying 'not a frontier leaf: waited on by W2632, W2636 and W2640'. MY READING (rank.py, 2026-11-18): rank() has no row cap and its only exclusion beyond state is is_umbrella (frontier(g, n)[0] != {n}); _report_item calls only placed(), never the filter. So --item cannot say why a card is absent. Not shown by a tool run: nemik-rank mtools --check printed no UMBRELLA line for mtools, so which condition dropped W2680 is not named by nemik today, which is the defect. | 2026-11-19T06:02:27Z: 2026-11-19: taking the round in the order the refusal named (W2321 first). Read rank.py at df640460: _rows excludes only non-ready (or non-working) and is_umbrella; _report_item prints placed() and never the filter; no test references --item, so the output can grow a line. | 2026-11-19T06:21:37Z: 2026-11-19: built refs/review/W2321-v1 = bf7640f63aa12620eaf7dada20e080fcd50c09e1 on main 2a2364ab, 3 files +162/-2. Final bazel run 11 of 11 pass (test_rank_item, test_rank, test_frontier, test_fruit, test_rank_survey, test_codon_census, both ratchets, test_nemik_src, test_test_inputs, test_skill); the first run failed on a capitalised state name and FBT001 and PLC1901 in the new test, fixed. Mutation run: dropping the umbrella exclusion in why_not_ranked is caught by exactly two tests. Sent to github-00; not submitted. | 2026-11-19T06:33:43Z: 2026-11-19: github-00 reviewed v1 (bf7640f6): right in substance, one fix, a maybe-result respelled as an empty string. v2 refs/review/W2321-v2 = 8045fe08882409772336741d8b7dda9106d5a5e2 on main 2a2364ab (3 files +183/-2; v1 to v2 +51/-30): require_ranked returns or raises NotRankedError with the reason; the caller catches; tests are pytest.raises. 11 of 11 pass under bazel, including the Codon census; the mutation run is caught by exactly two tests. Sent; not submitted.",
       "issued_at": "2026-11-19T02:36:39Z",
       "minted_during": "interrupt",
       "caused_by": "mtools",
-      "last_worked": "2026-11-19T02:40:32Z",
-      "ticks_blocked": 0
+      "last_worked": "2026-11-19T06:33:43Z",
+      "ticks_blocked": 0,
+      "completed": null
     },
     {
       "symbol": "W2322",
@@ -57638,7 +57637,7 @@
     {
       "symbol": "W2323",
       "title": "A velocity card inherits the MEASURED gate cost of the paths it accelerates as demand, so an expensive recurring gate pulls its own fix to the top",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W2303"
       ],
@@ -57647,13 +57646,14 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Design first, no build: what the store holds (ask luthen-observability what mikemol.gate.* carries per landing: CPU or wall, targets, paths), attribute each landing's gate cost to the paths it touched, let a velocity card declare the paths or targets it accelerates and take their summed cost over a window as weight; counters and CPU time, never wall as evidence; a replay over past landings in the style of the pace replay tool must show a W2727-like card rising before it ships; it feeds the accelerates flow of the rank design (W2325)",
-      "evidence": "",
+      "next_bounded_step": "Waiting on luthen-observability's answer on what the gate series carry per landing (names, labels, CPU vs wall, fresh vs run targets, per-path attribution, retention, how to query by name); meanwhile draft the design section: attribute each landing's cost to the paths it touched, a velocity card declares the paths or targets it accelerates, weight is their summed cost over a window, a replay over past landings shows a W2727-like card rising before it ships",
+      "evidence": "2026-11-19T06:34:02Z: 2026-11-19: round order after W2321 (in review). Asked luthen-observability what the gate series carry; the metrics store is not reachable from this session (NEMIK_VM_URL unset, 127.0.0.1:30829 refused), so I did not guess an endpoint.",
       "issued_at": "2026-11-19T03:01:29Z",
       "minted_during": "interrupt",
       "caused_by": "github-00",
-      "last_worked": "2026-11-19T03:10:06Z",
-      "ticks_blocked": 0
+      "last_worked": "2026-11-19T06:34:02Z",
+      "ticks_blocked": 0,
+      "completed": null
     },
     {
       "symbol": "W2324",
@@ -58103,6 +58103,50 @@
       "completed": null,
       "landed_at": "20261119T052055Z",
       "deploys": true
+    },
+    {
+      "symbol": "W2332",
+      "title": "One test runs the pre-commit hook through git commit with core.hooksPath, not only as sh HOOK",
+      "status": "ready",
+      "enables": [
+        "W2289"
+      ],
+      "touches": [
+        "evidence"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "In tests/test_precommit_nemik_src.py add a case that installs the hook with git -c core.hooksPath=<dir holding a copy of the hook> commit in the throwaway repo, with a stale staged tests list, and asserts the commit is refused with the hook's message (the existing cases run sh HOOK); build a review ref",
+      "evidence": "2026-11-19T06:01:31Z: 2026-11-19: from the W2307 cold review (github-00 relay: 16 consistent, 1 contradicts): the tests run the hook as sh HOOK, not through git commit with core.hooksPath. Harmless, the reviewer's own probe through core.hooksPath got the same verdicts, and W2307 did not claim otherwise; one test through the real install path is the suggested follow-up.",
+      "issued_at": "2026-11-19T06:01:27Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2307",
+      "last_worked": "2026-11-19T06:01:31Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "tests/test_precommit_nemik_src.py"
+      ],
+      "size_class": "small"
+    },
+    {
+      "symbol": "W2333",
+      "title": "Every .claude/held-* file is a commit on a scratch branch, its sha cited on its card, and the file removed",
+      "status": "ready",
+      "enables": [
+        "W2296"
+      ],
+      "touches": [
+        "evidence"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "A scratchpad script groups the ~100 .claude/held-* files by the W-number in the name; for each card build a tree = main's tree plus the files under held/<symbol>/ with git plumbing (a temporary index, update-index --cacheinfo, write-tree, commit-tree), point refs/heads/scratch/<symbol>-held at it; verify each blob by hash against the file; cite the branch sha on the card with --evidence-append; only then remove the files from the checkout. Not a bulk delete: the verification step comes first, and a file whose card is unknown (held-working-tree.patch, held-claims-finder.patch, held-tomlread.patch) gets a branch named by its own stem. W2312 and W2307 are the two done by hand",
+      "evidence": "2026-11-19T06:04:10Z: 2026-11-19: github-00 relaying the operator (not verified by me in a transcript): held work belongs as a commit on a branch so git knows it, not as a held-*.txt file and not only in a worktree. W2312's file is done (refs/heads/scratch/W2312 = e6663b0f). About 100 .claude/held-* files remain (patches, py.txt, md, one json); listing them in full is not needed, ls .claude shows them. W2307's patch is held-W2307-hook-pathspec.patch and its content is on refs/review/W2307-v1, so it can go once W2307 lands.",
+      "issued_at": "2026-11-19T06:04:04Z",
+      "minted_during": "interrupt",
+      "caused_by": "github-00",
+      "last_worked": "2026-11-19T06:04:10Z",
+      "ticks_blocked": 0
     }
   ],
   "residue": [

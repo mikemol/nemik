@@ -6410,3 +6410,11 @@
 2026-11-19T05:51:27Z  status W2307 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-19T05:57:56Z  status W2312 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-19T06:01:13Z  status W2312 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-19T06:01:27Z  interrupt W2332 minted    -         "One test runs the pre-commit hook through git commit with core.hooksPath, not only as sh HOOK"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2307
+2026-11-19T06:02:27Z  status W2321 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-19T06:04:04Z  interrupt W2333 minted    -         "Every .claude/held-* file is a commit on a scratch branch, its sha cited on its card, and the file removed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-00
+2026-11-19T06:05:00Z  status W2307 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-19T06:34:02Z  status W2323 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-19T06:34:33Z  status W2167 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-19T06:35:28Z  status W2167 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-19T06:35:28Z  status W2168 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
