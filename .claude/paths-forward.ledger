@@ -6440,3 +6440,9 @@
 2026-11-19T08:34:26Z  interrupt W2345 minted    -         "Three fine-grained live test targets judge the facts, each declaring its inputs, first in pre_gate, and a stale stamp is refused"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2110
 2026-11-19T08:34:26Z  interrupt W2346 minted    -         "The hook's duplicated shell checks and their hook tests are retired, bazel on PATH the one line left"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2110
 2026-11-19T08:35:17Z  status W2343 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-19T08:44:43Z  status W2344 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-19T09:04:15Z  interrupt W2347 minted    -         "gate_facts.sh writes unusual path names raw and NUL-safe, not quoted by core.quotePath"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2344
+2026-11-19T09:04:19Z  interrupt W2348 minted    -         "gate_facts.sh writes its two files as a pair and leaves no temp file behind on failure"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2344
+2026-11-19T09:07:25Z  status W2343 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-19T09:15:05Z  interrupt W2349 minted    -         "Residue: stamp-free fact bodies plus a separate freshness guard would let the gate's judgment tests hit the cache across trees"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2345
+2026-11-19T09:15:09Z  status W2349 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

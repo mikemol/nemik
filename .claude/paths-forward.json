@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 2346,
+  "counter": 2349,
   "waypoints": [
     {
       "symbol": "W1",
@@ -52895,7 +52895,6 @@
         "velocity"
       ],
       "blocked_on": [
-        "W2343",
         "W2344",
         "W2345",
         "W2346"
@@ -58396,6 +58395,31 @@
     {
       "symbol": "W2343",
       "title": "The hook's git-fed checks as pure functions over a facts text, tested on fixtures: tools/hook_facts.py",
+      "status": "done",
+      "enables": [
+        "W2110",
+        "W2345"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-11-19T08:42:57Z: 2026-11-19: built refs/review/W2343-v1 = a6191aaf74d59c20e93560a2a180e7a16dc08a37 on main a0438838, 4 files +286: tools/hook_facts.py, tests/test_hook_facts.py (22 cases), BUILD.bazel (+2), bazel/nemik_tests.bzl (+1). Final bazel run 6 of 6 pass. Mutations (weakening the stale comparison to a length check, inverting the working-card rule) fail exactly the tests that should (1 and 3), reverted. Bytes written through the Write and Edit tools. Sent to github-00 with the env_inherit design point for W2345; not submitted. | 2026-11-19T09:07:25Z: 2026-11-19: LANDED as 3e162c13 (PASS-SUBMIT from github-00 on refs/review/W2343-v1 = a6191aaf; git log -1 subject read back as this card's and git ls-remote origin refs/heads/main = 3e162c13a562485113064b0c9413335bb4c5dad2). Four paths: tools/hook_facts.py, tests/test_hook_facts.py, BUILD.bazel (+2), bazel/nemik_tests.bzl (+1). landing_kind ref (a tool and its test): done, not landed. W2344's cold review (REVISE) asks hook_facts.py to gain a head stamp for the changed-paths file, which is a follow-up edit carried by W2344 v2.",
+      "issued_at": "2026-11-19T08:34:26Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2110",
+      "last_worked": "2026-11-19T09:07:25Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "tools/hook_facts.py",
+        "tests/test_hook_facts.py"
+      ],
+      "size_class": "medium",
+      "completed": "20261119T090725Z"
+    },
+    {
+      "symbol": "W2344",
+      "title": "The gate writes the staged tree's git facts into its fixed worktree, tree-stamped, the changed paths stamped with the tree and the HEAD",
       "status": "working",
       "enables": [
         "W2110",
@@ -58404,45 +58428,25 @@
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Wait for github-00's review of refs/review/W2343-v1 = a6191aaf (pure judgments, slice 1). On PASS check main has not moved (else re-cut with the same tree), submit .claude/stack-W2343-v1.json with --freeze-from the .nemik-w2343-wt worktree, read back git log -1 and ls-remote, mark done (ref landing). Then W2344 (the gate writes the stamped facts) and W2345",
-      "evidence": "2026-11-19T08:42:57Z: 2026-11-19: built refs/review/W2343-v1 = a6191aaf74d59c20e93560a2a180e7a16dc08a37 on main a0438838, 4 files +286: tools/hook_facts.py, tests/test_hook_facts.py (22 cases), BUILD.bazel (+2), bazel/nemik_tests.bzl (+1). Final bazel run 6 of 6 pass. Mutations (weakening the stale comparison to a length check, inverting the working-card rule) fail exactly the tests that should (1 and 3), reverted. Bytes written through the Write and Edit tools. Sent to github-00 with the env_inherit design point for W2345; not submitted.",
+      "next_bounded_step": "Submitted .claude/stack-W2344-v2.json (refs/review/W2344-v2 = 32b79de7) after github-00's PASS-SUBMIT (scoped cold pass, 16 of 21 mutants killed); wait for the landing, then mark done with closing evidence naming where the landed text differs from v1's card (N3), and record the first real gate run that executes the new call as the witness",
+      "evidence": "2026-11-19T08:53:18Z: 2026-11-19: built refs/review/W2344-v1 = b6b543e3efd02988e8b4e7c02791418d46e66493 on the W2343 ref a6191aaf, 7 files +208: tools/gate_facts.sh, tests/test_gate_facts.py (5 cases), tools/gate_staged.sh (+4), .claude/generated.json, .gitignore, BUILD.bazel, bazel/nemik_tests.bzl. 9 of 9 pass under bazel. Mutations: reading git ls-files instead of the tree fails two tests (my first test did not catch it, so I tightened it), stamping HEAD instead of the tree fails the stamp test; reverted. Every file written through Write or Edit. Sent to github-00; not submitted (W2343 is still in the gate).",
       "issued_at": "2026-11-19T08:34:26Z",
       "minted_during": "interrupt",
       "caused_by": "W2110",
-      "last_worked": "2026-11-19T08:42:57Z",
+      "last_worked": "2026-11-19T09:21:41Z",
       "ticks_blocked": 0,
       "manifest": [
-        "tools/hook_facts.py",
-        "tests/test_hook_facts.py"
+        ".gitignore",
+        "BUILD.bazel",
+        "bazel/nemik_tests.bzl",
+        "tests/test_gate_facts.py",
+        "tests/test_hook_facts.py",
+        "tools/gate_facts.sh",
+        "tools/gate_staged.sh",
+        "tools/hook_facts.py"
       ],
       "size_class": "medium",
       "completed": null
-    },
-    {
-      "symbol": "W2344",
-      "title": "The gate writes the staged tree's git facts into its fixed worktree, stamped with the tree sha, registered as a generated file",
-      "status": "ready",
-      "enables": [
-        "W2110",
-        "W2345"
-      ],
-      "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
-      "next_bounded_step": "tools/gate_facts.sh WT TREE HEAD writes WT/.gate-facts/tracked.txt (git ls-files of the STAGED tree in the gate's fixed worktree, only src/nemik, tests, vendor/wheels, plus pyproject.toml's presence) and changed.txt (git diff --name-only HEAD TREE), each first line tree <sha>; gate_staged.sh calls it right after read-tree --reset -u, never the live checkout; .gitignore the dir; register the files in .claude/generated.json with a freshness check (the facts equal what git says for this index)",
-      "evidence": "",
-      "issued_at": "2026-11-19T08:34:26Z",
-      "minted_during": "interrupt",
-      "caused_by": "W2110",
-      "last_worked": "2026-11-19T08:34:47Z",
-      "ticks_blocked": 0,
-      "manifest": [
-        "tools/gate_facts.sh",
-        "tools/gate_staged.sh",
-        ".gitignore",
-        ".claude/generated.json"
-      ],
-      "size_class": "medium"
     },
     {
       "symbol": "W2345",
@@ -58455,12 +58459,12 @@
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "After W2343 and W2344: three py_test targets, each data = exactly its inputs, env_inherit = NEMIK_GATE_TREE only on these (not --test_env, which would key every test on the tree): named inputs (tracked facts + both lists), wheels (tracked facts + pyproject.toml), working-card (changed facts + the queue). Each refuses a missing or mismatched NEMIK_GATE_TREE. First members of //:pre_gate (and tests/test_pre_gate_suite.py). gate_staged.sh exports NEMIK_GATE_TREE from the staged tree",
-      "evidence": "",
+      "next_bounded_step": "GO from github-00 (2026-11-19) with one change: NO glob (a directory input; bazel inputs are named, never globbed, operator 2026-11-08): data = the two named files .gate-facts/tracked.txt and .gate-facts/changed.txt plus every other input named. Three py_test targets tagged manual in a gate-only test_suite //:gate_checks (not in //:pre_gate or //:precommit), env_inherit = NEMIK_GATE_TREE on these three only (NEMIK_GATE_HEAD on the working-card one), never --test_env; named inputs (tracked + both lists), wheels (tracked + pyproject.toml), working-card (changed + the queue); each refuses an unset or mismatched env saying to run under the gate; gate_staged.sh runs the suite first with the env set for that call only. PROVE in a normal checkout with no .gate-facts: bazel build //... and bazel test //:pre_gate succeed, and bazel test //:gate_checks fails with a clear missing-input or run-under-the-gate error. Build on refs/review/W2344-v2, submit only after W2344 lands (shares BUILD.bazel). Replaces the manifest's tests/test_pre_gate_suite.py with the gate_checks suite test",
+      "evidence": "2026-11-19T09:13:21Z: 2026-11-19 design sent to github-00 with W2344 v2 (refs/review/W2344-v2 = 32b79de7), R7: the facts are DECLARED INPUTS (glob of .gate-facts/*.txt, allow_empty) of the three targets, tagged manual, in a gate-only suite //:gate_checks kept out of //:pre_gate and //:precommit; env_inherit NEMIK_GATE_TREE on those three only (NEMIK_GATE_HEAD on the working-card one), each refusing an unset or malformed value with a message saying to run under the gate; gate_staged.sh runs the suite first. Rejected: the facts through the env channel (path plus digest), because the linux-sandbox cannot read an undeclared path, so the target would need no-sandbox. CONSEQUENCE awaiting github-00's ruling: the stamp holds the tree sha and NEMIK_GATE_TREE is in the key, so these three targets hit the cache only when the same tree is gated again, never across trees; every other target keeps its hits because env_inherit is per target. Alternative if wanted (card it as residue then): stamp-free bodies for the judgment tests plus a separate freshness guard, which changes the W2343 stamp contract. Not built until the design is approved. | 2026-11-19T09:15:15Z: 2026-11-19 github-00 ruled on the design sent with W2344 v2: keep the stamped cache design (per-tree misses on three small pure targets, every other target keeps its key); stamp-free alternative carded as W2349 residue; the glob is refused as a directory input, name the two files; the manual tag means a missing named source file errors only when those targets are analyzed, i.e. only outside the gate",
       "issued_at": "2026-11-19T08:34:26Z",
       "minted_during": "interrupt",
       "caused_by": "W2110",
-      "last_worked": "2026-11-19T08:34:49Z",
+      "last_worked": "2026-11-19T09:15:15Z",
       "ticks_blocked": 0,
       "manifest": [
         "BUILD.bazel",
@@ -58494,6 +58498,78 @@
         "tests/test_precommit_nemik_src.py"
       ],
       "size_class": "medium"
+    },
+    {
+      "symbol": "W2347",
+      "title": "gate_facts.sh writes unusual path names raw and NUL-safe, not quoted by core.quotePath",
+      "status": "ready",
+      "enables": [
+        "W2345"
+      ],
+      "touches": [
+        "evidence"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "From the W2344 cold review (R5): core.quotePath C-quotes a path with a newline, a tab or non-ASCII characters (\"src/nemik/\\303\\251.py\"), so a consumer comparing facts against raw names disagrees. Write ls-tree and diff-tree with -z and a NUL-safe format (or core.quotePath=false plus a rule for newlines), change hook_facts.parse and parse_diff to match, and test a name with a space, a newline and a non-ASCII character through the script and the parser",
+      "evidence": "",
+      "issued_at": "2026-11-19T09:04:15Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2344",
+      "last_worked": "2026-11-19T09:04:27Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "tools/gate_facts.sh",
+        "tools/hook_facts.py",
+        "tests/test_gate_facts.py",
+        "tests/test_hook_facts.py"
+      ],
+      "size_class": "small"
+    },
+    {
+      "symbol": "W2348",
+      "title": "gate_facts.sh writes its two files as a pair and leaves no temp file behind on failure",
+      "status": "ready",
+      "enables": [
+        "W2345"
+      ],
+      "touches": [
+        "evidence"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "From the W2344 cold review (R6): a failure leaves the pair half-written (tracked.txt moved in, then changed fails) and leaks mktemp files (.gate-facts/tracked.XXXXXX in write mode, the temp directory in --check). Add a trap that removes the temps, write both temps before either mv, and test a failure of the second emit leaves neither final file changed",
+      "evidence": "",
+      "issued_at": "2026-11-19T09:04:19Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2344",
+      "last_worked": "2026-11-19T09:04:33Z",
+      "ticks_blocked": 0,
+      "manifest": [
+        "tools/gate_facts.sh",
+        "tests/test_gate_facts.py"
+      ],
+      "size_class": "small"
+    },
+    {
+      "symbol": "W2349",
+      "title": "Residue: stamp-free fact bodies plus a separate freshness guard would let the gate's judgment tests hit the cache across trees",
+      "status": "blocked",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [
+        "W2345"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Only if the per-tree cache misses of the three W2345 targets are ever measured to cost: split each facts file into an unstamped body (the judgment test's declared input) and a stamp (read by a separate freshness guard), which changes the W2343 stamp contract (Facts, Diff, parse, require_tree, require_diff) and leaves staleness to the gate's clean-and-rewrite alone. Measure first from the gate-cost reader (W2334); do not build on a guess",
+      "evidence": "2026-11-19T09:15:09Z: 2026-11-19 residue, not scheduled. Proposed by me with W2345's design; github-00 ruled: keep the stamped design, the per-tree misses on three small pure targets are the right trade because every other target keeps its key (env_inherit is per target, never a global --test_env), and card this alternative as residue. Why it stays rejected: the stamp is what refuses a stale facts file, and the cross-tree hit it would buy is on checks that cost one sandbox start each.",
+      "issued_at": "2026-11-19T09:15:05Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2345",
+      "last_worked": "2026-11-19T09:15:09Z",
+      "ticks_blocked": 0,
+      "size_class": "small",
+      "prior_status": "ready"
     }
   ],
   "residue": [

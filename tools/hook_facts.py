@@ -8,15 +8,17 @@ are named from `git ls-files`). Every wheel the pyproject.toml names is tracked 
 code or tests changed while the queue has ready cards and no working one (nemik:W319).
 
 A bazel test is hermetic and cannot run git, so git's answers arrive as DATA: the gate writes
-them into a facts file from the STAGED tree, and each check here is judged by its own cached
-bazel test that declares that file as an input (the operator, host transcript 695f3e0a line
+them into facts files from the STAGED tree, and each check here is judged by its own cached
+bazel test that declares those files as inputs (the operator, host transcript 695f3e0a line
 190734: work with bazel's cache, never around it).
 
-A facts text is `tree <40 hex>` on its first line, the staged tree's sha, then one path per
-line. The stamp is how a stale file is caught: `require_tree` refuses facts that describe
-another tree than the one the caller says it is judging, so facts cannot silently lie. Every
-check returns its problems as a list, empty when there are none; a malformed or stale facts
-text is an exception, never an empty list.
+The tracked paths are a function of the tree alone: `tree <40 hex>` on the first line, then one
+path per line. The changed paths are a function of the tree AND the HEAD it was diffed against
+(nemik:W2344's cold review: one tree, two HEADs, one stamp, two bodies): `tree <40 hex>` then
+`head <40 hex>`, then one path per line. The stamps are how a stale file is caught: `require_tree`
+and `require_diff` refuse facts that describe another tree or HEAD than the one the caller says
+it is judging, so facts cannot silently lie. Every check returns its problems as a list, empty
+when there are none; a malformed or stale facts text is an exception, never an empty list.
 """
 
 import re
@@ -24,7 +26,6 @@ from typing import NamedTuple
 
 from nemik_src import SRC_SPEC, TESTS_SPEC, check
 
-STAMP = "tree"
 STAMP_FIELDS = 2
 SHA = re.compile(r"[0-9a-f]{40}")
 WHEEL = re.compile(r'vendor/wheels/[^"]*\.whl')
@@ -41,14 +42,40 @@ class FactsError(ValueError):
 
 
 class Facts(NamedTuple):
-    """What a facts file says: the tree it describes and the paths git reported for it."""
+    """What a tracked-paths file says: the tree it describes and the paths git reported."""
 
     tree: str
     paths: list[str]
 
 
+class Diff(NamedTuple):
+    """What a changed-paths file says: the tree, the HEAD it was diffed against, the paths."""
+
+    tree: str
+    head: str
+    paths: list[str]
+
+
+def _stamp(lines: list[str], at: int, key: str, source: str) -> str:
+    """Read the sha of a stamp line.
+
+    Returns:
+        The 40 hex sha after `key` on line `at`.
+
+    Raises:
+        FactsError: that line is missing or is not `<key> <40 hex>`.
+
+    """
+    parts = lines[at].split(" ") if at < len(lines) else []
+    if len(parts) != STAMP_FIELDS or parts[0] != key or not SHA.fullmatch(parts[1]):
+        where = ("first", "second")[at]
+        msg = f"{source}: the {where} line is not '{key} <40 hex>'"
+        raise FactsError(msg)
+    return parts[1]
+
+
 def parse(text: str, source: str) -> Facts:
-    """Read a facts text.
+    """Read a tracked-paths text.
 
     Args:
         text: The facts file's text.
@@ -57,16 +84,31 @@ def parse(text: str, source: str) -> Facts:
     Returns:
         The stamp and the paths.
 
-    Raises:
-        FactsError: the first line is not `tree <40 hex>`.
+    """
+    lines = text.splitlines()
+    return Facts(_stamp(lines, 0, "tree", source), [ln for ln in lines[1:] if ln])
+
+
+def parse_diff(text: str, source: str) -> Diff:
+    """Read a changed-paths text.
+
+    Args:
+        text: The facts file's text.
+        source: Where it came from, for the error message.
+
+    Returns:
+        The two stamps and the paths.
 
     """
     lines = text.splitlines()
-    head = lines[0].split(" ") if lines else []
-    if len(head) != STAMP_FIELDS or head[0] != STAMP or not SHA.fullmatch(head[1]):
-        msg = f"{source}: the first line is not '{STAMP} <40 hex>'"
+    tree = _stamp(lines, 0, "tree", source)
+    return Diff(tree, _stamp(lines, 1, "head", source), [ln for ln in lines[2:] if ln])
+
+
+def _require_sha(value: str, what: str, source: str) -> None:
+    if not SHA.fullmatch(value):
+        msg = f"{source}: the {what} to judge against is not a 40 hex sha ({value!r})"
         raise FactsError(msg)
-    return Facts(head[1], [line for line in lines[1:] if line])
 
 
 def require_tree(facts: Facts, expected: str, source: str) -> None:
@@ -82,13 +124,34 @@ def require_tree(facts: Facts, expected: str, source: str) -> None:
             were written for another tree.
 
     """
-    if not SHA.fullmatch(expected):
-        msg = f"{source}: the tree to judge against is not a 40 hex sha ({expected!r})"
-        raise FactsError(msg)
+    _require_sha(expected, "tree", source)
     if facts.tree != expected:
         msg = (
             f"{source}: the facts describe tree {facts.tree} and the staged tree is "
             f"{expected}: the facts are stale"
+        )
+        raise FactsError(msg)
+
+
+def require_diff(diff: Diff, tree: str, head: str, source: str) -> None:
+    """Refuse changed paths that were not diffed for this tree against this HEAD.
+
+    Args:
+        diff: The parsed changed-paths facts.
+        tree: The staged tree's sha, as the caller learned it apart from the facts file.
+        head: HEAD's sha, likewise.
+        source: Where the facts came from, for the error message.
+
+    Raises:
+        FactsError: the caller did not say which tree or HEAD, or the facts are for another.
+
+    """
+    _require_sha(tree, "tree", source)
+    _require_sha(head, "head", source)
+    if (diff.tree, diff.head) != (tree, head):
+        msg = (
+            f"{source}: the facts diff tree {diff.tree} against head {diff.head} and the "
+            f"commit is tree {tree} against head {head}: the facts are stale"
         )
         raise FactsError(msg)
 
@@ -133,7 +196,7 @@ def wheel_problems(tracked: Facts, pyproject: str) -> list[str]:
     ]
 
 
-def working_card_problems(queue: str, changed: Facts) -> list[str]:
+def working_card_problems(queue: str, changed: Diff) -> list[str]:
     """Apply the working-card rule.
 
     A commit that changes code or tests while the queue has ready cards and NO working card is

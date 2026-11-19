@@ -39,6 +39,10 @@ git -C "$wt" checkout --quiet --detach --force "$head_sha" || exit 1
 git -C "$wt" clean -fdxq -e 'bazel-*' -e .venv || exit 1
 tree="$(GIT_INDEX_FILE="$idx" git -C "$real_root" write-tree)" || exit 1
 git -C "$wt" read-tree --reset -u "$tree" || exit 1
+# nemik:W2344: the git facts the cached bazel checks judge (tools/gate_facts.sh), written from the STAGED
+# tree object into this worktree and stamped with its sha, never from the live checkout. A bazel test
+# cannot run git, so git's answers arrive as declared inputs. Nothing here judges anything.
+sh "$wt/tools/gate_facts.sh" "$wt" "$tree" "$head_sha" || exit 1
 
 # nemik:W733: every bazel call below goes through mtools' admission (mikemol-bazel-admit), which holds
 # memory for it and prints the hold line; `bazel` is this function, /usr/bin/bazel the real one.

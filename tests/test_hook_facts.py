@@ -5,10 +5,13 @@
 import pytest
 from hook_facts import (
     NO_WORKING_CARD,
+    Diff,
     Facts,
     FactsError,
     named_inputs_problems,
     parse,
+    parse_diff,
+    require_diff,
     require_tree,
     wheel_problems,
     working_card_problems,
@@ -17,6 +20,7 @@ from nemik_src import SRC_SPEC, TESTS_SPEC, render
 
 TREE = "a" * 40
 OTHER = "b" * 40
+HEAD = "c" * 40
 MODULES = ["src/nemik/__init__.py", "src/nemik/a.py", "src/nemik/b.py"]
 TESTS = ["tests/test_a.py", "tests/conftest.py"]
 SRC_LIST = render(MODULES, SRC_SPEC)
@@ -28,6 +32,10 @@ DONE = '{"waypoints": [{"symbol": "W1", "status": "done"}]}'
 
 def _facts(*paths: str, tree: str = TREE) -> Facts:
     return Facts(tree, list(paths))
+
+
+def _diff(*paths: str, tree: str = TREE, head: str = HEAD) -> Diff:
+    return Diff(tree, head, list(paths))
 
 
 def test_a_facts_text_is_a_stamp_then_one_path_per_line() -> None:
@@ -57,6 +65,35 @@ def test_a_text_without_a_good_stamp_is_refused_with_its_source_named(
     assert str(raised.value).startswith("gate/tracked.txt:")
 
 
+def test_a_diff_text_is_two_stamps_then_one_path_per_line() -> None:
+    """The changed paths name the tree AND the HEAD they were diffed against."""
+    text = f"tree {TREE}\nhead {HEAD}\nREADME.md\n\nsrc/nemik/b.py\n"
+    assert parse_diff(text, "c.txt") == Diff(
+        TREE, HEAD, ["README.md", "src/nemik/b.py"]
+    )
+    assert parse_diff(f"tree {TREE}\nhead {HEAD}\n", "c.txt") == Diff(TREE, HEAD, [])
+
+
+@pytest.mark.parametrize(
+    ("text", "where"),
+    [
+        ("", "first"),
+        (f"tree {TREE}\n", "second"),
+        (f"tree {TREE}\nREADME.md\n", "second"),
+        (f"tree {TREE}\ntree {HEAD}\n", "second"),
+        (f"tree {TREE}\nhead xyz\n", "second"),
+        (f"head {HEAD}\ntree {TREE}\n", "first"),
+    ],
+)
+def test_a_diff_text_without_both_stamps_is_refused_naming_the_line(
+    text: str, where: str
+) -> None:
+    """A changed-paths file with only a tree stamp is the gap the cold review found."""
+    with pytest.raises(FactsError, match=f"the {where} line is not '") as raised:
+        parse_diff(text, "gate/changed.txt")
+    assert str(raised.value).startswith("gate/changed.txt:")
+
+
 def test_facts_for_another_tree_are_refused_as_stale() -> None:
     """The mismatch the card asks for: facts cannot silently describe an older tree."""
     require_tree(_facts("src/nemik/a.py"), TREE, "tracked.txt")
@@ -71,6 +108,26 @@ def test_a_caller_that_does_not_say_the_tree_is_refused_not_trusted(
     """An unset or malformed expected tree is an error, never a pass."""
     with pytest.raises(FactsError, match="not a 40 hex sha"):
         require_tree(_facts("src/nemik/a.py"), expected, "tracked.txt")
+
+
+def test_changed_paths_for_another_head_or_tree_are_refused_as_stale() -> None:
+    """One tree against two HEADs is two different bodies, so the stamp must name both."""
+    require_diff(_diff("README.md"), TREE, HEAD, "changed.txt")
+    with pytest.raises(FactsError, match="stale"):
+        require_diff(_diff("README.md", head=OTHER), TREE, HEAD, "changed.txt")
+    with pytest.raises(FactsError, match="stale"):
+        require_diff(_diff("README.md", tree=OTHER), TREE, HEAD, "changed.txt")
+
+
+@pytest.mark.parametrize(
+    ("tree", "head"), [("", HEAD), (TREE, ""), ("unset", "unset"), (TREE, "c" * 39)]
+)
+def test_a_caller_that_does_not_say_the_tree_and_head_is_refused(
+    tree: str, head: str
+) -> None:
+    """An unsayable tree or HEAD is an error, never a pass."""
+    with pytest.raises(FactsError, match="not a 40 hex sha"):
+        require_diff(_diff("README.md"), tree, head, "changed.txt")
 
 
 def test_a_current_pair_of_lists_has_no_named_inputs_problem() -> None:
@@ -126,4 +183,4 @@ def test_the_working_card_rule_is_the_hooks_rule(
     queue: str, changed: list[str], expected: list[str]
 ) -> None:
     """Code or tests changed, ready cards and no working one: refused; anything else passes."""
-    assert working_card_problems(queue, _facts(*changed)) == expected
+    assert working_card_problems(queue, _diff(*changed)) == expected
