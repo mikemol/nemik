@@ -39,6 +39,7 @@ NEMIK_PY = [
     "src/nemik/core/chains.py",
     "src/nemik/core/text.py",
     "src/nemik/core/treemap.py",
+    "src/nemik/courier.py",
     "src/nemik/critical.py",
     "src/nemik/delivery.py",
     "src/nemik/dictops.py",

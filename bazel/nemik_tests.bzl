@@ -108,6 +108,7 @@ TESTS_PY = [
     "tests/test_core_treemap.py",
     "tests/test_core_treemap_layout.py",
     "tests/test_core_wasm.py",
+    "tests/test_courier.py",
     "tests/test_cpu_line.py",
     "tests/test_cpubound.py",
     "tests/test_credential_shaped.py",

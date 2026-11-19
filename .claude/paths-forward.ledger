@@ -6369,3 +6369,7 @@
 2026-11-18T20:34:58Z  status W2284 working>landed writer    "working -> landed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-18T20:37:06Z  interrupt W2312 minted    -         "witnessreads.FIELDS is a hand list mirroring the observers: pin the alert, promql and apply fields (file, git_ref and pid are already pinned against the real observers) from the observer code's own declaration or a fixture response, with no live endpoint, so a field added to one of those observers cannot make the unknown-field check warn falsely"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2263
 2026-11-18T20:40:02Z  status W2263 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-18T21:13:18Z  status W2263 working>landed writer    "working -> landed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-18T21:15:20Z  status W2280 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-18T21:17:10Z  interrupt W2313 minted    -         "A nemik-courier command: the dry run by default, and the gh send only when the operator-owned config holds courier_send = true"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2280
+2026-11-19T02:25:15Z  interrupt W2314 minted    -         "Ask mtools for a standing PreToolUse rule that refuses an agent's Write, Edit and Bash redirection to the courier config path, with its remedy (ask the operator)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-00
