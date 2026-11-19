@@ -87,6 +87,8 @@ TARGETS = [(src, "") for src in glob(["tests/test_*.py"]) if src != "tests/test_
             + (["tools/pace_replay.py"] if src == "tests/test_pace_replay.py" else [])
             # nemik:W2018: the side-by-side surfaces view is imported by name from tools/
             + (["tools/side_by_side.py"] if src == "tests/test_side_by_side.py" else [])
+            # nemik:W2343: the hook's git-fed checks are imported by name from tools/, with the list tool they call
+            + (["tools/hook_facts.py", "tools/nemik_src.py"] if src == "tests/test_hook_facts.py" else [])
             # nemik:W1994: the ratchet atomizer's plan is imported by name from tools/
             + (["tools/ratchet_atomizer.py"] if src == "tests/test_ratchet_atomizer.py" else [])
             # nemik:W1411: the codon closure map is imported by name from tools/

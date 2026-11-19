@@ -6429,3 +6429,14 @@
 2026-11-19T07:31:58Z  status W2319 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-19T07:45:37Z  interrupt W2339 minted    -         "Ask mtools for a standing PreToolUse rule refusing a Bash cp, mv or redirect from a scratchpad path into a repo tree"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-00
 2026-11-19T07:50:35Z  interrupt W2340 minted    -         "side_by_side's cell fields are typed with a recursive Json alias, not dict[str, object], derived from the schema"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-00
+2026-11-19T08:19:10Z  status W1325 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-19T08:19:10Z  status W2018 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-19T08:19:12Z  interrupt W2341 minted    -         "A reader of each repo's published surfaces.export.json feeds tools/side_by_side.py, from the ~/github layout and then the export layout"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2018
+2026-11-19T08:20:33Z  status W2337 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-19T08:20:36Z  interrupt W2342 minted    -         "docs/gate-cost-velocity.md records mtools' answers: cpu is user plus sys, run.seconds and run_seconds are two quantities, repo=repo is a fixture directory"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2337
+2026-11-19T08:20:48Z  status W2110 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-19T08:34:26Z  interrupt W2343 minted    -         "The hook's git-fed checks as pure functions over a facts text, tested on fixtures: tools/hook_facts.py"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2110
+2026-11-19T08:34:26Z  interrupt W2344 minted    -         "The gate writes the staged tree's git facts into its fixed worktree, stamped with the tree sha, registered as a generated file"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2110
+2026-11-19T08:34:26Z  interrupt W2345 minted    -         "Three fine-grained live test targets judge the facts, each declaring its inputs, first in pre_gate, and a stale stamp is refused"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2110
+2026-11-19T08:34:26Z  interrupt W2346 minted    -         "The hook's duplicated shell checks and their hook tests are retired, bazel on PATH the one line left"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2110
+2026-11-19T08:35:17Z  status W2343 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

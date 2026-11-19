@@ -188,6 +188,7 @@ TESTS_PY = [
     "tests/test_history_score_publish.py",
     "tests/test_history_stamps.py",
     "tests/test_history_waits.py",
+    "tests/test_hook_facts.py",
     "tests/test_hookcheck.py",
     "tests/test_hooks_wired.py",
     "tests/test_host_citations.py",
