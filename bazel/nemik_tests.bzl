@@ -330,6 +330,7 @@ TESTS_PY = [
     "tests/test_precommit_gate.py",
     "tests/test_precommit_nemik_src.py",
     "tests/test_precommit_queue_check.py",
+    "tests/test_presubmit.py",
     "tests/test_preview.py",
     "tests/test_projection.py",
     "tests/test_prompt_seen.py",

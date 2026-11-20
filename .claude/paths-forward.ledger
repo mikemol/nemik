@@ -6483,3 +6483,16 @@
 2026-11-19T23:50:58Z  status W2362 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-19T23:50:59Z  status W2365 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-19T23:51:11Z  status W2345 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-20T01:01:58Z  interrupt W2366 minted    -         "Design notes: the file observer's content fact (bounded read, local non-secret files only, which shape) sent to github-00"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2092
+2026-11-20T01:01:58Z  interrupt W2367 minted    -         "Build the content fact with its test, SKILL.md row and registry row"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2092
+2026-11-20T01:01:58Z  interrupt W2368 minted    -         "Put the content witness on W2091"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2092
+2026-11-20T01:16:03Z  status W2362 working>landed writer    "working -> landed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-20T01:16:05Z  status W2357 working>landed writer    "working -> landed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-20T01:39:17Z  status W2365 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-20T02:50:29Z  interrupt W2369 minted    -         "Add the endpoint (host and port only, credential and path stripped) and per-query sample timestamps to the promql fact, with tests on a fake store"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2107
+2026-11-20T02:50:29Z  interrupt W2370 minted    -         "Print the evaluation time, endpoint, sample count and value or the word empty on the witness row and in the apply evidence, tests for empty, non-empty, unobservable"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2107
+2026-11-20T02:50:29Z  interrupt W2371 minted    -         "Check how the apply path handles a promql containing a comparison sign that the writer refuses in evidence text, before W2091 relies on it"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2107
+2026-11-20T03:35:03Z  status W2365 working>blocked writer    "working -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-20T03:36:28Z  status W2365 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-20T03:36:33Z  interrupt W2372 minted    -         "presubmit.sh gates with the gated tree's own gate_staged.sh, not the live checkout's"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W2365
+2026-11-20T03:36:37Z  status W2372 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 2365,
+  "counter": 2372,
   "waypoints": [
     {
       "symbol": "W1",
@@ -52450,22 +52450,27 @@
     {
       "symbol": "W2092",
       "title": "Witness observer: a file fact that can say a file carries a line, not only that it exists",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W2295"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W2366",
+        "W2367",
+        "W2368"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "src/nemik/witnesses.py _file(key) returns only {exists}; W2091's cause witness (luthen's bazelrc sandbox_base line applied) needs a content fact, e.g. input.file[key].lines or a contains(path, pattern) check with a bounded read of local, non-secret files. Add the mode with a test and a SKILL.md and registry row, then put the witness on W2091. Found 2026-11-08 reading the observer for github-14's file-witness suggestion.",
       "evidence": "",
       "issued_at": "2026-11-08T23:05:47Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W2091",
-      "last_worked": null,
+      "last_worked": "2026-11-20T01:01:58Z",
       "ticks_blocked": 0,
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
-      "vector_source": "default"
+      "vector_source": "default",
+      "completed": null
     },
     {
       "symbol": "W2093",
@@ -52816,7 +52821,7 @@
     {
       "symbol": "W2107",
       "title": "A promql witness row names the endpoint queried, the value read with its timestamp and how an empty result was treated",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W2295"
       ],
@@ -52824,17 +52829,22 @@
         "file:src/nemik/witnesses.py",
         "file:tests/test_witnesses.py"
       ],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W2369",
+        "W2370",
+        "W2371"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "Read how src/nemik/witnesses.py prints a witness row and what --apply writes as evidence, add the endpoint, the returned values with their timestamp and an empty-result note to both, test with a promql fixture that returns a value and one that returns empty (the row must say empty and how it was judged); non-queue code, rides a pace-admitted stack after W2077",
       "evidence": "2026-11-09T20:19:14Z: 2026-11-09 asked by github-14 (a session message, no card): nemik-witnesses prints a promql witness row as only WITNESS <ref> true, with no endpoint and no value, so a reader cannot tell a real reading from a wrong endpoint or an empty-vector default. The row and the evidence --apply writes should carry the endpoint, the returned values with their timestamp and how an empty result was treated. Witness: a test where the promql fixture returns a value and the row names the endpoint and that value. NOT read yet: src/nemik/witnesses.py's row printing and the evidence text, and whether tests/test_witnesses.py has the promql fixture (I saw its promql tests earlier use an env var NEMIK_VM_URL and an unset endpoint reads undefined). | 2026-11-09T20:35:27Z: G0 2026-11-09T20:35:26Z: [NO-PACE-STAMP] Precommit: read src/nemik/witnesses.py where the WITNESS row and the apply evidence are written and where the promql observer reads the store (read-only), to say exactly what a row could carry. Sensor: the lines read. Expected: the value and endpoint are available at the point the row is built, or a named gap. | 2026-11-09T20:37:03Z: 2026-11-09 READ src/nemik/witnesses.py (lines 257-268, 406-428, 760-809). WHAT EXISTS: _promql runs an instant query via _get('NEMIK_VM_URL', '/api/v1/query') and returns {values: [float per result sample], empty: bool} or None when unobservable; witness() judges a bare promql as true when the result is non-empty, false when empty, undefined when None (docstring says so: x > y returns the series only while true); the facts doc is {now: stamp, promql: {query: {values, empty}}}. main() prints ONLY 'WITNESS repo:sym verdict' plus a note for unobservable refs and 'language sniffed'; on --apply with true it writes evidence 'witness held at <now>: <json of the facts without now>', so the apply evidence ALREADY carries the values and the empty flag keyed by the query. GAPS vs github-14's ask: (1) the endpoint is NOT recorded anywhere (NEMIK_VM_URL is read inside _get; neither the row nor the evidence names it); (2) the sample timestamp is dropped: the instant-query result's value is [timestamp, string] and _promql keeps only index 1; (3) the printed row carries no value and no empty note; (4) empty treatment (empty reads false, unobservable reads undefined) is documented in the docstring only. An empty vector therefore reads FALSE, not true, so the 'empty-vector default' worry does not hold for the verdict; what is missing is that the row does not say it. NEXT STEP REFINED: add endpoint and the sample timestamps to the fact (a small change to _promql and its dict, which flows into the evidence), and print them on the row (verdict, endpoint, values with their times, or 'empty'); tests/test_witnesses.py promql tests (a value, an empty, an unset endpoint) extend to assert the row text and the evidence text; non-queue code, rides a pace-admitted stack after W2077; no edit made. | 2026-11-09T20:38:13Z: 2026-11-09 R445 (due 2026-11-12) design adopted for W2107: KEEP the verdict rule (empty is false, unobservable is undefined, a value is true). ADD audit fields to the printed row and the apply evidence: evaluation time in UTC, the endpoint as host and port ONLY (NEMIK_VM_URL may carry a path or a credential, strip both before it reaches a log or a queue evidence line), and per query the sample count, the value (or the word empty) and the sample timestamp. TESTS (extend the existing promql tests in place, fake store): empty prints false with empty; non-empty prints the value and count; the endpoint drops a credential or a path; an unobservable store prints no verdict; a pinned-interval query round-trips through the evidence unchanged. The W2091 witness needs this: it will be judged over a gate window and six samples, and the evaluation time and the query text in the evidence are what prove the right window was read. Constraint from the writer: evidence text must avoid semicolons, greater-than signs, pipes and home paths (already redacted by redact_home); a promql with a comparison contains a greater-than, which the writer refuses in evidence text, so check how the apply path handles the W2091 query before relying on it. Not verified: that point.",
       "issued_at": "2026-11-09T20:19:07Z",
       "minted_during": "interrupt",
       "caused_by": "github-14",
-      "last_worked": "2026-11-09T20:38:13Z",
+      "last_worked": "2026-11-20T02:50:29Z",
       "ticks_blocked": 0,
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
-      "vector_source": "default"
+      "vector_source": "default",
+      "completed": null
     },
     {
       "symbol": "W2108",
@@ -58756,7 +58766,7 @@
     {
       "symbol": "W2357",
       "title": "Retro handoff shape: today's historic violators in a committed shrink-only baseline read as Info, any new violation stays VIOLATES",
-      "status": "working",
+      "status": "landed",
       "enables": [
         "gcalculus:W445"
       ],
@@ -58764,11 +58774,11 @@
       "blocked_on": [],
       "blocked_kind": "agent",
       "next_bounded_step": "On github-00's PASS-SUBMIT of refs/review/W2357-v3 = 22b214bc: resubmit .claude/stack-W2362-W2357.json frozen from .nemik-w2357-wt (re-cut if main moved), verify landing, then send github-00 the G8 field wording",
-      "evidence": "2026-11-19T20:51:52Z: 2026-11-19 claims inbox/2026-11-19-github-00-retro-handoff-shape-flags-history.md (the host's ruling, relayed by github-00). READ: the shape is nemik:RetroHandoffShape's second sparql (shapes.ttl); DEFINED in f1b458a6 (2026-10-19, W755, gate G8), first judging real retros in 171704e7 (2026-11-14, W982, scaffold-form retros carrying a precommit enter the graph via retroingest.in_scope). The field reviewers record: handoff.self_probe equal to the text executed-and-failed when handoff.operator is the text other (retroingest.HANDOFF_FIELDS maps self_probe to nemik:selfProbe). Design sent to github-00: a committed shrink-only baseline keyed by repo and retro id (repo:Rn) in package data, demotion to Info only for this message on a baselined focus, registered in ratchets.json with a pin that rebaselines.json never declares it. | 2026-11-19T22:19:45Z: 2026-11-19 built refs/review/W2357-v1 = 9abedf6c66ec45e6ebac526f6f064de9cc26dbf9 on main 4d05db4e, 19 files +817 -40. //:precommit 555 of 555. Baseline seeded with 296 retros from the live fleet by this tree's code (independently 296 by the installed checker). Four mutants killed. Fleet after: 0 self-probe Violations; gcalculus, paperkit, substrate OK; six repos still VIOLATES only on two other retro shapes (246 handoffs missing slots, 205 retros missing trigger or root, 10 of those written since this morning). | 2026-11-19T22:22:50Z: 2026-11-19 github-00 REVISE on v1 (small): R1 the baseline reader's None default and silent empty list on a bad file, split into a reader of the shipped file and a pure parse that raises; R2 empty-string sentinels in retro_id and _probe, make _probe a predicate and retro_id raise on a non-handoff; R3 the five PEP 758 except rewrites in check.py are formatter output and go in a format-only entry first (W2362). Approved as its own card: the two other retro shapes (W2363), cut by timestamp against each rule's knowable date. | 2026-11-19T23:18:27Z: 2026-11-19 built refs/review/W2357-v2 = 5c882350b9b4e3ccc299f083fc2c30abbd126277 on refs/review/W2362-v1 (8eae9e79), 19 files +899 -34, no except line changes. R1 parse_retro_baseline raises, R2 retro_id raises and is_probe is a predicate, R3 resolved by W2362. //:precommit 555 of 555; six mutants killed. In review at github:W120. | 2026-11-19T23:22:46Z: 2026-11-19 github-00 PASS-SUBMIT on refs/review/W2357-v2 = 5c882350; submitting stacked on W2362 (.claude/stack-W2362-W2357.json), frozen from .nemik-w2357-wt, main unmoved at 4d05db4e. | 2026-11-19T23:41:19Z: 2026-11-19 SUBMIT REFUSED (stack W2362+W2357, b1lnsr6wz): tools/rebaselines_gate.py: 'src/nemik/data/retro-handoff-baseline.json: was born at 296 with no rebaselines entry'; nothing landed, HEAD 4d05db4. mtools' rebaseline counts a birth above 0 as a rise needing the OPERATOR's record; v2's pin (rebaselines.json never names it) contradicted that. The letter's ruling is github-00's; no operator line on it in host 695f3e0a (searched --human baseline|ratchet|handoff). Asked the operator (AskUserQuestion): 'Yes, create it' at ca6f3699 line 401195 uuid b0ac2b3f-3a69-401d-80c1-eb3b8ee85599, but --verify --claim operator refuses it (kind tool_result, not human), so a typed confirmation is asked to serve as the warrant. Pin test rewritten in the wt: rebaselines.json names the file exactly once, old 0 new 296. Manifest corrected (gate's DRIFT: codon-baseline.json not taken, ten paths missing). | 2026-11-19T23:45:20Z: 2026-11-19 WARRANT: the operator typed 'Yes, create the retro-handoff baseline ratchet (W2357) at 296.' at ca6f3699 line 401288 uuid e92a2eb5-0ec4-4444-8c87-1bc4e1f16108; --verify --claim operator ok (kind human). v3 in .nemik-w2357-wt: rebaselines.json birth entry {old 0, new 296, warrant ca6f3699-66ac-4ffa-a3ca-6ececbab791f:401288}; tools/rebaselines_gate.py --head 4d05db4 --tree the wt exits 0 (it refused v2). mtools:W2787 (dialog answers as operator) declined: AskUserQuestion's answers field is agent-written, so --verify refusing a tool_result stays correct. //:precommit running (bcumyl27a). | 2026-11-19T23:48:00Z: 2026-11-19 v3 = refs/review/W2357-v3 = 22b214bc (tree 11c0b7a9, parent W2362-v1 8eae9e79); diff over v2: rebaselines.json +7, tests/test_retro_baseline.py; //:precommit 555 of 555 (bcumyl27a). In review at github:W120. | 2026-11-19T23:50:57Z: 2026-11-19 github-00 PASS-SUBMIT on refs/review/W2357-v3 = 22b214bc; resubmitting .claude/stack-W2362-W2357.json. Fold-in owed (non-blocking): the mutant 'a second rebaselines entry naming the file goes red'.",
+      "evidence": "2026-11-19T20:51:52Z: 2026-11-19 claims inbox/2026-11-19-github-00-retro-handoff-shape-flags-history.md (the host's ruling, relayed by github-00). READ: the shape is nemik:RetroHandoffShape's second sparql (shapes.ttl); DEFINED in f1b458a6 (2026-10-19, W755, gate G8), first judging real retros in 171704e7 (2026-11-14, W982, scaffold-form retros carrying a precommit enter the graph via retroingest.in_scope). The field reviewers record: handoff.self_probe equal to the text executed-and-failed when handoff.operator is the text other (retroingest.HANDOFF_FIELDS maps self_probe to nemik:selfProbe). Design sent to github-00: a committed shrink-only baseline keyed by repo and retro id (repo:Rn) in package data, demotion to Info only for this message on a baselined focus, registered in ratchets.json with a pin that rebaselines.json never declares it. | 2026-11-19T22:19:45Z: 2026-11-19 built refs/review/W2357-v1 = 9abedf6c66ec45e6ebac526f6f064de9cc26dbf9 on main 4d05db4e, 19 files +817 -40. //:precommit 555 of 555. Baseline seeded with 296 retros from the live fleet by this tree's code (independently 296 by the installed checker). Four mutants killed. Fleet after: 0 self-probe Violations; gcalculus, paperkit, substrate OK; six repos still VIOLATES only on two other retro shapes (246 handoffs missing slots, 205 retros missing trigger or root, 10 of those written since this morning). | 2026-11-19T22:22:50Z: 2026-11-19 github-00 REVISE on v1 (small): R1 the baseline reader's None default and silent empty list on a bad file, split into a reader of the shipped file and a pure parse that raises; R2 empty-string sentinels in retro_id and _probe, make _probe a predicate and retro_id raise on a non-handoff; R3 the five PEP 758 except rewrites in check.py are formatter output and go in a format-only entry first (W2362). Approved as its own card: the two other retro shapes (W2363), cut by timestamp against each rule's knowable date. | 2026-11-19T23:18:27Z: 2026-11-19 built refs/review/W2357-v2 = 5c882350b9b4e3ccc299f083fc2c30abbd126277 on refs/review/W2362-v1 (8eae9e79), 19 files +899 -34, no except line changes. R1 parse_retro_baseline raises, R2 retro_id raises and is_probe is a predicate, R3 resolved by W2362. //:precommit 555 of 555; six mutants killed. In review at github:W120. | 2026-11-19T23:22:46Z: 2026-11-19 github-00 PASS-SUBMIT on refs/review/W2357-v2 = 5c882350; submitting stacked on W2362 (.claude/stack-W2362-W2357.json), frozen from .nemik-w2357-wt, main unmoved at 4d05db4e. | 2026-11-19T23:41:19Z: 2026-11-19 SUBMIT REFUSED (stack W2362+W2357, b1lnsr6wz): tools/rebaselines_gate.py: 'src/nemik/data/retro-handoff-baseline.json: was born at 296 with no rebaselines entry'; nothing landed, HEAD 4d05db4. mtools' rebaseline counts a birth above 0 as a rise needing the OPERATOR's record; v2's pin (rebaselines.json never names it) contradicted that. The letter's ruling is github-00's; no operator line on it in host 695f3e0a (searched --human baseline|ratchet|handoff). Asked the operator (AskUserQuestion): 'Yes, create it' at ca6f3699 line 401195 uuid b0ac2b3f-3a69-401d-80c1-eb3b8ee85599, but --verify --claim operator refuses it (kind tool_result, not human), so a typed confirmation is asked to serve as the warrant. Pin test rewritten in the wt: rebaselines.json names the file exactly once, old 0 new 296. Manifest corrected (gate's DRIFT: codon-baseline.json not taken, ten paths missing). | 2026-11-19T23:45:20Z: 2026-11-19 WARRANT: the operator typed 'Yes, create the retro-handoff baseline ratchet (W2357) at 296.' at ca6f3699 line 401288 uuid e92a2eb5-0ec4-4444-8c87-1bc4e1f16108; --verify --claim operator ok (kind human). v3 in .nemik-w2357-wt: rebaselines.json birth entry {old 0, new 296, warrant ca6f3699-66ac-4ffa-a3ca-6ececbab791f:401288}; tools/rebaselines_gate.py --head 4d05db4 --tree the wt exits 0 (it refused v2). mtools:W2787 (dialog answers as operator) declined: AskUserQuestion's answers field is agent-written, so --verify refusing a tool_result stays correct. //:precommit running (bcumyl27a). | 2026-11-19T23:48:00Z: 2026-11-19 v3 = refs/review/W2357-v3 = 22b214bc (tree 11c0b7a9, parent W2362-v1 8eae9e79); diff over v2: rebaselines.json +7, tests/test_retro_baseline.py; //:precommit 555 of 555 (bcumyl27a). In review at github:W120. | 2026-11-19T23:50:57Z: 2026-11-19 github-00 PASS-SUBMIT on refs/review/W2357-v3 = 22b214bc; resubmitting .claude/stack-W2362-W2357.json. Fold-in owed (non-blocking): the mutant 'a second rebaselines entry naming the file goes red'. | 2026-11-20T01:16:05Z: 2026-11-20 landed as 09d28000 on origin/main (verified: git log, ls-remote). Ship (Flux) witness pending. Owed: G8 field wording to github-00 (handoff.self_probe = executed-and-failed when handoff.operator = other); non-blocking mutant (a second rebaselines entry for the file goes red). | 2026-11-20T01:17:31Z: 2026-11-20 github-00 verified the landing: W2362 6671e8bb byte-equal to the reviewed 8eae9e79; W2357 09d28000 differs from the reviewed 22b214bc only in the two .claude queue files; the pages for gcalculus, paperkit and substrate stop. Skill half: github:W121 (fleet skills learn handoff.self_probe = executed-and-failed, through change-review and the operator's sign-off). Order stands: W2365 mutants and drill, W2358 (a), W2363.",
       "issued_at": "2026-11-19T20:50:48Z",
       "minted_during": "interrupt",
       "caused_by": "inbox/2026-11-19-github-00-retro-handoff-shape-flags-history.md",
-      "last_worked": "2026-11-19T23:50:57Z",
+      "last_worked": "2026-11-20T01:17:31Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
@@ -58794,7 +58804,8 @@
         "tools/retro_handoff_baseline.py"
       ],
       "size_class": "medium",
-      "deploys": true
+      "deploys": true,
+      "landed_at": "20261120T011605Z"
     },
     {
       "symbol": "W2358",
@@ -58826,11 +58837,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-11-20T00:27:50Z: 2026-11-20 mtools second data point for the fixture: export round.json as_of 2026-11-20T00:24:14Z held mtools W2777 (rank 1, salience 1170), W2780 (2, 8), W2726 (3, 4.163), all status working; W2793 (gate-repair + mutation, working) was NOT in the round; nemik-rank mtools --json printed []. The round keeps working cards ahead of a higher-band card, so a STALE working status can hold a gate repair out of it (W2780 and W2726 stale-working, being set ready; earlier W2774 had the same shape with a ready gate-repair card). mtools will send the next export.",
       "issued_at": "2026-11-19T20:50:51Z",
       "minted_during": "interrupt",
       "caused_by": "inbox/2026-11-19-github-00-w2325-fixture-frozen-applier.md",
-      "last_worked": null,
+      "last_worked": "2026-11-20T00:27:50Z",
       "ticks_blocked": 0
     },
     {
@@ -58872,7 +58883,7 @@
     {
       "symbol": "W2362",
       "title": "The edit hook's formatter targets py313 (pyproject [tool.ruff] target-version), so an edit no longer forces PEP 758 except syntax",
-      "status": "working",
+      "status": "landed",
       "enables": [
         "W2357"
       ],
@@ -58880,18 +58891,19 @@
       "blocked_on": [],
       "blocked_kind": "agent",
       "next_bounded_step": "Lands with W2357 v3 in .claude/stack-W2362-W2357.json on github-00's PASS-SUBMIT of 22b214bc",
-      "evidence": "2026-11-19T22:22:51Z: 2026-11-19 minted from github-00's R3 on W2357 v1. The edit hook judges a whole file, and its formatter (ruff 0.16.6 in mtools' hook venv, target py314 from nemik's pyproject) rewrites except (A, B): as except A, B: (PEP 758), so any edit to these files must carry those lines. CODON FACTS: main's codon-baseline.json already records check.py's first Codon error as syntax error, unexpected ',' (main's check.py has no PEP 758 except, so something else), and cachestore's as no module named '__future__', an import wall before any except; main already holds PEP 758 excepts in history.py and metrics.py. So the census cannot see these lines either way; W2364 takes the conflict with Codon to mtools. | 2026-11-19T22:29:06Z: 2026-11-19 RE-SCOPED on mtools' reading (mtools:W2785): the hook formats with the governing project's own ruff (nemik's 0.16.10, not the hooks venv's 0.16.6 as I had wrongly said) against nemik's pyproject, which has no [tool.ruff] table, so ruff inferred py314 from requires-python and its formatter rewrote except (A, B) into PEP 758. CONFIRMED through the hook: with target-version py313 added, a trivial edit to main's check.py (five parenthesized excepts) was ACCEPTED, where before every edit was refused until they were rewritten; the probe edit is reverted. So no format-only commit is needed: W2357 keeps the original except lines. ruff-house.toml (the ratchet's config, py314) is unchanged. | 2026-11-19T23:00:35Z: 2026-11-19 built refs/review/W2362-v1 = 8eae9e7993b0bd7d81cb112095e6fd8a03d6e8db on main 4d05db4e, one file (pyproject.toml). bazel test //:precommit 554 of 554. In review at github:W120 together with W2357 v2, which stacks on it. | 2026-11-19T23:22:45Z: 2026-11-19 github-00 PASS-SUBMIT on refs/review/W2362-v1 = 8eae9e79; submitting as one stack with W2357 (.claude/stack-W2362-W2357.json) on main 4d05db4e. | 2026-11-19T23:48:02Z: 2026-11-19 first submit refused on W2357's entry (rebaselines gate); W2362 unchanged at 8eae9e79, rides under W2357 v3. | 2026-11-19T23:50:58Z: 2026-11-19 github-00 PASS-SUBMIT (8eae9e79, under W2357 v3 22b214bc); resubmitting.",
+      "evidence": "2026-11-19T22:22:51Z: 2026-11-19 minted from github-00's R3 on W2357 v1. The edit hook judges a whole file, and its formatter (ruff 0.16.6 in mtools' hook venv, target py314 from nemik's pyproject) rewrites except (A, B): as except A, B: (PEP 758), so any edit to these files must carry those lines. CODON FACTS: main's codon-baseline.json already records check.py's first Codon error as syntax error, unexpected ',' (main's check.py has no PEP 758 except, so something else), and cachestore's as no module named '__future__', an import wall before any except; main already holds PEP 758 excepts in history.py and metrics.py. So the census cannot see these lines either way; W2364 takes the conflict with Codon to mtools. | 2026-11-19T22:29:06Z: 2026-11-19 RE-SCOPED on mtools' reading (mtools:W2785): the hook formats with the governing project's own ruff (nemik's 0.16.10, not the hooks venv's 0.16.6 as I had wrongly said) against nemik's pyproject, which has no [tool.ruff] table, so ruff inferred py314 from requires-python and its formatter rewrote except (A, B) into PEP 758. CONFIRMED through the hook: with target-version py313 added, a trivial edit to main's check.py (five parenthesized excepts) was ACCEPTED, where before every edit was refused until they were rewritten; the probe edit is reverted. So no format-only commit is needed: W2357 keeps the original except lines. ruff-house.toml (the ratchet's config, py314) is unchanged. | 2026-11-19T23:00:35Z: 2026-11-19 built refs/review/W2362-v1 = 8eae9e7993b0bd7d81cb112095e6fd8a03d6e8db on main 4d05db4e, one file (pyproject.toml). bazel test //:precommit 554 of 554. In review at github:W120 together with W2357 v2, which stacks on it. | 2026-11-19T23:22:45Z: 2026-11-19 github-00 PASS-SUBMIT on refs/review/W2362-v1 = 8eae9e79; submitting as one stack with W2357 (.claude/stack-W2362-W2357.json) on main 4d05db4e. | 2026-11-19T23:48:02Z: 2026-11-19 first submit refused on W2357's entry (rebaselines gate); W2362 unchanged at 8eae9e79, rides under W2357 v3. | 2026-11-19T23:50:58Z: 2026-11-19 github-00 PASS-SUBMIT (8eae9e79, under W2357 v3 22b214bc); resubmitting. | 2026-11-20T01:16:03Z: 2026-11-20 landed as 6671e8bb on origin/main (verified: git log, ls-remote 09d28000 tip).",
       "issued_at": "2026-11-19T22:22:31Z",
       "minted_during": "interrupt",
       "caused_by": "W2357",
-      "last_worked": "2026-11-19T23:50:58Z",
+      "last_worked": "2026-11-20T01:16:03Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
         "pyproject.toml"
       ],
       "size_class": "small",
-      "deploys": true
+      "deploys": true,
+      "landed_at": "20261120T011603Z"
     },
     {
       "symbol": "W2363",
@@ -58932,19 +58944,148 @@
     {
       "symbol": "W2365",
       "title": "Gate parity: the pre-submit target set runs tools/rebaselines_gate.py, so a ratchet birth or rise without a warranted rebaselines.json entry shows before submit, not first at the commit gate",
-      "status": "ready",
+      "status": "working",
       "enables": [],
       "touches": [],
       "blocked_on": [],
-      "blocked_kind": null,
-      "next_bounded_step": "On github-00's ruling: build tools/presubmit.sh WT (refuse non-worktree or unstaged; run gate_staged.sh from the real root with GIT_INDEX_FILE=WT's index; print the gated tree sha), pin test, two refusal fixtures, the planted-birth drill",
-      "evidence": "2026-11-19T23:48:36Z: 2026-11-19 design notes sent to github-00: the pre-submit is gate_staged.sh itself fed the review worktree's index (gate_staged captures GIT_INDEX_FILE at line 21 and write-trees from it at line 40), because rebaselines_gate needs git and //:precommit is one of eight gate steps. Interim: run tools/rebaselines_gate.py by hand before review (done for W2357 v3). | 2026-11-19T23:50:59Z: 2026-11-19 github-00 DESIGN APPROVED: presubmit.sh = gate_staged.sh over the review worktree's index; plants: not-a-worktree and unstaged refusals, whole-line pin of the only gate call, planted ratchet-birth drill; from then on review messages cite presubmit's tree sha. And: re-scope W2345 after this lands (a check outside the gate cannot judge, exit 7); don't build for the old case meanwhile.",
+      "blocked_kind": "agent",
+      "next_bounded_step": "On github-00's PASS-SUBMIT of refs/review/W2365-v1 = 8eb17c75: submit .claude/stack-W2365-v1.json frozen from .nemik-w2365-wt (re-cut if main moved), verify the landing; then re-scope W2345 and start W2358 (a)",
+      "evidence": "2026-11-19T23:48:36Z: 2026-11-19 design notes sent to github-00: the pre-submit is gate_staged.sh itself fed the review worktree's index (gate_staged captures GIT_INDEX_FILE at line 21 and write-trees from it at line 40), because rebaselines_gate needs git and //:precommit is one of eight gate steps. Interim: run tools/rebaselines_gate.py by hand before review (done for W2357 v3). | 2026-11-19T23:50:59Z: 2026-11-19 github-00 DESIGN APPROVED: presubmit.sh = gate_staged.sh over the review worktree's index; plants: not-a-worktree and unstaged refusals, whole-line pin of the only gate call, planted ratchet-birth drill; from then on review messages cite presubmit's tree sha. And: re-scope W2345 after this lands (a check outside the gate cannot judge, exit 7); don't build for the old case meanwhile. | 2026-11-20T01:39:17Z: 2026-11-20 built in .nemik-w2365-wt on 09d28000: tools/presubmit.sh + tests/test_presubmit.py (5 tests, //:test_presubmit passes), BUILD data clause, bazel/nemik_tests.bzl regenerated. DRILL: presubmit.sh over a worktree with a planted baseline ratchet born at 2 and no rebaselines entry was refused by the gate ('drill-baseline.json: was born at 2 with no rebaselines entry', rc 1, tree 96c334d7 printed), the same message that refused W2357 v2. MUTANTS (each reverted): dropping GIT_INDEX_FILE from the gate call fails 2 tests (index seen empty; whole-line pin); dropping the untracked refusal fails test_an_untracked_file_is_refused. Dogfood run: presubmit.sh over its own worktree (full gate) running. | 2026-11-20T03:35:03Z: 2026-11-20 refs/review/W2365-v1 = 8eb17c75 (parent 09d28000), tree e5b67844 = the tree tools/presubmit.sh gated green over its own worktree (tree e5b678441eb03f17a90d48f87020144c0f9336bd rc 0); the first dogfood run was refused by the house ratchet (DOC201 in the test docstring), fixed. In review at github:W120. | 2026-11-20T03:36:28Z: 2026-11-20 github-00 PASS-SUBMIT on refs/review/W2365-v1 = 8eb17c75 (rev-parse tree e5b67844 = the gated tree). Limit carded separately: presubmit runs the LIVE checkout's gate_staged.sh, not the gated tree's.",
       "issued_at": "2026-11-19T23:43:53Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W2357",
-      "last_worked": "2026-11-19T23:50:59Z",
+      "last_worked": "2026-11-20T03:36:28Z",
       "ticks_blocked": 0,
       "completed": null
+    },
+    {
+      "symbol": "W2366",
+      "title": "Design notes: the file observer's content fact (bounded read, local non-secret files only, which shape) sent to github-00",
+      "status": "ready",
+      "enables": [
+        "W2092"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-11-20T01:01:58Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2092",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2367",
+      "title": "Build the content fact with its test, SKILL.md row and registry row",
+      "status": "ready",
+      "enables": [
+        "W2092"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-11-20T01:01:58Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2092",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2368",
+      "title": "Put the content witness on W2091",
+      "status": "ready",
+      "enables": [
+        "W2092"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-11-20T01:01:58Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2092",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2369",
+      "title": "Add the endpoint (host and port only, credential and path stripped) and per-query sample timestamps to the promql fact, with tests on a fake store",
+      "status": "ready",
+      "enables": [
+        "W2107"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-11-20T02:50:29Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2107",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2370",
+      "title": "Print the evaluation time, endpoint, sample count and value or the word empty on the witness row and in the apply evidence, tests for empty, non-empty, unobservable",
+      "status": "ready",
+      "enables": [
+        "W2107"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-11-20T02:50:29Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2107",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2371",
+      "title": "Check how the apply path handles a promql containing a comparison sign that the writer refuses in evidence text, before W2091 relies on it",
+      "status": "ready",
+      "enables": [
+        "W2107"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-11-20T02:50:29Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2107",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2372",
+      "title": "presubmit.sh gates with the gated tree's own gate_staged.sh, not the live checkout's",
+      "status": "blocked",
+      "enables": [
+        "W2345"
+      ],
+      "touches": [],
+      "blocked_on": [
+        "mtools:W2780"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Design notes to github-00 (a change that edits gate_staged.sh is judged by the OLD gate now, and a mid-run edit to the live script can change a verdict): materialize the gated tree's gate_staged.sh from the tree object, or use mtools' run-at-sha mode (mtools:W2780) once it lands, or refuse when the gated tree's script differs from the live one (minimal, buildable now). Plant: a tree whose gate_staged.sh differs from the live one.",
+      "evidence": "2026-11-20T03:36:37Z: 2026-11-20 github-00's limit on W2365 v1: the live checkout's gate script judges the gated tree. Edge to mtools:W2780 (run-at-sha) as one of three fixes.",
+      "issued_at": "2026-11-20T03:36:33Z",
+      "minted_during": "interrupt",
+      "caused_by": "nemik:W2365",
+      "last_worked": "2026-11-20T03:36:37Z",
+      "ticks_blocked": 0,
+      "prior_status": "ready"
     }
   ],
   "residue": [
