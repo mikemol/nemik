@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 2389,
+  "counter": 2390,
   "waypoints": [
     {
       "symbol": "W1",
@@ -59222,19 +59222,17 @@
     {
       "symbol": "W2380",
       "title": "The live checkout carries unlanded work from earlier sessions: map each uncommitted file to its card and land or stash it",
-      "status": "blocked",
+      "status": "ready",
       "enables": [],
       "touches": [],
-      "blocked_on": [
-        "mtools:W2815"
-      ],
-      "blocked_kind": "agent",
-      "next_bounded_step": "READ FIRST (no converter yet): luthen-observability's land_ref and mtools' stack and review-ref tooling for a 'patch file to review ref' command; the mapping of the 25 modified files and 114 held files to cards; design notes to github-00 with what exists. If none exists, card the shared command in mtools.",
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "STEP 1 (mine, first, no tool needed): make the FILE-TO-CARD MAPPING of the unlanded work in the main checkout. Read it from git, not by hand: git status --short there (about 25 tracked files modified: docs, src modules, tests, one tool, the queue and its ledger; about 1750 untracked entries, 114 of them held-W<n> patches and parked sources under .claude, each named by its card; the rest untracked tests and tools). For each modified file: git diff to the card whose work it is (the held-W<n> names, the card evidence and git log name the card). Write the mapping as a file, one line per piece: path, card, slug. NOTHING stashed or reverted before the mapping is read by github-00 (design notes to github-00 with it). STEP 2: the branch per card waits on mtools:W2815 (the shared command: patch or parked source + card + slug to ONE commit on refs/heads/review/W<n>-<slug> in a temporary index, with a batch mode over the mapping file; github-00 ruled the branch the ONLY namespace). STEP 3: land (presubmit on its branch, then the gate), hold (stays a branch cited on its card) or drop (a residue branch or tag cited on the card) each piece; the main checkout returns to trunk, clean. Warrant attached (host L176585).",
       "evidence": "2026-11-20T12:34:53Z: 2026-11-20 github-00 corrected the wording: land or stash is out; the rulings above (host L176585, L176697, L177064, L195318) make a named feature branch or refs/review ref the home of every piece of unlanded work. | 2026-11-20T12:40:18Z: 2026-11-20 github-00 (from the operator): ADOPT the fleet's existing pattern, do not design one (memory exploit-existing-flows-and-standards, convergence-is-integration-not-wrappers). In use: luthen-observability holds each card's work as refs/review/W<n>-<rev> and lands the exact bytes with its land_ref (checks the message head for a '(review ref ...)' marker; W2785-C landed so at e1ccc45f); mtools uses review/W<n>-<slug> branches (review/W2800-testgate-freeze-tree, review/W2805-cell-cpu) and submits stacks from them; nemik already cuts refs/review/W<n>-v<k>. END STATE: each held patch or parked source is a commit on refs/review/W<n>-<slug> (or a review/ branch) for its card. BEFORE writing a converter: read luthen's land_ref and mtools' stack tooling for a patch to review-ref command; if one exists use it; if none, the converter is a shared mtools command (one card there), not nemik/tools. | 2026-11-20T13:01:14Z: 2026-11-20 READ (github-00's 'read before writing a converter'): mtools/hooks/src/mikemol/hooks has freezefrom.py (mikemol-commit --stack FILE --freeze-from DIR: bytes from a scratch worktree), stackland.py, isolated.py, commit_kata.py, aheadrefusal.py, worktreereap.py; none turns a patch file into a refs/review/W<n>-<slug> commit. luthen-observability's land_ref.py is named only in a queue card (its words: 'drives checks.land by hand', with a shipped argument-shape bug): no such file exists in luthen-observability or mtools (find, 2026-11-20), so it is a session-scratch script, not a shared tool. RESULT per github-00: no existing command, so the converter belongs in mtools as ONE shared command (patch or parked source + card + slug to a commit on refs/review/W<n>-<slug>, message naming the card), not in nemik/tools. Asked mtools to card it (message sent). | 2026-11-20T13:02:52Z: 2026-11-20 mtools carded the shared command as mtools:W2815 (caused_by nemik:W2380; blocked on mtools:W2809): a patch or parked source + card + slug to ONE commit on a review ref in a TEMPORARY index (live index, worktree and HEAD untouched, planted byte for byte), parent a named base (default HEAD), message naming the card, a batch mode over a mapping file (file, card, slug), all-or-nothing in its dry run. OPEN: the namespace default, refs/heads/review/<name> (the BRANCH mtools uses and github-00 reads) or refs/review/W<n>-<slug>; I answered: branch default (the operator ruled branches better than tags or bare refs, host L177064) with a flag for refs/review, pending github-00. The branch-per-card step blocks on mtools:W2815; the file-to-card mapping stays mine, first. | 2026-11-20T13:04:36Z: 2026-11-20 CORRECTION (github-00): luthen-observability's land tool IS tracked: checks/land.py (land_named_test, land_stack_test, land_isolated_test, land_frozen_test, land_precheck.json at e1ccc45f; luthen:W2795 'land --ref' is its pending ref mode). My earlier 'no such file' was a reading of absence from find under a permission-denied .kube, wrong. READ land.py (functions list, lines 461-522): index_tree(paths, scope, source) builds the tree a commit would hold in a PRIVATE index with the steps of mikemol-commit's own isolated.commit_isolated (read-tree HEAD; add -A over the named paths from a source tree; write-tree); build_snapshot wraps it. That is the core of a patch-to-ref command; land.py is a lander (it runs the gate), not a ref writer. NAMESPACE RULED by github-00: refs/heads/review/W<n>-<slug>, the only namespace, no flag (told mtools). W2815 should reuse mtools' isolated.commit_isolated index steps (land.py duplicates them), and converge with luthen:W2795. | 2026-11-20T13:06:31Z: 2026-11-20 github-00 (luthen confirms): land_ref.py and ref_cut.py live only in luthen's session scratchpad, in no repo; checks/land.py is a different tool and luthen:W2795 is its pending ref mode. My conclusion (no shared patch-to-ref command) stands; only the method (a find that died on permission-denied) was weak. W2815 must converge with luthen:W2795 on ONE head format and on isolated.commit_isolated's core, doubly important because luthen's landing path is currently unversioned.",
       "issued_at": "2026-11-20T12:30:25Z",
       "minted_during": "interrupt",
       "caused_by": "github:W120",
-      "last_worked": "2026-11-20T13:06:31Z",
+      "last_worked": "2026-11-20T21:32:53Z",
       "ticks_blocked": 0,
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
       "vector_source": "default",
@@ -59266,7 +59264,8 @@
             "mtools:reader": "mikemol-transcriptstruct claude:transcript:-home-mikemol-github/695f3e0a-d36f-4080-9c67-7548978cd99e --verify 53df26f7-d6aa-4083-a179-0ef4f808893e --claim change queuing should also leverage branches; no excuse to not have material known by git; no excuse to reach into someone else's live checkout"
           }
         }
-      ]
+      ],
+      "completed": null
     },
     {
       "symbol": "W2381",
@@ -59366,23 +59365,24 @@
     {
       "symbol": "W2386",
       "title": "The installed nemik skill is a symlink into the live checkout, so every session loads uncommitted edits: install it from a pinned sha through luthen",
-      "status": "working",
+      "status": "landed",
       "enables": [
         "luthen-observability:W2808"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": "agent",
-      "next_bounded_step": "On github-00's PASS-SUBMIT of refs/review/W2386-v1 = 67b7896f: submit .claude/stack-W2386-v1.json frozen from .nemik-w2386-wt, verify the landing, then tell luthen-observability (W2808) the landed sha so it can resolve nemik/skills/nemik/ in the new venv",
-      "evidence": "2026-11-20T14:34:50Z: 2026-11-20 luthen-observability carded luthen-observability:W2808 (blocked on this card by citation). READ by luthen: ~/.claude/skills/nemik is a symlink to this live checkout (readlink); checks/user_tools.py installs a tool with uv tool install from git into ~/.local/share/luthen-tools/by-sha/<sha>/<name>/ and swaps live/<name> by one rename; user/tools.json's nemik row FOLLOWS the pushed main tip at install time (nemik-pace is the pinned one). nemik:W2383's tools path matches what is live now. | 2026-11-20T19:24:25Z: 2026-11-20 design notes sent to github-00 with the skills-repo interface (a pin by nemik sha, content read from git objects, no fork; the same shape for every repo-owned skill). FACTS: hatchling builds the wheel; skills/nemik holds one file (SKILL.md); test_skill reads skills/nemik/SKILL.md; the bazel venv is assembled from src/nemik, not a wheel build. | 2026-11-20T19:45:05Z: 2026-11-20 github-00 design PASS with refinements: (a) force-include over moving the source, AGREED; (b) the in-package path is the FLEET CONVENTION <package>/skills/<name>/ (nemik/skills/nemik/), told to luthen on W2808; (c) the skills repo's pin carries {repo, path, sha, tree} with the GIT TREE ID (git rev-parse <sha>:skills/nemik) as the content address, not a wheel sha256 list: skills:W4 verifies an install by recomputing the installed directory's tree id (one check for the wheel route and the .skill-archive route). PROBED: hatchling is not in uv.lock, so it is a declared dev dependency (uv lock added hatchling, tomlkit, trove-classifiers). BUILT in .nemik-w2386-wt on 2f97b8fe: pyproject [tool.hatch.build.targets.wheel.force-include] skills/nemik to nemik/skills/nemik, hatchling in the dev group, uv.lock, tests/test_skill_in_wheel.py (builds a wheel in bazel from a minimal tree with the real pyproject and skill dir and compares sha256 per file, nothing extra; a built-in drill with the rule removed holds no skill), BUILD data glob. Mutant: destination nemik/skill fails the test. Self-containedness pin NOT in this change: ten repo-relative pointers in SKILL.md, carded as W2389. Full presubmit running. | 2026-11-20T20:38:05Z: 2026-11-20 refs/review/W2386-v1 = 67b7896f (parent 2f97b8fe), tree 76a5743a = the tree tools/presubmit.sh gated green (rc 0, 559 targets). 5 files, 126 insertions. skills/nemik tree id at the ref: 944329cd5ba22afb0eee65b7717c0e74ec83f5cc. In review at github:W120. | 2026-11-20T20:40:23Z: 2026-11-20 github-00 PASS-SUBMIT on refs/review/W2386-v1 = 67b7896f (tree 76a5743a, skills/nemik tree 944329cd) after ONE fold-in, applied: the floor. The dev dependency was a bare hatchling while uv.lock pins 1.33.0 (fleet form >=x.y); now hatchling>=1.33 in BOTH [build-system].requires and the dev group, uv.lock records specifier >=1.33. STATED in pyproject.toml, [build-system] requires (line 81) and [dependency-groups] dev, each with a comment naming the other: luthen's uv tool install builds the wheel with the build-system requirement while the wheel test uses the dev group, so one floor keeps them measuring one backend. The delta from the reviewed v1 is pyproject.toml (2 lines) and uv.lock (1 line); the targeted tests pass; the commit gate runs the full suite on the submitted tree.",
+      "next_bounded_step": "Landed. Tell luthen-observability (W2808) and github-00 the sha (done); nothing further on nemik's side until W2389.",
+      "evidence": "2026-11-20T14:34:50Z: 2026-11-20 luthen-observability carded luthen-observability:W2808 (blocked on this card by citation). READ by luthen: ~/.claude/skills/nemik is a symlink to this live checkout (readlink); checks/user_tools.py installs a tool with uv tool install from git into ~/.local/share/luthen-tools/by-sha/<sha>/<name>/ and swaps live/<name> by one rename; user/tools.json's nemik row FOLLOWS the pushed main tip at install time (nemik-pace is the pinned one). nemik:W2383's tools path matches what is live now. | 2026-11-20T19:24:25Z: 2026-11-20 design notes sent to github-00 with the skills-repo interface (a pin by nemik sha, content read from git objects, no fork; the same shape for every repo-owned skill). FACTS: hatchling builds the wheel; skills/nemik holds one file (SKILL.md); test_skill reads skills/nemik/SKILL.md; the bazel venv is assembled from src/nemik, not a wheel build. | 2026-11-20T19:45:05Z: 2026-11-20 github-00 design PASS with refinements: (a) force-include over moving the source, AGREED; (b) the in-package path is the FLEET CONVENTION <package>/skills/<name>/ (nemik/skills/nemik/), told to luthen on W2808; (c) the skills repo's pin carries {repo, path, sha, tree} with the GIT TREE ID (git rev-parse <sha>:skills/nemik) as the content address, not a wheel sha256 list: skills:W4 verifies an install by recomputing the installed directory's tree id (one check for the wheel route and the .skill-archive route). PROBED: hatchling is not in uv.lock, so it is a declared dev dependency (uv lock added hatchling, tomlkit, trove-classifiers). BUILT in .nemik-w2386-wt on 2f97b8fe: pyproject [tool.hatch.build.targets.wheel.force-include] skills/nemik to nemik/skills/nemik, hatchling in the dev group, uv.lock, tests/test_skill_in_wheel.py (builds a wheel in bazel from a minimal tree with the real pyproject and skill dir and compares sha256 per file, nothing extra; a built-in drill with the rule removed holds no skill), BUILD data glob. Mutant: destination nemik/skill fails the test. Self-containedness pin NOT in this change: ten repo-relative pointers in SKILL.md, carded as W2389. Full presubmit running. | 2026-11-20T20:38:05Z: 2026-11-20 refs/review/W2386-v1 = 67b7896f (parent 2f97b8fe), tree 76a5743a = the tree tools/presubmit.sh gated green (rc 0, 559 targets). 5 files, 126 insertions. skills/nemik tree id at the ref: 944329cd5ba22afb0eee65b7717c0e74ec83f5cc. In review at github:W120. | 2026-11-20T20:40:23Z: 2026-11-20 github-00 PASS-SUBMIT on refs/review/W2386-v1 = 67b7896f (tree 76a5743a, skills/nemik tree 944329cd) after ONE fold-in, applied: the floor. The dev dependency was a bare hatchling while uv.lock pins 1.33.0 (fleet form >=x.y); now hatchling>=1.33 in BOTH [build-system].requires and the dev group, uv.lock records specifier >=1.33. STATED in pyproject.toml, [build-system] requires (line 81) and [dependency-groups] dev, each with a comment naming the other: luthen's uv tool install builds the wheel with the build-system requirement while the wheel test uses the dev group, so one floor keeps them measuring one backend. The delta from the reviewed v1 is pyproject.toml (2 lines) and uv.lock (1 line); the targeted tests pass; the commit gate runs the full suite on the submitted tree. | 2026-11-20T22:03:27Z: 2026-11-20 landed as 482d876f on origin/main (verified: git log, ls-remote). skills/nemik tree id at the landed commit: 944329cd5ba22afb0eee65b7717c0e74ec83f5cc (unchanged from the reviewed ref, the floor fold-in touched only pyproject.toml and uv.lock). Floor stated in pyproject.toml [build-system] requires and the dev group (hatchling>=1.33), uv.lock specifier >=1.33. Next: luthen-observability:W2808 resolves nemik/skills/nemik/ in the new venv; the operator's yes then the ~/.claude/skills row. W2389 (the ten pointers) and the skills repo pin (skills:W2, skills:W3) follow.",
       "issued_at": "2026-11-20T14:32:46Z",
       "minted_during": "interrupt",
       "caused_by": "github:W122",
-      "last_worked": "2026-11-20T20:40:23Z",
+      "last_worked": "2026-11-20T22:03:27Z",
       "ticks_blocked": 0,
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
       "vector_source": "default",
-      "completed": null
+      "completed": null,
+      "landed_at": "20261120T220327Z"
     },
     {
       "symbol": "W2387",
@@ -59437,11 +59437,35 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "MEASURED 2026-11-20 (grep over skills/nemik/SKILL.md): ten repo-relative pointers: tests/test_skill.py (line 3), ~/github/nemik/.venv/bin/ (line 18, also W2383), src/nemik/data/workflows.toml and tests/test_workflows.py (69-70), tools/nemik/uv-receipt.toml (93), docs/withholding-at-source.md and tests/test_exportcli.py (99), tools/image_replica_runner.sh (101), docs/pdf-views.md (124), src/nemik/data/retro-handoff-baseline.json (162). An installed skill (nemik/skills/nemik/ in the wheel, W2386) cannot open them. Decide per pointer: code pointers (src, tests, tools) inform a reader who has the repo and may stay if the skill says they are repo paths; docs/ pointers are things the reader is told to READ, so inline the fact or give a URL at a sha. Then pin it by test_skill. Fold the W2383 tools-path fix here. Design notes to github-00 first.",
+      "next_bounded_step": "Design notes to the HOST (github-00) FIRST, since which pointers inline, link or stay is a content call. MEASURED 2026-11-20 (grep over skills/nemik/SKILL.md): ten repo-relative pointers: a test (line 3), the sibling .venv tool path (line 18, also W2383: the pinned install is ~/.local/share/luthen-tools/live/nemik/bin/<tool>), two on workflows (69-70), one on the uv receipt (93), two docs and a test (99), one runner script (101), one pdf doc (124), one baseline data file (162): re-run the grep for the exact list. The installed skill (nemik/skills/nemik/ in the wheel, W2386) cannot open them. Proposal for the notes: code pointers (src, tests, tools) may stay if the skill says they are repo paths; docs pointers are things the reader is told to READ, so inline the fact or give a URL at a sha; fold W2383's tools-path fix; then pin by test_skill (no ~/github/<repo> path; every docs pointer inlined or a URL).",
       "evidence": "",
       "issued_at": "2026-11-20T19:44:58Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W2386",
+      "last_worked": "2026-11-20T21:32:54Z",
+      "ticks_blocked": 0,
+      "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
+      "vector_source": "default",
+      "completed": null
+    },
+    {
+      "symbol": "W2390",
+      "title": "Witness observer for a git tree id: input.git_tree answers the tree id of a directory or of a path at a sha",
+      "status": "ready",
+      "enables": [
+        "skills:W30"
+      ],
+      "touches": [
+        "file:src/nemik/witnesses.py!w",
+        "file:tests/test_witnesses.py!w"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "FROM skills-5e (skills:W30, low rank, ruled a nemik gap by github-00 2026-11-20, cited on skills:W27): skills:W27 flips a fleet skill's source from the installed directory to the skills repo once the installed tree id equals the pinned one, a comparison of two git tree ids; the witness writer refuses a witness without a declared language and none of nemik's observers (pid, file, git_ref, alert, promql, apply) reads a tree id. SHAPE WANTED: an observer that, given a directory (or a repo, path and sha), answers its git tree id, computed from the directory's bytes or from git objects at a sha, never from a sibling repo's working tree; skills-5e verified a pure-Python computation equal to git rev-parse on four directories (tree_id in the skills repo's scripts/installed_manifest.py, read it through git objects at a published sha). STEPS: read src/nemik/witnesses.py (the observer set and FIELDS in witnessreads) first; design notes to github-00 (the observer name and fields, a bounded read of local non-secret directories like the file observer's W2092 design, and how a repo/path/sha query reads git objects only); test with a planted directory and a repo at a sha; a SKILL.md row and the registry rows the new-command rule requires if any; one correct witness example for skills:W27. Low rank; related W2092 (a file observer's content fact).",
+      "evidence": "",
+      "issued_at": "2026-11-20T21:51:45Z",
+      "minted_during": "interrupt",
+      "caused_by": "skills:W30",
       "last_worked": null,
       "ticks_blocked": 0,
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",

@@ -6538,3 +6538,6 @@
 2026-11-20T19:45:05Z  status W2386 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-20T20:38:05Z  status W2386 working>blocked writer    "working -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-20T20:40:23Z  status W2386 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-20T20:57:58Z  status W2380 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-20T21:51:45Z  interrupt W2390 minted    -         "Witness observer for a git tree id: input.git_tree answers the tree id of a directory or of a path at a sha"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=skills:W30
+2026-11-20T22:03:27Z  status W2386 working>landed writer    "working -> landed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
