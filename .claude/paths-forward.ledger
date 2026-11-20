@@ -6522,3 +6522,13 @@
 2026-11-20T13:02:52Z  status W2380 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-20T14:11:56Z  status W2379 working>blocked writer    "working -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-20T14:14:02Z  status W2379 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-20T14:32:44Z  interrupt W2383 minted    -         "nemik skill: the tool path is the pinned install, not a sibling .venv (skills/nemik/SKILL.md line 18)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github:W122
+2026-11-20T14:32:45Z  interrupt W2384 minted    -         "nemik skill: liveness is a window query over mikemol.watchdog.armed{repo}, not a ListAgents reading"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github:W122
+2026-11-20T14:32:46Z  interrupt W2385 minted    -         "nemik skill: the weather and witness section lists the observers but not their fields; inline the field table from nemik.witnessreads.FIELDS"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github:W122
+2026-11-20T14:32:46Z  interrupt W2386 minted    -         "The installed nemik skill is a symlink into the live checkout, so every session loads uncommitted edits: install it from a pinned sha through luthen"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github:W122
+2026-11-20T15:49:05Z  status W2379 working>landed writer    "working -> landed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-20T16:17:42Z  status W2382 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-20T17:16:31Z  interrupt W2387 minted    -         "README links docs/adopting.md and lists every nemik-* command the fleet skills name, pinned by test_skill's mechanism"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github:W124
+2026-11-20T17:34:30Z  status W2382 working>blocked writer    "working -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-20T17:35:52Z  status W2382 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-20T17:35:53Z  interrupt W2388 minted    -         "image_solve.sh claims a pinned BuildKit frontend but uses the daemon's built-in dockerfile.v0: pin it or drop the word"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W2382

@@ -144,8 +144,9 @@ if [ -f tools/build_wasm.sh ]; then
 fi
 # nemik:W866: a Containerfile that cannot be converted ships no image and shows only hours later as a
 # missing one (nemik:W865). When the commit changes the Containerfile or the workflow that builds it,
-# solve it here with BuildKit (seconds, the gated path). Where no BuildKit answers (exit 3) it says why
-# it did not solve and goes on, so a host without a daemon is not locked out.
+# solve it here with BuildKit (seconds, the gated path). nemik:W2382: the step never skips. A host with no
+# buildctl or no daemon answering it cannot run the check: exit 7 (CANNOT_RUN), and the gate refuses on
+# it like on a failed solve (1), because a skip that exits 0 reports nothing wrong while checking nothing.
 solve_needed=0
 while IFS= read -r f; do
     case "$f" in
@@ -156,12 +157,10 @@ done < <(git -C "$real_root" diff --name-only "$head_sha" "$tree")
 if [ "$solve_needed" -eq 1 ]; then
     solve_status=0
     solve_out=$(sh tools/image_solve.sh "$wt" 2>&1) || solve_status=$?
-    if [ "$solve_status" -eq 3 ]; then
-        echo "gate_staged: the Containerfile was not solved here: $solve_out" >&2
-    elif [ "$solve_status" -ne 0 ]; then
+    if [ "$solve_status" -ne 0 ]; then
         printf '%s\n' "$solve_out" | tail -n 30 >&2
-        echo "gate_staged: tools/image_solve.sh failed ($solve_status): the image build would fail: commit refused" >&2
-        exit 1
+        echo "gate_staged: the Containerfile solve did not hold (status $solve_status: 1 failed, 7 not run): the image build would fail: commit refused" >&2
+        exit "$solve_status"
     fi
 fi
 # nemik:W526: every tracked shell file passes the shell checker (the edit hook checks only what an
