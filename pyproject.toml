@@ -78,16 +78,24 @@ docs = [
 ]
 
 [build-system]
-requires = ["hatchling"]
+requires = ["hatchling>=1.33"]  # nemik:W2386: the same floor as the dev group below, and the one uv.lock pins (1.33.0): luthen's uv tool install builds the wheel with THIS, the wheel test with the dev group
 build-backend = "hatchling.build"
 
 [tool.hatch.metadata]
 allow-direct-references = true
 
+# nemik:W2386: the nemik skill ships INSIDE the wheel, from the same commit as the tools, at the fleet's
+# in-package convention <package>/skills/<name>/ (it mirrors the repo layout skills/<name>/, so luthen's
+# installer resolves every repo-owned skill by one rule). skills/nemik stays the single source (tests/test_skill
+# pins it to the code); this maps it, never copies it. tests/test_skill_in_wheel.py builds a wheel and compares.
+[tool.hatch.build.targets.wheel.force-include]
+"skills/nemik" = "nemik/skills/nemik"
+
 [dependency-groups]
 dev = [
     "playwright>=1.63.0",
     "pytest>=9.1.1",
+    "hatchling>=1.33",  # nemik:W2386: tests/test_skill_in_wheel.py builds the wheel with the project's own build backend, so the skill's place in it is a measured fact; the floor is the one [build-system].requires states
     "jsonschema>=4.23",  # nemik:W441: published documents validate against their generated schemas
     "types-jsonschema",  # its stubs, for the mypy edit gate
     "pyyaml>=6.0",  # nemik:W504: tests/test_deploy_manifest.py reads deploy/*.yaml against the pod shape luthen agreed

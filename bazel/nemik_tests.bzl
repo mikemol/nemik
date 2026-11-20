@@ -453,6 +453,7 @@ TESTS_PY = [
     "tests/test_shellquote.py",
     "tests/test_side_by_side.py",
     "tests/test_skill.py",
+    "tests/test_skill_in_wheel.py",
     "tests/test_sla.py",
     "tests/test_snaplink.py",
     "tests/test_sources_fetch.py",

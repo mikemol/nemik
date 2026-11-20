@@ -6532,3 +6532,9 @@
 2026-11-20T17:34:30Z  status W2382 working>blocked writer    "working -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-20T17:35:52Z  status W2382 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-20T17:35:53Z  interrupt W2388 minted    -         "image_solve.sh claims a pinned BuildKit frontend but uses the daemon's built-in dockerfile.v0: pin it or drop the word"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W2382
+2026-11-20T19:22:41Z  status W2382 working>landed writer    "working -> landed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-20T19:24:25Z  status W2386 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-20T19:44:58Z  interrupt W2389 minted    -         "The nemik skill names no repo-relative path: an installed skill cannot read the repo, so each pointer becomes inlined fact, a URL at a sha, or nothing"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W2386
+2026-11-20T19:45:05Z  status W2386 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-20T20:38:05Z  status W2386 working>blocked writer    "working -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-20T20:40:23Z  status W2386 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

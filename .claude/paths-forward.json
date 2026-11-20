@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 2388,
+  "counter": 2389,
   "waypoints": [
     {
       "symbol": "W1",
@@ -59289,7 +59289,7 @@
     {
       "symbol": "W2382",
       "title": "The Containerfile solve step also skips with exit 3 and the gate goes on (a skipped check reporting nothing wrong)",
-      "status": "working",
+      "status": "landed",
       "enables": [],
       "touches": [
         "file:tests/test_image_solve.py!w",
@@ -59298,15 +59298,16 @@
       "blocked_on": [],
       "blocked_kind": "agent",
       "next_bounded_step": "On github-00's PASS-SUBMIT of refs/review/W2382-v1 = 32bdcb23: submit .claude/stack-W2382-v1.json frozen from .nemik-w2382-wt (the live gate_staged.sh already carries the same bytes, blob 133a925f), verify the landing, confirm the live gate script equals HEAD",
-      "evidence": "2026-11-20T16:17:42Z: 2026-11-20 github-00 reordered: W2382 is the same fail-open class as W2379 and ranks first; fix in the W2379 shape (any absent tool exits 7, the gate refuses). BUILT in .nemik-w2382-wt on 01bbe053: tools/image_solve.sh exits 7 (not 3) for no buildctl and for no BuildKit daemon, each naming which, and exit 1 for a failed solve (not buildctl's own status); tools/gate_staged.sh refuses on any nonzero solve status and exits with it (the 'not solved here' skip removed); tests/test_image_solve.py (6) runs the real script with a stub buildctl or none on PATH for each case, and pins the gate wiring. W866 checked: its evidence cites no operator line (caused_by a peer card), so the skip was nemik's own choice. This host has buildctl and a daemon (buildctl debug workers answers); the real script solves the Containerfile (exit 0). Mutant: missing buildctl exits 0 fails the test. Live gate_staged.sh given the same edits (blob 133a925f). Full presubmit running. | 2026-11-20T17:34:30Z: 2026-11-20 refs/review/W2382-v1 = 32bdcb23 (parent 01bbe053), tree 6db5335a = the tree tools/presubmit.sh gated green (rc 0). 3 files, 68 insertions. In review at github:W120. | 2026-11-20T17:35:52Z: 2026-11-20 github-00 PASS-SUBMIT on refs/review/W2382-v1 = 32bdcb23 (tree 6db5335a). CORRECTION (residue card, not this commit, so the reviewed and gated tree stands): tools/image_solve.sh's header says 'solve the Containerfile with the pinned BuildKit frontend' but --frontend dockerfile.v0 is the daemon's BUILT-IN frontend, whatever version it ships. Pin it (#syntax= with a digest in the Containerfile, or --frontend gateway.v0 --opt source=<image@digest>) or drop 'pinned'. After landing: send the sha and confirm the live gate_staged.sh equals HEAD.",
+      "evidence": "2026-11-20T16:17:42Z: 2026-11-20 github-00 reordered: W2382 is the same fail-open class as W2379 and ranks first; fix in the W2379 shape (any absent tool exits 7, the gate refuses). BUILT in .nemik-w2382-wt on 01bbe053: tools/image_solve.sh exits 7 (not 3) for no buildctl and for no BuildKit daemon, each naming which, and exit 1 for a failed solve (not buildctl's own status); tools/gate_staged.sh refuses on any nonzero solve status and exits with it (the 'not solved here' skip removed); tests/test_image_solve.py (6) runs the real script with a stub buildctl or none on PATH for each case, and pins the gate wiring. W866 checked: its evidence cites no operator line (caused_by a peer card), so the skip was nemik's own choice. This host has buildctl and a daemon (buildctl debug workers answers); the real script solves the Containerfile (exit 0). Mutant: missing buildctl exits 0 fails the test. Live gate_staged.sh given the same edits (blob 133a925f). Full presubmit running. | 2026-11-20T17:34:30Z: 2026-11-20 refs/review/W2382-v1 = 32bdcb23 (parent 01bbe053), tree 6db5335a = the tree tools/presubmit.sh gated green (rc 0). 3 files, 68 insertions. In review at github:W120. | 2026-11-20T17:35:52Z: 2026-11-20 github-00 PASS-SUBMIT on refs/review/W2382-v1 = 32bdcb23 (tree 6db5335a). CORRECTION (residue card, not this commit, so the reviewed and gated tree stands): tools/image_solve.sh's header says 'solve the Containerfile with the pinned BuildKit frontend' but --frontend dockerfile.v0 is the daemon's BUILT-IN frontend, whatever version it ships. Pin it (#syntax= with a digest in the Containerfile, or --frontend gateway.v0 --opt source=<image@digest>) or drop 'pinned'. After landing: send the sha and confirm the live gate_staged.sh equals HEAD. | 2026-11-20T19:22:41Z: 2026-11-20 landed as 2f97b8fe on origin/main (verified: git log, ls-remote). Live tree: tools/gate_staged.sh, image_solve.sh and tests/test_image_solve.py show no difference from HEAD (the live gate_staged.sh edit, blob 133a925f, is now the committed bytes). Residue: W2388 (the 'pinned frontend' comment).",
       "issued_at": "2026-11-20T12:33:42Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W2379",
-      "last_worked": "2026-11-20T17:35:52Z",
+      "last_worked": "2026-11-20T19:22:41Z",
       "ticks_blocked": 0,
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
       "vector_source": "default",
-      "completed": null
+      "completed": null,
+      "landed_at": "20261120T192241Z"
     },
     {
       "symbol": "W2383",
@@ -59365,22 +59366,23 @@
     {
       "symbol": "W2386",
       "title": "The installed nemik skill is a symlink into the live checkout, so every session loads uncommitted edits: install it from a pinned sha through luthen",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "luthen-observability:W2808"
       ],
       "touches": [],
       "blocked_on": [],
-      "blocked_kind": null,
-      "next_bounded_step": "luthen's plan (luthen-observability:W2808, blocked on this card): (1)+(3) ONE SHA BY CONSTRUCTION: ship skills/nemik as PACKAGE DATA inside the nemik WHEEL (pyproject package-data, a stable in-package path e.g. nemik/skill/), so the skill lands in the same venv from the same commit as the bins; tell luthen the in-package path; a HERMETIC test that the built wheel's skill files equal skills/nemik (a sha256 list). (2) luthen adds a declared row field naming the in-package path and, after the live/<name> swap, resolves it in the NEW venv and swaps a stable link ~/.local/share/luthen-tools/live/nemik-skill; ~/.claude/skills/nemik then points at that FIXED path and is never re-pointed. ~/.claude/skills/nemik is created by neither of us by hand: it needs the OPERATOR's yes (github-00 holds github:W122), then a declared user-scope row applied by the user apply loop, landed only after live/nemik-skill exists. ORDER: this wheel change, luthen's resolve-and-swap with planted tests, the operator's yes, the row. nemik's step: design notes to github-00 first (the in-package path, how skills/nemik stays the single source for test_skill and the wheel, the sha256-list test, the Containerfile and BUILD data), then build.",
-      "evidence": "2026-11-20T14:34:50Z: 2026-11-20 luthen-observability carded luthen-observability:W2808 (blocked on this card by citation). READ by luthen: ~/.claude/skills/nemik is a symlink to this live checkout (readlink); checks/user_tools.py installs a tool with uv tool install from git into ~/.local/share/luthen-tools/by-sha/<sha>/<name>/ and swaps live/<name> by one rename; user/tools.json's nemik row FOLLOWS the pushed main tip at install time (nemik-pace is the pinned one). nemik:W2383's tools path matches what is live now.",
+      "blocked_kind": "agent",
+      "next_bounded_step": "On github-00's PASS-SUBMIT of refs/review/W2386-v1 = 67b7896f: submit .claude/stack-W2386-v1.json frozen from .nemik-w2386-wt, verify the landing, then tell luthen-observability (W2808) the landed sha so it can resolve nemik/skills/nemik/ in the new venv",
+      "evidence": "2026-11-20T14:34:50Z: 2026-11-20 luthen-observability carded luthen-observability:W2808 (blocked on this card by citation). READ by luthen: ~/.claude/skills/nemik is a symlink to this live checkout (readlink); checks/user_tools.py installs a tool with uv tool install from git into ~/.local/share/luthen-tools/by-sha/<sha>/<name>/ and swaps live/<name> by one rename; user/tools.json's nemik row FOLLOWS the pushed main tip at install time (nemik-pace is the pinned one). nemik:W2383's tools path matches what is live now. | 2026-11-20T19:24:25Z: 2026-11-20 design notes sent to github-00 with the skills-repo interface (a pin by nemik sha, content read from git objects, no fork; the same shape for every repo-owned skill). FACTS: hatchling builds the wheel; skills/nemik holds one file (SKILL.md); test_skill reads skills/nemik/SKILL.md; the bazel venv is assembled from src/nemik, not a wheel build. | 2026-11-20T19:45:05Z: 2026-11-20 github-00 design PASS with refinements: (a) force-include over moving the source, AGREED; (b) the in-package path is the FLEET CONVENTION <package>/skills/<name>/ (nemik/skills/nemik/), told to luthen on W2808; (c) the skills repo's pin carries {repo, path, sha, tree} with the GIT TREE ID (git rev-parse <sha>:skills/nemik) as the content address, not a wheel sha256 list: skills:W4 verifies an install by recomputing the installed directory's tree id (one check for the wheel route and the .skill-archive route). PROBED: hatchling is not in uv.lock, so it is a declared dev dependency (uv lock added hatchling, tomlkit, trove-classifiers). BUILT in .nemik-w2386-wt on 2f97b8fe: pyproject [tool.hatch.build.targets.wheel.force-include] skills/nemik to nemik/skills/nemik, hatchling in the dev group, uv.lock, tests/test_skill_in_wheel.py (builds a wheel in bazel from a minimal tree with the real pyproject and skill dir and compares sha256 per file, nothing extra; a built-in drill with the rule removed holds no skill), BUILD data glob. Mutant: destination nemik/skill fails the test. Self-containedness pin NOT in this change: ten repo-relative pointers in SKILL.md, carded as W2389. Full presubmit running. | 2026-11-20T20:38:05Z: 2026-11-20 refs/review/W2386-v1 = 67b7896f (parent 2f97b8fe), tree 76a5743a = the tree tools/presubmit.sh gated green (rc 0, 559 targets). 5 files, 126 insertions. skills/nemik tree id at the ref: 944329cd5ba22afb0eee65b7717c0e74ec83f5cc. In review at github:W120. | 2026-11-20T20:40:23Z: 2026-11-20 github-00 PASS-SUBMIT on refs/review/W2386-v1 = 67b7896f (tree 76a5743a, skills/nemik tree 944329cd) after ONE fold-in, applied: the floor. The dev dependency was a bare hatchling while uv.lock pins 1.33.0 (fleet form >=x.y); now hatchling>=1.33 in BOTH [build-system].requires and the dev group, uv.lock records specifier >=1.33. STATED in pyproject.toml, [build-system] requires (line 81) and [dependency-groups] dev, each with a comment naming the other: luthen's uv tool install builds the wheel with the build-system requirement while the wheel test uses the dev group, so one floor keeps them measuring one backend. The delta from the reviewed v1 is pyproject.toml (2 lines) and uv.lock (1 line); the targeted tests pass; the commit gate runs the full suite on the submitted tree.",
       "issued_at": "2026-11-20T14:32:46Z",
       "minted_during": "interrupt",
       "caused_by": "github:W122",
-      "last_worked": "2026-11-20T14:34:50Z",
+      "last_worked": "2026-11-20T20:40:23Z",
       "ticks_blocked": 0,
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
-      "vector_source": "default"
+      "vector_source": "default",
+      "completed": null
     },
     {
       "symbol": "W2387",
@@ -59419,6 +59421,27 @@
       "issued_at": "2026-11-20T17:35:53Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W2382",
+      "last_worked": null,
+      "ticks_blocked": 0,
+      "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
+      "vector_source": "default"
+    },
+    {
+      "symbol": "W2389",
+      "title": "The nemik skill names no repo-relative path: an installed skill cannot read the repo, so each pointer becomes inlined fact, a URL at a sha, or nothing",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "file:skills/nemik/SKILL.md!w",
+        "file:tests/test_skill.py!w"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "MEASURED 2026-11-20 (grep over skills/nemik/SKILL.md): ten repo-relative pointers: tests/test_skill.py (line 3), ~/github/nemik/.venv/bin/ (line 18, also W2383), src/nemik/data/workflows.toml and tests/test_workflows.py (69-70), tools/nemik/uv-receipt.toml (93), docs/withholding-at-source.md and tests/test_exportcli.py (99), tools/image_replica_runner.sh (101), docs/pdf-views.md (124), src/nemik/data/retro-handoff-baseline.json (162). An installed skill (nemik/skills/nemik/ in the wheel, W2386) cannot open them. Decide per pointer: code pointers (src, tests, tools) inform a reader who has the repo and may stay if the skill says they are repo paths; docs/ pointers are things the reader is told to READ, so inline the fact or give a URL at a sha. Then pin it by test_skill. Fold the W2383 tools-path fix here. Design notes to github-00 first.",
+      "evidence": "",
+      "issued_at": "2026-11-20T19:44:58Z",
+      "minted_during": "interrupt",
+      "caused_by": "nemik:W2386",
       "last_worked": null,
       "ticks_blocked": 0,
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
@@ -59754,24 +59777,6 @@
       "renewed_at": "2026-10-24T12:59:32Z",
       "expires_at": "2026-10-24T13:29:32Z",
       "lapse_ledgered": true
-    },
-    {
-      "tag": "file:tests/test_image_solve.py!w",
-      "holder": "(unlocked)",
-      "waypoint": "W2382",
-      "base_sha": "01bbe05310ce5b160d17fea1f9fdbddfac8a2f7a",
-      "taken_at": "2026-11-20T17:35:52Z",
-      "renewed_at": "2026-11-20T17:35:52Z",
-      "expires_at": "2026-11-20T18:05:52Z"
-    },
-    {
-      "tag": "file:tools/gate_staged.sh!w",
-      "holder": "(unlocked)",
-      "waypoint": "W2382",
-      "base_sha": "01bbe05310ce5b160d17fea1f9fdbddfac8a2f7a",
-      "taken_at": "2026-11-20T17:35:52Z",
-      "renewed_at": "2026-11-20T17:35:52Z",
-      "expires_at": "2026-11-20T18:05:52Z"
     }
   ],
   "advice": [

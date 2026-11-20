@@ -102,6 +102,8 @@ TARGETS = [(src, "") for src in glob(["tests/test_*.py"]) if src != "tests/test_
             + (["tools/gate_verdict.py", "tools/gate_verdict.sh", "tools/gate_facts.sh", "tools/gate_staged.sh", "tools/hook_facts.py", "tools/nemik_src.py"] if src == "tests/test_gate_verdict.py" else [])
             # nemik:W2379: the wasm step is run by its test against stub bazel and worktree scripts, with the real build script and gate script
             + (["tools/gate_wasm.sh", "tools/build_wasm.sh", "tools/gate_staged.sh"] if src == "tests/test_gate_wasm.py" else [])
+            # nemik:W2386: the wheel test builds a wheel from the real pyproject and the whole skill directory
+            + (glob(["skills/nemik/**"], exclude = ["skills/nemik/SKILL.md"], allow_empty = True) if src == "tests/test_skill_in_wheel.py" else [])
             # nemik:W2345: the aggregate test reads the three verdict files the build actions wrote, through the verdict tool's own parser
             + ([":gate_verdict_named_inputs", ":gate_verdict_wheels", ":gate_verdict_working_card", "tools/gate_verdict.py", "tools/hook_facts.py", "tools/nemik_src.py"] if src in LIVE else [])
             # nemik:W2357: the retro baseline's test reads the ratchet declaration and the declared rises
