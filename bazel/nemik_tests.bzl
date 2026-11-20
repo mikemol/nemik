@@ -165,6 +165,7 @@ TESTS_PY = [
     "tests/test_gate_facts.py",
     "tests/test_gate_repair_band.py",
     "tests/test_gate_verdict.py",
+    "tests/test_gate_wasm.py",
     "tests/test_gate_weights.py",
     "tests/test_githooks_commitmsg.py",
     "tests/test_githooks_postcommit.py",

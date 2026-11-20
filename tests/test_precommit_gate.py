@@ -59,11 +59,12 @@ def test_the_gate_replays_the_images_environment_before_the_suite() -> None:
 def test_the_gate_rebuilds_the_wasm_and_compares_its_hash_before_the_suite() -> None:
     """W821: core.wasm is rebuilt from the staged core; a different hash refuses the commit."""
     code = "\n".join(_code(SCRIPT))
-    rebuild = code.index("tools/build_wasm.sh")
+    rebuild = code.index("tools/gate_wasm.sh run")
     suite = code.index("bazel test //:precommit")
     assert rebuild < suite
-    assert "src/nemik/web/core.wasm.sha256" in code
-    assert "-eq 3" in code, "absent tools skip with a reason, they do not fail the gate"
+    assert "-eq 3" not in code[rebuild : rebuild + 400], (
+        "an absent tool is exit 7 and refuses (nemik:W2379), it never skips"
+    )
 
 
 def test_the_gate_checks_shell_files_and_stray_code() -> None:

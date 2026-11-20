@@ -6513,3 +6513,12 @@
 2026-11-20T10:38:07Z  status W2345 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-20T10:49:28Z  status W2345 working>blocked writer    "working -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-20T10:51:06Z  status W2345 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-20T12:28:59Z  status W2345 working>landed writer    "working -> landed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-20T12:30:25Z  interrupt W2380 minted    -         "The live checkout carries unlanded work from earlier sessions: map each uncommitted file to its card and land or stash it"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github:W120
+2026-11-20T12:31:26Z  status W2379 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-20T12:33:41Z  interrupt W2381 minted    -         "Pin llc and wasm-ld as declared bazel inputs (a toolchain repository, like codon), so the core.wasm step is hermetic and no host can lack them"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W2379
+2026-11-20T12:33:42Z  interrupt W2382 minted    -         "The Containerfile solve step also skips with exit 3 and the gate goes on (a skipped check reporting nothing wrong)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W2379
+2026-11-20T12:33:49Z  status W2379 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-20T13:02:52Z  status W2380 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-20T14:11:56Z  status W2379 working>blocked writer    "working -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-20T14:14:02Z  status W2379 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

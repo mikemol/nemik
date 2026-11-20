@@ -5,22 +5,26 @@
 #
 # Codon compiles the entry to LLVM IR; llc turns the IR into a wasm64 object (memory64: Codon's IR
 # carries 64-bit sizes, so wasm32 is not an option, docs/wasm-pipeline.md); wasm-ld links it with the
-# runtime left to the page (wasm.js supplies seq_alloc and the rest). The pinned Codon is found in
-# Bazel's external tree, or by $CODON; the LLVM tools by $LLVM_BIN (default /usr/lib/llvm/23/bin).
-# Exits 3 with a reason when a tool is absent, so the gate can say why it did not rebuild.
+# runtime left to the page (wasm.js supplies seq_alloc and the rest). The pinned Codon is Bazel's
+# @codon//:bin/codon (tools/gate_wasm.sh codon names it by label), or $CODON; the LLVM tools are
+# $LLVM_BIN (default /usr/lib/llvm/23/bin). nemik:W2379: exits 7 (CANNOT_RUN) with a reason that names
+# the missing tool, the pinned Codon or the host's LLVM, when one is absent: the gate refuses on it.
 set -eu
 here=$(cd "$(dirname "$0")/.." && pwd)
 out=${1:-"$here/src/nemik/web/core.wasm"}
 llvm=${LLVM_BIN:-/usr/lib/llvm/23/bin}
 codon=${CODON:-}
 if [ -z "$codon" ]; then
-	base=$(cd "$here" && bazel info output_base 2>/dev/null || true)
-	codon="$base/external/+_repo_rules3+codon/bin/codon"
+	codon=$(cd "$here" && sh "$here/tools/gate_wasm.sh" codon bazel)
 fi
-for tool in "$codon" "$llvm/llc" "$llvm/wasm-ld"; do
+if [ ! -x "$codon" ]; then
+	echo "build_wasm: the pinned Codon $codon is not available" >&2
+	exit 7
+fi
+for tool in "$llvm/llc" "$llvm/wasm-ld"; do
 	if [ ! -x "$tool" ]; then
-		echo "build_wasm: $tool is not available" >&2
-		exit 3
+		echo "build_wasm: the host's LLVM tool $tool is not available (nemik:W2381 pins llc and wasm-ld as bazel inputs)" >&2
+		exit 7
 	fi
 done
 # a fixed work directory, not a random one: Codon embeds the path of the sources it compiles in the

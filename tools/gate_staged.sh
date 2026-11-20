@@ -130,24 +130,16 @@ else
 fi
 # nemik:W821: the page's wasm is built from Python by tools/build_wasm.sh and committed with its hash
 # (docs/wasm-pipeline.md). Rebuild it from the staged tree and compare: a core change without its
-# rebuilt core.wasm, or a hand edit of the binary, is refused. The host's LLVM is not hermetic, so
-# where the pinned Codon or llc/wasm-ld are absent (exit 3) it says why it did not rebuild and goes on.
-# The module embeds the absolute path of Codon's stdlib, which has Bazel's output-base hash in it, and
-# the gate's worktree has an output base of its own: so the real checkout's Codon builds it, the one
-# the committed module was built with.
+# rebuilt core.wasm, or a hand edit of the binary, is refused. nemik:W2379: the step is tools/gate_wasm.sh,
+# which names the pinned Codon by label (bazel's cquery of @codon//:bin/codon, from the REAL checkout, whose
+# output base the committed module was built with) and NEVER skips: a tool it needs that is not there (the
+# pinned Codon, or the host's llc or wasm-ld) is exit 7, CANNOT_RUN, and the gate refuses on it like on 1.
 if [ -f tools/build_wasm.sh ]; then
     wasm_status=0
-    wasm_base="$(cd "$real_root" && bazel info output_base 2>/dev/null)"
-    wasm_out=$(CODON="$wasm_base/external/+_repo_rules3+codon/bin/codon" sh tools/build_wasm.sh "$wt/.core.wasm" 2>&1) || wasm_status=$?
-    if [ "$wasm_status" -eq 3 ]; then
-        echo "gate_staged: core.wasm was not rebuilt here: $wasm_out" >&2
-    elif [ "$wasm_status" -ne 0 ]; then
-        printf '%s\n' "$wasm_out" | tail -n 30 >&2
-        echo "gate_staged: tools/build_wasm.sh failed ($wasm_status): commit refused" >&2
-        exit 1
-    elif [ "$(sha256sum <"$wt/.core.wasm" | cut -d' ' -f1)" != "$(cut -d' ' -f1 src/nemik/web/core.wasm.sha256)" ]; then
-        echo "gate_staged: src/nemik/web/core.wasm is not what src/nemik/core builds (rebuild it with tools/build_wasm.sh and commit it with its hash): commit refused" >&2
-        exit 1
+    sh tools/gate_wasm.sh run "$real_root" "$wt" "$admit" -- /usr/bin/bazel || wasm_status=$?
+    if [ "$wasm_status" -ne 0 ]; then
+        echo "gate_staged: the core.wasm check did not hold (status $wasm_status: 1 refused, 7 not run): commit refused" >&2
+        exit "$wasm_status"
     fi
 fi
 # nemik:W866: a Containerfile that cannot be converted ships no image and shows only hours later as a
