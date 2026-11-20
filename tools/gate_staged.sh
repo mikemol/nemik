@@ -48,13 +48,41 @@ sh "$wt/tools/gate_facts.sh" "$wt" "$tree" "$head_sha" || exit 1
 # memory for it and prints the hold line; `bazel` is this function, /usr/bin/bazel the real one.
 admit="$real_root/.venv/bin/mikemol-bazel-admit"
 [ -x "$admit" ] || { echo "gate_staged: $admit is missing; bazel runs only through admission" >&2; exit 1; }
-bazel() { "$admit" -- /usr/bin/bazel "$@"; }
+# nemik:W2345: every build and test call carries the facts repository (--inject_repository), not only the
+# verdict call: a call without it would change the module's inputs and re-analyze everything again.
+bazel() {
+    local sub="$1"
+    shift
+    case "$sub" in
+    build | test) "$admit" -- /usr/bin/bazel "$sub" "--inject_repository=gate_facts=$wt/.gate-facts" "$@" ;;
+    *) "$admit" -- /usr/bin/bazel "$sub" "$@" ;;
+    esac
+}
 
 cd "$wt" || exit 1
 # The tree's .venv is a bazel output, never tracked, and some checks run it by path (paper.toml's
 # `claim:` check is `.venv/bin/python3 checks/claims.py`): build it here as the checkout has it.
 bazel build //:.venv --show_result=0 --noshow_progress || exit 1
 ln -sfn bazel-bin/.venv .venv || exit 1
+# nemik:W2345: the git-fed checks (named inputs, wheels, the working card) are build actions over the facts
+# written above, judged first because they are cheap and fail early. Each writes a JSON verdict and the
+# aggregate test //:gate_checks_verdict shows a failing one in BuildBuddy; the gate's own status comes from
+# the verdicts' state field (tools/gate_verdict.py status): 1 when a judgment found problems, 7 when the
+# tree was not judged (a verdict missing, unparseable, of an unknown state, or stamped for another tree or
+# HEAD; a build that never ran reads the same), 0 when all hold. A test run that failed with every verdict
+# ok is still a refusal.
+verdict_rc=0
+bazel test //:gate_checks_verdict --noshow_progress || verdict_rc=$?
+verdict_status=0
+.venv/bin/python3 tools/gate_verdict.py status "$wt/bazel-bin/gate_verdicts" "$tree" "$head_sha" || verdict_status=$?
+if [ "$verdict_status" -ne 0 ]; then
+    echo "gate_staged: a git-fed check did not hold (status $verdict_status: 1 refused, 7 not judged): commit refused" >&2
+    exit "$verdict_status"
+fi
+if [ "$verdict_rc" -ne 0 ]; then
+    echo "gate_staged: the git-fed verdict test failed with every verdict ok (bazel status $verdict_rc): commit refused" >&2
+    exit 1
+fi
 # nemik:W421: the registries a change must also update (a new command's SKILL.md row and workflows
 # entry, a shape's SKILL.md row, an architecture claim's projection) fail in seconds here, before the
 # whole suite: W365 and W400 each spent two ~10-minute gate rounds finding them one at a time.

@@ -78,7 +78,7 @@ def test_the_facts_are_the_staged_trees_paths_stamped_with_its_sha(
     assert _run(str(repo), tree, head) == (0, "")
     tracked = parse(_read(repo, "tracked.txt"), "t")
     changed = parse_diff(_read(repo, "changed.txt"), "c")
-    assert tracked.tree == tree
+    assert (tracked.tree, tracked.head) == (tree, head)
     assert (changed.tree, changed.head) == (tree, head)
     assert tracked.paths == [
         "src/nemik/a.py",

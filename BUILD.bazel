@@ -18,7 +18,11 @@ SHACLINC_ITEMS = {
     "untitled": "test_incremental_equals_full_after_an_edit[_untitled]",
     "sequence": "test_edits_in_sequence_stay_equal",
 }
-TARGETS = [(src, "") for src in glob(["tests/test_*.py"]) if src != "tests/test_shaclinc.py"] + [("tests/test_shaclinc.py", item) for item in SHACLINC_ITEMS]
+# nemik:W2345: the gate-only aggregate test over the three git-fed verdict files (below). Named gate_*.py, not
+# test_*.py, so the glob does not find it and the image's plain pytest never collects it. Manual, so no wildcard
+# analyzes it where the injected facts repository does not exist, and left out of //:precommit and //:pre_gate.
+LIVE = ["tests/gate_checks_verdict.py"]
+TARGETS = [(src, "") for src in glob(["tests/test_*.py"]) if src != "tests/test_shaclinc.py"] + [("tests/test_shaclinc.py", item) for item in SHACLINC_ITEMS] + [(src, "") for src in LIVE]
 
 # nemik:W103: each runs under //:.venv's interpreter (tests/venv_pytest.sh); the venv is the input.
 [
@@ -35,6 +39,7 @@ TARGETS = [(src, "") for src in glob(["tests/test_*.py"]) if src != "tests/test_
         # test is the CPU it spends (tools/cpuline.py, set in tests/conftest.py by this size), so the
         # wall timeout is only the outermost guard: an hour.
         timeout = "eternal",
+        tags = ["manual"] if src in LIVE else [],
         # nemik:W1044: six browser PDF prints; run alone it passed, in the full gate it timed out at 300 s
         # nemik:W1061: test_modes alone takes 190 s of its 300 s timeout, and test_layout 296 s of 900 s
         # but timed out at 900 s in a loaded gate, so both run in three as well
@@ -93,6 +98,10 @@ TARGETS = [(src, "") for src in glob(["tests/test_*.py"]) if src != "tests/test_
             + (["tools/gate_facts.sh", "tools/gate_staged.sh", "tools/hook_facts.py", "tools/nemik_src.py"] if src == "tests/test_gate_facts.py" else [])
             # nemik:W2365: the pre-submit is run by its test in a throwaway repository with a stub gate, and read to pin its one gate call
             + (["tools/presubmit.sh"] if src == "tests/test_presubmit.py" else [])
+            # nemik:W2345: the verdict tool is imported by name from tools/ with the judgments it calls, run as a build tool in a throwaway tree, and the gate script and the BUILD file are read to pin their wiring
+            + (["tools/gate_verdict.py", "tools/gate_verdict.sh", "tools/gate_facts.sh", "tools/gate_staged.sh", "tools/hook_facts.py", "tools/nemik_src.py"] if src == "tests/test_gate_verdict.py" else [])
+            # nemik:W2345: the aggregate test reads the three verdict files the build actions wrote, through the verdict tool's own parser
+            + ([":gate_verdict_named_inputs", ":gate_verdict_wheels", ":gate_verdict_working_card", "tools/gate_verdict.py", "tools/hook_facts.py", "tools/nemik_src.py"] if src in LIVE else [])
             # nemik:W2357: the retro baseline's test reads the ratchet declaration and the declared rises
             + (["ratchets.json", "rebaselines.json"] if src == "tests/test_retro_baseline.py" else [])
             # nemik:W1994: the ratchet atomizer's plan is imported by name from tools/
@@ -209,7 +218,7 @@ TARGETS = [(src, "") for src in glob(["tests/test_*.py"]) if src != "tests/test_
 # warrant stages. tools/gate_staged.sh runs `bazel test //:precommit`; the hook refuses when bazel is absent.
 test_suite(
     name = "precommit",
-    tests = [":" + src.removeprefix("tests/").removesuffix(".py") + ("_" + item if item else "") for src, item in TARGETS],
+    tests = [":" + src.removeprefix("tests/").removesuffix(".py") + ("_" + item if item else "") for src, item in TARGETS if src not in LIVE],
 )
 
 # nemik:W2110: the tests the gate runs that a hand-picked pre-gate run kept leaving out, each named by a
@@ -231,6 +240,39 @@ test_suite(
         ":test_skill",
     ],
 )
+
+# nemik:W2345: the gate's git-fed judgments (tools/hook_facts.py) as build actions. The facts are a repository,
+# @gate_facts, that tools/gate_staged.sh injects (--inject_repository=gate_facts=$WT/.gate-facts) over the
+# directory tools/gate_facts.sh wrote from the STAGED tree: their content is the cache key, so an unchanged tree
+# is a cache hit and there is no environment variable and no stamp read from one. Each action writes a JSON
+# verdict (tools/gate_verdict.py), never a pass or fail by exit code; the gate maps the state field to exit 0, 1
+# or 7, and //:gate_checks_verdict (the aggregate test) shows a failing verdict in BuildBuddy. All manual: the
+# repository exists only under the gate, so no wildcard analyzes these anywhere else, and run there by name
+# without the injection they fail at analysis (an unresolved repository), closed.
+sh_binary(
+    name = "gate_verdict_run",
+    srcs = ["tools/gate_verdict.sh"],
+    data = [":.venv", "tools/gate_verdict.py", "tools/hook_facts.py", "tools/nemik_src.py"],
+    tags = ["manual"],
+)
+
+GATE_VERDICTS = {
+    "named_inputs": ["@gate_facts//:tracked.txt", "//bazel:nemik_src.bzl", "//bazel:nemik_tests.bzl"],
+    "wheels": ["@gate_facts//:tracked.txt", "pyproject.toml"],
+    "working_card": ["@gate_facts//:changed.txt", ".claude/paths-forward.json"],
+}
+
+[
+    genrule(
+        name = "gate_verdict_" + kind,
+        srcs = inputs,
+        outs = ["gate_verdicts/" + kind + ".json"],
+        cmd = "$(location :gate_verdict_run) judge " + kind + " $@ " + " ".join(["$(location " + label + ")" for label in inputs]),
+        tools = [":gate_verdict_run"],
+        tags = ["manual"],
+    )
+    for kind, inputs in GATE_VERDICTS.items()
+]
 
 # nemik:W445: MPXJ and the JAXB jars its MSPDI reader needs (pinned in MODULE.bazel)
 filegroup(

@@ -1,2 +1,3 @@
 # nemik:W2137: the console-script launcher test reads the template out of the venv rule.
-exports_files(["venv.bzl"])
+# nemik:W2345: the gate's named-inputs verdict reads the two generated lists as inputs.
+exports_files(["venv.bzl", "nemik_src.bzl", "nemik_tests.bzl"])

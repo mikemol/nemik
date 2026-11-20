@@ -6,12 +6,14 @@
 #
 # The facts come from the STAGED TREE object the gate is about to test (ls-tree and diff-tree on the
 # tree's sha), never from the live checkout. Each file's first line names its KIND, so a text handed to
-# the wrong parser is refused (nemik:W2350), and then stamps the tree it describes. changed.txt, which
-# is a function of the tree AND of the HEAD it is diffed against, stamps both:
+# the wrong parser is refused (nemik:W2350), and then stamps the tree it describes and the HEAD the
+# gate commits on. changed.txt is a function of both (it is diffed against HEAD); tracked.txt is a
+# function of the tree alone, but carries the HEAD too (nemik:W2345, the no-maybe-results ruling: every
+# verdict is stamped with both, so none is a result that may or may not carry a head):
 #
 #   facts tracked          (tracked.txt, its first line)   facts changed   (changed.txt)
 #   tree <sha>             (both files, the second line)
-#   head <sha>             (changed.txt only, its third line)
+#   head <sha>             (both files, the third line)
 #
 # the tests refuse facts stamped for another tree or HEAD, so a stale file cannot silently lie. In the
 # gate a stale file cannot survive anyway: tools/gate_staged.sh cleans the worktree (git clean -fdx,
@@ -41,7 +43,7 @@ dir="$wt/.gate-facts"
 emit() {
 	case "$1" in
 	tracked)
-		printf 'facts tracked\ntree %s\n' "$tree"
+		printf 'facts tracked\ntree %s\nhead %s\n' "$tree" "$head"
 		git -C "$wt" ls-tree -r --name-only "$tree" -- src/nemik tests vendor/wheels
 		;;
 	changed)
@@ -73,3 +75,9 @@ for name in tracked changed; do
 		mv "$tmp" "$target"
 	fi
 done
+# nemik:W2345: the directory is handed to bazel as a repository (--inject_repository=gate_facts=), which
+# needs a package and a repo marker; the two facts files are the only labels it exports.
+if [ "$mode" = "write" ]; then
+	printf 'exports_files(["tracked.txt", "changed.txt"])\n' >"$dir/BUILD.bazel"
+	: >"$dir/REPO.bazel"
+fi

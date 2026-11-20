@@ -6502,3 +6502,14 @@
 2026-11-20T05:02:23Z  status W2372 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-20T06:25:30Z  status W2372 working>blocked writer    "working -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-20T06:27:01Z  status W2372 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-20T07:40:19Z  interrupt W2373 minted    -         "Docs: docs/retro-audit.md and the retroingest.py docstring list the handoff's fields with handoff.self_probe"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github:W121
+2026-11-20T07:40:21Z  interrupt W2374 minted    -         "What could witness that a recorded self probe ran: RetroHandoffProbeShape checks only the literal value"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github:W121
+2026-11-20T07:40:21Z  interrupt W2375 minted    -         "A retro with no precommit escapes every retro shape: in_scope and all_triples judge only retros that carry one"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github:W121
+2026-11-20T07:40:22Z  interrupt W2376 minted    -         "A dump selection for github:W121's witness: retros after a recorded per-repo counter, with a precommit and an other handoff"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github:W121
+2026-11-20T07:56:45Z  interrupt W2377 minted    -         "nemik-check outlasts the SessionStart hook's 60 s budget, so every session's start reading is UNKNOWN"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github:W120
+2026-11-20T08:08:10Z  status W2372 working>landed writer    "working -> landed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-20T08:16:39Z  interrupt W2378 minted    -         "test_containerfile decides from BUILD.bazel's text, so it can pass while a test input is missing from the image: read the inputs from bazel's own graph"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github:W120
+2026-11-20T10:38:01Z  interrupt W2379 minted    -         "The wasm step hard-codes the positional repo name +_repo_rules3+codon and skips itself (fails open) when the name moves"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W2345
+2026-11-20T10:38:07Z  status W2345 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-20T10:49:28Z  status W2345 working>blocked writer    "working -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-20T10:51:06Z  status W2345 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

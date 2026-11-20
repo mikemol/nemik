@@ -28,23 +28,24 @@ TESTS_LIST = render(TESTS, TESTS_SPEC)
 READY = '{"waypoints": [{"symbol": "W1", "status": "ready"}]}'
 WORKING = '{"waypoints": [{"symbol": "W1", "status": "ready"}, {"status": "working"}]}'
 DONE = '{"waypoints": [{"symbol": "W1", "status": "done"}]}'
-TRACKED_HEAD = f"facts tracked\ntree {TREE}\n"
+TRACKED_HEAD = f"facts tracked\ntree {TREE}\nhead {HEAD}\n"
 CHANGED_HEAD = f"facts changed\ntree {TREE}\nhead {HEAD}\n"
 
 
-def _facts(*paths: str, tree: str = TREE) -> Facts:
-    return Facts(tree, list(paths))
+def _facts(*paths: str, tree: str = TREE, head: str = HEAD) -> Facts:
+    return Facts(tree, head, list(paths))
 
 
 def _diff(*paths: str, tree: str = TREE, head: str = HEAD) -> Diff:
     return Diff(tree, head, list(paths))
 
 
-def test_a_facts_text_is_a_kind_a_stamp_then_one_path_per_line() -> None:
-    """The first line names the kind, the second the tree; blank lines are not paths."""
-    text = f"facts tracked\ntree {TREE}\nsrc/nemik/a.py\n\ntests/test_a.py\n"
-    assert parse(text, "t.txt") == Facts(TREE, ["src/nemik/a.py", "tests/test_a.py"])
-    assert parse(TRACKED_HEAD, "t.txt") == Facts(TREE, [])
+def test_a_facts_text_is_a_kind_two_stamps_then_one_path_per_line() -> None:
+    """The first line names the kind, then the tree and HEAD; blank lines are not paths."""
+    text = f"{TRACKED_HEAD}src/nemik/a.py\n\ntests/test_a.py\n"
+    paths = ["src/nemik/a.py", "tests/test_a.py"]
+    assert parse(text, "t.txt") == Facts(TREE, HEAD, paths)
+    assert parse(TRACKED_HEAD, "t.txt") == Facts(TREE, HEAD, [])
 
 
 @pytest.mark.parametrize(
@@ -85,6 +86,28 @@ def test_a_tracked_text_without_a_good_stamp_is_refused_naming_the_line(
         FactsError, match="second line is not 'tree <40 hex>'"
     ) as raised:
         parse(text, "gate/tracked.txt")
+    assert str(raised.value).startswith("gate/tracked.txt:")
+
+
+@pytest.mark.parametrize(
+    "stamps",
+    [
+        "",
+        "src/nemik/a.py\n",
+        f"head {HEAD}\n",
+        f"tree {TREE}\n",
+        f"tree {TREE}\nhead\n",
+        f"tree {TREE}\nhead xyz\n",
+        f"tree {TREE}\ntree {HEAD}\n",
+        f"tree {TREE}\nHead {HEAD}\n",
+    ],
+)
+def test_a_tracked_text_without_a_head_stamp_is_refused_naming_the_line(
+    stamps: str,
+) -> None:
+    """Every judgment is stamped with the HEAD too (nemik:W2345): a path is never read as one."""
+    with pytest.raises(FactsError, match="line is not '") as raised:
+        parse(f"facts tracked\n{stamps}", "gate/tracked.txt")
     assert str(raised.value).startswith("gate/tracked.txt:")
 
 

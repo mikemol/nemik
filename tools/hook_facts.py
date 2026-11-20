@@ -12,10 +12,13 @@ them into facts files from the STAGED tree, and each check here is judged by its
 bazel test that declares those files as inputs (the operator, host transcript 695f3e0a line
 190734: work with bazel's cache, never around it).
 
-The tracked paths are a function of the tree alone: `facts tracked`, then `tree <40 hex>`, then
-one path per line. The changed paths are a function of the tree AND the HEAD it was diffed against
-(nemik:W2344's cold review: one tree, two HEADs, one stamp, two bodies): `facts changed`, then
-`tree <40 hex>`, then `head <40 hex>`, then one path per line. The first line names the KIND of
+Both facts files carry BOTH stamps, the tree and the HEAD the gate is committing on (nemik:W2345,
+the no-maybe-results ruling: a verdict that may or may not carry a head is a result that may or may
+not be there). The tracked paths are a function of the tree alone, and the HEAD is the gate's
+context: `facts tracked`, then `tree <40 hex>`, then `head <40 hex>`, then one path per line. The
+changed paths are a function of the tree AND the HEAD it was diffed against (nemik:W2344's cold
+review: one tree, two HEADs, one stamp, two bodies): `facts changed`, then `tree <40 hex>`, then
+`head <40 hex>`, then one path per line. The first line names the KIND of
 file, so a text handed to the wrong parser is refused, not read as paths (nemik:W2350, the same
 review's N4: a changed-paths text read as tracked paths passed, its head line becoming a path). The
 stamps are how a stale file is caught: `require_tree` and `require_diff` refuse facts that describe
@@ -48,9 +51,10 @@ class FactsError(ValueError):
 
 
 class Facts(NamedTuple):
-    """What a tracked-paths file says: the tree it describes and the paths git reported."""
+    """What a tracked-paths file says: the tree, the HEAD, and the paths git reported."""
 
     tree: str
+    head: str
     paths: list[str]
 
 
@@ -103,12 +107,13 @@ def parse(text: str, source: str) -> Facts:
         source: Where it came from, for the error message.
 
     Returns:
-        The stamp and the paths.
+        The two stamps and the paths.
 
     """
     lines = text.splitlines()
     _kind(lines, TRACKED, source)
-    return Facts(_stamp(lines, 1, "tree", source), [ln for ln in lines[2:] if ln])
+    tree = _stamp(lines, 1, "tree", source)
+    return Facts(tree, _stamp(lines, 2, "head", source), [ln for ln in lines[3:] if ln])
 
 
 def parse_diff(text: str, source: str) -> Diff:
