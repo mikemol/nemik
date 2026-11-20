@@ -9,11 +9,10 @@ from mikemol.procrun.proc import capture
 
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / "tools" / "presubmit.sh"
-GATE_CALL = (
-    'GIT_INDEX_FILE="$idx" MIKEMOL_REAL_ROOT="$real_root" '
-    '"$real_root/tools/gate_staged.sh" || rc=$?'
-)
+GATE_CALL = 'GIT_INDEX_FILE="$idx" MIKEMOL_REAL_ROOT="$real_root" "$gate" || rc=$?'
+GATE_PATH = 'gate="$real_root/tools/gate_staged.sh"'
 STUB_STATUS = 3
+CANNOT_RUN = 7
 
 
 def _git(*args: str) -> str:
@@ -115,6 +114,31 @@ def test_an_untracked_file_is_refused(tmp_path: Path) -> None:
     assert not seen.exists()
 
 
+def test_a_tree_with_another_gate_script_is_not_judged(tmp_path: Path) -> None:
+    """The live script would judge it, so it exits 7 (not 1) and the gate never runs."""
+    repo, wt, seen = _repo(tmp_path)
+    script = wt / "tools" / "gate_staged.sh"
+    text = script.read_text(encoding="utf-8")
+    script.write_text(text + "# changed\n", encoding="utf-8")
+    _git("-C", str(wt), "add", "-A")
+    status, out, err = _presubmit(repo, wt)
+    tree = _git("-C", str(wt), "write-tree")
+    assert status == CANNOT_RUN
+    assert "is not judged" in err
+    assert out.splitlines() == [f"tree {tree} rc {CANNOT_RUN}"]
+    assert not seen.exists()
+
+
+def test_a_tree_without_a_gate_script_is_not_judged(tmp_path: Path) -> None:
+    """A tree that holds no gate script has none to compare, so it is not judged."""
+    repo, wt, seen = _repo(tmp_path)
+    _git("-C", str(wt), "rm", "-q", "tools/gate_staged.sh")
+    status, _, err = _presubmit(repo, wt)
+    assert status == CANNOT_RUN
+    assert "is not judged" in err
+    assert not seen.exists()
+
+
 def test_the_only_gate_it_runs_is_gate_staged() -> None:
     """One whole non-comment line calls the gate; nothing runs bazel or its own step."""
     code = [
@@ -122,5 +146,7 @@ def test_the_only_gate_it_runs_is_gate_staged() -> None:
         for line in SCRIPT.read_text(encoding="utf-8").splitlines()
         if line.strip() and not line.strip().startswith("#")
     ]
-    assert [line for line in code if "gate_staged" in line] == [GATE_CALL]
+    assert [line for line in code if line.endswith("|| rc=$?")] == [GATE_CALL]
+    assert [line for line in code if line.startswith("gate=")] == [GATE_PATH]
+    assert "cannot_run=7" in code
     assert not [line for line in code if "bazel" in line]

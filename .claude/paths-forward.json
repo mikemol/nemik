@@ -58837,11 +58837,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "2026-11-20T00:27:50Z: 2026-11-20 mtools second data point for the fixture: export round.json as_of 2026-11-20T00:24:14Z held mtools W2777 (rank 1, salience 1170), W2780 (2, 8), W2726 (3, 4.163), all status working; W2793 (gate-repair + mutation, working) was NOT in the round; nemik-rank mtools --json printed []. The round keeps working cards ahead of a higher-band card, so a STALE working status can hold a gate repair out of it (W2780 and W2726 stale-working, being set ready; earlier W2774 had the same shape with a ready gate-repair card). mtools will send the next export.",
+      "evidence": "2026-11-20T00:27:50Z: 2026-11-20 mtools second data point for the fixture: export round.json as_of 2026-11-20T00:24:14Z held mtools W2777 (rank 1, salience 1170), W2780 (2, 8), W2726 (3, 4.163), all status working; W2793 (gate-repair + mutation, working) was NOT in the round; nemik-rank mtools --json printed []. The round keeps working cards ahead of a higher-band card, so a STALE working status can hold a gate repair out of it (W2780 and W2726 stale-working, being set ready; earlier W2774 had the same shape with a ready gate-repair card). mtools will send the next export. | 2026-11-20T06:15:09Z: 2026-11-20 mtools data for W2325 (round order vs the stacks the gate carries): three submit refusals in one hour from the round check, each a ready round card the stack did not carry: (1) b103 (W2781, ordinary band, not in round) refused, W2726 (ordinary, ready) and W2774 (gate-repair, ready) in the round, passed over; (2) after blocking W2726 on W2791, b102 (W2774, W2772, W2773) refused: W2780, gate-repair, just unblocked by b101's landing at 3e3c6b4b, entered the round and was passed over (its true dependency on W2774 is the hooks shard guard); (3) the round holds three slots for six stack waypoints. Pattern: a gate-repair card unblocked by a landing enters the round above the stacks the gate carries; the only honest exits are carry its work, block it on its real prerequisite, or build it first, so the round paces the gate instead of the reverse. Ask: when a stack names a gate-repair waypoint the round also holds, count the stack's waypoints as taken, or publish the round per stack, not per repo. | 2026-11-20T06:19:41Z: 2026-11-20 mtools: all five round refusals, shape 'X, Y are in this repository's round and ready, but the working set includes Z, which is not': (1) b101 (W2777, gate-repair): W2767/W2769-class ordinary cards passed over, twice; (2) b103 (W2781, ordinary): W2726, W2774 in round and ready; (3) b102 first: W2726 passed over; (4) b102 after W2726 blocked: W2780 (just unblocked by b101's landing) in round, working set W2772, W2773; (5) b102 third: W2791, W2788 in round (W2791 unblocked by b101's landing), working set W2772, W2773. github-00's ruling (inverts nothing in the band order): a gate-repair stack must not be refused for skipping lower-band round cards. Interim in mtools' round_check = mtools:W2799 (a stack whose every card touches gate-repair is admitted); the root fix is nemik's, W2325. Pattern: each landing of a gate-repair stack unblocks more ordinary cards, which enter the round above the next gate-repair stack.",
       "issued_at": "2026-11-19T20:50:51Z",
       "minted_during": "interrupt",
       "caused_by": "inbox/2026-11-19-github-00-w2325-fixture-frozen-applier.md",
-      "last_worked": "2026-11-20T00:27:50Z",
+      "last_worked": "2026-11-20T06:19:41Z",
       "ticks_blocked": 0
     },
     {
@@ -58944,19 +58944,20 @@
     {
       "symbol": "W2365",
       "title": "Gate parity: the pre-submit target set runs tools/rebaselines_gate.py, so a ratchet birth or rise without a warranted rebaselines.json entry shows before submit, not first at the commit gate",
-      "status": "working",
+      "status": "landed",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": "agent",
       "next_bounded_step": "On github-00's PASS-SUBMIT of refs/review/W2365-v1 = 8eb17c75: submit .claude/stack-W2365-v1.json frozen from .nemik-w2365-wt (re-cut if main moved), verify the landing; then re-scope W2345 and start W2358 (a)",
-      "evidence": "2026-11-19T23:48:36Z: 2026-11-19 design notes sent to github-00: the pre-submit is gate_staged.sh itself fed the review worktree's index (gate_staged captures GIT_INDEX_FILE at line 21 and write-trees from it at line 40), because rebaselines_gate needs git and //:precommit is one of eight gate steps. Interim: run tools/rebaselines_gate.py by hand before review (done for W2357 v3). | 2026-11-19T23:50:59Z: 2026-11-19 github-00 DESIGN APPROVED: presubmit.sh = gate_staged.sh over the review worktree's index; plants: not-a-worktree and unstaged refusals, whole-line pin of the only gate call, planted ratchet-birth drill; from then on review messages cite presubmit's tree sha. And: re-scope W2345 after this lands (a check outside the gate cannot judge, exit 7); don't build for the old case meanwhile. | 2026-11-20T01:39:17Z: 2026-11-20 built in .nemik-w2365-wt on 09d28000: tools/presubmit.sh + tests/test_presubmit.py (5 tests, //:test_presubmit passes), BUILD data clause, bazel/nemik_tests.bzl regenerated. DRILL: presubmit.sh over a worktree with a planted baseline ratchet born at 2 and no rebaselines entry was refused by the gate ('drill-baseline.json: was born at 2 with no rebaselines entry', rc 1, tree 96c334d7 printed), the same message that refused W2357 v2. MUTANTS (each reverted): dropping GIT_INDEX_FILE from the gate call fails 2 tests (index seen empty; whole-line pin); dropping the untracked refusal fails test_an_untracked_file_is_refused. Dogfood run: presubmit.sh over its own worktree (full gate) running. | 2026-11-20T03:35:03Z: 2026-11-20 refs/review/W2365-v1 = 8eb17c75 (parent 09d28000), tree e5b67844 = the tree tools/presubmit.sh gated green over its own worktree (tree e5b678441eb03f17a90d48f87020144c0f9336bd rc 0); the first dogfood run was refused by the house ratchet (DOC201 in the test docstring), fixed. In review at github:W120. | 2026-11-20T03:36:28Z: 2026-11-20 github-00 PASS-SUBMIT on refs/review/W2365-v1 = 8eb17c75 (rev-parse tree e5b67844 = the gated tree). Limit carded separately: presubmit runs the LIVE checkout's gate_staged.sh, not the gated tree's.",
+      "evidence": "2026-11-19T23:48:36Z: 2026-11-19 design notes sent to github-00: the pre-submit is gate_staged.sh itself fed the review worktree's index (gate_staged captures GIT_INDEX_FILE at line 21 and write-trees from it at line 40), because rebaselines_gate needs git and //:precommit is one of eight gate steps. Interim: run tools/rebaselines_gate.py by hand before review (done for W2357 v3). | 2026-11-19T23:50:59Z: 2026-11-19 github-00 DESIGN APPROVED: presubmit.sh = gate_staged.sh over the review worktree's index; plants: not-a-worktree and unstaged refusals, whole-line pin of the only gate call, planted ratchet-birth drill; from then on review messages cite presubmit's tree sha. And: re-scope W2345 after this lands (a check outside the gate cannot judge, exit 7); don't build for the old case meanwhile. | 2026-11-20T01:39:17Z: 2026-11-20 built in .nemik-w2365-wt on 09d28000: tools/presubmit.sh + tests/test_presubmit.py (5 tests, //:test_presubmit passes), BUILD data clause, bazel/nemik_tests.bzl regenerated. DRILL: presubmit.sh over a worktree with a planted baseline ratchet born at 2 and no rebaselines entry was refused by the gate ('drill-baseline.json: was born at 2 with no rebaselines entry', rc 1, tree 96c334d7 printed), the same message that refused W2357 v2. MUTANTS (each reverted): dropping GIT_INDEX_FILE from the gate call fails 2 tests (index seen empty; whole-line pin); dropping the untracked refusal fails test_an_untracked_file_is_refused. Dogfood run: presubmit.sh over its own worktree (full gate) running. | 2026-11-20T03:35:03Z: 2026-11-20 refs/review/W2365-v1 = 8eb17c75 (parent 09d28000), tree e5b67844 = the tree tools/presubmit.sh gated green over its own worktree (tree e5b678441eb03f17a90d48f87020144c0f9336bd rc 0); the first dogfood run was refused by the house ratchet (DOC201 in the test docstring), fixed. In review at github:W120. | 2026-11-20T03:36:28Z: 2026-11-20 github-00 PASS-SUBMIT on refs/review/W2365-v1 = 8eb17c75 (rev-parse tree e5b67844 = the gated tree). Limit carded separately: presubmit runs the LIVE checkout's gate_staged.sh, not the gated tree's. | 2026-11-20T04:59:45Z: 2026-11-20 landed as c2f31221 on origin/main (verified: git log, ls-remote). From now on review messages cite tools/presubmit.sh's tree sha.",
       "issued_at": "2026-11-19T23:43:53Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W2357",
-      "last_worked": "2026-11-20T03:36:28Z",
+      "last_worked": "2026-11-20T04:59:45Z",
       "ticks_blocked": 0,
-      "completed": null
+      "completed": null,
+      "landed_at": "20261120T045945Z"
     },
     {
       "symbol": "W2366",
@@ -59069,23 +59070,24 @@
     {
       "symbol": "W2372",
       "title": "presubmit.sh gates with the gated tree's own gate_staged.sh, not the live checkout's",
-      "status": "blocked",
+      "status": "working",
       "enables": [
         "W2345"
       ],
       "touches": [],
-      "blocked_on": [
-        "mtools:W2780"
-      ],
+      "blocked_on": [],
       "blocked_kind": "agent",
-      "next_bounded_step": "Design notes to github-00 (a change that edits gate_staged.sh is judged by the OLD gate now, and a mid-run edit to the live script can change a verdict): materialize the gated tree's gate_staged.sh from the tree object, or use mtools' run-at-sha mode (mtools:W2780) once it lands, or refuse when the gated tree's script differs from the live one (minimal, buildable now). Plant: a tree whose gate_staged.sh differs from the live one.",
-      "evidence": "2026-11-20T03:36:37Z: 2026-11-20 github-00's limit on W2365 v1: the live checkout's gate script judges the gated tree. Edge to mtools:W2780 (run-at-sha) as one of three fixes.",
+      "next_bounded_step": "On github-00's PASS-SUBMIT of refs/review/W2372-v1 = fbd16658: submit .claude/stack-W2372-v1.json frozen from .nemik-w2372-wt (re-cut if main moved), verify the landing; then stage 2 (run the tree's own script) and W2345's re-scope, then W2358 (a)",
+      "evidence": "2026-11-20T03:36:37Z: 2026-11-20 github-00's limit on W2365 v1: the live checkout's gate script judges the gated tree. Edge to mtools:W2780 (run-at-sha) as one of three fixes. | 2026-11-20T03:54:09Z: 2026-11-20 block on mtools:W2780 lifted: the refuse-when-different option is buildable now; W2780 is the later, fuller fix (run the gated tree's own script). Cite it from the design notes. | 2026-11-20T05:01:12Z: 2026-11-20 design notes sent to github-00; they ruled the order (refusal, then materializing, then mtools:W2780). | 2026-11-20T05:02:23Z: 2026-11-20 github-00 APPROVED stage 1: EXIT 7 (CANNOT_RUN), pinned, distinct from 1; read the tree side by cat-file and compare with the on-disk script. Docstring must state the limit: the .venv tools are the same mtools wheels only unless the commit changes uv.lock (a repin): the live venv then has the OLD pins; stating it is enough for stage 1 (uv --check or stage 2 / mtools:W2780 run-at-sha --venv later). | 2026-11-20T05:05:37Z: 2026-11-20 stage 1 built in .nemik-w2372-wt on c2f31221: tools/presubmit.sh compares the gated tree's tools/gate_staged.sh (rev-parse blob) with the live file (hash-object --no-filters); a difference or a missing tree script exits 7 (cannot_run) with the tree line printed and the gate never run; docstring states the uv.lock repin limit. tests/test_presubmit.py: 7 tests pass (two new: different script, missing script; the pin now covers the single '|| rc=$?' line, the gate= path line and cannot_run=7). MUTANTS (reverted): refusal exiting 1 fails 2 tests; the blob comparison dropped fails 1. DRILL: a worktree whose gate_staged.sh has a added comment line, run through presubmit.sh: exit 7, 'is not judged', gate not run (tree 14ccb987). Full presubmit over this worktree running. | 2026-11-20T05:22:23Z: 2026-11-20 vector set (the default the reader shows on sibling cards), per the fleet reader's Warning: a working card with no vector ranks unscored and the commit gate's round check refuses a stack that works it. | 2026-11-20T06:25:30Z: 2026-11-20 refs/review/W2372-v1 = fbd16658 (parent c2f31221), tree 484d9337 = the tree tools/presubmit.sh gated green over this worktree (tree 484d9337252bc5e8de1ceb7896e2484f12b68c72 rc 0). In review at github:W120. | 2026-11-20T06:27:01Z: 2026-11-20 github-00 PASS-SUBMIT on refs/review/W2372-v1 = fbd16658 (rev-parse tree 484d9337 = the gated tree); submitting.",
       "issued_at": "2026-11-20T03:36:33Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W2365",
-      "last_worked": "2026-11-20T03:36:37Z",
+      "last_worked": "2026-11-20T06:27:01Z",
       "ticks_blocked": 0,
-      "prior_status": "ready"
+      "prior_status": "ready",
+      "completed": null,
+      "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
+      "vector_source": "default"
     }
   ],
   "residue": [

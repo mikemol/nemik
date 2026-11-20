@@ -6496,3 +6496,9 @@
 2026-11-20T03:36:28Z  status W2365 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-20T03:36:33Z  interrupt W2372 minted    -         "presubmit.sh gates with the gated tree's own gate_staged.sh, not the live checkout's"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W2365
 2026-11-20T03:36:37Z  status W2372 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-20T03:54:09Z  status W2372 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-20T04:59:45Z  status W2365 working>landed writer    "working -> landed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-20T05:01:12Z  status W2372 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-20T05:02:23Z  status W2372 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-20T06:25:30Z  status W2372 working>blocked writer    "working -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-20T06:27:01Z  status W2372 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
