@@ -85,6 +85,17 @@
           }
         ]
       }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.local/share/luthen-tools/live/nemik/bin/mikemol-hook-tick-stop\""
+          }
+        ]
+      }
     ]
   }
 }
