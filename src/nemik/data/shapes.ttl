@@ -136,6 +136,12 @@ nemik:CheckableNextStepShape a sh:NodeShape ;
                 FILTER (?state IN (<https://github.com/mikemol/nemik/ns#Ready>, <https://github.com/mikemol/nemik/ns#Working>))
                 $this <https://github.com/mikemol/nemik/ns#namesFile> ?file .
                 FILTER NOT EXISTS { $this <https://github.com/mikemol/nemik/ns#weather> ?w }
+                # nemik:W708: a file the card edits (touches file:<f>!w) is a target, not an observable:
+                # its existence is not the doneness test, so no witness can be asked of it.
+                FILTER NOT EXISTS {
+                    $this <https://github.com/mikemol/nemik/ns#touches> ?tag .
+                    FILTER (?tag = CONCAT("file:", STR(?file), "!w"))
+                }
             }""" ] .
 
 # nemik:W553 (github-8f 2026-10-15): open work whose next step uses a word that blurs the change-lifecycle

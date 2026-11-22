@@ -6583,3 +6583,27 @@
 2026-11-22T18:50:20Z  status W2391 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-22T18:52:01Z  interrupt W2403 minted    -         "mikemol-commit's no-progress witness ended a doc-stack gate at rc 124 under load: find which wait it was, with mtools"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-00:W120
 2026-11-22T18:52:17Z  status W2403 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T19:12:33Z  status W1163 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T19:13:18Z  status W708 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T19:30:07Z  status W2402 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T19:30:56Z  status W970 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T19:31:31Z  interrupt W2404 minted    -         "Decide how the browser gets the native pieces binary's JSON (file, server request, static build), in docs/codon-to-browser.md"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2148
+2026-11-22T19:31:34Z  status W2148 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T19:32:39Z  interrupt W2405 minted    -         "W970a: collapse.js marks(umbrellas) as a pure function: one row per umbrella with label, name holding it, expanded false, tested on plain rows"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W970
+2026-11-22T19:32:41Z  interrupt W2406 minted    -         "W970b: the page draws marks() as buttons (aria-expanded flips on activation, 24 px, tab order), the oracle through the real page with two planted umbrellas"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W970
+2026-11-22T19:32:44Z  status W970 working>blocked writer    "working -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T19:33:34Z  status W2286 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T19:33:38Z  status W2308 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T19:33:39Z  status W2309 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T19:57:31Z  status W879 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T19:58:42Z  status W2148 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T19:58:51Z  status W2148 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T19:59:07Z  status W2404 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T20:00:27Z  status W1257 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T20:11:23Z  interrupt W2407 minted    -         "Round membership follows the working set: pin the working cards into the round (W1059's claim), fill the rest from the ready cards by rank"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=luthen-observability:W2894
+2026-11-22T20:14:13Z  status W1052 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T20:19:39Z  status W459 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T20:22:33Z  status W700 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T20:25:44Z  status W2407 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T20:26:25Z  intervention --   other     intervention "2026-11-22 practice: one full gate at a time on this checkout, no tools/presubmit.sh run while a stack gates (nemik:W2403, after a doc stack stalled at rc 124 under load)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T20:26:45Z  status W750 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

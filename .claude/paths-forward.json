@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 2403,
+  "counter": 2407,
   "waypoints": [
     {
       "symbol": "W1",
@@ -9055,19 +9055,21 @@
     {
       "symbol": "W459",
       "title": "OperatorActShape escalates Warning to Violation after N ticks, N learned from ledger history",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W2290"
       ],
       "touches": [],
-      "blocked_on": [],
+      "blocked_on": [
+        "W708"
+      ],
       "blocked_kind": "agent",
       "next_bounded_step": "Pair the 19 lifts with their start events (nemik-history --events, to~operator), compute stints in days, check whether the graph carries a blocked-since the shape can read; then declare the percentile and write the shape property and the fixture test",
-      "evidence": "2026-10-13: 2026-10-13 operator: wants better visibility before any escalation to Violation, and the shape is still being worked; held behind W467 (lanes in the view) and W460 (errands split out) | 2026-11-06T20:29:57Z: Operator-ask audit 2026-11-06 (warrant: host line 145131, uuid 9c5e8dd8-a5a4-4cbd-9e07-84e844cc8b00). CLASS: a pipeline step with one real question inside. The question the operator asked on 2026-10-13 was visibility first; the lanes are now in the view (W467 landed f3a00fd, per this card), so 'wait for visibility' is met. What is left is N, which the card already says is learned from the ledger (no typed threshold). Lift: learn N from ticks_blocked of no-command asks, add the Violation property gated on it, and let a cold review (host line 144945, verified human) decide whether the escalation ships, not a standing ask. W459 | 2026-11-15T02:29:14Z: 2026-11-14 POPULATION MEASURED (nemik-operator --json over the whole fleet root, scratch .claude/held-W459-no-command.py.txt, read-only): ONE ask has category no-command (substrate, a no-verify bootstrap commit, ticks_blocked 1). A learned N has nothing to learn from: no closed no-command asks are in the graph (it holds open asks only), and the one open ask has been blocked for 1 tick. So the next step as written (learn N from ticks_blocked of no-command asks over the ledger history) cannot be run: the coverable gate fails (population 1, no history). Routes: (a) wait until the population is large enough to learn from (a witness on the count of no-command asks); (b) learn N from the ticks_blocked of ALL operator asks that were lifted, which the ledger holds as lift lines but the graph does not; (c) ship the Violation property with N read from rank-weights.toml like W489's bound, declared and not typed in the shape. Not done: any shape change. | 2026-11-17T05:16:05Z: 2026-11-17 PROBE (the card's own 'probe first', read-only): (1) the ledger holds 32 lines saying unblocked or lifted, but they are tick lines naming a landed blocker, not 'lift lines' that carry ticks_blocked at lift for operator asks (sampled four); route (b) as written has no data source in the ledger. (2) The card-event history DOES hold the lifts: nemik-history nemik --from 2026-09-20 --events --where 'field=blocked_on and from~operator and not to=*' (the event filter landed in 0af9f42) prints 19 lifts of operator asks in nemik alone, each with the lift time and its commit (scratch operator-lifts.tsv). The start of each stint is the earlier event whose to names operator. So the stint LENGTHS in time are derivable now; the TICK count is not recorded (nemik:ticksBlocked is mtools' counter, a number on the card, not stamped per lift). (3) The shape gates on ticksBlocked, so N in ticks needs a tick-to-time conversion the ledger does not give stably (the loop cadence has varied). REVISED NEXT STEP: pair each lift with its start event to get operator-ask stints in days (19+ points, repo-local), declare the percentile in rank-weights.toml as W489's bound is, and gate the Violation on the card's blocked age in days if the graph carries one, else on ticksBlocked scaled by the median tick spacing measured from the ledger's tick lines over the same window. Not built.",
+      "evidence": "2026-10-13: 2026-10-13 operator: wants better visibility before any escalation to Violation, and the shape is still being worked; held behind W467 (lanes in the view) and W460 (errands split out) | 2026-11-06T20:29:57Z: Operator-ask audit 2026-11-06 (warrant: host line 145131, uuid 9c5e8dd8-a5a4-4cbd-9e07-84e844cc8b00). CLASS: a pipeline step with one real question inside. The question the operator asked on 2026-10-13 was visibility first; the lanes are now in the view (W467 landed f3a00fd, per this card), so 'wait for visibility' is met. What is left is N, which the card already says is learned from the ledger (no typed threshold). Lift: learn N from ticks_blocked of no-command asks, add the Violation property gated on it, and let a cold review (host line 144945, verified human) decide whether the escalation ships, not a standing ask. W459 | 2026-11-15T02:29:14Z: 2026-11-14 POPULATION MEASURED (nemik-operator --json over the whole fleet root, scratch .claude/held-W459-no-command.py.txt, read-only): ONE ask has category no-command (substrate, a no-verify bootstrap commit, ticks_blocked 1). A learned N has nothing to learn from: no closed no-command asks are in the graph (it holds open asks only), and the one open ask has been blocked for 1 tick. So the next step as written (learn N from ticks_blocked of no-command asks over the ledger history) cannot be run: the coverable gate fails (population 1, no history). Routes: (a) wait until the population is large enough to learn from (a witness on the count of no-command asks); (b) learn N from the ticks_blocked of ALL operator asks that were lifted, which the ledger holds as lift lines but the graph does not; (c) ship the Violation property with N read from rank-weights.toml like W489's bound, declared and not typed in the shape. Not done: any shape change. | 2026-11-17T05:16:05Z: 2026-11-17 PROBE (the card's own 'probe first', read-only): (1) the ledger holds 32 lines saying unblocked or lifted, but they are tick lines naming a landed blocker, not 'lift lines' that carry ticks_blocked at lift for operator asks (sampled four); route (b) as written has no data source in the ledger. (2) The card-event history DOES hold the lifts: nemik-history nemik --from 2026-09-20 --events --where 'field=blocked_on and from~operator and not to=*' (the event filter landed in 0af9f42) prints 19 lifts of operator asks in nemik alone, each with the lift time and its commit (scratch operator-lifts.tsv). The start of each stint is the earlier event whose to names operator. So the stint LENGTHS in time are derivable now; the TICK count is not recorded (nemik:ticksBlocked is mtools' counter, a number on the card, not stamped per lift). (3) The shape gates on ticksBlocked, so N in ticks needs a tick-to-time conversion the ledger does not give stably (the loop cadence has varied). REVISED NEXT STEP: pair each lift with its start event to get operator-ask stints in days (19+ points, repo-local), declare the percentile in rank-weights.toml as W489's bound is, and gate the Violation on the card's blocked age in days if the graph carries one, else on ticksBlocked scaled by the median tick spacing measured from the ledger's tick lines over the same window. Not built. | 2026-11-22T20:19:39Z: 2026-11-22 stop hook: not taken. Its manifest names src/nemik/data/shapes.ttl, which W708's stack (refs/review/W708-v1, presubmit running) and the round's W2308 and W2309 also edit; mikemol-commit refuses a queued stack sharing a file, and W459's first step is a measurement (19 lift stints paired with their start events), which would run nemik-history on a loaded host. Blocked on W708's landing; the three shapes.ttl cards go one at a time, W708 then W2308 then W2309 then this.",
       "issued_at": "2026-10-13T17:49:16Z",
       "minted_during": "tick",
       "caused_by": "W458",
-      "last_worked": "2026-11-17T05:16:05Z",
+      "last_worked": "2026-11-22T20:19:39Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
@@ -10361,7 +10363,6 @@
       ],
       "blocked_on": [
         "W877",
-        "W879",
         "W881"
       ],
       "blocked_kind": "agent",
@@ -10371,7 +10372,7 @@
       "minted_during": "tick",
       "caused_by": "operator",
       "last_worked": "2026-10-23T12:40:08Z",
-      "ticks_blocked": 509,
+      "ticks_blocked": 0,
       "weight": 11,
       "manifest": [
         "src/nemik/withheld.py"
@@ -14929,19 +14930,21 @@
     {
       "symbol": "W700",
       "title": "W581 part 2: the SLA breach priority band is derived from the wait SLO and its error budget, not a tick count",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W581"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W2393"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "Build the (age, answered) rows from card events as a function and the band in salience.py: a wait past the learned target adds a band above ordinary work; an unlearnable target is stated, not silent; fixture test in tests/test_sla.py",
-      "evidence": "2026-11-06T20:29:25Z: Operator-ask audit 2026-11-06 (warrant: host line 145131 uuid 9c5e8dd8-a5a4-4cbd-9e07-84e844cc8b00, verified human). CLASS: the ask as written (the operator states the wait SLO and an error budget) is OBSOLETE in form. github-14 relays the operator's standing input that thresholds are not typed but learned from baselines; that relay is not verified by me (I searched the host transcript lines 144800 to 145140 for 'threshold', '3.14', 'existing data', 'baseline' in human records and found none). The proposal: derive the SLO from the ledger itself (the wait ages of answered cross-repo waits give the target fraction and the budget, as W489 learns 9 in 10 for small cards), then the band follows from the burn rate as the next step already says. A pipeline step, not a choice: lift with that. W700 | 2026-11-17T05:21:10Z: 2026-11-17 MEASURED the derivation's inputs (read-only; nemik-history --all --from 2026-09-20 --events for blocked_on and status, then scratch wait_ages.py pairing each cross-repo cite's first appearance on a card with its disappearance; the ledgers of other repos not read, only the committed queue histories nemik-history already reads, recorded debt). ANSWERED cross-repo waits with both ends seen: 506. Age: median 0.43 d, p90 9.11 d, min 0.000, max 50.4 d; answered within 6 h 44%, 12 h 52%, 1 d 56%, 2 d 65%, 7 d 82%. STILL OPEN: 202 unmatched, 201 after excluding one on a card whose last status event is done/dropped/landed; median age 18.2 d; 121 of 201 (60%) are older than the answered p90 of 9.11 d. So against a target of 'nine in ten answered within 9.11 d' (the p90 as W489 learns 9 in 10) the error budget is 10 percent and the open set burns it at 6.0x. CAVEAT TO FIX BEFORE ANY BAND: the p90 comes from ANSWERED waits only, which is right-censored (a wait still open is not in it), so it understates the true wait: the 201 open waits, median 18.2 d, are the tail the answered set never saw; an honest SLO needs a survival estimate (answered plus open as censored, e.g. Kaplan-Meier) and not the answered percentile alone. The pairing also treats a cite that leaves and returns as a new wait. NEXT: docs/wait-slo.md with these numbers, a survival-based target age and budget computed by a pure function over (age, answered) rows in src/nemik/salience.py or a new module, the band as the budget's burn rate over current ages added to salience as a band above ordinary work, and tests/test_sla.py over a fixture (a short answered wait lifts nothing, a wait past the target burns budget, censored waits count). | 2026-11-17T07:57:05Z: 2026-11-17 Landed 70191c0 (full sha 70191c0c01612ac08504c49bdf97aac13a00c00f): mikemol-commit printed COMMITTED nemik 70191c0 W700 [PUSHED]; git log main shows my subject. Gate 538 of 538 green (v2; v1 of the same change was refused before any test ran, on bazel's 120 s server startup: nemik:W2245; so the pass is not counted as clean green on a resubmit). src/nemik/waitslo.py: target_age (Kaplan-Meier, open waits censored, -1.0 when not learnable) and burn (-1.0, never 0, when no target); tests/test_waitslo.py; bazel/nemik_src.bzl. Image landing: witness to attach by hand when the card closes. STILL OPEN: docs/wait-slo.md with the measured numbers (506 answered, p90 9.11 d; 201 open, median 18.2 d, 60 percent past the p90, burn 6.0x); the band in salience (a band above ordinary work from the budget's burn); the gauge. | 2026-11-17T08:23:01Z: 2026-11-17 Landed 354907e (full sha 354907ee251abede30b2db01ad0be0ee903411b5): mikemol-commit printed COMMITTED nemik 354907e W700 [PUSHED]; git log main shows my subject. docs/wait-slo.md (the derivation, the measured numbers: 506 answered, p90 9.11 d; 201 open, median 18.2 d, 60 percent past the p90, burn 6.0x; what is not done). Gate: 'Executed 0 out of 538 tests: 538 tests pass' (every result cached, since no test reads this doc), so the gate showed nothing broke and no test judged the document; the //:pre_gate suite passed on it beforehand. Landing kind ref (docs). STILL OPEN: the band in salience.py and a gauge; a series instead of one reading.",
+      "evidence": "2026-11-06T20:29:25Z: Operator-ask audit 2026-11-06 (warrant: host line 145131 uuid 9c5e8dd8-a5a4-4cbd-9e07-84e844cc8b00, verified human). CLASS: the ask as written (the operator states the wait SLO and an error budget) is OBSOLETE in form. github-14 relays the operator's standing input that thresholds are not typed but learned from baselines; that relay is not verified by me (I searched the host transcript lines 144800 to 145140 for 'threshold', '3.14', 'existing data', 'baseline' in human records and found none). The proposal: derive the SLO from the ledger itself (the wait ages of answered cross-repo waits give the target fraction and the budget, as W489 learns 9 in 10 for small cards), then the band follows from the burn rate as the next step already says. A pipeline step, not a choice: lift with that. W700 | 2026-11-17T05:21:10Z: 2026-11-17 MEASURED the derivation's inputs (read-only; nemik-history --all --from 2026-09-20 --events for blocked_on and status, then scratch wait_ages.py pairing each cross-repo cite's first appearance on a card with its disappearance; the ledgers of other repos not read, only the committed queue histories nemik-history already reads, recorded debt). ANSWERED cross-repo waits with both ends seen: 506. Age: median 0.43 d, p90 9.11 d, min 0.000, max 50.4 d; answered within 6 h 44%, 12 h 52%, 1 d 56%, 2 d 65%, 7 d 82%. STILL OPEN: 202 unmatched, 201 after excluding one on a card whose last status event is done/dropped/landed; median age 18.2 d; 121 of 201 (60%) are older than the answered p90 of 9.11 d. So against a target of 'nine in ten answered within 9.11 d' (the p90 as W489 learns 9 in 10) the error budget is 10 percent and the open set burns it at 6.0x. CAVEAT TO FIX BEFORE ANY BAND: the p90 comes from ANSWERED waits only, which is right-censored (a wait still open is not in it), so it understates the true wait: the 201 open waits, median 18.2 d, are the tail the answered set never saw; an honest SLO needs a survival estimate (answered plus open as censored, e.g. Kaplan-Meier) and not the answered percentile alone. The pairing also treats a cite that leaves and returns as a new wait. NEXT: docs/wait-slo.md with these numbers, a survival-based target age and budget computed by a pure function over (age, answered) rows in src/nemik/salience.py or a new module, the band as the budget's burn rate over current ages added to salience as a band above ordinary work, and tests/test_sla.py over a fixture (a short answered wait lifts nothing, a wait past the target burns budget, censored waits count). | 2026-11-17T07:57:05Z: 2026-11-17 Landed 70191c0 (full sha 70191c0c01612ac08504c49bdf97aac13a00c00f): mikemol-commit printed COMMITTED nemik 70191c0 W700 [PUSHED]; git log main shows my subject. Gate 538 of 538 green (v2; v1 of the same change was refused before any test ran, on bazel's 120 s server startup: nemik:W2245; so the pass is not counted as clean green on a resubmit). src/nemik/waitslo.py: target_age (Kaplan-Meier, open waits censored, -1.0 when not learnable) and burn (-1.0, never 0, when no target); tests/test_waitslo.py; bazel/nemik_src.bzl. Image landing: witness to attach by hand when the card closes. STILL OPEN: docs/wait-slo.md with the measured numbers (506 answered, p90 9.11 d; 201 open, median 18.2 d, 60 percent past the p90, burn 6.0x); the band in salience (a band above ordinary work from the budget's burn); the gauge. | 2026-11-17T08:23:01Z: 2026-11-17 Landed 354907e (full sha 354907ee251abede30b2db01ad0be0ee903411b5): mikemol-commit printed COMMITTED nemik 354907e W700 [PUSHED]; git log main shows my subject. docs/wait-slo.md (the derivation, the measured numbers: 506 answered, p90 9.11 d; 201 open, median 18.2 d, 60 percent past the p90, burn 6.0x; what is not done). Gate: 'Executed 0 out of 538 tests: 538 tests pass' (every result cached, since no test reads this doc), so the gate showed nothing broke and no test judged the document; the //:pre_gate suite passed on it beforehand. Landing kind ref (docs). STILL OPEN: the band in salience.py and a gauge; a series instead of one reading. | 2026-11-22T20:22:33Z: 2026-11-22 stop hook: not taken. What remains is a BAND in salience.py (a band above ordinary work from the wait budget's burn), which changes the ranking; the rank's composition is the subject of docs/rank-from-the-vector.md v11 (landed 2c0fda64: rank = demand per unit cost, an objective named as an external choice, the replay nemik:W2393 as the test), and a band added now would be a second ranking rule beside the one the replay judges. Blocked on W2393: the burn belongs in the replay's demand sources (a wait past the target as demand), not as an out-of-band tier. waitslo.py (the learned target and the burn, landed 70191c0) stays as the input.",
       "issued_at": "2026-10-18T23:03:41Z",
       "minted_during": "interrupt",
       "caused_by": "W581",
-      "last_worked": "2026-11-17T08:23:01Z",
+      "last_worked": "2026-11-22T20:22:33Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
@@ -15153,19 +15156,19 @@
     {
       "symbol": "W708",
       "title": "The no-witness Warning fires on cards whose step is a behaviour (a command refuses without a flag) that no observer can see: name the honest witness, a test result for a tree sha, or stop warning where none exists",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W58"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "After W2391 lands: run tools/presubmit.sh over /home/mikemol/github/.nemik-w708-wt (github-00 PASS-SUBMIT on refs/review/W708-v1 = fb92f9ac once presubmit is clean), then submit when W708 is in the round.",
+      "next_bounded_step": "Presubmit refs/review/W708-v1's tree over /home/mikemol/github/.nemik-w708-wt with the live queue staged (W708 working); on rc 0 and the tree equal to the ref's, submit (github-00 PASS-SUBMIT once presubmit is clean); no other full-gate run while it gates (W2403).",
       "evidence": "2026-11-06T20:29:59Z: Operator-ask audit 2026-11-06 (warrant: host line 145131, uuid 9c5e8dd8-a5a4-4cbd-9e07-84e844cc8b00). CLASS: a pipeline step, nemik's own design call. Two ways: a new nemik-witnesses observer (input.test, a test result for the tree sha) or narrowing the no-witness Warning in shapes.ttl for cards that name no observable. Both are nemik's code. Lift and decide by cold review: the observer is the larger build, narrowing the shape the smaller and reversible; a behaviour card with no observable is the case the Warning cannot serve, so narrowing is the default I propose, with the observer carded if a test-sha witness proves wanted. W708 | 2026-11-22T17:29:46Z: 2026-11-22 taken on the stop hook: read shapes.ttl:124-139; the discriminator is the card's own !w touch on the named file, no new observer. | 2026-11-22T17:33:36Z: 2026-11-22 BUILT: refs/review/W708-v1 = fb92f9acae9afd8bf22ce43c1afd46b7b0e3832a (tree 0d13307d3d60b485ab0773824ecb4f78d8b8f6ba, parent bc35af50): shapes.ttl CheckableNextStepShape skips a named file the card edits (touches file:<f>!w); tests/test_gate.py gains W5 (edit target, no Warning) beside W1 (observable, still warns). MEASURED: bazel test //:test_gate passes in the scratch worktree. NOT DONE: presubmit, github-00 review (cold review before it ships). The manifest's tests/test_witnessed_blocker.py was wrong; the fixture lives in tests/test_gate.py. | 2026-11-22T17:51:08Z: 2026-11-22 github-00: PASS-SUBMIT on fb92f9ac once presubmit is clean (the filter excludes a file the card itself writes, reason in a comment). Returned to ready: a working card outside the round is refused at submit. | 2026-11-22T18:20:58Z: 2026-11-22 stop hook asked to take W708: not taken while W2391's submit is in flight. A working card outside the round refused the W2391 stack this hour (W1028, W2148 are the round's ready cards); the presubmit is a second full-gate run on a loaded host. Blocked on W2391's landing.",
       "issued_at": "2026-10-19T00:15:38Z",
       "minted_during": "interrupt",
       "caused_by": "el-openglo:W702",
-      "last_worked": "2026-11-22T18:20:58Z",
+      "last_worked": "2026-11-22T19:13:18Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
@@ -16350,7 +16353,7 @@
     {
       "symbol": "W750",
       "title": "Improve the climate: date each practice change as an intervention and measure the shift in a before and after window",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W743"
       ],
@@ -16359,12 +16362,12 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "From now send one intervention per practice change (atomize, stack, shard, repin) when it happens, and write the before and after windows in docs/climate-interventions.md as each matures, starting with the 2026-10-21T02:14:31Z repin as the first window. The metric side (mikemol.waypoint.event) is not yet read back",
-      "evidence": "2026-10-21: 2026-10-20: the live writer has --intervention (repin 5971c07, venv rebuilt by the post-commit hook after 00cb6d2). First one sent: 'repin' for the move to f2f18a1; the command printed 'intervention repin sent' and exited 0. NOT yet read back: a LogsQL query for fleet:intervention on luthen's VictoriaLogs found nothing, so the series it lands in (metrics, not logs, or a delay) is unconfirmed; ask mtools-ad where an intervention is read before relying on the series | 2026-10-24: 2026-10-24: asked mtools-ad where an intervention event is read back (store, station or series name, delay); until answered the before and after windows would be built on a series not yet read back. Named by repo only, because mtools has no card for it: nemik:W750 is the citable ref | 2026-10-24: 2026-10-24 mtools-ad (a peer's word, read from code, no store queried): 'intervention sent' means the detached mikemol-otlp children were started, not delivered, since their output goes to /dev/null and a failed POST is swallowed (mtools:W1887 cards the fix). LOG in victorialogs-http: service.name mikemol-paths-forward, repo is the state file's repo, body one JSON line with station <repo>:fleet:intervention, field the kind, new the note. So a repin from nemik's queue is station nemik:fleet:intervention. LogsQL is service.name mikemol-paths-forward with the word fleet:intervention over 7d. METRIC in vmsingle is gauge mikemol.waypoint.event with labels repo, field and via, value 1 per event, read with sum_over_time, and its PromQL name is a guess until luthen's registry row is read. No delay. To test a lost send run mikemol-otlp log once in the foreground | 2026-10-24: 2026-10-24 read back: the 2026-10-20 repin intervention IS in the store, at 2026-10-21T02:14:31Z in luthen's VictoriaLogs, station nemik:fleet:intervention, found with luthen's checks.vlogs_query and the query service.name:mikemol-paths-forward \"fleet:intervention\" -\"accepted\". My earlier query used the colon word unquoted and found nothing, so the empty result was my query and not a lost send. It is the only intervention event in the store, so no other practice change has a date there, and past changes cannot be dated honestly since an event carries its send time | 2026-10-27: 2026-10-27: sent a stack intervention for stack583 (W1191); the command printed 'intervention stack started', which per mtools-ad means the sender was started, not delivered; read-back in VictoriaLogs still to do | 2026-10-28: 2026-10-28: sent intervention 'other' for the reviewed-loop adoption (printed 'intervention other started'; read-back pending); docs/climate-interventions.md now exists, listing the repin (read back), stack583 and this one with their read-back state; no window has matured. | 2026-10-28: 2026-10-28: landed f880c1e (pushed, gate green): docs/climate-interventions.md lists the three interventions sent; no window has matured; the 'other' and stack ones are not yet read back in VictoriaLogs. | 2026-11-01: 2026-11-01 CLASSIFIED by W1339 (reviewer R85, nemik:R83 on W613): partial. Commit f880c1e0 (2026-10-28T08:13:36-04:00): 'W750: docs/climate-interventions.md dates the practice changes sent as interventions, the '. Reason, read from this card's own title and next step: docs/climate-interventions.md dates the practice changes sent; the stack and reviewed-loop interventions are not yet sent. Scan criterion: the last 1500 commit subjects of the form W<n>:, number below 1200, status not done or landed. Read from titles and next steps, not from the code.",
+      "next_bounded_step": "Read back today's intervention (and the 'other' of 2026-10-28 and the stack one) in luthen's VictoriaLogs through endpoints_query; add the 2026-11-22 line to docs/climate-interventions.md; the first window (the 2026-10-21 repin) is old enough to measure.",
+      "evidence": "2026-10-21: 2026-10-20: the live writer has --intervention (repin 5971c07, venv rebuilt by the post-commit hook after 00cb6d2). First one sent: 'repin' for the move to f2f18a1; the command printed 'intervention repin sent' and exited 0. NOT yet read back: a LogsQL query for fleet:intervention on luthen's VictoriaLogs found nothing, so the series it lands in (metrics, not logs, or a delay) is unconfirmed; ask mtools-ad where an intervention is read before relying on the series | 2026-10-24: 2026-10-24: asked mtools-ad where an intervention event is read back (store, station or series name, delay); until answered the before and after windows would be built on a series not yet read back. Named by repo only, because mtools has no card for it: nemik:W750 is the citable ref | 2026-10-24: 2026-10-24 mtools-ad (a peer's word, read from code, no store queried): 'intervention sent' means the detached mikemol-otlp children were started, not delivered, since their output goes to /dev/null and a failed POST is swallowed (mtools:W1887 cards the fix). LOG in victorialogs-http: service.name mikemol-paths-forward, repo is the state file's repo, body one JSON line with station <repo>:fleet:intervention, field the kind, new the note. So a repin from nemik's queue is station nemik:fleet:intervention. LogsQL is service.name mikemol-paths-forward with the word fleet:intervention over 7d. METRIC in vmsingle is gauge mikemol.waypoint.event with labels repo, field and via, value 1 per event, read with sum_over_time, and its PromQL name is a guess until luthen's registry row is read. No delay. To test a lost send run mikemol-otlp log once in the foreground | 2026-10-24: 2026-10-24 read back: the 2026-10-20 repin intervention IS in the store, at 2026-10-21T02:14:31Z in luthen's VictoriaLogs, station nemik:fleet:intervention, found with luthen's checks.vlogs_query and the query service.name:mikemol-paths-forward \"fleet:intervention\" -\"accepted\". My earlier query used the colon word unquoted and found nothing, so the empty result was my query and not a lost send. It is the only intervention event in the store, so no other practice change has a date there, and past changes cannot be dated honestly since an event carries its send time | 2026-10-27: 2026-10-27: sent a stack intervention for stack583 (W1191); the command printed 'intervention stack started', which per mtools-ad means the sender was started, not delivered; read-back in VictoriaLogs still to do | 2026-10-28: 2026-10-28: sent intervention 'other' for the reviewed-loop adoption (printed 'intervention other started'; read-back pending); docs/climate-interventions.md now exists, listing the repin (read back), stack583 and this one with their read-back state; no window has matured. | 2026-10-28: 2026-10-28: landed f880c1e (pushed, gate green): docs/climate-interventions.md lists the three interventions sent; no window has matured; the 'other' and stack ones are not yet read back in VictoriaLogs. | 2026-11-01: 2026-11-01 CLASSIFIED by W1339 (reviewer R85, nemik:R83 on W613): partial. Commit f880c1e0 (2026-10-28T08:13:36-04:00): 'W750: docs/climate-interventions.md dates the practice changes sent as interventions, the '. Reason, read from this card's own title and next step: docs/climate-interventions.md dates the practice changes sent; the stack and reviewed-loop interventions are not yet sent. Scan criterion: the last 1500 commit subjects of the form W<n>:, number below 1200, status not done or landed. Read from titles and next steps, not from the code. | 2026-11-22T20:26:29Z: 2026-11-22 stop hook: sent intervention 'other' for the practice change one full gate at a time per checkout (nemik:W2403; a doc stack stalled at rc 124 while a presubmit held the bazel server). Printed 'intervention other started' (per mtools-ad: the sender started, not delivered); read-back in VictoriaLogs still to do with luthen's vlogs_query on service.name:mikemol-paths-forward 'fleet:intervention'. Not yet in docs/climate-interventions.md; the doc edit rides with the next docs stack.",
       "issued_at": "2026-10-19T19:35:14Z",
       "minted_during": "tick",
       "caused_by": "nemik:W743",
-      "last_worked": "2026-11-01T03:05:52Z",
+      "last_worked": "2026-11-22T20:26:45Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
@@ -19851,21 +19854,21 @@
     {
       "symbol": "W879",
       "title": "Ask el-openglo: nemik:W516 (withholding at the source): please repin your mikemol-paths-forward to mtools 5ba261f or",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W2293"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "2026-11-07: read the ask on this card (repin to mtools 5ba261f for nemik:W516) against the el-openglo reply, and close it if el-openglo:W754 delivered the repin, per the 2026-10-29 letter",
-      "evidence": "2026-11-06T02:06:19Z: 2026-11-06 lifted: inbox/2026-10-29-nemik-edge-el-openglo-W754-enables-W879.md says el-openglo:W754 was done on 2026-10-29. I have not read el-openglo's queue (sibling path) to confirm W754 is the repin. | 2026-11-06T02:10:27Z: 2026-11-06 verification (R257 finding 2): the letter inbox/2026-10-29-nemik-edge-el-openglo-W754-enables-W879.md is the tool's own record of the edge el-openglo:W754 enables W879, so W879 named W754 as its blocker, and the tool read W754 as done on 2026-10-29. That is a reading by nemik's edge code, not by me; I did not read el-openglo's queue. Whether el-openglo actually repinned to mtools 5ba261f is open and is the card's next step; the block on el-openglo is not restored because its stated blocker is done. | 2026-11-06T08:45:44Z: 2026-11-06 R269 f2, a stretch STATED: this card's manifest names a LETTER FILE (inbox/2026-10-29-nemik-edge-el-openglo-W754-enables-W879.md), which is not a file the card edits but the file its next step reads and may archive. I gave it that manifest only to clear the manifest ratchet; the overlaps check and stack composition read a manifest as the files a card touches, so this entry could mislead them. CONVENTION proposed in the next entry on W1568; this manifest is to be replaced by the file the answer lands in, or the card closed.",
+      "next_bounded_step": null,
+      "evidence": "2026-11-06T02:06:19Z: 2026-11-06 lifted: inbox/2026-10-29-nemik-edge-el-openglo-W754-enables-W879.md says el-openglo:W754 was done on 2026-10-29. I have not read el-openglo's queue (sibling path) to confirm W754 is the repin. | 2026-11-06T02:10:27Z: 2026-11-06 verification (R257 finding 2): the letter inbox/2026-10-29-nemik-edge-el-openglo-W754-enables-W879.md is the tool's own record of the edge el-openglo:W754 enables W879, so W879 named W754 as its blocker, and the tool read W754 as done on 2026-10-29. That is a reading by nemik's edge code, not by me; I did not read el-openglo's queue. Whether el-openglo actually repinned to mtools 5ba261f is open and is the card's next step; the block on el-openglo is not restored because its stated blocker is done. | 2026-11-06T08:45:44Z: 2026-11-06 R269 f2, a stretch STATED: this card's manifest names a LETTER FILE (inbox/2026-10-29-nemik-edge-el-openglo-W754-enables-W879.md), which is not a file the card edits but the file its next step reads and may archive. I gave it that manifest only to clear the manifest ratchet; the overlaps check and stack composition read a manifest as the files a card touches, so this entry could mislead them. CONVENTION proposed in the next entry on W1568; this manifest is to be replaced by the file the answer lands in, or the card closed. | 2026-11-22T19:57:31Z: 2026-11-22 VERIFIED through git objects (never a sibling working tree): el-openglo origin/main = be3ae8b179acad27b12836a20f5ef2d6091639f5, .claude/paths-forward.json line 19462 records 'the repin nemik:W879 asked for landed as 76b6519 (all 13 mikemol-* specs at mtools e8db624, after the 5ba261f nemik:W879 asked for)'; git merge-base --is-ancestor 5ba261f e8db624 in mtools exits 0, so e8db624 is a descendant of 5ba261f. The ask is delivered; closed. The 2026-10-29 letter is the record of the edge.",
       "issued_at": "2026-10-23T07:32:18Z",
       "minted_during": "interrupt",
       "caused_by": null,
-      "last_worked": "2026-11-06T08:45:44Z",
+      "last_worked": "2026-11-22T19:57:31Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261122T195731Z",
       "manifest": [
         "inbox/2026-10-29-nemik-edge-el-openglo-W754-enables-W879.md"
       ],
@@ -22416,19 +22419,21 @@
     {
       "symbol": "W970",
       "title": "The page draws one mark per collapse umbrella, named for assistive technology, with the WCAG chain test as its oracle",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W709"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
-      "next_bounded_step": "W969 landed (c7add8e8), umbrellas.json is served and panels.js reads it. Step 1: read panels.js umbrella reading and render.js mark drawing, the line ceilings in tests, and the WCAG chain test; decide collapse.js (new file) vs a traded line; write the failing tests/test_collapse_marks.py case (one mark per umbrella, accessible name holds its visible text, WCAG 2.5.3) before any page edit.",
-      "evidence": "2026-11-22T17:34:00Z: 2026-11-22 read: panels.js carries umbrellas through combine (lines 83-88, 139: rows deduped by id+card) and nothing draws them; render.js has no umbrella mark. The mark is the missing slice; collapse.js (new file, page files at ceilings) draws one mark per umbrella with aria-label holding its visible text, tested by tests/test_collapse_marks.py with the WCAG chain. Test first, then the file. | 2026-11-22T17:51:09Z: 2026-11-22 returned to ready: the round check refuses a working card outside the round while round cards are ready; the read (panels.js carries umbrellas, nothing draws them) stands. | 2026-11-22T17:51:27Z: 2026-11-22 stop hook asked to take W970: not taken. W970 is outside the round, and the submit check refuses a working card outside the round while round cards (W1028, W2148) are ready; W2391's stack is submitting now and a working W970 would refuse it (it did for W708 this hour). Blocked on W2391's landing; then take the round's cards W1028 and W2148 first, W970 when it enters the round.",
+      "blocked_on": [
+        "W2405"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "BUILD (github-00 ruling 2026-11-22: a BUTTON): collapse.js marks(umbrellas) -> rows; one button per umbrella with a name holding its visible text, role button, aria-expanded false/true reflecting open or closed, 24 px target, a place in tab order. Oracle in tests/test_collapse_marks.py through the real page with a planted umbrellas.json: exactly two marks, judge_names and judge_targets and tab-order clean, AND aria-expanded flips on activation. Red first.",
+      "evidence": "2026-11-22T17:34:00Z: 2026-11-22 read: panels.js carries umbrellas through combine (lines 83-88, 139: rows deduped by id+card) and nothing draws them; render.js has no umbrella mark. The mark is the missing slice; collapse.js (new file, page files at ceilings) draws one mark per umbrella with aria-label holding its visible text, tested by tests/test_collapse_marks.py with the WCAG chain. Test first, then the file. | 2026-11-22T17:51:09Z: 2026-11-22 returned to ready: the round check refuses a working card outside the round while round cards are ready; the read (panels.js carries umbrellas, nothing draws them) stands. | 2026-11-22T17:51:27Z: 2026-11-22 stop hook asked to take W970: not taken. W970 is outside the round, and the submit check refuses a working card outside the round while round cards (W1028, W2148) are ready; W2391's stack is submitting now and a working W970 would refuse it (it did for W708 this hour). Blocked on W2391's landing; then take the round's cards W1028 and W2148 first, W970 when it enters the round. | 2026-11-22T19:31:09Z: 2026-11-22 read tests/test_wcag_render.py: the chain is wcagjudge.judge_names/judge_targets/judge_order over rows the real page returns through webpage.evaluated (_page_rows, NAMES, TARGETS); this is the oracle for the marks. Design written to the next step for github-00; nothing built yet. | 2026-11-22T19:32:29Z: 2026-11-22 github-00: a button, not role img: the umbrella is a rollup the reader opens; take on name, role and state (aria-expanded), 24 px target, tab order; the oracle checks aria-expanded flips on activation beside the names. | 2026-11-22T19:32:44Z: 2026-11-22 atomized after github-00's button ruling: W2405 (collapse.js marks() pure, plain-row test) first, then W2406 (the page draws buttons, aria-expanded flips, oracle through the real page: planting umbrellas through webpage.served is its own read). W970 waits on both.",
       "issued_at": "2026-10-24T15:22:53Z",
       "minted_during": "interrupt",
       "caused_by": "W709",
-      "last_worked": "2026-11-22T17:51:27Z",
+      "last_worked": "2026-11-22T19:32:44Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
@@ -24904,7 +24909,7 @@
     {
       "symbol": "W1052",
       "title": "A shared file's writer never emits a form its deployed readers refuse",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W1033",
         "W1051"
@@ -24917,7 +24922,7 @@
       "issued_at": "2026-10-25T14:54:09Z",
       "minted_during": "tick",
       "caused_by": "W1025",
-      "last_worked": "2026-11-22T18:38:43Z",
+      "last_worked": "2026-11-22T20:14:13Z",
       "ticks_blocked": 0,
       "manifest": [
         "docs/shared-file-versions.md"
@@ -28142,7 +28147,7 @@
     {
       "symbol": "W1163",
       "title": "Answer nemik: estate:W39 is done (letter 2026-10-27-nemik-edge-estate-W39-enables-W914)",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W914"
       ],
@@ -28151,12 +28156,12 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "REVISE (github-00 2026-11-22, one low item): in docs/estate-w39-answer.md say 'the apply loop's first real apply', not 'the operator's' (the waldo/apply loop is the only applier, the operator supervises); if estate:W912 itself says otherwise, quote it and flag it to github-00 as its own finding. Then a new ref v2, presubmit, submit.",
-      "evidence": "2026-11-17T20:21:36Z: 2026-11-17 groom: wrote docs/estate-w39-answer.md from W914's evidence (what estate published, which observer nemik adds, what stays open: no record until the operator's first real apply). Not committed, not delivered. | 2026-11-22T17:34:33Z: 2026-11-22 BUILT: refs/review/W1163-v1 = 0d7a2c57bc33432b5b263e14eb7939ce97bf6614 (tree 558a5eb3106b8ba988cf4823c065cfb014dfcdad, parent bc35af50): docs/estate-w39-answer.md as written 2026-11-17, one file. NOT DONE: presubmit, github-00 review, submit, delivery. | 2026-11-22T17:51:10Z: 2026-11-22 github-00 REVISE on refs/review/W1163-v1 = 0d7a2c57: the OPERATOR's first real apply contradicts the standing rule. Returned to ready (outside the round). | 2026-11-22T18:38:12Z: 2026-11-22 v2 BUILT on the exit-8 wake: refs/review/W1163-v2 = 1ed3b0c8b13b25271714a51db96d25e5e59e3ab0 (tree a4108195f3122d7f7d8cfe665d4333e91c5adb9e, parent bc35af50): the open-items line says the apply loop's first real apply (the loop is the only applier, the operator supervises). estate:W912 as read from estate's published queue at origin/main does not state who applies in the text I grepped, so no contradiction to flag; v1's wording came from this card's own earlier evidence. NOT DONE: presubmit, github-00 re-review, submit, delivery.",
+      "next_bounded_step": null,
+      "evidence": "2026-11-17T20:21:36Z: 2026-11-17 groom: wrote docs/estate-w39-answer.md from W914's evidence (what estate published, which observer nemik adds, what stays open: no record until the operator's first real apply). Not committed, not delivered. | 2026-11-22T17:34:33Z: 2026-11-22 BUILT: refs/review/W1163-v1 = 0d7a2c57bc33432b5b263e14eb7939ce97bf6614 (tree 558a5eb3106b8ba988cf4823c065cfb014dfcdad, parent bc35af50): docs/estate-w39-answer.md as written 2026-11-17, one file. NOT DONE: presubmit, github-00 review, submit, delivery. | 2026-11-22T17:51:10Z: 2026-11-22 github-00 REVISE on refs/review/W1163-v1 = 0d7a2c57: the OPERATOR's first real apply contradicts the standing rule. Returned to ready (outside the round). | 2026-11-22T18:38:12Z: 2026-11-22 v2 BUILT on the exit-8 wake: refs/review/W1163-v2 = 1ed3b0c8b13b25271714a51db96d25e5e59e3ab0 (tree a4108195f3122d7f7d8cfe665d4333e91c5adb9e, parent bc35af50): the open-items line says the apply loop's first real apply (the loop is the only applier, the operator supervises). estate:W912 as read from estate's published queue at origin/main does not state who applies in the text I grepped, so no contradiction to flag; v1's wording came from this card's own earlier evidence. NOT DONE: presubmit, github-00 re-review, submit, delivery. | 2026-11-22T19:12:33Z: 2026-11-22 LANDED as 6b78506a8fb7c910a393225f4d4e51af06803922 (ls-remote origin refs/heads/main read back); github-00 PASS-SUBMIT on refs/review/W1163-v2 = 1ed3b0c8. The live copy (v1 bytes, left differing) restored to HEAD. Delivery to estate's inbox still waits on the courier (W1048); no sibling write.",
       "issued_at": "2026-10-27T09:42:58Z",
       "minted_during": "tick",
       "caused_by": "inbox/2026-10-27-nemik-edge-estate-W39-enables-W914.md",
-      "last_worked": "2026-11-22T18:38:12Z",
+      "last_worked": "2026-11-22T19:12:33Z",
       "ticks_blocked": 0,
       "manifest": [
         "docs/estate-w39-answer.md"
@@ -28165,7 +28170,7 @@
       "weight": 1,
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
       "vector_source": "default",
-      "completed": null
+      "completed": "20261122T191233Z"
     },
     {
       "symbol": "W1164",
@@ -30884,7 +30889,7 @@
     {
       "symbol": "W1257",
       "title": "Class: keyword-only call enforcement that Codon parses, a typed parameter object in place of '*,' across the ten modules",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W561"
       ],
@@ -30892,14 +30897,16 @@
         "portability",
         "typing"
       ],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W708"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "Probe, with the bazel-cache codon (NEMIK_CODON), whether a plain class with a typed __init__ taking named fields compiles, and whether @dataclass without arguments does (frozen=True and slots=True fail with 'class decorator got unexpected argument'); then pick the shortest-chain module among alarm, witwait, exportwire (imports mikemol.pathsforward or nemik.witnesses/check, so its chain is the imports, not the marker) and write the first leaf card for it. Do not drop either ruling: Codon-compatible Python (memory) and the typed-boundary keyword-only enforcement W569 wants.",
-      "evidence": "2026-10-29: 2026-10-29 github-8f ruling relayed (a peer, so a design suggestion, not the operator's word): do not drop either of Codon-compatibility and keyword-only enforcement; find the common structure, one typed parameter object in place of '*, a, b' so call sites name fields (a frozen dataclass; if dataclass arguments fail in the pinned Codon, a plain class with a typed __init__). Read before mint: W569 already holds the operator ask (option b: enums for 5 booleans and positional-or-keyword for the rest; blocked 389 ticks on the operator) and W568, W561; this class card is the alternative that keeps enforcement, so the operator's W569 choice should now name three options. The 10 modules and the evidence are on W1179 (alarm.py:47 compiled with the cached codon). Codon's paydown path; codon stays STARVED recorded as this design debt.",
+      "evidence": "2026-10-29: 2026-10-29 github-8f ruling relayed (a peer, so a design suggestion, not the operator's word): do not drop either of Codon-compatibility and keyword-only enforcement; find the common structure, one typed parameter object in place of '*, a, b' so call sites name fields (a frozen dataclass; if dataclass arguments fail in the pinned Codon, a plain class with a typed __init__). Read before mint: W569 already holds the operator ask (option b: enums for 5 booleans and positional-or-keyword for the rest; blocked 389 ticks on the operator) and W568, W561; this class card is the alternative that keeps enforcement, so the operator's W569 choice should now name three options. The 10 modules and the evidence are on W1179 (alarm.py:47 compiled with the cached codon). Codon's paydown path; codon stays STARVED recorded as this design debt. | 2026-11-22T20:00:27Z: 2026-11-22 stop hook: not taken. The probe needs the bazel-cache codon, whose path comes from a bazel command (tools/gate_wasm.sh codon mode); W708's presubmit holds this checkout's bazel server for a full 559-target run, and a second bazel command would queue silently behind it, which is the leading hypothesis of W2403's rc 124. Blocked on W708's landing; then run the probe (a plain class with a typed __init__, and @dataclass with no arguments) with the cached codon.",
       "issued_at": "2026-10-29T02:48:26Z",
       "minted_during": "interrupt",
       "caused_by": "W569",
-      "last_worked": "2026-10-29T02:48:33Z",
+      "last_worked": "2026-11-22T20:00:27Z",
       "ticks_blocked": 0,
       "want": "a Codon-parsable form of keyword-only enforcement",
       "weight": 216,
@@ -30909,7 +30916,8 @@
       ],
       "size_class": "small",
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
-      "vector_source": "default"
+      "vector_source": "default",
+      "completed": null
     },
     {
       "symbol": "W1258",
@@ -53850,20 +53858,22 @@
     },
     {
       "symbol": "W2148",
-      "title": "W423b: the browser reads the native pieces JSON and index.html graphText() is deleted",
-      "status": "ready",
+      "title": "W423b: the native binary replaces the Python producer of the static pieces (hashes.json, graph/*.json); graphText goes only if nothing still calls it",
+      "status": "blocked",
       "enables": [
         "W423"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
-      "next_bounded_step": "Per docs/codon-to-browser.md (native path): src/nemik/web/index.html loads the JSON the native pieces binary writes instead of calling graphText(), delete graphText(); witness: tests/test_layout.py and tests/test_pieces.py pass with graphText() gone. Blocked on W423a.",
-      "evidence": "",
+      "blocked_on": [
+        "W2404"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "After W2404's doc lands: build the native pieces producer in the static build so the page reads its output through sourceGraph unchanged; check every caller of graphText (panels.js load, line 151, is the one today) before deleting it; witness: tests/test_layout.py and tests/test_pieces.py pass.",
+      "evidence": "2026-11-22T19:31:34Z: 2026-11-22 stop hook: read docs/codon-to-browser.md line 29: it does NOT decide how the browser asks the native binary for its JSON (a file, a request to the server, a static build), and W2148 deletes graphText() in favour of exactly that read. W423a (W2147) landed d77dd24, so the compile half is done. Atomized: child W2404 decides the transport (design notes to github-00); W2148 builds after it.",
       "issued_at": "2026-11-10T18:00:15Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W423",
-      "last_worked": "2026-11-10T18:00:25Z",
+      "last_worked": "2026-11-22T19:58:51Z",
       "ticks_blocked": 0,
       "completed": null,
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
@@ -56717,7 +56727,7 @@
     {
       "symbol": "W2286",
       "title": "Open-card hygiene: 99 percent have no vector, 47 percent no next step, 27 percent no edge at all (census 2026-11-17)",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W2296"
       ],
@@ -56731,10 +56741,11 @@
       "issued_at": "2026-11-17T21:56:43Z",
       "minted_during": "interrupt",
       "caused_by": "operator",
-      "last_worked": "2026-11-18T00:50:58Z",
+      "last_worked": "2026-11-22T19:33:34Z",
       "ticks_blocked": 0,
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
-      "vector_source": "default"
+      "vector_source": "default",
+      "completed": null
     },
     {
       "symbol": "W2287",
@@ -57302,7 +57313,7 @@
     {
       "symbol": "W2308",
       "title": "nemik-check warns on an open card with neither its own enables nor its own blocked_on, though another card enables it: today only a card with no edge in or out is flagged (shapes.ttl W487)",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W2296"
       ],
@@ -57312,17 +57323,18 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "Add a SHACL shape beside the W487 one: an open card with no outgoing enables and no blocked_on is a Warning naming the card; test with a planted card that has an incoming edge only",
-      "evidence": "",
+      "evidence": "2026-11-22T19:33:45Z: 2026-11-22 taken working (round card). It edits src/nemik/data/shapes.ttl and a test beside W487, the same file W708's stack edits (refs/review/W708-v1, presubmit running): build it after W708 lands so the two stacks do not share a file in the queue.",
       "issued_at": "2026-11-18T13:49:15Z",
       "minted_during": "interrupt",
       "caused_by": "operator",
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-11-22T19:33:45Z",
+      "ticks_blocked": 0,
+      "completed": null
     },
     {
       "symbol": "W2309",
       "title": "nemik-check and nemik-rank's UNSCORED line count a card whose vector_source is default as UNSCORED, so 725 default-stamped cards read UNSCORED 725 and not no-vector 0",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W2296"
       ],
@@ -57332,12 +57344,13 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "Make the rank UNSCORED line and a check Info count source=default as unscored, with a test over a default-stamped and an agent-scored card; then score the real vectors by mtools:W2697 (writer suggests from a card's own fields) as a dry run checked as a set, never an agent fan",
-      "evidence": "",
+      "evidence": "2026-11-22T19:33:51Z: 2026-11-22 taken working (round card). Read: its step is two edits (rank's UNSCORED line, a check Info), both over vector_source == default; it touches shapes.ttl's check Info, so like W2308 it follows W708's landing; the rank line is in src/nemik (rankcli or rank) and can be built first in a scratch worktree.",
       "issued_at": "2026-11-18T13:50:45Z",
       "minted_during": "interrupt",
       "caused_by": "operator",
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-11-22T19:33:51Z",
+      "ticks_blocked": 0,
+      "completed": null
     },
     {
       "symbol": "W2310",
@@ -59739,7 +59752,7 @@
     {
       "symbol": "W2402",
       "title": "W1028a: write the documents' combine schema (the fields panels.js combine takes, line 139 region) as docs/core-combine-schema.md, from the code, before any port",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W1028"
       ],
@@ -59748,13 +59761,14 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "",
+      "next_bounded_step": "github-00 PASS-SUBMIT on refs/review/W2402-v1 = cc0ed1b9: submit as a docs stack once the W708 stack lands (one stack at a time on the shared queue files); stack file .claude/stack-W2402-v1.json.",
+      "evidence": "2026-11-22T19:30:39Z: 2026-11-22 BUILT: refs/review/W2402-v1 = cc0ed1b9cf909fd96a2fb662f3df37de2eb477b2 (tree c70a9fcfdc177b84815822385b1bb384fbe92789, parent 6b78506a): docs/core-combine-schema.md read from panels.js combine (line 115). Names three behaviours no test pins. NOT DONE: github-00 review, submit. | 2026-11-22T19:32:30Z: 2026-11-22 github-00 PASS-SUBMIT on cc0ed1b9: a contract read from the code with line citations; the three unpinned behaviours named for W1028 to pin before the port.",
       "issued_at": "2026-11-22T18:20:43Z",
       "minted_during": "interrupt",
       "caused_by": "W1028",
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-11-22T19:32:30Z",
+      "ticks_blocked": 0,
+      "completed": null
     },
     {
       "symbol": "W2403",
@@ -59774,6 +59788,91 @@
       "minted_during": "interrupt",
       "caused_by": "github-00:W120",
       "last_worked": "2026-11-22T18:52:17Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W2404",
+      "title": "Decide how the browser gets the native pieces binary's JSON (file, server request, static build), in docs/codon-to-browser.md",
+      "status": "working",
+      "enables": [
+        "W2148"
+      ],
+      "touches": [
+        "file:docs/codon-to-browser.md!w"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "github-00 PASS-SUBMIT on refs/review/W2404-v1 = 87185010: submit with .claude/stack-W2404-v1.json after W2402 and W708, one stack at a time.",
+      "evidence": "2026-11-22T19:57:05Z: 2026-11-22 exit-8 wake, read before deciding: docs/codon-to-browser.md (2026-10-16) rules out wasm (options 1 and 2) and leaves the transport open (line 29), but the tree has since grown a core.wasm path: W1028's own step says 'call it through core.wasm', W2379's gate builds core.wasm by Codon's label (tools/build_wasm.sh, gate_wasm.sh). So W2148's premise (a native pieces binary writing JSON) may be SUPERSEDED by the wasm route. Not decided here: ask github-00 which route W423 follows now, and whether the doc's 'Decision' is stale. | 2026-11-22T19:58:51Z: 2026-11-22 github-00 ruling: both live, one Codon source two compile targets (native PRODUCER of the static pieces at publish time; core.wasm COMPUTE in the page, per-view pure functions over loaded pieces); placing rule recorded in the doc. BUILT: refs/review/W2404-v1 = 87185010b3abe89c264fe0277396f7884cfadf09 (tree 0e0ef8056e15bcf3e7c104410e45eaa44aa4e632, parent 6b78506a): docs/codon-to-browser.md Decision rewritten, citing W1028 and W2379. graphText is only in panels.js (defined line 101, one caller at line 151), not index.html. W2148 retitled to the producer. NOT DONE: github-00 review, submit. | 2026-11-22T20:00:03Z: 2026-11-22 github-00 PASS-SUBMIT on 87185010; stack file written; order W708, W2402, W2404.",
+      "issued_at": "2026-11-22T19:31:31Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2148",
+      "last_worked": "2026-11-22T20:00:03Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W2405",
+      "title": "W970a: collapse.js marks(umbrellas) as a pure function: one row per umbrella with label, name holding it, expanded false, tested on plain rows",
+      "status": "ready",
+      "enables": [
+        "W970"
+      ],
+      "touches": [
+        "file:src/nemik/web/collapse.js!w",
+        "file:tests/test_collapse_marks.py!w"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-11-22T19:32:39Z",
+      "minted_during": "interrupt",
+      "caused_by": "W970",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2406",
+      "title": "W970b: the page draws marks() as buttons (aria-expanded flips on activation, 24 px, tab order), the oracle through the real page with two planted umbrellas",
+      "status": "ready",
+      "enables": [
+        "W970"
+      ],
+      "touches": [
+        "file:src/nemik/web/panels.js!w",
+        "file:src/nemik/web/index.html!w",
+        "file:tests/test_collapse_page.py!w"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-11-22T19:32:41Z",
+      "minted_during": "interrupt",
+      "caused_by": "W970",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2407",
+      "title": "Round membership follows the working set: pin the working cards into the round (W1059's claim), fill the rest from the ready cards by rank",
+      "status": "working",
+      "enables": [],
+      "touches": [
+        "file:src/nemik/roundof.py!w",
+        "file:src/nemik/roundcli.py!w",
+        "file:tests/test_round_stable.py!w"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "Build in a scratch worktree: roundof.round_of takes the working symbols and pins them (never refuses, excess is a WARNING beside nemik-check's zero/stale working class); rank.py computes the fruit stand-in over the READY rows only; planted tests (luthen's A/B/C shape with fruit members) red on current code; every working card's membership constant under any ready/working flip of the others; design already approved by github-00 2026-11-22 (two changes: no refusal, reproduce first: done).",
+      "evidence": "2026-11-22T20:11:31Z: 2026-11-22 luthen-observability live test after W2391 (2d86332a in their install): a working set equal to the round is refused at submit because taking the card in the round's last open slot changes the round (their cases A, B, C on W941/W1434; the five other cards working in all three). W2391 fixed WIDTH; membership still follows the working set. Source read: roundof.py:157 top-N slice, rank.py:600-677 working rows ranked by salience and the fruit stand-in toggled by fruit_busy. | 2026-11-22T20:16:20Z: 2026-11-22 REPRODUCED on luthen-observability's queue at committed sha fe57f5d222096019eb87467df5313629ad12bfee (git archive of .claude into a scratch root; the CURRENT round code, nemik-rank --root <scratch> --round, main 6b78506a; scratch writer updates on the COPY only). Five stable cards W2844 W1178 W2781 W2784 W2471 working in every case. (C, W941 and W1434 ready) round = [W2844, W916, W1480, W2781, W2784, W1178]: the working W2471 is OUTSIDE it, W916 (salience 0, the FRUIT stand-in, 259 members) and W1480 (a fruit member) are in. (A, W1434 working, W941 ready) the same six: working W2471 and W1434 OUTSIDE. (B, W941 working, W1434 ready) round = [W2844, W1480, W1981, W2781, W2784, W1178]: W916 gone, W1981 in; working W2471 and W941 OUTSIDE. So (1) a working card falls out of the round, W1059's invariant is not implemented (roundof.round_of is a top-N slice); (2) membership of the READY slots changes with the working set (W916 vs W1981), by the fruit stand-in (rank.py fruit_busy). The fruit row W916 'stands in' for 259 cards at rank 2. Cases differ from luthen's live ones only in that the committed queue's states differ; the mechanism is shown. NEXT: build per github-00 (pinned working cards, fill by rank, no refusal, excess a WARNING, stand-in over ready rows only; tests: every working card's membership constant under any ready/working flip of the others). | 2026-11-22T20:25:44Z: 2026-11-22 BUILT in the W2407 scratch worktree on main 6b78506a: roundof.round_of pins the working cards (room for the best ready ones up to the width; a wider working set is the whole round) and over_width reports the excess; roundcli passes the working symbols and prints a warning when they exceed the width; rank.py forms the fruit stand-in over the ready rows only when working cards are ranked (plain rank keeps the W52 holding rule). Tests: test_round_stable (a working card is in the round under every one of 256 working sets in three layouts; stays in under any flip of another card; the room is filled by ready rank; a wider set is the round and a warning), test_fruit (the class survives a working member), test_roundof signature. bazel: test_round_stable, test_roundof, test_fruit pass; test_roundcli, test_gate_repair_band, test_round_bindings pass. REAL-QUEUE RERUN with the new code on luthen's fe57f5d2 scratch, five stable cards working: case B (W941 working) round = the six working cards, W2471 and W941 IN (before: both outside); case C (both ready) round = the five working plus W916, W2471 IN (before: outside). NOT DONE: presubmit, github-00 review of the ref, submit.",
+      "issued_at": "2026-11-22T20:11:23Z",
+      "minted_during": "interrupt",
+      "caused_by": "luthen-observability:W2894",
+      "last_worked": "2026-11-22T20:25:44Z",
       "ticks_blocked": 0,
       "completed": null
     }
@@ -60107,6 +60206,60 @@
       "renewed_at": "2026-10-24T12:59:32Z",
       "expires_at": "2026-10-24T13:29:32Z",
       "lapse_ledgered": true
+    },
+    {
+      "tag": "file:docs/core-combine-schema.md!w",
+      "holder": "(unlocked)",
+      "waypoint": "W2402",
+      "base_sha": "6b78506a8fb7c910a393225f4d4e51af06803922",
+      "taken_at": "2026-11-22T19:30:07Z",
+      "renewed_at": "2026-11-22T19:30:07Z",
+      "expires_at": "2026-11-22T20:00:07Z"
+    },
+    {
+      "tag": "file:docs/codon-to-browser.md!w",
+      "holder": "(unlocked)",
+      "waypoint": "W2404",
+      "base_sha": "6b78506a8fb7c910a393225f4d4e51af06803922",
+      "taken_at": "2026-11-22T19:59:07Z",
+      "renewed_at": "2026-11-22T19:59:07Z",
+      "expires_at": "2026-11-22T20:29:07Z"
+    },
+    {
+      "tag": "file:src/nemik/roundof.py!w",
+      "holder": "(unlocked)",
+      "waypoint": "W2407",
+      "base_sha": "6b78506a8fb7c910a393225f4d4e51af06803922",
+      "taken_at": "2026-11-22T20:25:44Z",
+      "renewed_at": "2026-11-22T20:25:44Z",
+      "expires_at": "2026-11-22T20:55:44Z"
+    },
+    {
+      "tag": "file:src/nemik/roundcli.py!w",
+      "holder": "(unlocked)",
+      "waypoint": "W2407",
+      "base_sha": "6b78506a8fb7c910a393225f4d4e51af06803922",
+      "taken_at": "2026-11-22T20:25:44Z",
+      "renewed_at": "2026-11-22T20:25:44Z",
+      "expires_at": "2026-11-22T20:55:44Z"
+    },
+    {
+      "tag": "file:tests/test_round_stable.py!w",
+      "holder": "(unlocked)",
+      "waypoint": "W2407",
+      "base_sha": "6b78506a8fb7c910a393225f4d4e51af06803922",
+      "taken_at": "2026-11-22T20:25:44Z",
+      "renewed_at": "2026-11-22T20:25:44Z",
+      "expires_at": "2026-11-22T20:55:44Z"
+    },
+    {
+      "tag": "file:docs/climate-interventions.md!w",
+      "holder": "(unlocked)",
+      "waypoint": "W750",
+      "base_sha": "6b78506a8fb7c910a393225f4d4e51af06803922",
+      "taken_at": "2026-11-22T20:26:45Z",
+      "renewed_at": "2026-11-22T20:26:45Z",
+      "expires_at": "2026-11-22T20:56:45Z"
     }
   ],
   "advice": [

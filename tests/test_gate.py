@@ -296,6 +296,7 @@ def test_checkable_next_step_without_a_witness_warns(root: Path) -> None:
         waypoint("W2", next_bounded_step=step, witness="input.file.exists"),
         waypoint("W3", next_bounded_step=step, status="done"),
         waypoint("W4", next_bounded_step="think about it"),
+        waypoint("W5", next_bounded_step=step, touches=["file:tests/test_new.py!w"]),
     )
     r = run("check", root)
     assert r.returncode == 0, r.stdout + r.stderr
