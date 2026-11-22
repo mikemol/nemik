@@ -18,22 +18,36 @@ buildable today, and says what would make us look again. It answers nemik:W564 a
 
 ## Decision
 
-Take option 3. It is the only one that can be built today, and the browser needs the core's JSON output, not
-the core running inside the page.
+One Codon source, two compile targets, for two different jobs (github-00's ruling, 2026-11-22). They are
+not rivals, and no function is spelled twice.
+
+- **Native, a PRODUCER at publish time (option 3).** The native binary replaces the Python producer of the
+  static pieces, `hashes.json` and `graph/*.json`. The page reads them exactly as it does today
+  (`sourceGraph` in `src/nemik/web/panels.js`); nothing in the request path changes. This is the transport
+  choice nemik:W423 left open: a static file, the build step's output, not a request to a server.
+- **core.wasm, COMPUTE in the page at view time (option 2, now built).** Pure functions over pieces the page
+  has already loaded run as wasm, for example `combine` once nemik:W1028 ports it
+  (`docs/core-combine-schema.md` is its contract).
+
+The rule that places a function: if it needs only data the page already has and runs per view, it is wasm; if
+it makes the data, it is native at publish time.
+
+What changed since 2026-10-16: the tree gained a `core.wasm` build, and the gate builds it by Codon's label
+and refuses when the tool is absent (nemik:W2379, `tools/build_wasm.sh`, `tools/gate_wasm.sh`); nemik:W1028
+is the first port that calls a function through it. So options 1 and 2 are no longer only a revisit trigger.
 
 ## What this does not claim
 
-- It does not claim the browser can run Codon-compiled code. It cannot, until option 1 or 2 changes.
+- It does not claim every function can run as wasm: only the ones the tree has compiled (W1028's list grows
+  one function at a time).
 - The 386,000-byte figure is a single measurement from 2026-10-16, not a tracked series, and the doc does not
   say the binary is built by the current tree.
-- It does not decide how the browser asks the native binary for its JSON (a file, a request to the server, a
-  build step). That belongs to nemik:W423.
+- It does not name the native binary's output directory or how the static build invokes it. That is
+  nemik:W2148's build, and `graphText` in `panels.js` (the combiner of several sources, called once by
+  `load`) is deleted there only if nothing in the page still calls it.
 
 ## Revisit trigger
 
-Look again at options 1 and 2 when either of these becomes true:
-
-- Codon upstream ships a wasm32 target triple, or
-- the host gains a WASI sysroot and wasm32 compiler-rt builtins.
-
-Until then the native path stands.
+Look again at the native producer when `core.wasm` can run the whole pieces build in the page, which needs
+Codon upstream to ship a wasm32 target triple or the host to gain a WASI sysroot and wasm32 compiler-rt
+builtins for the runtime the pieces build needs.

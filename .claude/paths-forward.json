@@ -22317,7 +22317,7 @@
     {
       "symbol": "W966",
       "title": "Forecast trial 3: only cards that can start take a place in the line, and a blocked card is capped by how blocked stints end, scored on discrimination",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W749"
       ],
@@ -22327,12 +22327,12 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "2026-11-07: W968 is done, so the wait is over. Copy the rows stamped 2026-10-24T15:12 to a scratch file, score them alone with nemik-history --all --score, compare discrimination and its standard error with the 2026-10-23 issue's 0.66 and 0.09, record both in docs/forecast-features.md, and keep the feature only if discrimination rises beyond noise",
-      "evidence": "2026-10-24: landed 008b09a: climate.open_status, forecastshingle.stint_share and issue_blocked, history.forecast_rows gives a blocked card no place in the line (first gate run caught a test tolerance, not the code) | 2026-10-24: 2026-10-24T15:12:51Z issued the forecast with the feature: 1713 rows appended to ~/.cache/nemik/shingle.tsv, stamp 2026-10-24T15:12:51. Its +1d horizon matures 2026-10-25T15:13Z (W968 witnesses it) | 2026-11-01: 2026-11-01 CLASSIFIED by W1339 (reviewer R85, nemik:R83 on W613): partial. Commit 008b09aa (2026-10-24T11:01:56-04:00): 'W966: the forecast gives a blocked card no place in its repo's line and caps its chance by'. Reason, read from this card's own title and next step: forecast trials 1 and 2 landed; trial 3 scoring after W968 remains. Scan criterion: the last 1500 commit subjects of the form W<n>:, number below 1200, status not done or landed. Read from titles and next steps, not from the code.",
+      "next_bounded_step": "Record both scores in docs/forecast-features.md (docs stack), then revert trial 3's feature in forecastshingle (a blocked card gets a place in the line again, or find why the confident rows fail: the 211 rows said 0.95 for +7d that did not happen are the first thing to read); review ref to github-00 before reverting.",
+      "evidence": "2026-10-24: landed 008b09a: climate.open_status, forecastshingle.stint_share and issue_blocked, history.forecast_rows gives a blocked card no place in the line (first gate run caught a test tolerance, not the code) | 2026-10-24: 2026-10-24T15:12:51Z issued the forecast with the feature: 1713 rows appended to ~/.cache/nemik/shingle.tsv, stamp 2026-10-24T15:12:51. Its +1d horizon matures 2026-10-25T15:13Z (W968 witnesses it) | 2026-11-01: 2026-11-01 CLASSIFIED by W1339 (reviewer R85, nemik:R83 on W613): partial. Commit 008b09aa (2026-10-24T11:01:56-04:00): 'W966: the forecast gives a blocked card no place in its repo's line and caps its chance by'. Reason, read from this card's own title and next step: forecast trials 1 and 2 landed; trial 3 scoring after W968 remains. Scan criterion: the last 1500 commit subjects of the form W<n>:, number below 1200, status not done or landed. Read from titles and next steps, not from the code. | 2026-11-22T21:45:45Z: 2026-11-22 SCORED (read-only, nemik-history --all --score over a scratch copy of the 1713 rows stamped 2026-10-24T15:12; 571 matured rows): discrimination +1d 0.39, +3d 0.40, +7d 0.42, against the 2026-10-23 issue's 0.66 (standard error 0.09). Brier +1d 0.122, +3d 0.290, +7d 0.403; persistence 0.067/0.077/0.105 and climatology 0.062/0.071/0.094 BEAT it (skill -0.83 to -3.28). Calibration is bad where it matters: said 0.62 happened 0.00 (n 61, +1d); said 0.88 happened 0.02 (n 153, +3d); said 0.95 happened 0.07 (n 211, +7d). So trial 3's feature does NOT raise discrimination beyond noise, it LOWERS it (0.39 to 0.42 vs 0.66, more than 2 standard errors) and the confident predictions are the wrong ones. By the card's own rule (keep the feature only if discrimination rises beyond noise) it is NOT kept. Caveat: the 2026-10-23 score was over a different row population, so the comparison is two populations, not a paired test.",
       "issued_at": "2026-10-24T13:40:24Z",
       "minted_during": "tick",
       "caused_by": "W749",
-      "last_worked": "2026-11-06T03:48:01Z",
+      "last_worked": "2026-11-22T21:45:45Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/forecastshingle.py",
@@ -30902,7 +30902,7 @@
     {
       "symbol": "W1257",
       "title": "Class: keyword-only call enforcement that Codon parses, a typed parameter object in place of '*,' across the ten modules",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W561"
       ],
@@ -30913,11 +30913,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "Probe, with the bazel-cache codon (NEMIK_CODON), whether a plain class with a typed __init__ taking named fields compiles, and whether @dataclass without arguments does (frozen=True and slots=True fail with 'class decorator got unexpected argument'); then pick the shortest-chain module among alarm, witwait, exportwire (imports mikemol.pathsforward or nemik.witnesses/check, so its chain is the imports, not the marker) and write the first leaf card for it. Do not drop either ruling: Codon-compatible Python (memory) and the typed-boundary keyword-only enforcement W569 wants.",
-      "evidence": "2026-10-29: 2026-10-29 github-8f ruling relayed (a peer, so a design suggestion, not the operator's word): do not drop either of Codon-compatibility and keyword-only enforcement; find the common structure, one typed parameter object in place of '*, a, b' so call sites name fields (a frozen dataclass; if dataclass arguments fail in the pinned Codon, a plain class with a typed __init__). Read before mint: W569 already holds the operator ask (option b: enums for 5 booleans and positional-or-keyword for the rest; blocked 389 ticks on the operator) and W568, W561; this class card is the alternative that keeps enforcement, so the operator's W569 choice should now name three options. The 10 modules and the evidence are on W1179 (alarm.py:47 compiled with the cached codon). Codon's paydown path; codon stays STARVED recorded as this design debt. | 2026-11-22T20:00:27Z: 2026-11-22 stop hook: not taken. The probe needs the bazel-cache codon, whose path comes from a bazel command (tools/gate_wasm.sh codon mode); W708's presubmit holds this checkout's bazel server for a full 559-target run, and a second bazel command would queue silently behind it, which is the leading hypothesis of W2403's rc 124. Blocked on W708's landing; then run the probe (a plain class with a typed __init__, and @dataclass with no arguments) with the cached codon.",
+      "evidence": "2026-10-29: 2026-10-29 github-8f ruling relayed (a peer, so a design suggestion, not the operator's word): do not drop either of Codon-compatibility and keyword-only enforcement; find the common structure, one typed parameter object in place of '*, a, b' so call sites name fields (a frozen dataclass; if dataclass arguments fail in the pinned Codon, a plain class with a typed __init__). Read before mint: W569 already holds the operator ask (option b: enums for 5 booleans and positional-or-keyword for the rest; blocked 389 ticks on the operator) and W568, W561; this class card is the alternative that keeps enforcement, so the operator's W569 choice should now name three options. The 10 modules and the evidence are on W1179 (alarm.py:47 compiled with the cached codon). Codon's paydown path; codon stays STARVED recorded as this design debt. | 2026-11-22T20:00:27Z: 2026-11-22 stop hook: not taken. The probe needs the bazel-cache codon, whose path comes from a bazel command (tools/gate_wasm.sh codon mode); W708's presubmit holds this checkout's bazel server for a full 559-target run, and a second bazel command would queue silently behind it, which is the leading hypothesis of W2403's rc 124. Blocked on W708's landing; then run the probe (a plain class with a typed __init__, and @dataclass with no arguments) with the cached codon. | 2026-11-22T21:55:58Z: 2026-11-22 taken working (round card; the round check named it). The probe needs the bazel-cache codon path, which comes from a bazel command, and the W2404 stack gates on this checkout's bazel server now; the probe runs after that stack lands, so no second bazel command queues behind the gate (W2403).",
       "issued_at": "2026-10-29T02:48:26Z",
       "minted_during": "interrupt",
       "caused_by": "W569",
-      "last_worked": "2026-11-22T20:00:27Z",
+      "last_worked": "2026-11-22T21:55:58Z",
       "ticks_blocked": 0,
       "want": "a Codon-parsable form of keyword-only enforcement",
       "weight": 216,
@@ -59766,7 +59766,7 @@
     {
       "symbol": "W2402",
       "title": "W1028a: write the documents' combine schema (the fields panels.js combine takes, line 139 region) as docs/core-combine-schema.md, from the code, before any port",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W1028"
       ],
@@ -59775,14 +59775,14 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "github-00 PASS-SUBMIT on refs/review/W2402-v1 = cc0ed1b9: submit as a docs stack once the W708 stack lands (one stack at a time on the shared queue files); stack file .claude/stack-W2402-v1.json.",
-      "evidence": "2026-11-22T19:30:39Z: 2026-11-22 BUILT: refs/review/W2402-v1 = cc0ed1b9cf909fd96a2fb662f3df37de2eb477b2 (tree c70a9fcfdc177b84815822385b1bb384fbe92789, parent 6b78506a): docs/core-combine-schema.md read from panels.js combine (line 115). Names three behaviours no test pins. NOT DONE: github-00 review, submit. | 2026-11-22T19:32:30Z: 2026-11-22 github-00 PASS-SUBMIT on cc0ed1b9: a contract read from the code with line citations; the three unpinned behaviours named for W1028 to pin before the port.",
+      "next_bounded_step": null,
+      "evidence": "2026-11-22T19:30:39Z: 2026-11-22 BUILT: refs/review/W2402-v1 = cc0ed1b9cf909fd96a2fb662f3df37de2eb477b2 (tree c70a9fcfdc177b84815822385b1bb384fbe92789, parent 6b78506a): docs/core-combine-schema.md read from panels.js combine (line 115). Names three behaviours no test pins. NOT DONE: github-00 review, submit. | 2026-11-22T19:32:30Z: 2026-11-22 github-00 PASS-SUBMIT on cc0ed1b9: a contract read from the code with line citations; the three unpinned behaviours named for W1028 to pin before the port. | 2026-11-22T21:55:43Z: 2026-11-22 LANDED as a86667c3fc72e0b51082bcf84669db614b224f55 (ls-remote origin refs/heads/main read back); github-00 PASS-SUBMIT on refs/review/W2402-v1 = cc0ed1b9. W1028's tests pin the three named behaviours before the port.",
       "issued_at": "2026-11-22T18:20:43Z",
       "minted_during": "interrupt",
       "caused_by": "W1028",
-      "last_worked": "2026-11-22T19:32:30Z",
+      "last_worked": "2026-11-22T21:55:43Z",
       "ticks_blocked": 0,
-      "completed": null
+      "completed": "20261122T215543Z"
     },
     {
       "symbol": "W2403",
@@ -60196,11 +60196,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "DESIGN to github-00 first (W2422's hazard: commit time is not push order): keep the tag order as the build START epoch (monotonic per build, Flux picks the newest build, no ImagePolicy change) but fix both defects at the source: (1) take the epoch BEFORE the clone starts, so any landing pushed at or before it is in the clone and the deploy witness's window closes (a push after the epoch is not claimed); (2) stamp the CLONED tip's own sha (git -C src rev-parse HEAD) into the tag, not github.sha, so the tag names the code the image holds even when a push races the clone. Tests: build.yml is YAML, so a static check that the date call precedes the clone and that the sha comes from rev-parse, plus a drill that fails when either is reversed. Review ref for build.yml and the check.",
-      "evidence": "2026-11-22T21:43:00Z: 2026-11-22 designed from W2422's read: ordering by commit time would let a rebase or a skewed clock lose a newer push to an older image; the two defects are separable, the epoch-before-clone fixes the witness window and rev-parse of the clone fixes the traceability, with the ImagePolicy and its numerical order untouched.",
+      "evidence": "2026-11-22T21:43:00Z: 2026-11-22 designed from W2422's read: ordering by commit time would let a rebase or a skewed clock lose a newer push to an older image; the two defects are separable, the epoch-before-clone fixes the witness window and rev-parse of the clone fixes the traceability, with the ImagePolicy and its numerical order untouched. | 2026-11-22T21:45:48Z: 2026-11-22 github-00: build it as designed (build-start epoch before the clone; the clone's rev-parse HEAD). TWO NOTES to carry: (1) TIES: two builds starting in the same second get equal leading numbers and the policy then orders by the rest of the tag, effectively arbitrary on the sha; either show the runner serialises builds (they cannot start in one second) or state what the policy does on a tie and test it. (2) the check reads build.yml AS YAML (steps in order, the run lines of the named steps), not as text, so reformatting cannot make it pass or fail; the drill reverses each of the two.",
       "issued_at": "2026-11-22T21:22:08Z",
       "minted_during": "interrupt",
       "caused_by": "W2311",
-      "last_worked": "2026-11-22T21:43:00Z",
+      "last_worked": "2026-11-22T21:45:48Z",
       "ticks_blocked": 0
     }
   ],
@@ -60535,15 +60535,6 @@
       "lapse_ledgered": true
     },
     {
-      "tag": "file:docs/core-combine-schema.md!w",
-      "holder": "(unlocked)",
-      "waypoint": "W2402",
-      "base_sha": "6b78506a8fb7c910a393225f4d4e51af06803922",
-      "taken_at": "2026-11-22T19:30:07Z",
-      "renewed_at": "2026-11-22T19:30:07Z",
-      "expires_at": "2026-11-22T20:00:07Z"
-    },
-    {
       "tag": "file:docs/codon-to-browser.md!w",
       "holder": "(unlocked)",
       "waypoint": "W2404",
@@ -60596,6 +60587,24 @@
       "taken_at": "2026-11-22T20:30:06Z",
       "renewed_at": "2026-11-22T20:30:06Z",
       "expires_at": "2026-11-22T21:00:06Z"
+    },
+    {
+      "tag": "file:src/nemik/forecastshingle.py!w",
+      "holder": "(unlocked)",
+      "waypoint": "W966",
+      "base_sha": "829179f01e56c9d96860e324f8bcccf80f5c56ef",
+      "taken_at": "2026-11-22T21:45:45Z",
+      "renewed_at": "2026-11-22T21:45:45Z",
+      "expires_at": "2026-11-22T22:15:45Z"
+    },
+    {
+      "tag": "file:docs/forecast-features.md!w",
+      "holder": "(unlocked)",
+      "waypoint": "W966",
+      "base_sha": "829179f01e56c9d96860e324f8bcccf80f5c56ef",
+      "taken_at": "2026-11-22T21:45:45Z",
+      "renewed_at": "2026-11-22T21:45:45Z",
+      "expires_at": "2026-11-22T22:15:45Z"
     }
   ],
   "advice": [
