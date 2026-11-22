@@ -6573,3 +6573,7 @@
 2026-11-22T17:51:08Z  status W708 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-22T17:51:09Z  status W970 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-22T17:51:10Z  status W1163 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T17:51:27Z  status W970 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T18:20:43Z  interrupt W2402 minted    -         "W1028a: write the documents' combine schema (the fields panels.js combine takes, line 139 region) as docs/core-combine-schema.md, from the code, before any port"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1028
+2026-11-22T18:20:58Z  status W708 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T18:38:43Z  status W1052 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 2401,
+  "counter": 2402,
   "waypoints": [
     {
       "symbol": "W1",
@@ -15153,19 +15153,21 @@
     {
       "symbol": "W708",
       "title": "The no-witness Warning fires on cards whose step is a behaviour (a command refuses without a flag) that no observer can see: name the honest witness, a test result for a tree sha, or stop warning where none exists",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W58"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
-      "next_bounded_step": "Review ref refs/review/W708-v1 = fb92f9ac is github-00 PASS-SUBMIT once presubmit is clean: run tools/presubmit.sh over the W708 worktree, then submit when W708 enters the round (the round check refuses a working card outside it).",
-      "evidence": "2026-11-06T20:29:59Z: Operator-ask audit 2026-11-06 (warrant: host line 145131, uuid 9c5e8dd8-a5a4-4cbd-9e07-84e844cc8b00). CLASS: a pipeline step, nemik's own design call. Two ways: a new nemik-witnesses observer (input.test, a test result for the tree sha) or narrowing the no-witness Warning in shapes.ttl for cards that name no observable. Both are nemik's code. Lift and decide by cold review: the observer is the larger build, narrowing the shape the smaller and reversible; a behaviour card with no observable is the case the Warning cannot serve, so narrowing is the default I propose, with the observer carded if a test-sha witness proves wanted. W708 | 2026-11-22T17:29:46Z: 2026-11-22 taken on the stop hook: read shapes.ttl:124-139; the discriminator is the card's own !w touch on the named file, no new observer. | 2026-11-22T17:33:36Z: 2026-11-22 BUILT: refs/review/W708-v1 = fb92f9acae9afd8bf22ce43c1afd46b7b0e3832a (tree 0d13307d3d60b485ab0773824ecb4f78d8b8f6ba, parent bc35af50): shapes.ttl CheckableNextStepShape skips a named file the card edits (touches file:<f>!w); tests/test_gate.py gains W5 (edit target, no Warning) beside W1 (observable, still warns). MEASURED: bazel test //:test_gate passes in the scratch worktree. NOT DONE: presubmit, github-00 review (cold review before it ships). The manifest's tests/test_witnessed_blocker.py was wrong; the fixture lives in tests/test_gate.py. | 2026-11-22T17:51:08Z: 2026-11-22 github-00: PASS-SUBMIT on fb92f9ac once presubmit is clean (the filter excludes a file the card itself writes, reason in a comment). Returned to ready: a working card outside the round is refused at submit.",
+      "blocked_on": [
+        "W2391"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "After W2391 lands: run tools/presubmit.sh over /home/mikemol/github/.nemik-w708-wt (github-00 PASS-SUBMIT on refs/review/W708-v1 = fb92f9ac once presubmit is clean), then submit when W708 is in the round.",
+      "evidence": "2026-11-06T20:29:59Z: Operator-ask audit 2026-11-06 (warrant: host line 145131, uuid 9c5e8dd8-a5a4-4cbd-9e07-84e844cc8b00). CLASS: a pipeline step, nemik's own design call. Two ways: a new nemik-witnesses observer (input.test, a test result for the tree sha) or narrowing the no-witness Warning in shapes.ttl for cards that name no observable. Both are nemik's code. Lift and decide by cold review: the observer is the larger build, narrowing the shape the smaller and reversible; a behaviour card with no observable is the case the Warning cannot serve, so narrowing is the default I propose, with the observer carded if a test-sha witness proves wanted. W708 | 2026-11-22T17:29:46Z: 2026-11-22 taken on the stop hook: read shapes.ttl:124-139; the discriminator is the card's own !w touch on the named file, no new observer. | 2026-11-22T17:33:36Z: 2026-11-22 BUILT: refs/review/W708-v1 = fb92f9acae9afd8bf22ce43c1afd46b7b0e3832a (tree 0d13307d3d60b485ab0773824ecb4f78d8b8f6ba, parent bc35af50): shapes.ttl CheckableNextStepShape skips a named file the card edits (touches file:<f>!w); tests/test_gate.py gains W5 (edit target, no Warning) beside W1 (observable, still warns). MEASURED: bazel test //:test_gate passes in the scratch worktree. NOT DONE: presubmit, github-00 review (cold review before it ships). The manifest's tests/test_witnessed_blocker.py was wrong; the fixture lives in tests/test_gate.py. | 2026-11-22T17:51:08Z: 2026-11-22 github-00: PASS-SUBMIT on fb92f9ac once presubmit is clean (the filter excludes a file the card itself writes, reason in a comment). Returned to ready: a working card outside the round is refused at submit. | 2026-11-22T18:20:58Z: 2026-11-22 stop hook asked to take W708: not taken while W2391's submit is in flight. A working card outside the round refused the W2391 stack this hour (W1028, W2148 are the round's ready cards); the presubmit is a second full-gate run on a loaded host. Blocked on W2391's landing.",
       "issued_at": "2026-10-19T00:15:38Z",
       "minted_during": "interrupt",
       "caused_by": "el-openglo:W702",
-      "last_worked": "2026-11-22T17:51:08Z",
+      "last_worked": "2026-11-22T18:20:58Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
@@ -22416,19 +22418,21 @@
     {
       "symbol": "W970",
       "title": "The page draws one mark per collapse umbrella, named for assistive technology, with the WCAG chain test as its oracle",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W709"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W2391"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "W969 landed (c7add8e8), umbrellas.json is served and panels.js reads it. Step 1: read panels.js umbrella reading and render.js mark drawing, the line ceilings in tests, and the WCAG chain test; decide collapse.js (new file) vs a traded line; write the failing tests/test_collapse_marks.py case (one mark per umbrella, accessible name holds its visible text, WCAG 2.5.3) before any page edit.",
-      "evidence": "2026-11-22T17:34:00Z: 2026-11-22 read: panels.js carries umbrellas through combine (lines 83-88, 139: rows deduped by id+card) and nothing draws them; render.js has no umbrella mark. The mark is the missing slice; collapse.js (new file, page files at ceilings) draws one mark per umbrella with aria-label holding its visible text, tested by tests/test_collapse_marks.py with the WCAG chain. Test first, then the file. | 2026-11-22T17:51:09Z: 2026-11-22 returned to ready: the round check refuses a working card outside the round while round cards are ready; the read (panels.js carries umbrellas, nothing draws them) stands.",
+      "evidence": "2026-11-22T17:34:00Z: 2026-11-22 read: panels.js carries umbrellas through combine (lines 83-88, 139: rows deduped by id+card) and nothing draws them; render.js has no umbrella mark. The mark is the missing slice; collapse.js (new file, page files at ceilings) draws one mark per umbrella with aria-label holding its visible text, tested by tests/test_collapse_marks.py with the WCAG chain. Test first, then the file. | 2026-11-22T17:51:09Z: 2026-11-22 returned to ready: the round check refuses a working card outside the round while round cards are ready; the read (panels.js carries umbrellas, nothing draws them) stands. | 2026-11-22T17:51:27Z: 2026-11-22 stop hook asked to take W970: not taken. W970 is outside the round, and the submit check refuses a working card outside the round while round cards (W1028, W2148) are ready; W2391's stack is submitting now and a working W970 would refuse it (it did for W708 this hour). Blocked on W2391's landing; then take the round's cards W1028 and W2148 first, W970 when it enters the round.",
       "issued_at": "2026-10-24T15:22:53Z",
       "minted_during": "interrupt",
       "caused_by": "W709",
-      "last_worked": "2026-11-22T17:51:09Z",
+      "last_worked": "2026-11-22T17:51:27Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
@@ -24192,11 +24196,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "Read the documents' schema the combine step takes, write it as plain-data functions under src/nemik/core that compile under the pinned Codon, and have the page call them through core.wasm",
-      "evidence": "",
+      "evidence": "2026-11-22T18:20:45Z: 2026-11-22 atomized on the exit-8 wake: child W2402 (the combine schema written from panels.js) comes first; the port waits on it and is medium, so the core function then splits per document kind.",
       "issued_at": "2026-10-25T03:12:35Z",
       "minted_during": "tick",
       "caused_by": "W812",
-      "last_worked": "2026-10-25T03:12:44Z",
+      "last_worked": "2026-11-22T18:20:45Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/core/combine.py",
@@ -24904,20 +24908,22 @@
     {
       "symbol": "W1052",
       "title": "A shared file's writer never emits a form its deployed readers refuse",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W1033",
         "W1051"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
-      "next_bounded_step": "List every file nemik writes for another party and who reads it, record each file's current form and each reader's accepted forms in docs/shared-file-versions.md, then decide where the version lives (a key in the head line, which luthen's gates rule on, or beside the file)",
-      "evidence": "2026-10-25: class card (operator rule, host 695f3e0a line 95113: promote what an incident is about into a class, instances cite it). Instances today: (1) round.json: 7d1fad0 changed the file to one line of JSON before luthen's gate read that form, and the file reached the export tree with an amr- card (W1025, W1033). (2) ratchet-pace.json: 8941e42 added state unknown, the host writer was reinstalled past it while the pod image's reader predated it, the reader refused the whole file, the gauges vanished and the behind alert cleared by absence (W1039, W1051). Mechanism to evaluate (github-8f): expand/contract. The reader ships accepting the new form first, and the writer's change is gated on every deployed reader's version accepting it (the image the pods run, luthen's gate rules, mtools' reader). Checkable form: each shared file carries a schema version, each reader publishes the versions it accepts. The W1033 contract test is the seed: generalise it to every file nemik writes for others (round.json, ratchet-pace.json, landings.json, host-root.json, log-activities.json, and the flat files the courier will add) | 2026-10-25: first step written: docs/shared-file-versions.md lists the five files hostroot and rank write for others, their readers and today's form, what broke in which, and what is not known (which pod image accepts which form, which other files luthen's gates rule, where a version would live). Not decided: the version scheme | 2026-11-05T23:39:55Z: 2026-11-05T23:5xZ (R252): docs/shared-file-versions.md exists UNTRACKED in the working tree, 2969 bytes, written 2026-10-25 11:11: this card's own work product, never landed (a docs-only stack would be refused by the pace guard now). It lists round.json, ratchet-pace.json, landings.json and host-root.json with writer, reader and form, and is STALE: it gives the pace head as {as_of, window} where the published head now also carries build (nemik:W1197, luthen's pin 4d084f7). It must be refreshed before it lands. Listed in the held inventory on W1978.",
+      "blocked_on": [
+        "W2391"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Refresh the untracked docs/shared-file-versions.md before it lands: the pace head is {as_of, window, build} (W1197, luthen's pin 4d084f7), not {as_of, window}; read each writer's current output form from src (hostroot.py, rank, ratchetseries, landings) and each reader's accepted forms through git objects of the reader's repo at a published sha; add the verdict file (W2345's Judged/CannotJudge text) as a shared file; then a review ref to github-00. Take it working only when it is in the round (a working card outside the round refuses the stack submit).",
+      "evidence": "2026-10-25: class card (operator rule, host 695f3e0a line 95113: promote what an incident is about into a class, instances cite it). Instances today: (1) round.json: 7d1fad0 changed the file to one line of JSON before luthen's gate read that form, and the file reached the export tree with an amr- card (W1025, W1033). (2) ratchet-pace.json: 8941e42 added state unknown, the host writer was reinstalled past it while the pod image's reader predated it, the reader refused the whole file, the gauges vanished and the behind alert cleared by absence (W1039, W1051). Mechanism to evaluate (github-8f): expand/contract. The reader ships accepting the new form first, and the writer's change is gated on every deployed reader's version accepting it (the image the pods run, luthen's gate rules, mtools' reader). Checkable form: each shared file carries a schema version, each reader publishes the versions it accepts. The W1033 contract test is the seed: generalise it to every file nemik writes for others (round.json, ratchet-pace.json, landings.json, host-root.json, log-activities.json, and the flat files the courier will add) | 2026-10-25: first step written: docs/shared-file-versions.md lists the five files hostroot and rank write for others, their readers and today's form, what broke in which, and what is not known (which pod image accepts which form, which other files luthen's gates rule, where a version would live). Not decided: the version scheme | 2026-11-05T23:39:55Z: 2026-11-05T23:5xZ (R252): docs/shared-file-versions.md exists UNTRACKED in the working tree, 2969 bytes, written 2026-10-25 11:11: this card's own work product, never landed (a docs-only stack would be refused by the pace guard now). It lists round.json, ratchet-pace.json, landings.json and host-root.json with writer, reader and form, and is STALE: it gives the pace head as {as_of, window} where the published head now also carries build (nemik:W1197, luthen's pin 4d084f7). It must be refreshed before it lands. Listed in the held inventory on W1978. | 2026-11-22T18:38:29Z: 2026-11-22 stop hook: not taken working (outside the round while W2391 submits); next step rewritten with the refresh list. The verdict file W2345 landed since the doc was written and is a sixth shared form. | 2026-11-22T18:38:43Z: 2026-11-22 stop hook asked again: blocked, not taken. W1052 is outside the round and W2391's stack is gating now (bpuuidhgq); a working card outside the round refused the previous submit. Lifts when W2391 lands; the refresh list is in the next step.",
       "issued_at": "2026-10-25T14:54:09Z",
       "minted_during": "tick",
       "caused_by": "W1025",
-      "last_worked": "2026-11-05T23:39:55Z",
+      "last_worked": "2026-11-22T18:38:43Z",
       "ticks_blocked": 0,
       "manifest": [
         "docs/shared-file-versions.md"
@@ -28152,11 +28158,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "REVISE (github-00 2026-11-22, one low item): in docs/estate-w39-answer.md say 'the apply loop's first real apply', not 'the operator's' (the waldo/apply loop is the only applier, the operator supervises); if estate:W912 itself says otherwise, quote it and flag it to github-00 as its own finding. Then a new ref v2, presubmit, submit.",
-      "evidence": "2026-11-17T20:21:36Z: 2026-11-17 groom: wrote docs/estate-w39-answer.md from W914's evidence (what estate published, which observer nemik adds, what stays open: no record until the operator's first real apply). Not committed, not delivered. | 2026-11-22T17:34:33Z: 2026-11-22 BUILT: refs/review/W1163-v1 = 0d7a2c57bc33432b5b263e14eb7939ce97bf6614 (tree 558a5eb3106b8ba988cf4823c065cfb014dfcdad, parent bc35af50): docs/estate-w39-answer.md as written 2026-11-17, one file. NOT DONE: presubmit, github-00 review, submit, delivery. | 2026-11-22T17:51:10Z: 2026-11-22 github-00 REVISE on refs/review/W1163-v1 = 0d7a2c57: the OPERATOR's first real apply contradicts the standing rule. Returned to ready (outside the round).",
+      "evidence": "2026-11-17T20:21:36Z: 2026-11-17 groom: wrote docs/estate-w39-answer.md from W914's evidence (what estate published, which observer nemik adds, what stays open: no record until the operator's first real apply). Not committed, not delivered. | 2026-11-22T17:34:33Z: 2026-11-22 BUILT: refs/review/W1163-v1 = 0d7a2c57bc33432b5b263e14eb7939ce97bf6614 (tree 558a5eb3106b8ba988cf4823c065cfb014dfcdad, parent bc35af50): docs/estate-w39-answer.md as written 2026-11-17, one file. NOT DONE: presubmit, github-00 review, submit, delivery. | 2026-11-22T17:51:10Z: 2026-11-22 github-00 REVISE on refs/review/W1163-v1 = 0d7a2c57: the OPERATOR's first real apply contradicts the standing rule. Returned to ready (outside the round). | 2026-11-22T18:38:12Z: 2026-11-22 v2 BUILT on the exit-8 wake: refs/review/W1163-v2 = 1ed3b0c8b13b25271714a51db96d25e5e59e3ab0 (tree a4108195f3122d7f7d8cfe665d4333e91c5adb9e, parent bc35af50): the open-items line says the apply loop's first real apply (the loop is the only applier, the operator supervises). estate:W912 as read from estate's published queue at origin/main does not state who applies in the text I grepped, so no contradiction to flag; v1's wording came from this card's own earlier evidence. NOT DONE: presubmit, github-00 re-review, submit, delivery.",
       "issued_at": "2026-10-27T09:42:58Z",
       "minted_during": "tick",
       "caused_by": "inbox/2026-10-27-nemik-edge-estate-W39-enables-W914.md",
-      "last_worked": "2026-11-22T17:51:10Z",
+      "last_worked": "2026-11-22T18:38:12Z",
       "ticks_blocked": 0,
       "manifest": [
         "docs/estate-w39-answer.md"
@@ -59733,6 +59739,26 @@
       "issued_at": "2026-11-22T17:29:18Z",
       "minted_during": "interrupt",
       "caused_by": "skills:W30",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2402",
+      "title": "W1028a: write the documents' combine schema (the fields panels.js combine takes, line 139 region) as docs/core-combine-schema.md, from the code, before any port",
+      "status": "ready",
+      "enables": [
+        "W1028"
+      ],
+      "touches": [
+        "file:docs/core-combine-schema.md!w"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-11-22T18:20:43Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1028",
       "last_worked": null,
       "ticks_blocked": 0
     }
