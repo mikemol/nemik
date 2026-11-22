@@ -394,6 +394,7 @@ TESTS_PY = [
     "tests/test_round_bindings.py",
     "tests/test_round_contract.py",
     "tests/test_round_drift.py",
+    "tests/test_round_stable.py",
     "tests/test_roundcli.py",
     "tests/test_rounddigest.py",
     "tests/test_roundgauges.py",

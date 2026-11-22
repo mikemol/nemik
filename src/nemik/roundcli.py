@@ -30,18 +30,23 @@ def _files(row: dict[str, object]) -> list[str]:
 
 
 def stackable_of(rows: list[dict[str, object]]) -> int:
-    """Count the ready cards that can stack together beside the work in progress (nemik:W1082).
+    """Count the cards of the ranking that can stack without sharing a file (nemik:W1082).
+
+    nemik:W2391: a card's STATE never enters the count. The round ranks the working cards among
+    the ready ones, each by its own salience, so the set and the order of the rows are the same
+    before and after a card is taken; the count is over all of them in rank order, which makes
+    the round's width a function of the ranked set. It used to treat the working cards' files as
+    busy, so taking a card that shared a file with others lowered the supply, narrowed the round
+    and dropped cards from it that had not changed (luthen-observability:W2894).
 
     Args:
-        rows: nemik-rank's rows for a repo, best first, each with a state and a manifest.
+        rows: nemik-rank's rows for a repo, best first, each with a manifest.
 
     Returns:
-        roundof.supply over the ready cards' manifests, the working cards' files being busy.
+        roundof.supply over every row's manifest in the order given.
 
     """
-    ready = [_files(r) for r in rows if r.get("state") != "working"]
-    busy = [f for r in rows if r.get("state") == "working" for f in _files(r)]
-    return supply(ready, busy)
+    return supply([_files(r) for r in rows], [])
 
 
 def size_for(

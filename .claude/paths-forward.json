@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 2390,
+  "counter": 2401,
   "waypoints": [
     {
       "symbol": "W1",
@@ -15159,13 +15159,13 @@
       ],
       "touches": [],
       "blocked_on": [],
-      "blocked_kind": "agent",
-      "next_bounded_step": "Narrow the no-witness Warning in shapes.ttl for cards whose step is a behaviour and that name no observable (the default decided in the audit; the input.test observer is carded only if a test-result witness proves wanted). First case: el-openglo:W702. A test over a fixture behaviour card expects no Warning, and one over an observable card still expects it. A cold review before it ships. Owner nemik session, due 2026-11-13, witness: both fixtures",
-      "evidence": "2026-11-06T20:29:59Z: Operator-ask audit 2026-11-06 (warrant: host line 145131, uuid 9c5e8dd8-a5a4-4cbd-9e07-84e844cc8b00). CLASS: a pipeline step, nemik's own design call. Two ways: a new nemik-witnesses observer (input.test, a test result for the tree sha) or narrowing the no-witness Warning in shapes.ttl for cards that name no observable. Both are nemik's code. Lift and decide by cold review: the observer is the larger build, narrowing the shape the smaller and reversible; a behaviour card with no observable is the case the Warning cannot serve, so narrowing is the default I propose, with the observer carded if a test-sha witness proves wanted. W708",
+      "blocked_kind": null,
+      "next_bounded_step": "Review ref refs/review/W708-v1 = fb92f9ac is github-00 PASS-SUBMIT once presubmit is clean: run tools/presubmit.sh over the W708 worktree, then submit when W708 enters the round (the round check refuses a working card outside it).",
+      "evidence": "2026-11-06T20:29:59Z: Operator-ask audit 2026-11-06 (warrant: host line 145131, uuid 9c5e8dd8-a5a4-4cbd-9e07-84e844cc8b00). CLASS: a pipeline step, nemik's own design call. Two ways: a new nemik-witnesses observer (input.test, a test result for the tree sha) or narrowing the no-witness Warning in shapes.ttl for cards that name no observable. Both are nemik's code. Lift and decide by cold review: the observer is the larger build, narrowing the shape the smaller and reversible; a behaviour card with no observable is the case the Warning cannot serve, so narrowing is the default I propose, with the observer carded if a test-sha witness proves wanted. W708 | 2026-11-22T17:29:46Z: 2026-11-22 taken on the stop hook: read shapes.ttl:124-139; the discriminator is the card's own !w touch on the named file, no new observer. | 2026-11-22T17:33:36Z: 2026-11-22 BUILT: refs/review/W708-v1 = fb92f9acae9afd8bf22ce43c1afd46b7b0e3832a (tree 0d13307d3d60b485ab0773824ecb4f78d8b8f6ba, parent bc35af50): shapes.ttl CheckableNextStepShape skips a named file the card edits (touches file:<f>!w); tests/test_gate.py gains W5 (edit target, no Warning) beside W1 (observable, still warns). MEASURED: bazel test //:test_gate passes in the scratch worktree. NOT DONE: presubmit, github-00 review (cold review before it ships). The manifest's tests/test_witnessed_blocker.py was wrong; the fixture lives in tests/test_gate.py. | 2026-11-22T17:51:08Z: 2026-11-22 github-00: PASS-SUBMIT on fb92f9ac once presubmit is clean (the filter excludes a file the card itself writes, reason in a comment). Returned to ready: a working card outside the round is refused at submit.",
       "issued_at": "2026-10-19T00:15:38Z",
       "minted_during": "interrupt",
       "caused_by": "el-openglo:W702",
-      "last_worked": "2026-11-06T20:37:20Z",
+      "last_worked": "2026-11-22T17:51:08Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
@@ -20492,21 +20492,23 @@
     {
       "symbol": "W902",
       "title": "Decide whether the web view itself should draw vector: measure an SVG renderer against the canvas at the fleet's size",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W899"
       ],
       "touches": [
         "file:docs/vector-web-view.md!w"
       ],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W2168"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "Measure an SVG drawing of the web view against the canvas at the fleet's size (graphSvg of the fleet is 2.4 MB, 5300 paths, 1800 texts): load, pan and zoom cost in Chromium and Firefox; write docs/vector-web-view.md with the numbers and a recommendation",
-      "evidence": "",
+      "evidence": "2026-11-22T17:48:50Z: 2026-11-22 taken on the stop hook: the step is a load, pan and zoom timing in Chromium and Firefox; the host read load1 80.94 at 16:50Z, so a wall time now measures the contention, not the renderer. Blocked on W2168, whose idle-host witness (max_over_time(node_load1[10m]) < 4) marks the window to measure in; record CPU time (user+sys) beside wall, per the time-units rule.",
       "issued_at": "2026-10-23T16:12:14Z",
       "minted_during": "tick",
       "caused_by": "W899",
-      "last_worked": "2026-10-26T10:28:34Z",
+      "last_worked": "2026-11-22T17:48:50Z",
       "ticks_blocked": 0,
       "manifest": [
         "docs/vector-web-view.md"
@@ -22421,12 +22423,12 @@
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "After W969: the page draws one mark per umbrella node (one mark per state rule), with an accessible name that holds its visible text (WCAG 2.5.3), tested with the WCAG chain; the page files are at their line ceilings, so a new file (collapse.js) unless a line can be traded",
-      "evidence": "",
+      "next_bounded_step": "W969 landed (c7add8e8), umbrellas.json is served and panels.js reads it. Step 1: read panels.js umbrella reading and render.js mark drawing, the line ceilings in tests, and the WCAG chain test; decide collapse.js (new file) vs a traded line; write the failing tests/test_collapse_marks.py case (one mark per umbrella, accessible name holds its visible text, WCAG 2.5.3) before any page edit.",
+      "evidence": "2026-11-22T17:34:00Z: 2026-11-22 read: panels.js carries umbrellas through combine (lines 83-88, 139: rows deduped by id+card) and nothing draws them; render.js has no umbrella mark. The mark is the missing slice; collapse.js (new file, page files at ceilings) draws one mark per umbrella with aria-label holding its visible text, tested by tests/test_collapse_marks.py with the WCAG chain. Test first, then the file. | 2026-11-22T17:51:09Z: 2026-11-22 returned to ready: the round check refuses a working card outside the round while round cards are ready; the read (panels.js carries umbrellas, nothing draws them) stands.",
       "issued_at": "2026-10-24T15:22:53Z",
       "minted_during": "interrupt",
       "caused_by": "W709",
-      "last_worked": "2026-11-18T19:23:17Z",
+      "last_worked": "2026-11-22T17:51:09Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
@@ -28149,12 +28151,12 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "docs/estate-w39-answer.md is written (untracked in the working tree, 2026-11-17): land it as a docs stack (ref kind) with a review ref to a reviewer first, then the delivery to estate's inbox waits on the courier (W1048); no sibling write.",
-      "evidence": "2026-11-17T20:21:36Z: 2026-11-17 groom: wrote docs/estate-w39-answer.md from W914's evidence (what estate published, which observer nemik adds, what stays open: no record until the operator's first real apply). Not committed, not delivered.",
+      "next_bounded_step": "REVISE (github-00 2026-11-22, one low item): in docs/estate-w39-answer.md say 'the apply loop's first real apply', not 'the operator's' (the waldo/apply loop is the only applier, the operator supervises); if estate:W912 itself says otherwise, quote it and flag it to github-00 as its own finding. Then a new ref v2, presubmit, submit.",
+      "evidence": "2026-11-17T20:21:36Z: 2026-11-17 groom: wrote docs/estate-w39-answer.md from W914's evidence (what estate published, which observer nemik adds, what stays open: no record until the operator's first real apply). Not committed, not delivered. | 2026-11-22T17:34:33Z: 2026-11-22 BUILT: refs/review/W1163-v1 = 0d7a2c57bc33432b5b263e14eb7939ce97bf6614 (tree 558a5eb3106b8ba988cf4823c065cfb014dfcdad, parent bc35af50): docs/estate-w39-answer.md as written 2026-11-17, one file. NOT DONE: presubmit, github-00 review, submit, delivery. | 2026-11-22T17:51:10Z: 2026-11-22 github-00 REVISE on refs/review/W1163-v1 = 0d7a2c57: the OPERATOR's first real apply contradicts the standing rule. Returned to ready (outside the round).",
       "issued_at": "2026-10-27T09:42:58Z",
       "minted_during": "tick",
       "caused_by": "inbox/2026-10-27-nemik-edge-estate-W39-enables-W914.md",
-      "last_worked": "2026-11-17T20:21:36Z",
+      "last_worked": "2026-11-22T17:51:10Z",
       "ticks_blocked": 0,
       "manifest": [
         "docs/estate-w39-answer.md"
@@ -28162,7 +28164,8 @@
       "size_class": "small",
       "weight": 1,
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
-      "vector_source": "default"
+      "vector_source": "default",
+      "completed": null
     },
     {
       "symbol": "W1164",
@@ -54228,23 +54231,27 @@
     {
       "symbol": "W2168",
       "title": "Take the idle-host staging time of that target once luthen reports the host idle, and split it by input",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W1075"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
-      "next_bounded_step": "After W2167 names the target: take its idle-host staging time once luthen-observability reports the host idle, and split it by input.",
-      "evidence": "",
+      "blocked_on": [
+        "nemik-witnesses"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "WITNESS attached (idle host): max_over_time(node_load1{job=node-exporter}[10m]) < 4 returns a series only while the whole 10 minutes stayed under 4, paired with the positive control count(node_load1) non-empty so no-data is not read as idle (luthen-observability, 2026-11-22). When nemik-witnesses --apply marks it done: take the staging time of //:test_layout (W2167's target) with bazel test //:test_layout --nocache_test_results, record elapsed and critical path, split by input (docs/per-test-targets.md, W1075).",
+      "evidence": "2026-11-22T16:50:00Z: 2026-11-22 STOP-HOOK TAKE: measured the host now: /proc/loadavg 71.68 60.22 41.57 (the full gates of W2391 and W2325 running), so an idle figure cannot be taken; the card's condition is luthen's idle report, which nemik cannot read today (nemik's observers have no host-load fact, and the file observer reports only exists/W2366). Blocked on luthen-observability with the ask for the signal; the target is already named by W2167 (//:test_layout). | 2026-11-22T16:53:36Z: 2026-11-22 luthen-observability answered: node_load1, job=node-exporter, one series for the gate host; max_over_time(node_load1[10m]) read 80.94 at 16:50Z (busy). Empty has two causes (busy; store or scrape gap), so the witness pairs the positive control count(node_load1) non-empty.",
       "issued_at": "2026-11-13T14:39:54Z",
       "minted_during": "interrupt",
       "caused_by": "W1075",
-      "last_worked": "2026-11-17T22:02:43Z",
+      "last_worked": "2026-11-22T16:53:36Z",
       "ticks_blocked": 0,
       "completed": null,
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
-      "vector_source": "default"
+      "vector_source": "default",
+      "witness": "input.promql[\"max_over_time(node_load1{job=\\\"node-exporter\\\"}[10m]) < 4\"].empty == false; input.promql[\"count(node_load1{job=\\\"node-exporter\\\"})\"].empty == false",
+      "witness_lang": "rego"
     },
     {
       "symbol": "W2169",
@@ -55872,27 +55879,30 @@
     {
       "symbol": "W2249",
       "title": "ended_series does not flag a renamed-away path as ended: a guard test beside the join",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W2106",
         "W2248"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W2248"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "ended_series flags a series whose last sample is more than 60 s before its repo's newest: a renamed-away old key would read as ended; add a test that with the renames map applied (W2248) the old key is gone and the new series is judged by its own last sample",
-      "evidence": "2026-11-17T12:03:54Z: 2026-11-17 atomized from W2106: the regression the card's own reading named (nemik:W1039's ended_series would flag the old path).",
+      "evidence": "2026-11-17T12:03:54Z: 2026-11-17 atomized from W2106: the regression the card's own reading named (nemik:W1039's ended_series would flag the old path). | 2026-11-22T17:30:58Z: 2026-11-22 taken on the stop hook: the guard test needs join_renamed, which lives only on refs/review/W2248-v1 (15ba88ef), held, not on main; W2249 edits the same two files (ratchetseries.py, test_ratchet_rename.py), so it cannot stack before W2248 lands. Blocked on W2248, which submits when it enters the round.",
       "issued_at": "2026-11-17T12:03:45Z",
       "minted_during": "interrupt",
       "caused_by": "W2106",
-      "last_worked": "2026-11-17T12:03:54Z",
+      "last_worked": "2026-11-22T17:30:58Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/ratchetseries.py",
         "tests/test_ratchet_rename.py"
       ],
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
-      "vector_source": "default"
+      "vector_source": "default",
+      "completed": null
     },
     {
       "symbol": "W2250",
@@ -57722,19 +57732,21 @@
     {
       "symbol": "W2325",
       "title": "Rank from the vector and the graph's demand, with bands as display labels only: the design (operator ruling, warranted)",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W2303"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
-      "next_bounded_step": "Hold at v5 and build nothing; wait for github-00's synthesis from gcalculus and substrate, then write v6 from it with cold checks A to D as fixtures",
-      "evidence": "2026-11-19T03:09:37Z: 2026-11-18 OPERATOR RULING (warranted, verified): host transcript 695f3e0a line 188832, 2026-11-19T03:06Z, human: the vector is more meaningful than the bands, which are a flat ranking of a hyperdimensional weighting problem. W2325 is answered by NEITHER option A NOR B: the defect is that bands, a total order of named classes, take precedence over the vector and the weights. Re-scoped as a design: rank from the vector's axes plus propagated demand (Pareto fronts keep their dimensions), a band survives only as a display label, velocity is a dimension carried by an accelerates edge and propagated by a second flow, hard constraints stay constraints and the rest become weights, and a replay over the fleet with mtools:W2727 rising as the witness. Found while reading rank-weights.toml: the Pareto fronts and the flow model already exist; the band feeds them as a 7-valued label worth 100 weight units a step, which is lexicographic in effect. | 2026-11-19T03:22:56Z: 2026-11-18 v3: four operator records warranted (lines 188832, 188919, 188939, 188975). CHECKED: enables and blocked_on are one edge kind in nemik.flow today (index.successors), so an enables edge makes the target wait and cannot mean accelerates; a uniform velocity coefficient leaves absorbed currents unchanged and scales potentials by 1/v, so the observable is total delay D = demand x potential, value of raising velocity -dD/dv = D0/v^2, edge sensitivity -(potential drop)^2 (verified on a three-card chain in exact fractions); a broken gate is v=0, an open circuit. OPEN: comparing a ready card's absorbed current with a velocity card's delay reduction; whether the operator wants a soft maximum over competing paths (it would give up Kirchhoff and W241's conserved solve); tau is derived here, gcalculus defines none. | 2026-11-19T03:24:22Z: 2026-11-18 github-00: warm review of v3 (f150bfa2) PASSES; a cold review is running. Two open questions go to the operator: (a) enables as conductance and blocked_on as resistance need the distinction introduced (today one edge kind) or a speed-up edge type, with a migration; (b) LSE over competing paths versus exact Kirchhoff for paths with LSE only across unlike reasons. To fold into v4 after the cold review: a migration paragraph (drafted: one relation with two views, a per-edge g and a system v added as coefficients not edge kinds, a typed speed-up edge owned by the writer, and the regression property that with every g = 1 and v = 1 the new solver reproduces today's salience exactly), the delay-versus-current comparability as the build's FIRST gate, and the replay's fixed property that cards with no velocity role keep their relative order. | 2026-11-19T03:53:59Z: 2026-11-18 github-00: scoped cold pass on v5 (090ecb85): of 26 prior findings 18 resolved, 7 partly, 1 not (#37). NEW failures all from the Pareto layer: only the LARGEST accelerator reaches front 1 (check A), unscored cards break dominance either way (check B: critical below normal, or about 737 of 743 in front 1), front-1 width hands the order to the unsolved unit problem (check C), the red-gate argument holds in 1 of 3 cases (check D: W2212's cycle strands all demand and dropping the W2212 chain pull-in brings that deadlock back). DECISION: do not patch v5; hold, build nothing. Direction from gcalculus and substrate, being gathered by github-00: every reason a SOURCE in ONE network added by superposition (no per-reason units), velocity a MARGINAL (the change in network throughput when a card's edge closes) and not a series factor, exact Fractions throughout, substrate's Belnap two-rail logic for a card both wanted and blocked; removes the Pareto layer. v6 starts from that synthesis; the cold review's executable checks A to D (v5check/) are the test fixtures v6 must pass. | 2026-11-19T03:59:00Z: 2026-11-18: set back to ready: the card is HELD (v5 is the last cut, v6 waits on the gcalculus and substrate synthesis and the reviews), so it is not being worked, and the round check refused a queue commit while it was marked working outside the round (W2322, W2167, W2252, W2018 are the round). Drafting from the synthesis is not a working mark; the card goes back to working only if the round reaches it. | 2026-11-19T05:09:17Z: v8 at refs/review/W2325-v8 = 274aaf38 (parent 4c49a41d = main): folds the v7 cold review. The ranking is the odds pro over cost (cost counts against); mass is read from the supply (product), bias the ratio; BOTH on a ready card is wanted and expensive, action decompose; p, output-or-increment, the cost-less card's ranking, the critical floor and the cycle (#51) are marked OPEN. The doc's python block (275 lines) runs from the doc under python3 -I, every assertion held. Sent to github-00 for the cold pass scoped to the diff. | 2026-11-19T05:28:13Z: 2026-11-19: v8 cold review (github-00 relay): v7's 14 findings 13 resolved, 1 partly; v8 new 26 consistent, 5 contradicts, 6 unwarranted. v9 at refs/review/W2325-v9 = 080e5153 (parent 123db64a): the value is demand through a cost gain u0/cost, a named external projection (el-atlas Law 3.1, Lemma 3.2, Law 4.2, CX-1, P-1 cited), the exponent forced by the premise that a speed-up by G is a cost cut by G; mass is the product (line 177), not a bridge supply; the median stand-in for a cost-less card withdrawn; W_c is the unsplit demand; flag boundaries stated; decompose labelled my policy. Appendix 321 lines runs from the doc under python3 -I. Sent to github-00 for the cold pass on the diff. Open operator questions: output or increment, unconditional velocity-first, the cost-less card, the critical floor, the exponent premise, whether BOTH routes to decomposition. | 2026-11-19T05:30:31Z: 2026-11-19: gcalculus landed the exact checks this design rests on at 727db7b2 (W381; commit exists, and the five witness keys are in gcalc/families/network/reduction.py at that sha, read by me via git grep): network/nodal/grounding-is-conditioning, grounding-gain-is-phi-squared-over-m (D - D(c grounded) = phi_c^2 / M_cc), closing-an-edge-is-d-squared-over-r (a conductance change delta removes delta d^2 / (1 + delta R_e)), the-ground-set-is-one-node, the-derivative-is-not-the-discrete-change; also W380 at 8860ea1b (a component cut off from the ground is a typed Disconnected naming a node, not a StopIteration). NEXT REVISION: cite these at 727db7b2 in place of the doc's own appendix derivations and the relays; I have not run the witnesses (python3 -m gcalc network/nodal/<name> in the gcalculus tree) and the doc's per-cone use of the formulas is still mine. The v9 ref is with the cold pass and is not changed for this. | 2026-11-19T05:42:20Z: 2026-11-19: v9 cold review (github-00 relay): v8's 15 prior 7 resolved, 6 partly, 2 not; v9 new 18 consistent, 3 contradicts, 6 unwarranted. Core: pro * u0 / cost IS pro / cost (order-identical to v8's odds), the forced-exponent premise is degree -1 homogeneity restated; admissible only as a named external decision (Law 3.1 235, CX-1, Remark 3.5). github-00 puts the form to the operator and asked for mechanical fixes only. v10 at refs/review/W2325-v10 = 4e5e8daf (parent 123db64a): the order said plainly as a ratio and a choice, Remark 2.5c misread withdrawn, two declared scales (u0 and the source-size table), ties at the median unflagged for every tied card, pro=0 vs absent-cost asymmetry labelled, |b| notation, regression only at common cost = u0, series composition open, stale appendix comments fixed. Appendix 371 lines runs from the doc under python3 -I. HOLDING for the operator's answers; no further iteration on the form.",
+      "blocked_on": [
+        "github:W120"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "v11 is cut: refs/review/W2325-v11 = d605c791, with github-00 for the warm and cold review of the diff from v10. On their verdict: fold findings into v12 or hold; W2360 (stage 1 after W2391) and W2392 and the replay W2393 follow.",
+      "evidence": "2026-11-19T03:09:37Z: 2026-11-18 OPERATOR RULING (warranted, verified): host transcript 695f3e0a line 188832, 2026-11-19T03:06Z, human: the vector is more meaningful than the bands, which are a flat ranking of a hyperdimensional weighting problem. W2325 is answered by NEITHER option A NOR B: the defect is that bands, a total order of named classes, take precedence over the vector and the weights. Re-scoped as a design: rank from the vector's axes plus propagated demand (Pareto fronts keep their dimensions), a band survives only as a display label, velocity is a dimension carried by an accelerates edge and propagated by a second flow, hard constraints stay constraints and the rest become weights, and a replay over the fleet with mtools:W2727 rising as the witness. Found while reading rank-weights.toml: the Pareto fronts and the flow model already exist; the band feeds them as a 7-valued label worth 100 weight units a step, which is lexicographic in effect. | 2026-11-19T03:22:56Z: 2026-11-18 v3: four operator records warranted (lines 188832, 188919, 188939, 188975). CHECKED: enables and blocked_on are one edge kind in nemik.flow today (index.successors), so an enables edge makes the target wait and cannot mean accelerates; a uniform velocity coefficient leaves absorbed currents unchanged and scales potentials by 1/v, so the observable is total delay D = demand x potential, value of raising velocity -dD/dv = D0/v^2, edge sensitivity -(potential drop)^2 (verified on a three-card chain in exact fractions); a broken gate is v=0, an open circuit. OPEN: comparing a ready card's absorbed current with a velocity card's delay reduction; whether the operator wants a soft maximum over competing paths (it would give up Kirchhoff and W241's conserved solve); tau is derived here, gcalculus defines none. | 2026-11-19T03:24:22Z: 2026-11-18 github-00: warm review of v3 (f150bfa2) PASSES; a cold review is running. Two open questions go to the operator: (a) enables as conductance and blocked_on as resistance need the distinction introduced (today one edge kind) or a speed-up edge type, with a migration; (b) LSE over competing paths versus exact Kirchhoff for paths with LSE only across unlike reasons. To fold into v4 after the cold review: a migration paragraph (drafted: one relation with two views, a per-edge g and a system v added as coefficients not edge kinds, a typed speed-up edge owned by the writer, and the regression property that with every g = 1 and v = 1 the new solver reproduces today's salience exactly), the delay-versus-current comparability as the build's FIRST gate, and the replay's fixed property that cards with no velocity role keep their relative order. | 2026-11-19T03:53:59Z: 2026-11-18 github-00: scoped cold pass on v5 (090ecb85): of 26 prior findings 18 resolved, 7 partly, 1 not (#37). NEW failures all from the Pareto layer: only the LARGEST accelerator reaches front 1 (check A), unscored cards break dominance either way (check B: critical below normal, or about 737 of 743 in front 1), front-1 width hands the order to the unsolved unit problem (check C), the red-gate argument holds in 1 of 3 cases (check D: W2212's cycle strands all demand and dropping the W2212 chain pull-in brings that deadlock back). DECISION: do not patch v5; hold, build nothing. Direction from gcalculus and substrate, being gathered by github-00: every reason a SOURCE in ONE network added by superposition (no per-reason units), velocity a MARGINAL (the change in network throughput when a card's edge closes) and not a series factor, exact Fractions throughout, substrate's Belnap two-rail logic for a card both wanted and blocked; removes the Pareto layer. v6 starts from that synthesis; the cold review's executable checks A to D (v5check/) are the test fixtures v6 must pass. | 2026-11-19T03:59:00Z: 2026-11-18: set back to ready: the card is HELD (v5 is the last cut, v6 waits on the gcalculus and substrate synthesis and the reviews), so it is not being worked, and the round check refused a queue commit while it was marked working outside the round (W2322, W2167, W2252, W2018 are the round). Drafting from the synthesis is not a working mark; the card goes back to working only if the round reaches it. | 2026-11-19T05:09:17Z: v8 at refs/review/W2325-v8 = 274aaf38 (parent 4c49a41d = main): folds the v7 cold review. The ranking is the odds pro over cost (cost counts against); mass is read from the supply (product), bias the ratio; BOTH on a ready card is wanted and expensive, action decompose; p, output-or-increment, the cost-less card's ranking, the critical floor and the cycle (#51) are marked OPEN. The doc's python block (275 lines) runs from the doc under python3 -I, every assertion held. Sent to github-00 for the cold pass scoped to the diff. | 2026-11-19T05:28:13Z: 2026-11-19: v8 cold review (github-00 relay): v7's 14 findings 13 resolved, 1 partly; v8 new 26 consistent, 5 contradicts, 6 unwarranted. v9 at refs/review/W2325-v9 = 080e5153 (parent 123db64a): the value is demand through a cost gain u0/cost, a named external projection (el-atlas Law 3.1, Lemma 3.2, Law 4.2, CX-1, P-1 cited), the exponent forced by the premise that a speed-up by G is a cost cut by G; mass is the product (line 177), not a bridge supply; the median stand-in for a cost-less card withdrawn; W_c is the unsplit demand; flag boundaries stated; decompose labelled my policy. Appendix 321 lines runs from the doc under python3 -I. Sent to github-00 for the cold pass on the diff. Open operator questions: output or increment, unconditional velocity-first, the cost-less card, the critical floor, the exponent premise, whether BOTH routes to decomposition. | 2026-11-19T05:30:31Z: 2026-11-19: gcalculus landed the exact checks this design rests on at 727db7b2 (W381; commit exists, and the five witness keys are in gcalc/families/network/reduction.py at that sha, read by me via git grep): network/nodal/grounding-is-conditioning, grounding-gain-is-phi-squared-over-m (D - D(c grounded) = phi_c^2 / M_cc), closing-an-edge-is-d-squared-over-r (a conductance change delta removes delta d^2 / (1 + delta R_e)), the-ground-set-is-one-node, the-derivative-is-not-the-discrete-change; also W380 at 8860ea1b (a component cut off from the ground is a typed Disconnected naming a node, not a StopIteration). NEXT REVISION: cite these at 727db7b2 in place of the doc's own appendix derivations and the relays; I have not run the witnesses (python3 -m gcalc network/nodal/<name> in the gcalculus tree) and the doc's per-cone use of the formulas is still mine. The v9 ref is with the cold pass and is not changed for this. | 2026-11-19T05:42:20Z: 2026-11-19: v9 cold review (github-00 relay): v8's 15 prior 7 resolved, 6 partly, 2 not; v9 new 18 consistent, 3 contradicts, 6 unwarranted. Core: pro * u0 / cost IS pro / cost (order-identical to v8's odds), the forced-exponent premise is degree -1 homogeneity restated; admissible only as a named external decision (Law 3.1 235, CX-1, Remark 3.5). github-00 puts the form to the operator and asked for mechanical fixes only. v10 at refs/review/W2325-v10 = 4e5e8daf (parent 123db64a): the order said plainly as a ratio and a choice, Remark 2.5c misread withdrawn, two declared scales (u0 and the source-size table), ties at the median unflagged for every tied card, pro=0 vs absent-cost asymmetry labelled, |b| notation, regression only at common cost = u0, series composition open, stale appendix comments fixed. Appendix 371 lines runs from the doc under python3 -I. HOLDING for the operator's answers; no further iteration on the form. | 2026-11-22T16:17:58Z: 2026-11-22 HOST RULING on the six open questions of v10 (github-00, cite github:W146, warm R247, cold R248): the operator returned them as review questions (host 695f3e0a 2026-11-22, typed: 'Hell if I know the answers to any of these questions. This is warm/cold review stuff.'). Asks: v11 from the rulings, W2360 before or with v11, card the replay (W2392). The ruling is on the card's next step. | 2026-11-22T16:18:27Z: 2026-11-22 CORRECTION: the replay card is W2393 (due 2026-12-06); W2392 is the shape for a ready card with no cost estimate. W2360 (cost estimates) is the prerequisite of W2392 and comes before or with v11. | 2026-11-22T16:47:45Z: 2026-11-22 v11 at refs/review/W2325-v11 = d605c791 (children W2395 to W2400 done): the six host rulings (github:W146, R247, R248) written in, the appendix extended (Q1, Q2, Q3, Q5, Q6 checks), still one script under python3 -I. Found while deriving: Q2's threshold c_X < (1 - 1/G) c_y is exact only for a PURE accelerator; in general it is c_X < (1 - 1/G) c_y + (w_X / w_y) c_y.",
       "issued_at": "2026-11-19T03:01:33Z",
       "minted_during": "interrupt",
       "caused_by": "github-00",
-      "last_worked": "2026-11-19T05:42:20Z",
+      "last_worked": "2026-11-22T16:47:45Z",
       "ticks_blocked": 0,
       "completed": null,
       "warrants": [
@@ -58035,7 +58047,8 @@
           },
           "mtools:reason": "the operator said 2026-11-19T04:26Z: gain is also logsumexp partially applied, and happens when you exponentiate to change the domain"
         }
-      ]
+      ],
+      "due": "20261206"
     },
     {
       "symbol": "W2326",
@@ -58830,36 +58843,40 @@
       "title": "W2325 fixture: band order kept an applier-unfreezing fix out of the round, the rule read from bands.toml",
       "status": "ready",
       "enables": [
-        "W2325"
+        "W2325",
+        "mtools:W2844"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "2026-11-20T00:27:50Z: 2026-11-20 mtools second data point for the fixture: export round.json as_of 2026-11-20T00:24:14Z held mtools W2777 (rank 1, salience 1170), W2780 (2, 8), W2726 (3, 4.163), all status working; W2793 (gate-repair + mutation, working) was NOT in the round; nemik-rank mtools --json printed []. The round keeps working cards ahead of a higher-band card, so a STALE working status can hold a gate repair out of it (W2780 and W2726 stale-working, being set ready; earlier W2774 had the same shape with a ready gate-repair card). mtools will send the next export. | 2026-11-20T06:15:09Z: 2026-11-20 mtools data for W2325 (round order vs the stacks the gate carries): three submit refusals in one hour from the round check, each a ready round card the stack did not carry: (1) b103 (W2781, ordinary band, not in round) refused, W2726 (ordinary, ready) and W2774 (gate-repair, ready) in the round, passed over; (2) after blocking W2726 on W2791, b102 (W2774, W2772, W2773) refused: W2780, gate-repair, just unblocked by b101's landing at 3e3c6b4b, entered the round and was passed over (its true dependency on W2774 is the hooks shard guard); (3) the round holds three slots for six stack waypoints. Pattern: a gate-repair card unblocked by a landing enters the round above the stacks the gate carries; the only honest exits are carry its work, block it on its real prerequisite, or build it first, so the round paces the gate instead of the reverse. Ask: when a stack names a gate-repair waypoint the round also holds, count the stack's waypoints as taken, or publish the round per stack, not per repo. | 2026-11-20T06:19:41Z: 2026-11-20 mtools: all five round refusals, shape 'X, Y are in this repository's round and ready, but the working set includes Z, which is not': (1) b101 (W2777, gate-repair): W2767/W2769-class ordinary cards passed over, twice; (2) b103 (W2781, ordinary): W2726, W2774 in round and ready; (3) b102 first: W2726 passed over; (4) b102 after W2726 blocked: W2780 (just unblocked by b101's landing) in round, working set W2772, W2773; (5) b102 third: W2791, W2788 in round (W2791 unblocked by b101's landing), working set W2772, W2773. github-00's ruling (inverts nothing in the band order): a gate-repair stack must not be refused for skipping lower-band round cards. Interim in mtools' round_check = mtools:W2799 (a stack whose every card touches gate-repair is admitted); the root fix is nemik's, W2325. Pattern: each landing of a gate-repair stack unblocks more ordinary cards, which enter the round above the next gate-repair stack.",
+      "evidence": "2026-11-20T00:27:50Z: 2026-11-20 mtools second data point for the fixture: export round.json as_of 2026-11-20T00:24:14Z held mtools W2777 (rank 1, salience 1170), W2780 (2, 8), W2726 (3, 4.163), all status working; W2793 (gate-repair + mutation, working) was NOT in the round; nemik-rank mtools --json printed []. The round keeps working cards ahead of a higher-band card, so a STALE working status can hold a gate repair out of it (W2780 and W2726 stale-working, being set ready; earlier W2774 had the same shape with a ready gate-repair card). mtools will send the next export. | 2026-11-20T06:15:09Z: 2026-11-20 mtools data for W2325 (round order vs the stacks the gate carries): three submit refusals in one hour from the round check, each a ready round card the stack did not carry: (1) b103 (W2781, ordinary band, not in round) refused, W2726 (ordinary, ready) and W2774 (gate-repair, ready) in the round, passed over; (2) after blocking W2726 on W2791, b102 (W2774, W2772, W2773) refused: W2780, gate-repair, just unblocked by b101's landing at 3e3c6b4b, entered the round and was passed over (its true dependency on W2774 is the hooks shard guard); (3) the round holds three slots for six stack waypoints. Pattern: a gate-repair card unblocked by a landing enters the round above the stacks the gate carries; the only honest exits are carry its work, block it on its real prerequisite, or build it first, so the round paces the gate instead of the reverse. Ask: when a stack names a gate-repair waypoint the round also holds, count the stack's waypoints as taken, or publish the round per stack, not per repo. | 2026-11-20T06:19:41Z: 2026-11-20 mtools: all five round refusals, shape 'X, Y are in this repository's round and ready, but the working set includes Z, which is not': (1) b101 (W2777, gate-repair): W2767/W2769-class ordinary cards passed over, twice; (2) b103 (W2781, ordinary): W2726, W2774 in round and ready; (3) b102 first: W2726 passed over; (4) b102 after W2726 blocked: W2780 (just unblocked by b101's landing) in round, working set W2772, W2773; (5) b102 third: W2791, W2788 in round (W2791 unblocked by b101's landing), working set W2772, W2773. github-00's ruling (inverts nothing in the band order): a gate-repair stack must not be refused for skipping lower-band round cards. Interim in mtools' round_check = mtools:W2799 (a stack whose every card touches gate-repair is admitted); the root fix is nemik's, W2325. Pattern: each landing of a gate-repair stack unblocks more ordinary cards, which enter the round above the next gate-repair stack. | 2026-11-22T16:15:08Z: 2026-11-22 claims mtools:W2844 (admit a gate-repair card on the critical path to the round): the same W2325 family as the frozen-applier fixture; mtools' round refusals (five, 2026-11-19/20) are on this card and mtools:W2799 is the interim in its own round_check. The root fix is the round's admission rule, nemik's. | 2026-11-22T16:17:42Z: 2026-11-22 mtools:W2844 (letter 2026-11-21-mtools-round-admits-no-gate-repair-card.md): the round never lists the gate-repair cards (W2824, W2800, W2809), and the submit-time round check refuses a stack that names a card outside the round while a round card is ready and not named (W1942): a deadlock, not a ranking. github-00 (2026-11-22): that deadlock was worked around by recording true edges. STILL NEEDED? Read before building: the round's admission of a gate-repair card is part of W2325's rule (bands become display labels) and of W2391 (the working set changes the round's width); check the mtools round.json of 2026-11-21 against nemik-rank for the gate-repair band, then say whether anything remains. Claimed here (enables mtools:W2844).",
       "issued_at": "2026-11-19T20:50:51Z",
       "minted_during": "interrupt",
       "caused_by": "inbox/2026-11-19-github-00-w2325-fixture-frozen-applier.md",
-      "last_worked": "2026-11-20T06:19:41Z",
+      "last_worked": "2026-11-22T16:17:42Z",
       "ticks_blocked": 0
     },
     {
       "symbol": "W2360",
       "title": "Every card estimates its delivery cost and its effect on CPU-s and attempts per landing, and velocity comes from that estimate, not a tag",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W2325"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
-      "next_bounded_step": "",
-      "evidence": "",
+      "blocked_on": [
+        "github:W120"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "After W2391: (1) write the letter to mtools (inbox, citing nemik:W2360) for the writer-side estimate field {metric, old, new, basis, as_of}; (2) build stage 1: the reference-class own-cost forecast by manifest files, published as nemik_card_cost_forecast{repo,class} with a learned freshness rule, and the forecast-error series with its own freshness rule; (3) name attempts as a gap on this card, blocked on mtools' pollution fix; (4) then W2392 and the v11 cut. Design notes to github-00 for stage 1's reference-class function before building.",
+      "evidence": "2026-11-22T16:18:26Z: 2026-11-22 CORRECTION: the replay card is W2393 (due 2026-12-06), not W2392; W2392 is the nemik-check shape for a ready card with no cost estimate (blocked on this card). | 2026-11-22T16:18:56Z: 2026-11-22 design notes sent to github-00: OWN COST derived by a reference class from measured landings (no writer change, published as a forecast series), EFFECT carried on the card as {metric, old, new, basis, as_of} (needs an mtools writer card, mtools parked), the forecast-error series in the metric store as the calibration loop, CPU first and attempts named as a gap (partial and polluted). Questions: the cone (manifest files), whether a derived forecast satisfies Q3, whether to card the writer field for mtools. | 2026-11-22T16:24:00Z: 2026-11-22 github-00 APPROVED the design with answers: (a) the manifest files are the cone, consistent with the round; the import closure is a LATER refinement (fleet memory: the input graph drives card grouping); (b) a derived forecast satisfies 'every card has a cost' as the DEFAULT, and the card may later carry its own estimate, which OVERRIDES the default: the session's own estimate wins over the derived one, and both are scored by the same error series (state this precedence in v11); a card with no derivable class and no own estimate is Q3's cost-less card; (c) card the writer field and put its letter in mtools/inbox citing this card, not routed live. CONDITIONS: (1) nemik_card_cost_forecast and the error series each get a LEARNED FRESHNESS RULE (the fleet rule that every metric has one): a stopped producer reads UNKNOWN, not stale-as-current; (2) name attempts as a GAP on the card, with the mtools pollution fix as its blocker. Build stage 1 AFTER W2391; SAY in the design which store wins once both exist (the card's own estimate over the derived one, one error series, never two spellings of one estimate). | 2026-11-22T16:24:22Z: 2026-11-22 the writer-side field LETTER is written: mtools/inbox/2026-11-22-nemik-card-estimate-field-in-the-writer.md (a per-card estimate {metric, old, new, basis, as_of}, positive rationals, one entry per metric, validated by the writer; which store wins: the card's own estimate over the derived one, one error series; attempts named a gap blocked on mtools' pollution fix). Not routed live: mtools is parked.",
       "issued_at": "2026-11-19T20:50:52Z",
       "minted_during": "interrupt",
       "caused_by": "inbox/2026-11-19-github-00-w2325-velocity-from-cost-estimates.md",
-      "last_worked": null,
-      "ticks_blocked": 0
+      "last_worked": "2026-11-22T16:24:22Z",
+      "ticks_blocked": 0,
+      "completed": null
     },
     {
       "symbol": "W2361",
@@ -58969,11 +58986,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-11-22T16:17:41Z: 2026-11-22 mtools:W2843 (letter 2026-11-21-mtools-file-observer-reports-only-exists.md): the file observer reports only exists, so a witness on input.file[path].mtime > N can never hold (a nemik-witnesses --wait ended TIMEOUT with last value {exists: true} after the file was republished, every poll evaluating mtime over an absent key). Extend this design: the fact reports mtime (epoch seconds) and size beside exists and the content fact; a test with a planted file whose mtime is set (os.utime) and a witness mtime > N that holds, and one that stays false; the same bounded, local, non-secret read. Absent-key reads should be refused or typed, not silently false (check how the Rego query reads a missing key). Claimed on W2367 (enables mtools:W2843); mtools is parked, so no routing to it.",
       "issued_at": "2026-11-20T01:01:58Z",
       "minted_during": "interrupt",
       "caused_by": "W2092",
-      "last_worked": null,
+      "last_worked": "2026-11-22T16:17:41Z",
       "ticks_blocked": 0
     },
     {
@@ -58981,17 +58998,18 @@
       "title": "Build the content fact with its test, SKILL.md row and registry row",
       "status": "ready",
       "enables": [
-        "W2092"
+        "W2092",
+        "mtools:W2843"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-11-22T16:15:07Z: 2026-11-22 claims mtools:W2843 (the file observer reports only exists, so a nemik-witnesses query on file content cannot be written): this is the content fact W2092 split into W2366-W2368; the build step is this card. Tell mtools the card when the design notes go to github-00.",
       "issued_at": "2026-11-20T01:01:58Z",
       "minted_during": "interrupt",
       "caused_by": "W2092",
-      "last_worked": null,
+      "last_worked": "2026-11-22T16:15:07Z",
       "ticks_blocked": 0
     },
     {
@@ -59462,14 +59480,261 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "FROM skills-5e (skills:W30, low rank, ruled a nemik gap by github-00 2026-11-20, cited on skills:W27): skills:W27 flips a fleet skill's source from the installed directory to the skills repo once the installed tree id equals the pinned one, a comparison of two git tree ids; the witness writer refuses a witness without a declared language and none of nemik's observers (pid, file, git_ref, alert, promql, apply) reads a tree id. SHAPE WANTED: an observer that, given a directory (or a repo, path and sha), answers its git tree id, computed from the directory's bytes or from git objects at a sha, never from a sibling repo's working tree; skills-5e verified a pure-Python computation equal to git rev-parse on four directories (tree_id in the skills repo's scripts/installed_manifest.py, read it through git objects at a published sha). STEPS: read src/nemik/witnesses.py (the observer set and FIELDS in witnessreads) first; design notes to github-00 (the observer name and fields, a bounded read of local non-secret directories like the file observer's W2092 design, and how a repo/path/sha query reads git objects only); test with a planted directory and a repo at a sha; a SKILL.md row and the registry rows the new-command rule requires if any; one correct witness example for skills:W27. Low rank; related W2092 (a file observer's content fact).",
-      "evidence": "",
+      "evidence": "2026-11-22T17:29:21Z: 2026-11-22 atomized on the exit-8 wake: child W2401 (design notes to github-00) mints first; the implementation waits on the design reply.",
       "issued_at": "2026-11-20T21:51:45Z",
       "minted_during": "interrupt",
       "caused_by": "skills:W30",
-      "last_worked": null,
+      "last_worked": "2026-11-22T17:29:21Z",
       "ticks_blocked": 0,
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
       "vector_source": "default"
+    },
+    {
+      "symbol": "W2391",
+      "title": "The round's width falls when a card is taken, because the working cards' files count as busy: a card leaves the round that did not change",
+      "status": "working",
+      "enables": [
+        "luthen-observability:W2894"
+      ],
+      "touches": [
+        "gate-repair",
+        "file:src/nemik/roundcli.py!w",
+        "file:tests/test_round_stable.py!w"
+      ],
+      "blocked_on": [],
+      "blocked_kind": "agent",
+      "next_bounded_step": "On github-00's ruling of the design (stackable_of feeds supply ALL rows in rank order with an empty busy set; the width is a function of the ranked set, not of card states; tests/test_round_stable.py: the eight-card regression through the real functions, the flip invariant exhaustively over three manifest layouts, a test pinning that working rows count like ready ones; mutant: restore busy): build in a worktree, presubmit, send the ref",
+      "evidence": "2026-11-22T16:20:11Z: 2026-11-22 design sent to github-00 (their order: W2391 first, then W2360). | 2026-11-22T16:25:23Z: 2026-11-22 github-00 APPROVED W2391's design (the invariant, exhaustive over subsets plus the eight-card regression red on main) with one check before building: what busy protected. ANSWERED to github-00: busy (W1082, 759dfcd3) only ever lowered the round's COUNT, never kept a colliding card out; collision guards live at submit (mikemol-commit refuses queued stacks sharing a file) and at grooming (nemik-check --overlaps); the lost information is carded as W2394 (a label on the round line); roundcli is in no Codon baseline row, so it compiles clean. BUILT in .nemik-w2391-wt on bc35af50: stackable_of counts every ranked row in rank order with an empty busy set; tests/test_round_stable.py (3, red on the old code: (4, [A,B,C,D]) against (5, [A,B,C,D,E]); in the DISJOINT layout taking A already cut supply 8 to 7). Presubmit's first run was refused by the working-card gate rule (no working card in the staged queue): the live queue is staged with it. | 2026-11-22T16:26:15Z: 2026-11-22 declared touches gate-repair (bands.toml W2039): this card repairs the round check's own input, and its defect refuses real landings across every repo (github-00, 2026-11-22), so it belongs in the gate-repair band, the true edge, not a hand-tuned order. The stop hook (the round check) had listed W2168, W708, W2249, W970, W1163, W902 as the round with W2391 outside it: the mtools:W2844 shape. | 2026-11-22T17:48:31Z: 2026-11-22 BUILT and presubmitted: refs/review/W2391-v1 = ac26cdd0f235c87e1b4d3d74df7ca5dea4c13b16 (tree 744840fff4be2540e0233101df8ed09cc9fd8445, parent bc35af50), presubmit rc 0 on that tree; sent to github-00 for review. Submit on PASS-SUBMIT.",
+      "issued_at": "2026-11-22T16:17:19Z",
+      "minted_during": "interrupt",
+      "caused_by": "luthen-observability:W2894",
+      "last_worked": "2026-11-22T17:48:31Z",
+      "ticks_blocked": 0,
+      "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
+      "vector_source": "default",
+      "completed": null
+    },
+    {
+      "symbol": "W2392",
+      "title": "A nemik-check shape warns on a ready card with no cost estimate, so the grooming route is enforced, not assumed",
+      "status": "blocked",
+      "enables": [],
+      "touches": [
+        "file:src/nemik/data/shapes.ttl!w",
+        "file:skills/nemik/SKILL.md!w"
+      ],
+      "blocked_on": [
+        "W2360"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "FROM github:W146 Q3 (the cost-less card is EXCLUDED from the value ranking and routed to grooming, L189510 'if it does, it hasn't been groomed or decomposed'): the route must catch a card with NO COST ESTIMATE, not only no manifest (R248), so add a shape that warns on a ready card with no cost estimate; blocked on W2360 (where the estimate lives). Reuse the existing no-manifest Warning's mechanism (the ready cards with no manifest row in nemik-check, ratchet in the declared count) rather than a second one; a SKILL.md row and the registry rows test_skill requires; a planted ready card without an estimate refused and one with it clear.",
+      "evidence": "",
+      "issued_at": "2026-11-22T16:18:14Z",
+      "minted_during": "interrupt",
+      "caused_by": "github:W146",
+      "last_worked": "2026-11-22T16:18:25Z",
+      "ticks_blocked": 0,
+      "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
+      "vector_source": "default",
+      "prior_status": "ready"
+    },
+    {
+      "symbol": "W2393",
+      "title": "Replay the ranking over landed history: the demand-time integral under the ruled order against today's bands, and the host ruling's open points",
+      "status": "ready",
+      "enables": [
+        "W2325"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "FROM github:W146 (host ruling on W2325, ask 3): card the replay over landed history. MEASURE, for the fleet's landed history, the integral of outstanding demand over time (sum of demand x completion time): (1) the ruled order against today's bands; (2) Q1's CREDIT RULE for several accelerators on one card (marginal credit is the candidate); (3) Q2's CONDITIONAL velocity-first rule (X first iff c_X < (1 - 1/G)*c_y) against the UNCONDITIONAL standing rule (L100702); if the conditional burns the backlog faster it goes to the operator as a ruling that looks wrong, with the numbers; (4) Q4's demand SOURCE SIZE (no floor, only a larger source), with fixture B as the acceptance test and nemik-rank --check redefined to match; (5) Q5's heuristic GAP: k = 1 is Smith's rule, optimal only for independent cards on one machine, so measure the gap with precedence edges. INPUTS: landed history (the landings file nemik-hostroot writes, the queues' done cards with completed and issued_at), the cost estimates of W2360 once they exist (until then a reference class from measured gate seconds). Design notes to github-00 first (what history, what demand, what counts as completion time, the baseline). Due 2026-12-06 (my call, two weeks); the replay is read-only and applies nothing.",
+      "evidence": "2026-11-22T16:49:13Z: 2026-11-22 github-00 (v11 approved as faithful to github:W146): the replay tests the GENERAL exchange threshold, c_X < (1 - 1/G) c_y + (w_X / w_y) c_y, not the pure-accelerator one: the ruling's form c_X < (1 - 1/G) c_y is its w_X = 0 case, so the replay needs each accelerator's own demand w_X as an input and reports both (the pure form as the special case). Outcome unchanged: velocity-first stays unconditional until the replay says otherwise.",
+      "issued_at": "2026-11-22T16:18:19Z",
+      "minted_during": "interrupt",
+      "caused_by": "github:W146",
+      "last_worked": "2026-11-22T16:49:13Z",
+      "ticks_blocked": 0,
+      "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
+      "vector_source": "default",
+      "due": "20261206"
+    },
+    {
+      "symbol": "W2394",
+      "title": "Round lines mark a round card that shares a file with a card being worked, so the information busy carried reaches the reader without moving a card out",
+      "status": "ready",
+      "enables": [],
+      "touches": [
+        "file:src/nemik/roundcli.py!w",
+        "file:tests/test_round_stable.py!w"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "FROM github-00's check on W2391: busy (W1082, 759dfcd3) only ever lowered the round's COUNT; the collision guards live at submit (mikemol-commit refuses queued stacks sharing a file) and at grooming (nemik-check --overlaps). After W2391 the round no longer tells a session that a round card collides with a card in progress. Add a mark on the round line (a label, the round unchanged): a card whose manifest shares a file with a working card prints 'shares <file> with W<n>'; planted test (the eight-card layout: B, C, D share x with working A); the round file's egress form is luthen's (head then one card per line), so check that a label on the CLI line does not enter the round file.",
+      "evidence": "",
+      "issued_at": "2026-11-22T16:22:05Z",
+      "minted_during": "interrupt",
+      "caused_by": "nemik:W2391",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2395",
+      "title": "v11 Q5: the objective and k = 1 enter as named external choices, cited to github:W146 and R248",
+      "status": "done",
+      "enables": [
+        "W2325"
+      ],
+      "touches": [
+        "file:docs/rank-from-the-vector.md!w"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-11-22T16:45:10Z: 2026-11-22 finished in the working copy (.nemik-w2325-wt/docs/rank-from-the-vector.md, not yet a ref): the new section 'The host ruling of 2026-11-22 (github:W146), and the objective it names' (warrant from the inbox letter, the objective as a NAMED EXTERNAL DECODER, UNWARRANTED per R248, and Q5's k = 1 as a named external choice, Smith's rule) and an appendix assertion on v10's pair: 12.5 at k=1, 13.5 at k=2. The appendix (extracted between the python fences) runs under python3 -I, every assertion held.",
+      "issued_at": "2026-11-22T16:25:30Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2325",
+      "last_worked": "2026-11-22T16:45:10Z",
+      "ticks_blocked": 0,
+      "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
+      "vector_source": "default",
+      "completed": "20261122T164510Z"
+    },
+    {
+      "symbol": "W2396",
+      "title": "v11 Q1: the value is the delivery cost saved, weighted by demand, joint saving over accelerators is multiplicative",
+      "status": "done",
+      "enables": [
+        "W2325"
+      ],
+      "touches": [
+        "file:docs/rank-from-the-vector.md!w"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-11-22T16:45:12Z: 2026-11-22 finished in the working copy: the Value bullet replaced by the delivery cost SAVED, weighted by demand (1 - 1/G)*c_y, joint saving (1 - 1/prod G)*c_y for several accelerators on one card, credit across them OPEN (marginal candidate, replay W2393), v10's output and increment readings marked WITHDRAWN but kept as witnesses, the broken-gate bullet rewritten (NOT c_old = infinity, positive rationals, existing red-gate rules); appendix assertions: one gain of 2 saves 4 of 8, two gains of 2 save 6 of 8 (not 8), the sum of separate savings is the whole cost and the joint is not, a near-no-op saves under 1/100, all savings positive and below the cost. The appendix runs under python3 -I.",
+      "issued_at": "2026-11-22T16:25:30Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2325",
+      "last_worked": "2026-11-22T16:45:12Z",
+      "ticks_blocked": 0,
+      "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
+      "vector_source": "default",
+      "completed": "20261122T164512Z"
+    },
+    {
+      "symbol": "W2397",
+      "title": "v11 Q2: velocity-first stays unconditional, the conditional rule is a replay candidate with an appendix check",
+      "status": "done",
+      "enables": [
+        "W2325"
+      ],
+      "touches": [
+        "file:docs/rank-from-the-vector.md!w"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-11-22T16:45:42Z: 2026-11-22 finished in the working copy: the Velocity-first bullet (host ruling Q2, L100702 STANDS unconditional; the conditional rule a REPLAY CANDIDATE W2393; if it burns the backlog faster it goes to the operator as a ruling that looks wrong, with numbers). FOUND while deriving the exchange argument (tell github-00): the ruling's 'X first exactly when c_X < (1 - 1/G) c_y' holds only for a PURE accelerator (no demand of its own); in general X first iff c_X < (1 - 1/G) c_y + (w_X/w_y) c_y, so the pure threshold is sufficient, not exact. Appendix: a pure accelerator at cost 3, 5, 4 against threshold 4 (x first, y first, tie), the same pair with own demand 1 at cost 5 (x leads past the pure threshold) and a tie at the general threshold 7. The appendix runs under python3 -I.",
+      "issued_at": "2026-11-22T16:25:30Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2325",
+      "last_worked": "2026-11-22T16:45:42Z",
+      "ticks_blocked": 0,
+      "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
+      "vector_source": "default",
+      "completed": "20261122T164542Z"
+    },
+    {
+      "symbol": "W2398",
+      "title": "v11 Q3 and Q6: a cost-less card goes to grooming, both decomposition routes follow the absolute rules",
+      "status": "done",
+      "enables": [
+        "W2325"
+      ],
+      "touches": [
+        "file:docs/rank-from-the-vector.md!w"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-11-22T16:46:45Z: 2026-11-22 finished in the working copy: Q3 (the cost-less card EXCLUDED from the value ranking and routed to grooming; the route catches a card with NO COST ESTIMATE: W2360 the prerequisite, W2392 the shape; precedence: the session's own estimate wins over the derived one, both scored by the same error series; v8's median stand-in and the u0 identity cost ended; the asymmetry in the absent-cost encoding gone, an absent PRO keeps its 0) and Q6 (BOTH routes to decomposition by the absolute rules, loop-prompt line 15 and OversizeShape; demand only orders which are atomized first; the median cut answered and removed); the not-settled list updated. Appendix: a cost-less arrival moves no costed card and goes to grooming, u0 re-calibration cannot move a card, the absolute atomize rule is stable under three cheap arrivals while v10's median cut is not. The appendix runs under python3 -I.",
+      "issued_at": "2026-11-22T16:25:30Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2325",
+      "last_worked": "2026-11-22T16:46:45Z",
+      "ticks_blocked": 0,
+      "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
+      "vector_source": "default",
+      "completed": "20261122T164645Z"
+    },
+    {
+      "symbol": "W2399",
+      "title": "v11 Q4: no floor, a larger demand source, bands as display labels, source size left to the replay",
+      "status": "done",
+      "enables": [
+        "W2325"
+      ],
+      "touches": [
+        "file:docs/rank-from-the-vector.md!w"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-11-22T16:47:09Z: 2026-11-22 finished in the working copy: Q4 (NO floor, only a larger demand source: the critical-floor bullet rewritten, bands as display labels, hard safety stays in the trust-boundary policy, the source SIZE left to the replay W2393 with fixture B the acceptance test and nemik-rank --check redefined to match; the velocity-tag compatibility bullet, fixture B and the not-settled list updated). No appendix assertion: the size is calibrated by the replay, so nothing to assert yet.",
+      "issued_at": "2026-11-22T16:25:30Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2325",
+      "last_worked": "2026-11-22T16:47:09Z",
+      "ticks_blocked": 0,
+      "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
+      "vector_source": "default",
+      "completed": "20261122T164709Z"
+    },
+    {
+      "symbol": "W2400",
+      "title": "v11 cut: assemble the doc and its appendix, cut refs/review/W2325-v11 and send github-00 the diff from v10",
+      "status": "done",
+      "enables": [
+        "W2325"
+      ],
+      "touches": [
+        "file:docs/rank-from-the-vector.md!w"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": null,
+      "evidence": "2026-11-22T16:47:43Z: 2026-11-22 v11 CUT: refs/review/W2325-v11 = d605c791 (parent bc35af50 = main; the doc is not on main, v10 lived at refs/review/W2325-v10 = 4e5e8daf on an older parent), tree 8eaf30bc; diff from v10: 201 insertions and 66 deletions in docs/rank-from-the-vector.md. The appendix, extracted between the python fences, runs under python3 -I with every assertion held. Sent to github-00.",
+      "issued_at": "2026-11-22T16:25:30Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2325",
+      "last_worked": "2026-11-22T16:47:43Z",
+      "ticks_blocked": 0,
+      "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
+      "vector_source": "default",
+      "completed": "20261122T164743Z"
+    },
+    {
+      "symbol": "W2401",
+      "title": "W2390a: design notes for input.git_tree to github-00: observer name, fields (dir mode and repo/path/sha mode), bounded read of local non-secret dirs, git objects only for repo/path/sha",
+      "status": "ready",
+      "enables": [
+        "W2390"
+      ],
+      "touches": [
+        "file:docs/witness-git-tree.md!w"
+      ],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-11-22T17:29:18Z",
+      "minted_during": "interrupt",
+      "caused_by": "skills:W30",
+      "last_worked": null,
+      "ticks_blocked": 0
     }
   ],
   "residue": [
@@ -59801,6 +60066,33 @@
       "renewed_at": "2026-10-24T12:59:32Z",
       "expires_at": "2026-10-24T13:29:32Z",
       "lapse_ledgered": true
+    },
+    {
+      "tag": "file:src/nemik/roundcli.py!w",
+      "holder": "(unlocked)",
+      "waypoint": "W2391",
+      "base_sha": "bc35af50de41062ce1ed5d7321aa858f8f81988f",
+      "taken_at": "2026-11-22T16:25:23Z",
+      "renewed_at": "2026-11-22T16:25:23Z",
+      "expires_at": "2026-11-22T16:55:23Z"
+    },
+    {
+      "tag": "file:src/nemik/roundof.py!w",
+      "holder": "(unlocked)",
+      "waypoint": "W2391",
+      "base_sha": "bc35af50de41062ce1ed5d7321aa858f8f81988f",
+      "taken_at": "2026-11-22T16:25:23Z",
+      "renewed_at": "2026-11-22T16:25:23Z",
+      "expires_at": "2026-11-22T16:55:23Z"
+    },
+    {
+      "tag": "file:tests/test_roundcli.py!w",
+      "holder": "(unlocked)",
+      "waypoint": "W2391",
+      "base_sha": "bc35af50de41062ce1ed5d7321aa858f8f81988f",
+      "taken_at": "2026-11-22T16:25:23Z",
+      "renewed_at": "2026-11-22T16:25:23Z",
+      "expires_at": "2026-11-22T16:55:23Z"
     }
   ],
   "advice": [

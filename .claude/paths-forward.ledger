@@ -6541,3 +6541,35 @@
 2026-11-20T20:57:58Z  status W2380 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-20T21:51:45Z  interrupt W2390 minted    -         "Witness observer for a git tree id: input.git_tree answers the tree id of a directory or of a path at a sha"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=skills:W30
 2026-11-20T22:03:27Z  status W2386 working>landed writer    "working -> landed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T16:17:19Z  interrupt W2391 minted    -         "The round's width falls when a card is taken, because the working cards' files count as busy: a card leaves the round that did not change"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=luthen-observability:W2894
+2026-11-22T16:18:14Z  interrupt W2392 minted    -         "A nemik-check shape warns on a ready card with no cost estimate, so the grooming route is enforced, not assumed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github:W146
+2026-11-22T16:18:19Z  interrupt W2393 minted    -         "Replay the ranking over landed history: the demand-time integral under the ruled order against today's bands, and the host ruling's open points"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github:W146
+2026-11-22T16:18:25Z  status W2392 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T16:18:56Z  status W2360 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T16:20:11Z  status W2391 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T16:22:05Z  interrupt W2394 minted    -         "Round lines mark a round card that shares a file with a card being worked, so the information busy carried reaches the reader without moving a card out"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=nemik:W2391
+2026-11-22T16:25:23Z  status W2391 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T16:25:30Z  interrupt W2395 minted    -         "v11 Q5: the objective and k = 1 enter as named external choices, cited to github:W146 and R248"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2325
+2026-11-22T16:25:30Z  interrupt W2396 minted    -         "v11 Q1: the value is the delivery cost saved, weighted by demand, joint saving over accelerators is multiplicative"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2325
+2026-11-22T16:25:30Z  interrupt W2397 minted    -         "v11 Q2: velocity-first stays unconditional, the conditional rule is a replay candidate with an appendix check"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2325
+2026-11-22T16:25:30Z  interrupt W2398 minted    -         "v11 Q3 and Q6: a cost-less card goes to grooming, both decomposition routes follow the absolute rules"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2325
+2026-11-22T16:25:30Z  interrupt W2399 minted    -         "v11 Q4: no floor, a larger demand source, bands as display labels, source size left to the replay"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2325
+2026-11-22T16:25:30Z  interrupt W2400 minted    -         "v11 cut: assemble the doc and its appendix, cut refs/review/W2325-v11 and send github-00 the diff from v10"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2325
+2026-11-22T16:45:10Z  status W2395 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T16:45:12Z  status W2396 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T16:45:42Z  status W2397 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T16:46:45Z  status W2398 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T16:47:09Z  status W2399 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T16:47:43Z  status W2325 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T16:47:43Z  status W2400 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T16:47:45Z  status W2325 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T16:50:00Z  status W2168 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T17:29:18Z  interrupt W2401 minted    -         "W2390a: design notes for input.git_tree to github-00: observer name, fields (dir mode and repo/path/sha mode), bounded read of local non-secret dirs, git objects only for repo/path/sha"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=skills:W30
+2026-11-22T17:29:37Z  status W708 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T17:30:58Z  status W2249 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T17:33:55Z  status W970 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T17:34:33Z  status W1163 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T17:48:50Z  status W902 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T17:51:08Z  status W708 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T17:51:09Z  status W970 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T17:51:10Z  status W1163 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
