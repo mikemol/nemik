@@ -6607,3 +6607,26 @@
 2026-11-22T20:25:44Z  status W2407 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-22T20:26:25Z  intervention --   other     intervention "2026-11-22 practice: one full gate at a time on this checkout, no tools/presubmit.sh run while a stack gates (nemik:W2403, after a doc stack stalled at rc 124 under load)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-22T20:26:45Z  status W750 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T20:30:06Z  status W846 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T20:30:23Z  interrupt W2408 minted    -         "PROV-O and PROV-DM: one cited paragraph and what nemik could adopt, in docs/evidence-standards.md"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W910
+2026-11-22T20:30:23Z  interrupt W2409 minted    -         "AIF (Argument Interchange Format): one cited paragraph and the gap it names"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W910
+2026-11-22T20:30:23Z  interrupt W2410 minted    -         "SEPIO: one cited paragraph and the gap it names"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W910
+2026-11-22T20:30:23Z  interrupt W2411 minted    -         "ECO (Evidence and Conclusion Ontology): one cited paragraph and the gap it names"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W910
+2026-11-22T20:30:23Z  interrupt W2412 minted    -         "Nanopublications: one cited paragraph and the gap they name"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W910
+2026-11-22T20:30:23Z  interrupt W2413 minted    -         "Carneades: one cited paragraph and the gap it names"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W910
+2026-11-22T20:30:23Z  interrupt W2414 minted    -         "ClaimReview: one cited paragraph and the gap it names"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W910
+2026-11-22T20:44:41Z  interrupt W2415 minted    -         "OpenTelemetry semantic conventions and exemplars: one cited paragraph, the claim/ground mapping and what nemik could adopt"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W911
+2026-11-22T20:44:41Z  interrupt W2416 minted    -         "OpenSLO and Sloth: one cited paragraph each, SLOs as claims and error budgets as qualifiers, what nemik could adopt"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W911
+2026-11-22T20:44:41Z  interrupt W2417 minted    -         "Postmortem templates and PRR checklists: one cited paragraph, as backing for a claim, and what nemik could adopt"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W911
+2026-11-22T20:44:41Z  interrupt W2418 minted    -         "Definition of done as the done-claim's warrant: one cited paragraph and the gap against nemik's done evidence"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W911
+2026-11-22T21:01:36Z  interrupt W2419 minted    -         "W970b1: plant two umbrellas in the served page for a browser test (webpage.served over a layout carrying umbrellas.json), read back through webpage.evaluated"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2406
+2026-11-22T21:01:36Z  interrupt W2420 minted    -         "W970b2: the page draws one button per umbrella from collapse.js marks(), with name, role and 24 px target"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2406
+2026-11-22T21:01:36Z  interrupt W2421 minted    -         "W970b3: aria-expanded flips on activation and the tab order holds, judged by wcagjudge"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2406
+2026-11-22T21:22:08Z  interrupt W2422 minted    -         "W2311a: read how Flux's ImagePolicy orders the tags (deploy/image-automation.yaml, the leading-number extract) and record what a commit-time epoch would do to it"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2311
+2026-11-22T21:22:08Z  interrupt W2423 minted    -         "W2311b: ask luthen-observability whether it owns the ImagePolicy or only records it, citing nemik:W2311"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2311
+2026-11-22T21:22:08Z  interrupt W2424 minted    -         "W2311c: build.yml stamps the cloned tip's commit time and its own sha into the tag, with a review ref"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2311
+2026-11-22T21:22:23Z  status W2422 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T21:22:24Z  status W2423 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T21:45:39Z  status W459 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T21:45:39Z  status W708 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T21:45:39Z  status W1257 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
