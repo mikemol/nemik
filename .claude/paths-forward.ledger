@@ -6577,3 +6577,9 @@
 2026-11-22T18:20:43Z  interrupt W2402 minted    -         "W1028a: write the documents' combine schema (the fields panels.js combine takes, line 139 region) as docs/core-combine-schema.md, from the code, before any port"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1028
 2026-11-22T18:20:58Z  status W708 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-22T18:38:43Z  status W1052 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T18:50:20Z  status W708 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T18:50:20Z  status W970 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T18:50:20Z  status W1052 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T18:50:20Z  status W2391 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T18:52:01Z  interrupt W2403 minted    -         "mikemol-commit's no-progress witness ended a doc-stack gate at rc 124 under load: find which wait it was, with mtools"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-00:W120
+2026-11-22T18:52:17Z  status W2403 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
