@@ -6704,3 +6704,18 @@
 2026-11-23T03:57:42Z  status W1325 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-23T04:12:59Z  status W2029 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-23T04:13:13Z  status W938 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T04:54:58Z  interrupt W2457 minted    -         "W938a: the Queue view (W929's panel) in its own file, with the WCAG chain test as its oracle (tablist semantics, 24 px targets, names, contrast)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W938
+2026-11-23T04:54:58Z  interrupt W2458 minted    -         "W938b: the Graph view (the graph, treemap and their filters) in its own file, WCAG chain oracle"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W938
+2026-11-23T04:54:58Z  interrupt W2459 minted    -         "W938c: the Orders view (what needs me; the need-you line from Wake links here) in its own file, WCAG chain oracle"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W938
+2026-11-23T04:54:58Z  interrupt W2460 minted    -         "W938d: the Health view (history, weather, wake sleeping repos, findings) in its own file, WCAG chain oracle"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W938
+2026-11-23T04:54:58Z  interrupt W2461 minted    -         "W938e: the Help drawer (legend, keys, sources, settings) and the selected-card pane in a fixed place, stacking below the view at 320 CSS px, WCAG chain oracle"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W938
+2026-11-23T05:20:25Z  status W1345 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T05:21:12Z  status W1347 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T05:22:59Z  status W1411 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T05:34:36Z  status W1038 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T05:34:36Z  status W1175 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T05:34:36Z  status W1178 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T05:34:36Z  status W1184 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T05:34:36Z  status W1187 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T05:34:36Z  status W1225 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T05:34:36Z  status W2042 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
