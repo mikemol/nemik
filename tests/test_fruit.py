@@ -5,12 +5,13 @@
 from rdflib import Graph, Literal
 
 from nemik.adapter import NEMIK, OSLC_CM, waypoint_uri, workstream_uri
-from nemik.rank import RankRow, fruit, rank
+from nemik.rank import RankOptions, RankRow, fruit, rank
 from nemik.score import load_weights
 
 TWO_MEMBERS_WEIGHT = 2
 TAGGED_WEIGHT = 4
 PILE_WEIGHT = 9
+READY_PILE_WEIGHT = 8
 
 
 def test_members_are_leaves_moving_nothing_or_tagged() -> None:
@@ -117,3 +118,24 @@ def test_a_working_fruit_member_holds_the_class_slot() -> None:
     rows = rank(g, "a", load_weights())
     assert rows[0]["symbol"] == "W1"
     assert not any("fruit" in r for r in rows)
+
+
+def test_a_round_keeps_the_class_whichever_member_is_working() -> None:
+    """nemik:W2407: a round keeps the class when a member is working.
+
+    luthen-observability:W2894: W916 stood in for 259 cards and vanished when W941, a member,
+    was taken, so the ready cards that filled the round changed with one card's state. The class
+    is formed over the ready rows only; the working member is ranked by its own place.
+    """
+    spec = {"W1": ["W90"], **{f"W{n}": [] for n in range(2, 11)}}
+    options = RankOptions(with_working=True)
+    ready = rank(_graph(spec), "a", load_weights(), options=options)
+    g = _graph(spec)
+    g.set((waypoint_uri("a", "W2"), OSLC_CM.state, NEMIK.Working))
+    taken = rank(g, "a", load_weights(), options=options)
+    assert any("fruit" in r for r in ready)
+    assert any("fruit" in r for r in taken)
+    assert [r["symbol"] for r in taken if "fruit" in r] != []
+    stand_in = next(r for r in taken if "fruit" in r)
+    assert stand_in["fruit"]["class_weight"] == READY_PILE_WEIGHT
+    assert "W2" not in stand_in["fruit"]["members"]

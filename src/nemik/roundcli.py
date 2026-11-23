@@ -16,7 +16,15 @@ from pathlib import Path
 
 from nemik.landings import read_document
 from nemik.roundfile import round_text
-from nemik.roundof import capacity, round_of, stack_sizes, supply, width
+from nemik.roundof import (
+    capacity,
+    over_width,
+    round_of,
+    stack_sizes,
+    supply,
+    unranked,
+    width,
+)
 
 RECENT = 10  # landed stacks the capacity looks back over
 # nemik:W1191: no landing file. The landing file is always a Path, never None, because the pinned
@@ -27,6 +35,16 @@ NO_LANDINGS = Path()
 def _files(row: dict[str, object]) -> list[str]:
     planned = row.get("manifest")
     return [str(f) for f in planned] if isinstance(planned, list) else []
+
+
+def _working(rows: list[dict[str, object]]) -> list[str]:
+    """Name the cards of the ranking that are being worked (nemik:W2407).
+
+    Returns:
+        Their symbols, in the order given.
+
+    """
+    return [str(r["symbol"]) for r in rows if r.get("state") == "working"]
 
 
 def stackable_of(rows: list[dict[str, object]]) -> int:
@@ -127,7 +145,7 @@ def show_round(repo: str, rows: list[dict[str, object]], landings: Path) -> None
 
     """
     ranked = _ranked(rows)
-    lines = round_lines(repo, ranked, landings, stackable_of(rows))
+    lines = round_lines(repo, ranked, landings, stackable_of(rows), _working(rows))
     sys.stdout.write("\n".join(lines) + "\n")
 
 
@@ -142,14 +160,15 @@ def round_document(
         stamp: When the rounds were drawn, a UTC stamp.
 
     Returns:
-        The round file's text: repos sorted, each with its top N cards, N from its landed stacks.
+        The round file's text: repos sorted, each with its working cards and the best ready
+        cards up to N, N from its landed stacks.
 
     """
     rounds: list[tuple[str, list[tuple[str, int, str]]]] = []
     for repo in sorted(by_repo):
         size, _ = size_for(repo, by_repo[repo], landings)
         ranked = [(symbol, salience) for symbol, salience, _ in _ranked(by_repo[repo])]
-        rounds.append((repo, round_of(ranked, size)))
+        rounds.append((repo, round_of(ranked, size, _working(by_repo[repo]))))
     return round_text(stamp, rounds)
 
 
@@ -175,33 +194,49 @@ def write_round_file(
     temporary.replace(path)
 
 
+# nemik:W2407: no working cards. A shared empty list, never changed, because the pinned Codon cannot
+# take `list[str] | None` as a parameter type (the census refused it).
+NO_WORKING: list[str] = []
+
+
 def round_lines(
     repo: str,
     ranked: list[tuple[str, str, str]],
     landings: Path,
     stackable: int = 0,
+    working: list[str] = NO_WORKING,
 ) -> list[str]:
     """Print the round of a repo.
 
     Args:
         repo: The repo.
-        ranked: Its ready cards best first, each as (symbol, salience text, title).
+        ranked: Its cards best first, each as (symbol, salience text, title).
         landings: The landing file, or NO_LANDINGS.
         stackable: How many of its ready cards can stack together (stackable_of); 0 when unknown.
+        working: The symbols of its cards being worked, pinned into the round (nemik:W2407).
 
     Returns:
         A header naming the round size and its binding term (supply, the declared ceiling,
-        landings or floor),
-        then one line per card of the round.
+        landings or floor), a warning when the working cards exceed the width, a warning naming
+        a working card the ranking does not hold (it cannot be pinned), then one line per card
+        of the round.
 
     """
+    held = working
     landed, landed_source = capacity(sizes_of(repo, landings))
     size, source = width(stackable, landed, landed_source)
-    taken = round_of([(symbol, salience) for symbol, salience, _ in ranked], size)
+    pairs = [(symbol, salience) for symbol, salience, _ in ranked]
+    taken = round_of(pairs, size, held)
     titles = {symbol: title for symbol, _, title in ranked}
     head = f"round {repo}: {len(taken)} of {len(ranked)} cards (size {size}, from {source})"
+    excess = over_width(held, size)
+    note = f"warning: {excess} working card(s) beyond the width {size}, no ready fill"
+    lost = unranked(held, pairs)
+    gone = f"warning: working card(s) the ranking does not hold: {' '.join(lost)}"
     return [
         head,
+        *([note] if excess else []),
+        *([gone] if lost else []),
         *(
             f"{place:3} {symbol:6} salience {salience:>8}  {titles[symbol][:60]}"
             for symbol, place, salience in taken

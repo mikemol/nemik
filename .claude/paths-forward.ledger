@@ -6633,3 +6633,37 @@
 2026-11-22T21:45:45Z  status W966 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-22T21:55:43Z  status W2402 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-22T21:55:58Z  status W1257 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T22:07:06Z  status W2148 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T22:07:06Z  status W2404 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T22:07:21Z  status W1028 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T22:18:29Z  status W459 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T22:20:16Z  interrupt W2425 minted    -         "W2148a: name where the static build calls the Python pieces producer (pieces.split, the static docs writer in serve.py) and what the native binary must read and write to replace it"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2148
+2026-11-22T22:20:16Z  interrupt W2426 minted    -         "W2148b: a bazel target builds the native pieces binary with the pinned Codon (pieces.split/assemble compile, W2147) and a test runs it on the pieces corpus"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2148
+2026-11-22T22:20:16Z  interrupt W2427 minted    -         "W2148c: the static build runs the native binary for hashes.json and graph/*.json; the page reads them unchanged through sourceGraph"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2148
+2026-11-22T22:20:16Z  interrupt W2428 minted    -         "W2148d: grep every caller of graphText and delete it only if none remains (panels.js load, line 151, is one today)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2148
+2026-11-22T22:28:28Z  status W976 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T22:28:49Z  interrupt W2429 minted    -         "W984a: retrostub.py builds a retro stub (precommit from the card's mint-time next step and witness, trigger reopened) for a card reopened from done, from card events, pure and tested"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W984
+2026-11-22T22:28:49Z  interrupt W2430 minted    -         "W984b: the gate-refusal stub: confirm the writer's --retro-scaffold (mtools:W2267, landing verdict row) already opens it and wire the refusal event to call it, or name the gap"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W984
+2026-11-22T22:28:49Z  interrupt W2431 minted    -         "W984c: the alert-clearing and ruling-corrects-a-session stubs, one trigger each, after W984a's shape"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W984
+2026-11-22T22:46:08Z  status W2029 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T22:47:06Z  status W985 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T22:49:17Z  status W994 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T22:49:38Z  interrupt W2432 minted    -         "W1002a: a pure count of a repo's ready cards past the learned age bound, with tests (reuse W2010's held stale-ready patch if it fits)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1002
+2026-11-22T22:49:38Z  interrupt W2433 minted    -         "W1002b: ratchetpace takes the stale-ready count as a ratchet series beside the file ratchets"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1002
+2026-11-22T22:49:38Z  interrupt W2434 minted    -         "W1002c: pacepublish writes the stale-ready series on the pace board and gauge, with a learned freshness rule"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1002
+2026-11-22T22:49:38Z  interrupt W2435 minted    -         "W1002d: the gate refusal reads the stale-ready series like any other ratchet"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1002
+2026-11-22T23:04:27Z  interrupt W2436 minted    -         "Design: gate slots as a declared capacity the round schedules against, not false blocked_on edges (operator, via github-00)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-00:W120
+2026-11-22T23:05:13Z  status W2436 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T23:05:43Z  status W1007 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T23:06:53Z  status W1008 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T23:10:51Z  interrupt W2437 minted    -         "W2436a: a nemik-witnesses observer input.commit_queue over every repo's mikemol-commit --in-gate --json, tested with a planted entry and an unreadable repo as UNKNOWN"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2436
+2026-11-22T23:10:51Z  interrupt W2438 minted    -         "W2436b: nemik-rank --round derives queued for slot (behind W<n>) from the union of the repos' queues, never a state or a blocked_on edge"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2436
+2026-11-22T23:10:51Z  interrupt W2439 minted    -         "W2436c: tools/presubmit.sh takes the repo's commit claim, with a planted HELD_ENV nesting case"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2436
+2026-11-22T23:28:19Z  status W1009 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T23:37:45Z  status W1010 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T23:38:37Z  status W1016 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T23:41:45Z  status W1020 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-22T23:42:04Z  interrupt W2440 minted    -         "W1022a: hostlane.js maps host-root board rows to read-only nodes (id from resource_uri, state mapped, waitsFor to edges, no rank weight), tested on plain rows"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1022
+2026-11-22T23:42:04Z  interrupt W2441 minted    -         "W1022b: serve.py serves the host-root board to the page (served page only, a source without one has none)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1022
+2026-11-22T23:42:04Z  interrupt W2442 minted    -         "W1022c: the page draws the host lane from hostlane.js, with the WCAG chain test as oracle"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1022
+2026-11-23T00:03:47Z  status W1026 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

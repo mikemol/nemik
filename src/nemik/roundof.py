@@ -143,21 +143,70 @@ def width(stackable: int, landed: int, landed_source: str) -> tuple[int, str]:
     return landed, landed_source
 
 
-def round_of(ranked: list[tuple[str, str]], size: int) -> list[tuple[str, int, str]]:
-    """Take the top of a ranking as the round.
+def round_of(
+    ranked: list[tuple[str, str]], size: int, working: list[str]
+) -> list[tuple[str, int, str]]:
+    """Take the working cards and the top of the ready ranking as the round.
+
+    nemik:W2407 (nemik:W1059's invariant, "a card being worked is never outside the round"): the
+    working cards are in the round whatever their rank, and the best ready cards fill what the
+    width leaves. A card's state therefore moves only its own place: the other working cards stay,
+    and the ready cards that fill the room are the best ready ones by rank. A working set at or
+    beyond the width is the whole round, with no ready fill and no refusal (focus is forecast,
+    not control); the excess is `over_width`'s to report.
 
     Args:
-        ranked: The ready cards best first, each as (symbol, salience as text).
+        ranked: The cards best first, each as (symbol, salience as text); working cards included.
         size: How many cards the round holds.
+        working: The symbols of the cards being worked.
 
     Returns:
-        (symbol, rank from 1, salience) for the first `size` cards, in rank order.
+        (symbol, rank from 1 within the round, salience) for the working cards and the best ready
+        cards that fit, in rank order.
 
     """
+    pinned = [symbol for symbol, _ in ranked if symbol in working]
+    room = max(max(size, 0) - len(pinned), 0)
+    taken = [symbol for symbol, _ in ranked if symbol not in working][:room]
+    held = [*pinned, *taken]
     return [
         (symbol, place, salience)
-        for place, (symbol, salience) in enumerate(ranked[: max(size, 0)], start=1)
+        for place, (symbol, salience) in enumerate(
+            [(s, v) for s, v in ranked if s in held], start=1
+        )
     ]
+
+
+def unranked(working: list[str], ranked: list[tuple[str, str]]) -> list[str]:
+    """Name the working cards that the ranking does not hold.
+
+    A working card the ranker left out cannot be pinned into the round, so W1059's invariant would
+    fail without a word; the caller names each one (github-00, nemik:W2407).
+
+    Args:
+        working: The repo's cards being worked.
+        ranked: The ranking, each as (symbol, salience as text).
+
+    Returns:
+        The working symbols that are not in the ranking, in the order given.
+
+    """
+    held = {symbol for symbol, _ in ranked}
+    return [card for card in working if card not in held]
+
+
+def over_width(working: list[str], size: int) -> int:
+    """Count the working cards beyond the round's width.
+
+    Args:
+        working: The repo's cards being worked.
+        size: The round's width.
+
+    Returns:
+        How many working cards exceed the width; 0 when they fit.
+
+    """
+    return max(len(working) - max(size, 0), 0)
 
 
 def outside(working: list[str], in_round: list[str]) -> list[str]:

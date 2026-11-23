@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 2424,
+  "counter": 2442,
   "waypoints": [
     {
       "symbol": "W1",
@@ -9055,19 +9055,19 @@
     {
       "symbol": "W459",
       "title": "OperatorActShape escalates Warning to Violation after N ticks, N learned from ledger history",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W2290"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Pair the 19 lifts with their start events (nemik-history --events, to~operator), compute stints in days, check whether the graph carries a blocked-since the shape can read; then declare the percentile and write the shape property and the fixture test",
-      "evidence": "2026-10-13: 2026-10-13 operator: wants better visibility before any escalation to Violation, and the shape is still being worked; held behind W467 (lanes in the view) and W460 (errands split out) | 2026-11-06T20:29:57Z: Operator-ask audit 2026-11-06 (warrant: host line 145131, uuid 9c5e8dd8-a5a4-4cbd-9e07-84e844cc8b00). CLASS: a pipeline step with one real question inside. The question the operator asked on 2026-10-13 was visibility first; the lanes are now in the view (W467 landed f3a00fd, per this card), so 'wait for visibility' is met. What is left is N, which the card already says is learned from the ledger (no typed threshold). Lift: learn N from ticks_blocked of no-command asks, add the Violation property gated on it, and let a cold review (host line 144945, verified human) decide whether the escalation ships, not a standing ask. W459 | 2026-11-15T02:29:14Z: 2026-11-14 POPULATION MEASURED (nemik-operator --json over the whole fleet root, scratch .claude/held-W459-no-command.py.txt, read-only): ONE ask has category no-command (substrate, a no-verify bootstrap commit, ticks_blocked 1). A learned N has nothing to learn from: no closed no-command asks are in the graph (it holds open asks only), and the one open ask has been blocked for 1 tick. So the next step as written (learn N from ticks_blocked of no-command asks over the ledger history) cannot be run: the coverable gate fails (population 1, no history). Routes: (a) wait until the population is large enough to learn from (a witness on the count of no-command asks); (b) learn N from the ticks_blocked of ALL operator asks that were lifted, which the ledger holds as lift lines but the graph does not; (c) ship the Violation property with N read from rank-weights.toml like W489's bound, declared and not typed in the shape. Not done: any shape change. | 2026-11-17T05:16:05Z: 2026-11-17 PROBE (the card's own 'probe first', read-only): (1) the ledger holds 32 lines saying unblocked or lifted, but they are tick lines naming a landed blocker, not 'lift lines' that carry ticks_blocked at lift for operator asks (sampled four); route (b) as written has no data source in the ledger. (2) The card-event history DOES hold the lifts: nemik-history nemik --from 2026-09-20 --events --where 'field=blocked_on and from~operator and not to=*' (the event filter landed in 0af9f42) prints 19 lifts of operator asks in nemik alone, each with the lift time and its commit (scratch operator-lifts.tsv). The start of each stint is the earlier event whose to names operator. So the stint LENGTHS in time are derivable now; the TICK count is not recorded (nemik:ticksBlocked is mtools' counter, a number on the card, not stamped per lift). (3) The shape gates on ticksBlocked, so N in ticks needs a tick-to-time conversion the ledger does not give stably (the loop cadence has varied). REVISED NEXT STEP: pair each lift with its start event to get operator-ask stints in days (19+ points, repo-local), declare the percentile in rank-weights.toml as W489's bound is, and gate the Violation on the card's blocked age in days if the graph carries one, else on ticksBlocked scaled by the median tick spacing measured from the ledger's tick lines over the same window. Not built. | 2026-11-22T20:19:39Z: 2026-11-22 stop hook: not taken. Its manifest names src/nemik/data/shapes.ttl, which W708's stack (refs/review/W708-v1, presubmit running) and the round's W2308 and W2309 also edit; mikemol-commit refuses a queued stack sharing a file, and W459's first step is a measurement (19 lift stints paired with their start events), which would run nemik-history on a loaded host. Blocked on W708's landing; the three shapes.ttl cards go one at a time, W708 then W2308 then W2309 then this.",
+      "next_bounded_step": "Add the lift cause to the writer's lift record (answered, audit, reword) is mtools' (the writer is parked): write the letter; meanwhile the shape stays a Warning and this card holds the measurement. Decision for github-00: close W459 as not learnable now, or keep it behind the lift-cause field.",
+      "evidence": "2026-10-13: 2026-10-13 operator: wants better visibility before any escalation to Violation, and the shape is still being worked; held behind W467 (lanes in the view) and W460 (errands split out) | 2026-11-06T20:29:57Z: Operator-ask audit 2026-11-06 (warrant: host line 145131, uuid 9c5e8dd8-a5a4-4cbd-9e07-84e844cc8b00). CLASS: a pipeline step with one real question inside. The question the operator asked on 2026-10-13 was visibility first; the lanes are now in the view (W467 landed f3a00fd, per this card), so 'wait for visibility' is met. What is left is N, which the card already says is learned from the ledger (no typed threshold). Lift: learn N from ticks_blocked of no-command asks, add the Violation property gated on it, and let a cold review (host line 144945, verified human) decide whether the escalation ships, not a standing ask. W459 | 2026-11-15T02:29:14Z: 2026-11-14 POPULATION MEASURED (nemik-operator --json over the whole fleet root, scratch .claude/held-W459-no-command.py.txt, read-only): ONE ask has category no-command (substrate, a no-verify bootstrap commit, ticks_blocked 1). A learned N has nothing to learn from: no closed no-command asks are in the graph (it holds open asks only), and the one open ask has been blocked for 1 tick. So the next step as written (learn N from ticks_blocked of no-command asks over the ledger history) cannot be run: the coverable gate fails (population 1, no history). Routes: (a) wait until the population is large enough to learn from (a witness on the count of no-command asks); (b) learn N from the ticks_blocked of ALL operator asks that were lifted, which the ledger holds as lift lines but the graph does not; (c) ship the Violation property with N read from rank-weights.toml like W489's bound, declared and not typed in the shape. Not done: any shape change. | 2026-11-17T05:16:05Z: 2026-11-17 PROBE (the card's own 'probe first', read-only): (1) the ledger holds 32 lines saying unblocked or lifted, but they are tick lines naming a landed blocker, not 'lift lines' that carry ticks_blocked at lift for operator asks (sampled four); route (b) as written has no data source in the ledger. (2) The card-event history DOES hold the lifts: nemik-history nemik --from 2026-09-20 --events --where 'field=blocked_on and from~operator and not to=*' (the event filter landed in 0af9f42) prints 19 lifts of operator asks in nemik alone, each with the lift time and its commit (scratch operator-lifts.tsv). The start of each stint is the earlier event whose to names operator. So the stint LENGTHS in time are derivable now; the TICK count is not recorded (nemik:ticksBlocked is mtools' counter, a number on the card, not stamped per lift). (3) The shape gates on ticksBlocked, so N in ticks needs a tick-to-time conversion the ledger does not give stably (the loop cadence has varied). REVISED NEXT STEP: pair each lift with its start event to get operator-ask stints in days (19+ points, repo-local), declare the percentile in rank-weights.toml as W489's bound is, and gate the Violation on the card's blocked age in days if the graph carries one, else on ticksBlocked scaled by the median tick spacing measured from the ledger's tick lines over the same window. Not built. | 2026-11-22T20:19:39Z: 2026-11-22 stop hook: not taken. Its manifest names src/nemik/data/shapes.ttl, which W708's stack (refs/review/W708-v1, presubmit running) and the round's W2308 and W2309 also edit; mikemol-commit refuses a queued stack sharing a file, and W459's first step is a measurement (19 lift stints paired with their start events), which would run nemik-history on a loaded host. Blocked on W708's landing; the three shapes.ttl cards go one at a time, W708 then W2308 then W2309 then this. | 2026-11-22T22:20:00Z: 2026-11-22 PAIRED the 19 lifts with their start events (nemik-history --events, both directions over 2026-09-20 to now; scratch script pairs each lift with the latest earlier start naming the operator on the same card; read-only). Stints in days: 0.00 (W9, W121), 0.01 (W200, W532), 0.02 (W162), 0.05 (W1048), 0.09 (W1165), 0.44 (W224), 0.47 (W249), 0.54 (W1633), 1.01 (W904), 1.83 (W182), 18.71 x5 (W564, W567, W569, W700, W708), 24.99 (W459), 27.48 (W735); median 0.54 d, p90 24.99 d, max 27.48 d. THE DISTRIBUTION IS NOT A RESPONSE TIME: (a) five lifts are ONE instant, the 2026-11-07T14:12:16 operator-ask audit (W564 W567 W569 W700 W708 plus W459 and W964) reclassified asks as pipeline steps, not operator answers; (b) seven stints under 0.1 d are rewordings of the same ask (a start written and rewritten minutes apart: W9, W121, W200, W532, W162, W1048, W1165). So at most about seven stints (0.44 to 1.83 d, W224 W249 W1633 W904 W182 and the two long ones W735, W459 themselves) are plausibly operator turnaround, and W459 and W735's lifts are audits too. CONCLUSION: N cannot be learned from the lifts the graph holds; a percentile over them would be a number carrying the audit, not the operator. The shape stays a Warning until an honest source exists: either mark each lift with its cause (answered, audit, reword) when the writer lifts it, or count only lifts followed by a card change the operator's reply caused.",
       "issued_at": "2026-10-13T17:49:16Z",
       "minted_during": "tick",
       "caused_by": "W458",
-      "last_worked": "2026-11-22T20:19:39Z",
+      "last_worked": "2026-11-22T22:20:00Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
@@ -22588,19 +22588,19 @@
     {
       "symbol": "W976",
       "title": "Port nemik.critical (slack and the longest chain) to plain Card edges, held to the rdflib version in a test",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W508"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Port the slack and longest-chain computation of nemik.critical to plain card edges in a module with no import, held to the rdflib version on a fixture; critical_cards already takes plain Cards, so start by listing what it still reads from rdflib",
-      "evidence": "",
+      "next_bounded_step": "Re-scope: the slack and chain port is landed (critical_cards + core.chains). Remaining and bounded: cycles over plain Cards (Tarjan on the successors map, held to the rdflib version on a fixture) in src/nemik/cardcritical.py with tests/test_cardcritical.py; fires and assume_done next. Probe-compile under the pinned Codon before wiring (a new module must compile: dataclasses and typing.cast are walls). Ask github-00 whether to drop the slack/chain wording from the title.",
+      "evidence": "2026-11-22T22:28:28Z: 2026-11-22 READ src/nemik/critical.py for the card's own first step (what it still reads from rdflib). ALREADY PLAIN: critical_cards (line 132) over plain Cards, and the longest chain in nemik.core.chains.longest_chains (W818), so 'slack and the longest chain' are ported; critical() (line 111) is the adapter that builds Cards from the graph. STILL rdflib: open_nodes (55, state subjects), repo_scope (72), cone (82), _open_successors (189) and the Tarjan cycles (211, _pop_group 172, visit 232), assume_done (256, copies a Graph), fires (281, g.value mintedDuring), and the report functions. So the port the card names is mostly done; what is left is the cycles and the fires over plain Cards, and the manifest (cardcritical.py) names a module that does not exist.",
       "issued_at": "2026-10-24T16:41:28Z",
       "minted_during": "tick",
       "caused_by": "W508",
-      "last_worked": "2026-10-25T03:23:48Z",
+      "last_worked": "2026-11-22T22:28:28Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/cardcritical.py",
@@ -22609,7 +22609,8 @@
       "size_class": "medium",
       "weight": 212,
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
-      "vector_source": "default"
+      "vector_source": "default",
+      "completed": null
     },
     {
       "symbol": "W977",
@@ -22759,19 +22760,23 @@
     {
       "symbol": "W984",
       "title": "A retro stub, seeded with the card's mint-time precommit, opens on a gate refusal and on a card reopened from done, then on an alert clearing and a ruling that corrects a session",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W1215"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W2429",
+        "W2430",
+        "W2431"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "Build the stub from a card's ledger history for a reopened card first, then wire the gate-refusal event, once W982 fixes the record form",
       "evidence": "",
       "issued_at": "2026-10-24T17:32:59Z",
       "minted_during": "interrupt",
       "caused_by": "github-8f",
-      "last_worked": "2026-10-24T17:33:12Z",
+      "last_worked": "2026-11-22T22:28:49Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
@@ -22785,19 +22790,19 @@
     {
       "symbol": "W985",
       "title": "A report measures gate G9 fleet-wide: the recurring failure classes of the retros by the layer their measure lives at, seeded with the host's four classes of this week",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W1215"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Count recurring classes by enforcement layer over the ingested retros, and place the four classes of the host's week by what enforces each now",
-      "evidence": "",
+      "next_bounded_step": "Write src/nemik/retrolayers.py: a pure function over (finding text, layer, recurring) rows from the ingested retros: group the recurring ones by finding text and place each by its retro's enforcement_layer; tests/test_retrolayers.py over a planted set shaped like the live counts (gate 27, instructions 13, hook 4; 9 recurring). The host's four classes stay unrecovered, noted on the card with the transcript pointer. Probe-compile under the pinned Codon: a new module must compile.",
+      "evidence": "2026-11-22T22:47:06Z: 2026-11-22 COUNTED (read-only: the writer's --retros over this queue into a scratch file, then grep -o of the enforcement_layer field): 44 enforcement_layer values in the queue's retro records: gate 27, instructions 13, hook 4, memory 0, trigger 0 (the vocabulary's five layers: memory, instructions, trigger, hook, gate). 'recurring' appears in 9 records. Caveats: each value is one occurrence of the field, which may be one per retro or one per finding (not separated); it counts only retros that carry the field (the scaffold form, 44 ingested, W984's measure); no record is yet cross-checked as a recurring CLASS (a class repeated over retros). So the by-layer table exists in rough form; the recurring-class grouping and the host's four classes of that week are not yet placed. | 2026-11-22T22:48:45Z: 2026-11-22 github-00: 'the host's four classes of this week' are UNRECOVERED: not in his view and in no inbox letter. Do not guess and do not block: seed the report from the retro records themselves (the classes marked recurring, 9, grouped by their finding text, each placed by the enforcement_layer its retro names). Pointer to recover the four: search the host transcript (host 695f3e0a) around this card's issued_at 2026-10-24T17:33Z for the retro or ruling that named four classes.",
       "issued_at": "2026-10-24T17:33:00Z",
       "minted_during": "interrupt",
       "caused_by": "github-8f",
-      "last_worked": "2026-10-24T17:33:14Z",
+      "last_worked": "2026-11-22T22:48:45Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
@@ -23047,19 +23052,19 @@
     {
       "symbol": "W994",
       "title": "The adapter reads the pace file into the graph as behindOn facts on each workstream, so the paydown shape judges real repos",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W986"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "2026-11-07: W991 is done, so the wait is over. Read the pace file where W991 put it and set behindOn for each repo's behind ratchets while the graph is built",
-      "evidence": "",
+      "next_bounded_step": "Check pacecli's imports for a cycle with adapter; add the emission in the adapter's workstream build; test_pace_ingest.py over a planted pace file (a behind row yields behindOn, an ok row none, a missing file none); measure the paydown shape's findings on a copy of the live queue before landing; review ref to github-00.",
+      "evidence": "2026-11-22T22:49:17Z: 2026-11-22 READ before building: the vocabulary (nemik.ttl:162 nemik:behindOn) and the shape that reads it (shapes.ttl:731, the paydown shape) exist; NOTHING emits behindOn (grep of src finds no behindOn or behind_on). The pace reader exists as pacecli.behind_files(repo) (pacecli.py:176): file:<ratchet> for each of the repo's BEHIND rows in the export tree's pace file, empty when the file is missing or unreadable (a dark sensor must not reorder the queue; --pace exits 2 and nemik_ratchet_pace_readable is 0 elsewhere). So the card is one emission: in the adapter's per-workstream build add (workstream, NEMIK.behindOn, Literal(<ratchet path>)) for each behind_files(repo) row (strip the file: tag to the repo-relative path the vocabulary comment names). Cautions: (1) behind_files reads the export tree file; queue_graph is cached by file stamp, so the pace file's change must invalidate or the facts go stale; (2) the import direction adapter -> pacecli must not cycle (pacecli imports?); (3) the paydown shape then judges real repos for the first time: count its findings on a copy of nemik-check before wiring, as W982's ingest did.",
       "issued_at": "2026-10-24T20:10:47Z",
       "minted_during": "tick",
       "caused_by": "W988",
-      "last_worked": "2026-11-06T03:48:02Z",
+      "last_worked": "2026-11-22T22:49:17Z",
       "ticks_blocked": 0,
       "completed": null,
       "weight": 176,
@@ -23196,19 +23201,24 @@
     {
       "symbol": "W1002",
       "title": "The count of ready cards past the learned age bound is a ratchet on the pace board, so a repo whose stale-ready count is not falling lands only commits that close, block, drop or advance stale cards",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "github:W42"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W2432",
+        "W2433",
+        "W2434",
+        "W2435"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "Count each repo's ready cards past the learned age bound and give the count to the pace judgement as a ratchet series named by the stale-ready measure, published on the pace board and gauges beside the file ratchets; the gate refusal reads it like any other",
       "evidence": "",
       "issued_at": "2026-10-24T23:07:10Z",
       "minted_during": "interrupt",
       "caused_by": "W986",
-      "last_worked": "2026-10-25T01:12:00Z",
+      "last_worked": "2026-11-22T22:49:38Z",
       "ticks_blocked": 0,
       "warrants": [
         {
@@ -23385,19 +23395,19 @@
     {
       "symbol": "W1007",
       "title": "The open-commitment count per repo, from mtools' commitment ledger, is a ratchet on the pace board and gauges",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "github:W44"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "2026-11-07: the letters inbox/2026-10-26-nemik-edge-mtools-W1933-enables-W1007.md and ...-W2048-enables-W1007.md say mtools:W1933 and W2048 are done; check whether mtools publishes the commitment ledger (nemik-inbound or the pace board), and if so count open commitments per repo into a series; if not, re-block on the mtools card by symbol",
-      "evidence": "2026-10-24: 2026-10-24 mtools-ad contract (mtools:W1933): commitments.json at the build root {as_of, rows:[{repo, session, line, uuid, at, text, names, state open or resolved, resolved_by null or {kind, ref}}]} plus the gauge mikemol.commitments.open{repo}; the pace series for this ratchet is that gauge over time, read like the file ratchets. No field missing for the count | 2026-10-26: 2026-10-26: mtools:W1933 closed (commitledger, --commitments, the emitter landed); commitments.json is not published until mtools:W2048 (host timer), which this waits on | 2026-10-26: 2026-10-26: mtools:W2048 done (letter read); commitments.json is now produced, so this card is unblocked | 2026-10-26: 2026-10-26 19:30Z: mtools:W2048 is done but ~/.local/share/luthen/nemik-export/commitments.json does not exist; luthen's timer (luthen-observability:W1684) publishes it | 2026-11-03T08:28:29Z: 2026-11-03 luthen-observability: the commitments export (luthen-observability:W1684) is LIVE. luthen-nemik-commitments.timer (hourly, user scope) ran its first pass 03:07 EST, Result=success, about 2 min; the file commitments.json exists in luthen's nemik-export tree (208565 bytes, as_of 2026-11-03T08:07:01Z). Shape, enforced by checks.nemik_egress after each write: header exactly {as_of, rows}; each row exactly at, layer, names, repo, resolved_by, session, state; no text, uuid or line. Refreshed hourly. Open on their side: a liveness stamp (W1934) and the exact row count. Nothing to do but read it. | 2026-11-06T04:12:09Z: 2026-11-06 stale_ready's letter class: two inbox letters (mtools:W1933, mtools:W2048) enable this card, so its wait 'when mtools publishes its commitment ledger' may have ended. Not verified that the ledger itself is published.",
+      "next_bounded_step": "Query luthen's store for mikemol.commitments.open{repo} (endpoints_query for the address, a positive control first: the label-values call for the metric name) and read its history; if the series exists, ratchetpace takes it as a ratchet by name with its freshness rule, tests/test_commitment_pace.py over a planted series (rising, falling, empty-store = UNKNOWN); if it does not, ask luthen-observability to emit it, citing nemik:W1007.",
+      "evidence": "2026-10-24: 2026-10-24 mtools-ad contract (mtools:W1933): commitments.json at the build root {as_of, rows:[{repo, session, line, uuid, at, text, names, state open or resolved, resolved_by null or {kind, ref}}]} plus the gauge mikemol.commitments.open{repo}; the pace series for this ratchet is that gauge over time, read like the file ratchets. No field missing for the count | 2026-10-26: 2026-10-26: mtools:W1933 closed (commitledger, --commitments, the emitter landed); commitments.json is not published until mtools:W2048 (host timer), which this waits on | 2026-10-26: 2026-10-26: mtools:W2048 done (letter read); commitments.json is now produced, so this card is unblocked | 2026-10-26: 2026-10-26 19:30Z: mtools:W2048 is done but ~/.local/share/luthen/nemik-export/commitments.json does not exist; luthen's timer (luthen-observability:W1684) publishes it | 2026-11-03T08:28:29Z: 2026-11-03 luthen-observability: the commitments export (luthen-observability:W1684) is LIVE. luthen-nemik-commitments.timer (hourly, user scope) ran its first pass 03:07 EST, Result=success, about 2 min; the file commitments.json exists in luthen's nemik-export tree (208565 bytes, as_of 2026-11-03T08:07:01Z). Shape, enforced by checks.nemik_egress after each write: header exactly {as_of, rows}; each row exactly at, layer, names, repo, resolved_by, session, state; no text, uuid or line. Refreshed hourly. Open on their side: a liveness stamp (W1934) and the exact row count. Nothing to do but read it. | 2026-11-06T04:12:09Z: 2026-11-06 stale_ready's letter class: two inbox letters (mtools:W1933, mtools:W2048) enable this card, so its wait 'when mtools publishes its commitment ledger' may have ended. Not verified that the ledger itself is published. | 2026-11-22T23:05:43Z: 2026-11-22 READ the published ledger (luthen's nemik-export tree, read-only, a scratch script): commitments.json as_of 2026-11-22T22:46:29Z, 3357 rows, 722 open and 2635 resolved; open per repo: nemik 255, luthen-observability 137, mtools 119, gcalculus 110, linux-sources 34, el-openglo 20, paperkit 16, summit 12. So the wait ended: mtools:W1933 and W2048 are done and the export is live and fresh. The count per repo is derivable now from one document, but the PACE judgement needs a SERIES (a value over time), not a reading: the contract names the gauge mikemol.commitments.open{repo} as the series, over time, read like the file ratchets. NOT yet checked: whether that gauge is in the store (luthen's VictoriaMetrics) with history, and its freshness rule.",
       "issued_at": "2026-10-24T23:33:47Z",
       "minted_during": "interrupt",
       "caused_by": "inbox/2026-10-26-nemik-edge-mtools-W2048-enables-W1007.md",
-      "last_worked": "2026-11-06T04:12:09Z",
+      "last_worked": "2026-11-22T23:05:43Z",
       "ticks_blocked": 0,
       "warrants": [
         {
@@ -23441,19 +23451,19 @@
     {
       "symbol": "W1008",
       "title": "A shape warns on an open commitment that names a card of this repo whose evidence is no newer than the statement",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "github:W44"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "2026-11-07: the letters inbox/2026-10-26-nemik-edge-mtools-W1933-enables-W1008.md and ...-W2048-enables-W1008.md say mtools:W1933 and W2048 are done; check whether mtools publishes the commitment ledger, and if so read each open commitment naming a nemik card into the graph; if not, re-block on the mtools card by symbol",
-      "evidence": "2026-10-24: 2026-10-24 mtools-ad contract (mtools:W1933): commitments.json rows carry names (card cites repo:W<n> and files), at (the statement's UTC time) and state; the shape compares at against the named card's last_worked, so no field is missing | 2026-10-26: 2026-10-26: mtools:W1933 closed; commitments.json is not published until mtools:W2048 (host timer), which this waits on | 2026-10-26: 2026-10-26: mtools:W2048 done (letter read); commitments.json is now produced, so this card is unblocked | 2026-10-26: 2026-10-26 19:30Z: mtools:W2048 is done but commitments.json is not in the export tree yet; luthen's timer (luthen-observability:W1684) publishes it | 2026-11-03T08:28:31Z: 2026-11-03 luthen-observability: the commitments export (luthen-observability:W1684) is live and hourly, as_of 2026-11-03T08:07:01Z; header {as_of, rows}, rows exactly at, layer, names, repo, resolved_by, session, state. Read it from luthen's nemik-export tree; their liveness stamp (W1934) is still open. | 2026-11-06T04:12:11Z: 2026-11-06 stale_ready's letter class: two inbox letters (mtools:W1933, mtools:W2048) enable this card, so its wait may have ended. Not verified that the ledger itself is published.",
+      "next_bounded_step": "Build the shape over the 40 named open rows: read each open commitment's names that match W<n> into nemik:commitment facts (graph), warn when the named card's last_worked is no newer than the statement's at; count the warnings on a copy first (expected few). Separately card the 682 unnamed open commitments for mtools: a promise that names no card is unverifiable.",
+      "evidence": "2026-10-24: 2026-10-24 mtools-ad contract (mtools:W1933): commitments.json rows carry names (card cites repo:W<n> and files), at (the statement's UTC time) and state; the shape compares at against the named card's last_worked, so no field is missing | 2026-10-26: 2026-10-26: mtools:W1933 closed; commitments.json is not published until mtools:W2048 (host timer), which this waits on | 2026-10-26: 2026-10-26: mtools:W2048 done (letter read); commitments.json is now produced, so this card is unblocked | 2026-10-26: 2026-10-26 19:30Z: mtools:W2048 is done but commitments.json is not in the export tree yet; luthen's timer (luthen-observability:W1684) publishes it | 2026-11-03T08:28:31Z: 2026-11-03 luthen-observability: the commitments export (luthen-observability:W1684) is live and hourly, as_of 2026-11-03T08:07:01Z; header {as_of, rows}, rows exactly at, layer, names, repo, resolved_by, session, state. Read it from luthen's nemik-export tree; their liveness stamp (W1934) is still open. | 2026-11-06T04:12:11Z: 2026-11-06 stale_ready's letter class: two inbox letters (mtools:W1933, mtools:W2048) enable this card, so its wait may have ended. Not verified that the ledger itself is published. | 2026-11-22T23:06:53Z: 2026-11-22 READ the published commitments.json (as_of 2026-11-22T22:46:29Z, read-only, scratch scripts): 722 open rows, of which only 40 carry names (the rest name no card or file), all 722 at layer none; the 2635 resolved rows all carry names. The names are bare cites like W98 (the row's own repo is the repo), plus file names. So the shape this card asks for has at most 40 open rows to judge across the fleet; for nemik's 255 open rows NONE named a nemik card in my join (the names of nemik's open rows are empty or non-card). Consequence: the shape would warn on almost nothing today; the value is the 40, and the 682 open commitments that name nothing are a different gap (an unnamed promise cannot be checked against a card), which belongs to mtools' ledger writer, not to this shape.",
       "issued_at": "2026-10-24T23:33:49Z",
       "minted_during": "interrupt",
       "caused_by": "inbox/2026-10-26-nemik-edge-mtools-W2048-enables-W1008.md",
-      "last_worked": "2026-11-06T04:12:11Z",
+      "last_worked": "2026-11-22T23:06:53Z",
       "ticks_blocked": 0,
       "warrants": [
         {
@@ -23498,19 +23508,21 @@
     {
       "symbol": "W1009",
       "title": "A shape warns on a G0 intent older than the learned bound that no landing has delta-checked",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "github:W44"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "mtools:W1934"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "When mtools emits each turn's G0 intents with their later delta, warn on an intent older than the learned bound that has no landing delta",
-      "evidence": "",
+      "evidence": "2026-11-22T23:28:19Z: 2026-11-22 stop hook: not taken. The card's step waits on mtools emitting each turn's G0 intents with their later delta: that is mtools:W1934 ('Compute each stated intent's delta: resolve a G0 intent against a later landing or card status and emit the divergence'), read through git objects at mtools HEAD: status blocked, itself blocked on W1899. Nothing to read into the graph until it ships; blocked on it by citation (an agent block, mtools parked).",
       "issued_at": "2026-10-24T23:42:54Z",
       "minted_during": "interrupt",
       "caused_by": "github:W44",
-      "last_worked": "2026-10-24T23:43:31Z",
+      "last_worked": "2026-11-22T23:28:19Z",
       "ticks_blocked": 0,
       "warrants": [
         {
@@ -23555,19 +23567,19 @@
     {
       "symbol": "W1010",
       "title": "A shape warns on a retro record with zero sustain rows",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "github:W44"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Raise the sustain finding from Info to a Warning for a retro with zero sustain rows, once retro records are read into the graph (W982)",
-      "evidence": "",
+      "next_bounded_step": "Decide the cut-over with github-00 (a retro id or date after which a zero-sustain retro warns; older ones stay Info), count the Warnings the cut-over adds on a copy, then change the severity in shapes.ttl for that set with tests/test_retro_g6_rows.py over a retro with and without sustain rows on each side of the cut-over.",
+      "evidence": "2026-11-22T23:37:45Z: 2026-11-22 MEASURED before raising anything (nemik-check --repo nemik into a scratch file, read-only): 263 'thin: no sustain' Info rows today, across repos' retros (e.g. aeternum:R1, R10, R11: the ingest covers every repo's scaffold-form retros, not nemik's alone). Raising the Info to a Warning for a retro with zero sustain rows would add 263 Warnings to nemik-check at once, on retros that are history (the same flood W982's ingest decision avoided). So the shape is a one-line severity change, but WHICH retros it judges is the decision: all 263, or only retros after a cut-over (an id or date) or those the reviewer wrote after the sustain field was part of the scaffold form.",
       "issued_at": "2026-10-24T23:42:56Z",
       "minted_during": "interrupt",
       "caused_by": "github:W44",
-      "last_worked": "2026-10-24T23:43:28Z",
+      "last_worked": "2026-11-22T23:37:45Z",
       "ticks_blocked": 0,
       "warrants": [
         {
@@ -23824,19 +23836,19 @@
     {
       "symbol": "W1016",
       "title": "A nemik tool traces one test run with the footprint audit and writes the declared reads for nemik's modules",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W643"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Write readstrace: trace one test, drop .venv, __pycache__ and directories, map opens to repo-relative .py and data files, and list them per test as the candidate reads; run it over one test target first, then a sample",
-      "evidence": "2026-10-25: 2026-10-25 first trace: strace -f -e trace=openat over python3 -m pytest tests/test_cones.py (9 passed) logs 1409 opens; filtering to repo files means dropping .venv site-packages, __pycache__ .pyc files and directory opens, and reading the .py behind a .pyc. mikemol.hooks.footprint.within does the in-root regular-file reduction but counts .venv as in the root, so the nemik tool excludes it. strace is at /usr/bin/strace",
+      "next_bounded_step": "Write readstrace (pure): parse an strace -f -e trace=openat file into repo-relative .py and data files (drop .venv, __pycache__, directories; map a runfiles path to its repo path; read the .py behind a .pyc), tested on a planted strace excerpt; then one real trace with bazel test --run_under over a single test target (//:test_cones), read-only on the host, one bazel run at a time (W2403).",
+      "evidence": "2026-10-25: 2026-10-25 first trace: strace -f -e trace=openat over python3 -m pytest tests/test_cones.py (9 passed) logs 1409 opens; filtering to repo files means dropping .venv site-packages, __pycache__ .pyc files and directory opens, and reading the .py behind a .pyc. mikemol.hooks.footprint.within does the in-root regular-file reduction but counts .venv as in the root, so the nemik tool excludes it. strace is at /usr/bin/strace | 2026-11-22T23:38:37Z: 2026-11-22 RE-SCOPED against the operator's rule (run tests through bazel, never pytest outside it; 2026-10-24, re-ruled 2026-11-07): the 2026-10-25 first trace ran strace over python3 -m pytest directly, which that rule forbids now. The trace must run INSIDE the bazel test: bazel's --run_under wraps the test binary (strace -f -e trace=openat -o <file>), so the opens are those of the sandboxed test, which is also what the declared reads must match (the sandbox only has declared inputs). A sandbox run reads runfiles paths, not repo paths, so the mapping from a runfile open to its repo-relative source is part of readstrace; the test log directory holds the trace output. strace is at /usr/bin/strace, as recorded.",
       "issued_at": "2026-10-25T02:12:38Z",
       "minted_during": "tick",
       "caused_by": "W643",
-      "last_worked": "2026-10-25T03:39:52Z",
+      "last_worked": "2026-11-22T23:38:37Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/readstrace.py",
@@ -23924,19 +23936,19 @@
     {
       "symbol": "W1020",
       "title": "The builder container skips the rebuild when the inputs' hash is unchanged, with a before and after CPU reading",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W764"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Make the builder container's loop skip nemik-serve --publish when the content hash of the export tree is unchanged since the last build, then take a CPU reading over a measured interval against the 0.862 core baseline on W764",
-      "evidence": "",
+      "next_bounded_step": "Find the series that counts a publish skipped vs built (the W1074 build gauges: ask luthen's store through endpoints_query, positive control first) and the builder container's CPU-seconds counter; compute CPU-seconds per skipped pass and per built pass over the last N passes; compare to the 0.862-core baseline converted to CPU-seconds per pass; no kubectl (ask luthen's channel or read the series in Victoria). If no skip counter exists, card it as the gap and add the gauge.",
+      "evidence": "2026-11-22T23:41:45Z: 2026-11-22 READ deploy/deployment.yaml: the builder loop (lines 76-92) runs nemik-exports then nemik-serve --publish every 30 s, and the header comments already state the skip (line 14: 'the builder rebuilds on a changed content hash (publish skips an unchanged fleet)'; line 79: 'An unchanged fleet costs one hash pass (about a second); a changed one a build (~16 s CPU warm)'). So the SKIP the card asks for is in the publish path already; what is left is the READING the card asks for: the CPU of the builder before and after, against the 0.862-core baseline recorded on W764. Under the operator's throughput ruling (host line 213965) the reading is per BUILD and per HASH PASS (CPU-seconds of a skipped pass vs a built one, from the build gauges that carry the pod, W1074), not CPU over a wall-clock interval. Not read: that the skip really fires in the live pod (the code path and the gauge that counts skips).",
       "issued_at": "2026-10-25T02:38:48Z",
       "minted_during": "tick",
       "caused_by": "W764",
-      "last_worked": "2026-10-25T02:38:58Z",
+      "last_worked": "2026-11-22T23:41:45Z",
       "ticks_blocked": 0,
       "manifest": [
         "deploy/deployment.yaml",
@@ -23945,7 +23957,8 @@
       "size_class": "small",
       "weight": 205,
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
-      "vector_source": "default"
+      "vector_source": "default",
+      "completed": null
     },
     {
       "symbol": "W1021",
@@ -23978,19 +23991,23 @@
     {
       "symbol": "W1022",
       "title": "The page fetches the host-root board and maps its rows to nodes of a read-only host lane (state, waitsFor, id)",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W789"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W2440",
+        "W2441",
+        "W2442"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "Fetch the host-root board in the served page only, and draw each row as a node of a read-only host lane using adapter.resource_uri for its id, with state mapped to the node states and waitsFor to edges and no rank weight",
       "evidence": "",
       "issued_at": "2026-10-25T02:38:49Z",
       "minted_during": "tick",
       "caused_by": "W789",
-      "last_worked": "2026-10-25T02:39:01Z",
+      "last_worked": "2026-11-22T23:42:04Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/web/index.html",
@@ -24000,7 +24017,8 @@
       "size_class": "medium",
       "weight": 210,
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
-      "vector_source": "default"
+      "vector_source": "default",
+      "completed": null
     },
     {
       "symbol": "W1023",
@@ -24146,19 +24164,21 @@
     {
       "symbol": "W1026",
       "title": "The pace board publishes nemik_ready_overdue{repo}: the repo's ready cards past the learned age bound, a cleanup count beside the round gauges",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "github:W46"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
-      "next_bounded_step": "Count each repo's ready cards past the learned age bound with the same arithmetic nemik-check --ready-neither uses, publish it as the gauge nemik_ready_overdue labelled by repo beside the round gauges, and treat it as a cleanup count, not demand",
-      "evidence": "",
+      "blocked_on": [
+        "W2432"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "After W2432 lands: have W2434 publish the stale-ready series under the name nemik_ready_overdue{repo} (one series, two readers), and add the test that the round and the rank read it as a cleanup count, never as demand (tests/test_ready_overdue.py). Reuse the arithmetic nemik-check --ready-neither uses; reuse W2010's held stale-ready patch if it fits.",
+      "evidence": "2026-11-23T00:03:47Z: 2026-11-22 COMMON STRUCTURE with W1002 (atomized today: W2432 the pure count of ready cards past the learned age bound, W2433 ratchetpace takes it as a series, W2434 pacepublish writes the series on the pace board and gauge, W2435 the gate refusal reads it): this card's gauge nemik_ready_overdue{repo} is the SAME count with a second consumer. One count function (W2432), one published series (W2434): the gauge is the series' publication, not a second counter. What stays distinct is the reading: here a cleanup count, never demand (the card's own rule); in W1002 a ratchet the gate refuses on. So this card builds nothing of its own beyond naming the gauge nemik_ready_overdue and its labels, and the tests that it is a count not a demand source; blocked on W2432, the shared count.",
       "issued_at": "2026-10-25T02:47:02Z",
       "minted_during": "interrupt",
       "caused_by": "W1025",
-      "last_worked": "2026-10-25T02:47:10Z",
+      "last_worked": "2026-11-23T00:03:47Z",
       "ticks_blocked": 0,
       "completed": null,
       "weight": 206,
@@ -24202,19 +24222,19 @@
     {
       "symbol": "W1028",
       "title": "Port the page's combine step to the core once the documents' schema is fixed: take the next pure function from W815's inventory and call it through core.wasm",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W812"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Read the documents' schema the combine step takes, write it as plain-data functions under src/nemik/core that compile under the pinned Codon, and have the page call them through core.wasm",
+      "next_bounded_step": "W2402 landed (a86667c3, docs/core-combine-schema.md). Step 1: pin the three unpinned behaviours of panels.js combine in tests/test_core_combine.py (first-document ruler, inbound and operator concatenated without dedupe, last row wins on a duplicate node or edge) against the JS as it is; step 2: the plain-data port under src/nemik/core/combine.py that compiles under the pinned Codon; step 3: the page calls it through core.wasm. Probe-compile with the bazel-cache codon first (after W2407's presubmit, one bazel gate at a time).",
       "evidence": "2026-11-22T18:20:45Z: 2026-11-22 atomized on the exit-8 wake: child W2402 (the combine schema written from panels.js) comes first; the port waits on it and is medium, so the core function then splits per document kind.",
       "issued_at": "2026-10-25T03:12:35Z",
       "minted_during": "tick",
       "caused_by": "W812",
-      "last_worked": "2026-11-22T18:20:45Z",
+      "last_worked": "2026-11-22T22:07:21Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/core/combine.py",
@@ -24224,7 +24244,8 @@
       "size_class": "medium",
       "weight": 216,
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
-      "vector_source": "default"
+      "vector_source": "default",
+      "completed": null
     },
     {
       "symbol": "W1029",
@@ -50819,26 +50840,27 @@
     {
       "symbol": "W2029",
       "title": "Decide the page structure in docs/page-structure-map.md (Orders as its own view or a section of Health, pane or drawer, Wake split), then unblock W938",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W2304"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Read docs/page-structure-map.md and src/nemik/web/index.html, decide the three questions with the a11y-adversary review of any colour or chip change, write the decision in the doc, then unblock nemik:W938 with it. Owner nemik session, due 2026-11-13, witness: the doc states the three decisions and W938 is unblocked",
-      "evidence": "",
+      "next_bounded_step": "Send github-00 refs/review/W2029-v1; on PASS-SUBMIT submit as a docs stack after W2407; then unblock nemik:W938 with the doc's Decision section.",
+      "evidence": "2026-11-22T22:46:36Z: 2026-11-22 DECIDED in docs/page-structure-map.md (new section 'Decision'): Orders is its own view; the selected card is a pane in one fixed place and Help is the drawer; Wake splits (sleeping repos in Health, the need-you line in Orders as a link to the Health section). BUILT: refs/review/W2029-v1 = 4711dc6dc46e54bcd47f6ff077ede6262be9f2a2 (tree e8526dac2afd027ff154055accd04af46d5b670a, parent 834357e5), one docs file. No colour or chip change, so no a11y-adversary review owed here. NOT DONE: github-00 review, submit, then unblock W938 (and W964's three asks).",
       "issued_at": "2026-11-06T20:37:46Z",
       "minted_during": "tick",
       "caused_by": "W964",
-      "last_worked": null,
+      "last_worked": "2026-11-22T22:46:36Z",
       "ticks_blocked": 0,
       "manifest": [
         "docs/page-structure-map.md"
       ],
       "size_class": "small",
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
-      "vector_source": "default"
+      "vector_source": "default",
+      "completed": null
     },
     {
       "symbol": "W2030",
@@ -53876,7 +53898,10 @@
       ],
       "touches": [],
       "blocked_on": [
-        "W2404"
+        "W2425",
+        "W2426",
+        "W2427",
+        "W2428"
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "After W2404's doc lands: build the native pieces producer in the static build so the page reads its output through sourceGraph unchanged; check every caller of graphText (panels.js load, line 151, is the one today) before deleting it; witness: tests/test_layout.py and tests/test_pieces.py pass.",
@@ -53884,7 +53909,7 @@
       "issued_at": "2026-11-10T18:00:15Z",
       "minted_during": "interrupt",
       "caused_by": "nemik:W423",
-      "last_worked": "2026-11-22T19:58:51Z",
+      "last_worked": "2026-11-22T22:20:16Z",
       "ticks_blocked": 0,
       "completed": null,
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
@@ -57354,12 +57379,12 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Make the rank UNSCORED line and a check Info count source=default as unscored, with a test over a default-stamped and an agent-scored card; then score the real vectors by mtools:W2697 (writer suggests from a card's own fields) as a dry run checked as a set, never an agent fan",
-      "evidence": "2026-11-22T19:33:51Z: 2026-11-22 taken working (round card). Read: its step is two edits (rank's UNSCORED line, a check Info), both over vector_source == default; it touches shapes.ttl's check Info, so like W2308 it follows W708's landing; the rank line is in src/nemik (rankcli or rank) and can be built first in a scratch worktree.",
+      "next_bounded_step": "Build in a scratch worktree: one predicate (no vector or vectorSource == default) in rank.py used by unscored() and by the nemik-check Info; test over a default-stamped and an agent-scored card (tests/test_unscored.py or beside the rank tests); red first on the current count (725 default-stamped read UNSCORED 725 only if the predicate holds). Then the dry-run scoring by mtools:W2697 checked as a set.",
+      "evidence": "2026-11-22T19:33:51Z: 2026-11-22 taken working (round card). Read: its step is two edits (rank's UNSCORED line, a check Info), both over vector_source == default; it touches shapes.ttl's check Info, so like W2308 it follows W708's landing; the rank line is in src/nemik (rankcli or rank) and can be built first in a scratch worktree. | 2026-11-22T22:45:47Z: 2026-11-22 READ for the build: rank.unscored (src/nemik/rank.py:1437) counts open cards with g.value(n, NEMIK.vector) is None, the line printed at rank.py:941; adapter.py:552 already emits NEMIK.vectorSource from the card's vector_source. So the fix is one condition: count a card UNSCORED when its vector is absent OR its vectorSource is the literal default (the writer's default stamp), with a test over a default-stamped and an agent-scored card; the nemik-check Info reads the same predicate, so the predicate goes in one function both call (no second spelling).",
       "issued_at": "2026-11-18T13:50:45Z",
       "minted_during": "interrupt",
       "caused_by": "operator",
-      "last_worked": "2026-11-22T19:33:51Z",
+      "last_worked": "2026-11-22T22:45:47Z",
       "ticks_blocked": 0,
       "completed": null
     },
@@ -58896,12 +58921,12 @@
         "github:W120"
       ],
       "blocked_kind": "agent",
-      "next_bounded_step": "After W2391: (1) write the letter to mtools (inbox, citing nemik:W2360) for the writer-side estimate field {metric, old, new, basis, as_of}; (2) build stage 1: the reference-class own-cost forecast by manifest files, published as nemik_card_cost_forecast{repo,class} with a learned freshness rule, and the forecast-error series with its own freshness rule; (3) name attempts as a gap on this card, blocked on mtools' pollution fix; (4) then W2392 and the v11 cut. Design notes to github-00 for stage 1's reference-class function before building.",
-      "evidence": "2026-11-22T16:18:26Z: 2026-11-22 CORRECTION: the replay card is W2393 (due 2026-12-06), not W2392; W2392 is the nemik-check shape for a ready card with no cost estimate (blocked on this card). | 2026-11-22T16:18:56Z: 2026-11-22 design notes sent to github-00: OWN COST derived by a reference class from measured landings (no writer change, published as a forecast series), EFFECT carried on the card as {metric, old, new, basis, as_of} (needs an mtools writer card, mtools parked), the forecast-error series in the metric store as the calibration loop, CPU first and attempts named as a gap (partial and polluted). Questions: the cone (manifest files), whether a derived forecast satisfies Q3, whether to card the writer field for mtools. | 2026-11-22T16:24:00Z: 2026-11-22 github-00 APPROVED the design with answers: (a) the manifest files are the cone, consistent with the round; the import closure is a LATER refinement (fleet memory: the input graph drives card grouping); (b) a derived forecast satisfies 'every card has a cost' as the DEFAULT, and the card may later carry its own estimate, which OVERRIDES the default: the session's own estimate wins over the derived one, and both are scored by the same error series (state this precedence in v11); a card with no derivable class and no own estimate is Q3's cost-less card; (c) card the writer field and put its letter in mtools/inbox citing this card, not routed live. CONDITIONS: (1) nemik_card_cost_forecast and the error series each get a LEARNED FRESHNESS RULE (the fleet rule that every metric has one): a stopped producer reads UNKNOWN, not stale-as-current; (2) name attempts as a GAP on the card, with the mtools pollution fix as its blocker. Build stage 1 AFTER W2391; SAY in the design which store wins once both exist (the card's own estimate over the derived one, one error series, never two spellings of one estimate). | 2026-11-22T16:24:22Z: 2026-11-22 the writer-side field LETTER is written: mtools/inbox/2026-11-22-nemik-card-estimate-field-in-the-writer.md (a per-card estimate {metric, old, new, basis, as_of}, positive rationals, one entry per metric, validated by the writer; which store wins: the card's own estimate over the derived one, one error series; attempts named a gap blocked on mtools' pollution fix). Not routed live: mtools is parked.",
+      "next_bounded_step": "Index the reference-class cost forecast and its error series by landing (a landing's gate CPU-seconds and the forecast made before it), not by date; the freshness rule counts landings since the last sample, not hours. A wall-clock estimate is a later step: landings-to-zero times an observed landings-per-active-hour series. Design notes to github-00 first.",
+      "evidence": "2026-11-22T16:18:26Z: 2026-11-22 CORRECTION: the replay card is W2393 (due 2026-12-06), not W2392; W2392 is the nemik-check shape for a ready card with no cost estimate (blocked on this card). | 2026-11-22T16:18:56Z: 2026-11-22 design notes sent to github-00: OWN COST derived by a reference class from measured landings (no writer change, published as a forecast series), EFFECT carried on the card as {metric, old, new, basis, as_of} (needs an mtools writer card, mtools parked), the forecast-error series in the metric store as the calibration loop, CPU first and attempts named as a gap (partial and polluted). Questions: the cone (manifest files), whether a derived forecast satisfies Q3, whether to card the writer field for mtools. | 2026-11-22T16:24:00Z: 2026-11-22 github-00 APPROVED the design with answers: (a) the manifest files are the cone, consistent with the round; the import closure is a LATER refinement (fleet memory: the input graph drives card grouping); (b) a derived forecast satisfies 'every card has a cost' as the DEFAULT, and the card may later carry its own estimate, which OVERRIDES the default: the session's own estimate wins over the derived one, and both are scored by the same error series (state this precedence in v11); a card with no derivable class and no own estimate is Q3's cost-less card; (c) card the writer field and put its letter in mtools/inbox citing this card, not routed live. CONDITIONS: (1) nemik_card_cost_forecast and the error series each get a LEARNED FRESHNESS RULE (the fleet rule that every metric has one): a stopped producer reads UNKNOWN, not stale-as-current; (2) name attempts as a GAP on the card, with the mtools pollution fix as its blocker. Build stage 1 AFTER W2391; SAY in the design which store wins once both exist (the card's own estimate over the derived one, one error series, never two spellings of one estimate). | 2026-11-22T16:24:22Z: 2026-11-22 the writer-side field LETTER is written: mtools/inbox/2026-11-22-nemik-card-estimate-field-in-the-writer.md (a per-card estimate {metric, old, new, basis, as_of}, positive rationals, one entry per metric, validated by the writer; which store wins: the card's own estimate over the derived one, one error series; attempts named a gap blocked on mtools' pollution fix). Not routed live: mtools is parked. | 2026-11-22T23:09:26Z: 2026-11-22 OPERATOR RULING (host line 213965, uuid 91d9f552-6cf0-4692-b069-e9f36e00bbe6, 2026-11-22T23:07:46Z, via github-00): 'series over samples, not just series over time; sessions won't always be awake to process cards, so predictions based on wall clock won't work. Predictions based on throughput will mesh better with when the worker is working'. APPLIES: the cost forecast and its error series are indexed per LANDING or per TICK, never per day; a wall-clock figure, where one is wanted, is a separate step that multiplies by an observed wake rate, itself a series. The docs state their units and cite this line.",
       "issued_at": "2026-11-19T20:50:52Z",
       "minted_during": "interrupt",
       "caused_by": "inbox/2026-11-19-github-00-w2325-velocity-from-cost-estimates.md",
-      "last_worked": "2026-11-22T16:24:22Z",
+      "last_worked": "2026-11-22T23:09:26Z",
       "ticks_blocked": 0,
       "completed": null
     },
@@ -59576,11 +59601,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "FROM github:W146 (host ruling on W2325, ask 3): card the replay over landed history. MEASURE, for the fleet's landed history, the integral of outstanding demand over time (sum of demand x completion time): (1) the ruled order against today's bands; (2) Q1's CREDIT RULE for several accelerators on one card (marginal credit is the candidate); (3) Q2's CONDITIONAL velocity-first rule (X first iff c_X < (1 - 1/G)*c_y) against the UNCONDITIONAL standing rule (L100702); if the conditional burns the backlog faster it goes to the operator as a ruling that looks wrong, with the numbers; (4) Q4's demand SOURCE SIZE (no floor, only a larger source), with fixture B as the acceptance test and nemik-rank --check redefined to match; (5) Q5's heuristic GAP: k = 1 is Smith's rule, optimal only for independent cards on one machine, so measure the gap with precedence edges. INPUTS: landed history (the landings file nemik-hostroot writes, the queues' done cards with completed and issued_at), the cost estimates of W2360 once they exist (until then a reference class from measured gate seconds). Design notes to github-00 first (what history, what demand, what counts as completion time, the baseline). Due 2026-12-06 (my call, two weeks); the replay is read-only and applies nothing.",
-      "evidence": "2026-11-22T16:49:13Z: 2026-11-22 github-00 (v11 approved as faithful to github:W146): the replay tests the GENERAL exchange threshold, c_X < (1 - 1/G) c_y + (w_X / w_y) c_y, not the pure-accelerator one: the ruling's form c_X < (1 - 1/G) c_y is its w_X = 0 case, so the replay needs each accelerator's own demand w_X as an input and reports both (the pure form as the special case). Outcome unchanged: velocity-first stays unconditional until the replay says otherwise.",
+      "evidence": "2026-11-22T16:49:13Z: 2026-11-22 github-00 (v11 approved as faithful to github:W146): the replay tests the GENERAL exchange threshold, c_X < (1 - 1/G) c_y + (w_X / w_y) c_y, not the pure-accelerator one: the ruling's form c_X < (1 - 1/G) c_y is its w_X = 0 case, so the replay needs each accelerator's own demand w_X as an input and reports both (the pure form as the special case). Outcome unchanged: velocity-first stays unconditional until the replay says otherwise. | 2026-11-22T23:09:27Z: 2026-11-22 OPERATOR RULING (host line 213965, uuid 91d9f552-6cf0-4692-b069-e9f36e00bbe6, 2026-11-22T23:07:46Z, via github-00): series over samples, not just over time; predictions on throughput, not wall clock, because sessions are not always awake. APPLIES to the replay: burn-down is measured in LANDINGS or TICKS to zero; a wall-clock figure is a separate step that multiplies by an observed wake rate (itself a series). The replay's due date (2026-12-06) is a calendar commitment; its measure is not.",
       "issued_at": "2026-11-22T16:18:19Z",
       "minted_during": "interrupt",
       "caused_by": "github:W146",
-      "last_worked": "2026-11-22T16:49:13Z",
+      "last_worked": "2026-11-22T23:09:27Z",
       "ticks_blocked": 0,
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
       "vector_source": "default",
@@ -59808,7 +59833,7 @@
     {
       "symbol": "W2404",
       "title": "Decide how the browser gets the native pieces binary's JSON (file, server request, static build), in docs/codon-to-browser.md",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W2148"
       ],
@@ -59817,14 +59842,14 @@
       ],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "github-00 PASS-SUBMIT on refs/review/W2404-v1 = 87185010: submit with .claude/stack-W2404-v1.json after W2402 and W708, one stack at a time.",
-      "evidence": "2026-11-22T19:57:05Z: 2026-11-22 exit-8 wake, read before deciding: docs/codon-to-browser.md (2026-10-16) rules out wasm (options 1 and 2) and leaves the transport open (line 29), but the tree has since grown a core.wasm path: W1028's own step says 'call it through core.wasm', W2379's gate builds core.wasm by Codon's label (tools/build_wasm.sh, gate_wasm.sh). So W2148's premise (a native pieces binary writing JSON) may be SUPERSEDED by the wasm route. Not decided here: ask github-00 which route W423 follows now, and whether the doc's 'Decision' is stale. | 2026-11-22T19:58:51Z: 2026-11-22 github-00 ruling: both live, one Codon source two compile targets (native PRODUCER of the static pieces at publish time; core.wasm COMPUTE in the page, per-view pure functions over loaded pieces); placing rule recorded in the doc. BUILT: refs/review/W2404-v1 = 87185010b3abe89c264fe0277396f7884cfadf09 (tree 0e0ef8056e15bcf3e7c104410e45eaa44aa4e632, parent 6b78506a): docs/codon-to-browser.md Decision rewritten, citing W1028 and W2379. graphText is only in panels.js (defined line 101, one caller at line 151), not index.html. W2148 retitled to the producer. NOT DONE: github-00 review, submit. | 2026-11-22T20:00:03Z: 2026-11-22 github-00 PASS-SUBMIT on 87185010; stack file written; order W708, W2402, W2404.",
+      "next_bounded_step": null,
+      "evidence": "2026-11-22T19:57:05Z: 2026-11-22 exit-8 wake, read before deciding: docs/codon-to-browser.md (2026-10-16) rules out wasm (options 1 and 2) and leaves the transport open (line 29), but the tree has since grown a core.wasm path: W1028's own step says 'call it through core.wasm', W2379's gate builds core.wasm by Codon's label (tools/build_wasm.sh, gate_wasm.sh). So W2148's premise (a native pieces binary writing JSON) may be SUPERSEDED by the wasm route. Not decided here: ask github-00 which route W423 follows now, and whether the doc's 'Decision' is stale. | 2026-11-22T19:58:51Z: 2026-11-22 github-00 ruling: both live, one Codon source two compile targets (native PRODUCER of the static pieces at publish time; core.wasm COMPUTE in the page, per-view pure functions over loaded pieces); placing rule recorded in the doc. BUILT: refs/review/W2404-v1 = 87185010b3abe89c264fe0277396f7884cfadf09 (tree 0e0ef8056e15bcf3e7c104410e45eaa44aa4e632, parent 6b78506a): docs/codon-to-browser.md Decision rewritten, citing W1028 and W2379. graphText is only in panels.js (defined line 101, one caller at line 151), not index.html. W2148 retitled to the producer. NOT DONE: github-00 review, submit. | 2026-11-22T20:00:03Z: 2026-11-22 github-00 PASS-SUBMIT on 87185010; stack file written; order W708, W2402, W2404. | 2026-11-22T22:07:06Z: 2026-11-22 LANDED as 834357e52712685c3fbc9650fa89fd1df2fcf1de (git log -1 shows my subject; ls-remote origin refs/heads/main reads the same sha); github-00 PASS-SUBMIT on refs/review/W2404-v1 = 87185010. W2148 (the native producer of the static pieces) is unblocked.",
       "issued_at": "2026-11-22T19:31:31Z",
       "minted_during": "interrupt",
       "caused_by": "W2148",
-      "last_worked": "2026-11-22T20:00:03Z",
+      "last_worked": "2026-11-22T22:07:06Z",
       "ticks_blocked": 0,
-      "completed": null
+      "completed": "20261122T220706Z"
     },
     {
       "symbol": "W2405",
@@ -60202,6 +60227,335 @@
       "caused_by": "W2311",
       "last_worked": "2026-11-22T21:45:48Z",
       "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2425",
+      "title": "W2148a: name where the static build calls the Python pieces producer (pieces.split, the static docs writer in serve.py) and what the native binary must read and write to replace it",
+      "status": "ready",
+      "enables": [
+        "W2148"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-11-22T22:20:16Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2148",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2426",
+      "title": "W2148b: a bazel target builds the native pieces binary with the pinned Codon (pieces.split/assemble compile, W2147) and a test runs it on the pieces corpus",
+      "status": "ready",
+      "enables": [
+        "W2148"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-11-22T22:20:16Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2148",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2427",
+      "title": "W2148c: the static build runs the native binary for hashes.json and graph/*.json; the page reads them unchanged through sourceGraph",
+      "status": "ready",
+      "enables": [
+        "W2148"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-11-22T22:20:16Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2148",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2428",
+      "title": "W2148d: grep every caller of graphText and delete it only if none remains (panels.js load, line 151, is one today)",
+      "status": "ready",
+      "enables": [
+        "W2148"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-11-22T22:20:16Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2148",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2429",
+      "title": "W984a: retrostub.py builds a retro stub (precommit from the card's mint-time next step and witness, trigger reopened) for a card reopened from done, from card events, pure and tested",
+      "status": "ready",
+      "enables": [
+        "W984"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-11-22T22:28:49Z",
+      "minted_during": "interrupt",
+      "caused_by": "W984",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2430",
+      "title": "W984b: the gate-refusal stub: confirm the writer's --retro-scaffold (mtools:W2267, landing verdict row) already opens it and wire the refusal event to call it, or name the gap",
+      "status": "ready",
+      "enables": [
+        "W984"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-11-22T22:28:49Z",
+      "minted_during": "interrupt",
+      "caused_by": "W984",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2431",
+      "title": "W984c: the alert-clearing and ruling-corrects-a-session stubs, one trigger each, after W984a's shape",
+      "status": "ready",
+      "enables": [
+        "W984"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-11-22T22:28:49Z",
+      "minted_during": "interrupt",
+      "caused_by": "W984",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2432",
+      "title": "W1002a: a pure count of a repo's ready cards past the learned age bound, with tests (reuse W2010's held stale-ready patch if it fits)",
+      "status": "ready",
+      "enables": [
+        "W1002"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-11-22T22:49:38Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1002",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2433",
+      "title": "W1002b: ratchetpace takes the stale-ready count as a ratchet series beside the file ratchets",
+      "status": "ready",
+      "enables": [
+        "W1002"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-11-22T22:49:38Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1002",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2434",
+      "title": "W1002c: pacepublish writes the stale-ready series on the pace board and gauge, with a learned freshness rule",
+      "status": "ready",
+      "enables": [
+        "W1002"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-11-22T22:49:38Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1002",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2435",
+      "title": "W1002d: the gate refusal reads the stale-ready series like any other ratchet",
+      "status": "ready",
+      "enables": [
+        "W1002"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-11-22T22:49:38Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1002",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2436",
+      "title": "Design: gate slots as a declared capacity the round schedules against, not false blocked_on edges (operator, via github-00)",
+      "status": "blocked",
+      "enables": [],
+      "touches": [
+        "file:docs/gate-slots.md!w"
+      ],
+      "blocked_on": [
+        "W2437",
+        "W2438",
+        "W2439"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "Submit v3 as a docs stack (after W2407 and W2029); mint cards for the three builds: (1) witness observer input.commit_queue over every repo's --in-gate --json, test with a planted entry and an unreadable repo = UNKNOWN; (2) the derived column in nemik-rank --round; (3) tools/presubmit.sh takes claim:path:<git dir>/mtools/commit with a planted HELD_ENV nesting case.",
+      "evidence": "2026-11-22T23:05:13Z: 2026-11-22 DESIGNED (operator's ask via github-00): docs/gate-slots.md, refs/review/W2436-v1 = efac7c438194a235fa3d4df8df9662221295b26d (tree 432d0aeb76157a849f3a613476e613095a5115a7, parent 834357e5). Common structure: a gate run is a consumer of a declared capacity; membudget's ledger (total, leases, status) already counts it, so a gate slot is a lease of 1 on a 'gate' ledger. Four parts: declared in mtools' membudget config; observed through an input.membudget witness fact (holder = card by lease label, unreadable = UNKNOWN); the round derives a 'queued for slot (W<n>)' column, never a state or edge; the stall detector counts a live holder's CPU as the waiter's progress (W2403). Letter to mtools written for their half (membudget and mikemol-commit are theirs, parked). UNKNOWN: whether the existing ledger works count-only across clients (docstring read, not run). NOT DONE: github-00 review; then cards for the observer and the column. | 2026-11-22T23:08:28Z: 2026-11-22 github-00 REVISE of v1 (the operator: do mtools and gcalculus already have submit-queue katas; aren't the vector and cost models for this?). SURVEYED through git objects: mikemol-commit queues stacks PER REPO on fence's zero-capacity claim claim:path:<git dir>/mtools/commit (claim_of, commit_kata.py:807; no deadline, reaped when the holder dies, queued stacks join the running gate's run), observable through --in-gate [--json]; across repos only the host memory ledger; gcalculus has no queue tool of its own at HEAD; summit's index NOT queried (its reader is a peer's working tree); tools/presubmit.sh is NOT in the queue (leading reading of W2403). v2 = refs/review/W2436-v2 = 106a5cfce6a420b838101bb7c1f8e98d4998e0e8 (tree b9a64d47edda0de89403f77e98c04f273c13769c, parent 834357e5): opens with the operator's framing (the slot is the capacity side of W2360's cost and W2325 v11's con rail); no new ledger; capacity declared in nemik as the con rail's limit; holder observed through input.commit_queue over --in-gate --json; derived queued-for-slot in the round; presubmit takes the same claim (nemik's); the stall detector stays mtools' (letter rewritten, the ledger ask withdrawn). NOT DONE: review of v2. | 2026-11-22T23:09:28Z: 2026-11-22 OPERATOR RULING (host line 213965, uuid 91d9f552-6cf0-4692-b069-e9f36e00bbe6): throughput, not wall clock. For this design: slot occupancy is in ACTIVE seconds of the holder (its tree's CPU-seconds), already so; a queue's depth and a card's wait are counted in landings ahead of it, not minutes. To state in the doc's units paragraph (v3). | 2026-11-22T23:10:47Z: 2026-11-22 github-00 APPROVED v2 as a design (106a5cfc); three notes applied in v3 = refs/review/W2436-v3 = 04f9ec26d10cb99f153b7258b60d9ebfb69431b2 (tree 55c89affe85ca15bbb648c2f96385ebd082b3b55, parent 834357e5): (1) scope: the claim queue is per repo, the capacity the host's, so the holders are the union of every repo's --in-gate and the capacity is declared per host; (2) read-only: the pinned bin printed [] for nemik and luthen-observability (no stack in flight), the shape from commit_counts.live_json is [{key, state, waypoints, began_ns}] with began_ns null for a queued entry, a planted entry and a planted HELD_ENV nesting case belong in the build's tests; (3) summit missed under 'submit queue' (github-00 ran it), other spellings to try. Units: the operator's throughput ruling (host line 213965) cited in the doc. NEXT: nemik's half as cards: the input.commit_queue witness (union over repos), the derived queued-for-slot column, presubmit taking the claim.",
+      "issued_at": "2026-11-22T23:04:27Z",
+      "minted_during": "interrupt",
+      "caused_by": "github-00:W120",
+      "last_worked": "2026-11-22T23:10:51Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W2437",
+      "title": "W2436a: a nemik-witnesses observer input.commit_queue over every repo's mikemol-commit --in-gate --json, tested with a planted entry and an unreadable repo as UNKNOWN",
+      "status": "ready",
+      "enables": [
+        "W2436"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-11-22T23:10:51Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2436",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2438",
+      "title": "W2436b: nemik-rank --round derives queued for slot (behind W<n>) from the union of the repos' queues, never a state or a blocked_on edge",
+      "status": "ready",
+      "enables": [
+        "W2436"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-11-22T23:10:51Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2436",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2439",
+      "title": "W2436c: tools/presubmit.sh takes the repo's commit claim, with a planted HELD_ENV nesting case",
+      "status": "ready",
+      "enables": [
+        "W2436"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-11-22T23:10:51Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2436",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2440",
+      "title": "W1022a: hostlane.js maps host-root board rows to read-only nodes (id from resource_uri, state mapped, waitsFor to edges, no rank weight), tested on plain rows",
+      "status": "ready",
+      "enables": [
+        "W1022"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-11-22T23:42:04Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1022",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2441",
+      "title": "W1022b: serve.py serves the host-root board to the page (served page only, a source without one has none)",
+      "status": "ready",
+      "enables": [
+        "W1022"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-11-22T23:42:04Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1022",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2442",
+      "title": "W1022c: the page draws the host lane from hostlane.js, with the WCAG chain test as oracle",
+      "status": "ready",
+      "enables": [
+        "W1022"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-11-22T23:42:04Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1022",
+      "last_worked": null,
+      "ticks_blocked": 0
     }
   ],
   "residue": [
@@ -60535,15 +60889,6 @@
       "lapse_ledgered": true
     },
     {
-      "tag": "file:docs/codon-to-browser.md!w",
-      "holder": "(unlocked)",
-      "waypoint": "W2404",
-      "base_sha": "6b78506a8fb7c910a393225f4d4e51af06803922",
-      "taken_at": "2026-11-22T19:59:07Z",
-      "renewed_at": "2026-11-22T19:59:07Z",
-      "expires_at": "2026-11-22T20:29:07Z"
-    },
-    {
       "tag": "file:src/nemik/roundof.py!w",
       "holder": "(unlocked)",
       "waypoint": "W2407",
@@ -60605,6 +60950,15 @@
       "taken_at": "2026-11-22T21:45:45Z",
       "renewed_at": "2026-11-22T21:45:45Z",
       "expires_at": "2026-11-22T22:15:45Z"
+    },
+    {
+      "tag": "file:docs/gate-slots.md!w",
+      "holder": "(unlocked)",
+      "waypoint": "W2436",
+      "base_sha": "834357e52712685c3fbc9650fa89fd1df2fcf1de",
+      "taken_at": "2026-11-22T23:05:13Z",
+      "renewed_at": "2026-11-22T23:05:13Z",
+      "expires_at": "2026-11-22T23:35:13Z"
     }
   ],
   "advice": [

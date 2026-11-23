@@ -70,17 +70,17 @@ def test_capacity_is_the_median_stack_size_lifted_to_the_floor() -> None:
 def test_the_round_is_the_top_of_the_ranking_with_ranks_from_one() -> None:
     """Three of four, in rank order; a size past the list takes them all; zero takes none."""
     top = [("W5", 1, "9.0"), ("W2", 2, "4.5"), ("W9", 3, "1.0")]
-    assert round_of(RANKED, 3) == top
-    assert len(round_of(RANKED, 9)) == len(RANKED)
-    assert round_of(RANKED, 0) == []
+    assert round_of(RANKED, 3, []) == top
+    assert len(round_of(RANKED, 9, [])) == len(RANKED)
+    assert round_of(RANKED, 0, []) == []
 
 
 def test_a_card_unblocked_after_the_round_is_fixed_is_not_in_it() -> None:
     """The round is a value: a new ready card changes the next draw, not this one."""
-    first = round_of(RANKED, 2)
+    first = round_of(RANKED, 2, [])
     later = [("W7", "99.0"), *RANKED]
     assert [symbol for symbol, _, _ in first] == ["W5", "W2"]
-    assert [symbol for symbol, _, _ in round_of(later, 2)] == ["W7", "W5"]
+    assert [symbol for symbol, _, _ in round_of(later, 2, [])] == ["W7", "W5"]
 
 
 def test_drift_counts_the_working_cards_outside_the_round() -> None:

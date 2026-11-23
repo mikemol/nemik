@@ -653,12 +653,17 @@ def _rows(
     # While a fruit member is the working card, the class's slot is taken: no stand-in is promoted,
     # or the next member would inherit the class weight and read as DRIFT against the queue
     # (luthen-observability, 2026-10-02: W52 working, W56 suddenly "carries 13").
+    # nemik:W2407: when the working cards are ranked too (a round), the class is formed over the
+    # READY rows only and no working card can take its slot: a card's state must never reorder the
+    # others (luthen-observability:W2894: W916 the stand-in for 259 cards came and went as W941
+    # flipped, and the ready cards filling the round changed with it).
+    ready_rows = [r for r in rows if r["state"] == "ready"]
     working = [
         n
         for n in g.subjects(NEMIK.workstream, ws)
         if (n, OSLC_CM.state, NEMIK.Working) in g
     ]
-    fruit_busy = any(
+    fruit_busy = not with_working and any(
         downstream_weight(g, n, weights) == 0
         or (n, NEMIK.touches, Literal(FRUIT_TAG)) in g
         for n in working
@@ -666,11 +671,11 @@ def _rows(
     if (
         fruit_row
         and not fruit_busy
-        and (f := fruit(g, repo, rows, weights))
+        and (f := fruit(g, repo, ready_rows, weights))
         and len(f["members"]) > 1
     ):
         rep = min(
-            (r for r in rows if r["symbol"] in f["members"]),
+            (r for r in ready_rows if r["symbol"] in f["members"]),
             key=_downstream_order,
         )
         rep["weight"], rep["fruit"] = f["class_weight"], f
