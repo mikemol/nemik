@@ -89,6 +89,7 @@ NEMIK_PY = [
     "src/nemik/pacecli.py",
     "src/nemik/pacepublish.py",
     "src/nemik/pacerun.py",
+    "src/nemik/pacewiden.py",
     "src/nemik/pacewrite.py",
     "src/nemik/pacing.py",
     "src/nemik/parity.py",

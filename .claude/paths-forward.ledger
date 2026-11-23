@@ -6703,3 +6703,4 @@
 2026-11-23T03:39:48Z  interrupt W2456 minted    -         "W1258c: answer linux-sources:W498 (a past due on any open card is reported, never ranked) with the first reading"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1258
 2026-11-23T03:57:42Z  status W1325 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-23T04:12:59Z  status W2029 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T04:13:13Z  status W938 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

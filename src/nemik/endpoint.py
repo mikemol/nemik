@@ -158,6 +158,46 @@ def vm_export(match: str, root: Path, since: str = EXPORT_SINCE) -> str:
     return body
 
 
+def vm_series(match: str, root: Path, since: str = EXPORT_SINCE) -> str:
+    """Read the series a selector matches in a window, labels only, no samples (nemik:W2042).
+
+    The pace needs to know which ratchets exist before it asks for their samples: a ratchet quiet
+    for days has none in a short export and would otherwise be missing from the file.
+
+    Args:
+        match: The series selector, e.g. {__name__="mikemol.ratchet.value"}.
+        root: The directory holding the luthen-observability checkout, which names the store.
+        since: How far back to look, as a relative duration like 30d.
+
+    Returns:
+        The store's answer text, {"status": "success", "data": [label sets]}; pacewiden.known_from
+        reads it.
+
+    Raises:
+        OSError: When the store's address cannot be found, or it cannot be reached or answers badly.
+
+    """
+    base = declared_base("vmsingle-http", root)
+    if base is None:
+        message = f"no vmsingle-http address from the {LUTHEN} checkout under {root}"
+        raise OSError(message)
+    query = urllib.parse.urlencode({"match[]": match, "start": f"-{since}"})
+    connection = http.client.HTTPConnection(
+        urllib.parse.urlsplit(base).netloc, timeout=EXPORT_TIMEOUT_SECONDS
+    )
+    try:
+        status, body = _get(connection, f"/api/v1/series?{query}")
+    except (http.client.HTTPException, ValueError) as error:
+        message = f"the store's series list could not be read: {error}"
+        raise OSError(message) from error
+    finally:
+        connection.close()
+    if status != http.client.OK:
+        message = f"the store's series list answered {status}"
+        raise OSError(message)
+    return body
+
+
 def _get(connection: http.client.HTTPConnection, target: str) -> tuple[int, str]:
     """GET a path on an open connection.
 

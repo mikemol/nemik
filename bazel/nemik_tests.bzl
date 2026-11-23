@@ -304,6 +304,7 @@ TESTS_PY = [
     "tests/test_pace_pending.py",
     "tests/test_pace_replay.py",
     "tests/test_pace_selfcheck.py",
+    "tests/test_pace_widen.py",
     "tests/test_pacepublish.py",
     "tests/test_pacerun.py",
     "tests/test_pacewrite.py",

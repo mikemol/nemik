@@ -16,15 +16,17 @@ as one flat JSON object per line (a header, then an activity per line) for the o
 server never spawns, so the log is read here, on the host.
 """
 
+from __future__ import annotations
+
 import argparse
 import json
 import sys
 from datetime import UTC, datetime
 from importlib.metadata import PackageNotFoundError, distribution
 from pathlib import Path
-from typing import cast
+from typing import TYPE_CHECKING, cast
 
-from nemik.endpoint import vlogs_lines, vm_export
+from nemik.endpoint import EXPORT_SINCE, vlogs_lines, vm_export, vm_series
 from nemik.hostroot import HostRow, latest, records
 from nemik.landings import document as landings_document
 from nemik.landings import records as landings_records
@@ -35,6 +37,11 @@ from nemik.pacerun import (
     pace_document_floored,
     retired_of,
 )
+from nemik.pacewiden import known_from, short_by_repo, widened_selector
+from nemik.ratchetpace import WINDOW
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
 
 QUERY = "stream:host_root_frontier"
 LANDINGS_QUERY = "service.name:mikemol-commit"
@@ -242,6 +249,38 @@ def pace_file(source: Path, target: Path | None, stamp: str) -> int:
     return _judge(answer, target or PACE_OUT, stamp)
 
 
+# nemik:W2042: the first ask. Three raw exports over 30 days took the pace unit's whole 120 s of
+# CPU (luthen-nemik-pace.service, killed on every run since 2026-11-13). A few days hold the
+# samples the pace reads for a busy ratchet; only a quiet one is asked again over the long window.
+NARROW_SINCE = "3d"
+
+
+def ratchet_export(
+    root: Path,
+    export: Callable[[str, Path, str], str],
+    series: Callable[[str, Path], str],
+) -> str:
+    """Read the ratchet values: a short window, and the long one only for ratchets short of it.
+
+    Args:
+        root: The directory holding the luthen-observability checkout, which names the store.
+        export: Reads the store's raw export of a selector over a relative window (vm_export).
+        series: Reads the store's series list of a selector (vm_series).
+
+    Returns:
+        The export's lines: the long-window lines of the quiet ratchets, then the short window's.
+        Their samples repeat, and the series reader merges them by sample time.
+
+    """
+    short = export(RATCHET_SELECTOR, root, NARROW_SINCE)
+    known = known_from(series(RATCHET_SELECTOR, root))
+    wide = ""
+    for repo, names in short_by_repo(short, WINDOW, known).items():
+        selector = widened_selector(RATCHET_SELECTOR, repo, names)
+        wide += export(selector, root, EXPORT_SINCE)
+    return wide + short
+
+
 def pace_fetch(root: Path, target: Path | None, stamp: str) -> int:
     """Read the ratchet series from the metric store and write the pace file (nemik:W1032).
 
@@ -256,9 +295,9 @@ def pace_fetch(root: Path, target: Path | None, stamp: str) -> int:
 
     """
     try:
-        answer = vm_export(RATCHET_SELECTOR, root)
-        floors = floors_of(vm_export(REQUIRED_SELECTOR, root))
-        retired = retired_of(vm_export(RETIRED_SELECTOR, root))
+        answer = ratchet_export(root, vm_export, vm_series)
+        floors = floors_of(vm_export(REQUIRED_SELECTOR, root, NARROW_SINCE))
+        retired = retired_of(vm_export(RETIRED_SELECTOR, root, NARROW_SINCE))
     except OSError as error:
         sys.stderr.write(f"nemik-hostroot: {error}\n")
         return 1
