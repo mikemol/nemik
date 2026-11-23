@@ -6667,3 +6667,30 @@
 2026-11-22T23:42:04Z  interrupt W2441 minted    -         "W1022b: serve.py serves the host-root board to the page (served page only, a source without one has none)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1022
 2026-11-22T23:42:04Z  interrupt W2442 minted    -         "W1022c: the page draws the host lane from hostlane.js, with the WCAG chain test as oracle"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1022
 2026-11-23T00:03:47Z  status W1026 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T00:05:47Z  status W1032 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T00:08:08Z  status W2042 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T00:08:28Z  status W1038 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T00:09:24Z  interrupt W2443 minted    -         "A pace file older than N producer runs reads UNKNOWN and says so, instead of PENDING rows (the 2026-11-13 stamp sat nine days unnoticed)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2042
+2026-11-23T00:09:53Z  status W1042 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T00:29:13Z  interrupt W2444 minted    -         "W1070a: a small registry-digest reader mode that resolves the Containerfile BASE tag's manifest digest read-only (no hand curl)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1070
+2026-11-23T00:29:13Z  interrupt W2445 minted    -         "W1070b: docs/image-pinning.md answers luthen-observability:W1668: digest pin, the tag epoch (W2424's answer), and a retention rule keyed to the deployed pin"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1070
+2026-11-23T00:29:13Z  interrupt W2446 minted    -         "W1070c: pin BASE@sha256 in the Containerfile with a test_containerfile case that BASE carries a digest"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1070
+2026-11-23T00:48:25Z  status W1169 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T00:52:07Z  status W1175 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T00:53:28Z  status W1178 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T01:16:00Z  status W2407 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T01:29:54Z  status W1184 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T01:34:17Z  status W1187 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T01:39:59Z  status W1197 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T01:44:00Z  status W1215 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T01:51:12Z  status W1094 done>ready writer    "done -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T01:52:50Z  status W1217 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T01:53:42Z  interrupt W2447 minted    -         "W1217a: a pure function listing each src/nemik module with its import closure (from tools/codon_closure.closure, W1216 being superseded), tested on planted sources"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1217
+2026-11-23T01:53:42Z  interrupt W2448 minted    -         "W1217b: a generator writes one bazel census target per module (data = the module, its closure, the pinned compiler) into a generated .bzl, with --write and --check like tools/nemik_src.py"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1217
+2026-11-23T01:53:42Z  interrupt W2449 minted    -         "W1217c: tests/test_codon_census.py runs one module per target, and a test fails when a module has no target"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1217
+2026-11-23T01:54:14Z  status W1094 ready>done writer    "ready -> done"
+2026-11-23T01:56:52Z  status W1220 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T02:20:17Z  status W1225 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T02:37:28Z  interrupt W2450 minted    -         "A card worked with no G0 is a nemik-check Violation, and the writer is asked to refuse working to done without one (R496 finding 1)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1094
+2026-11-23T02:37:35Z  status W1226 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T03:02:52Z  status W1231 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

@@ -82,6 +82,32 @@ fleet, repo, umbrella, card that is also the way back up, and the jump-to-card f
   The six card-list radios plus the three clock radios are the nine, so "orders" is one control to a
   reader and nine inputs to a counter.
 
+## Decision (nemik, 2026-11-22, nemik:W2029; supersedes "a proposal, not a decision")
+
+The operator-ask audit of 2026-11-06 ruled these three a design call of nemik's own, not a choice
+that needs the operator; the answers below were reasoned from the page's own principle (navigation
+follows the questions the page is for, every control sits with what it acts on) and are open to a
+reviewer's correction. No colour or chip changes are made here, so no a11y-adversary review is owed
+for this note; each view W938 builds carries the WCAG chain test.
+
+1. **Orders is its own view.** "What needs me?" is a question asked alone, and an ask folded into a
+   status panel is an ask that can be missed: the page's job there is to make the operator's
+   waiting work visible, which a section of Health, read for how things are going, does not do.
+   Four places plus Help, as the table above has it.
+2. **The selected card is a pane, in one fixed place; Help is the drawer.** A drawer covers the
+   view it was opened from and has to move focus in and out, which the WCAG chain test would
+   judge on every view; a pane leaves the scope trail and the list visible and needs no focus
+   trap. Help is reference the reader leaves again, which suits a drawer. A pane competes for
+   width, so at 320 CSS px (WCAG 1.4.10, reflow) it stacks below the view and never adds a second
+   horizontal scroll.
+3. **Wake splits, with a link across.** Its sleeping repos are health and stay in Health; its
+   "N need you" line is an ask and goes to Orders, as a link to the full Wake section in Health.
+   Keeping Wake whole in Health would hide an ask in a status panel, which decision 1 refuses.
+
+What these decide, and what they do not: they fix where W938 builds each view and where the need-you
+line goes. They do not decide how a header control reads inside an opened umbrella (the
+self-similarity column stays a test for W938) or the page files' line ceilings.
+
 ## What follows
 
 W937 holds a scale path and a view in the address so a view is linkable and the PDF command can pick
