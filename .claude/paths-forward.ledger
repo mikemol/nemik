@@ -6694,3 +6694,12 @@
 2026-11-23T02:37:28Z  interrupt W2450 minted    -         "A card worked with no G0 is a nemik-check Violation, and the writer is asked to refuse working to done without one (R496 finding 1)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1094
 2026-11-23T02:37:35Z  status W1226 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-23T03:02:52Z  status W1231 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T03:04:27Z  status W1232 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T03:22:28Z  interrupt W2451 minted    -         "W1244a: count the writer spawns in tests/test_salience.py (each _graph or _fleet call that runs mikemol-paths-forward as a subprocess) and name which tests take them"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1244
+2026-11-23T03:22:28Z  interrupt W2452 minted    -         "W1244b: replace those spawns with in-process fixtures (the planted queue graph built without a subprocess), test-only, tests/test_salience.py"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1244
+2026-11-23T03:22:28Z  interrupt W2453 minted    -         "W1244c: record the test's CPU-seconds and wall-seconds in the last three green gates (BEP or test.xml, per R18-F35) so the 300 s kill is read against CPU, not wall"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1244
+2026-11-23T03:39:48Z  interrupt W2454 minted    -         "W1258a: a pure report over the graph: the open cards whose structured due is past, their count and the oldest, from NEMIK.due (adapter.py:442), tested on planted cards"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1258
+2026-11-23T03:39:48Z  interrupt W2455 minted    -         "W1258b: publish that count beside nemik_ready_overdue on the pace board and gauges (one publication path with W2434), a report only, never a ranking input"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1258
+2026-11-23T03:39:48Z  interrupt W2456 minted    -         "W1258c: answer linux-sources:W498 (a past due on any open card is reported, never ranked) with the first reading"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1258
+2026-11-23T03:57:42Z  status W1325 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T04:12:59Z  status W2029 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

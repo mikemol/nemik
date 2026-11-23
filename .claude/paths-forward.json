@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 2450,
+  "counter": 2456,
   "waypoints": [
     {
       "symbol": "W1",
@@ -30212,21 +30212,21 @@
     {
       "symbol": "W1232",
       "title": "Find why one-module edits make 446 of 449 gate targets fresh, and atomize the targets that cause it",
-      "status": "ready",
+      "status": "done",
       "enables": [
         "W2297"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Measure the fresh count of a TEST-ONLY gate (stack623's gate lines were in its leader's output, not in the joiner's) against a src-touching one, then decide: keep the single .venv (the venv-is-build-input rule) and sequence test-only paydowns separately, or give each test target a per-module closure (W1216 to W1218's import graph) so a src edit reruns only its importers",
-      "evidence": "2026-10-28: 2026-10-28 R10-F22 MEASURED with scratchpad/querycount.py (bazel query kind(test, rdeps(//..., //:FILE)), counts of test targets that take FILE as an input; the whole set is 450 test targets, the gate says 449): src/nemik/rank.py 450 of 450, src/nemik/pdf.py 450 of 450, ruff-baseline.json 2, mypy-baseline.json 3, tests/test_sla.py 7. So the hypothesis holds in its first half: EVERY src edit makes every test target a rerun candidate, which is why docstring-only stacks showed '446 fresh of 449'. MECHANISM, proven by bazel query somepath(//:test_sla, //:src/nemik/rank.py): //:test_sla -> //:.venv -> //:src/nemik/rank.py. The tests run against the one built venv (the established venv-is-build-input design), so the venv is the coarse input. CONSEQUENCES: (1) a test-only or baseline-only edit reaches 2 to 7 targets, so the cheap paydowns are those that edit tests only; (2) a src edit costs a full gate whatever it changes; (3) the lever that would change this is the per-module closure of W1216 to W1218, which would give each test target its importers, not the venv. NOT yet measured: the fresh count and wall time of a test-only gate, which is the number that would say how much (1) is worth. | 2026-10-28: 2026-10-28 THE NUMBER the card was waiting on, from stack624's gate (test_editable.py and test_withheld.py only, plus the two baselines): 'gate targets: 7 fresh of 449' and 'Elapsed time: 84.279s' for the bazel test step; landed 2837cad, at most 15 min 26 s from gate start (17:17:37Z) to landing (before 17:33:03Z). The src-touching gates of the same afternoon: stack619 '446 fresh of 449', bazel test step 'Elapsed time: 2176.014s'; stacks 620 to 622 took at most 36, 47:45 and 48:48 wall. So a test-only stack is 7 fresh against 446 and about 84 s of test time against about 2176 s, a factor of about 26 in test time. This settles the question for the pace: mypy and ruff paydowns that touch only tests and baselines cost a minute and a half of testing; any src edit costs the full gate. The decision this supports: sequence the paydown so test-only fixes ride together and src fixes are batched into fewer, larger stacks (the loop prompt's one-stack rule already says so); per-module closures (W1216 to W1218) are the structural fix for the src side.",
+      "next_bounded_step": null,
+      "evidence": "2026-10-28: 2026-10-28 R10-F22 MEASURED with scratchpad/querycount.py (bazel query kind(test, rdeps(//..., //:FILE)), counts of test targets that take FILE as an input; the whole set is 450 test targets, the gate says 449): src/nemik/rank.py 450 of 450, src/nemik/pdf.py 450 of 450, ruff-baseline.json 2, mypy-baseline.json 3, tests/test_sla.py 7. So the hypothesis holds in its first half: EVERY src edit makes every test target a rerun candidate, which is why docstring-only stacks showed '446 fresh of 449'. MECHANISM, proven by bazel query somepath(//:test_sla, //:src/nemik/rank.py): //:test_sla -> //:.venv -> //:src/nemik/rank.py. The tests run against the one built venv (the established venv-is-build-input design), so the venv is the coarse input. CONSEQUENCES: (1) a test-only or baseline-only edit reaches 2 to 7 targets, so the cheap paydowns are those that edit tests only; (2) a src edit costs a full gate whatever it changes; (3) the lever that would change this is the per-module closure of W1216 to W1218, which would give each test target its importers, not the venv. NOT yet measured: the fresh count and wall time of a test-only gate, which is the number that would say how much (1) is worth. | 2026-10-28: 2026-10-28 THE NUMBER the card was waiting on, from stack624's gate (test_editable.py and test_withheld.py only, plus the two baselines): 'gate targets: 7 fresh of 449' and 'Elapsed time: 84.279s' for the bazel test step; landed 2837cad, at most 15 min 26 s from gate start (17:17:37Z) to landing (before 17:33:03Z). The src-touching gates of the same afternoon: stack619 '446 fresh of 449', bazel test step 'Elapsed time: 2176.014s'; stacks 620 to 622 took at most 36, 47:45 and 48:48 wall. So a test-only stack is 7 fresh against 446 and about 84 s of test time against about 2176 s, a factor of about 26 in test time. This settles the question for the pace: mypy and ruff paydowns that touch only tests and baselines cost a minute and a half of testing; any src edit costs the full gate. The decision this supports: sequence the paydown so test-only fixes ride together and src fixes are batched into fewer, larger stacks (the loop prompt's one-stack rule already says so); per-module closures (W1216 to W1218) are the structural fix for the src side. | 2026-11-23T03:04:27Z: 2026-11-22 CLOSED: the card's question was answered with measurements on 2026-10-28 (the single built .venv is the coarse input: every src edit reaches 450 of 450 test targets, a test-only gate re-runs 7 of 449 in 84 s against 446 of 449 in about 2176 s for a src edit) and the decision it waited on is recorded there: keep the single venv, batch src fixes into few stacks, ride test-only fixes together; the structural fix is the per-module closure, now carried by W1217 (atomized today into W2447 the per-module closure list, W2448 the generator, W2449 the per-module census) after W1216 was dropped as superseded by tools/codon_closure.py. Today's presubmits (about 50 minutes each for src-touching trees, W2407, W2042) are the same shape. Nothing is left on this card that is not on W1217's children.",
       "issued_at": "2026-10-28T17:19:15Z",
       "minted_during": "interrupt",
       "caused_by": "W1231",
-      "last_worked": "2026-10-28T17:33:17Z",
+      "last_worked": "2026-11-23T03:04:27Z",
       "ticks_blocked": 0,
-      "completed": null,
+      "completed": "20261123T030427Z",
       "manifest": [
         "BUILD.bazel"
       ],
@@ -30605,7 +30605,7 @@
     {
       "symbol": "W1244",
       "title": "Find why //:test_salience timed out at 300 s in the stack 631 gate and passes in 33 s alone",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W1237"
       ],
@@ -30614,14 +30614,18 @@
         "test_salience",
         "flake"
       ],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W2451",
+        "W2452",
+        "W2453"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "Per R18-F35: get test_salience's PASSED times from the last three green gates (their bazel test.xml or BEP; the submit outputs print only failures), the stamps of heavy local commands in 21:24:52Z-21:51:45Z, then cut the writer spawns in tests/test_salience.py (in-process fixtures) after stack 633 lands; close on that, not on a green gate. Add a standing rule: a gate timeout with no failing assertion compares gate time with alone time.",
       "evidence": "2026-10-28: 2026-10-28: stack 631 refused at gate end, 447 fresh of 450, 449 pass, test_salience TIMEOUT 300.4 s (log: five dots then 'Test timed out at 21:51:45 UTC'); alone it passes 11 tests in 33.30 s (cpu 19.1 s). Culprit unattributed by the gate. Not resubmitted: a flake is a blocker. | 2026-10-28: 2026-10-28 R18-F35: the stack 631 and 633 submit outputs print no per-target PASSED times, so the three-gate comparison needs the BEP or test.xml; nothing in tasks/*.output holds one. Stack 633 landing green would prove nothing about the cause. | 2026-10-28: 2026-10-28 R20-C3: the sixth collected test of tests/test_salience.py, test_a_gap_on_a_card_that_is_not_open_is_ignored (line 142), was the one running at the 300 s kill (five dots before it); the unsharded file then. It uses _graph(_fleet(...)) as the five that passed did. Slowness and hang not separated; the 120 s bound in _pf discriminates and is a wall bound to remove once evidence is in. | 2026-10-28: 2026-10-28: the _pf timeout landed as 88f9086 (stack 634, tip 5eb0644 at 23:14:59Z). Card stays open: it names a stall if one repeats; removal is W1249.",
       "issued_at": "2026-10-28T22:06:30Z",
       "minted_during": "interrupt",
       "caused_by": "W1237",
-      "last_worked": "2026-10-28T23:16:55Z",
+      "last_worked": "2026-11-23T03:22:28Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
@@ -30957,7 +30961,7 @@
     {
       "symbol": "W1258",
       "title": "Report a past structured due on any open card (not only operator asks) beside the ready-overdue count, without ranking",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W2296"
       ],
@@ -30965,14 +30969,18 @@
         "metrics",
         "calendar"
       ],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W2454",
+        "W2455",
+        "W2456"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "Read first: where NEMIK.due is read today (adapter.py:442 stores it, blocks.py:596 carries it on operator-ask rows, wake.py:190 on wake rows, calwrite.py:192 and vtodo.py:157 project it to the calendar; nemik-ics exports only the operator asks, so an agent card's due reaches no consumer). Then decide with the operator whether a past due on a non-ask card is a REPORT (a count and the oldest, on the pace board beside the age-based ready-overdue cleanup count), never a ranking input (operator host 695f3e0a line 94798, W1005 dropped); the report would answer the operator's 2026-10-16 ask for monitoring of past-SLA waits (line 70556).",
-      "evidence": "2026-10-29: 2026-10-29 linux-sources asked (their W498): should a past structured --due on a non-needs-you card appear anywhere. Read of nemik's source: due is stored in the graph (adapter.py:442), carried by operator-ask rows (blocks.py:596) and wake rows (wake.py:190), and projected to the calendar (calwrite.py:192, vtodo.py:157); nothing reports a past due on an agent card, which matches their measurement (2 of 91 exported tasks carry a DUE, both operator asks). | 2026-10-29: 2026-10-29 linux-sources (peer) corrected its own measurement: the 0 linux-sources UIDs in the nemik-ics export are explained by that repo having no operator-ask cards (0 'operator: ' blocked_on lines against 14 in luthen-observability, 12 UIDs exported), so the export says nothing about due. The 'no consumer' conclusion therefore rests on nemik's source reading (adapter.py:442, blocks.py:596, wake.py:190, calwrite.py:192, vtodo.py:157) alone, which linux-sources has not read; I have not run a second check. Their W498 is blocked on nemik:W1258.",
+      "evidence": "2026-10-29: 2026-10-29 linux-sources asked (their W498): should a past structured --due on a non-needs-you card appear anywhere. Read of nemik's source: due is stored in the graph (adapter.py:442), carried by operator-ask rows (blocks.py:596) and wake rows (wake.py:190), and projected to the calendar (calwrite.py:192, vtodo.py:157); nothing reports a past due on an agent card, which matches their measurement (2 of 91 exported tasks carry a DUE, both operator asks). | 2026-10-29: 2026-10-29 linux-sources (peer) corrected its own measurement: the 0 linux-sources UIDs in the nemik-ics export are explained by that repo having no operator-ask cards (0 'operator: ' blocked_on lines against 14 in luthen-observability, 12 UIDs exported), so the export says nothing about due. The 'no consumer' conclusion therefore rests on nemik's source reading (adapter.py:442, blocks.py:596, wake.py:190, calwrite.py:192, vtodo.py:157) alone, which linux-sources has not read; I have not run a second check. Their W498 is blocked on nemik:W1258. | 2026-11-23T03:39:49Z: 2026-11-22 DECIDED FROM THE OPERATOR'S OWN RULINGS (no new ask needed): the card's step said to decide with the operator whether a past due on a non-ask card is a REPORT. The two rulings it cites already decide it: the operator asked on 2026-10-16 for monitoring of past-SLA waits (host line 70556) and ruled a due is never a ranking input (host line 94798, W1005 dropped). So: a past structured due on any open card is a REPORT (a count and the oldest, on the pace board beside the ready-overdue cleanup count), never a ranking input. Atomized into the pure report, its publication through the one path W2434 builds, and the answer to linux-sources:W498.",
       "issued_at": "2026-10-29T02:49:20Z",
       "minted_during": "interrupt",
       "caused_by": "linux-sources:W498",
-      "last_worked": "2026-10-29T02:53:10Z",
+      "last_worked": "2026-11-23T03:39:49Z",
       "ticks_blocked": 0,
       "weight": 214,
       "manifest": [
@@ -30981,7 +30989,8 @@
       ],
       "size_class": "small",
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
-      "vector_source": "default"
+      "vector_source": "default",
+      "completed": null
     },
     {
       "symbol": "W1259",
@@ -32544,19 +32553,21 @@
     {
       "symbol": "W1325",
       "title": "Configuration-mechanism census, fleet half: align each repo's per-surface rows (declaration site, change path, load path, review path) side by side and show where the mechanisms differ",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "github:W92"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
-      "next_bounded_step": "2026-11-07: mtools:W2201 is done (the writer refused my block on it: 'W2201 has landed'). Read its per-repo output schema (four columns per surface) from its documented command in this venv, then decide the nemik side-by-side mode and its files (manifest to follow); read only, no sibling file",
-      "evidence": "2026-10-31: 2026-10-31 asked by github-33 for github:W92 (peer message; it cites the operator's github:W91 ruling, which I have not verified in the transcript; the card only claims and blocks, it takes no action on that ruling). Contents stay per-repo; nemik owns only the fleet aggregation, mtools:W2201 owns the per-repo reader. | 2026-10-31: 2026-10-31 mtools reports (message, not landed, command line not yet given): mtools:W2201 schema 1 is fixed: one JSON object per repo {schema: 1, repo: <dir name>, surfaces: [{surface, declared: [paths], changed_by: [tools], loaded_by: [readers], reviewed_by: [gates]}]}; surfaces in fixed order claude_md, skills, settings, hooks, loop_prompt, standing, memory, policy; every field a sorted list of strings; declared is that repo's own disk only (a parent-dir loop prompt and the home memory dir read empty); reviewed_by names the pre-commit gate or CODEOWNERS only if the file exists; a new field is schema 2. It lands after the hooks stack now in its gate; the mode name follows. Block on mtools:W2201 stays until it lands and I can run it. | 2026-11-02: 2026-11-02T17:08:20Z (read by stampnote): Relayed by the github-33 session (cross-session message, 2026-11-02 about 17:1xZ), quoting the operator: ratchet paydown (ruff, mypy, codon) ranks above this census; work it only when no paydown item is ready. NOT verified: the message carries no transcript reference, so under the SOP it is a peer's report, not an operator warrant; I have not asked for the line. It agrees with what the loop already does (a stack must lower an owed ratchet; the standing set and the pace gate say so), so I changed nothing: this card stays behind the paydown cards, and no paydown item is ready only when the gate and the paydown queue are both empty, which today they are not. | 2026-11-06T07:21:44Z: 2026-11-06 the writer refused to block this card on mtools:W2201 because W2201 is done in mtools' queue, so the wait named in the old next step has ended. Next step rewritten.",
+      "blocked_on": [
+        "mtools"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "On mtools' reply: install or repin as told, run the reader against each repo (git ref only), then decide the nemik side-by-side mode and its files.",
+      "evidence": "2026-10-31: 2026-10-31 asked by github-33 for github:W92 (peer message; it cites the operator's github:W91 ruling, which I have not verified in the transcript; the card only claims and blocks, it takes no action on that ruling). Contents stay per-repo; nemik owns only the fleet aggregation, mtools:W2201 owns the per-repo reader. | 2026-10-31: 2026-10-31 mtools reports (message, not landed, command line not yet given): mtools:W2201 schema 1 is fixed: one JSON object per repo {schema: 1, repo: <dir name>, surfaces: [{surface, declared: [paths], changed_by: [tools], loaded_by: [readers], reviewed_by: [gates]}]}; surfaces in fixed order claude_md, skills, settings, hooks, loop_prompt, standing, memory, policy; every field a sorted list of strings; declared is that repo's own disk only (a parent-dir loop prompt and the home memory dir read empty); reviewed_by names the pre-commit gate or CODEOWNERS only if the file exists; a new field is schema 2. It lands after the hooks stack now in its gate; the mode name follows. Block on mtools:W2201 stays until it lands and I can run it. | 2026-11-02: 2026-11-02T17:08:20Z (read by stampnote): Relayed by the github-33 session (cross-session message, 2026-11-02 about 17:1xZ), quoting the operator: ratchet paydown (ruff, mypy, codon) ranks above this census; work it only when no paydown item is ready. NOT verified: the message carries no transcript reference, so under the SOP it is a peer's report, not an operator warrant; I have not asked for the line. It agrees with what the loop already does (a stack must lower an owed ratchet; the standing set and the pace gate say so), so I changed nothing: this card stays behind the paydown cards, and no paydown item is ready only when the gate and the paydown queue are both empty, which today they are not. | 2026-11-06T07:21:44Z: 2026-11-06 the writer refused to block this card on mtools:W2201 because W2201 is done in mtools' queue, so the wait named in the old next step has ended. Next step rewritten. | 2026-11-23T03:57:42Z: 2026-11-22 stop hook: checked the step's premise. mtools:W2201 is done in mtools' queue (read through git objects at HEAD), but the reader is NOT installed in nemik's venv (no census, surface or config script in .venv/bin) and no mtools dist's pyproject names one, so the step 'read its schema from its documented command in this venv' cannot run. Letter written to mtools' inbox (2026-11-22-nemik-config-census-reader-command-and-pin.md) asking for the command, the dist and whether nemik's pin carries it, and whether it takes a git ref (nemik reads peers through git objects only). Also noted: the 2026-11-02 relay that paydown ranks above this census is a peer's report, and the paydown cards are themselves blocked on W2042 today.",
       "issued_at": "2026-10-31T20:36:59Z",
       "minted_during": "interrupt",
       "caused_by": "github:W92",
-      "last_worked": "2026-11-06T08:45:58Z",
+      "last_worked": "2026-11-23T03:57:42Z",
       "ticks_blocked": 0,
       "completed": null,
       "weight": 219,
@@ -50843,19 +50854,19 @@
     {
       "symbol": "W2029",
       "title": "Decide the page structure in docs/page-structure-map.md (Orders as its own view or a section of Health, pane or drawer, Wake split), then unblock W938",
-      "status": "working",
+      "status": "done",
       "enables": [
         "W2304"
       ],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Send github-00 refs/review/W2029-v1; on PASS-SUBMIT submit as a docs stack after W2407; then unblock nemik:W938 with the doc's Decision section.",
-      "evidence": "2026-11-22T22:46:36Z: 2026-11-22 DECIDED in docs/page-structure-map.md (new section 'Decision'): Orders is its own view; the selected card is a pane in one fixed place and Help is the drawer; Wake splits (sleeping repos in Health, the need-you line in Orders as a link to the Health section). BUILT: refs/review/W2029-v1 = 4711dc6dc46e54bcd47f6ff077ede6262be9f2a2 (tree e8526dac2afd027ff154055accd04af46d5b670a, parent 834357e5), one docs file. No colour or chip change, so no a11y-adversary review owed here. NOT DONE: github-00 review, submit, then unblock W938 (and W964's three asks).",
+      "next_bounded_step": null,
+      "evidence": "2026-11-22T22:46:36Z: 2026-11-22 DECIDED in docs/page-structure-map.md (new section 'Decision'): Orders is its own view; the selected card is a pane in one fixed place and Help is the drawer; Wake splits (sleeping repos in Health, the need-you line in Orders as a link to the Health section). BUILT: refs/review/W2029-v1 = 4711dc6dc46e54bcd47f6ff077ede6262be9f2a2 (tree e8526dac2afd027ff154055accd04af46d5b670a, parent 834357e5), one docs file. No colour or chip change, so no a11y-adversary review owed here. NOT DONE: github-00 review, submit, then unblock W938 (and W964's three asks). | 2026-11-23T04:12:59Z: 2026-11-22 LANDED as 8d3a4e78c5e4b86913e24b2083dcd19f91f3cf31 (git log shows my subject, ls-remote origin refs/heads/main reads the same sha); github-00 PASS-SUBMIT on refs/review/W2029-v1 = 4711dc6d with one sentence added (the 1.4.10 reflow), v2 = 4aae7bcc. docs/page-structure-map.md now carries the Decision section: Orders its own view, the selected card a pane (Help the drawer), Wake split with a link across.",
       "issued_at": "2026-11-06T20:37:46Z",
       "minted_during": "tick",
       "caused_by": "W964",
-      "last_worked": "2026-11-22T22:46:36Z",
+      "last_worked": "2026-11-23T04:12:59Z",
       "ticks_blocked": 0,
       "manifest": [
         "docs/page-structure-map.md"
@@ -50863,7 +50874,7 @@
       "size_class": "small",
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
       "vector_source": "default",
-      "completed": null
+      "completed": "20261123T041259Z"
     },
     {
       "symbol": "W2030",
@@ -52958,11 +52969,11 @@
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "Wait for github-00's ruling on the re-scoped design (sent 2026-11-19): the hook's git-fed checks judged by fine-grained bazel TEST targets over a facts file the gate collects (git ls-files, the staged queue), each declaring its inputs so an unchanged fact is a cache hit, or the fallback of leaving the index checks in the hook. Build nothing until ruled. refs/review/W2110-v1 = c146d8df is the REJECTED argument design, kept as a commit",
-      "evidence": "2026-11-09T22:10:01Z: 2026-11-09 github-14 (class note, blameless): v7 was reviewed without its lint verdict, so a review ref carries the named bazel lint and type targets results as a precondition, checked once before any review ask; cites the W2077 refusal. Reviewer R448 (nemik:R446): one cause, the gate's 'gate_staged: the ratchet fails' line is the pycheck --ratchet summary of the ruff findings; the gate spent about fifteen minutes and a warrant try on findings test_ruff_ratchet finds in about thirty-five seconds. Rule: run test_ruff_ratchet, test_mypy_ratchet and the changed tests on the exact ref bytes under iowatch, log it, then ask for review. First instance: refs/review/W2077-v8 (5486217e), which has not had this run yet. | 2026-11-10T00:11:23Z: 2026-11-10 R452 (nemik:R450) adds a second precondition, for any gate step that can refuse: a real-tree smoke test, the step run on a copy of this repository at HEAD with nothing staged, expecting a pass, so a step that cannot read this repo's own state (W2088 on the empty {} baselines, W2115) fails its test before it fails a gate. Instance: W2088's tests used synthetic non-empty baselines, the landing gate used the OLD gate script, and the first real run refused everything in 20 s. Not yet written as a test for the rebaselines step or the other gate steps. | 2026-11-15T07:23:29Z: 2026-11-15 reviewer finding nemik:R495 f2 (due 2026-11-18): the refusals of this stretch each name a test a hand-picked pre-gate run left out (test_codon_wall_incidence on W1083, test_architecture on W2147, test_skill on W2176, gate_staged on the first W1099); the same class is in R401, R448, R452 and R492. Ask: one //:pre_gate test suite generated from the refusal history, fix the place-dependent members (W2201, W2144). Witness: the suite target and its generator with the stretch's refusals each named by a suite member, one scratch run of //:pre_gate agreeing with the gate on a stack that touches src, and the W2201 and W2144 fixes. | 2026-11-15T07:40:49Z: G0 2026-11-15T07:40:49Z: [NO-PACE-STAMP] Precommit (before the work, nemik:R495 f2): advances W2110. Actuator: a test_suite //:pre_gate in BUILD.bazel naming the tests this stretch's refusals showed a hand-picked run omits (test_ruff_ratchet, test_mypy_ratchet, test_architecture, test_skill, test_codon_census, test_nemik_src, test_codon_wall_incidence, test_codon_wall_table, test_precommit_gate, test_precommit_nemik_src), plus a test that every member exists as a test target. Sensor: bazel test //:pre_gate runs and passes on a clean worktree; the membership test passes and a mutant (a member renamed) fails it. Expected: the suite runs in minutes, not the cold gate's 85. Not claimed: that it equals the gate (it is the registry and ratchet subset), nor the place-dependent members W2201 and W2144. | 2026-11-15T11:47:34Z: 2026-11-15 finding from the W1997 stack (nemik:R495 f2 widened): the W1997 stack was refused by the PRE-COMMIT HOOK, not by a test: bazel/nemik_src.bzl did not name the new src/nemik/rolling.py. A hand-picked or even a //:pre_gate list cannot catch it, since test_nemik_src and test_precommit_nemik_src passed (neither compares the live list with git ls-files). A pre-gate that agrees with the gate must also RUN the pre-commit hook on the staged tree (.githooks/pre-commit against the worktree) as its first member. Add to the witness: a scratch run that applies the hook to a staged tree with a new src module and no regenerated list, and refuses it. | 2026-11-15T13:36:07Z: 2026-11-15 VERIFIED (github-cb's rule: verify, don't label): the operator's ruling on freezing a heavy run under kine load. Probe: mikemol-transcriptstruct --human over luthen-observability's transcript 32b6fca1, --since 384000 --until 386500: line 384529, uuid 6dd5f59a-90fe-4640-b4ed-a0145cf14942, 2026-11-05T14:43:43.345Z, kind human: 'A blend of 3 and 4 sounds right, tbh. Kinda like OOMkill, but \"freeze, resume when drum says it's OK.\"' (answering 'still need your decision on kill versus throttle', line 384432, uuid ab7cd818). --verify 6dd5f59a-90fe-4640-b4ed-a0145cf14942 --claim operator --line 384529 printed ok true, kind human. So the ruling is the operator's own: freeze (SIGSTOP) and resume, not kill; the 'on a trip, SIGCONT when it reads clear' wording is luthen's relay of it. The same probe over the host transcript 695f3e0a found no SIGSTOP hit, and over mtools' none. I had labelled it unchecked when the probe was runnable. | 2026-11-16T12:37:38Z: 2026-11-16 vector set by me as the agent (github-cb's rule for an unscored card, as for W2218 and W2219): reach local, no egress, integrity low (a hand-picked pre-gate that leaves out tests is what the suite prevents), availability low (the refusals it avoids), no precondition, scope unchanged, fix known, witness yes (test_pre_gate_suite): WV:1/R:L/E:N/C:N/I:L/A:L/X:N/S:U/F:K/W:Y. REBUILT as its own entry 1 of a two-entry stack with W1094 (refs/review/W2110-v2, github-cb's revision R1); not submitted pending github-cb's answer on how it lands (round). | 2026-11-17T04:54:59Z: 2026-11-17 Landed e55603a (full sha e55603a9b4c5e2ed85c34279734b2c5b4f1351d1): mikemol-commit printed COMMITTED nemik e55603a W2110 [PUSHED; UNVERIFIED: git ls-remote origin failed]; I read it back with git ls-remote origin refs/heads/main, which printed e55603a9b4c5e2ed85c34279734b2c5b4f1351d1, so the push is confirmed (the unverified note was a transient failure of the gate's own check); git log main shows my subject. Gate 537 of 537 green on the first submit. //:pre_gate (ten registry and ratchet members, each named by a gate refusal) and tests/test_pre_gate_suite.py (every member is a declared target and the list matches BUILD.bazel); rebuilt from the held ref on 3caa25a. Landing kind ref (BUILD, tests). STILL OPEN on this card: the place-dependent members W2201 and W2144; R452's real-tree smoke test of each gate step; the pre-commit hook run as a first member (the W1997 nemik_src.bzl refusal). | 2026-11-17T11:46:13Z: 2026-11-17 READ .githooks/pre-commit to design the 'run the pre-commit hook as a first pre-gate member' step (nothing built): the hook's checks BEFORE its last line are cheap and are the ones no listed test can make: bazel on PATH; every wheel the staged pyproject.toml names is tracked; the working-card rule (code or tests staged, ready cards, no working card: refused); and, for a staged change under src/nemik, tools/nemik_src.py --staged (bazel/nemik_src.bzl equals git ls-files src/nemik: the W1997 refusal). Its LAST line is exec tools/gate_staged.sh, the whole gate, so the hook cannot be a //:pre_gate member as it stands. DESIGN: (1) the hook gets an early exit before that exec when NEMIK_HOOK_CHECKS_ONLY is set (a shell change to a gate hook, shellcheck-clean, the W623 snapshot behaviour unchanged); (2) an sh_binary //:precommit_checks, like //:pycheck_file, runs it from BUILD_WORKSPACE_DIRECTORY with the flag and NEMIK_PYTHON from the built venv, so a pre-gate is bazel run //:precommit_checks on the staged tree; (3) a test in a temp git repo with a staged new src/nemik module and no nemik_src.bzl entry: refused; with the entry: passes; and the working-card rule: refused with a ready card and no working one (the flag must not weaken either). WITNESS: the W1997 case reproduced and refused by the step, then admitted. NOT built: a gate-hook change is a decision with blast radius (every commit passes it), so it goes through the cold review the loop prompt names for gate text before it lands. | 2026-11-19T08:20:48Z: 2026-11-19: taking the last round card. Read .githooks/pre-commit at a0438838: its checks run before its final exec of tools/gate_staged.sh. The card's note proposed an early exit on the environment variable NEMIK_HOOK_CHECKS_ONLY. I will use an ARGUMENT instead: git calls pre-commit with no arguments, so a commit cannot be made to skip the gate with it, where an environment variable set for one git commit would skip the whole bazel gate (as --no-verify does, and mtools' deny rules may refuse that). The snapshot re-exec already passes the arguments on. Asked github-00 to rule on this before review. | 2026-11-19T08:31:31Z: 2026-11-19: REJECTED RESIDUE, with the operator's ruling as github-00 relayed it from the host session (NOT verified by me in a transcript): 'why? This bypasses the accelerator that is bazel's cache, which we shouldn't be dodging/disabling.' github-00 ruled: stop building --checks-only; the fleet rule is to work WITH the cache, fine-grained bazel targets, never running checks outside bazel; solve the fast feedback inside bazel with each hook check its own test target declaring exactly its inputs, a test_suite for fast feedback, the hook running the same targets, and fail-fast ordering (cheap likely-to-fail first) as bazel targets. TWO DESIGNS REJECTED. (1) The environment variable NEMIK_HOOK_CHECKS_ONLY (this card's own earlier note): rejected by github-00 first, as a --no-verify spelled differently, since anything that can set the environment of a git commit could skip the gate. (2) The ARGUMENT, sh .githooks/pre-commit --checks-only with bazel run //:precommit_checks, which github-00 had accepted and then superseded under the operator's ruling. It was BUILT before the ruling arrived and is kept as a commit, not submitted: refs/review/W2110-v1 = c146d8df3dd55b0a494efabbbce73c615ac939e4 on main a0438838, five files, +226/-2 (the hook's argument check and early exit, tools/precommit_checks.sh, an sh_binary, tests/test_precommit_checks_only.py with 12 cases, BUILD data lines). Under bazel: the red run against the OLD hook failed exactly the five argument cases (fresh list under the flag died at the gate with 127, four unknown arguments were ignored) and passed the seven controls (stale list refused, working-card rule refused, five real git commit runs through core.hooksPath reaching the gate whatever the environment); the green run passed 10 of 10 after a docstring line-length fix; bazel run //:precommit_checks refused a staged unnamed src/nemik module with the W1997 message and exit 1, then admitted it after the list was regenerated. WHAT THE CARD WAS FOR: the hook's own checks (bazel on PATH, every wheel the staged pyproject.toml names is tracked, the working-card rule, and the named-inputs lists equal to git ls-files) fail a commit only at the hook, after a review ask, and no listed test or //:pre_gate member can pre-judge them (the W1997 refusal). | 2026-11-19T08:34:52Z: 2026-11-19: github-00 APPROVED the facts-file design (it is not dodging the cache: collecting git state is DATA, every JUDGMENT is a hermetic cached bazel test declaring that file as an input, the split bazel itself uses for workspace status). Conditions: (1) read gate_staged.sh first and write the facts INSIDE the gate's fixed worktree from the STAGED tree, never the live checkout, with a test showing a stale facts file is detected (stamped with the staged tree sha, the target refuses a mismatch); (2) the facts file is gitignored and generated, registered in the generated-files list with a freshness check; (3) verify the operator's ruling myself: DONE, host transcript 695f3e0a line 190734, uuid 9b982671-abf7-45f4-aa6e-72fa140971df, kind human, 2026-11-19T08:29:06Z, mikemol-transcriptstruct --human found it and --verify --claim operator printed ok true; the warrant is attached to this card. W2110-v1 stays as recorded residue. Blobs to github-00 before any submit, cold review after. READ gate_staged.sh: the gate builds the staged tree in a fixed worktree (git read-tree --reset -u of the tree the index writes), so the facts come from there. ATOMIZED into W2343 (pure functions in tools/hook_facts.py), W2344 (the gate writes the stamped facts, registered as generated), W2345 (three live test targets, env_inherit NEMIK_GATE_TREE on those only, first in pre_gate) and W2346 (retire the hook's shell checks), chained in that order. One design point to rule on in review: a freshness stamp needs a per-tree identity, so the three live targets re-run for each NEW tree and are a cache hit for the same one; that is milliseconds, and the heavy targets stay keyed on their own inputs because env_inherit is per target and not the global test_env flag.",
+      "evidence": "2026-11-09T22:10:01Z: 2026-11-09 github-14 (class note, blameless): v7 was reviewed without its lint verdict, so a review ref carries the named bazel lint and type targets results as a precondition, checked once before any review ask; cites the W2077 refusal. Reviewer R448 (nemik:R446): one cause, the gate's 'gate_staged: the ratchet fails' line is the pycheck --ratchet summary of the ruff findings; the gate spent about fifteen minutes and a warrant try on findings test_ruff_ratchet finds in about thirty-five seconds. Rule: run test_ruff_ratchet, test_mypy_ratchet and the changed tests on the exact ref bytes under iowatch, log it, then ask for review. First instance: refs/review/W2077-v8 (5486217e), which has not had this run yet. | 2026-11-10T00:11:23Z: 2026-11-10 R452 (nemik:R450) adds a second precondition, for any gate step that can refuse: a real-tree smoke test, the step run on a copy of this repository at HEAD with nothing staged, expecting a pass, so a step that cannot read this repo's own state (W2088 on the empty {} baselines, W2115) fails its test before it fails a gate. Instance: W2088's tests used synthetic non-empty baselines, the landing gate used the OLD gate script, and the first real run refused everything in 20 s. Not yet written as a test for the rebaselines step or the other gate steps. | 2026-11-15T07:23:29Z: 2026-11-15 reviewer finding nemik:R495 f2 (due 2026-11-18): the refusals of this stretch each name a test a hand-picked pre-gate run left out (test_codon_wall_incidence on W1083, test_architecture on W2147, test_skill on W2176, gate_staged on the first W1099); the same class is in R401, R448, R452 and R492. Ask: one //:pre_gate test suite generated from the refusal history, fix the place-dependent members (W2201, W2144). Witness: the suite target and its generator with the stretch's refusals each named by a suite member, one scratch run of //:pre_gate agreeing with the gate on a stack that touches src, and the W2201 and W2144 fixes. | 2026-11-15T07:40:49Z: G0 2026-11-15T07:40:49Z: [NO-PACE-STAMP] Precommit (before the work, nemik:R495 f2): advances W2110. Actuator: a test_suite //:pre_gate in BUILD.bazel naming the tests this stretch's refusals showed a hand-picked run omits (test_ruff_ratchet, test_mypy_ratchet, test_architecture, test_skill, test_codon_census, test_nemik_src, test_codon_wall_incidence, test_codon_wall_table, test_precommit_gate, test_precommit_nemik_src), plus a test that every member exists as a test target. Sensor: bazel test //:pre_gate runs and passes on a clean worktree; the membership test passes and a mutant (a member renamed) fails it. Expected: the suite runs in minutes, not the cold gate's 85. Not claimed: that it equals the gate (it is the registry and ratchet subset), nor the place-dependent members W2201 and W2144. | 2026-11-15T11:47:34Z: 2026-11-15 finding from the W1997 stack (nemik:R495 f2 widened): the W1997 stack was refused by the PRE-COMMIT HOOK, not by a test: bazel/nemik_src.bzl did not name the new src/nemik/rolling.py. A hand-picked or even a //:pre_gate list cannot catch it, since test_nemik_src and test_precommit_nemik_src passed (neither compares the live list with git ls-files). A pre-gate that agrees with the gate must also RUN the pre-commit hook on the staged tree (.githooks/pre-commit against the worktree) as its first member. Add to the witness: a scratch run that applies the hook to a staged tree with a new src module and no regenerated list, and refuses it. | 2026-11-15T13:36:07Z: 2026-11-15 VERIFIED (github-cb's rule: verify, don't label): the operator's ruling on freezing a heavy run under kine load. Probe: mikemol-transcriptstruct --human over luthen-observability's transcript 32b6fca1, --since 384000 --until 386500: line 384529, uuid 6dd5f59a-90fe-4640-b4ed-a0145cf14942, 2026-11-05T14:43:43.345Z, kind human: 'A blend of 3 and 4 sounds right, tbh. Kinda like OOMkill, but \"freeze, resume when drum says it's OK.\"' (answering 'still need your decision on kill versus throttle', line 384432, uuid ab7cd818). --verify 6dd5f59a-90fe-4640-b4ed-a0145cf14942 --claim operator --line 384529 printed ok true, kind human. So the ruling is the operator's own: freeze (SIGSTOP) and resume, not kill; the 'on a trip, SIGCONT when it reads clear' wording is luthen's relay of it. The same probe over the host transcript 695f3e0a found no SIGSTOP hit, and over mtools' none. I had labelled it unchecked when the probe was runnable. | 2026-11-16T12:37:38Z: 2026-11-16 vector set by me as the agent (github-cb's rule for an unscored card, as for W2218 and W2219): reach local, no egress, integrity low (a hand-picked pre-gate that leaves out tests is what the suite prevents), availability low (the refusals it avoids), no precondition, scope unchanged, fix known, witness yes (test_pre_gate_suite): WV:1/R:L/E:N/C:N/I:L/A:L/X:N/S:U/F:K/W:Y. REBUILT as its own entry 1 of a two-entry stack with W1094 (refs/review/W2110-v2, github-cb's revision R1); not submitted pending github-cb's answer on how it lands (round). | 2026-11-17T04:54:59Z: 2026-11-17 Landed e55603a (full sha e55603a9b4c5e2ed85c34279734b2c5b4f1351d1): mikemol-commit printed COMMITTED nemik e55603a W2110 [PUSHED; UNVERIFIED: git ls-remote origin failed]; I read it back with git ls-remote origin refs/heads/main, which printed e55603a9b4c5e2ed85c34279734b2c5b4f1351d1, so the push is confirmed (the unverified note was a transient failure of the gate's own check); git log main shows my subject. Gate 537 of 537 green on the first submit. //:pre_gate (ten registry and ratchet members, each named by a gate refusal) and tests/test_pre_gate_suite.py (every member is a declared target and the list matches BUILD.bazel); rebuilt from the held ref on 3caa25a. Landing kind ref (BUILD, tests). STILL OPEN on this card: the place-dependent members W2201 and W2144; R452's real-tree smoke test of each gate step; the pre-commit hook run as a first member (the W1997 nemik_src.bzl refusal). | 2026-11-17T11:46:13Z: 2026-11-17 READ .githooks/pre-commit to design the 'run the pre-commit hook as a first pre-gate member' step (nothing built): the hook's checks BEFORE its last line are cheap and are the ones no listed test can make: bazel on PATH; every wheel the staged pyproject.toml names is tracked; the working-card rule (code or tests staged, ready cards, no working card: refused); and, for a staged change under src/nemik, tools/nemik_src.py --staged (bazel/nemik_src.bzl equals git ls-files src/nemik: the W1997 refusal). Its LAST line is exec tools/gate_staged.sh, the whole gate, so the hook cannot be a //:pre_gate member as it stands. DESIGN: (1) the hook gets an early exit before that exec when NEMIK_HOOK_CHECKS_ONLY is set (a shell change to a gate hook, shellcheck-clean, the W623 snapshot behaviour unchanged); (2) an sh_binary //:precommit_checks, like //:pycheck_file, runs it from BUILD_WORKSPACE_DIRECTORY with the flag and NEMIK_PYTHON from the built venv, so a pre-gate is bazel run //:precommit_checks on the staged tree; (3) a test in a temp git repo with a staged new src/nemik module and no nemik_src.bzl entry: refused; with the entry: passes; and the working-card rule: refused with a ready card and no working one (the flag must not weaken either). WITNESS: the W1997 case reproduced and refused by the step, then admitted. NOT built: a gate-hook change is a decision with blast radius (every commit passes it), so it goes through the cold review the loop prompt names for gate text before it lands. | 2026-11-19T08:20:48Z: 2026-11-19: taking the last round card. Read .githooks/pre-commit at a0438838: its checks run before its final exec of tools/gate_staged.sh. The card's note proposed an early exit on the environment variable NEMIK_HOOK_CHECKS_ONLY. I will use an ARGUMENT instead: git calls pre-commit with no arguments, so a commit cannot be made to skip the gate with it, where an environment variable set for one git commit would skip the whole bazel gate (as --no-verify does, and mtools' deny rules may refuse that). The snapshot re-exec already passes the arguments on. Asked github-00 to rule on this before review. | 2026-11-19T08:31:31Z: 2026-11-19: REJECTED RESIDUE, with the operator's ruling as github-00 relayed it from the host session (NOT verified by me in a transcript): 'why? This bypasses the accelerator that is bazel's cache, which we shouldn't be dodging/disabling.' github-00 ruled: stop building --checks-only; the fleet rule is to work WITH the cache, fine-grained bazel targets, never running checks outside bazel; solve the fast feedback inside bazel with each hook check its own test target declaring exactly its inputs, a test_suite for fast feedback, the hook running the same targets, and fail-fast ordering (cheap likely-to-fail first) as bazel targets. TWO DESIGNS REJECTED. (1) The environment variable NEMIK_HOOK_CHECKS_ONLY (this card's own earlier note): rejected by github-00 first, as a --no-verify spelled differently, since anything that can set the environment of a git commit could skip the gate. (2) The ARGUMENT, sh .githooks/pre-commit --checks-only with bazel run //:precommit_checks, which github-00 had accepted and then superseded under the operator's ruling. It was BUILT before the ruling arrived and is kept as a commit, not submitted: refs/review/W2110-v1 = c146d8df3dd55b0a494efabbbce73c615ac939e4 on main a0438838, five files, +226/-2 (the hook's argument check and early exit, tools/precommit_checks.sh, an sh_binary, tests/test_precommit_checks_only.py with 12 cases, BUILD data lines). Under bazel: the red run against the OLD hook failed exactly the five argument cases (fresh list under the flag died at the gate with 127, four unknown arguments were ignored) and passed the seven controls (stale list refused, working-card rule refused, five real git commit runs through core.hooksPath reaching the gate whatever the environment); the green run passed 10 of 10 after a docstring line-length fix; bazel run //:precommit_checks refused a staged unnamed src/nemik module with the W1997 message and exit 1, then admitted it after the list was regenerated. WHAT THE CARD WAS FOR: the hook's own checks (bazel on PATH, every wheel the staged pyproject.toml names is tracked, the working-card rule, and the named-inputs lists equal to git ls-files) fail a commit only at the hook, after a review ask, and no listed test or //:pre_gate member can pre-judge them (the W1997 refusal). | 2026-11-19T08:34:52Z: 2026-11-19: github-00 APPROVED the facts-file design (it is not dodging the cache: collecting git state is DATA, every JUDGMENT is a hermetic cached bazel test declaring that file as an input, the split bazel itself uses for workspace status). Conditions: (1) read gate_staged.sh first and write the facts INSIDE the gate's fixed worktree from the STAGED tree, never the live checkout, with a test showing a stale facts file is detected (stamped with the staged tree sha, the target refuses a mismatch); (2) the facts file is gitignored and generated, registered in the generated-files list with a freshness check; (3) verify the operator's ruling myself: DONE, host transcript 695f3e0a line 190734, uuid 9b982671-abf7-45f4-aa6e-72fa140971df, kind human, 2026-11-19T08:29:06Z, mikemol-transcriptstruct --human found it and --verify --claim operator printed ok true; the warrant is attached to this card. W2110-v1 stays as recorded residue. Blobs to github-00 before any submit, cold review after. READ gate_staged.sh: the gate builds the staged tree in a fixed worktree (git read-tree --reset -u of the tree the index writes), so the facts come from there. ATOMIZED into W2343 (pure functions in tools/hook_facts.py), W2344 (the gate writes the stamped facts, registered as generated), W2345 (three live test targets, env_inherit NEMIK_GATE_TREE on those only, first in pre_gate) and W2346 (retire the hook's shell checks), chained in that order. One design point to rule on in review: a freshness stamp needs a per-tree identity, so the three live targets re-run for each NEW tree and are a cache hit for the same one; that is milliseconds, and the heavy targets stay keyed on their own inputs because env_inherit is per target and not the global test_env flag. | 2026-11-23T03:05:26Z: 2026-11-22 github-00: gate parity again (luthen-observability:W2890 found it on its side): the edit hook passes what the gate refuses. Letter written to mtools' inbox (2026-11-22-nemik-edit-hook-must-judge-by-the-gates-lint-configs.md) citing this card and nemik:R496 finding 3, with today's instances: W2407 (4 presubmits: D403, E501, the Codon census) and W2042 (4 presubmits: house ruff E501 at 100, ARG001, PLC2701, PLR2004, TC003, D401, DOC502; house mypy disallow_any_expr on json.loads, json.dumps and monkeypatch), and the one contradiction (hook TC004 against gate TC003 on a Callable import). Ask: the hook judges by the repo's own gate configs against the committed baseline entry per file.",
       "issued_at": "2026-11-09T22:09:54Z",
       "minted_during": "interrupt",
       "caused_by": "W2077",
-      "last_worked": "2026-11-19T08:34:52Z",
+      "last_worked": "2026-11-23T03:05:26Z",
       "ticks_blocked": 0,
       "manifest": [
         "BUILD.bazel",
@@ -60707,6 +60718,114 @@
       "minted_during": "interrupt",
       "caused_by": "W1094",
       "last_worked": "2026-11-23T02:37:34Z",
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2451",
+      "title": "W1244a: count the writer spawns in tests/test_salience.py (each _graph or _fleet call that runs mikemol-paths-forward as a subprocess) and name which tests take them",
+      "status": "ready",
+      "enables": [
+        "W1244"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-11-23T03:22:28Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1244",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2452",
+      "title": "W1244b: replace those spawns with in-process fixtures (the planted queue graph built without a subprocess), test-only, tests/test_salience.py",
+      "status": "ready",
+      "enables": [
+        "W1244"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-11-23T03:22:28Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1244",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2453",
+      "title": "W1244c: record the test's CPU-seconds and wall-seconds in the last three green gates (BEP or test.xml, per R18-F35) so the 300 s kill is read against CPU, not wall",
+      "status": "ready",
+      "enables": [
+        "W1244"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-11-23T03:22:28Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1244",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2454",
+      "title": "W1258a: a pure report over the graph: the open cards whose structured due is past, their count and the oldest, from NEMIK.due (adapter.py:442), tested on planted cards",
+      "status": "ready",
+      "enables": [
+        "W1258"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-11-23T03:39:48Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1258",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2455",
+      "title": "W1258b: publish that count beside nemik_ready_overdue on the pace board and gauges (one publication path with W2434), a report only, never a ranking input",
+      "status": "ready",
+      "enables": [
+        "W1258"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-11-23T03:39:48Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1258",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2456",
+      "title": "W1258c: answer linux-sources:W498 (a past due on any open card is reported, never ranked) with the first reading",
+      "status": "ready",
+      "enables": [
+        "W1258"
+      ],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "",
+      "evidence": "",
+      "issued_at": "2026-11-23T03:39:48Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1258",
+      "last_worked": null,
       "ticks_blocked": 0
     }
   ],
