@@ -7159,3 +7159,66 @@
 2026-11-26T15:21:50Z  interrupt W2550 minted    -         "Differential test: tests/test_tomlread.py converts a Val tree to a dict and compares it with tomllib on every .toml in this repo, plus malformed inputs that both must refuse"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2034
 2026-11-26T15:21:50Z  interrupt W2551 minted    -         "Probe loads('a = 1') by import and call in the staged tree (tools/codon_census.stage) in both modes with the pinned codon, and record the walls pair effect"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2034
 2026-11-26T15:22:27Z  interrupt W2552 minted    -         "Judge only live retros in the sustain and handoff-probe shapes: a retro any retro supersedes by its full id is history, not judged (github-82)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2545
+2026-11-26T15:32:55Z  status W2545 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T15:33:03Z  tick  W2545 parked    park      "operator order via github-82 (host line 230521): idle until the mtools gate returns; watchdog stopped; stack-6 submit already in gate, not killed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T15:34:29Z  status W2545 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T15:37:35Z  status W1908 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T15:40:46Z  status W1909 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T15:50:32Z  status W1897 working>landed writer    "working -> landed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T15:50:33Z  status W1919 ready>landed writer    "ready -> landed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T15:50:34Z  status W1843 done>landed writer    "done -> landed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T15:50:41Z  status W2545 blocked>landed writer    "blocked -> landed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T15:50:42Z  status W2026 working>landed writer    "working -> landed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T17:56:18Z  interrupt W2553 minted    -         "wake, nemik-operator and stale readers show a parked session as PARKED, not stale or a wake candidate (github:W163 item 3)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github:W163
+2026-11-26T17:56:19Z  interrupt W2554 minted    -         "claim observer for nemik-witnesses: a card can wait on the fact a peer's card claims mine, read from committed objects or refs/paths-forward/live"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github:W164
+2026-11-26T17:59:44Z  status W2552 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T18:00:31Z  status W1910 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T18:08:52Z  interrupt W2555 minted    -         "nemik.sha256: a Codon-compilable streaming sha256 hex digest, tested against hashlib vectors, so serve (and cachestore, adapter) drop hashlib"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1682
+2026-11-26T18:08:57Z  status W1911 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T18:11:31Z  interrupt W2556 minted    -         "Design: serve's HTTP transport without http.server, which carries http.client into the Codon closure"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1683
+2026-11-26T18:11:34Z  status W1912 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T18:16:32Z  status W1913 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T18:23:02Z  interrupt W2557 minted    -         "nemik.ruler: in-tree Codon-compilable emit_f and morse_motif, parity-tested against mikemol.rulerseq on 0..1023"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1685
+2026-11-26T18:23:08Z  status W1914 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T18:26:37Z  status W1915 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T18:32:12Z  interrupt W2558 minted    -         "nemik.rmtree: a recursive directory removal without shutil, probed under the pinned Codon, tested on a nested tree"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1689
+2026-11-26T18:32:16Z  status W1916 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T18:39:49Z  interrupt W2559 minted    -         "Baseline tools and the guard read each queue as a committed object at a named sha and the shapes from the pinned install, never a working tree or a symlink into src"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2552
+2026-11-26T18:39:57Z  status W2552 working>blocked writer    "working -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T18:47:11Z  status W1917 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T18:49:33Z  status W1918 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T18:51:40Z  status W1920 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T18:57:49Z  status W1921 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T18:59:14Z  status W1922 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T19:02:51Z  status W1923 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T19:08:12Z  status W1924 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T19:14:22Z  status W1925 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T19:23:24Z  status W1926 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T19:43:19Z  status W1927 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T20:07:14Z  status W1928 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T20:20:15Z  interrupt W2560 minted    -         "Pay nemik's 42 handoff-probe retros R23 to R64 by real superseding retros, under the operator's swarm exception for retro paydown"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2545
+2026-11-26T20:20:53Z  status W1929 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T20:23:14Z  status W1930 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T20:24:30Z  interrupt W2561 minted    -         "mtools --migrate-retros turns a recurring or one_off list into true, carrying its items verbatim into contributing (the R65 precedent)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2560
+2026-11-26T20:24:37Z  status W2561 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T20:28:35Z  status W1931 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T20:36:01Z  status W1932 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T20:37:52Z  status W1933 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T20:50:49Z  interrupt W2562 minted    -         "pre-commit runs the INDEX's tools/gate_staged.sh and tools/nemik_src.py, not the working copy's (skills:W131)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=skills:W131
+2026-11-26T20:51:25Z  status W1934 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T20:53:43Z  interrupt W2563 minted    -         "Every write-once retro shape judges only live retros, so any failing retro is paid by supersession, or record per shape why not"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2552
+2026-11-26T20:53:47Z  status W2563 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T21:02:03Z  status W1935 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T21:08:57Z  interrupt W2564 minted    -         "A shape that relates nodes by IRI text is invisible to the incremental SHACL cache: gate it, and an incremental run must equal a fresh run"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2552
+2026-11-26T21:09:00Z  status W2564 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T21:15:15Z  status W2552 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T21:20:46Z  status W1936 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T21:22:29Z  status W1937 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T21:26:23Z  status W1938 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T21:29:19Z  status W1939 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T21:31:03Z  status W1940 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T21:41:47Z  status W1941 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T22:03:28Z  status W2560 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T22:11:53Z  status W1942 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T22:20:12Z  interrupt W2565 minted    -         "Design: vtodo's ICS writer, vtimezone and subprocess capture without the mikemol libraries, which are Codon walls"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1943
+2026-11-26T22:20:18Z  status W1943 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
