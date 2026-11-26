@@ -7224,3 +7224,5 @@
 2026-11-26T22:20:18Z  status W1943 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-26T22:30:29Z  interrupt W2566 minted    -         "nemik-rank puts a ready umbrella whose evidence names a review ref or PASS-SUBMIT in its own lane ahead of its children, and --check names it"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=mtools:W2979
 2026-11-26T22:31:05Z  status W1944 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T22:40:17Z  status W1945 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T22:48:01Z  status W1946 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
