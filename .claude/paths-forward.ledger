@@ -7124,3 +7124,38 @@
 2026-11-26T11:44:11Z  status W2538 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-26T12:10:09Z  status W1898 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-26T12:10:36Z  status W1898 working>blocked writer    "working -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T12:13:55Z  status W1899 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T12:31:20Z  interrupt W2539 minted    -         "Find where nemik-check resolves a cross-repo cite (src/nemik/check.py) and name the three cases in a test fixture: cite to a repo absent under --root, to a present repo lacking the waypoint, to a residue symbol"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2152
+2026-11-26T12:31:20Z  interrupt W2540 minted    -         "Make a cite to a repo absent under --root a warning that names the missing repo, leaving the other two cases violations"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2152
+2026-11-26T12:31:20Z  interrupt W2541 minted    -         "Add the partial-root mode so the full-fleet run stays strict, and witness: nemik-check over a root holding two repos exits 0 on the 274 cross-repo cites"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2152
+2026-11-26T12:31:31Z  status W2031 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T12:49:13Z  status W1900 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T13:18:50Z  status W1901 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T13:42:06Z  interrupt W2542 minted    -         "Ask luthen-observability for the nemik-witnesses --apply job's own log: when it last ran, what it closed, and the gap from issued_at to its closing of each witnessed card, so W913's vacuous-mint question has data"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W913
+2026-11-26T13:42:20Z  status W2542 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T13:42:29Z  status W2012 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T13:50:32Z  status W1719 working>landed writer    "working -> landed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T13:50:33Z  status W1890 working>landed writer    "working -> landed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T13:50:35Z  status W2534 working>landed writer    "working -> landed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T13:51:58Z  status W2012 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T13:52:37Z  status W2542 blocked>done writer    "blocked -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T13:52:41Z  interrupt W2543 minted    -         "One source for the ruff scope that test_ruff_ratchet and gate_staged both read, and a test that they agree: gate_staged's ratchet reads checks/ and the test does not, so a test-green tree failed at the gate on a 101-character comment (github-82, the W2524/W2920 class)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1719
+2026-11-26T14:17:24Z  status W1902 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T14:17:25Z  interrupt W2544 minted    -         "index.Scope.__exit__ takes (kind, error, trace: object), which the pinned Codon cannot call (it calls __exit__ with no arguments): give it *args: object with the same docstring note as salience.MemoAudits, and probe it under the pinned Codon (github-82, 2026-11-26)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1897
+2026-11-26T14:23:24Z  interrupt W2545 minted    -         "Pay down src/nemik/data/retro-handoff-baseline.json: supersede one baselined nemik retro (R23-R65) through a reviewer-authored handoff, then drop its id with the baseline tool"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1719
+2026-11-26T14:34:30Z  status W2545 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T14:37:26Z  status W2545 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T14:37:33Z  interrupt W2546 minted    -         "Attribute a baseline's required fall to the repos its ids name: the paydown guard counted the sustain baseline's nine ids (github's and luthen-observability's retros) as nemik's required fall, so nemik's src stacks were refused for debt nemik cannot pay (github-82, 2026-11-26)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2529
+2026-11-26T14:37:37Z  interrupt W2547 minted    -         "Card the upstream repos' unfinished paydown: nine thin sustain retros of github and luthen-observability sit in nemik's baseline"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2529
+2026-11-26T14:38:18Z  status W1903 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T14:39:10Z  status W2546 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T14:47:52Z  status W1904 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T15:16:35Z  status W1905 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T15:17:17Z  status W1905 working>blocked writer    "working -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T15:19:13Z  status W1906 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T15:21:48Z  status W1907 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T15:21:50Z  interrupt W2548 minted    -         "Probe under the pinned Codon how jsonparse.Parser's tagged-node arena shape (kind, text, kids, keys) compiles, and reuse it for TOML: a Val tree class with kind, text, num, flt, flag, items and table, and an Exception subclass with an explicit __init__"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2034
+2026-11-26T15:21:50Z  interrupt W2549 minted    -         "Write src/nemik/tomlread.py: loads(text) over the TOML subset the repo's files use (tables, dotted keys, strings, ints, floats, bools, arrays, inline tables, comments), with accessors get, as_str, as_int, as_list and keys"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2034
+2026-11-26T15:21:50Z  interrupt W2550 minted    -         "Differential test: tests/test_tomlread.py converts a Val tree to a dict and compares it with tomllib on every .toml in this repo, plus malformed inputs that both must refuse"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2034
+2026-11-26T15:21:50Z  interrupt W2551 minted    -         "Probe loads('a = 1') by import and call in the staged tree (tools/codon_census.stage) in both modes with the pinned codon, and record the walls pair effect"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2034
+2026-11-26T15:22:27Z  interrupt W2552 minted    -         "Judge only live retros in the sustain and handoff-probe shapes: a retro any retro supersedes by its full id is history, not judged (github-82)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2545

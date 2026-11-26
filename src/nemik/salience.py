@@ -14,7 +14,6 @@ only after this audit (W241).
 from __future__ import annotations
 
 import tomllib
-from contextlib import contextmanager
 from dataclasses import dataclass
 from fractions import Fraction
 from importlib.resources import files
@@ -29,8 +28,6 @@ from nemik.score import Weights, load_weights
 from nemik.tomlview import table
 
 if TYPE_CHECKING:
-    from collections.abc import Generator
-
     from rdflib import Graph
     from rdflib.term import Node
 
@@ -43,15 +40,38 @@ DECIMALS = 4
 _MEMO: list[dict[tuple[object, ...], Audit] | None] = [None]
 
 
-@contextmanager
-def memo_audits() -> Generator[None]:
-    """Answer repeated identical audits from a table for the duration of the block (one build)."""
-    outer = _MEMO[0]
-    _MEMO[0] = {} if outer is None else outer
-    try:
-        yield
-    finally:
-        _MEMO[0] = outer
+class MemoAudits:
+    """The block of one build, in which repeated identical audits are answered from a table.
+
+    A class with __enter__ and __exit__, not contextlib.contextmanager (nemik:W1897): contextlib
+    is a wall for the pinned Codon, and the compiler calls __exit__ with no arguments where
+    CPython passes three, so it takes *args (a defaulted `object` parameter aborts the compile).
+    """
+
+    outer: dict[tuple[object, ...], Audit] | None
+
+    def __init__(self) -> None:
+        """Hold no table until the block is entered."""
+        self.outer = None
+
+    def __enter__(self) -> None:
+        """Open the table, or share the one an enclosing block opened."""
+        self.outer = _MEMO[0]
+        _MEMO[0] = {} if self.outer is None else self.outer
+
+    def __exit__(self, *args: object) -> None:
+        """Put back what the enclosing block had, an empty table or none."""
+        _MEMO[0] = self.outer
+
+
+def memo_audits() -> MemoAudits:
+    """Answer repeated identical audits from a table for the duration of the block (one build).
+
+    Returns:
+        The block to enter with `with`.
+
+    """
+    return MemoAudits()
 
 
 @dataclass(frozen=True)

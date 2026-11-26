@@ -620,6 +620,21 @@ nemik:RetroHandoffProbeShape a sh:NodeShape ;
                 $this <https://github.com/mikemol/nemik/ns#handoffOperator> ?o .
                 FILTER(STR(?o) = "other")
                 FILTER NOT EXISTS { $this <https://github.com/mikemol/nemik/ns#selfProbe> ?p . FILTER(STR(?p) = "executed-and-failed") }
+                # nemik:W2545: retros are write-once, so a handoff that failed this is retired by
+                # SUPERSESSION, as a thin sustain is (W2529): a different retro that names the retro by
+                # its full <repo>:R<n> id and carries a handoff that passes, an operator of self, or of
+                # other with the probe recorded. A superseder whose handoff still fails clears nothing.
+                FILTER NOT EXISTS {
+                    ?other <https://github.com/mikemol/nemik/ns#supersedes> ?id ;
+                           <https://github.com/mikemol/nemik/ns#handoff> ?h2 .
+                    ?h2 <https://github.com/mikemol/nemik/ns#handoffOperator> ?o2 .
+                    FILTER(
+                        STR(?o2) = "self"
+                        || (STR(?o2) = "other" && EXISTS { ?h2 <https://github.com/mikemol/nemik/ns#selfProbe> ?p2 . FILTER(STR(?p2) = "executed-and-failed") })
+                    )
+                    FILTER(?h2 != $this)
+                    FILTER(STRENDS(STR($this), CONCAT("/retro/", STR(?id), "/handoff")))
+                }
             }""" ] .
 
 # A retro names how strongly its fix is enforced (nemik:W651, gate G9). The layers run weakest to

@@ -71,9 +71,10 @@ def _import_time(body: list[ast.stmt]) -> list[ast.stmt]:
     """Pick the import statements that run when a module is imported.
 
     Returns:
-        The imports of `body`, reaching into module-level if, try, with, for and while, leaving
-        out the body of an `if TYPE_CHECKING` block (its else is kept) and not entering
-        functions or classes.
+        The imports of `body`, reaching into module-level if, try (and try*), with, for and while
+        (their async forms and the else of a loop too) and match, leaving out the body of an
+        `if TYPE_CHECKING` block (its else is kept) and the else of `if not TYPE_CHECKING`, and
+        not entering functions or classes.
 
     """
     out: list[ast.stmt] = []
@@ -81,16 +82,23 @@ def _import_time(body: list[ast.stmt]) -> list[ast.stmt]:
         if isinstance(node, (ast.Import, ast.ImportFrom)):
             out.append(node)
         elif isinstance(node, ast.If):
-            if ast.unparse(node.test) in {"TYPE_CHECKING", "typing.TYPE_CHECKING"}:
+            test = ast.unparse(node.test)
+            if test in {"TYPE_CHECKING", "typing.TYPE_CHECKING"}:
                 out.extend(_import_time(node.orelse))
+            elif test in {"not TYPE_CHECKING", "not typing.TYPE_CHECKING"}:
+                out.extend(_import_time(node.body))
             else:
                 out.extend(_import_time(node.body) + _import_time(node.orelse))
-        elif isinstance(node, ast.Try):
+        elif isinstance(node, (ast.Try, ast.TryStar)):
             handlers = [stmt for h in node.handlers for stmt in h.body]
             flat = node.body + handlers + node.orelse + node.finalbody
             out.extend(_import_time(flat))
-        elif isinstance(node, (ast.With, ast.For, ast.While)):
+        elif isinstance(node, (ast.With, ast.AsyncWith)):
             out.extend(_import_time(node.body))
+        elif isinstance(node, (ast.For, ast.AsyncFor, ast.While)):
+            out.extend(_import_time(node.body + node.orelse))
+        elif isinstance(node, ast.Match):
+            out.extend(_import_time([s for case in node.cases for s in case.body]))
     return out
 
 

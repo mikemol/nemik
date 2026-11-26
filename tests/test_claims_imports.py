@@ -112,6 +112,34 @@ def test_the_import_time_finder_leaves_out_what_does_not_run_at_import() -> None
     assert _all(text) == {"a", "typed", "real", "t", "e", "lazy", "inner"}
 
 
+def test_every_statement_that_runs_its_body_at_import_is_entered() -> None:
+    """MUTANT: a finder that skipped a block form would lose an edge, and a cycle with it."""
+    text = (
+        "async with x:\n    from nemik import aw\n"
+        "async for i in x:\n    from nemik import af\nelse:\n    from nemik import afe\n"
+        "for i in x:\n    pass\nelse:\n    from nemik import fe\n"
+        "while x:\n    pass\nelse:\n    from nemik import we\n"
+        "match x:\n    case 1:\n        from nemik import m1\n"
+        "    case _:\n        from nemik import m2\n"
+        "try:\n    pass\nexcept* E:\n    from nemik import star\n"
+    )
+    assert _at_import(text) == {"aw", "af", "afe", "fe", "we", "m1", "m2", "star"}
+
+
+def test_if_not_type_checking_runs_its_body_and_not_its_else() -> None:
+    """`if not TYPE_CHECKING:` runs at import; the else of it is the type-only branch."""
+    text = (
+        "from typing import TYPE_CHECKING\n"
+        "if not TYPE_CHECKING:\n    from nemik import real\n"
+        "else:\n    from nemik import typed\n"
+        "import typing\n"
+        "if not typing.TYPE_CHECKING:\n    from nemik import real2\n"
+        "else:\n    from nemik import typed2\n"
+    )
+    assert _at_import(text) == {"real", "real2"}
+    assert _all(text) == {"real", "typed", "real2", "typed2"}
+
+
 def test_the_real_adapter_is_seen_with_its_no_dot_imports() -> None:
     """adapter.py imports its leaf modules the no-dot way: the claim would pass blind without it."""
     seen = _all((ROOT / "src" / "nemik" / "adapter.py").read_text(encoding="utf-8"))
