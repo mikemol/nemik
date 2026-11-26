@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 2565,
+  "counter": 2566,
   "waypoints": [
     {
       "symbol": "W1",
@@ -49093,20 +49093,22 @@
     {
       "symbol": "W1944",
       "title": "Codon instance vtodo: nemik.vtodo stops using rdflib",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W1687",
         "W1746"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W1767"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "Remove rdflib from nemik.vtodo (src/nemik/vtodo.py): replace the import or construct with a Codon-compatible form (the wall's recorded options are in docs/codon-walls.md), in a scratch worktree, probing the pinned Codon first, then measure the pair with tools/codon_walls.py before and after. The card closes when the pair (vtodo, rdflib) leaves codon-walls.json. Bundle with other ready instances in one stack: never a full gate for one pair (github-14, 2026-11-10).",
-      "evidence": "",
+      "evidence": "2026-11-26T22:31:05Z: 2026-11-26: vtodo.py imports rdflib Graph at runtime (line 35) and builds each VTODO from the merged queue graph through nemik.check.survey, nemik.adapter.ledger_graph and nemik.blocks. The pair leaves only with the rdflib core, W1767; same as W1915, W1920, W1924, W1926, W1929, W1930, W1934, W1939. Re-ready when W1767 lands.",
       "issued_at": "2026-11-05T21:54:14Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-11-17T22:00:43Z",
+      "last_worked": "2026-11-26T22:31:05Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/vtodo.py"
@@ -49114,7 +49116,8 @@
       "size_class": "small",
       "weight": 22,
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
-      "vector_source": "default"
+      "vector_source": "default",
+      "completed": null
     },
     {
       "symbol": "W1945",
@@ -63544,11 +63547,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "Operator 2026-11-26 host L234190 (uuid 060b0054, verified kind human): swarm exception for retro paydown only, concurrent subagents allowed. Per retro: a subagent reads the old retro and the git history it names, executes the handoff step as its instrument, and writes the superseding retro JSON (supersedes full id, operator self, or other with self_probe executed-and-failed and the real result). The session adds each through --add-retro, never edits it, and github-82 reviews each batch before submit. R51 to R64 are list-to-bool, R23 to R50 are self_probe.",
-      "evidence": "2026-11-26T20:22:24Z: 2026-11-26 github-82 accepted W2560 with two shape changes. (1) Scaffold first, mechanically. Read at source (the pinned writer's --migrate-retros over nemik, tool-results b4jg25tz3): 0 WOULD WRITE, every R23-R64 row is NEEDS A REVIEWER: R23-R50 'handoff operator other needs self_probe executed-and-failed' (the probe result is the judgment), R51-R64 additionally 'recurring/one_off must be true or false, not [list]' (mtools 87857abb refuses to convert it, so the normalisation is not offered by the writer). So a nemik-side scaffold tool generates the superseding JSON for all 42: verbatim copy of every field except id/supersedes/handoff, recurring and one_off lists turned into true with the list items carried verbatim into contributing (the R65 precedent), handoff instrument and channel copied from the row, operator and self_probe left for the subagent. Subagents do ONLY the probe and the sourced sustain. (2) Batch size 7, six batches (R51-R57, R58-R64, R23-R29, R30-R36, R37-R43, R44-R50): each batch is one review by github-82, the two cohorts stay whole (14 = 2x7, 28 = 4x7), and a REVISE costs 7 rows, not 42. | 2026-11-26T20:24:39Z: 2026-11-26 github-82: batches of 7 accepted; a nemik-side scaffold generator is NOT (the writer and --migrate-retros are mtools', a second scaffold here is a copy beside the integration). So: the list-to-bool normalisation is asked of mtools as W2561 (letter in mtools/inbox); until it lands each subagent applies that same rule to its own row in its draft (non-empty list -> true with the items verbatim in contributing, empty -> false), and the batch review checks it field by field; the probe and the sourced sustain stay the subagents' judgment. | 2026-11-26T22:03:28Z: 2026-11-26 BATCH 1 (R51 to R57, 7 subagents, general-purpose, run in the background) started under the operator's swarm exception (host L234190, verified). Each reads the shared brief (scratchpad w2560-brief.md: copy every field verbatim except id, supersedes, handoff, recurring, one_off; a non-empty recurring or one_off list becomes true with its items carried verbatim into contributing; supersedes is the full id; the old delta stays verbatim with an appended SUPERSESSION paragraph stating the truth; operator self only if the step really succeeded, other only with a really attempted and failed probe), runs the retro's own handoff step, and writes only scratchpad w2560/R<n>.json. They do not touch the queue. I add each through --add-retro after checking it field by field, never editing it; github-82 reviews the batch before any submit. | 2026-11-26T22:12:40Z: 2026-11-26 BATCH 1 drafts back (R51-R57, scratchpad w2560/R<n>.json), each validated by the writer on a scratch copy of the queue (copy under a directory named nemik, real state never passed): all say operator self, the step (--add-retro) executed for the actor. Field-by-field check by a read-only script (scratchpad check_w2560.py: every field verbatim except id/supersedes/handoff/recurring/one_off, contributing = old plus the Carried-from lines, delta starts with the old delta, instrument and channel copied): R51, R52, R53, R54, R55, R57 OK; R56 dropped the finding text of all four findings (the --retros view omits it) and was sent back to restore it from the raw row. First-round drafts that claimed executed-and-failed or self from a mere read-back (R52, R53, R56) were rejected and redone after the scratch-state addendum. OPEN QUESTION for the review: the older rows hand 'add-retro through the cold review' to another operator; the drafts record self because the instrument executes for the actor, with the cold-review channel stated as not exercised. nemik:R499 was ruled wrong for a similar filing-as-measurement move (the residue there was independence); here the instrument IS the filing, but github-82 decides. Rows are NOT added to the queue until the batch is reviewed (write-once). | 2026-11-26T22:20:33Z: 2026-11-26 github-82 REVISE on batch 1's handoff (same ruling as R499): operator self is false, because filing executes the writer, not the independent review the old rows' residue names. Revised all seven: operator other, self_probe executed-and-failed from a really run cold-restate (the drafters re-read their rows against the older raw findings; unmatched: R52 finding 1's message a628bd8d is on no card, R52 finding 3 not compared, R53 and R56 first deltas incomplete and corrected), instrument carries the restate's date, channel = 'independent review by github-82, batch review of nemik:W2560 batch 1, 2026-11-26, record github:R_PENDING' (the number arrives with the PASS). Mechanical check (scratchpad check_w2560.py, now asserting the handoff shape): 7 of 7 OK; the scratch --add-retro printed 'nemik:R502 added' for each. Sent back to github-82. Brief (w2560-brief.md) rewritten so batches 2 to 6 start with this form. Rows go into the queue only after the PASS and the record number. | 2026-11-26T22:24:23Z: 2026-11-26 BATCH 1 PASSED by github-82 (record github:R282; she read R51 and R52 in full and the supersession paragraphs of R53, R55, R57; R54 and R56 checked only through check_w2560.py, which the record says). R_PENDING substituted with github:R282 in the seven drafts, the mechanical check re-run (7 of 7 OK), and the rows ADDED to the queue through the writer: nemik:R502 (supersedes R51), R503 (R52), R504 (R53), R505 (R54), R506 (R55), R507 (R56), R508 (R57); R508 read back whole from the queue (supersedes nemik:R57, operator other, self_probe executed-and-failed, channel with record github:R282, recurring and one_off true with the items carried). Their delta text says 'record github:R282 until their verdict', which was true when drafted and is now only slightly stale; the writer rows are write-once so it stands. The cold-cache handoff baseline shrink for R51-R57 comes after the batches, with the guard. Batch 2 (R58 to R64, batch number 2 in the channel) started from the updated brief.",
+      "evidence": "2026-11-26T20:22:24Z: 2026-11-26 github-82 accepted W2560 with two shape changes. (1) Scaffold first, mechanically. Read at source (the pinned writer's --migrate-retros over nemik, tool-results b4jg25tz3): 0 WOULD WRITE, every R23-R64 row is NEEDS A REVIEWER: R23-R50 'handoff operator other needs self_probe executed-and-failed' (the probe result is the judgment), R51-R64 additionally 'recurring/one_off must be true or false, not [list]' (mtools 87857abb refuses to convert it, so the normalisation is not offered by the writer). So a nemik-side scaffold tool generates the superseding JSON for all 42: verbatim copy of every field except id/supersedes/handoff, recurring and one_off lists turned into true with the list items carried verbatim into contributing (the R65 precedent), handoff instrument and channel copied from the row, operator and self_probe left for the subagent. Subagents do ONLY the probe and the sourced sustain. (2) Batch size 7, six batches (R51-R57, R58-R64, R23-R29, R30-R36, R37-R43, R44-R50): each batch is one review by github-82, the two cohorts stay whole (14 = 2x7, 28 = 4x7), and a REVISE costs 7 rows, not 42. | 2026-11-26T20:24:39Z: 2026-11-26 github-82: batches of 7 accepted; a nemik-side scaffold generator is NOT (the writer and --migrate-retros are mtools', a second scaffold here is a copy beside the integration). So: the list-to-bool normalisation is asked of mtools as W2561 (letter in mtools/inbox); until it lands each subagent applies that same rule to its own row in its draft (non-empty list -> true with the items verbatim in contributing, empty -> false), and the batch review checks it field by field; the probe and the sourced sustain stay the subagents' judgment. | 2026-11-26T22:03:28Z: 2026-11-26 BATCH 1 (R51 to R57, 7 subagents, general-purpose, run in the background) started under the operator's swarm exception (host L234190, verified). Each reads the shared brief (scratchpad w2560-brief.md: copy every field verbatim except id, supersedes, handoff, recurring, one_off; a non-empty recurring or one_off list becomes true with its items carried verbatim into contributing; supersedes is the full id; the old delta stays verbatim with an appended SUPERSESSION paragraph stating the truth; operator self only if the step really succeeded, other only with a really attempted and failed probe), runs the retro's own handoff step, and writes only scratchpad w2560/R<n>.json. They do not touch the queue. I add each through --add-retro after checking it field by field, never editing it; github-82 reviews the batch before any submit. | 2026-11-26T22:12:40Z: 2026-11-26 BATCH 1 drafts back (R51-R57, scratchpad w2560/R<n>.json), each validated by the writer on a scratch copy of the queue (copy under a directory named nemik, real state never passed): all say operator self, the step (--add-retro) executed for the actor. Field-by-field check by a read-only script (scratchpad check_w2560.py: every field verbatim except id/supersedes/handoff/recurring/one_off, contributing = old plus the Carried-from lines, delta starts with the old delta, instrument and channel copied): R51, R52, R53, R54, R55, R57 OK; R56 dropped the finding text of all four findings (the --retros view omits it) and was sent back to restore it from the raw row. First-round drafts that claimed executed-and-failed or self from a mere read-back (R52, R53, R56) were rejected and redone after the scratch-state addendum. OPEN QUESTION for the review: the older rows hand 'add-retro through the cold review' to another operator; the drafts record self because the instrument executes for the actor, with the cold-review channel stated as not exercised. nemik:R499 was ruled wrong for a similar filing-as-measurement move (the residue there was independence); here the instrument IS the filing, but github-82 decides. Rows are NOT added to the queue until the batch is reviewed (write-once). | 2026-11-26T22:20:33Z: 2026-11-26 github-82 REVISE on batch 1's handoff (same ruling as R499): operator self is false, because filing executes the writer, not the independent review the old rows' residue names. Revised all seven: operator other, self_probe executed-and-failed from a really run cold-restate (the drafters re-read their rows against the older raw findings; unmatched: R52 finding 1's message a628bd8d is on no card, R52 finding 3 not compared, R53 and R56 first deltas incomplete and corrected), instrument carries the restate's date, channel = 'independent review by github-82, batch review of nemik:W2560 batch 1, 2026-11-26, record github:R_PENDING' (the number arrives with the PASS). Mechanical check (scratchpad check_w2560.py, now asserting the handoff shape): 7 of 7 OK; the scratch --add-retro printed 'nemik:R502 added' for each. Sent back to github-82. Brief (w2560-brief.md) rewritten so batches 2 to 6 start with this form. Rows go into the queue only after the PASS and the record number. | 2026-11-26T22:24:23Z: 2026-11-26 BATCH 1 PASSED by github-82 (record github:R282; she read R51 and R52 in full and the supersession paragraphs of R53, R55, R57; R54 and R56 checked only through check_w2560.py, which the record says). R_PENDING substituted with github:R282 in the seven drafts, the mechanical check re-run (7 of 7 OK), and the rows ADDED to the queue through the writer: nemik:R502 (supersedes R51), R503 (R52), R504 (R53), R505 (R54), R506 (R55), R507 (R56), R508 (R57); R508 read back whole from the queue (supersedes nemik:R57, operator other, self_probe executed-and-failed, channel with record github:R282, recurring and one_off true with the items carried). Their delta text says 'record github:R282 until their verdict', which was true when drafted and is now only slightly stale; the writer rows are write-once so it stands. The cold-cache handoff baseline shrink for R51-R57 comes after the batches, with the guard. Batch 2 (R58 to R64, batch number 2 in the channel) started from the updated brief. | 2026-11-26T22:34:59Z: 2026-11-26 BATCH 1 COMMITTED nemik 79bd60e (parent 4232f9e3, PUSHED, gate_staged green, queue files only): R502 to R508 supersede R51 to R57. BATCH 2 PASSED by github-82 (record github:R284; she read R58 and R63 in full and the supersession paragraph of all seven; honest mismatches recorded: R61 F2 and F4, R63 F3 and F4, R64 F1 and F4; R59, R60, R62 state the discharge was not checked). R_PENDING substituted with github:R284, check_w2560.py 7 of 7 OK, rows ADDED through the writer: R509 (supersedes R58), R510 (R59), R511 (R60), R512 (R61), R513 (R62), R514 (R63), R515 (R64); submitted as a queue-only stack (scratchpad stack-q2.json). github-82's rule for batches 3 to 6: rotate which two rows are read in full (not the first two), every position read in some batch.",
       "issued_at": "2026-11-26T20:20:15Z",
       "minted_during": "interrupt",
       "caused_by": "W2545",
-      "last_worked": "2026-11-26T22:24:23Z",
+      "last_worked": "2026-11-26T22:34:59Z",
       "ticks_blocked": 0,
       "completed": null
     },
@@ -63656,6 +63659,22 @@
       "issued_at": "2026-11-26T22:20:12Z",
       "minted_during": "interrupt",
       "caused_by": "W1943",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2566",
+      "title": "nemik-rank puts a ready umbrella whose evidence names a review ref or PASS-SUBMIT in its own lane ahead of its children, and --check names it",
+      "status": "ready",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "mtools:W2979 (github-82's review): nemik-rank --check classes a READY card with open child cards an UMBRELLA and ranks only its children; in mtools that hid SEVEN ready cards each carrying a built, PASS-SUBMITTED review ref (W2769, W2772, W2778, W2824, W2854, W2863, W2865: 159 of 187 ready cards ranked, these absent), and the children are FOLLOW-UPS minted with an edge to the parent, so the shipped fix waited a week on its sequel. Build: an umbrella whose evidence names a refs/review ref or a PASS-SUBMIT is its own lane ('built fix waiting on a landing') ranked ahead of its children, and --check names it. Fleet question to answer with a read: how many ready umbrellas with a ref does each repo hold. The writer half (a follow-up mint cites the parent with caused_by and does not enable it unless asked) is mtools' and is asked of them on mtools:W2979.",
+      "evidence": "",
+      "issued_at": "2026-11-26T22:30:29Z",
+      "minted_during": "interrupt",
+      "caused_by": "mtools:W2979",
       "last_worked": null,
       "ticks_blocked": 0
     }
@@ -79201,7 +79220,464 @@
       },
       "supersedes": "nemik:R57",
       "id": "nemik:R508"
+    },
+    {
+      "card": "W1242",
+      "trigger": "round 54: 693 (51ce549) landed pushed 04:32:24Z, ruff 1700 to 1690, ls-remote read back; pace 04:25:12Z owes ruff 73 (up from 49), 1690 left, which is 693's gate-time count (PENDING); a PT018 batch (-35 ruff) reverted unsubmitted because mypy rose about +36; 694 (W1279 slice 3, 13 Returns sections, ruff 1690 to 1677) inflight 04:42:32Z; gap 10 min 6 s",
+      "root": "The revert is the best act of the round: the PT018 fix was measured on ruff only (-35) while the G0 said mypy unchanged 3548, an expectation not checked, and the measure found mypy +36 (mypy dedupes rows by line, so splitting one assert with two Any expressions makes two rows). The session reverted its own uncommitted changes, with status before and after read, and wrote the rule (measure mypy for any fix that splits or moves a line) on W1242. The new fact the round exposes is that the ruff requirement RISES: owed 49, then 73, seeded from earlier windows, so a fall of 20 or 10 per stack does not clear it by itself and no clear-by date is computable.",
+      "contributing": [
+        "The G0 stated an unmeasured expectation (mypy unchanged); the measure, not the G0, caught the rise. This is the claim-before-reading class in a G0.",
+        "The pace row quotes 1690, the gate-time count for a stack that had not landed at the stamp (PENDING), the same effect as 689's 3577 earlier.",
+        "R57-F4 (the gate-time label rule on W1179) was not written, again.",
+        "W1283 is partly answered (437 tags, 16 built in 1 day, 150 in 7) but the deploy-state pins and gated build time are unread; the Forgejo read returned 404 and no token was looked for.",
+        "W1286, W1284 and W1282 still wait; the ATOMIZE line prints again on W1279 (mtools:W2170).",
+        "Carried from the older row's recurring list (now the boolean true): A G0 stating an expectation not yet measured.",
+        "Carried from the older row's recurring list (now the boolean true): The gate-time count read as landed in the pace (W1179).",
+        "Carried from the older row's recurring list (now the boolean true): R57-F4 and W1283 owed across rounds.",
+        "Carried from the older row's one_off list (now the boolean true): The PT018 batch: ruff -35, mypy +36, reverted."
+      ],
+      "precommit": "694: 13 Returns sections in witnesses.py, each from a body read in full before the G0, K=13, N=13; ruff 1690 to 1677 exactly K; mypy unchanged 3548 (docstrings only); 12 tests directly; census green. The PT018 batch G0 expected mypy unchanged: wrong.",
+      "delta": "Held: 693 landed with ruff -10 and read back; the starting rule held (W1279 marked in an earlier call than the submit; accepted first try); 694's mypy-unchanged prediction held (docstrings only); the ruff order by code count written; W1283 partly read. Not held: the PT018 G0 expectation (corrected by revert); R57-F4; the clear-by date. Open: the 694 verdict and the pace after it. SUPERSESSION 2026-11-26 (nemik:R58 stands as history): the older row recorded its handoff as the instrument nemik-paths-forward --add-retro through the channel 'the cold review' with operator 'other', naming no reviewer. The instrument was executed now on a scratch copy of the queue (measuring the filing, not the independence). The drafting actor's cold-restate against the older row's four findings (the rising ruff requirement and its seed on W1242, MEASURED or EXPECTED labels in each G0 on W1246, the gate-time PENDING label rule on W1179, finishing W1283 without a credential) found this draft's account matching each of them, with no finding whose account could not be matched; whether each finding's witness was ever produced was not checked. The independent review by github-82 is the channel. Still not measured: the independence of any reader of this row, and whether the four findings' witnesses exist on their cards.",
+      "sustain": [
+        "Reverting the PT018 batch when the measure showed mypy +36, reading the status before and after, and writing the rule on W1242.",
+        "Reading every hunk of the ruff --fix output, which found the faithful splits and also the mypy effect.",
+        "Marking W1279 working in an earlier call than the submit (first application of the starting rule, held).",
+        "Reading the registry tag list by name through luthen's endpoints_query and stating what could not be read.",
+        "Declining to give a clear-by date when the requirement rises."
+      ],
+      "enforcement_layer": "gate",
+      "recurring": true,
+      "one_off": true,
+      "findings": [
+        {
+          "finding": "The ruff requirement rises (owed 49, then 73, seeded from earlier windows). Ask what seeds it: read the pace's window and seed, write them on W1242, and ask mtools if the requirement should rise while falls are landing. If the requirement outruns the 10 to 20 per stack, the paydown cannot clear it by DOC201 alone; the order of codes then needs a bigger source first.",
+          "finding_card": "W1242",
+          "finding_owner": "nemik session",
+          "due": "2026-10-31",
+          "finding_witness": "a W1242 line with the pace's window and seed, a nudge to mtools with a read-back, and a revised order if the rate cannot clear the owed figure"
+        },
+        {
+          "finding": "State in each G0 which figure was measured and which is an expectation, so mypy unchanged is marked not yet measured until it is. Add one line to the G0 template: each figure is MEASURED or EXPECTED.",
+          "finding_card": "W1246",
+          "finding_owner": "nemik session",
+          "due": "2026-10-31",
+          "finding_witness": "the next three G0s with each figure labelled MEASURED or EXPECTED"
+        },
+        {
+          "finding": "Write the gate-time label rule on W1179 (R57-F4), now evidenced twice (689's 3577, 693's 1690): a pace row whose value equals a stack that has not landed at the stamp is labelled PENDING for that stack. Until W1284 prints it, the label goes in the ledger line.",
+          "finding_card": "W1179",
+          "finding_owner": "nemik session",
+          "due": "2026-10-31",
+          "finding_witness": "a W1179 line with the label rule and the two instances, and the next pace row labelled in the ledger"
+        },
+        {
+          "finding": "Finish W1283 without a credential: ask luthen (who runs the Forgejo) for the deploy-state pins and the gated build time, or write that the reads cannot be made from nemik and the answer stands on the tag list alone. No token is looked for.",
+          "finding_card": "W1283",
+          "finding_owner": "nemik session",
+          "due": "2026-11-01",
+          "finding_witness": "a W1283 line with the deploy-state pins and build time from luthen, or an explicit statement that they cannot be read and the answer stands on the tag list"
+        }
+      ],
+      "handoff": {
+        "instrument": "nemik-paths-forward --add-retro; cold-restated by the drafting actor 2026-11-26 against the older row's findings, which cannot certify its own independence",
+        "channel": "independent review by github-82, batch review of nemik:W2560 batch 2, 2026-11-26, record github:R284",
+        "operator": "other",
+        "self_probe": "executed-and-failed"
+      },
+      "supersedes": "nemik:R58",
+      "id": "nemik:R509"
+    },
+    {
+      "card": "W1286",
+      "trigger": "round 55: 694 (49f85cf) landed pushed 04:57:32Z, ruff 1690 to 1677, mypy equal as EXPECTED and now MEASURED; 695 (W1286 nemik-wake --series-only plus wake.py's 8 DOC201 sites, ruff 1677 to 1669) inflight 05:00:38Z; gap 3 min 4 s; W1283 closed; a ratchet --write run while 694 still gated",
+      "root": "The gap of 3 min 4 s is the first near-zero: build and census ran inside 694's gate, files and baseline lease respected (the --write that deviated had no effect and was said out loud). The pace code was read: the required fall is the requirement the last file stated, re-seeded from the store's highest sample, over a window of 10 landings; so ruff-neutral landings (689 mypy, 690 codon, 691 -1) in the window lower the ruff sum, and while ruff is behind every landing should carry a ruff fall. The session stated what it did not read (how pacewrite raises 49 to 73). That is the working explanation of the rising requirement and it changes the stack plan.",
+      "contributing": [
+        "The --write on the ruff baseline while 694 gated broke the session's own rule (measure without --write until the queued stack lands); no effect, but the rule has no enforcement.",
+        "A 400-line file was printed where a narrow read would do (context cost).",
+        "The 7-day tag horizon is the session's own choice, not a measured fact; neither side read the deploy-state log or a gated build time.",
+        "The post-695 pace row will predate 695's landing if the stack lands after 05:25.",
+        "W1284 plus W1282 on rank.py and mtools:W2171 and W2170 are still open.",
+        "Carried from the older row's recurring list (now the boolean true): Reading a figure wider than needed (a 400-line print).",
+        "Carried from the older row's recurring list (now the boolean true): The pace row predating the landing (PENDING).",
+        "Carried from the older row's recurring list (now the boolean true): A rule held in practice that the tool does not enforce (--write while a queue holds the baseline).",
+        "Carried from the older row's one_off list (now the boolean true): The 7-day tag retention horizon chosen by the session."
+      ],
+      "precommit": "695: --series-only mode with wake.py's 8 DOC201 sites; ruff 1677 to 1669 (K=8); mypy 3548 unchanged; 23 wake tests directly; census green; G0 and addendum on W1286 before the edit.",
+      "delta": "Held: 694 landed and read back; mypy equal MEASURED; ruff -8 = K for 695; the first E501 fixed; 23 tests directly; the witness on the real export (19 lines, as_of 04:51:38Z, no sample for github and amr-skills); series-only 2.69 s wall, 0.98 s CPU; census 7 passed in 448.72 s; the starting rule held 2 of 2. Not held: no --write while a queued stack carries the baseline. Open: the 695 verdict. SUPERSESSION 2026-11-26 (nemik:R59 stands as history): the older row recorded its handoff as operator 'other' (instrument 'nemik-paths-forward --add-retro', channel 'the cold review') with no self_probe. Today the instrument executed on a scratch copy of the queue (never the real state file), with the copy at a path named nemik/.claude/paths-forward.json, and printed 'nemik:R509 added' with no refusal; that measures the filing, not the independence: the residue is add-retro through an independent reader, and the writer does not read. The drafting actor then re-read this draft against the older row's raw findings: all four findings (W1242 ruff fall per stack and the window sum, W1246 no --write while a queued stack carries the baseline, W1286 tell luthen-observability:W1804 and close only on luthen's read of the mode, W1284 the rank.py stack G0 with the PENDING label) and their cards, owners, due dates and witnesses match the older row character for character; the draft only copies them, and the drafter did not check whether any of the four asks was discharged on its card, so no account of their state could be matched. The drafter cannot certify its own independence. The channel is the independent review by github-82 (batch review of nemik:W2560 batch 2, record github:R284 until their verdict). Not measured: that review's verdict, the real queue's id for this row, and whether W1242, W1246, W1286 or W1284 received the lines the findings ask for.",
+      "sustain": [
+        "Reading pacerun.py and the pace file and stating what was not read (how pacewrite raises the requirement).",
+        "Saying aloud that the ratchet --write run broke the rule and that it had no effect, with the check.",
+        "Measuring series-only on the real export and not re-running the graph mode to claim luthen's number.",
+        "Proposing the retention horizon as the session's choice, not a measured fact, and closing W1283 on that.",
+        "Building 695 and its census inside 694's gate; gap 3 min 4 s."
+      ],
+      "enforcement_layer": "gate",
+      "recurring": true,
+      "one_off": true,
+      "findings": [
+        {
+          "finding": "Plan each stack to carry a ruff fall while ruff is behind. The window sums the last 10 landings; ruff-neutral landings dilute it. For each next stack, state its ruff fall in the G0 as MEASURED, and prefer the sources with the largest count per edit. Write the sum over the last 10 landings on W1242 each time the pace is read, so the rate is visible.",
+          "finding_card": "W1242",
+          "finding_owner": "nemik session",
+          "due": "2026-10-31",
+          "finding_witness": "a W1242 line giving the ruff fall per landing over the last 10 and the next stack's MEASURED fall"
+        },
+        {
+          "finding": "Do not run pycheck --ratchet --write while a queued stack carries the baseline. Make it a line in the G0 template (the measure is without --write until the queued stack lands) and a narrow-read habit (ruff-baseline.json is read by key, not printed whole). Ask mtools if --write should refuse while a gate holds the file.",
+          "finding_card": "W1246",
+          "finding_owner": "nemik session",
+          "due": "2026-11-02",
+          "finding_witness": "a template line in the G0 and either a mtools card for the refusal or a note that none is wanted"
+        },
+        {
+          "finding": "When 695 lands, tell luthen-observability:W1804 with the hash and the series-only timing, read their next pass back, and then read the pace row against its stamp (PENDING if older than the landing). Close W1286 only on luthen's read of the mode in use.",
+          "finding_card": "W1286",
+          "finding_owner": "nemik session",
+          "due": "2026-10-31",
+          "finding_witness": "a W1286 line with luthen's confirmed read of the mode and the pace row after 695, labelled PENDING or not"
+        },
+        {
+          "finding": "Do the rank.py stack (W1284 with W1282): write the G0 now with the plan from W1282's revised split (Objectives type, then RankRow for printed fields) and the PENDING label. It is the next waiting item and shares one file; keep it on its own stack so the label rule is not diluted.",
+          "finding_card": "W1284",
+          "finding_owner": "nemik session",
+          "due": "2026-11-02",
+          "finding_witness": "a G0 for the rank.py stack with its measured ruff and mypy figures, and a landing with the label printed"
+        }
+      ],
+      "handoff": {
+        "instrument": "nemik-paths-forward --add-retro; cold-restated by the drafting actor 2026-11-26 against the older row's findings, which cannot certify its own independence",
+        "channel": "independent review by github-82, batch review of nemik:W2560 batch 2, 2026-11-26, record github:R284",
+        "operator": "other",
+        "self_probe": "executed-and-failed"
+      },
+      "supersedes": "nemik:R59",
+      "id": "nemik:R510"
+    },
+    {
+      "card": "W1284",
+      "trigger": "round 56: 695 (03aaee8) landed pushed 05:24:48Z, ruff 1677 to 1669, ls-remote read back; 696 (W1279 slice 4 vtodo.py 9 Returns sections, plus W1284 PENDING label in nemik-rank --pace) inflight 05:26:17Z; gap 1 min 27 s; the live witness caught a flaw before the submit; pace after 695: ruff fell 52 over 10 landings, owes 73",
+      "root": "The best act of the round is the live witness on W1284: the first version marked mtools' two rows PENDING for a nemik landing, which the real pace output showed, and the fix (mark only the named repo's lines, with a test carrying an mtools row) was made before any submit. The session also respected pacecli.py's Codon census constraint by reading the plain-text reflog and doing integer calendar arithmetic, stopped a census when source changed after it started, and reran it once. The estimate for the ruff rate (about 52) held against the pace's printed 52. The gap fell to 1 min 27 s by building during 695's gate. The remaining ruff gap is 52 against 73 owed.",
+      "contributing": [
+        "The ruff requirement of 73 is a high-water mark; at 52 per 10 landings the ratchet cannot clear until the window's sum exceeds 73, which needs about 7 per landing sustained more than the current mix delivers.",
+        "The mtools ask for refusing --write while a gate holds the file is not sent (due 2026-11-02).",
+        "W1286 stays open until luthen's read of the mode in use and github-42's hook, not on the landing.",
+        "ATOMIZE printed on W1279 again (mtools:W2170 holds the exemption).",
+        "A census that began before source changed was stopped and rerun: 527.69 s; the cost of an edit late in the measure is a census.",
+        "Carried from the older row's recurring list (now the boolean true): The ruff ratchet behind and its requirement a high-water mark.",
+        "Carried from the older row's recurring list (now the boolean true): ATOMIZE on umbrella cards.",
+        "Carried from the older row's recurring list (now the boolean true): A rule in practice (no --write while a gate holds the file) with the mtools ask not sent.",
+        "Carried from the older row's one_off list (now the boolean true): The PENDING label's mtools-row flaw, found by the live witness."
+      ],
+      "precommit": "696: W1279 slice 4 (9 Returns sections in vtodo.py, K=9) MEASURED ruff 1669 to 1660, mypy 3548 unchanged; W1284 PENDING label in pacecli.py with no git or subprocess; census green with pacecli compiling.",
+      "delta": "Held: 695 landed, read back, ruff -8 = K; the pace after 695 printed fell 52 over 10 landings against the estimate 52; the live witness found and fixed the mtools-row flaw before the submit; census 7 passed in 527.69 s; both cards marked working in an earlier call (3 of 3); baseline written after 695 landed. Open: the 696 verdict, luthen's read for W1286, github-42's hook. SUPERSESSION 2026-11-26 (nemik:R60 stands as history): the older row recorded its handoff as operator 'other' (instrument 'nemik-paths-forward --add-retro', channel 'the cold review') with no self_probe. Today the instrument executed on a scratch copy of the queue (never the real state file) and printed 'nemik:R509 added'; that measures the filing, not the independence: the residue is add-retro through an independent reader, and the writer does not read. The drafting actor then re-read this draft against the older row's raw findings: all four findings (W1242 ruff rate arithmetic and the 8-per-stack rule, W1286 closing only on luthen's read and github-42's hook, W1246 the mtools ask to refuse --write while a gate holds the baseline, W1282 the rank.py Objectives stack with a G0 of measured figures) and their cards, owners, due dates and witnesses match the older row character for character; the draft only copies them, and the drafter did not check whether any of the four asks was discharged on its card, so no account of their state could be matched. The drafter cannot certify its own independence. The channel is the independent review by github-82 (batch review of nemik:W2560 batch 2, record github:R284 until their verdict). Not measured: that review's verdict, the real queue's id for this row, and whether W1242, W1286, W1246 or W1282 received the lines the findings ask for.",
+      "sustain": [
+        "Running the new output on the real files and fixing what it showed (mtools rows) before the submit.",
+        "Reading pacecli.py's Codon constraint first and using the reflog and integer arithmetic.",
+        "Stopping a census whose source changed and rerunning once.",
+        "Estimating the ruff rate as EXPECTED and checking it against the printed pace (52 against 52).",
+        "Writing the baseline only after 695 landed (the rule broken once, kept this time)."
+      ],
+      "enforcement_layer": "gate",
+      "recurring": true,
+      "one_off": true,
+      "findings": [
+        {
+          "finding": "The ruff rate is 52 over 10 landings against 73 owed. Write the arithmetic on W1242: the sum needed per landing, how many of the last 10 landings were ruff-neutral, and a rule for the next 10: every stack carries a ruff fall of at least 8 as MEASURED, so the window sum reaches 73 within ten landings. If a stack cannot carry a fall, pair it with a slice as 695 and 696 do.",
+          "finding_card": "W1242",
+          "finding_owner": "nemik session",
+          "due": "2026-10-31",
+          "finding_witness": "a W1242 line with the rate arithmetic and the pace row after 696 lands showing the window sum"
+        },
+        {
+          "finding": "Close W1286 only when luthen reads the mode in use and github-42's hook is in place. Write both as the card's witness lines; if either is not in place by 2026-11-02, nudge with a read-back. A landing alone does not close a card whose purpose is a peer's use.",
+          "finding_card": "W1286",
+          "finding_owner": "nemik session",
+          "due": "2026-11-02",
+          "finding_witness": "a W1286 line with luthen's repinned read and github-42's hook line, then done"
+        },
+        {
+          "finding": "Send the mtools ask for refusing pycheck --ratchet --write while a gate holds the baseline file, with the one observed case and its zero effect, and read the reply back. It is a rule held in practice that the tool could enforce.",
+          "finding_card": "W1246",
+          "finding_owner": "nemik session",
+          "due": "2026-11-02",
+          "finding_witness": "a message to mtools and a read-back of their queue showing a card for it"
+        },
+        {
+          "finding": "Make the next stack the rank.py one (W1282 Objectives then RankRow) with its measured mypy fall, since W1284 does not touch rank.py. The W1282 plan failed once in a scratch worktree and was revised; write the G0 with MEASURED figures from a second scratch check before building.",
+          "finding_card": "W1282",
+          "finding_owner": "nemik session",
+          "due": "2026-11-03",
+          "finding_witness": "a G0 for the Objectives stack with measured mypy and ruff figures from a scratch check, then a landing with the mypy fall"
+        }
+      ],
+      "handoff": {
+        "instrument": "nemik-paths-forward --add-retro; cold-restated by the drafting actor 2026-11-26 against the older row's findings, which cannot certify its own independence",
+        "channel": "independent review by github-82, batch review of nemik:W2560 batch 2, 2026-11-26, record github:R284",
+        "operator": "other",
+        "self_probe": "executed-and-failed"
+      },
+      "supersedes": "nemik:R60",
+      "id": "nemik:R511"
+    },
+    {
+      "card": "W1287",
+      "trigger": "round 57: 696 (22f6946, 2617faf) landed pushed 05:51:03Z, ls-remote read back, ruff 1669 to 1660; the PENDING label printed correctly on the real pace right after the landing; 697 (W1279 slice 5, critical.py 8 Returns sections, plus W1287 --only for github-42) inflight 05:53:04Z; gap 1 min 58 s",
+      "root": "The landing rule is 7 of 7 and the starting rule 4 of 4; gaps are 1 to 2 min because stacks are built inside the previous gate. W1284 did what it was built for: right after 696 landed the pace said PENDING for all three nemik lines, the reading earlier G1s kept getting wrong. The open risks moved from process to evidence: mtools said refused or repeated gate runs shift the 10-landing window, but nobody has read ratchetseries.py's dedupe, so the pace's window sum, on which the ruff debt arithmetic (52 against 73 owed) depends, is not known to be what the session's records say. That is a shared unverified claim.",
+      "contributing": [
+        "The 10-landing window can be shifted by refused or repeated gate runs (mtools); the session's rate estimate counts landings, the pace counts something else, and the dedupe is unread by both.",
+        "The mtools:W2172 card (--write refusal) is minted and not confirmed as mtools' tool.",
+        "W1284 was said to touch rank.py; the printer is pacecli.py, and the manifest was corrected.",
+        "The writer refused a W1287 evidence line for naming a home-directory path; resent with the path described.",
+        "W1286 stays open pending github-42's hook and luthen's final read; luthen's read of 0.395 s wall is their number, not mine.",
+        "Carried from the older row's recurring list (now the boolean true): A ratchet window arithmetic resting on an unread producer (pace, dedupe).",
+        "Carried from the older row's recurring list (now the boolean true): The rank.py stack waiting a fourth round (W1282).",
+        "Carried from the older row's recurring list (now the boolean true): ATOMIZE on umbrellas pending mtools:W2170.",
+        "Carried from the older row's one_off list (now the boolean true): The writer refusing a home-directory path in evidence."
+      ],
+      "precommit": "697: critical.py 8 Returns sections (K=8) MEASURED ruff 1660 to 1650, mypy unchanged 3548, 9 tests directly; W1287 --only and a default series path with 26 wake tests; census green (444.33 s).",
+      "delta": "Held: 696 landed, read back, ruff -9 = K; the label PENDING printed on the real pace; the pace after 695 equal to the EXPECTED 52; first measure fixes before the baseline (FBT001, FBT002, E501, PLW1514); baseline written after 696 landed; both cards marked working earlier than the submit (4 of 4). Not held: R60-F4 (rank.py stack still waiting). Open: the 697 verdict and the next pace. SUPERSESSION 2026-11-26 (nemik:R61 stands as history): the older row recorded its handoff as the instrument nemik-paths-forward --add-retro through the channel the cold review with operator other and no self probe; the instrument was executed on a scratch copy of the queue and printed added with no refusal, which measures the filing, not the independence of a reader. Cold-restate by the drafting actor against the older row's four findings, read from the cards: F1 (W1179, dedupe of ratchetseries.py) matches the card's R61-F1 line (dedupe by sample time only, _hold lines 140 to 146); F3 (W1246, mtools:W2172 read from their queue) matches the card's R61-F3 line (ready, caused by nemik:W1246); F4 (W1282) is matched only in part, since the card shows a landed first step 93eeb7c1 on 2026-11-02 (mypy 1069 to 869, recorded under W1480) but no G0 line with MEASURED scratch-check figures, and I did not verify the commit; F2 (W1287) I could not match, since the card holds the landing hash 47c1f87 but no line with an --only run on the real series or github-42's confirmed hook (it was closed by the W1338 sweep). The independent review by github-82 is the channel; what is still not measured is whether any reader other than the drafter judges these accounts and the witnesses of F2 and F4.",
+      "sustain": [
+        "Running the pace label on the real files and quoting the output in the G1.",
+        "Correcting the W1284 manifest (pacecli.py, not rank.py).",
+        "Fixing FBT001, FBT002, E501 and PLW1514 from the first measure before any baseline write.",
+        "Recording mtools' window answer as not a design answer, with the dedupe unread.",
+        "Resending a refused evidence line with the path described, not quoted."
+      ],
+      "enforcement_layer": "gate",
+      "recurring": true,
+      "one_off": true,
+      "findings": [
+        {
+          "finding": "Read ratchetseries.py's dedupe and how refused or repeated gate runs enter the 10-landing window, and write what you find on W1179 (even dedupes by key X). The ruff debt arithmetic (52 of 73) depends on what the window counts; mtools said it is shifted by refused runs but neither of you has read the code.",
+          "finding_card": "W1179",
+          "finding_owner": "nemik session",
+          "due": "2026-10-31",
+          "finding_witness": "a W1179 line quoting the dedupe lines of ratchetseries.py and what a refused run does to the window"
+        },
+        {
+          "finding": "Give W1287's landing a witness for github-42: when 697 lands, send the hash and the --only output on the real series (the repos named, the refusal with no --repo), and read their hook back. Do not close W1286 on the landing; close it on the hook and luthen's final read.",
+          "finding_card": "W1287",
+          "finding_owner": "nemik session",
+          "due": "2026-11-01",
+          "finding_witness": "a W1287 line with the hash, an --only run on the real series, and github-42's confirmed hook"
+        },
+        {
+          "finding": "Confirm mtools:W2172 is mtools' (read their queue with --show) and write its state on W1246; if it is only minted by you, ask them to adopt it. A minted card in a peer's namespace is not a ticket until the peer has it.",
+          "finding_card": "W1246",
+          "finding_owner": "nemik session",
+          "due": "2026-11-02",
+          "finding_witness": "a W1246 line with the state of mtools:W2172 read from their queue, or a nudge with a read-back"
+        },
+        {
+          "finding": "Build the rank.py stack (W1282) next, fourth round waiting. W1284 does not touch rank.py, so the file is free; run the second scratch check for the Objectives split with MEASURED mypy and ruff, and write the G0 before the edit.",
+          "finding_card": "W1282",
+          "finding_owner": "nemik session",
+          "due": "2026-11-03",
+          "finding_witness": "a G0 for W1282 with MEASURED figures from the scratch check, then a landing with the mypy fall"
+        }
+      ],
+      "handoff": {
+        "instrument": "nemik-paths-forward --add-retro; cold-restated by the drafting actor 2026-11-26 against the older row's findings, which cannot certify its own independence",
+        "channel": "independent review by github-82, batch review of nemik:W2560 batch 2, 2026-11-26, record github:R284",
+        "operator": "other",
+        "self_probe": "executed-and-failed"
+      },
+      "supersedes": "nemik:R61",
+      "id": "nemik:R512"
+    },
+    {
+      "card": "W1179",
+      "trigger": "round 58: 697 (ebb44c9, 47c1f87) landed pushed 06:18:16Z, ls-remote read back, ruff 1660 to 1650; ratchetseries.py read (the only dedupe is by sample time, not by commit, stack or verdict); 698 (W1279 slice 6, 15 Returns sections, ruff 1650 to 1635) inflight 06:19:53Z; gap 1 min 34 s; W1282 waits a fifth round",
+      "root": "The read of ratchetseries.py changes the debt arithmetic: the pace's window counts one sample per gate run, deduped only by timestamp, so refused gates, re-gates and runs of stacks that do not touch a ratchet (flat samples) each occupy a slot. That is why ruff-neutral landings dilute the window, and why a refusal costs a slot as well as a gate cycle. The unread half, ratchetpace.py (how fell and owes come from the 10 samples), decides whether the 73 can be cleared, and neither the session nor mtools has read it. The process rules (landing 8 of 8, starting 5 of 5) hold; the open risk is that the plan is built on a half-read producer.",
+      "contributing": [
+        "ratchetpace.py is unread: fell may be a sum or a difference over the window, and flat samples may count differently; the session's rate arithmetic assumes the sum.",
+        "A flat sample for a ratchet that a stack does not touch fills a slot; every stack that names only ruff dilutes mypy and codon rows, and conversely.",
+        "The rank.py stack (W1282) waits a fifth round while 83 DOC201 sites and D103 398 are easier sources.",
+        "The 06:25 stamp had not landed at the submit; the label said PENDING and the submit used the 05:25:12Z reading, stated on the card.",
+        "Carried from the older row's recurring list (now the boolean true): A shared producer read in half (pace code: ratchetseries.py read, ratchetpace.py unread).",
+        "Carried from the older row's recurring list (now the boolean true): W1282 waiting (R57 to R62).",
+        "Carried from the older row's recurring list (now the boolean true): ATOMIZE on umbrellas pending mtools:W2170.",
+        "Carried from the older row's one_off list (now the boolean true): Two methods at deeper indent in churn.py needing the codemod change."
+      ],
+      "precommit": "698: 15 Returns sections (churn.py 8 including two deeper-indent methods, calendars.py 7), K=15, N=15, each from a body read in full before the G0; MEASURED ruff 1650 to 1635, mypy unchanged 3548; 19 tests directly; census green (522.51 s).",
+      "delta": "Held: 697 landed and read back; ruff -10 against K=8; the dedupe read from source (_hold lines 140 to 146); W2172 confirmed in mtools' queue (ready, caused by nemik:W1246); the starting rule held 5 of 5; the baseline written after 697 landed; ruff -15 = K for 698. Not held: R61-F4 (W1282). Open: the 698 verdict, the hook and reads for W1286 and W1287, ratchetpace.py. SUPERSESSION 2026-11-26 (nemik:R62 stands as history): the older row recorded its handoff as operator 'other' (instrument 'nemik-paths-forward --add-retro', channel 'the cold review') with no self_probe. Today the instrument executed on a scratch copy of the queue (never the real state file), at a path named nemik/.claude/paths-forward.json, and printed 'nemik:R509 added' with no refusal. That measures the filing, not the independence: the residue is add-retro through an independent reader, and the writer does not read. The drafting actor then re-read this draft against the older row's raw findings: all four findings (W1179 read ratchetpace.py and write the formula, W1242 recompute the ruff rate from the pace's own 10 samples and name the flat ones, W1282 write the passed-over reason and a start date or build it, W1286 a dated nudge and a read of github-42's and luthen's states by 2026-11-01) and their cards, owners, due dates and witnesses match the older row character for character; the draft only copies them, and the drafter did not check whether any of the four asks was discharged on its card, so no account of their state could be matched. The drafter cannot certify its own independence. The channel is the independent review by github-82 (batch review of nemik:W2560 batch 2, record github:R284 until their verdict). Not measured: that review's verdict, the real queue's id for this row, and whether W1179, W1242, W1282 or W1286 received the lines the findings ask for.",
+      "sustain": [
+        "Reading ratchetseries.py's dedupe and drawing the consequence for the window.",
+        "Naming ratchetpace.py as unread and sending the dedupe finding to mtools for W2171.",
+        "Reading mtools' queue (read only) to confirm W2172.",
+        "Submitting on the last stamped reading when the label said PENDING, and saying so on the card.",
+        "The codemod now taking each anchor's own indent (deeper-indent methods)."
+      ],
+      "enforcement_layer": "gate",
+      "recurring": true,
+      "one_off": true,
+      "findings": [
+        {
+          "finding": "Read ratchetpace.py (how fell and owes come from the 10 samples) and write the formula on W1179 with the line numbers. The ruff plan needs to know whether fell is a sum of differences or end minus start, and how flat samples count. Until read, say so in every line that quotes a rate.",
+          "finding_card": "W1179",
+          "finding_owner": "nemik session",
+          "due": "2026-10-31",
+          "finding_witness": "a W1179 line with the formula from ratchetpace.py and the rate recomputed from the last 10 samples"
+        },
+        {
+          "finding": "Recompute the ruff rate from the pace's own 10 samples, not from the session's landing records, and write which of the 10 are flat. If several are flat samples from stacks that do not touch ruff, the plan changes: every stack touches ruff while ruff is behind, including peer-request stacks.",
+          "finding_card": "W1242",
+          "finding_owner": "nemik session",
+          "due": "2026-10-31",
+          "finding_witness": "a W1242 line listing the 10 samples with their values and the flat ones, and the rule for stacks that do not touch ruff"
+        },
+        {
+          "finding": "W1282 has waited five rounds and W1286 and W1287 wait on peers. Write the reason W1282 is passed over on its card (easier ruff sources first, or the scratch check not yet done) with a start date, or build it next. A card that has the longest wait and no stated reason is a bump that reads as work.",
+          "finding_card": "W1282",
+          "finding_owner": "nemik session",
+          "due": "2026-10-31",
+          "finding_witness": "a W1282 line with the reason and a start date, or a stack landing for it"
+        },
+        {
+          "finding": "Follow the hook for W1286 and W1287 with a dated nudge: github-42's hook and luthen's final read were asked at 05:51Z and 06:18Z. If neither is in place by 2026-11-01, read their queue (--show) and write the states on both cards.",
+          "finding_card": "W1286",
+          "finding_owner": "nemik session",
+          "due": "2026-11-01",
+          "finding_witness": "a W1286 line with github-42's hook state and luthen's read, read from their own queues or messages"
+        }
+      ],
+      "handoff": {
+        "instrument": "nemik-paths-forward --add-retro; cold-restated by the drafting actor 2026-11-26 against the older row's findings, which cannot certify its own independence",
+        "channel": "independent review by github-82, batch review of nemik:W2560 batch 2, 2026-11-26, record github:R284",
+        "operator": "other",
+        "self_probe": "executed-and-failed"
+      },
+      "supersedes": "nemik:R62",
+      "id": "nemik:R513"
+    },
+    {
+      "card": "W1179",
+      "trigger": "round 59: 698 (04326df) landed pushed 06:47:10Z after 27 min 20 s, the longest gate of the night, ls-remote read back; ratchetpace.py read (window_fall is end minus start; requirement only rises, seeded from the median of earlier windows); a prediction of the 06:25 pace was wrong and corrected; 699 (W1279 slice 7, 18 Returns sections, ruff 1635 to 1617) inflight 06:51:46Z with a stated hypothesis about gate time; gap 4 min 27 s",
+      "root": "The producer is now read: fell is the value ten samples back minus the value now, so a rise inside the window counts against it, flat samples are slots, and the requirement is min(max(prior, seed, 1), now) with the seed the median fall of earlier windows (needs 3), so it only rises. The formula held against two printed paces (fell 52 = 1721-1669, fell 71 = 1721-1650). The one wrong claim was a prediction about timing: a stack's sample enters the series 5 to 6 minutes into its gate, not at its start, which the session stated as wrong before it was asked and corrected on W1179. The longer-term implication is that falling the ruff value by a large step is what matters (end minus start).",
+      "contributing": [
+        "Five of ten slots in the 05:25 window were flat; the window formula (end minus start) makes the 71 depend on the value ten back (1721, 685's era), which falls off the window as landings continue.",
+        "The last four gates took 24 to 27 min against 13 to 17 earlier; the session's censuses and tests ran beside them. The hypothesis is stated with a prediction (about 07:08Z if it holds, 07:15Z or later if not).",
+        "The prediction of the 06:25 pace was wrong, and the session said so before being asked.",
+        "W1286 and W1287 wait only on the hook line's review; mtools' replies (W2171, W2172, W2170) remain open.",
+        "Carried from the older row's recurring list (now the boolean true): A shared producer's behaviour inferred and then read (the pace code, now fully read).",
+        "Carried from the older row's recurring list (now the boolean true): Gate time longer when heavy work runs beside it (to be tested).",
+        "Carried from the older row's one_off list (now the boolean true): The wrong 06:25 pace prediction, corrected."
+      ],
+      "precommit": "Hypothesis: with nothing heavy beside 699's gate, it finishes about 07:08Z; if not, 07:15Z or later. 699: 18 Returns sections over eight small files (K=18, N=18), ruff 1635 to 1617, mypy unchanged, 42 tests directly, census green.",
+      "delta": "Held: 698 landed and read back; ruff -15 = K; the formula verified against two printed paces; five flat slots listed; reasons and a start date for W1282; a dated nudge on W1286; the starting rule held 6 of 6; ruff -18 = K for 699. Not held: the timing prediction of the 06:25 pace (corrected). Open: the 699 verdict and the hypothesis result. SUPERSESSION 2026-11-26 (nemik:R63 stands as history): the older row recorded its handoff as the instrument nemik-paths-forward --add-retro through the channel 'the cold review' with operator other. The instrument was executed on a scratch copy of the queue; that measures the filing, not the independence of any reader. The drafting actor cold-restated the four findings against the older row's raw findings and the stored cards: F1 (gate-time result) matches the R63-F1 RESULT line on W1246 (699 gated 20 min 42 s, between the two predicted stamps, with loadavg readings); F2 (clear-by from the formula) matches the R63-F2 line on W1242, which marks itself EXPECTED, not measured; I could not match an account for F3 (the order of sources per window on W1242): the stored W1242 text gives only the rule to land at least the owed figure per window, and the next row, nemik:R64, says the slice-per-window ordering is not written; F4 (07:25 pace, predicted and printed fell side by side) has a predicted fell of 104 and a printed line that carries no fell figure for an ok row, with the window later read as ending at 700 (fell 173 by the formula), so a printed fell is not there to compare. The independent review by github-82 is the channel. Still not measured: the independence of any reader of this row, whether F3 was ever discharged, and whether the loadavg and wall figures on W1246 match the host.",
+      "sustain": [
+        "Stating a prediction before the result for the gate-time hypothesis, with two outcomes.",
+        "Saying the 06:25 prediction was wrong before it was asked and correcting W1179 and github-42.",
+        "Reading ratchetpace.py and checking the formula against two printed paces.",
+        "Writing W1282's passed-over reason and a start date.",
+        "Running nothing heavy beside 699's gate to test the cause."
+      ],
+      "enforcement_layer": "gate",
+      "recurring": true,
+      "one_off": true,
+      "findings": [
+        {
+          "finding": "Report the result of the gate-time hypothesis whichever way it falls: record 699's wall time from began_ns to the landing stamp, against 07:08Z (holds) and 07:15Z (does not), and the load average at the stamps. If the gate is faster with nothing beside it, make no heavy census beside the gate part of the working-ahead rule and say what the census gives up; if not, strike the hypothesis.",
+          "finding_card": "W1246",
+          "finding_owner": "nemik session",
+          "due": "2026-10-31",
+          "finding_witness": "a W1246 line with 699's wall time, the loadavg at submit and verdict, and the decision on the working-ahead rule"
+        },
+        {
+          "finding": "The formula is end minus start, so the observed fell depends on the value ten samples back. Compute, from the samples, when the 1721 start value leaves the window and what the fell reads then at the current pace of falls; write the date the ruff row is expected to clear (or why it does not) on W1242. The earlier no clear-by date computable no longer holds now the formula is read.",
+          "finding_card": "W1242",
+          "finding_owner": "nemik session",
+          "due": "2026-10-31",
+          "finding_witness": "a W1242 line with the sample values by slot, the landing at which the start value changes, and the expected clear-by date or the reason there is none"
+        },
+        {
+          "finding": "Because the requirement only rises (median of earlier windows, needs 3), plan slices per window: say in the order on W1242 which sources go in which stacks so the large falls are not wasted on a window already counted.",
+          "finding_card": "W1242",
+          "finding_owner": "nemik session",
+          "due": "2026-11-02",
+          "finding_witness": "a W1242 line with the order of sources per window and the expected fell at each pace stamp"
+        },
+        {
+          "finding": "Read the 07:25 pace against the prediction of the formula (699's value and the value ten samples back) before writing it as PENDING or current, and write the predicted and printed figures side by side. A formula that holds twice is not yet a rule to rely on for timing.",
+          "finding_card": "W1179",
+          "finding_owner": "nemik session",
+          "due": "2026-10-31",
+          "finding_witness": "a W1179 line with the predicted fell and the printed fell at the 07:25 stamp"
+        }
+      ],
+      "handoff": {
+        "instrument": "nemik-paths-forward --add-retro; cold-restated by the drafting actor 2026-11-26 against the older row's findings, which cannot certify its own independence",
+        "channel": "independent review by github-82, batch review of nemik:W2560 batch 2, 2026-11-26, record github:R284",
+        "operator": "other",
+        "self_probe": "executed-and-failed"
+      },
+      "supersedes": "nemik:R63",
+      "id": "nemik:R514"
+    },
+    {
+      "supersedes": "nemik:R64",
+      "card": "W1288",
+      "trigger": "round 60: 699 (7f3bbcb) landed pushed 07:12:19Z after 20 min 42 s (hypothesis result read), ruff 1635 to 1617; the clear-by computed from the formula (86 then 104 expected); 700 (W1288, 66 test_* docstrings generated from the test names, ruff 1617 to 1548) inflight 07:19:52Z; gap 7 min 30 s",
+      "root": "Two good acts: the gate-time hypothesis was tested and the result reported against both predictions (observed 20 min 42 s, between 07:08Z and 07:15Z, so the session's census explains about 4 to 7 of the extra minutes and host load the rest), and the clear-by was computed from the formula with the seed named as not yet computed. The risk in this round is 700 itself: 66 docstrings that restate the test name satisfy D103 but add no information, the session says so on the card, and this is the cheap paydown in its purest form (ruff -69 for a script). It also sits against W1239, where six lifted test docstrings were corrected to state what their tests assert after the reviewer read them against their bodies. The fall is real, the content is not; the rule's purpose (a reader learns what the function does) is not served for test names that already say it.",
+      "contributing": [
+        "A name-restating docstring may mislead later: it will be read as reviewed, and W1239 showed lifted test docstrings that said the wrong thing.",
+        "The seed (median of earlier windows) was not computed, so the 07:25 prediction (86 or 104, ok) can be wrong if the seed rose.",
+        "The pace unit runs at :25 EDT, i.e. 07:25Z; the earlier hour was misjudged.",
+        "The slice-per-window ordering (R63-F3) is not written.",
+        "Carried from the older row's recurring list (now the boolean true): Paydown by cheapness: a rule satisfied with no information.",
+        "Carried from the older row's recurring list (now the boolean true): A prediction beside a printed figure owed.",
+        "Carried from the older row's one_off list (now the boolean true): The census hypothesis result: the host load explains most of the extra minutes."
+      ],
+      "precommit": "Hypothesis: 07:08Z if the censuses caused the lengthening, 07:15Z or later if not; 700: K=66, N=74, G0 before the write; ruff 1617 to 1548 MEASURED, mypy unchanged, 78 tests directly, tests only so no census.",
+      "delta": "Held: 699 landed and read back; the hypothesis result against both predictions (observed 07:12:19Z); the clear-by computed (71, 86, 104 expected); a dry run that printed every sentence before the write; 78 tests directly; the first format check noise identified before acting; the starting rule held 7 of 7. Not held: the seed computed; R63-F3. Open: the 700 verdict and the 07:25 pace beside the prediction. SUPERSESSION 2026-11-26 (nemik:R64 stands as history): the older row recorded a handoff of instrument 'nemik-paths-forward --add-retro' through the channel 'the cold review' with operator 'other' and no self_probe. On 2026-11-26 the instrument executed on a scratch copy of the queue (never the real state file): 'mikemol-paths-forward --state <scratch>/nemik/.claude/paths-forward.json --add-retro <this draft>' printed 'nemik:R509 added', with no refusal. That run measures the filing and not the independence of a review. The drafting actor then cold-restated this row against the older row's four findings (F1 asks for a decision on name-restating docstrings with a 10 of 66 sample read against bodies, F2 for the computed seed and the printed 07:25 row, F3 for the slice-per-window order on W1242, F4 for the gate wall time and loadavg of the last six gates): the findings are copied verbatim and match, but this delta's Not held and Open lines name F2's seed, F3's order and the 700 verdict and do not name F1's sample and decision on the remaining 332 or F4's load figures, so that account did not match F1 and F4 and is stated here; the drafter cannot certify its own independence. The channel is the independent review by github-82. Not measured: whether the older row's cold review was ever run, the cards W1288, W1179, W1242 and W1246 for lines answering F1 to F4 (this drafting did not read them), the 700 verdict, and the 07:25 pace row.",
+      "sustain": [
+        "Stating a two-outcome prediction and reporting the result against it, with the loadavg.",
+        "Printing every generated sentence in a dry run before writing.",
+        "Saying plainly on the card that the docstrings restate the name.",
+        "Identifying the format noise (ruff-house.toml against the repo config) before acting.",
+        "Naming the seed as not yet computed."
+      ],
+      "enforcement_layer": "gate",
+      "recurring": true,
+      "one_off": true,
+      "findings": [
+        {
+          "finding": "Decide whether name-restating docstrings are an acceptable payment for D103 on tests, and write the decision on W1288 with a witness. W1239 corrected six test docstrings after they were read against their bodies; 700 adds 66 that were not read against bodies. Read a sample (10 of the 66) against the bodies and report whether the sentence is true of the test; and say whether the 332 D103 left should be paid with name-restating text, or with a different rule.",
+          "finding_card": "W1288",
+          "finding_owner": "nemik session",
+          "due": "2026-10-31",
+          "finding_witness": "a W1288 line with a sample of 10 docstrings read against their bodies, how many were true of the test, and the decision on the remaining 332"
+        },
+        {
+          "finding": "Compute the seed (median of the earlier windows' falls) from the samples and write the predicted ruff row for the 07:25 pace as a number with the seed in it, not a direction. Put the printed row beside it when the pace lands.",
+          "finding_card": "W1179",
+          "finding_owner": "nemik session",
+          "due": "2026-10-30",
+          "finding_witness": "a W1179 line with the seed, the predicted fell and owes, and the printed row at 07:25Z"
+        },
+        {
+          "finding": "Write the slice-per-window ordering on W1242: which sources go into which window, given the formula and the start value leaving after slot 701. If a D103 rule decision changes the source, record that the order depends on it.",
+          "finding_card": "W1242",
+          "finding_owner": "nemik session",
+          "due": "2026-11-01",
+          "finding_witness": "a W1242 line with the order per window and its dependence on the W1288 decision"
+        },
+        {
+          "finding": "Keep the late-census preference but record the load figure at each gate on W1246 so the next lengthening is read against it: gate wall time and loadavg for the last six gates.",
+          "finding_card": "W1246",
+          "finding_owner": "nemik session",
+          "due": "2026-11-02",
+          "finding_witness": "a W1246 line with gate wall time and loadavg for the last six gates"
+        }
+      ],
+      "handoff": {
+        "instrument": "nemik-paths-forward --add-retro; cold-restated by the drafting actor 2026-11-26 against the older row's findings, which cannot certify its own independence",
+        "channel": "independent review by github-82, batch review of nemik:W2560 batch 2, 2026-11-26, record github:R284",
+        "operator": "other",
+        "self_probe": "executed-and-failed"
+      },
+      "id": "nemik:R515"
     }
   ],
-  "retro_counter": 508
+  "retro_counter": 515
 }
