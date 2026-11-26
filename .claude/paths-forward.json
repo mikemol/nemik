@@ -49239,20 +49239,22 @@
     {
       "symbol": "W1949",
       "title": "Codon instance waitemit: nemik.waitemit stops using the mikemol libraries",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W1685",
         "W1747"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W2567"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "Remove the mikemol libraries from nemik.waitemit (src/nemik/waitemit.py): replace the import or construct with a Codon-compatible form (the wall's recorded options are in docs/codon-walls.md), in a scratch worktree, probing the pinned Codon first, then measure the pair with tools/codon_walls.py before and after. The card closes when the pair (waitemit, the mikemol libraries) leaves codon-walls.json. Bundle with other ready instances in one stack: never a full gate for one pair (github-14, 2026-11-10).",
-      "evidence": "",
+      "evidence": "2026-11-26T23:10:46Z: 2026-11-26: waitemit.py imports mikemol.endpoints.resolve (base_url) and mikemol.otlp.metrics and mikemol.otlp.sender (lines 22-24). The otlp pair is the same replacement decision as its protobuf instance W1948, designed on W2567; the endpoints.resolve base_url is a third small read (resolving the metrics endpoint from the environment) that the same design must place in-tree or keep through mtools. Re-ready when W2567 names the replacement.",
       "issued_at": "2026-11-05T21:54:17Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-11-17T22:00:46Z",
+      "last_worked": "2026-11-26T23:10:46Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/waitemit.py"
@@ -49260,7 +49262,8 @@
       "size_class": "small",
       "weight": 20,
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
-      "vector_source": "default"
+      "vector_source": "default",
+      "completed": null
     },
     {
       "symbol": "W1950",
@@ -63560,11 +63563,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "Operator 2026-11-26 host L234190 (uuid 060b0054, verified kind human): swarm exception for retro paydown only, concurrent subagents allowed. Per retro: a subagent reads the old retro and the git history it names, executes the handoff step as its instrument, and writes the superseding retro JSON (supersedes full id, operator self, or other with self_probe executed-and-failed and the real result). The session adds each through --add-retro, never edits it, and github-82 reviews each batch before submit. R51 to R64 are list-to-bool, R23 to R50 are self_probe.",
-      "evidence": "2026-11-26T20:22:24Z: 2026-11-26 github-82 accepted W2560 with two shape changes. (1) Scaffold first, mechanically. Read at source (the pinned writer's --migrate-retros over nemik, tool-results b4jg25tz3): 0 WOULD WRITE, every R23-R64 row is NEEDS A REVIEWER: R23-R50 'handoff operator other needs self_probe executed-and-failed' (the probe result is the judgment), R51-R64 additionally 'recurring/one_off must be true or false, not [list]' (mtools 87857abb refuses to convert it, so the normalisation is not offered by the writer). So a nemik-side scaffold tool generates the superseding JSON for all 42: verbatim copy of every field except id/supersedes/handoff, recurring and one_off lists turned into true with the list items carried verbatim into contributing (the R65 precedent), handoff instrument and channel copied from the row, operator and self_probe left for the subagent. Subagents do ONLY the probe and the sourced sustain. (2) Batch size 7, six batches (R51-R57, R58-R64, R23-R29, R30-R36, R37-R43, R44-R50): each batch is one review by github-82, the two cohorts stay whole (14 = 2x7, 28 = 4x7), and a REVISE costs 7 rows, not 42. | 2026-11-26T20:24:39Z: 2026-11-26 github-82: batches of 7 accepted; a nemik-side scaffold generator is NOT (the writer and --migrate-retros are mtools', a second scaffold here is a copy beside the integration). So: the list-to-bool normalisation is asked of mtools as W2561 (letter in mtools/inbox); until it lands each subagent applies that same rule to its own row in its draft (non-empty list -> true with the items verbatim in contributing, empty -> false), and the batch review checks it field by field; the probe and the sourced sustain stay the subagents' judgment. | 2026-11-26T22:03:28Z: 2026-11-26 BATCH 1 (R51 to R57, 7 subagents, general-purpose, run in the background) started under the operator's swarm exception (host L234190, verified). Each reads the shared brief (scratchpad w2560-brief.md: copy every field verbatim except id, supersedes, handoff, recurring, one_off; a non-empty recurring or one_off list becomes true with its items carried verbatim into contributing; supersedes is the full id; the old delta stays verbatim with an appended SUPERSESSION paragraph stating the truth; operator self only if the step really succeeded, other only with a really attempted and failed probe), runs the retro's own handoff step, and writes only scratchpad w2560/R<n>.json. They do not touch the queue. I add each through --add-retro after checking it field by field, never editing it; github-82 reviews the batch before any submit. | 2026-11-26T22:12:40Z: 2026-11-26 BATCH 1 drafts back (R51-R57, scratchpad w2560/R<n>.json), each validated by the writer on a scratch copy of the queue (copy under a directory named nemik, real state never passed): all say operator self, the step (--add-retro) executed for the actor. Field-by-field check by a read-only script (scratchpad check_w2560.py: every field verbatim except id/supersedes/handoff/recurring/one_off, contributing = old plus the Carried-from lines, delta starts with the old delta, instrument and channel copied): R51, R52, R53, R54, R55, R57 OK; R56 dropped the finding text of all four findings (the --retros view omits it) and was sent back to restore it from the raw row. First-round drafts that claimed executed-and-failed or self from a mere read-back (R52, R53, R56) were rejected and redone after the scratch-state addendum. OPEN QUESTION for the review: the older rows hand 'add-retro through the cold review' to another operator; the drafts record self because the instrument executes for the actor, with the cold-review channel stated as not exercised. nemik:R499 was ruled wrong for a similar filing-as-measurement move (the residue there was independence); here the instrument IS the filing, but github-82 decides. Rows are NOT added to the queue until the batch is reviewed (write-once). | 2026-11-26T22:20:33Z: 2026-11-26 github-82 REVISE on batch 1's handoff (same ruling as R499): operator self is false, because filing executes the writer, not the independent review the old rows' residue names. Revised all seven: operator other, self_probe executed-and-failed from a really run cold-restate (the drafters re-read their rows against the older raw findings; unmatched: R52 finding 1's message a628bd8d is on no card, R52 finding 3 not compared, R53 and R56 first deltas incomplete and corrected), instrument carries the restate's date, channel = 'independent review by github-82, batch review of nemik:W2560 batch 1, 2026-11-26, record github:R_PENDING' (the number arrives with the PASS). Mechanical check (scratchpad check_w2560.py, now asserting the handoff shape): 7 of 7 OK; the scratch --add-retro printed 'nemik:R502 added' for each. Sent back to github-82. Brief (w2560-brief.md) rewritten so batches 2 to 6 start with this form. Rows go into the queue only after the PASS and the record number. | 2026-11-26T22:24:23Z: 2026-11-26 BATCH 1 PASSED by github-82 (record github:R282; she read R51 and R52 in full and the supersession paragraphs of R53, R55, R57; R54 and R56 checked only through check_w2560.py, which the record says). R_PENDING substituted with github:R282 in the seven drafts, the mechanical check re-run (7 of 7 OK), and the rows ADDED to the queue through the writer: nemik:R502 (supersedes R51), R503 (R52), R504 (R53), R505 (R54), R506 (R55), R507 (R56), R508 (R57); R508 read back whole from the queue (supersedes nemik:R57, operator other, self_probe executed-and-failed, channel with record github:R282, recurring and one_off true with the items carried). Their delta text says 'record github:R282 until their verdict', which was true when drafted and is now only slightly stale; the writer rows are write-once so it stands. The cold-cache handoff baseline shrink for R51-R57 comes after the batches, with the guard. Batch 2 (R58 to R64, batch number 2 in the channel) started from the updated brief. | 2026-11-26T22:34:59Z: 2026-11-26 BATCH 1 COMMITTED nemik 79bd60e (parent 4232f9e3, PUSHED, gate_staged green, queue files only): R502 to R508 supersede R51 to R57. BATCH 2 PASSED by github-82 (record github:R284; she read R58 and R63 in full and the supersession paragraph of all seven; honest mismatches recorded: R61 F2 and F4, R63 F3 and F4, R64 F1 and F4; R59, R60, R62 state the discharge was not checked). R_PENDING substituted with github:R284, check_w2560.py 7 of 7 OK, rows ADDED through the writer: R509 (supersedes R58), R510 (R59), R511 (R60), R512 (R61), R513 (R62), R514 (R63), R515 (R64); submitted as a queue-only stack (scratchpad stack-q2.json). github-82's rule for batches 3 to 6: rotate which two rows are read in full (not the first two), every position read in some batch. | 2026-11-26T22:49:22Z: 2026-11-26 BATCH 2 COMMITTED nemik 08c65ff (parent 79bd60e, PUSHED, queue files only): R509 to R515 supersede R58 to R64. BATCH 3 PASSED by github-82 (record github:R286; full reads R25 and R27, supersession paragraphs of all seven; R28 found the refusal the older row names does not exist in the pinned writer, R29 declined to run a tick-close half that writes live state): R_PENDING substituted, check 7 of 7, rows ADDED R516 (R23), R517 (R24), R518 (R25), R519 (R26), R520 (R27), R521 (R28), R522 (R29); queue-only stack submitted (stack-q3.json). BATCH 4 (R30 to R36) drafted, 7 of 7 OK, sent to github-82 for review with full reads of positions 4 and 7 (R33, R36). Remaining: batch 4 add and commit, batches 5 (R37 to R43) and 6 (R44 to R50), then the cold-cache handoff baseline shrink. | 2026-11-26T23:02:28Z: 2026-11-26 BATCH 3 COMMITTED nemik 1aac98e (parent 08c65ff, PUSHED, gate_staged green, queue files only): R516 to R522 supersede R23 to R29. BATCH 4 PASSED by github-82 (record github:R288; full reads R33 and R36, supersession paragraph of all seven; no live-writing instrument half run, each row says what it read instead): R_PENDING substituted, check 7 of 7, rows ADDED R523 (R30), R524 (R31), R525 (R32), R526 (R33), R527 (R34), R528 (R35), R529 (R36); queue-only stack submitted (stack-q4.json). BATCH 5 PASSED (record github:R289; github-82 read R40, my clock draw, and R42 in full, plus all seven supersession paragraphs; she notes this batch checked each finding against the cards' stored evidence): rows to be added after batch 4 lands. BATCH 6 (R44 to R50) drafted, seven files, to be checked and sent for review. 28 of 42 superseded once batch 4 lands; 35 with batch 5; 42 with batch 6. | 2026-11-26T23:05:44Z: 2026-11-26 BATCH 6 PASSED by github-82 (record github:R291; she read R48, my clock draw, and R47 in full, the latter for its anomaly: the older delta cites 'R46-F4', which its own findings lack, and the draft reports rather than corrects the write-once text; R47's tick-hooks half correctly not run). That completes ALL 42 rows (R23 to R64) reviewed across github:R282, R284, R286, R288, R289, R291. R289 (batch 5) and R291 substituted and checked (7 of 7 each). Order of landing, one queue-only stack per batch: batches 1 to 3 COMMITTED (79bd60e, 08c65ff, 1aac98e), batch 4's rows added and its stack gating, then batch 5 (R537?-numbers assigned by the writer at add time), then batch 6. Afterwards, github-82 asks: re-run the handoff baseline tool from a COLD cache (NEMIK_CACHE_DIR empty) over a committed object and record how many of the 42 leave the baseline, noting which shapes judged it (the probe shape at nemik HEAD is still the string match until W2552 lands). Then send her the six queue-only shas. | 2026-11-26T23:10:24Z: 2026-11-26 BATCH 4 COMMITTED nemik a8b4e91 (parent 1aac98e, PUSHED, gate_staged green, queue files only): R523 to R529 supersede R30 to R36. BATCH 5 rows ADDED (R289 substituted, check 7 of 7): R530 (R37), R531 (R38), R532 (R39), R533 (R40), R534 (R41), R535 (R42), R536 (R43); queue-only stack submitted (stack-q5.json). Batch 6 (R44 to R50, record github:R291, check 7 of 7) next, then the cold-cache baseline run.",
+      "evidence": "2026-11-26T20:22:24Z: 2026-11-26 github-82 accepted W2560 with two shape changes. (1) Scaffold first, mechanically. Read at source (the pinned writer's --migrate-retros over nemik, tool-results b4jg25tz3): 0 WOULD WRITE, every R23-R64 row is NEEDS A REVIEWER: R23-R50 'handoff operator other needs self_probe executed-and-failed' (the probe result is the judgment), R51-R64 additionally 'recurring/one_off must be true or false, not [list]' (mtools 87857abb refuses to convert it, so the normalisation is not offered by the writer). So a nemik-side scaffold tool generates the superseding JSON for all 42: verbatim copy of every field except id/supersedes/handoff, recurring and one_off lists turned into true with the list items carried verbatim into contributing (the R65 precedent), handoff instrument and channel copied from the row, operator and self_probe left for the subagent. Subagents do ONLY the probe and the sourced sustain. (2) Batch size 7, six batches (R51-R57, R58-R64, R23-R29, R30-R36, R37-R43, R44-R50): each batch is one review by github-82, the two cohorts stay whole (14 = 2x7, 28 = 4x7), and a REVISE costs 7 rows, not 42. | 2026-11-26T20:24:39Z: 2026-11-26 github-82: batches of 7 accepted; a nemik-side scaffold generator is NOT (the writer and --migrate-retros are mtools', a second scaffold here is a copy beside the integration). So: the list-to-bool normalisation is asked of mtools as W2561 (letter in mtools/inbox); until it lands each subagent applies that same rule to its own row in its draft (non-empty list -> true with the items verbatim in contributing, empty -> false), and the batch review checks it field by field; the probe and the sourced sustain stay the subagents' judgment. | 2026-11-26T22:03:28Z: 2026-11-26 BATCH 1 (R51 to R57, 7 subagents, general-purpose, run in the background) started under the operator's swarm exception (host L234190, verified). Each reads the shared brief (scratchpad w2560-brief.md: copy every field verbatim except id, supersedes, handoff, recurring, one_off; a non-empty recurring or one_off list becomes true with its items carried verbatim into contributing; supersedes is the full id; the old delta stays verbatim with an appended SUPERSESSION paragraph stating the truth; operator self only if the step really succeeded, other only with a really attempted and failed probe), runs the retro's own handoff step, and writes only scratchpad w2560/R<n>.json. They do not touch the queue. I add each through --add-retro after checking it field by field, never editing it; github-82 reviews the batch before any submit. | 2026-11-26T22:12:40Z: 2026-11-26 BATCH 1 drafts back (R51-R57, scratchpad w2560/R<n>.json), each validated by the writer on a scratch copy of the queue (copy under a directory named nemik, real state never passed): all say operator self, the step (--add-retro) executed for the actor. Field-by-field check by a read-only script (scratchpad check_w2560.py: every field verbatim except id/supersedes/handoff/recurring/one_off, contributing = old plus the Carried-from lines, delta starts with the old delta, instrument and channel copied): R51, R52, R53, R54, R55, R57 OK; R56 dropped the finding text of all four findings (the --retros view omits it) and was sent back to restore it from the raw row. First-round drafts that claimed executed-and-failed or self from a mere read-back (R52, R53, R56) were rejected and redone after the scratch-state addendum. OPEN QUESTION for the review: the older rows hand 'add-retro through the cold review' to another operator; the drafts record self because the instrument executes for the actor, with the cold-review channel stated as not exercised. nemik:R499 was ruled wrong for a similar filing-as-measurement move (the residue there was independence); here the instrument IS the filing, but github-82 decides. Rows are NOT added to the queue until the batch is reviewed (write-once). | 2026-11-26T22:20:33Z: 2026-11-26 github-82 REVISE on batch 1's handoff (same ruling as R499): operator self is false, because filing executes the writer, not the independent review the old rows' residue names. Revised all seven: operator other, self_probe executed-and-failed from a really run cold-restate (the drafters re-read their rows against the older raw findings; unmatched: R52 finding 1's message a628bd8d is on no card, R52 finding 3 not compared, R53 and R56 first deltas incomplete and corrected), instrument carries the restate's date, channel = 'independent review by github-82, batch review of nemik:W2560 batch 1, 2026-11-26, record github:R_PENDING' (the number arrives with the PASS). Mechanical check (scratchpad check_w2560.py, now asserting the handoff shape): 7 of 7 OK; the scratch --add-retro printed 'nemik:R502 added' for each. Sent back to github-82. Brief (w2560-brief.md) rewritten so batches 2 to 6 start with this form. Rows go into the queue only after the PASS and the record number. | 2026-11-26T22:24:23Z: 2026-11-26 BATCH 1 PASSED by github-82 (record github:R282; she read R51 and R52 in full and the supersession paragraphs of R53, R55, R57; R54 and R56 checked only through check_w2560.py, which the record says). R_PENDING substituted with github:R282 in the seven drafts, the mechanical check re-run (7 of 7 OK), and the rows ADDED to the queue through the writer: nemik:R502 (supersedes R51), R503 (R52), R504 (R53), R505 (R54), R506 (R55), R507 (R56), R508 (R57); R508 read back whole from the queue (supersedes nemik:R57, operator other, self_probe executed-and-failed, channel with record github:R282, recurring and one_off true with the items carried). Their delta text says 'record github:R282 until their verdict', which was true when drafted and is now only slightly stale; the writer rows are write-once so it stands. The cold-cache handoff baseline shrink for R51-R57 comes after the batches, with the guard. Batch 2 (R58 to R64, batch number 2 in the channel) started from the updated brief. | 2026-11-26T22:34:59Z: 2026-11-26 BATCH 1 COMMITTED nemik 79bd60e (parent 4232f9e3, PUSHED, gate_staged green, queue files only): R502 to R508 supersede R51 to R57. BATCH 2 PASSED by github-82 (record github:R284; she read R58 and R63 in full and the supersession paragraph of all seven; honest mismatches recorded: R61 F2 and F4, R63 F3 and F4, R64 F1 and F4; R59, R60, R62 state the discharge was not checked). R_PENDING substituted with github:R284, check_w2560.py 7 of 7 OK, rows ADDED through the writer: R509 (supersedes R58), R510 (R59), R511 (R60), R512 (R61), R513 (R62), R514 (R63), R515 (R64); submitted as a queue-only stack (scratchpad stack-q2.json). github-82's rule for batches 3 to 6: rotate which two rows are read in full (not the first two), every position read in some batch. | 2026-11-26T22:49:22Z: 2026-11-26 BATCH 2 COMMITTED nemik 08c65ff (parent 79bd60e, PUSHED, queue files only): R509 to R515 supersede R58 to R64. BATCH 3 PASSED by github-82 (record github:R286; full reads R25 and R27, supersession paragraphs of all seven; R28 found the refusal the older row names does not exist in the pinned writer, R29 declined to run a tick-close half that writes live state): R_PENDING substituted, check 7 of 7, rows ADDED R516 (R23), R517 (R24), R518 (R25), R519 (R26), R520 (R27), R521 (R28), R522 (R29); queue-only stack submitted (stack-q3.json). BATCH 4 (R30 to R36) drafted, 7 of 7 OK, sent to github-82 for review with full reads of positions 4 and 7 (R33, R36). Remaining: batch 4 add and commit, batches 5 (R37 to R43) and 6 (R44 to R50), then the cold-cache handoff baseline shrink. | 2026-11-26T23:02:28Z: 2026-11-26 BATCH 3 COMMITTED nemik 1aac98e (parent 08c65ff, PUSHED, gate_staged green, queue files only): R516 to R522 supersede R23 to R29. BATCH 4 PASSED by github-82 (record github:R288; full reads R33 and R36, supersession paragraph of all seven; no live-writing instrument half run, each row says what it read instead): R_PENDING substituted, check 7 of 7, rows ADDED R523 (R30), R524 (R31), R525 (R32), R526 (R33), R527 (R34), R528 (R35), R529 (R36); queue-only stack submitted (stack-q4.json). BATCH 5 PASSED (record github:R289; github-82 read R40, my clock draw, and R42 in full, plus all seven supersession paragraphs; she notes this batch checked each finding against the cards' stored evidence): rows to be added after batch 4 lands. BATCH 6 (R44 to R50) drafted, seven files, to be checked and sent for review. 28 of 42 superseded once batch 4 lands; 35 with batch 5; 42 with batch 6. | 2026-11-26T23:05:44Z: 2026-11-26 BATCH 6 PASSED by github-82 (record github:R291; she read R48, my clock draw, and R47 in full, the latter for its anomaly: the older delta cites 'R46-F4', which its own findings lack, and the draft reports rather than corrects the write-once text; R47's tick-hooks half correctly not run). That completes ALL 42 rows (R23 to R64) reviewed across github:R282, R284, R286, R288, R289, R291. R289 (batch 5) and R291 substituted and checked (7 of 7 each). Order of landing, one queue-only stack per batch: batches 1 to 3 COMMITTED (79bd60e, 08c65ff, 1aac98e), batch 4's rows added and its stack gating, then batch 5 (R537?-numbers assigned by the writer at add time), then batch 6. Afterwards, github-82 asks: re-run the handoff baseline tool from a COLD cache (NEMIK_CACHE_DIR empty) over a committed object and record how many of the 42 leave the baseline, noting which shapes judged it (the probe shape at nemik HEAD is still the string match until W2552 lands). Then send her the six queue-only shas. | 2026-11-26T23:10:24Z: 2026-11-26 BATCH 4 COMMITTED nemik a8b4e91 (parent 1aac98e, PUSHED, gate_staged green, queue files only): R523 to R529 supersede R30 to R36. BATCH 5 rows ADDED (R289 substituted, check 7 of 7): R530 (R37), R531 (R38), R532 (R39), R533 (R40), R534 (R41), R535 (R42), R536 (R43); queue-only stack submitted (stack-q5.json). Batch 6 (R44 to R50, record github:R291, check 7 of 7) next, then the cold-cache baseline run. | 2026-11-26T23:22:23Z: 2026-11-26 BATCH 5 COMMITTED nemik 35067b4 (parent a8b4e91, PUSHED, gate_staged green, queue files only): R530 to R536 supersede R37 to R43. BATCH 6 rows ADDED (R291 substituted, check 7 of 7): R537 (R44), R538 (R45), R539 (R46), R540 (R47), R541 (R48), R542 (R49), R543 (R50); queue-only stack submitted (stack-q6.json). Six queue-only commits: 79bd60e, 08c65ff, 1aac98e, a8b4e91, 35067b4, and the batch-6 sha to come. Then: the cold-cache handoff baseline run over a committed object, recording which shapes judged it.",
       "issued_at": "2026-11-26T20:20:15Z",
       "minted_during": "interrupt",
       "caused_by": "W2545",
-      "last_worked": "2026-11-26T23:10:24Z",
+      "last_worked": "2026-11-26T23:22:23Z",
       "ticks_blocked": 0,
       "completed": null
     },
@@ -80969,7 +80972,430 @@
       },
       "supersedes": "nemik:R43",
       "id": "nemik:R536"
+    },
+    {
+      "card": "W1246",
+      "trigger": "round 40: 674 (b136ac4, D205 done in src) landed 19:13:15Z, 675 (W1014 slice 9, D401, ruff 1810 to 1800, census 444.24 s) inflight about 19:22:44Z, gap 9 min 27 s, the first under 10 min, UNSCORED still 209",
+      "root": "The gap fell below 10 min because the next slice was edited and measured during the previous gate, with disjoint files, and the census ran once after the measure. That is the mechanism R41-F1 and R43-F1 named, done as practice, it still depends on the next slice's files being disjoint from the gating one, which the D401 plan (21 files in five slices) has to keep true. UNSCORED is a third round unchanged because the three minted cards were not scored.",
+      "contributing": [
+        "ruff-baseline.json was held until 674 landed so the in-gate tree stayed untouched, this is the trick that made working ahead safe, and it is described only in this message.",
+        "R43-F2 (score the three cards) was not done though it is a few minutes of work.",
+        "The pace is still not newer than 04:25:05Z after the store came back at 18:45:20Z, W1277 stays blocked, correctly."
+      ],
+      "precommit": "Slice 9 edited and measured during the 674 gate, files disjoint, measure before census, one census run, D401 in alarm, apischema, churn and mspdi, ruff 1810 to 1800.",
+      "delta": "Held by your report: 674 ruff 1819 to 1810, the gap 9 min 27 s from date stamps, measure before census with one E501 fixed and one census (444.24 s), D401 plan on W1014, peer reply from readings. Not held: R43-F2. Open: the 675 verdict. SUPERSESSION 2026-11-26 (nemik:R44 stands as history): the older row recorded the handoff as instrument 'nemik-paths-forward --add-retro', channel 'the cold review', operator 'other', with no self_probe. The writer executed: this draft was passed to mikemol-paths-forward --add-retro against a scratch copy of the queue at a path ending nemik/.claude/paths-forward.json and printed: nemik:R523 added; the real queue was never passed to --state. That measures the filing and the writer's field validation, not the independence the older row's residue names. The drafting actor then cold-restated the draft against the older row's four findings: findings 1 to 4 are copied whole and unchanged, and recurring and one_off are the booleans the older row already held. Finding 1 asks for the working-ahead method written down on W1246 with the next two gaps, both under 10 min from date stamps: W1246 carries a line headed R44-F1 giving the four-step method and saying the next two gaps are to be quoted from date stamps there, so the method matches, but I did not find on W1246 the two later gaps quoted as the witness requires, and the W1014 lines that record later gaps give 20 min 10 s and 21 min 8 s, so its account for the gaps could not be matched. Finding 2 asks that UNSCORED be below 209 with a before and after line: W1231 carries a line headed R44-F2 scoring W1275, W1276 and W1277 by weight with UNSCORED 209 before, then a later line saying UNSCORED read 210 and weights do not move it, then a recorded decision to leave it at 209, so the account could not be matched as the witness is worded (the ledger was not read). Finding 3 asks for a W1014 file-to-slice table for D401 with the pairs that cannot run ahead: W1014 carries a line headed R44-F3 with the table and the statement that no pair among the D401 slices cannot run ahead, so its account matches. Finding 4 asks for a W1277 line with a pace as-of newer than 18:45:20Z and the unit exit status, or a message to luthen with the failed reading: W1277 carries the R43-F3 re-read (exit 14:25:10 EDT, pace not newer than 04:25:05Z) and is blocked, and I found no line with a newer as-of or a message to luthen, so its account could not be matched. The drafter cannot certify its own independence, so that restate is a probe executed and failed. The channel is an independent review by github-82. Not measured: whether findings 1, 2 and 4 were met as their witnesses are worded, the ledger, whether a later W1277 reading exists beyond the evidence lines read, and the independent review's verdict.",
+      "sustain": [
+        "Working ahead during the previous gate on disjoint files, holding the baseline file until landing (the gap fell below 10 min).",
+        "Measure before census, one census run (R43-F1 met).",
+        "Writing the D401 family order and five-slice plan with counts (48 in 21 files) on W1014.",
+        "Answering github-42 from readings and re-reading the pace unit instead of closing W1277 on the report."
+      ],
+      "enforcement_layer": "instructions",
+      "recurring": true,
+      "one_off": false,
+      "findings": [
+        {
+          "finding": "Write the working-ahead method down as a rule so it survives the next compaction: edit and measure the next slice while the current one gates, on files disjoint from the gating stack, hold ruff-baseline.json until the current stack lands, one census after the measure passes. Put it on W1246 and in the next G0 that uses it, and check the D401 slices keep files disjoint.",
+          "finding_card": "W1246",
+          "finding_owner": "nemik session",
+          "due": "2026-10-31",
+          "finding_witness": "a W1246 line with the method and the next two gaps, both under 10 min from date stamps"
+        },
+        {
+          "finding": "Score W1275, W1276 and W1277 now. The three cards have been unscored for three rounds and UNSCORED stays 209 because of them. It takes minutes, write the count before and after.",
+          "finding_card": "W1231",
+          "finding_owner": "nemik session",
+          "due": "2026-10-30",
+          "finding_witness": "a ledger line with UNSCORED before and after, below 209"
+        },
+        {
+          "finding": "Check that the five D401 slices keep files disjoint pairwise, listing which slice edits which of the 21 files, so a slice that must wait is known before it is chosen. Write the pairs on W1014.",
+          "finding_card": "W1014",
+          "finding_owner": "nemik session",
+          "due": "2026-10-31",
+          "finding_witness": "a W1014 line with the file-to-slice table for D401 and the pairs that cannot run ahead"
+        },
+        {
+          "finding": "Re-read nemik-rank --pace and the unit after the next scheduled run time, and write the as-of and exit status on W1277. If the unit stays failed after the store is back, say so to luthen-observability with the reading.",
+          "finding_card": "W1277",
+          "finding_owner": "nemik session",
+          "due": "2026-10-31",
+          "finding_witness": "a W1277 line with the pace as-of newer than 18:45:20Z and the unit exit status, or a message to luthen with the failed reading"
+        }
+      ],
+      "handoff": {
+        "instrument": "nemik-paths-forward --add-retro; cold-restated by the drafting actor 2026-11-26 against the older row's findings, which cannot certify its own independence",
+        "channel": "independent review by github-82, batch review of nemik:W2560 batch 6, 2026-11-26, record github:R291",
+        "operator": "other",
+        "self_probe": "executed-and-failed"
+      },
+      "supersedes": "nemik:R44",
+      "id": "nemik:R537"
+    },
+    {
+      "card": "W1246",
+      "trigger": "round 41: 675 (1fee34b) landed local 19:42:39Z but its push was held about 36 min by another session's git index.lock, 676 refused at submit for the codon ratchet (required fall 1, observed 0), 677 (5882631 W1179, 3bdbff6 W1014) landed and pushed 21:06:17Z after a hub-modules refusal, 678 (W1278 repin + W1014 slice 12) inflight 21:26:27Z, gaps 59 min 37 s and 20 min 10 s",
+      "root": "The codon fall owed since round 24 finally arrived as a refusal once the pace refreshed, and was met by a real fix (tiers.py split) after a lazy import was rejected as hiding the modules from the census. The long gap (59 min 37 s) is mostly outside the session: a push held by github-42's kata flush under an index.lock with a ~48 min precommit. The session did the right thing (read ps and the lock, did not touch the process, pushed itself afterwards, read back ls-remote). The recurring cost is the refusals found at submit that earlier checks could have caught: the codon ratchet (known as owed for 20 rounds) and the hub-modules test.",
+      "contributing": [
+        "The codon baseline write mode reworded about 10 other entries' error text, the session restored it from git and removed only the tiers block (4 lines). A baseline writer that rewrites unrelated entries is a defect on its owner.",
+        "The hub-modules-depend-on-everything-below test failed after metrics.py gained a rank import, a fast registry pass would find it before a submit if run first.",
+        "UNSCORED rose to 210: --weight does not move it, it counts cards without a vector, so R44-F2 was misdirected for two rounds.",
+        "A second session's flush held the repo's index.lock for about 48 min, there is no coordination between the host kata flush and the session's push."
+      ],
+      "precommit": "W1179 G0 before the edit: tiers split, not a lazy import. Expected: codon fall of 1 with the pinned Codon, census green. 678: ruff 1776 to 1758, mypy 3914, census 431.39 s.",
+      "delta": "Held by your report: codon entry gone for tiers with 7 passed (419.96 s) and the write mode (453.42 s), 677 landed pushed, ls-remote read back at 1fee34b, the pace later read codon ok 148 left. Not held: the 59 min 37 s gap (mostly the held push), UNSCORED (210), R44-F2. Open: the 678 verdict. SUPERSESSION 2026-11-26 (nemik:R45 stands as history): the older row recorded the handoff as instrument 'nemik-paths-forward --add-retro', channel 'the cold review', operator 'other', with no self_probe. The writer executed: this draft was passed to mikemol-paths-forward --add-retro against a scratch copy of the queue at a path ending nemik/.claude/paths-forward.json and printed: nemik:R523 added; the real queue was never passed to --state. That measures the filing and the writer's field validation, not the independence the older row's residue names. The drafting actor then cold-restated the draft against the older row's four findings: findings 1 to 4 are copied whole and unchanged, and recurring and one_off are the booleans the older row already held (true and false), so no list was converted. Finding 1 asks that the unrelated-entry rewording of the codon baseline write mode become a card with a before and after of the ten entries, owned by the writer's owner, with a confirmed nudge: W1179 carries a line headed R45-F1 correction of ownership that says the mode is nemik's own and gives the reproduction and the reworded entries, so the account matches in part, though no nudge or read-back was found there and the ownership differs from the finding's wording. Finding 2 asks that the fast registry pass run before a submit that adds an import: W1219 carries a line headed R45-F2 pre-submit list naming the hub-modules and import-graph claims to run first, so the account matches, though the witness of a later stack showing the pass run and an accepted first submit was not read. Finding 3 asks for a github:R132 line with the lock hold time and the change, or a nudge reply from github-42: W1246 carries no line headed R45-F3 and github:R132 was not read, so its account could not be matched. Finding 4 asks that vectors be set on W1275 to W1278 and UNSCORED written below 210: W1231 carries R45-F4 and R48-F3 lines recording a dry run and a decision not to apply a default vector, leaving UNSCORED at 209, so its account could not be matched as the witness is worded. The drafter cannot certify its own independence, so that restate is a probe executed and failed. The channel is an independent review by github-82. Not measured: whether findings 1 to 4 were met as their witnesses are worded, the ledger, the nudges, and the independent review's verdict.",
+      "sustain": [
+        "Reading ps, the lock and git status, reporting to github-42, and pushing only after the lock ended, then ls-remote.",
+        "Rejecting a lazy import that would hide the modules from the census.",
+        "Restoring the codon baseline from git and removing only the 4-line tiers block.",
+        "Checking the wheel's entry_points.txt myself for W1278, instead of taking the request.",
+        "Answering the 'IDLE' reading from the reflog, ls-remote and refusals."
+      ],
+      "enforcement_layer": "gate",
+      "recurring": true,
+      "one_off": false,
+      "findings": [
+        {
+          "finding": "Make the unrelated-entry rewording of the codon baseline write mode a card with a reproduction (before and after of the 10 entries), owned by the baseline writer's owner, and nudge with a read-back (W1224). Until fixed, every codon write needs a git restore and a hand edit, which is a hazard for the next paydown.",
+          "finding_card": "W1179",
+          "finding_owner": "nemik session",
+          "due": "2026-10-31",
+          "finding_witness": "a card for the write mode with the diff of the reworded entries and a confirmed nudge"
+        },
+        {
+          "finding": "Run the fast registry pass (test_architecture hub-modules and the ratchet owed lines) as a pre-submit step on any stack that adds an import or touches a ratchet. Add it to the pre-submit checklist next to the untracked and manifest checks, so the 20:42:16Z refusal is found before the submit.",
+          "finding_card": "W1219",
+          "finding_owner": "nemik session",
+          "due": "2026-11-01",
+          "finding_witness": "the next stack that adds an import showing the registry pass run before the submit and an accepted first submit"
+        },
+        {
+          "finding": "The held push (about 36 min under another session's index.lock) is a fleet cost. Ask for a way to learn that the lock is held and by whom before a stack is built, and for the kata flush to not hold the lock through a 48 min precommit. github:R132 holds the report, add the lock-wait figures (start 19:33:44Z, end about 20:18Z) and ask for a witness.",
+          "finding_card": "W1246",
+          "finding_owner": "github-42",
+          "due": "2026-11-03",
+          "finding_witness": "a github:R132 line with the lock hold time and the change, or a nudge reply confirming the flush no longer holds the lock through precommit"
+        },
+        {
+          "finding": "UNSCORED counts cards without a vector, not a weight. Set --vector on W1275, W1276, W1277 and W1278 and write the count before and after. This corrects R44-F2, which pointed at weight.",
+          "finding_card": "W1231",
+          "finding_owner": "nemik session",
+          "due": "2026-10-30",
+          "finding_witness": "a ledger line with UNSCORED before and after setting vectors, below 210"
+        }
+      ],
+      "handoff": {
+        "instrument": "nemik-paths-forward --add-retro; cold-restated by the drafting actor 2026-11-26 against the older row's findings, which cannot certify its own independence",
+        "channel": "independent review by github-82, batch review of nemik:W2560 batch 6, 2026-11-26, record github:R291",
+        "operator": "other",
+        "self_probe": "executed-and-failed"
+      },
+      "supersedes": "nemik:R45",
+      "id": "nemik:R538"
+    },
+    {
+      "card": "W1246",
+      "trigger": "round 42: 678 (7412778 W1278 re-vendor, 132130a W1014 slice 12) landed pushed 21:43:38Z, ls-remote read back, 679 (W1014 DOC201 slice 1, ruff 1758 to 1746, census 443.81 s) inflight 22:21:50Z, gap 38 min 10 s with no stack built, UNSCORED 210",
+      "root": "The gap of 38 min 10 s returned to the old pattern: the gate was empty while the session handled the previous round's retro findings, the W1056 read and the first DOC201 slice. R44's working-ahead method (edit and measure the next slice during the previous gate) was not applied, because the next family (DOC201) had no plan or ready slice when 678 gated, the D family finished and the next one was not started. A closing family needs its successor's first slice built before the last landing.",
+      "contributing": [
+        "UNSCORED is 210 and the vector mechanism (--update-many unscored, WV:1 with --vector-source) was read but the dry run was not done, due 2026-10-30.",
+        "DOC201 has about 205 sites left, so this is a long family, the slice size (12 sites per stack) sets about 17 stacks.",
+        "W1056 is now blocked on mtools:W2060 for importdag, debtplan, buildtel in revendor.EXTRA, the standing, standing-stop, debtplan and buildlog hooks are not in luthen-observability's scope.",
+        "mtools:W2155 stays open on a mixed-tag test."
+      ],
+      "precommit": "679: Returns sections for 12 functions in alarm, mspdi, pins and projection, ruff 1758 to 1746, exactly K, mypy 3914, census green after the measure. I did not read the G0.",
+      "delta": "Held by your report: 678 ruff 1776 to 1758, the push read back, the wheel's entry_points.txt listing mikemol-hook-precompact, the pace codon ok 148 left. Not held: working ahead (gap 38 min 10 s), UNSCORED (210). Open: the 679 verdict. SUPERSESSION 2026-11-26 (nemik:R46 stands as history): the older row recorded the handoff as instrument 'nemik-paths-forward --add-retro', channel 'the cold review', operator 'other', with no self_probe. The writer executed: this draft was passed to mikemol-paths-forward --add-retro against a scratch copy of the queue at a path ending nemik/.claude/paths-forward.json and printed: nemik:R523 added; the real queue was never passed to --state. That measures the filing and the writer's field validation, not the independence the older row's residue names. The drafting actor then cold-restated the draft against the older row's four findings: findings 1 to 4 are copied whole and unchanged, and recurring and one_off are the booleans the older row already held (true and false). Finding 1 asks that the next family's first slice be edited, measured and its G0 written before the last landing, with a DOC201 slice plan on a card and a landing line with the next gap under 10 min: W1246's evidence records the working-ahead method and a first gap under 10 min (9 min 27 s) for slice 9, before this row, and the DOC201 first-slice G0 and the D-family closing line, but the next gap the witness wants was 13 min 28 s by the following row's root and not under 10 min, so its account could not be matched as the witness is worded (the DOC201 plan card was not read). Finding 2 asks for a DOC201 card of its own and W1014 marked done with its final D-family counts: W1014 is done and its closing line gives the final D-family counts and says the DOC201 family moves to W1279, so the account matches, though W1279 itself was not read. Finding 3 asks for the UNSCORED dry run with the selected card count and then UNSCORED before and after an apply: W1231 carries a line headed R48-F3 giving the dry run (209 proposed, 0 rejected) and a decision not to apply, leaving UNSCORED at 209, so the dry-run half matches and the before-and-after-the-apply half was not met as worded (no apply was made). Finding 4 asks for a W1056 line with the states of mtools:W2060 and mtools:W2155 read from their queue: W1056 carries a line headed R46-F4 READ giving W2060 as working and W2155 as ready, read with the writer's --show, so its account matches (the mtools queue itself was not read). The drafter cannot certify its own independence, so that restate is a probe executed and failed. The channel is an independent review by github-82. Not measured: whether finding 1 and finding 3 were met as their witnesses are worded, the cards W1279 and the mtools cards, and the independent review's verdict.",
+      "sustain": [
+        "Reading ls-remote and the wheel's entry_points.txt back after the push.",
+        "Telling luthen-observability the scope exactly as they fixed it and carding mtools:W2060 for what is outside it.",
+        "Correcting the W1179 write-mode ownership to nemik's own code after reading it.",
+        "Stating that no ready stack was built while the gate sat empty."
+      ],
+      "enforcement_layer": "instructions",
+      "recurring": true,
+      "one_off": false,
+      "findings": [
+        {
+          "finding": "Before a family's last landing, have the next family's first slice edited, measured and its G0 written. D-family was finishing while DOC201 had no plan, so the gate sat empty 38 min 10 s. For DOC201, write the slice plan (205 sites by file group, 12 per slice, disjoint files in consecutive slices) on a card now, and do the next slice during 679's gate.",
+          "finding_card": "W1246",
+          "finding_owner": "nemik session",
+          "due": "2026-10-31",
+          "finding_witness": "a DOC201 card with the plan and a landing line with the next gap under 10 min, the next slice edited during 679's gate"
+        },
+        {
+          "finding": "DOC201 is its own family with about 205 sites, give it a card of its own (not W1014) with the manifest, the ruff command and the slice plan, so W1014 can close with the D family. A closed D family on W1014 and a new family inside the same card would hide the finish.",
+          "finding_card": "W1014",
+          "finding_owner": "nemik session",
+          "due": "2026-10-31",
+          "finding_witness": "a new DOC201 card with a manifest and plan in the queue, and W1014 marked done with its final D-family counts"
+        },
+        {
+          "finding": "Do the UNSCORED dry run now: nemik-rank --update-many unscored with a selector, dry run, and --vector-source set, and write the selected card count. The mechanism was read two rounds ago and the number is still 210.",
+          "finding_card": "W1231",
+          "finding_owner": "nemik session",
+          "due": "2026-10-30",
+          "finding_witness": "a ledger line with the dry-run selection count, then UNSCORED before and after the apply"
+        },
+        {
+          "finding": "W1056 is blocked on mtools:W2060 and mtools:W2155 stays open on a mixed-tag test. Read both back from their queue (writer --show) at the next tick, as done for W2126, and write each state on the card, do not wait on a reply.",
+          "finding_card": "W1056",
+          "finding_owner": "nemik session",
+          "due": "2026-11-02",
+          "finding_witness": "a W1056 line with the states of mtools:W2060 and mtools:W2155 read from their queue"
+        }
+      ],
+      "handoff": {
+        "instrument": "nemik-paths-forward --add-retro; cold-restated by the drafting actor 2026-11-26 against the older row's findings, which cannot certify its own independence",
+        "channel": "independent review by github-82, batch review of nemik:W2560 batch 6, 2026-11-26, record github:R291",
+        "operator": "other",
+        "self_probe": "executed-and-failed"
+      },
+      "supersedes": "nemik:R46",
+      "id": "nemik:R539"
+    },
+    {
+      "card": "W1246",
+      "trigger": "round 43: 679 (ecf7694) landed pushed 22:42:58Z, ls-remote read back, W1014 done, 680 (DOC201 slice 2) refused at submit 22:45:00Z for the mypy ratchet (required fall 122, observed 88), 681 (W1176 then W1279 slice 2) accepted 22:56:26Z, 682 built behind 681, gap 13 min 28 s",
+      "root": "Working ahead worked (slice 2 was built and measured during 679's gate, the gap fell from 38 min to 13 min 28 s), but it was submitted without reading the pace, so the mypy ratchet refused it. R45-F2 (read nemik-rank --pace before the first submit) sat on W1219 and was not applied, the third time a pre-submit check was written and not done (cf. the codon refusal, the hub-modules test). The G0 for W1176 was written after the codemod. Both are order errors, named on the card.",
+      "contributing": [
+        "The pace refreshed to 22:25:10Z during the gate and showed mypy owed, a read before the submit would have shown it, and the cure (two typed parameters) could have been built during the gate.",
+        "The writer refused to mark W1279 working while W1014 held the baseline lease, the G0 was logged as evidence. The baseline lease serializes any two stacks that share a ratchet file.",
+        "github-42 classed the session JUGGLING STALL twice and IDLE once. The class emitter (W1276) and a velocity question (W1280) came out of that, the session answered each from readings.",
+        "UNSCORED is still 210, the dry run is a fourth round unfinished.",
+        "W2060 and W2155 states were not read from mtools' queue."
+      ],
+      "precommit": "Slice 2 (adapter, apischema, cachestore, 14 Returns sections, ruff 1746 to 1732) built and measured in 679's gate, census 552.81 s, 681: W1176 typed parameters (mypy 3914 to 3909) then slice 2, census 454.31 s on the whole tree.",
+      "delta": "Held by your report: 679 ruff 1758 to 1746 and the read back, W1014 closed with D-family counts at 0, DOC201 as W1279 with 205 sites, the gap 13 min 28 s from date stamps, 681 accepted. Not held: the pace read before 680, G0 before the codemod for W1176, UNSCORED dry run, R46-F4. Open: 681 and 682 verdicts. SUPERSESSION 2026-11-26 (nemik:R47 stands as history): the older row recorded its handoff as operator other, instrument 'nemik-paths-forward --add-retro, then --tick-hooks-set for the pace line', channel 'the cold review', which fails the probe rule because it carries no executed self probe. The first half of the instrument (--add-retro) was executed on a scratch copy of the queue, which measures the filing and not the independence; the second half (--tick-hooks-set) writes the live tick hooks and was not run. The drafting actor's cold-restate of the four findings (W1219 pace read first in every submit and in the tick hooks, W1279 baseline files and stack order in the G0, W1280 how the gate checks a baseline and a confirmed ask to mtools, W1231 the UNSCORED dry run plus the states of mtools:W2060 and mtools:W2155) found that the delta above accounts for the first (the pace read before 680, not held) and the fourth (UNSCORED dry run, not held) only in part, says nothing of W1280 or of the W2060 and W2155 reads beyond the contributing list, and names an R46-F4 that this row's findings do not contain, so that item's account could not be matched here. The independent review by github-82 is the channel; it is not yet recorded, and the independence of this restatement, whether the findings were applied after the row was written, and whether the R46-F4 account is correct are still not measured.",
+      "sustain": [
+        "Building and measuring the next slice during the gate, the gap fell by 25 min.",
+        "Carding DOC201 as its own family and closing W1014 with its final counts.",
+        "Answering the peer's class readings from the stack and ratchet state, not from memory.",
+        "Recording the G0-order miss on the card instead of omitting it."
+      ],
+      "enforcement_layer": "gate",
+      "recurring": true,
+      "one_off": false,
+      "findings": [
+        {
+          "finding": "Make the pace read the first line of every submit: write the pace as-of and the owed ratchets in the stack JSON's G0 and refuse to submit a stack without it. Three written reminders were not applied, the third refusal (680) shows it. Put it in the tick hooks next to --in-gate, not on a card.",
+          "finding_card": "W1219",
+          "finding_owner": "nemik session",
+          "due": "2026-11-01",
+          "finding_witness": "a tick-hooks line that prints the pace and owed ratchets at tick-open, and the next stack's G0 quoting them before the submit"
+        },
+        {
+          "finding": "Stacks 681 and 682 share ruff-baseline.json and mypy-baseline.json, so 682 waits for 681. Plan the next stacks so one carries a ratchet-lowering item with the family slice, as 681 did, write the order and which baseline file each stack touches in the G0, so a hold is known before building.",
+          "finding_card": "W1279",
+          "finding_owner": "nemik session",
+          "due": "2026-10-31",
+          "finding_witness": "the G0 of 682 listing the baseline files it touches and the stack it waits on, and a landing with no refusal for a shared baseline"
+        },
+        {
+          "finding": "The velocity question W1280 (gate computing the lowered baseline at land time, or per-file baselines) is the cause of the serialization. Read how the gate checks a baseline, write the answer on the card, and ask mtools with a read-back (W1224).",
+          "finding_card": "W1280",
+          "finding_owner": "nemik session",
+          "due": "2026-10-30",
+          "finding_witness": "a W1280 line quoting the gate's baseline check and a confirmed nudge to mtools"
+        },
+        {
+          "finding": "Do the UNSCORED dry run (nemik-rank --update-many unscored with a selector) and read W2060 and W2155 from mtools' queue with the writer --show. Both have been owed for several rounds and cost minutes, write the selection count and the two states on their cards.",
+          "finding_card": "W1231",
+          "finding_owner": "nemik session",
+          "due": "2026-10-30",
+          "finding_witness": "a ledger line with the dry-run selection count and a W1056 line with the states of mtools:W2060 and mtools:W2155"
+        }
+      ],
+      "handoff": {
+        "instrument": "nemik-paths-forward --add-retro, then --tick-hooks-set for the pace line; cold-restated by the drafting actor 2026-11-26 against the older row's findings, which cannot certify its own independence",
+        "channel": "independent review by github-82, batch review of nemik:W2560 batch 6, 2026-11-26, record github:R291",
+        "operator": "other",
+        "self_probe": "executed-and-failed"
+      },
+      "supersedes": "nemik:R47",
+      "id": "nemik:R540"
+    },
+    {
+      "card": "W846",
+      "trigger": "round 44: 681 refused by the popLater flake class (//:test_keymap shard 1 of 3), the fix (open through webpage.launched_page) folded into stack 683, which landed pushed 23:36:46Z (54e441b, 720aa5e, 219100d, 9c0dbb6), ls-remote read back, 684 (W1187 calendars.py) inflight 23:51:28Z, gaps 34 min 20 s and 14 min 42 s, pace now in the tick hooks",
+      "root": "The flake was treated as a blocker and not as a resubmit, the shard log was read, and the cause found was the third test that opens its page by hand without a failed-request list (after test_wcag_render and test_svgexport). The fix is in, but W846 stays open because one clean gate is a diagnostic and not a proof. The gap of 34 min 20 s includes a 16 min refused gate, so the real cost of the flake was a full gate cycle plus the diagnosis.",
+      "contributing": [
+        "Three test files opened their pages by hand, there is no check that finds the pattern, so the next one is found by a flake.",
+        "The pace in the tick hooks (R47-F1 done in a hook) is read at tick-open, but 'PENDING by host standing 12' means the reading predates the landing, the G0 quoted it.",
+        "R47-F3 (W1280, ask mtools about the baseline) and the UNSCORED dry run were not done, again.",
+        "The venv-script calendar tests for 684 cannot run under the system python3.14, the direct boundary tests passed and the rest rides on the gate."
+      ],
+      "precommit": "W846 G0 before the edit, W1187 G0 for the calendars change written before the codemod, 684: mypy 3908 to 3888, ruff 1724 to 1721, census 388.33 s green.",
+      "delta": "Held by your report: 683 landed pushed with no popLater failure and ls-remote read back, the pace in the tick hooks (4 commands) and quoted in 684's G0, G0 order for W1187, mtools' queue read with --show. Not held: W1280 and the UNSCORED dry run, W846 as a proof. Open: the 684 verdict. SUPERSESSION 2026-11-26 (nemik:R48 stands as history): the older row recorded the handoff as instrument 'nemik-paths-forward --add-retro', channel 'the cold review', operator 'other', with no self_probe. The writer executed: this draft was passed to mikemol-paths-forward --add-retro against a scratch copy of the queue at a path ending nemik/.claude/paths-forward.json and printed: nemik:R523 added; the real queue was never passed to --state. That measures the filing and the writer's field validation, not the independence the older row's residue names. The drafting actor then cold-restated the draft against the older row's four findings: findings 1 to 4 are copied whole and unchanged, and recurring and one_off are the booleans the older row already held. Finding 1 asks for every hand-opened browser test to be found by one grep or a registry check and moved onto webpage.launched_page, with a W846 line listing them: W846 carries a line headed R48-F1 grep result listing 17 test files that open a page by hand and the 7 already converted, with a slice plan, so the listing matches, though whether the list was emptied or a registry check exists was not read and the card stays blocked. Finding 2 asks for the gate's baseline check to be read, written on W1280 and mtools nudged with a read-back: W1280 carries a line quoting ratchet_pace.py's paydown check (it checks that the stack's paths name the owed baseline, not that the count falls) and later lines recording mtools' replies naming mtools:W1920 and mtools:W2167, so its account matches, though that line is headed R49-F1 and not R48-F2. Finding 3 asks for the UNSCORED dry run with its selection count, or a parked mark with a reason: W1231 carries a line headed R48-F3 giving the dry run printing 209 proposed with 0 rejected, a decision not to apply it, and a parked mark with a reason, so its account matches. Finding 4 asks that the calendar tests for 684 be run with the venv's python or recorded as not run directly: W1187 carries a line headed R48-F4 saying they were not run directly, 8 test_calendars tests ride on the gate alone and the venv has no python3 binary, so its account matches. The drafter cannot certify its own independence, so that restate is a probe executed and failed. The channel is an independent review by github-82. Not measured: whether finding 1's list was emptied or a registry check exists, the cards' later evidence beyond the lines read, and the independent review's verdict.",
+      "sustain": [
+        "Treating the flake as a blocker: reading the shard log and fixing the cause, not resubmitting.",
+        "Folding the fix, the paydown items and the family slices into one stack that landed.",
+        "Putting the pace in the tick hooks (R47-F1) and quoting it in the G0.",
+        "Keeping W846 open as a diagnostic.",
+        "Reading mtools' state with --show, read only."
+      ],
+      "enforcement_layer": "hook",
+      "recurring": true,
+      "one_off": false,
+      "findings": [
+        {
+          "finding": "Find every browser test that opens its page by hand without the failed-request list, and move them onto webpage.launched_page in one pass. Three have been found by flakes (test_wcag_render, test_svgexport, test_keymap). A single grep or a registry check would find the rest before they fail.",
+          "finding_card": "W846",
+          "finding_owner": "nemik session",
+          "due": "2026-11-02",
+          "finding_witness": "a W846 line with the grep result listing every test that opens a page by hand, and a registry check or the list emptied"
+        },
+        {
+          "finding": "Do the W1280 ask to mtools now: read how the gate checks a baseline (land time or per file), write the answer on the card, and nudge mtools with a read-back. The shared baseline files serialize stacks every round, and this card has been due since 2026-10-30.",
+          "finding_card": "W1280",
+          "finding_owner": "nemik session",
+          "due": "2026-10-31",
+          "finding_witness": "a W1280 line quoting the gate's baseline check and a confirmed nudge reply from mtools"
+        },
+        {
+          "finding": "Do the UNSCORED dry run: nemik-rank --update-many unscored with a selector, --vector-source set, dry run, and write the selection count. It is the fifth round owed. If the dry run cannot select anything, say that and park the unscored with a reason.",
+          "finding_card": "W1231",
+          "finding_owner": "nemik session",
+          "due": "2026-10-30",
+          "finding_witness": "a ledger line with the dry-run selection count, or a parked mark with a reason"
+        },
+        {
+          "finding": "The venv-script calendar tests for 684 cannot run under the system python3.14. Run them with the venv's python before the gate verdict is trusted, or record that they ride on the gate alone, so the direct run is not mistaken for coverage.",
+          "finding_card": "W1187",
+          "finding_owner": "nemik session",
+          "due": "2026-10-31",
+          "finding_witness": "a W1187 line with the venv-python run of the calendar tests, or an explicit note that they were not run directly"
+        }
+      ],
+      "handoff": {
+        "instrument": "nemik-paths-forward --add-retro; cold-restated by the drafting actor 2026-11-26 against the older row's findings, which cannot certify its own independence",
+        "channel": "independent review by github-82, batch review of nemik:W2560 batch 6, 2026-11-26, record github:R291",
+        "operator": "other",
+        "self_probe": "executed-and-failed"
+      },
+      "supersedes": "nemik:R48",
+      "id": "nemik:R541"
+    },
+    {
+      "card": "W846",
+      "trigger": "round 45: 684 (aa5b573) landed pushed 00:04:34Z, ls-remote read back, 685 (W846 slice A, W1187 wake.py typing, mypy 3888 to 3875) inflight 00:23:14Z, gap 18 min 40 s, 17 test files open a page by hand, 13 left after slice A, UNSCORED parked at 209",
+      "root": "The session took two decisions this round that are worth keeping: it ran the UNSCORED dry run and declined to apply it, because applying the common vector would read UNSCORED as 0 by asserting identical risk metrics for 209 unjudged cards, and it listed the 17 hand-opened pages with a slice plan. Slice A alone lowers neither ruff nor mypy, so it rides with a ratchet item, the sound pairing. The remaining gaps are W1280 (the gate-baseline read, owed four rounds) and the stale pace, which prints 23:25:11Z, predating 683 and 684.",
+      "contributing": [
+        "The pace in the tick-open is 23:25:11Z and the next refresh is about 00:25Z, so a stack submitted at 00:23:14Z was built on a reading older than two landings, the G0 quoted it, which is right, but the owed ratchets are unknown.",
+        "The 8 calendar tests that need the venv's mikemol-ics cannot run directly under the system python3.14, they ride on the gate alone (recorded on W1187).",
+        "The 17-file grep is by name patterns (new_page(, chromium.launch(, minus launched_page, opened_page, open_page), a test using another opening route is outside it.",
+        "A parked UNSCORED has a reason but no reopen date."
+      ],
+      "precommit": "W846 G0 before the edits, W1187 G0 before the codemod, 685: mypy 3888 to 3875 (-13), ruff unchanged 1721, 9 alarm tests directly, census green (368.65 s).",
+      "delta": "Held by your report: 684 mypy 3908 to 3888 and ruff 1724 to 1721, ls-remote read back, the dry run decision and reason, the 17-file list with a slice plan, the G0 order, 9 alarm tests run directly. Not held: W1280 (R48-F2). Open: the 685 verdict. SUPERSESSION 2026-11-26 (nemik:R49 stands as history): the older row recorded the handoff as instrument 'nemik-paths-forward --add-retro', channel 'the cold review', operator 'other', with no self_probe. The writer executed: this draft was passed to mikemol-paths-forward --add-retro against a scratch copy of the queue at a path ending nemik/.claude/paths-forward.json and printed: nemik:R523 added; the real queue was never passed to --state. That measures the filing and the writer's field validation, not the independence the older row's residue names. The drafting actor then cold-restated the draft against the older row's four findings: findings 1 to 4 are copied whole and unchanged, and recurring (true) and one_off (false) are the booleans the older row already held. Finding 1 asks for a W1280 line quoting the gate's baseline check and a confirmed nudge reply from mtools: W1280 carries a line headed R49-F1 READ quoting the gate's paydown check in ratchet_pace.py and a later peer message from mtools naming mtools:W1920, so the account matches, though the reply was read as recorded on the card and not fetched from mtools. Finding 2 asks for a W1231 line with the reopen date and trigger: W1231 carries a line headed R49-F2 giving 2026-11-05 and two triggers, and saying UNSCORED 209 is the honest count, so the account matches. Finding 3 asks for a W1219 line quoting the new pace's owed ratchets and the next stack's G0 naming the item chosen: W1219 carries a line headed R49-F3 quoting the pace of 2026-10-30T00:25:11Z with mypy-baseline.json behind and owing 122, and stating that the next stack's G0 names the item, so the line matches, but the G0 itself was not read and the part of the witness naming the item chosen is not matched. Finding 4 asks for a W846 line listing the second grep's patterns and extra hits, or none: W846 carries a line giving the patterns and saying no page-opening route outside the 13 files was found, with a wrapper hiding sync_playwright in another module not searched for, so the content matches, though the line is headed R50-F4 and not R49-F4 and a later correction on the card changes its count of converted files from 7 to 10. The drafter cannot certify its own independence, so that restate is a probe executed and failed. The channel is an independent review by github-82. Not measured: whether the G0 named the item for finding 3, the ledger, and the independent review's verdict.",
+      "sustain": [
+        "Declining to apply the vector that would assert identical risk metrics for 209 unjudged cards, with the reason on W1231.",
+        "Reading bands.toml to confirm the vector is band-neutral before deciding.",
+        "Listing the 17 files with a slice plan and a named exception (test_file_url).",
+        "Reverting one replacement after mypy found a dict[str, str] caller, instead of keeping a wrong type.",
+        "Recording what could not be run directly (the 8 calendar tests)."
+      ],
+      "enforcement_layer": "hook",
+      "recurring": true,
+      "one_off": false,
+      "findings": [
+        {
+          "finding": "Do the W1280 ask now. It is owed four rounds, it names the cause of every serialized stack, and it costs one read of the gate's baseline check and one nudge. Write what the gate does at land time on the card and confirm the nudge by read-back.",
+          "finding_card": "W1280",
+          "finding_owner": "nemik session",
+          "due": "2026-10-31",
+          "finding_witness": "a W1280 line quoting the gate's baseline check and a confirmed nudge reply from mtools"
+        },
+        {
+          "finding": "Give the parked UNSCORED a reopen date and a trigger: reopen when a card gets a real vector (or on 2026-11-05), and say on W1231 that UNSCORED reading 209 is the honest count of cards with no risk judgement. A parked count with no date drifts back to owed.",
+          "finding_card": "W1231",
+          "finding_owner": "nemik session",
+          "due": "2026-10-31",
+          "finding_witness": "a W1231 line with the reopen date and trigger"
+        },
+        {
+          "finding": "Before the 685 verdict, read the fresh pace (about 00:25Z) and write the owed ratchets against 683 and 684 on W1219. Slice B (the next W846 files) should lead with the ratchet the new pace says is owed, and not with whichever item is ready.",
+          "finding_card": "W1219",
+          "finding_owner": "nemik session",
+          "due": "2026-10-30",
+          "finding_witness": "a W1219 line quoting the new pace's owed ratchets and the next stack's G0 naming the item chosen for it"
+        },
+        {
+          "finding": "Check the 13 remaining hand-opened-page files with a second grep for other opening routes (goto, sync_playwright, a wrapper), so the list of 17 is not an artifact of the patterns. Write the extra hits, or none, on W846.",
+          "finding_card": "W846",
+          "finding_owner": "nemik session",
+          "due": "2026-11-02",
+          "finding_witness": "a W846 line listing the second grep's patterns and extra hits, or stating none"
+        }
+      ],
+      "handoff": {
+        "instrument": "nemik-paths-forward --add-retro; cold-restated by the drafting actor 2026-11-26 against the older row's findings, which cannot certify its own independence",
+        "channel": "independent review by github-82, batch review of nemik:W2560 batch 6, 2026-11-26, record github:R291",
+        "operator": "other",
+        "self_probe": "executed-and-failed"
+      },
+      "supersedes": "nemik:R49",
+      "id": "nemik:R542"
+    },
+    {
+      "card": "W1280",
+      "trigger": "round 46: 685 (cca1454, b833407) landed pushed 00:36:47Z, ls-remote read back, W1280 read in mtools' source (ratchet_pace.py stack_reason: the paydown check is a path check, not a count), 686 (W1187 SolveKey alias, mypy 3875 to 3846, -29) inflight 00:52:02Z, gap 15 min 15 s, UNSCORED parked with a reopen date",
+      "root": "The serialization cause is found and it is not the gate's measure: the check names the baseline file and never compares the count, so any stack that names the owed baseline passes while the message says 'lowers'. That explains why paydown by cheapness (R27-F2) was never policed by the gate, and it explains the serialization by line 40 of the loop prompt. The session read mtools' source instead of asking, then asked a sharper question, mtools carded W2167 and the session has two blocks on W1280. The remaining decision (the gate writing the baseline) needs the operator.",
+      "contributing": [
+        "A check that passes on 'names the baseline' and not on 'lowers it' means a stack that touches the file without lowering it would pass the gate, this session lowers for real (686 reports -29) but nothing enforces it, so another session need not.",
+        "The pace is 00:25:11Z with mypy behind (owes 122, up from 80 at 23:25:11Z), which predates 685's landing, the debt moves faster than the pace refreshes.",
+        "R49-F4 (second grep for other page-opening routes) was not done.",
+        "686 sits on one file (flow.py) with a 29-row cascade, the cascade is real but one alias drives it, so the mypy fall is one decision and not 29 annotations."
+      ],
+      "precommit": "686 G0 before the edit, naming mypy-baseline.json as the gate's path check needs, expected mypy 3875 to 3846, ruff unchanged 1721, 9 tests directly, census 348.41 s.",
+      "delta": "Held by your report: 685 landed, mypy 3888 to 3875, ls-remote read back, W1280 read in source, UNSCORED parked with a date, the owed ratchets written on W1219, 686 accepted with a real fall. Not held: R49-F4. Open: the 686 verdict. SUPERSESSION 2026-11-26 (nemik:R50 stands as history): the older row recorded its handoff as the instrument nemik-paths-forward --add-retro through the channel 'the cold review' with operator other, and no independent reader's verdict is recorded on it. The instrument was executed on a scratch copy of the queue and printed 'nemik:R523 added', which measures the filing, not the independence. The cold-restate of this draft against the older row's four findings (W1280 mtools: the paydown check names the file and never compares the count, so track mtools:W1920 rule (c) and mtools:W2167 and keep W1280 open until the staged blob's count is compared to HEAD's; W1176: record the SolveKey alias as one decision driving a 29-row cascade and write the ratio table with cascade sources; W1187: plan mypy paydown by cascade source and list candidates with row counts; W846: do the second grep for other page-opening routes) found each finding's account matching the older row as stored, with no finding whose account I could not match; I did not check the cards, the mtools states or the due-date witnesses named in them. The independent review by github-82 is the channel, and what is still not measured is that independence, which the drafting actor cannot supply.",
+      "sustain": [
+        "Reading mtools' source for the path check and then asking mtools a sharper question (rule (c) of W1920).",
+        "Separating the message/code gap (W1920 c) from the serialization (W2167), so each has its own card.",
+        "Naming the baseline file in 686's G0 because the gate needs it while carrying a real fall.",
+        "Writing the pace's owed ratchets on W1219."
+      ],
+      "enforcement_layer": "gate",
+      "recurring": true,
+      "one_off": false,
+      "findings": [
+        {
+          "finding": "The paydown check names the file and never compares the count. This is the gate-side half of the R27 cheapness finding: nothing refuses a stack that touches the baseline without lowering it. Track mtools:W1920 rule (c) and mtools:W2167 on W1280 with a nudge read-back each, and do not close W1280 until the staged blob's count is compared to HEAD's.",
+          "finding_card": "W1280",
+          "finding_owner": "mtools",
+          "due": "2026-11-05",
+          "finding_witness": "a W1280 line with the states of mtools:W1920 and mtools:W2167 read from their queue, and a test showing a stack that names the baseline without lowering it is refused"
+        },
+        {
+          "finding": "Record that the SolveKey alias is one decision driving a 29-row cascade, and that the per-annotation ratio is not a measure of effort. Write the ratio table (1.3, 14, 21, now 29 for one alias) on W1176 with the files, so the paydown ranking uses cascade sources and not counts of rows.",
+          "finding_card": "W1176",
+          "finding_owner": "nemik session",
+          "due": "2026-11-01",
+          "finding_witness": "a W1176 table of stack, edits and rows removed, with the cascade sources named"
+        },
+        {
+          "finding": "The mypy debt is 122 owed and rising faster than the pace refreshes. Plan mypy paydown to lead the next two stacks by cascade source (aliases for tuple keys and untyped boundaries), and write the candidate list on W1187 with the row count each would remove.",
+          "finding_card": "W1187",
+          "finding_owner": "nemik session",
+          "due": "2026-10-31",
+          "finding_witness": "a W1187 line listing the next cascade sources with row counts, and a stack landing whose mypy fall is at least 30"
+        },
+        {
+          "finding": "Do the second grep for other page-opening routes (goto, sync_playwright, a wrapper) over the 13 remaining files and write the result on W846. It is the second round owed and it is one command.",
+          "finding_card": "W846",
+          "finding_owner": "nemik session",
+          "due": "2026-10-31",
+          "finding_witness": "a W846 line listing the grep patterns and hits, or stating none"
+        }
+      ],
+      "handoff": {
+        "instrument": "nemik-paths-forward --add-retro; cold-restated by the drafting actor 2026-11-26 against the older row's findings, which cannot certify its own independence",
+        "channel": "independent review by github-82, batch review of nemik:W2560 batch 6, 2026-11-26, record github:R291",
+        "operator": "other",
+        "self_probe": "executed-and-failed"
+      },
+      "supersedes": "nemik:R50",
+      "id": "nemik:R543"
     }
   ],
-  "retro_counter": 536
+  "retro_counter": 543
 }
