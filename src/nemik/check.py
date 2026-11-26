@@ -76,8 +76,7 @@ from nemik.letters import (
     report,
     split_orphans,
 )
-from nemik.marks import MARKS, read
-from nemik.marks import provenance as mark_provenance
+from nemik.marks import MARKS, bad_instants, mark_source, marks_from_text
 from nemik.queuefiles import LEDGER, QUEUE, default_root, workstream_files
 from nemik.realize import policy_version, runtime_valid, verdicts
 from nemik.realize import rows as realize_rows
@@ -1388,12 +1387,22 @@ def _realizability(root: Path) -> int:
             unjudged += 1
             continue
         # nemik:W234: the writer's persisted marks are read, not re-derived; a stale one is named.
-        marks, unreadable = read(path.parent / MARKS)
+        marks_path = path.parent / MARKS
+        marks_text = (
+            marks_path.read_text(encoding="utf-8") if marks_path.is_file() else ""
+        )
+        marks, unreadable = marks_from_text(marks_text)
         say(f"{repo}: {len(found)} waypoint(s), {unreadable} unreadable mark line(s)")
+        # nemik:W1719: a mark whose as_of nemik cannot read reads stale; say so, not only stale.
+        unread_as_of = bad_instants(marks)
+        if unread_as_of:
+            say(
+                f"{repo}: {unread_as_of} mark(s) with an as_of that is not a UTC instant"
+            )
         for verdict in found:
             residue += not runtime_valid(verdict)
             symbol = str(verdict.get("ref")).rsplit(":", 1)[-1]
-            source = mark_provenance(marks.get(symbol), now, version)
+            source = mark_source(marks, symbol, now, version)
             for line in realize_rows(verdict, source):
                 say(f"  {line}")
     return 2 if unjudged else int(residue > 0)

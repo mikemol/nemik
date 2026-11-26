@@ -548,7 +548,6 @@
  },
  "realize": {
   "TYPE_CHECKING": "reached",
-  "datetime": "reached",
   "hashlib": "reached",
   "importlib.metadata": "reached",
   "importlib.resources": "reached",

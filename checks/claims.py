@@ -14,6 +14,7 @@ several claims. Run from the repo root (paperkit's `root = "."` in paper.toml pu
 
 from __future__ import annotations
 
+import ast
 import re
 import sys
 from pathlib import Path
@@ -26,6 +27,7 @@ MIN_DIRECT_RDFLIB_IMPORTERS = (
     2  # the claim is a gap: rdflib is not behind adapter alone
 )
 SRC = ROOT / "src" / "nemik"
+PACKAGE = "nemik"
 
 
 def _src(name: str) -> str:
@@ -37,10 +39,73 @@ def _modules() -> dict[str, str]:
 
 
 def _imports_nemik(text: str) -> set[str]:
-    return {
-        m.group(1)
-        for m in re.finditer(r"^from nemik\.(\w+) import", text, re.MULTILINE)
-    }
+    """Name the nemik modules (or subpackages) a source text imports, in any form and nesting.
+
+    nemik:W2026: read from the syntax tree, not a regex, so `from nemik import a, b`,
+    `from nemik.a import b`, `import nemik.a` and an import inside a function, a try or an
+    `if TYPE_CHECKING` block are all seen, and a docstring or comment that only looks like an
+    import is not. A name imported from the package itself counts as the module it names.
+
+    Returns:
+        The first component under `nemik` of every import: `a` for the three forms above.
+
+    """
+    found: set[str] = set()
+    for node in ast.walk(ast.parse(text)):
+        if isinstance(node, ast.ImportFrom) and node.level == 0 and node.module:
+            parts = node.module.split(".")
+            if parts == [PACKAGE]:
+                found.update(alias.name for alias in node.names)
+            elif parts[0] == PACKAGE:
+                found.add(parts[1])
+        elif isinstance(node, ast.Import):
+            found.update(
+                alias.name.split(".")[1]
+                for alias in node.names
+                if alias.name.startswith(PACKAGE + ".")
+            )
+    return found
+
+
+def _import_time(body: list[ast.stmt]) -> list[ast.stmt]:
+    """Pick the import statements that run when a module is imported.
+
+    Returns:
+        The imports of `body`, reaching into module-level if, try, with, for and while, leaving
+        out the body of an `if TYPE_CHECKING` block (its else is kept) and not entering
+        functions or classes.
+
+    """
+    out: list[ast.stmt] = []
+    for node in body:
+        if isinstance(node, (ast.Import, ast.ImportFrom)):
+            out.append(node)
+        elif isinstance(node, ast.If):
+            if ast.unparse(node.test) in {"TYPE_CHECKING", "typing.TYPE_CHECKING"}:
+                out.extend(_import_time(node.orelse))
+            else:
+                out.extend(_import_time(node.body) + _import_time(node.orelse))
+        elif isinstance(node, ast.Try):
+            handlers = [stmt for h in node.handlers for stmt in h.body]
+            flat = node.body + handlers + node.orelse + node.finalbody
+            out.extend(_import_time(flat))
+        elif isinstance(node, (ast.With, ast.For, ast.While)):
+            out.extend(_import_time(node.body))
+    return out
+
+
+def _import_time_nemik(text: str) -> set[str]:
+    """Name the nemik modules a source text imports when it is imported (nemik:W2026).
+
+    A type-only import under `if TYPE_CHECKING` and an import inside a function or class body do
+    not run at import, so they are not edges of the import-time graph that acyclicity is about.
+
+    Returns:
+        The first component under `nemik` of every import statement that runs at import.
+
+    """
+    kept = ast.Module(body=_import_time(ast.parse(text).body), type_ignores=[])
+    return _imports_nemik(ast.unparse(kept))
 
 
 def _require(condition: object, message: str) -> None:
@@ -193,16 +258,25 @@ def shacl_is_the_one_validator() -> None:
 
 
 def adapter_is_the_foundation_layer() -> None:
-    """adapter.py imports no other nemik module but vocab, a leaf of plain strings.
+    """adapter.py imports exactly six leaf modules of nemik, and no module above it.
 
-    nemik:W2526: the IRI bases and status words live in nemik.vocab (strings and one import of the
-    pure urnbase), so a module that needs only the names can import them without adapter's walls;
-    adapter builds its rdflib namespaces from the same strings.
+    nemik:W2026: read from the syntax tree, so the no-dot form (`from nemik import a, b`) is seen:
+    editverbs (the verbs of a next step, re only), retroingest (a retro as triples, nemik.tomlview
+    only), urnbase (the urn base), vocab (the IRI bases and status words as strings, nemik:W2526),
+    warrants (a card's warrants as triples) and witnessreads (the witness field readers). Each is
+    a leaf of the layering below adapter (acyclicity checks none imports it back); a new import
+    must be declared here.
     """
-    _require(
-        _imports_nemik(_src("adapter.py")) <= {"vocab"},
-        "adapter.py now depends on a nemik module other than vocab",
-    )
+    base = {
+        "editverbs",
+        "retroingest",
+        "urnbase",
+        "vocab",
+        "warrants",
+        "witnessreads",
+    }
+    deps = _imports_nemik(_src("adapter.py"))
+    _require(deps == base, f"adapter.py's nemik imports changed: {sorted(deps)}")
 
 
 def adoption_has_no_internal_coupling() -> None:
@@ -269,11 +343,19 @@ def hub_modules_depend_on_everything_below() -> None:
     # nemik:W1851: metrics reads its command line through flags, the Codon-compatible flag reader
     # (a leaf over sys), and takes TYPE_CHECKING from _typing (nemik:W1852, the W2125 constant).
     # nemik:W2517: serve counts the passes a build skipped or built through passcount, a leaf.
+    # nemik:W2026: the dependency sets are read from the syntax tree now, so the no-dot imports the
+    # old regex could not see are in them: metrics also reads cachestore, forecast, history and
+    # tiers (the saved solves, the forecast, the git history and the burn-down tiers); serve reads
+    # cachestore, lastgood (the last good snapshot) and snaplink.
     expected = {
         "metrics": lower
         | {
             "_typing",
+            "cachestore",
             "flags",
+            "forecast",
+            "history",
+            "tiers",
             "ledgersummary",
             "realize",
             "runlogs",
@@ -290,6 +372,9 @@ def hub_modules_depend_on_everything_below() -> None:
         | {
             "outbox",
             "passcount",
+            "cachestore",
+            "lastgood",
+            "snaplink",
             "exportwire",
             "runlogs",
             "withheldage",
@@ -334,9 +419,14 @@ def hub_modules_depend_on_everything_below() -> None:
 
 
 def import_graph_is_acyclic() -> None:
-    """No nemik module reaches itself through the import graph."""
+    """No nemik module reaches itself through the import-time import graph.
+
+    nemik:W2026: read from the syntax tree. The type-only edges under `if TYPE_CHECKING` (index,
+    blocks and cards name each other's types) and the imports inside function bodies do not run at
+    import, so they are not edges here; a subpackage (`core`) is no node of this flat graph.
+    """
     mods = _modules()
-    graph = {name: _imports_nemik(text) for name, text in mods.items()}
+    graph = {name: _import_time_nemik(text) & set(mods) for name, text in mods.items()}
 
     def reaches(a: str, b: str, seen: frozenset[str] = frozenset()) -> bool:
         if a in seen:

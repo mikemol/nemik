@@ -91,10 +91,6 @@
   "as_written": "no module named '__future__'",
   "stripped": "class decorator got unexpected argument"
  },
- "marks": {
-  "as_written": "no module named '__future__'",
-  "stripped": "no module named 'hashlib'"
- },
  "metrics": {
   "as_written": "no module named '__future__'",
   "stripped": "no module named 'argparse'"

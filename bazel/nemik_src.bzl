@@ -60,6 +60,7 @@ NEMIK_PY = [
     "src/nemik/flow.py",
     "src/nemik/forecast.py",
     "src/nemik/forecastshingle.py",
+    "src/nemik/g0rows.py",
     "src/nemik/health.py",
     "src/nemik/histdocs.py",
     "src/nemik/history.py",

@@ -7076,3 +7076,51 @@
 2026-11-26T08:19:27Z  status W1889 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-26T08:42:26Z  status W2030 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-26T08:48:27Z  status W2030 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T08:55:18Z  status W1890 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T08:55:44Z  status W1891 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T09:18:57Z  interrupt W2534 minted    -         "A pure predicate names the cards worked with no G0, from the ledger rows and the cards' evidence, tested on a planted ledger"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2450
+2026-11-26T09:18:57Z  interrupt W2535 minted    -         "check wires the no-G0 finding beside idle.stale_findings, with its cut-over date read from rank-weights.toml"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2450
+2026-11-26T09:18:57Z  interrupt W2536 minted    -         "A letter asks mtools' writer to refuse working to done with no G0"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2450
+2026-11-26T09:19:12Z  status W2535 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T09:19:13Z  status W2536 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T09:36:23Z  status W2534 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T09:37:53Z  status W1892 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T09:56:09Z  status W1893 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T10:11:17Z  status W1842 blocked>done writer    "blocked -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T10:11:18Z  status W1843 blocked>done writer    "blocked -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T10:11:19Z  status W1844 blocked>done writer    "blocked -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T10:11:20Z  status W1846 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T10:11:35Z  status W1849 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T10:11:36Z  status W1850 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T10:11:37Z  status W1719 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T10:11:37Z  status W1848 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T10:11:38Z  status W1852 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T10:11:39Z  status W1856 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T10:11:40Z  status W1869 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T10:11:41Z  status W1871 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T10:11:42Z  status W1874 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T10:11:58Z  status W1851 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T10:11:58Z  status W2044 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T10:11:59Z  status W2527 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T10:12:00Z  status W2529 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T10:12:01Z  status W2514 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T10:12:02Z  status W2526 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T10:12:03Z  status W2494 working>landed writer    "working -> landed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T10:12:13Z  status W1851 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T10:12:14Z  status W1836 working>blocked writer    "working -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T10:12:15Z  status W1838 working>blocked writer    "working -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T10:12:42Z  interrupt W2537 minted    -         "Retrospective of the W2526 landing: three submits refused before it landed, each on a check I had not run"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2526
+2026-11-26T10:15:01Z  status W2026 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T10:43:34Z  status W2494 landed>done writer    "landed -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T10:47:43Z  status W1719 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T10:50:57Z  status W1719 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T10:59:29Z  status W1719 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T10:59:54Z  status W1894 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T11:00:21Z  status W1894 working>blocked writer    "working -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T11:28:16Z  status W1895 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T11:34:27Z  status W1896 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T11:41:30Z  status W1897 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T11:44:05Z  interrupt W2538 minted    -         "Drain nemik.marks.epoch_seconds and the writer's UTC stamp format into a Codon-safe mikemol.* module (mtools:W1344's boundary), then import it"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1719
+2026-11-26T11:44:11Z  status W2538 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T12:10:09Z  status W1898 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T12:10:36Z  status W1898 working>blocked writer    "working -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

@@ -12,11 +12,10 @@ measured nothing, so it never reads as clean.
 
 from __future__ import annotations
 
-from datetime import UTC, datetime
+import time
 from typing import TYPE_CHECKING
 
 from mikemol.pathsforward import certify, marks, opa_eval
-from mikemol.pathsforward.lock import stamp
 from mikemol.pathsforward.model import text
 
 from nemik.adapter import load_state
@@ -29,6 +28,8 @@ if TYPE_CHECKING:
 
 _DONE = "done"
 _RUNTIME_VALID = "coverable"
+# the state file's stamp (mikemol.pathsforward.lock.stamp): UTC, to the second
+_STAMP = "%Y-%m-%dT%H:%M:%SZ"
 
 
 def policy_version() -> str:
@@ -68,14 +69,16 @@ def judged(files: list[tuple[str, Path]], root: Path) -> list[dict[str, object]]
     """Judge every queue a caller names, each verdict as a plain dict (nemik:W1659).
 
     The list of queue files is passed in because this module cannot import nemik.check (which
-    imports it): metrics and rank each name the fleet's queues themselves.
+    imports it): metrics and rank each name the fleet's queues themselves. The judging instant
+    is read from the clock with `time`, in the state file's own stamp (nemik:W1890: `datetime.UTC`
+    is a Codon wall).
 
     Returns:
         One verdict per judged card, each {ref, level, reference_arm, residue}. An opa that is
         absent raises (`verdicts`), so a card that was not judged never reads as one with no gaps.
 
     """
-    now = stamp(datetime.now(UTC))
+    now = time.strftime(_STAMP, time.gmtime())
     return [
         dict(verdict)
         for repo, path in files
