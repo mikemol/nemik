@@ -6719,3 +6719,360 @@
 2026-11-23T05:34:36Z  status W1187 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-23T05:34:36Z  status W1225 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-23T05:34:36Z  status W2042 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T05:55:24Z  status W1038 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T06:02:33Z  status W1345 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T06:22:01Z  status W1175 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T06:39:12Z  status W1178 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T06:56:18Z  status W1184 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T07:07:28Z  interrupt W2462 minted    -         "A working card that is an umbrella is never a round row, so the pin of W2407 cannot hold it and the submit round check counts it outside"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-00:W120
+2026-11-23T07:07:56Z  status W1187 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T07:14:25Z  status W1225 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T07:14:27Z  status W2462 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T07:18:24Z  status W1487 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T07:35:28Z  status W1488 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T07:52:24Z  status W1489 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T08:18:50Z  status W1490 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T08:49:37Z  status W1514 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T08:50:44Z  interrupt W2463 minted    -         "The pace reads mypy-baseline.json and ruff-baseline.json as unknown (no verdict) while codon, mtools and aeternum rows read: an unjudged ratchet can drift with nobody owing a fall (github-00 2026-11-23)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-00:W120
+2026-11-23T08:56:36Z  interrupt W2464 minted    -         "flow.py and waitlog.py import the TYPE_CHECKING guard from nemik._typing, so two codon-walls pairs fall and every module reaching flow loses its flow TYPE_CHECKING pair"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2462
+2026-11-23T08:58:11Z  status W1518 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T09:19:29Z  status W1522 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T09:21:37Z  status W1549 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T09:30:14Z  status W1568 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T09:50:51Z  status W1648 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T10:00:03Z  interrupt W2465 minted    -         "The presubmit's gate-time ratchet emit pays an owed ratchet before the submit, so the submit's paydown guard no longer sees the stack as lowering it (W2464: walls 841 to 840 read ok in the 09:51Z pace, then the guard listed only codon-baseline and retro-handoff)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2462
+2026-11-23T10:00:27Z  status W1661 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T10:01:45Z  status W1759 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T10:02:04Z  status W1760 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T10:24:44Z  status W1762 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T10:25:04Z  status W1763 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T10:26:15Z  status W1764 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T10:28:37Z  status W1765 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T10:37:35Z  status W1766 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T10:38:36Z  interrupt W2466 minted    -         "codon-baseline paydown blocked on mtools dist walls: the cheapest failing modules stop at datetime.UTC, collections.abc Collection and fractions, which the pinned Codon refuses (weather, cross-repo)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2462
+2026-11-23T10:39:14Z  status W2466 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T11:00:08Z  interrupt W2467 minted    -         "tools/codon_walls.py counts an import under TYPE_CHECKING as no wall, but the pinned Codon still refuses a guarded 'from collections.abc import ...' (no module named collections.abc), so the incidence undercounts real walls"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2466
+2026-11-23T11:01:27Z  status W2464 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T11:19:56Z  status W2465 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T11:21:18Z  status W1767 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T11:22:31Z  status W1768 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T11:43:35Z  interrupt W2468 minted    -         "codon_walls.py counts a guarded stdlib-gap import as a wall, with a planted test that reads red on the old tool"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2467
+2026-11-23T11:43:35Z  interrupt W2469 minted    -         "Decide whether walls come from the compiler's refusals in the census run, and what the census already records per module"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2467
+2026-11-23T11:43:35Z  interrupt W2470 minted    -         "Declare the codon-walls rise in rebaselines.json citing W2467 with the old and new pair counts from the new tool"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2467
+2026-11-23T11:56:30Z  status W1769 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T12:08:40Z  status W1770 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T12:10:32Z  interrupt W2471 minted    -         "The gate and the presubmit run the live checkout's tools/gate_staged.sh, so a change to the gate script needs an uncommitted live edit to be judged: run the committed script of the gated tree instead"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2465
+2026-11-23T12:10:57Z  status W1771 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T12:12:07Z  status W1772 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T12:33:43Z  status W1773 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T12:35:22Z  status W1774 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T12:47:04Z  status W1775 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T12:47:05Z  status W2471 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T12:58:00Z  status W1776 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T12:59:05Z  interrupt W2472 minted    -         "The commit gate (mikemol-commit, pre-commit hook) runs the frozen stack tree's own tools/gate_staged.sh, so the presubmit and the commit gate cannot judge with different scripts"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2471
+2026-11-23T12:59:13Z  status W2472 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T13:17:59Z  status W2462 working>blocked writer    "working -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T13:17:59Z  status W1518 working>blocked writer    "working -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T13:42:31Z  status W1777 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T13:57:02Z  interrupt W2473 minted    -         "Mechanize debt reduction: for each owed ratchet find its mechanical classes and pay them in bulk with a codemod, ordered by entries paid per codemod built (operator 2026-11-23)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T13:57:06Z  interrupt W2474 minted    -         "Ask summit and read mtools' pycodemod dist: what a codemod there already does (dry-run set, write, re-measure) before building one"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2473
+2026-11-23T13:57:06Z  interrupt W2475 minted    -         "Count each owed ratchet's entries by repeated shape (codon-walls pairs by wall kind, codon-baseline modules by first refusal, retro-handoff by cause) and rank classes by entries paid"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2473
+2026-11-23T13:57:06Z  interrupt W2476 minted    -         "For the top mechanical class, card a codemod with its dry-run set and the expected fall in entries, measured on the corrected instrument (W2467)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2473
+2026-11-23T13:57:13Z  status W2475 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T13:57:19Z  status W2474 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T13:59:18Z  status W2474 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T14:01:06Z  status W1778 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T14:19:12Z  status W2469 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T14:19:47Z  status W1779 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T14:23:01Z  status W1780 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T14:32:45Z  interrupt W2477 minted    -         "Answer luthen-observability:W2929: unexpected_red check=nemik_check pages: retro handoff shape violations in nine repos (is the rule retroactive, or are pre-rule rows declared in the baseline)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=luthen-observability:W2929
+2026-11-23T14:35:41Z  status W1781 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T14:35:43Z  status W2477 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T14:37:19Z  status W1782 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T14:38:02Z  interrupt W2478 minted    -         "Extend the retro-handoff baseline to the instrument-channel-operator shape: a one-time cut listing every existing violator per repo, declared in rebaselines.json"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2477
+2026-11-23T14:38:02Z  interrupt W2479 minted    -         "List github's violating retro ids by shape (R235 to R248 and earlier) with the installed check, and report the per-repo counts to github-00 and luthen-observability"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2477
+2026-11-23T14:39:34Z  status W2479 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T14:39:50Z  status W1783 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T14:44:57Z  status W1784 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T14:47:24Z  interrupt W2480 minted    -         "nemik's fleet reader takes each repo's queue from a git state (origin/main or HEAD via git objects), never from the file on disk, and every nemik tool that opens a path under a repo's checkout is listed and moved (operator 2026-11-23: nothing should read a working tree)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-00:W2477
+2026-11-23T14:47:29Z  status W2480 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T14:52:52Z  status W1785 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T14:54:28Z  status W1786 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T14:57:53Z  interrupt W2481 minted    -         "The committed .claude/settings.json hooks run the pinned install (~/.local/share/luthen-tools/live/nemik/bin), not the checkout's .venv (operator 2026-11-23: nothing runs from a working tree)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2471
+2026-11-23T14:57:59Z  status W2481 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T14:58:23Z  status W1787 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T14:59:20Z  status W2481 working>blocked writer    "working -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T15:01:55Z  interrupt W2482 minted    -         "The nemik skill names the pinned install for its tools, not a checkout's .venv, with test_skill pinning the line (operator 2026-11-23: everyone up to date on the pinned stuff)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2480
+2026-11-23T15:01:59Z  status W2482 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T15:02:24Z  status W1788 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T15:06:47Z  status W1789 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T15:28:15Z  status W1790 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T15:37:01Z  status W1791 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T15:41:08Z  status W1792 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T15:58:46Z  status W1793 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T16:18:55Z  status W1794 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T16:53:03Z  status W1795 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T17:04:10Z  status W1796 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T17:16:09Z  status W1797 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T17:22:36Z  interrupt W2483 minted    -         "ratchetseries judges a series ended against the repo's newest LANDED sample, so mtools can delete the unlabelled gate-time emit (mtools:W2884) without every series reading NO_END"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2465
+2026-11-23T17:22:42Z  status W2483 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T17:24:39Z  status W2483 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T17:24:59Z  status W1798 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T17:27:13Z  status W1799 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T17:46:19Z  status W1800 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T17:46:20Z  status W2483 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T17:59:27Z  interrupt W2484 minted    -         "docs/gate-slots.md: the gate slots a host admits are DERIVED from per-resource pressure (PSI some and full against a learned threshold), with the declared fixed capacity only as the fallback when pressure is unreadable"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2436
+2026-11-23T17:59:50Z  status W1801 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T18:23:17Z  status W1802 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T18:36:49Z  status W1803 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T19:21:18Z  status W1804 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T19:38:25Z  status W1805 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T20:00:11Z  status W1806 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T20:02:12Z  status W1807 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T20:04:23Z  status W1808 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T20:21:24Z  status W1809 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T20:38:14Z  status W1810 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T20:49:50Z  status W1811 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T21:20:32Z  status W1812 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T21:23:00Z  interrupt W2485 minted    -         "nemik-akonadi-tasks gets a home outside a checkout (pinned via luthen's W2937, or a host-only install path the skill names), since it exists only in a checkout's build/"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2482
+2026-11-23T21:23:01Z  interrupt W2486 minted    -         "test_skill refuses every checkout-path form (the absolute /home/mikemol/github/nemik/ form, the HOME form, build/ paths) and catches bare unbackticked tool names"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2482
+2026-11-23T21:23:01Z  interrupt W2487 minted    -         "A check compares tests/pinned-nemik-bin.txt with the pin when the pin moves (the repin path), so the fixture of the pinned bin's listing cannot go stale"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2482
+2026-11-23T21:23:09Z  status W2485 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T21:24:41Z  interrupt W2488 minted    -         "Nemik half of retro supersession: the graph carries a supersedes link, the handoff shapes judge only a row nothing supersedes, and a superseded baselined id is stale so the baseline shrinks"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2478
+2026-11-23T21:26:03Z  status W2488 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T21:29:20Z  status W1813 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T21:32:11Z  status W1814 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T21:50:03Z  status W1815 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T22:20:18Z  status W1816 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T22:37:42Z  status W1817 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T22:57:52Z  status W1818 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T23:09:54Z  status W1819 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T23:11:51Z  interrupt W2489 minted    -         "queuefiles.workstream_files and the readers take the queue from gitqueue.committed, and an UNREAD repo surfaces as UNKNOWN in nemik-check, nemik-rank and nemik-operator, with a test for each"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2480
+2026-11-23T23:13:40Z  status W1820 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T23:21:20Z  status W1821 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T23:40:22Z  status W1822 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T23:53:47Z  status W1823 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-23T23:59:38Z  interrupt W2490 minted    -         "Repin nemik's vendored mtools wheels (11, now +636e39b) to 87857abb with mikemol-repin --revendor, so the pinned writer carries supersedes, as an entry of the retro-handoff lowering stack"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2478
+2026-11-23T23:59:47Z  status W2490 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-24T00:01:11Z  status W1824 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-24T00:03:46Z  status W1825 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-24T00:06:11Z  interrupt W2491 minted    -         "Stored retros R1 to R21 hold their content under a nested retros key (fixpoint, subtracted_set wrappers) that no retro view renders: --retros prints their ids only"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2478
+2026-11-24T00:06:11Z  interrupt W2492 minted    -         "A mechanized supersession pass for the other 43 baselined nemik retros: the probe recipe per handoff instrument, run and recorded, a dry-run set of superseding rows (github-82, 2026-11-23)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2478
+2026-11-24T00:07:26Z  interrupt W2493 minted    -         "tools/presubmit.sh takes the repo's blocking gate lease, so a second presubmit waits on the holder's pid instead of running beside it"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2403
+2026-11-24T00:08:51Z  status W1826 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-24T00:27:15Z  status W1827 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-24T00:47:02Z  status W1828 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-24T00:48:41Z  status W1829 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-24T00:50:47Z  status W1830 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-24T00:51:48Z  status W2443 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-24T00:52:01Z  status W2443 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-24T00:52:28Z  status W1831 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-24T01:21:28Z  status W1832 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-24T01:38:53Z  status W1833 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-24T01:57:16Z  status W1834 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-24T02:02:03Z  interrupt W2494 minted    -         "deploy/service.yaml gains a headless Service for nemik's pods, so luthen's dns_sd job scrapes each builder pod and the two builders' nemik_build gauges stop interleaving"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=luthen-observability:W1670
+2026-11-24T02:02:46Z  status W1835 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-24T02:11:36Z  status W459 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-24T02:11:36Z  status W750 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-24T02:11:36Z  status W846 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-24T02:11:36Z  status W966 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-24T02:11:36Z  status W976 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-24T02:11:36Z  status W985 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-24T02:11:36Z  status W994 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-24T02:11:36Z  status W1007 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-24T02:11:36Z  status W1008 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-24T02:11:36Z  status W1010 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-24T02:11:36Z  status W1016 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-24T02:11:36Z  status W1020 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-24T02:11:36Z  status W1028 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-24T02:11:36Z  status W1052 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-24T02:11:36Z  status W1257 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-24T02:11:36Z  status W1522 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-24T02:11:36Z  status W1549 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-24T02:11:36Z  status W1759 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-24T02:11:36Z  status W1762 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-24T02:11:36Z  status W2286 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-24T02:11:36Z  status W2308 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-24T02:11:36Z  status W2309 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-24T02:11:36Z  status W2465 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-24T02:11:36Z  status W2469 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-24T02:11:36Z  status W2471 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-24T02:11:36Z  status W2479 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-24T02:11:36Z  status W2482 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-24T02:11:36Z  status W2483 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-24T02:11:36Z  status W2488 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-24T02:11:36Z  status W2490 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-24T02:14:04Z  tick  --   parked    manual    "PARK 2026-11-24 (operator Park nemik, host L219885). LANDED this session: nothing (the pace guard refused every stack: codon-baseline owes 2, retro-handoff-baseline owes 1). WAITING, as review refs in this repo: W2462-v1 902a341b, W2464-v1 5e6e0c22 (PASS withdrawn as a lead), W1518-v1 7d4cebf1 and W1518-v2 c51c4cc4, W2465-v2 39508232, W2471-v1 d426c423, W2482-v2 e24aece4 (PASS), W2483-v1 4697e80d (PASS), W2480-v2 e66615c5 (PASS) and W2480-v3 53306069 (presubmit unfinished), W2488-v2 10a53718 (presubmit unfinished), W2490-stack 87ea649b (repin + W2488 + baseline drop, not gated, queue files stale), W2481-reference 56124301, W2488-r22-row and -script blobs. THE LEAD: the lowering stack W2490-stack plus the R497 row (already in the live queue) drops nemik:R22 from retro-handoff-baseline.json. OTHERS WAIT ON NEMIK: mtools:W2884 waits on nemik:W2443 (series freshness, unbuilt) and nemik:W2483 (sha when it lands); luthen-observability:W1670 waits on nemik:W2494 (headless Service, unbuilt); luthen-observability:W2936 holds nemik:W2481 (settings unit). NEMIK WAITS ON: mtools:W2883 (gate parity), mtools:W2887 (codemod classes), mtools Fraction stand-in (nemik:W2466), luthen W2937 (akonadi-tasks pin)."  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-24T02:14:46Z  status W2483 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-24T02:16:08Z  status W2443 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-25T20:47:52Z  interrupt W2495 minted    -         "Round admission defects (luthen-observability:W3012): incident cards admitted at mint, a card being worked stays in the round, an umbrella's band flows to its unscored leaves"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=luthen-observability:W3012
+2026-11-25T20:47:57Z  interrupt W2496 minted    -         "roundof pins a ready card whose vector is an incident (S:C with R:H, band critical) so it is in the round at the next publish, whatever its rank position behind velocity cards, with a planted test"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2495
+2026-11-25T20:47:57Z  interrupt W2497 minted    -         "Verify a card being worked stays in the published round: the publisher's nemik-rank sha against W2407's pin, then a planted test and, if the publisher runs an older sha, a repin request to luthen"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2495
+2026-11-25T20:47:57Z  interrupt W2498 minted    -         "An umbrella's critical band flows to its unscored leaves (a leaf is at least its umbrella's band when it is the umbrella's only way to close), and the ranker says unscored as a refusal, not a silent normal"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2495
+2026-11-25T20:49:14Z  status W2490 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-25T20:49:15Z  status W2488 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-25T20:49:16Z  status W2482 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-25T20:49:24Z  status W2483 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-25T20:49:49Z  status W2489 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-25T21:18:18Z  status W2468 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-25T21:35:56Z  status W2469 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-25T21:55:06Z  status W2470 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-25T22:19:59Z  status W1052 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-25T22:26:10Z  status W2137 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-25T22:27:30Z  status W2338 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-25T22:31:08Z  status W1028 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-25T22:32:50Z  interrupt W2499 minted    -         "src/nemik/exact.py: a rational in pure ints with the operations flow uses, property-tested against fractions.Fraction as the oracle in the test only, compiling under the pinned Codon"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2466
+2026-11-25T22:32:50Z  interrupt W2500 minted    -         "flow, blocks, cachestore, salience, rank and the tests take Fraction from nemik.exact, so the whole fleet of callers agrees on one type"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2466
+2026-11-25T22:32:50Z  interrupt W2501 minted    -         "flow.py: annotations as dict and list, a sentinel for weights, the solve memo key as text, cachestore's format versioned so old entries are invalidated, never read as another key"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2466
+2026-11-25T22:32:50Z  interrupt W2502 minted    -         "Probe flow's whole import closure with mikemol-codon-probe, remove flow's baseline line with the tool, and carry the fall in the lowering stack"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2466
+2026-11-25T22:34:28Z  interrupt W2503 minted    -         "mtools hooks/ratchet_pace.py stack_reason admits only a stack whose diff LOWERS an owed key's value, not any stack that touches an owed ratchet file (github-82, 2026-11-25)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2490
+2026-11-25T22:34:29Z  interrupt W2504 minted    -         "mtools hooks/admission.py: repin_admission (clause R, a repin-only stack admitted past the pace with an Admission mark) is promised by the module docstring and not built at HEAD"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2490
+2026-11-25T22:34:36Z  status W2503 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-25T22:34:37Z  status W2504 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-25T22:34:42Z  status W2499 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-25T22:45:08Z  status W2352 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-25T22:45:09Z  status W2500 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-25T22:55:47Z  interrupt W2505 minted    -         "pycheck judges whole-project mypy per edit, so a cross-file type change cannot land by hand edits"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-25T22:56:10Z  status W459 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-25T23:22:30Z  status W2363 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-25T23:39:57Z  status W750 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-25T23:59:35Z  status W2373 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T00:15:11Z  status W2374 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T00:19:40Z  interrupt W2506 minted    -         "mtools: pycodemod as a pinned mode, judged as a set under the edit hook"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T00:23:09Z  status W2377 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T00:43:23Z  status W2505 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T00:44:00Z  status W2500 working>blocked writer    "working -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T00:44:11Z  status W2378 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T01:01:32Z  status W846 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T01:22:15Z  status W966 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T01:22:37Z  status W976 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T01:42:57Z  status W985 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T01:44:23Z  interrupt W2507 minted    -         "pycheck's ruff target rejects history.py's Python 3.14 except-tuple syntax, so no Edit to history.py can pass"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T01:44:30Z  status W966 working>blocked writer    "working -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T01:45:12Z  interrupt W2508 minted    -         "A card that takes three or more attempts to advance is flagged loudly in nemik-check, nemik-operator and nemik-metrics"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T01:45:18Z  status W2508 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T01:46:55Z  status W2507 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T01:48:22Z  status W2507 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T01:49:01Z  status W966 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T01:49:23Z  status W994 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T01:50:22Z  status W1007 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T01:54:58Z  status W1007 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T01:56:21Z  interrupt W2509 minted    -         "Most open commitments name no card, so none can be checked against evidence"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T01:56:26Z  status W2509 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T01:56:28Z  status W1008 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T02:01:53Z  status W1010 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T02:03:15Z  status W1010 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T02:03:16Z  status W985 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T02:03:18Z  status W976 working>ready writer    "working -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T02:03:20Z  status W1016 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T02:06:31Z  interrupt W2510 minted    -         "The commitments census emits an explicit 0 for a layer with no open commitments, not a dropped series"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T02:06:37Z  status W2510 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T02:08:14Z  status W2510 blocked>done writer    "blocked -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T02:16:06Z  status W976 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T02:25:33Z  status W985 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T02:26:54Z  interrupt W2511 minted    -         "nemik-check --repo X costs a full fleet run, so the SessionStart hook times out at 60 s"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=resumes:W1
+2026-11-26T02:31:15Z  interrupt W2512 minted    -         "Recurring retro findings with no card group by AMR graph equivalence, not exact text"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T02:31:25Z  status W2512 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T02:36:00Z  status W1010 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T02:36:51Z  interrupt W2513 minted    -         "nemik-check emits its own CPU seconds per run, labelled hit or survey, as a metric series"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T02:37:36Z  status W1010 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T02:37:55Z  interrupt W2514 minted    -         "retro-sustain-baseline.json lists every retro with zero sustain rows, shrink-only, registered as a ratchet"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T02:37:56Z  interrupt W2515 minted    -         "A retro with zero sustain rows that is not in the sustain baseline is a Warning at once"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T02:38:01Z  status W2515 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T02:44:22Z  interrupt W2516 minted    -         "Remove W2511-v1's hand-keyed warnings cache once a repo's findings are a bazel action"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T02:45:03Z  status W1020 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T02:46:03Z  status W2514 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T02:46:57Z  interrupt W2517 minted    -         "The builder counts its publish passes by outcome (built or skipped) with the pod, and states what nemik_build_cpu_seconds means"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T02:49:56Z  status W2514 working>blocked writer    "working -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T02:54:29Z  status W2517 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T02:56:57Z  status W2514 blocked>working writer    "blocked -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T02:57:02Z  interrupt W2518 minted    -         "Pay down nemik's own thin retro (nemik:R496): supersede it with a real sustain section"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T02:59:56Z  status W1257 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T03:00:02Z  interrupt W2519 minted    -         "alarm.py: the keyword-only schedule and done parameters become a typed parameter class"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T03:01:44Z  status W1522 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T03:05:53Z  status W1549 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T03:09:59Z  interrupt W2520 minted    -         "Operator warrants on a card count as demand the ranker reads, each restatement adding, shown in nemik-rank's explanation"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-82
+2026-11-26T03:11:37Z  status W1759 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T03:13:32Z  status W1762 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T03:15:04Z  status W2520 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T03:16:24Z  interrupt W2521 minted    -         "atomize_walls.waves compares its scores as exact fractions so a near-tie never orders by rounding"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T03:20:27Z  status W1836 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T03:21:23Z  interrupt W2522 minted    -         "idle's graph readers (workable, agent_blockers, findings) move to their own module, so idle itself holds no rdflib type"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T03:21:24Z  interrupt W2523 minted    -         "ledger_rows and tick_outcomes read the ledger without rdflib or mikemol.pathsforward, in a plain module"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T03:22:01Z  status W1837 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T03:50:17Z  status W1838 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T03:52:28Z  status W1839 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T03:55:15Z  interrupt W2524 minted    -         "One ruff and mypy config read by both the edit hook and the gate, with a test that fails if they diverge"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github-82
+2026-11-26T03:59:52Z  status W1688 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T03:59:52Z  status W1840 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T04:02:51Z  status W1688 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T04:05:58Z  interrupt W2525 minted    -         "mspdi's reader sits apart from its writer and command line, so importer's closure holds no adapter or rdflib"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T04:06:05Z  status W1841 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T04:08:27Z  interrupt W2526 minted    -         "The RDF vocabulary (BASE, NEMIK, OSLC_CM, STATE) lives in its own module, so a module that needs only the names does not import the whole adapter"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T04:08:32Z  status W1842 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T04:11:53Z  status W1843 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T04:14:59Z  status W1844 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T04:16:54Z  status W2526 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T04:17:25Z  status W1845 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T04:22:01Z  status W1846 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T04:22:44Z  status W1847 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T04:28:57Z  status W1847 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T04:32:45Z  status W1847 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T04:40:36Z  status W1848 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T04:44:46Z  status W1849 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T04:51:02Z  status W1850 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T04:52:38Z  status W1851 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T04:52:43Z  status W2044 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T05:08:08Z  interrupt W2527 minted    -         "Answer resumes:W38: nemik-ask takes --title, --next and --caused-by so the card it mints is complete at mint, and says which blocked_on an unclaimed ask carries (a resolvable <repo>:W<n>, never a bare repo name)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=resumes:W38
+2026-11-26T05:10:50Z  status W1852 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T05:13:43Z  status W1853 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T05:18:29Z  status W1854 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T05:23:41Z  status W1855 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T05:32:13Z  status W1856 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T05:32:40Z  status W1857 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T05:38:34Z  interrupt W2528 minted    -         "Unify the two hand-written Codon CLI parsers (ask_cli, work) with nemik.flags: one reader with the unique-prefix long options and -h they have, then delete the duplicates"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2044
+2026-11-26T05:39:19Z  status W1693 blocked>ready writer    "blocked -> ready"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T05:39:19Z  status W1858 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T05:43:45Z  status W1693 ready>done writer    "ready -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T05:45:44Z  status W1859 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T05:56:31Z  status W1860 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T06:01:53Z  interrupt W2529 minted    -         "nemik reads a retro's supersedes field (the full <repo>:R<n> id, mtools 87857abb) so a thin or baselined retro that a retro with sustain supersedes is no longer thin, and the baseline sheds it"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2514
+2026-11-26T06:02:43Z  status W1861 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T06:04:06Z  status W1862 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T06:06:42Z  interrupt W2530 minted    -         "CheckableNextStepShape's remedy stops telling a ready card to add --witness, which the writer's check refuses"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github:W155
+2026-11-26T06:08:17Z  status W1863 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T06:12:34Z  status W1864 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T06:14:13Z  status W1865 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T06:15:43Z  status W1866 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T06:22:13Z  status W2529 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T06:22:45Z  status W1867 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T06:29:05Z  interrupt W2531 minted    -         "Answer resumes:W52: can nemik-check flag a bare count or a sentence kept in two cards"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=resumes:W52
+2026-11-26T06:30:36Z  status W1868 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T06:42:41Z  status W1869 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T06:44:26Z  status W1870 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T06:47:32Z  status W1871 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T06:48:03Z  status W1872 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T06:56:07Z  status W1873 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T07:00:10Z  status W1874 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T07:01:32Z  status W1875 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T07:03:13Z  interrupt W2532 minted    -         "nemik-inbound and the KEPT lines read each peer's queue at its committed HEAD, not its live file, and an unread repo says UNKNOWN"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2489
+2026-11-26T07:03:45Z  status W2532 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T07:10:27Z  interrupt W2533 minted    -         "nemik-pins' --max-behind is a Limit (given, value), not an int or None"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1874
+2026-11-26T07:11:31Z  status W1876 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T07:16:09Z  status W1877 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T07:16:58Z  status W2527 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T07:19:23Z  status W1878 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T07:25:37Z  status W1879 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T07:26:59Z  status W1880 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T07:49:54Z  status W2494 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T07:51:41Z  status W1881 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T07:53:22Z  status W1882 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T07:55:02Z  status W1883 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T07:56:33Z  status W1884 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T07:59:45Z  status W1885 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T08:02:42Z  status W1886 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T08:10:49Z  status W1887 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T08:14:42Z  status W1888 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T08:19:27Z  status W1889 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T08:42:26Z  status W2030 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T08:48:27Z  status W2030 working>done writer    "working -> done"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f

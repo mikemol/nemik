@@ -10,7 +10,6 @@ whether the peer has PUBLISHED that HEAD is not asked here (a pin can only name 
 
 from __future__ import annotations
 
-import argparse
 import re
 import tomllib
 from pathlib import Path
@@ -18,9 +17,100 @@ from typing import NamedTuple
 
 from mikemol.procrun.proc import TimeoutExpired, capture
 
+from nemik.flags import command_line, parse_flags
 from nemik.queuefiles import default_root
-from nemik.say import say
+from nemik.say import say, warn
 from nemik.tomlview import table, tables
+
+VALUED = ["--root", "--max-behind", "--receipt", "--stuck-after"]
+SWITCHES = ["--help", "--no-cluster"]
+STUCK_AFTER = 5  # call the ship stuck past this many commits
+BAD_USAGE = 2  # argparse's exit status for a command line it could not read
+USAGE = (
+    "usage: nemik-pins [--root ROOT] [--max-behind N] [--receipt FILE] [--no-cluster] "
+    "[--stuck-after N] [repos ...]\n"
+    "  repos            only these repos' pins (default: all)\n"
+    "  --root ROOT      ~/github\n"
+    "  --max-behind N   exit 6 when any pin is more than this many commits behind\n"
+    "  --receipt FILE   uv's receipt for the host install of nemik (W379)\n"
+    "  --no-cluster     skip the deployed-image check (W455)\n"
+    "  --stuck-after N  call the ship stuck past this many commits (a fresh push is "
+    "always briefly behind)"
+)
+
+
+class Command:
+    """The parsed command line of nemik-pins (nemik:W1187, W1874: read with nemik.flags)."""
+
+    repos: list[str]
+    root: Path
+    max_behind: int | None
+    receipt: Path
+    cluster: bool
+    stuck_after: int
+
+    def __init__(
+        self,
+        repos: list[str],
+        root: Path,
+        limits: tuple[int | None, int],
+        receipt: Path,
+        switches: list[str],
+    ) -> None:
+        """Hold the options; limits is (max_behind, stuck_after)."""
+        self.repos = repos
+        self.root = root
+        self.max_behind, self.stuck_after = limits
+        self.receipt = receipt
+        self.cluster = "--no-cluster" not in switches
+
+
+def _whole_number(text: str, name: str, fallback: int, errors: list[str]) -> int:
+    # an int flag's value; a text int() refuses adds the error argparse gives and reads as
+    # the fallback, so the answer is always a number (the caller exits 2 on any error)
+    try:
+        return int(text)
+    except ValueError:
+        errors.append(f"argument {name}: invalid int value: {text!r}")
+        return fallback
+
+
+def read_options(argv: list[str] | None) -> Command:
+    """Read nemik-pins's command line, printing usage or errors and exiting like argparse.
+
+    Args:
+        argv: The command line; None reads the process's own.
+
+    Returns:
+        The options, each defaulted as the argparse form defaulted it.
+
+    Raises:
+        SystemExit: 0 after --help, 2 for an unrecognized argument, a flag with no value or a
+            value that is not a whole number.
+
+    """
+    words = command_line() if argv is None else argv
+    flags = parse_flags(words, VALUED, SWITCHES)
+    if flags.has("--help") or "-h" in flags.rest:
+        say(USAGE)
+        raise SystemExit(0)
+    errors = list(flags.errors)
+    given = flags.first("--max-behind", "")
+    behind_limit = _whole_number(given, "--max-behind", 0, errors) if given else None
+    stuck_text = flags.first("--stuck-after", str(STUCK_AFTER))
+    stuck = _whole_number(stuck_text, "--stuck-after", STUCK_AFTER, errors)
+    if errors:
+        warn(USAGE)
+        warn("nemik-pins: error: " + "; ".join(errors))
+        raise SystemExit(BAD_USAGE)
+    return Command(
+        flags.rest,
+        Path(flags.first("--root", str(default_root()))),
+        (behind_limit, stuck),
+        Path(flags.first("--receipt", str(RECEIPT))),
+        flags.switches,
+    )
+
 
 _PIN = re.compile(
     r"git\+https://github\.com/[\w.-]+/([\w.-]+?)(?:\.git)?@([0-9a-f]{7,40})\b"
@@ -137,17 +227,6 @@ def deployed(namespace: str = "nemik") -> str | None:
     return m[1] if m else None
 
 
-class Options(argparse.Namespace):
-    """The parsed command line of nemik-pins (nemik:W1187)."""
-
-    repos: list[str]
-    root: Path
-    max_behind: int | None
-    receipt: Path
-    cluster: bool
-    stuck_after: int
-
-
 def main(argv: list[str] | None = None) -> int:
     """nemik-pins: how many commits each repo's pin of a peer is behind that peer's HEAD.
 
@@ -155,36 +234,7 @@ def main(argv: list[str] | None = None) -> int:
         6 when --max-behind is given and some pin is further behind than it, else 0.
 
     """
-    ap = argparse.ArgumentParser(
-        prog="nemik-pins", description=(main.__doc__ or "").splitlines()[0]
-    )
-    ap.add_argument("repos", nargs="*", help="only these repos' pins (default: all)")
-    ap.add_argument("--root", type=Path, default=default_root(), help="~/github")
-    ap.add_argument(
-        "--max-behind",
-        type=int,
-        default=None,
-        help="exit 6 when any pin is more than this many commits behind",
-    )
-    ap.add_argument(
-        "--receipt",
-        type=Path,
-        default=RECEIPT,
-        help="uv's receipt for the host install of nemik (W379)",
-    )
-    ap.add_argument(
-        "--no-cluster",
-        dest="cluster",
-        action="store_false",
-        help="skip the deployed-image check (W455)",
-    )
-    ap.add_argument(
-        "--stuck-after",
-        type=int,
-        default=5,
-        help="call the ship stuck past this many commits (a fresh push is always briefly behind)",
-    )
-    args = ap.parse_args(argv, namespace=Options())
+    args = read_options(argv)
     worst = 0
     # nemik:W379: the host's own install of nemik's tools is a pin too, of nemik by the operator's
     # PATH; reinstalling stays a deliberate step, so this says how far behind it is and how to

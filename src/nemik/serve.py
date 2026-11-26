@@ -81,6 +81,7 @@ from nemik.outbox import outbox
 from nemik.overlaps import overlaps
 from nemik.pacepublish import metric_lines, read_pace, readable_lines
 from nemik.pacing import limits, paces
+from nemik.passcount import BUILT, SKIPPED, bump, lines, merge, parse, render
 from nemik.pieces import GraphDoc, split
 from nemik.queuefiles import LEDGER, QUEUE, default_root, workstream_files
 from nemik.queuerows import fleet_queues
@@ -104,6 +105,51 @@ from nemik.withheldage import require_fresh
 # nemik:W783: the server never starts a process, so its survey skips the gate marks that ask
 # mikemol-commit which cards a commit stack names (a spawn, for the CLIs beside the committer).
 survey = partial(checked_survey, gate="")
+COUNTS_FILE = "passes"  # nemik:W2517: the publish pass counts, beside the snapshots
+
+
+def _replace(path: Path, text: str) -> None:
+    """Write a file whole or not at all (a temp file in the same directory, then a rename)."""
+    tmp = path.with_name(f".{path.name}.{os.getpid()}")
+    tmp.write_text(text, encoding="utf-8")
+    tmp.replace(path)
+
+
+def _count_pass(base: Path, snapshot: Path, outcome: str) -> None:
+    """Add one publish pass to its outcome and put the counter into a snapshot's /metrics.
+
+    The builder is a fresh process every pass and a skipped pass builds nothing, so the totals ride
+    the file `passes` under `base` and the counter lines go into the `metrics` file of `snapshot`.
+    An unwritable file never fails a pass: the counter observes the publish, it is no part of it.
+
+    Args:
+        base: The publish directory holding the snapshots.
+        snapshot: The snapshot directory whose `metrics` file carries the counter.
+        outcome: passcount.BUILT or passcount.SKIPPED.
+
+    """
+    counts_path = base / COUNTS_FILE
+    held = counts_path.read_text(encoding="utf-8") if counts_path.is_file() else ""
+    counts = bump(parse(held), outcome)
+    metrics = snapshot / "metrics"
+    try:
+        _replace(counts_path, render(counts))
+        if metrics.is_file():
+            pod = os.environ.get("NEMIK_POD", "")
+            merged = merge(metrics.read_text(encoding="utf-8"), lines(counts, pod))
+            _replace(metrics, merged)
+    except OSError as error:
+        warn(f"pass counter not kept: {error}")
+
+
+def count_built(base: Path, snapshot: Path) -> None:
+    """nemik:W2517: count a pass that built `snapshot`, and say so in its /metrics."""
+    _count_pass(base, snapshot, BUILT)
+
+
+def count_skipped(base: Path) -> None:
+    """nemik:W2517: count a pass that found the fleet unchanged, in the current /metrics."""
+    _count_pass(base, base / "current", SKIPPED)
 
 
 def queue_doc(graph: Graph) -> dict[str, object]:
@@ -1929,6 +1975,7 @@ def publish(
         key += "|series:" + str(int(time.time()) // SERIES_REBUILD_S)
     live = base / "current" / "source-key"
     if live.exists() and live.read_text() == key:
+        count_skipped(base)
         return None
     base.mkdir(parents=True, exist_ok=True)
     # nemik:W1086: a pod with no snapshot of its own serves the last good one kept on the claim
@@ -1950,6 +1997,7 @@ def publish(
         shutil.rmtree(snap, ignore_errors=True)
         raise
     cachestore.save(base / ".cache")
+    count_built(base, snap)
     link = base / f".current-{os.getpid()}"
     link.unlink(missing_ok=True)
     link.symlink_to(snap.name)

@@ -14,10 +14,10 @@ canonical loop prompt. mtools keeps each repo's last acknowledged reading beside
 `~/github/.claude/loop-prompt.md`; a repo whose reading differs from the prompt is behind.
 """
 
+from __future__ import annotations
+
 import json
 import time
-import tomllib
-from importlib.resources import files
 from pathlib import Path
 from typing import TYPE_CHECKING
 
@@ -27,37 +27,10 @@ from nemik.tomlview import table
 if TYPE_CHECKING:
     from rdflib import Graph
 
-DEFAULT_STALE_MINUTES = 90
 STAMP_CHARS = 19  # YYYY-MM-DDTHH:MM:SS
-DEFAULT_TICKS = 16
-DEFAULT_OUTCOMES = ["idle"]
 PROMPT = Path(".claude") / "loop-prompt.md"
 SEEN = Path(".git") / "mtools" / "loop-prompt.seen"
 SECONDS_PER_HOUR = 3600
-
-
-def declared(text: str | None = None) -> tuple[int, list[str]]:
-    """Read the declared run length and the outcomes that mean idle.
-
-    Args:
-        text: The rank-weights TOML, or None for the one that ships with the package.
-
-    Returns:
-        The number of consecutive idle ticks that triggers the warning, and the idle outcomes.
-
-    """
-    if text is None:
-        text = files("nemik.data").joinpath("rank-weights.toml").read_text()
-    document: dict[str, object] = tomllib.loads(text)
-    table = document.get("idle")
-    if not isinstance(table, dict):
-        return DEFAULT_TICKS, DEFAULT_OUTCOMES
-    ticks = table.get("ticks", DEFAULT_TICKS)
-    outcomes = table.get("outcomes", DEFAULT_OUTCOMES)
-    return (
-        ticks if isinstance(ticks, int) else DEFAULT_TICKS,
-        [str(o) for o in outcomes] if isinstance(outcomes, list) else DEFAULT_OUTCOMES,
-    )
 
 
 def idle_run(outcomes: list[str], idle: list[str]) -> int:
@@ -161,23 +134,6 @@ def agent_blockers(merged: Graph, repo: str) -> list[str]:
     )
 
 
-def declared_stale_minutes(text: str) -> int:
-    """Read the declared age, in minutes, past which a live loop's newest tick line is stale.
-
-    Args:
-        text: The rank-weights TOML; the caller reads the one that ships with the package.
-
-    Returns:
-        `tick_stale_minutes` of [idle], or the default when it is absent or not a whole number.
-
-    """
-    document: dict[str, object] = tomllib.loads(text)
-    minutes = table(document.get("idle")).get(
-        "tick_stale_minutes", DEFAULT_STALE_MINUTES
-    )
-    return minutes if isinstance(minutes, int) else DEFAULT_STALE_MINUTES
-
-
 def live_repos(root: Path) -> tuple[set[str], str]:
     """Name the repos whose loop luthen's liveness export says is running, or why it cannot say.
 
@@ -209,7 +165,9 @@ def live_repos(root: Path) -> tuple[set[str], str]:
     return live, ""
 
 
-def stale_findings(root: Path, repos: list[str], now: float) -> dict[str, str]:
+def stale_findings(
+    root: Path, repos: list[str], now: float, stale_minutes: int
+) -> dict[str, str]:
     """Name each repo whose loop is live but whose ledger has no recent tick line (nemik:W1094).
 
     A session can work, commit and land with no tick open, and then none of the practice that hangs
@@ -222,6 +180,8 @@ def stale_findings(root: Path, repos: list[str], now: float) -> dict[str, str]:
         root: The directory holding the repos.
         repos: The repos with a queue.
         now: The instant the age is read at, in seconds since the epoch.
+        stale_minutes: The declared bound, read by the caller (check.idle_stale_minutes,
+            nemik:W1838).
 
     Returns:
         The warning text per live repo whose newest tick line is older than the declared bound; when
@@ -235,9 +195,7 @@ def stale_findings(root: Path, repos: list[str], now: float) -> dict[str, str]:
         where = host if host in repos else (min(repos) if repos else "")
         unjudged = f"liveness export absent: tick staleness not judged ({blind})"
         return {where: unjudged} if where else {}
-    minutes = declared_stale_minutes(
-        files("nemik.data").joinpath("rank-weights.toml").read_text()
-    )
+    minutes = stale_minutes
     cutoff = time.strftime("%Y-%m-%dT%H:%M:%S", time.gmtime(now - minutes * 60))
     found: dict[str, str] = {}
     for repo in repos:
@@ -258,20 +216,27 @@ def stale_findings(root: Path, repos: list[str], now: float) -> dict[str, str]:
     return found
 
 
-def findings(root: Path, merged: Graph, repos: list[str]) -> dict[str, str]:
+def findings(
+    root: Path,
+    merged: Graph,
+    repos: list[str],
+    declared_run: tuple[int, list[str]],
+) -> dict[str, str]:
     """Name each repo that ticks idle for the declared run, or is behind on the loop prompt.
 
     Args:
         root: The directory holding the repos.
         merged: The merged queue graph.
         repos: The repos with a queue.
+        declared_run: The declared run length and idle outcomes, read by the caller
+            (check.idle_declared, nemik:W1838).
 
     Returns:
         The warning text per repo: idle while it has no workable card (nemik:W577), and behind on
         the canonical loop prompt (nemik:W676), joined when both hold.
 
     """
-    limit, idle = declared()
+    limit, idle = declared_run
     found: dict[str, str] = {}
     for repo in repos:
         path = root / repo / ".claude" / "paths-forward.ledger"

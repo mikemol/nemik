@@ -6,8 +6,10 @@ import json
 import tempfile
 from pathlib import Path
 
+from nemik.check import IDLE_TICKS as DEFAULT_TICKS
+from nemik.check import idle_declared as declared
 from nemik.check import survey
-from nemik.idle import DEFAULT_TICKS, declared, idle_run
+from nemik.idle import idle_run
 
 
 def _write(

@@ -146,3 +146,95 @@ def test_the_reader_finds_the_index_html_case() -> None:
     assert _paths(src) == {"src/nemik/web/index.html"}
     files, prefixes = _declared()
     assert not _covered("src/nemik/web/index.html", files, prefixes)
+
+
+# nemik:W1549: a test that imports a tools/ module by name needs the module in its bazel data.
+# Direct pytest cannot see the gap (the repo's pytest pythonpath reaches tools/); the gate's
+# sandbox holds only the declared data, so stack 915 was refused for it (R185).
+GLOBAL_DATA = "data = [src,"  # the line of data every test target gets
+
+
+def _tool_imports(source: str, tools: set[str]) -> set[str]:
+    """Name the tools/ modules a test imports.
+
+    Args:
+        source: The test's text.
+        tools: The stems of the files in tools/.
+
+    Returns:
+        The stems of the tools modules it imports, at any depth.
+
+    """
+    names: set[str] = set()
+    for node in ast.walk(ast.parse(source)):
+        if isinstance(node, ast.Import):
+            names.update(alias.name.split(".")[0] for alias in node.names)
+        elif isinstance(node, ast.ImportFrom) and node.module and not node.level:
+            names.add(node.module.split(".")[0])
+    return names & tools
+
+
+def _unfed(build: str, test: str, modules: set[str]) -> list[str]:
+    """Name the tools modules a test imports that its bazel target does not carry.
+
+    Args:
+        build: BUILD.bazel's text.
+        test: The test file, as `tests/test_x.py`.
+        modules: The stems of the tools modules the test imports.
+
+    Returns:
+        The `tools/<stem>.py` paths neither on the global data line nor on a line that also names
+        this test, sorted.
+
+    """
+    lines = build.splitlines()
+    missing: list[str] = []
+    for module in sorted(modules):
+        tool = f'"tools/{module}.py"'
+        fed = any(
+            tool in line
+            and (line.lstrip().startswith(GLOBAL_DATA) or f'"{test}"' in line)
+            for line in lines
+        )
+        if not fed:
+            missing.append(tool.strip('"'))
+    return missing
+
+
+def test_a_test_that_imports_a_tools_module_declares_it_as_data() -> None:
+    """Every tools/ import in a test has a BUILD.bazel data entry under that test's name."""
+    tools = {p.stem for p in (REPO / "tools").glob("*.py")} - {
+        p.stem for p in HERE.glob("*.py")
+    }
+    build = (REPO / "BUILD.bazel").read_text()
+    missing: list[str] = []
+    for test in sorted(HERE.glob("test_*.py")):
+        modules = _tool_imports(test.read_text(), tools)
+        missing.extend(
+            f"tests/{test.name}: {path}"
+            for path in _unfed(build, f"tests/{test.name}", modules)
+        )
+    hint = "imports a tools module BUILD.bazel gives it no data for:\n"
+    assert not missing, hint + "\n".join(missing)
+
+
+def test_an_entry_removed_from_build_bazel_is_caught() -> None:
+    """The planted case: an entry present passes, absent is named, a global one covers all."""
+    entry = (
+        '+ (["tools/diff_harness.py"] if src == "tests/test_diff_harness.py" else [])'
+    )
+    test = "tests/test_diff_harness.py"
+    assert _unfed(f"x\n{entry}\ny\n", test, {"diff_harness"}) == []
+    assert _unfed("x\ny\n", test, {"diff_harness"}) == ["tools/diff_harness.py"]
+    other = entry.replace("test_diff_harness", "test_other")
+    assert _unfed(other, test, {"diff_harness"}) == ["tools/diff_harness.py"]
+    glob = 'data = [src, "tools/cpuline.py", "x"]'
+    assert _unfed(glob, test, {"cpuline"}) == []
+
+
+def test_the_reader_names_only_tools_modules_a_test_imports() -> None:
+    """Both import forms count, a nested import counts, stdlib and package imports do not."""
+    src = "import os\nfrom nemik import x\nfrom diff_harness import main\n"
+    src += "def f():\n    import codon_census\n"
+    found = _tool_imports(src, {"diff_harness", "codon_census", "unused"})
+    assert found == {"diff_harness", "codon_census"}

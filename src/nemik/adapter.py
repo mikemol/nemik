@@ -23,9 +23,14 @@ from rdflib.namespace import DCTERMS, PROV, RDFS, XSD
 
 from nemik import editverbs, retroingest, urnbase, warrants, witnessreads
 
+# nemik:W2526: the IRIs live in nemik.vocab as plain strings; the terms are built here
+from nemik.vocab import NEMIK_BASE, OSLC_BASE, OSLC_CM_BASE, STATE_NAMES
+
 if TYPE_CHECKING:
     from collections.abc import Callable
     from pathlib import Path
+
+BASE = urnbase.BASE  # nemik:W2147: from nemik.urnbase, a pure module; kept here by name
 
 
 def editable_install() -> bool:
@@ -78,19 +83,11 @@ class _Terms(Namespace):
         return term
 
 
-OSLC_CM = _Terms("http://open-services.net/ns/cm#")
-OSLC = _Terms("http://open-services.net/ns/core#")
-NEMIK = _Terms("https://github.com/mikemol/nemik/ns#")
-BASE = urnbase.BASE  # nemik:W2147: defined in nemik.urnbase, a pure module; kept here by name
+OSLC_CM = _Terms(OSLC_CM_BASE)
+OSLC = _Terms(OSLC_BASE)
+NEMIK = _Terms(NEMIK_BASE)
 
-STATE = {
-    "ready": NEMIK.Ready,
-    "working": NEMIK.Working,
-    "blocked": NEMIK.Blocked,
-    # nemik:W840 (mtools:W1643): committed, deploy not yet witnessed; open, so closed stays false
-    "landed": NEMIK.LandedStatus,
-    "done": NEMIK.Done,
-}
+STATE = {status: NEMIK[name] for status, name in STATE_NAMES.items()}
 
 
 def bind(g: Graph) -> Graph:

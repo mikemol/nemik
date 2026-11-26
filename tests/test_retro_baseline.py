@@ -129,7 +129,7 @@ def test_the_baseline_only_shrinks() -> None:
 def test_a_baselined_retro_that_no_longer_violates_is_said_on_its_repo() -> None:
     """A dead entry is an Info line on a surveyed repo, and nothing on a repo not surveyed."""
     rows = {"gcalculus": [("Violation", HANDOFF, SAID, PROBE_SHAPE)]}
-    found = demoted(rows, ["gcalculus:R1", "gcalculus:R7", "absent:R1"])
+    found = demoted(rows, ["gcalculus:R1", "gcalculus:R7", "absent:R1"], [])
     dead = ("Info", "retro/gcalculus:R7/handoff", f"gcalculus:R7 {STALE}")
     assert dead in found["gcalculus"]
     assert "absent" not in found
@@ -177,7 +177,7 @@ def test_a_new_retro_beside_a_baselined_one_still_violates_end_to_end() -> None:
         sym for _, sym, _, shape in rows["gcalculus"] if shape == PROBE_SHAPE
     )
     assert probes == [HANDOFF, NEW]
-    found = demoted(rows, ["gcalculus:R1"])["gcalculus"]
+    found = demoted(rows, ["gcalculus:R1"], [])["gcalculus"]
     assert [sev for sev, sym, _ in found if sym == NEW] == ["Violation"]
     assert sorted(sev for sev, sym, _ in found if sym == HANDOFF) == [
         "Info",

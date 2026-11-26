@@ -3,6 +3,7 @@
 """nemik:W1064, W1074: a build's memory and CPU are gauges, labelled by pod and by cache."""
 
 from nemik.buildcost import (
+    HELP_CPU,
     build_cost_lines,
     bytes_of,
     labels_of,
@@ -34,9 +35,16 @@ def test_the_gauges_carry_resident_swap_cgroup_and_cpu_with_labels() -> None:
         f"nemik_build_cgroup_peak_bytes{LABELS} {CGROUP_PEAK}",
         "# TYPE nemik_build_cgroup_swap_peak_bytes gauge",
         f"nemik_build_cgroup_swap_peak_bytes{LABELS} {CGROUP_SWAP}",
+        f"# HELP nemik_build_cpu_seconds {HELP_CPU}",
         "# TYPE nemik_build_cpu_seconds gauge",
         f"nemik_build_cpu_seconds{LABELS} 275.720",
     ]
+
+
+def test_the_cpu_gauge_says_what_it_measures() -> None:
+    """nemik:W2517: the help names one build's own process cost, held until the next build."""
+    assert "last build" in HELP_CPU
+    assert "held until the next build" in HELP_CPU
 
 
 def test_a_build_that_used_nothing_still_publishes_every_gauge() -> None:

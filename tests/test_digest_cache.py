@@ -2,6 +2,7 @@
 # Copyright (c) 2026 Mike Mol
 """nemik:W763: an unchanged fleet answers the per-prompt digest from the last run."""
 
+from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
@@ -91,3 +92,54 @@ def test_an_unchanged_fleet_is_surveyed_once(
     queue.write_text(QUEUE.replace("[]", "[ ]", 1), encoding="utf-8")
     check.cached_survey(root, digest=True)
     assert len(calls) == len(("first", "after the change"))
+
+
+def test_the_warning_rows_of_an_unchanged_fleet_are_surveyed_once(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """nemik:W2511: --repo X --warnings ran the whole survey every time.
+
+    An unchanged fleet now answers from the stored rows; a changed queue or an unreadable cache
+    surveys again.
+    """
+    root = _root(tmp_path)
+    calls: list[str] = []
+    answer = {"a": (["OK        a", "Warning   W1 waits"], 0)}
+
+    def rows(_root: Path) -> dict[str, tuple[list[str], int]]:
+        calls.append("survey")
+        return answer
+
+    cache = tmp_path / "cache"
+    monkeypatch.setenv("NEMIK_CACHE_DIR", str(cache))
+    monkeypatch.setattr(check, "default_root", lambda: root)
+    monkeypatch.setattr(check, "warning_rows", rows)
+    assert check.cached_warning_rows(root) == answer
+    assert check.cached_warning_rows(root) == answer
+    assert len(calls) == 1
+    queue = root / "a" / ".claude" / queuefiles.QUEUE
+    queue.write_text(QUEUE.replace("[]", "[ ]", 1), encoding="utf-8")
+    check.cached_warning_rows(root)
+    assert len(calls) == len(("first", "after the change"))
+    (cache / check.WARNINGS_FILE).write_text("not json", encoding="utf-8")
+    assert check.cached_warning_rows(root) == answer
+    assert len(calls) == len(("first", "after the change", "after the bad cache"))
+
+
+def test_a_root_that_is_not_the_fleet_is_never_cached(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Like cached_survey, only the real fleet root is kept: another root surveys every time."""
+    root = _root(tmp_path)
+    calls: list[str] = []
+
+    def rows(_root: Path) -> dict[str, tuple[list[str], int]]:
+        calls.append("survey")
+        return {}
+
+    monkeypatch.setenv("NEMIK_CACHE_DIR", str(tmp_path / "cache"))
+    monkeypatch.setattr(check, "default_root", lambda: tmp_path / "elsewhere")
+    monkeypatch.setattr(check, "warning_rows", rows)
+    check.cached_warning_rows(root)
+    check.cached_warning_rows(root)
+    assert len(calls) == len(("first", "second"))

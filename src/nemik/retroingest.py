@@ -34,6 +34,9 @@ TEXT_FIELDS = [
     ("frozen_timeline", "frozenTimeline"),
     ("enforcement_layer", "enforcementLayer"),
     ("delta", "delta"),
+    # the writer's optional key (mtools 87857abb): the full <repo>:R<n> id of the retro this one
+    # supersedes; RetroSustainShape reads it (nemik:W2529)
+    ("supersedes", "supersedes"),
 ]
 LIST_FIELDS = [("contributing", "contributing"), ("sustain", "sustain")]
 FLAG_FIELDS = [("recurring", "recurring"), ("one_off", "oneOff")]
@@ -54,6 +57,14 @@ HANDOFF_FIELDS = [
 
 def _text(value: object) -> str:
     return value if isinstance(value, str) else ""
+
+
+def _items(value: object) -> list[str]:
+    # the writer accepts a list field as a list of texts or as one text (pathsforward retros.py
+    # RETRO_FIELDS, `_present`), so a non-empty text is one item and not an absent field (W2514)
+    if isinstance(value, str):
+        return [value] if value.strip() else []
+    return strings(value)
 
 
 def in_scope(retro: dict[str, object]) -> bool:
@@ -81,7 +92,7 @@ def triples(retro: dict[str, object]) -> list[Triple]:
     out: list[Triple] = [(subject, "a", "Retro", False)]
     out.extend(_texts(subject, retro, TEXT_FIELDS))
     for key, predicate in LIST_FIELDS:
-        out.extend((subject, predicate, item, False) for item in strings(retro.get(key)))
+        out.extend((subject, predicate, item, False) for item in _items(retro.get(key)))
     out.extend(
         (subject, predicate, "true", False)
         for key, predicate in FLAG_FIELDS

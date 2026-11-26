@@ -140,3 +140,59 @@ def test_applying_mints_blocks_and_writes_then_a_second_filing_is_refused(
     assert "waypoint = {life:W13}" in written
     refused = 2
     assert main(args, env()) == refused
+
+
+def _minted(tmp_path: Path) -> dict[str, object]:
+    """Read back the one waypoint the filing minted in the filer's queue.
+
+    Returns:
+        The card as stored.
+
+    """
+    stored: dict[str, list[dict[str, object]]] = json.loads(
+        (tmp_path / "github" / "life" / ".claude" / "paths-forward.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    (card,) = stored["waypoints"]
+    return card
+
+
+@pytest.mark.usefixtures("scratch_fleet")
+def test_the_card_is_complete_at_mint_from_the_given_fields(tmp_path: Path) -> None:
+    """--title, --next and --caused-by land on the card (resumes:W38)."""
+    given = ["--title", "Ask mtools: fence admission", "--next", "wait, then cite"]
+    line = _args(tmp_path, "--apply", *given, "--caused-by", "operator")
+    assert main(line, env()) == 0
+    card = _minted(tmp_path)
+    assert card["title"] == "Ask mtools: fence admission"
+    assert card["next_bounded_step"] == "wait, then cite"
+    assert card["caused_by"] == "operator"
+
+
+@pytest.mark.usefixtures("scratch_fleet")
+def test_a_card_minted_with_no_next_says_what_it_waits_on_and_cites_itself(
+    tmp_path: Path,
+) -> None:
+    """MUTANT: an empty next step is what left resumes' five ask cards unfinished."""
+    assert main(_args(tmp_path, "--apply"), env()) == 0
+    card = _minted(tmp_path)
+    step = str(card["next_bounded_step"])
+    assert "mtools:W12" in step
+    assert "life:W13" in step
+    assert card["caused_by"] in {None, ""}
+
+
+@pytest.mark.usefixtures("scratch_fleet")
+def test_the_dry_run_prints_the_title_the_next_step_and_changes_nothing(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """The dry run shows what would be minted, given fields included."""
+    args = _args(tmp_path, "--title", "My title", "--next", "do it")
+    queue = Path(args[args.index("--state") + 1])
+    before = queue.read_text(encoding="utf-8")
+    assert main(args, env()) == 0
+    shown = capsys.readouterr().out
+    assert "'My title'" in shown
+    assert "do it" in shown
+    assert queue.read_text(encoding="utf-8") == before

@@ -20,7 +20,6 @@ declared and none can expand, whatever expat the interpreter links.
 
 from __future__ import annotations
 
-import argparse
 import sys
 from pathlib import Path
 from xml.parsers import expat
@@ -30,8 +29,79 @@ from rdflib import Graph
 from nemik import issues
 from nemik.adapter import queue_graph
 from nemik.blocks import annotate
+from nemik.flags import command_line, parse_flags
 from nemik.projection import Link, Task, project
 from nemik.queuefiles import QUEUE, default_root, workstream_files
+from nemik.say import say, warn
+
+VALUED = ["--root", "--repo", "--format", "--against"]
+FORMATS = ["mspdi", "issues"]
+USAGE = (
+    "usage: nemik-export [--root ROOT] [--repo REPO] [--format {mspdi,issues}] "
+    "[--against AGAINST]\n"
+    "  --repo REPO      export only this repo (repeatable)\n"
+    "  --format FORMAT  mspdi: MS Project XML; issues: issue-tracker JSON (W366)\n"
+    "  --against FILE   with --format issues: a tracker's issues as JSON (GitHub or Forgejo); "
+    "print the calls a mirror would make against them instead of the issues (W958)"
+)
+BAD_USAGE = 2  # argparse's exit status for a command line it could not read
+
+
+class Command:
+    """The parsed command line (nemik:W958, W1856: read with nemik.flags, not argparse)."""
+
+    root: Path
+    repo: list[str]
+    format: str
+    against: Path | None
+
+    def __init__(
+        self, root: Path, repo: list[str], fmt: str, against: Path | None
+    ) -> None:
+        """Hold the four options."""
+        self.root = root
+        self.repo = repo
+        self.format = fmt
+        self.against = against
+
+
+def read_options(argv: list[str] | None) -> Command:
+    """Read nemik-export's command line, printing usage or errors and exiting like argparse.
+
+    Args:
+        argv: The command line; None reads the process's own.
+
+    Returns:
+        The options, each defaulted as the argparse form defaulted it.
+
+    Raises:
+        SystemExit: 0 after --help, 2 for an unrecognized argument, a flag with no value or a
+            format that is neither mspdi nor issues.
+
+    """
+    words = command_line() if argv is None else argv
+    flags = parse_flags(words, VALUED, ["--help"])
+    if flags.has("--help") or "-h" in flags.rest:
+        say(USAGE)
+        raise SystemExit(0)
+    fmt = flags.first("--format", "mspdi")
+    errors = [*flags.errors, *(f"unrecognized argument: {w}" for w in flags.rest)]
+    if fmt not in FORMATS:
+        errors.append(
+            f"argument --format: invalid choice: {fmt!r} (choose from mspdi, issues)"
+        )
+    if errors:
+        warn(USAGE)
+        warn("nemik-export: error: " + "; ".join(errors))
+        raise SystemExit(BAD_USAGE)
+    against = flags.first("--against", "")
+    return Command(
+        Path(flags.first("--root", str(default_root()))),
+        flags.every("--repo"),
+        fmt,
+        Path(against) if against else None,
+    )
+
 
 NS = "http://schemas.microsoft.com/project"
 FS = "1"  # PredecessorLink Type: finish-to-start
@@ -191,36 +261,7 @@ def write(tasks: list[Task], name: str = "nemik") -> str:
 
 def main(argv: list[str] | None = None) -> None:
     """nemik-export: the fleet's cards (or one repo's) as MSPDI on stdout, read-only."""
-
-    class Options(argparse.Namespace):
-        """The command line, typed (nemik:W958)."""
-
-        root: Path
-        repo: list[str] | None
-        format: str
-        against: Path | None
-
-    ap = argparse.ArgumentParser(
-        prog="nemik-export", description=(__doc__ or "").splitlines()[0]
-    )
-    ap.add_argument("--root", type=Path, default=default_root())
-    ap.add_argument(
-        "--repo", action="append", help="export only this repo (repeatable)"
-    )
-    ap.add_argument(
-        "--format",
-        choices=("mspdi", "issues"),
-        default="mspdi",
-        help="mspdi: MS Project XML; issues: issue-tracker JSON (W366)",
-    )
-    ap.add_argument(
-        "--against",
-        type=Path,
-        default=None,
-        help="with --format issues: a tracker's issues as JSON (GitHub or Forgejo); print the "
-        "calls a mirror would make against them instead of the issues (W958)",
-    )
-    args = ap.parse_args(argv, namespace=Options())
+    args = read_options(argv)
     queues = workstream_files(args.root, QUEUE)
     known = frozenset(r for r, _ in queues)
     g = Graph()

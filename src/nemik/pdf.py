@@ -16,9 +16,7 @@ It is a host tool: playwright, mikemol.webpage and librsvg's rsvg-convert are de
 dependencies, not the pod's.
 """
 
-import argparse
 import os
-import shutil
 import sys
 import tempfile
 from pathlib import Path
@@ -34,6 +32,42 @@ from playwright.sync_api import (
 )
 
 from nemik import pdfviews
+from nemik.flags import command_line, parse_flags
+
+
+class Lookup:
+    """The answer of a PATH search: what was found and where it looked (nemik:W1871)."""
+
+    found: bool
+    executable: str
+    searched: list[str]
+
+    def __init__(self, executable: str, searched: list[str]) -> None:
+        """Hold the file found (empty when none was) and the directories searched."""
+        self.executable = executable
+        self.searched = searched
+        self.found = bool(executable)
+
+
+def search_path(name: str) -> Lookup:
+    """Search PATH for an executable file, without shutil (nemik:W1871).
+
+    It differs from shutil.which on purpose: an empty PATH entry is skipped (shutil reads it as
+    the current directory, which would run a same-named file from wherever the tool is started),
+    and an unset PATH searches nothing (shutil falls back to os.defpath).
+
+    Returns:
+        The first PATH entry's executable file called name, and the directories it searched, in
+        order; `found` is False when no directory held one.
+
+    """
+    directories = [d for d in os.environ.get("PATH", "").split(os.pathsep) if d]
+    for directory in directories:
+        candidate = Path(directory) / name
+        if candidate.is_file() and os.access(candidate, os.X_OK):
+            return Lookup(str(candidate), directories)
+    return Lookup("", directories)
+
 
 HOST_URL = "http://127.0.0.1:8765/"
 # nemik:W846: a response at or past this status is recorded as a failed request
@@ -59,16 +93,72 @@ SVG_EXPORT = Path(__file__).parent / "web" / "svgexport.js"
 BACKGROUND = "#f7f7f5"
 RSVG = "rsvg-convert"
 GRAPH_SVG = "() => graphSvg(cy)"
+VALUED = ["--out", "--repo", "--url", "--address"]
+USAGE = (
+    "usage: python -m nemik.pdf VIEW --out FILE [--repo REPO] [--url URL] [--address A]\n"
+    "  VIEW           one of the views in nemik.pdfviews, or the address view\n"
+    "  --out FILE     where the PDF goes (required)\n"
+    "  --repo REPO    for the repo view\n"
+    "  --url URL      a running nemik-serve\n"
+    "  --address A    for the address view: #/<repo>[/W<n>], what the page opens at (nemik:W955)"
+)
+BAD_USAGE = 2  # argparse's exit status for a command line it could not read
 
 
-class _Options(argparse.Namespace):
-    """The command line, typed."""
+class Command:
+    """The parsed command line (nemik:W1869: read with nemik.flags, not argparse)."""
 
     view: str
     out: Path
     repo: str
     url: str
     address: str
+
+    def __init__(self, view: str, out: Path, repo: str, url: str, address: str) -> None:
+        """Hold the five options."""
+        self.view = view
+        self.out = out
+        self.repo = repo
+        self.url = url
+        self.address = address
+
+
+def read_options(argv: list[str] | None) -> Command:
+    """Read nemik-pdf's command line, printing usage or errors and exiting like argparse.
+
+    Args:
+        argv: The command line; None reads the process's own.
+
+    Returns:
+        The options, each defaulted as the argparse form defaulted it.
+
+    Raises:
+        SystemExit: 0 after --help, 2 for an unrecognized argument, a flag with no value, a
+            missing view or a missing --out.
+
+    """
+    words = command_line() if argv is None else argv
+    flags = parse_flags(words, VALUED, ["--help"])
+    if flags.has("--help") or "-h" in flags.rest:
+        sys.stdout.write(USAGE + "\n")
+        raise SystemExit(0)
+    errors = list(flags.errors)
+    errors.extend(f"unrecognized argument: {w}" for w in flags.rest[1:])
+    if not flags.rest:
+        errors.append("the following arguments are required: view")
+    if not flags.every("--out"):
+        errors.append("the following arguments are required: --out")
+    if errors:
+        sys.stderr.write(USAGE + "\n")
+        sys.stderr.write("nemik.pdf: error: " + "; ".join(errors) + "\n")
+        raise SystemExit(BAD_USAGE)
+    return Command(
+        flags.rest[0],
+        Path(flags.first("--out", "")),
+        flags.first("--repo", ""),
+        flags.first("--url", HOST_URL),
+        flags.first("--address", ""),
+    )
 
 
 def apply(page: Page, view: str, repo: str) -> None:
@@ -186,12 +276,14 @@ def svg_to_pdf(svg: str, out: Path) -> None:
             own error text.
 
     """
-    exe = shutil.which(RSVG)
-    if exe is None:
+    lookup = search_path(RSVG)
+    if not lookup.found:
         missing = (
-            f"{RSVG} is not on the PATH; install librsvg to print the graph to a PDF"
+            f"{RSVG} is not on the PATH (searched {', '.join(lookup.searched) or 'nothing'}); "
+            "install librsvg to print the graph to a PDF"
         )
         raise RuntimeError(missing)
+    exe = lookup.executable
     with tempfile.TemporaryDirectory() as work:
         source = Path(work) / "graph.svg"
         source.write_text(svg, encoding="utf-8")
@@ -253,19 +345,7 @@ def main(argv: list[str] | None = None) -> int:
         0 when the PDF was written; 2 for an unknown view or a repo view with no repo.
 
     """
-    parser = argparse.ArgumentParser(prog="python -m nemik.pdf", description=__doc__)
-    parser.add_argument(
-        "view", help=f"one of {', '.join(pdfviews.NAMES)}, or {pdfviews.ADDRESS}"
-    )
-    parser.add_argument("--out", type=Path, required=True)
-    parser.add_argument("--repo", default="", help="for the repo view")
-    parser.add_argument("--url", default=HOST_URL, help="a running nemik-serve")
-    parser.add_argument(
-        "--address",
-        default="",
-        help="for the address view: #/<repo>[/W<n>], what the page opens at (nemik:W955)",
-    )
-    options = parser.parse_args(argv, namespace=_Options())
+    options = read_options(argv)
     try:
         pdfviews.steps(options.view, options.repo)
         opened = (

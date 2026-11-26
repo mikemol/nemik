@@ -65,7 +65,7 @@ TARGETS = [(src, "") for src in glob(["tests/test_*.py"]) if src != "tests/test_
         # 300 (58 and 59 percent) in three shards. So layout and the wall table run in sixteen, modes and pdf in six
         shard_count = 16 if src in ("tests/test_layout.py", "tests/test_codon_wall_table.py") else 8 if src == "tests/test_codon_census.py" else 6 if src in ("tests/test_pdf.py", "tests/test_modes.py") else 3 if src in ("tests/test_keymap.py", "tests/test_salience.py", "tests/test_viewer_settings.py", "tests/test_metrics_gating.py", "tests/test_rank_flow.py", "tests/test_viewstate.py", "tests/test_cardtree.py", "tests/test_publish.py") else 1,
         args = ["$(rootpath " + src + ")" + ("::" + SHACLINC_ITEMS[item] if item else ""), "-c", "$(rootpath pyproject.toml)"],
-        data = [src, "tests/installed.py", "tests/webpage.py", "tests/pagetext.py", "tests/conftest.py", "tools/cpuline.py", ".claude/settings.json", "//tests/fixtures:fleet", "pyproject.toml", "ARCHITECTURE.md", "skills/nemik/SKILL.md", "docs/positioning.md", "deploy/deployment.yaml", "src/nemik/data/workflows.toml", "tools/nemik_client.py", "BUILD.bazel", "Containerfile", ".forgejo/workflows/build.yml"] + glob(["tests/corpus/**"]) + [ "src/nemik/data/shapes.ttl", "src/nemik/data/nemik.ttl", "src/nemik/data/wcag.rego", "src/nemik/data/run-row.schema.json", "src/nemik/data/waypoint.schema.json", "src/nemik/data/rank-weights.schema.json", "src/nemik/data/rank-weights.toml", ":.venv", "@opa//file", "@use_of_colour_rego//file", "@chromium//:files", "@chromium//:chrome-headless-shell"]
+        data = [src, "tests/installed.py", "tests/webpage.py", "tests/pagetext.py", "tests/conftest.py", "tools/cpuline.py", ".claude/settings.json", "//tests/fixtures:fleet", "pyproject.toml", "ARCHITECTURE.md", "skills/nemik/SKILL.md", "docs/positioning.md", "src/nemik/data/workflows.toml", "tools/nemik_client.py", "BUILD.bazel", "Containerfile", ".forgejo/workflows/build.yml"] + glob(["tests/corpus/**"]) + [ "src/nemik/data/shapes.ttl", "src/nemik/data/nemik.ttl", "src/nemik/data/wcag.rego", "src/nemik/data/run-row.schema.json", "src/nemik/data/waypoint.schema.json", "src/nemik/data/rank-weights.schema.json", "src/nemik/data/rank-weights.toml", ":.venv", "@opa//file", "@use_of_colour_rego//file", "@chromium//:files", "@chromium//:chrome-headless-shell"]
             # nemik:W445: the JRE (52 MB) and MPXJ's jars go to the one test that reads with them
             + (["@temurin_jre//:files", "@temurin_jre//:bin/java", ":mpxj_classpath"] if src == "tests/test_mpxj.py" else [])
             # nemik:W518: the claims boundary test runs checks/claims.py's read-only witnesses
@@ -116,8 +116,13 @@ TARGETS = [(src, "") for src in glob(["tests/test_*.py"]) if src != "tests/test_
             + (["tools/landing_report.py", "tools/working_unnamed.py"] if src == "tests/test_landing_report.py" else [])
             # nemik:W1568: the stamp tool is imported by name from tools/
             + (["tools/stampnote.py"] if src == "tests/test_stampnote.py" else [])
+            # nemik:W1522: the differential harness is imported by name from tools/
+            + (["tools/diff_harness.py"] if src == "tests/test_diff_harness.py" else [])
             # nemik:W2262: the deploy-witness tool is imported by name from tools/
             + (["tools/deploy_witness.py"] if src == "tests/test_deploy_witness.py" else [])
+            # nemik:W2494: the manifests are inputs of the tests that read them, not of every test
+            + (["deploy/deployment.yaml"] if src == "tests/test_deploy_manifest.py" else [])
+            + (["deploy/service.yaml", "deploy/kustomization.yaml"] if src == "tests/test_deploy_service.py" else [])
             # nemik:W2261: the guard reads every python file under tests with ast, named from git ls-files
             # (minus what every test already has, and tests/fixtures, a package of its own)
             + ([f for f in TESTS_PY if f not in (src, "tests/installed.py", "tests/webpage.py", "tests/pagetext.py", "tests/conftest.py") and not f.startswith("tests/fixtures/")] if src == "tests/test_no_plain_threading_server.py" else [])

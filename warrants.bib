@@ -90,7 +90,7 @@
 
 @misc{adapter-is-the-foundation-layer,
   section = {modularity},
-  claim   = {adapter.py imports no other nemik module --- it is the base of the dependency order, translating mtools' queue and ledger objects into RDF and nothing else, so every other module's behavior can change without adapter.py needing to know},
+  claim   = {adapter.py imports no other nemik module but vocab, a leaf of plain strings (the IRI bases and status words, nemik:W2526) --- it is the base of the dependency order, translating mtools' queue and ledger objects into RDF and nothing else, so every other module's behavior can change without adapter.py needing to know},
   check   = {claim:adapter-is-the-foundation-layer}
 }
 

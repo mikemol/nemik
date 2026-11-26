@@ -12,6 +12,7 @@
     },
     {"path": "codon-baseline.json", "kind": "baseline"},
     {"path": "codon-walls.json", "kind": "baseline"},
-    {"path": "src/nemik/data/retro-handoff-baseline.json", "kind": "baseline"}
+    {"path": "src/nemik/data/retro-handoff-baseline.json", "kind": "baseline"},
+    {"path": "src/nemik/data/retro-sustain-baseline.json", "kind": "baseline"}
   ]
 }

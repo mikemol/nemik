@@ -15,7 +15,7 @@ from __future__ import annotations
 from datetime import UTC, datetime
 from typing import TYPE_CHECKING
 
-from mikemol.pathsforward import certify, opa_eval
+from mikemol.pathsforward import certify, marks, opa_eval
 from mikemol.pathsforward.lock import stamp
 from mikemol.pathsforward.model import text
 
@@ -29,6 +29,21 @@ if TYPE_CHECKING:
 
 _DONE = "done"
 _RUNTIME_VALID = "coverable"
+
+
+def policy_version() -> str:
+    """Name the policy that judges now (nemik:W1848, W1849), by the writer's own digest.
+
+    The writer stamps each mark with this value and a mark is current only when it equals it, so
+    it is read from the writer (mikemol.pathsforward.marks), never recomputed here. It lives in
+    this module, beside the opa_eval import, so that nemik.marks needs neither hashlib nor the
+    mikemol libraries.
+
+    Returns:
+        The sha256 of the shipped realizability.rego, as the writer records it.
+
+    """
+    return marks.policy_version()
 
 
 def verdicts(repo: str, state_path: Path, root: Path, now: str) -> list[Json]:

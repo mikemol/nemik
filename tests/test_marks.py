@@ -7,7 +7,7 @@ from __future__ import annotations
 import json
 from typing import TYPE_CHECKING
 
-from nemik.marks import DERIVED, MARK, STALE, policy_version, provenance, read
+from nemik.marks import DERIVED, MARK, STALE, provenance, read
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -15,7 +15,6 @@ if TYPE_CHECKING:
 NOW = "2026-10-08T12:00:00Z"
 VERSION = "v1"
 UNREADABLE = 2
-DIGEST_LENGTH = 64
 
 
 def _mark(as_of: str, version: str = VERSION) -> dict[str, object]:
@@ -66,8 +65,3 @@ def test_the_latest_mark_per_symbol_wins_and_bad_lines_are_counted(
 def test_an_absent_marks_file_reads_empty(tmp_path: Path) -> None:
     """An absent marks file reads empty."""
     assert read(tmp_path / "none.jsonl") == ({}, 0)
-
-
-def test_the_policy_version_is_a_sha256_of_the_shipped_policy() -> None:
-    """The policy version is a sha256 of the shipped policy."""
-    assert len(policy_version()) == DIGEST_LENGTH

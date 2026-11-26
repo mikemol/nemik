@@ -14,13 +14,10 @@ printed as such and never read as current. An unreadable line is counted, not sk
 
 from __future__ import annotations
 
-import hashlib
 import json
 from datetime import datetime
-from typing import TYPE_CHECKING
 
-from mikemol.pathsforward.opa_eval import POLICY
-
+from nemik._typing import TYPE_CHECKING
 from nemik.tomlview import table
 
 if TYPE_CHECKING:
@@ -44,16 +41,6 @@ def _decoded(raw: str) -> object:
     """
     loaded: object = json.loads(raw)
     return loaded
-
-
-def policy_version() -> str:
-    """Name the policy that judges now.
-
-    Returns:
-        the sha256 of the shipped realizability.rego, as the writer records it.
-
-    """
-    return hashlib.sha256(POLICY.read_bytes()).hexdigest()
 
 
 def read(path: Path) -> tuple[dict[str, Json], int]:

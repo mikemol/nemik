@@ -13,6 +13,15 @@ carry the process's swapped bytes and the container cgroup's own peak and swap p
 sample is labelled with the pod and whether the build started from a restored cache, so a warm build
 reads alone from the store. Plain strings and integers only, no import, so the Codon census
 compiles it.
+
+WHAT nemik_build_cpu_seconds MEASURES (nemik:W2517). The CPU time, user and system together, that
+the publish PROCESS of one BUILD had used when it wrote its metrics file: one process per pass, so
+the value is that build's whole cost, not a rate and not a running total. A pass that finds the
+fleet unchanged builds nothing and writes no gauge, so the value in the served /metrics HOLDS until
+the next build replaces it (in the store it changes once per build, not once per pass). The
+`cache_hit` label is 1 when the build started from a restored cache (a warm build) and 0 when it
+built cold, so the two costs read apart. The share of passes that build, and a skipped pass's cost,
+come from the pass counter nemik_publish_passes_total (nemik.passcount), not from this gauge.
 """
 
 GAUGE_PEAK = "nemik_build_peak_rss_bytes"
@@ -20,6 +29,10 @@ GAUGE_SWAP = "nemik_build_swap_bytes"
 GAUGE_CGROUP_PEAK = "nemik_build_cgroup_peak_bytes"
 GAUGE_CGROUP_SWAP_PEAK = "nemik_build_cgroup_swap_peak_bytes"
 GAUGE_CPU = "nemik_build_cpu_seconds"
+HELP_CPU = (
+    "CPU seconds (user plus system) the publish process of the last build had used; "
+    "one process per pass, so this is that build's cost; held until the next build"
+)
 KIB = 1024
 FIELDS = 2  # a status line is a name and a value
 
@@ -124,6 +137,7 @@ def build_cost_lines(
         f"{GAUGE_CGROUP_PEAK}{labels} {cgroup[0]}",
         f"# TYPE {GAUGE_CGROUP_SWAP_PEAK} gauge",
         f"{GAUGE_CGROUP_SWAP_PEAK}{labels} {cgroup[1]}",
+        f"# HELP {GAUGE_CPU} {HELP_CPU}",
         f"# TYPE {GAUGE_CPU} gauge",
         f"{GAUGE_CPU}{labels} {cpu_ms / 1000:.3f}",
     ]

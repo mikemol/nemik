@@ -3,10 +3,14 @@
 """nemik:W2164: nemik-ask reads its command line by hand and agrees with the argparse it replaced.
 
 nemik.ask_cli used argparse, a Codon wall (the second of the two its leaves failed on). The frozen
-parser below is the old one, unchanged in what it accepts; every accepted line must give the same
-options through nemik.ask_cli.parse and every rejected line the same exit status. Where the hand
-parser differs on purpose (the usage text, which names no abbreviations) a test says so.
+parser below is the old one, extended with the three card fields of nemik:W2527 (--title, --next,
+--caused-by); every accepted line must give the same options through nemik.ask_cli.parse and every
+rejected line the same exit status. Where the hand parser differs on purpose (the usage text, which
+names no abbreviations) a test says so. The new options make `--t` ambiguous (--to or --title),
+for argparse and the hand parser alike.
 """
+
+from __future__ import annotations
 
 import argparse
 from pathlib import Path
@@ -19,16 +23,25 @@ from nemik.ask_cli import DEFAULT_FLOOR, USAGE, parse
 if TYPE_CHECKING:
     from collections.abc import Callable
 
-BASE = ["--filer", "life", "--to", "mtools", "--slug", "ask-x", "--claim", "x is wrong"]
+BASE = [
+    "--filer",
+    "life",
+    "--to",
+    "mtools",
+    "--slug",
+    "ask-x",
+    "--claim",
+    "x is wrong",
+]
 USAGE_ERROR = 2
-Fields = tuple[str, str, str, str, str, str, str, bool]
+Fields = tuple[str, str, str, str, str, str, str, str, str, str, bool]
 
 
 def _frozen(argv: list[str]) -> Fields:
-    """Parse as nemik.ask_cli did before W2164: argparse, frozen.
+    """Parse as nemik.ask_cli did before W2164: argparse, frozen (plus the W2527 fields).
 
     Returns:
-        The eight option values, paths as strings.
+        The eleven option values, paths as strings.
 
     """
     ap = argparse.ArgumentParser(prog="nemik-ask")
@@ -37,6 +50,9 @@ def _frozen(argv: list[str]) -> Fields:
     ap.add_argument("--slug", required=True)
     ap.add_argument("--claim", required=True)
     ap.add_argument("--owner-card", default="")
+    ap.add_argument("--title", default="")
+    ap.add_argument("--next", default="")
+    ap.add_argument("--caused-by", default="")
     ap.add_argument("--state", type=Path, default=Path(".claude/paths-forward.json"))
     ap.add_argument("--floor", type=Path, default=DEFAULT_FLOOR)
     ap.add_argument("--apply", action="store_true")
@@ -46,17 +62,32 @@ def _frozen(argv: list[str]) -> Fields:
     slug: str = ns.slug
     claim: str = ns.claim
     owner_card: str = ns.owner_card
+    card_title: str = ns.title
+    next_step: str = ns.next
+    caused_by: str = ns.caused_by
     state: Path = ns.state
     floor: Path = ns.floor
     apply: bool = ns.apply
-    return (filer, owner, slug, claim, owner_card, str(state), str(floor), apply)
+    return (
+        filer,
+        owner,
+        slug,
+        claim,
+        owner_card,
+        card_title,
+        next_step,
+        caused_by,
+        str(state),
+        str(floor),
+        apply,
+    )
 
 
 def _ours(argv: list[str]) -> Fields:
     """Parse with the hand parser.
 
     Returns:
-        The eight option values, paths as strings.
+        The eleven option values, paths as strings.
 
     """
     out = parse(argv)
@@ -66,6 +97,9 @@ def _ours(argv: list[str]) -> Fields:
         out.slug,
         out.claim,
         out.owner_card,
+        out.card_title,
+        out.next_step,
+        out.caused_by,
         str(out.state),
         str(out.floor),
         out.apply,
@@ -91,10 +125,15 @@ ACCEPTED = [
     [*BASE, "--apply"],
     [*BASE, "--owner-card", "W12"],
     ["--filer=life", "--to=mtools", "--slug=ask-x", "--claim=x is wrong"],
-    ["--fil", "life", "--t", "mtools", "--sl", "ask-x", "--cl", "x is wrong"],
+    [
+        *("--fil", "life", "--to", "mtools"),
+        *("--sl", "ask-x", "--cl", "x is wrong"),
+    ],
     [*BASE, "--st", "q.json", "--flo", "floor", "--ap", "--ow", "W3"],
     [*BASE, "--claim=", "--owner-card="],
     ["--filer", "-", "--to", "mtools", "--slug", "s", "--claim", "-"],
+    [*BASE, "--title", "Ask mtools: x", "--next", "wait", "--caused-by", "operator"],
+    [*BASE, "--ti=T", "--ne=n", "--ca=resumes:W38"],
 ]
 REJECTED = [
     [*BASE, "--"],
@@ -103,9 +142,11 @@ REJECTED = [
     [*BASE, "extra"],
     [*BASE, "--nope"],
     [*BASE, "--s", "x"],
+    [*BASE, "--t", "x"],
     [*BASE, "--apply=1"],
     ["--filer"],
     [*BASE, "--state"],
+    [*BASE, "--title"],
     [*BASE, "--", "after"],
 ]
 
@@ -117,19 +158,25 @@ def test_every_accepted_line_gives_the_options_argparse_gave(argv: list[str]) ->
 
 
 @pytest.mark.parametrize("argv", REJECTED)
-def test_every_rejected_line_stops_with_the_status_argparse_gave(argv: list[str]) -> None:
+def test_every_rejected_line_stops_with_the_status_argparse_gave(
+    argv: list[str],
+) -> None:
     """Stop with a usage error, as the frozen argparse parser does."""
     assert _exit_status(_ours, argv) == _exit_status(_frozen, argv) == USAGE_ERROR
 
 
-def test_help_prints_the_usage_and_exits_zero(capsys: pytest.CaptureFixture[str]) -> None:
+def test_help_prints_the_usage_and_exits_zero(
+    capsys: pytest.CaptureFixture[str],
+) -> None:
     """Print the usage on stdout and stop with 0 for -h and --help."""
     for flag in ("-h", "--help"):
         assert _exit_status(_ours, [flag]) == 0
         assert capsys.readouterr().out == f"{USAGE}\n"
 
 
-def test_a_missing_option_is_named_with_the_usage(capsys: pytest.CaptureFixture[str]) -> None:
+def test_a_missing_option_is_named_with_the_usage(
+    capsys: pytest.CaptureFixture[str],
+) -> None:
     """Name every missing required option, after the usage, on stderr."""
     assert _exit_status(_ours, ["--filer", "life"]) == USAGE_ERROR
     said = capsys.readouterr().err

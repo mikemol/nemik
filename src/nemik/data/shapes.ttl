@@ -536,10 +536,12 @@ nemik:RetroBlamelessShape a sh:NodeShape ;
 
 # A retro records what to sustain as well as what to fix (nemik:W649, gate G6). Empty is thin, said in
 # the commit-message draft's own words (`# thin: no <field>`, mtools commitmsg): the gap is stated, not
-# hidden, and it stays Info because a retro with nothing worth keeping is rare but possible.
+# hidden. It is a Violation (nemik:W2514), and the retros that were thin when the rule was baselined
+# (src/nemik/data/retro-sustain-baseline.json, a registered shrink-only ratchet) read as Info by
+# identity (nemik.retrobaseline.demote), so a retro that becomes thin tomorrow is not silent.
 nemik:RetroSustainShape a sh:NodeShape ;
     sh:targetClass nemik:Retro ;
-    sh:severity sh:Info ;
+    sh:severity sh:Violation ;
     sh:sparql [
         sh:message "thin: no sustain. Say what worked and should be kept, beside what went wrong" ;
         sh:select """
@@ -548,6 +550,16 @@ nemik:RetroSustainShape a sh:NodeShape ;
                 FILTER NOT EXISTS {
                     $this <https://github.com/mikemol/nemik/ns#sustain> ?s .
                     FILTER(STRLEN(STR(?s)) > 0)
+                }
+                # nemik:W2529: retros are write-once, so a thin one is retired by SUPERSESSION: a
+                # different retro that names it by its full <repo>:R<n> id (supersedes) and itself
+                # carries a sustain. A superseder that is itself thin clears nothing.
+                FILTER NOT EXISTS {
+                    ?other <https://github.com/mikemol/nemik/ns#supersedes> ?id ;
+                           <https://github.com/mikemol/nemik/ns#sustain> ?kept .
+                    FILTER(STRLEN(STR(?kept)) > 0)
+                    FILTER(?other != $this)
+                    FILTER(STRENDS(STR($this), CONCAT("/retro/", STR(?id))))
                 }
             }""" ] .
 

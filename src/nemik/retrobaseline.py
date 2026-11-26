@@ -137,3 +137,94 @@ def shrink(baseline: list[str], today: list[str]) -> list[str]:
     """
     now = set(today)
     return sorted(ident for ident in baseline if ident in now)
+
+
+# nemik:W2514: the second baseline, of retros with zero sustain rows (nemik:RetroSustainShape, gate
+# G6). Same discipline as the handoff baseline: counted debt that only shrinks, read by the result's
+# shape IRI and focus, never its message. The focus of this shape is the retro itself.
+SUSTAIN_SHAPE = "https://github.com/mikemol/nemik/ns#RetroSustainShape"
+SUSTAIN_PREFIX = "retro/"
+
+
+def sustain_id(symbol: str) -> str:
+    """Give the retro id a sustain result's focus symbol names.
+
+    Args:
+        symbol: A retro's focus symbol, such as `retro/github:R12`.
+
+    Returns:
+        The retro id (`github:R12`).
+
+    Raises:
+        ValueError: the symbol is not a retro's: the sustain shape targets retros, so this is a
+            shape defect, never a result to read past.
+
+    """
+    inner = symbol[len(SUSTAIN_PREFIX) :]
+    if not symbol.startswith(SUSTAIN_PREFIX) or not inner or "/" in inner:
+        msg = f"not a retro's focus: {symbol!r}"
+        raise ValueError(msg)
+    return inner
+
+
+def sustain_retros(rows: list[Row]) -> list[str]:
+    """List the retros the sustain shape judges thin, at any severity.
+
+    Args:
+        rows: Results of any repos, each with its source shape.
+
+    Returns:
+        The sorted, distinct retro ids whose result came from RetroSustainShape. Any severity: the
+        shape reads Info today, and the seed is the set it names now.
+
+    """
+    return sorted({sustain_id(row[1]) for row in rows if row[3] == SUSTAIN_SHAPE})
+
+
+SUSTAIN_HISTORIC = (
+    "thin, baselined (retros are write-once and this one predates the sustain rule; "
+    "src/nemik/data/retro-sustain-baseline.json, nemik:W2514): "
+)
+SUSTAIN_STALE = (
+    "is in the retro sustain baseline but is no longer thin: "
+    "tools/retro_sustain_baseline.py --write drops it (the baseline only shrinks, nemik:W2514)"
+)
+
+
+def is_thin(row: Row) -> bool:
+    """Say whether a result is a Violation of the sustain shape.
+
+    Args:
+        row: A result with the shape that produced it.
+
+    Returns:
+        True for a Violation whose source shape is RetroSustainShape.
+
+    """
+    severity, _, _, shape = row
+    return severity == "Violation" and shape == SUSTAIN_SHAPE
+
+
+def demote_thin(rows: list[Row], baseline: set[str]) -> list[Row]:
+    """Read the sustain shape's Violations on baselined retros as Info; leave every other result.
+
+    A thin retro outside the baseline keeps its Violation: the baseline is counted debt, not a
+    silent Info. The result still carries each row's shape, so `demote` can read the same rows
+    for the handoff baseline after this.
+
+    Args:
+        rows: One repo's results, each with its source shape.
+        baseline: The baselined retro ids of the sustain shape.
+
+    Returns:
+        The rows in the same order, a baselined thin retro's with severity Info and the reason said.
+
+    """
+    out: list[Row] = []
+    for row in rows:
+        severity, symbol, message, shape = row
+        if is_thin(row) and sustain_id(symbol) in baseline:
+            out.append(("Info", symbol, SUSTAIN_HISTORIC + message, shape))
+        else:
+            out.append((severity, symbol, message, shape))
+    return out

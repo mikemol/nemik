@@ -51,11 +51,9 @@ its policy entails them. This command prints, and the host decides what to impor
 
 from __future__ import annotations
 
-import argparse
 import json
 import os
 from collections import Counter
-from collections.abc import Callable
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
 
@@ -66,6 +64,7 @@ from rdflib import RDF, Graph
 from rdflib.namespace import DCTERMS
 
 from nemik import cachestore, forecast, history, tiers
+from nemik._typing import TYPE_CHECKING
 from nemik.adapter import (
     BASE,
     NEMIK,
@@ -76,18 +75,84 @@ from nemik.adapter import (
 )
 from nemik.blocks import inbound, operator_asks, ref, with_salience
 from nemik.check import Finding, ready_neither, survey
+from nemik.flags import command_line, parse_flags
 from nemik.health import STATUSES, health, thresholds
 from nemik.ledgersummary import summarize
 from nemik.queuefiles import LEDGER, QUEUE, default_root, workstream_files
 from nemik.rank import TIERS, rank
 from nemik.realize import judged, verdicts
 from nemik.runlogs import unmigrated_at_source
-from nemik.say import say
+from nemik.say import say, warn
 from nemik.score import load_weights
 from nemik.stackable import stackable_count
 from nemik.stackable_cli import drifted, history_cited
 from nemik.wake import read_liveness, roster
 from nemik.workrows import open_leaf_stamps, tick_kinds, working_rows
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
+
+VALUED = ["--root", "--spool", "--runs", "--family"]
+USAGE = (
+    "usage: nemik-metrics [--root ROOT] [--spool SPOOL] [--runs RUNS] [--family NAME]\n"
+    "  --root ROOT     ~/github, or the export layout root\n"
+    "  --spool SPOOL   the prompt spool\n"
+    "  --runs RUNS     luthen's published run logs (DIR/index.json): print how many source "
+    "lines predate the run-row shape (nemik:W565)\n"
+    "  --family NAME   print only this metric family (repeatable): the host job pushes the "
+    "registered ones"
+)
+BAD_USAGE = 2  # argparse's exit status for a command line it could not read
+
+
+class Options:
+    """The parsed command line (nemik:W1851: read with nemik.flags, not argparse)."""
+
+    root: Path
+    spool: Path
+    runs: Path | None
+    family: list[str] | None
+
+    def __init__(
+        self, root: Path, spool: Path, runs: Path | None, family: list[str] | None
+    ) -> None:
+        """Hold the four options."""
+        self.root = root
+        self.spool = spool
+        self.runs = runs
+        self.family = family
+
+
+def read_options(argv: list[str] | None) -> Options:
+    """Read nemik-metrics's command line, printing usage or errors and exiting like argparse.
+
+    Args:
+        argv: The command line; None reads the process's own.
+
+    Returns:
+        The options, each defaulted as the argparse form defaulted it.
+
+    Raises:
+        SystemExit: 0 after --help, 2 for an unrecognized argument or a flag with no value.
+
+    """
+    words = command_line() if argv is None else argv
+    flags = parse_flags(words, VALUED, ["--help"])
+    if flags.has("--help") or "-h" in flags.rest:
+        say(USAGE)
+        raise SystemExit(0)
+    errors = [*flags.errors, *(f"unrecognized argument: {w}" for w in flags.rest)]
+    if errors:
+        warn(USAGE)
+        warn("nemik-metrics: error: " + "; ".join(errors))
+        raise SystemExit(BAD_USAGE)
+    runs = flags.first("--runs", "")
+    return Options(
+        Path(flags.first("--root", str(default_root()))),
+        Path(flags.first("--spool", str(spool_path()))),
+        Path(runs) if runs else None,
+        flags.every("--family") or None,
+    )
 
 
 def judged_cards(root: Path) -> list[dict[str, object]]:
@@ -197,7 +262,7 @@ def working_tick_lines(root: Path) -> list[str]:
 
 
 # nemik:W620: what builds one group of families' lines when a run asks for them
-Producer = Callable[[], list[str]]
+type Producer = Callable[[], list[str]]
 TYPE_LINE_WORDS = 3  # "# TYPE", the metric name, its kind
 DAY = 86400  # seconds in the arrival window
 
@@ -300,7 +365,7 @@ def realizability_lines(root: Path) -> list[str]:
     for repo, path in workstream_files(root, QUEUE):
         try:
             found = verdicts(repo, path, root, now)
-        except OpaUnavailableError, UnreadableStateError:
+        except (OpaUnavailableError, UnreadableStateError):
             out.append(f"nemik_realizability_unjudged{label(repo=repo)} 1")
             continue
         by_level = Counter(str(v.get("level")) for v in found)
@@ -937,15 +1002,6 @@ def age_lines(repo: str, g: Graph, now: datetime) -> list[str]:
     return out
 
 
-class _Options(argparse.Namespace):
-    """The parsed command line, with the one option the filter reads typed."""
-
-    family: list[str] | None
-    root: Path
-    runs: Path | None
-    spool: Path
-
-
 def run_log_lines(directory: Path | None) -> list[str]:
     """Print how many source lines of each published run log predate the run-row shape (W565).
 
@@ -1171,29 +1227,7 @@ def main(argv: list[str] | None = None) -> None:
         argv: The command line; None reads sys.argv.
 
     """
-    ap = argparse.ArgumentParser(
-        prog="nemik-metrics", description=(__doc__ or "").splitlines()[0]
-    )
-    ap.add_argument(
-        "--root",
-        type=Path,
-        default=default_root(),
-        help="~/github, or the export layout root",
-    )
-    ap.add_argument("--spool", type=Path, default=spool_path())
-    ap.add_argument(
-        "--runs",
-        type=Path,
-        help="luthen's published run logs (DIR/index.json): print how many source lines predate "
-        "the run-row shape (nemik:W565)",
-    )
-    ap.add_argument(
-        "--family",
-        action="append",
-        metavar="NAME",
-        help="print only this metric family (repeatable): the host job pushes the registered ones",
-    )
-    args = ap.parse_args(argv, namespace=_Options())
+    args = read_options(argv)
 
     out = [
         "# TYPE nemik_waypoints gauge",

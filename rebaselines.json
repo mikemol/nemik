@@ -13,6 +13,13 @@
    "new": 296,
    "reason": "birth of the retro handoff baseline (nemik W2357): the historic retros whose handoff breaks the self-probe rule (nemik:RetroHandoffProbeShape), which read as Info because retros are write-once. The host ruled the shrink-only baseline (inbox/2026-11-19-github-00-retro-handoff-shape-flags-history.md) and the operator's record (nemik line 401288) rules that it be CREATED at 296; 296 is the count tools/retro_handoff_baseline.py --seed measured over the live fleet, not a number the operator chose",
    "warrant": "ca6f3699-66ac-4ffa-a3ca-6ececbab791f:401288"
+  },
+  {
+   "ratchet": "src/nemik/data/retro-sustain-baseline.json",
+   "old": 0,
+   "new": 9,
+   "reason": "birth of the retro sustain baseline (nemik W2514): the retros with no sustain (nemik:RetroSustainShape, gate G6), counted debt that only shrinks and is paid down by superseding each retro with a real sustain section (nemik:W2529 reads the writer's supersedes). The operator's words (host line 225627, uuid b8699232) were 'Create the baseline at the measured 268... this is fine for now. But there needs to be a concerted effort to pay down the debt'. OUR CORRECTION, not the operator's: the 268 was mis-measured, because nemik.retroingest read a retro's sustain only as a list of texts and the writer's schema also accepts one text (262 of the 268 carried a text sustain: github 229, aeternum 28, rosettapkg 4, nemik 1). The baseline is born at the count measured at the land with the corrected reader, NINE retros of two kinds. (1) SIX were thin when the 268 was measured: github R242 and R244, luthen-observability R5 to R8 (each confirmed to carry no sustain by its repo's own --retros). (2) THREE, github R253, R254 and R255, were written AFTER the warrant, while RetroSustainShape still read Info; they are the host's cold-review retros, and the host's briefs caused them (a stale retro skeleton, since fixed). Nine is below the 268 of the warrant, a fall the ratchet allows, and it is the seed, not a later rise; after this land the shape is a Violation, so nothing more can join (tests/test_retro_sustain_baseline pins the file to a subset of these nine: it may only shrink). Supersession of each is open on github:W158 and luthen-observability",
+   "warrant": "695f3e0a-d36f-4080-9c67-7548978cd99e:225627"
   }
  ]
 }

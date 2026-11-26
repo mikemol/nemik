@@ -8,12 +8,15 @@ clean (github-cb 2026-11-16): with no readable export every live loop is unjudge
 own finding, and the answer of live_repos is two parts, never a maybe.
 """
 
+from __future__ import annotations
+
 import calendar
 import json
 from importlib.resources import files
 from typing import TYPE_CHECKING
 
-from nemik.idle import declared_stale_minutes, live_repos, stale_findings
+from nemik.check import idle_stale_minutes as declared_stale_minutes
+from nemik.idle import live_repos, stale_findings
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -47,6 +50,18 @@ def _fleet(
         (root / "liveness.json").write_text(json.dumps(document), encoding="utf-8")
 
 
+def _said(root: Path, repos: list[str]) -> dict[str, str]:
+    """Run the check with the packaged weights, which the caller reads (nemik:W1836).
+
+    Returns:
+        stale_findings' answer.
+
+    """
+    return stale_findings(
+        root, repos, NOW, stale_minutes=declared_stale_minutes(PACKAGED)
+    )
+
+
 def test_the_declared_bound_comes_from_rank_weights() -> None:
     """The bound is read from the text it is given, with a default, and not typed in the check."""
     assert declared_stale_minutes(PACKAGED) == DECLARED
@@ -57,7 +72,7 @@ def test_the_declared_bound_comes_from_rank_weights() -> None:
 def test_a_live_loop_with_an_old_tick_is_a_warning(tmp_path: Path) -> None:
     """Live and last ticked four days ago: named, with the stamp."""
     _fleet(tmp_path, {"a": STALE}, {"a": "ok"})
-    said = stale_findings(tmp_path, ["a"], NOW)
+    said = _said(tmp_path, ["a"])
     assert list(said) == ["a"]
     assert "2026-11-10T18:06:42" in said["a"]
 
@@ -65,25 +80,25 @@ def test_a_live_loop_with_an_old_tick_is_a_warning(tmp_path: Path) -> None:
 def test_a_live_loop_with_a_fresh_tick_is_not(tmp_path: Path) -> None:
     """MUTANT: the same live repo with a tick fifteen minutes old draws nothing."""
     _fleet(tmp_path, {"a": FRESH}, {"a": "ok"})
-    assert stale_findings(tmp_path, ["a"], NOW) == {}
+    assert _said(tmp_path, ["a"]) == {}
 
 
 def test_a_peer_line_is_not_a_tick(tmp_path: Path) -> None:
     """A recent peer line leaves the loop with no recent tick: still stale."""
     _fleet(tmp_path, {"a": STALE + PEER}, {"a": "ok"})
-    assert list(stale_findings(tmp_path, ["a"], NOW)) == ["a"]
+    assert list(_said(tmp_path, ["a"])) == ["a"]
 
 
 def test_a_live_loop_with_no_tick_line_at_all_is_a_warning(tmp_path: Path) -> None:
     """No tick line is stale too, said as 'at all'."""
     _fleet(tmp_path, {"a": PEER}, {"a": "ok"})
-    assert "at all" in stale_findings(tmp_path, ["a"], NOW)["a"]
+    assert "at all" in _said(tmp_path, ["a"])["a"]
 
 
 def test_a_dormant_repo_is_left_alone(tmp_path: Path) -> None:
     """Most repos are dormant on purpose: an old tick with no live loop is no finding."""
     _fleet(tmp_path, {"a": STALE}, {"a": "dormant"})
-    assert stale_findings(tmp_path, ["a"], NOW) == {}
+    assert _said(tmp_path, ["a"]) == {}
 
 
 def test_a_readable_export_answers_with_no_reason(tmp_path: Path) -> None:
@@ -100,7 +115,7 @@ def test_no_liveness_export_is_blind_not_clean(tmp_path: Path) -> None:
     live, blind = live_repos(tmp_path)
     assert not live
     assert "no liveness.json" in blind
-    said = stale_findings(tmp_path, ["a", "b"], NOW)
+    said = _said(tmp_path, ["a", "b"])
     assert list(said) == ["a"]
     assert "liveness export absent: tick staleness not judged" in said["a"]
 
@@ -110,4 +125,4 @@ def test_an_export_that_is_not_json_is_blind_too(tmp_path: Path) -> None:
     _fleet(tmp_path, {"a": STALE}, None)
     (tmp_path / "liveness.json").write_text("not json", encoding="utf-8")
     assert live_repos(tmp_path)[1] == "liveness.json is not JSON"
-    assert "not judged" in stale_findings(tmp_path, ["a"], NOW)["a"]
+    assert "not judged" in _said(tmp_path, ["a"])["a"]

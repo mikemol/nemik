@@ -11,3 +11,20 @@ spec:
     - name: http
       port: 8750
       targetPort: http
+---
+# Service `nemik-headless` (nemik:W2494, luthen-observability:W1670): no cluster IP, so a DNS lookup
+# returns every pod's address and luthen's dns_sd scrape job reaches each builder pod. Through the
+# ClusterIP Service above, each scrape lands on a random pod and the two builders' nemik_build_*
+# gauges interleave.
+apiVersion: v1
+kind: Service
+metadata:
+  name: nemik-headless
+  labels: {app.kubernetes.io/name: nemik}
+spec:
+  clusterIP: None
+  selector: {app.kubernetes.io/name: nemik}
+  ports:
+    - name: http
+      port: 8750
+      targetPort: http

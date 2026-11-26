@@ -28,7 +28,8 @@ from nemik.work import Env, run_writer
 DEFAULT_FLOOR = Path.home() / "github" / "summit" / "floor" / "inbox"
 USAGE = (
     "usage: nemik-ask [-h] --filer FILER --to TO --slug SLUG --claim CLAIM "
-    "[--owner-card OWNER_CARD] [--state STATE] [--floor FLOOR] [--apply]"
+    "[--owner-card OWNER_CARD] [--title TITLE] [--next NEXT] [--caused-by REF] "
+    "[--state STATE] [--floor FLOOR] [--apply]"
 )
 VALUE_OPTIONS = (
     "--filer",
@@ -36,6 +37,9 @@ VALUE_OPTIONS = (
     "--slug",
     "--claim",
     "--owner-card",
+    "--title",
+    "--next",
+    "--caused-by",
     "--state",
     "--floor",
 )
@@ -52,6 +56,9 @@ class Options:
     slug: str
     claim: str
     owner_card: str
+    card_title: str
+    next_step: str
+    caused_by: str
     state: Path
     floor: Path
     apply: bool
@@ -63,6 +70,9 @@ class Options:
         self.slug = ""
         self.claim = ""
         self.owner_card = ""
+        self.card_title = ""
+        self.next_step = ""
+        self.caused_by = ""
         self.state = Path(".claude/paths-forward.json")
         self.floor = DEFAULT_FLOOR
         self.apply = False
@@ -94,6 +104,12 @@ def _set(out: Options, option: str, value: str) -> None:
         out.claim = value
     elif option == "--owner-card":
         out.owner_card = value
+    elif option == "--title":
+        out.card_title = value
+    elif option == "--next":
+        out.next_step = value
+    elif option == "--caused-by":
+        out.caused_by = value
     elif option == "--state":
         out.state = Path(value)
     else:
@@ -138,8 +154,9 @@ def _apply(out: Options, arg: str, argv: list[str], at: int, seen: list[str]) ->
 def parse(argv: list[str]) -> Options:
     """Read the command line of nemik-ask without argparse (nemik:W2164).
 
-    The four required options (--filer, --to, --slug, --claim), --owner-card, --state, --floor,
-    --apply and -h, as argparse took them: a long option may be given as a unique prefix or as
+    The four required options (--filer, --to, --slug, --claim), --owner-card, --title, --next,
+    --caused-by (nemik:W2527), --state, --floor, --apply and -h, as argparse took them: a long
+    option may be given as a unique prefix or as
     --name=value. A bare -- is refused with whatever follows it: there is no positional for it to
     release (argparse of Python 3.14 reports it as unrecognized).
 
@@ -204,11 +221,36 @@ def _refusal(slug: str, claim: str, target: Path) -> str:
     return ""
 
 
-def _mint(state: Path, card_title: str, wait: str, env: Env) -> tuple[int, str]:
-    """Mint the filer's waypoint through the writer and block it on the owner.
+def next_step(args: Options, symbol: str, wait: str) -> str:
+    """Word the minted card's next step, the filer's own unless one was given.
 
     Args:
-        state: The filer's queue file.
+        args: The parsed command line.
+        symbol: The minted waypoint's symbol.
+        wait: What the card waits on.
+
+    Returns:
+        The --next text, or a default that says what is waited on and cites the filer's card so
+        the blocker can claim it (the nemik skill: a bare repo name gives the blocker nothing to
+        cite).
+
+    """
+    if args.next_step:
+        return args.next_step
+    return (
+        f"Wait for {wait}'s answer to the ask {args.slug} filed on the floor; "
+        f"it cites {args.filer}:{symbol}, so the owner can claim it."
+    )
+
+
+def _mint(args: Options, card_title: str, wait: str, env: Env) -> tuple[int, str]:
+    """Mint the filer's waypoint through the writer and block it on the owner.
+
+    The card is complete at mint (resumes:W38): its title is the one given or the cut claim, it is
+    caused by --caused-by when one is given, and it carries a next step.
+
+    Args:
+        args: The parsed command line (the queue file, --caused-by, --next).
         card_title: The waypoint's title.
         wait: What it waits on.
         env: Where the writer is installed and where scratch directories go.
@@ -217,14 +259,18 @@ def _mint(state: Path, card_title: str, wait: str, env: Env) -> tuple[int, str]:
         (0, the new symbol) on success, else (a non-zero status, why).
 
     """
-    code, said = run_writer(["--state", str(state), "--add", card_title], env)
+    state = str(args.state)
+    add = ["--state", state, "--add", card_title]
+    if args.caused_by:
+        add.extend(["--caused-by", args.caused_by])
+    code, said = run_writer(add, env)
     symbol = said.split()[0] if said.split() else ""
     if code or not symbol.startswith("W"):
         return code or 1, f"the writer did not mint a card: {said}"
-    block = ["--state", str(state), "--update", symbol, "--status", "blocked"]
-    code, said = run_writer(
-        [*block, "--blocked-on", wait, "--blocked-kind", "agent"], env
-    )
+    block = ["--state", state, "--update", symbol, "--status", "blocked"]
+    block.extend(["--blocked-on", wait, "--blocked-kind", "agent"])
+    block.extend(["--next", next_step(args, symbol, wait)])
+    code, said = run_writer(block, env)
     if code:
         return code, f"{symbol} was minted but not blocked: {said}"
     return 0, symbol
@@ -248,13 +294,16 @@ def main(argv: list[str], env: Env) -> int:
         sys.stderr.write(f"nemik-ask: {reason}\n")
         return 2
     wait = blocked_on(args.to, args.owner_card)
+    card_title = args.card_title or title(args.to, args.claim)
     if not args.apply:
         sys.stdout.write(
-            f"would mint in {args.state}: {title(args.to, args.claim)!r}, blocked on {wait}\n"
+            f"would mint in {args.state}: {card_title!r}, blocked on {wait}"
+            f" ({args.caused_by or 'no caused-by'})\n"
+            f"next step: {next_step(args, 'W?', wait)}\n"
             f"would write {target}:\n{entry(args.slug, args.filer, args.to, args.claim, 'W?')}"
         )
         return 0
-    code, symbol = _mint(args.state, title(args.to, args.claim), wait, env)
+    code, symbol = _mint(args, card_title, wait, env)
     if code:
         sys.stderr.write(f"nemik-ask: {symbol}\n")
         return code

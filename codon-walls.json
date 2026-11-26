@@ -22,7 +22,6 @@
   "class decorator with arguments": "reached",
   "contextlib": "reached",
   "dataclasses.dataclass": "reached",
-  "dataclasses.field": "reached",
   "fractions": "reached",
   "hashlib": "reached",
   "importlib.metadata": "reached",
@@ -126,7 +125,6 @@
   "class decorator with arguments": "reached",
   "contextlib": "reached",
   "dataclasses.dataclass": "reached",
-  "dataclasses.field": "reached",
   "fractions": "reached",
   "hashlib": "reached",
   "importlib.metadata": "reached",
@@ -182,7 +180,6 @@
   "class decorator with arguments": "reached",
   "contextlib": "reached",
   "dataclasses.dataclass": "reached",
-  "dataclasses.field": "reached",
   "fractions": "reached",
   "hashlib": "reached",
   "importlib.metadata": "reached",
@@ -247,7 +244,6 @@
   "class decorator with arguments": "reached",
   "contextlib": "reached",
   "dataclasses.dataclass": "reached",
-  "dataclasses.field": "reached",
   "fractions": "reached",
   "hashlib": "reached",
   "importlib.metadata": "reached",
@@ -287,7 +283,6 @@
  "hostapply": {
   "TYPE_CHECKING": "reached",
   "bare '*,' keyword-only marker": "reached",
-  "hashlib": "reached",
   "mikemol.* (third-party)": "reached"
  },
  "hostroot_cli": {
@@ -333,18 +328,7 @@
   "xml.parsers": "reached"
  },
  "index": {
-  "TYPE_CHECKING": "reached",
-  "contextlib": "reached",
-  "dataclasses.dataclass": "reached",
-  "dataclasses.field": "reached",
-  "hashlib": "reached",
-  "importlib.metadata": "reached",
-  "importlib.resources": "reached",
-  "mikemol.* (third-party)": "reached",
   "rdflib": "reached",
-  "tomllib": "reached",
-  "typing.cast": "reached",
-  "urllib.parse": "reached",
   "weakref": "reached"
  },
  "issues": {
@@ -366,17 +350,11 @@
   "urllib.parse": "reached",
   "weakref": "reached"
  },
- "marks": {
-  "TYPE_CHECKING": "reached",
-  "hashlib": "reached",
-  "mikemol.* (third-party)": "reached"
- },
  "metrics": {
   "TYPE_CHECKING": "reached",
   "argparse": "reached",
   "bare '*,' keyword-only marker": "reached",
   "class decorator with arguments": "reached",
-  "collections.abc": "reached",
   "contextlib": "reached",
   "dataclasses.dataclass": "reached",
   "dataclasses.field": "reached",
@@ -399,7 +377,6 @@
  },
  "mspdi": {
   "TYPE_CHECKING": "reached",
-  "argparse": "reached",
   "bare '*,' keyword-only marker": "reached",
   "class decorator with arguments": "reached",
   "contextlib": "reached",
@@ -480,10 +457,8 @@
   "zlib": "reached"
  },
  "pdf": {
-  "argparse": "reached",
   "mikemol.* (third-party)": "reached",
   "playwright": "reached",
-  "shutil": "reached",
   "tempfile": "reached"
  },
  "pendingdeliver": {
@@ -491,7 +466,6 @@
   "argparse": "reached",
   "bare '*,' keyword-only marker": "reached",
   "datetime": "reached",
-  "hashlib": "reached",
   "http.client": "reached",
   "mikemol.* (third-party)": "reached",
   "tempfile": "reached",
@@ -500,7 +474,6 @@
   "urllib.parse": "reached"
  },
  "pins": {
-  "argparse": "reached",
   "mikemol.* (third-party)": "reached",
   "tomllib": "reached"
  },
@@ -613,7 +586,6 @@
   "class decorator with arguments": "reached",
   "contextlib": "reached",
   "dataclasses.dataclass": "reached",
-  "dataclasses.field": "reached",
   "fractions": "reached",
   "hashlib": "reached",
   "importlib.metadata": "reached",
@@ -865,7 +837,6 @@
   "class decorator with arguments": "reached",
   "contextlib": "reached",
   "dataclasses.dataclass": "reached",
-  "dataclasses.field": "reached",
   "datetime": "reached",
   "dateutil": "reached",
   "fractions": "reached",
@@ -886,7 +857,6 @@
   "class decorator with arguments": "reached",
   "contextlib": "reached",
   "dataclasses.dataclass": "reached",
-  "dataclasses.field": "reached",
   "fractions": "reached",
   "hashlib": "reached",
   "importlib.metadata": "reached",
@@ -909,7 +879,6 @@
   "argparse": "reached",
   "bare '*,' keyword-only marker": "reached",
   "datetime": "reached",
-  "hashlib": "reached",
   "http.client": "reached",
   "importlib.resources": "reached",
   "mikemol.* (third-party)": "reached",
@@ -945,7 +914,6 @@
   "argparse": "reached",
   "bare '*,' keyword-only marker": "reached",
   "datetime": "reached",
-  "hashlib": "reached",
   "http.client": "reached",
   "mikemol.* (third-party)": "reached",
   "tempfile": "reached",
@@ -958,7 +926,6 @@
   "argparse": "reached",
   "bare '*,' keyword-only marker": "reached",
   "datetime": "reached",
-  "hashlib": "reached",
   "http.client": "reached",
   "mikemol.* (third-party)": "reached",
   "tempfile": "reached",

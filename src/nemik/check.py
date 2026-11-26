@@ -76,12 +76,21 @@ from nemik.letters import (
     report,
     split_orphans,
 )
-from nemik.marks import MARKS, policy_version, read
+from nemik.marks import MARKS, read
 from nemik.marks import provenance as mark_provenance
 from nemik.queuefiles import LEDGER, QUEUE, default_root, workstream_files
+from nemik.realize import policy_version, runtime_valid, verdicts
 from nemik.realize import rows as realize_rows
-from nemik.realize import runtime_valid, verdicts
-from nemik.retrobaseline import STALE, Row, demote, stale, violators
+from nemik.retrobaseline import (
+    STALE,
+    SUSTAIN_STALE,
+    Row,
+    demote,
+    demote_thin,
+    stale,
+    sustain_retros,
+    violators,
+)
 from nemik.rolling import bound as landing_bound
 from nemik.rolling import counts as landing_counts
 from nemik.rolling import message as rolling_message
@@ -107,6 +116,93 @@ NEITHER_SAMPLES = 10  # fewer finished small cards than this and no bound is lea
 SECONDS_A_DAY = 86400
 UMBRELLA_PREREQS = 2
 RETRO_BASELINE = "retro-handoff-baseline.json"  # nemik:W2357
+SUSTAIN_BASELINE = "retro-sustain-baseline.json"  # nemik:W2514
+# what a baselined id that no longer breaks its rule says, per baseline (handoff, sustain)
+STALE_TEXT = (STALE, SUSTAIN_STALE)
+IDLE_STALE_MINUTES = 90  # nemik:W1838: the default bound on a live tick
+IDLE_TICKS = 16  # the default idle run length that warns
+IDLE_OUTCOMES = ["idle"]  # the default outcomes that mean idle
+
+
+def idle_declared(text: str) -> tuple[int, list[str]]:
+    """nemik:W1838: read the declared idle run length and the outcomes that mean idle.
+
+    Read here, not in nemik.idle, so idle needs no TOML reader and compiles under Codon.
+
+    Args:
+        text: The rank-weights TOML.
+
+    Returns:
+        The number of consecutive idle ticks that triggers the warning, and the idle outcomes.
+
+    """
+    document: dict[str, object] = tomllib.loads(text)
+    section = document.get("idle")
+    if not isinstance(section, dict):
+        return IDLE_TICKS, IDLE_OUTCOMES
+    ticks = section.get("ticks", IDLE_TICKS)
+    outcomes = section.get("outcomes", IDLE_OUTCOMES)
+    return (
+        ticks if isinstance(ticks, int) else IDLE_TICKS,
+        [str(o) for o in outcomes] if isinstance(outcomes, list) else IDLE_OUTCOMES,
+    )
+
+
+def idle_stale_minutes(text: str) -> int:
+    """nemik:W1838: read the declared age, in minutes, past which a live loop's tick is stale.
+
+    Args:
+        text: The rank-weights TOML.
+
+    Returns:
+        `tick_stale_minutes` of [idle], or the default when it is absent or not a whole number.
+
+    """
+    document: dict[str, object] = tomllib.loads(text)
+    minutes = table(document.get("idle")).get("tick_stale_minutes", IDLE_STALE_MINUTES)
+    return minutes if isinstance(minutes, int) else IDLE_STALE_MINUTES
+
+
+def idle_notes(
+    root: Path, merged: Graph, repos: list[str], weights_toml: str
+) -> dict[str, str]:
+    """nemik:W1838: the idle-loop findings, with the declared numbers read here, not in idle.
+
+    Returns:
+        nemik.idle.findings' answer for the declared run and outcomes in `weights_toml`.
+
+    """
+    return idle_findings(root, merged, repos, declared_run=idle_declared(weights_toml))
+
+
+def stale_tick_notes(
+    root: Path, repos: list[str], now: float, weights_toml: str
+) -> dict[str, str]:
+    """nemik:W1838: the stale-tick findings, with the declared bound read here, not in idle.
+
+    Returns:
+        nemik.idle.stale_findings' answer for the bound in `weights_toml`.
+
+    """
+    minutes = idle_stale_minutes(weights_toml)
+    return stale_tick_findings(root, repos, now, stale_minutes=minutes)
+
+
+def sustain_violators(root: Path) -> list[str]:
+    """nemik:W2514: the retros the sustain shape judges thin today, fleet-wide.
+
+    tools/retro_sustain_baseline.py intersects the committed baseline with this, so the baseline
+    can only shrink.
+
+    Returns:
+        The sorted retro ids (`github:R12`).
+
+    """
+    graphs, _, merged = _read_queues(root, "")
+    annotate(merged)
+    _mark_unresolved(root, merged)
+    rows = repo_rows(_identified(root, merged), list(graphs))
+    return sustain_retros([row for found in rows.values() for row in found])
 
 
 def mark_gating(graph: Graph, repo: str, repo_dir: Path) -> None:
@@ -394,11 +490,9 @@ def warnings_report(root: Path, repo: str | None) -> int:
 
     """
     failed = 0
-    for name, _, findings in survey(root):
+    for name, (lines, bad) in cached_warning_rows(root).items():
         if repo and name != repo:
             continue
-        kept = [f for f in findings if f[0] in {"Warning", "Violation", "Unreadable"}]
-        lines, bad = finding_lines(name, kept, digest=False)
         sys.stdout.write("\n".join(lines) + "\n")
         failed += bad
     return 1 if failed else 0
@@ -682,11 +776,12 @@ def _mark_unresolved(root: Path, merged: Graph) -> None:
             merged.add((node, NEMIK.unresolvedBlocker, cited))
 
 
-def parse_retro_baseline(text: str) -> list[str]:
-    """nemik:W2357: read the retro handoff baseline's text.
+def parse_retro_baseline(text: str, name: str = RETRO_BASELINE) -> list[str]:
+    """nemik:W2357: read a retro baseline's text (the handoff one by default; nemik:W2514).
 
     Args:
         text: The baseline file's text.
+        name: The file's name, said in a refusal.
 
     Returns:
         The sorted baselined retro ids (`gcalculus:R12`).
@@ -700,11 +795,11 @@ def parse_retro_baseline(text: str) -> list[str]:
     """
     parsed: object = json.loads(text)
     if not isinstance(parsed, list):
-        msg = f"{RETRO_BASELINE} is not a JSON list"
+        msg = f"{name} is not a JSON list"
         raise TypeError(msg)
     ids = [str(item) for item in parsed if isinstance(item, str)]
     if len(ids) != len(parsed):
-        msg = f"{RETRO_BASELINE} holds an item that is not a retro id"
+        msg = f"{name} holds an item that is not a retro id"
         raise ValueError(msg)
     return sorted(ids)
 
@@ -718,6 +813,17 @@ def retro_baseline() -> list[str]:
     """
     shipped = files("nemik.data").joinpath(RETRO_BASELINE)
     return parse_retro_baseline(shipped.read_text(encoding="utf-8"))
+
+
+def sustain_baseline() -> list[str]:
+    """nemik:W2514: the retro sustain baseline that ships with the package.
+
+    Returns:
+        The sorted baselined retro ids (see parse_retro_baseline).
+
+    """
+    shipped = files("nemik.data").joinpath(SUSTAIN_BASELINE)
+    return parse_retro_baseline(shipped.read_text(encoding="utf-8"), SUSTAIN_BASELINE)
 
 
 def _identified(root: Path, merged: Graph) -> list[tuple[Node, str, str, str]]:
@@ -760,29 +866,44 @@ def repo_rows(
 
 
 def demoted(
-    rows: dict[str, list[Row]], baseline: list[str]
+    rows: dict[str, list[Row]],
+    baseline: list[str],
+    sustain: list[str],
 ) -> dict[str, list[Finding]]:
-    """nemik:W2357: each repo's findings, the self-probe rule's baselined retros read as Info.
+    """nemik:W2357, W2514: each repo's findings, the baselined retros read as Info.
 
-    The demotion keys on each result's shape and focus, never its message. A baselined retro of a
-    surveyed repo that no longer breaks the rule is an Info line on that repo, so the baseline
-    cannot hold a dead entry silently.
+    The self-probe rule's baselined retros (the handoff baseline) and the sustain rule's (the
+    sustain baseline). The demotion keys on each result's shape and focus, never its message, and
+    only a baselined retro is demoted: a retro that is thin and not in the baseline keeps its
+    Violation. A baselined retro of a surveyed repo that no longer breaks its rule is an Info line
+    on that repo, so a baseline cannot hold a dead entry silently.
 
     Args:
         rows: The results by repo, each with its source shape.
-        baseline: The baselined retro ids.
+        baseline: The retro ids baselined for the handoff self-probe rule.
+        sustain: The retro ids baselined for the sustain rule (empty when there are none).
 
     Returns:
         The findings by repo.
 
     """
-    held = set(baseline)
-    by_repo = {repo: demote(found, held) for repo, found in rows.items()}
-    today = violators([row for found in rows.values() for row in found])
-    for ident in stale(baseline, today):
+    thin = sustain
+    by_repo = {
+        repo: demote(demote_thin(found, set(thin)), set(baseline))
+        for repo, found in rows.items()
+    }
+    every = [row for found in rows.values() for row in found]
+    lapsed = [
+        (ident, f"retro/{ident}/handoff", STALE_TEXT[0])
+        for ident in stale(baseline, violators(every))
+    ] + [
+        (ident, f"retro/{ident}", STALE_TEXT[1])
+        for ident in stale(thin, sustain_retros(every))
+    ]
+    for ident, focus, text in lapsed:
         repo = ident.partition(":")[0]
         if repo in by_repo:
-            by_repo[repo].append(("Info", f"retro/{ident}/handoff", f"{ident} {STALE}"))
+            by_repo[repo].append(("Info", focus, f"{ident} {text}"))
     return by_repo
 
 
@@ -808,14 +929,15 @@ def _shacl_by_repo(
 ) -> dict[str, list[Finding]]:
     """Validate the merged graph once and file each finding under its focus node's repo.
 
-    nemik:W2357: the self-probe rule's results on baselined retros read as Info (demoted).
+    nemik:W2357, W2514: the self-probe and sustain rules' results on baselined retros read as
+    Info (demoted); a thin retro outside the sustain baseline keeps its Violation.
 
     Returns:
         the findings by repo, an empty list for each repo in `graphs`.
 
     """
     rows = repo_rows(_identified(root, merged), list(graphs))
-    return demoted(rows, retro_baseline())
+    return demoted(rows, retro_baseline(), sustain_baseline())
 
 
 def _cycle_findings(merged: Graph, by_repo: dict[str, list[Finding]]) -> None:
@@ -1092,13 +1214,13 @@ def _fleet_checks(
         merged, by_repo, _declared_int(weights_toml, "sla", "cross_repo_ticks", 48)
     )
     # nemik:W577: a loop that ticks idle with nothing workable is told to disarm or name its wait.
-    _add_notes(by_repo, idle_findings(root, merged, repos))
+    _add_notes(by_repo, idle_notes(root, merged, repos, weights_toml))
     # nemik:W1997: a card waiting on a blocker that keeps landing, from the landings document.
     _rolling_findings(
         root, merged, by_repo, _declared_int(weights_toml, "rolling", "percentile", 90)
     )
     # nemik:W1094: a live loop whose ledger has no recent tick line runs none of the practice.
-    _add_notes(by_repo, stale_tick_findings(root, repos, time.time()))
+    _add_notes(by_repo, stale_tick_notes(root, repos, time.time(), weights_toml))
     # nemik:W616, W617: a working card that looks stalled, or whose progress is invisible.
     _add_rows(by_repo, "Warning", stalled_rows.findings(root, merged, int(time.time())))
     # nemik:W608: the warrant debt may only fall: a repo above its ceiling is told to warrant.
@@ -1439,6 +1561,7 @@ def integrity_report(root: Path, only: str | None = None) -> int:
 
 
 DIGEST_FILE = "fleet-survey.json"
+WARNINGS_FILE = "fleet-warnings.json"  # nemik:W2511: each repo's warning rows
 CODE_SUFFIXES = frozenset({".py", ".ttl", ".toml", ".json"})
 # what a survey reads outside the queues, by path: the root's host-apply export and loop prompt
 # (hostapply.load, idle.prompt_lag), and in each repo the loop prompt it last acknowledged and the
@@ -1577,6 +1700,71 @@ def cached_survey(root: Path, *, digest: bool) -> tuple[list[str], int]:
     except OSError:
         return lines, failed
     return lines, failed
+
+
+def warning_rows(root: Path) -> dict[str, tuple[list[str], int]]:
+    """Give each repo's Warning, Violation and Unreadable rows, as the survey words them.
+
+    Args:
+        root: The directory holding the repos.
+
+    Returns:
+        repo -> (its print-ready rows, how many of them violate or are unreadable).
+
+    """
+    rows: dict[str, tuple[list[str], int]] = {}
+    for name, _, findings in survey(root):
+        kept = [f for f in findings if f[0] in {"Warning", "Violation", "Unreadable"}]
+        lines, bad = finding_lines(name, kept, digest=False)
+        rows[name] = (lines, bad)
+    return rows
+
+
+def cached_warning_rows(root: Path) -> dict[str, tuple[list[str], int]]:
+    """Answer warning_rows from the last run when none of the survey's inputs changed (nemik:W2511).
+
+    `--repo X --warnings` took 328 CPU-s because it ran the whole fleet survey to print one repo's
+    rows (--repo scoped the output, not the work), and its caller, the SessionStart hook, has a 60 s
+    wall budget. The rows of every repo are held under the content key of survey_inputs, as
+    cached_survey holds the full survey, so an unchanged fleet costs a hash. Only the real fleet
+    root is kept. This is the fleet-keyed step; a per-queue key that follows each repo's own cone is
+    the card's next.
+
+    Returns:
+        warning_rows' answer, from the cache when the key matches.
+
+    """
+    if root.resolve() != default_root().resolve():
+        return warning_rows(root)
+    key = cachestore.content_key(survey_inputs(root, digest=False))
+    path = cachestore.user_dir() / WARNINGS_FILE
+    try:
+        held: object = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        held = None
+    doc = table(held)
+    repos = table(doc.get("repos"))
+    if doc.get("key") == key and repos:
+        out: dict[str, tuple[list[str], int]] = {}
+        for name, entry in repos.items():
+            body = table(entry)
+            said, bad = body.get("lines"), body.get("bad")
+            if not isinstance(said, list) or not isinstance(bad, int):
+                break
+            out[name] = ([str(line) for line in said], bad)
+        else:
+            return out
+    rows = warning_rows(root)
+    kept = {name: {"lines": lines, "bad": bad} for name, (lines, bad) in rows.items()}
+    payload: dict[str, object] = {"key": key, "repos": kept}
+    try:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        tmp = path.with_name(f".{WARNINGS_FILE}.{os.getpid()}")
+        tmp.write_text(json.dumps(payload), encoding="utf-8")
+        tmp.replace(path)
+    except OSError:
+        return rows
+    return rows
 
 
 def summary_line(found: list[str], failed: int) -> str:

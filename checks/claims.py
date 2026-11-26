@@ -193,10 +193,15 @@ def shacl_is_the_one_validator() -> None:
 
 
 def adapter_is_the_foundation_layer() -> None:
-    """adapter.py imports no other nemik module."""
+    """adapter.py imports no other nemik module but vocab, a leaf of plain strings.
+
+    nemik:W2526: the IRI bases and status words live in nemik.vocab (strings and one import of the
+    pure urnbase), so a module that needs only the names can import them without adapter's walls;
+    adapter builds its rdflib namespaces from the same strings.
+    """
     _require(
-        not _imports_nemik(_src("adapter.py")),
-        "adapter.py now depends on another nemik module",
+        _imports_nemik(_src("adapter.py")) <= {"vocab"},
+        "adapter.py now depends on a nemik module other than vocab",
     )
 
 
@@ -261,9 +266,14 @@ def hub_modules_depend_on_everything_below() -> None:
     # now that nemik.pieces' GraphDoc is a plain dict and not a TypedDict.
     # nemik:W1100: metrics counts the ledger's lines and tick pairs through ledgersummary, a leaf
     # of pure functions over plain rows (no import).
+    # nemik:W1851: metrics reads its command line through flags, the Codon-compatible flag reader
+    # (a leaf over sys), and takes TYPE_CHECKING from _typing (nemik:W1852, the W2125 constant).
+    # nemik:W2517: serve counts the passes a build skipped or built through passcount, a leaf.
     expected = {
         "metrics": lower
         | {
+            "_typing",
+            "flags",
             "ledgersummary",
             "realize",
             "runlogs",
@@ -279,6 +289,7 @@ def hub_modules_depend_on_everything_below() -> None:
         "serve": lower
         | {
             "outbox",
+            "passcount",
             "exportwire",
             "runlogs",
             "withheldage",
