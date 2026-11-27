@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 2567,
+  "counter": 2570,
   "waypoints": [
     {
       "symbol": "W1",
@@ -49268,20 +49268,22 @@
     {
       "symbol": "W1950",
       "title": "Codon instance waitemit: nemik.waitemit stops using rdflib",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W1687",
         "W1747"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W1767"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "Remove rdflib from nemik.waitemit (src/nemik/waitemit.py): replace the import or construct with a Codon-compatible form (the wall's recorded options are in docs/codon-walls.md), in a scratch worktree, probing the pinned Codon first, then measure the pair with tools/codon_walls.py before and after. The card closes when the pair (waitemit, rdflib) leaves codon-walls.json. Bundle with other ready instances in one stack: never a full gate for one pair (github-14, 2026-11-10).",
-      "evidence": "",
+      "evidence": "2026-11-26T23:22:44Z: 2026-11-26: waitemit.py imports rdflib Graph at runtime (line 25) and builds its wait series from the merged queue graph (nemik.check.survey, nemik.waitrows, nemik.wake). The pair leaves only with the rdflib core, W1767; same as W1915, W1920, W1924, W1926, W1929, W1930, W1934, W1939, W1944. Re-ready when W1767 lands.",
       "issued_at": "2026-11-05T21:54:18Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-11-17T22:00:47Z",
+      "last_worked": "2026-11-26T23:22:44Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/waitemit.py"
@@ -49289,25 +49291,28 @@
       "size_class": "small",
       "weight": 12,
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
-      "vector_source": "default"
+      "vector_source": "default",
+      "completed": null
     },
     {
       "symbol": "W1951",
       "title": "Codon instance waitemit: nemik.waitemit stops using TYPE_CHECKING blocks",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W1691",
         "W1747"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W2475"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "Remove TYPE_CHECKING blocks from nemik.waitemit (src/nemik/waitemit.py): replace the import or construct with a Codon-compatible form (the wall's recorded options are in docs/codon-walls.md), in a scratch worktree, probing the pinned Codon first, then measure the pair with tools/codon_walls.py before and after. The card closes when the pair (waitemit, TYPE_CHECKING blocks) leaves codon-walls.json. Bundle with other ready instances in one stack: never a full gate for one pair (github-14, 2026-11-10).",
-      "evidence": "",
+      "evidence": "2026-11-26T23:26:26Z: 2026-11-26: waitemit.py imports typing.TYPE_CHECKING (line 20) and keeps type-only imports in that block. The TYPE_CHECKING class is W2475's codemod (operator ruling 2026-11-23: mechanize), with W1917, W1918, W1921, W1922, W1925, W1928, W1940, W1946. Re-ready when W2475 lands.",
       "issued_at": "2026-11-05T21:54:18Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-11-17T22:00:47Z",
+      "last_worked": "2026-11-26T23:26:26Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/waitemit.py"
@@ -49315,25 +49320,28 @@
       "size_class": "small",
       "weight": 15,
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
-      "vector_source": "default"
+      "vector_source": "default",
+      "completed": null
     },
     {
       "symbol": "W1952",
       "title": "Codon instance waitlog: nemik.waitlog stops using the protobuf message import",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W1681",
         "W1748"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W2567"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "Remove the protobuf message import from nemik.waitlog (src/nemik/waitlog.py): replace the import or construct with a Codon-compatible form (the wall's recorded options are in docs/codon-walls.md), in a scratch worktree, probing the pinned Codon first, then measure the pair with tools/codon_walls.py before and after. The card closes when the pair (waitlog, the protobuf message import) leaves codon-walls.json. Bundle with other ready instances in one stack: never a full gate for one pair (github-14, 2026-11-10).",
-      "evidence": "",
+      "evidence": "2026-11-26T23:31:05Z: 2026-11-26: waitlog.py has no protobuf import of its own; the pair comes through mikemol.otlp.logs (Entry, request), mikemol.otlp.metrics (resource_here) and mikemol.otlp.sender (LOGS_PATH, Post, SendError, post, send), plus mikemol.endpoints.resolve base_url (lines 14-17): the same OTLP emit path as waitemit (W1948, W1949), designed once on W2567. Re-ready when W2567 names the replacement.",
       "issued_at": "2026-11-05T21:54:19Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-11-17T22:00:48Z",
+      "last_worked": "2026-11-26T23:31:05Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/waitlog.py"
@@ -49341,25 +49349,28 @@
       "size_class": "small",
       "weight": 183,
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
-      "vector_source": "default"
+      "vector_source": "default",
+      "completed": null
     },
     {
       "symbol": "W1953",
       "title": "Codon instance waitlog: nemik.waitlog stops using the mikemol libraries",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W1685",
         "W1748"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W2567"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "Remove the mikemol libraries from nemik.waitlog (src/nemik/waitlog.py): replace the import or construct with a Codon-compatible form (the wall's recorded options are in docs/codon-walls.md), in a scratch worktree, probing the pinned Codon first, then measure the pair with tools/codon_walls.py before and after. The card closes when the pair (waitlog, the mikemol libraries) leaves codon-walls.json. Bundle with other ready instances in one stack: never a full gate for one pair (github-14, 2026-11-10).",
-      "evidence": "",
+      "evidence": "2026-11-26T23:36:47Z: 2026-11-26: waitlog.py's mikemol libraries are mikemol.otlp (logs, metrics, sender) and mikemol.endpoints.resolve (lines 14-17), the same OTLP emit path as waitemit (W1948, W1949) and waitlog's protobuf instance (W1952); one design, W2567. Re-ready when W2567 names the replacement.",
       "issued_at": "2026-11-05T21:54:20Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-11-17T22:00:49Z",
+      "last_worked": "2026-11-26T23:36:47Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/waitlog.py"
@@ -49367,25 +49378,28 @@
       "size_class": "small",
       "weight": 95,
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
-      "vector_source": "default"
+      "vector_source": "default",
+      "completed": null
     },
     {
       "symbol": "W1954",
       "title": "Codon instance waitlog: nemik.waitlog stops using TYPE_CHECKING blocks",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W1691",
         "W1748"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W2475"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "Remove TYPE_CHECKING blocks from nemik.waitlog (src/nemik/waitlog.py): replace the import or construct with a Codon-compatible form (the wall's recorded options are in docs/codon-walls.md), in a scratch worktree, probing the pinned Codon first, then measure the pair with tools/codon_walls.py before and after. The card closes when the pair (waitlog, TYPE_CHECKING blocks) leaves codon-walls.json. Bundle with other ready instances in one stack: never a full gate for one pair (github-14, 2026-11-10).",
-      "evidence": "",
+      "evidence": "2026-11-26T23:44:50Z: 2026-11-26: waitlog.py imports typing.TYPE_CHECKING (line 12) and keeps its type-only imports in that block. The TYPE_CHECKING class is W2475's codemod (operator ruling 2026-11-23: mechanize), with W1917, W1918, W1921, W1922, W1925, W1928, W1940, W1946, W1951. Re-ready when W2475 lands.",
       "issued_at": "2026-11-05T21:54:20Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-11-17T22:00:49Z",
+      "last_worked": "2026-11-26T23:44:50Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/waitlog.py"
@@ -49393,25 +49407,28 @@
       "size_class": "small",
       "weight": 91,
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
-      "vector_source": "default"
+      "vector_source": "default",
+      "completed": null
     },
     {
       "symbol": "W1955",
       "title": "Codon instance waitrows: nemik.waitrows stops using rdflib",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W1687",
         "W1749"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W1767"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "Remove rdflib from nemik.waitrows (src/nemik/waitrows.py): replace the import or construct with a Codon-compatible form (the wall's recorded options are in docs/codon-walls.md), in a scratch worktree, probing the pinned Codon first, then measure the pair with tools/codon_walls.py before and after. The card closes when the pair (waitrows, rdflib) leaves codon-walls.json. Bundle with other ready instances in one stack: never a full gate for one pair (github-14, 2026-11-10).",
-      "evidence": "",
+      "evidence": "2026-11-26T23:47:56Z: 2026-11-26: waitrows.py names rdflib only as 'from rdflib import Graph' under TYPE_CHECKING (line 20) and its docstring says it uses only Graph.triples and Graph.value, but it imports nemik.adapter (NEMIK, OSLC_CM, line 15) and nemik.rank (line 17), and walls count through the import closure: the (waitrows, rdflib) pair is carried by the adapter, the rdflib core W1767. Same as W1926 and W1930. Re-ready when W1767 lands.",
       "issued_at": "2026-11-05T21:54:21Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-11-17T22:00:50Z",
+      "last_worked": "2026-11-26T23:47:56Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/waitrows.py"
@@ -49419,12 +49436,13 @@
       "size_class": "small",
       "weight": 92,
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
-      "vector_source": "default"
+      "vector_source": "default",
+      "completed": null
     },
     {
       "symbol": "W1956",
       "title": "Codon instance wake: nemik.wake stops using argparse",
-      "status": "ready",
+      "status": "working",
       "enables": [
         "W1674",
         "W1750"
@@ -49433,11 +49451,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "Remove argparse from nemik.wake (src/nemik/wake.py): replace the import or construct with a Codon-compatible form (the wall's recorded options are in docs/codon-walls.md), in a scratch worktree, probing the pinned Codon first, then measure the pair with tools/codon_walls.py before and after. The card closes when the pair (wake, argparse) leaves codon-walls.json. Bundle with other ready instances in one stack: never a full gate for one pair (github-14, 2026-11-10).",
-      "evidence": "",
+      "evidence": "2026-11-27T00:01:58Z: 2026-11-26 TAKEN: wake.py's own argparse is Options(argparse.Namespace) (line 563, fourteen attributes: root, liveness, all, json, nudge, nudges_state, alarms, since, until, series_lines, series_only, only, repo, series, series_max_age) and parse_args (line 583, ArgumentParser line 590). Its direct nemik imports are adapter, alarm, blocks, luthenseries, pacecli, queuefiles and say; none of those appears in the grep list of modules that import argparse themselves (pendingdeliver, importer, pacing, stackable_cli, rank, starved, vtodo, check, critical, history, overlaps, serve, calendars, witnesses, waitemit, calwrite, hostroot_cli, blocks_cli, exportcli), so the (wake, argparse) pair may leave by converting this module with nemik.flags (the W2526 shape: valued flags --root --liveness --nudges-state --since --until --series --series-max-age --repo (repeatable), switches --all --json --nudge --alarms --series-lines --series-only --only). NOT VERIFIED: the transitive closure (a module reached through the adapter or blocks might import argparse); that is measured by tools/codon_walls.py after the conversion, in a worktree. It unblocks part of W1947 (waitemit) and W1941 chain. The review and submit queue behind the W2490 stack.",
       "issued_at": "2026-11-05T21:54:21Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-11-17T22:00:51Z",
+      "last_worked": "2026-11-27T00:01:58Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/wake.py"
@@ -49445,25 +49463,28 @@
       "size_class": "small",
       "weight": 86,
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
-      "vector_source": "default"
+      "vector_source": "default",
+      "completed": null
     },
     {
       "symbol": "W1957",
       "title": "Codon instance wake: nemik.wake stops using datetime.UTC",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W1679",
         "W1750"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "mtools:W1344"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "Remove datetime.UTC from nemik.wake (src/nemik/wake.py): replace the import or construct with a Codon-compatible form (the wall's recorded options are in docs/codon-walls.md), in a scratch worktree, probing the pinned Codon first, then measure the pair with tools/codon_walls.py before and after. The card closes when the pair (wake, datetime.UTC) leaves codon-walls.json. Bundle with other ready instances in one stack: never a full gate for one pair (github-14, 2026-11-10).",
-      "evidence": "",
+      "evidence": "2026-11-27T00:02:53Z: 2026-11-26: wake.py uses datetime.UTC (the nudge and alarm clocks); the Codon-safe UTC clock is one shared helper (W2538 behind mtools:W1344), blocking W1910 (serve) and W1932 (starved) for the same reason, so a wake-only form would be a third copy. Re-ready when mtools:W1344 or the shared epoch-seconds clock lands.",
       "issued_at": "2026-11-05T21:54:22Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-11-17T22:00:51Z",
+      "last_worked": "2026-11-27T00:02:53Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/wake.py"
@@ -49471,7 +49492,8 @@
       "size_class": "small",
       "weight": 113,
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
-      "vector_source": "default"
+      "vector_source": "default",
+      "completed": null
     },
     {
       "symbol": "W1958",
@@ -62106,18 +62128,18 @@
     },
     {
       "symbol": "W2490",
-      "title": "Repin nemik's vendored mtools wheels (11, now +636e39b) to 87857abb with mikemol-repin --revendor, so the pinned writer carries supersedes, as an entry of the retro-handoff lowering stack",
+      "title": "Repin nemik's 11 vendored mtools wheels (now +636e39b) to mtools origin/main aeb2a6d3 as a PURE single-sha repin, so the pinned writer carries supersedes",
       "status": "working",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
-      "next_bounded_step": "Find two codon-baseline modules the compiler can be made to accept: survey done (first errors grouped), none is reachable without mtools walls or nemik-side redesign; asked github-82.",
-      "evidence": "2026-11-23T23:59:47Z: 2026-11-23 luthen-observability:W2977 (review ref ccad1e0e, in THEIR repo) repins LUTHEN's vendored wheels (+g9ea5914 to +g87857ab), not nemik's: nemik's own vendor/wheels, pyproject.toml, MODULE.bazel and uv.lock pin mtools at 636e39b, eleven wheels. So the nemik repin is mine: mikemol-repin --revendor --sha 87857abb40fa2d546e239cbc660ec09825e0a776 --root <scratch worktree> --mtools <mtools> --no-sync --write (dry run printed the plan: archive 87857ab of hooks pathsforward fence icsstruct rulerseq frontier atomicwrite cvdcore ratchet transcriptstruct procrun, uv build each wheel, copy to vendor/wheels, git rm the old, move the 11 wheel paths in pyproject.toml and MODULE.bazel, uv lock, rewrite the checksum file). Its own check: the new writer's --hash over a COPY of the queue equals the live one. Running in the scratch worktree now. | 2026-11-24T00:03:12Z: 2026-11-23 APPLIED in a scratch worktree (mikemol-repin --revendor --sha 87857abb... --no-sync --write; its parity check needed a live writer to compare with, so the worktree had a symlinked .venv, removed before staging): the 11 wheels, pyproject.toml, MODULE.bazel, uv.lock and SHA256SUMS moved from +636e39b to +87857ab. A scratch venv built from the new pathsforward wheel ran --migrate-retros over a copy of nemik's queue (the copy in a directory named nemik: the writer joins ids to the state's directory name): 496 rows, 0 copyable, every one NEEDS A REVIEWER; the baselined nemik R22 to R65 say 'handoff operator other needs self_probe executed-and-failed'. So the lowering row needs a REAL self probe run by a reviewer; asked github-82 which retro and what the probe found. | 2026-11-25T22:30:40Z: 2026-11-25 EARLY CREDIT (recorded as github-82 ruled): the lowering stack (refs/review/W2490-stack-v2 02a7bcc3, tree 545cd5a3, presubmit rc 0) was REFUSED at submit because retro-handoff-baseline.json's 296 to 295 fall was credited at PRESUBMIT: tools/gate_staged.sh (the live checkout's, still the old one: nemik:W2465's fail-closed fix is reviewed and PASSed but unlanded) emits the staged tree's ratchet values as an unlabelled gate-time sample, so the pace of 2026-11-25T22:23:46Z already reads 'ok retro-handoff-baseline.json; 295 left'. The guard now lists codon-baseline.json (owes 2) and codon-walls.json (owes 1), and the stack lowers neither. A recurrence of W2464's 840 (2026-11-23). My lapse: I ran the stack's presubmit while knowing W2465 was unlanded. github-82's ruling (E): carry a REAL codon-baseline fall (two modules the pinned compiler accepts, verified by mikemol-codon-probe) in this same stack; then W2465 lands as the NEXT stack, before any other presubmit.",
+      "next_bounded_step": "Pure repin, FIRST (github-82 2026-11-26, ahead of the cold-cache baseline): in a worktree at the current nemik main with a symlinked .venv (the tool's parity check needs a live writer; remove the symlink before staging), mikemol-repin --revendor --sha aeb2a6d3b581ebc0a2ebfd881163d941d256c9fb --root <worktree> --no-sync --write; moves the 11 wheels, pyproject.toml, MODULE.bazel, uv.lock and SHA256SUMS and nothing else; stack it as one pure repin (clause R admits it with no paydown); converge 0f8267e, webpage 146ebaaf, otlp and endpoints 5ba261f stay. After it lands tell luthen-observability the sha (its user apply rebuilds the live install, then every --add-retro takes supersedes).",
+      "evidence": "2026-11-23T23:59:47Z: 2026-11-23 luthen-observability:W2977 (review ref ccad1e0e, in THEIR repo) repins LUTHEN's vendored wheels (+g9ea5914 to +g87857ab), not nemik's: nemik's own vendor/wheels, pyproject.toml, MODULE.bazel and uv.lock pin mtools at 636e39b, eleven wheels. So the nemik repin is mine: mikemol-repin --revendor --sha 87857abb40fa2d546e239cbc660ec09825e0a776 --root <scratch worktree> --mtools <mtools> --no-sync --write (dry run printed the plan: archive 87857ab of hooks pathsforward fence icsstruct rulerseq frontier atomicwrite cvdcore ratchet transcriptstruct procrun, uv build each wheel, copy to vendor/wheels, git rm the old, move the 11 wheel paths in pyproject.toml and MODULE.bazel, uv lock, rewrite the checksum file). Its own check: the new writer's --hash over a COPY of the queue equals the live one. Running in the scratch worktree now. | 2026-11-24T00:03:12Z: 2026-11-23 APPLIED in a scratch worktree (mikemol-repin --revendor --sha 87857abb... --no-sync --write; its parity check needed a live writer to compare with, so the worktree had a symlinked .venv, removed before staging): the 11 wheels, pyproject.toml, MODULE.bazel, uv.lock and SHA256SUMS moved from +636e39b to +87857ab. A scratch venv built from the new pathsforward wheel ran --migrate-retros over a copy of nemik's queue (the copy in a directory named nemik: the writer joins ids to the state's directory name): 496 rows, 0 copyable, every one NEEDS A REVIEWER; the baselined nemik R22 to R65 say 'handoff operator other needs self_probe executed-and-failed'. So the lowering row needs a REAL self probe run by a reviewer; asked github-82 which retro and what the probe found. | 2026-11-25T22:30:40Z: 2026-11-25 EARLY CREDIT (recorded as github-82 ruled): the lowering stack (refs/review/W2490-stack-v2 02a7bcc3, tree 545cd5a3, presubmit rc 0) was REFUSED at submit because retro-handoff-baseline.json's 296 to 295 fall was credited at PRESUBMIT: tools/gate_staged.sh (the live checkout's, still the old one: nemik:W2465's fail-closed fix is reviewed and PASSed but unlanded) emits the staged tree's ratchet values as an unlabelled gate-time sample, so the pace of 2026-11-25T22:23:46Z already reads 'ok retro-handoff-baseline.json; 295 left'. The guard now lists codon-baseline.json (owes 2) and codon-walls.json (owes 1), and the stack lowers neither. A recurrence of W2464's 840 (2026-11-23). My lapse: I ran the stack's presubmit while knowing W2465 was unlanded. github-82's ruling (E): carry a REAL codon-baseline fall (two modules the pinned compiler accepts, verified by mikemol-codon-probe) in this same stack; then W2465 lands as the NEXT stack, before any other presubmit. | 2026-11-26T23:29:49Z: 2026-11-26 COLLAPSE (github-82): nemik:W2568, minted today for the same wheel re-vendor, is closed into this card (one symbol for every waiter: luthen-observability:W3066/W2977, nemik:W2489 and W2532). Its facts: the writer the retro paydown ran on was a session-built scratch venv at mikemol_pathsforward 0.1.0+87857ab (a pinned-tools deviation recorded on W2560; the pinned 636e39b writer cannot write supersedes, which is why this card is now FIRST); the paydown guard's clause R (mtools hooks/ratchet_pace.py _repin_clear, repin_admission.admits) admits a stack that is a pure repin of one new sha, so the repin needs no owed-ratchet paydown; dry run of the live install's mikemol-repin --revendor --sha aeb2a6d3 planned exactly the same eleven wheels (hooks pathsforward fence icsstruct rulerseq frontier atomicwrite cvdcore ratchet transcriptstruct procrun). A first attempt today in a bare worktree (.nemik-w2568-wt at 35067b41) REFUSED at the tool's parity check ('live empty, new v2:5176600c...'): the tool compares against the worktree's own .venv writer and a fresh worktree has none; the live and nemik-.venv writers both read the live queue as v2:b7f5ff69f80b7da6. The fix is the symlinked .venv this card's 2026-11-24 evidence already records. | 2026-11-26T23:31:49Z: 2026-11-26 REPIN APPLIED in the worktree .nemik-w2568-wt at 35067b41: mikemol-repin --revendor --sha aeb2a6d3b581ebc0a2ebfd881163d941d256c9fb --no-sync --write (parity check satisfied with a symlinked .venv, removed before staging): printed APPLIED .nemik-w2568-wt at aeb2a6d, sha256 per wheel (hooks 9e989709, pathsforward cb7dada8, fence e71c8755, icsstruct ee252d5c, rulerseq c3e3f6a2, frontier b67fe6cf, atomicwrite 47225e3a, cvdcore 32fb3af9, ratchet 9b7987c1, transcriptstruct 02ed3dea, procrun 8661c013). git status: exactly MODULE.bazel, pyproject.toml, uv.lock (version, source-path and wheel-hash lines only, read in full: no dependency line moved), vendor/wheels/SHA256SUMS and eleven wheel renames. Submitted as a pure-repin stack (scratchpad stack-repin.json, --freeze-from the worktree, queue files not listed), so clause R should admit it. Next: tell luthen-observability the sha once it prints COMMITTED. | 2026-11-26T23:34:28Z: 2026-11-26 REPIN SUBMIT REFUSED, CAUSE FOUND: the pure-repin stack (stack-repin.json, frozen from .nemik-w2568-wt) was answered NOT COMMITTED by mikemol-commit: 'behind its ratchet paydown and this stack lowers none of the ratchets it owes (codon-baseline.json 2, codon-walls.json 1, retro-handoff-baseline.json 1, retro-sustain-baseline.json 1)'. mtools' repin_admission.py (HEAD, read whole) holds for this tree on all four invariants (one sha aeb2a6d, every mention agrees, every wheel named exists, only sha and hash tokens change; SHA256SUMS has exactly the 11 swapped lines and no old sha), so the pace guard did not run clause R: the mikemol-commit I invoke is the live install's, whose hooks wheel is +636e39b, and git grep for _repin_clear and repin_admission in ratchet_pace.py at 636e39b finds nothing (clause R is mtools 91576a0a and later). So a repin is not admitted by the guard that actually runs, and the repin that would bring clause R in cannot land through it. ROUTE (no waiver): stack the repin with an owed-ratchet paydown: the 42 supersessions (all committed: 79bd60e, 08c65ff, 1aac98e, a8b4e91, 35067b4, b73a7ce) should shrink src/nemik/data/retro-handoff-baseline.json, which is owed (required fall 1); entry 1 the baseline shrink, entry 2 the pure repin, one stack. The cold-cache measurement runs now (two dry runs with an empty NEMIK_CACHE_DIR: HEAD's code through PYTHONPATH at the worktree, and the live working-tree code with W2552's edge form). | 2026-11-26T23:47:28Z: 2026-11-26 THE SHRINK FIGURE (github-82's conditions): tools/retro_handoff_baseline.py, dry run, from HEAD's code (PYTHONPATH at the worktree .nemik-w2568-wt at 35067b41, src = HEAD's; the later commits only changed the queue; the shapes are the string-match supersession clauses of 4232f9e3 with the old literal ingest, NOT W2552's edge form), NEMIK_CACHE_DIR empty, over a scratch root built from committed objects by git show per repo (scratchpad mkroot_committed.py): nemik b73a7cef; aeternum 071ca7ff, amr-skills c8b23546, el-openglo b93663cb, estate e235a158, gcalculus 86c41e66, life 625bc171, linux-sources 2e754104, luthen-observability 75f5b30b, mtools aeb2a6d3, resumes 5a5d79aa, rosettapkg c6047119, skills 8747ae45, substrate bc3ad1b1, summit d021c037; three queues have no committed object (the host root is not a git repo; paperkit and gabion do not track theirs) and enter as live files, named as exceptions. RESULT: kept 250, would drop 45 of 295: nemik:R22 and nemik:R23 to R64 (the 42 paydown rows plus R22, superseded earlier by R497) and gcalculus:R50 and gcalculus:R51. 42 of 42 leave; the required fall of 1 is met. INFORMATION ONLY (live working trees, live working-tree code with the W2552 edge form): kept 252, would drop 43 (nemik R22 to R64, no gcalculus ids); I do not know why the gcalculus ids differ between the two runs (a different input state is the candidate, not verified). Next: --write of the baseline file with the tool in the worktree, then the two-entry stack (baseline shrink, pure repin), the refs to github-82 before submit. | 2026-11-27T00:01:22Z: 2026-11-26 REVIEW REFS (sent to github-82, no submit yet): entry 1 refs/review/w2490-shrink = cc6b9099809a1238a7ca1367ef7e65c28d3b376c (parent b73a7cef): src/nemik/data/retro-handoff-baseline.json, 45 deletions, written by tools/retro_handoff_baseline.py --write (kept 250, dropped 45: nemik R22 and R23 to R64, gcalculus R50 and R51; HEAD's string-match shapes; empty NEMIK_CACHE_DIR; inputs: committed objects per repo, the host queue from commit 066481b1fdf9cf26bce9bd958499dc250336baef of the host's own .claude repo, paperkit and gabion live files named as exceptions, W2569 and W2570). Entry 2 refs/review/w2490-repin = 283f3dd0f885fc17dae39c1d8e3cda1f3993acf7 (parent cc6b9099): the pure repin, 16 files (MODULE.bazel, pyproject.toml, uv.lock, SHA256SUMS, 11 wheel renames). Clause R's four invariants hand-checked and sent. The stack is two entries (shrink, repin), one gate, submitted on github-82's PASS. | 2026-11-27T00:03:56Z: 2026-11-26 INDEPENDENT BYTE CHECK (github-82's condition; PASS-SUBMIT given subject to it): mikemol-wheel (not the repin tool's own build) rebuilt all eleven dists from mtools aeb2a6d3b581ebc0a2ebfd881163d941d256c9fb (--sha, --mtools the mtools checkout, output in the session scratchpad). WHOLE-FILE sha256 DOES NOT EQUAL the vendored wheels': independent hooks 26f98738, pathsforward cd74a80c, fence adf5c6c2, icsstruct 0561fb00, rulerseq 4efdefcb, frontier 173fdf8c, atomicwrite 142633ed, cvdcore 83600629, ratchet e5a3d8b1, transcriptstruct 36d6b0b3, procrun e35ab985 (first 8 hex) against vendored hooks 9e989709, pathsforward cb7dada8, fence e71c8755, icsstruct ee252d5c, rulerseq c3e3f6a2, frontier b67fe6cf, atomicwrite 47225e3a, cvdcore 32fb3af9, ratchet 9b7987c1, transcriptstruct 02ed3dea, procrun 8661c013. CAUSE, read: the two tools spell the local version differently: mikemol-wheel names the wheel +gaeb2a6d, the repin tool sets +aeb2a6d (its plan line says '+aeb2a6d in the archive only'), and that spelling is the dist-info directory name and the METADATA Version, so the zip bytes differ. MEMBER-WISE COMPARISON (scratchpad cmp_wheels.py, names and METADATA/WHEEL normalised for the +g spelling, RECORD not compared since it hashes the dist-info files): for all 11 dists, no member present in one wheel and absent in the other, and no differing member: 204 (hooks), 94 (pathsforward), 21 (fence), 6 (icsstruct), 5 (rulerseq), 3 (frontier), 4 (atomicwrite), 3 (cvdcore), 18 (ratchet), 30 (transcriptstruct), 3 (procrun) payload members byte-equal. So the vendored wheels carry the same CONTENT as an independent build, and the whole-file digests cannot match unless the spelling is changed. Not claimed: that the zip metadata (timestamps) was compared. The stack is NOT submitted: asked github-82 whether member-wise equality satisfies her condition.",
       "issued_at": "2026-11-23T23:59:38Z",
       "minted_during": "interrupt",
       "caused_by": "W2478",
-      "last_worked": "2026-11-25T22:30:40Z",
+      "last_worked": "2026-11-27T00:03:56Z",
       "ticks_blocked": 0,
       "completed": null,
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
@@ -63563,11 +63585,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "Operator 2026-11-26 host L234190 (uuid 060b0054, verified kind human): swarm exception for retro paydown only, concurrent subagents allowed. Per retro: a subagent reads the old retro and the git history it names, executes the handoff step as its instrument, and writes the superseding retro JSON (supersedes full id, operator self, or other with self_probe executed-and-failed and the real result). The session adds each through --add-retro, never edits it, and github-82 reviews each batch before submit. R51 to R64 are list-to-bool, R23 to R50 are self_probe.",
-      "evidence": "2026-11-26T20:22:24Z: 2026-11-26 github-82 accepted W2560 with two shape changes. (1) Scaffold first, mechanically. Read at source (the pinned writer's --migrate-retros over nemik, tool-results b4jg25tz3): 0 WOULD WRITE, every R23-R64 row is NEEDS A REVIEWER: R23-R50 'handoff operator other needs self_probe executed-and-failed' (the probe result is the judgment), R51-R64 additionally 'recurring/one_off must be true or false, not [list]' (mtools 87857abb refuses to convert it, so the normalisation is not offered by the writer). So a nemik-side scaffold tool generates the superseding JSON for all 42: verbatim copy of every field except id/supersedes/handoff, recurring and one_off lists turned into true with the list items carried verbatim into contributing (the R65 precedent), handoff instrument and channel copied from the row, operator and self_probe left for the subagent. Subagents do ONLY the probe and the sourced sustain. (2) Batch size 7, six batches (R51-R57, R58-R64, R23-R29, R30-R36, R37-R43, R44-R50): each batch is one review by github-82, the two cohorts stay whole (14 = 2x7, 28 = 4x7), and a REVISE costs 7 rows, not 42. | 2026-11-26T20:24:39Z: 2026-11-26 github-82: batches of 7 accepted; a nemik-side scaffold generator is NOT (the writer and --migrate-retros are mtools', a second scaffold here is a copy beside the integration). So: the list-to-bool normalisation is asked of mtools as W2561 (letter in mtools/inbox); until it lands each subagent applies that same rule to its own row in its draft (non-empty list -> true with the items verbatim in contributing, empty -> false), and the batch review checks it field by field; the probe and the sourced sustain stay the subagents' judgment. | 2026-11-26T22:03:28Z: 2026-11-26 BATCH 1 (R51 to R57, 7 subagents, general-purpose, run in the background) started under the operator's swarm exception (host L234190, verified). Each reads the shared brief (scratchpad w2560-brief.md: copy every field verbatim except id, supersedes, handoff, recurring, one_off; a non-empty recurring or one_off list becomes true with its items carried verbatim into contributing; supersedes is the full id; the old delta stays verbatim with an appended SUPERSESSION paragraph stating the truth; operator self only if the step really succeeded, other only with a really attempted and failed probe), runs the retro's own handoff step, and writes only scratchpad w2560/R<n>.json. They do not touch the queue. I add each through --add-retro after checking it field by field, never editing it; github-82 reviews the batch before any submit. | 2026-11-26T22:12:40Z: 2026-11-26 BATCH 1 drafts back (R51-R57, scratchpad w2560/R<n>.json), each validated by the writer on a scratch copy of the queue (copy under a directory named nemik, real state never passed): all say operator self, the step (--add-retro) executed for the actor. Field-by-field check by a read-only script (scratchpad check_w2560.py: every field verbatim except id/supersedes/handoff/recurring/one_off, contributing = old plus the Carried-from lines, delta starts with the old delta, instrument and channel copied): R51, R52, R53, R54, R55, R57 OK; R56 dropped the finding text of all four findings (the --retros view omits it) and was sent back to restore it from the raw row. First-round drafts that claimed executed-and-failed or self from a mere read-back (R52, R53, R56) were rejected and redone after the scratch-state addendum. OPEN QUESTION for the review: the older rows hand 'add-retro through the cold review' to another operator; the drafts record self because the instrument executes for the actor, with the cold-review channel stated as not exercised. nemik:R499 was ruled wrong for a similar filing-as-measurement move (the residue there was independence); here the instrument IS the filing, but github-82 decides. Rows are NOT added to the queue until the batch is reviewed (write-once). | 2026-11-26T22:20:33Z: 2026-11-26 github-82 REVISE on batch 1's handoff (same ruling as R499): operator self is false, because filing executes the writer, not the independent review the old rows' residue names. Revised all seven: operator other, self_probe executed-and-failed from a really run cold-restate (the drafters re-read their rows against the older raw findings; unmatched: R52 finding 1's message a628bd8d is on no card, R52 finding 3 not compared, R53 and R56 first deltas incomplete and corrected), instrument carries the restate's date, channel = 'independent review by github-82, batch review of nemik:W2560 batch 1, 2026-11-26, record github:R_PENDING' (the number arrives with the PASS). Mechanical check (scratchpad check_w2560.py, now asserting the handoff shape): 7 of 7 OK; the scratch --add-retro printed 'nemik:R502 added' for each. Sent back to github-82. Brief (w2560-brief.md) rewritten so batches 2 to 6 start with this form. Rows go into the queue only after the PASS and the record number. | 2026-11-26T22:24:23Z: 2026-11-26 BATCH 1 PASSED by github-82 (record github:R282; she read R51 and R52 in full and the supersession paragraphs of R53, R55, R57; R54 and R56 checked only through check_w2560.py, which the record says). R_PENDING substituted with github:R282 in the seven drafts, the mechanical check re-run (7 of 7 OK), and the rows ADDED to the queue through the writer: nemik:R502 (supersedes R51), R503 (R52), R504 (R53), R505 (R54), R506 (R55), R507 (R56), R508 (R57); R508 read back whole from the queue (supersedes nemik:R57, operator other, self_probe executed-and-failed, channel with record github:R282, recurring and one_off true with the items carried). Their delta text says 'record github:R282 until their verdict', which was true when drafted and is now only slightly stale; the writer rows are write-once so it stands. The cold-cache handoff baseline shrink for R51-R57 comes after the batches, with the guard. Batch 2 (R58 to R64, batch number 2 in the channel) started from the updated brief. | 2026-11-26T22:34:59Z: 2026-11-26 BATCH 1 COMMITTED nemik 79bd60e (parent 4232f9e3, PUSHED, gate_staged green, queue files only): R502 to R508 supersede R51 to R57. BATCH 2 PASSED by github-82 (record github:R284; she read R58 and R63 in full and the supersession paragraph of all seven; honest mismatches recorded: R61 F2 and F4, R63 F3 and F4, R64 F1 and F4; R59, R60, R62 state the discharge was not checked). R_PENDING substituted with github:R284, check_w2560.py 7 of 7 OK, rows ADDED through the writer: R509 (supersedes R58), R510 (R59), R511 (R60), R512 (R61), R513 (R62), R514 (R63), R515 (R64); submitted as a queue-only stack (scratchpad stack-q2.json). github-82's rule for batches 3 to 6: rotate which two rows are read in full (not the first two), every position read in some batch. | 2026-11-26T22:49:22Z: 2026-11-26 BATCH 2 COMMITTED nemik 08c65ff (parent 79bd60e, PUSHED, queue files only): R509 to R515 supersede R58 to R64. BATCH 3 PASSED by github-82 (record github:R286; full reads R25 and R27, supersession paragraphs of all seven; R28 found the refusal the older row names does not exist in the pinned writer, R29 declined to run a tick-close half that writes live state): R_PENDING substituted, check 7 of 7, rows ADDED R516 (R23), R517 (R24), R518 (R25), R519 (R26), R520 (R27), R521 (R28), R522 (R29); queue-only stack submitted (stack-q3.json). BATCH 4 (R30 to R36) drafted, 7 of 7 OK, sent to github-82 for review with full reads of positions 4 and 7 (R33, R36). Remaining: batch 4 add and commit, batches 5 (R37 to R43) and 6 (R44 to R50), then the cold-cache handoff baseline shrink. | 2026-11-26T23:02:28Z: 2026-11-26 BATCH 3 COMMITTED nemik 1aac98e (parent 08c65ff, PUSHED, gate_staged green, queue files only): R516 to R522 supersede R23 to R29. BATCH 4 PASSED by github-82 (record github:R288; full reads R33 and R36, supersession paragraph of all seven; no live-writing instrument half run, each row says what it read instead): R_PENDING substituted, check 7 of 7, rows ADDED R523 (R30), R524 (R31), R525 (R32), R526 (R33), R527 (R34), R528 (R35), R529 (R36); queue-only stack submitted (stack-q4.json). BATCH 5 PASSED (record github:R289; github-82 read R40, my clock draw, and R42 in full, plus all seven supersession paragraphs; she notes this batch checked each finding against the cards' stored evidence): rows to be added after batch 4 lands. BATCH 6 (R44 to R50) drafted, seven files, to be checked and sent for review. 28 of 42 superseded once batch 4 lands; 35 with batch 5; 42 with batch 6. | 2026-11-26T23:05:44Z: 2026-11-26 BATCH 6 PASSED by github-82 (record github:R291; she read R48, my clock draw, and R47 in full, the latter for its anomaly: the older delta cites 'R46-F4', which its own findings lack, and the draft reports rather than corrects the write-once text; R47's tick-hooks half correctly not run). That completes ALL 42 rows (R23 to R64) reviewed across github:R282, R284, R286, R288, R289, R291. R289 (batch 5) and R291 substituted and checked (7 of 7 each). Order of landing, one queue-only stack per batch: batches 1 to 3 COMMITTED (79bd60e, 08c65ff, 1aac98e), batch 4's rows added and its stack gating, then batch 5 (R537?-numbers assigned by the writer at add time), then batch 6. Afterwards, github-82 asks: re-run the handoff baseline tool from a COLD cache (NEMIK_CACHE_DIR empty) over a committed object and record how many of the 42 leave the baseline, noting which shapes judged it (the probe shape at nemik HEAD is still the string match until W2552 lands). Then send her the six queue-only shas. | 2026-11-26T23:10:24Z: 2026-11-26 BATCH 4 COMMITTED nemik a8b4e91 (parent 1aac98e, PUSHED, gate_staged green, queue files only): R523 to R529 supersede R30 to R36. BATCH 5 rows ADDED (R289 substituted, check 7 of 7): R530 (R37), R531 (R38), R532 (R39), R533 (R40), R534 (R41), R535 (R42), R536 (R43); queue-only stack submitted (stack-q5.json). Batch 6 (R44 to R50, record github:R291, check 7 of 7) next, then the cold-cache baseline run. | 2026-11-26T23:22:23Z: 2026-11-26 BATCH 5 COMMITTED nemik 35067b4 (parent a8b4e91, PUSHED, gate_staged green, queue files only): R530 to R536 supersede R37 to R43. BATCH 6 rows ADDED (R291 substituted, check 7 of 7): R537 (R44), R538 (R45), R539 (R46), R540 (R47), R541 (R48), R542 (R49), R543 (R50); queue-only stack submitted (stack-q6.json). Six queue-only commits: 79bd60e, 08c65ff, 1aac98e, a8b4e91, 35067b4, and the batch-6 sha to come. Then: the cold-cache handoff baseline run over a committed object, recording which shapes judged it.",
+      "evidence": "2026-11-26T20:22:24Z: 2026-11-26 github-82 accepted W2560 with two shape changes. (1) Scaffold first, mechanically. Read at source (the pinned writer's --migrate-retros over nemik, tool-results b4jg25tz3): 0 WOULD WRITE, every R23-R64 row is NEEDS A REVIEWER: R23-R50 'handoff operator other needs self_probe executed-and-failed' (the probe result is the judgment), R51-R64 additionally 'recurring/one_off must be true or false, not [list]' (mtools 87857abb refuses to convert it, so the normalisation is not offered by the writer). So a nemik-side scaffold tool generates the superseding JSON for all 42: verbatim copy of every field except id/supersedes/handoff, recurring and one_off lists turned into true with the list items carried verbatim into contributing (the R65 precedent), handoff instrument and channel copied from the row, operator and self_probe left for the subagent. Subagents do ONLY the probe and the sourced sustain. (2) Batch size 7, six batches (R51-R57, R58-R64, R23-R29, R30-R36, R37-R43, R44-R50): each batch is one review by github-82, the two cohorts stay whole (14 = 2x7, 28 = 4x7), and a REVISE costs 7 rows, not 42. | 2026-11-26T20:24:39Z: 2026-11-26 github-82: batches of 7 accepted; a nemik-side scaffold generator is NOT (the writer and --migrate-retros are mtools', a second scaffold here is a copy beside the integration). So: the list-to-bool normalisation is asked of mtools as W2561 (letter in mtools/inbox); until it lands each subagent applies that same rule to its own row in its draft (non-empty list -> true with the items verbatim in contributing, empty -> false), and the batch review checks it field by field; the probe and the sourced sustain stay the subagents' judgment. | 2026-11-26T22:03:28Z: 2026-11-26 BATCH 1 (R51 to R57, 7 subagents, general-purpose, run in the background) started under the operator's swarm exception (host L234190, verified). Each reads the shared brief (scratchpad w2560-brief.md: copy every field verbatim except id, supersedes, handoff, recurring, one_off; a non-empty recurring or one_off list becomes true with its items carried verbatim into contributing; supersedes is the full id; the old delta stays verbatim with an appended SUPERSESSION paragraph stating the truth; operator self only if the step really succeeded, other only with a really attempted and failed probe), runs the retro's own handoff step, and writes only scratchpad w2560/R<n>.json. They do not touch the queue. I add each through --add-retro after checking it field by field, never editing it; github-82 reviews the batch before any submit. | 2026-11-26T22:12:40Z: 2026-11-26 BATCH 1 drafts back (R51-R57, scratchpad w2560/R<n>.json), each validated by the writer on a scratch copy of the queue (copy under a directory named nemik, real state never passed): all say operator self, the step (--add-retro) executed for the actor. Field-by-field check by a read-only script (scratchpad check_w2560.py: every field verbatim except id/supersedes/handoff/recurring/one_off, contributing = old plus the Carried-from lines, delta starts with the old delta, instrument and channel copied): R51, R52, R53, R54, R55, R57 OK; R56 dropped the finding text of all four findings (the --retros view omits it) and was sent back to restore it from the raw row. First-round drafts that claimed executed-and-failed or self from a mere read-back (R52, R53, R56) were rejected and redone after the scratch-state addendum. OPEN QUESTION for the review: the older rows hand 'add-retro through the cold review' to another operator; the drafts record self because the instrument executes for the actor, with the cold-review channel stated as not exercised. nemik:R499 was ruled wrong for a similar filing-as-measurement move (the residue there was independence); here the instrument IS the filing, but github-82 decides. Rows are NOT added to the queue until the batch is reviewed (write-once). | 2026-11-26T22:20:33Z: 2026-11-26 github-82 REVISE on batch 1's handoff (same ruling as R499): operator self is false, because filing executes the writer, not the independent review the old rows' residue names. Revised all seven: operator other, self_probe executed-and-failed from a really run cold-restate (the drafters re-read their rows against the older raw findings; unmatched: R52 finding 1's message a628bd8d is on no card, R52 finding 3 not compared, R53 and R56 first deltas incomplete and corrected), instrument carries the restate's date, channel = 'independent review by github-82, batch review of nemik:W2560 batch 1, 2026-11-26, record github:R_PENDING' (the number arrives with the PASS). Mechanical check (scratchpad check_w2560.py, now asserting the handoff shape): 7 of 7 OK; the scratch --add-retro printed 'nemik:R502 added' for each. Sent back to github-82. Brief (w2560-brief.md) rewritten so batches 2 to 6 start with this form. Rows go into the queue only after the PASS and the record number. | 2026-11-26T22:24:23Z: 2026-11-26 BATCH 1 PASSED by github-82 (record github:R282; she read R51 and R52 in full and the supersession paragraphs of R53, R55, R57; R54 and R56 checked only through check_w2560.py, which the record says). R_PENDING substituted with github:R282 in the seven drafts, the mechanical check re-run (7 of 7 OK), and the rows ADDED to the queue through the writer: nemik:R502 (supersedes R51), R503 (R52), R504 (R53), R505 (R54), R506 (R55), R507 (R56), R508 (R57); R508 read back whole from the queue (supersedes nemik:R57, operator other, self_probe executed-and-failed, channel with record github:R282, recurring and one_off true with the items carried). Their delta text says 'record github:R282 until their verdict', which was true when drafted and is now only slightly stale; the writer rows are write-once so it stands. The cold-cache handoff baseline shrink for R51-R57 comes after the batches, with the guard. Batch 2 (R58 to R64, batch number 2 in the channel) started from the updated brief. | 2026-11-26T22:34:59Z: 2026-11-26 BATCH 1 COMMITTED nemik 79bd60e (parent 4232f9e3, PUSHED, gate_staged green, queue files only): R502 to R508 supersede R51 to R57. BATCH 2 PASSED by github-82 (record github:R284; she read R58 and R63 in full and the supersession paragraph of all seven; honest mismatches recorded: R61 F2 and F4, R63 F3 and F4, R64 F1 and F4; R59, R60, R62 state the discharge was not checked). R_PENDING substituted with github:R284, check_w2560.py 7 of 7 OK, rows ADDED through the writer: R509 (supersedes R58), R510 (R59), R511 (R60), R512 (R61), R513 (R62), R514 (R63), R515 (R64); submitted as a queue-only stack (scratchpad stack-q2.json). github-82's rule for batches 3 to 6: rotate which two rows are read in full (not the first two), every position read in some batch. | 2026-11-26T22:49:22Z: 2026-11-26 BATCH 2 COMMITTED nemik 08c65ff (parent 79bd60e, PUSHED, queue files only): R509 to R515 supersede R58 to R64. BATCH 3 PASSED by github-82 (record github:R286; full reads R25 and R27, supersession paragraphs of all seven; R28 found the refusal the older row names does not exist in the pinned writer, R29 declined to run a tick-close half that writes live state): R_PENDING substituted, check 7 of 7, rows ADDED R516 (R23), R517 (R24), R518 (R25), R519 (R26), R520 (R27), R521 (R28), R522 (R29); queue-only stack submitted (stack-q3.json). BATCH 4 (R30 to R36) drafted, 7 of 7 OK, sent to github-82 for review with full reads of positions 4 and 7 (R33, R36). Remaining: batch 4 add and commit, batches 5 (R37 to R43) and 6 (R44 to R50), then the cold-cache handoff baseline shrink. | 2026-11-26T23:02:28Z: 2026-11-26 BATCH 3 COMMITTED nemik 1aac98e (parent 08c65ff, PUSHED, gate_staged green, queue files only): R516 to R522 supersede R23 to R29. BATCH 4 PASSED by github-82 (record github:R288; full reads R33 and R36, supersession paragraph of all seven; no live-writing instrument half run, each row says what it read instead): R_PENDING substituted, check 7 of 7, rows ADDED R523 (R30), R524 (R31), R525 (R32), R526 (R33), R527 (R34), R528 (R35), R529 (R36); queue-only stack submitted (stack-q4.json). BATCH 5 PASSED (record github:R289; github-82 read R40, my clock draw, and R42 in full, plus all seven supersession paragraphs; she notes this batch checked each finding against the cards' stored evidence): rows to be added after batch 4 lands. BATCH 6 (R44 to R50) drafted, seven files, to be checked and sent for review. 28 of 42 superseded once batch 4 lands; 35 with batch 5; 42 with batch 6. | 2026-11-26T23:05:44Z: 2026-11-26 BATCH 6 PASSED by github-82 (record github:R291; she read R48, my clock draw, and R47 in full, the latter for its anomaly: the older delta cites 'R46-F4', which its own findings lack, and the draft reports rather than corrects the write-once text; R47's tick-hooks half correctly not run). That completes ALL 42 rows (R23 to R64) reviewed across github:R282, R284, R286, R288, R289, R291. R289 (batch 5) and R291 substituted and checked (7 of 7 each). Order of landing, one queue-only stack per batch: batches 1 to 3 COMMITTED (79bd60e, 08c65ff, 1aac98e), batch 4's rows added and its stack gating, then batch 5 (R537?-numbers assigned by the writer at add time), then batch 6. Afterwards, github-82 asks: re-run the handoff baseline tool from a COLD cache (NEMIK_CACHE_DIR empty) over a committed object and record how many of the 42 leave the baseline, noting which shapes judged it (the probe shape at nemik HEAD is still the string match until W2552 lands). Then send her the six queue-only shas. | 2026-11-26T23:10:24Z: 2026-11-26 BATCH 4 COMMITTED nemik a8b4e91 (parent 1aac98e, PUSHED, gate_staged green, queue files only): R523 to R529 supersede R30 to R36. BATCH 5 rows ADDED (R289 substituted, check 7 of 7): R530 (R37), R531 (R38), R532 (R39), R533 (R40), R534 (R41), R535 (R42), R536 (R43); queue-only stack submitted (stack-q5.json). Batch 6 (R44 to R50, record github:R291, check 7 of 7) next, then the cold-cache baseline run. | 2026-11-26T23:22:23Z: 2026-11-26 BATCH 5 COMMITTED nemik 35067b4 (parent a8b4e91, PUSHED, gate_staged green, queue files only): R530 to R536 supersede R37 to R43. BATCH 6 rows ADDED (R291 substituted, check 7 of 7): R537 (R44), R538 (R45), R539 (R46), R540 (R47), R541 (R48), R542 (R49), R543 (R50); queue-only stack submitted (stack-q6.json). Six queue-only commits: 79bd60e, 08c65ff, 1aac98e, a8b4e91, 35067b4, and the batch-6 sha to come. Then: the cold-cache handoff baseline run over a committed object, recording which shapes judged it. | 2026-11-26T23:27:36Z: 2026-11-26 PINNED-TOOLS DEVIATION (github-82's ruling): every queue write of this retro paydown (the 42 --add-retro adds R502 to R543, all card updates and evidence lines since the session began, and the drafters' scratch validations) ran on a SESSION-BUILT writer, scratchpad/wvenv, installed distribution mikemol_pathsforward 0.1.0+87857ab (mtools 87857abb by sha), outside the pinned set; the pinned set moves only through luthen's user apply and a session never installs a fleet tool by hand. CAUSE: the pinned writer (nemik's vendored wheel 0.1.0+636e39b, built into the live install) predates supersedes, so it could not write the field and a working session built one. The rows are valid committed JSON with an auditable provenance, so R502 onward STAND (github-82). From now the scratch writer is NOT used for any further write: writes go through the live install's writer (live/nemik/bin/mikemol-paths-forward, which reads this queue: its --check findings are old card states, none about retros). The fix for the cause is W2568 (re-vendor nemik's mikemol-* wheels at mtools' current origin/main as a pure single-sha repin, clause R), which is now FIRST, ahead of the cold-cache baseline measurement.",
       "issued_at": "2026-11-26T20:20:15Z",
       "minted_during": "interrupt",
       "caused_by": "W2545",
-      "last_worked": "2026-11-26T23:22:23Z",
+      "last_worked": "2026-11-26T23:27:36Z",
       "ticks_blocked": 0,
       "completed": null
     },
@@ -63711,6 +63733,44 @@
       "caused_by": "W1948",
       "last_worked": null,
       "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2569",
+      "title": "paperkit's .claude/paths-forward.json is untracked in git, so no reader can read it as a committed object (a baseline measure falls back to its live file)",
+      "status": "blocked",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [
+        "paperkit"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "",
+      "evidence": "2026-11-26T23:50:08Z: 2026-11-26: git -C paperkit ls-files .claude/paths-forward.json prints nothing (checked), so there is no committed object for a reader to name. Letter sent: paperkit/inbox/2026-11-26-nemik-your-queue-is-not-in-git.md (track it, or say why not). Surfaced while measuring nemik's retro-handoff baseline over committed objects (nemik:W2490): paperkit's queue entered the scratch root as its LIVE file, named as an exception. Re-file blocked_on as paperkit:W<n> when paperkit cards it.",
+      "issued_at": "2026-11-26T23:49:50Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2490",
+      "last_worked": "2026-11-26T23:50:08Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W2570",
+      "title": "gabion's .claude/paths-forward.json is untracked in git, so no reader can read it as a committed object (a baseline measure falls back to its live file)",
+      "status": "blocked",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [
+        "gabion"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "",
+      "evidence": "2026-11-26T23:50:09Z: 2026-11-26: git -C gabion ls-files .claude/paths-forward.json prints nothing (checked), so there is no committed object for a reader to name. Letter sent: gabion/inbox/2026-11-26-nemik-your-queue-is-not-in-git.md (track it, or say why not). Surfaced while measuring nemik's retro-handoff baseline over committed objects (nemik:W2490): gabion's queue entered the scratch root as its LIVE file, named as an exception. Re-file blocked_on as gabion:W<n> when gabion cards it.",
+      "issued_at": "2026-11-26T23:49:51Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2490",
+      "last_worked": "2026-11-26T23:50:09Z",
+      "ticks_blocked": 0,
+      "completed": null
     }
   ],
   "residue": [
@@ -63992,6 +64052,13 @@
       "title": "Commit the src/nemik import graph as data (module to the modules it imports), regenerated and checked by a test, so a census target can name its import closure",
       "dropped_at": "2026-11-23T01:52:50Z",
       "reason": "Superseded in substance, read before dropping: tools/codon_closure.py (nemik:W1411, landed, tests/test_codon_closure.py) already reads each src/nemik module's nemik imports with the ast module (own_row returns its Codon blockers and its nemik dependencies) and unions blockers over the import closure (closure), and src/nemik/cones.py reads mtools' importdag graph.json for the test cones. A census target can therefore name its import closure from the source today; a committed import-graph.json would be a second copy of what those tools derive, and its only extra (a committed file a test compares against a fresh read) would need a reason the closure tool does not already give. Recoverable: if a census target needs the closure without running the tool, commit tools/codon_closure.py's closure output with a freshness test.",
+      "recoverable": true
+    },
+    {
+      "symbol": "W2568",
+      "title": "Re-vendor nemik's mikemol-* wheels at mtools 24340f84 or later with mikemol-repin --revendor, so the live writer accepts supersedes",
+      "dropped_at": "2026-11-26T23:29:53Z",
+      "reason": "duplicate of nemik:W2490 (the same wheel re-vendor, minted earlier on 2026-11-23); W2490 carries the work and W2568's facts moved onto it, so every waiter cites one symbol (github-82 2026-11-26)",
       "recoverable": true
     }
   ],

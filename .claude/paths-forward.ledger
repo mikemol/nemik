@@ -7230,3 +7230,17 @@
 2026-11-26T23:06:12Z  interrupt W2567 minted    -         "Design: waitemit's OTLP metric emit without mikemol.otlp and its protobuf message import, which are Codon walls"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1948
 2026-11-26T23:06:16Z  status W1948 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-26T23:10:46Z  status W1949 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T23:22:44Z  status W1950 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T23:25:42Z  interrupt W2568 minted    -         "Re-vendor nemik's mikemol-* wheels at mtools 24340f84 or later with mikemol-repin --revendor, so the live writer accepts supersedes"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github:W163
+2026-11-26T23:26:26Z  status W1951 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T23:28:18Z  status W2568 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T23:31:05Z  status W1952 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T23:36:47Z  status W1953 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T23:44:50Z  status W1954 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T23:47:56Z  status W1955 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T23:49:50Z  interrupt W2569 minted    -         "paperkit's .claude/paths-forward.json is untracked in git, so no reader can read it as a committed object (a baseline measure falls back to its live file)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2490
+2026-11-26T23:49:51Z  interrupt W2570 minted    -         "gabion's .claude/paths-forward.json is untracked in git, so no reader can read it as a committed object (a baseline measure falls back to its live file)"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2490
+2026-11-26T23:50:08Z  status W2569 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-26T23:50:09Z  status W2570 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-27T00:01:58Z  status W1956 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-27T00:02:53Z  status W1957 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
