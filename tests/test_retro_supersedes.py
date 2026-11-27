@@ -39,15 +39,24 @@ def _thin_ids(key: str, retros: dict[str, dict[str, str]]) -> list[str]:
         node = _node(ident)
         g.add((node, RDF.type, NEMIK.Retro))
         for name, value in fields.items():
-            g.add((node, NEMIK[name], Literal(value)))
+            if name == "supersedes":
+                # as the ingest emits it (nemik:W2552): an edge to the retro's node, resolved
+                # under the superseder's own repo
+                repo = ident.partition(":")[0]
+                g.add(
+                    (node, NEMIK.supersedes, URIRef(f"urn:test:{repo}/retro/{value}"))
+                )
+            else:
+                g.add((node, NEMIK[name], Literal(value)))
     rows = findings(f"supersedes-{key}", g, shapes())
     return sorted(str(f).rsplit("/retro/", 1)[1] for f, _, m in rows if THIN in m)
 
 
-def test_the_ingest_reads_the_supersedes_text() -> None:
-    """The writer's key reaches the graph as a literal, by that spelling."""
+def test_the_ingest_reads_the_supersedes_key_as_an_edge() -> None:
+    """The writer's key reaches the graph as an edge to the superseded retro's node (W2552)."""
     got = triples({"id": "a:R2", "supersedes": "a:R1"})
-    assert ("retro/a:R2", "supersedes", "a:R1", False) in got
+    assert ("retro/a:R2", "supersedes", "retro/a:R1", True) in got
+    assert not [t for t in got if t[1] == "supersedes" and not t[3]]
 
 
 def test_a_thin_retro_with_no_superseder_stays_thin() -> None:
@@ -61,10 +70,20 @@ def test_a_retro_a_sustained_retro_supersedes_is_not_thin() -> None:
     assert _thin_ids("clears", retros) == []
 
 
-def test_a_superseder_that_is_itself_thin_clears_nothing() -> None:
-    """R2 names R1 but has no sustain: both stay thin."""
+def test_a_thin_superseder_is_thin_in_its_own_right() -> None:
+    """W2552: R1 is history once R2 names it; R2 is the live row, judged, and thin."""
     retros = {"a:R1": {}, "a:R2": {"supersedes": "a:R1"}}
-    assert _thin_ids("thin-superseder", retros) == ["a:R1", "a:R2"]
+    assert _thin_ids("thin-superseder", retros) == ["a:R2"]
+
+
+def test_a_chain_is_judged_at_its_live_row_only() -> None:
+    """W2552: R3 supersedes R2 which supersedes R1; R1 and R2 are history, R3 is sustained."""
+    retros = {
+        "a:R1": {},
+        "a:R2": {"supersedes": "a:R1"},
+        "a:R3": {"supersedes": "a:R2", "sustain": KEEP},
+    }
+    assert _thin_ids("chain", retros) == []
 
 
 def test_only_the_full_id_matches() -> None:

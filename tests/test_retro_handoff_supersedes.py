@@ -42,7 +42,16 @@ def _refused_ids(key: str, retros: dict[str, dict[str, str]]) -> list[str]:
         g.add((node, NEMIK[HANDOFF], hand))
         g.add((hand, RDF.type, NEMIK.RetroHandoff))
         if "supersedes" in fields:
-            g.add((node, NEMIK.supersedes, Literal(fields["supersedes"])))
+            # as the ingest emits it (nemik:W2552): an edge to the retro's node, resolved under
+            # the superseder's own repo
+            repo = ident.partition(":")[0]
+            g.add(
+                (
+                    node,
+                    NEMIK.supersedes,
+                    URIRef(f"urn:test:{repo}/retro/{fields['supersedes']}"),
+                )
+            )
         g.add((hand, NEMIK.handoffOperator, Literal(fields["operator"])))
         if "self_probe" in fields:
             g.add((hand, NEMIK.selfProbe, Literal(fields["self_probe"])))
@@ -77,13 +86,23 @@ def test_a_superseder_with_a_recorded_probe_retires_it() -> None:
     assert _refused_ids("probe", retros) == []
 
 
-def test_a_superseder_whose_handoff_still_fails_clears_nothing() -> None:
-    """R2 names R1 but hands to another operator with no probe: both stay refused."""
+def test_a_failing_superseder_is_refused_in_its_own_right() -> None:
+    """W2552: R1 is history once R2 names it; R2 is the live row and is judged, and refused."""
     retros = {
         "a:R1": {"operator": "other"},
         "a:R2": {"operator": "other", "supersedes": "a:R1"},
     }
-    assert _refused_ids("still-failing", retros) == ["a:R1", "a:R2"]
+    assert _refused_ids("still-failing", retros) == ["a:R2"]
+
+
+def test_a_chain_is_judged_at_its_live_row_only() -> None:
+    """W2552: R3 supersedes R2 which supersedes R1; R1 and R2 are history, R3 passes."""
+    retros = {
+        "a:R1": {"operator": "other"},
+        "a:R2": {"operator": "other", "supersedes": "a:R1"},
+        "a:R3": {"operator": "self", "supersedes": "a:R2"},
+    }
+    assert _refused_ids("chain", retros) == []
 
 
 def test_only_the_full_id_of_the_same_repo_retires_it() -> None:

@@ -34,9 +34,6 @@ TEXT_FIELDS = [
     ("frozen_timeline", "frozenTimeline"),
     ("enforcement_layer", "enforcementLayer"),
     ("delta", "delta"),
-    # the writer's optional key (mtools 87857abb): the full <repo>:R<n> id of the retro this one
-    # supersedes; RetroSustainShape reads it (nemik:W2529)
-    ("supersedes", "supersedes"),
 ]
 LIST_FIELDS = [("contributing", "contributing"), ("sustain", "sustain")]
 FLAG_FIELDS = [("recurring", "recurring"), ("one_off", "oneOff")]
@@ -91,6 +88,13 @@ def triples(retro: dict[str, object]) -> list[Triple]:
     subject = f"retro/{ident}"
     out: list[Triple] = [(subject, "a", "Retro", False)]
     out.extend(_texts(subject, retro, TEXT_FIELDS))
+    # nemik:W2552: the writer's optional key (mtools 87857abb), the full <repo>:R<n> id of the retro
+    # this one supersedes, is an EDGE to that retro's node, never a literal matched by IRI text: a
+    # shape reads `?other supersedes ?retro` as a pattern, so the incremental SHACL run's
+    # neighbourhood reaches the superseded retro from the changed triple (the R22 and R497 case).
+    superseded = _text(retro.get("supersedes"))
+    if superseded:
+        out.append((subject, "supersedes", f"retro/{superseded}", True))
     for key, predicate in LIST_FIELDS:
         out.extend((subject, predicate, item, False) for item in _items(retro.get(key)))
     out.extend(

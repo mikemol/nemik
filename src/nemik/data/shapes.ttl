@@ -551,15 +551,15 @@ nemik:RetroSustainShape a sh:NodeShape ;
                     $this <https://github.com/mikemol/nemik/ns#sustain> ?s .
                     FILTER(STRLEN(STR(?s)) > 0)
                 }
-                # nemik:W2529: retros are write-once, so a thin one is retired by SUPERSESSION: a
-                # different retro that names it by its full <repo>:R<n> id (supersedes) and itself
-                # carries a sustain. A superseder that is itself thin clears nothing.
+                # nemik:W2529, W2552: retros are write-once, so a thin one is retired by SUPERSESSION:
+                # a different retro has an EDGE (supersedes) to this retro's node. Only LIVE rows
+                # are judged: the writer allows one live row per chain, a superseded retro is history,
+                # and a thin superseder is itself a live row and is judged on its own. The relation is
+                # an edge, never IRI text, so the incremental run's neighbourhood reaches this retro
+                # from the changed superseder (a string match is invisible to it: the R22 case).
                 FILTER NOT EXISTS {
-                    ?other <https://github.com/mikemol/nemik/ns#supersedes> ?id ;
-                           <https://github.com/mikemol/nemik/ns#sustain> ?kept .
-                    FILTER(STRLEN(STR(?kept)) > 0)
+                    ?other <https://github.com/mikemol/nemik/ns#supersedes> $this .
                     FILTER(?other != $this)
-                    FILTER(STRENDS(STR($this), CONCAT("/retro/", STR(?id))))
                 }
             }""" ] .
 
@@ -620,20 +620,15 @@ nemik:RetroHandoffProbeShape a sh:NodeShape ;
                 $this <https://github.com/mikemol/nemik/ns#handoffOperator> ?o .
                 FILTER(STR(?o) = "other")
                 FILTER NOT EXISTS { $this <https://github.com/mikemol/nemik/ns#selfProbe> ?p . FILTER(STR(?p) = "executed-and-failed") }
-                # nemik:W2545: retros are write-once, so a handoff that failed this is retired by
-                # SUPERSESSION, as a thin sustain is (W2529): a different retro that names the retro by
-                # its full <repo>:R<n> id and carries a handoff that passes, an operator of self, or of
-                # other with the probe recorded. A superseder whose handoff still fails clears nothing.
+                # nemik:W2545, W2552: retros are write-once, so a handoff that failed this is retired by
+                # SUPERSESSION, as a thin sustain is (W2529): a different retro has an EDGE (supersedes)
+                # to the retro that owns this handoff. Only LIVE rows are judged: a superseded retro is
+                # history, and a superseder whose handoff still fails is itself a live row and a fresh
+                # violation. Two hops from the handoff, by edges, so the incremental run reaches it.
                 FILTER NOT EXISTS {
-                    ?other <https://github.com/mikemol/nemik/ns#supersedes> ?id ;
-                           <https://github.com/mikemol/nemik/ns#handoff> ?h2 .
-                    ?h2 <https://github.com/mikemol/nemik/ns#handoffOperator> ?o2 .
-                    FILTER(
-                        STR(?o2) = "self"
-                        || (STR(?o2) = "other" && EXISTS { ?h2 <https://github.com/mikemol/nemik/ns#selfProbe> ?p2 . FILTER(STR(?p2) = "executed-and-failed") })
-                    )
-                    FILTER(?h2 != $this)
-                    FILTER(STRENDS(STR($this), CONCAT("/retro/", STR(?id), "/handoff")))
+                    ?other <https://github.com/mikemol/nemik/ns#supersedes> ?r .
+                    ?r <https://github.com/mikemol/nemik/ns#handoff> $this .
+                    FILTER(?other != ?r)
                 }
             }""" ] .
 

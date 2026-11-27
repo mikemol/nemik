@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_root": "/home/mikemol/github/nemik",
-  "counter": 2570,
+  "counter": 2574,
   "waypoints": [
     {
       "symbol": "W1",
@@ -48874,14 +48874,17 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "Remove argparse from nemik.staticserve (src/nemik/staticserve.py): replace the import or construct with a Codon-compatible form (the wall's recorded options are in docs/codon-walls.md), in a scratch worktree, probing the pinned Codon first, then measure the pair with tools/codon_walls.py before and after. The card closes when the pair (staticserve, argparse) leaves codon-walls.json. Bundle with other ready instances in one stack: never a full gate for one pair (github-14, 2026-11-10).",
-      "evidence": "2026-11-26T21:20:46Z: 2026-11-26: staticserve.py converted off argparse in the live tree: Options is a plain class (root, bind, port, errors), read_options(argv) reads --root/--bind/--port with nemik.flags.parse_flags (missing --root, an unrecognized word and a non-integer port go into errors as argparse refused them), main prints usage and exits 2 on errors. Closure check: staticserve imports only nemik.flags, nemik.say and nemik.tomlview among nemik modules, none of which imports argparse, so the (staticserve, argparse) pair can leave. tests/test_deploy_manifest.py now calls read_options, and tests/test_staticserve_options.py (6 cases) is new. Still to do: bazel lists, codon-walls.json by tools/codon_walls.py in a worktree, a probe compile under the pinned Codon, a review ref to github-82. The submit waits on the paydown guard like every nemik stack (mtools:W2937) unless it lowers an owed ratchet. | 2026-11-26T21:41:18Z: 2026-11-26: refs/review/w1936 = 15b6a0a4 (parent 4232f9e3), staticserve off argparse and shutil, codon-walls.json 780 to 778, bazel on the worktree 15 of 15; sent to github-82 for review. The guard (mtools:W2937) will still refuse it as it refuses every nemik stack that lowers no owed ratchet, so the submit waits on that, not on the build.",
+      "evidence": "2026-11-26T21:20:46Z: 2026-11-26: staticserve.py converted off argparse in the live tree: Options is a plain class (root, bind, port, errors), read_options(argv) reads --root/--bind/--port with nemik.flags.parse_flags (missing --root, an unrecognized word and a non-integer port go into errors as argparse refused them), main prints usage and exits 2 on errors. Closure check: staticserve imports only nemik.flags, nemik.say and nemik.tomlview among nemik modules, none of which imports argparse, so the (staticserve, argparse) pair can leave. tests/test_deploy_manifest.py now calls read_options, and tests/test_staticserve_options.py (6 cases) is new. Still to do: bazel lists, codon-walls.json by tools/codon_walls.py in a worktree, a probe compile under the pinned Codon, a review ref to github-82. The submit waits on the paydown guard like every nemik stack (mtools:W2937) unless it lowers an owed ratchet. | 2026-11-26T21:41:18Z: 2026-11-26: refs/review/w1936 = 15b6a0a4 (parent 4232f9e3), staticserve off argparse and shutil, codon-walls.json 780 to 778, bazel on the worktree 15 of 15; sent to github-82 for review. The guard (mtools:W2937) will still refuse it as it refuses every nemik stack that lowers no owed ratchet, so the submit waits on that, not on the build. | 2026-11-27T02:57:11Z: 2026-11-27 github-82 PASS-SUBMIT on refs/review/w1936 (15b6a0a4): staticserve.py and codon-walls.json read; the read/write loop is right (wfile is a socket writer whose write is a sendall, so no short write); read_options names the same three refusals argparse gave and exits 2. Two behaviour questions, answered by probe (scratchpad probe_flags.py over nemik.flags): (a) -h and --help are now refused (exit 2), where argparse printed help and exited 0: a real change, NOT intended; fixed as a follow-up so the reviewed diff does not move: nemik:W2573. (b) repeated flags: NOT a change: Flags.first() returns the LAST value given (root [/a, /b] reads /b; port [1, 2] reads 2), the same last-wins as argparse; W2573 adds a test pinning it. Stack agreed with github-82: W1936+W1938 lead as the codon-walls paydown, then W2552 (PASS-SUBMIT 3c6edf32), then W2563 once built and reviewed; both rebased onto main in fresh worktrees, rebased refs to her before any submit. | 2026-11-27T03:05:08Z: 2026-11-27 STACK REFUSED by gate_staged, nothing landed (HEAD still 48f6665): the two-entry code stack (W1936+W1938 then W2552, both PASS-SUBMITted by github-82) failed the house ruff and mypy ratchet, which neither ref had been run through: I ran the specific test targets (staticserve, deploy_manifest, codon census, retro and shape targets) but not //:test_ruff_ratchet, the only place the house config is judged. Findings above baseline: src/nemik/staticserve.py PLW0717 1; tests/test_staticserve_options.py D403 1, E501 1, PLR2004 1; tests/test_supersedes_incremental.py D403 1, PLR2004 1, TC003 1, and mypy misc 1. That is my omission (the lenient edit hook passed each file). Fixing lint-only in the stack worktree, then the diffs go back to github-82 as changes against the reviewed refs before any resubmit. Also printed: DRIFT W1936 and W2552 (files outside their manifests: codon-walls.json, the two test files, nemik_tests.bzl, retroingest.py, the new test), a warning to fix by declaring the manifests. | 2026-11-27T03:15:03Z: 2026-11-27 FIXED, lint only, same test that refused: bazel test //:test_ruff_ratchet and the touched targets (staticserve_options, supersedes_incremental, staticserve, static_view, deploy_manifest) on the stack worktree, exit 0, 6 of 6, after a second pass (the first left SIM105 on stream() and one E501). Changes: stream()'s loop moved into send() so the try has one statement (PLW0717) and its except returns instead of pass (SIM105's fix is contextlib.suppress, a Codon wall); BAD_USAGE for the literal exit status, 'Argparse' capitalised, a shorter module docstring line; in the W2552 incremental test: __future__ annotations with Path under TYPE_CHECKING, named radius constants, 'Repo b's' docstring, and the join plant as typed triple traversal instead of SPARQL (the house mypy refused the untyped rows). Refs: refs/review/w1936-fix 7e2bf2e4 and refs/review/w2552-fix 40591a52, deltas sent to github-82 for review before the resubmit.",
       "issued_at": "2026-11-05T21:54:09Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-11-26T21:41:18Z",
+      "last_worked": "2026-11-27T03:15:03Z",
       "ticks_blocked": 0,
       "manifest": [
-        "src/nemik/staticserve.py"
+        "src/nemik/staticserve.py",
+        "codon-walls.json",
+        "tests/test_deploy_manifest.py",
+        "tests/test_staticserve_options.py"
       ],
       "size_class": "small",
       "weight": 117,
@@ -49498,20 +49501,22 @@
     {
       "symbol": "W1958",
       "title": "Codon instance wake: nemik.wake stops using the mikemol libraries",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W1685",
         "W1750"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W2565"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "Remove the mikemol libraries from nemik.wake (src/nemik/wake.py): replace the import or construct with a Codon-compatible form (the wall's recorded options are in docs/codon-walls.md), in a scratch worktree, probing the pinned Codon first, then measure the pair with tools/codon_walls.py before and after. The card closes when the pair (wake, the mikemol libraries) leaves codon-walls.json. Bundle with other ready instances in one stack: never a full gate for one pair (github-14, 2026-11-10).",
-      "evidence": "",
+      "evidence": "2026-11-27T00:26:44Z: 2026-11-26: wake.py imports two mikemol libraries: mikemol.hooks.rewake (line 31; its comment on line 49 says mtools' rewake owns the constant and the pure pair, mtools:W1299) and mikemol.procrun.proc.capture (line 32, the subprocess wrapper). The procrun half is the same subprocess-capture decision as vtodo's capture_bytes, designed on W2565; the rewake half is a small pure pair that the same design must place (an in-tree copy, which duplicates mtools' own owner, or an mtools Codon-compilable form). Re-ready when W2565 names the replacement for both.",
       "issued_at": "2026-11-05T21:54:23Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-11-17T22:00:52Z",
+      "last_worked": "2026-11-27T00:26:44Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/wake.py"
@@ -49519,25 +49524,28 @@
       "size_class": "small",
       "weight": 88,
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
-      "vector_source": "default"
+      "vector_source": "default",
+      "completed": null
     },
     {
       "symbol": "W1959",
       "title": "Codon instance wake: nemik.wake stops using rdflib",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W1687",
         "W1750"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W1767"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "Remove rdflib from nemik.wake (src/nemik/wake.py): replace the import or construct with a Codon-compatible form (the wall's recorded options are in docs/codon-walls.md), in a scratch worktree, probing the pinned Codon first, then measure the pair with tools/codon_walls.py before and after. The card closes when the pair (wake, rdflib) leaves codon-walls.json. Bundle with other ready instances in one stack: never a full gate for one pair (github-14, 2026-11-10).",
-      "evidence": "",
+      "evidence": "2026-11-27T00:44:26Z: 2026-11-26: wake.py reads the queue graph through nemik.adapter (BASE, NEMIK, OSLC_CM, line 35) and nemik.blocks (inbound, operator_asks, with_salience, line 37), which are built on rdflib Graph; the (wake, rdflib) pair is carried by the adapter, the rdflib core W1767. Same as W1926, W1930, W1955. Re-ready when W1767 lands.",
       "issued_at": "2026-11-05T21:54:23Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-11-17T22:00:53Z",
+      "last_worked": "2026-11-27T00:44:26Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/wake.py"
@@ -49545,25 +49553,28 @@
       "size_class": "small",
       "weight": 80,
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
-      "vector_source": "default"
+      "vector_source": "default",
+      "completed": null
     },
     {
       "symbol": "W1960",
       "title": "Codon instance wake: nemik.wake stops using TYPE_CHECKING blocks",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W1691",
         "W1750"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W2475"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "Remove TYPE_CHECKING blocks from nemik.wake (src/nemik/wake.py): replace the import or construct with a Codon-compatible form (the wall's recorded options are in docs/codon-walls.md), in a scratch worktree, probing the pinned Codon first, then measure the pair with tools/codon_walls.py before and after. The card closes when the pair (wake, TYPE_CHECKING blocks) leaves codon-walls.json. Bundle with other ready instances in one stack: never a full gate for one pair (github-14, 2026-11-10).",
-      "evidence": "",
+      "evidence": "2026-11-27T01:05:17Z: 2026-11-26: wake.py has a TYPE_CHECKING block for its type-only imports. The TYPE_CHECKING class is W2475's codemod (operator ruling 2026-11-23: mechanize), with W1917, W1918, W1921, W1922, W1925, W1928, W1940, W1946, W1951, W1954. Re-ready when W2475 lands.",
       "issued_at": "2026-11-05T21:54:24Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-11-17T22:00:53Z",
+      "last_worked": "2026-11-27T01:05:17Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/wake.py"
@@ -49571,25 +49582,28 @@
       "size_class": "small",
       "weight": 85,
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
-      "vector_source": "default"
+      "vector_source": "default",
+      "completed": null
     },
     {
       "symbol": "W1961",
       "title": "Codon instance warrantdebt: nemik.warrantdebt stops using importlib.resources and importlib.metadata",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W1684",
         "W1751"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W2476"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "Remove importlib.resources and importlib.metadata from nemik.warrantdebt (src/nemik/warrantdebt.py): replace the import or construct with a Codon-compatible form (the wall's recorded options are in docs/codon-walls.md), in a scratch worktree, probing the pinned Codon first, then measure the pair with tools/codon_walls.py before and after. The card closes when the pair (warrantdebt, importlib.resources and importlib.metadata) leaves codon-walls.json. Bundle with other ready instances in one stack: never a full gate for one pair (github-14, 2026-11-10).",
-      "evidence": "",
+      "evidence": "2026-11-27T02:59:10Z: 2026-11-27: warrantdebt.py imports importlib.resources.files (line 15) to read packaged data, the 45-pair packaged-data class carried by one codemod (W2476, pycodemod verb mtools:W2887/W2902), same as W1905, W1913, W1933, W1942. It has no importlib.metadata import of its own (grep), so that half arrives through the closure. Re-ready when W2476 lands.",
       "issued_at": "2026-11-05T21:54:24Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-11-17T22:00:54Z",
+      "last_worked": "2026-11-27T02:59:10Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/warrantdebt.py"
@@ -49597,25 +49611,28 @@
       "size_class": "small",
       "weight": 116,
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
-      "vector_source": "default"
+      "vector_source": "default",
+      "completed": null
     },
     {
       "symbol": "W1962",
       "title": "Codon instance warrantdebt: nemik.warrantdebt stops using rdflib",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W1687",
         "W1751"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W1767"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "Remove rdflib from nemik.warrantdebt (src/nemik/warrantdebt.py): replace the import or construct with a Codon-compatible form (the wall's recorded options are in docs/codon-walls.md), in a scratch worktree, probing the pinned Codon first, then measure the pair with tools/codon_walls.py before and after. The card closes when the pair (warrantdebt, rdflib) leaves codon-walls.json. Bundle with other ready instances in one stack: never a full gate for one pair (github-14, 2026-11-10).",
-      "evidence": "",
+      "evidence": "2026-11-27T03:01:55Z: 2026-11-27: warrantdebt.py names rdflib only as 'from rdflib import Graph' under TYPE_CHECKING (line 22) but imports nemik.adapter (line 18) and nemik.blocks (line 19), and walls count through the import closure: the (warrantdebt, rdflib) pair is carried by the adapter, the rdflib core W1767. Same as W1926, W1930, W1955, W1959. Re-ready when W1767 lands.",
       "issued_at": "2026-11-05T21:54:25Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-11-17T22:00:54Z",
+      "last_worked": "2026-11-27T03:01:55Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/warrantdebt.py"
@@ -49623,25 +49640,28 @@
       "size_class": "small",
       "weight": 101,
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
-      "vector_source": "default"
+      "vector_source": "default",
+      "completed": null
     },
     {
       "symbol": "W1963",
       "title": "Codon instance warrantdebt: nemik.warrantdebt stops using tomllib",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W1690",
         "W1751"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W2034"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "Remove tomllib from nemik.warrantdebt (src/nemik/warrantdebt.py): replace the import or construct with a Codon-compatible form (the wall's recorded options are in docs/codon-walls.md), in a scratch worktree, probing the pinned Codon first, then measure the pair with tools/codon_walls.py before and after. The card closes when the pair (warrantdebt, tomllib) leaves codon-walls.json. Bundle with other ready instances in one stack: never a full gate for one pair (github-14, 2026-11-10).",
-      "evidence": "",
+      "evidence": "2026-11-27T03:05:36Z: 2026-11-27: warrantdebt.py reads TOML through tomllib (the codon-wall instance) and nemik.tomlview. The TOML reader replacement is W2034 (atomized into W2548 to W2551), the blocker W1907 (score), W1935 (starved) and W1945 (vtodo) already wait on; a warrantdebt-only reader would be a fourth copy. Re-ready when W2034 lands.",
       "issued_at": "2026-11-05T21:54:26Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-11-17T22:00:55Z",
+      "last_worked": "2026-11-27T03:05:36Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/warrantdebt.py"
@@ -49649,25 +49669,28 @@
       "size_class": "small",
       "weight": 125,
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
-      "vector_source": "default"
+      "vector_source": "default",
+      "completed": null
     },
     {
       "symbol": "W1964",
       "title": "Codon instance warrants: nemik.warrants stops using collections.abc imports",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W1675",
         "W1752"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W2475"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "Remove collections.abc imports from nemik.warrants (src/nemik/warrants.py): replace the import or construct with a Codon-compatible form (the wall's recorded options are in docs/codon-walls.md), in a scratch worktree, probing the pinned Codon first, then measure the pair with tools/codon_walls.py before and after. The card closes when the pair (warrants, collections.abc imports) leaves codon-walls.json. Bundle with other ready instances in one stack: never a full gate for one pair (github-14, 2026-11-10).",
-      "evidence": "",
+      "evidence": "2026-11-27T03:10:47Z: 2026-11-27: warrants.py's only collections.abc import is 'from collections.abc import Mapping' inside its TYPE_CHECKING block (lines 19-20). It leaves with that block: the TYPE_CHECKING class, W2475's codemod (operator ruling 2026-11-23: mechanize), same as W1918 (shaclcache) and W1922 (shaclinc). Re-ready when W2475 lands.",
       "issued_at": "2026-11-05T21:54:26Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-11-17T22:00:55Z",
+      "last_worked": "2026-11-27T03:10:47Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/warrants.py"
@@ -49675,25 +49698,28 @@
       "size_class": "small",
       "weight": 157,
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
-      "vector_source": "default"
+      "vector_source": "default",
+      "completed": null
     },
     {
       "symbol": "W1965",
       "title": "Codon instance warrants: nemik.warrants stops using importlib.resources and importlib.metadata",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W1684",
         "W1752"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W2476"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "Remove importlib.resources and importlib.metadata from nemik.warrants (src/nemik/warrants.py): replace the import or construct with a Codon-compatible form (the wall's recorded options are in docs/codon-walls.md), in a scratch worktree, probing the pinned Codon first, then measure the pair with tools/codon_walls.py before and after. The card closes when the pair (warrants, importlib.resources and importlib.metadata) leaves codon-walls.json. Bundle with other ready instances in one stack: never a full gate for one pair (github-14, 2026-11-10).",
-      "evidence": "",
+      "evidence": "2026-11-27T03:13:20Z: 2026-11-27: warrants.py imports importlib.resources.files (line 16) to read packaged data (the warrant bib), the 45-pair packaged-data class carried by one codemod (W2476, pycodemod verb mtools:W2887/W2902), same as W1905, W1913, W1933, W1942, W1961. It has no importlib.metadata import of its own (grep). Re-ready when W2476 lands.",
       "issued_at": "2026-11-05T21:54:27Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-11-17T22:00:56Z",
+      "last_worked": "2026-11-27T03:13:20Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/warrants.py"
@@ -49701,25 +49727,28 @@
       "size_class": "small",
       "weight": 149,
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
-      "vector_source": "default"
+      "vector_source": "default",
+      "completed": null
     },
     {
       "symbol": "W1966",
       "title": "Codon instance warrants: nemik.warrants stops using rdflib",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W1687",
         "W1752"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W2475"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "Remove rdflib from nemik.warrants (src/nemik/warrants.py): replace the import or construct with a Codon-compatible form (the wall's recorded options are in docs/codon-walls.md), in a scratch worktree, probing the pinned Codon first, then measure the pair with tools/codon_walls.py before and after. The card closes when the pair (warrants, rdflib) leaves codon-walls.json. Bundle with other ready instances in one stack: never a full gate for one pair (github-14, 2026-11-10).",
-      "evidence": "",
+      "evidence": "2026-11-27T03:15:42Z: 2026-11-27: warrants.py has NO nemik imports (grep), so the (warrants, rdflib) pair is not carried by the adapter: it is the single line 22, 'from rdflib import Graph' inside its TYPE_CHECKING block, used only by the annotation on attach(g: Graph, ...) (line 87). It leaves with the TYPE_CHECKING class, W2475's codemod (operator ruling 2026-11-23: mechanize), whose annotation form (a structural stand-in for Graph, or an object annotation) the codemod must choose; the same edit clears W1964 (collections.abc.Mapping in the same block) and the module's TYPE_CHECKING pair. Re-ready when W2475 lands.",
       "issued_at": "2026-11-05T21:54:27Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-11-17T22:00:57Z",
+      "last_worked": "2026-11-27T03:15:42Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/warrants.py"
@@ -49727,25 +49756,28 @@
       "size_class": "small",
       "weight": 145,
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
-      "vector_source": "default"
+      "vector_source": "default",
+      "completed": null
     },
     {
       "symbol": "W1967",
       "title": "Codon instance warrants: nemik.warrants stops using tomllib",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W1690",
         "W1752"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W2034"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "Remove tomllib from nemik.warrants (src/nemik/warrants.py): replace the import or construct with a Codon-compatible form (the wall's recorded options are in docs/codon-walls.md), in a scratch worktree, probing the pinned Codon first, then measure the pair with tools/codon_walls.py before and after. The card closes when the pair (warrants, tomllib) leaves codon-walls.json. Bundle with other ready instances in one stack: never a full gate for one pair (github-14, 2026-11-10).",
-      "evidence": "",
+      "evidence": "2026-11-27T03:26:56Z: 2026-11-27: warrants.py reads TOML through tomllib (the warrant data it loads from the packaged files, beside importlib.resources). The TOML reader replacement is W2034 (atomized into W2548 to W2551), the blocker W1907 (score), W1935 (starved), W1945 (vtodo) and W1963 (warrantdebt) already wait on; a warrants-only reader would be a fifth copy. Re-ready when W2034 lands.",
       "issued_at": "2026-11-05T21:54:28Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-11-17T22:00:57Z",
+      "last_worked": "2026-11-27T03:26:56Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/warrants.py"
@@ -49753,25 +49785,28 @@
       "size_class": "small",
       "weight": 156,
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
-      "vector_source": "default"
+      "vector_source": "default",
+      "completed": null
     },
     {
       "symbol": "W1968",
       "title": "Codon instance wcagjudge: nemik.wcagjudge stops using importlib.resources and importlib.metadata",
-      "status": "ready",
+      "status": "blocked",
       "enables": [
         "W1684",
         "W1753"
       ],
       "touches": [],
-      "blocked_on": [],
-      "blocked_kind": null,
+      "blocked_on": [
+        "W2476"
+      ],
+      "blocked_kind": "agent",
       "next_bounded_step": "Remove importlib.resources and importlib.metadata from nemik.wcagjudge (src/nemik/wcagjudge.py): replace the import or construct with a Codon-compatible form (the wall's recorded options are in docs/codon-walls.md), in a scratch worktree, probing the pinned Codon first, then measure the pair with tools/codon_walls.py before and after. The card closes when the pair (wcagjudge, importlib.resources and importlib.metadata) leaves codon-walls.json. Bundle with other ready instances in one stack: never a full gate for one pair (github-14, 2026-11-10).",
-      "evidence": "",
+      "evidence": "2026-11-27T03:28:34Z: 2026-11-27: wcagjudge.py imports importlib.resources.files (line 10) to read packaged data, the 45-pair packaged-data class carried by one codemod (W2476, pycodemod verb mtools:W2887/W2902), same as W1905, W1913, W1933, W1942, W1961, W1965. It has no importlib.metadata import of its own (grep). Re-ready when W2476 lands.",
       "issued_at": "2026-11-05T21:54:29Z",
       "minted_during": "tick",
       "caused_by": null,
-      "last_worked": "2026-11-17T22:00:58Z",
+      "last_worked": "2026-11-27T03:28:34Z",
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/wcagjudge.py"
@@ -49779,7 +49814,8 @@
       "size_class": "small",
       "weight": 165,
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
-      "vector_source": "default"
+      "vector_source": "default",
+      "completed": null
     },
     {
       "symbol": "W1969",
@@ -62129,21 +62165,22 @@
     {
       "symbol": "W2490",
       "title": "Repin nemik's 11 vendored mtools wheels (now +636e39b) to mtools origin/main aeb2a6d3 as a PURE single-sha repin, so the pinned writer carries supersedes",
-      "status": "working",
+      "status": "landed",
       "enables": [],
       "touches": [],
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "Pure repin, FIRST (github-82 2026-11-26, ahead of the cold-cache baseline): in a worktree at the current nemik main with a symlinked .venv (the tool's parity check needs a live writer; remove the symlink before staging), mikemol-repin --revendor --sha aeb2a6d3b581ebc0a2ebfd881163d941d256c9fb --root <worktree> --no-sync --write; moves the 11 wheels, pyproject.toml, MODULE.bazel, uv.lock and SHA256SUMS and nothing else; stack it as one pure repin (clause R admits it with no paydown); converge 0f8267e, webpage 146ebaaf, otlp and endpoints 5ba261f stay. After it lands tell luthen-observability the sha (its user apply rebuilds the live install, then every --add-retro takes supersedes).",
-      "evidence": "2026-11-23T23:59:47Z: 2026-11-23 luthen-observability:W2977 (review ref ccad1e0e, in THEIR repo) repins LUTHEN's vendored wheels (+g9ea5914 to +g87857ab), not nemik's: nemik's own vendor/wheels, pyproject.toml, MODULE.bazel and uv.lock pin mtools at 636e39b, eleven wheels. So the nemik repin is mine: mikemol-repin --revendor --sha 87857abb40fa2d546e239cbc660ec09825e0a776 --root <scratch worktree> --mtools <mtools> --no-sync --write (dry run printed the plan: archive 87857ab of hooks pathsforward fence icsstruct rulerseq frontier atomicwrite cvdcore ratchet transcriptstruct procrun, uv build each wheel, copy to vendor/wheels, git rm the old, move the 11 wheel paths in pyproject.toml and MODULE.bazel, uv lock, rewrite the checksum file). Its own check: the new writer's --hash over a COPY of the queue equals the live one. Running in the scratch worktree now. | 2026-11-24T00:03:12Z: 2026-11-23 APPLIED in a scratch worktree (mikemol-repin --revendor --sha 87857abb... --no-sync --write; its parity check needed a live writer to compare with, so the worktree had a symlinked .venv, removed before staging): the 11 wheels, pyproject.toml, MODULE.bazel, uv.lock and SHA256SUMS moved from +636e39b to +87857ab. A scratch venv built from the new pathsforward wheel ran --migrate-retros over a copy of nemik's queue (the copy in a directory named nemik: the writer joins ids to the state's directory name): 496 rows, 0 copyable, every one NEEDS A REVIEWER; the baselined nemik R22 to R65 say 'handoff operator other needs self_probe executed-and-failed'. So the lowering row needs a REAL self probe run by a reviewer; asked github-82 which retro and what the probe found. | 2026-11-25T22:30:40Z: 2026-11-25 EARLY CREDIT (recorded as github-82 ruled): the lowering stack (refs/review/W2490-stack-v2 02a7bcc3, tree 545cd5a3, presubmit rc 0) was REFUSED at submit because retro-handoff-baseline.json's 296 to 295 fall was credited at PRESUBMIT: tools/gate_staged.sh (the live checkout's, still the old one: nemik:W2465's fail-closed fix is reviewed and PASSed but unlanded) emits the staged tree's ratchet values as an unlabelled gate-time sample, so the pace of 2026-11-25T22:23:46Z already reads 'ok retro-handoff-baseline.json; 295 left'. The guard now lists codon-baseline.json (owes 2) and codon-walls.json (owes 1), and the stack lowers neither. A recurrence of W2464's 840 (2026-11-23). My lapse: I ran the stack's presubmit while knowing W2465 was unlanded. github-82's ruling (E): carry a REAL codon-baseline fall (two modules the pinned compiler accepts, verified by mikemol-codon-probe) in this same stack; then W2465 lands as the NEXT stack, before any other presubmit. | 2026-11-26T23:29:49Z: 2026-11-26 COLLAPSE (github-82): nemik:W2568, minted today for the same wheel re-vendor, is closed into this card (one symbol for every waiter: luthen-observability:W3066/W2977, nemik:W2489 and W2532). Its facts: the writer the retro paydown ran on was a session-built scratch venv at mikemol_pathsforward 0.1.0+87857ab (a pinned-tools deviation recorded on W2560; the pinned 636e39b writer cannot write supersedes, which is why this card is now FIRST); the paydown guard's clause R (mtools hooks/ratchet_pace.py _repin_clear, repin_admission.admits) admits a stack that is a pure repin of one new sha, so the repin needs no owed-ratchet paydown; dry run of the live install's mikemol-repin --revendor --sha aeb2a6d3 planned exactly the same eleven wheels (hooks pathsforward fence icsstruct rulerseq frontier atomicwrite cvdcore ratchet transcriptstruct procrun). A first attempt today in a bare worktree (.nemik-w2568-wt at 35067b41) REFUSED at the tool's parity check ('live empty, new v2:5176600c...'): the tool compares against the worktree's own .venv writer and a fresh worktree has none; the live and nemik-.venv writers both read the live queue as v2:b7f5ff69f80b7da6. The fix is the symlinked .venv this card's 2026-11-24 evidence already records. | 2026-11-26T23:31:49Z: 2026-11-26 REPIN APPLIED in the worktree .nemik-w2568-wt at 35067b41: mikemol-repin --revendor --sha aeb2a6d3b581ebc0a2ebfd881163d941d256c9fb --no-sync --write (parity check satisfied with a symlinked .venv, removed before staging): printed APPLIED .nemik-w2568-wt at aeb2a6d, sha256 per wheel (hooks 9e989709, pathsforward cb7dada8, fence e71c8755, icsstruct ee252d5c, rulerseq c3e3f6a2, frontier b67fe6cf, atomicwrite 47225e3a, cvdcore 32fb3af9, ratchet 9b7987c1, transcriptstruct 02ed3dea, procrun 8661c013). git status: exactly MODULE.bazel, pyproject.toml, uv.lock (version, source-path and wheel-hash lines only, read in full: no dependency line moved), vendor/wheels/SHA256SUMS and eleven wheel renames. Submitted as a pure-repin stack (scratchpad stack-repin.json, --freeze-from the worktree, queue files not listed), so clause R should admit it. Next: tell luthen-observability the sha once it prints COMMITTED. | 2026-11-26T23:34:28Z: 2026-11-26 REPIN SUBMIT REFUSED, CAUSE FOUND: the pure-repin stack (stack-repin.json, frozen from .nemik-w2568-wt) was answered NOT COMMITTED by mikemol-commit: 'behind its ratchet paydown and this stack lowers none of the ratchets it owes (codon-baseline.json 2, codon-walls.json 1, retro-handoff-baseline.json 1, retro-sustain-baseline.json 1)'. mtools' repin_admission.py (HEAD, read whole) holds for this tree on all four invariants (one sha aeb2a6d, every mention agrees, every wheel named exists, only sha and hash tokens change; SHA256SUMS has exactly the 11 swapped lines and no old sha), so the pace guard did not run clause R: the mikemol-commit I invoke is the live install's, whose hooks wheel is +636e39b, and git grep for _repin_clear and repin_admission in ratchet_pace.py at 636e39b finds nothing (clause R is mtools 91576a0a and later). So a repin is not admitted by the guard that actually runs, and the repin that would bring clause R in cannot land through it. ROUTE (no waiver): stack the repin with an owed-ratchet paydown: the 42 supersessions (all committed: 79bd60e, 08c65ff, 1aac98e, a8b4e91, 35067b4, b73a7ce) should shrink src/nemik/data/retro-handoff-baseline.json, which is owed (required fall 1); entry 1 the baseline shrink, entry 2 the pure repin, one stack. The cold-cache measurement runs now (two dry runs with an empty NEMIK_CACHE_DIR: HEAD's code through PYTHONPATH at the worktree, and the live working-tree code with W2552's edge form). | 2026-11-26T23:47:28Z: 2026-11-26 THE SHRINK FIGURE (github-82's conditions): tools/retro_handoff_baseline.py, dry run, from HEAD's code (PYTHONPATH at the worktree .nemik-w2568-wt at 35067b41, src = HEAD's; the later commits only changed the queue; the shapes are the string-match supersession clauses of 4232f9e3 with the old literal ingest, NOT W2552's edge form), NEMIK_CACHE_DIR empty, over a scratch root built from committed objects by git show per repo (scratchpad mkroot_committed.py): nemik b73a7cef; aeternum 071ca7ff, amr-skills c8b23546, el-openglo b93663cb, estate e235a158, gcalculus 86c41e66, life 625bc171, linux-sources 2e754104, luthen-observability 75f5b30b, mtools aeb2a6d3, resumes 5a5d79aa, rosettapkg c6047119, skills 8747ae45, substrate bc3ad1b1, summit d021c037; three queues have no committed object (the host root is not a git repo; paperkit and gabion do not track theirs) and enter as live files, named as exceptions. RESULT: kept 250, would drop 45 of 295: nemik:R22 and nemik:R23 to R64 (the 42 paydown rows plus R22, superseded earlier by R497) and gcalculus:R50 and gcalculus:R51. 42 of 42 leave; the required fall of 1 is met. INFORMATION ONLY (live working trees, live working-tree code with the W2552 edge form): kept 252, would drop 43 (nemik R22 to R64, no gcalculus ids); I do not know why the gcalculus ids differ between the two runs (a different input state is the candidate, not verified). Next: --write of the baseline file with the tool in the worktree, then the two-entry stack (baseline shrink, pure repin), the refs to github-82 before submit. | 2026-11-27T00:01:22Z: 2026-11-26 REVIEW REFS (sent to github-82, no submit yet): entry 1 refs/review/w2490-shrink = cc6b9099809a1238a7ca1367ef7e65c28d3b376c (parent b73a7cef): src/nemik/data/retro-handoff-baseline.json, 45 deletions, written by tools/retro_handoff_baseline.py --write (kept 250, dropped 45: nemik R22 and R23 to R64, gcalculus R50 and R51; HEAD's string-match shapes; empty NEMIK_CACHE_DIR; inputs: committed objects per repo, the host queue from commit 066481b1fdf9cf26bce9bd958499dc250336baef of the host's own .claude repo, paperkit and gabion live files named as exceptions, W2569 and W2570). Entry 2 refs/review/w2490-repin = 283f3dd0f885fc17dae39c1d8e3cda1f3993acf7 (parent cc6b9099): the pure repin, 16 files (MODULE.bazel, pyproject.toml, uv.lock, SHA256SUMS, 11 wheel renames). Clause R's four invariants hand-checked and sent. The stack is two entries (shrink, repin), one gate, submitted on github-82's PASS. | 2026-11-27T00:03:56Z: 2026-11-26 INDEPENDENT BYTE CHECK (github-82's condition; PASS-SUBMIT given subject to it): mikemol-wheel (not the repin tool's own build) rebuilt all eleven dists from mtools aeb2a6d3b581ebc0a2ebfd881163d941d256c9fb (--sha, --mtools the mtools checkout, output in the session scratchpad). WHOLE-FILE sha256 DOES NOT EQUAL the vendored wheels': independent hooks 26f98738, pathsforward cd74a80c, fence adf5c6c2, icsstruct 0561fb00, rulerseq 4efdefcb, frontier 173fdf8c, atomicwrite 142633ed, cvdcore 83600629, ratchet e5a3d8b1, transcriptstruct 36d6b0b3, procrun e35ab985 (first 8 hex) against vendored hooks 9e989709, pathsforward cb7dada8, fence e71c8755, icsstruct ee252d5c, rulerseq c3e3f6a2, frontier b67fe6cf, atomicwrite 47225e3a, cvdcore 32fb3af9, ratchet 9b7987c1, transcriptstruct 02ed3dea, procrun 8661c013. CAUSE, read: the two tools spell the local version differently: mikemol-wheel names the wheel +gaeb2a6d, the repin tool sets +aeb2a6d (its plan line says '+aeb2a6d in the archive only'), and that spelling is the dist-info directory name and the METADATA Version, so the zip bytes differ. MEMBER-WISE COMPARISON (scratchpad cmp_wheels.py, names and METADATA/WHEEL normalised for the +g spelling, RECORD not compared since it hashes the dist-info files): for all 11 dists, no member present in one wheel and absent in the other, and no differing member: 204 (hooks), 94 (pathsforward), 21 (fence), 6 (icsstruct), 5 (rulerseq), 3 (frontier), 4 (atomicwrite), 3 (cvdcore), 18 (ratchet), 30 (transcriptstruct), 3 (procrun) payload members byte-equal. So the vendored wheels carry the same CONTENT as an independent build, and the whole-file digests cannot match unless the spelling is changed. Not claimed: that the zip metadata (timestamps) was compared. The stack is NOT submitted: asked github-82 whether member-wise equality satisfies her condition.",
+      "evidence": "2026-11-23T23:59:47Z: 2026-11-23 luthen-observability:W2977 (review ref ccad1e0e, in THEIR repo) repins LUTHEN's vendored wheels (+g9ea5914 to +g87857ab), not nemik's: nemik's own vendor/wheels, pyproject.toml, MODULE.bazel and uv.lock pin mtools at 636e39b, eleven wheels. So the nemik repin is mine: mikemol-repin --revendor --sha 87857abb40fa2d546e239cbc660ec09825e0a776 --root <scratch worktree> --mtools <mtools> --no-sync --write (dry run printed the plan: archive 87857ab of hooks pathsforward fence icsstruct rulerseq frontier atomicwrite cvdcore ratchet transcriptstruct procrun, uv build each wheel, copy to vendor/wheels, git rm the old, move the 11 wheel paths in pyproject.toml and MODULE.bazel, uv lock, rewrite the checksum file). Its own check: the new writer's --hash over a COPY of the queue equals the live one. Running in the scratch worktree now. | 2026-11-24T00:03:12Z: 2026-11-23 APPLIED in a scratch worktree (mikemol-repin --revendor --sha 87857abb... --no-sync --write; its parity check needed a live writer to compare with, so the worktree had a symlinked .venv, removed before staging): the 11 wheels, pyproject.toml, MODULE.bazel, uv.lock and SHA256SUMS moved from +636e39b to +87857ab. A scratch venv built from the new pathsforward wheel ran --migrate-retros over a copy of nemik's queue (the copy in a directory named nemik: the writer joins ids to the state's directory name): 496 rows, 0 copyable, every one NEEDS A REVIEWER; the baselined nemik R22 to R65 say 'handoff operator other needs self_probe executed-and-failed'. So the lowering row needs a REAL self probe run by a reviewer; asked github-82 which retro and what the probe found. | 2026-11-25T22:30:40Z: 2026-11-25 EARLY CREDIT (recorded as github-82 ruled): the lowering stack (refs/review/W2490-stack-v2 02a7bcc3, tree 545cd5a3, presubmit rc 0) was REFUSED at submit because retro-handoff-baseline.json's 296 to 295 fall was credited at PRESUBMIT: tools/gate_staged.sh (the live checkout's, still the old one: nemik:W2465's fail-closed fix is reviewed and PASSed but unlanded) emits the staged tree's ratchet values as an unlabelled gate-time sample, so the pace of 2026-11-25T22:23:46Z already reads 'ok retro-handoff-baseline.json; 295 left'. The guard now lists codon-baseline.json (owes 2) and codon-walls.json (owes 1), and the stack lowers neither. A recurrence of W2464's 840 (2026-11-23). My lapse: I ran the stack's presubmit while knowing W2465 was unlanded. github-82's ruling (E): carry a REAL codon-baseline fall (two modules the pinned compiler accepts, verified by mikemol-codon-probe) in this same stack; then W2465 lands as the NEXT stack, before any other presubmit. | 2026-11-26T23:29:49Z: 2026-11-26 COLLAPSE (github-82): nemik:W2568, minted today for the same wheel re-vendor, is closed into this card (one symbol for every waiter: luthen-observability:W3066/W2977, nemik:W2489 and W2532). Its facts: the writer the retro paydown ran on was a session-built scratch venv at mikemol_pathsforward 0.1.0+87857ab (a pinned-tools deviation recorded on W2560; the pinned 636e39b writer cannot write supersedes, which is why this card is now FIRST); the paydown guard's clause R (mtools hooks/ratchet_pace.py _repin_clear, repin_admission.admits) admits a stack that is a pure repin of one new sha, so the repin needs no owed-ratchet paydown; dry run of the live install's mikemol-repin --revendor --sha aeb2a6d3 planned exactly the same eleven wheels (hooks pathsforward fence icsstruct rulerseq frontier atomicwrite cvdcore ratchet transcriptstruct procrun). A first attempt today in a bare worktree (.nemik-w2568-wt at 35067b41) REFUSED at the tool's parity check ('live empty, new v2:5176600c...'): the tool compares against the worktree's own .venv writer and a fresh worktree has none; the live and nemik-.venv writers both read the live queue as v2:b7f5ff69f80b7da6. The fix is the symlinked .venv this card's 2026-11-24 evidence already records. | 2026-11-26T23:31:49Z: 2026-11-26 REPIN APPLIED in the worktree .nemik-w2568-wt at 35067b41: mikemol-repin --revendor --sha aeb2a6d3b581ebc0a2ebfd881163d941d256c9fb --no-sync --write (parity check satisfied with a symlinked .venv, removed before staging): printed APPLIED .nemik-w2568-wt at aeb2a6d, sha256 per wheel (hooks 9e989709, pathsforward cb7dada8, fence e71c8755, icsstruct ee252d5c, rulerseq c3e3f6a2, frontier b67fe6cf, atomicwrite 47225e3a, cvdcore 32fb3af9, ratchet 9b7987c1, transcriptstruct 02ed3dea, procrun 8661c013). git status: exactly MODULE.bazel, pyproject.toml, uv.lock (version, source-path and wheel-hash lines only, read in full: no dependency line moved), vendor/wheels/SHA256SUMS and eleven wheel renames. Submitted as a pure-repin stack (scratchpad stack-repin.json, --freeze-from the worktree, queue files not listed), so clause R should admit it. Next: tell luthen-observability the sha once it prints COMMITTED. | 2026-11-26T23:34:28Z: 2026-11-26 REPIN SUBMIT REFUSED, CAUSE FOUND: the pure-repin stack (stack-repin.json, frozen from .nemik-w2568-wt) was answered NOT COMMITTED by mikemol-commit: 'behind its ratchet paydown and this stack lowers none of the ratchets it owes (codon-baseline.json 2, codon-walls.json 1, retro-handoff-baseline.json 1, retro-sustain-baseline.json 1)'. mtools' repin_admission.py (HEAD, read whole) holds for this tree on all four invariants (one sha aeb2a6d, every mention agrees, every wheel named exists, only sha and hash tokens change; SHA256SUMS has exactly the 11 swapped lines and no old sha), so the pace guard did not run clause R: the mikemol-commit I invoke is the live install's, whose hooks wheel is +636e39b, and git grep for _repin_clear and repin_admission in ratchet_pace.py at 636e39b finds nothing (clause R is mtools 91576a0a and later). So a repin is not admitted by the guard that actually runs, and the repin that would bring clause R in cannot land through it. ROUTE (no waiver): stack the repin with an owed-ratchet paydown: the 42 supersessions (all committed: 79bd60e, 08c65ff, 1aac98e, a8b4e91, 35067b4, b73a7ce) should shrink src/nemik/data/retro-handoff-baseline.json, which is owed (required fall 1); entry 1 the baseline shrink, entry 2 the pure repin, one stack. The cold-cache measurement runs now (two dry runs with an empty NEMIK_CACHE_DIR: HEAD's code through PYTHONPATH at the worktree, and the live working-tree code with W2552's edge form). | 2026-11-26T23:47:28Z: 2026-11-26 THE SHRINK FIGURE (github-82's conditions): tools/retro_handoff_baseline.py, dry run, from HEAD's code (PYTHONPATH at the worktree .nemik-w2568-wt at 35067b41, src = HEAD's; the later commits only changed the queue; the shapes are the string-match supersession clauses of 4232f9e3 with the old literal ingest, NOT W2552's edge form), NEMIK_CACHE_DIR empty, over a scratch root built from committed objects by git show per repo (scratchpad mkroot_committed.py): nemik b73a7cef; aeternum 071ca7ff, amr-skills c8b23546, el-openglo b93663cb, estate e235a158, gcalculus 86c41e66, life 625bc171, linux-sources 2e754104, luthen-observability 75f5b30b, mtools aeb2a6d3, resumes 5a5d79aa, rosettapkg c6047119, skills 8747ae45, substrate bc3ad1b1, summit d021c037; three queues have no committed object (the host root is not a git repo; paperkit and gabion do not track theirs) and enter as live files, named as exceptions. RESULT: kept 250, would drop 45 of 295: nemik:R22 and nemik:R23 to R64 (the 42 paydown rows plus R22, superseded earlier by R497) and gcalculus:R50 and gcalculus:R51. 42 of 42 leave; the required fall of 1 is met. INFORMATION ONLY (live working trees, live working-tree code with the W2552 edge form): kept 252, would drop 43 (nemik R22 to R64, no gcalculus ids); I do not know why the gcalculus ids differ between the two runs (a different input state is the candidate, not verified). Next: --write of the baseline file with the tool in the worktree, then the two-entry stack (baseline shrink, pure repin), the refs to github-82 before submit. | 2026-11-27T00:01:22Z: 2026-11-26 REVIEW REFS (sent to github-82, no submit yet): entry 1 refs/review/w2490-shrink = cc6b9099809a1238a7ca1367ef7e65c28d3b376c (parent b73a7cef): src/nemik/data/retro-handoff-baseline.json, 45 deletions, written by tools/retro_handoff_baseline.py --write (kept 250, dropped 45: nemik R22 and R23 to R64, gcalculus R50 and R51; HEAD's string-match shapes; empty NEMIK_CACHE_DIR; inputs: committed objects per repo, the host queue from commit 066481b1fdf9cf26bce9bd958499dc250336baef of the host's own .claude repo, paperkit and gabion live files named as exceptions, W2569 and W2570). Entry 2 refs/review/w2490-repin = 283f3dd0f885fc17dae39c1d8e3cda1f3993acf7 (parent cc6b9099): the pure repin, 16 files (MODULE.bazel, pyproject.toml, uv.lock, SHA256SUMS, 11 wheel renames). Clause R's four invariants hand-checked and sent. The stack is two entries (shrink, repin), one gate, submitted on github-82's PASS. | 2026-11-27T00:03:56Z: 2026-11-26 INDEPENDENT BYTE CHECK (github-82's condition; PASS-SUBMIT given subject to it): mikemol-wheel (not the repin tool's own build) rebuilt all eleven dists from mtools aeb2a6d3b581ebc0a2ebfd881163d941d256c9fb (--sha, --mtools the mtools checkout, output in the session scratchpad). WHOLE-FILE sha256 DOES NOT EQUAL the vendored wheels': independent hooks 26f98738, pathsforward cd74a80c, fence adf5c6c2, icsstruct 0561fb00, rulerseq 4efdefcb, frontier 173fdf8c, atomicwrite 142633ed, cvdcore 83600629, ratchet e5a3d8b1, transcriptstruct 36d6b0b3, procrun e35ab985 (first 8 hex) against vendored hooks 9e989709, pathsforward cb7dada8, fence e71c8755, icsstruct ee252d5c, rulerseq c3e3f6a2, frontier b67fe6cf, atomicwrite 47225e3a, cvdcore 32fb3af9, ratchet 9b7987c1, transcriptstruct 02ed3dea, procrun 8661c013. CAUSE, read: the two tools spell the local version differently: mikemol-wheel names the wheel +gaeb2a6d, the repin tool sets +aeb2a6d (its plan line says '+aeb2a6d in the archive only'), and that spelling is the dist-info directory name and the METADATA Version, so the zip bytes differ. MEMBER-WISE COMPARISON (scratchpad cmp_wheels.py, names and METADATA/WHEEL normalised for the +g spelling, RECORD not compared since it hashes the dist-info files): for all 11 dists, no member present in one wheel and absent in the other, and no differing member: 204 (hooks), 94 (pathsforward), 21 (fence), 6 (icsstruct), 5 (rulerseq), 3 (frontier), 4 (atomicwrite), 3 (cvdcore), 18 (ratchet), 30 (transcriptstruct), 3 (procrun) payload members byte-equal. So the vendored wheels carry the same CONTENT as an independent build, and the whole-file digests cannot match unless the spelling is changed. Not claimed: that the zip metadata (timestamps) was compared. The stack is NOT submitted: asked github-82 whether member-wise equality satisfies her condition. | 2026-11-27T00:06:27Z: 2026-11-26 VERIFICATION OF RECORD (github-82: member-wise equality is enough; do not rebuild the vendored wheels in the other spelling): independent rebuild with mikemol-wheel from mtools aeb2a6d3b581ebc0a2ebfd881163d941d256c9fb, compared member by member with the vendored wheels, names and METADATA/WHEEL normalised for the +g spelling, RECORD and zip metadata NOT compared: payload members byte-equal, none missing or extra, none differing, per dist: hooks 204, pathsforward 94, fence 21, icsstruct 6, rulerseq 5, frontier 3, atomicwrite 4, cvdcore 3, ratchet 18, transcriptstruct 30, procrun 3; 11 of 11 dists same content. The two-entry stack (baseline shrink cc6b9099, repin 283f3dd0) was SUBMITTED on github-82's PASS-SUBMIT (stack-final.json, --freeze-from the worktree whose tree equals the repin ref). The builder-spelling split is carded for mtools as W2571. | 2026-11-27T01:49:45Z: 2026-11-26 LANDED as a two-entry stack, gate_staged green, both PUSHED: nemik 722f981a0ac22681fea60119762c9b8abdf4acd3 (the retro-handoff baseline falls 295 to 250, the paydown) then nemik 48f6665fe2fe47d8a94f898796344b7c4f85855c (the pure repin of the 11 wheels to +aeb2a6d; parent 722f981a). git log confirms both are this session's commits. Sent to luthen-observability for the user apply that rebuilds the live install; to be verified after it: the live writer's installed pathsforward is +aeb2a6d and its --add-retro accepts supersedes. The witness for closing this card is that live-install check. | 2026-11-27T01:51:26Z: 2026-11-26 luthen-observability received it and verified 48f6665f is an ancestor of nemik's origin/main; the live install is still by-sha b73a7cef (their readlink). The rebuild is the user apply's act (the loop's, never theirs); they watch it as luthen-observability:W3073 (the live link and the installed mikemol_pathsforward version, read each tick, not a clock) and will tell nemik when the live install carries +aeb2a6d. They cited nemik:W2490 landed on luthen-observability:W3066 (now blocked on W3073) and closed W2977 as superseded for luthen's vendored wheels only. This card closes on MY check of the installed distribution (pathsforward +aeb2a6d, --add-retro accepting supersedes) after their word, not on their word.",
       "issued_at": "2026-11-23T23:59:38Z",
       "minted_during": "interrupt",
       "caused_by": "W2478",
-      "last_worked": "2026-11-27T00:03:56Z",
+      "last_worked": "2026-11-27T01:51:26Z",
       "ticks_blocked": 0,
       "completed": null,
       "vector": "WV:1/R:L/E:N/C:N/I:N/A:L/X:N/S:U/F:K/W:N",
-      "vector_source": "agent"
+      "vector_source": "agent",
+      "landed_at": "20261127T014945Z"
     },
     {
       "symbol": "W2491",
@@ -63451,8 +63488,11 @@
       "ticks_blocked": 0,
       "manifest": [
         "src/nemik/data/shapes.ttl",
+        "src/nemik/retroingest.py",
+        "tests/test_retro_supersedes.py",
         "tests/test_retro_handoff_supersedes.py",
-        "tests/test_retro_supersedes.py"
+        "tests/test_supersedes_incremental.py",
+        "bazel/nemik_tests.bzl"
       ],
       "completed": null
     },
@@ -63645,11 +63685,11 @@
       ],
       "blocked_kind": "agent",
       "next_bounded_step": "github-82 (from the host's warm review of skills a6d30af, record R272): only RetroSustainShape and RetroHandoffProbeShape carry a supersession clause; RetroPrecommit, RetroRoot, RetroBlameless, RetroFinding, RetroHandoff (missing field), RetroEnforcement, RetroDelta, RetroTimeline, RetroPass and RetroFixpoint do not, so a retro failing one can never be paid down by supersession (operator L216105: that is what supersession is for). Apply W2552's FILTER NOT EXISTS on a superseding retro (full-id match, other retro, not self) to each, or write down per shape why not. Witness: a planted row failing each shape, superseded by a passing row, is retired, and its superseder is judged on its own. Lands with or after W2552.",
-      "evidence": "2026-11-26T20:55:10Z: 2026-11-26 github-82 design steer: for shapes whose target is a child node (findings, the handoff) match the owning retro through the GRAPH EDGE that links it (?retro nemik:finding $this, ?retro nemik:handoff $this), never STRENDS on IRI text, which is the mechanism under suspicion in R22. Read so far: the edges exist (the graph dump shows urn:nemik:nemik/retro/nemik:R22 nemik:handoff .../handoff and nemik:finding .../finding/<i>). The gap is the other end: a retro's supersedes is a LITERAL ('nemik:R22'), and no triple names a retro by an id, so matching the superseded retro needs the id text (STRENDS on the retro node's IRI). The clean form is for the ingest (nemik.retroingest.triples, which emits supersedes as a literal) to emit supersedes as a REFERENCE to the superseded retro's node, so a shape reads ?other nemik:supersedes ?retro as an edge and reaches a child through ?retro nemik:handoff $this, with no string match anywhere. That is part of this card, designed after R22's bisection names its cause (probe b7u1pqqo3), and it would also replace the STRENDS in W2552's two clauses.",
+      "evidence": "2026-11-26T20:55:10Z: 2026-11-26 github-82 design steer: for shapes whose target is a child node (findings, the handoff) match the owning retro through the GRAPH EDGE that links it (?retro nemik:finding $this, ?retro nemik:handoff $this), never STRENDS on IRI text, which is the mechanism under suspicion in R22. Read so far: the edges exist (the graph dump shows urn:nemik:nemik/retro/nemik:R22 nemik:handoff .../handoff and nemik:finding .../finding/<i>). The gap is the other end: a retro's supersedes is a LITERAL ('nemik:R22'), and no triple names a retro by an id, so matching the superseded retro needs the id text (STRENDS on the retro node's IRI). The clean form is for the ingest (nemik.retroingest.triples, which emits supersedes as a literal) to emit supersedes as a REFERENCE to the superseded retro's node, so a shape reads ?other nemik:supersedes ?retro as an edge and reaches a child through ?retro nemik:handoff $this, with no string match anywhere. That is part of this card, designed after R22's bisection names its cause (probe b7u1pqqo3), and it would also replace the STRENDS in W2552's two clauses. | 2026-11-27T02:41:21Z: 2026-11-26 github-82 (warm review github:R321, finding L-2): the writer's --migrate-retros --write at aeb2a6d adds superseding rows, but RetroHandoffShape (a handoff missing instrument, channel or a valid operator; shapes.ttl line 595, read just now) has NO supersession clause, so a row the writer supersedes keeps its RetroHandoffShape Violation in nemik-check; only the sustain shape (line 561) and RetroHandoffProbeShape (line 629) honour supersession (and those are the working-tree edge form of W2552, unlanded; HEAD's are the string-match ones). It bears on the host's 389 rows (github:W170) and every repo's paydown. THIS CARD IS THAT FIX, option 1: every write-once retro shape judges only live retros, RetroHandoffShape first among the ten, by the same edge (?other supersedes ?r . ?r handoff $this). Option 2 (the writer stops offering to supersede rows whose only failure is that shape) is mtools' and is NOT taken: it would leave the violation unpayable, which the operator's 'that is what supersession is for' (L216105) rules out. Lands after W2552 (the edge ingest it builds on) and is blocked behind the same guard hold (the owed sustain baseline, mtools:W2937).",
       "issued_at": "2026-11-26T20:53:43Z",
       "minted_during": "interrupt",
       "caused_by": "W2552",
-      "last_worked": "2026-11-26T20:55:10Z",
+      "last_worked": "2026-11-27T02:41:21Z",
       "ticks_blocked": 0,
       "completed": null,
       "manifest": [
@@ -63693,11 +63733,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "",
-      "evidence": "",
+      "evidence": "2026-11-27T00:26:45Z: 2026-11-26: scope widened by W1958 (wake): the design also covers mikemol.procrun.proc.capture (subprocess capture, shared with vtodo's capture_bytes) and mikemol.hooks.rewake (a constant and a pure pair, mtools:W1299, whose owner is mtools); decide per library whether it is ported in-tree or asked of mtools in a Codon-compilable form.",
       "issued_at": "2026-11-26T22:20:12Z",
       "minted_during": "interrupt",
       "caused_by": "W1943",
-      "last_worked": null,
+      "last_worked": "2026-11-27T00:26:45Z",
       "ticks_blocked": 0
     },
     {
@@ -63709,11 +63749,11 @@
       "blocked_on": [],
       "blocked_kind": null,
       "next_bounded_step": "mtools:W2979 (github-82's review): nemik-rank --check classes a READY card with open child cards an UMBRELLA and ranks only its children; in mtools that hid SEVEN ready cards each carrying a built, PASS-SUBMITTED review ref (W2769, W2772, W2778, W2824, W2854, W2863, W2865: 159 of 187 ready cards ranked, these absent), and the children are FOLLOW-UPS minted with an edge to the parent, so the shipped fix waited a week on its sequel. Build: an umbrella whose evidence names a refs/review ref or a PASS-SUBMIT is its own lane ('built fix waiting on a landing') ranked ahead of its children, and --check names it. Fleet question to answer with a read: how many ready umbrellas with a ref does each repo hold. The writer half (a follow-up mint cites the parent with caused_by and does not enable it unless asked) is mtools' and is asked of them on mtools:W2979.",
-      "evidence": "2026-11-26T22:35:57Z: 2026-11-26 mtools (data point on mtools:W2979): W2769 ranked 1 as a ready umbrella whose own work had LANDED on 2026-11-20 (3e3c6b4b) and was never closed, so a refs/review ref or PASS-SUBMIT in the evidence is not a sign the work is still open. The ranking change must read the landing too: a ref or sha named in the evidence that is an ANCESTOR of main means built-and-landed (a close-it signal, not a 'built fix waiting on a landing' lane), and only an unlanded ref goes in the new lane. mtools closed W2769 against that sha. The writer half (follow-up mint with caused_by, no enables) stays on mtools:W2979, number to follow from them.",
+      "evidence": "2026-11-26T22:35:57Z: 2026-11-26 mtools (data point on mtools:W2979): W2769 ranked 1 as a ready umbrella whose own work had LANDED on 2026-11-20 (3e3c6b4b) and was never closed, so a refs/review ref or PASS-SUBMIT in the evidence is not a sign the work is still open. The ranking change must read the landing too: a ref or sha named in the evidence that is an ANCESTOR of main means built-and-landed (a close-it signal, not a 'built fix waiting on a landing' lane), and only an unlanded ref goes in the new lane. mtools closed W2769 against that sha. The writer half (follow-up mint with caused_by, no enables) stays on mtools:W2979, number to follow from them. | 2026-11-27T03:01:28Z: 2026-11-27 sibling carded: nemik:W2574 (mtools' second instance, mtools:W2944: an umbrella whose open children are all held, blocked on a human or on another repo, ranked out of the round by a child that cannot move). Same classification code in nemik-rank; build together, cards kept apart so each waiter cites its own trigger.",
       "issued_at": "2026-11-26T22:30:29Z",
       "minted_during": "interrupt",
       "caused_by": "mtools:W2979",
-      "last_worked": "2026-11-26T22:35:57Z",
+      "last_worked": "2026-11-27T03:01:28Z",
       "ticks_blocked": 0
     },
     {
@@ -63771,6 +63811,76 @@
       "last_worked": "2026-11-26T23:50:09Z",
       "ticks_blocked": 0,
       "completed": null
+    },
+    {
+      "symbol": "W2571",
+      "title": "mikemol-wheel and mikemol-repin spell the local version differently (+g<sha> against +<sha>), so their wheels cannot digest-match",
+      "status": "blocked",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [
+        "mtools:W2986"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "",
+      "evidence": "2026-11-27T00:06:25Z: 2026-11-26 github-82 (review of W2490): unify mikemol-wheel and mikemol-repin on one builder, or at least one spelling of the local version, with a test that the repin tool's wheels digest-match mikemol-wheel's for the same sha, so the next check is a plain sha256 equality. Measured: all 11 payloads byte-equal, whole-file digests differ only by the +gaeb2a6d against +aeb2a6d spelling (counts per dist on W2490, RECORD and zip metadata not compared). Letter: mtools/inbox/2026-11-26-nemik-two-wheel-builders-two-spellings.md. Re-file blocked_on as mtools:W<n> when mtools cards it. | 2026-11-27T00:08:55Z: 2026-11-26 mtools claimed it as mtools:W2986 (enables this card): one spelling or one builder, with a test that wheels built for the same sha by both digest-match. mtools read the spelling in its own code: the hooks wheel.py sets +g<short> in the extracted pyproject and revendor.py keeps each row's own spelling (mtools:W2251), consistent with the measurement here. blocked_on re-filed as mtools:W2986.",
+      "issued_at": "2026-11-27T00:06:18Z",
+      "minted_during": "interrupt",
+      "caused_by": "W2490",
+      "last_worked": "2026-11-27T00:08:55Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W2572",
+      "title": "mikemol-transcriptstruct needs a mode pairing each tool_use with its tool_result, so a reviewer can tell an executed change from a refused attempt",
+      "status": "blocked",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [
+        "mtools:W2994"
+      ],
+      "blocked_kind": "agent",
+      "next_bounded_step": "",
+      "evidence": "2026-11-27T02:13:07Z: 2026-11-26 github-82's ask (from the host's cold reviews github:R308 W-2 and R311): the pinned mikemol-transcriptstruct has no mode pairing each tool_use with its tool_result, so a reviewer cannot tell an executed change from a refused attempt (cited: L201283's --tick-hooks-set refused at L201315). WHAT: print each tool_use next to its paired tool_result with that result's exit or refusal, filterable by tool and by a command regex. ACCEPTANCE: L201283 reads as refused, a successful --standing-set reads as applied. Owner is mtools (the transcriptstruct distribution); letter: mtools/inbox/2026-11-26-nemik-transcriptstruct-pair-tool-use-with-result.md. Re-file blocked_on as mtools:W<n> when mtools cards it. | 2026-11-27T02:26:07Z: 2026-11-26 mtools claimed it as mtools:W2994 (enables this card, caused by it), with github-82's acceptance (L201283 reads refused, a successful --standing-set reads applied). blocked_on re-filed as mtools:W2994.",
+      "issued_at": "2026-11-27T02:13:00Z",
+      "minted_during": "interrupt",
+      "caused_by": "github:W158",
+      "last_worked": "2026-11-27T02:26:07Z",
+      "ticks_blocked": 0,
+      "completed": null
+    },
+    {
+      "symbol": "W2573",
+      "title": "nemik-static prints USAGE and exits 0 for -h and --help as argparse did, and a test pins repeated flags as last-wins",
+      "status": "ready",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "github-82's review of refs/review/w1936 (PASS-SUBMIT): (a) -h and --help now exit 2 with 'unrecognized arguments'; argparse printed help and exited 0. Probe 2026-11-27 (scratchpad probe_flags.py over nemik.flags): --help is an unrecognized-argument error and -h lands in the stray words. Fix: declare --help a switch in staticserve.read_options, treat -h like pins.py does, print USAGE on stdout and exit 0 (pins.read_options is the pattern); a test for both. (b) NOT a change: the same probe shows nemik.flags.Flags.first() returns the LAST value given (['/a','/b'] reads '/b', ['1','2'] reads '2'), the same last-wins as argparse, despite the method's name; add a test that pins it so the name cannot mislead the next reader. Small; src/nemik/staticserve.py and tests/test_staticserve_options.py. Not in the reviewed stack so as not to change a reviewed diff.",
+      "evidence": "",
+      "issued_at": "2026-11-27T02:57:03Z",
+      "minted_during": "interrupt",
+      "caused_by": "W1936",
+      "last_worked": null,
+      "ticks_blocked": 0
+    },
+    {
+      "symbol": "W2574",
+      "title": "nemik-rank --check flags an umbrella whose open children are all held, blocked on a human, or blocked on another repo",
+      "status": "ready",
+      "enables": [],
+      "touches": [],
+      "blocked_on": [],
+      "blocked_kind": null,
+      "next_bounded_step": "mtools (2026-11-27): mtools:W2944 (velocity band, an operator-priority card) dropped OUT of the published round because W1780, HELD FOR THE OPERATOR and blocked on luthen-observability:W1467, carried an enables edge to it, so nemik classed W2944 an UMBRELLA and ranked its children instead; the round (as_of 2026-11-27T02:55:41Z) listed 12 mtools cards and not W2944 and the stack submit was refused by the round check for it; mtools cleared the edge through the writer and the next round (02:59:58Z) lists W2944 at rank 1. Second instance of the hidden-umbrella class after the seven of mtools:W2977 (nemik:W2566, which handles the ref-or-PASS-SUBMIT trigger; the writer half is mtools:W2979). BUILD: in the umbrella classification behind nemik-rank --check, flag a ready card whose open children are ALL held, blocked on a human, or blocked on another repo (none of them can move), name the card and the blocking child, and rank such a card as itself rather than as an umbrella. Build it with W2566 (same classification code), but keep the cards apart: each waiter cites the trigger it cares about.",
+      "evidence": "",
+      "issued_at": "2026-11-27T03:01:22Z",
+      "minted_during": "interrupt",
+      "caused_by": "mtools:W2944",
+      "last_worked": null,
+      "ticks_blocked": 0
     }
   ],
   "residue": [

@@ -7244,3 +7244,21 @@
 2026-11-26T23:50:09Z  status W2570 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-27T00:01:58Z  status W1956 ready>working writer    "ready -> working"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
 2026-11-27T00:02:53Z  status W1957 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-27T00:06:18Z  interrupt W2571 minted    -         "mikemol-wheel and mikemol-repin spell the local version differently (+g<sha> against +<sha>), so their wheels cannot digest-match"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W2490
+2026-11-27T00:06:25Z  status W2571 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-27T00:26:44Z  status W1958 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-27T00:44:26Z  status W1959 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-27T01:05:17Z  status W1960 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-27T01:49:45Z  status W2490 working>landed writer    "working -> landed"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-27T02:13:00Z  interrupt W2572 minted    -         "mikemol-transcriptstruct needs a mode pairing each tool_use with its tool_result, so a reviewer can tell an executed change from a refused attempt"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=github:W158
+2026-11-27T02:13:07Z  status W2572 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-27T02:57:03Z  interrupt W2573 minted    -         "nemik-static prints USAGE and exits 0 for -h and --help as argparse did, and a test pins repeated flags as last-wins"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=W1936
+2026-11-27T02:59:10Z  status W1961 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-27T03:01:22Z  interrupt W2574 minted    -         "nemik-rank --check flags an umbrella whose open children are all held, blocked on a human, or blocked on another repo"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f  evidence=mtools:W2944
+2026-11-27T03:01:55Z  status W1962 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-27T03:05:36Z  status W1963 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-27T03:10:47Z  status W1964 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-27T03:13:20Z  status W1965 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-27T03:15:42Z  status W1966 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-27T03:26:56Z  status W1967 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
+2026-11-27T03:28:34Z  status W1968 ready>blocked writer    "ready -> blocked"  session=ca6f3699-66ac-4ffa-a3ca-6ececbab791f
