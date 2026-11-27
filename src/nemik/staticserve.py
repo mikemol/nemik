@@ -13,15 +13,17 @@ stdlib only on purpose: a test holds this module to never importing rdflib.
 
 from __future__ import annotations
 
-import argparse
 import json
 import os
-import shutil
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
+from nemik.flags import command_line, parse_flags
+from nemik.say import warn
 from nemik.tomlview import table
+
+CHUNK = 64 * 1024  # the streaming read size
 
 # nemik:W1179: a fixed suffix table, not the host's mimetypes module (a Codon wall, and its answer
 # also depends on the machine's /etc/mime.types). A suffix not listed is served as octet-stream.
@@ -167,15 +169,23 @@ class _Writer(BaseHTTPRequestHandler):
         self.send_header("ETag", tag)
         self.end_headers()
 
+    def send(self, real: Path, ctype: str, tag: str) -> None:
+        """Send a file's head and, but for HEAD, its body in 64 KiB chunks."""
+        with real.open("rb") as f:
+            self.head_of(os.fstat(f.fileno()).st_size, ctype, tag)
+            if self.command != "HEAD":
+                # nemik:W1938: shutil is a Codon wall; the copy is a read and write loop
+                chunk = f.read(CHUNK)
+                while chunk:
+                    self.wfile.write(chunk)
+                    chunk = f.read(CHUNK)
+
     def stream(self, real: Path, ctype: str, tag: str) -> None:
         """Stream a file in 64 KiB chunks: memory does not grow with its size or other reads."""
         try:
-            with real.open("rb") as f:
-                self.head_of(os.fstat(f.fileno()).st_size, ctype, tag)
-                if self.command != "HEAD":
-                    shutil.copyfileobj(f, self.wfile, 64 * 1024)
+            self.send(real, ctype, tag)
         except (BrokenPipeError, ConnectionResetError):
-            pass  # the client went away mid-body
+            return  # the client went away mid-body
 
 
 def handler(root: Path) -> type[BaseHTTPRequestHandler]:
@@ -235,31 +245,58 @@ def handler(root: Path) -> type[BaseHTTPRequestHandler]:
     return H
 
 
-def parser() -> argparse.ArgumentParser:
-    """Give the command line, apart from main so a deployment manifest can be checked against it.
-
-    Returns:
-        The argument parser: --root, --bind and --port.
-
-    """
-    ap = argparse.ArgumentParser(
-        prog="nemik-static",
-        description="serve a published nemik snapshot as files (W502)",
-    )
-    ap.add_argument(
-        "--root", type=Path, required=True, help="the publish root (or one build)"
-    )
-    ap.add_argument("--bind", default="127.0.0.1")
-    ap.add_argument("--port", type=int, default=8750)
-    return ap
+VALUED = ["--root", "--bind", "--port"]
+DEFAULT_BIND = "127.0.0.1"
+DEFAULT_PORT = 8750
+BAD_USAGE = 2  # argparse's exit status for a command line it could not read
+USAGE = "usage: nemik-static --root ROOT [--bind BIND] [--port PORT]"
 
 
-class Options(argparse.Namespace):
-    """The parsed command line of nemik-static (nemik:W1187)."""
+class Options:
+    """The parsed command line of nemik-static (nemik:W1187, W1936: read with nemik.flags)."""
 
     root: Path
     bind: str
     port: int
+    errors: list[str]
+
+    def __init__(self, root: Path, bind: str, port: int, errors: list[str]) -> None:
+        """Hold the three options and what was wrong with the command line, if anything."""
+        self.root = root
+        self.bind = bind
+        self.port = port
+        self.errors = errors
+
+
+def read_options(argv: list[str] | None = None) -> Options:
+    """Read the command line, apart from main so a deployment manifest can be checked against it.
+
+    nemik:W1936: argparse is a Codon wall, so the three flags are read with nemik.flags. A missing
+    --root, an unrecognized word and a port that is not a whole number are named in `errors`, as
+    argparse refused them; main prints them and exits 2.
+
+    Args:
+        argv: the command line, or None for sys.argv.
+
+    Returns:
+        The options: --root, --bind (default 127.0.0.1), --port (default 8750), and the errors.
+
+    """
+    words = command_line() if argv is None else argv
+    flags = parse_flags(words, VALUED, [])
+    errors = list(flags.errors)
+    errors.extend(f"unrecognized arguments: {word}" for word in flags.rest)
+    root = flags.first("--root", "")
+    if not root:
+        errors.append("the following arguments are required: --root")
+    port = DEFAULT_PORT
+    given = flags.first("--port", "")
+    if given:
+        try:
+            port = int(given)
+        except ValueError:
+            errors.append(f"argument --port: invalid int value: {given!r}")
+    return Options(Path(root), flags.first("--bind", DEFAULT_BIND), port, errors)
 
 
 def main(argv: list[str] | None = None) -> None:
@@ -268,8 +305,15 @@ def main(argv: list[str] | None = None) -> None:
     Args:
         argv: the command line, or None for sys.argv.
 
+    Raises:
+        SystemExit: 2 when the command line could not be read.
+
     """
-    args = parser().parse_args(argv, namespace=Options())
+    args = read_options(argv)
+    if args.errors:
+        warn(USAGE)
+        warn("nemik-static: error: " + "; ".join(args.errors))
+        raise SystemExit(BAD_USAGE)
     PageServer((args.bind, args.port), handler(args.root)).serve_forever()
 
 

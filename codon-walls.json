@@ -710,9 +710,7 @@
   "zlib": "reached"
  },
  "staticserve": {
-  "argparse": "reached",
   "http.server": "reached",
-  "shutil": "reached",
   "urllib.parse": "reached"
  },
  "trs": {
