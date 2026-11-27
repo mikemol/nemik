@@ -844,7 +844,6 @@
  },
  "wcagjudge": {
   "TYPE_CHECKING": "reached",
-  "argparse": "reached",
   "bare '*,' keyword-only marker": "reached",
   "datetime": "reached",
   "http.client": "reached",
@@ -879,7 +878,6 @@
  },
  "witnesses": {
   "TYPE_CHECKING": "reached",
-  "argparse": "reached",
   "bare '*,' keyword-only marker": "reached",
   "datetime": "reached",
   "http.client": "reached",
@@ -891,7 +889,6 @@
  },
  "witnesses_cli": {
   "TYPE_CHECKING": "reached",
-  "argparse": "reached",
   "bare '*,' keyword-only marker": "reached",
   "datetime": "reached",
   "http.client": "reached",

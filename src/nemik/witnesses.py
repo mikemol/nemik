@@ -16,7 +16,6 @@ key they could not resolve.
 
 from __future__ import annotations
 
-import argparse
 import http.client
 import json
 import os
@@ -33,6 +32,7 @@ from mikemol.procrun.proc import capture
 
 from nemik import edgeletters
 from nemik.delivery import owed, stamp
+from nemik.flags import command_line, parse_flags
 from nemik.hostapply import fact, load
 from nemik.queuefiles import QUEUE, default_root, workstream_files
 from nemik.say import say, warn
@@ -697,8 +697,18 @@ def wait(
         sleep(every_s)
 
 
-class Options(argparse.Namespace):
-    """nemik-witnesses's parsed command line, typed so each option reads as its own type."""
+VALUED = ["--root", "--wait", "--lang", "--timeout", "--every"]
+SWITCHES = ["--apply"]
+LANGS = ["rego", "promql"]
+BAD_USAGE = 2  # argparse's exit status for a command line it could not read
+USAGE = (
+    "usage: nemik-witnesses [--root ROOT] [--apply] [--wait QUERY] "
+    "[--lang {rego,promql}] [--timeout TIMEOUT] [--every EVERY]"
+)
+
+
+class Options:
+    """nemik-witnesses's command line (nemik:W1970: read with nemik.flags, not argparse)."""
 
     root: Path
     apply: bool
@@ -706,6 +716,39 @@ class Options(argparse.Namespace):
     lang: str
     timeout: str
     every: str
+    errors: list[str]
+
+    def __init__(self, words: list[str]) -> None:
+        """Read the options out of the words after the program name.
+
+        Args:
+            words: the command line.
+
+        """
+        flags = parse_flags(words, VALUED, SWITCHES)
+        self.errors = list(flags.errors)
+        self.errors.extend(f"unrecognized arguments: {word}" for word in flags.rest)
+        self.root = Path(flags.first("--root", str(default_root())))
+        self.apply = flags.has("--apply")
+        self.wait = flags.first("--wait", "") or None
+        self.lang = flags.first("--lang", "")
+        self.timeout = flags.first("--timeout", "12h")
+        self.every = flags.first("--every", "30s")
+        if self.lang and self.lang not in LANGS:
+            self.errors.append(f"argument --lang: invalid choice: {self.lang!r}")
+
+
+def read_options(argv: list[str] | None = None) -> Options:
+    """Read the command line, apart from main so a test can check it.
+
+    Args:
+        argv: the command line, or None for sys.argv.
+
+    Returns:
+        The options, with the errors argparse would have refused the command line for.
+
+    """
+    return Options(command_line() if argv is None else argv)
 
 
 def main(argv: list[str] | None = None) -> None:
@@ -720,44 +763,14 @@ def main(argv: list[str] | None = None) -> None:
         argv: the command line, or None for sys.argv.
 
     Raises:
-        SystemExit: with the --wait code.
+        SystemExit: with the --wait code, or 2 when the command line could not be read.
 
     """
-    ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    ap.add_argument(
-        "--root",
-        type=Path,
-        default=default_root(),
-        help="~/github, or the export layout root",
-    )
-    ap.add_argument(
-        "--apply",
-        action="store_true",
-        help="mark waypoints whose witness holds as done",
-    )
-    ap.add_argument(
-        "--wait",
-        metavar="QUERY",
-        help="block until QUERY holds (a PromQL expression, or a Rego query over the observers): "
-        "exit 0 held, 1 timed out, 2 cannot be evaluated (nemik:W258)",
-    )
-    ap.add_argument(
-        "--lang",
-        choices=list[str](["rego", "promql"]),
-        default="",
-        help="with --wait: the query's language, instead of guessing it from its text (nemik:W539)",
-    )
-    ap.add_argument(
-        "--timeout",
-        default="12h",
-        help="with --wait: give up after this long (90s, 30m, 12h, 1d)",
-    )
-    ap.add_argument(
-        "--every",
-        default="30s",
-        help="with --wait: poll this often (90s, 30m, 12h, 1d)",
-    )
-    args = ap.parse_args(argv, namespace=Options())
+    args = read_options(argv)
+    if args.errors:
+        warn(USAGE)
+        warn("nemik-witnesses: error: " + "; ".join(args.errors))
+        raise SystemExit(BAD_USAGE)
     if args.wait:
         try:
             limit, step = seconds(args.timeout), seconds(args.every)
