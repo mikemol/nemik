@@ -124,7 +124,7 @@ def test_the_baseline_is_a_registered_ratchet_declared_only_at_its_birth() -> No
     births = [row for row in declared if row.get("ratchet") == PATH]
     assert len(births) == 1
     assert births[0].get("old") == 0
-    assert births[0].get("new") == len(sustain_baseline())
+    assert births[0].get("new") == len(SEED)
 
 
 SEED = {
